@@ -88,6 +88,13 @@ app.MapPost("/change-password", async (HttpContext c) => {
   return Results.Json(new { ok = true });
 });
 
+app.MapGet("/players", async () => {
+  try {
+    await using var db = new MySqlConnection(connStr); await db.OpenAsync();
+    await using var c = new MySqlCommand("SELECT COUNT(*) FROM characters WHERE Online=1", db);
+    return Results.Json(new { online = Convert.ToInt32(await c.ExecuteScalarAsync()) });
+  } catch (Exception ex) { Log($"players error {ex.GetType().Name}: {ex.Message}"); return Results.Json(new { online = (int?)null, error = "unavailable" }, statusCode: 503); }
+});
 DDogsStore.Map(app, connStr, Log, Limited);
 Log($"start port={port} pid={Environment.ProcessId}");
 app.Run();
