@@ -47,7 +47,7 @@
   "Population": {
     "_comment": "AORebirth ordinary-NPC policy: references to existing nonalien NpcTemplates families whose leaf name/MonsterData/NPCFamily match captured missions. Not a reconstruction of retail hashes, selection weights, or the full human/high-level population. NPC resolution requests mission QL and uses existing interpolation/clamping; this older catalog has gaps and upper limits (ANDR106, ROLL47, other families85). See docs/evidence/MISSION_DUNGEON_NPC_POPULATION_EVIDENCE.md. Bosses, objectives and loot are separate.",
     "SpawnPointChancePercent": 35,
-    "RegularNpcHashes": ["ANDR", "ROLL", "CLAW", "TENT", "SHAD", "UNBR"]
+    "RegularNpcHashes": ["ANDR", "ROLL", "CLAW", "TENT", "SHAD"]
   },
   "Profiles": [
     { "Team": false, "MinQuality": 1, "MaxQuality": 250, "Styles": [321, 324, 341, 351], "Floors": 1, "MinFloorSize": 9, "MaxFloorSize": 16 },
