@@ -1,4 +1,4 @@
-﻿# Builds AORebirth/GameData/NpcTemplates.json from the local DB (cellao_codex_clean).
+# Builds AORebirth/GameData/NpcTemplates.json from the local DB (cellao_codex_clean).
 # Sources, in order of trust:
 #   1. mobspawns_stats: full captured stat sets of real spawns (playfield 954). Used as-is per level.
 #   2. mobtemplate: older catalog rows (name, level range, health, MonsterData, scale, family, breed...).
@@ -47,7 +47,8 @@ function DerivedBands($dbHash, $skeleton) {
 }
 
 # Captured leaves (hash names follow docs/evidence/MISSION_DUNGEON_NPC_POPULATION_EVIDENCE.md where known).
-$captured = [ordered]@{ LE01 = 'Leet'; AD01 = '34-I Helper'; RR02 = 'Contagious Rollerrat'; RR01 = 'Diseased Rollerrat'; CL02 = 'Clawfinger Ruffian'; CL01 = 'Clawfinger Bully' }
+$captured = [ordered]@{ LE01 = 'Leet'; AD01 = '34-I Helper'; RR02 = 'Contagious Rollerrat'; RR01 = 'Diseased Rollerrat'; CL02 = 'Clawfinger Ruffian'; CL01 = 'Clawfinger Bully'
+  LE02 = 'Eleet'; BF01 = 'Biofreak Carcass'; BF02 = 'Biofreak Cadaver'; EM01 = 'Eyemutant Bully'; EM02 = 'Eyemutant Ruffian'; HW01 = 'Fresh Highwayman'; BTTM = 'Blackout the TechnoMaster' }
 foreach ($h in $captured.Keys) { $catalog[$h] = [ordered]@{ Templates = (CapturedBands $captured[$h]) } }
 
 # Derived leaves: DB mobtemplate hash -> captured skeleton leaf.
