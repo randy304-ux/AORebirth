@@ -2,8 +2,8 @@
 <Config>
   <!-- Ports for the Game Engines -->
   <ListenIP>0.0.0.0</ListenIP>
-  <ChatIP>127.0.0.1</ChatIP>
-  <ZoneIP>127.0.0.1</ZoneIP>
+  <ChatIP>192.168.1.68</ChatIP>
+  <ZoneIP>192.168.1.68</ZoneIP>
   <ChatPort>7012</ChatPort>
   <ZonePort>7501</ZonePort>
   <LoginPort>7500</LoginPort>
