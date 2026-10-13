@@ -6,7 +6,7 @@ namespace ZoneEngine_New.Core.Mobs
     using SmokeLounge.AOtomation.Messaging.GameData;
 
     /// <summary>
-    /// One boss trigger. On = "FirstAggro" (first damage taken) or "HealthBelow" (health under Pct percent).
+    /// One boss trigger. On = "FirstAggro" (first damage taken), "HealthBelow" (health under Pct percent) or "Death" (on death; those adds are not despawned with the boss).
     /// Each trigger fires once per fight; the fight resets on death or leash.
     /// </summary>
     public sealed class NpcBossTrigger

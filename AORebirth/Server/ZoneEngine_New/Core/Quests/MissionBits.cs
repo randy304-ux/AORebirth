@@ -7,13 +7,13 @@ namespace ZoneEngine_New.Core.Quests
     using ZoneEngine_New.Core.Entities;
 
     /// <summary>
-    /// Mission bits 0-639: character flags packed 32 to a stat. Completing a quest sets its
+    /// Mission bits 0-767: character flags packed 32 to a stat. Completing a quest sets its
     /// <see cref="QuestTemplate.MissionBit"/>; items set, clear and test the same stats with SetFlag, ClearFlag and
-    /// BitAnd requirements. Bits 576 and up are in server-only stats the client never sees.
+    /// BitAnd requirements. Bits 576 and up are in server-only stats the client never sees; 640-767 (MissionBits21-24) are the ddogs quest block.
     /// </summary>
     public static class MissionBits
     {
-        public const int Count = 640;
+        public const int Count = 768;
 
         /// <summary>The stat holding each run of 32 bits, in bit order.</summary>
         static readonly CharacterStat[] Stats =
@@ -37,7 +37,11 @@ namespace ZoneEngine_New.Core.Quests
             CharacterStat.MissionBits17,         // 693
             CharacterStat.MissionBits18,         // 694
             CharacterStat.MissionBits19,         // server-only
-            CharacterStat.MissionBits20          // server-only
+            CharacterStat.MissionBits20,         // server-only
+            CharacterStat.MissionBits21,         // server-only, ddogs block 640-671
+            CharacterStat.MissionBits22,         // server-only, 672-703
+            CharacterStat.MissionBits23,         // server-only, 704-735
+            CharacterStat.MissionBits24          // server-only, 736-767
         ];
 
         public static bool IsValid(int bit) => bit >= 0 && bit < Count;

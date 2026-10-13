@@ -1,0 +1,66 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  4311,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:garden:78D280F6",
+                     "Provenance":  "retired capture (ecefa673^ NascenceLifeSpawn.cs / ThrakOmniGardenSpawn.cs); ddogs/tools/Build-GardenContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78D280F6",
+                     "PlayfieldId":  4311,
+                     "InstanceId":  2027061494,
+                     "Name":  "Prophet Yutt Thrak",
+                     "Position":  [
+                                      287.974182,
+                                      106.696884,
+                                      1005.84973
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  271061505,
+                                   "1":  9280,
+                                   "4":  6,
+                                   "27":  9280,
+                                   "33":  2,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  208635,
+                                   "360":  150,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  233207,
+                                        "Layer":  2
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 }
+             ]
+}

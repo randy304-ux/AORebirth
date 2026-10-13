@@ -138,6 +138,7 @@ namespace ZoneEngine_New.Core.Entities
             if (IsDead)
                 return;
 
+            RunDeathTriggers(killer);
             ReleaseForDeath("vendor died");
             base.OnDeath(killer);
         }
@@ -314,7 +315,22 @@ namespace ZoneEngine_New.Core.Entities
             }
         }
 
-        void RunBossAction(NpcBossTrigger trigger, NpcBossAction action, Character attacker)
+        /// <summary>On = "Death" triggers: their adds outlive the boss (successor bosses such as Uklesh, then Khalum, then Aztur).</summary>
+        void RunDeathTriggers(Character? killer)
+        {
+            List<NpcBossTrigger>? triggers = MobTemplate?.BossTriggers;
+            if (triggers == null || triggers.Count == 0 || Playfield == null)
+                return;
+            foreach (NpcBossTrigger trigger in triggers)
+            {
+                if (trigger == null || !string.Equals(trigger.On, "Death", StringComparison.OrdinalIgnoreCase))
+                    continue;
+                foreach (NpcBossAction action in trigger.Actions ?? new List<NpcBossAction>())
+                    RunBossAction(trigger, action, killer, track: false);
+            }
+        }
+
+        void RunBossAction(NpcBossTrigger trigger, NpcBossAction action, Character? attacker, bool track = true)
         {
             IZoneLogger? logger = Playfield?.GetService<IZoneLogger>();
             if (action == null || !string.Equals(action.Type, "SpawnAdds", StringComparison.OrdinalIgnoreCase)
@@ -345,8 +361,10 @@ namespace ZoneEngine_New.Core.Entities
                 try
                 {
                     NpcCharacter add = spawns.SpawnMob(template, at, level: level, spawnHash: action.Hash);
-                    add.Brain?.AddThreat(attacker.Identity, 1);
-                    _bossAdds.Add(add);
+                    if (attacker != null)
+                        add.Brain?.AddThreat(attacker.Identity, 1);
+                    if (track)
+                        _bossAdds.Add(add);
                 }
                 catch (Exception exception)
                 {

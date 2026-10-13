@@ -1,4 +1,4 @@
-﻿# Dungeon Dogs content sources (ddogs fork)
+# Dungeon Dogs content sources (ddogs fork)
 
 This file records where our fork's content comes from. No Funcom files are stored here, and none of this is published.
 
@@ -26,7 +26,7 @@ It's built by `ddogs/tools/Build-NpcTemplates.ps1`. `Build-NpcTemplates.last.txt
 - The Kill Person and Find Person targets use the same families, replacing MFPB. In AO the mission "boss" is a regular mob. The engine resolves each family to the leaf that matches the mission's level.
 
 ## Not yet sourced
-- Static-dungeon spawns. Temple of Three Winds (pf 1931), Steps of Madness (1933), Crypt of Home (4805) and Temple of Home (1404) have no client district spawns, so they need hand-made `Spawns.json` points. TOTW bosses from AO-Universe/AOWiki: Defender of the Three (lvl 40-42, Nanofreak), Windcaller Yatila 55-57, Gartua 62-65, Lien 64-66, Nematet 66-68, Khalum 73, Aztur 74 (HP 38630). The cultist/human models still need a source.
+- Static-dungeon spawns. Steps of Madness (1933), Crypt of Home (4805) and Temple of Home (1404) have no client district spawns and still need hand-made `Spawns.json` points. Temple of Three Winds (1931) is built, see below.
 - Dynas: the engine has no dyna buff or loot hook (no code references), so they aren't implemented.
 - About 1,200 other district hashes (other families) have no model source yet, and spawn as the AAAA placeholder or not at all.
 
@@ -105,3 +105,41 @@ It's built by `ddogs/tools/Build-NpcTemplates.ps1`. `Build-NpcTemplates.last.txt
 - Slots: each player can hire one merc of each profession. Enforcer, Soldier and Keeper use their own pet slots (10, 11 and 12). The Doctor uses the heal slot, so the pet AI heals its owner, but it replaces a player's own heal pet. The Doctor's heal nano depends on level: Minor Healing 26465 (under 25), Healing 26466 (under 75), Improved Healing 28665 (under 150), and Superior Healing 28676 above that.
 - Toggle: `GameData/Mercs.json` `"Enabled": false` stops hiring (read at each hire).
 - Recruiters are PlayfieldContent NPCs ("Mercenary Recruiter (Doctor)" and so on, ContentNpcIdentity `ddogs-merc-<kind>`). Four stand next to each start point: PF 4582 at about (922-934, 740), PF 6553 Arete Landing at (3445-3457, 857), and PF 4310 by the Emissary of Jobe at (846-858, 1068). Scripts are in `GameData/Knubot/Merc*.json`.
+
+## Temple of the Three Winds (PF 1931), added 2026-10-13
+Built by `ddogs/tools/Build-TotwContent.ps1`, which `Build-NpcTemplates.ps1` calls at its end. The build report is in `Build-TotwContent.last.txt`.
+- **Spawn points.** The 251 points in `GameData/Playfields/1931/Spawns.json`. Every one of the 51 spawn hashes now has a template; the builder throws if one is missing.
+- **Names and boss mapping.** From the AO-Universe TotW guide and loot table. Captured boss positions (retired `CapturedTempleOfThreeWindsEncounterRuntimeService.cs`, git `ecefa673^`) fall within 0.4 m of the DEOF, THCU, NMTH, GUOT, GATH and UKTH spawn points. The other named hashes are mapped by their name codes, e.g. WIYA = Windcaller Yatila, REGU = Reverend Gulard, TRRN = The Re-Animator, LITH = Lien the Memorystalker.
+- **Unnamed cultists.** ULTI, COKC, CULT, PCFH, BBOI, KNSL and OLSE (levels 20-35) have no known names, so they are all "Cultist". Each uses one of the 7 captured cultist profile seeds (MonsterData and head).
+- **Bosses.** Level, HP, max damage and scale come from the capture for Defender, Curator, Nematet, Guardian, Gartua, Uklesh, Khalum, Aztur, Yatila, Gulard, Re-Animator and Betany. Lien has no capture and uses the Uklesh model with curve HP. Everything else uses curve HP and damage of level x1.5.
+- **Boss triggers.**
+  - Uklesh death spawns Khalum (KHAL), and Khalum death spawns Aztur (AZTR). This uses the new engine trigger `On = "Death"`, whose adds are not despawned with the boss.
+  - Lien calls 3 Ju-ju Dolls (JUJU) on first aggro and again under 50% health. They vanish when he dies, as in the guide.
+  - The Guardian's 3 Eternal Guardians are ordinary spawns.
+- **Loot.**
+  - Item hashes T*** come from ItemTemplates.json, with ids from itemnames, matched by name. TSFA is the 6 Shadowfade pieces; TBKA and TBKT are the Ape Fist and Tree of Enlightenment book sections.
+  - Who drops what follows the AO-Universe loot table. Guardian Circuit Board drops 100%; every other chance is a placeholder.
+  - Caska (CSTE) drops Red Berry Wine 100%, for Dante Karrall's "Like Fine Wine".
+  - CommonLoot is on every mob, plus Enhanced MTI M-2 Bipower at 1% ("any mob").
+- **Entrance.** The client door in Greater Tir County (647, about 1803x2695) should be a native TeleportProxy into 1931; the engine logs 1931 exit door C024078B. No teleports row was added. **Not verified in game.** If it lands wrong, add a teleports.sql row as was done for the Subway (806c1d9b).
+- **Not built.** Windcaller Karrec's ICC HQ portal quest (Bronto Burger + Maddy's Credit Card) and the level-60 entry cap. The engine has no door level gate yet.
+
+## Nascence garden keys, added 2026-10-13
+Built by `Build-GardenContent.ps1` (NPCs, items GADV/GINA/GINT/GAPG/GAPF/GKAB/GKTH, insignia drops on LLBE/SLCM/SWSI) and the garden section of `Build-NewbieQuests.ps1` (quests and Knubot). Mission bits 640-644; see `MISSION_BITS.md`.
+- **Aban (Clan), from the AO-Universe guide.**
+  1. Donna Red gives the Ancient Device.
+  2. Ecclesiast Aban Fala (PF 4312) is shown an Insignia of Aban.
+  3. Sipius Aban Lux-Wei (garden, PF 4676) combines device + insignia into the graced Analyzer.
+  4. Kill 3 Dreaming Silvertails (DRSL).
+  5. Return the Analyzer for The Key to the Garden of Aban (226824).
+- **Thrak (Omni/neutral), from AOWiki and the retired capture quest pack `Content/Thrak/garden-key`.**
+  1. Veronica Escobar gives the device.
+  2. Prophet Yutt Thrak (Brawl, PF 4311) is shown an Insignia of Thrak.
+  3. Hypnagogic Urga-Lum Thrak (garden, PF 4677) takes device + insignia, pays 7000 XP and 10000 credits, and gives the favored Analyzer.
+  4. Curse 3 Dreaming Silvertails.
+  5. Return the Analyzer for The Key to the Garden of Thrak (226994), plus 462 XP and 800 credits.
+- **NPCs.** Looks and positions come from retired captures (`NascenceLifeSpawn.cs`, `ThrakOmniGardenSpawn.cs`).
+- **Simplified.**
+  - The insignia + device combine happens in a trade with the garden NPC.
+  - The silvertail chat-trade became a kill objective.
+  - Starters have no faction or level gate. The key items carry their own requirements.

@@ -326,3 +326,7 @@ $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-N
 "wrote leaves=$(($catalog.Values | ? { $_.Templates }).Count) families=$(($catalog.Values | ? { $_.Children }).Count)"
 # Arete quest mobs, quest-item drops and Arete quest givers live in Build-AreteContent.ps1; re-apply them on top.
 & "$PSScriptRoot\Build-AreteContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Temple of the Three Winds (PF 1931) mobs, bosses, loot and boss triggers: Build-TotwContent.ps1.
+& "$PSScriptRoot\Build-TotwContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Nascence garden key NPCs, items and insignia drops: Build-GardenContent.ps1 (then run Build-NewbieQuests.ps1).
+& "$PSScriptRoot\Build-GardenContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))

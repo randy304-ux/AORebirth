@@ -1,0 +1,66 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  4312,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:garden:7A1B033F",
+                     "Provenance":  "retired capture (ecefa673^ NascenceLifeSpawn.cs / ThrakOmniGardenSpawn.cs); ddogs/tools/Build-GardenContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:7A1B033F",
+                     "PlayfieldId":  4312,
+                     "InstanceId":  2048590655,
+                     "Name":  "Ecclesiast Aban Fala",
+                     "Position":  [
+                                      1893.47546,
+                                      68.465004,
+                                      690.309143
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0.5387633,
+                                      0,
+                                      0.8424551
+                                  ],
+                     "Stats":  {
+                                   "0":  271061505,
+                                   "1":  9280,
+                                   "4":  6,
+                                   "27":  9280,
+                                   "33":  1,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  214078,
+                                   "360":  140,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  234636,
+                                        "Layer":  2
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 }
+             ]
+}

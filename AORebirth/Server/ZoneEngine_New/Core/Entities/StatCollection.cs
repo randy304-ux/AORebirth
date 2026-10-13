@@ -82,6 +82,7 @@ namespace ZoneEngine_New.Core.Entities
         /// <summary>Server bookkeeping stats the client never receives.</summary>
         public static bool IsServerOnly(CharacterStat stat)
             => stat is CharacterStat.UsedIP or CharacterStat.MissionBits19 or CharacterStat.MissionBits20
+                or CharacterStat.MissionBits21 or CharacterStat.MissionBits22 or CharacterStat.MissionBits23 or CharacterStat.MissionBits24
                 or CharacterStat.DebugFlags;
 
         /// <summary>

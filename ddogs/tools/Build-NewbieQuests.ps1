@@ -1,4 +1,4 @@
-﻿# ddogs/tools/Build-NewbieQuests.ps1 - writes newbie-area quest givers (Quests.json entries + Knubot scripts).
+# ddogs/tools/Build-NewbieQuests.ps1 - writes newbie-area quest givers (Quests.json entries + Knubot scripts).
 # Sources: AO-Universe "Nostalgic Guide - ICC Shuttleport Island Quests", AO-Universe/AOWiki Nascence start-up quests; item ids from the client RDB (auno/aogalaxy names).
 # Re-runnable: replaces quests whose QasInstance is in 920000-929999 and rewrites the scripts it owns.
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
@@ -23,7 +23,7 @@ function AddQuest($hash, $name, $action, $npc, $count, $next, $bit, $xp, $cr, $i
 function Job($giver, $code, $steps, $returnName, $xp, $cr, $items, $opt) {
   if (-not $opt) { $opt = @{} }
   $hashes = @(); for ($i = 0; $i -lt $steps.Count; $i++) { $hashes += ('{0}{1}' -f $code, $i) }
-  $ret = $code + 'R'; $b = $null; if (-not $opt.NoBit) { $b = $script:bit++; if ($b -gt 639) { throw 'out of mission bits' } }
+  $ret = $code + 'R'; $b = $null; if (-not $opt.NoBit) { $b = $script:bit++; if ($b -gt 767) { throw 'out of mission bits' } }
   for ($i = 0; $i -lt $steps.Count; $i++) {
     $s = $steps[$i]; $next = $(if ($i + 1 -lt $steps.Count) { $hashes[$i + 1] } else { $ret })
     AddQuest $hashes[$i] $s[3] $s[0] $s[1] $s[2] $next $null 0 0 $null $null
@@ -164,13 +164,11 @@ Script 'LibbieHyman.json' @('LIHY') 'Libbie Hyman, Old Frontier (880x1575).' @('
 
 $emD = Job 'ESOJ' 'DED' @(,@('TargetNpc','SNDA',$null,'Talk to Scientist Donna Red')) 'Return to the Emissary' 500 500 $null
 $emV = Job 'ESOJ' 'DEV' @(,@('TargetNpc','SCVR',$null,'Talk to Veronica Escobar')) 'Return to the Emissary' 500 500 $null
-Script 'EmissaryOfJobe.json' @('ESOJ') 'Emissary of Jobe, Jobe bridge (854x1059). Starts the garden key introductions; the level-100 key quests themselves are not built.' @('{delay 1}Welcome to the Shadowlands. The gardens of the Shadowlands hold great power, if you can earn a key.', '{delay 1}Two scientists study the gardens. They can tell you more.') @(
+Script 'EmissaryOfJobe.json' @('ESOJ') 'Emissary of Jobe, Jobe bridge (854x1059). Starts the garden key introductions; the key quests are built further down (Nascence garden keys).' @('{delay 1}Welcome to the Shadowlands. The gardens of the Shadowlands hold great power, if you can earn a key.', '{delay 1}Two scientists study the gardens. They can tell you more.') @(
   (J 'aban' $emD 'Tell me about the Aban garden.' 'Scientist Donna Red studies the Aban garden. She is south-east of here, near 985 by 1785. She favors Clan and neutral travelers.' 'I''ll find her.' 'Find Scientist Donna Red near 985 by 1785.' $null),
   (J 'thrak' $emV 'Tell me about the Thrak garden.' 'Scientist Veronica Escobar studies the Thrak garden. She is south-west, near 745 by 1876. She favors Omni and neutral travelers.' 'I''ll find her.' 'Find Scientist Veronica Escobar near 745 by 1876.' $null)
 ) 'May the light of Jobe guide you.' $null
 
-Script 'DonnaRed.json' @('SNDA') 'Scientist Donna Red (985x1785). Aban garden key quest (level 100) not built.' @('{delay 1}The Aban garden is a place of redemption. Only those with a key may enter.', '{delay 1}Come back when you are more experienced, and we will talk about earning a key.') @() 'Good luck, traveler.' $null
-Script 'VeronicaEscobar.json' @('SCVR') 'Scientist Veronica Escobar (745x1876). Thrak garden key quest (level 100) not built.' @('{delay 1}The Thrak garden belongs to those who embrace the darkness. A key is needed to enter.', '{delay 1}You are not ready yet. Return when you have grown stronger.') @() 'Until next time.' $null
 Script 'GuardianOfTheWeak.json' @('GROW') 'Guardian of the Weak, Jobe bridge.' @('{delay 1}I watch over those who are new to these lands.', '{delay 1}The creatures beyond the bridge are dangerous. Stay near the path until you have found your strength, and speak to Joshua Falker for work.') @() 'Be careful out there.' $null
 
 # ---------------- Arete Landing (6553) ----------------
@@ -269,10 +267,56 @@ Script 'PatrickSun.json' @('SimpleChar:78E0FC7B') 'Patrick Sun, camp (3463x812).
   (J 'greedy' $patG 'Is there a ringleader?' 'The Greedy Desert Reet. Big one, south of the camp near the oasis. Take it down.' 'Consider it done.' 'The Greedy Desert Reet.' $null @{ Mode = 'talk'; Thanks = @('Ha! That''ll show it.') })
 ) 'Watch your supplies.' $null
 Script 'ImmigrationOfficerBill.json' @('SimpleChar:78E0FC66') 'ICC Immigration Officer Bill.' @('{delay 1}ICC Immigration. No ID, no passage.', '{delay 1}If you want off Arete, start with Rex Larsson on the upper deck. Unofficially, of course.') @() 'Next!' $null
+# ---------------- Nascence garden keys (bits 640+, server-only block, see ddogs/docs/MISSION_BITS.md) ----------------
+# Clan: Aban garden (AO-Universe "Aban Garden Key Quest"). Omni/neutral: Thrak garden (AOWiki "Thrak Garden Mission").
+# NPCs: Donna Red / Veronica Escobar are Frontier hash spawns; Fala (4312), Lux-Wei (4676), Yutt Thrak (4311) and Urga-Lum (4677) are
+# content NPCs from Build-GardenContent.ps1. Simplified: the insignia + device combine happens in a trade with the garden NPC,
+# and "save/curse three Dreaming Silvertails" is a kill objective (the retail chat-trade with the silvertail is not built).
+$script:bit = 640
+$hFala = Handoff 'HGAF' 'Show the device to Aban Fala' 'GAFA'
+$hLux = Handoff 'HGAL' 'Talk to Sipius Aban Lux-Wei' 'GLUX'
+$hYutt = Handoff 'HGTY' 'Find Prophet Yutt Thrak' 'GYUT'
+$hUrga = Handoff 'HGTU' 'Talk to Urga-Lum Thrak' 'GURG'
+$fala = Job 'GAFA' 'GAF' @() 'Show an Insignia of Aban' 3000 2000 $null @{ Ret = 'FindItem'; Spec = 'GINA' }
+$lux = Job 'GLUX' 'GAL' @(,@('KillMultiple','DRSL',3,'Save 3 Dreaming Silvertails')) 'Return the Analyzer to Lux-Wei' 5000 5000 @(Item 226824 'The Key to the Garden of Aban') @{ Ret = 'FindItem'; Spec = 'GAPG' }
+$yutt = Job 'GYUT' 'GTY' @() 'Bring Yutt Thrak an Insignia' 3000 2000 $null @{ Ret = 'FindItem'; Spec = 'GINT' }
+$urga = Job 'GURG' 'GTU' @() 'Give Urga-Lum the device' 7000 10000 $null @{ Ret = 'FindItem'; Spec = 'GADV' }
+$urgaK = Job 'GURG' 'GTK' @(,@('KillMultiple','DRSL',3,'Curse 3 Dreaming Silvertails')) 'Return the Analyzer to Urga-Lum' 462 800 @(Item 226994 'The Key to the Garden of Thrak') @{ Ret = 'FindItem'; Spec = 'GAPF' }
+
+function Starter($handoff, $done, $text) {
+  @{ Hello = @('device'); Replies = [ordered]@{ device = [ordered]@{ Text = 'Tell me about the garden key.'; If = @(('!HasAnyQuest ' + $handoff), ('!HasCompletedQuest ' + $done), '!has GADV'); Goto = 'device' } }
+     Lines = [ordered]@{ device = [ordered]@{ Text = @($text) + @('{spawn GADV 1}', ('{givequest ' + $handoff + '}')); Fail = 'full'; Replies = @('nothing') }
+       full = [ordered]@{ Text = 'Your hands are full. Make some room in your inventory first.{close}' } } }
+}
+Script 'DonnaRed.json' @('SNDA') 'Scientist Donna Red (985x1785). Aban garden key (Clan) start: hands out the Ancient Device.' @('{delay 1}The Aban garden is a place of redemption. Only those with a key may enter freely.', '{delay 1}I have found something the Redeemed might want to see.') @() 'Good luck, traveler.' (Starter $hFala $lux.Return @('This Ancient Device turned up near the Frontier. The Redeemed will know what it is.', '{delay 1}Take it to Ecclesiast Aban Fala in the Redeemed village in south-east Nascence. Bring Insignias of Aban, the Barking Chimeras carry them.'))
+Script 'VeronicaEscobar.json' @('SCVR') 'Scientist Veronica Escobar (745x1876). Thrak garden key (Omni/neutral) start: hands out the Ancient Device.' @('{delay 1}The Thrak garden belongs to those who embrace the darkness. A key lets you enter it freely.', '{delay 1}I have an artifact the Unredeemed would kill for.') @() 'Until next time.' (Starter $hYutt $urgaK.Return @('This Ancient Device came out of the Frontier. Someone in the settlement to the west, in Brawl, will be very interested.', '{delay 1}Find Prophet Yutt Thrak there. Carry a few Insignias of Thrak, the beasts of the Frontier drop them.'))
+
+Script 'EcclesiastAbanFala.json' @('SimpleChar:7A1B033F') 'Ecclesiast Aban Fala, Redeemed village (PF 4312, 1893x690). Aban key step 1: show an Insignia of Aban (returned).' @('{delay 1}Be welcome, child. Aban watches over the humble.') @(
+  (J 'insignia' $fala 'Donna Red sent me with this device.' @('An ancient device... Before I speak of it, bring me something that shows the Divine presence of Aban in Nascence.', '{delay 1}Show me an Insignia of Aban.') 'I will.' 'Show me an Insignia of Aban.' $null @{ Mode = 'trade'; Items = @(,(TI 'GINA')); Thanks = @('Yes, His mark. Keep it, you will need it.'); After = @('{spawn GINA 1}', ('{givequest ' + $hLux + '}'), '{delay 1}Take the device to Sipius Aban Lux-Wei in the Garden of Aban, by the teleporter statue. He knows the old Xan technology.') })
+) 'Go in light.' (Arrive $hFala @('Donna Red''s device. Let me see.'))
+
+$luxExtra = Merge (Arrive $hLux @('Fala sent you. Show me the device.')) @{ Hello = @('combine')
+  Replies = [ordered]@{ combine = [ordered]@{ Text = 'How do I awaken the device?'; If = @('!has GAPG'); Goto = 'combine' } }
+  Lines = [ordered]@{ combine = [ordered]@{ Text = 'Give me the Ancient Device together with an Insignia of Aban.{opentrade}' }
+    graced = [ordered]@{ Text = @('{spawn GAPG 1}', 'It is done: an Ancient Pattern Analyzer, graced by the Faithful.', '{delay 1}Now save three souls. The Dreaming Silvertails north of Frontier Bridge are lost; free them, then return the Analyzer to me.'); Fail = 'full'; Replies = @('more', 'nothing') }
+    full = [ordered]@{ Text = 'Your hands are full. Make some room in your inventory first.{close}' } }
+  Trades = [ordered]@{ combine = [ordered]@{ If = @('!has GAPG'); Items = @((TI 'GADV'), (TI 'GINA')); Goto = 'graced' } } }
+Script 'SipiusAbanLuxWei.json' @('SimpleChar:7A2013BC') 'Sipius Aban Lux-Wei, Garden of Aban (PF 4676, 468x495). Aban key: device + insignia -> graced Analyzer, 3 silvertails, Analyzer -> Key to the Garden of Aban.' @('{delay 1}The garden is at peace. May you find it too.') @(
+  (J 'souls' $lux 'I am ready to save the souls.' @('Three Dreaming Silvertails wander north of Frontier Bridge. Free them, carrying the graced Analyzer.', '{delay 1}Then give the Analyzer back to me.') 'I will save them.' 'Free three Dreaming Silvertails, then give me back the graced Analyzer.' $fala.Return @{ Mode = 'trade'; Items = @(,(TI 'GAPG')); Thanks = @('Three souls saved. Aban is pleased, and so am I. This key is yours: the Garden of Aban is open to you.') })
+) 'Peace be with you.' $luxExtra
+
+Script 'ProphetYuttThrak.json' @('SimpleChar:78D280F6') 'Prophet Yutt Thrak, Brawl (PF 4311, 288x1006). Thrak key step 1: show an Insignia of Thrak (returned).' @('{delay 1}You stand before a prophet of the Unredeemed. Speak.') @(
+  (J 'insignia' $yutt 'Veronica sent me with this device.' @('*The demon turns the device over in its claws and hands it back.*', '{delay 1}Interesting. Prove you walk with Thrak. Show me an Insignia of Thrak.') 'Here it is.' 'Show me an Insignia of Thrak.' $null @{ Mode = 'trade'; Items = @(,(TI 'GINT')); Thanks = @('His mark. Keep it.'); After = @('{spawn GINT 1}', ('{givequest ' + $hUrga + '}'), '{delay 1}Use an insignia on the Thrak statue and enter His Garden. Hypnagogic Urga-Lum Thrak, below the ramp, will take the device.') })
+) 'Go.' (Arrive $hYutt @('The scientist''s errand runner. Come closer.'))
+
+Script 'HypnagogicUrgaLumThrak.json' @('SimpleChar:79758F3A') 'Hypnagogic Urga-Lum Thrak, Garden of Thrak (PF 4677, 464x359). Thrak key: device + insignia -> favored Analyzer, 3 silvertails, Analyzer -> Key to the Garden of Thrak.' @('{delay 1}*The demon''s eyes flicker open.* You dream loudly, mortal.') @(
+  (J 'device' $urga 'Prophet Yutt sent me with the device.' @('Give me the device, and an Insignia of Thrak to wake it.') 'Take them.' 'Give me the Ancient Device and an Insignia of Thrak.' $null @{ Mode = 'trade'; Items = @((TI 'GADV'), (TI 'GINT')); Thanks = @('*The device hums with dark light.* An Ancient Pattern Analyzer, favored by the Chosen One.'); After = @('{spawn GAPF 1}', '{delay 1}Now curse three Dreaming Silvertails near Frontier Bridge and bring it back.') }),
+  (J 'souls' $urgaK 'I will claim the souls.' 'Three Dreaming Silvertails near Frontier Bridge. Claim their souls, then give me the Analyzer.' 'It will be done.' 'Curse three Dreaming Silvertails, then give me back the favored Analyzer.' $urga.Return @{ Mode = 'trade'; Items = @(,(TI 'GAPF')); Thanks = @('Three souls for Thrak. Take this key; His Garden is yours to enter.') })
+) 'Dream well.' (Arrive $hUrga @('Yutt sent you. I felt it.'))
 # ---------------- write Quests.json ----------------
 $qpath = Join-Path $GameData 'Quests.json'
 $existing = ([IO.File]::ReadAllText($qpath) | ConvertFrom-Json) | ForEach-Object { $_ } | Where-Object { $_.QasInstance -lt 920000 -or $_.QasInstance -gt 929999 }
 $all = @($existing) + $script:quests
 $dup = $all | ForEach-Object { $_.Hash } | Group-Object | Where-Object Count -gt 1; if ($dup) { throw ('duplicate quest hashes: ' + ($dup.Name -join ',')) }
 [IO.File]::WriteAllText($qpath, (ConvertTo-Json @($all) -Depth 10), $u)
-"quests total=$($all.Count) generated=$($script:quests.Count) bits=610-$($script:bit - 1)"
+"quests total=$($all.Count) generated=$($script:quests.Count) bits=610-639,640-$($script:bit - 1)"

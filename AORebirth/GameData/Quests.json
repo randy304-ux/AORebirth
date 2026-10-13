@@ -2264,5 +2264,276 @@
                        "Xp":  250,
                        "Records":  null
                    }
+    },
+    {
+        "Hash":  "HGAF",
+        "Name":  "Show the device to Aban Fala",
+        "QasInstance":  920079,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Show the device to Aban Fala",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GAFA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RGAF",
+                       "Credits":  0,
+                       "Xp":  50,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "HGAL",
+        "Name":  "Talk to Sipius Aban Lux-Wei",
+        "QasInstance":  920080,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Talk to Sipius Aban Lux-Wei",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GLUX",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RGAL",
+                       "Credits":  0,
+                       "Xp":  50,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "HGTY",
+        "Name":  "Find Prophet Yutt Thrak",
+        "QasInstance":  920081,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Find Prophet Yutt Thrak",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GYUT",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RGTY",
+                       "Credits":  0,
+                       "Xp":  50,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "HGTU",
+        "Name":  "Talk to Urga-Lum Thrak",
+        "QasInstance":  920082,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Talk to Urga-Lum Thrak",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GURG",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RGTU",
+                       "Credits":  0,
+                       "Xp":  50,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "GAFR",
+        "Name":  "Show an Insignia of Aban",
+        "QasInstance":  920083,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Show an Insignia of Aban",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GAFA",
+                          "SpecItem":  "GINA",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  640,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RAFR",
+                       "Credits":  2000,
+                       "Xp":  3000,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "GAL0",
+        "Name":  "Save 3 Dreaming Silvertails",
+        "QasInstance":  920084,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Save 3 Dreaming Silvertails",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "DRSL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "GALR",
+        "Reward":  {
+                       "Hash":  "RAL0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "GALR",
+        "Name":  "Return the Analyzer to Lux-Wei",
+        "QasInstance":  920085,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Return the Analyzer to Lux-Wei",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GLUX",
+                          "SpecItem":  "GAPG",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  641,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RALR",
+                       "Credits":  5000,
+                       "Xp":  5000,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  226824,
+                                               "HighId":  226824,
+                                               "Name":  "The Key to the Garden of Aban",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "GTYR",
+        "Name":  "Bring Yutt Thrak an Insignia",
+        "QasInstance":  920086,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Bring Yutt Thrak an Insignia",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GYUT",
+                          "SpecItem":  "GINT",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  642,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTYR",
+                       "Credits":  2000,
+                       "Xp":  3000,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "GTUR",
+        "Name":  "Give Urga-Lum the device",
+        "QasInstance":  920087,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Give Urga-Lum the device",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GURG",
+                          "SpecItem":  "GADV",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  643,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTUR",
+                       "Credits":  10000,
+                       "Xp":  7000,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "GTK0",
+        "Name":  "Curse 3 Dreaming Silvertails",
+        "QasInstance":  920088,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Curse 3 Dreaming Silvertails",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "DRSL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "GTKR",
+        "Reward":  {
+                       "Hash":  "RTK0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "GTKR",
+        "Name":  "Return the Analyzer to Urga-Lum",
+        "QasInstance":  920089,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Return the Analyzer to Urga-Lum",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GURG",
+                          "SpecItem":  "GAPF",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  644,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTKR",
+                       "Credits":  800,
+                       "Xp":  462,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  226994,
+                                               "HighId":  226994,
+                                               "Name":  "The Key to the Garden of Thrak",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
     }
 ]

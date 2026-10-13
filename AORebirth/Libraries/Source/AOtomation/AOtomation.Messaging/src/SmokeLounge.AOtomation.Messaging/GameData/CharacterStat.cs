@@ -1332,6 +1332,18 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
         /// </summary>
         DebugFlags = 0x00002713,
 
+        /// <summary>AORebirth server-only: mission bits 640-671 (ddogs quest block, see ddogs/docs/MISSION_BITS.md). Never sent to the client.</summary>
+        MissionBits21 = 0x00002714,
+
+        /// <summary>AORebirth server-only: mission bits 672-703. Never sent to the client.</summary>
+        MissionBits22 = 0x00002715,
+
+        /// <summary>AORebirth server-only: mission bits 704-735. Never sent to the client.</summary>
+        MissionBits23 = 0x00002716,
+
+        /// <summary>AORebirth server-only: mission bits 736-767. Never sent to the client.</summary>
+        MissionBits24 = 0x00002717,
+
         /// <summary>Sentinel for missing / unset stat and item attribute values.</summary>
         Unset = 1234567890,
     }
