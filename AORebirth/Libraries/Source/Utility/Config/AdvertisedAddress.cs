@@ -1,4 +1,4 @@
-﻿namespace Utility.Config
+namespace Utility.Config
 {
     using System;
     using System.Net;
@@ -23,6 +23,24 @@
         {
             Config c = ConfigReadWrite.Instance.CurrentConfig;
             return Select(c == null ? null : c.ChatIP, c == null ? null : c.ChatIPPublic, c == null ? null : c.LanSubnets, remote);
+        }
+
+        /// <summary>Resolves a hostname to an IPv4 string at call time (IP literals pass through); falls back to the input.</summary>
+        public static string ResolveIPv4(string host)
+        {
+            if (string.IsNullOrWhiteSpace(host)) return host;
+            IPAddress parsed;
+            if (IPAddress.TryParse(host, out parsed)) return host;
+            try
+            {
+                foreach (IPAddress a in Dns.GetHostAddresses(host))
+                    if (a.AddressFamily == AddressFamily.InterNetwork) return a.ToString();
+            }
+            catch (SocketException)
+            {
+            }
+
+            return host;
         }
 
         public static string Select(string lanValue, string publicValue, string lanSubnets, IPAddress remote)

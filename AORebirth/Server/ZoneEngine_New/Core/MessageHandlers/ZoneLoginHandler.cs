@@ -288,7 +288,7 @@ namespace ZoneEngine_New.Core.MessageHandlers
             session.Send(
                 new ChatServerInfoMessage
                 {
-                    HostName = AdvertisedAddress.Chat(session.RemoteAddress) is { Length: > 0 } chatHost && !string.IsNullOrWhiteSpace(chatHost) ? chatHost : "127.0.0.1",
+                    HostName = AdvertisedAddress.ResolveIPv4(AdvertisedAddress.Chat(session.RemoteAddress)) is { Length: > 0 } chatHost && !string.IsNullOrWhiteSpace(chatHost) ? chatHost : "127.0.0.1",
                     Port = config.ChatPort > 0 ? config.ChatPort : 7012
                 },
                 playfield.Identity.Instance,
