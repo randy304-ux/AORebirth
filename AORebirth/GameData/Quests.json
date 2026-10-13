@@ -353,5 +353,1470 @@
                        "Xp":  100,
                        "Records":  null
                    }
+    },
+    {
+        "Hash":  "DBC0",
+        "Name":  "Kill 3 Reef Salamanders",
+        "QasInstance":  920001,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Reef Salamanders",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "RFSL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DBC1",
+        "Reward":  {
+                       "Hash":  "RBC0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DBC1",
+        "Name":  "Kill 3 Tropical Stalkers",
+        "QasInstance":  920002,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Tropical Stalkers",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "TPSA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DBC2",
+        "Reward":  {
+                       "Hash":  "RBC1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DBC2",
+        "Name":  "Kill 3 Cliff Malles",
+        "QasInstance":  920003,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Cliff Malles",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "CIMA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DBCR",
+        "Reward":  {
+                       "Hash":  "RBC2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DBCR",
+        "Name":  "Report the cull",
+        "QasInstance":  920004,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Report the cull",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ICBI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  610,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RBCR",
+                       "Credits":  350,
+                       "Xp":  350,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  265797,
+                                               "HighId":  265797,
+                                               "Name":  "Shiny Band",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DBT0",
+        "Name":  "Tag the Salamander leader",
+        "QasInstance":  920005,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tag the Salamander leader",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BLMM",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DBT1",
+        "Reward":  {
+                       "Hash":  "RBT0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DBT1",
+        "Name":  "Tag the Leet leader",
+        "QasInstance":  920006,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tag the Leet leader",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BEML",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DBT2",
+        "Reward":  {
+                       "Hash":  "RBT1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DBT2",
+        "Name":  "Tag the Malle leader",
+        "QasInstance":  920007,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tag the Malle leader",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BDML",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DBT3",
+        "Reward":  {
+                       "Hash":  "RBT2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DBT3",
+        "Name":  "Tag the Rollerrat leader",
+        "QasInstance":  920008,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tag the Rollerrat leader",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BSMG",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DBTR",
+        "Reward":  {
+                       "Hash":  "RBT3",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DBTR",
+        "Name":  "Report the tagging",
+        "QasInstance":  920009,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Report the tagging",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ICBI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  611,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RBTR",
+                       "Credits":  350,
+                       "Xp":  350,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  248374,
+                                               "HighId":  248374,
+                                               "Name":  "Range Meter",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DAP0",
+        "Name":  "Get a Power Supply",
+        "QasInstance":  920010,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Get a Power Supply",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "CADR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DAP1",
+        "Reward":  {
+                       "Hash":  "RAP0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DAP1",
+        "Name":  "Get a Compression Chamber",
+        "QasInstance":  920011,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Get a Compression Chamber",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "WTCO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DAP2",
+        "Reward":  {
+                       "Hash":  "RAP1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DAP2",
+        "Name":  "Get Stalker Limbs",
+        "QasInstance":  920012,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Get Stalker Limbs",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "TPSA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DAP3",
+        "Reward":  {
+                       "Hash":  "RAP2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DAP3",
+        "Name":  "Get Rollerrat Intestines",
+        "QasInstance":  920013,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Get Rollerrat Intestines",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SORL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DAP4",
+        "Reward":  {
+                       "Hash":  "RAP3",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DAP4",
+        "Name":  "Get Bone Plates",
+        "QasInstance":  920014,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Get Bone Plates",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "CIMA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DAPR",
+        "Reward":  {
+                       "Hash":  "RAP4",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DAPR",
+        "Name":  "Bring the parts to Adri",
+        "QasInstance":  920015,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Bring the parts to Adri",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ADAF",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  612,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RAPR",
+                       "Credits":  400,
+                       "Xp":  400,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DAD0",
+        "Name":  "Kill 3 Cargo Droids",
+        "QasInstance":  920016,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Cargo Droids",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "CADR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DAD1",
+        "Reward":  {
+                       "Hash":  "RAD0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DAD1",
+        "Name":  "Kill 3 Waste Collectors",
+        "QasInstance":  920017,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Waste Collectors",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "WTCO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DAD2",
+        "Reward":  {
+                       "Hash":  "RAD1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DAD2",
+        "Name":  "Disable the Android Leader",
+        "QasInstance":  920018,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Disable the Android Leader",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BDMO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DAD3",
+        "Reward":  {
+                       "Hash":  "RAD2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DAD3",
+        "Name":  "Disable the Junk Bot Leader",
+        "QasInstance":  920019,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Disable the Junk Bot Leader",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BJMR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DADR",
+        "Reward":  {
+                       "Hash":  "RAD3",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DADR",
+        "Name":  "Report to Adri Afeli",
+        "QasInstance":  920020,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Report to Adri Afeli",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ADAF",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  613,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RADR",
+                       "Credits":  450,
+                       "Xp":  450,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  99228,
+                                               "HighId":  99228,
+                                               "Name":  "Small Backpack",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DTB0",
+        "Name":  "Kill 3 Cross-Wired Junkbots",
+        "QasInstance":  920021,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Cross-Wired Junkbots",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "CRJU",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DTBR",
+        "Reward":  {
+                       "Hash":  "RTB0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DTBR",
+        "Name":  "Return to Travis (boots)",
+        "QasInstance":  920022,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Travis (boots)",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SHMG",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  614,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTBR",
+                       "Credits":  100,
+                       "Xp":  300,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  248269,
+                                               "HighId":  248269,
+                                               "Name":  "Newcomer\u0027s Boots",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DTG0",
+        "Name":  "Kill 3 Stowaway Rollerrats",
+        "QasInstance":  920023,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Stowaway Rollerrats",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "SORL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DTGR",
+        "Reward":  {
+                       "Hash":  "RTG0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DTGR",
+        "Name":  "Return to Travis (gloves)",
+        "QasInstance":  920024,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Travis (gloves)",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SHMG",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  615,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTGR",
+                       "Credits":  100,
+                       "Xp":  300,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  248277,
+                                               "HighId":  248277,
+                                               "Name":  "Newcomer\u0027s Gloves",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DTS0",
+        "Name":  "Kill a Shuttle Saboteur",
+        "QasInstance":  920025,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill a Shuttle Saboteur",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "LPAK",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DTSR",
+        "Reward":  {
+                       "Hash":  "RTS0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DTSR",
+        "Name":  "Return to Travis (sleeves)",
+        "QasInstance":  920026,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Travis (sleeves)",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SHMG",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  616,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTSR",
+                       "Credits":  100,
+                       "Xp":  300,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  248275,
+                                               "HighId":  248275,
+                                               "Name":  "Newcomer\u0027s Sleeves",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DTA0",
+        "Name":  "Kill 3 Climbing Salamanders",
+        "QasInstance":  920027,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Climbing Salamanders",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "CBSN",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DTAR",
+        "Reward":  {
+                       "Hash":  "RTA0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DTAR",
+        "Name":  "Return to Travis (body)",
+        "QasInstance":  920028,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Travis (body)",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SHMG",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  617,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTAR",
+                       "Credits":  100,
+                       "Xp":  300,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  248273,
+                                               "HighId":  248273,
+                                               "Name":  "Newcomer\u0027s Body Armor",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DTP0",
+        "Name":  "Kill 3 Giant Snakes",
+        "QasInstance":  920029,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Giant Snakes",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "GISK",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DTPR",
+        "Reward":  {
+                       "Hash":  "RTP0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DTPR",
+        "Name":  "Return to Travis (pants)",
+        "QasInstance":  920030,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Travis (pants)",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SHMG",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  618,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTPR",
+                       "Credits":  100,
+                       "Xp":  300,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  248271,
+                                               "HighId":  248271,
+                                               "Name":  "Newcomer\u0027s Pants",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DTC0",
+        "Name":  "Get the medical status report",
+        "QasInstance":  920031,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Get the medical status report",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "CLFI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DTCR",
+        "Reward":  {
+                       "Hash":  "RTC0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DTCR",
+        "Name":  "Bring Travis the report",
+        "QasInstance":  920032,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Bring Travis the report",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SHMG",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  619,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTCR",
+                       "Credits":  400,
+                       "Xp":  400,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DTO0",
+        "Name":  "Get the combat status report",
+        "QasInstance":  920033,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Get the combat status report",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "OMUI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DTOR",
+        "Reward":  {
+                       "Hash":  "RTO0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DTOR",
+        "Name":  "Bring Travis the report",
+        "QasInstance":  920034,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Bring Travis the report",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SHMG",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  620,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RTOR",
+                       "Credits":  400,
+                       "Xp":  400,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DES0",
+        "Name":  "Scan an Alien Spider - Zix",
+        "QasInstance":  920035,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Scan an Alien Spider - Zix",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ZIXI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DES1",
+        "Reward":  {
+                       "Hash":  "RES0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DES1",
+        "Name":  "Scan a Reef Salamander",
+        "QasInstance":  920036,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Scan a Reef Salamander",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "RFSL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DESR",
+        "Reward":  {
+                       "Hash":  "RES1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DESR",
+        "Name":  "Return the scanner to Elsa",
+        "QasInstance":  920037,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return the scanner to Elsa",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "CLFI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  621,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RESR",
+                       "Credits":  200,
+                       "Xp":  500,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  248359,
+                                               "HighId":  248359,
+                                               "Name":  "Joint Clans Shoulderpad",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DFX0",
+        "Name":  "Kill 3 Alien Spiders - Zix",
+        "QasInstance":  920038,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Alien Spiders - Zix",
+        "Objective":  {
+                          "Count":  3,
+                          "Npc":  "ZIXI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DFXR",
+        "Reward":  {
+                       "Hash":  "RFX0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DFXR",
+        "Name":  "Report to Squadleader Fixx",
+        "QasInstance":  920039,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Report to Squadleader Fixx",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "OMUI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  622,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RFXR",
+                       "Credits":  200,
+                       "Xp":  500,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  248360,
+                                               "HighId":  248360,
+                                               "Name":  "Omni-Tek Shoulderpad",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DJF0",
+        "Name":  "Kill 10 Swift Silvertails",
+        "QasInstance":  920040,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 10 Swift Silvertails",
+        "Objective":  {
+                          "Count":  10,
+                          "Npc":  "SWSI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DJF1",
+        "Reward":  {
+                       "Hash":  "RJF0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DJF1",
+        "Name":  "Kill 10 Barking Chimeras",
+        "QasInstance":  920041,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 10 Barking Chimeras",
+        "Objective":  {
+                          "Count":  10,
+                          "Npc":  "LLBE",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DJFR",
+        "Reward":  {
+                       "Hash":  "RJF1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DJFR",
+        "Name":  "Return to Joshua Falker",
+        "QasInstance":  920042,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Joshua Falker",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "JOFA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  623,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RJFR",
+                       "Credits":  500,
+                       "Xp":  1000,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  218315,
+                                               "HighId":  218315,
+                                               "Name":  "Coil of Health",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DRL0",
+        "Name":  "Kill 5 Hiathlins",
+        "QasInstance":  920043,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 5 Hiathlins",
+        "Objective":  {
+                          "Count":  5,
+                          "Npc":  "HIAT",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DRL1",
+        "Reward":  {
+                       "Hash":  "RRL0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DRL1",
+        "Name":  "Kill a Hiathlin Prime",
+        "QasInstance":  920044,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill a Hiathlin Prime",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ATHL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DRLR",
+        "Reward":  {
+                       "Hash":  "RRL1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DRLR",
+        "Name":  "Bring the thigh to Rosenblatt",
+        "QasInstance":  920045,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Bring the thigh to Rosenblatt",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "DRRS",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  624,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RRLR",
+                       "Credits":  1000,
+                       "Xp":  2000,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  252157,
+                                               "HighId":  252157,
+                                               "Name":  "Light Bar",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DRE0",
+        "Name":  "Collect Essence of the Haunted",
+        "QasInstance":  920046,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Collect Essence of the Haunted",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "CCSP",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DRER",
+        "Reward":  {
+                       "Hash":  "RRE0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DRER",
+        "Name":  "Bring the essence to Rosenblatt",
+        "QasInstance":  920047,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Bring the essence to Rosenblatt",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "DRRS",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  625,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RRER",
+                       "Credits":  1000,
+                       "Xp":  1000,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DRP0",
+        "Name":  "Remove Papagena",
+        "QasInstance":  920048,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Remove Papagena",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "PAPA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DRPR",
+        "Reward":  {
+                       "Hash":  "RRP0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DRPR",
+        "Name":  "Report to Dr. Rosenblatt",
+        "QasInstance":  920049,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Report to Dr. Rosenblatt",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "DRRS",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  626,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RRPR",
+                       "Credits":  1000,
+                       "Xp":  1000,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DRD0",
+        "Name":  "Destroy the Demonic Subjugator",
+        "QasInstance":  920050,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Destroy the Demonic Subjugator",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "TEDM",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DRDR",
+        "Reward":  {
+                       "Hash":  "RRD0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DRDR",
+        "Name":  "Report to Dr. Rosenblatt",
+        "QasInstance":  920051,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Report to Dr. Rosenblatt",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "DRRS",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  627,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RRDR",
+                       "Credits":  1500,
+                       "Xp":  1500,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DSB0",
+        "Name":  "Get 6 Predator Blood Samples",
+        "QasInstance":  920052,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Get 6 Predator Blood Samples",
+        "Objective":  {
+                          "Count":  6,
+                          "Npc":  "PDST",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DSBR",
+        "Reward":  {
+                       "Hash":  "RSB0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DSBR",
+        "Name":  "Return to Sabina Florenta",
+        "QasInstance":  920053,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Sabina Florenta",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SBFN",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  628,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RSBR",
+                       "Credits":  2000,
+                       "Xp":  2000,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DLH0",
+        "Name":  "Kill 7 Weavers of Malice",
+        "QasInstance":  920054,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 7 Weavers of Malice",
+        "Objective":  {
+                          "Count":  7,
+                          "Npc":  "WROM",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DLHR",
+        "Reward":  {
+                       "Hash":  "RLH0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DLHR",
+        "Name":  "Return to Libbie Hyman",
+        "QasInstance":  920055,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Libbie Hyman",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "LIHY",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  629,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RLHR",
+                       "Credits":  1500,
+                       "Xp":  2000,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DED0",
+        "Name":  "Talk to Scientist Donna Red",
+        "QasInstance":  920056,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Talk to Scientist Donna Red",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SNDA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DEDR",
+        "Reward":  {
+                       "Hash":  "RED0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DEDR",
+        "Name":  "Return to the Emissary",
+        "QasInstance":  920057,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to the Emissary",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ESOJ",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  630,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "REDR",
+                       "Credits":  500,
+                       "Xp":  500,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DEV0",
+        "Name":  "Talk to Veronica Escobar",
+        "QasInstance":  920058,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Talk to Veronica Escobar",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SCVR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DEVR",
+        "Reward":  {
+                       "Hash":  "REV0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DEVR",
+        "Name":  "Return to the Emissary",
+        "QasInstance":  920059,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to the Emissary",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ESOJ",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  631,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "REVR",
+                       "Credits":  500,
+                       "Xp":  500,
+                       "Records":  null
+                   }
     }
 ]
