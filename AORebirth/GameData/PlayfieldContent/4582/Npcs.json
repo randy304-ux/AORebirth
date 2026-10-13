@@ -1,0 +1,358 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  4582,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:merc:4582:doctor",
+                     "Provenance":  "ddogs merc recruiter; look from IccShuttleportSpawn.cs (ecefa673^) Brandon Thorn",
+                     "ContentNpcIdentity":  "ddogs-merc-doctor",
+                     "PlayfieldId":  4582,
+                     "InstanceId":  2110836737,
+                     "Name":  "Mercenary Recruiter (Doctor)",
+                     "Position":  [
+                                      922,
+                                      22.8,
+                                      740
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40700,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  204985,
+                                   "360":  103,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  85939
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  120627
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  120625
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  120626
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40700,
+                                        "Layer":  4
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:merc:4582:enforcer",
+                     "Provenance":  "ddogs merc recruiter; look from IccShuttleportSpawn.cs (ecefa673^) ICC Shuttle Guard",
+                     "ContentNpcIdentity":  "ddogs-merc-enforcer",
+                     "PlayfieldId":  4582,
+                     "InstanceId":  2110836738,
+                     "Name":  "Mercenary Recruiter (Enforcer)",
+                     "Position":  [
+                                      926,
+                                      22.85,
+                                      740
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40627,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  254118,
+                                   "360":  105,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  286229
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  286227
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  286228
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  286226
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  286225
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  286562,
+                                        "Id":  265793,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40627,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  262556,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  3,
+                                        "OverrideTextureId":  0,
+                                        "Id":  286446,
+                                        "Layer":  0
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:merc:4582:soldier",
+                     "Provenance":  "ddogs merc recruiter; look from IccShuttleportSpawn.cs (ecefa673^) ICC Shuttle Guard",
+                     "ContentNpcIdentity":  "ddogs-merc-soldier",
+                     "PlayfieldId":  4582,
+                     "InstanceId":  2110836739,
+                     "Name":  "Mercenary Recruiter (Soldier)",
+                     "Position":  [
+                                      930,
+                                      23,
+                                      740
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40627,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  254118,
+                                   "360":  105,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  286229
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  286227
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  286228
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  286226
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  286225
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  286562,
+                                        "Id":  265793,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40627,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  262556,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  3,
+                                        "OverrideTextureId":  0,
+                                        "Id":  286446,
+                                        "Layer":  0
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:merc:4582:keeper",
+                     "Provenance":  "ddogs merc recruiter; look from IccShuttleportSpawn.cs (ecefa673^) Manager Travis Molen",
+                     "ContentNpcIdentity":  "ddogs-merc-keeper",
+                     "PlayfieldId":  4582,
+                     "InstanceId":  2110836740,
+                     "Name":  "Mercenary Recruiter (Keeper)",
+                     "Position":  [
+                                      934,
+                                      23.4,
+                                      740
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40689,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26084,
+                                   "360":  112,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  164965
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  21819
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  21831
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40689,
+                                        "Layer":  4
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 }
+             ]
+}

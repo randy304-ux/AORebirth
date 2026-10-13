@@ -1,0 +1,55 @@
+{
+    "Notes":  "Dungeon Dogs merc recruiter (Doctor). Placed in PlayfieldContent 4582/6553/4310 Npcs.json. {hiremerc} hires a pet-based Doctor companion at the player\u0027s level (one per profession, in memory only).",
+    "Npcs":  [
+                 "ddogs-merc-doctor"
+             ],
+    "Openers":  [
+                    {
+                        "Say":  "hello"
+                    }
+                ],
+    "Replies":  {
+                    "hire":  {
+                                 "Text":  "I\u0027d like to hire a Doctor.",
+                                 "Goto":  "hire"
+                             },
+                    "dismiss":  {
+                                    "Text":  "Send my mercenaries home.",
+                                    "Goto":  "dismiss"
+                                },
+                    "how":  {
+                                "Text":  "How do mercenaries work?",
+                                "Goto":  "how"
+                            }
+                },
+    "Lines":  {
+                  "hello":  {
+                                "Text":  "Looking for some muscle? I can sign a Doctor on to watch your back. No charge for newcomers.",
+                                "Replies":  [
+                                                "hire",
+                                                "how",
+                                                "dismiss"
+                                            ]
+                            },
+                  "hire":  {
+                               "Text":  "Done. Your Doctor will follow you and fight what fights you.{hiremerc doctor}",
+                               "Fail":  "busy",
+                               "Replies":  [
+                                               "dismiss"
+                                           ]
+                           },
+                  "busy":  {
+                               "Text":  "Sorry, I can\u0027t send anyone out right now."
+                           },
+                  "dismiss":  {
+                                  "Text":  "{dismissmercs}All right, I\u0027ll call them back. Come see me any time you need them again."
+                              },
+                  "how":  {
+                              "Text":  "You can hire one of each kind: Doctor, Enforcer, Soldier and Keeper. They work like pets, so use the pet window or /pet commands to tell them to follow, guard, wait or attack. They leave when you log off or fall in battle; just come back and hire them again.",
+                              "Replies":  [
+                                              "hire",
+                                              "dismiss"
+                                          ]
+                          }
+              }
+}

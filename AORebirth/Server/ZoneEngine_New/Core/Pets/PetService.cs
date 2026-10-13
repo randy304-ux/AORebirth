@@ -3,6 +3,7 @@ namespace ZoneEngine_New.Core.Pets
     using System;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
 
     using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
@@ -95,6 +96,7 @@ namespace ZoneEngine_New.Core.Pets
                     npc.Stats.Set(CharacterStat.Side, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base));
                     MatchOwnerRunSpeed(npc, owner);
                     npc.BindPet(controller);
+                    npc.UploadedNanoIds.AddRange(Mercs.NanosFor(hash, level > 0 ? level : npc.Stats.GetOrOne(CharacterStat.Level)));
                     if (healthPercent is > 0 and < 100)
                     {
                         int max = npc.Stats.GetOrZero(CharacterStat.MaxHealth);
@@ -125,6 +127,40 @@ namespace ZoneEngine_New.Core.Pets
             return pet;
         }
 
+        /// <summary>GameData/Mercs.json toggle for hiring mercenaries.</summary>
+        public bool MercsEnabled => Mercs.Enabled(_gameData.RootPath);
+
+        /// <summary>
+        /// Hires a mercenary for <paramref name="owner"/> at <paramref name="level"/>: a pet of the merc's own slot that
+        /// guards its owner until dismissed. A merc of the same profession already hired is replaced.
+        /// </summary>
+        public NpcCharacter? HireMerc(Player owner, Mercs.Kind kind, int level)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            ArgumentNullException.ThrowIfNull(kind);
+            if (!MercsEnabled || owner.IsDead || !ReferenceEquals(owner.Playfield, _playfield))
+                return null;
+
+            return Spawn(owner, kind.Hash, kind.PetType, Math.Clamp(level, 1, 220), null, PetMode.Guard, 100, 100, []);
+        }
+
+        /// <summary>Dismisses every merc <paramref name="owner"/> has; returns how many.</summary>
+        public int DismissMercs(Player owner)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            int count = 0;
+            foreach (NpcCharacter pet in owner.OwnedPets.All.ToArray())
+            {
+                if (pet.Pet != null && Mercs.IsMercHash(pet.Pet.Hash))
+                {
+                    Dismiss(pet, "merc dismissed");
+                    count++;
+                }
+            }
+
+            owner.OwnedPets.Stash.RemoveAll(stash => Mercs.IsMercHash(stash.Hash));
+            return count;
+        }
         /// <summary>Removes a pet from the world and from its owner.</summary>
         public void Dismiss(NpcCharacter pet, string reason)
         {

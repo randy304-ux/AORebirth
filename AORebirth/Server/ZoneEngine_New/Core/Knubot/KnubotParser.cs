@@ -188,6 +188,20 @@ public static class KnubotParser
                     Effect(new KnubotChooseStartArea(words[1] == "arete"));
                     break;
 
+                case "hiremerc":
+                    if (words.Length != 2 || ZoneEngine_New.Core.Pets.Mercs.Find(words[1]) == null)
+                    {
+                        errors.Add("expected {hiremerc doctor|enforcer|soldier|keeper}: {" + body + "}");
+                        break;
+                    }
+
+                    Effect(new KnubotHireMerc(words[1]));
+                    break;
+
+                case "dismissmercs":
+                    Expect(words, 1, 1, body, errors);
+                    Effect(new KnubotDismissMercs());
+                    break;
                 case "shop":
                     Expect(words, 1, 1, body, errors);
                     Effect(new KnubotOpenShop());

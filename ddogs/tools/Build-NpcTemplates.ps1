@@ -197,6 +197,129 @@ foreach ($h in @($subway) + 'ASSU') {
   }
 }
 $report += "common loot attached to $(@($subway).Count + 1) subway codes; STFE extra stims/rechargers; WOST extra OFAB 5%"
+# 8. Newbie zones: ICC Shuttleport (PF 4582) and Nascense Frontier (PF 4310, the Shadowlands starter zone).
+#    Spawn codes come from the client Spawns.json of each playfield. Names and recorded stats come from the upstream
+#    capture-backed spawn lists retired in commit ecefa673 (IccShuttleportSpawn.cs, NascenceLifeSpawn.cs), read with git show.
+#    A code is matched to a captured NPC by position: the captured NPC nearest each spawn point (within 25 m) votes.
+#    PF 4582 hostile codes use the old CellAO mobtemplate rows named in docs/evidence/PF4582_TEMPLATE_HASH_RESOLUTION_AUDIT_20260824.md.
+$repo = [IO.Path]::GetFullPath("$PSScriptRoot\..\..")
+function RetiredBlocks($file, $kind) {
+  $txt = (& git -C $repo show "ecefa673^:AORebirth/Server/ZoneEngine/Core/Playfields/$file") -join "`n"
+  $out = @()
+  foreach ($m in [regex]::Matches($txt, "new $kind\s*\{(.*?)\n\s*\},", 'Singleline')) {
+    $b = $m.Groups[1].Value; $o = [ordered]@{}
+    $n = [regex]::Match($b, 'Name = "([^"]+)"'); if (-not $n.Success) { continue }; $o.Name = $n.Groups[1].Value
+    foreach ($f in 'PlayfieldId','Level','Health','MonsterData','Scale','VisualFlags','CharacterFlags','HeadMesh','NpcFamily','Side','Breed','Gender','Race','RunSpeed') {
+      $mm = [regex]::Match($b, "\b$f = (-?\d+)"); if ($mm.Success) { $o[$f] = [int]$mm.Groups[1].Value } }
+    foreach ($f in 'X','Z') { $mm = [regex]::Match($b, "\b$f = (-?[\d\.]+)f"); if ($mm.Success) { $o[$f] = [double]$mm.Groups[1].Value } }
+    if ($o.Contains('X')) { $out += [pscustomobject]$o }
+  }
+  $out
+}
+$shutCap = @(RetiredBlocks 'IccShuttleportSpawn.cs' 'ShuttleportNpc')
+$lifeCap = @(RetiredBlocks 'NascenceLifeSpawn.cs' 'LifeNpc' | Where-Object { $_.PlayfieldId -eq 4310 })
+$hostileFlags = 268964353; $socialFlags = 277352961
+$newbieLeaves = New-Object System.Collections.Generic.List[string]
+
+function NewbieLeaf($h, $cap, [int]$lo, [int]$hi, [bool]$social, $equip) {
+  $r = $cap | Sort-Object Level | Select-Object -Last 1
+  $skel = [ordered]@{ Stats = [ordered]@{} }
+  foreach ($p in $catalog['CL02'].Templates[-1].Stats.GetEnumerator()) { $skel.Stats[$p.Key] = $p.Value }
+  $o = [ordered]@{ '0' = $(if ($social) { $socialFlags } elseif ($r.CharacterFlags) { $r.CharacterFlags } else { $hostileFlags })
+    '359' = $r.MonsterData; '360' = $(if ($r.Scale) { $r.Scale } else { 100 }); '673' = $(if ($r.VisualFlags) { $r.VisualFlags } else { 31 })
+    '455' = $(if ($null -ne $r.NpcFamily) { $r.NpcFamily } else { 0 }); '64' = $(if ($r.HeadMesh) { $r.HeadMesh } else { 0 }) }
+  foreach ($f in @(@('Side','33'),@('Breed','4'),@('Gender','59'),@('Race','89'),@('RunSpeed','156'))) { if ($null -ne $r.($f[0])) { $o[$f[1]] = $r.($f[0]) } }
+  $bands = @()
+  foreach ($lvl in (@($lo, $hi) | Select-Object -Unique)) {
+    $hp = if ($r.Health -and $r.Level) { [int][math]::Round($r.Health * (HealthAt $lvl) / (HealthAt $r.Level)) } else { HealthAt $lvl }
+    $o['1'] = [math]::Max(1, $hp)
+    $b = Band $skel $r.Name $lvl $o
+    if ($social) { $b['Features'] = @('NoCombat'); $b['HasHeadMesh'] = [bool]$r.HeadMesh; if ($equip) { $b['Equipment'] = @(,@($equip, $equip)) } }
+    else { $b['LootTable'] = @(CommonLoot $lvl); $b.Stats['61'] = [int]($lvl * 10) }
+    $bands += $b
+  }
+  if ($catalog.Contains($h)) { throw "newbie hash $h collides with an existing leaf" }
+  $catalog[$h] = [ordered]@{ Templates = $bands }; $newbieLeaves.Add($h)
+}
+
+function MatchCodes($pf, $cap) {
+  $pts = (Get-Content "$Playfields\$pf\Spawns.json" -Raw | ConvertFrom-Json).spawns
+  $res = @()
+  foreach ($g in ($pts | Group-Object hashText)) {
+    $votes = @{}; $d = @()
+    foreach ($p in $g.Group) {
+      $best = $null; $bd = 1e9
+      foreach ($n in $cap) { $dd = [math]::Sqrt([math]::Pow($n.X - $p.position[0], 2) + [math]::Pow($n.Z - $p.position[2], 2)); if ($dd -lt $bd) { $bd = $dd; $best = $n } }
+      if ($best -and $bd -lt 25) { $votes[$best.Name] = 1 + $votes[$best.Name]; $d += $bd }
+    }
+    $top = $votes.GetEnumerator() | Sort-Object Value -Descending | Select-Object -First 1
+    $res += [pscustomobject]@{ Code = $g.Name; Points = $g.Count; Min = [int]($g.Group | Measure-Object minLevel -Minimum).Minimum
+      Max = [int]($g.Group | Measure-Object maxLevel -Maximum).Maximum; Name = $top.Name; Votes = [int]$top.Value
+      Dist = $(if ($d) { ($d | Measure-Object -Average).Average } else { 99 }) }
+  }
+  $res
+}
+
+# 8a. PF 4582 social NPCs and guards: exact capture matches (within 1 m). Island Reet (ISRE) is a level 1 critter.
+$shutSocial = 'BNTO ICBI ADAF EQVE OITA CNTD CCRI ONRE NERE OMUI CLFI SHMG ICST'.Split(' ')
+$shutShop = @{ EQVE = 248368; OITA = 248368; CNTD = 248368 }   # EQVE's recorded vendor terminal (docs/accepted/npc/delmus); stock in VendingMachines.json
+foreach ($m in (MatchCodes 4582 $shutCap)) {
+  if ($m.Code -eq 'ISRE') { NewbieLeaf 'ISRE' @($shutCap | Where-Object Name -eq 'Island Reet') 1 1 $false $null; $report += "newbie 4582 ISRE Island Reet x$($m.Points)"; continue }
+  if ($shutSocial -notcontains $m.Code) { continue }
+  if ($m.Dist -gt 3.5) { $report += "newbie 4582 $($m.Code) skipped (nearest capture $([math]::Round($m.Dist,1)) m)"; continue }
+  $cap = @($shutCap | Where-Object Name -eq $m.Name)
+  NewbieLeaf $m.Code $cap $m.Min $m.Max $true $shutShop[$m.Code]
+  $report += "newbie 4582 $($m.Code) $($m.Name) L$($m.Min)-$($m.Max) social x$($m.Points)"
+}
+# 8b. PF 4582 hostile codes from mobtemplate. The 17 audit candidates; the 7 one-point named rares (B***) are assigned by level and kind (guesses).
+$shutDb = [ordered]@{ ZIXI='A026'; ACFJ='A002'; TPSA='A033'; CIMA='A035'; GISK='A030'; WTCO='A029'; CADR='A027'; FDQO='A004'; SRLZ='A000'
+  CRJU='A009'; RFSL='A034'; CBSN='A013'; SORL='A012'; LLER='A012'; SRSK='A003'; LPAK='A014'; CRDY='A016'
+  BTMO='A037'; BDMO='A036'; BJMR='A038'; BEML='A010'; BDML='A015'; BLMM='A031'; BSMG='A032' }
+$shutPts = (Get-Content "$Playfields\4582\Spawns.json" -Raw | ConvertFrom-Json).spawns
+foreach ($h in $shutDb.Keys) {
+  $r = (Q "select Name, MinLvl, MaxLvl, Side, Fatness, Breed, Sex, Race, Flags, NPCFamily, Health, MonsterData, MonsterScale from mobtemplate where Hash='$($shutDb[$h])'") -split "`t"
+  $p = @($shutPts | Where-Object hashText -eq $h)
+  $lo = [int]($p | Measure-Object minLevel -Minimum).Minimum; $hi = [int]($p | Measure-Object maxLevel -Maximum).Maximum
+  $cap = [pscustomobject]@{ Name = $r[0]; Level = [int]$r[2]; Health = [int]$r[10]; MonsterData = [int]$r[11]; Scale = [int]$r[12]; NpcFamily = [int]$r[9]
+    Side = [int]$r[3]; Breed = [int]$r[5]; Gender = [int]$r[6]; Race = [int]$r[7]; CharacterFlags = $hostileFlags }
+  NewbieLeaf $h @($cap) $lo $hi $false $null
+  $report += "newbie 4582 $h $($r[0]) (mobtemplate $($shutDb[$h])) L$lo-$hi x$($p.Count)"
+}
+# 8c. PF 4310 Nascense Frontier: every code whose spawn points agree on one captured NPC (>= 60% of points, mean distance <= 10 m,
+#     or a single point within 3 m). Humans with a head mesh are the quest/social NPCs; everything else is hostile.
+$lifeSocial = 'Dr. Rosenblatt|Emissary of Jobe|Guardian of the Weak|Joshua Falker|Libbie Hyman|Sabina Florenta|Scientist Donna Red|Scientist Veronica Escobar'
+foreach ($m in (MatchCodes 4310 $lifeCap)) {
+  $ok = ($m.Points -gt 1 -and $m.Votes / $m.Points -ge 0.6 -and $m.Dist -le 10) -or ($m.Points -eq 1 -and $m.Votes -eq 1 -and $m.Dist -le 3)
+  if (-not $ok -or -not $m.Name) { $report += "newbie 4310 $($m.Code) unmatched x$($m.Points) L$($m.Min)-$($m.Max)"; continue }
+  $social = $m.Name -match "^($lifeSocial)$"
+  NewbieLeaf $m.Code @($lifeCap | Where-Object Name -eq $m.Name) $m.Min $m.Max $social $null
+  $report += "newbie 4310 $($m.Code) $($m.Name) L$($m.Min)-$($m.Max) $(if ($social) { 'social' } else { 'hostile' }) x$($m.Points) votes $($m.Votes) dist $([math]::Round($m.Dist,1))"
+}
+
+# 9. Mercenaries (hired companions; GameData/Knubot/Mercs*.json recruiters, GameData/PetTypes.json slots). Human looks from
+#    the PF 4582 captures; levels 1-220 so a merc spawns at the hiring player's level. Profession stat 60 is set per type.
+$mercs = [ordered]@{
+  MRDR = @{ Name = 'Mercenary Doctor';   Look = 'Brandon Thorn';           Prof = 10; Hp = 0.8; Dmg = 0.6 }
+  MREN = @{ Name = 'Mercenary Enforcer'; Look = 'ICC Shuttle Guard';       Prof = 9;  Hp = 1.6; Dmg = 0.9 }
+  MRSO = @{ Name = 'Mercenary Soldier';  Look = 'ICC Shuttle Guard';       Prof = 1;  Hp = 1.0; Dmg = 1.3 }
+  MRKE = @{ Name = 'Mercenary Keeper';   Look = 'Manager Travis Molen';    Prof = 14; Hp = 1.3; Dmg = 1.0 }
+}
+foreach ($h in $mercs.Keys) {
+  $md = $mercs[$h]; $r = $shutCap | Where-Object Name -eq $md.Look | Select-Object -First 1
+  $skel = [ordered]@{ Stats = [ordered]@{} }; foreach ($p in $catalog['CL02'].Templates[-1].Stats.GetEnumerator()) { $skel.Stats[$p.Key] = $p.Value }
+  $bands = @()
+  foreach ($lvl in 1, 5, 10, 15, 25, 50, 75, 100, 125, 150, 175, 200, 220) {
+    $o = [ordered]@{ '0' = $hostileFlags; '359' = $r.MonsterData; '360' = 100; '673' = 31; '455' = 0; '64' = $r.HeadMesh; '60' = $md.Prof
+      '33' = 0; '4' = $r.Breed; '59' = $r.Gender; '89' = $r.Race; '156' = 129; '1' = [int][math]::Max(30, (HealthAt $lvl) * $md.Hp) }
+    $b = Band $skel $md.Name $lvl $o
+    $b.Stats['285'] = [int][math]::Max(3, $lvl * 1.5 * $md.Dmg); $b.Stats['286'] = [int][math]::Max(1, $lvl * 0.5 * $md.Dmg)
+    $b['HasHeadMesh'] = $true
+    $bands += $b
+  }
+  $catalog[$h] = [ordered]@{ Templates = $bands }
+  $report += "merc $h $($md.Name) look=$($md.Look) prof=$($md.Prof)"
+}
+$report += "newbie leaves: $($newbieLeaves.Count)"
 $json = $catalog | ConvertTo-Json -Depth 8
 [IO.File]::WriteAllText([IO.Path]::GetFullPath($Out), $json + "`n", (New-Object Text.UTF8Encoding $false))
 $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-NpcTemplates.last.txt'))
