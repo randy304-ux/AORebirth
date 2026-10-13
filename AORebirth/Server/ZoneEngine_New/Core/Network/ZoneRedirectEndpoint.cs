@@ -8,10 +8,11 @@ using Utility.Config;
 
 internal sealed record ZoneRedirectEndpoint(IPAddress Address, ushort Port)
 {
-    internal static ZoneRedirectEndpoint Configured()
+    internal static ZoneRedirectEndpoint Configured(IPAddress? remote = null)
     {
         Config? config = ConfigReadWrite.Instance.CurrentConfig;
-        string host = config == null || string.IsNullOrWhiteSpace(config.ZoneIP) ? "127.0.0.1" : config.ZoneIP;
+        string? selected = config == null ? null : AdvertisedAddress.Zone(remote);
+        string host = string.IsNullOrWhiteSpace(selected) ? "127.0.0.1" : selected;
         int port = config == null || config.ZonePort <= 0 ? 7501 : config.ZonePort;
         if (port > ushort.MaxValue) throw new InvalidOperationException("ZonePort is outside the retail redirect range.");
         if (IPAddress.TryParse(host, out IPAddress? parsed) && parsed.AddressFamily == AddressFamily.InterNetwork)

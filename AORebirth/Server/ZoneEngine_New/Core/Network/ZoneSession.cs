@@ -300,7 +300,7 @@ namespace ZoneEngine_New.Core.Network
         internal byte[][] PrepareTransferPackets(Player player, Vector3 landing,
             AORebirth.Core.Vector.Quaternion heading, int destinationId)
         {
-            ZoneRedirectEndpoint target = ZoneRedirectEndpoint.Configured();
+            ZoneRedirectEndpoint target = ZoneRedirectEndpoint.Configured(RemoteAddress);
             AuthorizeZoneRedirect(player.Identity.Instance, target);
             return
             [
@@ -882,6 +882,23 @@ namespace ZoneEngine_New.Core.Network
                     if (n <= 0)
                         throw new IOException("Socket closed during compressed send.");
                     sent += n;
+                }
+            }
+        }
+
+        /// <summary>Client source address (IPv4), used to pick the LAN or public advertised address.</summary>
+        public System.Net.IPAddress? RemoteAddress
+        {
+            get
+            {
+                try
+                {
+                    System.Net.IPAddress? a = (_socket.RemoteEndPoint as System.Net.IPEndPoint)?.Address;
+                    return a != null && a.IsIPv4MappedToIPv6 ? a.MapToIPv4() : a;
+                }
+                catch
+                {
+                    return null;
                 }
             }
         }

@@ -13,6 +13,9 @@ namespace ZoneEngine_New.Core.Network
 
         Player? Player { get; }
 
+        /// <summary>Client source address; null when unknown (treated as LAN).</summary>
+        System.Net.IPAddress? RemoteAddress => null;
+
         bool IsClosed => State == SessionState.Closed;
 
         void BindPlayer(Player player);

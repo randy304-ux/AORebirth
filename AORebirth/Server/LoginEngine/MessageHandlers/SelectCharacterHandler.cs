@@ -95,9 +95,10 @@ namespace LoginEngine.MessageHandlers
             try
             {
                 IPAddress zoneIpAdress;
-                if (IPAddress.TryParse(ConfigReadWrite.Instance.CurrentConfig.ZoneIP, out zoneIpAdress) == false)
+                string advertisedZoneHost = Utility.Config.AdvertisedAddress.Zone(client.ClientAddress);
+                if (IPAddress.TryParse(advertisedZoneHost, out zoneIpAdress) == false)
                 {
-                    IPHostEntry zoneHost = Dns.GetHostEntry(ConfigReadWrite.Instance.CurrentConfig.ZoneIP);
+                    IPHostEntry zoneHost = Dns.GetHostEntry(advertisedZoneHost);
                     zoneIpAdress = zoneHost.AddressList.FirstOrDefault(
                         ip => ip.AddressFamily == AddressFamily.InterNetwork);
                 }

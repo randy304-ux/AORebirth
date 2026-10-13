@@ -87,7 +87,7 @@ namespace ZoneEngine_New.Core.MessageHandlers
         private async Task HandleAsyncCoreInner(ZoneLoginMessage message, IZoneSession session)
         {
             AORebirth.Database.Dao.ZoneHandoffClaim claim;
-            try { claim = _admission.Claim(message); }
+            try { claim = _admission.Claim(message, session.RemoteAddress); }
             catch
             {
                 _logger.Warn("Zone admission rejected: reason=authority_unavailable");
@@ -288,7 +288,7 @@ namespace ZoneEngine_New.Core.MessageHandlers
             session.Send(
                 new ChatServerInfoMessage
                 {
-                    HostName = string.IsNullOrWhiteSpace(config.ChatIP) ? "127.0.0.1" : config.ChatIP,
+                    HostName = AdvertisedAddress.Chat(session.RemoteAddress) is { Length: > 0 } chatHost && !string.IsNullOrWhiteSpace(chatHost) ? chatHost : "127.0.0.1",
                     Port = config.ChatPort > 0 ? config.ChatPort : 7012
                 },
                 playfield.Identity.Instance,

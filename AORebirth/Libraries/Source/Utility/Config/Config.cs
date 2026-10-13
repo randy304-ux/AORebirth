@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 
 // Copyright (c) 2005-2014, CellAO Team
 // 
@@ -220,6 +220,15 @@ namespace Utility.Config
         /// Gets or sets Zone server IP
         /// </summary>
         public string ZoneIP { get; set; }
+
+        /// <summary>Dungeon Dogs: zone address/hostname advertised to clients outside LanSubnets (empty = use ZoneIP).</summary>
+        public string ZoneIPPublic { get; set; }
+
+        /// <summary>Dungeon Dogs: chat address/hostname advertised to clients outside LanSubnets (empty = use ChatIP).</summary>
+        public string ChatIPPublic { get; set; }
+
+        /// <summary>Dungeon Dogs: comma-separated IPv4 CIDRs treated as LAN (loopback always LAN).</summary>
+        public string LanSubnets { get; set; }
 
         /// <summary>
         /// Gets or sets the Zone Port

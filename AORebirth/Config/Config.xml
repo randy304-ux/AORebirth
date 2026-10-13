@@ -4,6 +4,10 @@
   <ListenIP>0.0.0.0</ListenIP>
   <ChatIP>192.168.1.68</ChatIP>
   <ZoneIP>192.168.1.68</ZoneIP>
+  <!-- Dungeon Dogs: clients from LanSubnets (and loopback) get ZoneIP/ChatIP; others get the *Public values (hostname or IP; empty = use LAN value). -->
+  <ZoneIPPublic></ZoneIPPublic>
+  <ChatIPPublic></ChatIPPublic>
+  <LanSubnets>192.168.1.0/24,127.0.0.0/8</LanSubnets>
   <ChatPort>7012</ChatPort>
   <ZonePort>7501</ZonePort>
   <LoginPort>7500</LoginPort>

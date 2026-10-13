@@ -53,6 +53,7 @@
     <Compile Include="AssemblyInfoclass.cs" />
     <Compile Include="Attributes\RevisionNameAttribute.cs" />
     <Compile Include="Colouring.cs" />
+    <Compile Include="Config\AdvertisedAddress.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigReadWrite.cs" />
     <Compile Include="Config\LocalitySettings.cs" />
