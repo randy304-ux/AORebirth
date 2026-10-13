@@ -21,7 +21,7 @@ $items = [ordered]@{
   TSKW=@(204751,204751); TSDS=@(204755,204755); TTCH=@(204706,204706); TMTI=@(123733,123734)
   TKVI=@(204650,204650); TNIE=@(204613,204613); TNSP=@(204648,204649); TSOA=@(204647,204647); TTOG=@(204651,204651)
   TCFU=@(204708,204708); TDKM=@(204602,204602); TMLP=@(204603,204603); TGCB=@(204601,204601); THBI=@(204765,204765); TLCR=@(204829,204829)
-  TPRD=@(204608,204608); TRBW=@(275083,275083)
+  TPRD=@(204608,204608); TRBW=@(275083,275083); TCPL=@(287143,287143)   # Copper Pail QL200: retail capture on Guardian and Aztur corpses
   TAF1=@(204711,204711); TAF2=@(204712,204712); TAF3=@(204713,204713); TAF4=@(204714,204714); TAF5=@(204715,204715)
   TTE1=@(204720,204720); TTE2=@(204721,204721); TTE3=@(204722,204722); TTE4=@(204723,204723); TTE5=@(204724,204724); TTE6=@(204725,204725)
 }
@@ -78,13 +78,14 @@ $def = [ordered]@{
   NMTH=@('Nematet the Custodian of Time',26159,0,@(@('TRWF',25),@('TTCH',25),@('TNIE',20),@('TSOA',15),@('TTOG',15)),@(66,25318,255,107))
   TRRN=@('The Re-Animator',26155,0,@(@('TBAR',20),@('TWFL',20),@('TSKL',15),@('TSKW',15),@('TCFU',20),@('TPRD',20)),@(60,12441,220,100))
   LITH=@('Lien the Memorystalker',40515,0,@(@('TRML',25),@('TSKL',15),@('TSKW',15),@('TCFU',15),@('TDKM',15),@('TMLP',15)))
-  GUOT=@('Guardian of Tomorrow',22798,0,@(@('TGCB',100),@('TGTA',10),@('TBAS',25),@('TBLR',20),@('TREN',20),@('TRTF',20),@('TPRD',25)),@(68,26500,264,108))
+  GUOT=@('Guardian of Tomorrow',22798,0,@(@('TGCB',100),@('TGTA',25),@('TCPL',15),@('TBAS',25),@('TBLR',20),@('TREN',20),@('TRTF',20),@('TPRD',25)),@(68,26500,264,108))
   GATH=@('Gartua the Doorkeeper',159085,40105,@(@('TRCG',25),@('TBLR',20),@('TRWF',20),@('TKVI',20)),@(65,14130,229,107))
   UKTH=@('Uklesh the Frozen',40515,0,@(@('TBAR',20),@('TWFL',20),@('TFOR',15),@('TRTF',20),@('TFTU',20),@('TPRD',25)),@(73,21039,283,108))
   KHAL=@('Khalum',95352,0,@(@('TREN',25),@('TPRD',25)),@(73,25247,283,108))
-  AZTR=@('Aztur the Immortal',159966,0,@(@('TREN',25),@('TRTF',25),@('TSDS',20),@('TSOA',15),@('THBI',25),@('TPRD',25)),@(74,38630,522,163))
+  AZTR=@('Aztur the Immortal',159966,0,@(@('TREN',25),@('TRTF',25),@('TSDS',20),@('TSOA',15),@('THBI',25),@('TPRD',25),@('TCPL',15)),@(74,38630,522,163))
   JUJU=@('Ju-ju Doll',41690,0,@(),@(45,600,60,50))
 }
+$cash = @{ GUOT = 2830; GATH = 1592; UKTH = 625; KHAL = 625; AZTR = 3184 }   # corpse credits from retail captures
 $report = @()
 foreach ($h in $def.Keys) {
   $d = $def[$h]; $md = $d[1]; $head = $d[2]
@@ -97,7 +98,7 @@ foreach ($h in $def.Keys) {
     $st = [ordered]@{}; foreach ($p in $skel.PSObject.Properties) { $st[$p.Name] = [int]$p.Value }
     $hp = $(if ($d.Count -gt 4) { $d[4][1] } else { HealthAt $l }); $mx = $(if ($d.Count -gt 4) { $d[4][2] } else { [math]::Max(3, [int][math]::Round($l * 1.5)) })
     $st['1'] = $hp; $st['27'] = $hp; $st['54'] = $l; $st['359'] = $md; $st['360'] = $(if ($d.Count -gt 4) { $d[4][3] } else { 100 }); $st['455'] = 136
-    $st['285'] = $mx; $st['286'] = [math]::Max(1, [int][math]::Round($mx / 2)); $st['61'] = 10 * $l
+    $st['285'] = $mx; $st['286'] = [math]::Max(1, [int][math]::Round($mx / 2)); $st['61'] = $(if ($cash.ContainsKey($h)) { $cash[$h] } else { 10 * $l })
     if ($head) { $st['64'] = $head }
     $loot = @($d[3] | Where-Object { $_ } | ForEach-Object { [ordered]@{ Hash = $_[0]; Repeats = 1; Chance = $_[1]; LevelMod = 0 } })
     if ($h -ne 'JUJU' -and $h -ne 'RACO') { $loot += CommonLoot $l }

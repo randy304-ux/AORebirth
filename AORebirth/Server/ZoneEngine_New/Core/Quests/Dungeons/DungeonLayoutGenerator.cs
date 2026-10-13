@@ -155,6 +155,10 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
             {
                 _policy = JsonSerializer.Deserialize<GenerationPolicy>(File.ReadAllText(Path.Combine(gameData.RootPath, GenerationFileName)),
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                // Population hashes must resolve in NpcTemplates.json; an empty or unloadable catalog lands here.
+                string[] missingNpcs = (_policy?.Population?.RegularNpcHashes ?? []).Where(h => !gameData.HasMobTemplate(h)).ToArray();
+                if (missingNpcs.Length > 0)
+                    throw new InvalidDataException("Dungeon population hashes not in NpcTemplates.json: " + string.Join(",", missingNpcs));
                 if (_policy == null || _policy.Population?.IsValid(gameData) != true || _policy.FloorHeight is <= 0 or > 255
                     || (_policy.TokenReward != null && !_policy.TokenReward.IsValid)
                     || _policy.LockedDoorChancePercent is < 0 or > 100 || _policy.Profiles.Count == 0
@@ -169,6 +173,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                             && _policy.Profiles[i].MinQuality <= _policy.Profiles[j].MaxQuality
                             && _policy.Profiles[j].MinQuality <= _policy.Profiles[i].MaxQuality)
                             throw new InvalidDataException("Overlapping dungeon generation profiles.");
+                logger.Info(string.Format(CultureInfo.InvariantCulture, "GameData dungeon generation profiles={0} population={1}", _policy.Profiles.Count, string.Join(",", _policy.Population!.RegularNpcHashes)));
             }
             catch (Exception exception)
             {
