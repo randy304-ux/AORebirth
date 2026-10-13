@@ -1,0 +1,69 @@
+{
+    "Notes":  "Dungeon Dogs ICC Transit Officer next to Brandon Thorn (PlayfieldContent 4582 Npcs.json). One-time start-area choice for new Rubi-Ka characters: {startarea arete} moves to Arete Landing (6553), {startarea icc} stays.",
+    "Npcs":  [
+                 "ddogs-icc-transit"
+             ],
+    "Openers":  [
+                    {
+                        "If":  [
+                                   "StartAreaPending"
+                               ],
+                        "Say":  "offer"
+                    },
+                    {
+                        "Say":  "done"
+                    }
+                ],
+    "Replies":  {
+                    "go_arete":  {
+                                     "Text":  "Take me to Arete Landing.",
+                                     "If":  [
+                                                "StartAreaPending"
+                                            ],
+                                     "Goto":  "arete"
+                                 },
+                    "stay_icc":  {
+                                     "Text":  "I\u0027ll stay here at the ICC Shuttleport.",
+                                     "If":  [
+                                                "StartAreaPending"
+                                            ],
+                                     "Goto":  "icc"
+                                 },
+                    "what_arete":  {
+                                       "Text":  "What is Arete Landing?",
+                                       "Goto":  "about"
+                                   }
+                },
+    "Lines":  {
+                  "offer":  {
+                                "Text":  [
+                                             "{delay 1}Welcome to the ICC Shuttleport. I handle transfers for new arrivals.",
+                                             "{delay 1}You can start your training right here, or I can send you to the colony camp on Arete Landing instead. It is a one-time offer, so choose carefully."
+                                         ],
+                                "Replies":  [
+                                                "go_arete",
+                                                "stay_icc",
+                                                "what_arete"
+                                            ]
+                            },
+                  "about":  {
+                                "Text":  "Arete is the newer colony landing. The camp there has its own vendors and work for newcomers. The Shuttleport has Brandon Thorn and the classic island training.",
+                                "Replies":  [
+                                                "go_arete",
+                                                "stay_icc"
+                                            ]
+                            },
+                  "arete":  {
+                                "Text":  [
+                                             "Arete Landing it is. Good luck out there!",
+                                             "{delay 2}Hold still, the transfer beacon will pull you over now.{startarea arete}"
+                                         ]
+                            },
+                  "icc":  {
+                              "Text":  "{startarea icc}Very well. Brandon Thorn right here will get you started. Welcome aboard!{close}"
+                          },
+                  "done":  {
+                               "Text":  "{delay 1}Hello again. Your arrival paperwork is all filed, so there is nothing more I can do for you. Safe travels!{close}"
+                           }
+              }
+}

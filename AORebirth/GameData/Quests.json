@@ -1,26 +1,357 @@
 [
     {
-      "Hash": "KION",
-      "Name": "Kill one Leet.",
-      "QasInstance": 21205,
-      "Scope": "Solo",
-      "Action": "KillOne",
-      "Summary": "kill the target NPC",
-      "Objective": {
-        "Count": null,
-        "Npc": "LE01",
-        "SpecItem": null,
-        "WorldItem": null
-      },
-      "Flags": "NoCash",
-      "MissionBit": null,
-      "NextStep": "KLTR",
-      "Reward": {
-        "Hash": "DIRM",
-        "Credits": 0,
-        "Xp": 300,
-        "Records": null
-      }
+        "Hash":  "KION",
+        "Name":  "Kill one Leet.",
+        "QasInstance":  21205,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "kill the target NPC",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "LE01",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "KLTR",
+        "Reward":  {
+                       "Hash":  "DIRM",
+                       "Credits":  0,
+                       "Xp":  300,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "H38F",
+        "Name":  "Welcome ashore",
+        "QasInstance":  910001,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Welcome ashore",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BNTO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  600,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "DRH3",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "L5G4",
+        "Name":  "Find a Beach Leet",
+        "QasInstance":  910002,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Find a Beach Leet",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "FDQO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DDF2",
+        "Reward":  {
+                       "Hash":  "DRL5",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DDF2",
+        "Name":  "Find an Island Reet",
+        "QasInstance":  910003,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Find an Island Reet",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ISRE",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DDF3",
+        "Reward":  {
+                       "Hash":  "DRDD",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DDF3",
+        "Name":  "Find a Surf Lizard",
+        "QasInstance":  910004,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Find a Surf Lizard",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SRLZ",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "DDF4",
+        "Reward":  {
+                       "Hash":  "DRDD",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "DDF4",
+        "Name":  "Find a Shore Snake",
+        "QasInstance":  910005,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Find a Shore Snake",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SRSK",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "T8Q1",
+        "Reward":  {
+                       "Hash":  "DRDD",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "T8Q1",
+        "Name":  "Return to Brandon Thorn",
+        "QasInstance":  910006,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Brandon Thorn",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BNTO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  601,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "DRT8",
+                       "Credits":  400,
+                       "Xp":  400,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  252157,
+                                               "HighId":  252157,
+                                               "Name":  "Light Bar",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "91S8",
+        "Name":  "Kill a Beach Leet",
+        "QasInstance":  910007,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill a Beach Leet",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "FDQO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "0NEC",
+        "Reward":  {
+                       "Hash":  "DR91",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "0NEC",
+        "Name":  "Kill an Island Reet",
+        "QasInstance":  910008,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill an Island Reet",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ISRE",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "GFM9",
+        "Reward":  {
+                       "Hash":  "DR0N",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "GFM9",
+        "Name":  "Kill a Surf Lizard",
+        "QasInstance":  910009,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill a Surf Lizard",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SRLZ",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "R1FQ",
+        "Reward":  {
+                       "Hash":  "DRGF",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "R1FQ",
+        "Name":  "Kill a Shore Snake",
+        "QasInstance":  910010,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill a Shore Snake",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SRSK",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "Q5V8",
+        "Reward":  {
+                       "Hash":  "DRR1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "Q5V8",
+        "Name":  "Report to Brandon Thorn",
+        "QasInstance":  910011,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Report to Brandon Thorn",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BNTO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  602,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "DRQ5",
+                       "Credits":  100,
+                       "Xp":  600,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  260026,
+                                               "HighId":  260026,
+                                               "Name":  "Blackmane\u0027s Belt",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "MWTD",
+        "Name":  "Take the belt to Stacklund",
+        "QasInstance":  910012,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Take the belt to Stacklund",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "EQVE",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  603,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "DRMW",
+                       "Credits":  50,
+                       "Xp":  50,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  252158,
+                                               "HighId":  252158,
+                                               "Name":  "Blackmane\u0027s Belt Component Platform",
+                                               "Quality":  1
+                                           },
+                                           {
+                                               "Id":  36779,
+                                               "HighId":  36779,
+                                               "Name":  "2 - 3 NCU Memory",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "HYIY",
+        "Name":  "Talk to the ICC Bio-Inspector",
+        "QasInstance":  910013,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Talk to the ICC Bio-Inspector",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ICBI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  604,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "DRHY",
+                       "Credits":  0,
+                       "Xp":  100,
+                       "Records":  null
+                   }
     }
 ]
-  
