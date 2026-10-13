@@ -147,10 +147,13 @@ foreach ($h in $subway) {
 #    No recorded model exists, so it borrows the Infector (INFE, family 150, its two guards in the final room) look at a larger scale.
 $inf = $upstream | Where-Object { $_.Hash -eq 'INFE' } | Select-Object -First 1
 $skel = [ordered]@{ Stats = [ordered]@{} }; foreach ($p in $inf.Stats.PSObject.Properties) { $skel.Stats[$p.Name] = [int]$p.Value }
-$b = Band $skel 'Abmouth Supremus' 30 ([ordered]@{ '1' = 10324; '360' = 150 })
+$b = Band $skel 'Abmouth Supremus' 30 ([ordered]@{ '1' = 10324; '359' = 155962; '360' = 100 })   # client MonsterData 155962 is named 'abmouth' (catmesh 155548 abmouth.cir); native size, tune 360 if needed
 $b.Stats['285'] = 148; $b.Stats['286'] = 73
+# Randy's rule: 2 Infectors on first aggro and again under 75/50/25% health (engine BossTriggers, once per fight, reset on death/leash).
+$adds = @([ordered]@{ Type = 'SpawnAdds'; Hash = 'INFE'; Count = 2; Radius = 4 })
+$b['BossTriggers'] = @([ordered]@{ On = 'FirstAggro'; Pct = 0; Actions = $adds }) + @(75, 50, 25 | ForEach-Object { [ordered]@{ On = 'HealthBelow'; Pct = $_; Actions = $adds } })
 $catalog['ASSU'] = [ordered]@{ Templates = @($b) }
-$report += "subway ASSU Abmouth Supremus L30 HP10324 dmg73-148 model $($inf.Stats.'359') (Infector) scale150"
+$report += "subway ASSU Abmouth Supremus L30 HP10324 dmg73-148 model 155962 (client abmouth) scale100"
 
 # 6. Subway loot (item hashes SW** in ItemTemplates.json, ids matched by name in itemnames).
 #    Ring 100% on Abmouth is from the Fandom wiki; every other chance is a placeholder for Randy to tune (guides only say rare/uncommon).

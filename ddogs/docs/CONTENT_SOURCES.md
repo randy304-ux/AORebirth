@@ -77,3 +77,13 @@ It's built by `ddogs/tools/Build-NpcTemplates.ps1`. `Build-NpcTemplates.last.txt
 - Fixes: the SWLP id pair is corrected to 160051 (QL1) / 160050 (QL200). Belt of Justice 202733/202734 is QL1/QL20.
 - Every chance here is a tunable placeholder.
 - Workman Striker (Randy): Support Beam of Intolerance (SWSB, 202719 QL10 / 202720 QL30) at 40% with LevelMod 25, so QL spreads around the mob level and the engine clamps it to the 10-30 range. OFAB is 5% on Strikers and 1% on every other subway mob. The 12 Ofab weapons match AO-Universe's list exactly. Each is a single fixed-QL1 item (aogalaxy: no QL variants), so no QL spread is possible for them.
+- Update: the ASSU model is now the client's own Abmouth MonsterData 155962. Its record string is 'abmouth' and its catmesh 155548 contains abmouth.cir, matching Randy's screenshot of the rust-red maw brute with a flail. It is at native scale 100. The raid version 'abmouth indominus' is MonsterData 305016, and the client's sub_boss_abmouth_VeryHigh* weapons are items 305909-305923; neither is used. AO-Universe's raid guide gives no raid stats. Raid specials: Devour (stomach room), flames, knockback, and Harbingers of Pestilence adds.
+
+## Boss triggers (engine feature, added 2026-10-13)
+- An NpcTemplates.json band can carry "BossTriggers": [{ On: "FirstAggro" | "HealthBelow", Pct, Actions: [{ Type: "SpawnAdds", Hash, Count, Radius, Level? }] }].
+- Each trigger fires once per fight. NpcCharacter.ResetBossTriggers clears them on death (ReleaseForDeath) and on leash (OnReset).
+- Adds spawn in a ring of the given Radius around the boss, at the boss level (clamped to the add template's range), and are given threat on the attacker. Any adds still alive when the boss dies or resets are despawned.
+- Adds are runtime-only. They are never written to the DB or to Spawns.json.
+- Code: Mobs/MobTemplates.cs (NpcBossTrigger, NpcBossAction), GameData/NpcTemplateCatalog.cs (band to template copy), Entities/NpcCharacter.cs (RunBossTriggers, RunBossAction, ResetBossTriggers).
+- Not yet: cast and teleport/root actions (for example Abmouth's Summoned). Unknown action types are logged and skipped.
+- ASSU: 2x INFE at FirstAggro, and again below 75%, 50% and 25% health.

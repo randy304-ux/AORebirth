@@ -12170,8 +12170,8 @@
                                                      "59":  0,
                                                      "89":  1,
                                                      "156":  58,
-                                                     "359":  31909,
-                                                     "360":  150,
+                                                     "359":  155962,
+                                                     "360":  100,
                                                      "455":  150,
                                                      "466":  0,
                                                      "673":  31,
@@ -12179,6 +12179,56 @@
                                                      "286":  73,
                                                      "61":  300
                                                  },
+                                       "BossTriggers":  [
+                                                            {
+                                                                "On":  "FirstAggro",
+                                                                "Pct":  0,
+                                                                "Actions":  [
+                                                                                {
+                                                                                    "Type":  "SpawnAdds",
+                                                                                    "Hash":  "INFE",
+                                                                                    "Count":  2,
+                                                                                    "Radius":  4
+                                                                                }
+                                                                            ]
+                                                            },
+                                                            {
+                                                                "On":  "HealthBelow",
+                                                                "Pct":  75,
+                                                                "Actions":  [
+                                                                                {
+                                                                                    "Type":  "SpawnAdds",
+                                                                                    "Hash":  "INFE",
+                                                                                    "Count":  2,
+                                                                                    "Radius":  4
+                                                                                }
+                                                                            ]
+                                                            },
+                                                            {
+                                                                "On":  "HealthBelow",
+                                                                "Pct":  50,
+                                                                "Actions":  [
+                                                                                {
+                                                                                    "Type":  "SpawnAdds",
+                                                                                    "Hash":  "INFE",
+                                                                                    "Count":  2,
+                                                                                    "Radius":  4
+                                                                                }
+                                                                            ]
+                                                            },
+                                                            {
+                                                                "On":  "HealthBelow",
+                                                                "Pct":  25,
+                                                                "Actions":  [
+                                                                                {
+                                                                                    "Type":  "SpawnAdds",
+                                                                                    "Hash":  "INFE",
+                                                                                    "Count":  2,
+                                                                                    "Radius":  4
+                                                                                }
+                                                                            ]
+                                                            }
+                                                        ],
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWRN",
