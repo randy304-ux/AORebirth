@@ -17,7 +17,8 @@ if not exist "%VSWHERE%" (
 
 set "VSROOT="
 set "VSRESULT=%TEMP%\AORebirthClientPatch-vswhere-%RANDOM%-%RANDOM%.txt"
-"%VSWHERE%" -latest -products * -version "[18.0,19.0)" -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath > "%VSRESULT%"
+if not defined AO_VS_RANGE set "AO_VS_RANGE=[18.0,19.0)"
+"%VSWHERE%" -latest -products * -version "%AO_VS_RANGE%" -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath > "%VSRESULT%"
 if errorlevel 1 (
   del /Q "%VSRESULT%" >nul 2>nul
   echo [AORebirthClientPatch] ERROR Visual Studio discovery failed.

@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <cctype>
 #include <cstdint>
+#include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <string>
 #include <vector>
@@ -27,13 +29,18 @@ namespace aorf
         constexpr unsigned long AoRebirthLocalIpClientArgumentOrder =
             (1ul << 24) | 127ul;
         constexpr unsigned long AoRebirthLoginPort = 7500;
-        constexpr const char* AoRebirthDailyLoginIp = "2.24.96.30";
+        // Dungeon Dogs: Store/Daily Rewards go to the server this client logs into (the IA launch
+        // argument), never to the AO Rebirth public server. HTTP port 80 is moved to the account web port.
+        char RouteTargetIp[16] = {};
+        unsigned char RouteTargetOctets[4] = {};
+        unsigned short RouteWebPort = 8098;
         constexpr const char* AoRebirthDailyLoginHost = "uwg.daily.icc-rk";
 
         using FnGetAddrInfoA = int(WSAAPI*)(PCSTR, PCSTR, const ADDRINFOA*, PADDRINFOA*);
         using FnGetAddrInfoW = int(WSAAPI*)(PCWSTR, PCWSTR, const ADDRINFOW*, PADDRINFOW*);
         using FnGetHostByName = hostent*(WSAAPI*)(const char*);
         using FnSend = int(WSAAPI*)(SOCKET, const char*, int, int);
+        using FnConnect = int(WSAAPI*)(SOCKET, const sockaddr*, int);
         using FnGetProcAddress = FARPROC(WINAPI*)(HMODULE, LPCSTR);
         using FnWSASend = int(WSAAPI*)(
             SOCKET,
@@ -60,6 +67,7 @@ namespace aorf
         FnGetAddrInfoW RealGetAddrInfoW = nullptr;
         FnGetHostByName RealGetHostByName = nullptr;
         FnSend RealSend = nullptr;
+        FnConnect RealConnect = nullptr;
         FnWSASend RealWSASend = nullptr;
         FnGetProcAddress RealGetProcAddressKernel32 = nullptr;
         FnGetProcAddress RealGetProcAddressKernelBase = nullptr;
@@ -76,6 +84,7 @@ namespace aorf
             PADDRINFOW* result);
         hostent* WSAAPI HookGetHostByName(const char* name);
         int WSAAPI HookSend(SOCKET socket, const char* buffer, int length, int flags);
+        int WSAAPI HookConnect(SOCKET socket, const sockaddr* name, int nameLength);
         FARPROC WINAPI HookGetProcAddress(HMODULE module, LPCSTR procName);
         int WSAAPI HookWSASend(
             SOCKET socket,
@@ -236,7 +245,9 @@ namespace aorf
             std::string lower = ToLower(host);
             return lower == "dailyrewards.anarchy-online.com" ||
                 lower == "uwg.daily.icc-rk" ||
-                lower == "www.daily.icc-rk";
+                lower == "www.daily.icc-rk" ||
+                lower == "uwg.store.icc-rk" ||
+                lower == "www.store.icc-rk";
         }
 
         bool IsOrdinalProcedureName(LPCSTR procName)
@@ -435,7 +446,8 @@ namespace aorf
             RealGetHostByName = reinterpret_cast<FnGetHostByName>(ResolveWs2("gethostbyname"));
             RealSend = reinterpret_cast<FnSend>(ResolveWs2("send"));
             RealWSASend = reinterpret_cast<FnWSASend>(ResolveWs2("WSASend"));
-            return RealGetAddrInfoA && RealGetAddrInfoW && RealGetHostByName && RealSend && RealWSASend;
+            RealConnect = reinterpret_cast<FnConnect>(ResolveWs2("connect"));
+            return RealGetAddrInfoA && RealGetAddrInfoW && RealGetHostByName && RealSend && RealWSASend && RealConnect;
         }
 
         bool PatchImport(HMODULE module, const char* importModule, const char* name, void* original, void* replacement)
@@ -560,6 +572,7 @@ namespace aorf
                     patched += PatchImport(entry.hModule, "WS2_32.dll", "gethostbyname", RealGetHostByName, reinterpret_cast<void*>(HookGetHostByName)) ? 1ul : 0ul;
                     patched += PatchImport(entry.hModule, "WS2_32.dll", "send", RealSend, reinterpret_cast<void*>(HookSend)) ? 1ul : 0ul;
                     patched += PatchImport(entry.hModule, "WS2_32.dll", "WSASend", RealWSASend, reinterpret_cast<void*>(HookWSASend)) ? 1ul : 0ul;
+                    patched += PatchImport(entry.hModule, "WS2_32.dll", "connect", RealConnect, reinterpret_cast<void*>(HookConnect)) ? 1ul : 0ul;
                     patched += PatchImport(entry.hModule, "KERNEL32.dll", "GetProcAddress", RealGetProcAddressKernel32, reinterpret_cast<void*>(HookGetProcAddress)) ? 1ul : 0ul;
                     patched += PatchImport(entry.hModule, "KERNELBASE.dll", "GetProcAddress", RealGetProcAddressKernelBase, reinterpret_cast<void*>(HookGetProcAddress)) ? 1ul : 0ul;
                 }
@@ -570,8 +583,65 @@ namespace aorf
             return patched;
         }
 
+        bool ResolveRouteTarget()
+        {
+            LaunchEndpoint endpoint = {};
+            if (!TryParseLaunchEndpoint(GetCommandLineW(), endpoint))
+            {
+                return false;
+            }
+
+            unsigned long ip = endpoint.ip;
+            if (endpoint.dottedIp)
+            {
+                RouteTargetOctets[0] = static_cast<unsigned char>((ip >> 24) & 0xff);
+                RouteTargetOctets[1] = static_cast<unsigned char>((ip >> 16) & 0xff);
+                RouteTargetOctets[2] = static_cast<unsigned char>((ip >> 8) & 0xff);
+                RouteTargetOctets[3] = static_cast<unsigned char>(ip & 0xff);
+            }
+            else
+            {
+                // Integer IA is the in_addr read little-endian: the low byte is the first octet.
+                RouteTargetOctets[0] = static_cast<unsigned char>(ip & 0xff);
+                RouteTargetOctets[1] = static_cast<unsigned char>((ip >> 8) & 0xff);
+                RouteTargetOctets[2] = static_cast<unsigned char>((ip >> 16) & 0xff);
+                RouteTargetOctets[3] = static_cast<unsigned char>((ip >> 24) & 0xff);
+            }
+
+            if (RouteTargetOctets[0] == 2 && RouteTargetOctets[1] == 24 &&
+                RouteTargetOctets[2] == 96 && RouteTargetOctets[3] == 30)
+            {
+                Log("DAILYLOGIN route=SKIP reason=aorebirth_public_server_not_routed");
+                return false;
+            }
+
+            sprintf_s(RouteTargetIp, "%u.%u.%u.%u",
+                static_cast<unsigned>(RouteTargetOctets[0]), static_cast<unsigned>(RouteTargetOctets[1]),
+                static_cast<unsigned>(RouteTargetOctets[2]), static_cast<unsigned>(RouteTargetOctets[3]));
+
+            char portText[16] = {};
+            DWORD portLength = GetEnvironmentVariableA("AO_DDOGS_WEB_PORT", portText, static_cast<DWORD>(sizeof(portText)));
+            if (portLength > 0 && portLength < sizeof(portText))
+            {
+                unsigned long port = std::strtoul(portText, nullptr, 10);
+                if (port > 0 && port <= 65535)
+                {
+                    RouteWebPort = static_cast<unsigned short>(port);
+                }
+            }
+
+            Log("DAILYLOGIN route=target ip=%s webPort=%u", RouteTargetIp, static_cast<unsigned>(RouteWebPort));
+            return true;
+        }
+
         bool ResolvePolicyAllowsRouting()
         {
+            if (!ResolveRouteTarget())
+            {
+                Log("DAILYLOGIN route=SKIP reason=no_launch_target");
+                return false;
+            }
+
             char value[32] = {};
             DWORD length = GetEnvironmentVariableA(
                 "AO_REBIRTH_DAILYLOGIN_ROUTING",
@@ -639,8 +709,8 @@ namespace aorf
         {
             if (RoutingEnabled && nodeName && IsDailyLoginHost(nodeName))
             {
-                Log("DAILYLOGIN route=dns host=%s target=%s", nodeName, AoRebirthDailyLoginIp);
-                return RealGetAddrInfoA(AoRebirthDailyLoginIp, serviceName, hints, result);
+                Log("DAILYLOGIN route=dns host=%s target=%s", nodeName, RouteTargetIp);
+                return RealGetAddrInfoA(RouteTargetIp, serviceName, hints, result);
             }
 
             return RealGetAddrInfoA(nodeName, serviceName, hints, result);
@@ -666,8 +736,9 @@ namespace aorf
                     nullptr);
                 if (converted > 0 && IsDailyLoginHost(host))
                 {
-                    Log("DAILYLOGIN route=dnsw host=%s target=%s", host, AoRebirthDailyLoginIp);
-                    wchar_t target[] = L"2.24.96.30";
+                    Log("DAILYLOGIN route=dnsw host=%s target=%s", host, RouteTargetIp);
+                    wchar_t target[16] = {};
+                    MultiByteToWideChar(CP_ACP, 0, RouteTargetIp, -1, target, 16);
                     return RealGetAddrInfoW(target, serviceName, hints, result);
                 }
             }
@@ -689,12 +760,9 @@ namespace aorf
                 };
 
                 thread_local HostStorage storage = {};
-                strcpy_s(storage.name, AoRebirthDailyLoginIp);
+                strcpy_s(storage.name, RouteTargetIp);
                 storage.aliases[0] = nullptr;
-                storage.address[0] = 2;
-                storage.address[1] = 24;
-                storage.address[2] = 96;
-                storage.address[3] = 30;
+                std::memcpy(storage.address, RouteTargetOctets, 4);
                 storage.addressList[0] = reinterpret_cast<char*>(storage.address);
                 storage.addressList[1] = nullptr;
                 storage.entry.h_name = storage.name;
@@ -702,7 +770,7 @@ namespace aorf
                 storage.entry.h_addrtype = AF_INET;
                 storage.entry.h_length = 4;
                 storage.entry.h_addr_list = storage.addressList;
-                Log("DAILYLOGIN route=gethostbyname host=%s target=%s", name, AoRebirthDailyLoginIp);
+                Log("DAILYLOGIN route=gethostbyname host=%s target=%s", name, RouteTargetIp);
                 return &storage.entry;
             }
 
@@ -752,6 +820,12 @@ namespace aorf
                     return reinterpret_cast<FARPROC>(HookSend);
                 }
 
+                if (std::strcmp(procName, "connect") == 0)
+                {
+                    Log("DAILYLOGIN route=getproc name=connect");
+                    return reinterpret_cast<FARPROC>(HookConnect);
+                }
+
                 if (std::strcmp(procName, "WSASend") == 0)
                 {
                     Log("DAILYLOGIN route=getproc name=WSASend");
@@ -762,6 +836,26 @@ namespace aorf
             return RealGetProcAddressKernel32
                 ? RealGetProcAddressKernel32(module, procName)
                 : nullptr;
+        }
+
+        int WSAAPI HookConnect(SOCKET socket, const sockaddr* name, int nameLength)
+        {
+            if (RoutingEnabled && name && nameLength >= static_cast<int>(sizeof(sockaddr_in)) &&
+                name->sa_family == AF_INET)
+            {
+                const auto* in = reinterpret_cast<const sockaddr_in*>(name);
+                if (in->sin_port == static_cast<USHORT>(80u << 8) &&
+                    std::memcmp(&in->sin_addr, RouteTargetOctets, 4) == 0 &&
+                    RouteWebPort != 80)
+                {
+                    sockaddr_in moved = *in;
+                    moved.sin_port = static_cast<USHORT>(((RouteWebPort & 0xffu) << 8) | ((RouteWebPort >> 8) & 0xffu));
+                    Log("DAILYLOGIN route=connect ip=%s port=80->%u", RouteTargetIp, static_cast<unsigned>(RouteWebPort));
+                    return RealConnect(socket, reinterpret_cast<const sockaddr*>(&moved), static_cast<int>(sizeof(moved)));
+                }
+            }
+
+            return RealConnect(socket, name, nameLength);
         }
 
         int WSAAPI HookWSASend(

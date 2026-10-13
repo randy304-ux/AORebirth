@@ -925,6 +925,7 @@ namespace ZoneEngine_New.Core.Playfield
 
             try
             {
+                _playfield.GetService<Claims.ClaimService>()?.DeliverPending(player);
                 _playfield.GetService<Quests.QuestService>()?.Restore(player);
             }
             catch (Exception ex)

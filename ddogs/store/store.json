@@ -1,0 +1,18 @@
+﻿{
+  "note": "Dungeon Dogs in-game Store hub. Add a link by copying one block. 'background' is an image URL or a file name inside the store folder's 'img' subfolder (served at /store/img/...). Leave it empty for the plain teal look. Changes show the next time the Store window opens.",
+  "title": "Dungeon Dogs",
+  "subtitle": "Anarchy Online private server",
+  "background": "ddogs-crest.png",
+  "links": [
+    { "title": "Claim Center", "url": "/claim", "description": "Free armor sets and veteran items, once per character." },
+    { "title": "Daily Reward", "url": "/daily", "description": "Pick up today's daily reward." },
+    { "title": "Dungeon Dogs AO", "url": "https://dungeondogs.org/ao/", "description": "Server home, downloads and news." },
+    { "title": "Account", "url": "https://dungeondogs.org/ao/account/", "description": "Create an account or change your password." },
+    { "title": "AO-Universe", "url": "https://www.ao-universe.com/main/news", "description": "Guides, quests and dungeon maps." },
+    { "title": "Auno", "url": "https://auno.org/ao/db.php", "description": "Item database." },
+    { "title": "AOGalaxy", "url": "https://www.aogalaxy.com/", "description": "Items, nanos and tools." },
+    { "title": "AO Wiki", "url": "https://wiki.aodb.us/wiki/Main_Page", "description": "Community wiki." }
+  ]
+}
+
+

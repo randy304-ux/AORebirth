@@ -1,0 +1,8 @@
+﻿{
+  "note": "Daily Reward rotation. Each character can take one reward per day (server date). Rewards rotate by day of year. ql 0 = the item's own QL.",
+  "rewards": [
+    { "name": "Health and Nano Stim", "lowId": 291043, "highId": 291043, "ql": 0 },
+    { "name": "Health and Nano Recharger", "lowId": 291082, "highId": 291082, "ql": 0 }
+  ]
+}
+
