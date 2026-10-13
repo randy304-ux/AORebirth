@@ -29,3 +29,10 @@ It's built by `ddogs/tools/Build-NpcTemplates.ps1`. `Build-NpcTemplates.last.txt
 - Static-dungeon spawns. Temple of Three Winds (pf 1931), Steps of Madness (1933), Crypt of Home (4805) and Temple of Home (1404) have no client district spawns, so they need hand-made `Spawns.json` points. TOTW bosses from AO-Universe/AOWiki: Defender of the Three (lvl 40-42, Nanofreak), Windcaller Yatila 55-57, Gartua 62-65, Lien 64-66, Nematet 66-68, Khalum 73, Aztur 74 (HP 38630). The cultist/human models still need a source.
 - Dynas: the engine has no dyna buff or loot hook (no code references), so they aren't implemented.
 - About 1,200 other district hashes (other families) have no model source yet, and spawn as the AAAA placeholder or not at all.
+
+## Condemned Subway (PF 127), added 2026-10-13
+- 28 leaves (DRSH + 27 codes). Names and recorded stats (model 359, family 455, side, look) come from docs/accepted/npc/delmus/NpcTemplate.json. Level bands come from the client PF127 Spawns.json. Health is rescaled from the recorded level with the shared curve.
+- DRSH "Deranged Shopper": the name is from Randy. There is no upstream record, so it reuses the Looter (DCQV) stats and look.
+- Spawns: the engine's HashSpawnSystem already reads the client PF127 Spawns.json (gitignored, local-only), so it uses the exact positions and respawn times. 313 of 326 points now resolve.
+- Points the engine skips on purpose, because they have no template: CARO x5 (Randy: no L20-40 mobs there), ASSU (Abmouth: no model/stats source), PCBN, and the 6 vendor codes (the vendors come from PlayfieldContent/127/Npcs.json).
+- Design images and the CSV are in I:\AO\design\subway (local, not committed).

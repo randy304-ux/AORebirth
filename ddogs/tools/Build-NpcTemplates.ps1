@@ -1,4 +1,4 @@
-﻿# Builds AORebirth/GameData/NpcTemplates.json from local, non-redistributed sources:
+# Builds AORebirth/GameData/NpcTemplates.json from local, non-redistributed sources:
 #   1. DB mobspawns_stats: full stat sets of captured spawns (pf 954). Used as-is.
 #   2. DB mobtemplate: older catalog rows (identity, levels, health). Other stats copied from a captured sibling.
 #   3. Client district spawn tables (GameData/Playfields/*/Districts.json, extracted from the local client RDB):
@@ -114,6 +114,33 @@ foreach ($prefix in $families.Keys) {
   foreach ($e in $fd.Extra) { if ($catalog.Contains($e) -and -not $children.Contains($e)) { $children.Add($e) } }
   foreach ($c in @($captured.Keys)) { if ($c.StartsWith($prefix) -and -not $children.Contains($c)) { $children.Add($c) } }
   $catalog[$fd.Family] = [ordered]@{ Children = @($children) }
+}
+
+# 4. Condemned Subway (PF 127) leaves. Names and recorded stats (model, family, side, look) from the upstream
+#    capture list docs/accepted/npc/delmus/NpcTemplate.json; level bands from the client PF127 Spawns.json;
+#    health rescaled from the recorded level with the curve above. CARO/PCBN/ASSU have no source data and are left out
+#    (the engine then skips those spawn points).
+$upstream = Get-Content "$PSScriptRoot\..\..\docs\accepted\npc\delmus\NpcTemplate.json" -Raw | ConvertFrom-Json
+$pf127 = (Get-Content "$Playfields\127\Spawns.json" -Raw | ConvertFrom-Json).spawns
+$subway = 'DRSH DCQV DIPE DOPT EHDL EMSE FASO FLFE INFE INPE IORB LPPE MDPA MEML MENI MUGG NUBR NXZP PMPE RESC SLRU SS01 STFE STFO UNPE VEAE VOVG WOST'.Split(' ')
+foreach ($h in $subway) {
+  $u = $upstream | Where-Object { $_.Hash -eq $h } | Select-Object -First 1
+  # DRSH: name from Randy (Deranged Shopper); no upstream record, so it borrows the Looter (DCQV, same mall human family 138) look/stats.
+  if ($h -eq 'DRSH') { $u = ($upstream | Where-Object { $_.Hash -eq 'DCQV' } | Select-Object -First 1 | ConvertTo-Json -Depth 6 | ConvertFrom-Json); $u.Name = 'Deranged Shopper' }
+  if (-not $u) { throw "no upstream template for $h" }
+  if ($catalog.Contains($h)) { throw "subway hash $h collides with an existing leaf" }
+  $pts = $pf127 | Where-Object { $_.hashText -eq $h }
+  $lo = ($pts | Measure-Object minLevel -Minimum).Minimum; $hi = ($pts | Measure-Object maxLevel -Maximum).Maximum
+  $skel = [ordered]@{ Stats = [ordered]@{} }
+  foreach ($p in $u.Stats.PSObject.Properties) { $skel.Stats[$p.Name] = [int]$p.Value }
+  $recLvl = [int]$u.Stats.'54'; $recHp = [int]$u.Stats.'1'
+  $bands = @()
+  foreach ($lvl in (@([int]$lo, [int]$hi) | Select-Object -Unique)) {
+    $hp = [int][math]::Round($recHp * (HealthAt $lvl) / (HealthAt $recLvl))
+    $bands += Band $skel $u.Name $lvl ([ordered]@{ '1' = $hp })
+  }
+  $catalog[$h] = [ordered]@{ Templates = $bands }
+  $report += "subway $h $($u.Name) L$lo-$hi recorded L$recLvl HP$recHp model $($u.Stats.'359') points $(@($pts).Count)"
 }
 
 $json = $catalog | ConvertTo-Json -Depth 8
