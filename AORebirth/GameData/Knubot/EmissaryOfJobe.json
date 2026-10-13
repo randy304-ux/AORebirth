@@ -61,6 +61,10 @@
                                 "Text":  "I\u0027m on it.",
                                 "Goto":  "bye"
                             },
+                    "more":  {
+                                 "Text":  "Anything else?",
+                                 "Goto":  "hello"
+                             },
                     "nothing":  {
                                     "Text":  "Nothing right now, thanks.",
                                     "Goto":  "nothing"

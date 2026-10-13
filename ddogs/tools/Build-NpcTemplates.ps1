@@ -324,3 +324,5 @@ $json = $catalog | ConvertTo-Json -Depth 8
 [IO.File]::WriteAllText([IO.Path]::GetFullPath($Out), $json + "`n", (New-Object Text.UTF8Encoding $false))
 $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-NpcTemplates.last.txt'))
 "wrote leaves=$(($catalog.Values | ? { $_.Templates }).Count) families=$(($catalog.Values | ? { $_.Children }).Count)"
+# Arete quest mobs, quest-item drops and Arete quest givers live in Build-AreteContent.ps1; re-apply them on top.
+& "$PSScriptRoot\Build-AreteContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))

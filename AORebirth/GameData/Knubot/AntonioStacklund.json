@@ -17,6 +17,10 @@
                                 "Text":  "I\u0027m on it.",
                                 "Goto":  "bye"
                             },
+                    "more":  {
+                                 "Text":  "Anything else?",
+                                 "Goto":  "hello"
+                             },
                     "factory":  {
                                     "Text":  "Tell me about the Adaptation Factory.",
                                     "Goto":  "factory"

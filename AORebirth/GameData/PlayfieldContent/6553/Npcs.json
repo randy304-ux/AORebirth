@@ -1033,6 +1033,1197 @@
                      "Presentation":  {
 
                                       }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC63",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC63",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010595,
+                     "Name":  "Rex Larsson",
+                     "Position":  [
+                                      3624.06128,
+                                      51.745,
+                                      787.764648
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.708068252,
+                                      0,
+                                      0.706144
+                                  ],
+                     "Stats":  {
+                                   "0":  277615105,
+                                   "1":  511,
+                                   "4":  1,
+                                   "27":  511,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  15,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40691,
+                                   "89":  1,
+                                   "156":  52,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26074,
+                                   "360":  97,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  295555
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  295553
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  295554
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  295552
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  295556
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  205120,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40691,
+                                        "Layer":  4
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC62",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC62",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010594,
+                     "Name":  "Marcus Stone",
+                     "Position":  [
+                                      3630.13062,
+                                      40.9849968,
+                                      824.1919
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.2588223,
+                                      0,
+                                      -0.965926
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  117800,
+                                   "4":  1,
+                                   "27":  117800,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  15,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40667,
+                                   "89":  1,
+                                   "156":  52,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  258744,
+                                   "360":  105,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  295555
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  295553
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  295554
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  295552
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  295556
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  205120,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40667,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  292936,
+                                        "Layer":  2
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC64",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC64",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010596,
+                     "Name":  "Flint Novak",
+                     "Position":  [
+                                      3598.331,
+                                      5.11000061,
+                                      862.9781
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0.493891031,
+                                      0,
+                                      0.8695238
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  559,
+                                   "4":  2,
+                                   "27":  559,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  20,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40251,
+                                   "89":  1,
+                                   "156":  69,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26133,
+                                   "360":  90,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  295555
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  295553
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  295554
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  295552
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  295556
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  205116,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40251,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  258983,
+                                        "Layer":  2
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC61",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC61",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010593,
+                     "Name":  "Alex Gibbs",
+                     "Position":  [
+                                      3520.78442,
+                                      5.11000061,
+                                      856.6935
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.6912034,
+                                      0,
+                                      0.722660244
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  559,
+                                   "4":  1,
+                                   "27":  559,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  20,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40137,
+                                   "89":  1,
+                                   "156":  73,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  263050,
+                                   "360":  115,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  265571
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  265567
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  265569
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  265575
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  265573
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  265714,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40137,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  268617,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  5,
+                                        "OverrideTextureId":  0,
+                                        "Id":  267981,
+                                        "Layer":  0
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC66",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC66",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010598,
+                     "Name":  "ICC Immigration Officer Bill",
+                     "Position":  [
+                                      3510.2,
+                                      5.11000061,
+                                      826.2723
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0.6667155,
+                                      0,
+                                      0.745312333
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  724,
+                                   "4":  1,
+                                   "27":  724,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  25,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40687,
+                                   "89":  1,
+                                   "156":  86,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26088,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  286229
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  286227
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  286228
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  286226
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  286225
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40687,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  99154,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  3,
+                                        "OverrideTextureId":  0,
+                                        "Id":  286446,
+                                        "Layer":  0
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC77",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC77",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010615,
+                     "Name":  "Desmond Calitri",
+                     "Position":  [
+                                      3605.20337,
+                                      8.075,
+                                      826.8822
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.7337265,
+                                      0,
+                                      0.6794449
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  559,
+                                   "4":  4,
+                                   "27":  559,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  20,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  236703,
+                                   "89":  1,
+                                   "156":  69,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  295565,
+                                   "360":  120,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  284557
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  247977
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  247887
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  248016
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  236703,
+                                        "Layer":  4
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC7C",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC7C",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010620,
+                     "Name":  "Antonio Stacklund",
+                     "Position":  [
+                                      3443.073,
+                                      9.145,
+                                      832.652649
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.388969,
+                                      0,
+                                      0.9212495
+                                  ],
+                     "Stats":  {
+                                   "0":  279450113,
+                                   "1":  559,
+                                   "4":  1,
+                                   "27":  559,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  20,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40687,
+                                   "89":  1,
+                                   "156":  69,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26088,
+                                   "360":  99,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  30862
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  40903
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  30839
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  30886
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40687,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  7777,
+                                        "Layer":  2
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC6C",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC6C",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010604,
+                     "Name":  "Dr. Mason",
+                     "Position":  [
+                                      3430.51563,
+                                      9.215,
+                                      795.449158
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.5077101,
+                                      0,
+                                      0.861528
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  559,
+                                   "4":  3,
+                                   "27":  559,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  20,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40172,
+                                   "89":  1,
+                                   "156":  77,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26147,
+                                   "360":  99,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  213839
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  213739
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  213796
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  213694
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  213914
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40172,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  262517,
+                                        "Layer":  2
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC7B",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC7B",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010619,
+                     "Name":  "Patrick Sun",
+                     "Position":  [
+                                      3462.502,
+                                      9.01,
+                                      812.4979
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.8417724,
+                                      0,
+                                      0.539832652
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  559,
+                                   "4":  1,
+                                   "27":  559,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  20,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40694,
+                                   "89":  1,
+                                   "156":  69,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26092,
+                                   "360":  99,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  258544
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  287244
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  37036
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  154204
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  292933,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40694,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  268625,
+                                        "Layer":  2
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC79",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC79",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010617,
+                     "Name":  "Shady Guy",
+                     "Position":  [
+                                      3540.858,
+                                      6.085,
+                                      748.305237
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.709456146,
+                                      0,
+                                      0.7047496
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  559,
+                                   "4":  1,
+                                   "27":  559,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  20,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40691,
+                                   "89":  1,
+                                   "156":  69,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26074,
+                                   "360":  99,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  247958
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  247992
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  247912
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  248031
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40691,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  30240,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  5,
+                                        "OverrideTextureId":  0,
+                                        "Id":  268581,
+                                        "Layer":  0
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC6A",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC6A",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010602,
+                     "Name":  "Shipping Manifest Terminal",
+                     "Position":  [
+                                      3551.00586,
+                                      8.315,
+                                      832.852
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.7046964,
+                                      0,
+                                      0.709509
+                                  ],
+                     "Stats":  {
+                                   "0":  268964353,
+                                   "1":  724,
+                                   "4":  6,
+                                   "27":  724,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  25,
+                                   "59":  1,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  87,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  279184,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  0
+                                      }
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC68",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC68",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010600,
+                     "Name":  "Vernon Godfray",
+                     "Position":  [
+                                      3433.95337,
+                                      12.285,
+                                      825.898254
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0.92450124,
+                                      0,
+                                      0.381179065
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  393,
+                                   "4":  2,
+                                   "27":  393,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  15,
+                                   "59":  1,
+                                   "60":  0,
+                                   "64":  40271,
+                                   "89":  1,
+                                   "156":  55,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  295564,
+                                   "360":  97,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  164803
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  164804
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  164802
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  164806
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40271,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  35542,
+                                        "Layer":  2
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:78E0FC73",
+                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs (ecefa673^); ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:78E0FC73",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2028010611,
+                     "Name":  "Vaughn Hammond",
+                     "Position":  [
+                                      3369.26465,
+                                      18.1111526,
+                                      828.5384
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0.7086759,
+                                      0,
+                                      0.70553416
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  724,
+                                   "4":  1,
+                                   "27":  724,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  25,
+                                   "59":  1,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  86,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  281855,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  286229
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  286227
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  286228
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  286226
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  286225
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  286562,
+                                        "Id":  265793,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  264698,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  3,
+                                        "OverrideTextureId":  0,
+                                        "Id":  286446,
+                                        "Layer":  0
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:7985CAEC",
+                     "Provenance":  "LoreleiOasisMobRuntime.cs (ecefa673^) Lolly; ddogs/tools/Build-AreteContent.ps1",
+                     "ContentNpcIdentity":  "SimpleChar:7985CAEC",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2038811372,
+                     "Name":  "Lolly the Reet",
+                     "Position":  [
+                                      3360.186,
+                                      3.527,
+                                      620.348
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  69,
+                                   "4":  6,
+                                   "27":  69,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  6,
+                                   "59":  1,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  20,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  30365,
+                                   "360":  80,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
                  }
              ],
     "StandaloneShops":  [

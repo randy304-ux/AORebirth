@@ -6,7 +6,7 @@
     "Openers":  [
                     {
                         "If":  [
-                                   "HasAnyQuest DRL0,DRL1,DRLR"
+                                   "HasAnyQuest DRL0,DRLR"
                                ],
                         "Say":  "busy_hiathlin"
                     },
@@ -37,7 +37,7 @@
                                          "Text":  "Do you have a job for me?",
                                          "If":  [
                                                     "!HasCompletedQuest DRLR",
-                                                    "!HasAnyQuest DRL0,DRL1,DRLR"
+                                                    "!HasAnyQuest DRL0,DRLR"
                                                 ],
                                          "Goto":  "offer_hiathlin"
                                      },
@@ -45,10 +45,17 @@
                                           "Text":  "I\u0027ll hunt them.",
                                           "If":  [
                                                      "!HasCompletedQuest DRLR",
-                                                     "!HasAnyQuest DRL0,DRL1,DRLR"
+                                                     "!HasAnyQuest DRL0,DRLR"
                                                  ],
                                           "Goto":  "give_hiathlin"
                                       },
+                    "handin_hiathlin":  {
+                                            "Text":  "I have it right here.",
+                                            "If":  [
+                                                       "HasQuest DRLR"
+                                                   ],
+                                            "Goto":  "handin_hiathlin"
+                                        },
                     "ask_essence":  {
                                         "Text":  "I found a datadisc about the haunted.",
                                         "If":  [
@@ -105,6 +112,10 @@
                                 "Text":  "I\u0027m on it.",
                                 "Goto":  "bye"
                             },
+                    "more":  {
+                                 "Text":  "Anything else?",
+                                 "Goto":  "hello"
+                             },
                     "nothing":  {
                                     "Text":  "Nothing right now, thanks.",
                                     "Goto":  "nothing"
@@ -113,8 +124,8 @@
     "Lines":  {
                   "offer_hiathlin":  {
                                          "Text":  [
-                                                      "Kill five Hiathlins, then a Hiathlin Prime. The Primes roam just before the zone to Milky Way.",
-                                                      "{delay 1}Bring me proof, and I\u0027ll give you something that lights up the darkest cave."
+                                                      "Kill five Hiathlins, then hunt down a Hiathlin Prime. The Primes roam just before the zone to Milky Way.",
+                                                      "{delay 1}Bring me the Thigh of a Hiathlin Prime as proof, and I\u0027ll give you something that lights up the darkest cave."
                                                   ],
                                          "Replies":  [
                                                          "take_hiathlin",
@@ -127,9 +138,23 @@
                                                      "{delay 1}Good luck. Come back to me when it is done."
                                                  ]
                                     },
-                  "busy_hiathlin":  {
-                                        "Text":  "Five Hiathlins, then a Hiathlin Prime.",
+                  "done_hiathlin":  {
+                                        "Text":  [
+                                                     "{completequest DRLR}",
+                                                     "A fine specimen! Here, take this Light Bar."
+                                                 ],
                                         "Replies":  [
+                                                        "more",
+                                                        "nothing"
+                                                    ]
+                                    },
+                  "handin_hiathlin":  {
+                                          "Text":  "Let\u0027s see it, then. Put it in the trade window.{opentrade}"
+                                      },
+                  "busy_hiathlin":  {
+                                        "Text":  "Five Hiathlins, then bring me the Thigh of a Hiathlin Prime.",
+                                        "Replies":  [
+                                                        "handin_hiathlin",
                                                         "bye"
                                                     ]
                                     },
@@ -212,5 +237,19 @@
                                                 "nothing"
                                             ]
                             }
-              }
+              },
+    "Trades":  {
+                   "turnin_hiathlin":  {
+                                           "If":  [
+                                                      "HasQuest DRLR"
+                                                  ],
+                                           "Items":  [
+                                                         {
+                                                             "Hash":  "QHPT",
+                                                             "Count":  1
+                                                         }
+                                                     ],
+                                           "Goto":  "done_hiathlin"
+                                       }
+               }
 }
