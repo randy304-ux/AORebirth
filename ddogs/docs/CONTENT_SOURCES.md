@@ -36,3 +36,26 @@ It's built by `ddogs/tools/Build-NpcTemplates.ps1`. `Build-NpcTemplates.last.txt
 - Spawns: the engine's HashSpawnSystem already reads the client PF127 Spawns.json (gitignored, local-only), so it uses the exact positions and respawn times. 313 of 326 points now resolve.
 - Points the engine skips on purpose, because they have no template: CARO x5 (Randy: no L20-40 mobs there), ASSU (Abmouth: no model/stats source), PCBN, and the 6 vendor codes (the vendors come from PlayfieldContent/127/Npcs.json).
 - Design images and the CSV are in I:\AO\design\subway (local, not committed).
+
+## Abmouth Supremus and subway loot, added 2026-10-13
+- ASSU: level 30, HP 10324, melee damage 73-148, from AOWiki/Fandom. AO-Universe (updated 05.27.2026) puts him in the final room with Vergil spawning nearby. The spawn point's respawn of 550 s and 100% chance come from the client Spawns.json. Fandom says 20-30 min with less than 100% chance; the client value is kept.
+- Model: no recorded Abmouth model exists. He borrows the Infector look (INFE, model 31909, NPC family 150; his two guards), at scale 150.
+- Not implemented: the "Summoned" nano (teleports the target to Abmouth and roots for 5 s), and the two Infectors that spawn when he is attacked. The engine has no hook for either.
+- Loot uses the engine's per-band LootTable (Hash/Repeats/Chance/LevelMod). New item hashes in ItemTemplates.json, with ids matched by name from the itemnames table:
+
+  | Hash | Item | Ids |
+  |---|---|---|
+  | SWRN | Ring of the Nucleus Basalis | 202717/202718 |
+  | SWBJ | Belt of Justice | 202733/202734 (lowest of 3 id pairs) |
+  | SWJT | Juggler's Treat | 202741/202742 |
+  | SWBS | Boots of Infinite Speed | 202722/202723 |
+  | SWCS | Construction Sleeves | 202756 |
+  | SWSB | Support Beam of Intolerance | 202719/202720 |
+  | SWVC | Vagabond Cloak | 204397 |
+  | SWFT | The fr00b T-shirt | 258543 |
+  | SWED | Eleet Doll | 204396 |
+  | SWLS / SWLP / SWLH / SWLG | Living Cyber Armor Sleeves / Pants / Helmet / Gloves | |
+  | SWMM | Morphing Memory | 202726, stage 1 |
+
+- Tables are wired for ASSU, VEAE, MENI, STFO, WOST, EHDL, VOVG, PMPE, DIPE, DOPT, MDPA, FASO, MEML, IORB, NUBR and EMSE. Only Abmouth's Ring at 100% is sourced (Fandom); all other chances are placeholders, since the guides only say rare or uncommon.
+- Not wired: the Illegally Modified Ofab weapons (any subway mob, mostly Workman Strikers), the Ergo-ring parts, stims and kits, and generic loot.

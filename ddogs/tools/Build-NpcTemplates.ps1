@@ -118,7 +118,7 @@ foreach ($prefix in $families.Keys) {
 
 # 4. Condemned Subway (PF 127) leaves. Names and recorded stats (model, family, side, look) from the upstream
 #    capture list docs/accepted/npc/delmus/NpcTemplate.json; level bands from the client PF127 Spawns.json;
-#    health rescaled from the recorded level with the curve above. CARO/PCBN/ASSU have no source data and are left out
+#    health rescaled from the recorded level with the curve above. CARO/PCBN have no source data (ASSU is built in section 5) and are left out
 #    (the engine then skips those spawn points).
 $upstream = Get-Content "$PSScriptRoot\..\..\docs\accepted\npc\delmus\NpcTemplate.json" -Raw | ConvertFrom-Json
 $pf127 = (Get-Content "$Playfields\127\Spawns.json" -Raw | ConvertFrom-Json).spawns
@@ -141,6 +141,36 @@ foreach ($h in $subway) {
   }
   $catalog[$h] = [ordered]@{ Templates = $bands }
   $report += "subway $h $($u.Name) L$lo-$hi recorded L$recLvl HP$recHp model $($u.Stats.'359') points $(@($pts).Count)"
+}
+
+# 5. Abmouth Supremus (ASSU). Level 30, HP 10324, melee 73-148 (AOWiki/Fandom; AO-Universe confirms the final-room boss).
+#    No recorded model exists, so it borrows the Infector (INFE, family 150, its two guards in the final room) look at a larger scale.
+$inf = $upstream | Where-Object { $_.Hash -eq 'INFE' } | Select-Object -First 1
+$skel = [ordered]@{ Stats = [ordered]@{} }; foreach ($p in $inf.Stats.PSObject.Properties) { $skel.Stats[$p.Name] = [int]$p.Value }
+$b = Band $skel 'Abmouth Supremus' 30 ([ordered]@{ '1' = 10324; '360' = 150 })
+$b.Stats['285'] = 148; $b.Stats['286'] = 73
+$catalog['ASSU'] = [ordered]@{ Templates = @($b) }
+$report += "subway ASSU Abmouth Supremus L30 HP10324 dmg73-148 model $($inf.Stats.'359') (Infector) scale150"
+
+# 6. Subway loot (item hashes SW** in ItemTemplates.json, ids matched by name in itemnames).
+#    Ring 100% on Abmouth is from the Fandom wiki; every other chance is a placeholder for Randy to tune (guides only say rare/uncommon).
+$loot = @{
+  ASSU = @(@('SWRN',100),@('SWBJ',25),@('SWJT',25),@('SWLS',10),@('SWLP',10),@('SWLH',10),@('SWLG',10))
+  VEAE = @(@('SWRN',15),@('SWBJ',10),@('SWLP',20))
+  MENI = @(@('SWRN',15),@('SWLS',20))
+  STFO = @(@('SWBS',5),@('SWCS',20))
+  WOST = @(@('SWSB',5),@('SWCS',5))
+  EHDL = @(,@('SWCS',10))
+  VOVG = @(@('SWVC',10),@('SWFT',3))
+  PMPE = @(,@('SWED',5))
+  DIPE = @(,@('SWMM',3)); DOPT = @(,@('SWMM',3))
+  MDPA = @(@('SWLS',3),@('SWLH',3),@('SWLP',3),@('SWLG',3))
+}
+foreach ($h in @('FASO','MEML','IORB','NUBR','EMSE')) { $loot[$h] = @(@('SWLH',2),@('SWLP',2),@('SWLG',2)) }
+foreach ($h in $loot.Keys) {
+  $rows = @($loot[$h] | ForEach-Object { [ordered]@{ Hash = $_[0]; Repeats = 1; Chance = $_[1]; LevelMod = 0 } })
+  foreach ($band in $catalog[$h].Templates) { $band['LootTable'] = $rows }
+  $report += "loot $h " + (($loot[$h] | ForEach-Object { "$($_[0])@$($_[1])%" }) -join ' ')
 }
 
 $json = $catalog | ConvertTo-Json -Depth 8

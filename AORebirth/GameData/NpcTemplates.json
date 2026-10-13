@@ -9345,7 +9345,15 @@
                                                      "455":  138,
                                                      "466":  0,
                                                      "673":  31
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWMM",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Discarded Pet",
@@ -9368,7 +9376,15 @@
                                                      "673":  31,
                                                      "285":  15,
                                                      "286":  5
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWMM",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9393,7 +9409,15 @@
                                                      "455":  138,
                                                      "466":  0,
                                                      "673":  31
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWMM",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Disobedient Bot",
@@ -9416,7 +9440,15 @@
                                                      "673":  31,
                                                      "285":  15,
                                                      "286":  5
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWMM",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9444,7 +9476,15 @@
                                                      "673":  31,
                                                      "285":  20,
                                                      "286":  6
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWCS",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Architect Striker",
@@ -9468,7 +9508,15 @@
                                                      "673":  31,
                                                      "285":  27,
                                                      "286":  9
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWCS",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9496,7 +9544,27 @@
                                                      "673":  31,
                                                      "285":  26,
                                                      "286":  8
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Empty Shell",
@@ -9520,7 +9588,27 @@
                                                      "673":  31,
                                                      "285":  32,
                                                      "286":  10
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9548,7 +9636,27 @@
                                                      "673":  31,
                                                      "285":  26,
                                                      "286":  8
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Fragmented Soul",
@@ -9572,7 +9680,27 @@
                                                      "673":  31,
                                                      "285":  33,
                                                      "286":  11
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9748,7 +9876,27 @@
                                                      "673":  31,
                                                      "285":  26,
                                                      "286":  8
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Incomplete Rebuild",
@@ -9772,7 +9920,27 @@
                                                      "673":  31,
                                                      "285":  33,
                                                      "286":  11
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9850,7 +10018,33 @@
                                                      "673":  31,
                                                      "285":  27,
                                                      "286":  9
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLS",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Melded Patterns",
@@ -9874,7 +10068,33 @@
                                                      "673":  31,
                                                      "285":  38,
                                                      "286":  12
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLS",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9902,7 +10122,27 @@
                                                      "673":  31,
                                                      "285":  26,
                                                      "286":  8
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Molested Molecules",
@@ -9926,7 +10166,27 @@
                                                      "673":  31,
                                                      "285":  38,
                                                      "286":  12
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9954,7 +10214,21 @@
                                                      "673":  31,
                                                      "285":  30,
                                                      "286":  10
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWRN",
+                                                             "Repeats":  1,
+                                                             "Chance":  15,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLS",
+                                                             "Repeats":  1,
+                                                             "Chance":  20,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10032,7 +10306,27 @@
                                                      "673":  31,
                                                      "285":  24,
                                                      "286":  8
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Neural Burnout",
@@ -10056,7 +10350,27 @@
                                                      "673":  31,
                                                      "285":  38,
                                                      "286":  12
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10134,7 +10448,15 @@
                                                      "673":  31,
                                                      "285":  24,
                                                      "286":  8
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWED",
+                                                             "Repeats":  1,
+                                                             "Chance":  5,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Premature Pattern",
@@ -10158,7 +10480,15 @@
                                                      "673":  31,
                                                      "285":  34,
                                                      "286":  12
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWED",
+                                                             "Repeats":  1,
+                                                             "Chance":  5,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10390,7 +10720,21 @@
                                                      "673":  31,
                                                      "285":  28,
                                                      "286":  10
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWBS",
+                                                             "Repeats":  1,
+                                                             "Chance":  5,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWCS",
+                                                             "Repeats":  1,
+                                                             "Chance":  20,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10468,7 +10812,27 @@
                                                      "673":  31,
                                                      "285":  44,
                                                      "286":  14
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWRN",
+                                                             "Repeats":  1,
+                                                             "Chance":  15,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWBJ",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  20,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Vergil Aeneid",
@@ -10492,7 +10856,27 @@
                                                      "673":  31,
                                                      "285":  48,
                                                      "286":  16
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWRN",
+                                                             "Repeats":  1,
+                                                             "Chance":  15,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWBJ",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  20,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10520,7 +10904,21 @@
                                                      "673":  31,
                                                      "285":  9,
                                                      "286":  3
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWVC",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWFT",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Violent Vagabond",
@@ -10544,7 +10942,21 @@
                                                      "673":  31,
                                                      "285":  15,
                                                      "286":  5
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWVC",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWFT",
+                                                             "Repeats":  1,
+                                                             "Chance":  3,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10572,7 +10984,21 @@
                                                      "673":  31,
                                                      "285":  20,
                                                      "286":  6
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWSB",
+                                                             "Repeats":  1,
+                                                             "Chance":  5,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWCS",
+                                                             "Repeats":  1,
+                                                             "Chance":  5,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Workman Striker",
@@ -10596,7 +11022,92 @@
                                                      "673":  31,
                                                      "285":  38,
                                                      "286":  12
-                                                 }
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWSB",
+                                                             "Repeats":  1,
+                                                             "Chance":  5,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWCS",
+                                                             "Repeats":  1,
+                                                             "Chance":  5,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
+                                   }
+                               ]
+             },
+    "ASSU":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Abmouth Supremus",
+                                       "Level":  30,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "1":  10324,
+                                                     "4":  6,
+                                                     "27":  10324,
+                                                     "33":  3,
+                                                     "47":  1,
+                                                     "54":  30,
+                                                     "59":  0,
+                                                     "89":  1,
+                                                     "156":  58,
+                                                     "359":  31909,
+                                                     "360":  150,
+                                                     "455":  150,
+                                                     "466":  0,
+                                                     "673":  31,
+                                                     "285":  148,
+                                                     "286":  73
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "SWRN",
+                                                             "Repeats":  1,
+                                                             "Chance":  100,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWBJ",
+                                                             "Repeats":  1,
+                                                             "Chance":  25,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWJT",
+                                                             "Repeats":  1,
+                                                             "Chance":  25,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLS",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLP",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLH",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SWLG",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              }
