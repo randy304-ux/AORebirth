@@ -178,6 +178,16 @@ public static class KnubotParser
                     Effect(new KnubotSpawnItem(words[1], atLevel ? null : quality, spawnCount));
                     break;
 
+                case "startarea":
+                    if (words.Length != 2 || (words[1] != "arete" && words[1] != "icc"))
+                    {
+                        errors.Add("expected {startarea arete|icc}: {" + body + "}");
+                        break;
+                    }
+
+                    Effect(new KnubotChooseStartArea(words[1] == "arete"));
+                    break;
+
                 case "shop":
                     Expect(words, 1, 1, body, errors);
                     Effect(new KnubotOpenShop());

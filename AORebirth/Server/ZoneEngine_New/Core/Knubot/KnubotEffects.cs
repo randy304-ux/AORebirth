@@ -14,8 +14,12 @@ using ZoneEngine_New.Core.Quests;
 using ZoneEngine_New.Core.Trade;
 
 /// <summary>Services a line's effects are applied through.</summary>
-public sealed class KnubotEffectServices(QuestService quests, HashItemMinter minter, InventoryFlushService flush, TradeService trades)
+public sealed class KnubotEffectServices(QuestService quests, HashItemMinter minter, InventoryFlushService flush, TradeService trades,
+    Lazy<ZoneEngine_New.Core.Playfield.PlayfieldManager>? playfields = null, AORebirth.Interfaces.Persistence.Missions.IMissionDao? missions = null)
 {
+    public Lazy<ZoneEngine_New.Core.Playfield.PlayfieldManager>? Playfields { get; } = playfields;
+    public AORebirth.Interfaces.Persistence.Missions.IMissionDao? Missions { get; } = KnubotStartArea.Register(missions);
+
     public QuestService Quests { get; } = quests;
     public HashItemMinter Minter { get; } = minter;
     public InventoryFlushService Flush { get; } = flush;

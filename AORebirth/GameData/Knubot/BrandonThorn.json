@@ -11,6 +11,8 @@
     { "Say": "6" }
   ],
   "Replies": {
+    "go_arete": { "Text": "I'd rather start out on Arete Landing.", "If": ["StartAreaPending"], "Goto": "arete" },
+    "stay_icc": { "Text": "I'll start here at the ICC Shuttleport.", "If": ["StartAreaPending"], "Goto": "icc" },
     "yes": { "Text": "Yes!", "If": ["!HasQuest L5G4"], "Goto": "7" },
     "explain_skills": { "Text": "Can you explain the skill system to me?" },
     "check_equipment": { "Text": "How do I check my equipment?" },
@@ -34,6 +36,15 @@
     "found_other_things": { "Text": "Ok. I found some  other things too though." }
   },
   "Lines": {
+    "arete": {
+      "Text": [
+        "Arete Landing it is. The colonists out there could use a fresh pair of hands, and the camp has everything a newcomer needs.",
+        "{delay 2}\\nHold still, the transfer beacon will pull you over now. Good luck!{startarea arete}"
+      ]
+    },
+    "icc": {
+      "Text": "{startarea icc}Good choice, we need all the help we can get here at the Shuttleport.{goto 6}"
+    },
     "1": {
       "Text": [
         "{givequest H38F}",
@@ -42,7 +53,7 @@
         "{delay 1}\\nAnyway, I'm Brandon Thorn, I'm a paramedic here at the ICC Shuttleport. I can provide you with the standard issue gear for all newcomers to Rubi-Ka. Because I use nanobots to assemble the equipment straight into your inventory. {emote}You can open your inventory by pressing 'i' or using the inventory icon on your gui.{/emote}\\nI hope you feel good enough to start working, we need all the help we can get here!",
         "{delay 2}\\nAre you ready?"
       ],
-      "Replies": ["yes", "explain_skills"]
+      "Replies": ["yes", "explain_skills", "go_arete", "stay_icc"]
     },
     "2": {
       "Text": [
@@ -68,7 +79,7 @@
     },
     "6": {
       "Text": "{delay 1}Hello there, are you ready to help me?",
-      "Replies": ["yes", "explain_skills"]
+      "Replies": ["yes", "explain_skills", "go_arete", "stay_icc"]
     },
     "7": {
       "Text": [

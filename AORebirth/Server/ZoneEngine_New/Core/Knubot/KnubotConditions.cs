@@ -163,6 +163,16 @@ public abstract record KnubotCondition(bool Negated)
                 condition = new KnubotHasCondition(negated, templates, count);
                 return true;
 
+            case "startareapending":
+                if (words.Length != 1)
+                {
+                    error = "'StartAreaPending' takes no arguments";
+                    return false;
+                }
+
+                condition = new KnubotStartAreaPendingCondition(negated);
+                return true;
+
             case "met":
                 if (words.Length != 1)
                 {
