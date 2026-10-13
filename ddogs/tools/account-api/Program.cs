@@ -11,6 +11,8 @@ var logDir = @"I:\AO\logs";
 var port = int.Parse(Environment.GetEnvironmentVariable("AO_ACCOUNT_API_PORT") ?? "8098");
 var connStr = File.ReadAllText(Path.Combine(secrets, "account-api-db.txt")).Trim();
 string Invite() => File.ReadAllText(Path.Combine(secrets, "signup-invite.txt")).Trim();
+// One invite code per non-empty line of signup-invite.txt (re-read on every request).
+string[] Invites() => File.ReadAllLines(Path.Combine(secrets, "signup-invite.txt")).Select(l => l.Trim()).Where(l => l.Length > 0).ToArray();
 const int NewAllowedChars = 50, NewExpansions = 2047;
 
 AssemblyLoadContext.Default.Resolving += (ctx, n) => { var p = Path.Combine(builtDir, n.Name + ".dll"); return File.Exists(p) ? ctx.LoadFromAssemblyPath(p) : null; };
@@ -50,7 +52,7 @@ app.MapPost("/signup", async (HttpContext c) => {
   var ip = ClientIp(c);
   if (Limited("su:" + ip, 5, TimeSpan.FromHours(1)) || Limited("su:all", 30, TimeSpan.FromHours(1))) { Log($"signup ratelimited ip={ip}"); return Results.Json(new { ok = false, error = "too many requests" }, statusCode: 429); }
   SignupReq r; try { r = await c.Request.ReadFromJsonAsync<SignupReq>(); } catch { return Results.Json(new { ok = false, error = "bad json" }, statusCode: 400); }
-  if (r == null) return Results.Json(new { ok = false, error = "bad request" }, statusCode: 400);
+  if (r == null || r.invite == null || !Invites().Any(code => CryptoEq(r.invite.Trim(), code))) { Log($"signup badinvite ip={ip}"); return Results.Json(new { ok = false, error = "invalid invite code" }, statusCode: 403); }
   if (r.username == null || !userRx.IsMatch(r.username)) return Results.Json(new { ok = false, error = "username must be 3-16 letters/digits, starting with a letter" }, statusCode: 400);
   var pe = PwErr(r.password); if (pe != null) return Results.Json(new { ok = false, error = pe }, statusCode: 400);
   var email = (r.email ?? "").Trim(); if (email.Length > 0 && !mailRx.IsMatch(email)) return Results.Json(new { ok = false, error = "invalid email" }, statusCode: 400);
