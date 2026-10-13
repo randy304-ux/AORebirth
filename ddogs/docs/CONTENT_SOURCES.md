@@ -59,3 +59,21 @@ It's built by `ddogs/tools/Build-NpcTemplates.ps1`. `Build-NpcTemplates.last.txt
 
 - Tables are wired for ASSU, VEAE, MENI, STFO, WOST, EHDL, VOVG, PMPE, DIPE, DOPT, MDPA, FASO, MEML, IORB, NUBR and EMSE. Only Abmouth's Ring at 100% is sourced (Fandom); all other chances are placeholders, since the guides only say rare or uncommon.
 - Not wired: the Illegally Modified Ofab weapons (any subway mob, mostly Workman Strikers), the Ergo-ring parts, stims and kits, and generic loot.
+
+## Shared common loot (reusable) and the Subway regular loot, added 2026-10-13
+- Item QLs were read from the local client RDB (record type 1000020, stat 54) with I:\AO\cache\itemql. Randy picked the stim and kit; aogalaxy.com confirms the names and QL1 values.
+  - HNST: Health and Nano Stim (combat stim), 291043 QL1 / 291044 QL200.
+  - HNRC: Health and Nano Recharger (sit-down kit), 291082 QL1 / 291083 QL100.
+- Families in ItemTemplates.json:
+  - CMTR (trash/vendor): Monster Parts 42640/42641, Blood Plasma 154358/154359, Small Power Supply 234877, Circuit board 234875, A Burnt Out Memory Chip 234876, Copper Wire 234874.
+  - CMHK: HNST and HNRC.
+  - OFAB: OF01-OF12, the Illegally Modified Ofab Bear/Boar/Cobra/Hawk/Mongoose/Panther/Peregrine/Shark/Silverback/Tiger/Viper/Wolf, ids 301707-301718. These are single-id QL1 items.
+- CommonLoot(level) in Build-NpcTemplates.ps1 gives rows that any zone's leaves can reuse:
+  - Below level 15: CMTR 40%, CMHK 8%, OFAB 1%.
+  - Level 15 and up: CMTR 50%, CMHK 12%, OFAB 1%.
+  - All rows use LevelMod 20, so the item QL is the mob level +/-20%, which the engine interpolates.
+- Extras: STFE (Stim Fiend) also gets HNST 60% x2 and HNRC 35%; WOST (Workman Striker) gets OFAB 5%.
+- Credits: the Cash stat (61) is set to level x 10 on every subway band. The engine gives the cash to the first corpse opener.
+- Fixes: the SWLP id pair is corrected to 160051 (QL1) / 160050 (QL200). Belt of Justice 202733/202734 is QL1/QL20.
+- Every chance here is a tunable placeholder.
+- Workman Striker (Randy): Support Beam of Intolerance (SWSB, 202719 QL10 / 202720 QL30) at 40% with LevelMod 25, so QL spreads around the mob level and the engine clamps it to the 10-30 range. OFAB is 5% on Strikers and 1% on every other subway mob. The 12 Ofab weapons match AO-Universe's list exactly. Each is a single fixed-QL1 item (aogalaxy: no QL variants), so no QL spread is possible for them.

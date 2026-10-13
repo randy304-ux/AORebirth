@@ -159,7 +159,7 @@ $loot = @{
   VEAE = @(@('SWRN',15),@('SWBJ',10),@('SWLP',20))
   MENI = @(@('SWRN',15),@('SWLS',20))
   STFO = @(@('SWBS',5),@('SWCS',20))
-  WOST = @(@('SWSB',5),@('SWCS',5))
+  WOST = @(@('SWSB',40),@('SWCS',5))   # Randy: Support Beam is a common Striker drop
   EHDL = @(,@('SWCS',10))
   VOVG = @(@('SWVC',10),@('SWFT',3))
   PMPE = @(,@('SWED',5))
@@ -168,11 +168,32 @@ $loot = @{
 }
 foreach ($h in @('FASO','MEML','IORB','NUBR','EMSE')) { $loot[$h] = @(@('SWLH',2),@('SWLP',2),@('SWLG',2)) }
 foreach ($h in $loot.Keys) {
-  $rows = @($loot[$h] | ForEach-Object { [ordered]@{ Hash = $_[0]; Repeats = 1; Chance = $_[1]; LevelMod = 0 } })
+  $rows = @($loot[$h] | ForEach-Object { [ordered]@{ Hash = $_[0]; Repeats = 1; Chance = $_[1]; LevelMod = $(if ($_[0] -eq 'SWSB') { 25 } else { 0 }) } })
   foreach ($band in $catalog[$h].Templates) { $band['LootTable'] = $rows }
   $report += "loot $h " + (($loot[$h] | ForEach-Object { "$($_[0])@$($_[1])%" }) -join ' ')
 }
 
+# 7. Shared common loot, reusable by any zone: CommonLoot <level> returns rows by level band.
+#    Item families in ItemTemplates.json: CMTR (trash/vendor: Monster Parts, Blood Plasma, Ergo-ring parts),
+#    CMHK (Health and Nano Stim 291043/291044 QL1-200, Health and Nano Recharger 291082/291083 QL1-100), OFAB (12 Illegally Modified Ofab).
+#    QL comes from the engine's roll (mob level +/- LevelMod %), interpolated between each low/high id pair. Chances are tunable placeholders.
+function CommonLoot([int]$lvl) {
+  if ($lvl -lt 15) { $trash = 40; $heal = 8 } else { $trash = 50; $heal = 12 }
+  @([ordered]@{ Hash = 'CMTR'; Repeats = 1; Chance = $trash; LevelMod = 20 },
+    [ordered]@{ Hash = 'CMHK'; Repeats = 1; Chance = $heal; LevelMod = 20 },
+    [ordered]@{ Hash = 'OFAB'; Repeats = 1; Chance = 1; LevelMod = 0 })
+}
+$extra = @{ STFE = @(@('HNST', 60, 2), @('HNRC', 35, 1)); WOST = @(,@('OFAB', 5, 1)) }
+foreach ($h in @($subway) + 'ASSU') {
+  foreach ($band in $catalog[$h].Templates) {
+    $rows = @(); if ($band.Contains('LootTable')) { $rows += $band['LootTable'] }
+    $rows += CommonLoot $band.Level
+    if ($extra.ContainsKey($h)) { foreach ($e in $extra[$h]) { $rows += [ordered]@{ Hash = $e[0]; Repeats = $e[2]; Chance = $e[1]; LevelMod = 20 } } }
+    $band['LootTable'] = $rows
+    $band.Stats['61'] = [int]($band.Level * 10)   # credits on the corpse (CharacterStat.Cash); first opener takes them
+  }
+}
+$report += "common loot attached to $(@($subway).Count + 1) subway codes; STFE extra stims/rechargers; WOST extra OFAB 5%"
 $json = $catalog | ConvertTo-Json -Depth 8
 [IO.File]::WriteAllText([IO.Path]::GetFullPath($Out), $json + "`n", (New-Object Text.UTF8Encoding $false))
 $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-NpcTemplates.last.txt'))

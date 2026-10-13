@@ -9243,8 +9243,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  10,
-                                                     "286":  4
-                                                 }
+                                                     "286":  4,
+                                                     "61":  70
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Deranged Shopper",
@@ -9267,8 +9288,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  14,
-                                                     "286":  4
-                                                 }
+                                                     "286":  4,
+                                                     "61":  90
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9295,8 +9337,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  14,
-                                                     "286":  4
-                                                 }
+                                                     "286":  4,
+                                                     "61":  90
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Looter",
@@ -9319,8 +9382,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  15,
-                                                     "286":  5
-                                                 }
+                                                     "286":  5,
+                                                     "61":  100
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9344,13 +9428,32 @@
                                                      "360":  95,
                                                      "455":  138,
                                                      "466":  0,
-                                                     "673":  31
+                                                     "673":  31,
+                                                     "61":  50
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWMM",
                                                              "Repeats":  1,
                                                              "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9375,13 +9478,32 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  15,
-                                                     "286":  5
+                                                     "286":  5,
+                                                     "61":  100
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWMM",
                                                              "Repeats":  1,
                                                              "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9408,13 +9530,32 @@
                                                      "360":  94,
                                                      "455":  138,
                                                      "466":  0,
-                                                     "673":  31
+                                                     "673":  31,
+                                                     "61":  50
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWMM",
                                                              "Repeats":  1,
                                                              "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9439,13 +9580,32 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  15,
-                                                     "286":  5
+                                                     "286":  5,
+                                                     "61":  100
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWMM",
                                                              "Repeats":  1,
                                                              "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9475,13 +9635,32 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  20,
-                                                     "286":  6
+                                                     "286":  6,
+                                                     "61":  130
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWCS",
                                                              "Repeats":  1,
                                                              "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9507,13 +9686,32 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  27,
-                                                     "286":  9
+                                                     "286":  9,
+                                                     "61":  180
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWCS",
                                                              "Repeats":  1,
                                                              "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9543,7 +9741,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  26,
-                                                     "286":  8
+                                                     "286":  8,
+                                                     "61":  170
                                                  },
                                        "LootTable":  [
                                                          {
@@ -9562,6 +9761,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9587,7 +9804,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  32,
-                                                     "286":  10
+                                                     "286":  10,
+                                                     "61":  210
                                                  },
                                        "LootTable":  [
                                                          {
@@ -9606,6 +9824,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9635,7 +9871,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  26,
-                                                     "286":  8
+                                                     "286":  8,
+                                                     "61":  170
                                                  },
                                        "LootTable":  [
                                                          {
@@ -9654,6 +9891,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9679,7 +9934,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  33,
-                                                     "286":  11
+                                                     "286":  11,
+                                                     "61":  220
                                                  },
                                        "LootTable":  [
                                                          {
@@ -9698,6 +9954,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9724,8 +9998,29 @@
                                                      "360":  130,
                                                      "455":  138,
                                                      "466":  0,
-                                                     "673":  31
-                                                 }
+                                                     "673":  31,
+                                                     "61":  40
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Filth Flea",
@@ -9747,8 +10042,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  33,
-                                                     "286":  11
-                                                 }
+                                                     "286":  11,
+                                                     "61":  220
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9774,8 +10090,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  24,
-                                                     "286":  8
-                                                 }
+                                                     "286":  8,
+                                                     "61":  160
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Infector",
@@ -9797,8 +10134,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  38,
-                                                     "286":  12
-                                                 }
+                                                     "286":  12,
+                                                     "61":  250
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9824,8 +10182,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  15,
-                                                     "286":  5
-                                                 }
+                                                     "286":  5,
+                                                     "61":  100
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Infected Attendant",
@@ -9847,8 +10226,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  36,
-                                                     "286":  12
-                                                 }
+                                                     "286":  12,
+                                                     "61":  240
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -9875,7 +10275,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  26,
-                                                     "286":  8
+                                                     "286":  8,
+                                                     "61":  170
                                                  },
                                        "LootTable":  [
                                                          {
@@ -9894,6 +10295,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9919,7 +10338,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  33,
-                                                     "286":  11
+                                                     "286":  11,
+                                                     "61":  220
                                                  },
                                        "LootTable":  [
                                                          {
@@ -9938,6 +10358,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -9966,8 +10404,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  24,
-                                                     "286":  8
-                                                 }
+                                                     "286":  8,
+                                                     "61":  160
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Lost Thought",
@@ -9989,8 +10448,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  33,
-                                                     "286":  11
-                                                 }
+                                                     "286":  11,
+                                                     "61":  220
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10017,7 +10497,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  27,
-                                                     "286":  9
+                                                     "286":  9,
+                                                     "61":  180
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10042,6 +10523,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10067,7 +10566,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  38,
-                                                     "286":  12
+                                                     "286":  12,
+                                                     "61":  250
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10092,6 +10592,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10121,7 +10639,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  26,
-                                                     "286":  8
+                                                     "286":  8,
+                                                     "61":  170
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10140,6 +10659,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10165,7 +10702,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  38,
-                                                     "286":  12
+                                                     "286":  12,
+                                                     "61":  250
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10184,6 +10722,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10213,7 +10769,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  30,
-                                                     "286":  10
+                                                     "286":  10,
+                                                     "61":  200
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10226,6 +10783,24 @@
                                                              "Hash":  "SWLS",
                                                              "Repeats":  1,
                                                              "Chance":  20,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10253,8 +10828,29 @@
                                                      "360":  95,
                                                      "455":  138,
                                                      "466":  0,
-                                                     "673":  31
-                                                 }
+                                                     "673":  31,
+                                                     "61":  50
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Mugger",
@@ -10277,8 +10873,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  15,
-                                                     "286":  5
-                                                 }
+                                                     "286":  5,
+                                                     "61":  100
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10305,7 +10922,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  24,
-                                                     "286":  8
+                                                     "286":  8,
+                                                     "61":  160
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10324,6 +10942,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10349,7 +10985,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  38,
-                                                     "286":  12
+                                                     "286":  12,
+                                                     "61":  250
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10368,6 +11005,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10396,8 +11051,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  14,
-                                                     "286":  4
-                                                 }
+                                                     "286":  4,
+                                                     "61":  90
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Shadow",
@@ -10419,8 +11095,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  36,
-                                                     "286":  12
-                                                 }
+                                                     "286":  12,
+                                                     "61":  240
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10447,13 +11144,32 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  24,
-                                                     "286":  8
+                                                     "286":  8,
+                                                     "61":  160
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWED",
                                                              "Repeats":  1,
                                                              "Chance":  5,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10479,13 +11195,32 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  34,
-                                                     "286":  12
+                                                     "286":  12,
+                                                     "61":  230
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWED",
                                                              "Repeats":  1,
                                                              "Chance":  5,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10515,8 +11250,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  27,
-                                                     "286":  9
-                                                 }
+                                                     "286":  9,
+                                                     "61":  180
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Redundant Scan",
@@ -10539,8 +11295,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  33,
-                                                     "286":  11
-                                                 }
+                                                     "286":  11,
+                                                     "61":  220
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10566,8 +11343,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  16,
-                                                     "286":  6
-                                                 }
+                                                     "286":  6,
+                                                     "61":  110
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Slum Runner",
@@ -10589,8 +11387,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  34,
-                                                     "286":  12
-                                                 }
+                                                     "286":  12,
+                                                     "61":  230
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10616,8 +11435,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  36,
-                                                     "286":  12
-                                                 }
+                                                     "286":  12,
+                                                     "61":  240
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Bloodcreeper",
@@ -10639,8 +11479,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  38,
-                                                     "286":  12
-                                                 }
+                                                     "286":  12,
+                                                     "61":  250
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10667,8 +11528,41 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  14,
-                                                     "286":  4
-                                                 }
+                                                     "286":  4,
+                                                     "61":  90
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "HNST",
+                                                             "Repeats":  2,
+                                                             "Chance":  60,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "HNRC",
+                                                             "Repeats":  1,
+                                                             "Chance":  35,
+                                                             "LevelMod":  20
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Stim Fiend",
@@ -10691,8 +11585,41 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  26,
-                                                     "286":  8
-                                                 }
+                                                     "286":  8,
+                                                     "61":  170
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "HNST",
+                                                             "Repeats":  2,
+                                                             "Chance":  60,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "HNRC",
+                                                             "Repeats":  1,
+                                                             "Chance":  35,
+                                                             "LevelMod":  20
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10719,7 +11646,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  28,
-                                                     "286":  10
+                                                     "286":  10,
+                                                     "61":  190
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10732,6 +11660,24 @@
                                                              "Hash":  "SWCS",
                                                              "Repeats":  1,
                                                              "Chance":  20,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10760,8 +11706,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  16,
-                                                     "286":  6
-                                                 }
+                                                     "286":  6,
+                                                     "61":  110
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    },
                                    {
                                        "Name":  "Uncontrollable Anger",
@@ -10783,8 +11750,29 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  34,
-                                                     "286":  12
-                                                 }
+                                                     "286":  12,
+                                                     "61":  230
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
                                    }
                                ]
              },
@@ -10811,7 +11799,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  44,
-                                                     "286":  14
+                                                     "286":  14,
+                                                     "61":  290
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10830,6 +11819,24 @@
                                                              "Hash":  "SWLP",
                                                              "Repeats":  1,
                                                              "Chance":  20,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10855,7 +11862,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  48,
-                                                     "286":  16
+                                                     "286":  16,
+                                                     "61":  320
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10874,6 +11882,24 @@
                                                              "Hash":  "SWLP",
                                                              "Repeats":  1,
                                                              "Chance":  20,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10903,7 +11929,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  9,
-                                                     "286":  3
+                                                     "286":  3,
+                                                     "61":  60
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10916,6 +11943,24 @@
                                                              "Hash":  "SWFT",
                                                              "Repeats":  1,
                                                              "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10941,7 +11986,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  15,
-                                                     "286":  5
+                                                     "286":  5,
+                                                     "61":  100
                                                  },
                                        "LootTable":  [
                                                          {
@@ -10954,6 +12000,24 @@
                                                              "Hash":  "SWFT",
                                                              "Repeats":  1,
                                                              "Chance":  3,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
@@ -10983,20 +12047,45 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  20,
-                                                     "286":  6
+                                                     "286":  6,
+                                                     "61":  130
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWSB",
                                                              "Repeats":  1,
-                                                             "Chance":  5,
-                                                             "LevelMod":  0
+                                                             "Chance":  40,
+                                                             "LevelMod":  25
                                                          },
                                                          {
                                                              "Hash":  "SWCS",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  5,
+                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    },
@@ -11021,20 +12110,45 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  38,
-                                                     "286":  12
+                                                     "286":  12,
+                                                     "61":  250
                                                  },
                                        "LootTable":  [
                                                          {
                                                              "Hash":  "SWSB",
                                                              "Repeats":  1,
-                                                             "Chance":  5,
-                                                             "LevelMod":  0
+                                                             "Chance":  40,
+                                                             "LevelMod":  25
                                                          },
                                                          {
                                                              "Hash":  "SWCS",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  5,
+                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    }
@@ -11062,7 +12176,8 @@
                                                      "466":  0,
                                                      "673":  31,
                                                      "285":  148,
-                                                     "286":  73
+                                                     "286":  73,
+                                                     "61":  300
                                                  },
                                        "LootTable":  [
                                                          {
@@ -11105,6 +12220,24 @@
                                                              "Hash":  "SWLG",
                                                              "Repeats":  1,
                                                              "Chance":  10,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  50,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
                                                              "LevelMod":  0
                                                          }
                                                      ]
