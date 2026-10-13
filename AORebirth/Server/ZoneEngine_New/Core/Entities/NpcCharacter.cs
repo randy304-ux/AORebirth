@@ -160,6 +160,7 @@ namespace ZoneEngine_New.Core.Entities
         /// <summary>What an NPC lets go of when it dies or is despawned as dead: its brain, pet bookkeeping, pets and shop.</summary>
         void ReleaseForDeath(string shopCloseReason)
         {
+            ResetBossTriggers("boss died");
             Brain?.OnOwnerDied();
 
             // A pet's death gives nobody a reward and leaves no body to loot.
@@ -274,15 +275,121 @@ namespace ZoneEngine_New.Core.Entities
             // A player's pet draws threat like its owner does, so a mob turns on the pet that hits it.
             if (attacker.IsPlayer || (attacker is NpcCharacter { PetOwner: Player }))
                 Brain?.AddThreat(attacker.Identity, hpRemoved);
+
+            RunBossTriggers(attacker);
         }
 
         public override bool IsEvading => Brain?.IsEvading == true;
+        // Boss triggers (MobTemplate.BossTriggers): which fired this fight, and the adds they spawned.
+        readonly HashSet<int> _firedBossTriggers = new();
+        readonly List<NpcCharacter> _bossAdds = new();
+
+        /// <summary>Fires every not-yet-fired trigger whose condition holds after this hit. Each fires once per fight.</summary>
+        void RunBossTriggers(Character attacker)
+        {
+            List<NpcBossTrigger>? triggers = MobTemplate?.BossTriggers;
+            if (triggers == null || triggers.Count == 0 || Playfield == null || IsDead)
+                return;
+
+            int health = Stats.GetOrZero(CharacterStat.Health);
+            int maxHealth = Stats.GetOrZero(CharacterStat.MaxHealth);
+            if (health <= 0 || maxHealth <= 0)
+                return;
+
+            for (int i = 0; i < triggers.Count; i++)
+            {
+                NpcBossTrigger trigger = triggers[i];
+                if (trigger == null || _firedBossTriggers.Contains(i))
+                    continue;
+
+                bool fire = string.Equals(trigger.On, "FirstAggro", StringComparison.OrdinalIgnoreCase)
+                    || (string.Equals(trigger.On, "HealthBelow", StringComparison.OrdinalIgnoreCase)
+                        && (long)health * 100 < (long)maxHealth * trigger.Pct);
+                if (!fire)
+                    continue;
+
+                _firedBossTriggers.Add(i);
+                foreach (NpcBossAction action in trigger.Actions ?? new List<NpcBossAction>())
+                    RunBossAction(trigger, action, attacker);
+            }
+        }
+
+        void RunBossAction(NpcBossTrigger trigger, NpcBossAction action, Character attacker)
+        {
+            IZoneLogger? logger = Playfield?.GetService<IZoneLogger>();
+            if (action == null || !string.Equals(action.Type, "SpawnAdds", StringComparison.OrdinalIgnoreCase)
+                || string.IsNullOrEmpty(action.Hash) || Playfield == null)
+            {
+                logger?.Warn("Boss trigger action skipped (unsupported or empty) on " + Name);
+                return;
+            }
+
+            IGameData gameData = Playfield.GetRequiredService<IGameData>();
+            SpawnService spawns = Playfield.GetRequiredService<SpawnService>();
+            int level = action.Level ?? Stats.GetOrOne(CharacterStat.Level);
+            var templates = new List<MobTemplate>();
+            gameData.CollectMobSpawns(action.Hash, level, templates);
+            MobTemplate? template = templates.Count > 0 ? templates[0] : null;
+            if (template == null)
+            {
+                logger?.Warn("Boss trigger add template unresolved hash=" + action.Hash + " boss=" + Name);
+                return;
+            }
+
+            int count = Math.Clamp(action.Count, 0, 20);
+            for (int n = 0; n < count; n++)
+            {
+                double angle = 2 * Math.PI * n / Math.Max(1, count);
+                float dx = (float)(Math.Cos(angle) * action.Radius), dz = (float)(Math.Sin(angle) * action.Radius);
+                Vector3 at = new Vector3(Position.xf + dx, Position.yf, Position.zf + dz);
+                try
+                {
+                    NpcCharacter add = spawns.SpawnMob(template, at, level: level, spawnHash: action.Hash);
+                    add.Brain?.AddThreat(attacker.Identity, 1);
+                    _bossAdds.Add(add);
+                }
+                catch (Exception exception)
+                {
+                    logger?.Warn("Boss trigger add spawn failed hash=" + action.Hash + ": " + exception.Message);
+                }
+            }
+
+            logger?.Info(string.Format(
+                CultureInfo.InvariantCulture,
+                "Boss trigger {0} {1}{2} spawned {3}x{4} near {5} id={6}",
+                Name, trigger.On, trigger.Pct > 0 ? " " + trigger.Pct.ToString(CultureInfo.InvariantCulture) + "%" : string.Empty,
+                count, action.Hash, Name, Identity.Instance));
+        }
+
+        /// <summary>Death or leash: forget fired triggers and remove any trigger adds still alive.</summary>
+        void ResetBossTriggers(string reason)
+        {
+            _firedBossTriggers.Clear();
+            if (_bossAdds.Count == 0)
+                return;
+
+            SpawnService? spawns = Playfield?.GetService<SpawnService>();
+            int removed = 0;
+            foreach (NpcCharacter add in _bossAdds)
+            {
+                if (add.Playfield == null || add.IsDead || spawns == null)
+                    continue;
+                add.OnReset();
+                spawns.DespawnNpc(add);
+                removed++;
+            }
+
+            _bossAdds.Clear();
+            if (removed > 0)
+                Playfield?.GetService<IZoneLogger>()?.Info("Boss trigger adds despawned count=" + removed.ToString(CultureInfo.InvariantCulture) + " boss=" + Name + " (" + reason + ")");
+        }
 
         /// <summary>
         /// Fight ended without a kill. Restores HP, clears fight state, and drops kill credit.
         /// </summary>
         public void OnReset()
         {
+            ResetBossTriggers("boss reset");
             // An NPC that resets sends its pets away.
             if (OwnedPets.Count > 0)
                 Playfield?.GetService<Pets.PetService>()?.DismissAll(this, "owner reset");

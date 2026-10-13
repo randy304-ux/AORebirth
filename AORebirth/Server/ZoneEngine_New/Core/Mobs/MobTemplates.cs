@@ -5,6 +5,36 @@ namespace ZoneEngine_New.Core.Mobs
 
     using SmokeLounge.AOtomation.Messaging.GameData;
 
+    /// <summary>
+    /// One boss trigger. On = "FirstAggro" (first damage taken) or "HealthBelow" (health under Pct percent).
+    /// Each trigger fires once per fight; the fight resets on death or leash.
+    /// </summary>
+    public sealed class NpcBossTrigger
+    {
+        public string On { get; set; } = string.Empty;
+
+        public int Pct { get; set; }
+
+        public List<NpcBossAction> Actions { get; set; } = new();
+    }
+
+    /// <summary>
+    /// Type "SpawnAdds": Count NPCs of Hash within Radius metres of the boss, at the boss level unless Level is set.
+    /// They aggro the attacker at once and are despawned when the boss dies or resets.
+    /// </summary>
+    public sealed class NpcBossAction
+    {
+        public string Type { get; set; } = "SpawnAdds";
+
+        public string Hash { get; set; } = string.Empty;
+
+        public int Count { get; set; } = 1;
+
+        public float Radius { get; set; } = 4f;
+
+        public int? Level { get; set; }
+    }
+
     public sealed class MobItemTableEntry
     {
         public string Hash { get; set; } = string.Empty;
@@ -72,6 +102,9 @@ namespace ZoneEngine_New.Core.Mobs
         public int KnuBotId { get; set; }
 
         public List<MobItemTableEntry> ItemTable { get; set; } = new();
+
+        /// <summary>Data-driven boss triggers (NpcTemplates.json band "BossTriggers"), see <see cref="NpcBossTrigger"/>.</summary>
+        public List<NpcBossTrigger> BossTriggers { get; set; } = new();
 
         public string BinaryListData { get; set; } = string.Empty;
 
