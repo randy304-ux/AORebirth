@@ -10,13 +10,13 @@
     "windows": { "Text": "I have some questions about the windows and menus.", "Goto": "windows" },
     "windows_right": { "Text": "Tell me about the windows on the right.", "Goto": "windows_right" },
     "inventory": { "Text": "Tell me about the Inventory.", "Goto": "inventory" },
-    "skills": { "Text": "Tell me about the Skill system." },
-    "shortcut_bar": { "Text": "Tell me about the Shortcut bar." },
+    "skills": { "Text": "Tell me about the Skill system.", "Goto": "skills" },
+    "shortcut_bar": { "Text": "Tell me about the Shortcut bar.", "Goto": "shortcut_bar" },
     "something_else": { "Text": "Let's talk about something else.", "Goto": "something_else" },
-    "browse_topics": { "Text": "I'd like to see all the topics and browse through them as I please." },
+    "browse_topics": { "Text": "I'd like to see all the topics and browse through them as I please.", "Goto": "browse_topics" },
     "tasks": { "Text": "I prefer doing tasks.", "Goto": "tasks" },
-    "mission_seen": { "Text": "Yes, I see it." },
-    "mission_not_seen": { "Text": "No." }
+    "mission_seen": { "Text": "Yes, I see it.", "Goto": "mission_seen" },
+    "mission_not_seen": { "Text": "No.", "Goto": "mission_not_seen" }
   },
   "Lines": {
     "intro": {
@@ -44,8 +44,7 @@
         "{delay 1}By holding down the CTRL-key and pressing keys 1 to 9, you can open and close various sub-menu windows.",
         "{delay 1}Notice that the windows that are open are highlighted.",
         "{delay 1}You can also minimize and maximize the windows by clicking on the window label.",
-        "{delay 1}What windows do you want me to tell you about?",
-        "{delay 1}<font color=#FF0000>[Debug] Dead end: the individual window topics have no replies yet.</font>"
+        "{delay 1}What windows do you want me to tell you about?"
       ],
       "Replies": ["something_else"]
     },
@@ -63,6 +62,58 @@
       "Replies": ["something_else"]
     },
 
+    "skills": {
+      "Text": [
+        "{delay 1}Your skills decide what you can use and how well you do it. Every level gives you improvement points to spend on them.",
+        "{delay 1}Open the Skills window with ' U ' to raise them. Items and nano programs list the skills they need."
+      ],
+      "Replies": ["shortcut_bar", "something_else"]
+    },
+    "shortcut_bar": {
+      "Text": [
+        "{delay 1}The shortcut bar holds the things you use most: weapons, nano programs, perks and items.",
+        "{delay 1}Drag anything onto a slot, then press its number key to use it. You can add more bars from the bar's own menu."
+      ],
+      "Replies": ["skills", "something_else"]
+    },
+    "browse_topics": {
+      "Text": "{delay 1}Here is what I can tell you about. Pick whatever you like.",
+      "Replies": ["windows", "inventory", "skills", "shortcut_bar", "tasks"]
+    },
+    "mission_seen": {
+      "Text": "{delay 1}Well done! Follow the mission's instructions, and come back to me any time you have questions.",
+      "Replies": ["something_else"]
+    },
+    "mission_not_seen": {
+      "Text": "{delay 1}Press CTRL and 4 together, or use the mission icon in the menu on the right of your screen. The new mission is listed there.",
+      "Replies": ["mission_seen"]
+    },
+    "skills": {
+      "Text": [
+        "{delay 1}Your skills decide what you can use and how well you do it. Every level gives you improvement points to spend on them.",
+        "{delay 1}Open the Skills window with ' U ' to raise them. Items and nano programs list the skills they need."
+      ],
+      "Replies": ["shortcut_bar", "something_else"]
+    },
+    "shortcut_bar": {
+      "Text": [
+        "{delay 1}The shortcut bar holds the things you use most: weapons, nano programs, perks and items.",
+        "{delay 1}Drag anything onto a slot, then press its number key to use it. You can add more bars from the bar's own menu."
+      ],
+      "Replies": ["skills", "something_else"]
+    },
+    "browse_topics": {
+      "Text": "{delay 1}Here is what I can tell you about. Pick whatever you like.",
+      "Replies": ["windows", "inventory", "skills", "shortcut_bar", "tasks"]
+    },
+    "mission_seen": {
+      "Text": "{delay 1}Well done! Follow the mission's instructions, and come back to me any time you have questions.",
+      "Replies": ["something_else"]
+    },
+    "mission_not_seen": {
+      "Text": "{delay 1}Press CTRL and 4 together, or use the mission icon in the menu on the right of your screen. The new mission is listed there.",
+      "Replies": ["mission_seen"]
+    },
     "howto": {
       "Text": [
         "{delay 1}I can provide you with information on a number of subjects. Just tell me what you would like to know more about.",
