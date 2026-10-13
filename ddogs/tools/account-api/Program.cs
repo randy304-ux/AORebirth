@@ -50,7 +50,7 @@ app.MapPost("/signup", async (HttpContext c) => {
   var ip = ClientIp(c);
   if (Limited("su:" + ip, 5, TimeSpan.FromHours(1)) || Limited("su:all", 30, TimeSpan.FromHours(1))) { Log($"signup ratelimited ip={ip}"); return Results.Json(new { ok = false, error = "too many requests" }, statusCode: 429); }
   SignupReq r; try { r = await c.Request.ReadFromJsonAsync<SignupReq>(); } catch { return Results.Json(new { ok = false, error = "bad json" }, statusCode: 400); }
-  if (r == null || r.invite == null || !CryptoEq(r.invite.Trim(), Invite())) { Log($"signup badinvite ip={ip}"); return Results.Json(new { ok = false, error = "invalid invite code" }, statusCode: 403); }
+  if (r == null) return Results.Json(new { ok = false, error = "bad request" }, statusCode: 400);
   if (r.username == null || !userRx.IsMatch(r.username)) return Results.Json(new { ok = false, error = "username must be 3-16 letters/digits, starting with a letter" }, statusCode: 400);
   var pe = PwErr(r.password); if (pe != null) return Results.Json(new { ok = false, error = pe }, statusCode: 400);
   var email = (r.email ?? "").Trim(); if (email.Length > 0 && !mailRx.IsMatch(email)) return Results.Json(new { ok = false, error = "invalid email" }, statusCode: 400);
