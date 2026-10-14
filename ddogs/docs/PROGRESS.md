@@ -49,3 +49,7 @@ Caliginous, Achromic, Rimy, Sanguine, and Pure Novictum. Other gardens (Elysium 
 ## Ergo floating head - deployed 2026-10-14 15:34
 
 Ergo (ERGO) now uses client monster data 210582 guardian_of_shadows at scale 100, from Randy's PRK screenshots. Spot unchanged: 4312 at 1428, 56.7, 195 matches AO-Universe, aquarius (1428;195) and the client district named Ergo. He has no Wander feature, so he stays put. Height is still a guess. Only one Ergo spawn exists (Nascence); other SL zone Ergos are not placed yet. Backup `I:\AO\backups\cellao_codex_clean-20261014-1531-ergo.sql`.
+
+## Meshes, Yuttos stock - deployed 2026-10-14 16:05
+
+Blubbags 40075, Rhinomen 17664, Molokhai 214479 (client monster data). Yuttos stock from Randy's PRK screenshots: Machines 31, Chemicals 33, Pharmaceuticals 64, Manuals 36, Electronics 34, Tools 102 (Spirit Siphon x5 and Deflection Shield QL66 unmatched). Yuttos Machines moved into the Pharmaceuticals/Manuals tent at 307.27, 61.6, 1613.71 (guessed floor). Ergo Y unchanged. Backup `I:\AO\backups\cellao_codex_clean-20261014-1604-yuttos.sql`. ZoneEngine 16:05: leaves=683, quests=129 skipped=0, Knubot rejected=0, ports 7500/7501/7012/8098 up.
