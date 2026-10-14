@@ -63,11 +63,76 @@
                                       }
                  },
                  {
-                     "Key":  "ddogs:yuttos:YUME",
+                     "Key":  "ddogs:yuttos:DEBE",
                      "Provenance":  "Randy live screenshot 2026-10-14; look from YUMA capture",
                      "ContentNpcIdentity":  "SimpleChar:7A1C0001",
                      "PlayfieldId":  4311,
                      "InstanceId":  2048655361,
+                     "Name":  "Deep Breath Nine",
+                     "Position":  [
+                                      429.72656,
+                                      104.74102,
+                                      450.0295
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0.72537437101228752,
+                                      0,
+                                      0.688354575693754
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  60000,
+                                   "4":  1,
+                                   "18":  0,
+                                   "21":  0,
+                                   "27":  60000,
+                                   "33":  0,
+                                   "37":  1,
+                                   "47":  1,
+                                   "54":  50,
+                                   "59":  0,
+                                   "60":  15,
+                                   "89":  1,
+                                   "99":  503,
+                                   "132":  5,
+                                   "156":  5,
+                                   "173":  3,
+                                   "174":  3,
+                                   "214":  1,
+                                   "274":  0,
+                                   "284":  0,
+                                   "285":  75,
+                                   "286":  25,
+                                   "292":  0,
+                                   "339":  91,
+                                   "342":  600,
+                                   "343":  0,
+                                   "359":  22802,
+                                   "360":  250,
+                                   "368":  15,
+                                   "387":  503,
+                                   "389":  0,
+                                   "417":  503,
+                                   "421":  3,
+                                   "436":  91,
+                                   "455":  0,
+                                   "466":  15,
+                                   "660":  0,
+                                   "673":  31,
+                                   "1003":  0,
+                                   "64":  0
+                               },
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  false
+                 },
+                 {
+                     "Key":  "ddogs:yuttos:YUME",
+                     "Provenance":  "Randy live screenshot 2026-10-14; look from YUMA capture",
+                     "ContentNpcIdentity":  "SimpleChar:7A1C0002",
+                     "PlayfieldId":  4311,
+                     "InstanceId":  2048655362,
                      "Name":  "Yuttos Machines",
                      "Position":  [
                                       298.38736,
@@ -127,7 +192,7 @@
                      "Attackable":  false,
                      "TickLiving":  false,
                      "Vendor":  {
-                                    "InstanceId":  319553537,
+                                    "InstanceId":  319553538,
                                     "TemplateId":  99634,
                                     "Stock":  [
 
@@ -137,9 +202,9 @@
                  {
                      "Key":  "ddogs:yuttos:YTMA",
                      "Provenance":  "Randy live screenshot 2026-10-14; look from YUMA capture",
-                     "ContentNpcIdentity":  "SimpleChar:7A1C0002",
+                     "ContentNpcIdentity":  "SimpleChar:7A1C0003",
                      "PlayfieldId":  4311,
-                     "InstanceId":  2048655362,
+                     "InstanceId":  2048655363,
                      "Name":  "Yuttos Manuals",
                      "Position":  [
                                       319.60663,
@@ -199,7 +264,7 @@
                      "Attackable":  false,
                      "TickLiving":  false,
                      "Vendor":  {
-                                    "InstanceId":  319553538,
+                                    "InstanceId":  319553539,
                                     "TemplateId":  99634,
                                     "Stock":  [
 
@@ -209,9 +274,9 @@
                  {
                      "Key":  "ddogs:yuttos:YUCH",
                      "Provenance":  "Randy live screenshot 2026-10-14; look from YUMA capture",
-                     "ContentNpcIdentity":  "SimpleChar:7A1C0003",
+                     "ContentNpcIdentity":  "SimpleChar:7A1C0004",
                      "PlayfieldId":  4311,
-                     "InstanceId":  2048655363,
+                     "InstanceId":  2048655364,
                      "Name":  "Yuttos Chemicals",
                      "Position":  [
                                       308.2419,
@@ -271,7 +336,7 @@
                      "Attackable":  false,
                      "TickLiving":  false,
                      "Vendor":  {
-                                    "InstanceId":  319553539,
+                                    "InstanceId":  319553540,
                                     "TemplateId":  99634,
                                     "Stock":  [
 
@@ -281,9 +346,9 @@
                  {
                      "Key":  "ddogs:yuttos:YUPH",
                      "Provenance":  "Randy live screenshot 2026-10-14; look from YUMA capture",
-                     "ContentNpcIdentity":  "SimpleChar:7A1C0004",
+                     "ContentNpcIdentity":  "SimpleChar:7A1C0005",
                      "PlayfieldId":  4311,
-                     "InstanceId":  2048655364,
+                     "InstanceId":  2048655365,
                      "Name":  "Yuttos Pharmaceuticals",
                      "Position":  [
                                       311.09064,
@@ -343,7 +408,7 @@
                      "Attackable":  false,
                      "TickLiving":  false,
                      "Vendor":  {
-                                    "InstanceId":  319553540,
+                                    "InstanceId":  319553541,
                                     "TemplateId":  99634,
                                     "Stock":  [
 
@@ -353,9 +418,9 @@
                  {
                      "Key":  "ddogs:yuttos:YUEL",
                      "Provenance":  "Randy live screenshot 2026-10-14; look from YUMA capture",
-                     "ContentNpcIdentity":  "SimpleChar:7A1C0005",
+                     "ContentNpcIdentity":  "SimpleChar:7A1C0006",
                      "PlayfieldId":  4311,
-                     "InstanceId":  2048655365,
+                     "InstanceId":  2048655366,
                      "Name":  "Yuttos Electronics",
                      "Position":  [
                                       356.1908,
@@ -415,7 +480,7 @@
                      "Attackable":  false,
                      "TickLiving":  false,
                      "Vendor":  {
-                                    "InstanceId":  319553541,
+                                    "InstanceId":  319553542,
                                     "TemplateId":  99634,
                                     "Stock":  [
 
@@ -425,9 +490,9 @@
                  {
                      "Key":  "ddogs:yuttos:YUTO",
                      "Provenance":  "Randy live screenshot 2026-10-14; look from YUMA capture",
-                     "ContentNpcIdentity":  "SimpleChar:7A1C0006",
+                     "ContentNpcIdentity":  "SimpleChar:7A1C0007",
                      "PlayfieldId":  4311,
-                     "InstanceId":  2048655366,
+                     "InstanceId":  2048655367,
                      "Name":  "Yuttos Tools",
                      "Position":  [
                                       363.24417,
@@ -487,7 +552,7 @@
                      "Attackable":  false,
                      "TickLiving":  false,
                      "Vendor":  {
-                                    "InstanceId":  319553542,
+                                    "InstanceId":  319553543,
                                     "TemplateId":  99634,
                                     "Stock":  [
 

@@ -20,7 +20,8 @@ $g = @(
   @('GROF','Guardian of Crystal',8,8,'EMPT','aquarius TG faction'), @('CTTC','Celeth-El the Crystal Guardian',10,10,'EMPT','aquarius TG quest'),
   @('EDTH','El-Domo the Forest Ranger',10,10,'TEMP','aquarius TG quest'), @('IMDR','Imp Disruptor',20,20,'PDST','aquarius TG unique'),
   # PF 4311 Nascence Wilds / Brawl
-  @('ALAN','Calan-Cur',36,40,'RAIG','aquarius Wilds: Unredeemed Calan-Cur 36-37'),
+  @('ALAN','Calan-Cur',36,40,'RAIG','aquarius Wilds; CONFIRMED by Randy live screenshot 2026-10-14'),
+  @('REMU','Mesut-Ra',38,38,'ESUT','Randy live screenshot 2026-10-14 (by Two Mountains); look = captured Mesut-Ra ESUT'),
   @('THRO','Ran-Roth-Or',110,110,'ORAD','aquarius: unique L110'), @('LFOH','Lord of the Void',250,250,'MOOM','aquarius: unique L250+'),
   # PF 4312 Nascence Swamp
   @('XAIY','Malah-Ana',32,38,'ALAH','aquarius Swamp: Malah-Anas 32-38'), @('MOCA','Hiathlin Prime',22,25,'ATHL','aquarius: Hiathlins Prime 22-25'),
@@ -37,7 +38,7 @@ foreach ($x in $g) {
   $b.Name = $name; $b.Level = $lvl; $b.Stats.'54' = $lvl
   $hp = [int][math]::Max(30, [double]$d.Stats.'1' * $lvl / $dl)
   $b.Stats.'1' = $hp; if ($b.Stats.'27') { $b.Stats.'27' = $hp }
-  $b | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Donor = $don; Source = $src; Levels = "$lo-$hi" })
+  $b | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = ($code -notin 'ALAN','REMU'); Confirmed = ($code -in 'ALAN','REMU'); Donor = $don; Source = $src; Levels = "$lo-$hi" })
   if ($code -eq 'THRO') { $b | Add-Member -Force NoteProperty PatrolWaypoints @(@(170,106.6,1370),@(179,106.9,1421),@(164,109,1469),@(157,110,1517),@(186,107,1565),@(209,106.1,1612),@(208,106.1,1669),@(194,106.3,1717),@(198,105.4,1765),@(235,105.5,1799),@(272,90,1780),@(316,78,1749),@(364,66,1718),@(427,53.8,1718),@(492,53.8,1725),@(524,56.5,1765),@(540,73.5,1780)); if ($b.Features) { $b.Features = @($b.Features | Where-Object { $_ -ne 'Wander' }) } }  # Randy 2026-10-14: yellow patrol path
   $nt | Add-Member -Force NoteProperty $code ([pscustomobject]@{ Templates = @($b) }); $n++
 }
