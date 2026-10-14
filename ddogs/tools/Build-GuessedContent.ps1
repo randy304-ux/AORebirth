@@ -38,7 +38,7 @@ foreach ($x in $g) {
   $hp = [int][math]::Max(30, [double]$d.Stats.'1' * $lvl / $dl)
   $b.Stats.'1' = $hp; if ($b.Stats.'27') { $b.Stats.'27' = $hp }
   $b | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Donor = $don; Source = $src; Levels = "$lo-$hi" })
-  if ($code -eq 'THRO') { $b | Add-Member -Force NoteProperty Features @('Wander') }  # Randy 2026-10-14: Ran-Roth-Or wanders
+  if ($code -eq 'THRO') { $b | Add-Member -Force NoteProperty PatrolWaypoints @(@(170,106.6,1370),@(179,106.9,1421),@(164,109,1469),@(157,110,1517),@(186,107,1565),@(209,106.1,1612),@(208,106.1,1669),@(194,106.3,1717),@(198,105.4,1765),@(235,105.5,1799),@(272,90,1780),@(316,78,1749),@(364,66,1718),@(427,53.8,1718),@(492,53.8,1725),@(524,56.5,1765),@(540,73.5,1780)); if ($b.Features) { $b.Features = @($b.Features | Where-Object { $_ -ne 'Wander' }) } }  # Randy 2026-10-14: yellow patrol path
   $nt | Add-Member -Force NoteProperty $code ([pscustomobject]@{ Templates = @($b) }); $n++
 }
 [IO.File]::WriteAllText($npath, ($nt | ConvertTo-Json -Depth 8) + "`n", $u)
