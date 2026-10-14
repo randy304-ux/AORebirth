@@ -230,11 +230,12 @@ namespace ZoneEngine_New.Core.Playfield
             _logger.Info(
                 string.Format(
                     CultureInfo.InvariantCulture,
-                    "Spawned mob hash={0} name={1} id={2} level={3} at ({4},{5},{6})",
+                    "Spawned mob hash={0} name={1} id={2} level={3} weapons={4} at ({5},{6},{7})",
                     template.Hash,
                     template.Name,
                     identity.Instance,
                     npc.Stats.GetOrZero(CharacterStat.Level),
+                    npc.Weapons.Count,
                     position.xf,
                     position.yf,
                     position.zf));

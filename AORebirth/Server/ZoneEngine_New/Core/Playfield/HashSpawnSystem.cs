@@ -876,7 +876,8 @@ namespace ZoneEngine_New.Core.Playfield
                     configure = npc =>
                     {
                         if (npc.Brain == null) return;
-                        npc.Brain.EnableWander(home, 0.01f, 5, 20);  // sets Home for leash; radius too small to stroll`n                        npc.Brain.PatrolEnabled = true;
+                        npc.Brain.EnableWander(home, 0.01f, 5, 20);  // sets Home for leash; radius too small to stroll
+                        npc.Brain.PatrolEnabled = true;
                         npc.Brain.PatrolWaypoints = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(copy, p => new Vector3(p[0], p.Length > 1 ? p[1] : home.y, p.Length > 2 ? p[2] : home.z)));
                     };
                 }

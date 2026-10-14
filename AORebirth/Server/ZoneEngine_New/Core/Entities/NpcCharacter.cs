@@ -460,6 +460,17 @@ namespace ZoneEngine_New.Core.Entities
                 TickStallWatch.Stage("equip.weapon", lowId);
                 TryExpandMonsterWeapon(gameData, item, quality, logger);
             }
+
+            // Templates almost never list a monster weapon. Without one, Rebase arms nothing and the mob chases but never swings.
+            // Pets and mercs come through the same FillEquipment call. NoCombat bodies (vendors, social staff) stay unarmed.
+            if (_combatWeaponSlots.Count == 0 && !template.Has(NpcFeature.NoCombat))
+            {
+                TryAddEquipment(
+                    _items.CreateWithNewInstance(144742, 144743, quality, ItemSource.Other),
+                    logger,
+                    combatWeapon: true,
+                    sawHash: "SIW1");
+            }
         }
 
         /// <summary>Equipment items named "Boss Modifier Item (…)" are alternatives: each spawn keeps one at random.</summary>
