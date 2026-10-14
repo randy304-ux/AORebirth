@@ -347,3 +347,5 @@ $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-N
 & "$PSScriptRoot\Build-TotwContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Nascence garden key NPCs, items and insignia drops: Build-GardenContent.ps1 (then run Build-NewbieQuests.ps1).
 & "$PSScriptRoot\Build-GardenContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Best-guess fills (ContentProvenance.Guessed) for uncaptured spawn points: Build-GuessedContent.ps1.
+& "$PSScriptRoot\Build-GuessedContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
