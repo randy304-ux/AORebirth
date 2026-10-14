@@ -43,7 +43,7 @@ $common = @(
   [pscustomobject]@{ Hash='CMHK'; Repeats=1; Chance=8; LevelMod=20 }
 )
 $oil = @($common) + @([pscustomobject]@{ Hash='BMOL'; Repeats=1; Chance=100; LevelMod=0 })
-Add-Leaf 'ERGO' 'Ergo' 40 'SCDR' $true 22802 180 2 @() 'Yuttos mesh from Deep Breath Nine. Spot 1428x195 on swamp 4312 is south of the client spawn cloud.'
+Add-Leaf 'ERGO' 'Ergo' 40 'SCDR' $true 210582 100 2 @() 'Floating head: client monster data 210582 guardian_of_shadows (Randy PRK screenshots). Spot 1428x195 matches AO-Universe/aquarius guides and client district Ergo.'
 Add-Leaf 'LSSR' 'Long Stare at Danger' 40 'SCDR' $true 22802 180 2 @() 'Client spawn LSSR 1401x578 on swamp 4312. Yuttos mesh from Deep Breath Nine.'
 Add-Leaf 'EMOL' 'Embryonic Molokhai' 35 'HIAT' $false 0 110 2 $common 'No molokhai mesh captured. Hiathlin stand-in. Persistent, not a death-chain.'
 Add-Leaf 'LMOL' 'Larval Molokhai' 37 'HIAT' $false 0 120 2.4 $common 'No molokhai mesh captured. Hiathlin stand-in.'

@@ -45,3 +45,7 @@ Insipid Ring (bits 653 trial, 654 level-50 skip). Ergo is a new spawn on swamp 4
 ## Not started
 
 Caliginous, Achromic, Rimy, Sanguine, and Pure Novictum. Other gardens (Elysium garden playfields 4678-4681 are the next garden ids; Aban and Thrak stay as they are). RK statics: Steps of Madness 1933, Smuggler's Den 125, Cyborg Barracks 1833, Reet Retreat 1913, Crypt of Home 4805. Elysium outdoor 4540-4544. When those zones are filled, put Hecklers where the guides show them, using the rock-pile mesh, and leave the captured 4311 camps alone.
+
+## Ergo floating head - deployed 2026-10-14 15:34
+
+Ergo (ERGO) now uses client monster data 210582 guardian_of_shadows at scale 100, from Randy's PRK screenshots. Spot unchanged: 4312 at 1428, 56.7, 195 matches AO-Universe, aquarius (1428;195) and the client district named Ergo. He has no Wander feature, so he stays put. Height is still a guess. Only one Ergo spawn exists (Nascence); other SL zone Ergos are not placed yet. Backup `I:\AO\backups\cellao_codex_clean-20261014-1531-ergo.sql`.
