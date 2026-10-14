@@ -1,0 +1,103 @@
+{
+    "Notes": "Deck Officer on the freighter (playfield 7101, hash TPIB, about 63x59 y4). Guessed. ContentProvenance.Guessed. Points arrivals at Rex Larsson on the Arete upper deck (AO-Universe Arete Landing).",
+    "Npcs": [
+        "TPIB"
+    ],
+    "Openers": [
+        {
+            "If": [
+                "HasCompletedQuest FRGO"
+            ],
+            "Say": "done"
+        },
+        {
+            "If": [
+                "HasQuest FRGO"
+            ],
+            "Say": "busy"
+        },
+        {
+            "Say": "hello"
+        }
+    ],
+    "Replies": {
+        "ask": {
+            "Text": "Where do I go from here?",
+            "If": [
+                "!HasCompletedQuest FRGO",
+                "!HasQuest FRGO"
+            ],
+            "Goto": "offer"
+        },
+        "take": {
+            "Text": "I'll find Rex Larsson.",
+            "If": [
+                "!HasCompletedQuest FRGO",
+                "!HasQuest FRGO"
+            ],
+            "Goto": "give"
+        },
+        "later": {
+            "Text": "Maybe later.",
+            "Goto": "later"
+        },
+        "bye": {
+            "Text": "Thanks.",
+            "Goto": "bye"
+        }
+    },
+    "Lines": {
+        "hello": {
+            "Text": [
+                "{delay 1}Welcome aboard. The landing deck is through the hatch.",
+                "{delay 1}Rex Larsson runs the crew up top, if you are looking for work."
+            ],
+            "Replies": [
+                "ask",
+                "take",
+                "later"
+            ]
+        },
+        "offer": {
+            "Text": [
+                "{delay 1}Rex is on the upper deck, about 3624 by 788. He is the one who starts people out.",
+                "{delay 1}Check in with him, then come back if you lose the hatch."
+            ],
+            "Replies": [
+                "take",
+                "later"
+            ]
+        },
+        "give": {
+            "Text": [
+                "{givequest FRGO}",
+                "{delay 1}Go on. The deck is just outside."
+            ]
+        },
+        "busy": {
+            "Text": [
+                "{delay 1}Rex is still on the upper deck. You have not finished checking in."
+            ],
+            "Replies": [
+                "bye"
+            ]
+        },
+        "done": {
+            "Text": [
+                "{delay 1}Good. Stay with Rex until he sends you on."
+            ],
+            "Replies": [
+                "bye"
+            ]
+        },
+        "later": {
+            "Text": "{delay 1}The hatch is behind you.",
+            "Replies": [
+                "bye"
+            ]
+        },
+        "bye": {
+            "Text": "{delay 1}Watch your step."
+        }
+    }
+}

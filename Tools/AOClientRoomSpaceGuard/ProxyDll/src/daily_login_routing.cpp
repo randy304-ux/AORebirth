@@ -34,6 +34,8 @@ namespace aorf
         char RouteTargetIp[16] = {};
         unsigned char RouteTargetOctets[4] = {};
         unsigned short RouteWebPort = 8098;
+        // True when the host came from AO_DDOGS_WEB_HOST or the client-folder web file, not from the IA argument.
+        bool RouteHostExplicit = false;
         constexpr const char* AoRebirthDailyLoginHost = "uwg.daily.icc-rk";
 
         using FnGetAddrInfoA = int(WSAAPI*)(PCSTR, PCSTR, const ADDRINFOA*, PADDRINFOA*);
@@ -583,42 +585,277 @@ namespace aorf
             return patched;
         }
 
-        bool ResolveRouteTarget()
+        bool IsPublicAoRebirthRoute()
         {
-            LaunchEndpoint endpoint = {};
-            if (!TryParseLaunchEndpoint(GetCommandLineW(), endpoint))
-            {
-                return false;
-            }
+            return RouteTargetOctets[0] == 2 && RouteTargetOctets[1] == 24 &&
+                RouteTargetOctets[2] == 96 && RouteTargetOctets[3] == 30;
+        }
 
-            unsigned long ip = endpoint.ip;
-            if (endpoint.dottedIp)
-            {
-                RouteTargetOctets[0] = static_cast<unsigned char>((ip >> 24) & 0xff);
-                RouteTargetOctets[1] = static_cast<unsigned char>((ip >> 16) & 0xff);
-                RouteTargetOctets[2] = static_cast<unsigned char>((ip >> 8) & 0xff);
-                RouteTargetOctets[3] = static_cast<unsigned char>(ip & 0xff);
-            }
-            else
-            {
-                // Integer IA is the in_addr read little-endian: the low byte is the first octet.
-                RouteTargetOctets[0] = static_cast<unsigned char>(ip & 0xff);
-                RouteTargetOctets[1] = static_cast<unsigned char>((ip >> 8) & 0xff);
-                RouteTargetOctets[2] = static_cast<unsigned char>((ip >> 16) & 0xff);
-                RouteTargetOctets[3] = static_cast<unsigned char>((ip >> 24) & 0xff);
-            }
-
-            if (RouteTargetOctets[0] == 2 && RouteTargetOctets[1] == 24 &&
-                RouteTargetOctets[2] == 96 && RouteTargetOctets[3] == 30)
-            {
-                Log("DAILYLOGIN route=SKIP reason=aorebirth_public_server_not_routed");
-                return false;
-            }
-
+        void FormatRouteIp()
+        {
             sprintf_s(RouteTargetIp, "%u.%u.%u.%u",
                 static_cast<unsigned>(RouteTargetOctets[0]), static_cast<unsigned>(RouteTargetOctets[1]),
                 static_cast<unsigned>(RouteTargetOctets[2]), static_cast<unsigned>(RouteTargetOctets[3]));
+        }
 
+        bool ParseDottedIpA(const char* text, unsigned char octets[4])
+        {
+            if (!text)
+            {
+                return false;
+            }
+
+            unsigned parts[4] = {};
+            const char* cursor = text;
+            for (int index = 0; index < 4; ++index)
+            {
+                if (!std::isdigit(static_cast<unsigned char>(*cursor)))
+                {
+                    return false;
+                }
+
+                unsigned value = 0;
+                int digits = 0;
+                while (std::isdigit(static_cast<unsigned char>(*cursor)))
+                {
+                    value = value * 10u + static_cast<unsigned>(*cursor - '0');
+                    if (value > 255 || ++digits > 3)
+                    {
+                        return false;
+                    }
+
+                    ++cursor;
+                }
+
+                parts[index] = value;
+                if (index < 3)
+                {
+                    if (*cursor != '.')
+                    {
+                        return false;
+                    }
+
+                    ++cursor;
+                }
+            }
+
+            if (*cursor != 0)
+            {
+                return false;
+            }
+
+            for (int index = 0; index < 4; ++index)
+            {
+                octets[index] = static_cast<unsigned char>(parts[index]);
+            }
+
+            return true;
+        }
+
+        bool ApplyRouteHost(const char* host)
+        {
+            unsigned char octets[4] = {};
+            if (ParseDottedIpA(host, octets))
+            {
+                std::memcpy(RouteTargetOctets, octets, 4);
+                FormatRouteIp();
+                return true;
+            }
+
+            using FnWsaStartup = int(WSAAPI*)(WORD, LPWSADATA);
+            using FnFreeAddrInfoA = void(WSAAPI*)(ADDRINFOA*);
+            auto startup = reinterpret_cast<FnWsaStartup>(ResolveWs2("WSAStartup"));
+            auto release = reinterpret_cast<FnFreeAddrInfoA>(ResolveWs2("freeaddrinfo"));
+            if (!host || !host[0] || !RealGetAddrInfoA || !startup || !release)
+            {
+                return false;
+            }
+
+            WSADATA wsa = {};
+            startup(MAKEWORD(2, 2), &wsa);
+            ADDRINFOA hints = {};
+            hints.ai_family = AF_INET;
+            ADDRINFOA* result = nullptr;
+            if (RealGetAddrInfoA(host, nullptr, &hints, &result) != 0 || !result)
+            {
+                return false;
+            }
+
+            bool resolved = false;
+            for (ADDRINFOA* entry = result; entry; entry = entry->ai_next)
+            {
+                if (entry->ai_family != AF_INET || !entry->ai_addr)
+                {
+                    continue;
+                }
+
+                const auto* in = reinterpret_cast<const sockaddr_in*>(entry->ai_addr);
+                std::memcpy(RouteTargetOctets, &in->sin_addr, 4);
+                resolved = true;
+                break;
+            }
+
+            release(result);
+            if (!resolved)
+            {
+                return false;
+            }
+
+            FormatRouteIp();
+            return true;
+        }
+
+        bool ExtractJsonString(const std::string& text, const char* key, std::string& value)
+        {
+            const std::string needle = std::string("\"") + key + "\"";
+            size_t pos = text.find(needle);
+            if (pos == std::string::npos)
+            {
+                return false;
+            }
+
+            pos = text.find(':', pos + needle.size());
+            if (pos == std::string::npos)
+            {
+                return false;
+            }
+
+            ++pos;
+            while (pos < text.size() && std::isspace(static_cast<unsigned char>(text[pos])))
+            {
+                ++pos;
+            }
+
+            if (pos >= text.size())
+            {
+                return false;
+            }
+
+            if (text[pos] == '"')
+            {
+                ++pos;
+                size_t end = text.find('"', pos);
+                if (end == std::string::npos || end == pos)
+                {
+                    return false;
+                }
+
+                value = text.substr(pos, end - pos);
+                return true;
+            }
+
+            size_t end = pos;
+            while (end < text.size() && std::isdigit(static_cast<unsigned char>(text[end])))
+            {
+                ++end;
+            }
+
+            if (end == pos)
+            {
+                return false;
+            }
+
+            value = text.substr(pos, end - pos);
+            return true;
+        }
+
+        bool ReadWholeFile(const wchar_t* path, std::string& out)
+        {
+            HANDLE file = CreateFileW(
+                path,
+                GENERIC_READ,
+                FILE_SHARE_READ | FILE_SHARE_WRITE,
+                nullptr,
+                OPEN_EXISTING,
+                FILE_ATTRIBUTE_NORMAL,
+                nullptr);
+            if (file == INVALID_HANDLE_VALUE)
+            {
+                return false;
+            }
+
+            DWORD size = GetFileSize(file, nullptr);
+            if (size == INVALID_FILE_SIZE || size > 65536)
+            {
+                CloseHandle(file);
+                return false;
+            }
+
+            out.assign(size, '\0');
+            DWORD read = 0;
+            BOOL ok = size == 0 || ReadFile(file, out.data(), size, &read, nullptr);
+            CloseHandle(file);
+            if (!ok)
+            {
+                return false;
+            }
+
+            out.resize(read);
+            return true;
+        }
+
+        // Client folder file written by the launcher. Survives when the game drops env vars on relaunch.
+        bool LoadWebFile(std::string& host, unsigned long& port, bool& hasPort)
+        {
+            host.clear();
+            hasPort = false;
+            wchar_t modulePath[MAX_PATH] = {};
+            if (!GetModuleFileNameW(nullptr, modulePath, MAX_PATH))
+            {
+                return false;
+            }
+
+            wchar_t* slash = wcsrchr(modulePath, L'\\');
+            if (!slash)
+            {
+                return false;
+            }
+
+            *(slash + 1) = 0;
+            const wchar_t* names[] = { L"ddogs-web.json", L"config.json" };
+            const std::wstring dir = modulePath;
+            for (const wchar_t* name : names)
+            {
+                std::string text;
+                if (!ReadWholeFile((dir + name).c_str(), text))
+                {
+                    continue;
+                }
+
+                std::string fileHost;
+                const bool gotHost = ExtractJsonString(text, "AO_DDOGS_WEB_HOST", fileHost) ||
+                    ExtractJsonString(text, "webHost", fileHost);
+                std::string filePort;
+                const bool gotPort = ExtractJsonString(text, "AO_DDOGS_WEB_PORT", filePort) ||
+                    ExtractJsonString(text, "webPort", filePort);
+                if (!gotHost && !gotPort)
+                {
+                    continue;
+                }
+
+                if (gotHost)
+                {
+                    host = fileHost;
+                }
+
+                if (gotPort)
+                {
+                    unsigned long parsed = std::strtoul(filePort.c_str(), nullptr, 10);
+                    if (parsed > 0 && parsed <= 65535)
+                    {
+                        port = parsed;
+                        hasPort = true;
+                    }
+                }
+
+                return gotHost;
+            }
+
+            return false;
+        }
+
+        void ApplyWebPortOverride()
+        {
             char portText[16] = {};
             DWORD portLength = GetEnvironmentVariableA("AO_DDOGS_WEB_PORT", portText, static_cast<DWORD>(sizeof(portText)));
             if (portLength > 0 && portLength < sizeof(portText))
@@ -629,8 +866,73 @@ namespace aorf
                     RouteWebPort = static_cast<unsigned short>(port);
                 }
             }
+        }
 
-            Log("DAILYLOGIN route=target ip=%s webPort=%u", RouteTargetIp, static_cast<unsigned>(RouteWebPort));
+        bool ResolveRouteTarget()
+        {
+            RouteHostExplicit = false;
+            std::string fileHost;
+            unsigned long filePort = 0;
+            bool hasFilePort = false;
+            const bool hasFileHost = LoadWebFile(fileHost, filePort, hasFilePort);
+            const char* source = "none";
+
+            char envHost[256] = {};
+            DWORD envLength = GetEnvironmentVariableA("AO_DDOGS_WEB_HOST", envHost, static_cast<DWORD>(sizeof(envHost)));
+            if (envLength > 0 && envLength < sizeof(envHost) && ApplyRouteHost(envHost))
+            {
+                RouteHostExplicit = true;
+                source = "env";
+            }
+            else if (hasFileHost && ApplyRouteHost(fileHost.c_str()))
+            {
+                RouteHostExplicit = true;
+                source = "file";
+            }
+            else
+            {
+                LaunchEndpoint endpoint = {};
+                if (!TryParseLaunchEndpoint(GetCommandLineW(), endpoint))
+                {
+                    return false;
+                }
+
+                unsigned long ip = endpoint.ip;
+                if (endpoint.dottedIp)
+                {
+                    RouteTargetOctets[0] = static_cast<unsigned char>((ip >> 24) & 0xff);
+                    RouteTargetOctets[1] = static_cast<unsigned char>((ip >> 16) & 0xff);
+                    RouteTargetOctets[2] = static_cast<unsigned char>((ip >> 8) & 0xff);
+                    RouteTargetOctets[3] = static_cast<unsigned char>(ip & 0xff);
+                }
+                else
+                {
+                    // Integer IA is the in_addr read little-endian: the low byte is the first octet.
+                    RouteTargetOctets[0] = static_cast<unsigned char>(ip & 0xff);
+                    RouteTargetOctets[1] = static_cast<unsigned char>((ip >> 8) & 0xff);
+                    RouteTargetOctets[2] = static_cast<unsigned char>((ip >> 16) & 0xff);
+                    RouteTargetOctets[3] = static_cast<unsigned char>((ip >> 24) & 0xff);
+                }
+
+                FormatRouteIp();
+                source = "launch";
+            }
+
+            if (hasFilePort)
+            {
+                RouteWebPort = static_cast<unsigned short>(filePort);
+            }
+
+            ApplyWebPortOverride();
+
+            if (IsPublicAoRebirthRoute())
+            {
+                Log("DAILYLOGIN route=SKIP reason=aorebirth_public_server_not_routed");
+                return false;
+            }
+
+            Log("DAILYLOGIN route=target source=%s ip=%s webPort=%u explicit=%s",
+                source, RouteTargetIp, static_cast<unsigned>(RouteWebPort), RouteHostExplicit ? "true" : "false");
             return true;
         }
 
@@ -651,6 +953,12 @@ namespace aorf
             {
                 Log("DAILYLOGIN route=SKIP reason=policy_off");
                 return false;
+            }
+
+            if (RouteHostExplicit)
+            {
+                Log("DAILYLOGIN route=ARMED reason=web_host");
+                return true;
             }
 
             if (length > 0 && _stricmp(value, "Always") == 0)

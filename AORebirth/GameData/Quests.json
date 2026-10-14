@@ -3196,5 +3196,33 @@
                        "Xp":  2000,
                        "Records":  null
                    }
+    },
+
+    {
+        "Hash":  "FRGO",
+        "Name":  "Check in on the landing deck",
+        "QasInstance":  920116,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Find Rex Larsson on the Arete upper deck, then speak to the Deck Officer again",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "TPIB",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  655,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RFRG",
+                       "Credits":  200,
+                       "Xp":  100,
+                       "Records":  null
+                   },
+        "ContentProvenance":  {
+                                  "Guessed":  true,
+                                  "Source":  "Freighter Deck Officer. AO-Universe Arete Landing starts players with Rex Larsson on the upper deck."
+                              }
     }
 ]
