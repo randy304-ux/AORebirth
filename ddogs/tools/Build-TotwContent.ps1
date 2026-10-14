@@ -82,7 +82,7 @@ $def = [ordered]@{
   GATH=@('Gartua the Doorkeeper',159085,40105,@(@('TRCG',25),@('TBLR',20),@('TRWF',20),@('TKVI',20)),@(65,14130,229,107))
   UKTH=@('Uklesh the Frozen',40515,0,@(@('TBAR',20),@('TWFL',20),@('TFOR',15),@('TRTF',20),@('TFTU',20),@('TPRD',25)),@(73,21039,283,108))
   KHAL=@('Khalum',95352,0,@(@('TREN',25),@('TPRD',25)),@(73,25247,283,108))
-  AZTR=@('Aztur the Immortal',159966,0,@(@('TREN',25),@('TRTF',25),@('TSDS',20),@('TSOA',15),@('THBI',25),@('TPRD',25),@('TCPL',15)),@(74,38630,522,163))
+  AZTR=@('Aztur the Immortal',159966,0,@(@('TREN',25),@('TRTF',25),@('TSDS',100),@('TSOA',15),@('THBI',25),@('TPRD',25),@('TCPL',15)),@(74,38630,522,163))
   JUJU=@('Ju-ju Doll',41690,0,@(),@(45,600,60,50))
 }
 $cash = @{ GUOT = 2830; GATH = 1592; UKTH = 625; KHAL = 625; AZTR = 3184 }   # corpse credits from retail captures
