@@ -54,6 +54,8 @@ Ergo (ERGO) now uses client monster data 210582 guardian_of_shadows at scale 100
 
 Blubbags 40075, Rhinomen 17664, Molokhai 214479 (client monster data). Yuttos stock from Randy's PRK screenshots: Machines 31, Chemicals 33, Pharmaceuticals 64, Manuals 36, Electronics 34, Tools 102 (Spirit Siphon x5 and Deflection Shield QL66 unmatched). Yuttos Machines moved into the Pharmaceuticals/Manuals tent at 307.27, 61.6, 1613.71 (guessed floor). Ergo Y unchanged. Backup `I:\AO\backups\cellao_codex_clean-20261014-1604-yuttos.sql`. ZoneEngine 16:05: leaves=683, quests=129 skipped=0, Knubot rejected=0, ports 7500/7501/7012/8098 up.
 
-## Natural weapon and Ran-Roth-Or patrol — deploying
+## Natural weapon and Ran-Roth-Or patrol — deployed 2026-10-14 16:46
 
-Combat NPCs whose template lists no monster weapon now get SIW1 (144742/144743) at their level in `FillEquipment`, including pets and mercs (same `SpawnMob` path). NoCombat NPCs stay unarmed. The literal `` `n `` in `HashSpawnSystem` was commenting out `PatrolEnabled`, so named patrols such as Ran-Roth-Or never started. Snake change `0034178f` (Scurryflutter) rides along with this boot. Account service and launcher were not touched.
+Backup `I:\AO\backups\cellao_codex_clean-20261014-1643-weapons.sql`. ZoneEngine root container started 16:46:49 ET. leaves=683, quests=129 skipped=0, Knubot scripts=54 rejected=0. Ports 7500, 7501, 7012, and 8098 listening. Engines left up. Account service and launcher were not touched. Commit `91bf6723` (local only). Snake change `0034178f` is in the loaded templates (BSMG monster data 30252, scale 300).
+
+Combat NPCs whose template lists no monster weapon now get SIW1 (144742/144743) at their level in `FillEquipment`, including pets and mercs (same `SpawnMob` path). NoCombat NPCs stay unarmed. The spawn line now includes `weapons=`. A broken comment in `HashSpawnSystem` had been swallowing `PatrolEnabled = true`, so named patrols such as Ran-Roth-Or never started. No playfield has loaded a mob since this boot (preflight online count was 0), so a `weapons=` line from this process is not in the log yet. The `weapons=0` lines at 16:24-16:29 are from the previous process.
