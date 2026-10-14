@@ -50,7 +50,9 @@ function Script($file, $npcs, $notes, $intro, $jobs, $done, $extra) {
     $replies['ask_' + $j.Key] = [ordered]@{ Text = $j.Ask; If = $cond; Goto = 'offer_' + $j.Key }
     $replies['take_' + $j.Key] = [ordered]@{ Text = $j.Accept; If = $cond; Goto = 'give_' + $j.Key }
     $lines['offer_' + $j.Key] = [ordered]@{ Text = $j.Offer; Replies = @(('take_' + $j.Key), 'later') }
-    $lines['give_' + $j.Key] = [ordered]@{ Text = @(('{givequest ' + $j.Job.First + '}'), '{delay 1}Good luck. Come back to me when it is done.') }
+    $give = @('{givequest ' + $j.Job.First + '}')
+    if ($j.Give) { $give = @($j.Give) + $give }
+    $lines['give_' + $j.Key] = [ordered]@{ Text = $give + @('{delay 1}Good luck. Come back to me when it is done.') }
     $busyReplies = @('bye')
     $thanks = $(if ($j.Thanks) { @($j.Thanks) } else { @('Excellent work. Here is what I promised.') })
     $doneLine = [ordered]@{ Text = @(('{completequest ' + $j.Job.Return + '}')) + $thanks + @($j.After | Where-Object { $_ }); Replies = @('more', 'nothing') }
@@ -313,6 +315,57 @@ Script 'HypnagogicUrgaLumThrak.json' @('SimpleChar:79758F3A') 'Hypnagogic Urga-L
   (J 'device' $urga 'Prophet Yutt sent me with the device.' @('Give me the device, and an Insignia of Thrak to wake it.') 'Take them.' 'Give me the Ancient Device and an Insignia of Thrak.' $null @{ Mode = 'trade'; Items = @((TI 'GADV'), (TI 'GINT')); Thanks = @('*The device hums with dark light.* An Ancient Pattern Analyzer, favored by the Chosen One.'); After = @('{spawn GAPF 1}', '{delay 1}Now curse three Dreaming Silvertails near Frontier Bridge and bring it back.') }),
   (J 'souls' $urgaK 'I will claim the souls.' 'Three Dreaming Silvertails near Frontier Bridge. Claim their souls, then give me the Analyzer.' 'It will be done.' 'Curse three Dreaming Silvertails, then give me back the favored Analyzer.' $urga.Return @{ Mode = 'trade'; Items = @(,(TI 'GAPF')); Thanks = @('Three souls for Thrak. Take this key; His Garden is yours to enter.') })
 ) 'Dream well.' (Arrive $hUrga @('Yutt sent you. I felt it.'))
+# ---------------- Nascence Training Ground (4313), Drake Rodriguez. Bits continue from 645. ----------------
+# Retail tests, without the live timers. Heckler of Evolution drops 6 Delicate Metal Devices per kill (Randy 2026-10-14).
+# Screenshot root: gear, "Mandatory?!", refuse, bracer, goodbye. Jobe-bridge geography is not used.
+$dStr = Job 'SCDR' 'XDS' @(@('KillOne','DCWA',$null,'Kill a Deceitful Weaver'),@('KillOne','SICL',$null,'Kill a Shining Coiler'),@('KillOne','BEGR',$null,'Kill a Beit Gras')) 'Return to Drake' 195 360 @(Item 223771 'Bracer of Strength')
+$dAgi = Job 'SCDR' 'XDA' @(@('TargetNpc','HUPD',$null,'Tag a Hungry Predator'),@('TargetNpc','LUCH',$null,'Tag a Lurking Chimera'),@('TargetNpc','PODR',$null,'Tag a Pond Dryad')) 'Return to Drake' 195 360 @(Item 223766 'Protective Shirt of Exploration')
+$dSen = Job 'SCDR' 'XDN' @(,@('TargetNpc','DOWL',$null,'Find a Shadowleet')) 'Return to Drake' 175 350 @(Item 223768 'Nano Crystal (Overview of Nascence)')
+$dEl = Job 'EDTH' 'XDE' @(,@('TargetNpc','YOSI',$null,'Guide the Young Silvertail')) 'Return to El-Domo' 50 0 $null
+$dCe = Job 'CTTC' 'XDC' @(,@('KillOne','SIMR',$null,'Silence the Silvertail Mare')) 'Return to Celeth-El' 50 0 @(Item 233804 'Scourged Bracer of Jobe')
+$dPsy = Job 'SCDR' 'XDP' @() 'Report the psychic test' 195 360 @(Item 223769 'Ring of Enhanced Psychic')
+$dInt = Job 'SCDR' 'XDI' @(@('TargetNpc','GSTD',$null,'Ask Brad Willis for help'),@('TargetNpc','STSH',$null,'Deliver supplies to Sarah')) 'Return to Drake' 195 360 @(Item 223773 'Bonfire Kit')
+$dBr = Job 'SCDR' 'XDB' @() 'Bring 6 metal devices' 235 440 @(Item 223770 'Smart Backpack') @{ Ret = 'FindItem'; Spec = 'QDMD' }
+$drakeExtra = @{
+  Hello = @('gear','mandatory','bracer','helped_el','helped_ce','refuse')
+  Openers = @([ordered]@{ If = @('HasQuest XDPR'); Say = 'psy_done' })
+  Replies = [ordered]@{
+    gear = [ordered]@{ Text = 'I need the standard issue gear.'; If = @('!has QBRJ'); Goto = 'gear' }
+    mandatory = [ordered]@{ Text = 'Mandatory?!'; Goto = 'mandatory' }
+    bracer = [ordered]@{ Text = 'Tell me more about that bracer.'; Goto = 'bracer' }
+    refuse = [ordered]@{ Text = 'Forget about it. I''m not going to participate in any of your tests.'; Goto = 'refuse' }
+    helped_el = [ordered]@{ Text = 'I helped El-Domo.'; If = @('HasCompletedQuest XDER','!HasQuest XDPR','!HasCompletedQuest XDPR'); Goto = 'give_psy' }
+    helped_ce = [ordered]@{ Text = 'I helped Celeth-El.'; If = @('HasCompletedQuest XDCR','!HasQuest XDPR','!HasCompletedQuest XDPR'); Goto = 'give_psy' }
+  }
+  Lines = [ordered]@{
+    gear = [ordered]@{ Text = @('{spawn QBRJ 1}','{spawn QJSV 1}','{spawn QJSB 1}','{spawn QJSP 1}','Standard issue. The bracer measures your performance. While you are level 15 or under, it can return you to me. Press I to check your inventory.'); Fail = 'full'; Replies = @('more','nothing') }
+    full = [ordered]@{ Text = 'Your hands are full. Make some room in your inventory first.{close}' }
+    mandatory = [ordered]@{ Text = @('We have a healthy specimen here. I will take you through the usual tests before we send you to the brink.', '{delay 1}Rodriguez out. The rewards are real, and I have never had anyone refuse.'); Replies = @('ask_strength','bracer','refuse','nothing') }
+    bracer = [ordered]@{ Text = 'That bracer records the examination. Wear it while you take the tests. Under level 15 it can also bring you back to me if you are lost.'; Replies = @('more','nothing') }
+    refuse = [ordered]@{ Text = 'Noted. The offer stands when you change your mind.{close}' }
+    give_psy = [ordered]@{ Text = @('{givequest XDPR}','Then that test is ready to close. Speak to me again and I will record it.') }
+    psy_done = [ordered]@{ Text = @('{completequest XDPR}','{spawn QBRJ 1}','Your mind held. This ring is yours, and a fresh bracer if Celeth-El kept the other one.'); Fail = 'full'; Replies = @('more','nothing') }
+  }
+}
+Script 'DrakeRodriguez.json' @('SCDR') 'Scientist Drake Rodriguez, Nascence Training Ground tower (414x354). Full test chain. Heckler of Evolution drops 6 Delicate Metal Devices.' @(
+  '{delay 1}I am Drake Rodriguez and I will be handling your case today. Here, take this standard issue gear. You''ll need it for your mandatory examination.',
+  '{delay 1}Are you ready?') @(
+  (J 'strength' $dStr 'I will take the Test of Strength.' @('Kill a Deceitful Weaver, then a Shining Coiler, then a Beit Gras. They are around the tower and the water.', '{delay 1}Bring the result back to me. The reward is a Bracer of Strength.') 'I''ll do it.' 'A Deceitful Weaver, a Shining Coiler, then a Beit Gras.' $null),
+  (J 'agility' $dAgi 'I will take the Test of Agility and Stamina.' @('Take this biomarker. Tag a Hungry Predator, a Lurking Chimera and a Pond Dryad. Target each one up close.', '{delay 1}The reward is a Protective Shirt of Exploration.') 'I''ll tag them.' 'Tag a Hungry Predator, a Lurking Chimera and a Pond Dryad.' $dStr.Return @{ Give = '{spawn QBMS 1}' }),
+  (J 'sense' $dSen 'I will take the Test of Sense.' 'A Shadowleet is hiding in the grass near the start of the grounds. Get close and target it. On retail it is invisible until you search; here you can see it.' 'I''ll find one.' 'Target a Shadowleet.' $dAgi.Return),
+  (J 'mind' $dInt 'I will take the Test of Intelligence.' @('These supplies go to Scientist Sarah Willis. An Imp Disruptor guards her crevice.', '{delay 1}Assistant Brad Willis is outside. Target him, then target Sarah and leave the supplies. The reward is a Bonfire Kit.') 'I''ll get them through.' 'Target Brad Willis, then Sarah Willis.' $dPsy.Return @{ Give = '{spawn QSUP 1}' }),
+  (J 'brink' $dBr 'I will take the final test.' @('Out at the brink, kill the Heckler of Evolution. It drops six Delicate Metal Devices.', '{delay 1}Bring all six back. The other rock piles are Hecklers of Nature. Leave them if you only need the device.') 'I''ll bring the devices.' 'Six Delicate Metal Devices from the Heckler of Evolution.' $dInt.Return @{ Mode = 'trade'; Items = @(,(TI 'QDMD' 6)); Thanks = @('An ancient device. There is a civilization under this place. If you want to go further, find Scientist Donna Red or Scientist Veronica Escobar out in Nascence.') })
+) 'The tests are done. Nascence is through the way you came, when you are ready.' $drakeExtra
+Script 'ElDomo.json' @('EDTH') 'El-Domo the Forest Ranger, Training Ground ruins. Redeemed side of Drake''s psychic test.' @('{delay 1}I am El-Domo. One of the silvertail young has lost the herd.', '{delay 1}If Drake sent you, I can use the help.') @(
+  (J 'young' $dEl 'Drake sent me. I will help the young silvertail.' @('The Young Silvertail is in the grove to the southwest. Target it and it will follow the scent home.', '{delay 1}Then come back.') 'I will find it.' 'Target the Young Silvertail southwest of here.' $dSen.Return @{ Mode = 'talk'; Thanks = @('The young one is safe. Tell Drake you helped the Redeemed.') })
+) 'The herd is calmer today.' $null
+Script 'CelethEl.json' @('CTTC') 'Celeth-El, the Crystal Guardian. Unredeemed side of Drake''s psychic test. Talkable.' @('{delay 1}Celeth-El. You wear Jobe''s bracer. Give me a moment with it.', '{delay 1}There is a Silvertail Mare crying outside this cleft. Silence her.') @(
+  (J 'mare' $dCe 'I will deal with the Silvertail Mare.' 'She stands just outside. Kill her, then come back. I will return your bracer... changed.' 'Consider it done.' 'Kill the Silvertail Mare.' $dSen.Return @{ Mode = 'talk'; Thanks = @('It is scourged. The bracer is stronger, and Drake will not accept this one. Ask him for another, and tell him the Chosen are satisfied.') })
+) 'The crystals are quiet.' $null
+Script 'YoungSilvertail.json' @('YOSI') 'Young Silvertail for El-Domo''s test. Friendly.' @('*The foal noses at your hand and starts toward the herd.*') @() '*The foal stays close.*' $null
+Script 'SarahWillis.json' @('STSH') 'Scientist Sarah Willis, in the crevice with the Imp Disruptor.' @('{delay 1}You brought supplies? Leave them. Brad has the imp''s attention, so do not waste it.', '{delay 1}Tell Drake the delivery landed.') @() 'Go, before it turns around.' $null
+Script 'BradWillis.json' @('GSTD') 'Assistant Brad Willis, outside the imp crevice.' @('{delay 1}That Imp Disruptor will end you if you walk in cold. I''ll hold it.', '{delay 1}Target me so Drake''s bracer logs it, then get to Sarah.') @() 'I have the imp. Move.' $null
+Script 'SundanceSmith.json' @('SDSM') 'Sundance Smith, J.A.M.E. Depot. Placement guessed near the lower bridge. Shop stock is not invented.' @('{delay 1}Sundance Smith, J.A.M.E. Depot. Armor, NCU, ammunition and a fair price for whatever the wildlife dropped.', '{delay 1}The counter is not stocked on this server yet. I can still point you at Drake if you have not taken his tests.') @() 'Come back when the depot is open.' $null
 # ---------------- write Quests.json ----------------
 $qpath = Join-Path $GameData 'Quests.json'
 $existing = ([IO.File]::ReadAllText($qpath) | ConvertFrom-Json) | ForEach-Object { $_ } | Where-Object { $_.QasInstance -lt 920000 -or $_.QasInstance -gt 929999 }

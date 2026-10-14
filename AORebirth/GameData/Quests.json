@@ -2535,5 +2535,505 @@
                                        ]
                                    ]
                    }
+    },
+    {
+        "Hash":  "XDS0",
+        "Name":  "Kill a Deceitful Weaver",
+        "QasInstance":  920090,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill a Deceitful Weaver",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "DCWA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDS1",
+        "Reward":  {
+                       "Hash":  "RDS0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDS1",
+        "Name":  "Kill a Shining Coiler",
+        "QasInstance":  920091,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill a Shining Coiler",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SICL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDS2",
+        "Reward":  {
+                       "Hash":  "RDS1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDS2",
+        "Name":  "Kill a Beit Gras",
+        "QasInstance":  920092,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill a Beit Gras",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BEGR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDSR",
+        "Reward":  {
+                       "Hash":  "RDS2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDSR",
+        "Name":  "Return to Drake",
+        "QasInstance":  920093,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Drake",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SCDR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  645,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDSR",
+                       "Credits":  360,
+                       "Xp":  195,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  223771,
+                                               "HighId":  223771,
+                                               "Name":  "Bracer of Strength",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "XDA0",
+        "Name":  "Tag a Hungry Predator",
+        "QasInstance":  920094,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tag a Hungry Predator",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "HUPD",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDA1",
+        "Reward":  {
+                       "Hash":  "RDA0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDA1",
+        "Name":  "Tag a Lurking Chimera",
+        "QasInstance":  920095,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tag a Lurking Chimera",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "LUCH",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDA2",
+        "Reward":  {
+                       "Hash":  "RDA1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDA2",
+        "Name":  "Tag a Pond Dryad",
+        "QasInstance":  920096,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tag a Pond Dryad",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "PODR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDAR",
+        "Reward":  {
+                       "Hash":  "RDA2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDAR",
+        "Name":  "Return to Drake",
+        "QasInstance":  920097,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Drake",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SCDR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  646,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDAR",
+                       "Credits":  360,
+                       "Xp":  195,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  223766,
+                                               "HighId":  223766,
+                                               "Name":  "Protective Shirt of Exploration",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "XDN0",
+        "Name":  "Find a Shadowleet",
+        "QasInstance":  920098,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Find a Shadowleet",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "DOWL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDNR",
+        "Reward":  {
+                       "Hash":  "RDN0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDNR",
+        "Name":  "Return to Drake",
+        "QasInstance":  920099,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Drake",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SCDR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  647,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDNR",
+                       "Credits":  350,
+                       "Xp":  175,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  223768,
+                                               "HighId":  223768,
+                                               "Name":  "Nano Crystal (Overview of Nascence)",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "XDE0",
+        "Name":  "Guide the Young Silvertail",
+        "QasInstance":  920100,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Guide the Young Silvertail",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "YOSI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDER",
+        "Reward":  {
+                       "Hash":  "RDE0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDER",
+        "Name":  "Return to El-Domo",
+        "QasInstance":  920101,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to El-Domo",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "EDTH",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  648,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDER",
+                       "Credits":  0,
+                       "Xp":  50,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDC0",
+        "Name":  "Silence the Silvertail Mare",
+        "QasInstance":  920102,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Silence the Silvertail Mare",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SIMR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDCR",
+        "Reward":  {
+                       "Hash":  "RDC0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDCR",
+        "Name":  "Return to Celeth-El",
+        "QasInstance":  920103,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Celeth-El",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "CTTC",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  649,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDCR",
+                       "Credits":  0,
+                       "Xp":  50,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  233804,
+                                               "HighId":  233804,
+                                               "Name":  "Scourged Bracer of Jobe",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "XDPR",
+        "Name":  "Report the psychic test",
+        "QasInstance":  920104,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Report the psychic test",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SCDR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  650,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDPR",
+                       "Credits":  360,
+                       "Xp":  195,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  223769,
+                                               "HighId":  223769,
+                                               "Name":  "Ring of Enhanced Psychic",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "XDI0",
+        "Name":  "Ask Brad Willis for help",
+        "QasInstance":  920105,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Ask Brad Willis for help",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GSTD",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDI1",
+        "Reward":  {
+                       "Hash":  "RDI0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDI1",
+        "Name":  "Deliver supplies to Sarah",
+        "QasInstance":  920106,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Deliver supplies to Sarah",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "STSH",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "XDIR",
+        "Reward":  {
+                       "Hash":  "RDI1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDIR",
+        "Name":  "Return to Drake",
+        "QasInstance":  920107,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Drake",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SCDR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  651,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDIR",
+                       "Credits":  360,
+                       "Xp":  195,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  223773,
+                                               "HighId":  223773,
+                                               "Name":  "Bonfire Kit",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "XDBR",
+        "Name":  "Bring 6 metal devices",
+        "QasInstance":  920108,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Bring 6 metal devices",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SCDR",
+                          "SpecItem":  "QDMD",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  652,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDBR",
+                       "Credits":  440,
+                       "Xp":  235,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  223770,
+                                               "HighId":  223770,
+                                               "Name":  "Smart Backpack",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
     }
 ]
