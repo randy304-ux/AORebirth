@@ -1,4 +1,4 @@
-﻿# ddogs/tools/Build-GuessedContent.ps1 - best-guess fills for client spawn points with no capture (approved "option A").
+# ddogs/tools/Build-GuessedContent.ps1 - best-guess fills for client spawn points with no capture (approved "option A").
 # Every template made here carries ContentProvenance.Guessed = true plus the donor it was cloned from, so it can be replaced
 # when real data turns up. Names and levels come from the guides; the look/stats come from a donor template of the same kind.
 # Sources: aquarius.aodb.us/guides/nascence (mob lists per zone), wiki.aodb.us Nascence_Training_Grounds, AO-Universe Nascence guide.
@@ -38,6 +38,7 @@ foreach ($x in $g) {
   $hp = [int][math]::Max(30, [double]$d.Stats.'1' * $lvl / $dl)
   $b.Stats.'1' = $hp; if ($b.Stats.'27') { $b.Stats.'27' = $hp }
   $b | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Donor = $don; Source = $src; Levels = "$lo-$hi" })
+  if ($code -eq 'THRO') { $b | Add-Member -Force NoteProperty Features @('Wander') }  # Randy 2026-10-14: Ran-Roth-Or wanders
   $nt | Add-Member -Force NoteProperty $code ([pscustomobject]@{ Templates = @($b) }); $n++
 }
 [IO.File]::WriteAllText($npath, ($nt | ConvertTo-Json -Depth 8) + "`n", $u)

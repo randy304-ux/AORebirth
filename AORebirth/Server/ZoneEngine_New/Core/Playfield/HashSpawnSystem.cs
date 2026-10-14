@@ -860,7 +860,8 @@ namespace ZoneEngine_New.Core.Playfield
                 Metrics.TickStallWatch.Stage("spawn.place", point.CellId);
                 PickSpawnTransform(point, out Vector3 position, out Quaternion heading);
                 Action<NpcCharacter>? configure = null;
-                GameplayWander? wander = point.Wanders ? _playfield.GetService<GameplaySettings>()?.Wander : null;
+                // Template opt-in (Features: ["Wander"]) lets a Spawns.json point roam too, e.g. a wandering named mob.
+                GameplayWander? wander = point.Wanders || templates[i].Features.Contains(NpcFeature.Wander) ? _playfield.GetService<GameplaySettings>()?.Wander : null;
                 // A body that cannot move (plants, towers, turrets) stays exactly on its point.
                 bool immobile = templates[i].Stats.TryGetValue((int)SmokeLounge.AOtomation.Messaging.GameData.CharacterStat.MonsterData,
                         out int monsterData)
