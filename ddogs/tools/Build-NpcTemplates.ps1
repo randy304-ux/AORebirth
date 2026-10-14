@@ -296,6 +296,23 @@ foreach ($m in (MatchCodes 4310 $lifeCap)) {
   $report += "newbie 4310 $($m.Code) $($m.Name) L$($m.Min)-$($m.Max) $(if ($social) { 'social' } else { 'hostile' }) x$($m.Points) votes $($m.Votes) dist $([math]::Round($m.Dist,1))"
 }
 
+# 8d. PF 4311 Nascense Wilds (Brawl) and PF 4312 Nascense Swamp: same position match against the retired NascenceLifeSpawn.cs
+#     captures of those playfields (390 / 197 captured NPCs). Codes already built for 4310 are shared and skipped.
+#     Unmatched codes are listed in the report; PF 4313 (Training Ground) has no capture and is filled in Build-GuessedContent.ps1.
+$lifeAll = @(RetiredBlocks 'NascenceLifeSpawn.cs' 'LifeNpc')
+foreach ($pfn in 4311, 4312) {
+  $cap = @($lifeAll | Where-Object { $_.PlayfieldId -eq $pfn })
+  foreach ($m in (MatchCodes $pfn $cap)) {
+    if ($catalog.Contains($m.Code) -or $m.Code -eq 'PRYU') { continue }  # PRYU: Prophet Yutt Thrak is a garden content NPC
+    $ok = ($m.Points -gt 1 -and $m.Votes / $m.Points -ge 0.5 -and $m.Dist -le 15) -or ($m.Points -eq 1 -and $m.Votes -eq 1 -and $m.Dist -le 5)
+    if (-not $ok -or -not $m.Name) { $report += "nascence $pfn $($m.Code) unmatched x$($m.Points) L$($m.Min)-$($m.Max)"; continue }
+    $c = @($cap | Where-Object Name -eq $m.Name)
+    $social = [bool]($c | Where-Object { $_.HeadMesh } | Select-Object -First 1) -and $m.Points -le 2
+    if ($m.Points -eq 1 -and $m.Name -match 'Thrak|Yuttos|Craig-Or of|^(Nesbaneb|Takheperu|Ahwere|Heru-Maat|Ehmat|Mesut-Ra)$') { $social = $true }  # garden villagers, vendors, statue keepers
+    NewbieLeaf $m.Code $c $m.Min $m.Max $social $null
+    $report += "nascence $pfn $($m.Code) $($m.Name) L$($m.Min)-$($m.Max) $(if ($social) { 'social' } else { 'hostile' }) x$($m.Points) votes $($m.Votes) dist $([math]::Round($m.Dist,1))"
+  }
+}
 # 9. Mercenaries (hired companions; GameData/Knubot/Mercs*.json recruiters, GameData/PetTypes.json slots). Human looks from
 #    the PF 4582 captures; levels 1-220 so a merc spawns at the hiring player's level. Profession stat 60 is set per type.
 $mercs = [ordered]@{
