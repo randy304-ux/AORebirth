@@ -159,7 +159,6 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
     app.MapGet("/", Root);
     app.MapGet("/index.app", Root);
     app.MapGet("/store", () => Html(Hub()));
-    app.MapGet("/store/", () => Html(Hub()));
     app.MapGet("/store/img/{file}", (string file) => {
       var name = Path.GetFileName(file ?? "");
       var p = Path.Combine(Dir, "img", name);
