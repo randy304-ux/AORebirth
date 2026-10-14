@@ -75,14 +75,14 @@ $def = [ordered]@{
   ETGU=@('Eternal Guardian',41690,0,@(@('TEWK',4),@('TNWK',4),@('TSWK',4),@('TWWK',4))); ETSE=@('Eternal Sentinel',41690,0,@(@('TEWK',4),@('TNWK',4),@('TSWK',4),@('TWWK',4)))
   DEOF=@('Defender of the Three',38394,0,@(@('THSK',25),@('TPHB',25),@('TNSP',20)),@(42,7091,145,104))
   THCU=@('The Curator',22802,0,@(@('TRCG',20),@('TBR3',25),@('TNR3',25),@('TPR3',25),@('TTOG',20)),@(52,9740,198,106))
-  NMTH=@('Nematet the Custodian of Time',26159,0,@(@('TRWF',25),@('TTCH',25),@('TNIE',20),@('TSOA',15),@('TTOG',15)),@(66,25318,255,107))
+  NMTH=@('Nematet the Custodian of Time',26159,0,@(@('TRWF',25),@('TTCH',25),@('TNIE',20),@('TSOA',50),@('TTOG',15)),@(66,25318,255,107))
   TRRN=@('The Re-Animator',26155,0,@(@('TBAR',20),@('TWFL',20),@('TSKL',15),@('TSKW',15),@('TCFU',20),@('TPRD',20)),@(60,12441,220,100))
   LITH=@('Lien the Memorystalker',40515,0,@(@('TRML',25),@('TSKL',15),@('TSKW',15),@('TCFU',15),@('TDKM',15),@('TMLP',15)))
   GUOT=@('Guardian of Tomorrow',22798,0,@(@('TGCB',100),@('TGTA',25),@('TCPL',15),@('TBAS',25),@('TBLR',20),@('TREN',20),@('TRTF',20),@('TPRD',25)),@(68,26500,264,108))
   GATH=@('Gartua the Doorkeeper',159085,40105,@(@('TRCG',25),@('TBLR',20),@('TRWF',20),@('TKVI',20)),@(65,14130,229,107))
   UKTH=@('Uklesh the Frozen',40515,0,@(@('TBAR',20),@('TWFL',20),@('TFOR',15),@('TRTF',20),@('TFTU',20),@('TPRD',25)),@(73,21039,283,108))
   KHAL=@('Khalum',95352,0,@(@('TREN',25),@('TPRD',25)),@(73,25247,283,108))
-  AZTR=@('Aztur the Immortal',159966,0,@(@('TREN',25),@('TRTF',25),@('TSDS',100),@('TSOA',15),@('THBI',25),@('TPRD',25),@('TCPL',15)),@(74,38630,522,163))
+  AZTR=@('Aztur the Immortal',159966,0,@(@('TREN',25),@('TRTF',25),@('TSDS',100),@('TSOA',50),@('THBI',25),@('TPRD',25),@('TCPL',15)),@(74,38630,522,163))
   JUJU=@('Ju-ju Doll',41690,0,@(),@(45,600,60,50))
 }
 $cash = @{ GUOT = 2830; GATH = 1592; UKTH = 625; KHAL = 625; AZTR = 3184 }   # corpse credits from retail captures
