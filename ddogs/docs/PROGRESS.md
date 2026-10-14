@@ -59,3 +59,11 @@ Blubbags 40075, Rhinomen 17664, Molokhai 214479 (client monster data). Yuttos st
 Backup `I:\AO\backups\cellao_codex_clean-20261014-1643-weapons.sql`. ZoneEngine root container started 16:46:49 ET. leaves=683, quests=129 skipped=0, Knubot scripts=54 rejected=0. Ports 7500, 7501, 7012, and 8098 listening. Engines left up. Account service and launcher were not touched. Commit `91bf6723` (local only). Snake change `0034178f` is in the loaded templates (BSMG monster data 30252, scale 300).
 
 Combat NPCs whose template lists no monster weapon now get SIW1 (144742/144743) at their level in `FillEquipment`, including pets and mercs (same `SpawnMob` path). NoCombat NPCs stay unarmed. The spawn line now includes `weapons=`. A broken comment in `HashSpawnSystem` had been swallowing `PatrolEnabled = true`, so named patrols such as Ran-Roth-Or never started. No playfield has loaded a mob since this boot (preflight online count was 0), so a `weapons=` line from this process is not in the log yet. The `weapons=0` lines at 16:24-16:29 are from the previous process.
+
+## Arete arrival and shop routing — deployed 2026-10-14 18:33 ET
+
+Backup `I:\AO\backups\cellao_codex_clean-20261014-1832-arete.sql` (18:32 ET). ZoneEngine started 18:33 ET. leaves=690, quests=130 skipped=0, Knubot scripts=55 rejected=0. Ports 7500, 7501, 7012, and 8098 listening. Account API was left running. Commit `b3dd2c63` (local only).
+
+New characters start on Arete Landing playfield 6553 at 3609, 52.3, 786.2 (the guide's upper deck, beside Rex). Pink placeholders on that deck (QEMH, CABX, FOJN, MUSN, and the one RELS body rehashed to CGOB) and the freighter's MFSP are guessed small cargo bots, NoCombat. TPIB on freighter 7101 (about 63, 59, y 4) is a guessed Deck Officer. Quest FRGO, bit 655, sends the player to Rex. The existing Rex-through-Vaughn chain was already in GameData and was not rebuilt. Lower-deck pink placeholders (around y 5) were left as they are.
+
+Launcher 2026.10.14-1830 writes `ddogs-web.json` (login host, port 8098) into the marked client and the patch arms Store/Daily from that file. Published locally and to the public downloads folder. Not pushed.
