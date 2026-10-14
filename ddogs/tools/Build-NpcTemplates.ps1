@@ -303,7 +303,7 @@ $lifeAll = @(RetiredBlocks 'NascenceLifeSpawn.cs' 'LifeNpc')
 foreach ($pfn in 4311, 4312) {
   $cap = @($lifeAll | Where-Object { $_.PlayfieldId -eq $pfn })
   foreach ($m in (MatchCodes $pfn $cap)) {
-    if ($catalog.Contains($m.Code) -or $m.Code -eq 'PRYU') { continue }  # PRYU: Prophet Yutt Thrak is a garden content NPC
+    if ($catalog.Contains($m.Code) -or $m.Code -in 'PRYU','YUCH','YUPH','YTMA','YUEL','YUTO') { continue }  # content NPCs (garden quest, Yuttos shops)  # PRYU: Prophet Yutt Thrak is a garden content NPC
     $ok = ($m.Points -gt 1 -and $m.Votes / $m.Points -ge 0.5 -and $m.Dist -le 15) -or ($m.Points -eq 1 -and $m.Votes -eq 1 -and $m.Dist -le 5)
     if (-not $ok -or -not $m.Name) { $report += "nascence $pfn $($m.Code) unmatched x$($m.Points) L$($m.Min)-$($m.Max)"; continue }
     $c = @($cap | Where-Object Name -eq $m.Name)
@@ -351,3 +351,5 @@ $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-N
 & "$PSScriptRoot\Build-GuessedContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Team mission boss families (DungeonGeneration.json Population.BossNpcHashes): Build-MissionBosses.ps1.
 & "$PSScriptRoot\Build-MissionBosses.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Yuttos shop NPCs in Nascence Wilds: Build-YuttosVendors.ps1.
+& "$PSScriptRoot\Build-YuttosVendors.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
