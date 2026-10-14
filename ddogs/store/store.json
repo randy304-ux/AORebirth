@@ -1,4 +1,4 @@
-﻿{
+{
   "note": "Dungeon Dogs in-game Store hub. Add a link by copying one block. 'background' is an image URL or a file name inside the store folder's 'img' subfolder (served at /store/img/...). Leave it empty for the plain teal look. Changes show the next time the Store window opens.",
   "title": "Dungeon Dogs",
   "subtitle": "Anarchy Online private server",
@@ -11,7 +11,8 @@
     { "title": "AO-Universe", "url": "https://www.ao-universe.com/main/news", "description": "Guides, quests and dungeon maps." },
     { "title": "Auno", "url": "https://auno.org/ao/db.php", "description": "Item database." },
     { "title": "AOGalaxy", "url": "https://www.aogalaxy.com/", "description": "Items, nanos and tools." },
-    { "title": "AO Wiki", "url": "https://wiki.aodb.us/wiki/Main_Page", "description": "Community wiki." }
+    { "title": "AO Wiki", "url": "https://wiki.aodb.us/wiki/Main_Page", "description": "Community wiki." },
+    { "title": "TinkerPlants", "url": "https://ao.tinkeringidiot.com/tinkerplants/", "description": "Free web implant designer." }
   ]
 }
 
