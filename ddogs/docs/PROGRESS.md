@@ -2,7 +2,9 @@
 
 Local branch `ddogs/main`. Not pushed.
 
-## Training Ground (4313) — built, not yet deployed this session
+## Training Ground (4313) — deployed 2026-10-14 13:05
+
+Backup `I:\AO\backups\cellao_codex_clean-20261014-1255-totw.sql`. Zone build passed. Latest ZoneEngine start: npc templates leaves=441, quests=122 skipped=0, Knubot scripts=52 rejected=0. Ports 7500, 7501, 7012, 8098 listening. Commit `7bd69e8e` (local only).
 
 Randy's screenshots are pinned in `ddogs/tools/Build-GuessedContent.ps1`. Drake's tests are in `ddogs/tools/Build-NewbieQuests.ps1` (bits 645-652).
 
