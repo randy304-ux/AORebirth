@@ -160,6 +160,12 @@ namespace ZoneEngine_New.Core.Commands
 
         string Usage { get; }
 
+        /// <summary>Info appendix topic. A command that needs a GM level defaults to "gm"; any other defaults to "player".</summary>
+        string Topic => RequiredGmLevel > 0 ? "gm" : "player";
+
+        /// <summary>One line under the usage text in the Info appendix.</summary>
+        string Summary => string.Empty;
+
         void Execute(GmCommandContext context);
     }
 
@@ -221,6 +227,8 @@ namespace ZoneEngine_New.Core.Commands
                 _commands[command.Name] = command;
             }
         }
+
+        public IReadOnlyCollection<IGmCommand> All => _commands.Values;
 
         public void TryExecute(IZoneSession session, Player player, string name, string[] args)
         {

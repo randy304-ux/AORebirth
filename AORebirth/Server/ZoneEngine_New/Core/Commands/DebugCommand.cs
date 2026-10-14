@@ -26,6 +26,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".debug [watchdog] [on|off]";
 
+        public string Summary => "Turns your debug channels on or off.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

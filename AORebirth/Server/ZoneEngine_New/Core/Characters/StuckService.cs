@@ -18,6 +18,10 @@ namespace ZoneEngine_New.Core.Characters
     /// </summary>
     public sealed class StuckService
     {
+        public const string HelpSyntax = "/stuck";
+
+        public const string HelpSummary = "Sends you to the stuck landing. Refused while you are being attacked or while Stability is locked from the last use.";
+
         readonly GameplaySettings _settings;
         readonly Lazy<PlayfieldManager> _playfields;
 

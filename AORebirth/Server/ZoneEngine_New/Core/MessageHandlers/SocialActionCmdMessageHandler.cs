@@ -14,6 +14,10 @@ namespace ZoneEngine_New.Core.MessageHandlers
     /// </summary>
     public sealed class SocialActionCmdMessageHandler : IMessageHandler<SocialActionCmdMessage>
     {
+        public const string HelpSyntax = "Social window";
+
+        public const string HelpSummary = "Emotes from the social window are shown to people who can see you. Sleep and lounge are postures; stand up to leave them.";
+
         public Type MessageBodyType => typeof(SocialActionCmdMessage);
 
         public void Handle(MessageBody body, IZoneSession session)

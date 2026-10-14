@@ -44,6 +44,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".quests (selected player's active quests) | .quests info <questId> [characterId] (all of a quest's details) | .quests tp <questId> (you, to its dungeon entrance)";
 
+        public string Summary => "Lists quests for the selected player, shows one quest, or jumps you to a dungeon entrance.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

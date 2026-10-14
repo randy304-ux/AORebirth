@@ -23,6 +23,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".shutdown <seconds> | .shutdown abort";
 
+        public string Summary => "Schedules a zone shutdown, or cancels one.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

@@ -35,6 +35,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".online";
 
+        public string Summary => "Lists everyone online, grouped by profession.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

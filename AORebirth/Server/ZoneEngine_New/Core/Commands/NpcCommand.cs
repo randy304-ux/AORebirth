@@ -45,6 +45,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".npc source|template|loot [roll [count]]|equipment|nanos|position";
 
+        public string Summary => "Inspects the selected NPC: source, template, loot, gear, nanos, or position.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

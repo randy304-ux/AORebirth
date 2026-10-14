@@ -26,6 +26,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".spawn <Hash> <Level>";
 
+        public string Summary => "Spawns a mob template at your location.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

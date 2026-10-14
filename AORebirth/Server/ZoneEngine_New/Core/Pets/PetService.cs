@@ -30,6 +30,19 @@ namespace ZoneEngine_New.Core.Pets
         /// <summary>A player's pet farther than this from its owner rejoins the owner at once.</summary>
         public const double MaxPlayerPetDistance = 50.0;
 
+        /// <summary>Orders <see cref="Command"/> honors. The client sends these codes from /pet. Other codes are ignored.</summary>
+        public static readonly (PetCommandCode Code, string Syntax, string Summary)[] Orders =
+        [
+            (PetCommandCode.Follow, "/pet follow", "The pet follows you."),
+            (PetCommandCode.Behind, "/pet behind", "The pet follows behind you."),
+            (PetCommandCode.Guard, "/pet guard", "The pet guards. A doctor merc treats this as its heal duty."),
+            (PetCommandCode.Wait, "/pet wait", "The pet stays where it is."),
+            (PetCommandCode.Attack, "/pet attack", "The pet attacks your current target."),
+            (PetCommandCode.Heal, "/pet heal", "A heal pet heals its target."),
+            (PetCommandCode.Terminate, "/pet terminate", "Dismisses that pet."),
+            (PetCommandCode.Report, "/pet report", "Reports health, nano, and position for that pet.")
+        ];
+
         readonly Playfield _playfield;
         readonly IGameData _gameData;
         readonly IZoneLogger _logger;

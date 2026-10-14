@@ -44,6 +44,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".diag [on [sec] | off | reset | top [n] [here|pfId] | stages [here|all|pfId] | path [n] [here|pfId] | alloc [here|all|pfId] | pfs [1|3|5|10|30] | slow | proc | threshold <ms|auto>]";
 
+        public string Summary => "Playfield tick diagnostics and the watchdog.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

@@ -1,6 +1,6 @@
 {
-  "note": "Dungeon Dogs in-game Store hub. Add a link by copying one block. 'background' is an image URL or a file name inside the store folder's 'img' subfolder (served at /store/img/...). Leave it empty for the plain teal look. Changes show the next time the Store window opens.",
-  "title": "Dungeon Dogs",
+  "note": "Dungeon Dogs in-game Info hub (the Store window, vgtp://uwg.store.icc-rk). Add a link by copying one block. 'background' is an image URL or a file name inside the store folder's 'img' subfolder (served at /store/img/...). Leave it empty for the plain teal look. Changes show the next time the Info window opens. The Commands card is added by the server and is not listed here.",
+  "title": "Info",
   "subtitle": "Anarchy Online private server",
   "background": "ddogs-crest.png",
   "links": [

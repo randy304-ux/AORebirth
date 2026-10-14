@@ -22,6 +22,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".serverstats [1|3|5|10|30]";
 
+        public string Summary => "Prints timing stats for this playfield.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

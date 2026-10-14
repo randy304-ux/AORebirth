@@ -18,6 +18,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".set <statName|statId> <value>";
 
+        public string Summary => "Sets a stat on you. GM level 100 or higher can set another character.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

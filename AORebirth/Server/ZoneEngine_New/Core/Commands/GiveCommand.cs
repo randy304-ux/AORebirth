@@ -55,6 +55,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".give item <low> <high> <ql> | .give item <hash> <ql> | .give buff <nanoId> | .give quest <hash> | .give setup <aosetups url>";
 
+        public string Summary => "Gives an item, buff, quest, or setup.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

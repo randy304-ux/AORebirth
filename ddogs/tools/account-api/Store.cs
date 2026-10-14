@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using MySqlConnector;
 
-// Dungeon Dogs in-game Store window (vgtp://uwg.store.icc-rk), Claim Center and Daily Reward pages.
+// Dungeon Dogs in-game Info window (vgtp://uwg.store.icc-rk), Claim Center and Daily Reward pages.
 // The client patch routes uwg.store.icc-rk / uwg.daily.icc-rk to this service. Content comes from
 // editable JSON in the store folder (AO_DDOGS_STORE_DIR, default I:\AO\src\ddogs\store).
 static class DDogsStore
@@ -50,7 +50,8 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
   {
     var cfg = Load("store.json");
     var sb = new StringBuilder();
-    sb.Append($"<h1>{H(S(cfg, "title") is var t && t.Length > 0 ? t : "Dungeon Dogs")}</h1><div class=\"sub\">{H(S(cfg, "subtitle"))}</div>");
+    sb.Append($"<h1>{H(S(cfg, "title") is var t && t.Length > 0 ? t : "Info")}</h1><div class=\"sub\">{H(S(cfg, "subtitle"))}</div>");
+    sb.Append("<a class=\"card\" href=\"chatcmd:///say .info\"><b>Commands</b><span>Opens the command appendix in an info window. Click the Appendix link in chat, or type .info</span></a>");
     if (cfg?["links"] is JsonArray links)
       foreach (var l in links)
       {
@@ -58,7 +59,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
         var external = url.Contains("://");
         sb.Append($"<a class=\"card\" href=\"{H(url)}\"{(external ? " target=\"_blank\"" : "")}><b>{H(S(l, "title"))}</b><span>{H(S(l, "description"))}</span></a>");
       }
-    return Page("Dungeon Dogs", sb.ToString());
+    return Page("Info", sb.ToString());
   }
 
   record Who(int CharId, string Name);
@@ -97,7 +98,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
   const string CodeHelp = "Type <b>.claim</b> in the game chat to see your character's claim code, then enter it here. Items arrive in your inventory right away if you are online (or on your next login/zone).";
 
   static string CodeForm(string action, string code, string msg) =>
-    $"<div class=\"nav\"><a href=\"/store\">&laquo; Back to Store</a></div>{msg}<p>{CodeHelp}</p><form method=\"get\" action=\"{action}\">Claim code: <input type=\"text\" name=\"code\" size=\"12\" value=\"{H(code)}\"> <input type=\"submit\" value=\"Continue\"></form>";
+    $"<div class=\"nav\"><a href=\"/store\">&laquo; Back to Info</a></div>{msg}<p>{CodeHelp}</p><form method=\"get\" action=\"{action}\">Claim code: <input type=\"text\" name=\"code\" size=\"12\" value=\"{H(code)}\"> <input type=\"submit\" value=\"Continue\"></form>";
 
   static string Msg(string m, bool ok) => string.IsNullOrEmpty(m) ? "" : $"<p class=\"{(ok ? "ok" : "err")}\">{H(m)}</p>";
 
@@ -107,7 +108,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
     if (who == null)
       return Page("Claim Center", "<h1>Claim Center</h1>" + CodeForm("/claim", code, Msg(string.IsNullOrWhiteSpace(code) ? msg : "That claim code was not found.", false)));
     var claimed = await Claimed(connStr, who.CharId);
-    var sb = new StringBuilder($"<h1>Claim Center</h1><div class=\"sub\">Claiming for <b>{H(who.Name)}</b>. Each item can be claimed once per character.</div><div class=\"nav\"><a href=\"/store\">&laquo; Back to Store</a> &nbsp; <a href=\"/daily?code={H(code)}\">Daily Reward</a></div>{Msg(msg, ok)}");
+    var sb = new StringBuilder($"<h1>Claim Center</h1><div class=\"sub\">Claiming for <b>{H(who.Name)}</b>. Each item can be claimed once per character.</div><div class=\"nav\"><a href=\"/store\">&laquo; Back to Info</a> &nbsp; <a href=\"/daily?code={H(code)}\">Daily Reward</a></div>{Msg(msg, ok)}");
     var cat = Load("claims.json");
     string group = null;
     if (cat?["items"] is JsonArray items)
@@ -138,7 +139,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
       return Page("Daily Reward", "<h1>Daily Reward</h1>" + CodeForm("/daily", code, Msg(string.IsNullOrWhiteSpace(code) ? msg : "That claim code was not found.", false)));
     var reward = TodaysReward(out var dayKey);
     var claimed = await Claimed(connStr, who.CharId);
-    var sb = new StringBuilder($"<h1>Daily Reward</h1><div class=\"sub\">For <b>{H(who.Name)}</b> &middot; {DateTime.Now:dddd, MMM d}</div><div class=\"nav\"><a href=\"/store\">&laquo; Back to Store</a> &nbsp; <a href=\"/claim?code={H(code)}\">Claim Center</a></div>{Msg(msg, ok)}");
+    var sb = new StringBuilder($"<h1>Daily Reward</h1><div class=\"sub\">For <b>{H(who.Name)}</b> &middot; {DateTime.Now:dddd, MMM d}</div><div class=\"nav\"><a href=\"/store\">&laquo; Back to Info</a> &nbsp; <a href=\"/claim?code={H(code)}\">Claim Center</a></div>{Msg(msg, ok)}");
     if (reward == null) sb.Append("<p>No daily reward is set up today.</p>");
     else
     {

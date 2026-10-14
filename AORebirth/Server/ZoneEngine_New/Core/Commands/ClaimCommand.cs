@@ -9,7 +9,7 @@
     using ZoneEngine_New.Core.Claims;
 
     /// <summary>
-    /// <c>.claim</c> (everyone): shows your Store claim code and delivers anything already claimed.
+    /// <c>.claim</c> (everyone): shows your Info-window claim code and delivers anything already claimed.
     /// <c>.claim list</c> shows the Claim Center items; <c>.claim &lt;number|key&gt;</c> claims one directly (once per character).
     /// </summary>
     public sealed class ClaimCommand : IGmCommand
@@ -26,6 +26,10 @@
 
         public string Usage => ".claim (your claim code + deliver) | .claim list | .claim <number>";
 
+        public string Topic => "claims";
+
+        public string Summary => "Shows your claim code and delivers claimed items, or lists and claims from chat.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);
@@ -40,7 +44,7 @@
             {
                 if (context.Args.Length == 0)
                 {
-                    Say("Your claim code is " + _claims.GetOrCreateCode(id) + ". Open the Store (Shop menu > Store) > Claim Center and enter it. Type .claim list to claim from chat instead.");
+                    Say("Your claim code is " + _claims.GetOrCreateCode(id) + ". Open the Info window (Shop menu > Store) > Claim Center and enter it. Type .claim list to claim from chat instead.");
                     int n = _claims.DeliverPending(context.Player);
                     if (n == 0)
                         Say("No claimed items are waiting for you.");

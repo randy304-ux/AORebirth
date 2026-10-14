@@ -10,6 +10,17 @@ namespace ZoneEngine_New.Core.Teams
     /// <summary>The N3 ChatCmd route: /team, /invite and /stuck; never consumes ordinary vicinity text.</summary>
     public sealed class TeamChatMessageHandler(TeamService teams, Characters.StuckService stuck) : IMessageHandler<ChatCmdMessage>
     {
+        /// <summary>Chat slash commands this handler accepts. Keep in step with <see cref="TeamService.TryHandleChatCommand"/>.</summary>
+        public static readonly (string Syntax, string Summary)[] Commands =
+        [
+            ("/team invite <name>", "Invites that player onto your team."),
+            ("/invite <name>", "Same as /team invite."),
+            ("/team accept", "Accepts a team invite."),
+            ("/team decline", "Declines a team invite."),
+            ("/team reject", "Same as /team decline."),
+            ("/team leave", "Leaves your team.")
+        ];
+
         public Type MessageBodyType => typeof(ChatCmdMessage);
         public void Handle(MessageBody body, IZoneSession session) => Handle((ChatCmdMessage)body, session);
 

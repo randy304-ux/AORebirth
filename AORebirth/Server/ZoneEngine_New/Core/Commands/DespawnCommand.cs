@@ -21,6 +21,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".despawn (despawns the selected non-player target as if it died)";
 
+        public string Summary => "Removes the selected non-player as if it had died.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

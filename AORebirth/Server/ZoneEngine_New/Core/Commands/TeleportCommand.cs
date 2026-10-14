@@ -37,6 +37,10 @@ namespace ZoneEngine_New.Core.Commands
         public string Usage =>
             ".tp <x> <z> <playfieldId> or .tp <x> <y> <z> <playfieldId> (look-at player if selected) | .tp summon <character name> | .tp to <character name>";
 
+        public string Topic => "travel";
+
+        public string Summary => "Teleports you or the selected player, summons a character, or goes to a character.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

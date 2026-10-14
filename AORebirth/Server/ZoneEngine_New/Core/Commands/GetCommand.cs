@@ -31,6 +31,8 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Usage => ".get stat <statName|statId> | .get stats | .get buffs | .get quests | .get weapons";
 
+        public string Summary => "Shows a stat, the stat sheet, buffs, quests, or weapons.";
+
         public void Execute(GmCommandContext context)
         {
             ArgumentNullException.ThrowIfNull(context);

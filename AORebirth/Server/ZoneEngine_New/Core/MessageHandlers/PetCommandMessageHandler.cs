@@ -10,7 +10,7 @@ using ZoneEngine_New.Core.Pets;
 /// <summary>
 /// PetCommand from the pet window or /pet (Gamecode.dll PetCommandIIR_c 0x100763de): Unknown2 is the command
 /// code, Unknown3 its argument, Identities the pets it is for. The owner's own pets on its playfield obey
-/// follow, wait, guard, attack (at the owner's target) and terminate; everything else is ignored.
+/// follow, behind, wait, guard, attack, heal, terminate and report (see PetService.Orders); other codes are ignored.
 /// </summary>
 public sealed class PetCommandMessageHandler : IMessageHandler<PetCommandMessage>
 {

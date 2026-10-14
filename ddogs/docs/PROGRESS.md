@@ -67,3 +67,9 @@ Backup `I:\AO\backups\cellao_codex_clean-20261014-1832-arete.sql` (18:32 ET). Zo
 New characters start on Arete Landing playfield 6553 at 3609, 52.3, 786.2 (the guide's upper deck, beside Rex). Pink placeholders on that deck (QEMH, CABX, FOJN, MUSN, and the one RELS body rehashed to CGOB) and the freighter's MFSP are guessed small cargo bots, NoCombat. TPIB on freighter 7101 (about 63, 59, y 4) is a guessed Deck Officer. Quest FRGO, bit 655, sends the player to Rex. The existing Rex-through-Vaughn chain was already in GameData and was not rebuilt. Lower-deck pink placeholders (around y 5) were left as they are.
 
 Launcher 2026.10.14-1830 writes `ddogs-web.json` (login host, port 8098) into the marked client and the patch arms Store/Daily from that file. Published locally and to the public downloads folder. Not pushed.
+
+## Info page and command appendix — deployed 2026-10-14 18:59 ET
+
+Backup `I:\AO\backups\cellao_codex_clean-20261014-1856-info.sql` (18:56 ET). ZoneEngine started 18:59 ET. leaves=690, quests=130 skipped=0, Knubot scripts=55 rejected=0. Ports 7500, 7501, 7012, and 8098 listening. Account API republished and restarted with the engines. Engines left up.
+
+The Store window (same `vgtp://uwg.store.icc-rk` address, `/`, `/index.app`, and `/store`) is titled Info. Claim Center and Daily Reward say Back to Info. The Commands card says `.info`, which opens the command appendix in the same info window as an item description. Lists come from the command registry plus the team, pet, chat, and stuck handlers. GM commands are included only when that character can run them.

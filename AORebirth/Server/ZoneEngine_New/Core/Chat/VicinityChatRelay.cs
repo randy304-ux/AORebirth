@@ -15,6 +15,16 @@ namespace ZoneEngine_New.Core.Chat
 
     public sealed class VicinityChatRelay
     {
+        public readonly record struct ChatMode(ChatMessageType Type, float Range, string Syntax, string Summary);
+
+        /// <summary>Chat modes this relay delivers, and how far they carry. A line that starts with a dot is a command, not speech.</summary>
+        public static readonly ChatMode[] Modes =
+        [
+            new(ChatMessageType.Whisper, 1.5f, "Whisper", "Whisper chat, for people very close to you."),
+            new(ChatMessageType.Say, 10f, "Say", "Ordinary chat that does not start with a dot."),
+            new(ChatMessageType.Shout, 60f, "Shout", "Shout chat. Carries farther than say.")
+        ];
+
         private readonly IChatEngineLink _chatLink;
         private readonly IZoneLogger _logger;
 
@@ -78,21 +88,17 @@ namespace ZoneEngine_New.Core.Chat
 
         private static bool TryResolveRange(ChatMessageType type, out float range)
         {
-            switch (type)
+            foreach (ChatMode mode in Modes)
             {
-                case ChatMessageType.Whisper:
-                    range = 1.5f;
+                if (mode.Type == type)
+                {
+                    range = mode.Range;
                     return true;
-                case ChatMessageType.Say:
-                    range = 10.0f;
-                    return true;
-                case ChatMessageType.Shout:
-                    range = 60.0f;
-                    return true;
-                default:
-                    range = 0;
-                    return false;
+                }
             }
+
+            range = 0;
+            return false;
         }
     }
 }
