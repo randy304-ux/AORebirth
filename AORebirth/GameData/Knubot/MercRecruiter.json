@@ -1,0 +1,51 @@
+{
+    "Notes": "Mercenary recruiter by the striking workers outside Desmond Calitri's office. Hires the existing Doctor, Enforcer, Soldier and Keeper. The four camp recruiters stay.",
+    "Npcs": [
+        "ddogs-merc-strike"
+    ],
+    "Openers": [
+        {
+            "Say": "hello"
+        }
+    ],
+    "Replies": {
+        "doctor": { "Text": "Hire a Doctor.", "Goto": "doctor" },
+        "enforcer": { "Text": "Hire an Enforcer.", "Goto": "enforcer" },
+        "soldier": { "Text": "Hire a Soldier.", "Goto": "soldier" },
+        "keeper": { "Text": "Hire a Keeper.", "Goto": "keeper" },
+        "dismiss": { "Text": "Send my mercenaries home.", "Goto": "dismiss" },
+        "how": { "Text": "How do mercenaries work?", "Goto": "how" }
+    },
+    "Lines": {
+        "hello": {
+            "Text": "Strikers on one side, Desmond on the other. I can put a mercenary on your side. Doctor, Enforcer, Soldier or Keeper. No charge.",
+            "Replies": [ "doctor", "enforcer", "soldier", "keeper", "how", "dismiss" ]
+        },
+        "doctor": {
+            "Text": "Done. Your Doctor will follow you and fight what fights you.{hiremerc doctor}",
+            "Fail": "busy",
+            "Replies": [ "enforcer", "soldier", "keeper", "dismiss" ]
+        },
+        "enforcer": {
+            "Text": "Done. Your Enforcer will follow you and fight what fights you.{hiremerc enforcer}",
+            "Fail": "busy",
+            "Replies": [ "doctor", "soldier", "keeper", "dismiss" ]
+        },
+        "soldier": {
+            "Text": "Done. Your Soldier will follow you and fight what fights you.{hiremerc soldier}",
+            "Fail": "busy",
+            "Replies": [ "doctor", "enforcer", "keeper", "dismiss" ]
+        },
+        "keeper": {
+            "Text": "Done. Your Keeper will follow you and fight what fights you.{hiremerc keeper}",
+            "Fail": "busy",
+            "Replies": [ "doctor", "enforcer", "soldier", "dismiss" ]
+        },
+        "busy": { "Text": "Sorry, I can't send anyone out right now." },
+        "dismiss": { "Text": "{dismissmercs}All right, I'll call them back. Come see me any time you need them again." },
+        "how": {
+            "Text": "You can hire one of each kind: Doctor, Enforcer, Soldier and Keeper. They work like pets, so use the pet window or /pet commands to tell them to follow, guard, wait or attack. They leave when you log off or fall in battle; just come back and hire them again.",
+            "Replies": [ "doctor", "enforcer", "soldier", "keeper", "dismiss" ]
+        }
+    }
+}

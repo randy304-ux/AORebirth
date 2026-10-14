@@ -23,9 +23,14 @@ function AddQuest($hash, $name, $action, $npc, $count, $next, $bit, $xp, $cr, $i
 function Job($giver, $code, $steps, $returnName, $xp, $cr, $items, $opt) {
   if (-not $opt) { $opt = @{} }
   $hashes = @(); for ($i = 0; $i -lt $steps.Count; $i++) { $hashes += ('{0}{1}' -f $code, $i) }
-  $ret = $code + 'R'; $b = $null; if (-not $opt.NoBit) { $b = $script:bit++; if ($b -gt 767) { throw 'out of mission bits' } }
+  $ret = $code + 'R'; $b = $null
+  if ($opt.Contains('Bit')) { $b = [int]$opt.Bit; if ($b -lt 640 -or $b -gt 767) { throw "bit out of ddogs range: $b" } }
+  elseif (-not $opt.NoBit) { $b = $script:bit++; if ($b -gt 767) { throw 'out of mission bits' } }
   for ($i = 0; $i -lt $steps.Count; $i++) {
-    $s = $steps[$i]; $next = $(if ($i + 1 -lt $steps.Count) { $hashes[$i + 1] } else { $ret })
+    $s = $steps[$i]
+    if ($s -is [Array] -and $s.Count -eq 1 -and $s[0] -is [Array]) { $s = $s[0] }
+    if ($s[0] -isnot [string] -or $s[3] -isnot [string]) { throw "quest step $code $i is not an action/name pair" }
+    $next = $(if ($i + 1 -lt $steps.Count) { $hashes[$i + 1] } else { $ret })
     AddQuest $hashes[$i] $s[3] $s[0] $s[1] $s[2] $next $null 0 0 $null $null
   }
   $ra = $(if ($opt.Ret) { $opt.Ret } else { 'TargetNpc' })
@@ -47,12 +52,15 @@ function Script($file, $npcs, $notes, $intro, $jobs, $done, $extra) {
     $cond = @(('!HasAnyQuest ' + ($j.Job.Steps -join ',')))
     if ($null -ne $j.Job.Bit) { $cond = @(('!HasCompletedQuest ' + $j.Job.Return)) + $cond }
     if ($j.Prereq) { $cond += 'HasCompletedQuest ' + $j.Prereq }
+    if ($j.MinLevel) { $cond += 'minlevel ' + $j.MinLevel }
+    if ($j.Prof) { $cond += 'prof ' + $j.Prof }
     $replies['ask_' + $j.Key] = [ordered]@{ Text = $j.Ask; If = $cond; Goto = 'offer_' + $j.Key }
     $replies['take_' + $j.Key] = [ordered]@{ Text = $j.Accept; If = $cond; Goto = 'give_' + $j.Key }
     $lines['offer_' + $j.Key] = [ordered]@{ Text = $j.Offer; Replies = @(('take_' + $j.Key), 'later') }
     $give = @('{givequest ' + $j.Job.First + '}')
     if ($j.Give) { $give = @($j.Give) + $give }
-    $lines['give_' + $j.Key] = [ordered]@{ Text = $give + @('{delay 1}Good luck. Come back to me when it is done.') }
+    $luck = $(if ($j.Luck) { $j.Luck } else { '{delay 1}Good luck. Come back to me when it is done.' })
+    $lines['give_' + $j.Key] = [ordered]@{ Text = $give + @($luck) }
     $busyReplies = @('bye')
     $thanks = $(if ($j.Thanks) { @($j.Thanks) } else { @('Excellent work. Here is what I promised.') })
     $doneLine = [ordered]@{ Text = @(('{completequest ' + $j.Job.Return + '}')) + $thanks + @($j.After | Where-Object { $_ }); Replies = @('more', 'nothing') }
@@ -174,10 +182,9 @@ Script 'EmissaryOfJobe.json' @('ESOJ') 'Emissary of Jobe, Jobe bridge (854x1059)
 Script 'GuardianOfTheWeak.json' @('GROW') 'Guardian of the Weak, Jobe bridge.' @('{delay 1}I watch over those who are new to these lands.', '{delay 1}The creatures beyond the bridge are dangerous. Stay near the path until you have found your strength, and speak to Joshua Falker for work.') @() 'Be careful out there.' $null
 
 # ---------------- Arete Landing (6553) ----------------
-# Identity Crisis chain (retail titles from Content/Arete quest packs + Content/Runtime/interactions.json), NPCs spawned by
-# Build-AreteContent.ps1. Content NPCs carry no spawn hash, so returns and "Talk to X" steps complete in dialogue.
-# Retail item steps (lock pick + strongbox, hacker tool, implant assembly, pet cage capture) are simplified to NPCs that
-# hand the real quest item over; turn-ins are real trades. Bits 632-639 are the eight chain milestones.
+# AO-Universe Arete Landing, sections 1-22. Journal steps use the guide's order.
+# Use-item, tradeskill and shop steps that the quest actions cannot perform are a talk or a trade of the real item.
+# Bits 632-639 stay the eight chain milestones. Added one-time jobs use explicit bits 656+ so the garden reset is untouched.
 function Arrive($quest, $text) { @{ Openers = @([ordered]@{ If = @(('HasQuest ' + $quest)); Say = 'arrive' }); Lines = [ordered]@{ arrive = [ordered]@{ Text = @(('{completequest ' + $quest + '}')) + $text; Replies = @('more', 'nothing') } } } }
 function Giveaway($quest, $item, $text, $idle) {
   @{ Openers = @([ordered]@{ If = @(('HasQuest ' + $quest), ('!has ' + $item)); Say = 'handover' })
@@ -187,88 +194,158 @@ function Giveaway($quest, $item, $text, $idle) {
 function Merge($a, $b) { $r = @{ Openers = @(); Lines = [ordered]@{}; Replies = [ordered]@{}; Trades = [ordered]@{}; Hello = @() }
   foreach ($x in @($a, $b)) { if (-not $x) { continue }; if ($x.Openers) { $r.Openers += $x.Openers }; if ($x.Hello) { $r.Hello += $x.Hello }
     foreach ($k in 'Lines', 'Replies', 'Trades') { if ($x[$k]) { foreach ($kk in $x[$k].Keys) { $r[$k][$kk] = $x[$k][$kk] } } } }; $r }
-
+$hMarcus = Handoff 'HAMS' 'Talk to Marcus Stone' 'AMST'
 $hFlint = Handoff 'HFLN' 'Talk to Flint Novak' 'FLNV'
 $hStan = Handoff 'HSTG' 'Talk to Stan Goodman' 'SAGO'
+$hMarco = Handoff 'HMPS' 'Talk to Marco Spida' 'ONRP'
 $hSarah = Handoff 'HSAG' 'Talk to Sarah Greene' 'SAGE'
 $hVern = Handoff 'HVGO' 'Speak to Vernon Godfray' 'AVGO'
 $hMason = Handoff 'HDMA' 'Talk to Doctor Mason' 'ADMA'
 $hLor = Handoff 'HLOR' 'Talk to Lorelei' 'LRTH'
 
-$rex = Job 'RELS' 'ARX' @(,@('KillMultiple','MLCE',5,'Kill 5 Malfunctioning Robots')) 'Return to Rex Larsson' 300 150 $null
-$flint = Job 'FLNV' 'AFL' @() 'Find a Bio Analyzing Computer' 400 200 $null @{ Ret = 'FindItem'; Spec = 'QBAC' }
-$stan = Job 'SAGO' 'AST' @() 'Get the Adaptation Factory' 400 250 $null @{ Ret = 'FindItem'; Spec = 'QAAF' }
-$sarah = Job 'SAGE' 'ASG' @() 'Recover the DNA-Locked Armor' 500 300 $null @{ Ret = 'FindItem'; Spec = 'QDLA' }
-$vern = Job 'AVGO' 'AVG' @() 'Get the Identification Chip' 500 300 $null @{ Ret = 'FindItem'; Spec = 'QUIC' }
-$mason = Job 'ADMA' 'AMA' @(,@('KillMultiple','WSSC',5,'Kill 5 Rollerrats')) 'Return to Dr. Mason' 600 300 @(Item 295706 'Leg Implant: Agility, Shiny')
-$lor = Job 'LRTH' 'ALO' @() 'Find Lorelei''s Lost Pet' 600 300 $null @{ Ret = 'FindItem'; Spec = 'QPCR' }
+$rex = Job 'RELS' 'ARX' @(@('KillMultiple','MLCE',5,'Terminate 5 Cleaning Robots'),@('TargetNpc',$null,$null,'Open the Cargo Box')) 'Return to Rex Larsson' 1281 1040 $null
+$marcus = Job 'AMST' 'AMR' @() 'Extinguish the gas fire' 1281 1080 @(Item 296569 'Generic Nano Transmitter') @{ Bit = 656; Ret = 'FindItem'; Spec = 'QCFS' }
+$flint = Job 'FLNV' 'AFL' @(,@('KillMultiple','JUCO',7,'Kill 7 Cleaning Robots')) 'Bring the computer to Alex' 0 0 @(Item 296570 'Blank Info Chip') @{ Ret = 'FindItem'; Spec = 'QBAC' }
+$alex = Job 'ALGI' 'AAX' @(
+  @('TargetNpc','SRDO',$null,'Hack the Surveillance Droid'),
+  @('TargetNpc',$null,$null,'Plant the Recording Device'),
+  @('TargetNpc',$null,$null,'Deliver the monitor to Bill'),
+  @('KillOne','UNAF',$null,'Defeat Kneebreaker Alfonzo')
+) 'Report to Alex Gibbs' 0 0 @((Item 296571 '2560-Bit Encryption Compiler'), (Item 287041 'Nano Crystal (Composite Tradeskill Expertise)')) @{ Bit = 657 }
+$stan = Job 'SAGO' 'AST' @(,@('TargetNpc',$null,$null,'Lockpick the Merchant Strongbox')) 'Bring Stan the four parts' 2229 1240 @(Item 296572 'Unprogrammed Identification Chip') @{ Ret = 'FindItem' }
+$marco = Job 'ONRP' 'AMP' @() 'Open your nano container' 2229 1120 @(Item 223373 'Nano Crystal (Composite Attribute Boost)') @{ Bit = 658 }
+$sarah = Job 'SAGE' 'ASG' @() 'Recover the DNA-Locked Armor' 0 0 @(Item 296574 'Biological Survey Nanobots') @{ Ret = 'FindItem'; Spec = 'QDLA' }
+$vern = Job 'AVGO' 'AVG' @(@('TargetNpc',$null,$null,'Hack the Technical Library'),@('TargetNpc',$null,$null,'Hack the Shipping Manifest')) 'Bring Vernon the ID chip' 0 0 @(Item 296575 'Blank ICC ID Chip') @{ Ret = 'FindItem'; Spec = 'QUIC' }
+$mason = Job 'ADMA' 'AMA' @() 'Fit the agility implant' 0 0 @(Item 295706 'Leg Implant: Agility, Shiny')
+$sheila = Job 'LDSH' 'ASH' @() 'Speak with Lady Sheila' 0 0 @(Item 296576 'Personalized ICC ID Chip') @{ Bit = 662 }
+$lor = Job 'LRTH' 'ALO' @() 'Bring Lolly back to Lorelei' 0 0 @(Item 296692 'Identification Card') @{ Ret = 'FindItem'; Spec = 'QPCR' }
 $vaughnBit = $script:bit++; if ($vaughnBit -gt 639) { throw 'out of mission bits' }
-AddQuest 'AVHR' 'Talk to Vaughn Hammond' 'TargetNpc' 'AVHA' $null $null $vaughnBit 1000 1000 $null $null
-# repeatable side jobs (no mission bit)
-$marcus = Job 'AMST' 'AMS' @(,@('KillMultiple','JNME',6,'Kill 6 Garbage Fleas')) 'Return to Marcus Stone' 150 50 $null @{ NoBit = $true }
-$desmond = Job 'ADCA' 'ADC' @(,@('KillMultiple','32DO',4,'Kill 4 32-V Dockers')) 'Return to Desmond Calitri' 200 80 $null @{ NoBit = $true }
-$alexW = Job 'ALGI' 'AAG' @(,@('KillMultiple','01V1',5,'Kill 5 Waste Collectors')) 'Return to Alex Gibbs' 250 100 $null @{ NoBit = $true }
-$patR = Job 'APSU' 'APS' @(,@('KillMultiple','DERT',6,'Kill 6 Desert Reets')) 'Return to Patrick Sun' 300 120 $null @{ NoBit = $true }
-$patG = Job 'APSU' 'APG' @(,@('KillOne','GRDS',$null,'Kill the Greedy Desert Reet')) 'Return to Patrick Sun' 250 150 $null @{ NoBit = $true }
+AddQuest 'AVHR' 'Hand Vaughn your ID card' 'FindItem' 'AVHA' $null $null $vaughnBit 0 0 $null 'QIDC'
+$desmond = Job 'ADCA' 'ADP' @(@('TargetNpc',$null,$null,'Return the Bronto Burger'),@('KillMultiple','ROTE',2,'Kill 2 Protesters'),@('KillOne','CEHA',$null,'Kill Cedric Harding')) 'Collect Desmond''s payment' 2229 1120 @((Item 295698 'Dockworker Overalls'), (Item 295699 'The Brute Suit'), (Item 295703 'Experimental Nano Armor Exosuit')) @{ Bit = 659 }
+$patrick = Job 'APSU' 'APN' @() 'Touch the Insurance Terminal' 0 0 @(Item 36777 'Belt Component Platform 300X') @{ Bit = 660 }
+$shady = Job 'ASYG' 'ASY' @(,@('KillOne','MARC',$null,'Kill Mario Carles')) 'Return the Yalmaha' 1540 5000 @(Item 295705 'Kodaik Velocity IV') @{ Bit = 661; Ret = 'FindItem' }
 
-Script 'RexLarsson.json' @('SimpleChar:78E0FC63') 'Rex Larsson, cleaning business on the upper deck (3624x788). Identity Crisis start.' @('{delay 1}You look new. Everyone who washes up here wants the same thing: an ID, so they can get off Arete and onto Rubi-Ka proper.', '{delay 1}I can point you to the people who make that happen. But first, a favor. My cleaning robots have gone haywire.') @(
-  (J 'robots' $rex 'What''s wrong with the robots?' @('Five of my Malfunctioning Cleaning Robots are rolling around out here, scrubbing anything that moves. Terminate them.', '{delay 1}Come back when they''re scrap and I''ll introduce you to someone useful.') 'I''ll take care of them.' 'Five Malfunctioning Cleaning Robots, right around here.' $null @{ Mode = 'talk'; Thanks = @('Ha! Much quieter. Thanks.'); After = @('{givequest HFLN}', '{delay 1}Now go see Flint Novak, down by the junkyard. He knows people who can build you that ID.') })
+Script 'RexLarsson.json' @('SimpleChar:78E0FC63') 'Rex Larsson, upper deck (3624x788). Guide: five cleaning robots, the cargo box, then Marcus Stone. Reward 1040 credits and up to 1281 xp.' @('{delay 1}You look new. Everyone who washes up here wants an ID, so they can get off Arete.', '{delay 1}I can point you on. First, my cleaning robots have gone haywire.') @(
+  (J 'robots' $rex 'What''s wrong with the robots?' @('Terminate five Malfunctioning Cleaning Robots rolling around out here.', '{delay 1}Then open the Cargo Box beside me and come back. After that, Marcus Stone is the man with the ID papers.') 'I''ll do it.' 'Five Malfunctioning Cleaning Robots, then the Cargo Box.' $null @{ Mode = 'talk'; Thanks = @('Much quieter, and the box is open. Here.'); After = @('{givequest HAMS}', '{delay 1}Marcus Stone is on this deck, about 3630 by 824. He is next, not the junkyard.') })
 ) 'Keep your head down out there.' $null
+Script 'CargoBox.json' @('ddogs-cargo-box') 'Cargo Box at the captured static (3621.6, 51.7, 780.5), beside Rex.' @('A cargo box. The lid is shut.') @() 'The lid stays shut.' @{
+  Openers = @([ordered]@{ If = @('HasQuest ARX1'); Say = 'open' })
+  Lines = [ordered]@{ open = [ordered]@{ Text = @('{completequest ARX1}', 'The lid gives. Rex will want to hear that you opened it.'); Replies = @('nothing') } }
+}
 
-Script 'FlintNovak.json' @('SimpleChar:78E0FC64') 'Flint Novak, junkyard (3598x863).' @('{delay 1}Flint Novak. I find things, and I fix things.', '{delay 1}An ID card needs parts, and parts need work.') @(
-  (J 'computer' $flint 'Rex said you could help with an ID.' @('Alex Gibbs needs a Bio Analyzing Computer to start on your ID card. The Cleaning Robots in the junkyard pick up all sorts of junk, and sometimes one of them has swallowed one.', '{delay 1}Bust a few open until you find a Bio Analyzing Computer, then take it to Alex Gibbs by the shuttle pad.') 'I''ll find one.' 'Destroy junkyard Cleaning Robots until one drops a Bio Analyzing Computer, then give it to Alex Gibbs.' $rex.Return @{ Mode = 'elsewhere' })
-) 'Alex Gibbs is by the shuttle pad, if you''re looking for him.' (Arrive $hFlint @('Rex sent you? Then you''ve earned a hearing.'))
+Script 'MarcusStone.json' @('SimpleChar:78E0FC62') 'Marcus Stone, upper deck (3630x824). Guide: Compact Fire Suppressant on the gas fire, then return the container. 1080 credits, up to 1281 xp, Generic Nano Transmitter.' @('{delay 1}Marcus Stone. There is a gas fire on a container up here, and it will not put itself out.') @(
+  (J 'fire' $marcus 'Rex sent me.' @('Take this Compact Fire Suppressant Container and put the gas fire out. Drag it onto the fire.', '{delay 1}The fire object is not wired as a quest target, so bring the container back to me once you have dealt with it. Then see Flint Novak.') 'I''ll put it out.' 'Use the Compact Fire Suppressant Container on the gas fire, then return the container.' $rex.Return @{ Mode = 'trade'; Items = @(,(TI 'QCFS')); Give = '{spawn QCFS 1}'; Thanks = @('The fire is out. This Generic Nano Transmitter is yours. Do not lose it. Stan Goodman will want it later.'); After = @('{givequest HFLN}', '{delay 1}Flint Novak is down by the junkyard, about 3598 by 863.') })
+) 'The wounded dockworkers are a separate errand. I do not have them standing here yet.' $null
 
-$alexExtra = Merge (Arrive 'HFLN' @()) $null
-$alexExtra = @{ Openers = @([ordered]@{ If = @(('HasQuest ' + $flint.Return)); Say = 'bac' })
-  Lines = [ordered]@{ bac = [ordered]@{ Text = 'Flint sent you? If you found a Bio Analyzing Computer, hand it over.{opentrade}' }
-    bac_done = [ordered]@{ Text = @(('{completequest ' + $flint.Return + '}'), 'This is exactly what I needed. Your ID card is under way.', ('{givequest ' + $hStan + '}'), '{delay 1}You''ll need more parts. Stan Goodman in the camp is a purveyor of recently used merchandise. Go talk to him.'); Replies = @('more', 'nothing') } }
-  Trades = [ordered]@{ bac = [ordered]@{ If = @(('HasQuest ' + $flint.Return)); Items = @(,(TI 'QBAC')); Goto = 'bac_done' } } }
-Script 'AlexGibbs.json' @('SimpleChar:78E0FC61') 'Alex Gibbs, shuttle pad (3521x857). Takes Flint''s Bio Analyzing Computer.' @('{delay 1}Alex Gibbs. I put together identities for people who need them.', '{delay 1}And I always need the Waste Collectors kept off my pad.') @(
-  (J 'waste' $alexW 'Can I help with the Waste Collectors?' 'Five of them. They''re all over the landing.' 'Sure.' 'Five Waste Collectors.' $null @{ Mode = 'talk'; Thanks = @('Thanks. That keeps the pad clean for a while.') })
-) 'Come back if you need anything.' $alexExtra
+Script 'FlintNovak.json' @('SimpleChar:78E0FC64') 'Flint Novak, junkyard (3598x863). Guide: seven junkyard robots, Bio Analyzing Computer goes to Alex, not back to Flint.' @('{delay 1}Flint Novak. I find things, and I fix things.') @(
+  (J 'computer' $flint 'Marcus sent me.' @('Alex Gibbs needs a Bio Analyzing Computer. On retail any mix of seven junkyard robots will do: Cleaning Robots, Waste Collectors or 32-V Dockers.', '{delay 1}This counter is the seven Cleaning Robots, because one objective counts one kind. Take the computer to Alex Gibbs. Do not bring it back to me.') 'I''ll find one.' 'Seven junkyard Cleaning Robots. Take the Bio Analyzing Computer to Alex Gibbs.' $marcus.Return @{ Mode = 'elsewhere'; Luck = 'Take whatever you find to Alex Gibbs, by the shuttle pad. Not back here.' })
+) 'Alex Gibbs is by the shuttle pad.' (Arrive $hFlint @('Marcus sent you? Then you have earned a hearing.'))
 
-$antonio = Giveaway $stan.Return 'QAAF' @('Stan sent you for my Adaptation Factory? That crook.', '{delay 1}Fine, fine. I owe him. Take it, and tell him we''re even.')
-Script 'StanGoodman.json' @('SimpleChar:78E0FC65') 'Stan Goodman, Arete Landing camp (3463x880). Retail: lock pick + Merchant''s Strongbox; here Antonio Stacklund hands the factory over.' @('{delay 1}Stan Goodman, purveyor of recently used merchandise.', '{delay 1}New in town? Talk to Rex Larsson on the upper deck if you want an ID. Everybody wants an ID.') @(
-  (J 'factory' $stan 'Alex said you could get me ID parts.' @('Parts cost. But I''ll trade you. Antonio Stacklund over at the camp has an Adaptation Factory he owes me.', '{delay 1}Get it from him and bring it back. Then we''ll talk.') 'Deal.' 'Get Antonio''s Adaptation Factory from Antonio Stacklund and bring it to me.' $flint.Return @{ Mode = 'trade'; Items = @(,(TI 'QAAF')); Thanks = @('Pleasure doing business.'); After = @(('{givequest ' + $hSarah + '}'), '{delay 1}For the next part, see Sarah Greene. She''s an armorsmith, and she owes ME a favor.') })
+$alexTurn = @{ Openers = @([ordered]@{ If = @('HasQuest AFLR'); Say = 'bac' })
+  Lines = [ordered]@{ bac = [ordered]@{ Text = 'Flint sent you? If that is a Bio Analyzing Computer, hand it over.{opentrade}' }
+    bac_done = [ordered]@{ Text = @('{completequest AFLR}', 'This is the one. Here is a Blank Info Chip. Hold onto it.', '{givequest AAX0}', '{delay 1}Next: the surveillance droid at 3563 by 823. Hack it, plant the recorder on the prized house plant in Desmond''s office, take the monitor to Immigration Officer Bill, then deal with Kneebreaker Alfonzo.'); Replies = @('more', 'nothing') } }
+  Trades = [ordered]@{ bac = [ordered]@{ If = @('HasQuest AFLR'); Items = @(,(TI 'QBAC')); Goto = 'bac_done' } } }
+Script 'AlexGibbs.json' @('SimpleChar:78E0FC61') 'Alex Gibbs, shuttle pad (3521x857). Guide: computer from Flint, then droid, house plant, Bill, Kneebreaker Alfonzo.' @('{delay 1}Alex Gibbs. I put identities together for people who need them.') @(
+  (J 'watch' $alex 'The computer is with you. What next?' @('Hack the Surveillance Droid at 3563 by 823 with the Rebuilt HC-12 SecTec Monitor.', '{delay 1}Plant the RC-P Audio Recording Device on the prized house plant in Desmond''s office. Take the monitor to Immigration Officer Bill. Then defeat Kneebreaker Alfonzo Rizzolo, about 3580 by 833. A bruiser sometimes stands with him; he is not a separate objective here.') 'I''ll see it done.' 'Droid, house plant, Bill, then Kneebreaker Alfonzo.' $flint.Return @{ Mode = 'talk'; Give = @('{spawn QMON 1}', '{spawn QRCP 1}'); Thanks = @('Alfonzo is done. The 2560-Bit Encryption Compiler, and a tradeskill crystal. Stan Goodman is next.'); After = @('{givequest HSTG}', '{delay 1}Stan Goodman is in the camp, about 3463 by 880.') })
+) 'Come back if you need anything.' $alexTurn
+Script 'HousePlant.json' @('ddogs-house-plant') 'Prized House Plant in Desmond''s office, a few meters from Desmond Calitri. The guide does not pin the pot.' @('A prized house plant.') @() 'The leaves do not answer.' @{
+  Openers = @([ordered]@{ If = @('HasQuest AAX1'); Say = 'plant' })
+  Lines = [ordered]@{ plant = [ordered]@{ Text = 'The recorder has to be planted on the pot. Put the RC-P in the trade window.{opentrade}' }
+    planted = [ordered]@{ Text = @('{completequest AAX1}', 'The RC-P is hidden in the leaves. Immigration Officer Bill is waiting for the monitor.'); Replies = @('nothing') } }
+  Trades = [ordered]@{ plant = [ordered]@{ If = @('HasQuest AAX1'); Items = @(,(TI 'QRCP')); Goto = 'planted' } }
+}
+Script 'ImmigrationOfficerBill.json' @('SimpleChar:78E0FC66') 'ICC Immigration Officer Bill (3510x826). After he sends you after the Kneebreaker he will not discuss Arete.' @('{delay 1}ICC Immigration. No ID, no passage.') @() 'Next!' @{
+  Hello = @('rex','monitor')
+  Openers = @([ordered]@{ If = @('HasQuest AAX2'); Say = 'monitor' })
+  Replies = [ordered]@{
+    rex = [ordered]@{ Text = 'How do I get off Arete?'; If = @('!HasAnyQuest AAX3,AAXR','!HasCompletedQuest AAXR'); Goto = 'rex' }
+    monitor = [ordered]@{ Text = 'Alex Gibbs sent the monitor.'; If = @('HasQuest AAX2'); Goto = 'monitor' }
+  }
+  Lines = [ordered]@{
+    rex = [ordered]@{ Text = 'Unofficially, start with Rex Larsson on the upper deck.'; Replies = @('nothing') }
+    monitor = [ordered]@{ Text = 'The Rebuilt HC-12. Put it in the trade window.{opentrade}' }
+    briefed = [ordered]@{ Text = @('{completequest AAX2}', 'Kneebreaker Alfonzo Rizzolo. That is all I will say about Arete.'); Replies = @('nothing') }
+  }
+  Trades = [ordered]@{ monitor = [ordered]@{ If = @('HasQuest AAX2'); Items = @(,(TI 'QMON')); Goto = 'briefed' } }
+}
+
+Script 'Strongbox.json' @('ddogs-strongbox') 'Merchant''s Strongbox in the room the guide gives at 3407.9 by 877.6. Y is the camp deck.' @('A merchant''s strongbox. It is locked.') @() 'Still locked.' @{
+  Openers = @([ordered]@{ If = @('HasQuest AST0'); Say = 'pick' })
+  Lines = [ordered]@{ pick = [ordered]@{ Text = 'The Vacuum Packed Lock Pick goes in the trade window.{opentrade}' }
+    opened = [ordered]@{ Text = @('{completequest AST0}', '{spawn QAAF 1}', 'The lock gives. Antonio''s Adaptation Factory was inside. Stan wants that, plus the transmitter, the blank info chip and the encryption compiler.'); Fail = 'full'; Replies = @('nothing') }
+    full = [ordered]@{ Text = 'Your hands are full. Make some room in your inventory first.{close}' } }
+  Trades = [ordered]@{ pick = [ordered]@{ If = @('HasQuest AST0'); Items = @(,(TI 'QLOK')); Goto = 'opened' } }
+}
+Script 'StanGoodman.json' @('SimpleChar:78E0FC65') 'Stan Goodman, camp (3463x880). Guide: lockpick from ICC Tech, the strongbox, then four parts. 1240 credits, up to 2229 xp, Unprogrammed Identification Chip.' @('{delay 1}Stan Goodman, purveyor of recently used merchandise.') @(
+  (J 'factory' $stan 'Alex sent me.' @('Buy a Vacuum Packed Lock Pick from ICC Tech Supplies if you do not have one. I will hand you one, because that counter is not stocked here.', '{delay 1}Sneak past the security dog and lockpick the Merchant''s Strongbox in the room at 3408 by 878. Bring me Antonio''s Adaptation Factory, the Generic Nano Transmitter, the Blank Info Chip and the 2560-Bit Encryption Compiler.') 'Deal.' 'Lockpick the strongbox, then bring the factory, the transmitter, the info chip and the compiler.' $alex.Return @{ Mode = 'trade'; Items = @((TI 'QAAF'), (TI 'QGNT'), (TI 'QBIC'), (TI 'QENC')); Give = '{spawn QLOK 1}'; Thanks = @('That is the set. The Unprogrammed Identification Chip is yours.'); After = @('{givequest HMPS}', '{delay 1}Marco Spida is in the camp, about 3408 by 831. He sells profession nanos.') })
 ) 'Stay sharp out there.' (Arrive $hStan @('Alex sent you, did he?'))
-Script 'AntonioStacklundArete.json' @('SimpleChar:78E0FC7C') 'Antonio Stacklund, Arete camp. Gives Stan''s Adaptation Factory during the Identity Crisis chain.' @('{delay 1}Antonio Stacklund. If it''s for sale, I''ve got it. Mostly.') @() 'Come back any time.' $antonio
+Script 'AntonioStacklundArete.json' @('SimpleChar:78E0FC7C') 'Antonio Stacklund, Arete camp. The Adaptation Factory is in the strongbox, not a gift from him. He sells the upgrade parts.' @('{delay 1}Antonio Stacklund. If it is for sale, I have it. Mostly.', '{delay 1}The Adaptation Factory people keep asking me for was in a strongbox. I sell the parts the upgrades eat: plates, hides, chambers, beaks, intestines. The factory itself is consumed each time you combine.') @() 'Come back any time.' $null
 
-$shady = Giveaway $sarah.Return 'QDLA' @('Whoa, whoa! I didn''t steal anything. I found it. Lying around.', '{delay 1}Take the stupid armor, it doesn''t even fit me. DNA-locked, who knew?')
-Script 'SarahGreene.json' @('SimpleChar:78E0FC69') 'Sarah Greene, armorsmith, Arete camp (3471x841). Retail: thief in the underground; here the Shady Guy (3541x748) has it.' @('{delay 1}Hi there! I''m Sarah. I make armor, good armor.', '{delay 1}Everyone here is trying to get off this rock and onto Rubi-Ka proper.') @(
-  (J 'armor' $sarah 'Stan said you could help with my ID.' @('I can, but someone stole one of my custom suits: a DNA-Locked Prototype Raven Combat Armor. It''s useless to the thief, it''s locked to its owner.', '{delay 1}Word is a Shady Guy has been hanging around south of the landing. Get my armor back.') 'I''ll find the thief.' 'Find the Shady Guy south of the landing and get the DNA-Locked Armor back.' $stan.Return @{ Mode = 'trade'; Items = @(,(TI 'QDLA')); Thanks = @('My armor! Thank you.'); After = @(('{givequest ' + $hVern + '}'), '{delay 1}For your ID you''ll need a chip. Vernon Godfray is a hacker in the camp. Tell him I sent you.') })
-) 'See you around!' (Arrive $hSarah @('Stan sent you? Of course he did.'))
-Script 'ShadyGuy.json' @('SimpleChar:78E0FC79') 'Shady Guy, south of the landing. Hands over Sarah''s DNA-Locked Armor.' @('{delay 1}What are you looking at? Move along.') @() 'Nothing to see here.' $shady
+Script 'MarcoSpida.json' @('ONRP') 'Marco Spida (3408x831). Guide: buy your profession nano container from him and open it. 1120 credits, up to 2229 xp, Composite Attribute Boost.' @('{delay 1}Marco Spida. Nanos, for people who can pay.') @(
+  (J 'nano' $marco 'Stan said you sell nanos.' @('Buy the nano container for your profession and open it. My counter is not a full shop yet, so I will hand you the container.', '{delay 1}Open it, then tell me.') 'I will open it.' 'Open the profession nano container Marco gives you.' $stan.Return @{ Mode = 'talk'; Give = '{spawn QNPC 1}'; Thanks = @('Opened. Here is a Composite Attribute Boost crystal. Sarah Greene is next.'); After = @('{givequest HSAG}', '{delay 1}Sarah Greene, the armorsmith, about 3471 by 841.') })
+) 'The can I handed you is the Soldier nanoprogram container. The other professions have their own can on retail. The crystal is the same.' (Arrive $hMarco @('Stan sent you. I can see it.'))
 
-$term = Giveaway $vern.Return 'QUIC' @('SHIPPING MANIFEST TERMINAL. Access denied.', '{delay 1}...override accepted. Manifest entry 4471: 1x Unprogrammed Identification Chip. Released to bearer.')
-Script 'VernonGodfray.json' @('SimpleChar:78E0FC68') 'Vernon Godfray, hacker, Arete camp (3434x826). Retail: hacker tool + Technical Library; here the Shipping Manifest Terminal releases the chip.' @('{delay 1}Vernon Godfray. I don''t do small talk.') @(
-  (J 'chip' $vern 'Sarah sent me about an ID chip.' @('An Unprogrammed Identification Chip came in on the last cargo run. It''s sitting in the Shipping Manifest Terminal down by the pad.', '{delay 1}I''ve already put a backdoor in it. Just talk to the terminal and it''ll release the chip. Bring it to me.') 'On my way.' 'Talk to the Shipping Manifest Terminal by the pad and bring me the Unprogrammed Identification Chip.' $sarah.Return @{ Mode = 'trade'; Items = @(,(TI 'QUIC')); Thanks = @('Nice. I''ll program it with your new identity.'); After = @(('{givequest ' + $hMason + '}'), '{delay 1}The chip needs to be implanted. Doctor Mason can do that.') })
-) 'Don''t mention my name to the peacekeepers.' (Arrive $hVern @('Sarah sent you. Fine.'))
-Script 'ShippingManifestTerminal.json' @('SimpleChar:78E0FC6A') 'Shipping Manifest Terminal by the shuttle pad. Releases the Unprogrammed Identification Chip.' @('SHIPPING MANIFEST TERMINAL. Access denied.') @() 'SESSION CLOSED.' $term
+$thief = Giveaway $sarah.Return 'QDLA' @('The thief is dead. The DNA-Locked Prototype Raven Combat Armor is still on the body.', '{delay 1}It is locked to its owner. Sarah Greene is the armorsmith who can use it.')
+Script 'SarahGreene.json' @('SimpleChar:78E0FC69') 'Sarah Greene, armorsmith (3471x841). Guide: the armor is on a dead thief in the Underground, under a Mutated Garbage Flea. Not the Shady Guy.' @('{delay 1}Hi there! I''m Sarah. I make armor, good armor.') @(
+  (J 'armor' $sarah 'Marco said you could help with my ID.' @('Someone stole a DNA-Locked Prototype Raven Combat Armor. The thief is dead in the Underground under the market, under a Mutated Garbage Flea.', '{delay 1}Garbage Fleas line that path. Bring the armor back. The Shady Guy south of the landing is a different crook.') 'I''ll go under the market.' 'The dead thief in the Underground, under the Mutated Garbage Flea.' $marco.Return @{ Mode = 'trade'; Items = @(,(TI 'QDLA')); Thanks = @('My armor! These Biological Survey Nanobots are yours.'); After = @('{givequest HVGO}', '{delay 1}Vernon Godfray is the hacker in the camp, about 3434 by 826.') })
+) 'See you around!' (Merge (Arrive $hSarah @('Marco sent you? Of course he did.')) $null)
+Script 'DeadThief.json' @('ddogs-dead-thief') 'Dead thief beside the Mutated Garbage Flea spawn IEGA in the Underground.' @('A dead thief. The armor is still buckled on.') @() 'The body does not move.' $thief
 
-Script 'DrMason.json' @('SimpleChar:78E0FC6C') 'Dr. Mason, Arete camp (3431x795). Retail: implant assembly tradeskill quests; here a Rollerrat harvest and the leg implant as reward.' @('{delay 1}Doctor Mason. Hold still, this won''t hurt. Much.') @(
-  (J 'implant' $mason 'Vernon said you could implant my ID chip.' @('I can, but I''ll need fresh tissue cultures for the bonding. Rollerrats are ideal.', '{delay 1}Kill five Rollerrats around the landing and come back. I''ll even throw in a leg implant.') 'I''ll get them.' 'Five Rollerrats.' $vern.Return @{ Mode = 'talk'; Thanks = @('Perfect cultures. There, your chip is in. And this implant is yours.'); After = @(('{givequest ' + $hLor + '}'), '{delay 1}One more thing. Lorelei at the bar up the hill knows the man who can get you out of here.') })
+$lib = @{ Openers = @([ordered]@{ If = @('HasQuest AVG0'); Say = 'lib' })
+  Lines = [ordered]@{ lib = [ordered]@{ Text = 'Hacker Tool and the Omni-Tek Technical Library, together.{opentrade}' }
+    lib_done = [ordered]@{ Text = @('{completequest AVG0}', '{spawn QHKL 1}', '{spawn QHKT 1}', 'Hacked. Keep the library and the tool. Now the Shipping Manifest Terminal, same building as the Kneebreaker. Use the Hacker Tool on it and bring me the chip it releases.'); Fail = 'full'; Replies = @('nothing') }
+    full = [ordered]@{ Text = 'Your hands are full. Make some room in your inventory first.{close}' } }
+  Trades = [ordered]@{ lib = [ordered]@{ If = @('HasQuest AVG0'); Items = @((TI 'QHKT'), (TI 'QLIB')); Goto = 'lib_done' } } }
+Script 'VernonGodfray.json' @('SimpleChar:78E0FC68') 'Vernon Godfray (3434x826). Guide: hack the library, hack the manifest terminal, he programs the chip. Shades go to Lady Sheila. Everyone else to Doctor Mason.' @('{delay 1}Vernon Godfray. I do not do small talk.') @(
+  (J 'chip' $vern 'Sarah sent me about an ID chip.' @('Combine a Hacker Tool with an Omni-Tek Technical Library. I will hand you both, the shop step is not stocked here.', '{delay 1}Bring me the hacked library, then hack the Shipping Manifest Terminal. The chip comes back here so I can program it.') 'On my way.' 'Hack the library, hack the manifest terminal, bring the chip.' $sarah.Return @{ Mode = 'trade'; Items = @(,(TI 'QUIC')); Give = @('{spawn QHKT 1}', '{spawn QLIB 1}'); Thanks = @('Programmed. This Blank ICC ID Chip is yours.'); After = @('{delay 1}Shades: Lady Sheila Black, about 3412 by 904. Everyone else: Doctor Mason, about 3431 by 796.') })
+) 'Do not mention my name to the peacekeepers.' (Merge (Arrive $hVern @('Sarah sent you. Fine.')) $lib)
+Script 'ShippingManifestTerminal.json' @('SimpleChar:78E0FC6A') 'Shipping Manifest Terminal by the pad. Guide: hack it with the Hacker Tool after the library.' @('SHIPPING MANIFEST TERMINAL. Access denied.') @() 'SESSION CLOSED.' @{
+  Openers = @([ordered]@{ If = @('HasQuest AVG1'); Say = 'hack' })
+  Lines = [ordered]@{ hack = [ordered]@{ Text = 'The Hacker Tool interfaces. Put it in the trade window.{opentrade}' }
+    hacked = [ordered]@{ Text = @('{completequest AVG1}', '{spawn QUIC 1}', 'Override accepted. 1x Unprogrammed Identification Chip released. Vernon is waiting.'); Fail = 'full'; Replies = @('nothing') }
+    full = [ordered]@{ Text = 'Your hands are full. Make some room in your inventory first.{close}' } }
+  Trades = [ordered]@{ hack = [ordered]@{ If = @('HasQuest AVG1'); Items = @(,(TI 'QHKT')); Goto = 'hacked' } }
+}
+
+Script 'DrMason.json' @('SimpleChar:78E0FC6C') 'Doctor Mason (3431x796). Guide: Basic Leg Implant, then Agility Shiny, Stamina Bright and Max Health Faded clusters, installed at the Surgery Clinic. He gives Leg Implant: Agility, Shiny. Not a Rollerrat hunt.' @('{delay 1}Doctor Mason. Hold still, this will not hurt. Much.') @(
+  (J 'implant' $mason 'Vernon sent me about the chip.' @('Buy a Basic Leg Implant, level 1. Then an Agility cluster, Shiny, for the leg. Then Stamina, Bright. Then Max Health, Faded. Assemble them in that order and install the implant at the Surgery Clinic.', '{delay 1}The clinic combine is not a quest action here. I will fit the finished Leg Implant: Agility, Shiny when you come back. A wrong implant I would refuse.') 'I''ll have it assembled.' 'Basic Leg Implant, then the three clusters, installed at the Surgery Clinic.' $vern.Return @{ Mode = 'talk'; Give = '{spawn QBLI 1}'; Thanks = @('That is the right implant. Your chip can ride with it. Lorelei at the bar knows the way out.'); After = @('{givequest HLOR}') })
 ) 'Come back if anything itches.' (Arrive $hMason @('Vernon''s patient? Sit down.'))
+Script 'LadySheilaBlack.json' @('LDSH') 'Lady Sheila Black (3412x904), shades only. Guide: Spirit Siphon under 21 percent health, a Soul Capsule, Comfortless Spirit of Defense, then the Personalized ICC ID Chip.' @('{delay 1}Lady Sheila Black. I do not bargain with just anyone.') @(
+  (J 'spirit' $sheila 'Vernon said shades should see you.' @('Spirit Siphon, while you are under 21 percent health. Then a Soul Capsule. Then a Comfortless Spirit of Defense.', '{delay 1}The siphon and the capsule are not a single quest action here. Come back and I will give you the Personalized ICC ID Chip, and the spirit of defense.') 'I will return.' 'Spirit Siphon under 21 percent health, a Soul Capsule, then the Comfortless Spirit of Defense.' $vern.Return @{ Mode = 'talk'; Prof = '15'; Give = @('{spawn QSIP 1}', '{spawn QCSD 1}'); Thanks = @('The chip is personalized. Lorelei is next.'); After = @('{givequest HLOR}') })
+) 'Do not waste my time.' $null
 
-$lolly = Giveaway $lor.Return 'QPCR' @('*The reet chirps, sniffs your hand, and hops straight into the pet cage.*')
-$lorExtra = Merge (Arrive $hLor @('Mason sent you? Have a seat.')) @{ Hello = @('shop'); Replies = [ordered]@{ shop = [ordered]@{ Text = 'What are you serving?'; Goto = 'shop' } }; Lines = [ordered]@{ shop = [ordered]@{ Text = 'Take a look.{shop}' } } }
-Script 'LoreleiTheBartender.json' @('SimpleChar:78E0FC6B') 'Lorelei the Bartender (3369x...); keeps her shop via {shop}.' @('{delay 1}Welcome to my bar. What''ll it be?') @(
-  (J 'pet' $lor 'Mason said you know a way out of here.' @('I might. But first: my reet, Lolly, ran off again. She likes the oasis to the south.', '{delay 1}Bring her back to me and I''ll introduce you to Vaughn Hammond.') 'I''ll find her.' 'Find Lolly the Reet at the oasis south of the bar and bring her back.' $mason.Return @{ Mode = 'trade'; Items = @(,(TI 'QPCR')); Thanks = @('Lolly! You bad girl. Thank you, really.'); After = @('{givequest AVHR}', '{delay 1}Vaughn Hammond, just outside. He gets people off Arete. Tell him I sent you.') })
-) 'Come back any time.' $lorExtra
-Script 'LollyTheReet.json' @('SimpleChar:7985CAEC') 'Lolly the Reet, Lorelei''s pet, at the oasis.' @('*The reet eyes you suspiciously.*') @() '*The reet goes back to sniffing the sand.*' $lolly
-Script 'VaughnHammond.json' @('SimpleChar:78E0FC73') 'Vaughn Hammond, end of the Identity Crisis chain.' @('{delay 1}Vaughn Hammond. You need an ID first, friend.') @() 'Safe travels.' (Arrive 'AVHR' @('So Lorelei vouches for you. Your ID checks out, too.', '{delay 1}Welcome to Rubi-Ka, citizen. Whenever you''re ready, the ICC shuttle will take you anywhere you want to go.'))
+$lolly = @{ Openers = @([ordered]@{ If = @('HasQuest ALOR', '!has QPCR'); Say = 'cookie' })
+  Lines = [ordered]@{ cookie = [ordered]@{ Text = 'She takes the cookie, then the cage.{opentrade}' }
+    caged = [ordered]@{ Text = @('{spawn QPCR 1}', 'Lolly hops into the cage.'); Fail = 'full'; Replies = @('nothing') }
+    full = [ordered]@{ Text = 'Your hands are full. Make some room in your inventory first.{close}' } }
+  Trades = [ordered]@{ cookie = [ordered]@{ If = @('HasQuest ALOR'); Items = @((TI 'QCKE'), (TI 'QCAG')); Goto = 'caged' } } }
+$lorExtra = Merge (Arrive $hLor @('You have the chip? Then we can talk about Vaughn.')) @{ Hello = @('shop'); Replies = [ordered]@{ shop = [ordered]@{ Text = 'What are you serving?'; Goto = 'shop' } }; Lines = [ordered]@{ shop = [ordered]@{ Text = 'Take a look.{shop}' } } }
+Script 'LoreleiTheBartender.json' @('SimpleChar:78E0FC6B') 'Lorelei the Bartender. Guide: Tasty Peanut Butter Cookie, her cage, give the cookie to Lolly, combine Lolly with the cage, return the bird and the ID chip. Reward: Identification Card.' @('{delay 1}Welcome to my bar. What will it be?') @(
+  (J 'pet' $lor 'Mason, or Sheila, said you know a way out.' @('Buy a Tasty Peanut Butter Cookie. I will hand you the cookie and a cage, the counter is not stocked for this.', '{delay 1}Lolly is a level 10 reet at the oasis. Give her the cookie, put her in the cage, and bring her back with your ID chip.') 'I''ll find her.' 'Cookie for Lolly, then the caged reet and your ID chip.' $vern.Return @{ Mode = 'trade'; Items = @((TI 'QPCR'), (TI 'QICC')); Give = @('{spawn QCKE 1}', '{spawn QCAG 1}'); Thanks = @('Lolly! And the chip. This Identification Card is yours.'); After = @('{givequest AVHR}', '{delay 1}Vaughn Hammond is by the ICC door, about 3369 by 828.') })
+) 'Come back any time.' (Merge $lorExtra $lolly)
+Script 'LollyTheReet.json' @('SimpleChar:7985CAEC') 'Lolly the Reet, Lorelei''s pet. Guide: give her the cookie, then cage her.' @('*The reet eyes you suspiciously.*') @() '*The reet goes back to sniffing the sand.*' $lolly
+Script 'VaughnHammond.json' @('SimpleChar:78E0FC73') 'Vaughn Hammond (3369x828). Guide: hand over the Identification Card and the identity is uploaded. The 15000-credit bribe is not a quest action here.' @('{delay 1}Vaughn Hammond. An Identification Card, or we are not having this conversation.', '{delay 1}There is a story about a 15000 credit bribe. I am not taking a bribe. The card is the way.') @() 'Safe travels.' @{
+  Openers = @([ordered]@{ If = @('HasQuest AVHR'); Say = 'card' })
+  Lines = [ordered]@{ card = [ordered]@{ Text = 'The Identification Card. Trade it.{opentrade}' }
+    uploaded = [ordered]@{ Text = @('{completequest AVHR}', 'Uploaded. Whenever you are ready, the ICC shuttle will take you on.'); Replies = @('nothing') } }
+  Trades = [ordered]@{ card = [ordered]@{ If = @('HasQuest AVHR'); Items = @(,(TI 'QIDC')); Goto = 'uploaded' } }
+}
 
-Script 'MarcusStone.json' @('SimpleChar:78E0FC62') 'Marcus Stone, upper deck (3630x824). Repeatable side job.' @('{delay 1}Marcus Stone. Keep your distance from the fleas.') @(
-  (J 'fleas' $marcus 'Fleas?' 'Garbage Fleas, all over the landing. Kill six of them for me.' 'Sure.' 'Six Garbage Fleas.' $null @{ Mode = 'talk'; Thanks = @('Better. Thanks.') })
-) 'See you.' $null
-Script 'DesmondCalitri.json' @('SimpleChar:78E0FC77') 'Desmond Calitri (3605x827). Repeatable side job.' @('{delay 1}Desmond Calitri. Those docker robots have stopped listening to anyone.') @(
-  (J 'dockers' $desmond 'Want me to deal with them?' 'Four 32-V Dockers. Shut them down.' 'Will do.' 'Four 32-V Dockers.' $null @{ Mode = 'talk'; Thanks = @('Nice work.') })
-) 'Later.' $null
-Script 'PatrickSun.json' @('SimpleChar:78E0FC7B') 'Patrick Sun, camp (3463x812). Repeatable side jobs.' @('{delay 1}Patrick Sun. The reets are getting into the supplies again.') @(
-  (J 'reets' $patR 'I can help with the reets.' 'Six Desert Reets, south of the camp.' 'On it.' 'Six Desert Reets.' $null @{ Mode = 'talk'; Thanks = @('Thanks! The supplies are safe for another day.') }),
-  (J 'greedy' $patG 'Is there a ringleader?' 'The Greedy Desert Reet. Big one, south of the camp near the oasis. Take it down.' 'Consider it done.' 'The Greedy Desert Reet.' $null @{ Mode = 'talk'; Thanks = @('Ha! That''ll show it.') })
-) 'Watch your supplies.' $null
-Script 'ImmigrationOfficerBill.json' @('SimpleChar:78E0FC66') 'ICC Immigration Officer Bill.' @('{delay 1}ICC Immigration. No ID, no passage.', '{delay 1}If you want off Arete, start with Rex Larsson on the upper deck. Unofficially, of course.') @() 'Next!' $null
+Script 'DesmondCalitri.json' @('SimpleChar:78E0FC77') 'Desmond Calitri (3605x827). Guide: a plain Bronto Burger, two Protesters, then Cedric Harding. 1120 credits, up to 2229 xp, and the three suits. Not the docker robots.' @('{delay 1}Desmond Calitri. The strikers outside are the problem, not the docker robots.') @(
+  (J 'strike' $desmond 'What do you want done?' @('Buy a plain Bronto Burger from Barry, 30 credits, first food row on the far right. I will hand you one because Barry''s counter is not stocked.', '{delay 1}Bring it back. Then kill two Protesters, level 2. Then Cedric Harding, level 6, the organizer. Violent Protesters may join him; they are not a separate count.') 'Consider it done.' 'The burger, two Protesters, then Cedric Harding.' $null @{ Mode = 'talk'; Give = '{spawn QBRG 1}'; Luck = 'The burger first. Then the strikers.'; Thanks = @('Cedric is down. The pay is 1120 credits, and the suits.'); After = @() })
+) 'Later.' @{
+  Openers = @([ordered]@{ If = @('HasQuest ADP0'); Say = 'burger' })
+  Lines = [ordered]@{ burger = [ordered]@{ Text = 'Plain, I hope. Trade the Bronto Burger.{opentrade}' }
+    burger_done = [ordered]@{ Text = @('{completequest ADP0}', 'Greasy enough. Two Protesters, then Cedric Harding.'); Replies = @('nothing') } }
+  Trades = [ordered]@{ burger = [ordered]@{ If = @('HasQuest ADP0'); Items = @(,(TI 'QBRG')); Goto = 'burger_done' } }
+}
+Script 'PatrickSun.json' @('SimpleChar:78E0FC7B') 'Patrick Sun (3463x812). Guide: touch the Insurance Terminal, he kills you as a joke, reward Belt Component Platform 300X. The reets are not his job.' @('{delay 1}Patrick Sun. The insurance terminal is right there. Give it a poke.') @(
+  (J 'insurance' $patrick 'What does the terminal do?' 'Touch it. I will do the rest. It is a joke, and you will not actually die.' 'I touched it.' 'Touch the Insurance Terminal.' $null @{ Mode = 'talk'; Thanks = @('Ha! You should have seen your face. The Belt Component Platform 300X is yours. Computer Literacy comes with it.') })
+) 'The Greedy Desert Reet is a different story. I am not hiring you for it.' $null
+Script 'ShadyGuy.json' @('SimpleChar:78E0FC79') 'Shady Guy, south of the landing (3541x748). Guide: crowbar, the white desert car, Mario Carles, return the Stolen Yalmaha and the crowbar. 5000 credits, up to 1540 xp, Kodaik Velocity IV.' @('{delay 1}What are you looking at?') @(
+  (J 'car' $shady 'You selling something?' @('Take the crowbar. Smash the fancy white desert car and kill Mario Carles. Level 10.', '{delay 1}He is just east of me. Bring the Stolen Yalmaha and the crowbar back.') 'Hand me the crowbar.' 'Kill Mario Carles and bring back the Stolen Yalmaha and the crowbar.' $null @{ Mode = 'trade'; Items = @((TI 'QYAL'), (TI 'QCBR')); Give = '{spawn QCBR 1}'; Thanks = @('5000 credits, and a Kodaik Velocity IV. We are done.') })
+) 'Nothing to see here.' $null
+Script 'RemiGallois.json' @('RMGL') 'Remi Gallois, stall by Antonio (3434x833). Subscriber field test. The SANDSTORM Marauders are not on this landing, so he explains the test and does not offer a quest that cannot be finished.' @('{delay 1}Remi Gallois. Subscribers get the field test: an Experimental Hellfyre Rocket Launcher against SANDSTORM Marauders.', '{delay 1}The launcher burns out after about a minute. The marauders are not spawned on Arete, so I am not sending you after them. The pay, when the test exists, is four composite nano crystals.') @() 'Ask Antonio if you need parts.' $null
 # ---------------- Nascence garden keys (bits 640+, server-only block, see ddogs/docs/MISSION_BITS.md) ----------------
 # Clan: Aban garden (AO-Universe "Aban Garden Key Quest"). Omni/neutral: Thrak garden (AOWiki "Thrak Garden Mission").
 # NPCs: Donna Red / Veronica Escobar are Frontier hash spawns; Fala (4312), Lux-Wei (4676), Yutt Thrak (4311) and Urga-Lum (4677) are
@@ -454,10 +531,35 @@ Script 'LongStareAtDanger.json' @('LSSR') 'Long Stare at Danger, Nascence Swamp 
     where = [ordered]@{ Text = 'North of here, about 1414 by 604. Same order: Embryonic, Larval, Metamorphosing, Young.'; Replies = @('bye') }
   }
 }
+# ---------------- Janos, freighter 7101. Bit 655 replaces the guessed Deck Officer check-in. ----------------
+# The sealed-parcel item id is not in itemnames, so the journal errand is completed by RALPH rather than a wrongly named item.
+if ($script:bit -ne 655) { throw "Janos expected bit 655, got $($script:bit)" }
+$janos = Job 'TPIB' 'JNS' @() 'Deliver the parcel to RALPH' 11266 0 $null @{ Ret = 'FindItem' }
+if ($script:bit -ne 656) { throw "after Janos expected the counter at 656, got $($script:bit)" }
+# Explicit Arete bits 656-662 are already assigned and do not move this counter.
+$script:bit = 663
+Script 'FreighterOfficer.json' @('TPIB') 'Janos, back of the Arete starting ship (playfield 7101). AO-Universe section 22, A Special Delivery. Bit 655.' @('{delay 1}Janos. Are you heading to ICC Headquarters?', '{delay 1}I have a parcel for the robot butler at the desk in the tallest tower. It is marked for Arbiter Vincenzo Palmiero.') @(
+  (J 'parcel' $janos 'I can take it.' @('Leave with the blue android. Nobody else.', '{delay 1}The parcel item is not in the item list, so I am not handing you a stand-in. When you are done on Arete, the Arrival Hall is in Andromeda. Turn right to the Holo Deck tower, take the telepad behind the reception desk, and give the errand to RALPH.', '{delay 1}You cannot come back to Arete once you leave.') 'I''ll deliver it.' 'RALPH, the blue android in the Holo Deck at ICC Headquarters.' $null @{ Mode = 'elsewhere'; MinLevel = 5; Luck = 'RALPH is upstairs in the Holo Deck. He is not expecting you.' })
+) 'Do not open it.' $null
+Script 'Ralph.json' @('ddogs-ralph') 'RALPH, Holo Deck, Andromeda playfield 655, at the guide pin 3246 by 940. Y is the floor the building''s spawns stand on. He was not in the spawn dump upstairs.' @('{delay 1}RALPH. State your business.') @() 'I have a desk to keep.' @{
+  Hello = @('who','delivery')
+  Replies = [ordered]@{
+    who = [ordered]@{ Text = 'Who are you?'; Goto = 'who' }
+    delivery = [ordered]@{ Text = 'I have a delivery from Janos.'; If = @('HasQuest JNSR'); Goto = 'delivery' }
+  }
+  Lines = [ordered]@{
+    who = [ordered]@{ Text = 'I keep the Holo Deck desk. The arbiter is not always in. If you have nothing to hand me, we are done.'; Replies = @('delivery', 'nothing') }
+    delivery = [ordered]@{ Text = @('{completequest JNSR}', 'I was not expecting a delivery. Scanning. It is acceptable. It will be delivered.', '{delay 1}The published bounty is experience, up to 11266. The credit amount is not in the guide, so I am not inventing one.'); Replies = @('nothing') }
+  }
+}
 # ---------------- write Quests.json ----------------
 $qpath = Join-Path $GameData 'Quests.json'
 $existing = ([IO.File]::ReadAllText($qpath) | ConvertFrom-Json) | ForEach-Object { $_ } | Where-Object { $_.QasInstance -lt 920000 -or $_.QasInstance -gt 929999 }
 $all = @($existing) + $script:quests
 $dup = $all | ForEach-Object { $_.Hash } | Group-Object | Where-Object Count -gt 1; if ($dup) { throw ('duplicate quest hashes: ' + ($dup.Name -join ',')) }
+$badAct = $script:quests | Where-Object { $_['Action'] -isnot [string] -or $_['Name'] -isnot [string] }
+if ($badAct) { throw ('quest action or name is not a string: ' + (($badAct | ForEach-Object { $_['Hash'] }) -join ',')) }
+$dupBits = $script:quests | Where-Object { $null -ne $_['MissionBit'] } | Group-Object { $_['MissionBit'] } | Where-Object { $_.Count -gt 1 }
+if ($dupBits) { throw ('duplicate mission bits: ' + (($dupBits | ForEach-Object { $_.Name }) -join ',')) }
 [IO.File]::WriteAllText($qpath, (ConvertTo-Json @($all) -Depth 10), $u)
 "quests total=$($all.Count) generated=$($script:quests.Count) bits=610-639,640-$($script:bit - 1)"

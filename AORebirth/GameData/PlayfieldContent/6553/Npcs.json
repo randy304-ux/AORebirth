@@ -2224,6 +2224,323 @@
                      "Presentation":  {
 
                                       }
+                 },
+                 {
+                     "Key":  "ddogs:arete:cargo-box",
+                     "Provenance":  "Captured Terminal 56D9B4AF at 3621.576, 51.745, 780.4768. Mesh is the cleaning robot at a small scale; the static box mesh is not an NPC monster id.",
+                     "ContentNpcIdentity":  "ddogs-cargo-box",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2110836801,
+                     "Name":  "Cargo Box",
+                     "Position":  [
+                                      3621.576,
+                                      51.745,
+                                      780.4768
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.7101817,
+                                      0,
+                                      0.7040185
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  80,
+                                   "4":  1,
+                                   "27":  80,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  5,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  297023,
+                                   "360":  40,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:strongbox",
+                     "Provenance":  "Guide room 3407.9 by 877.6. Y 9.4 is the camp deck height of the nearby FACS spawn. Mesh borrowed.",
+                     "ContentNpcIdentity":  "ddogs-strongbox",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2110836802,
+                     "Name":  "Merchant\u0027s Strongbox",
+                     "Position":  [
+                                      3407.9,
+                                      9.4,
+                                      877.6
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  80,
+                                   "4":  1,
+                                   "27":  80,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  5,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  297023,
+                                   "360":  40,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:house-plant",
+                     "Provenance":  "Desmond Calitri is at 3605.2, 8.075, 826.9. The plant is a few meters into that office. The guide does not pin the pot. Mesh borrowed.",
+                     "ContentNpcIdentity":  "ddogs-house-plant",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2110836803,
+                     "Name":  "Prized House Plant",
+                     "Position":  [
+                                      3602.2,
+                                      8.075,
+                                      824.5
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  80,
+                                   "4":  1,
+                                   "27":  80,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  5,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  297023,
+                                   "360":  30,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:arete:dead-thief",
+                     "Provenance":  "Beside IEGA, the level-7 underground spawn at 3424.1, 0.4, 888.2. Guide: the armor is on the thief under the Mutated Garbage Flea. Human mesh borrowed.",
+                     "ContentNpcIdentity":  "ddogs-dead-thief",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2110836804,
+                     "Name":  "Dead Thief",
+                     "Position":  [
+                                      3426.1,
+                                      0.4,
+                                      888.2
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  80,
+                                   "4":  1,
+                                   "27":  80,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  5,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40689,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26084,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:merc:6553:strike",
+                     "Provenance":  "Mercenary recruiter for Doctor, Enforcer, Soldier and Keeper. Placed by the level-2 protesters outside Desmond, Y taken from SWOO at 3602.8, 8.3, 819.8. Look copied from the Arete Enforcer recruiter.",
+                     "ContentNpcIdentity":  "ddogs-merc-strike",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2110836745,
+                     "Name":  "Mercenary Recruiter",
+                     "Position":  [
+                                      3596,
+                                      8.3,
+                                      818
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40627,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  254118,
+                                   "360":  105,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  286229
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  286227
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  286228
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  286226
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  286225
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  286562,
+                                        "Id":  265793,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40627,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  262556,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  3,
+                                        "OverrideTextureId":  0,
+                                        "Id":  286446,
+                                        "Layer":  0
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
                  }
              ],
     "StandaloneShops":  [

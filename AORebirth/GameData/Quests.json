@@ -1659,9 +1659,32 @@
                    }
     },
     {
+        "Hash":  "HAMS",
+        "Name":  "Talk to Marcus Stone",
+        "QasInstance":  920053,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Talk to Marcus Stone",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "AMST",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RAMS",
+                       "Credits":  0,
+                       "Xp":  50,
+                       "Records":  null
+                   }
+    },
+    {
         "Hash":  "HFLN",
         "Name":  "Talk to Flint Novak",
-        "QasInstance":  920053,
+        "QasInstance":  920054,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Talk to Flint Novak",
@@ -1684,7 +1707,7 @@
     {
         "Hash":  "HSTG",
         "Name":  "Talk to Stan Goodman",
-        "QasInstance":  920054,
+        "QasInstance":  920055,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Talk to Stan Goodman",
@@ -1705,9 +1728,32 @@
                    }
     },
     {
+        "Hash":  "HMPS",
+        "Name":  "Talk to Marco Spida",
+        "QasInstance":  920056,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Talk to Marco Spida",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ONRP",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RMPS",
+                       "Credits":  0,
+                       "Xp":  50,
+                       "Records":  null
+                   }
+    },
+    {
         "Hash":  "HSAG",
         "Name":  "Talk to Sarah Greene",
-        "QasInstance":  920055,
+        "QasInstance":  920057,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Talk to Sarah Greene",
@@ -1730,7 +1776,7 @@
     {
         "Hash":  "HVGO",
         "Name":  "Speak to Vernon Godfray",
-        "QasInstance":  920056,
+        "QasInstance":  920058,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Speak to Vernon Godfray",
@@ -1753,7 +1799,7 @@
     {
         "Hash":  "HDMA",
         "Name":  "Talk to Doctor Mason",
-        "QasInstance":  920057,
+        "QasInstance":  920059,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Talk to Doctor Mason",
@@ -1776,7 +1822,7 @@
     {
         "Hash":  "HLOR",
         "Name":  "Talk to Lorelei",
-        "QasInstance":  920058,
+        "QasInstance":  920060,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Talk to Lorelei",
@@ -1798,11 +1844,11 @@
     },
     {
         "Hash":  "ARX0",
-        "Name":  "Kill 5 Malfunctioning Robots",
-        "QasInstance":  920059,
+        "Name":  "Terminate 5 Cleaning Robots",
+        "QasInstance":  920061,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 5 Malfunctioning Robots",
+        "Summary":  "Terminate 5 Cleaning Robots",
         "Objective":  {
                           "Count":  5,
                           "Npc":  "MLCE",
@@ -1811,7 +1857,7 @@
                       },
         "Flags":  "NoCash",
         "MissionBit":  null,
-        "NextStep":  "ARXR",
+        "NextStep":  "ARX1",
         "Reward":  {
                        "Hash":  "RRX0",
                        "Credits":  0,
@@ -1820,9 +1866,32 @@
                    }
     },
     {
+        "Hash":  "ARX1",
+        "Name":  "Open the Cargo Box",
+        "QasInstance":  920062,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Open the Cargo Box",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  null,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "ARXR",
+        "Reward":  {
+                       "Hash":  "RRX1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
         "Hash":  "ARXR",
         "Name":  "Return to Rex Larsson",
-        "QasInstance":  920060,
+        "QasInstance":  920063,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Return to Rex Larsson",
@@ -1837,45 +1906,262 @@
         "NextStep":  null,
         "Reward":  {
                        "Hash":  "RRXR",
-                       "Credits":  150,
-                       "Xp":  300,
+                       "Credits":  1040,
+                       "Xp":  1281,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AMRR",
+        "Name":  "Extinguish the gas fire",
+        "QasInstance":  920064,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Extinguish the gas fire",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "AMST",
+                          "SpecItem":  "QCFS",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  656,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RMRR",
+                       "Credits":  1080,
+                       "Xp":  1281,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  296569,
+                                               "HighId":  296569,
+                                               "Name":  "Generic Nano Transmitter",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AFL0",
+        "Name":  "Kill 7 Cleaning Robots",
+        "QasInstance":  920065,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 7 Cleaning Robots",
+        "Objective":  {
+                          "Count":  7,
+                          "Npc":  "JUCO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "AFLR",
+        "Reward":  {
+                       "Hash":  "RFL0",
+                       "Credits":  0,
+                       "Xp":  0,
                        "Records":  null
                    }
     },
     {
         "Hash":  "AFLR",
-        "Name":  "Find a Bio Analyzing Computer",
-        "QasInstance":  920061,
+        "Name":  "Bring the computer to Alex",
+        "QasInstance":  920066,
         "Scope":  "Solo",
         "Action":  "FindItem",
-        "Summary":  "Find a Bio Analyzing Computer",
+        "Summary":  "Bring the computer to Alex",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "FLNV",
                           "SpecItem":  "QBAC",
                           "WorldItem":  null
                       },
-        "Flags":  "None",
+        "Flags":  "NoCash",
         "MissionBit":  633,
         "NextStep":  null,
         "Reward":  {
                        "Hash":  "RFLR",
-                       "Credits":  200,
-                       "Xp":  400,
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  296570,
+                                               "HighId":  296570,
+                                               "Name":  "Blank Info Chip",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AAX0",
+        "Name":  "Hack the Surveillance Droid",
+        "QasInstance":  920067,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Hack the Surveillance Droid",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SRDO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "AAX1",
+        "Reward":  {
+                       "Hash":  "RAX0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AAX1",
+        "Name":  "Plant the Recording Device",
+        "QasInstance":  920068,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Plant the Recording Device",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  null,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "AAX2",
+        "Reward":  {
+                       "Hash":  "RAX1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AAX2",
+        "Name":  "Deliver the monitor to Bill",
+        "QasInstance":  920069,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Deliver the monitor to Bill",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  null,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "AAX3",
+        "Reward":  {
+                       "Hash":  "RAX2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AAX3",
+        "Name":  "Defeat Kneebreaker Alfonzo",
+        "QasInstance":  920070,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Defeat Kneebreaker Alfonzo",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "UNAF",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "AAXR",
+        "Reward":  {
+                       "Hash":  "RAX3",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AAXR",
+        "Name":  "Report to Alex Gibbs",
+        "QasInstance":  920071,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Report to Alex Gibbs",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ALGI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  657,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RAXR",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  296571,
+                                               "HighId":  296571,
+                                               "Name":  "2560-Bit Encryption Compiler",
+                                               "Quality":  1
+                                           },
+                                           {
+                                               "Id":  287041,
+                                               "HighId":  287041,
+                                               "Name":  "Nano Crystal (Composite Tradeskill Expertise)",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AST0",
+        "Name":  "Lockpick the Merchant Strongbox",
+        "QasInstance":  920072,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Lockpick the Merchant Strongbox",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  null,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "ASTR",
+        "Reward":  {
+                       "Hash":  "RST0",
+                       "Credits":  0,
+                       "Xp":  0,
                        "Records":  null
                    }
     },
     {
         "Hash":  "ASTR",
-        "Name":  "Get the Adaptation Factory",
-        "QasInstance":  920062,
+        "Name":  "Bring Stan the four parts",
+        "QasInstance":  920073,
         "Scope":  "Solo",
         "Action":  "FindItem",
-        "Summary":  "Get the Adaptation Factory",
+        "Summary":  "Bring Stan the four parts",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "SAGO",
-                          "SpecItem":  "QAAF",
+                          "SpecItem":  null,
                           "WorldItem":  null
                       },
         "Flags":  "None",
@@ -1883,15 +2169,56 @@
         "NextStep":  null,
         "Reward":  {
                        "Hash":  "RSTR",
-                       "Credits":  250,
-                       "Xp":  400,
-                       "Records":  null
+                       "Credits":  1240,
+                       "Xp":  2229,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  296572,
+                                               "HighId":  296572,
+                                               "Name":  "Unprogrammed Identification Chip",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AMPR",
+        "Name":  "Open your nano container",
+        "QasInstance":  920074,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Open your nano container",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ONRP",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  658,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RMPR",
+                       "Credits":  1120,
+                       "Xp":  2229,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  223373,
+                                               "HighId":  223373,
+                                               "Name":  "Nano Crystal (Composite Attribute Boost)",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
                    }
     },
     {
         "Hash":  "ASGR",
         "Name":  "Recover the DNA-Locked Armor",
-        "QasInstance":  920063,
+        "QasInstance":  920075,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Recover the DNA-Locked Armor",
@@ -1901,82 +2228,123 @@
                           "SpecItem":  "QDLA",
                           "WorldItem":  null
                       },
-        "Flags":  "None",
+        "Flags":  "NoCash",
         "MissionBit":  635,
         "NextStep":  null,
         "Reward":  {
                        "Hash":  "RSGR",
-                       "Credits":  300,
-                       "Xp":  500,
-                       "Records":  null
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  296574,
+                                               "HighId":  296574,
+                                               "Name":  "Biological Survey Nanobots",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
                    }
     },
     {
-        "Hash":  "AVGR",
-        "Name":  "Get the Identification Chip",
-        "QasInstance":  920064,
+        "Hash":  "AVG0",
+        "Name":  "Hack the Technical Library",
+        "QasInstance":  920076,
         "Scope":  "Solo",
-        "Action":  "FindItem",
-        "Summary":  "Get the Identification Chip",
+        "Action":  "TargetNpc",
+        "Summary":  "Hack the Technical Library",
         "Objective":  {
                           "Count":  null,
-                          "Npc":  "AVGO",
-                          "SpecItem":  "QUIC",
-                          "WorldItem":  null
-                      },
-        "Flags":  "None",
-        "MissionBit":  636,
-        "NextStep":  null,
-        "Reward":  {
-                       "Hash":  "RVGR",
-                       "Credits":  300,
-                       "Xp":  500,
-                       "Records":  null
-                   }
-    },
-    {
-        "Hash":  "AMA0",
-        "Name":  "Kill 5 Rollerrats",
-        "QasInstance":  920065,
-        "Scope":  "Solo",
-        "Action":  "KillMultiple",
-        "Summary":  "Kill 5 Rollerrats",
-        "Objective":  {
-                          "Count":  5,
-                          "Npc":  "WSSC",
+                          "Npc":  null,
                           "SpecItem":  null,
                           "WorldItem":  null
                       },
         "Flags":  "NoCash",
         "MissionBit":  null,
-        "NextStep":  "AMAR",
+        "NextStep":  "AVG1",
         "Reward":  {
-                       "Hash":  "RMA0",
+                       "Hash":  "RVG0",
                        "Credits":  0,
                        "Xp":  0,
                        "Records":  null
                    }
     },
     {
-        "Hash":  "AMAR",
-        "Name":  "Return to Dr. Mason",
-        "QasInstance":  920066,
+        "Hash":  "AVG1",
+        "Name":  "Hack the Shipping Manifest",
+        "QasInstance":  920077,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Return to Dr. Mason",
+        "Summary":  "Hack the Shipping Manifest",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  null,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "AVGR",
+        "Reward":  {
+                       "Hash":  "RVG1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AVGR",
+        "Name":  "Bring Vernon the ID chip",
+        "QasInstance":  920078,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Bring Vernon the ID chip",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "AVGO",
+                          "SpecItem":  "QUIC",
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  636,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RVGR",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  296575,
+                                               "HighId":  296575,
+                                               "Name":  "Blank ICC ID Chip",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AMAR",
+        "Name":  "Fit the agility implant",
+        "QasInstance":  920079,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Fit the agility implant",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "ADMA",
                           "SpecItem":  null,
                           "WorldItem":  null
                       },
-        "Flags":  "None",
+        "Flags":  "NoCash",
         "MissionBit":  637,
         "NextStep":  null,
         "Reward":  {
                        "Hash":  "RMAR",
-                       "Credits":  300,
-                       "Xp":  600,
+                       "Credits":  0,
+                       "Xp":  0,
                        "Records":  [
                                        [
                                            {
@@ -1990,127 +2358,168 @@
                    }
     },
     {
+        "Hash":  "ASHR",
+        "Name":  "Speak with Lady Sheila",
+        "QasInstance":  920080,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Speak with Lady Sheila",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "LDSH",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  662,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RSHR",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  296576,
+                                               "HighId":  296576,
+                                               "Name":  "Personalized ICC ID Chip",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
         "Hash":  "ALOR",
-        "Name":  "Find Lorelei\u0027s Lost Pet",
-        "QasInstance":  920067,
+        "Name":  "Bring Lolly back to Lorelei",
+        "QasInstance":  920081,
         "Scope":  "Solo",
         "Action":  "FindItem",
-        "Summary":  "Find Lorelei\u0027s Lost Pet",
+        "Summary":  "Bring Lolly back to Lorelei",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "LRTH",
                           "SpecItem":  "QPCR",
                           "WorldItem":  null
                       },
-        "Flags":  "None",
+        "Flags":  "NoCash",
         "MissionBit":  638,
         "NextStep":  null,
         "Reward":  {
                        "Hash":  "RLOR",
-                       "Credits":  300,
-                       "Xp":  600,
-                       "Records":  null
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  296692,
+                                               "HighId":  296692,
+                                               "Name":  "Identification Card",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
                    }
     },
     {
         "Hash":  "AVHR",
-        "Name":  "Talk to Vaughn Hammond",
-        "QasInstance":  920068,
+        "Name":  "Hand Vaughn your ID card",
+        "QasInstance":  920082,
         "Scope":  "Solo",
-        "Action":  "TargetNpc",
-        "Summary":  "Talk to Vaughn Hammond",
+        "Action":  "FindItem",
+        "Summary":  "Hand Vaughn your ID card",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "AVHA",
-                          "SpecItem":  null,
+                          "SpecItem":  "QIDC",
                           "WorldItem":  null
                       },
-        "Flags":  "None",
+        "Flags":  "NoCash",
         "MissionBit":  639,
         "NextStep":  null,
         "Reward":  {
                        "Hash":  "RVHR",
-                       "Credits":  1000,
-                       "Xp":  1000,
-                       "Records":  null
-                   }
-    },
-    {
-        "Hash":  "AMS0",
-        "Name":  "Kill 6 Garbage Fleas",
-        "QasInstance":  920069,
-        "Scope":  "Solo",
-        "Action":  "KillMultiple",
-        "Summary":  "Kill 6 Garbage Fleas",
-        "Objective":  {
-                          "Count":  6,
-                          "Npc":  "JNME",
-                          "SpecItem":  null,
-                          "WorldItem":  null
-                      },
-        "Flags":  "NoCash",
-        "MissionBit":  null,
-        "NextStep":  "AMSR",
-        "Reward":  {
-                       "Hash":  "RMS0",
                        "Credits":  0,
                        "Xp":  0,
                        "Records":  null
                    }
     },
     {
-        "Hash":  "AMSR",
-        "Name":  "Return to Marcus Stone",
-        "QasInstance":  920070,
+        "Hash":  "ADP0",
+        "Name":  "Return the Bronto Burger",
+        "QasInstance":  920083,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Return to Marcus Stone",
+        "Summary":  "Return the Bronto Burger",
         "Objective":  {
                           "Count":  null,
-                          "Npc":  "AMST",
-                          "SpecItem":  null,
-                          "WorldItem":  null
-                      },
-        "Flags":  "None",
-        "MissionBit":  null,
-        "NextStep":  null,
-        "Reward":  {
-                       "Hash":  "RMSR",
-                       "Credits":  50,
-                       "Xp":  150,
-                       "Records":  null
-                   }
-    },
-    {
-        "Hash":  "ADC0",
-        "Name":  "Kill 4 32-V Dockers",
-        "QasInstance":  920071,
-        "Scope":  "Solo",
-        "Action":  "KillMultiple",
-        "Summary":  "Kill 4 32-V Dockers",
-        "Objective":  {
-                          "Count":  4,
-                          "Npc":  "32DO",
+                          "Npc":  null,
                           "SpecItem":  null,
                           "WorldItem":  null
                       },
         "Flags":  "NoCash",
         "MissionBit":  null,
-        "NextStep":  "ADCR",
+        "NextStep":  "ADP1",
         "Reward":  {
-                       "Hash":  "RDC0",
+                       "Hash":  "RDP0",
                        "Credits":  0,
                        "Xp":  0,
                        "Records":  null
                    }
     },
     {
-        "Hash":  "ADCR",
-        "Name":  "Return to Desmond Calitri",
-        "QasInstance":  920072,
+        "Hash":  "ADP1",
+        "Name":  "Kill 2 Protesters",
+        "QasInstance":  920084,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 2 Protesters",
+        "Objective":  {
+                          "Count":  2,
+                          "Npc":  "ROTE",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "ADP2",
+        "Reward":  {
+                       "Hash":  "RDP1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "ADP2",
+        "Name":  "Kill Cedric Harding",
+        "QasInstance":  920085,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill Cedric Harding",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "CEHA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "ADPR",
+        "Reward":  {
+                       "Hash":  "RDP2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "ADPR",
+        "Name":  "Collect Desmond\u0027s payment",
+        "QasInstance":  920086,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Return to Desmond Calitri",
+        "Summary":  "Collect Desmond\u0027s payment",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "ADCA",
@@ -2118,157 +2527,127 @@
                           "WorldItem":  null
                       },
         "Flags":  "None",
-        "MissionBit":  null,
+        "MissionBit":  659,
         "NextStep":  null,
         "Reward":  {
-                       "Hash":  "RDCR",
-                       "Credits":  80,
-                       "Xp":  200,
-                       "Records":  null
+                       "Hash":  "RDPR",
+                       "Credits":  1120,
+                       "Xp":  2229,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  295698,
+                                               "HighId":  295698,
+                                               "Name":  "Dockworker Overalls",
+                                               "Quality":  1
+                                           },
+                                           {
+                                               "Id":  295699,
+                                               "HighId":  295699,
+                                               "Name":  "The Brute Suit",
+                                               "Quality":  1
+                                           },
+                                           {
+                                               "Id":  295703,
+                                               "HighId":  295703,
+                                               "Name":  "Experimental Nano Armor Exosuit",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
                    }
     },
     {
-        "Hash":  "AAG0",
-        "Name":  "Kill 5 Waste Collectors",
-        "QasInstance":  920073,
-        "Scope":  "Solo",
-        "Action":  "KillMultiple",
-        "Summary":  "Kill 5 Waste Collectors",
-        "Objective":  {
-                          "Count":  5,
-                          "Npc":  "01V1",
-                          "SpecItem":  null,
-                          "WorldItem":  null
-                      },
-        "Flags":  "NoCash",
-        "MissionBit":  null,
-        "NextStep":  "AAGR",
-        "Reward":  {
-                       "Hash":  "RAG0",
-                       "Credits":  0,
-                       "Xp":  0,
-                       "Records":  null
-                   }
-    },
-    {
-        "Hash":  "AAGR",
-        "Name":  "Return to Alex Gibbs",
-        "QasInstance":  920074,
+        "Hash":  "APNR",
+        "Name":  "Touch the Insurance Terminal",
+        "QasInstance":  920087,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Return to Alex Gibbs",
-        "Objective":  {
-                          "Count":  null,
-                          "Npc":  "ALGI",
-                          "SpecItem":  null,
-                          "WorldItem":  null
-                      },
-        "Flags":  "None",
-        "MissionBit":  null,
-        "NextStep":  null,
-        "Reward":  {
-                       "Hash":  "RAGR",
-                       "Credits":  100,
-                       "Xp":  250,
-                       "Records":  null
-                   }
-    },
-    {
-        "Hash":  "APS0",
-        "Name":  "Kill 6 Desert Reets",
-        "QasInstance":  920075,
-        "Scope":  "Solo",
-        "Action":  "KillMultiple",
-        "Summary":  "Kill 6 Desert Reets",
-        "Objective":  {
-                          "Count":  6,
-                          "Npc":  "DERT",
-                          "SpecItem":  null,
-                          "WorldItem":  null
-                      },
-        "Flags":  "NoCash",
-        "MissionBit":  null,
-        "NextStep":  "APSR",
-        "Reward":  {
-                       "Hash":  "RPS0",
-                       "Credits":  0,
-                       "Xp":  0,
-                       "Records":  null
-                   }
-    },
-    {
-        "Hash":  "APSR",
-        "Name":  "Return to Patrick Sun",
-        "QasInstance":  920076,
-        "Scope":  "Solo",
-        "Action":  "TargetNpc",
-        "Summary":  "Return to Patrick Sun",
+        "Summary":  "Touch the Insurance Terminal",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "APSU",
                           "SpecItem":  null,
                           "WorldItem":  null
                       },
-        "Flags":  "None",
-        "MissionBit":  null,
+        "Flags":  "NoCash",
+        "MissionBit":  660,
         "NextStep":  null,
         "Reward":  {
-                       "Hash":  "RPSR",
-                       "Credits":  120,
-                       "Xp":  300,
-                       "Records":  null
+                       "Hash":  "RPNR",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  36777,
+                                               "HighId":  36777,
+                                               "Name":  "Belt Component Platform 300X",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
                    }
     },
     {
-        "Hash":  "APG0",
-        "Name":  "Kill the Greedy Desert Reet",
-        "QasInstance":  920077,
+        "Hash":  "ASY0",
+        "Name":  "Kill Mario Carles",
+        "QasInstance":  920088,
         "Scope":  "Solo",
         "Action":  "KillOne",
-        "Summary":  "Kill the Greedy Desert Reet",
+        "Summary":  "Kill Mario Carles",
         "Objective":  {
                           "Count":  null,
-                          "Npc":  "GRDS",
+                          "Npc":  "MARC",
                           "SpecItem":  null,
                           "WorldItem":  null
                       },
         "Flags":  "NoCash",
         "MissionBit":  null,
-        "NextStep":  "APGR",
+        "NextStep":  "ASYR",
         "Reward":  {
-                       "Hash":  "RPG0",
+                       "Hash":  "RSY0",
                        "Credits":  0,
                        "Xp":  0,
                        "Records":  null
                    }
     },
     {
-        "Hash":  "APGR",
-        "Name":  "Return to Patrick Sun",
-        "QasInstance":  920078,
+        "Hash":  "ASYR",
+        "Name":  "Return the Yalmaha",
+        "QasInstance":  920089,
         "Scope":  "Solo",
-        "Action":  "TargetNpc",
-        "Summary":  "Return to Patrick Sun",
+        "Action":  "FindItem",
+        "Summary":  "Return the Yalmaha",
         "Objective":  {
                           "Count":  null,
-                          "Npc":  "APSU",
+                          "Npc":  "ASYG",
                           "SpecItem":  null,
                           "WorldItem":  null
                       },
         "Flags":  "None",
-        "MissionBit":  null,
+        "MissionBit":  661,
         "NextStep":  null,
         "Reward":  {
-                       "Hash":  "RPGR",
-                       "Credits":  150,
-                       "Xp":  250,
-                       "Records":  null
+                       "Hash":  "RSYR",
+                       "Credits":  5000,
+                       "Xp":  1540,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  295705,
+                                               "HighId":  295705,
+                                               "Name":  "Kodaik Velocity IV",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
                    }
     },
     {
         "Hash":  "HGAF",
         "Name":  "Show the device to Aban Fala",
-        "QasInstance":  920079,
+        "QasInstance":  920090,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Show the device to Aban Fala",
@@ -2291,7 +2670,7 @@
     {
         "Hash":  "HGAL",
         "Name":  "Talk to Sipius Aban Lux-Wei",
-        "QasInstance":  920080,
+        "QasInstance":  920091,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Talk to Sipius Aban Lux-Wei",
@@ -2314,7 +2693,7 @@
     {
         "Hash":  "HGTY",
         "Name":  "Find Prophet Yutt Thrak",
-        "QasInstance":  920081,
+        "QasInstance":  920092,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Find Prophet Yutt Thrak",
@@ -2337,7 +2716,7 @@
     {
         "Hash":  "HGTU",
         "Name":  "Talk to Urga-Lum Thrak",
-        "QasInstance":  920082,
+        "QasInstance":  920093,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Talk to Urga-Lum Thrak",
@@ -2360,7 +2739,7 @@
     {
         "Hash":  "GAFR",
         "Name":  "Show an Insignia of Aban",
-        "QasInstance":  920083,
+        "QasInstance":  920094,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Show an Insignia of Aban",
@@ -2383,7 +2762,7 @@
     {
         "Hash":  "GAL0",
         "Name":  "Save 3 Dreaming Silvertails",
-        "QasInstance":  920084,
+        "QasInstance":  920095,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
         "Summary":  "Save 3 Dreaming Silvertails",
@@ -2406,7 +2785,7 @@
     {
         "Hash":  "GALR",
         "Name":  "Return the Analyzer to Lux-Wei",
-        "QasInstance":  920085,
+        "QasInstance":  920096,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Return the Analyzer to Lux-Wei",
@@ -2438,7 +2817,7 @@
     {
         "Hash":  "GTYR",
         "Name":  "Bring Yutt Thrak an Insignia",
-        "QasInstance":  920086,
+        "QasInstance":  920097,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Bring Yutt Thrak an Insignia",
@@ -2461,7 +2840,7 @@
     {
         "Hash":  "GTUR",
         "Name":  "Give Urga-Lum the device",
-        "QasInstance":  920087,
+        "QasInstance":  920098,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Give Urga-Lum the device",
@@ -2484,7 +2863,7 @@
     {
         "Hash":  "GTK0",
         "Name":  "Curse 3 Dreaming Silvertails",
-        "QasInstance":  920088,
+        "QasInstance":  920099,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
         "Summary":  "Curse 3 Dreaming Silvertails",
@@ -2507,7 +2886,7 @@
     {
         "Hash":  "GTKR",
         "Name":  "Return the Analyzer to Urga-Lum",
-        "QasInstance":  920089,
+        "QasInstance":  920100,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Return the Analyzer to Urga-Lum",
@@ -2539,7 +2918,7 @@
     {
         "Hash":  "XDS0",
         "Name":  "Kill a Deceitful Weaver",
-        "QasInstance":  920090,
+        "QasInstance":  920101,
         "Scope":  "Solo",
         "Action":  "KillOne",
         "Summary":  "Kill a Deceitful Weaver",
@@ -2562,7 +2941,7 @@
     {
         "Hash":  "XDS1",
         "Name":  "Kill a Shining Coiler",
-        "QasInstance":  920091,
+        "QasInstance":  920102,
         "Scope":  "Solo",
         "Action":  "KillOne",
         "Summary":  "Kill a Shining Coiler",
@@ -2585,7 +2964,7 @@
     {
         "Hash":  "XDS2",
         "Name":  "Kill a Beit Gras",
-        "QasInstance":  920092,
+        "QasInstance":  920103,
         "Scope":  "Solo",
         "Action":  "KillOne",
         "Summary":  "Kill a Beit Gras",
@@ -2608,7 +2987,7 @@
     {
         "Hash":  "XDSR",
         "Name":  "Return to Drake",
-        "QasInstance":  920093,
+        "QasInstance":  920104,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Return to Drake",
@@ -2640,7 +3019,7 @@
     {
         "Hash":  "XDA0",
         "Name":  "Tag a Hungry Predator",
-        "QasInstance":  920094,
+        "QasInstance":  920105,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Tag a Hungry Predator",
@@ -2663,7 +3042,7 @@
     {
         "Hash":  "XDA1",
         "Name":  "Tag a Lurking Chimera",
-        "QasInstance":  920095,
+        "QasInstance":  920106,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Tag a Lurking Chimera",
@@ -2686,7 +3065,7 @@
     {
         "Hash":  "XDA2",
         "Name":  "Tag a Pond Dryad",
-        "QasInstance":  920096,
+        "QasInstance":  920107,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Tag a Pond Dryad",
@@ -2709,7 +3088,7 @@
     {
         "Hash":  "XDAR",
         "Name":  "Return to Drake",
-        "QasInstance":  920097,
+        "QasInstance":  920108,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Return to Drake",
@@ -2741,7 +3120,7 @@
     {
         "Hash":  "XDN0",
         "Name":  "Find a Shadowleet",
-        "QasInstance":  920098,
+        "QasInstance":  920109,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Find a Shadowleet",
@@ -2764,7 +3143,7 @@
     {
         "Hash":  "XDNR",
         "Name":  "Return to Drake",
-        "QasInstance":  920099,
+        "QasInstance":  920110,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Return to Drake",
@@ -2796,7 +3175,7 @@
     {
         "Hash":  "XDE0",
         "Name":  "Guide the Young Silvertail",
-        "QasInstance":  920100,
+        "QasInstance":  920111,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Guide the Young Silvertail",
@@ -2819,7 +3198,7 @@
     {
         "Hash":  "XDER",
         "Name":  "Return to El-Domo",
-        "QasInstance":  920101,
+        "QasInstance":  920112,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Return to El-Domo",
@@ -2842,7 +3221,7 @@
     {
         "Hash":  "XDC0",
         "Name":  "Silence the Silvertail Mare",
-        "QasInstance":  920102,
+        "QasInstance":  920113,
         "Scope":  "Solo",
         "Action":  "KillOne",
         "Summary":  "Silence the Silvertail Mare",
@@ -2865,7 +3244,7 @@
     {
         "Hash":  "XDCR",
         "Name":  "Return to Celeth-El",
-        "QasInstance":  920103,
+        "QasInstance":  920114,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Return to Celeth-El",
@@ -2897,7 +3276,7 @@
     {
         "Hash":  "XDPR",
         "Name":  "Report the psychic test",
-        "QasInstance":  920104,
+        "QasInstance":  920115,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Report the psychic test",
@@ -2929,7 +3308,7 @@
     {
         "Hash":  "XDI0",
         "Name":  "Ask Brad Willis for help",
-        "QasInstance":  920105,
+        "QasInstance":  920116,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Ask Brad Willis for help",
@@ -2952,7 +3331,7 @@
     {
         "Hash":  "XDI1",
         "Name":  "Deliver supplies to Sarah",
-        "QasInstance":  920106,
+        "QasInstance":  920117,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Deliver supplies to Sarah",
@@ -2975,7 +3354,7 @@
     {
         "Hash":  "XDIR",
         "Name":  "Return to Drake",
-        "QasInstance":  920107,
+        "QasInstance":  920118,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
         "Summary":  "Return to Drake",
@@ -3007,7 +3386,7 @@
     {
         "Hash":  "XDBR",
         "Name":  "Bring 6 metal devices",
-        "QasInstance":  920108,
+        "QasInstance":  920119,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Bring 6 metal devices",
@@ -3039,7 +3418,7 @@
     {
         "Hash":  "EIN0",
         "Name":  "Reach a Yutto",
-        "QasInstance":  920109,
+        "QasInstance":  920120,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Reach a Yutto",
@@ -3062,7 +3441,7 @@
     {
         "Hash":  "EIN1",
         "Name":  "Kill Embryonic Molokhai",
-        "QasInstance":  920110,
+        "QasInstance":  920121,
         "Scope":  "Solo",
         "Action":  "KillOne",
         "Summary":  "Kill Embryonic Molokhai",
@@ -3085,7 +3464,7 @@
     {
         "Hash":  "EIN2",
         "Name":  "Kill Larval Molokhai",
-        "QasInstance":  920111,
+        "QasInstance":  920122,
         "Scope":  "Solo",
         "Action":  "KillOne",
         "Summary":  "Kill Larval Molokhai",
@@ -3108,7 +3487,7 @@
     {
         "Hash":  "EIN3",
         "Name":  "Kill Metamorphosing Molokhai",
-        "QasInstance":  920112,
+        "QasInstance":  920123,
         "Scope":  "Solo",
         "Action":  "KillOne",
         "Summary":  "Kill Metamorphosing Molokhai",
@@ -3131,7 +3510,7 @@
     {
         "Hash":  "EIN4",
         "Name":  "Kill Young Molokhai",
-        "QasInstance":  920113,
+        "QasInstance":  920124,
         "Scope":  "Solo",
         "Action":  "KillOne",
         "Summary":  "Kill Young Molokhai",
@@ -3154,7 +3533,7 @@
     {
         "Hash":  "EINR",
         "Name":  "Hand Baby Molok Oil to Ergo",
-        "QasInstance":  920114,
+        "QasInstance":  920125,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Hand Baby Molok Oil to Ergo",
@@ -3177,7 +3556,7 @@
     {
         "Hash":  "EISR",
         "Name":  "Skip the Nascence trial",
-        "QasInstance":  920115,
+        "QasInstance":  920126,
         "Scope":  "Solo",
         "Action":  "FindItem",
         "Summary":  "Skip the Nascence trial",
@@ -3197,32 +3576,27 @@
                        "Records":  null
                    }
     },
-
     {
-        "Hash":  "FRGO",
-        "Name":  "Check in on the landing deck",
-        "QasInstance":  920116,
+        "Hash":  "JNSR",
+        "Name":  "Deliver the parcel to RALPH",
+        "QasInstance":  920127,
         "Scope":  "Solo",
-        "Action":  "TargetNpc",
-        "Summary":  "Find Rex Larsson on the Arete upper deck, then speak to the Deck Officer again",
+        "Action":  "FindItem",
+        "Summary":  "Deliver the parcel to RALPH",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "TPIB",
                           "SpecItem":  null,
                           "WorldItem":  null
                       },
-        "Flags":  "None",
+        "Flags":  "NoCash",
         "MissionBit":  655,
         "NextStep":  null,
         "Reward":  {
-                       "Hash":  "RFRG",
-                       "Credits":  200,
-                       "Xp":  100,
+                       "Hash":  "RNSR",
+                       "Credits":  0,
+                       "Xp":  11266,
                        "Records":  null
-                   },
-        "ContentProvenance":  {
-                                  "Guessed":  true,
-                                  "Source":  "Freighter Deck Officer. AO-Universe Arete Landing starts players with Rex Larsson on the upper deck."
-                              }
+                   }
     }
 ]
