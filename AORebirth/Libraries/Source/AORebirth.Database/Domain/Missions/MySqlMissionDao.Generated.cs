@@ -13,7 +13,7 @@ namespace AORebirth.Database.Domain.Missions
     /// <summary>Generated missions share the existing DAO connection factory and reward ledger.</summary>
     public sealed partial class MySqlMissionDao : IGeneratedMissionDao
     {
-        private const string OfferColumns = "OwnerId,BatchIdentity,OfferIndex,OfferType,OfferInstance,MissionType,Quality,DestinationType,DestinationInstance,DestinationPlayfield,DestinationX,DestinationY,DestinationZ,EntranceType,EntranceInstance,EntranceLow,EntranceHigh,CashReward,ExperienceReward,RewardLowId,RewardHighId,RewardQuality,RewardCount,Title,Description,FrozenWireBody,FrozenWireSha256,State,OfferedAtUtcTicks,ExpiresAtUtcTicks,Version";
+        private const string OfferColumns = "OwnerId,BatchIdentity,OfferIndex,OfferType,OfferInstance,MissionType,Quality,DestinationType,DestinationInstance,DestinationPlayfield,DestinationX,DestinationY,DestinationZ,EntranceType,EntranceInstance,EntranceLow,EntranceHigh,CashReward,ExperienceReward,RewardLowId,RewardHighId,RewardQuality,RewardCount,IsTeam,Title,Description,FrozenWireBody,FrozenWireSha256,State,OfferedAtUtcTicks,ExpiresAtUtcTicks,Version";
         private const string BindingColumns = "OwnerId,OfferType,OfferInstance,QuestType,QuestInstance,TeamType,TeamInstance,KeyInstance,BundleId,BundleSha256,BuildingType,BuildingInstance,LivePlayfield,ObjectiveType,ObjectiveInstance,ObjectiveTemplateId,ObjectiveInteraction,RequiredCount,Progress,State,CleanupCheckpoints,TokenProgressPercent,TokenClaimLevel,TokenClaimSide,TokenDisposition,TokenCount,CompletionFrozenAtUtcTicks,AcceptedAtUtcTicks,ExpiresAtUtcTicks,CompletedAtUtcTicks,UpdatedAtUtcTicks,Version";
 
         public int ReserveIdentities(string sequence, int count)
@@ -520,7 +520,7 @@ namespace AORebirth.Database.Domain.Missions
                 && a.DestinationPlayfield == b.DestinationPlayfield && a.DestinationX.Equals(b.DestinationX) && a.DestinationY.Equals(b.DestinationY) && a.DestinationZ.Equals(b.DestinationZ)
                 && a.EntranceType == b.EntranceType && a.EntranceInstance == b.EntranceInstance && a.EntranceLow == b.EntranceLow && a.EntranceHigh == b.EntranceHigh
                 && a.CashReward == b.CashReward && a.ExperienceReward == b.ExperienceReward && a.RewardLowId == b.RewardLowId && a.RewardHighId == b.RewardHighId
-                && a.RewardQuality == b.RewardQuality && a.RewardCount == b.RewardCount && a.Title == b.Title && a.Description == b.Description
+                && a.RewardQuality == b.RewardQuality && a.RewardCount == b.RewardCount && a.IsTeam == b.IsTeam && a.Title == b.Title && a.Description == b.Description
                 && a.FrozenWireSha256 == b.FrozenWireSha256 && a.FrozenWireBody.SequenceEqual(b.FrozenWireBody) && a.OfferedAtUtcTicks == b.OfferedAtUtcTicks && a.ExpiresAtUtcTicks == b.ExpiresAtUtcTicks;
         private static bool Finite(float value) => !float.IsNaN(value) && !float.IsInfinity(value);
         private static readonly HashSet<int> ProgressionStatIds = new HashSet<int>

@@ -248,8 +248,45 @@ public sealed class QuestDungeonPlayfield : Playfield
             }
         }
 
+        SpawnTeamBoss(rooms, spawns, population);
         Logger.Info("Quest dungeon " + QuestId + " spawn points=" + added + " skipped=" + skipped
             + " requestedNpcLevel=" + Quality + " families=" + string.Join(",", population.RegularNpcHashes));
+    }
+
+    /// <summary>
+    /// Team missions only (the layout has a boss room): one boss from a seeded mission family, at QL + bonus.
+    /// It is not part of the frozen token population and does not respawn.
+    /// </summary>
+    void SpawnTeamBoss(
+        List<(AORebirth.World.Collision.DungeonRoomPlacement Placement, PlayfieldDistrictEntry District, List<PlayfieldDistrictSpawnPoint> Points)> rooms,
+        HashSpawnSystem spawns, DungeonPopulationPolicy population)
+    {
+        if (Layout.BossRoomIndex is not int bossRoom || population.BossNpcHashes == null || population.BossNpcHashes.Count == 0)
+            return;
+        var roll = new Random(unchecked(Layout.Seed * 15485863));
+        string family = population.RegularNpcHashes[roll.Next(population.RegularNpcHashes.Length)];
+        if (!population.BossNpcHashes.TryGetValue(family, out string? bossHash) || !GameData.HasMobTemplate(bossHash))
+        {
+            Logger.Warn("Quest dungeon " + QuestId + ": no boss template for family " + family);
+            return;
+        }
+        int level = Math.Min(population.BossMaxLevel, Math.Max(1, Quality) + population.BossLevelBonus);
+        // The boss room first, then the other rooms.
+        foreach (var room in rooms.OrderByDescending(r => r.Placement.Index == bossRoom).ThenByDescending(r => r.Placement.Index))
+        {
+            foreach (PlayfieldDistrictSpawnPoint point in room.Points)
+            {
+                System.Numerics.Vector3 placed = room.Placement.TransformTemplatePoint(
+                    new System.Numerics.Vector3(point.Position[0], point.Position[1], point.Position[2]));
+                if (!spawns.AddPlacedDistrictPoint(bossHash, room.District, new AORebirth.Core.Vector.Vector3(placed.X, placed.Y, placed.Z),
+                        point.Radius, useDistrictLevels: false, respawns: false, requestedLevel: level))
+                    continue;
+                Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    "Quest dungeon {0} team boss {1} L{2} in room {3} (boss room {4})", QuestId, bossHash, level, room.Placement.Index, bossRoom));
+                return;
+            }
+        }
+        Logger.Warn("Quest dungeon " + QuestId + ": team boss " + bossHash + " could not be placed");
     }
 
     bool IsObjectiveNpcPoint(AORebirth.World.Collision.DungeonRoomPlacement placement, PlayfieldDistrictSpawnPoint point)

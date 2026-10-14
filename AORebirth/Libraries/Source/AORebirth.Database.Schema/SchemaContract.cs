@@ -123,7 +123,7 @@ public static class SchemaContract
         Add("generatedmissionoffers", "text", "Description");
         Add("generatedmissionoffers", "char", "FrozenWireSha256");
         Add("generatedmissionoffers", "mediumblob", "FrozenWireBody");
-        Add("generatedmissionoffers", "int", "OwnerId OfferIndex OfferType OfferInstance MissionType Quality DestinationType DestinationInstance DestinationPlayfield EntranceType EntranceInstance EntranceLow EntranceHigh CashReward ExperienceReward RewardLowId RewardHighId RewardQuality RewardCount State", false);
+        Add("generatedmissionoffers", "int", "OwnerId OfferIndex OfferType OfferInstance MissionType Quality DestinationType DestinationInstance DestinationPlayfield EntranceType EntranceInstance EntranceLow EntranceHigh CashReward ExperienceReward RewardLowId RewardHighId RewardQuality RewardCount IsTeam State", false);
         Add("generatedmissionoffers", "float", "DestinationX DestinationY DestinationZ");
         Add("generatedmissionoffers", "bigint", "OfferedAtUtcTicks ExpiresAtUtcTicks Version", false);
         Add("generatedmissionbindings", "varchar", "BundleId");

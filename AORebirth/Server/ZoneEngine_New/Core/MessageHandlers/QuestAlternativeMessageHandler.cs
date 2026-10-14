@@ -12,6 +12,7 @@ namespace ZoneEngine_New.Core.MessageHandlers
     using ZoneEngine_New.Core.Missions;
     using ZoneEngine_New.Core.Network;
     using ZoneEngine_New.Core.Playfield;
+    using ZoneEngine_New.Core.Teams;
 
     public sealed class QuestAlternativeMessageHandler : IMessageHandler<QuestAlternativeMessage>
     {
@@ -80,6 +81,13 @@ namespace ZoneEngine_New.Core.MessageHandlers
                     }
                     batch = GeneratedMissionRollProjection.Create(message, response, playfield.Identity.Instance,
                         MissionRollPolicy.Current.Fee(level), seed, nonce, now, selectedEntrances);
+                }
+                // Rolled in a team of two or more: team missions (multi-floor dungeon with a boss), as on retail.
+                TeamSnapshot? rollTeam = playfield.GetService<TeamService>()?.GetTeam(player);
+                if (rollTeam != null && rollTeam.MemberIds.Count >= 2)
+                {
+                    foreach (var rolled in batch.Offers)
+                        rolled.IsTeam = 1;
                 }
                 var committing = ZoneEngine_New.Core.Metrics.TickStallWatch.Enter("mission.roll.commit", player.Identity.Instance);
                 var result = _missions.PublishOffers(player, batch);

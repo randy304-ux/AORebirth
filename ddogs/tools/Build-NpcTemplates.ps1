@@ -349,3 +349,5 @@ $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-N
 & "$PSScriptRoot\Build-GardenContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Best-guess fills (ContentProvenance.Guessed) for uncaptured spawn points: Build-GuessedContent.ps1.
 & "$PSScriptRoot\Build-GuessedContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Team mission boss families (DungeonGeneration.json Population.BossNpcHashes): Build-MissionBosses.ps1.
+& "$PSScriptRoot\Build-MissionBosses.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))

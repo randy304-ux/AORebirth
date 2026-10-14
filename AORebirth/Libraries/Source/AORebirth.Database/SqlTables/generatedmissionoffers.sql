@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS generatedmissionoffers (
  DestinationX FLOAT NOT NULL, DestinationY FLOAT NOT NULL, DestinationZ FLOAT NOT NULL,
  EntranceType INT NOT NULL, EntranceInstance INT NOT NULL, EntranceLow INT NOT NULL, EntranceHigh INT NOT NULL,
  CashReward INT NOT NULL, ExperienceReward INT NOT NULL,
- RewardLowId INT NOT NULL, RewardHighId INT NOT NULL, RewardQuality INT NOT NULL, RewardCount INT NOT NULL,
+ RewardLowId INT NOT NULL, RewardHighId INT NOT NULL, RewardQuality INT NOT NULL, RewardCount INT NOT NULL, IsTeam INT NOT NULL DEFAULT 0,
  Title VARCHAR(1024) NOT NULL, Description TEXT NOT NULL,
  FrozenWireBody MEDIUMBLOB NOT NULL, FrozenWireSha256 CHAR(64) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
  State INT NOT NULL, OfferedAtUtcTicks BIGINT NOT NULL, ExpiresAtUtcTicks BIGINT NOT NULL, Version BIGINT NOT NULL DEFAULT 1,

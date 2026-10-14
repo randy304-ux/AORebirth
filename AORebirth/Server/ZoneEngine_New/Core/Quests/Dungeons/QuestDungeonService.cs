@@ -192,9 +192,16 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 DungeonLayout acceptedLayout;
                 using (ZoneEngine_New.Core.Metrics.TickStallWatch.Enter("mission.accept.layout", player.Identity.Instance))
                 {
-                    // Current offers are solo. Team mode must be carried from the roll request and accepted roster
-                    // in the encounter milestone; party membership alone must never change an offered mission's mode.
-                    if (!_layouts.ConfigureNewDungeon(parameters, team: false) || !_layouts.TryGenerate(parameters, out acceptedLayout))
+                    // Team mode is frozen on the offer at roll time (rolled in a team of two or more); membership at
+                    // accept time never changes it. A team offer with no team profile for its QL falls back to solo.
+                    bool team = offer.IsTeam == 1;
+                    if (team && !_layouts.ConfigureNewDungeon(parameters, team: true))
+                    {
+                        player.Logger.Warn("Team mission " + questId + ": no team dungeon profile at QL " + offer.Quality + "; using the solo layout");
+                        team = false;
+                        parameters.GeneratorVersion = 0;
+                    }
+                    if ((!team && !_layouts.ConfigureNewDungeon(parameters, team: false)) || !_layouts.TryGenerate(parameters, out acceptedLayout))
                         return "Mission dungeons are unavailable.";
                 }
 
@@ -1152,7 +1159,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 Hash = questId,
                 Name = offer.Title ?? string.Empty,
                 Summary = offer.Description ?? string.Empty,
-                Scope = "Solo",
+                Scope = offer.IsTeam == 1 ? "Team" : "Solo",
                 Action = offer.MissionType switch
                 {
                     0 => QuestTemplate.KillOneAction,

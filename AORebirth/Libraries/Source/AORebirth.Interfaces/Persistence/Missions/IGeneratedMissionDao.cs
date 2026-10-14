@@ -89,6 +89,8 @@ namespace AORebirth.Interfaces.Persistence.Missions
         public int RewardHighId { get; set; }
         public int RewardQuality { get; set; }
         public int RewardCount { get; set; }
+        /// <summary>1 when the offer was rolled by a player in a team of two or more (team dungeon with a boss floor); 0 = solo.</summary>
+        public int IsTeam { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public byte[] FrozenWireBody { get; set; }
