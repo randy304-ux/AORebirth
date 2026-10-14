@@ -282,6 +282,7 @@ foreach ($h in $shutDb.Keys) {
   $lo = [int]($p | Measure-Object minLevel -Minimum).Minimum; $hi = [int]($p | Measure-Object maxLevel -Maximum).Maximum
   $cap = [pscustomobject]@{ Name = $r[0]; Level = [int]$r[2]; Health = [int]$r[10]; MonsterData = [int]$r[11]; Scale = [int]$r[12]; NpcFamily = [int]$r[9]
     Side = [int]$r[3]; Breed = [int]$r[5]; Gender = [int]$r[6]; Race = [int]$r[7]; CharacterFlags = $hostileFlags }
+  if ($h -eq 'BSMG') { $cap.MonsterData = 30252; $cap.Scale = 300 }  # Randy: Scurryflutter is a huge beach snake (Giant/Shore Snake mesh 30252), not a leet
   NewbieLeaf $h @($cap) $lo $hi $false $null
   $report += "newbie 4582 $h $($r[0]) (mobtemplate $($shutDb[$h])) L$lo-$hi x$($p.Count)"
 }
