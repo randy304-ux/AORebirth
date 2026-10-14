@@ -93,6 +93,8 @@ function New-Leaf($key, $name, $lvl, $type, $boss) {
   $b.Stats.'1' = $hp; if ($b.Stats.'27') { $b.Stats.'27' = $hp }
   $b.Stats.'0' = 268964353
   $scale = 100; if ($b.Stats.'360') { $scale = [int]$b.Stats.'360' }
+  if ($type -eq 'Blubbags') { $b.Stats.'359' = 40075 }  # client monster data 'blubbag'
+  if ($type -eq 'Rhinomen') { $b.Stats.'359' = 17664 }  # client monster data 'rhinoman'
   if ($type -in $script:big) { $b.Stats.'359' = 226557; $scale = 140 }
   if ($boss) { $scale = [int][math]::Max($scale, [int]($scale * 1.25)) }
   $b.Stats.'360' = $scale

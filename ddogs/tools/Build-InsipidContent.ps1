@@ -45,10 +45,10 @@ $common = @(
 $oil = @($common) + @([pscustomobject]@{ Hash='BMOL'; Repeats=1; Chance=100; LevelMod=0 })
 Add-Leaf 'ERGO' 'Ergo' 40 'SCDR' $true 210582 100 2 @() 'Floating head: client monster data 210582 guardian_of_shadows (Randy PRK screenshots). Spot 1428x195 matches AO-Universe/aquarius guides and client district Ergo.'
 Add-Leaf 'LSSR' 'Long Stare at Danger' 40 'SCDR' $true 22802 180 2 @() 'Client spawn LSSR 1401x578 on swamp 4312. Yuttos mesh from Deep Breath Nine.'
-Add-Leaf 'EMOL' 'Embryonic Molokhai' 35 'HIAT' $false 0 110 2 $common 'No molokhai mesh captured. Hiathlin stand-in. Persistent, not a death-chain.'
-Add-Leaf 'LMOL' 'Larval Molokhai' 37 'HIAT' $false 0 120 2.4 $common 'No molokhai mesh captured. Hiathlin stand-in.'
-Add-Leaf 'MMOL' 'Metamorphosing Molokhai' 39 'HIAT' $false 0 130 2.8 $common 'No molokhai mesh captured. Hiathlin stand-in.'
-Add-Leaf 'YMOL' 'Young Molokhai' 42 'HIAT' $false 0 150 4 $oil 'Drops Baby Molok Oil. Hiathlin stand-in.'
+Add-Leaf 'EMOL' 'Embryonic Molokhai' 35 'HIAT' $false 214479 110 2 $common 'Client monster data 214479 sl_molokhai. Persistent, not a death-chain.'
+Add-Leaf 'LMOL' 'Larval Molokhai' 37 'HIAT' $false 214479 120 2.4 $common 'Client monster data 214479 sl_molokhai.'
+Add-Leaf 'MMOL' 'Metamorphosing Molokhai' 39 'HIAT' $false 214479 130 2.8 $common 'Client monster data 214479 sl_molokhai.'
+Add-Leaf 'YMOL' 'Young Molokhai' 42 'HIAT' $false 214479 150 4 $oil 'Drops Baby Molok Oil. Client monster data 214479 sl_molokhai.'
 if ($made.Count) {
   $raw = [IO.File]::ReadAllText($npath, $u).TrimEnd()
   if (-not $raw.EndsWith('}')) { throw 'NpcTemplates.json: unexpected ending' }
