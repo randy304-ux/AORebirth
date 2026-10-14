@@ -366,6 +366,94 @@ Script 'YoungSilvertail.json' @('YOSI') 'Young Silvertail for El-Domo''s test. F
 Script 'SarahWillis.json' @('STSH') 'Scientist Sarah Willis, in the crevice with the Imp Disruptor.' @('{delay 1}You brought supplies? Leave them. Brad has the imp''s attention, so do not waste it.', '{delay 1}Tell Drake the delivery landed.') @() 'Go, before it turns around.' $null
 Script 'BradWillis.json' @('GSTD') 'Assistant Brad Willis, outside the imp crevice.' @('{delay 1}That Imp Disruptor will end you if you walk in cold. I''ll hold it.', '{delay 1}Target me so Drake''s bracer logs it, then get to Sarah.') @() 'I have the imp. Move.' $null
 Script 'SundanceSmith.json' @('SDSM') 'Sundance Smith, J.A.M.E. Depot. Placement guessed near the lower bridge. Shop stock is not invented.' @('{delay 1}Sundance Smith, J.A.M.E. Depot. Armor, NCU, ammunition and a fair price for whatever the wildlife dropped.', '{delay 1}The counter is not stocked on this server yet. I can still point you at Drake if you have not taken his tests.') @() 'Come back when the depot is open.' $null
+# ---------------- Insipid Ring, Nascence to Elysium. Bits 653+. Randy: oil to Ergo, not the longer menace chain. ----------------
+# Level 50+ may skip (AO-Universe). The ring is profession-unit specific. Portal item-check is not wired.
+if ($script:bit -ne 653) { throw "Insipid expected bit 653, got $($script:bit)" }
+$trial = Job 'ERGO' 'EIN' @(
+  ,@('FindItem',$null,$null,'Reach a Yutto')
+  ,@('KillOne','EMOL',$null,'Kill Embryonic Molokhai')
+  ,@('KillOne','LMOL',$null,'Kill Larval Molokhai')
+  ,@('KillOne','MMOL',$null,'Kill Metamorphosing Molokhai')
+  ,@('KillOne','YMOL',$null,'Kill Young Molokhai')
+) 'Hand Baby Molok Oil to Ergo' 8000 4000 $null @{ Ret = 'FindItem'; Spec = 'BMOL' }
+$skip = Job 'ERGO' 'EIS' @() 'Skip the Nascence trial' 2000 0 $null @{ Ret = 'FindItem' }
+$fresh = @('!HasCompletedQuest EINR','!HasCompletedQuest EISR','!HasAnyQuest EIN0,EIN1,EIN2,EIN3,EIN4,EINR,EISR')
+function Ring($quest, $hash, $words) {
+  [ordered]@{ Text = @('{completequest ' + $quest + '}', ('{spawn ' + $hash + ' 1}'), $words); Fail = 'full'; Replies = @('nothing') }
+}
+$ergoExtra = @{
+  Openers = @(
+    [ordered]@{ If = @('HasQuest EIN0'); Say = 'busy_yutto' }
+    [ordered]@{ If = @('HasQuest EIN1'); Say = 'busy_em' }
+    [ordered]@{ If = @('HasQuest EIN2'); Say = 'busy_la' }
+    [ordered]@{ If = @('HasQuest EIN3'); Say = 'busy_me' }
+    [ordered]@{ If = @('HasQuest EIN4'); Say = 'busy_yo' }
+    [ordered]@{ If = @('HasQuest EINR'); Say = 'oil' }
+  )
+  Hello = @('trial','skip_ar','skip_co','skip_ex','skip_in','skip_su')
+  Replies = [ordered]@{
+    trial = [ordered]@{ Text = 'I will take the trial.'; If = $fresh; Goto = 'give_trial' }
+    skip_ar = [ordered]@{ Text = 'I am past this trial.'; If = @('minlevel 50','prof 1,9') + $fresh; Goto = 'skip_ar' }
+    skip_co = [ordered]@{ Text = 'I am past this trial.'; If = @('minlevel 50','prof 8,11,7') + $fresh; Goto = 'skip_co' }
+    skip_ex = [ordered]@{ Text = 'I am past this trial.'; If = @('minlevel 50','prof 5,4,15') + $fresh; Goto = 'skip_ex' }
+    skip_in = [ordered]@{ Text = 'I am past this trial.'; If = @('minlevel 50','prof 6,2') + $fresh; Goto = 'skip_in' }
+    skip_su = [ordered]@{ Text = 'I am past this trial.'; If = @('minlevel 50','prof 10,3,14,12') + $fresh; Goto = 'skip_su' }
+    handin = [ordered]@{ Text = 'Here is the Baby Molok Oil.'; If = @('HasQuest EINR'); Goto = 'handin' }
+  }
+  Lines = [ordered]@{
+    give_trial = [ordered]@{ Text = @('{spawn FCAN 1}','{givequest EIN0}','This Fumigating Canister goes to a Yutto. Deep Breath Nine is in the Embryo in the Wilds, about 430 by 450. Long Stare at Danger is in the Swamp, about 1401 by 578.', '{delay 1}Either of them starts the molokhai. Kill the Embryonic, then the Larval, then the Metamorphosing, then the Young. The Young drops Baby Molok Oil. Bring the oil back to me.'); Fail = 'full'; Replies = @('nothing') }
+    full = [ordered]@{ Text = 'Your hands are full. Make some room in your inventory first.{close}' }
+    busy_yutto = [ordered]@{ Text = 'Deep Breath Nine, Embryo, Wilds, about 430 by 450. Or Long Stare at Danger, Swamp, about 1401 by 578. Give one of them the canister, or just talk to Long Stare.'; Replies = @('bye') }
+    busy_em = [ordered]@{ Text = 'The Embryonic Molokhai is first. One is west of Deep Breath Nine, about 385 by 490. The other is just north of Long Stare, about 1414 by 604.'; Replies = @('bye') }
+    busy_la = [ordered]@{ Text = 'The Larval Molokhai is next, standing with the others.'; Replies = @('bye') }
+    busy_me = [ordered]@{ Text = 'The Metamorphosing Molokhai is next.'; Replies = @('bye') }
+    busy_yo = [ordered]@{ Text = 'The Young Molokhai drops the Baby Molok Oil. Bring it to me.'; Replies = @('bye') }
+    oil = [ordered]@{ Text = 'The oil. Put it in the trade window.'; Replies = @('handin','bye') }
+    handin = [ordered]@{ Text = 'Let me see it.{opentrade}' }
+    skip_ar = (Ring 'EISR' 'INAR' 'You have outgrown the trial. The Artillery ring is yours. Let it touch the portal to Elysium.')
+    skip_co = (Ring 'EISR' 'INCO' 'You have outgrown the trial. The Control ring is yours. Let it touch the portal to Elysium.')
+    skip_ex = (Ring 'EISR' 'INEX' 'You have outgrown the trial. The Extermination ring is yours. Let it touch the portal to Elysium.')
+    skip_in = (Ring 'EISR' 'ININ' 'You have outgrown the trial. The Infantry ring is yours. Let it touch the portal to Elysium.')
+    skip_su = (Ring 'EISR' 'INSU' 'You have outgrown the trial. The Support ring is yours. Let it touch the portal to Elysium.')
+    ring_ar = (Ring 'EINR' 'INAR' 'Baby Molok Oil. The Artillery ring is yours. Let it touch the portal to Elysium.')
+    ring_co = (Ring 'EINR' 'INCO' 'Baby Molok Oil. The Control ring is yours. Let it touch the portal to Elysium.')
+    ring_ex = (Ring 'EINR' 'INEX' 'Baby Molok Oil. The Extermination ring is yours. Let it touch the portal to Elysium.')
+    ring_in = (Ring 'EINR' 'ININ' 'Baby Molok Oil. The Infantry ring is yours. Let it touch the portal to Elysium.')
+    ring_su = (Ring 'EINR' 'INSU' 'Baby Molok Oil. The Support ring is yours. Let it touch the portal to Elysium.')
+  }
+  Trades = [ordered]@{
+    oil_ar = [ordered]@{ If = @('HasQuest EINR','prof 1,9'); Items = @(,(TI 'BMOL')); Goto = 'ring_ar' }
+    oil_co = [ordered]@{ If = @('HasQuest EINR','prof 8,11,7'); Items = @(,(TI 'BMOL')); Goto = 'ring_co' }
+    oil_ex = [ordered]@{ If = @('HasQuest EINR','prof 5,4,15'); Items = @(,(TI 'BMOL')); Goto = 'ring_ex' }
+    oil_in = [ordered]@{ If = @('HasQuest EINR','prof 6,2'); Items = @(,(TI 'BMOL')); Goto = 'ring_in' }
+    oil_su = [ordered]@{ If = @('HasQuest EINR','prof 10,3,14,12'); Items = @(,(TI 'BMOL')); Goto = 'ring_su' }
+  }
+}
+Script 'Ergo.json' @('ERGO') 'Ergo, Nascence Swamp (4312). Guide spot 1428x195 is south of the client spawn cloud, so the position is guessed. Insipid Ring: canister to Deep Breath Nine, or Long Stare at Danger, then Embryonic, Larval, Metamorphosing, Young Molokhai, Baby Molok Oil back to Ergo. Level 50+ can skip.' @('{delay 1}I am Ergo. Words matter, and so does the ring that opens the way from Nascence to Elysium.', '{delay 1}Under level 50 the price is Baby Molok Oil. At 50 and above I can give you the ring without the trial.') @() 'The portal is the way on, when you have the ring.' $ergoExtra
+Script 'DeepBreathNine.json' @('SimpleChar:7A1C0001') 'Deep Breath Nine, the Embryo, Nascence Wilds (4311, 430x450). Trades Ergo''s Fumigating Canister and points at the molokhai west of him.' @('{delay 1}Sshhh!... Excuse me, but I am a bit preoccupied here... The Yuttos no doubt is using some very deep simile...') @() 'Quietly, please.' @{
+  Hello = @('ergo','where')
+  Replies = [ordered]@{
+    ergo = [ordered]@{ Text = 'I come from Ergo. I have the Fumigating Canister.'; If = @('HasQuest EIN0'); Goto = 'show' }
+    where = [ordered]@{ Text = 'Where are the molokhai?'; If = @('HasAnyQuest EIN1,EIN2,EIN3,EIN4,EINR'); Goto = 'where' }
+  }
+  Lines = [ordered]@{
+    show = [ordered]@{ Text = 'Oh! Sorry, please show me what it is, but do it quietly.{opentrade}' }
+    opened = [ordered]@{ Text = @('{completequest EIN0}','The hive is just west of here, about 385 by 490. Kill the Embryonic Molokhai, then the Larval, then the Metamorphosing, then the Young. The Young carries Baby Molok Oil for Ergo.'); Replies = @('bye') }
+    where = [ordered]@{ Text = 'West of here, about 385 by 490. Embryonic, Larval, Metamorphosing, then Young.'; Replies = @('bye') }
+  }
+  Trades = [ordered]@{ canister = [ordered]@{ If = @('HasQuest EIN0'); Items = @(,(TI 'FCAN')); Goto = 'opened' } }
+}
+Script 'LongStareAtDanger.json' @('LSSR') 'Long Stare at Danger, Nascence Swamp (4312, 1401x578). Client spawn. Starts the molokhai chain just north of him. No key item: the retail key id was not identified, so the entrance is open.' @('{delay 1}Long Stare at Danger. The molokhai under this swamp are hatching, and Ergo wants the oil from the youngest.') @() 'Watch the ground.' @{
+  Hello = @('key','where')
+  Replies = [ordered]@{
+    key = [ordered]@{ Text = 'Ergo sent me for the molokhai.'; If = @('HasQuest EIN0'); Goto = 'key' }
+    where = [ordered]@{ Text = 'Where are they?'; If = @('HasAnyQuest EIN1,EIN2,EIN3,EIN4,EINR'); Goto = 'where' }
+  }
+  Lines = [ordered]@{
+    key = [ordered]@{ Text = @('{completequest EIN0}','The entrance is just north, about 1414 by 604. Kill the Embryonic Molokhai, then the Larval, then the Metamorphosing, then the Young. Bring Ergo the oil.'); Replies = @('bye') }
+    where = [ordered]@{ Text = 'North of here, about 1414 by 604. Same order: Embryonic, Larval, Metamorphosing, Young.'; Replies = @('bye') }
+  }
+}
 # ---------------- write Quests.json ----------------
 $qpath = Join-Path $GameData 'Quests.json'
 $existing = ([IO.File]::ReadAllText($qpath) | ConvertFrom-Json) | ForEach-Object { $_ } | Where-Object { $_.QasInstance -lt 920000 -or $_.QasInstance -gt 929999 }

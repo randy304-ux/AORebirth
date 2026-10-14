@@ -3035,5 +3035,166 @@
                                        ]
                                    ]
                    }
+    },
+    {
+        "Hash":  "EIN0",
+        "Name":  "Reach a Yutto",
+        "QasInstance":  920109,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Reach a Yutto",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  null,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "EIN1",
+        "Reward":  {
+                       "Hash":  "RIN0",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "EIN1",
+        "Name":  "Kill Embryonic Molokhai",
+        "QasInstance":  920110,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill Embryonic Molokhai",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "EMOL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "EIN2",
+        "Reward":  {
+                       "Hash":  "RIN1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "EIN2",
+        "Name":  "Kill Larval Molokhai",
+        "QasInstance":  920111,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill Larval Molokhai",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "LMOL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "EIN3",
+        "Reward":  {
+                       "Hash":  "RIN2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "EIN3",
+        "Name":  "Kill Metamorphosing Molokhai",
+        "QasInstance":  920112,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill Metamorphosing Molokhai",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "MMOL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "EIN4",
+        "Reward":  {
+                       "Hash":  "RIN3",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "EIN4",
+        "Name":  "Kill Young Molokhai",
+        "QasInstance":  920113,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill Young Molokhai",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "YMOL",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "EINR",
+        "Reward":  {
+                       "Hash":  "RIN4",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "EINR",
+        "Name":  "Hand Baby Molok Oil to Ergo",
+        "QasInstance":  920114,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Hand Baby Molok Oil to Ergo",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ERGO",
+                          "SpecItem":  "BMOL",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  653,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RINR",
+                       "Credits":  4000,
+                       "Xp":  8000,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "EISR",
+        "Name":  "Skip the Nascence trial",
+        "QasInstance":  920115,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Skip the Nascence trial",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ERGO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  654,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RISR",
+                       "Credits":  0,
+                       "Xp":  2000,
+                       "Records":  null
+                   }
     }
 ]

@@ -34,6 +34,12 @@ Still guessed, needs a screenshot after deploy:
 - Sarah Willis, Brad Willis, the autoname researchers, the nurse, and the two extra L50 staff use scientist or guard bodies. Sundance Smith is talkable only; his shop stock was not invented. His spot, the Beit Silvertail, the Predator Rager, the Young Silvertail and The Devastator are placed beside the related spawns, not from a client point.
 - Yellow hazard-suit guards were not given a mesh. Only one ground guard hash (GSTD) was free, and it is Brad Willis.
 
+## Dynas and Insipid Ring — built 2026-10-14, deploy follows
+
+174 AO-Universe dyna camps are hash spawns (boss plus up to four adds) on Aegean 585, Andromeda 655, Belial Forest 605, Central Artery Valley 590, Newland Desert 565, Omni Forest 716, Perpetual Wastelands 570, Varmint Woods 600, and Wailing Wastes 551. Builder: `ddogs/tools/Build-DynaContent.ps1` and `dyna-camps.csv`. Boss respawn 20 minutes, adds 3 minutes. Boss HP is about 4x a normal mob of that level, plus kill-XP stat 52 (`level * 40`). No color buff. Boss loot is common trash plus a low chance of Nullity Sphere (150504), Nullity Sphere MK II (150503), and Empty Data Receptacle Container (275056). Camp-specific weapons were not invented. Positions use the guide x,z and the nearest client spawn's Y. All of it is guessed.
+
+Insipid Ring (bits 653 trial, 654 level-50 skip). Ergo is a new spawn on swamp 4312 at 1428, 56.7, 195 (guide spot, south of the client spawn cloud). Long Stare at Danger uses the client point 1401, 578. Deep Breath Nine takes the Fumigating Canister (234878). The four molokhai are persistent, not a death-chain, at the Embryo (4311, about 385x490) and just north of Long Stare (4312, about 1414x604). Young Molokhai drops Baby Molok Oil (234879). Ergo turns the oil in for the profession ring: Artillery 225753, Control 225758, Extermination 223998, Infantry 225760, Support 225759. Level 50+ can skip. Knubot conditions added: `prof` and `minlevel`. The Elysium portal does not check for the ring. Yuttos stock is still empty. Launcher bundle was not touched.
+
 ## Not started
 
-Dynas, Ergo rings, other gardens, RK statics, Elysium. When those zones are filled, put Hecklers where the guides show them, using the rock-pile mesh, and leave the captured 4311 camps alone.
+Caliginous, Achromic, Rimy, Sanguine, and Pure Novictum. Other gardens. RK statics (Steps of Madness, Smuggler's Den, Cyborg Barracks, Reet Retreat, Crypt of Home). Elysium. When those zones are filled, put Hecklers where the guides show them, using the rock-pile mesh, and leave the captured 4311 camps alone.

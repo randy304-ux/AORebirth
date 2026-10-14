@@ -353,3 +353,8 @@ $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-N
 & "$PSScriptRoot\Build-MissionBosses.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Yuttos shop NPCs in Nascence Wilds: Build-YuttosVendors.ps1.
 & "$PSScriptRoot\Build-YuttosVendors.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Rubi-Ka dyna camps: Build-DynaContent.ps1. Do not run this file's full rebuild unless the BA00-BU07 keys are preserved;
+# these sub-builders are safe to run on their own.
+& "$PSScriptRoot\Build-DynaContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Insipid Ring actors (Ergo, Long Stare, molokhai): Build-InsipidContent.ps1. Quest text is Build-NewbieQuests.ps1.
+& "$PSScriptRoot\Build-InsipidContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))

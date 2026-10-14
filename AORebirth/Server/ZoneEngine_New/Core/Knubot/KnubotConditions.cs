@@ -53,7 +53,8 @@ public sealed class KnubotLoadContext(QuestCatalog quests, IGameData gameData, I
 /// One check from an <c>If</c> list. Prefix <c>!</c> to negate. Forms:
 /// <c>quest HASH none|active|done|failed|expired|abandoned</c>, <c>HasQuest HASH</c> (in the journal now),
 /// <c>HasAnyQuest HASH,HASH,...</c> (any of them in the journal now),
-/// <c>HasCompletedQuest HASH</c> (the quest's mission bit), <c>has ITEMHASH [count]</c>, <c>met</c>.
+/// <c>HasCompletedQuest HASH</c> (the quest's mission bit), <c>has ITEMHASH [count]</c>,
+/// <c>prof 1,9</c> (character profession is one of those ids), <c>minlevel 50</c>, <c>met</c>.
 /// Stat checks are <c>Requirements</c> rows, compiled by <see cref="TryParseRequirements"/>.
 /// </summary>
 public abstract record KnubotCondition(bool Negated)
@@ -181,6 +182,41 @@ public abstract record KnubotCondition(bool Negated)
                 }
 
                 condition = new KnubotMetCondition(negated);
+                return true;
+
+            case "prof":
+                string[] profWords = string.Join(' ', words, 1, words.Length - 1)
+                    .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                var professions = new List<int>(profWords.Length);
+                bool profOk = words.Length >= 2 && profWords.Length > 0;
+                foreach (string word in profWords)
+                {
+                    if (!int.TryParse(word, NumberStyles.Integer, CultureInfo.InvariantCulture, out int id) || id < 0 || id > 15)
+                    {
+                        profOk = false;
+                        break;
+                    }
+
+                    professions.Add(id);
+                }
+
+                if (!profOk)
+                {
+                    error = "expected 'prof ID,ID,...' with profession ids 0-15: " + trimmed;
+                    return false;
+                }
+
+                condition = new KnubotProfessionCondition(negated, professions.ToArray());
+                return true;
+
+            case "minlevel":
+                if (words.Length != 2 || !TryPositive(words[1], out int minLevel))
+                {
+                    error = "expected 'minlevel N' with a positive level: " + trimmed;
+                    return false;
+                }
+
+                condition = new KnubotMinLevelCondition(negated, minLevel);
                 return true;
 
             default:
@@ -341,4 +377,26 @@ public sealed record KnubotRequirementCondition(ItemRequirement[] Requirements) 
 public sealed record KnubotMetCondition(bool Negated) : KnubotCondition(Negated)
 {
     protected override bool Test(KnubotContext context) => context.Met;
+}
+
+/// <summary><c>prof 1,9</c>. Profession ids match <see cref="Profession"/> (Soldier 1, Martial Artist 2, Engineer 3, Fixer 4, Agent 5, Adventurer 6, Trader 7, Bureaucrat 8, Enforcer 9, Doctor 10, Nano-Technician 11, Meta-Physicist 12, Keeper 14, Shade 15).</summary>
+public sealed record KnubotProfessionCondition(bool Negated, int[] Professions) : KnubotCondition(Negated)
+{
+    protected override bool Test(KnubotContext context)
+    {
+        int profession = context.Player.Stats.GetOrZero(CharacterStat.Profession);
+        foreach (int id in Professions)
+        {
+            if (profession == id)
+                return true;
+        }
+
+        return false;
+    }
+}
+
+/// <summary><c>minlevel 50</c>. The player's level stat is at least this.</summary>
+public sealed record KnubotMinLevelCondition(bool Negated, int Level) : KnubotCondition(Negated)
+{
+    protected override bool Test(KnubotContext context) => context.Player.Stats.GetOrZero(CharacterStat.Level) >= Level;
 }
