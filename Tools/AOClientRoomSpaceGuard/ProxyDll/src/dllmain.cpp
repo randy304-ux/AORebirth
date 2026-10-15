@@ -190,6 +190,17 @@ namespace
             return 0;
         }
 
+        if (profile == aorf::ClientProfile::FuncomCurrent)
+        {
+            aorf::Log(
+                "SKIP GUI rectangle and renderer repairs reason=official_18.8.50_layout");
+            aorf::Log(
+                "READY loginKeyWorker=%s dailyLoginWorker=%s RoomSpace and login-key repairs active",
+                loginKeyWorkerStarted ? "started" : "blocked",
+                dailyLoginWorkerStarted ? "started" : "blocked");
+            return 0;
+        }
+
         aorf::Log(
             "READY loginKeyWorker=%s dailyLoginWorker=%s RoomSpace, GUI rectangle, and renderer repairs active",
             loginKeyWorkerStarted ? "started" : "blocked",

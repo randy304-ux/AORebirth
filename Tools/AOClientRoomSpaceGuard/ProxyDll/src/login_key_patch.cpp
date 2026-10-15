@@ -479,61 +479,69 @@ namespace aorf
             return nt->OptionalHeader.SizeOfImage;
         }
 
-        bool ValidateModuleFile(const TargetModule& target, HMODULE module)
+        enum class FileCheck
+        {
+            Match,
+            DifferentBuild,
+            Unreadable
+        };
+
+        FileCheck ValidateModuleFile(const TargetModule& target, HMODULE module)
         {
             wchar_t path[MAX_PATH] = {};
             DWORD length = GetModuleFileNameW(module, path, static_cast<DWORD>(sizeof(path) / sizeof(path[0])));
             if (length == 0 || length >= sizeof(path) / sizeof(path[0]))
             {
-                Log("LOGINKEY module=%ls patch=BLOCKED reason=module_path", target.moduleName);
-                return false;
+                Log("LOGINKEY module=%ls profile=%s patch=BLOCKED reason=module_path", target.moduleName, target.profileId);
+                return FileCheck::Unreadable;
             }
 
             std::vector<unsigned char> fileBytes;
             if (!ReadFileBytes(path, fileBytes))
             {
-                Log("LOGINKEY module=%ls patch=BLOCKED reason=file_read", target.moduleName);
-                return false;
-            }
-
-            if (fileBytes.size() != target.expectedFileSize)
-            {
-                Log(
-                    "LOGINKEY module=%ls patch=BLOCKED reason=file_size actual=%lu expected=%lu",
-                    target.moduleName,
-                    static_cast<unsigned long>(fileBytes.size()),
-                    target.expectedFileSize);
-                return false;
+                Log("LOGINKEY module=%ls profile=%s patch=BLOCKED reason=file_read", target.moduleName, target.profileId);
+                return FileCheck::Unreadable;
             }
 
             std::string hash;
             if (!Sha256(fileBytes, hash))
             {
-                Log("LOGINKEY module=%ls patch=BLOCKED reason=file_hash", target.moduleName);
-                return false;
+                Log("LOGINKEY module=%ls profile=%s patch=BLOCKED reason=file_hash", target.moduleName, target.profileId);
+                return FileCheck::Unreadable;
             }
 
-            if (_stricmp(hash.c_str(), target.expectedSha256) != 0)
+            if (fileBytes.size() != target.expectedFileSize ||
+                _stricmp(hash.c_str(), target.expectedSha256) != 0)
             {
                 Log(
-                    "LOGINKEY module=%ls patch=BLOCKED reason=unsupported_build sha256=%s",
+                    "LOGINKEY module=%ls profile=%s patch=SKIP reason=not_this_profile actual=%lu expected=%lu sha256=%s",
                     target.moduleName,
+                    target.profileId,
+                    static_cast<unsigned long>(fileBytes.size()),
+                    target.expectedFileSize,
                     hash.c_str());
-                return false;
+                return FileCheck::DifferentBuild;
             }
 
-            return true;
+            return FileCheck::Match;
         }
 
-        bool PatchLoadedModule(const TargetModule& target)
+        bool PatchLoadedModule(const TargetModule& target, bool& patched)
         {
+            patched = false;
             HMODULE module = GetModuleHandleW(target.moduleName);
             if (!module)
             {
                 return false;
             }
 
-            if (!ValidateModuleFile(target, module))
+            FileCheck check = ValidateModuleFile(target, module);
+            if (check == FileCheck::DifferentBuild)
+            {
+                return true;
+            }
+
+            if (check != FileCheck::Match)
             {
                 return true;
             }
@@ -556,7 +564,8 @@ namespace aorf
 
             if (analysis.state == PatchState::Patched)
             {
-                Log("LOGINKEY module=%ls state=Patched patch=PASS reason=already_patched", target.moduleName);
+                Log("LOGINKEY module=%ls profile=%s state=Patched patch=PASS reason=already_patched", target.moduleName, target.profileId);
+                patched = true;
                 return true;
             }
 
@@ -596,9 +605,11 @@ namespace aorf
             }
 
             Log(
-                "LOGINKEY module=%ls state=Original rva=0x%lx patch=PASS verify=PASS",
+                "LOGINKEY module=%ls profile=%s state=Original rva=0x%lx patch=PASS verify=PASS",
                 target.moduleName,
+                target.profileId,
                 static_cast<unsigned long>(analysis.funcomOffsets[0]));
+            patched = true;
             return true;
         }
 
@@ -635,6 +646,7 @@ namespace aorf
             }
 
             bool completed[sizeof(Targets) / sizeof(Targets[0])] = {};
+            bool patched[sizeof(Targets) / sizeof(Targets[0])] = {};
             for (int attempt = 0; attempt < 600; ++attempt)
             {
                 bool allCompleted = true;
@@ -642,7 +654,7 @@ namespace aorf
                 {
                     if (!completed[index])
                     {
-                        completed[index] = PatchLoadedModule(Targets[index]);
+                        completed[index] = PatchLoadedModule(Targets[index], patched[index]);
                     }
 
                     allCompleted = allCompleted && completed[index];
@@ -650,8 +662,38 @@ namespace aorf
 
                 if (allCompleted)
                 {
-                    Log("LOGINKEY patch=COMPLETE");
-                    return 0;
+                    bool guiPatched = false;
+                    bool interfacesPatched = false;
+                    for (size_t index = 0; index < sizeof(Targets) / sizeof(Targets[0]); ++index)
+                    {
+                        if (!patched[index])
+                        {
+                            continue;
+                        }
+
+                        if (wcscmp(Targets[index].moduleName, L"GUI.dll") == 0)
+                        {
+                            guiPatched = true;
+                        }
+                        if (wcscmp(Targets[index].moduleName, L"Interfaces.dll") == 0)
+                        {
+                            interfacesPatched = true;
+                        }
+                    }
+
+                    if (!guiPatched)
+                    {
+                        Log("LOGINKEY module=GUI.dll patch=BLOCKED reason=no_supported_profile");
+                    }
+                    if (!interfacesPatched)
+                    {
+                        Log("LOGINKEY module=Interfaces.dll patch=BLOCKED reason=no_supported_profile");
+                    }
+
+                    Log("LOGINKEY patch=COMPLETE gui=%s interfaces=%s",
+                        guiPatched ? "PASS" : "BLOCKED",
+                        interfacesPatched ? "PASS" : "BLOCKED");
+                    return (guiPatched && interfacesPatched) ? 0 : 1;
                 }
 
                 Sleep(100);

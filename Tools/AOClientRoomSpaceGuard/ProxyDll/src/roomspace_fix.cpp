@@ -596,8 +596,11 @@ namespace aorf
             return ClientProfile::Unknown;
         }
 
-        if (std::strcmp(profile->name, "old-client") == 0 ||
-            std::strcmp(profile->name, "funcom-current") == 0)
+        if (std::strcmp(profile->name, "funcom-current") == 0)
+        {
+            return ClientProfile::FuncomCurrent;
+        }
+        if (std::strcmp(profile->name, "old-client") == 0)
         {
             return ClientProfile::OldClient;
         }

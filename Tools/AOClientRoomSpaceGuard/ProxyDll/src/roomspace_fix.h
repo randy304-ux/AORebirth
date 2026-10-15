@@ -6,7 +6,8 @@ namespace aorf
     {
         Unknown,
         NewClient,
-        OldClient
+        OldClient,
+        FuncomCurrent
     };
 
     ClientProfile GetLoadedN3ClientProfile();
