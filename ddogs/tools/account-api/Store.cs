@@ -160,6 +160,12 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
     app.MapGet("/", Root);
     app.MapGet("/index.app", Root);
     app.MapGet("/store", () => Html(Hub()));
+    // Stock 18.8.x GUI.dll opens the Item Store at http://aoshop.funcom.com/shop/ (bundles at /showitem) and the market at /market/.
+    app.MapGet("/shop", () => Html(Hub()));
+    app.MapGet("/shop/{**rest}", () => Html(Hub()));
+    app.MapGet("/showitem", () => Html(Hub()));
+    app.MapGet("/market", () => Html(Hub()));
+    app.MapGet("/market/{**rest}", () => Html(Hub()));
     app.MapGet("/store/img/{file}", (string file) => {
       var name = Path.GetFileName(file ?? "");
       var p = Path.Combine(Dir, "img", name);
