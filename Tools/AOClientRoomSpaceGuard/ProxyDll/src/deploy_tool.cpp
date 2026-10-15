@@ -65,6 +65,8 @@ namespace AORebirthClientPatchDeploy
         L"E242F4855DE93094161B619047CD838B6A3261BB53A5EB17065F60EDA5239168";
     constexpr wchar_t OldClientN3Hash[] =
         L"8C019EFD72D547879A06585B69147AB1546B9617A2FCE090E5863791AEC8B0BB";
+    constexpr wchar_t FuncomCurrentN3Hash[] =
+        L"1CC4EA47F8896F71F55013D7C4948885E8628FF90CEB7EF0568F905B18C989CD";
 
     class UniqueHandle
     {
@@ -112,7 +114,7 @@ namespace AORebirthClientPatchDeploy
 
     bool IsApprovedN3Hash(const std::wstring& hash)
     {
-        return hash == NewClientN3Hash || hash == OldClientN3Hash;
+        return hash == NewClientN3Hash || hash == OldClientN3Hash || hash == FuncomCurrentN3Hash;
     }
 
     bool IsUpperHex64(const std::wstring& value)

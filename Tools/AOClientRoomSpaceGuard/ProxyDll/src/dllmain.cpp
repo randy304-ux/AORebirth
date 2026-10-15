@@ -11,6 +11,7 @@
 #include "randy_color_fix.h"
 #include "roomspace_fix.h"
 
+#include <string>
 #include <windows.h>
 
 namespace
@@ -88,10 +89,19 @@ namespace
         if (profile == aorf::ClientProfile::Unknown)
         {
             aorf::Log("ERROR client profile was not available before crash mitigation");
+            std::wstring detail = L"This client build is not supported. ";
+            const char* why = aorf::UnsupportedClientDetail();
+            if (why)
+            {
+                for (const char* cursor = why; *cursor; ++cursor)
+                {
+                    detail.push_back(static_cast<wchar_t>(static_cast<unsigned char>(*cursor)));
+                }
+            }
+            detail += L". The patch did not change the client. Close AO and update the launcher. The log is %LOCALAPPDATA%\\AORebirthClientPatch\\AORebirthClientPatch.log.";
             MessageBoxW(
                 nullptr,
-                L"AORebirth Client Patch could not verify this client profile. "
-                L"Close AO and review %LOCALAPPDATA%\\AORebirthClientPatch\\AORebirthClientPatch.log.",
+                detail.c_str(),
                 L"AORebirth Client Patch",
                 MB_OK | MB_ICONERROR | MB_SETFOREGROUND);
             return 1;

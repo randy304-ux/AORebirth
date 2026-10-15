@@ -10,6 +10,7 @@ namespace aorf
     };
 
     ClientProfile GetLoadedN3ClientProfile();
+    const char* UnsupportedClientDetail();
     bool InstallClientCrashMitigation();
     bool RunClientCrashMitigationSelfTest();
 }

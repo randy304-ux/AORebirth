@@ -56,8 +56,22 @@ namespace aorf
                 0x5B864,
                 0x13C6A,
                 0xC709
+            },
+            {
+                // Current Funcom EP1 installer. Same image as old-client except 11 header/resource bytes.
+                "funcom-current",
+                "1CC4EA47F8896F71F55013D7C4948885E8628FF90CEB7EF0568F905B18C989CD",
+                { 0x13F2E, 0x148B6, 0x15054, 0x15068, 0x1570A },
+                0xC8AA,
+                0x3894A,
+                0x5B80C,
+                0x5B864,
+                0x13C6A,
+                0xC709
             }
         };
+
+        std::string UnsupportedDetail = "N3.dll could not be checked";
 
         struct SuspendedThreads
         {
@@ -331,6 +345,7 @@ namespace aorf
             HMODULE n3 = GetModuleHandleW(L"N3.dll");
             if (!n3)
             {
+                UnsupportedDetail = "N3.dll was not loaded";
                 Log("ERROR N3.dll is not loaded");
                 return nullptr;
             }
@@ -342,6 +357,7 @@ namespace aorf
                 static_cast<DWORD>(sizeof(n3Path) / sizeof(n3Path[0])));
             if (pathLength == 0 || pathLength >= sizeof(n3Path) / sizeof(n3Path[0]))
             {
+                UnsupportedDetail = "N3.dll path could not be read";
                 Log("ERROR unable to resolve loaded N3.dll path");
                 return nullptr;
             }
@@ -349,6 +365,7 @@ namespace aorf
             std::string hash;
             if (!Sha256File(n3Path, hash))
             {
+                UnsupportedDetail = "N3.dll could not be hashed";
                 Log("ERROR unable to hash loaded N3.dll");
                 return nullptr;
             }
@@ -356,6 +373,7 @@ namespace aorf
             const PatchProfile* profile = SelectProfile(hash);
             if (!profile)
             {
+                UnsupportedDetail = "N3.dll sha256 " + hash;
                 Log("ERROR unsupported N3.dll sha256=%s", hash.c_str());
                 return nullptr;
             }
@@ -565,6 +583,11 @@ namespace aorf
         }
     }
 
+    const char* UnsupportedClientDetail()
+    {
+        return UnsupportedDetail.c_str();
+    }
+
     ClientProfile GetLoadedN3ClientProfile()
     {
         const PatchProfile* profile = GetLoadedProfile();
@@ -573,7 +596,8 @@ namespace aorf
             return ClientProfile::Unknown;
         }
 
-        if (std::strcmp(profile->name, "old-client") == 0)
+        if (std::strcmp(profile->name, "old-client") == 0 ||
+            std::strcmp(profile->name, "funcom-current") == 0)
         {
             return ClientProfile::OldClient;
         }

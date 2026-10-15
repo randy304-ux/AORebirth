@@ -90,6 +90,70 @@ app.MapPost("/change-password", async (HttpContext c) => {
   return Results.Json(new { ok = true });
 });
 
+app.MapGet("/reset-password", () => Results.Content(ResetPage(null), "text/html; charset=utf-8"));
+app.MapPost("/reset-password", async (HttpContext c) => {
+  var ip = ClientIp(c);
+  if (Limited("rp:" + ip, 10, TimeSpan.FromHours(1))) { Log($"reset ratelimited ip={ip}"); return Results.Content(ResetPage("Too many tries. Wait and try again."), "text/html; charset=utf-8", statusCode: 429); }
+  string user, email, password, confirm;
+  var isForm = c.Request.HasFormContentType;
+  if (isForm)
+  {
+    var fields = await c.Request.ReadFormAsync();
+    user = fields["username"].ToString();
+    email = fields["email"].ToString();
+    password = fields["password"].ToString();
+    confirm = fields["confirm"].ToString();
+  }
+  else
+  {
+    ResetReq body; try { body = await c.Request.ReadFromJsonAsync<ResetReq>(); } catch { return Results.Json(new { ok = false, error = "bad json" }, statusCode: 400); }
+    if (body == null) return Results.Json(new { ok = false, error = "bad json" }, statusCode: 400);
+    user = body.username; email = body.email; password = body.password; confirm = body.confirm;
+  }
+  IResult Fail(string error, int status) => isForm
+    ? Results.Content(ResetPage(error), "text/html; charset=utf-8", statusCode: status)
+    : Results.Json(new { ok = false, error }, statusCode: status);
+  if (user == null || !userRx.IsMatch(user)) return Fail("Username must be 3-16 letters and digits, starting with a letter.", 400);
+  email = (email ?? "").Trim();
+  if (!mailRx.IsMatch(email)) return Fail("Enter the email on the account.", 400);
+  if (!string.Equals(password, confirm, StringComparison.Ordinal)) return Fail("The two passwords do not match.", 400);
+  var pe = PwErr(password); if (pe != null) return Fail("Password must be 8-64 characters.", 400);
+  user = user.ToLowerInvariant();
+  if (Limited("rpu:" + user, 5, TimeSpan.FromHours(1))) { Log($"reset ratelimited user={user} ip={ip}"); return Fail("Too many tries. Wait and try again.", 429); }
+  try
+  {
+    await using var db = new MySqlConnection(connStr); await db.OpenAsync();
+    string storedEmail = null, hash = null;
+    await using (var s = new MySqlCommand("SELECT Email, Password FROM login WHERE Username=@u", db))
+    {
+      s.Parameters.AddWithValue("@u", user);
+      await using var row = await s.ExecuteReaderAsync();
+      if (await row.ReadAsync())
+      {
+        storedEmail = row.IsDBNull(0) ? "" : row.GetString(0);
+        hash = row.IsDBNull(1) ? "" : row.GetString(1);
+      }
+    }
+    if (hash == null || !string.Equals(storedEmail?.Trim(), email, StringComparison.OrdinalIgnoreCase))
+    {
+      Log($"reset denied user={user} ip={ip}");
+      return Fail("That username and email do not match.", 403);
+    }
+    await using (var u = new MySqlCommand("UPDATE login SET Password=@p WHERE Username=@u AND Password=@old", db))
+    {
+      u.Parameters.AddWithValue("@p", Hash(password));
+      u.Parameters.AddWithValue("@u", user);
+      u.Parameters.AddWithValue("@old", hash);
+      if (await u.ExecuteNonQueryAsync() != 1) return Fail("Could not save the new password. Try again.", 409);
+    }
+  }
+  catch (Exception ex) { Log($"reset error user={user} {ex.GetType().Name}: {ex.Message}"); return Fail("Server error.", 500); }
+  Log($"reset ok user={user} ip={ip}");
+  return isForm
+    ? Results.Content(ResetPage(null, done: true), "text/html; charset=utf-8")
+    : Results.Json(new { ok = true });
+});
+
 app.MapGet("/players", async () => {
   try {
     await using var db = new MySqlConnection(connStr); await db.OpenAsync();
@@ -102,5 +166,22 @@ Log($"start port={port} pid={Environment.ProcessId}");
 app.Run();
 
 static bool CryptoEq(string a, string b) => System.Security.Cryptography.CryptographicOperations.FixedTimeEquals(System.Text.Encoding.UTF8.GetBytes(a), System.Text.Encoding.UTF8.GetBytes(b));
+static string ResetPage(string error, bool done = false)
+{
+  string note = done
+    ? "<p>Password saved. Log in with the new password.</p>"
+    : "<form method=\"post\" action=\"/reset-password\">"
+      + "<label>Username<br><input name=\"username\" required></label><br><br>"
+      + "<label>Email on the account<br><input name=\"email\" type=\"email\" required></label><br><br>"
+      + "<label>New password<br><input name=\"password\" type=\"password\" required></label><br><br>"
+      + "<label>New password again<br><input name=\"confirm\" type=\"password\" required></label><br><br>"
+      + "<button type=\"submit\">Reset password</button></form>";
+  string alert = string.IsNullOrEmpty(error) ? "" : "<p>" + System.Net.WebUtility.HtmlEncode(error) + "</p>";
+  return "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>Reset password</title></head><body>"
+    + "<h1>Reset password</h1>"
+    + "<p>Enter the username and the email on the account. This does not change the game client.</p>"
+    + alert + note + "</body></html>";
+}
 record SignupReq(string username, string password, string email, string invite);
 record ChangeReq(string username, string oldPassword, string newPassword);
+record ResetReq(string username, string email, string password, string confirm);

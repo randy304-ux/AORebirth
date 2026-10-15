@@ -94,6 +94,18 @@ namespace aorf
                 "ep1-interfaces-20230602",
                 "3aa79a44e76c3413543404058c5d07323bd3b69f4c3493c7b136befa1a55b0a7",
                 211968
+            },
+            {
+                L"GUI.dll",
+                "funcom-current-gui",
+                "f8a741bc16b19371bbd1450e9806dbdbbe3ee4d39f03fcf6ae70c90a369268e3",
+                2790400
+            },
+            {
+                L"Interfaces.dll",
+                "funcom-current-interfaces",
+                "fab9fef95773636a7d162a5a63fed3e44dd834449f64b54162f12d1a898455df",
+                211968
             }
         };
 
@@ -677,10 +689,7 @@ namespace aorf
 
         bool RunLoginKeyPatchSelfTest()
         {
-            if (PublicKeyLength != sizeof(AoRebirthPublicKey) - 1)
-            {
-                return false;
-            }
+            static_assert(PublicKeyLength == sizeof(AoRebirthPublicKey) - 1, "public key length");
 
             LaunchEndpoint endpoint = {};
             if (!TryParseLaunchEndpoint(L"anarchyonline.exe IA35151902 IP7500 DUprivate", endpoint) ||
