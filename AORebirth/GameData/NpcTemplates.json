@@ -68177,5 +68177,137 @@
                                            "Guessed":  true,
                                            "Source":  "Mario Carles, level 10, for the Shady Guy car job. Placed 14m east of the Shady Guy at the same height. The guide does not publish his coordinates. Drops the Stolen Yalmaha."
                                        }
+             },
+    "DMMK":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Des Morck",
+                                       "Level":  102,
+                                       "Stats":  {
+                                                     "0":  277352961,
+                                                     "1":  10000,
+                                                     "27":  10000,
+                                                     "33":  0,
+                                                     "54":  102,
+                                                     "673":  31
+                                                 },
+                                       "Features":  [
+                                                        "NoCombat"
+                                                    ],
+                                       "HasHeadMesh":  false
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  true,
+                                           "Source":  "Client hash DMMK at 3259.5, 36.1, 941.9, level 102. No captured monster data, so no mesh was invented. Health is a placeholder so the NPC is not dead. Look is unproven."
+                                       }
+             },
+    "WIKA":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Windcaller Karrec",
+                                       "Level":  200,
+                                       "Stats":  {
+                                                     "0":  277352961,
+                                                     "1":  51008,
+                                                     "27":  51008,
+                                                     "33":  0,
+                                                     "54":  200,
+                                                     "64":  40696,
+                                                     "359":  40818,
+                                                     "360":  121,
+                                                     "455":  136,
+                                                     "673":  31
+                                                 },
+                                       "Features":  [
+                                                        "NoCombat"
+                                                    ],
+                                       "HasHeadMesh":  true
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Source":  "Capture 20260717-223626. Position matches hash WIKA. MonsterData 40818, head 40696, scale 121, level 200, family 136, health 51008, flags 277352961. Dialog is the captured greeting only. The temple follow-up is Guessed and gives no quest."
+                                       }
+             },
+    "ARVC":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Arbiter Vincenzo Palmiero",
+                                       "Level":  220,
+                                       "Stats":  {
+                                                     "0":  277615105,
+                                                     "1":  203721,
+                                                     "27":  203721,
+                                                     "33":  0,
+                                                     "54":  220,
+                                                     "64":  40694,
+                                                     "359":  26092,
+                                                     "360":  100,
+                                                     "455":  3,
+                                                     "673":  31
+                                                 },
+                                       "Features":  [
+                                                        "NoCombat"
+                                                    ],
+                                       "HasHeadMesh":  true
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Source":  "Capture 20260719-155043 matches hash ARVC exactly at 229.3, 1.4, 198.0. MonsterData 26092, head 40694, scale 100, level 220, family 3, health 203721, flags 277615105."
+                                       }
+             },
+    "FLIC":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Adeline Guerra [Freelancers Inc.]",
+                                       "Level":  210,
+                                       "Stats":  {
+                                                     "0":  277615105,
+                                                     "1":  31900,
+                                                     "27":  31900,
+                                                     "33":  0,
+                                                     "54":  210,
+                                                     "64":  40138,
+                                                     "359":  26155,
+                                                     "360":  130,
+                                                     "455":  1020,
+                                                     "673":  31
+                                                 },
+                                       "Features":  [
+                                                        "NoCombat"
+                                                    ],
+                                       "HasHeadMesh":  true
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  true,
+                                           "Source":  "Capture 20260719-155043 Adeline Guerra is 0.94 m from hash FLIC, the only level 210 body in Palmiero's Office. The hash binding is guessed. MonsterData 26155, head 40138, scale 130, family 1020, health 31900, flags 277615105."
+                                       }
+             },
+    "RPPI":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Arbitration Drone",
+                                       "Level":  100,
+                                       "Stats":  {
+                                                     "0":  277369345,
+                                                     "1":  13658,
+                                                     "27":  13658,
+                                                     "33":  0,
+                                                     "54":  100,
+                                                     "359":  260229,
+                                                     "360":  100,
+                                                     "455":  3,
+                                                     "673":  31
+                                                 },
+                                       "Features":  [
+                                                        "NoCombat"
+                                                    ],
+                                       "HasHeadMesh":  false
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Source":  "Capture 20260719-155043 matches hash RPPI exactly at 227.2, 1.2, 193.0. MonsterData 260229, no head, scale 100, level 100, family 3, health 13658, flags 277369345."
+                                       }
              }
 }

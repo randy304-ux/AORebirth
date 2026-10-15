@@ -23,9 +23,10 @@ namespace ZoneEngine_New.Core.WorldSimulation
     public static class DynelEventSpells
     {
         /// <summary>
-        /// Copies <see cref="EventType.OnUse"/> and <see cref="EventType.OnTargetInVicinity"/> from
-        /// the dynel. Grid teleporters keep <see cref="FunctionType.LineTeleport"/> on vicinity,
-        /// not on use.
+        /// Copies <see cref="EventType.OnUse"/>, <see cref="EventType.OnTargetInVicinity"/> and
+        /// <see cref="EventType.OnEnter"/> from the dynel. Grid teleporters keep
+        /// <see cref="FunctionType.LineTeleport"/> on vicinity, not on use. A walk-in absolute
+        /// <see cref="FunctionType.Teleport"/> (Palmiero's Office exit) lives on OnEnter.
         /// </summary>
         public static ItemTemplate WithOnUseFromDynel(ItemTemplate template, PlayfieldDynel? dynel)
         {
@@ -33,12 +34,13 @@ namespace ZoneEngine_New.Core.WorldSimulation
             if (dynel?.Modifiers == null)
                 return template;
 
-            var spellList = new Dictionary<EventType, List<ItemSpell>>(template.SpellList.Count + 2);
+            var spellList = new Dictionary<EventType, List<ItemSpell>>(template.SpellList.Count + 3);
             foreach (KeyValuePair<EventType, List<ItemSpell>> existing in template.SpellList)
                 spellList[existing.Key] = existing.Value;
 
             bool added = CopyEvent(dynel, spellList, AodbEventType.OnUse, EventType.OnUse);
             added |= CopyEvent(dynel, spellList, AodbEventType.OnTargetInVicinity, EventType.OnTargetInVicinity);
+            added |= CopyEvent(dynel, spellList, AodbEventType.OnEnter, EventType.OnEnter);
             if (!added)
                 return template;
 

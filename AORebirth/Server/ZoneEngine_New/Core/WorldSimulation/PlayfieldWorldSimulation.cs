@@ -24,6 +24,7 @@
     using ZoneEngine_New.Core.Playfield;
 
     using EventType = AORebirth.Enums.EventType;
+    using FunctionType = AORebirth.Enums.FunctionType;
     using AoVector3 = AORebirth.Core.Vector.Vector3;
     using AoQuaternion = AORebirth.Core.Vector.Quaternion;
     using CharacterStat = SmokeLounge.AOtomation.Messaging.GameData.CharacterStat;
@@ -997,8 +998,16 @@
             if (events == null || player.Session == null)
                 return;
 
+            // A door's own vicinity list wins. An exit that only has OnEnter (Palmiero's Office
+            // terminal) is baked as the same pad and runs that enter list.
+            EventType eventType = events.SpellList.ContainsKey(EventType.OnTargetInVicinity)
+                ? EventType.OnTargetInVicinity
+                : EventType.OnEnter;
+            if (!events.SpellList.ContainsKey(eventType))
+                return;
+
             events.ExecuteSpells(
-                EventType.OnTargetInVicinity,
+                eventType,
                 player,
                 playfield.GetRequiredService<IInventoryRepository>(),
                 playfield.GetRequiredService<IItemBuilder>(),
@@ -1018,21 +1027,39 @@
                 ItemTemplate events = DynelEventSpells.WithOnUseFromDynel(
                     new ItemTemplate { Id = d.TemplateId },
                     d);
+                bool enterTeleport = IsDoorOrTerminal(d) && HasFunction(events, EventType.OnEnter, FunctionType.Teleport);
                 if (!events.SpellList.ContainsKey(EventType.OnTargetInVicinity)
+                    && !enterTeleport
                     && itemTemplates != null
                     && itemTemplates.TryGet(d.TemplateId, out ItemTemplate? fromTemplate)
                     && fromTemplate.SpellList.ContainsKey(EventType.OnTargetInVicinity))
                     events = fromTemplate;
 
-                if (!events.SpellList.ContainsKey(EventType.OnTargetInVicinity))
+                bool vicinity = events.SpellList.ContainsKey(EventType.OnTargetInVicinity);
+                if (!vicinity && !enterTeleport)
                     continue;
 
                 float x = d.Position.X;
                 float y = d.Position.Y;
                 float z = d.Position.Z;
+                bool absoluteDoor = IsDoorOrTerminal(d)
+                    && (enterTeleport || HasFunction(events, EventType.OnTargetInVicinity, FunctionType.Teleport));
                 float r = TriggerVolumeCatalog.TargetVicinityRadius;
                 if (events.Stats.TryGetValue(CharacterStat.VicinityRange, out int vicinityRange) && vicinityRange > 0)
                     r = vicinityRange;
+                else if (itemTemplates != null
+                    && itemTemplates.TryGet(d.TemplateId, out ItemTemplate? catalog)
+                    && catalog.Stats.TryGetValue(CharacterStat.VicinityRange, out int catalogRange)
+                    && catalogRange > 0)
+                    r = catalogRange;
+                else if (absoluteDoor)
+                {
+                    // Client door spheres in DynelCollision.json are about 3. The Holo Deck door
+                    // (template 26219, mesh 258035) and the 7001 exit terminal have none extracted,
+                    // so the walk-up pad uses that same reach. Landings stay the dynel's own arguments.
+                    r = 3f;
+                }
+
                 var pad = new ZoneTriggerVolume
                 {
                     Kind = ZoneTriggerKind.TargetVicinity,
@@ -1051,8 +1078,29 @@
                 float h = TriggerVolumeCatalog.HalfHeight(pad);
                 pad.MinY = y - h;
                 pad.MaxY = y + h;
+                if (absoluteDoor && d.IdentityType == (int)IdentityType.Door)
+                    ApplyClientSphere(pad, d, x, y, z, DoorRotation(d));
+                else if (absoluteDoor && d.IdentityType == (int)IdentityType.Terminal)
+                    ApplyClientSphere(pad, d, x, y, z);
                 _triggers.Add(pad);
             }
+        }
+
+        static bool IsDoorOrTerminal(PlayfieldDynel dynel)
+            => dynel.IdentityType == (int)IdentityType.Door || dynel.IdentityType == (int)IdentityType.Terminal;
+
+        static bool HasFunction(ItemTemplate template, EventType eventType, FunctionType function)
+        {
+            if (!template.SpellList.TryGetValue(eventType, out List<ItemSpell>? spells) || spells == null)
+                return false;
+
+            for (int i = 0; i < spells.Count; i++)
+            {
+                if (spells[i].Is(function))
+                    return true;
+            }
+
+            return false;
         }
 
         /// <summary>

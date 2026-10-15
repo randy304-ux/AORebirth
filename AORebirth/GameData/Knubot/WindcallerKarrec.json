@@ -1,0 +1,26 @@
+{
+  "Notes": "Windcaller Karrec, hash WIKA, playfield 655. The greeting is the captured line from 20260717-223626. The temple errand is not built. The follow-up is Guessed.",
+  "Npcs": ["WIKA"],
+  "Openers": [
+    { "Say": "hello" }
+  ],
+  "Replies": {
+    "moment": {
+      "Text": "You can have a moment, but no more.",
+      "Goto": "notopen"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": [
+        "Greetings, traveller. My name is Karrec.",
+        "Would you spare a moment of your precious time?"
+      ],
+      "Replies": ["moment"]
+    },
+    "notopen": {
+      "Text": "The way into the Temple of the Three Winds is not open yet.",
+      "Replies": []
+    }
+  }
+}

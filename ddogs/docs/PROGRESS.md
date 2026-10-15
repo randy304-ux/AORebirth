@@ -105,3 +105,21 @@ One NPC, Buffbot, on playfield 655 at 3251.4, 35.1, 823.4. That pin is where Ran
 `.buff`, a tell to Buffbot, or the knubot line opens the info window. Buffmacro, Rebuff, Help, and Status are the top links. Sections are Generic, Agent, Bureaucrat, Doctor, and Enforcer. A click casts the items.dat nano whose exact name is in `GameData/Buffbot.json`, the highest QL that name has at or under the player's level. items.dat has one named rank for each of these programs. Strain, stacking, and NCU are the real buff rules. There is no credit cost. `.org create Name` inserts the organization and opens the org channel. The chat name is Orgbot. It is not a character row. Commands: online, members, lastseen (online or offline only), motd, news, alts, add, raid, loot. Raid and loot notes are memory and clear on a zone restart. The retail org-window create packet was not found, so `.org create` is the formation path.
 
 Not tested in the client: the tell window, a buff landing, a full NCU bar, org create, and an org-chat tell.
+
+## Holo Deck door and Palmiero's Office guides — deployed 2026-10-14 21:58 ET
+
+Backup `I:\AO\backups\cellao_codex_clean-20261014-2155-holo.sql` (21:55 ET, 18643634 bytes). Zone build passed. ZoneEngine ready 21:58 ET. leaves=705, quests=141 skipped=0, Knubot scripts=66 rejected=0. Ports 7500 pid 57736, 7501 pid 63200, 7012 pid 12408, 8098 pid 35656. Account API was left running. Engines left up.
+
+The Holo Deck entrance is client door 0xC000028F, template 26219, on playfield 655 at 3245.8, 36.1, 943.0. That is about 120 m north of Randy's pin 3251.4, 823.4, on the ICC HQ floor, not on the pin. Its OnTargetInVicinity teleport already names 183, 2, 197 on playfield 7001. A second proxy names playfield 6131 and stays closed, because operator 117 fails. Mesh 258035 has no sphere in DynelCollision.json, so the walk-up pad is 3 m, the reach of the client door spheres that are extracted. No teleports-table row was added. 7001 has no Door dynel, so a door-to-door route cannot name an exit.
+
+The way out is the only dynel on 7001: terminal template 303199 at 178.1, 1.1, 197.0. Its OnEnter teleport sends the character to 3245, 36, 939 on 655, about 4 m south of the entrance. That OnEnter was not baked before. It is now the same kind of 3 m pad. The client walk was not tested.
+
+Guide NPCs are hash templates and NoCombat. RALPH was not moved.
+
+- Des Morck (DMMK) at 3259.5, 36.1, 941.9, level 102. Guessed. No captured monster data, so no mesh was invented. Health 10000 is a placeholder. He may have no body.
+- Windcaller Karrec (WIKA) at 3212.4, 36.0, 788.8. Capture 20260717-223626: MonsterData 40818, head 40696, scale 121, level 200. The greeting is the captured line. The follow-up says the temple way is not open yet, and that line is Guessed. No burger quest and no level gate.
+- Arbiter Vincenzo Palmiero (ARVC) matches capture 20260719-155043 exactly. MonsterData 26092, head 40694, scale 100, level 220.
+- Adeline Guerra (FLIC) is Guessed. The capture stands 0.94 m from the only level 210 body. MonsterData 26155, head 40138, scale 130, level 210.
+- Arbitration Drone (RPPI) matches that capture exactly. MonsterData 260229, no head, scale 100, level 100.
+
+ASDM, the guardians, and the other untemplated 7001 bodies were not spawned. Not tested in the client: walking in through the Holo Deck door and back out.
