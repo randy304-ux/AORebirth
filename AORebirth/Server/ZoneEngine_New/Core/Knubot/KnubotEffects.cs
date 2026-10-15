@@ -15,8 +15,11 @@ using ZoneEngine_New.Core.Trade;
 
 /// <summary>Services a line's effects are applied through.</summary>
 public sealed class KnubotEffectServices(QuestService quests, HashItemMinter minter, InventoryFlushService flush, TradeService trades,
-    Lazy<ZoneEngine_New.Core.Playfield.PlayfieldManager>? playfields = null, AORebirth.Interfaces.Persistence.Missions.IMissionDao? missions = null)
+    Lazy<ZoneEngine_New.Core.Playfield.PlayfieldManager>? playfields = null, AORebirth.Interfaces.Persistence.Missions.IMissionDao? missions = null,
+    ZoneEngine_New.Core.Bots.BuffbotService? buffs = null)
 {
+    /// <summary>Root buffbot. Playfield providers do not register it, so {buffmenu} must not look it up there.</summary>
+    public ZoneEngine_New.Core.Bots.BuffbotService? Buffs { get; } = buffs;
     public Lazy<ZoneEngine_New.Core.Playfield.PlayfieldManager>? Playfields { get; } = playfields;
     public AORebirth.Interfaces.Persistence.Missions.IMissionDao? Missions { get; } = KnubotStartArea.Register(missions);
 
@@ -169,7 +172,7 @@ public sealed record KnubotOpenBuffMenu : KnubotEffect
 
     public override void Apply(KnubotContext context, KnubotEffectServices services)
     {
-        if (context.Player.Playfield?.GetService<ZoneEngine_New.Core.Bots.BuffbotService>() is { } buffs)
+        if ((services.Buffs ?? context.Player.Playfield?.GetService<ZoneEngine_New.Core.Bots.BuffbotService>()) is { } buffs)
             buffs.OpenMenu(context.Player);
     }
 }

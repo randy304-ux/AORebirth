@@ -263,8 +263,8 @@ namespace ZoneEngine_New.Core.Commands
                     body.Append(' ').Append(DiagAoml.Muted(Esc(line.Summary)));
             }
 
-            body.Append("<br><br><a href=&#39;chatcmd:///say .info&#39;>").Append(DiagAoml.Label("Back")).Append("</a>");
-            body.Append(" &#160; <a href=&#39;chatcmd:///say .info&#39;>").Append(DiagAoml.Label("Appendix")).Append("</a>");
+            body.Append("<br><br><a href='chatcmd:///say .info'>").Append(DiagAoml.Label("Back")).Append("</a>");
+            body.Append(" &#160; <a href='chatcmd:///say .info'>").Append(DiagAoml.Label("Appendix")).Append("</a>");
             body.Append("<br>").Append(DiagAoml.Muted("The window Back button steps back through these pages."));
             string html = body.ToString();
             if (html.IndexOf('\'') >= 0 || html.IndexOf('"') >= 0)

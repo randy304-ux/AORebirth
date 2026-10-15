@@ -186,7 +186,7 @@ namespace ZoneEngine_New.Core.Bots
 
             if (shown == 0)
                 body.Append("<br>").Append(DiagAoml.Muted("No buffbot nanos are running."));
-            body.Append("<br><br><a href=&#39;chatcmd:///say .buff menu&#39;>").Append(DiagAoml.Label("Back")).Append("</a>");
+            body.Append("<br><br><a href='chatcmd:///say .buff menu'>").Append(DiagAoml.Label("Back")).Append("</a>");
             return new List<string> { Link(body.ToString(), "Buff status") };
         }
 
@@ -197,10 +197,10 @@ namespace ZoneEngine_New.Core.Bots
             head.Append(DiagAoml.Title("Buffbot"));
             head.Append("<br>").Append(DiagAoml.Muted(
                 "One bot for every profession. A click casts the nano your level allows. No charge."));
-            head.Append("<br><a href=&#39;chatcmd:///say .buff macro&#39;>").Append(DiagAoml.Label("Buffmacro")).Append("</a>");
-            head.Append(" &#160; <a href=&#39;chatcmd:///say .buff rebuff&#39;>").Append(DiagAoml.Label("Rebuff")).Append("</a>");
-            head.Append(" &#160; <a href=&#39;chatcmd:///say .buff help&#39;>").Append(DiagAoml.Label("Help")).Append("</a>");
-            head.Append(" &#160; <a href=&#39;chatcmd:///say .buff status&#39;>").Append(DiagAoml.Label("Status")).Append("</a>");
+            head.Append("<br><a href='chatcmd:///say .buff macro'>").Append(DiagAoml.Label("Buffmacro")).Append("</a>");
+            head.Append(" &#160; <a href='chatcmd:///say .buff rebuff'>").Append(DiagAoml.Label("Rebuff")).Append("</a>");
+            head.Append(" &#160; <a href='chatcmd:///say .buff help'>").Append(DiagAoml.Label("Help")).Append("</a>");
+            head.Append(" &#160; <a href='chatcmd:///say .buff status'>").Append(DiagAoml.Label("Status")).Append("</a>");
             blocks.Add(head.ToString());
 
             if (_catalog.Sections.Count == 0)
@@ -218,9 +218,9 @@ namespace ZoneEngine_New.Core.Bots
                     sectionBody.Append("<br>");
                     if (offer.Available)
                     {
-                        sectionBody.Append("<a href=&#39;chatcmd:///say .buff cast ")
+                        sectionBody.Append("<a href='chatcmd:///say .buff cast ")
                             .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture))
-                            .Append("&#39;>")
+                            .Append("'>")
                             .Append(DiagAoml.Label(Esc(offer.Name)))
                             .Append("</a> ");
                         sectionBody.Append(DiagAoml.Muted(Esc(Describe(offer))));
@@ -262,14 +262,14 @@ namespace ZoneEngine_New.Core.Bots
             text.Append("<br><br>");
             if (page > 1)
             {
-                text.Append("<a href=&#39;chatcmd:///say .buff page ")
+                text.Append("<a href='chatcmd:///say .buff page ")
                     .Append((page - 1).ToString(CultureInfo.InvariantCulture))
-                    .Append("&#39;>").Append(DiagAoml.Label("Back")).Append("</a> &#160; ");
+                    .Append("'>").Append(DiagAoml.Label("Back")).Append("</a> &#160; ");
             }
 
-            text.Append("<a href=&#39;chatcmd:///say .buff page ")
+            text.Append("<a href='chatcmd:///say .buff page ")
                 .Append((page + 1).ToString(CultureInfo.InvariantCulture))
-                .Append("&#39;>").Append(DiagAoml.Label("Forward")).Append("</a>");
+                .Append("'>").Append(DiagAoml.Label("Forward")).Append("</a>");
             text.Append("<br>").Append(DiagAoml.Muted("Page " + page.ToString(CultureInfo.InvariantCulture) + "/%%PAGES%%"));
             return text.ToString();
         }

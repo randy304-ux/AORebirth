@@ -67381,7 +67381,7 @@
                                                      "342":  600,
                                                      "343":  0,
                                                      "359":  17657,
-                                                     "360":  125,
+                                                     "360":  310,
                                                      "368":  15,
                                                      "387":  503,
                                                      "389":  0,
@@ -67449,7 +67449,7 @@
                                                      "342":  600,
                                                      "343":  0,
                                                      "359":  17657,
-                                                     "360":  125,
+                                                     "360":  310,
                                                      "368":  15,
                                                      "387":  503,
                                                      "389":  0,
@@ -67517,7 +67517,7 @@
                                                      "342":  600,
                                                      "343":  0,
                                                      "359":  17657,
-                                                     "360":  125,
+                                                     "360":  310,
                                                      "368":  15,
                                                      "387":  503,
                                                      "389":  0,
@@ -67585,7 +67585,7 @@
                                                      "342":  600,
                                                      "343":  0,
                                                      "359":  17657,
-                                                     "360":  125,
+                                                     "360":  310,
                                                      "368":  15,
                                                      "387":  503,
                                                      "389":  0,
@@ -67623,7 +67623,287 @@
                                ],
                  "ContentProvenance":  {
                                            "Guessed":  false,
-                                           "Source":  "AO-Universe Arete Garbage Fleas. Mesh 17657, scale 125 and the level-2 hit points match the existing JNME Garbage Flea. VUFL is the repeated unresolved hash on the underground path and the same hash elsewhere on 6553."
+                                           "Source":  "AO-Universe Arete Garbage Fleas. Mesh 17657, scale 310 (raised from 125 at Randy's request; 125 looked too small) and the level-2 hit points match the existing JNME Garbage Flea. VUFL is the repeated unresolved hash on the underground path and the same hash elsewhere on 6553."
+                                       }
+             },
+    "FCTO":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Garbage Flea",
+                                       "Level":  1,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "1":  15,
+                                                     "4":  1,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "27":  15,
+                                                     "33":  3,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "54":  1,
+                                                     "59":  2,
+                                                     "60":  15,
+                                                     "64":  0,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  20,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  2,
+                                                     "286":  1,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "359":  17657,
+                                                     "360":  310,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "455":  25,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "61":  10
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
+                                   },
+                                   {
+                                       "Name":  "Garbage Flea",
+                                       "Level":  2,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "1":  24,
+                                                     "4":  1,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "27":  24,
+                                                     "33":  3,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "54":  2,
+                                                     "59":  2,
+                                                     "60":  15,
+                                                     "64":  0,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  20,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  2,
+                                                     "286":  1,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "359":  17657,
+                                                     "360":  310,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "455":  25,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "61":  20
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
+                                   },
+                                   {
+                                       "Name":  "Garbage Flea",
+                                       "Level":  5,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "1":  58,
+                                                     "4":  1,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "27":  58,
+                                                     "33":  3,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "54":  5,
+                                                     "59":  2,
+                                                     "60":  15,
+                                                     "64":  0,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  20,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  5,
+                                                     "286":  1,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "359":  17657,
+                                                     "360":  310,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "455":  25,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "61":  50
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
+                                   },
+                                   {
+                                       "Name":  "Garbage Flea",
+                                       "Level":  6,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "1":  69,
+                                                     "4":  1,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "27":  69,
+                                                     "33":  3,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "54":  6,
+                                                     "59":  2,
+                                                     "60":  15,
+                                                     "64":  0,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  20,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  6,
+                                                     "286":  1,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "359":  17657,
+                                                     "360":  310,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "455":  25,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "61":  60
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ]
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  true,
+                                           "Source":  "Guessed. FCTO is the unresolved level-5 hash by the subway door near the Arete new-character spawn (3601, 806 and 3573, 818); given the VUFL Garbage Flea leaf. AO-Universe Arete Garbage Fleas. Mesh 17657, scale 310 (raised from 125) and the level-2 hit points match the existing JNME Garbage Flea. VUFL is the repeated unresolved hash on the underground path and the same hash elsewhere on 6553."
                                        }
              },
     "IEGA":  {
@@ -67661,7 +67941,7 @@
                                                      "342":  600,
                                                      "343":  0,
                                                      "359":  17657,
-                                                     "360":  180,
+                                                     "360":  400,
                                                      "368":  15,
                                                      "387":  503,
                                                      "389":  0,
@@ -68229,6 +68509,8 @@
                                            "Source":  "Capture 20260717-223626. Position matches hash WIKA. MonsterData 40818, head 40696, scale 121, level 200, family 136, health 51008, flags 277352961. Dialog is the captured greeting only. The temple follow-up is Guessed and gives no quest."
                                        }
              },
+    "ICRW":  {"Templates": [{"Name": "ICC Cleaning Robot","Level": 1,"Stats": {"0": 277352961,"1": 200,"27": 200,"33": 0,"54": 1,"64": 0,"359": 297023,"360": 110,"455": 0,"673": 31},"Features": ["NoCombat","NoMove"],"HasHeadMesh": false}],"ContentProvenance": {"Source": "Guessed. Level 1 body near the reception desk in Palmiero's Office (7001). Name and cleaner mesh 297023 are guesses."}},
+    "ABGU":  {"Templates": [{"Name": "ICC Arbiter Guard","Level": 220,"Stats": {"0": 277352961,"1": 50000,"27": 50000,"33": 0,"54": 220,"64": 40627,"359": 254118,"360": 105,"455": 0,"673": 31},"Features": ["NoCombat","NoMove"],"HasHeadMesh": true}],"ContentProvenance": {"Source": "Guessed. Four level 220 bodies at the doors of Palmiero's Office (7001). Name guessed; model borrowed from ICC Shuttle Guard (254118, head 40627)."}},
     "ARVC":  {
                  "Templates":  [
                                    {
