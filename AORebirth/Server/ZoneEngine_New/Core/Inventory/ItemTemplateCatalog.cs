@@ -38,6 +38,8 @@ namespace ZoneEngine_New.Core.Inventory
         public bool TryGet(int aoid, out ItemTemplate template)
             => _templates.TryGetValue(aoid, out template!);
 
+        public IReadOnlyCollection<ItemTemplate> All => _templates.Values;
+
         public ItemTemplate Require(int aoid)
         {
             if (TryGet(aoid, out ItemTemplate template))

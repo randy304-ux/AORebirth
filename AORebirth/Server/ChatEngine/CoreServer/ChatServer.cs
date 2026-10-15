@@ -43,9 +43,10 @@ namespace ChatEngine.CoreServer
 
     using AORebirth.Communication.Messages;
     using AORebirth.Database.Dao;
+    using AORebirth.Database.Entities;
 
-    using ChatEngine.Channels;
     using ChatEngine.BotIntegration;
+    using ChatEngine.Channels;
     using ChatEngine.CoreClient;
     using ChatEngine.Lists;
     using ChatEngine.Packets;
@@ -104,6 +105,7 @@ namespace ChatEngine.CoreServer
             this.Channels.Add(new RestrictedChannel(Side.Clan, ChannelFlags.None, ChannelType.General));
             this.Channels.Add(new RestrictedChannel(Side.Omni, ChannelFlags.None, ChannelType.General));
             this.Channels.Add(new RestrictedChannel(Side.Neutral, ChannelFlags.None, ChannelType.General));
+            this.LoadOrganizationChannels();
 
             this.ClientConnected += this.ClientConnectedToChat;
             this.ClientDisconnected += this.OnClientDisconnect;
@@ -280,6 +282,120 @@ namespace ChatEngine.CoreServer
             }
         }
 
+        private void LoadOrganizationChannels()
+        {
+            try
+            {
+                foreach (DBOrganization org in OrganizationDao.Instance.GetAll())
+                {
+                    if (org == null || org.Id <= 0)
+                    {
+                        continue;
+                    }
+
+                    this.EnsureOrganizationChannel(org.Id, org.Name);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.Error.WriteLine("Organization channels were not loaded: " + exception.Message);
+            }
+        }
+
+        private void EnsureOrganizationChannel(int orgId, string name)
+        {
+            if (orgId <= 0 || this.FindOrganizationChannel(orgId) != null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(name))
+            {
+                name = "Organization";
+            }
+
+            this.Channels.Add(
+                new OrganizationChannel(
+                    ChannelFlags.NoInternational | ChannelFlags.GroupOnName,
+                    ChannelType.Organization,
+                    (uint)orgId,
+                    name));
+        }
+
+        private ChannelBase FindOrganizationChannel(int orgId)
+        {
+            foreach (ChannelBase channel in this.Channels)
+            {
+                if (channel.channelType == ChannelType.Organization && channel.ChannelId == (uint)orgId)
+                {
+                    return channel;
+                }
+            }
+
+            return null;
+        }
+
+        private bool TryHandleOrganizationRelay(string text, int characterId)
+        {
+            const string openPrefix = "#aorebirth-org-open ";
+            const string sayPrefix = "#aorebirth-org-say ";
+            if (text.StartsWith(openPrefix, StringComparison.Ordinal))
+            {
+                string idText = text.Substring(openPrefix.Length).Trim();
+                int space = idText.IndexOf(' ');
+                if (space >= 0)
+                {
+                    idText = idText.Substring(0, space);
+                }
+
+                int orgId;
+                if (int.TryParse(idText, out orgId) && orgId > 0)
+                {
+                    DBOrganization org = null;
+                    try
+                    {
+                        org = OrganizationDao.Instance.Get(orgId);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.Error.WriteLine("Organization lookup failed: " + exception.Message);
+                    }
+
+                    this.EnsureOrganizationChannel(orgId, org == null ? "Organization" : org.Name);
+                    ChannelBase channel = this.FindOrganizationChannel(orgId);
+                    Client client;
+                    if (channel != null
+                        && characterId > 0
+                        && this.ConnectedClients.TryGetValue((uint)characterId, out client)
+                        && client != null)
+                    {
+                        channel.AddClient(client);
+                    }
+                }
+
+                return true;
+            }
+
+            if (text.StartsWith(sayPrefix, StringComparison.Ordinal))
+            {
+                string rest = text.Substring(sayPrefix.Length).Trim();
+                int space = rest.IndexOf(' ');
+                int orgId;
+                if (space > 0 && int.TryParse(rest.Substring(0, space), out orgId))
+                {
+                    ChannelBase channel = this.FindOrganizationChannel(orgId);
+                    if (channel != null)
+                    {
+                        channel.BotMessage(ServerBots.OrgbotWireId, ServerBots.OrgbotName, rest.Substring(space + 1));
+                    }
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
         private void HandleZoneChatCommand(ChatCommand chatCommand)
         {
             if (chatCommand == null || string.IsNullOrWhiteSpace(chatCommand.ChatCommandString))
@@ -288,6 +404,11 @@ namespace ChatEngine.CoreServer
             }
 
             string text = chatCommand.ChatCommandString.Trim();
+            if (this.TryHandleOrganizationRelay(text, chatCommand.CharacterId))
+            {
+                return;
+            }
+
             if (TeamChatBridge.TryHandle(this, chatCommand))
             {
                 return;

@@ -2,7 +2,61 @@
     "SchemaVersion":  1,
     "PlayfieldId":  655,
     "Npcs":  [
+                 {
+                     "Key":  "ddogs:icc:buffbot",
+                     "Provenance":  "Client monster 96056 protocol droid (catMesh 96024). One buffbot for every profession, standing at Randy's outdoor ICC hub pin 3251.4, 35.1, 823.4. That pin is where Randy was standing, not a measured row of bot characters. White uniforms are not on a hash template.",
+                     "ContentNpcIdentity":  "ddogs-buffbot",
+                     "PlayfieldId":  655,
+                     "InstanceId":  2110836806,
+                     "Name":  "Buffbot",
+                     "Position":  [
+                                      3251.4,
+                                      35.1,
+                                      823.4
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  200,
+                                   "4":  1,
+                                   "27":  200,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  220,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  96056,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
 
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 }
              ],
     "StandaloneShops":  [
 

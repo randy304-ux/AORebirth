@@ -33,7 +33,11 @@ namespace ChatEngine.Channels
 {
     #region Usings ...
 
+    using Cell.Core;
+
     using AORebirth.Database.Dao;
+
+    using ChatEngine.CoreClient;
 
     #endregion
 
@@ -72,5 +76,35 @@ namespace ChatEngine.Channels
         }
 
         #endregion
+
+        /// <summary>
+        /// Only a character whose clan stat is this org id joins the channel.
+        /// 50000 is the character identity type stored in stats.Type.
+        /// </summary>
+        public override bool AddClient(IClient client)
+        {
+            Client typed = client as Client;
+            if (typed == null || typed.Character == null)
+            {
+                return false;
+            }
+
+            int orgId;
+            try
+            {
+                orgId = StatDao.Instance.GetById(50000, (int)typed.Character.CharacterId, 5).StatValue;
+            }
+            catch
+            {
+                return false;
+            }
+
+            if (orgId != (int)this.ChannelId)
+            {
+                return false;
+            }
+
+            return base.AddClient(client);
+        }
     }
 }

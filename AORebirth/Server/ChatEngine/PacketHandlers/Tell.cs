@@ -35,6 +35,7 @@ namespace ChatEngine.PacketHandlers
 
     using AORebirth.Database.Dao;
 
+    using ChatEngine.BotIntegration;
     using ChatEngine.CoreClient;
     using ChatEngine.Packets;
 
@@ -66,6 +67,28 @@ namespace ChatEngine.PacketHandlers
             string message = reader.ReadString();
             client.Server.Debug(client, "{0} >> Tell: PlayerId: {1}", client.Character.characterName, playerId);
             reader.Finish();
+            if (ServerBots.IsServerBot(playerId))
+            {
+                string tellText = message ?? string.Empty;
+                if (tellText.Length > 180)
+                {
+                    tellText = tellText.Substring(0, 180);
+                }
+
+                tellText = tellText.Replace("\r", " ").Replace("\n", " ");
+                if (Program.ISCom != null)
+                {
+                    Program.ISCom.BroadCast(
+                        new AORebirth.Communication.Messages.ChatCommand
+                        {
+                            CharacterId = (int)client.Character.CharacterId,
+                            ChatCommandString = "#aorebirth-bot-tell " + ServerBots.NameOf(playerId) + " " + tellText
+                        });
+                }
+
+                return;
+            }
+
             if (client.ChatServer().BotRouter != null
                 && client.ChatServer().BotRouter.TryPublishTell(
                     playerId,

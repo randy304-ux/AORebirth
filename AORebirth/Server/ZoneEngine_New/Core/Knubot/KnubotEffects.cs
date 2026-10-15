@@ -162,6 +162,18 @@ public sealed record KnubotOpenShop : KnubotEffect
         => services.Trades.TryOpenShop(context.Player, context.Npc.Shop!);
 }
 
+/// <summary><c>{buffmenu}</c>: opens the buffbot info window. The script still plays its line.</summary>
+public sealed record KnubotOpenBuffMenu : KnubotEffect
+{
+    public override bool Check(KnubotContext context, KnubotPlan plan, KnubotEffectServices services) => true;
+
+    public override void Apply(KnubotContext context, KnubotEffectServices services)
+    {
+        if (context.Player.Playfield?.GetService<ZoneEngine_New.Core.Bots.BuffbotService>() is { } buffs)
+            buffs.OpenMenu(context.Player);
+    }
+}
+
 /// <summary><c>{opentrade}</c>: opens the NPC's Give Item window for the script's Trades.</summary>
 public sealed record KnubotOpenTrade : KnubotEffect
 {

@@ -1,0 +1,16 @@
+{
+  "Notes": "ICC hub buffbot. {buffmenu} opens the info window. Mesh is client monster 96056, protocol droid.",
+  "Npcs": ["ddogs-buffbot"],
+  "Openers": [
+    { "Say": "intro" }
+  ],
+  "Replies": {
+    "menu": { "Text": "Show me the buffs.", "Goto": "intro" }
+  },
+  "Lines": {
+    "intro": {
+      "Text": "{buffmenu}I cast the buffs your level allows. The window lists them. There is no charge.",
+      "Replies": ["menu"]
+    }
+  }
+}

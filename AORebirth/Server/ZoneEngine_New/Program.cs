@@ -253,6 +253,7 @@ namespace ZoneEngine_New
 
             //Chat
             services.AddSingleton<IChatEngineLink, IsComChatEngineLink>();
+            services.AddSingleton(provider => new Lazy<IChatEngineLink>(provider.GetRequiredService<IChatEngineLink>));
             services.AddSingleton(provider => new Lazy<TeamService>(provider.GetRequiredService<TeamService>));
             services.AddSingleton(provider => new TeamService(
                 provider.GetRequiredService<IChatEngineLink>(), dispatchOnOwner: (player, action) =>
@@ -295,6 +296,14 @@ namespace ZoneEngine_New
             services.AddSingleton<IGmCommand, ShutdownCommand>();
             services.AddSingleton<InfoCommand>();
             services.AddSingleton<IGmCommand>(provider => provider.GetRequiredService<InfoCommand>());
+            services.AddSingleton<ZoneEngine_New.Core.Bots.BuffbotCatalog>();
+            services.AddSingleton<ZoneEngine_New.Core.Bots.BuffbotService>();
+            services.AddSingleton<ZoneEngine_New.Core.Bots.OrgBotService>();
+            services.AddSingleton<ZoneEngine_New.Core.Bots.BotChatDispatch>();
+            services.AddSingleton(provider => new Lazy<ZoneEngine_New.Core.Bots.BotChatDispatch>(
+                provider.GetRequiredService<ZoneEngine_New.Core.Bots.BotChatDispatch>));
+            services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.BuffbotCommand>();
+            services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.OrgBotCommand>();
             services.AddSingleton(provider => new Lazy<GmCommandDispatcher>(() => provider.GetRequiredService<GmCommandDispatcher>()));
             services.AddSingleton<GmCommandDispatcher>();
             services.AddSingleton<ZoneLoginHandler>();

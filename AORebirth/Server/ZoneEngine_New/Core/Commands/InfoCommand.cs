@@ -192,7 +192,7 @@ namespace ZoneEngine_New.Core.Commands
                     foreach ((string syntax, string summary) in TeamChatMessageHandler.Commands)
                         lines.Add(new Line(syntax, summary));
                     lines.Add(new Line("Team window", "Kick, make leader, and make raid use the team window."));
-                    lines.Add(new Line("Organization chat", "The client org channel. This server adds no org slash command."));
+                    lines.Add(new Line("Organization chat", "The client org channel. .org and a tell to Orgbot use the org bot."));
                     break;
                 case "mercs":
                     foreach ((PetCommandCode _, string syntax, string summary) in PetService.Orders)

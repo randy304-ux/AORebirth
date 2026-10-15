@@ -36,6 +36,7 @@ namespace ChatEngine.PacketHandlers
     using AORebirth.Database.Dao;
     using AORebirth.Database.Entities;
 
+    using ChatEngine.BotIntegration;
     using ChatEngine.CoreClient;
     using ChatEngine.Packets;
 
@@ -80,9 +81,14 @@ namespace ChatEngine.PacketHandlers
             reader.Finish();
 
             var character = AORebirth.Database.DatabaseDaoFactory.CreateCharacterDao().LoadByName(playerName);
+            uint serverBotId;
             if (character != null)
             {
                 playerId = (uint)character.CharacterId;
+            }
+            else if (ServerBots.TryResolve(playerName, out serverBotId))
+            {
+                playerId = serverBotId;
             }
             else if (client.ChatServer().BotRouter != null)
             {
@@ -93,7 +99,11 @@ namespace ChatEngine.PacketHandlers
             client.Send(namelookup);
 
             int online = 0;
-            if (playerId != uint.MaxValue)
+            if (ServerBots.IsServerBot(playerId))
+            {
+                online = 1;
+            }
+            else if (playerId != uint.MaxValue)
             {
                 try
                 {

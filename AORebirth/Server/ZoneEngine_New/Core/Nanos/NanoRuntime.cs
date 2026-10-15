@@ -642,6 +642,68 @@ namespace ZoneEngine_New.Core.Nanos
             return true;
         }
 
+        /// <summary>
+        /// Lands a friendly buff on the player without an uploaded nano, a nano-energy spend, or a cast bar.
+        /// Strain, stacking and NCU still go through <see cref="Character.TryApplyBuff"/>. The player is the
+        /// source, so the land is a self-apply. Hostile nanos and non-buffs are refused.
+        /// </summary>
+        public static bool TryApplyServiceBuff(Player player, int nanoId, bool announceRefusal, out string detail)
+        {
+            detail = "That nano program had no effect.";
+            ArgumentNullException.ThrowIfNull(player);
+            if (player.IsDead)
+            {
+                detail = "You cannot receive a buff while dead.";
+                return false;
+            }
+
+            if (!TryResolveSpell(player, nanoId, out NanoSpell? spell) || spell == null)
+            {
+                detail = "That nano is not in the item catalog.";
+                return false;
+            }
+
+            if (spell.IsHostile || !spell.IsBuff)
+            {
+                detail = "That nano is not a friendly buff.";
+                return false;
+            }
+
+            DateTime nowUtc = DateTime.UtcNow;
+            BuffApplyDecision decision = player.TryApplyBuff(
+                spell,
+                player.Identity,
+                nowUtc,
+                out Buff? applied,
+                out Buff? replaced);
+            if (applied == null)
+            {
+                detail = decision switch
+                {
+                    BuffApplyDecision.RefusedNotEnoughNcu => "Not enough NCU.",
+                    BuffApplyDecision.RefusedStrainStronger => "A stronger buff of that strain is already running.",
+                    _ => "That nano program had no effect."
+                };
+                if (announceRefusal)
+                    Refuse(player, decision);
+                return false;
+            }
+
+            if (replaced != null && replaced.Id != spell.Id)
+                AnnounceBuffRemoved(player, replaced);
+
+            ClientFeedback.Send(player, ClientFeedback.NanoExecutedSuccessfully);
+            SendNanoDuration(player, player, applied);
+            ExecuteOnUseEffects(player, player, spell, skipPassiveModifiers: true);
+            detail = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} QL {1} landed. NCU {2}.",
+                spell.Name,
+                spell.Quality,
+                spell.NcuCost);
+            return true;
+        }
+
         static int ResolveNanoCost(Character caster, NanoSpell spell)
             => NanoCostCalculator.Compute(
                 spell.NanoPointCost,

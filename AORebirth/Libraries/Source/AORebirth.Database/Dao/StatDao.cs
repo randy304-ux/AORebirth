@@ -47,6 +47,17 @@ namespace AORebirth.Database.Dao
     /// <summary>
     /// Data access object for Stats
     /// </summary>
+    public sealed class OrganizationMemberRow
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Username { get; set; }
+
+        public int Online { get; set; }
+    }
+
     public class StatDao : Dao<DBStats, StatDao>
     {
         #region Public Methods and Operators
@@ -199,11 +210,38 @@ namespace AORebirth.Database.Dao
         }
 
         /// <summary>
-        /// Disband an organization
+        /// Characters whose stats row StatId 5 (clan) equals <paramref name="orgId"/>.
+        /// <paramref name="ownerType"/> is the stats.Type the zone writes for a character.
         /// </summary>
-        /// <param name="orgId">
-        /// Id of the organization
-        /// </param>
+        public static List<OrganizationMemberRow> ListOrganizationMembers(int orgId, int ownerType)
+        {
+            var rows = new List<OrganizationMemberRow>();
+            if (orgId <= 0)
+            {
+                return rows;
+            }
+
+            try
+            {
+                using (IDbConnection conn = Connector.GetConnection())
+                {
+                    rows.AddRange(
+                        conn.Query<OrganizationMemberRow>(
+                            "SELECT c.Id AS Id, c.Name AS Name, c.Username AS Username, c.Online AS Online "
+                            + "FROM stats s INNER JOIN characters c ON c.Id = s.Instance "
+                            + "WHERE s.StatId = 5 AND s.StatValue = @orgId AND s.Type = @type "
+                            + "ORDER BY c.Name",
+                            new { orgId, type = ownerType }));
+                }
+            }
+            catch (Exception e)
+            {
+                LogUtil.ErrorException(e);
+            }
+
+            return rows;
+        }
+
         public static void DisbandOrganization(int orgId)
         {
             // This only takes care of the offline characters. Characters currently online have to be notified as well (setting their stats + message)

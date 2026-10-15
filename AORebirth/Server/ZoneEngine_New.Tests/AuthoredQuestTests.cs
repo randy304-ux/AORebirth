@@ -457,6 +457,7 @@ public sealed class AuthoredQuestTests
     {
         public bool TryGet(int id, out ItemTemplate template) { template = Require(id); return true; }
         public ItemTemplate Require(int id) => new() { Id = id, Quality = 1 };
+        public IReadOnlyCollection<ItemTemplate> All => Array.Empty<ItemTemplate>();
     }
     sealed class NoIndependentFlush : ICharacterCoalesceCommit
     { public void Persist(IReadOnlyList<ItemInstanceRecord> inserts, IReadOnlyList<ItemLocationUpdate> updates, int owner, IReadOnlyList<int> nanos, IReadOnlyList<ActiveNanoRecord>? activeNanos, IReadOnlyList<SkillLockRecord>? skillLocks) => throw new InvalidOperationException("No independent item transaction expected."); }

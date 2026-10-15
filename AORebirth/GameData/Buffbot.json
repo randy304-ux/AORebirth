@@ -1,0 +1,58 @@
+{
+  "SchemaVersion": 1,
+  "Notes": "Names only. The zone resolves each name in items.dat and casts the highest QL the player level allows. Ids are not stored here. Based on the ChewysBuffs info window (Budabot/Nadybot). Names that are not in items.dat are omitted at startup.",
+  "Sections": [
+    {
+      "Name": "Generic",
+      "Nanos": [
+        "L33t Transformation",
+        "Composite Attribute Boost",
+        "Composite Nano Expertise",
+        "Composite Utility Expertise",
+        "Composite Ranged Expertise",
+        "Composite Ranged Special Expertise",
+        "Composite Melee Expertise",
+        "Composite Physical Special Expertise",
+        "Composite Martial Prowess Expertise",
+        "Composite Tradeskill Expertise"
+      ]
+    },
+    {
+      "Name": "Agent",
+      "Nanos": [
+        "Assassin's Grin",
+        "Feline Grace",
+        "Enhanced Senses"
+      ]
+    },
+    {
+      "Name": "Bureaucrat",
+      "Nanos": [
+        "Cut Red Tape",
+        "Soothing Calm",
+        "Baton of Command",
+        "Baton of Leadership",
+        "Baton of Authority"
+      ]
+    },
+    {
+      "Name": "Doctor",
+      "Nanos": [
+        "Continuous Reconstruction",
+        "Instinctive Control"
+      ]
+    },
+    {
+      "Name": "Enforcer",
+      "Nanos": [
+        "Essence of Behemoth",
+        "Essence of Colossus",
+        "Essence of Gargantua",
+        "Essence of Cyclops",
+        "Essence of Might",
+        "Essence of Vitality",
+        "Essence of Boundless Health"
+      ]
+    }
+  ]
+}

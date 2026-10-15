@@ -181,6 +181,8 @@ namespace ZoneEngine_New.Tests
             => _templates.TryGetValue(aoid, out template!);
 
         public ItemTemplate Require(int aoid) => _templates[aoid];
+
+        public IReadOnlyCollection<ItemTemplate> All => _templates.Values;
     }
 
     internal sealed class StubLogger : IZoneLogger

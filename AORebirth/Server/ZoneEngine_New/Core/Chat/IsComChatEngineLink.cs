@@ -9,7 +9,10 @@ namespace ZoneEngine_New.Core.Chat
 
     using Utility.Config;
 
+    using ZoneEngine_New.Core.Bots;
+    using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.Logging;
+    using ZoneEngine_New.Core.Playfield;
     using ZoneEngine_New.Core.Teams;
 
     using ConfigReadWrite = Utility.Config.ConfigReadWrite;
@@ -28,16 +31,26 @@ namespace ZoneEngine_New.Core.Chat
     {
         private readonly IZoneLogger _logger;
         private readonly Lazy<TeamService> _teams;
+        private readonly Lazy<PlayfieldManager> _playfields;
+        private readonly Lazy<BotChatDispatch> _bots;
         private readonly ISComV2Client _client = new ISComV2Client();
         private bool _started;
         private bool _disposed;
 
-        public IsComChatEngineLink(IZoneLogger logger, Lazy<TeamService> teams)
+        public IsComChatEngineLink(
+            IZoneLogger logger,
+            Lazy<TeamService> teams,
+            Lazy<PlayfieldManager> playfields,
+            Lazy<BotChatDispatch> bots)
         {
             ArgumentNullException.ThrowIfNull(logger);
             ArgumentNullException.ThrowIfNull(teams);
+            ArgumentNullException.ThrowIfNull(playfields);
+            ArgumentNullException.ThrowIfNull(bots);
             _logger = logger;
             _teams = teams;
+            _playfields = playfields;
+            _bots = bots;
             _client.OnReceiveData += OnReceiveData;
         }
 
@@ -99,9 +112,18 @@ namespace ZoneEngine_New.Core.Chat
 
             try
             {
-                _teams.Value.TryHandleInboundChatCommand(
+                if (_teams.Value.TryHandleInboundChatCommand(
                     command.CharacterId,
-                    command.ChatCommandString);
+                    command.ChatCommandString))
+                    return;
+
+                if (!_playfields.Value.FindPlayer(command.CharacterId, out Player player))
+                {
+                    _bots.Value.TellOffline(command.CharacterId, command.ChatCommandString);
+                    return;
+                }
+
+                _bots.Value.TryHandle(player, command.ChatCommandString);
             }
             catch (Exception exception)
             {
