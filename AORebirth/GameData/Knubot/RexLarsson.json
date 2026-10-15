@@ -57,7 +57,7 @@
     "Lines":  {
                   "offer_robots":  {
                                        "Text":  [
-                                                    "Terminate five Malfunctioning Cleaning Robots rolling around out here.",
+                                                    "Terminate five Cleanmeister Intelligence Robots rolling around out here.",
                                                     "{delay 1}Then open the Cargo Box beside me and come back. After that, Marcus Stone is the man with the ID papers."
                                                 ],
                                        "Replies":  [
@@ -84,7 +84,7 @@
                                                   ]
                                   },
                   "busy_robots":  {
-                                      "Text":  "Five Malfunctioning Cleaning Robots, then the Cargo Box.",
+                                      "Text":  "Five Cleanmeister Intelligence Robots, then the Cargo Box.",
                                       "Replies":  [
                                                       "bye"
                                                   ]

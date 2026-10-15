@@ -203,9 +203,9 @@ $hVern = Handoff 'HVGO' 'Speak to Vernon Godfray' 'AVGO'
 $hMason = Handoff 'HDMA' 'Talk to Doctor Mason' 'ADMA'
 $hLor = Handoff 'HLOR' 'Talk to Lorelei' 'LRTH'
 
-$rex = Job 'RELS' 'ARX' @(@('KillMultiple','MLCE',5,'Terminate 5 Cleaning Robots'),@('TargetNpc',$null,$null,'Open the Cargo Box')) 'Return to Rex Larsson' 1281 1040 $null
+$rex = Job 'RELS' 'ARX' @(@('KillMultiple','MLCE',5,'Terminate 5 Cleanmeisters'),@('TargetNpc',$null,$null,'Open the Cargo Box')) 'Return to Rex Larsson' 1281 1040 $null
 $marcus = Job 'AMST' 'AMR' @() 'Extinguish the gas fire' 1281 1080 @(Item 296569 'Generic Nano Transmitter') @{ Bit = 656; Ret = 'FindItem'; Spec = 'QCFS' }
-$flint = Job 'FLNV' 'AFL' @(,@('KillMultiple','JUCO',7,'Kill 7 Cleaning Robots')) 'Bring the computer to Alex' 0 0 @(Item 296570 'Blank Info Chip') @{ Ret = 'FindItem'; Spec = 'QBAC' }
+$flint = Job 'FLNV' 'AFL' @(,@('KillMultiple','JUCO',7,'Kill 7 Cleanmeisters')) 'Bring the computer to Alex' 0 0 @(Item 296570 'Blank Info Chip') @{ Ret = 'FindItem'; Spec = 'QBAC' }
 $alex = Job 'ALGI' 'AAX' @(
   @('TargetNpc','SRDO',$null,'Hack the Surveillance Droid'),
   @('TargetNpc',$null,$null,'Plant the Recording Device'),
@@ -226,7 +226,7 @@ $patrick = Job 'APSU' 'APN' @() 'Touch the Insurance Terminal' 0 0 @(Item 36777 
 $shady = Job 'ASYG' 'ASY' @(,@('KillOne','MARC',$null,'Kill Mario Carles')) 'Return the Yalmaha' 1540 5000 @(Item 295705 'Kodaik Velocity IV') @{ Bit = 661; Ret = 'FindItem' }
 
 Script 'RexLarsson.json' @('SimpleChar:78E0FC63') 'Rex Larsson, upper deck (3624x788). Guide: five cleaning robots, the cargo box, then Marcus Stone. Reward 1040 credits and up to 1281 xp.' @('{delay 1}You look new. Everyone who washes up here wants an ID, so they can get off Arete.', '{delay 1}I can point you on. First, my cleaning robots have gone haywire.') @(
-  (J 'robots' $rex 'What''s wrong with the robots?' @('Terminate five Malfunctioning Cleaning Robots rolling around out here.', '{delay 1}Then open the Cargo Box beside me and come back. After that, Marcus Stone is the man with the ID papers.') 'I''ll do it.' 'Five Malfunctioning Cleaning Robots, then the Cargo Box.' $null @{ Mode = 'talk'; Thanks = @('Much quieter, and the box is open. Here.'); After = @('{givequest HAMS}', '{delay 1}Marcus Stone is on this deck, about 3630 by 824. He is next, not the junkyard.') })
+  (J 'robots' $rex 'What''s wrong with the robots?' @('Terminate five Cleanmeister Intelligence Robots rolling around out here.', '{delay 1}Then open the Cargo Box beside me and come back. After that, Marcus Stone is the man with the ID papers.') 'I''ll do it.' 'Five Cleanmeister Intelligence Robots, then the Cargo Box.' $null @{ Mode = 'talk'; Thanks = @('Much quieter, and the box is open. Here.'); After = @('{givequest HAMS}', '{delay 1}Marcus Stone is on this deck, about 3630 by 824. He is next, not the junkyard.') })
 ) 'Keep your head down out there.' $null
 Script 'CargoBox.json' @('ddogs-cargo-box') 'Cargo Box at the captured static (3621.6, 51.7, 780.5), beside Rex.' @('A cargo box. The lid is shut.') @() 'The lid stays shut.' @{
   Openers = @([ordered]@{ If = @('HasQuest ARX1'); Say = 'open' })
@@ -238,7 +238,7 @@ Script 'MarcusStone.json' @('SimpleChar:78E0FC62') 'Marcus Stone, upper deck (36
 ) 'The wounded dockworkers are a separate errand. I do not have them standing here yet.' $null
 
 Script 'FlintNovak.json' @('SimpleChar:78E0FC64') 'Flint Novak, junkyard (3598x863). Guide: seven junkyard robots, Bio Analyzing Computer goes to Alex, not back to Flint.' @('{delay 1}Flint Novak. I find things, and I fix things.') @(
-  (J 'computer' $flint 'Marcus sent me.' @('Alex Gibbs needs a Bio Analyzing Computer. On retail any mix of seven junkyard robots will do: Cleaning Robots, Waste Collectors or 32-V Dockers.', '{delay 1}This counter is the seven Cleaning Robots, because one objective counts one kind. Take the computer to Alex Gibbs. Do not bring it back to me.') 'I''ll find one.' 'Seven junkyard Cleaning Robots. Take the Bio Analyzing Computer to Alex Gibbs.' $marcus.Return @{ Mode = 'elsewhere'; Luck = 'Take whatever you find to Alex Gibbs, by the shuttle pad. Not back here.' })
+  (J 'computer' $flint 'Marcus sent me.' @('Alex Gibbs needs a Bio Analyzing Computer. On retail any mix of seven junkyard robots will do: Cleanmeister Intelligence Robots, Waste Collectors or 32-V Dockers.', '{delay 1}This counter is the seven Cleanmeister Intelligence Robots, because one objective counts one kind. Take the computer to Alex Gibbs. Do not bring it back to me.') 'I''ll find one.' 'Seven Cleanmeister Intelligence Robots. Take the Bio Analyzing Computer to Alex Gibbs.' $marcus.Return @{ Mode = 'elsewhere'; Luck = 'Take whatever you find to Alex Gibbs, by the shuttle pad. Not back here.' })
 ) 'Alex Gibbs is by the shuttle pad.' (Arrive $hFlint @('Marcus sent you? Then you have earned a hearing.'))
 
 $alexTurn = @{ Openers = @([ordered]@{ If = @('HasQuest AFLR'); Say = 'bac' })
@@ -538,10 +538,24 @@ $janos = Job 'TPIB' 'JNS' @() 'Deliver the parcel to RALPH' 11266 0 $null @{ Ret
 if ($script:bit -ne 656) { throw "after Janos expected the counter at 656, got $($script:bit)" }
 # Explicit Arete bits 656-662 are already assigned and do not move this counter.
 $script:bit = 663
-Script 'FreighterOfficer.json' @('TPIB') 'Janos, back of the Arete starting ship (playfield 7101). AO-Universe section 22, A Special Delivery. Bit 655.' @('{delay 1}Janos. Are you heading to ICC Headquarters?', '{delay 1}I have a parcel for the robot butler at the desk in the tallest tower. It is marked for Arbiter Vincenzo Palmiero.') @(
-  (J 'parcel' $janos 'I can take it.' @('Leave with the blue android. Nobody else.', '{delay 1}The parcel item is not in the item list, so I am not handing you a stand-in. When you are done on Arete, the Arrival Hall is in Andromeda. Turn right to the Holo Deck tower, take the telepad behind the reception desk, and give the errand to RALPH.', '{delay 1}You cannot come back to Arete once you leave.') 'I''ll deliver it.' 'RALPH, the blue android in the Holo Deck at ICC Headquarters.' $null @{ Mode = 'elsewhere'; MinLevel = 5; Luck = 'RALPH is upstairs in the Holo Deck. He is not expecting you.' })
-) 'Do not open it.' $null
-Script 'Ralph.json' @('ddogs-ralph') 'RALPH, Holo Deck, Andromeda playfield 655, at the guide pin 3246 by 940. Y is the floor the building''s spawns stand on. He was not in the spawn dump upstairs.' @('{delay 1}RALPH. State your business.') @() 'I have a desk to keep.' @{
+# Janos's first screen is the PRK line with exactly two options, so Script() is not used.
+$fo = [ordered]@{
+  Notes = 'Janos, back of the Arete starting ship (playfield 7101). AO-Universe section 22, A Special Delivery. Opening line and the two options are Randy''s PRK shot. Bit 655. Generated by ddogs/tools/Build-NewbieQuests.ps1.'
+  Npcs = @('TPIB')
+  Openers = @([ordered]@{ If = @('HasAnyQuest JNSR'); Say = 'busy_parcel' }, [ordered]@{ Say = 'hello' })
+  Replies = [ordered]@{
+    ask_parcel = [ordered]@{ Text = 'I can help!'; If = @('!HasCompletedQuest JNSR', '!HasAnyQuest JNSR', 'minlevel 5'); Goto = 'give_parcel' }
+    goodbye = [ordered]@{ Text = 'Goodbye'; Goto = 'bye' }
+  }
+  Lines = [ordered]@{
+    give_parcel = [ordered]@{ Text = @('{givequest JNSR}', 'Good good, here, don''t ask questions. Don''t open it, or anything. Take this to the tallest tower. Leave it with the robot butler at the desk.', '{delay 1}That tower is the Holo Deck at ICC Headquarters. RALPH is behind the reception desk in Palmiero''s Office.') }
+    busy_parcel = [ordered]@{ Text = 'RALPH. Behind the reception desk in Palmiero''s Office, in the Holo Deck.'; Replies = @('goodbye') }
+    bye = [ordered]@{ Text = 'Good.{close}' }
+    hello = [ordered]@{ Text = @('{delay 1}You there...are you heading into the ICC Headquarters?'); Replies = @('ask_parcel', 'goodbye') }
+  }
+}
+[IO.File]::WriteAllText((Join-Path $GameData 'Knubot\FreighterOfficer.json'), ($fo | ConvertTo-Json -Depth 10), $u)
+Script 'Ralph.json' @('ddogs-ralph') 'RALPH, behind the reception desk in Palmiero''s Office, playfield 7001, at 187.7, 1.0, 195.9.' @('{delay 1}Greetings and salutations, meatbag. You have entered the hall of Arbiter Vincenzo Palmiero. Please state your business.') @() 'I have a desk to keep.' @{
   Hello = @('who','delivery')
   Replies = [ordered]@{
     who = [ordered]@{ Text = 'Who are you?'; Goto = 'who' }

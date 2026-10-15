@@ -1844,11 +1844,11 @@
     },
     {
         "Hash":  "ARX0",
-        "Name":  "Terminate 5 Cleaning Robots",
+        "Name":  "Terminate 5 Cleanmeisters",
         "QasInstance":  920061,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Terminate 5 Cleaning Robots",
+        "Summary":  "Terminate 5 Cleanmeisters",
         "Objective":  {
                           "Count":  5,
                           "Npc":  "MLCE",
@@ -1945,11 +1945,11 @@
     },
     {
         "Hash":  "AFL0",
-        "Name":  "Kill 7 Cleaning Robots",
+        "Name":  "Kill 7 Cleanmeisters",
         "QasInstance":  920065,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 7 Cleaning Robots",
+        "Summary":  "Kill 7 Cleanmeisters",
         "Objective":  {
                           "Count":  7,
                           "Npc":  "JUCO",

@@ -1,0 +1,64 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  7001,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:palmiero:ralph",
+                     "Provenance":  "Guessed. RALPH behind the reception desk in Palmiero's Office, playfield 7001, at Randy's pin 187.7, 1.0, 195.9. The client monster-name table has no RALPH and no blue-armored humanoid with a white bag, so mesh 297023 is still borrowed. ICRW at 187.0, 1.2, 201.4 is a separate untemplated client body and was not renamed.",
+                     "ContentNpcIdentity":  "ddogs-ralph",
+                     "PlayfieldId":  7001,
+                     "InstanceId":  2110836805,
+                     "Name":  "RALPH",
+                     "Position":  [
+                                      187.7,
+                                      1.0,
+                                      195.9
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  200,
+                                   "4":  1,
+                                   "27":  200,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  20,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  297023,
+                                   "360":  110,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 }
+             ],
+    "StandaloneShops":  [
+
+                        ]
+}
