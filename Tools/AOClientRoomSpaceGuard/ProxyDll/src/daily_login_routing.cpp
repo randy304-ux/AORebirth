@@ -249,7 +249,9 @@ namespace aorf
                 lower == "uwg.daily.icc-rk" ||
                 lower == "www.daily.icc-rk" ||
                 lower == "uwg.store.icc-rk" ||
-                lower == "www.store.icc-rk";
+                lower == "www.store.icc-rk" ||
+                lower == "aoshop.funcom.com" ||
+                lower == "aomarket.funcom.com";
         }
 
         bool IsOrdinalProcedureName(LPCSTR procName)
@@ -315,6 +317,17 @@ namespace aorf
                 lower.find("www.daily.icc-rk") != std::string::npos;
             const bool matchedUwg =
                 lower.find("uwg.daily.icc-rk") != std::string::npos;
+            const bool matchedStore =
+                lower.find("aoshop.funcom.com") != std::string::npos ||
+                lower.find("aomarket.funcom.com") != std::string::npos;
+            if (matchedStore && !matchedDailyRewards && !matchedWww && !matchedUwg)
+            {
+                // Store/market requests keep their Host header (the account API serves the
+                // Store hub for any non-daily host); only DNS and the port are redirected.
+                Log("DAILYLOGIN route=http_store host_kept bytes=%lu", static_cast<unsigned long>(length));
+                return false;
+            }
+
             if (!matchedDailyRewards && !matchedWww && !matchedUwg)
             {
                 return false;
@@ -499,14 +512,14 @@ namespace aorf
                         : nullptr;
                     for (; thunk->u1.Function; ++thunk)
                     {
+                        // Winsock 1 calls (connect, send, gethostbyname) are usually imported by
+                        // ordinal; for those the bound address check below is the only match.
                         if (originalThunk &&
                             (originalThunk->u1.Ordinal & IMAGE_ORDINAL_FLAG))
                         {
                             ++originalThunk;
-                            continue;
                         }
-
-                        if (originalThunk)
+                        else if (originalThunk)
                         {
                             auto* importByName = reinterpret_cast<IMAGE_IMPORT_BY_NAME*>(
                                 base + originalThunk->u1.AddressOfData);
@@ -1285,7 +1298,9 @@ namespace aorf
         if (!IsDailyLoginHost("dailyrewards.anarchy-online.com") ||
             !IsDailyLoginHost("uwg.daily.icc-rk") ||
             !IsDailyLoginHost("www.daily.icc-rk") ||
-            IsDailyLoginHost("aomarket.funcom.com"))
+            !IsDailyLoginHost("aoshop.funcom.com") ||
+            !IsDailyLoginHost("aomarket.funcom.com") ||
+            IsDailyLoginHost("register.funcom.com"))
         {
             return false;
         }
