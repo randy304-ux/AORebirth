@@ -91,7 +91,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "SAGO"
                  },
                  {
                      "Key":  "legacy:AreteLandingSpawn:6553:78E0FC69",
@@ -188,178 +189,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
-                 },
-                 {
-                     "Key":  "legacy:AreteLandingSpawn:6553:78E0FC81",
-                     "Provenance":  "AORebirth/Server/ZoneEngine/Core/Playfields/AreteLandingSpawn.cs;AOSharpLiveCapture/20260721-nanoprogramsvendor;source:78E0FC81",
-                     "ContentNpcIdentity":  "SimpleChar:78E0FC81",
-                     "PlayfieldId":  6553,
-                     "InstanceId":  2028010625,
-                     "Name":  "Marco Spida",
-                     "Position":  [
-                                      3407.6768,
-                                      9.01,
-                                      831.26245
-                                  ],
-                     "Rotation":  [
-                                      0,
-                                      -0.02306845,
-                                      0,
-                                      0.9997331
-                                  ],
-                     "Stats":  {
-                                   "0":  279450113,
-                                   "1":  227,
-                                   "4":  1,
-                                   "27":  227,
-                                   "33":  0,
-                                   "47":  1,
-                                   "54":  10,
-                                   "59":  2,
-                                   "60":  0,
-                                   "64":  40694,
-                                   "89":  1,
-                                   "156":  34,
-                                   "173":  3,
-                                   "174":  3,
-                                   "359":  26092,
-                                   "360":  95,
-                                   "368":  0,
-                                   "389":  0,
-                                   "455":  0,
-                                   "466":  0,
-                                   "660":  0,
-                                   "673":  31
-                               },
-                     "Textures":  [
-                                      {
-                                          "Place":  0,
-                                          "Id":  0
                                       },
-                                      {
-                                          "Place":  1,
-                                          "Id":  247966
-                                      },
-                                      {
-                                          "Place":  2,
-                                          "Id":  9619
-                                      },
-                                      {
-                                          "Place":  3,
-                                          "Id":  247920
-                                      },
-                                      {
-                                          "Place":  4,
-                                          "Id":  9626
-                                      }
-                                  ],
-                     "Meshes":  [
-                                    {
-                                        "Position":  0,
-                                        "OverrideTextureId":  0,
-                                        "Id":  40694,
-                                        "Layer":  4
-                                    }
-                                ],
-                     "Passive":  true,
-                     "Attackable":  true,
-                     "TickLiving":  true,
-                     "Presentation":  {
-                                          "AppearanceValue":  1576,
-                                          "Family":  0,
-                                          "LosHeight":  0
-                                      },
-                     "Vendor":  {
-                                    "InstanceId":  317157906,
-                                    "TemplateId":  248371,
-                                    "Stock":  [
-                                                  {
-                                                      "Slot":  0,
-                                                      "LowId":  248255,
-                                                      "HighId":  248255,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  1,
-                                                      "LowId":  248256,
-                                                      "HighId":  248256,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  2,
-                                                      "LowId":  248257,
-                                                      "HighId":  248257,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  3,
-                                                      "LowId":  248258,
-                                                      "HighId":  248258,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  4,
-                                                      "LowId":  248259,
-                                                      "HighId":  248259,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  5,
-                                                      "LowId":  248260,
-                                                      "HighId":  248260,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  6,
-                                                      "LowId":  248261,
-                                                      "HighId":  248261,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  7,
-                                                      "LowId":  300892,
-                                                      "HighId":  300892,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  8,
-                                                      "LowId":  248262,
-                                                      "HighId":  248262,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  9,
-                                                      "LowId":  248263,
-                                                      "HighId":  248263,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  10,
-                                                      "LowId":  248264,
-                                                      "HighId":  248264,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  11,
-                                                      "LowId":  300893,
-                                                      "HighId":  300893,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  12,
-                                                      "LowId":  248265,
-                                                      "HighId":  248265,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  13,
-                                                      "LowId":  248266,
-                                                      "HighId":  248266,
-                                                      "Quality":  1
-                                                  }
-                                              ]
-                                }
+                     "SpawnHash":  "SAGE"
                  },
                  {
                      "Key":  "legacy:AreteLandingSpawn:6553:78E0FC6B",
@@ -680,7 +511,8 @@
                                                       "Quality":  1
                                                   }
                                               ]
-                                }
+                                },
+                     "SpawnHash":  "LRTH"
                  },
                  {
                      "Key":  "ddogs:merc:6553:doctor",
@@ -1299,7 +1131,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "FLNV"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC61",
@@ -1396,7 +1229,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "ALGI"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC66",
@@ -1487,7 +1321,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "ICIM"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC77",
@@ -1566,7 +1401,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "DNCI"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC7C",
@@ -1651,7 +1487,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "VOEQ"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC6C",
@@ -1736,7 +1573,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "RAOH"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC7B",
@@ -1827,7 +1665,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "OFTP"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC79",
@@ -1918,7 +1757,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "ICTA"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC6A",
@@ -1992,7 +1832,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "SPMF"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC68",
@@ -2077,7 +1918,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "VRTR"
                  },
                  {
                      "Key":  "ddogs:arete:78E0FC73",
@@ -2168,7 +2010,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "VUHO"
                  },
                  {
                      "Key":  "ddogs:arete:7985CAEC",

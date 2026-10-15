@@ -23,6 +23,7 @@ public static class WorldNpcFactory
             { Type = IdentityType.CanbeAffected, Instance = definition.InstanceId }, items)
         {
             Name = definition.Name, SpawnSource = SpawnSource.ContentPlacement,
+            SpawnHash = string.IsNullOrEmpty(definition.SpawnHash) ? null : definition.SpawnHash,
             // Blue-named NPCs are friendly, non-combat NPCs and cannot be attacked.
             Attackable = definition.Attackable
                 && !(definition.Stats.TryGetValue((int)CharacterStat.Flags, out int flags) && Helpers.CombatRules.IsBlueNameNpc(flags)),

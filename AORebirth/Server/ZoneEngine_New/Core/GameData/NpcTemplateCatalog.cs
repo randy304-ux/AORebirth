@@ -128,9 +128,23 @@ namespace ZoneEngine_New.Core.GameData
             return true;
         }
 
+        readonly HashSet<string> _hidden = new(StringComparer.Ordinal);
+
+        /// <summary>Hashes that must never fall back to the pink placeholder (GameData/SpawnSkips.json hiddenHashes).</summary>
+        public void Hide(IEnumerable<string> hashes)
+        {
+            foreach (string hash in hashes)
+                if (!string.IsNullOrEmpty(hash))
+                    _hidden.Add(hash);
+        }
+
+        public bool IsHidden(string hash) => !string.IsNullOrEmpty(hash) && _hidden.Contains(hash) && !HasTemplate(hash);
+
         bool CanUseFallback(string hash)
         {
             if (string.Equals(hash, MobTemplate.FallbackHash, StringComparison.Ordinal))
+                return false;
+            if (_hidden.Contains(hash))
                 return false;
             if (_leaves.ContainsKey(hash) || _families.ContainsKey(hash))
                 return false;

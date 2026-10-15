@@ -26,6 +26,8 @@ public sealed class WorldNpcDefinition
     public bool TickLiving { get; set; } = true;
     public WorldNpcPresentation Presentation { get; set; } = new();
     public WorldVendorDefinition? Vendor { get; set; }
+    /// <summary>Official hash point this NPC stands on; quests and Knubot scripts bind by it.</summary>
+    public string? SpawnHash { get; set; }
 }
 
 public sealed class WorldStandaloneShopDefinition

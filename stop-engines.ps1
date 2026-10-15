@@ -278,14 +278,35 @@ foreach ($engine in $engines) {
             }
 
             if ($metadataProcess) {
-                $actualPath = [System.IO.Path]::GetFullPath($metadataProcess.Path)
+                $actualPath = $null
+                try { if (-not [string]::IsNullOrWhiteSpace($metadataProcess.Path)) { $actualPath = [System.IO.Path]::GetFullPath($metadataProcess.Path) } } catch { }
+                if (-not $actualPath) {
+                    # S4U task-launched engines deny path/handle queries to this session. Identify them instead by
+                    # process name + recorded PID + WMI creation time + the exact listening ports from the metadata.
+                    $cim = Get-CimInstance Win32_Process -Filter "ProcessId=$($metadataProcess.Id)" -ErrorAction SilentlyContinue
+                    $recordedStartAlt = [DateTime]::Parse([string]$metadata.StartedAt, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::RoundtripKind)
+                    $expectedPorts = @($metadata.Ports | ForEach-Object { [int]$_ })
+                    $ownedPorts = @(Get-NetTCPConnection -State Listen -OwningProcess $metadataProcess.Id -ErrorAction SilentlyContinue | ForEach-Object { [int]$_.LocalPort })
+                    $portsOk = $expectedPorts.Count -gt 0 -and @($expectedPorts | Where-Object { $ownedPorts -notcontains $_ }).Count -eq 0
+                    $timeOk = $cim -and [Math]::Abs(($cim.CreationDate.ToUniversalTime() - $recordedStartAlt.ToUniversalTime()).TotalSeconds) -le 5
+                    if ($metadataProcess.ProcessName -ieq $engine.Name -and $coreEngineNames -contains $engine.Name -and $portsOk -and $timeOk -and
+                        [System.IO.Path]::GetFullPath([string]$metadata.Path) -ieq $expectedPath) {
+                        Write-Host "$($engine.Name) pid=$($metadataProcess.Id) identified by name, start time and ports $($expectedPorts -join ',') (path unreadable)."
+                        $actualPath = $expectedPath
+                    }
+                    else {
+                        $actualPath = '<unverified>'
+                    }
+                }
                 $recordedPath = [System.IO.Path]::GetFullPath([string]$metadata.Path)
                 $recordedStart = [DateTime]::Parse(
                     [string]$metadata.StartedAt,
                     [System.Globalization.CultureInfo]::InvariantCulture,
                     [System.Globalization.DateTimeStyles]::RoundtripKind)
+                $procStart = $null; try { $procStart = $metadataProcess.StartTime } catch { }
+                if (-not $procStart) { $procStart = (Get-CimInstance Win32_Process -Filter "ProcessId=$($metadataProcess.Id)").CreationDate }
                 $startDifferenceSeconds = [Math]::Abs(
-                    ($metadataProcess.StartTime.ToUniversalTime() - $recordedStart.ToUniversalTime()).TotalSeconds)
+                    ($procStart.ToUniversalTime() - $recordedStart.ToUniversalTime()).TotalSeconds)
                 if ([string]$metadata.Engine -ieq $engine.Name -and
                     $actualPath -ieq $expectedPath -and
                     $recordedPath -ieq $expectedPath -and

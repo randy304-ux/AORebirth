@@ -60,7 +60,8 @@
                      "TickLiving":  true,
                      "Presentation":  {
 
-                                      }
+                                      },
+                     "SpawnHash":  "PRYU"
                  },
                  {
                      "Key":  "ddogs:yuttos:DEBE",
@@ -125,7 +126,8 @@
                                },
                      "Passive":  true,
                      "Attackable":  false,
-                     "TickLiving":  false
+                     "TickLiving":  false,
+                     "SpawnHash":  "DEBE"
                  },
                  {
                      "Key":  "ddogs:yuttos:YUME",
@@ -669,7 +671,8 @@
                                                       "Quality":  72
                                                   }
                                               ]
-                                }
+                                },
+                     "SpawnHash":  "YTMA"
                  },
                  {
                      "Key":  "ddogs:yuttos:YUCH",
@@ -938,7 +941,8 @@
                                                       "Quality":  200
                                                   }
                                               ]
-                                }
+                                },
+                     "SpawnHash":  "YUCH"
                  },
                  {
                      "Key":  "ddogs:yuttos:YUPH",
@@ -1393,7 +1397,8 @@
                                                       "Quality":  17
                                                   }
                                               ]
-                                }
+                                },
+                     "SpawnHash":  "YUPH"
                  },
                  {
                      "Key":  "ddogs:yuttos:YUEL",
@@ -1668,7 +1673,8 @@
                                                       "Quality":  160
                                                   }
                                               ]
-                                }
+                                },
+                     "SpawnHash":  "YUEL"
                  },
                  {
                      "Key":  "ddogs:yuttos:YUTO",
@@ -2351,7 +2357,8 @@
                                                       "Quality":  33
                                                   }
                                               ]
-                                }
+                                },
+                     "SpawnHash":  "YUTO"
                  }
              ]
 }

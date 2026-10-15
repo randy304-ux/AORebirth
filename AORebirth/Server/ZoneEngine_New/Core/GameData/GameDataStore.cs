@@ -483,6 +483,7 @@ namespace ZoneEngine_New.Core.GameData
             try
             {
                 _npcTemplates = NpcTemplateCatalog.Parse(File.ReadAllText(path));
+                LoadSpawnSkips(Path.Combine(Path.GetDirectoryName(path) ?? string.Empty, "SpawnSkips.json"));
                 _logger.Info(
                     string.Format(
                         CultureInfo.InvariantCulture,
@@ -1439,6 +1440,50 @@ namespace ZoneEngine_New.Core.GameData
         {
             public int NextLevelXp { get; set; }
         }
-    }
+    
+        readonly List<(int Playfield, string Hash, float X, float Y, float Z)> _removedSpawnPoints = new();
+
+        public bool IsHiddenSpawnHash(string hash) => _npcTemplates.IsHidden(hash);
+
+        public float SpawnDedupeRadius { get; private set; }
+
+        public bool IsRemovedSpawnPoint(int playfield, string hash, float x, float y, float z)
+        {
+            foreach (var p in _removedSpawnPoints)
+            {
+                if (p.Playfield != playfield || !string.Equals(p.Hash, hash, StringComparison.Ordinal))
+                    continue;
+                float dx = p.X - x, dy = p.Y - y, dz = p.Z - z;
+                if (dx * dx + dy * dy + dz * dz <= 0.01f)
+                    return true;
+            }
+
+            return false;
+        }
+
+        void LoadSpawnSkips(string skipPath)
+        {
+            _removedSpawnPoints.Clear();
+            if (!File.Exists(skipPath))
+                return;
+
+            using var doc = System.Text.Json.JsonDocument.Parse(File.ReadAllText(skipPath));
+            var hidden = new List<string>();
+            if (doc.RootElement.TryGetProperty("hiddenHashes", out var hh))
+                foreach (var h in hh.EnumerateArray())
+                    hidden.Add(h.GetProperty("hash").GetString() ?? string.Empty);
+            _npcTemplates.Hide(hidden);
+            SpawnDedupeRadius = doc.RootElement.TryGetProperty("dedupeRadius", out var dr) ? dr.GetSingle() : 0f;
+            if (doc.RootElement.TryGetProperty("removedPoints", out var rp))
+                foreach (var p in rp.EnumerateArray())
+                {
+                    var pos = p.GetProperty("position");
+                    _removedSpawnPoints.Add((p.GetProperty("playfield").GetInt32(), p.GetProperty("hash").GetString() ?? string.Empty,
+                        pos[0].GetSingle(), pos[1].GetSingle(), pos[2].GetSingle()));
+                }
+
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "GameData spawn skips hiddenHashes={0} removedPoints={1} from {2}", hidden.Count, _removedSpawnPoints.Count, skipPath));
+        }    }
 }
 

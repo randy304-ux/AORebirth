@@ -58,6 +58,15 @@ namespace ZoneEngine_New.Core.GameData
         /// True when <paramref name="hash"/> has no authored NPC template but is in ItemTemplates.json, so it
         /// spawns as a static dynel instead of the placeholder NPC.
         /// </summary>
+        /// <summary>Unmatched hash listed in GameData/SpawnSkips.json: spawn nothing instead of the pink placeholder.</summary>
+        bool IsHiddenSpawnHash(string hash) => false;
+
+        /// <summary>Drop a Spawns.json point when the same hash already spawns within this radius (metres). Zero disables.</summary>
+        float SpawnDedupeRadius => 0f;
+
+        /// <summary>A single Spawns.json point removed by GameData/SpawnSkips.json (duplicate or placeholder on a real NPC).</summary>
+        bool IsRemovedSpawnPoint(int playfield, string hash, float x, float y, float z) => false;
+
         bool IsStaticSpawnHash(string hash)
             => !string.IsNullOrEmpty(hash) && !HasMobTemplate(hash) && CanResolveItemHash(hash);
 

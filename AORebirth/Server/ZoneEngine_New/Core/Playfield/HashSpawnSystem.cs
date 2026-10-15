@@ -258,6 +258,10 @@ namespace ZoneEngine_New.Core.Playfield
             PlayfieldSpawnsData data = _gameData.GetPlayfieldSpawns(_playfield.Identity.Instance);
             PlayfieldSpawnEntry[] entries = data.Spawns ?? [];
             int skipped = 0;
+            int hiddenPoints = 0;
+            int removedPoints = 0;
+            float dedupe = _gameData.SpawnDedupeRadius;
+            var loadedPositions = new List<(string Hash, float X, float Y, float Z)>();
 
             foreach (PlayfieldSpawnEntry entry in entries)
             {
@@ -267,6 +271,39 @@ namespace ZoneEngine_New.Core.Playfield
                     continue;
                 }
                 string spawnHash = entry.HashText ?? string.Empty;
+                if (entry.Position != null && entry.Position.Length >= 3
+                    && _gameData.IsRemovedSpawnPoint(_playfield.Identity.Instance, spawnHash, entry.Position[0], entry.Position[1], entry.Position[2]))
+                {
+                    removedPoints++;
+                    continue;
+                }
+
+                if (dedupe > 0f && entry.Position != null && entry.Position.Length >= 3 && !HasInactiveEvent(entry))
+                {
+                    bool duplicate = false;
+                    foreach (var seen in loadedPositions)
+                    {
+                        if (!string.Equals(seen.Hash, spawnHash, StringComparison.Ordinal))
+                            continue;
+                        float dx = seen.X - entry.Position[0], dy = seen.Y - entry.Position[1], dz = seen.Z - entry.Position[2];
+                        if (dx * dx + dy * dy + dz * dz <= dedupe * dedupe) { duplicate = true; break; }
+                    }
+
+                    if (duplicate)
+                    {
+                        removedPoints++;
+                        continue;
+                    }
+
+                    loadedPositions.Add((spawnHash, entry.Position[0], entry.Position[1], entry.Position[2]));
+                }
+
+                if (_gameData.IsHiddenSpawnHash(spawnHash))
+                {
+                    hiddenPoints++;
+                    continue;
+                }
+
                 if (HasInactiveEvent(entry))
                 {
                     skipped++;
@@ -343,6 +380,10 @@ namespace ZoneEngine_New.Core.Playfield
                 list.Add(point);
                 _allPoints.Add(point);
             }
+
+            if (hiddenPoints > 0 || removedPoints > 0)
+                _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                    "HashSpawnSystem spawn skips playfield={0} hidden={1} removed={2}", _playfield.Identity.Instance, hiddenPoints, removedPoints));
 
             if (skipped > 0)
             {
