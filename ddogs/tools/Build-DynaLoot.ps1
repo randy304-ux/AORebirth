@@ -305,3 +305,5 @@ foreach ($e in ($edits | Sort-Object Start -Descending)) {
 $rk = @($edits | Where-Object { $_.Text -notlike '*"DYAR"*' }).Count
 $ar = $edits.Count - $rk
 "dyna loot leaves=$($drops.Count) discs=$discUsed crystalFallback=$crystalFallback nanosSkipped=$nanoSkipped bosses=$rk arete=$ar"
+# Nascence camps use CampKey nascence| so the boss| pass above does not replace their tables.
+& "$PSScriptRoot\Build-NascenceDynas.ps1" -GameData $GameData
