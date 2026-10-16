@@ -136,3 +136,11 @@ Guessed, needs PRK screenshots:
 - No alien-ship door exists in the 6553 client dynels and nothing in 6553 links to 8009. The way in is talking to Karli ("Get me into the ship"); the way out is a "Ship Hatch" terminal-look NPC in 8009 at 40, 0.5, 44 that puts you back beside Karli.
 - Interior is playfield 8009 "Crashed Alien Ship" (84 m outdoor map with one client spawn, YZWI, still pink). Not a random-room instance and not per team. Spawns added: 2 Zix, 2 Jaax, 2 Cha'Heru, Alien General (new ALGN: Cha'Heru mesh 251772 at scale 140, L14, 3x HP) and the target Zix (new ZIXK, L12, scale 130, 60 s respawn), all at y 0.5 around 50-62, 40-64; heights not checked.
 - Solo quest FBUD (bit 663): using the can on a teammate does not complete it; you tell Karli you did. Team quest ZXK1 "The Alien Ship" (bit 664, Scope Team, KillOne ZIXK): reward 1500 credits / 1500 XP invented (guide lists none). NCU chips are id 36778/36780 at QL 30.
+### 2026-10-15 21:40 ET - Karli's alien ship: General model + Kyr'ozch hierarchy names
+- Sources: AO-Universe Arete #20 (mob list) and AO-Universe Alien Hierarchy (Rank - Class'Race); meshes from docs/reference/enemies/data/ClientRdbNpcTemplateHints.csv.
+- Alien General (ALGN): name REAL (AOU lists "Alien General", level ?). Mesh 247742 "alien boss detached" (Khaz battle-spider, no rider) to match Randy's PRK screenshot. GUESSED: mesh choice by eye, scale 75, level 14, 3x HP.
+- Kept REAL Arete mobs: Alien Spider - Zix (alien_spider 247728), Scout - Jaax'Sinuh (mini bug 251782), Specialist - Cha'Heru (hover battlesuit 251772).
+- Added crew, GUESSED (valid hierarchy combos but not in the Arete list): Scout - Ankari'Sinuh (KSAU, mini_bug_caster 251784, L11), Guard - Rimah'Uri (KGRU, centaur_melee 251785, L12), Commando - Ilari'Uri (KCIU, centaur_melee_ranged 251786, L13), Guard - Xoch'Heru (KGXH, hover_caster 251773, L12). Levels/scales guessed.
+- Race->mesh: Sinuh=alien_mini_bug (frog), Uri=alien_battlesuit_centaur, Heru=alien_battlesuit_hover (snake). Uri mapping from mesh names, not a capture.
+- Ground: 8009 heightmap is flat 0; native YZWI spawn at y=0.498, all ship spawns at y=0.5.
+- Template insert in Build-KarliAlienShip.ps1 now re-appends our keys (idempotent). Data-only deploy; no engine rebuild needed.

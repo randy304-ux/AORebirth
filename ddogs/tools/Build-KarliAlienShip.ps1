@@ -1,8 +1,8 @@
-﻿# ddogs/tools/Build-KarliAlienShip.ps1 - Karli Cappelleri (Arete Landing guide #20, AO-Universe) and her two alien missions.
+# ddogs/tools/Build-KarliAlienShip.ps1 - Karli Cappelleri (Arete Landing guide #20, AO-Universe) and her two alien missions.
 # Real (AO-Universe / AOGalaxy): names, dialog, mob list and levels, rewards 2520 cr / 1386 xp / 3x 8-15 NCU Memory,
 #   Nano Can: Friendly Buff = AOID 301250, quest name "Help From a Friend".
 # Guessed: Karli's spot and look, the ship hatch (talk-to teleport, no client door), interior = playfield 8009
-#   "Crashed Alien Ship" (fixed map, not random rooms), interior spawn spots, Alien General look/level, team-mission reward,
+#   "Crashed Alien Ship" (fixed map, not random rooms), interior spawn spots, Alien General scale/level (mesh = Khaz spider per screenshot), extra crew names, team-mission reward,
 #   NCU chip QL 30 (ids 36778/36780), solo completion by talking to Karli instead of using the can on a teammate.
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
 $ErrorActionPreference = 'Stop'
@@ -17,23 +17,40 @@ $npath = Join-Path $gd 'NpcTemplates.json'
 $nt = [IO.File]::ReadAllText($npath, $u) | ConvertFrom-Json
 function Clone($o) { $o | ConvertTo-Json -Depth 8 | ConvertFrom-Json }
 $gen = Clone ($nt.CRDY.Templates | Sort-Object Level | Select-Object -Last 1)
-$gen.Name = 'Alien General'; $gen.Level = 14; $gen.Stats.'54' = 14; $gen.Stats.'360' = 140
+$gen.Name = 'Alien General'; $gen.Level = 14; $gen.Stats.'54' = 14; $gen.Stats.'359' = 247742; $gen.Stats.'360' = 75
 $gen.Stats.'1' = [int]$gen.Stats.'1' * 3; $gen.Stats.'27' = $gen.Stats.'1'
-$gen | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = 'CRDY'; Source = 'AO-Universe Arete #20 lists Alien General (level ?). Specialist Cha-Heru mesh 251772 scaled 140, level 14, 3x HP' })
+$gen | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = 'CRDY'; Source = 'Name real (AO-Universe Arete #20 "Alien General", level ?). Mesh 247742 "alien boss detached" = Khaz battle-spider without rider, matches Randy PRK screenshot (big mech spider, cyan lights). Scale 75, level 14, 3x HP guessed' })
 $nt | Add-Member -Force NoteProperty ALGN ([pscustomobject]@{ Templates = @($gen) })
 $zk = Clone ($nt.ZIXI.Templates | Sort-Object Level | Select-Object -Last 1)
 $zk.Name = 'Alien Spider - Zix'; $zk.Level = 12; $zk.Stats.'54' = 12; $zk.Stats.'360' = 130
 $zk | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = 'ZIXI'; Source = 'Team mission target: the Zix in the Alien General room (AO-Universe Arete #20). Level 12 and scale guessed' })
 $nt | Add-Member -Force NoteProperty ZIXK ([pscustomobject]@{ Templates = @($zk) })
-# insert as text so the rest of the 4 MB file keeps its formatting
-$nraw = [IO.File]::ReadAllText($npath, $u)
-if ($nraw -notmatch '"ALGN":') {
-  $frag = ''
-  foreach ($k in 'ALGN','ZIXK') { $frag += ",`n    `"$k`": " + ($nt.$k | ConvertTo-Json -Depth 8) }
-  $end = $nraw.TrimEnd().LastIndexOf('}')
-  $last = $nraw.LastIndexOf('}', $end - 1)
-  [IO.File]::WriteAllText($npath, $nraw.Substring(0, $last + 1) + $frag + "`n}`n", $u)
+# extra ship crew, Rank - Class'Race per AO-Universe Alien Hierarchy. Names are valid hierarchy combos but NOT listed for Arete (guessed).
+# race meshes: Sinuh = alien_mini_bug (frog), Uri = alien_battlesuit_centaur, Heru = alien_battlesuit_hover (snake)
+$crew = @(
+  @('KSAU', "Scout - Ankari'Sinuh", 11, 251784, 96, 'ACFJ', 'alien_mini_bug_caster_unrooted'),
+  @('KGRU', "Guard - Rimah'Uri", 12, 251785, 110, 'CRDY', 'alien_battlesuit_centaur_melee_unrooted'),
+  @('KCIU', "Commando - Ilari'Uri", 13, 251786, 115, 'CRDY', 'alien_battlesuit_centaur_melee_ranged_unrooted'),
+  @('KGXH', "Guard - Xoch'Heru", 12, 251773, 140, 'CRDY', 'alien_battlesuit_hover_caster_unrooted')
+)
+$crewKeys = @()
+foreach ($r in $crew) {
+  $t = Clone ($nt.($r[5]).Templates | Sort-Object Level | Select-Object -Last 1)
+  $t.Name = $r[1]; $t.Level = $r[2]; $t.Stats.'54' = $r[2]; $t.Stats.'359' = $r[3]; $t.Stats.'360' = $r[4]
+  $t | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = $r[5]; Source = ('Name follows AO-Universe Alien Hierarchy (Rank - Class''Race); not in the Arete #20 mob list. Mesh ' + $r[3] + ' ' + $r[6] + ' from client RDB hints; level/scale guessed') })
+  $nt | Add-Member -Force NoteProperty $r[0] ([pscustomobject]@{ Templates = @($t) })
+  $crewKeys += $r[0]
 }
+$ourKeys = @('ALGN','ZIXK') + $crewKeys
+# insert as text so the rest of the 4 MB file keeps its formatting; our keys are appended at the end, so cut and re-append
+$nraw = [IO.File]::ReadAllText($npath, $u) -replace "`r`n", "`n"
+$cut = $nraw.IndexOf(",`n    `"ALGN`":")
+if ($cut -ge 0) { $nraw = $nraw.Substring(0, $cut) + "`n}`n" }
+$frag = ''
+foreach ($k in $ourKeys) { $frag += ",`n    `"$k`": " + ($nt.$k | ConvertTo-Json -Depth 8) }
+$end = $nraw.TrimEnd().LastIndexOf('}')
+$last = $nraw.LastIndexOf('}', $end - 1)
+[IO.File]::WriteAllText($npath, $nraw.Substring(0, $last + 1) + $frag + "`n}`n", $u)
 # --- item hash for the can
 $ipath = Join-Path $gd 'ItemTemplates.json'
 $il = [IO.File]::ReadAllLines($ipath, $u) | Where-Object { $_ -notmatch '^\s*"FBCN":' }
@@ -76,9 +93,11 @@ $spath = Join-Path $gd 'Playfields\8009\Spawns.json'
 $s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
 $adds = @(
   @('ZIXI',10,50,0.5,40), @('ZIXI',11,56,0.5,44), @('ACFJ',11,54,0.5,52), @('ACFJ',13,58,0.5,50),
-  @('CRDY',12,60,0.5,56), @('CRDY',13,52,0.5,58), @('ALGN',14,62,0.5,62), @('ZIXK',12,60,0.5,64)
+  @('CRDY',12,60,0.5,56), @('CRDY',13,52,0.5,58), @('ALGN',14,62,0.5,62), @('ZIXK',12,60,0.5,64),
+  @('KSAU',11,46,0.5,54), @('KGRU',12,64,0.5,48), @('KCIU',13,66,0.5,58), @('KGXH',12,56,0.5,62)
 )
-$s.spawns = @($s.spawns | Where-Object { $_.hash -ne 0 -or $_.hashText -notin 'ZIXI','ACFJ','CRDY','ALGN','ZIXK' })
+# floor: 8009 heightmap is flat 0; native spawn YZWI sits at y=0.498, so 0.5 is the ship floor
+$s.spawns = @($s.spawns | Where-Object { $_.hash -ne 0 -or $_.hashText -notin (@('ZIXI','ACFJ','CRDY') + $ourKeys) })
 foreach ($a in $adds) {
   $s.spawns += [pscustomobject]@{ districtIndex=0; hash=0; hashText=$a[0]; manifestHash=0; minLevel=$a[1]; maxLevel=$a[1]; respawnChance=100; flags=1
     respawnTime= $(if ($a[0] -eq 'ZIXK') { 60 } else { 300 }); version7Extra=0; hasOptionalFlagBlock=$true; nativeFlags=0; moreFlags=0; assistanceRadius=0
