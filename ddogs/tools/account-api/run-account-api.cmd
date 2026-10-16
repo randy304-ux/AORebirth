@@ -1,5 +1,5 @@
 @echo off
-rem Dungeon Dogs AO account service (port 8098)
+rem Dungeon Dogs AO account service (port 8098, and port 80 for the in-game Store window)
 set "DOTNET_ROOT=I:\AO\tools\dotnet"
 set "DOTNET_MULTILEVEL_LOOKUP=0"
 set "DOTNET_CLI_HOME=I:\AO\cache\dotnet-home"

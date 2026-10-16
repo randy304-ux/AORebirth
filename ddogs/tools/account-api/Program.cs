@@ -42,7 +42,21 @@ var mailRx = new Regex(@"^[^@\s]{1,40}@[^@\s]{1,40}\.[^@\s]{2,10}$");
 string PwErr(string p) => p == null || p.Length < 8 || p.Length > 64 ? "password must be 8-64 characters" : null;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions { Args = args });
-builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+// The in-game Store/Info window dials the login server on port 80 (uwg.store.icc-rk / aoshop.funcom.com).
+// Nothing was listening there, so LAN and remote both got "connection refused". 8098 stays the account port.
+var listen80 = false;
+if (port != 80)
+{
+  var probe = new System.Net.Sockets.TcpListener(System.Net.IPAddress.Any, 80);
+  try { probe.Start(); listen80 = true; }
+  catch (Exception ex) { Log($"store port80 unavailable {ex.GetType().Name}: {ex.Message}"); }
+  finally { try { probe.Stop(); } catch { } }
+}
+builder.WebHost.ConfigureKestrel(options =>
+{
+  options.ListenAnyIP(port);
+  if (listen80) options.ListenAnyIP(80);
+});
 builder.Logging.ClearProviders();
 var app = builder.Build();
 
@@ -162,7 +176,7 @@ app.MapGet("/players", async () => {
   } catch (Exception ex) { Log($"players error {ex.GetType().Name}: {ex.Message}"); return Results.Json(new { online = (int?)null, error = "unavailable" }, statusCode: 503); }
 });
 DDogsStore.Map(app, connStr, Log, Limited);
-Log($"start port={port} pid={Environment.ProcessId}");
+Log($"start port={port} also80={listen80} pid={Environment.ProcessId}");
 app.Run();
 
 static bool CryptoEq(string a, string b) => System.Security.Cryptography.CryptographicOperations.FixedTimeEquals(System.Text.Encoding.UTF8.GetBytes(a), System.Text.Encoding.UTF8.GetBytes(b));

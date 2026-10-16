@@ -34,6 +34,14 @@ namespace aorf
         char RouteTargetIp[16] = {};
         unsigned char RouteTargetOctets[4] = {};
         unsigned short RouteWebPort = 8098;
+        // Export ordinals from the loaded ws2_32. GUI.dll imports connect by ordinal, and the
+        // bound IAT slot is not the GetProcAddress address, so an address compare never patches it.
+        unsigned short OrdinalGetAddrInfoA = 0;
+        unsigned short OrdinalGetAddrInfoW = 0;
+        unsigned short OrdinalGetHostByName = 0;
+        unsigned short OrdinalSend = 0;
+        unsigned short OrdinalWSASend = 0;
+        unsigned short OrdinalConnect = 0;
         // True when the host came from AO_DDOGS_WEB_HOST or the client-folder web file, not from the IA argument.
         bool RouteHostExplicit = false;
         constexpr const char* AoRebirthDailyLoginHost = "uwg.daily.icc-rk";
@@ -465,11 +473,11 @@ namespace aorf
             return RealGetAddrInfoA && RealGetAddrInfoW && RealGetHostByName && RealSend && RealWSASend && RealConnect;
         }
 
-        bool PatchImport(HMODULE module, const char* importModule, const char* name, void* original, void* replacement)
+        bool PatchImport(HMODULE module, const char* importModule, const char* name, unsigned short ordinal, void* original, void* replacement)
         {
             __try
             {
-                if (!module || !original || !replacement)
+                if (!module || !replacement || (!original && ordinal == 0 && !name))
                 {
                     return false;
                 }
@@ -512,26 +520,29 @@ namespace aorf
                         : nullptr;
                     for (; thunk->u1.Function; ++thunk)
                     {
-                        // Winsock 1 calls (connect, send, gethostbyname) are usually imported by
-                        // ordinal; for those the bound address check below is the only match.
-                        if (originalThunk &&
-                            (originalThunk->u1.Ordinal & IMAGE_ORDINAL_FLAG))
+                        // GUI.dll imports connect by ordinal. The loaded slot is not the
+                        // GetProcAddress address, so matching the ordinal (or the import name)
+                        // is what actually rewrites the Store window's port-80 connect.
+                        bool match = false;
+                        if (originalThunk && (originalThunk->u1.Ordinal & IMAGE_ORDINAL_FLAG))
                         {
+                            const unsigned short got = static_cast<unsigned short>(originalThunk->u1.Ordinal & 0xFFFF);
                             ++originalThunk;
+                            match = ordinal != 0 && got == ordinal;
                         }
                         else if (originalThunk)
                         {
                             auto* importByName = reinterpret_cast<IMAGE_IMPORT_BY_NAME*>(
                                 base + originalThunk->u1.AddressOfData);
-                            if (std::strcmp(reinterpret_cast<const char*>(importByName->Name), name) != 0)
-                            {
-                                ++originalThunk;
-                                continue;
-                            }
+                            match = name && std::strcmp(reinterpret_cast<const char*>(importByName->Name), name) == 0;
                             ++originalThunk;
                         }
+                        else if (original)
+                        {
+                            match = reinterpret_cast<void*>(thunk->u1.Function) == original;
+                        }
 
-                        if (reinterpret_cast<void*>(thunk->u1.Function) != original)
+                        if (!match || reinterpret_cast<void*>(thunk->u1.Function) == replacement)
                         {
                             continue;
                         }
@@ -565,6 +576,25 @@ namespace aorf
             }
         }
 
+        unsigned long PatchOneModule(HMODULE module)
+        {
+            if (!module)
+            {
+                return 0;
+            }
+
+            unsigned long patched = 0;
+            patched += PatchImport(module, "WS2_32.dll", "getaddrinfo", OrdinalGetAddrInfoA, RealGetAddrInfoA, reinterpret_cast<void*>(HookGetAddrInfoA)) ? 1ul : 0ul;
+            patched += PatchImport(module, "WS2_32.dll", "GetAddrInfoW", OrdinalGetAddrInfoW, RealGetAddrInfoW, reinterpret_cast<void*>(HookGetAddrInfoW)) ? 1ul : 0ul;
+            patched += PatchImport(module, "WS2_32.dll", "gethostbyname", OrdinalGetHostByName, RealGetHostByName, reinterpret_cast<void*>(HookGetHostByName)) ? 1ul : 0ul;
+            patched += PatchImport(module, "WS2_32.dll", "send", OrdinalSend, RealSend, reinterpret_cast<void*>(HookSend)) ? 1ul : 0ul;
+            patched += PatchImport(module, "WS2_32.dll", "WSASend", OrdinalWSASend, RealWSASend, reinterpret_cast<void*>(HookWSASend)) ? 1ul : 0ul;
+            patched += PatchImport(module, "WS2_32.dll", "connect", OrdinalConnect, RealConnect, reinterpret_cast<void*>(HookConnect)) ? 1ul : 0ul;
+            patched += PatchImport(module, "KERNEL32.dll", "GetProcAddress", 0, RealGetProcAddressKernel32, reinterpret_cast<void*>(HookGetProcAddress)) ? 1ul : 0ul;
+            patched += PatchImport(module, "KERNELBASE.dll", "GetProcAddress", 0, RealGetProcAddressKernelBase, reinterpret_cast<void*>(HookGetProcAddress)) ? 1ul : 0ul;
+            return patched;
+        }
+
         unsigned long PatchAllLoadedModules()
         {
             HANDLE snapshot = CreateToolhelp32Snapshot(
@@ -582,14 +612,7 @@ namespace aorf
             {
                 do
                 {
-                    patched += PatchImport(entry.hModule, "WS2_32.dll", "getaddrinfo", RealGetAddrInfoA, reinterpret_cast<void*>(HookGetAddrInfoA)) ? 1ul : 0ul;
-                    patched += PatchImport(entry.hModule, "WS2_32.dll", "GetAddrInfoW", RealGetAddrInfoW, reinterpret_cast<void*>(HookGetAddrInfoW)) ? 1ul : 0ul;
-                    patched += PatchImport(entry.hModule, "WS2_32.dll", "gethostbyname", RealGetHostByName, reinterpret_cast<void*>(HookGetHostByName)) ? 1ul : 0ul;
-                    patched += PatchImport(entry.hModule, "WS2_32.dll", "send", RealSend, reinterpret_cast<void*>(HookSend)) ? 1ul : 0ul;
-                    patched += PatchImport(entry.hModule, "WS2_32.dll", "WSASend", RealWSASend, reinterpret_cast<void*>(HookWSASend)) ? 1ul : 0ul;
-                    patched += PatchImport(entry.hModule, "WS2_32.dll", "connect", RealConnect, reinterpret_cast<void*>(HookConnect)) ? 1ul : 0ul;
-                    patched += PatchImport(entry.hModule, "KERNEL32.dll", "GetProcAddress", RealGetProcAddressKernel32, reinterpret_cast<void*>(HookGetProcAddress)) ? 1ul : 0ul;
-                    patched += PatchImport(entry.hModule, "KERNELBASE.dll", "GetProcAddress", RealGetProcAddressKernelBase, reinterpret_cast<void*>(HookGetProcAddress)) ? 1ul : 0ul;
+                    patched += PatchOneModule(entry.hModule);
                 }
                 while (Module32NextW(snapshot, &entry));
             }
@@ -997,6 +1020,116 @@ namespace aorf
             return true;
         }
 
+        unsigned short FindExportOrdinal(HMODULE module, const char* name)
+        {
+            __try
+            {
+                if (!module || !name)
+                {
+                    return 0;
+                }
+
+                auto* base = reinterpret_cast<unsigned char*>(module);
+                auto* dos = reinterpret_cast<IMAGE_DOS_HEADER*>(base);
+                if (dos->e_magic != IMAGE_DOS_SIGNATURE)
+                {
+                    return 0;
+                }
+
+                auto* nt = reinterpret_cast<IMAGE_NT_HEADERS*>(base + dos->e_lfanew);
+                if (nt->Signature != IMAGE_NT_SIGNATURE)
+                {
+                    return 0;
+                }
+
+                const IMAGE_DATA_DIRECTORY directory = nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT];
+                if (directory.VirtualAddress == 0)
+                {
+                    return 0;
+                }
+
+                auto* exports = reinterpret_cast<IMAGE_EXPORT_DIRECTORY*>(base + directory.VirtualAddress);
+                auto* names = reinterpret_cast<DWORD*>(base + exports->AddressOfNames);
+                auto* ordinals = reinterpret_cast<WORD*>(base + exports->AddressOfNameOrdinals);
+                for (DWORD index = 0; index < exports->NumberOfNames; ++index)
+                {
+                    const char* exportName = reinterpret_cast<const char*>(base + names[index]);
+                    if (std::strcmp(exportName, name) == 0)
+                    {
+                        return static_cast<unsigned short>(exports->Base + ordinals[index]);
+                    }
+                }
+            }
+            __except (EXCEPTION_EXECUTE_HANDLER)
+            {
+                return 0;
+            }
+
+            return 0;
+        }
+
+        void ResolveWs2Ordinals()
+        {
+            if (!Ws2)
+            {
+                return;
+            }
+
+            OrdinalGetAddrInfoA = FindExportOrdinal(Ws2, "getaddrinfo");
+            OrdinalGetAddrInfoW = FindExportOrdinal(Ws2, "GetAddrInfoW");
+            OrdinalGetHostByName = FindExportOrdinal(Ws2, "gethostbyname");
+            OrdinalSend = FindExportOrdinal(Ws2, "send");
+            OrdinalWSASend = FindExportOrdinal(Ws2, "WSASend");
+            OrdinalConnect = FindExportOrdinal(Ws2, "connect");
+            Log("DAILYLOGIN route=ordinals connect=%u send=%u gethost=%u getaddr=%u",
+                static_cast<unsigned>(OrdinalConnect),
+                static_cast<unsigned>(OrdinalSend),
+                static_cast<unsigned>(OrdinalGetHostByName),
+                static_cast<unsigned>(OrdinalGetAddrInfoA));
+        }
+
+        struct LdrDllLoadedNote
+        {
+            ULONG Flags;
+            void* FullDllName;
+            void* BaseDllName;
+            PVOID DllBase;
+            ULONG SizeOfImage;
+        };
+
+        using LdrDllNotificationFn = VOID(CALLBACK*)(ULONG, const LdrDllLoadedNote*, PVOID);
+        using LdrRegisterDllNotificationFn = LONG(NTAPI*)(ULONG, LdrDllNotificationFn, PVOID, PVOID*);
+
+        VOID CALLBACK OnStoreDllLoaded(ULONG reason, const LdrDllLoadedNote* data, PVOID)
+        {
+            if (reason == 1 && data && data->DllBase)
+            {
+                PatchOneModule(reinterpret_cast<HMODULE>(data->DllBase));
+            }
+        }
+
+        void ArmDllLoadHook()
+        {
+            HMODULE ntdll = GetModuleHandleW(L"ntdll.dll");
+            if (!ntdll || !RealGetProcAddressKernel32)
+            {
+                return;
+            }
+
+            auto* registerNotification = reinterpret_cast<LdrRegisterDllNotificationFn>(
+                RealGetProcAddressKernel32(ntdll, "LdrRegisterDllNotification"));
+            if (!registerNotification)
+            {
+                return;
+            }
+
+            PVOID cookie = nullptr;
+            if (registerNotification(0, &OnStoreDllLoaded, nullptr, &cookie) >= 0)
+            {
+                Log("DAILYLOGIN route=dll_notify armed");
+            }
+        }
+
         DWORD WINAPI DailyLoginRoutingWorker(LPVOID)
         {
             if (!ResolveWs2Functions())
@@ -1010,6 +1143,9 @@ namespace aorf
             {
                 return 0;
             }
+
+            ResolveWs2Ordinals();
+            ArmDllLoadHook();
 
             unsigned long totalPatches = 0;
             for (int attempt = 0; attempt < 300; ++attempt)
