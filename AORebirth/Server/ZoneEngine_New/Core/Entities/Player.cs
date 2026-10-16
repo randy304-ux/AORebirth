@@ -73,7 +73,7 @@ namespace ZoneEngine_New.Core.Entities
         // Live DeathRespawn action parameters (CharacterAction 0xAB).
         const int DeathRespawnActionParameter1 = 1000020;
         public const int AreteLandingPlayfield = 6553;
-        public static readonly float[] AreteLandingReclaim = { 3609f, 52.3f, 786.2f };
+        public static readonly float[] AreteLandingReclaim = { 3464.0f, 9.1f, 813.9f }; // Arete insurance terminal by Patrick Sun (x, y=height, z)
         const int DeathRespawnActionParameter2 = 295830;
 
         bool _respawnPending;
@@ -459,6 +459,20 @@ namespace ZoneEngine_New.Core.Entities
         // stats is confirmed by RC-LT capture 2026-10-16 (client SetStat): PersonalResearchGoal(265) = selected research perk, PersonalResearchLevel(263) =
         // Personal slider %, GlobalResearchLevel(264) = Global slider %. Banked research XP is server-only stat ResearchXpStat (GUESS: not sent to client).
         public const CharacterStat ResearchXpStat = (CharacterStat)10263;
+
+        // Server-only insurance (respawn) point, saved at an insurance terminal. Coordinates are x10.
+        public const CharacterStat InsurancePlayfieldStat = (CharacterStat)10270;
+        public const CharacterStat InsuranceXStat = (CharacterStat)10271;
+        public const CharacterStat InsuranceYStat = (CharacterStat)10272;
+        public const CharacterStat InsuranceZStat = (CharacterStat)10273;
+
+        public void SaveInsurancePoint(int playfieldId, Vector3 at)
+        {
+            Stats.Set(InsurancePlayfieldStat, playfieldId, StatDetail.Base);
+            Stats.Set(InsuranceXStat, (int)Math.Round(at.xf * 10), StatDetail.Base);
+            Stats.Set(InsuranceYStat, (int)Math.Round(at.yf * 10), StatDetail.Base);
+            Stats.Set(InsuranceZStat, (int)Math.Round(at.zf * 10), StatDetail.Base);
+        }
         public int ActiveResearchPerk => Stats.GetOrZero(CharacterStat.PersonalResearchGoal);
         public int ResearchXp => Stats.GetOrZero(ResearchXpStat);
         public int ResearchPercent => Math.Clamp(Stats.GetOrZero(CharacterStat.PersonalResearchLevel), 0, 100);
@@ -1169,9 +1183,11 @@ namespace ZoneEngine_New.Core.Entities
                 throw new InvalidOperationException("No respawn destination is configured.");
 
             Vector3 landing = new Vector3(respawn.Position[0], respawn.Position[1], respawn.Position[2]);
-            int respawnPf = respawn.PlayfieldId;
-            // Arete Landing deaths reclaim on Arete Landing (start deck; real reclaim terminal coords are a guess).
-            if (playfield.Identity.Instance == AreteLandingPlayfield)
+            // Insurance point saved at an insurance terminal; unset characters use the Arete Landing insurance terminal.
+            int respawnPf = Stats.GetOrZero(InsurancePlayfieldStat);
+            if (respawnPf > 0)
+                landing = new Vector3(Stats.GetOrZero(InsuranceXStat) / 10f, Stats.GetOrZero(InsuranceYStat) / 10f, Stats.GetOrZero(InsuranceZStat) / 10f);
+            else
             {
                 respawnPf = AreteLandingPlayfield;
                 landing = new Vector3(AreteLandingReclaim[0], AreteLandingReclaim[1], AreteLandingReclaim[2]);

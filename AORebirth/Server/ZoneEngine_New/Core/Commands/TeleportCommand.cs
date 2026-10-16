@@ -59,7 +59,7 @@ namespace ZoneEngine_New.Core.Commands
 
             string[] args = context.Args;
             if (args.Length == 1 && string.Equals(args[0], "arete", StringComparison.OrdinalIgnoreCase))
-                args = new[] { "3609", "52.3", "786.2", "6553" };
+                args = new[] { "3464.0", "9.1", "813.9", "6553" };
 
             bool hasExplicitY = args.Length >= 4;
             int zIndex = hasExplicitY ? 2 : 1;

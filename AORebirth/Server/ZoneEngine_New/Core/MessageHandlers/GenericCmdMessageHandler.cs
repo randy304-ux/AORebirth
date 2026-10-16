@@ -337,6 +337,11 @@ namespace ZoneEngine_New.Core.MessageHandlers
                 return;
             }
 
+            if (dynel != null && TryUseInsuranceTerminal(session, player, playfield, dynel))
+            {
+                Acknowledge(session, message, dynel.Identity);
+                return;
+            }
             if (dynel is not IUsableDynel usable)
             {
                 Deny(
@@ -362,6 +367,32 @@ namespace ZoneEngine_New.Core.MessageHandlers
             }
 
             Acknowledge(session, message, dynel.Identity);
+        }
+
+        // Insurance terminals: (playfield, x, y, z). Using one saves the player's respawn point beside it.
+        static readonly (int Pf, float X, float Y, float Z)[] InsuranceTerminals =
+        {
+            (Player.AreteLandingPlayfield, Player.AreteLandingReclaim[0], Player.AreteLandingReclaim[1], Player.AreteLandingReclaim[2]),
+        };
+
+        static bool TryUseInsuranceTerminal(IZoneSession session, Player player, Playfield playfield, Dynel dynel)
+        {
+            int pf = playfield.Identity.Instance;
+            var p = dynel.Position;
+            foreach (var t in InsuranceTerminals)
+            {
+                if (t.Pf != pf)
+                    continue;
+                float dx = p.xf - t.X, dz = p.zf - t.Z;
+                if (dx * dx + dz * dz > 8f * 8f)
+                    continue;
+                player.SaveInsurancePoint(pf, player.Position);
+                ZoneEngine_New.Core.Commands.GmCommandFeedback.Send(session, player, "Insurance point saved. You will respawn here when you die.");
+                player.Logger.Info(string.Format(CultureInfo.InvariantCulture, "Insurance saved char={0} pf={1} at ({2},{3},{4}) terminal={5}", player.Identity.Instance, pf, player.Position.xf, player.Position.yf, player.Position.zf, dynel.Identity));
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

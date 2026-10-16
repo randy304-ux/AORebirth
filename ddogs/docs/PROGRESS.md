@@ -218,3 +218,11 @@ GUESSES:
 - Research: changing the line no longer wipes banked XP. The client re-sends 265 when the window opens, and that was resetting the bank to 0. Overflow already carried over between tiers; it waits in the bank when the next tier is level-capped.
 - Death respawn: dying on PF 6553 now respawns on Arete Landing at 3609,52.3,786.2. GUESS: these are the start-deck coords, not the real reclaim terminal. Everywhere else still uses Respawn.json (Bor 800).
 - .tp arete takes you to that point.
+
+## 2026-10-16 01:48 - Insurance respawn, Arete looks, minibull mesh
+- Insurance: using the terminal within 8 m of 3464.0, 9.1 (height), 813.9 on PF 6553 saves your spot. It is stored per character in server-only stats 10270-10273 (playfield, x/y/z times 10). On death you respawn at the saved spot. Characters with nothing saved go to the Arete insurance spot, not Bor (Respawn.json is no longer used). .tp arete goes to the same spot. GUESS: Randy's coordinates are read as x, z, height, the same way the guide gives the credit card spot (3451.4, 891.6, 9.1). Other playfields have no insurance terminals listed yet.
+- Jumpsuits: already in Quests.json. They are the choice reward for Desmond Calitri's chain, final step ADPR "Collect Desmond's payment" (1120 credits, 2229 XP): Dockworker Overalls 295698, The Brute Suit 295699, Experimental Nano Armor Exosuit 295703.
+- Cedric Harding (CEHA): Solitus male body 26092, head 40694, wearing Dockworker Overalls (template Equipment, which NPC wear textures read from). Dockworker IESY and Wounded Dockworker WODO also wear the overalls. GUESS: that the Dockworker Overalls are the orange suit.
+- Protesters: ROTE uses the Antonio Stacklund look (26088/40687). Clan Protesters CPPS and CSPE use female civilian looks (26076/40635 and 26082/40634). Every spawn of one template still shares that template's look.
+- Angry Minibull (WTSO) and Harvey (REGD): MonsterData changed from 30360 to 38387, the ID the original E03C "Minibulls" data uses. GUESS.
+- Audit: every MonsterData ID in the recent Arete templates exists in MonsterData.json and in the client RDB (types 1040023/1010002), so there were no bad IDs. Waste Collector (17714, organic waste collector, still unchanged from the original data) invisibility cause unknown.
