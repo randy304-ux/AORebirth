@@ -61,7 +61,7 @@ foreach ($p in $nt.PSObject.Properties) {
   }
   $start = $nraw.IndexOf("`n    `"" + $p.Name + "`":")
   if ($start -lt 0) { throw "key $($p.Name) not found" }
-  $m = [regex]::new("`n    `"[^`"]+`":").Match($nraw, $start + 5)
+  $m = [regex]::new("`n {0,4}`"[^`"]{1,6}`":").Match($nraw, $start + 5)
   $endIdx = if ($m.Success) { $m.Index } else { $nraw.TrimEnd().LastIndexOf('}') }
   $seg = $nraw.Substring($start, $endIdx - $start)
   $comma = if ($seg.TrimEnd().EndsWith(',')) { ',' } else { '' }

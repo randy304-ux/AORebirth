@@ -3,7 +3,7 @@
 # Real: AO-Universe Shoulderpads Quests guide (givers, 8 parts, rewards); item ids from itemnames (client RDB names);
 #   ALOD (Lush Fields 695, 1544,2500) and DODE (Aegean 585, 606,1122) are the client spawn hashes at the guide's coordinates.
 #   Mob names from Randy's live screenshots (IIV-X Advanced Docker inside resource 2150461, Supreme Collector of Waste, Cleanmeister).
-# Guessed: hash mapping PO51(+3 nearby 32DO)=IIV-X Advanced Docker, FRAG=Supreme Collector of Waste, PRC2=Cleanmeister boss; levels/scales/HP;
+# Guessed: hash mapping PO51(+3 nearby 32DO)=IIV-X Advanced Docker, SOCW=Supreme Collector of Waste, PRC2=Cleanmeister boss; levels/scales/HP;
 #   no tradeskill engine in ZoneEngine_New, so the givers take the 8 raw parts by trade (retail: combine into the polyhedral casing first);
 #   drop rates (Randy: "fairly often"); giver looks (Adri Afeli's mesh); pad QL 30. Parts 2 and 3 (Trash King & lackeys) not built.
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
@@ -28,7 +28,7 @@ function PartLoot($pct) { foreach ($k in $parts.Keys) { [pscustomobject]@{ Hash 
 $new = [ordered]@{}
 $ix = Mk '32DO' 'IIV-X Advanced Docker' 4 17649 115 1 'IIV-X Advanced Docker (Randy live screenshot, inside the building at 3515.8,901.7, resource 2150461). Mesh 17649 android (green battle droid). Level 4 from PO51: guessed'
 $new.IIVX = [pscustomobject]@{ Templates = @($ix) }
-$sc = Mk '01V1' 'Supreme Collector of Waste' 8 17714 130 3 'Junkyard boss (Randy live screenshot). Mesh 17714 organic waste collector; the orange skin is not settable, scale 130, L8, 3x HP, hash FRAG: guessed'
+$sc = Mk '01V1' 'Supreme Collector of Waste' 13 17714 130 3 'Boss (Randy live screenshot; wiki.aodb.us: northeast part of the map). Hash SOCW (L13, east side 4067,667) by name/level, mesh 17714 organic waste collector (orange skin not settable), scale 130, 3x HP: guessed'
 $sc | Add-Member -Force NoteProperty LootTable @(PartLoot 40)
 $new.SCWS = [pscustomobject]@{ Templates = @($sc) }
 $cm = Mk 'JUCO' 'Cleanmeister Intelligence Robot' 4 297023 170 4 'Cleanmeister boss (Randy live screenshot: green box robot with antenna, among Cleaning Robots). Mesh 297023, scale 170, L4, 4x HP, hash PRC2 (L2, 600 s, inside the JUCO cluster): guessed'
@@ -58,7 +58,7 @@ foreach ($p in $nt.PSObject.Properties) {
   }
   $start = $nraw.IndexOf("`n    `"" + $p.Name + "`":")
   if ($start -lt 0) { throw "key $($p.Name) not found" }
-  $m = [regex]::new("`n    `"[^`"]+`":").Match($nraw, $start + 5)
+  $m = [regex]::new("`n {0,4}`"[^`"]{1,6}`":").Match($nraw, $start + 5)
   $endIdx = if ($m.Success) { $m.Index } else { $nraw.TrimEnd().LastIndexOf('}') }
   $seg = $nraw.Substring($start, $endIdx - $start)
   $comma = if ($seg.TrimEnd().EndsWith(',')) { ',' } else { '' }
@@ -73,7 +73,7 @@ foreach ($p in $nt.PSObject.Properties) {
   $km = [regex]::Match($nraw, "`n[ ]*`"" + $p.Name + "`":"); if (-not $km.Success) { Write-Warning ("flea key not found: " + $p.Name); continue }
   foreach ($t in $ts) { $t.Stats.'360' = $(if ($t.Name -match 'Mutated|Dyna|King|Queen|Boss') { 160 } else { 100 }) }
   $start = $km.Index
-  $m = [regex]::new("`n    `"[^`"]+`":").Match($nraw, $start + 5)
+  $m = [regex]::new("`n {0,4}`"[^`"]{1,6}`":").Match($nraw, $start + 5)
   $endIdx = if ($m.Success) { $m.Index } else { $nraw.TrimEnd().LastIndexOf('}') }
   $seg = $nraw.Substring($start, $endIdx - $start)
   $comma = if ($seg.TrimEnd().EndsWith(',')) { ',' } else { '' }
@@ -97,7 +97,7 @@ $s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
 foreach ($sp in $s.spawns) {
   $x = $sp.position[0]; $z = $sp.position[2]
   if ($sp.hashText -eq 'PO51' -or ($sp.hashText -eq '32DO' -and [Math]::Sqrt(($x-3515.8)*($x-3515.8)+($z-901.7)*($z-901.7)) -lt 14)) { $sp.hashText = 'IIVX'; $sp.hash = 0; $sp.minLevel = 4; $sp.maxLevel = 4; $sp.respawnTime = 60 }
-  if ($sp.hashText -eq 'FRAG') { $sp.hashText = 'SCWS'; $sp.hash = 0; $sp.minLevel = 8; $sp.maxLevel = 8; $sp.respawnTime = 900 }
+  if ($sp.hashText -in 'SOCW','SCWS') { $sp.hashText = 'SCWS'; $sp.hash = 0; $sp.minLevel = 13; $sp.maxLevel = 13; $sp.respawnTime = 900 }
   if ($sp.hashText -eq 'PRC2') { $sp.hashText = 'CMBS'; $sp.hash = 0; $sp.minLevel = 4; $sp.maxLevel = 4; $sp.respawnTime = 900 }
 }
 [IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)
@@ -146,3 +146,4 @@ $d = Giver 'DODE' 'SPC1' 'Dodga Demercel' "The Clans asked me to gather some imp
 [IO.File]::WriteAllText((Join-Path $kd 'DodgaDemercel.json'), ($d | ConvertTo-Json -Depth 8) + "`n", $u)
 foreach ($p in @($npath, $ipath, $qpath, (Join-Path $kd 'AlvinOdeleder.json'), (Join-Path $kd 'DodgaDemercel.json'))) { [IO.File]::WriteAllText($p, ([IO.File]::ReadAllText($p, $u) -replace "`r`n", "`n"), $u) }
 'shoulderpads/junkyard written; part drops on: ' + ($mk -join ',') + '; fleas resized: ' + ($fleas -join ',')
+& (Join-Path $PSScriptRoot 'Build-AreteDocks.ps1') -GameData $gd

@@ -3741,5 +3741,231 @@
                                        ]
                                    ]
                    }
+    },
+    {
+        "Hash":  "GFOT",
+        "Name":  "Extinguish the Gas Fire",
+        "QasInstance":  920172,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Extinguish the Gas Fire",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GAFR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  702,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RGFO",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "WDK1",
+        "Name":  "Use the stim on a Wounded Dockworker",
+        "QasInstance":  920173,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Use the stim on a Wounded Dockworker",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "WODO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  703,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RWD1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "WDK2",
+        "Name":  "Return to Marcus Stone",
+        "QasInstance":  920174,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return to Marcus Stone",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "AMST",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  704,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RWD2",
+                       "Credits":  1040,
+                       "Xp":  1281,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  291082,
+                                               "HighId":  291082,
+                                               "Name":  "Health and Nano Recharger",
+                                               "Quality":  1
+                                           },
+                                           {
+                                               "Id":  291043,
+                                               "HighId":  291043,
+                                               "Name":  "Health and Nano Stim",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "SSW1",
+        "Name":  "The Shiny Sword",
+        "QasInstance":  920175,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Give the Shiny Sword to the Greedy Desert Reet",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GRDS",
+                          "SpecItem":  "SHSW",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  705,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RSSW",
+                       "Credits":  0,
+                       "Xp":  1000,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  223381,
+                                               "HighId":  223381,
+                                               "Name":  "Nano Crystal (Composite Nano Expertise)",
+                                               "Quality":  10
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "LKQ1",
+        "Name":  "The wrath of the Leet King",
+        "QasInstance":  920176,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill the Greedy Desert Reet and smash his stolen treasure",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "GRDS",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  706,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RLK1",
+                       "Credits":  0,
+                       "Xp":  500,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "LKQ2",
+        "Name":  "A queen for the king",
+        "QasInstance":  920177,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Bring the Leet King\u0027s gifts to Princess Leet",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "PRLT",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  707,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RLK2",
+                       "Credits":  0,
+                       "Xp":  1000,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  246925,
+                                               "HighId":  246925,
+                                               "Name":  "Light Bio Mesh",
+                                               "Quality":  10
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "CCS1",
+        "Name":  "Steal the credits",
+        "QasInstance":  920178,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Drain the credits off the Bank of Rubi-Ka Credit Card",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "BBOC",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  708,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RCCS",
+                       "Credits":  15000,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "CCR1",
+        "Name":  "Find the owner of the credit card",
+        "QasInstance":  920179,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Return the credit card to Leonora Marty in the market",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "LEMY",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  709,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RCCR",
+                       "Credits":  0,
+                       "Xp":  2080,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  297054,
+                                               "HighId":  297054,
+                                               "Name":  "Vacuum Packed Omni-Med Suit",
+                                               "Quality":  10
+                                           }
+                                       ]
+                                   ]
+                   }
     }
 ]

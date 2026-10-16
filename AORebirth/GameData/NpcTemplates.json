@@ -27452,6 +27452,12 @@
                                                 "Repeats":  1,
                                                 "Chance":  50,
                                                 "LevelMod":  0
+                                            },
+                                            {
+                                                "Hash":  "SHSW",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  0
                                             }
                                         ]
                       },
@@ -27544,151 +27550,169 @@
                                                 "Repeats":  1,
                                                 "Chance":  50,
                                                 "LevelMod":  0
+                                            },
+                                            {
+                                                "Hash":  "SHSW",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  0
                                             }
                                         ]
                       }
                   ]
 },
-    "DERT":  {
-                 "Templates":  [
-                                   {
-                                       "Name":  "Desert Reet",
-                                       "Level":  5,
-                                       "Stats":  {
-                                                     "0":  268964353,
-                                                     "1":  58,
-                                                     "4":  6,
-                                                     "18":  0,
-                                                     "21":  0,
-                                                     "27":  58,
-                                                     "33":  3,
-                                                     "37":  1,
-                                                     "47":  1,
-                                                     "54":  5,
-                                                     "59":  5,
-                                                     "60":  15,
-                                                     "89":  1,
-                                                     "99":  503,
-                                                     "132":  5,
-                                                     "156":  5,
-                                                     "173":  3,
-                                                     "174":  3,
-                                                     "214":  1,
-                                                     "274":  0,
-                                                     "284":  0,
-                                                     "285":  5,
-                                                     "286":  2,
-                                                     "292":  0,
-                                                     "339":  91,
-                                                     "342":  600,
-                                                     "343":  0,
-                                                     "359":  30365,
-                                                     "360":  93,
-                                                     "368":  15,
-                                                     "387":  503,
-                                                     "389":  0,
-                                                     "417":  503,
-                                                     "421":  3,
-                                                     "436":  91,
-                                                     "455":  0,
-                                                     "466":  15,
-                                                     "660":  0,
-                                                     "673":  31,
-                                                     "1003":  0,
-                                                     "64":  0,
-                                                     "61":  50
-                                                 },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ]
-                                   },
-                                   {
-                                       "Name":  "Desert Reet",
-                                       "Level":  6,
-                                       "Stats":  {
-                                                     "0":  268964353,
-                                                     "1":  69,
-                                                     "4":  6,
-                                                     "18":  0,
-                                                     "21":  0,
-                                                     "27":  69,
-                                                     "33":  3,
-                                                     "37":  1,
-                                                     "47":  1,
-                                                     "54":  6,
-                                                     "59":  5,
-                                                     "60":  15,
-                                                     "89":  1,
-                                                     "99":  503,
-                                                     "132":  5,
-                                                     "156":  5,
-                                                     "173":  3,
-                                                     "174":  3,
-                                                     "214":  1,
-                                                     "274":  0,
-                                                     "284":  0,
-                                                     "285":  6,
-                                                     "286":  3,
-                                                     "292":  0,
-                                                     "339":  91,
-                                                     "342":  600,
-                                                     "343":  0,
-                                                     "359":  30365,
-                                                     "360":  93,
-                                                     "368":  15,
-                                                     "387":  503,
-                                                     "389":  0,
-                                                     "417":  503,
-                                                     "421":  3,
-                                                     "436":  91,
-                                                     "455":  0,
-                                                     "466":  15,
-                                                     "660":  0,
-                                                     "673":  31,
-                                                     "1003":  0,
-                                                     "64":  0,
-                                                     "61":  60
-                                                 },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ]
-                                   }
-                               ]
-             },
+    "DERT": {
+    "Templates":  [
+                      {
+                          "Name":  "Desert Reet",
+                          "Level":  5,
+                          "Stats":  {
+                                        "0":  268964353,
+                                        "1":  58,
+                                        "4":  6,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  58,
+                                        "33":  3,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  5,
+                                        "59":  5,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  5,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  5,
+                                        "286":  2,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  30365,
+                                        "360":  93,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  0,
+                                        "61":  50
+                                    },
+                          "LootTable":  [
+                                            {
+                                                "Hash":  "CMTR",
+                                                "Repeats":  1,
+                                                "Chance":  40,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "CMHK",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "OFAB",
+                                                "Repeats":  1,
+                                                "Chance":  1,
+                                                "LevelMod":  0
+                                            },
+                                            {
+                                                "Hash":  "SHSW",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  0
+                                            }
+                                        ]
+                      },
+                      {
+                          "Name":  "Desert Reet",
+                          "Level":  6,
+                          "Stats":  {
+                                        "0":  268964353,
+                                        "1":  69,
+                                        "4":  6,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  69,
+                                        "33":  3,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  6,
+                                        "59":  5,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  5,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  6,
+                                        "286":  3,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  30365,
+                                        "360":  93,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  0,
+                                        "61":  60
+                                    },
+                          "LootTable":  [
+                                            {
+                                                "Hash":  "CMTR",
+                                                "Repeats":  1,
+                                                "Chance":  40,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "CMHK",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "OFAB",
+                                                "Repeats":  1,
+                                                "Chance":  1,
+                                                "LevelMod":  0
+                                            },
+                                            {
+                                                "Hash":  "SHSW",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  0
+                                            }
+                                        ]
+                      }
+                  ]
+},
     "GRDS":  {
                  "Templates":  [
                                    {
@@ -70476,71 +70500,80 @@
                                            "Source":  "RMGL at 3433.6, 9.4, 832.8, the stall beside Antonio. Human mesh borrowed. No marauder quest."
                                        }
              },
-    "MARC":  {
-                 "Templates":  [
-                                   {
-                                       "Name":  "Mario Carles",
-                                       "Level":  10,
-                                       "Stats":  {
-                                                     "0":  268964353,
-                                                     "1":  80,
-                                                     "4":  1,
-                                                     "18":  0,
-                                                     "21":  0,
-                                                     "27":  80,
-                                                     "33":  3,
-                                                     "37":  1,
-                                                     "47":  1,
-                                                     "54":  10,
-                                                     "59":  2,
-                                                     "60":  15,
-                                                     "64":  40689,
-                                                     "89":  1,
-                                                     "99":  503,
-                                                     "132":  5,
-                                                     "156":  20,
-                                                     "173":  3,
-                                                     "174":  3,
-                                                     "214":  1,
-                                                     "274":  0,
-                                                     "284":  0,
-                                                     "285":  10,
-                                                     "286":  1,
-                                                     "292":  0,
-                                                     "339":  91,
-                                                     "342":  600,
-                                                     "343":  0,
-                                                     "359":  26084,
-                                                     "360":  105,
-                                                     "368":  15,
-                                                     "387":  503,
-                                                     "389":  0,
-                                                     "417":  503,
-                                                     "421":  3,
-                                                     "436":  91,
-                                                     "455":  25,
-                                                     "466":  15,
-                                                     "660":  0,
-                                                     "673":  31,
-                                                     "1003":  0,
-                                                     "61":  100
-                                                 },
-                                       "HasHeadMesh":  true,
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "QYAL",
-                                                             "Repeats":  1,
-                                                             "Chance":  100,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ]
-                                   }
-                               ],
-                 "ContentProvenance":  {
-                                           "Guessed":  true,
-                                           "Source":  "Mario Carles, level 10, for the Shady Guy car job. Placed 14m east of the Shady Guy at the same height. The guide does not publish his coordinates. Drops the Stolen Yalmaha."
-                                       }
-             },
+    "MARC": {
+    "Templates":  [
+                      {
+                          "Name":  "Mario Carles",
+                          "Level":  10,
+                          "Stats":  {
+                                        "0":  268964353,
+                                        "1":  80,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  80,
+                                        "33":  3,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  10,
+                                        "59":  2,
+                                        "60":  15,
+                                        "64":  40689,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  20,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  10,
+                                        "286":  1,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  203157,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  25,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "61":  100
+                                    },
+                          "HasHeadMesh":  true,
+                          "LootTable":  [
+                                            {
+                                                "Hash":  "QYAL",
+                                                "Repeats":  1,
+                                                "Chance":  100,
+                                                "LevelMod":  0
+                                            }
+                                        ],
+                          "Features":  [
+                                           "Wander"
+                                       ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "MARC",
+                                                    "Source":  "Mario Carles L10 in a white car wandering the desert (AO-Universe #17, Randy). Mesh 203157 yalmaha_executive; spot near 3700,640: guessed"
+                                                }
+                      }
+                  ],
+    "ContentProvenance":  {
+                              "Guessed":  true,
+                              "Source":  "Mario Carles, level 10, for the Shady Guy car job. Placed 14m east of the Shady Guy at the same height. The guide does not publish his coordinates. Drops the Stolen Yalmaha."
+                          }
+},
     "DMMK":  {
                  "Templates":  [
                                    {
@@ -71693,8 +71726,8 @@
                                         "339":  91,
                                         "342":  600,
                                         "343":  0,
-                                        "359":  17712,
-                                        "360":  110,
+                                        "359":  205942,
+                                        "360":  220,
                                         "368":  15,
                                         "387":  503,
                                         "389":  0,
@@ -71864,18 +71897,18 @@
     "Templates":  [
                       {
                           "Name":  "Supreme Collector of Waste",
-                          "Level":  8,
+                          "Level":  13,
                           "Stats":  {
                                         "0":  268964353,
-                                        "1":  348,
+                                        "1":  522,
                                         "4":  6,
                                         "18":  0,
                                         "21":  0,
-                                        "27":  348,
+                                        "27":  522,
                                         "33":  3,
                                         "37":  1,
                                         "47":  1,
-                                        "54":  8,
+                                        "54":  13,
                                         "59":  5,
                                         "60":  15,
                                         "89":  1,
@@ -71913,7 +71946,7 @@
                                                     "Guessed":  true,
                                                     "Confirmed":  false,
                                                     "Donor":  "01V1",
-                                                    "Source":  "Junkyard boss (Randy live screenshot). Mesh 17714 organic waste collector; the orange skin is not settable, scale 130, L8, 3x HP, hash FRAG: guessed"
+                                                    "Source":  "Boss (Randy live screenshot; wiki.aodb.us: northeast part of the map). Hash SOCW (L13, east side 4067,667) by name/level, mesh 17714 organic waste collector (orange skin not settable), scale 130, 3x HP: guessed"
                                                 },
                           "LootTable":  [
                                             {
@@ -72196,6 +72229,1873 @@
                                                     "Confirmed":  false,
                                                     "Donor":  "ADAF",
                                                     "Source":  "Dodga Demercel, clan outpost on the Aegean mountain 600x1100 (AO-Universe). Look borrowed from Adri Afeli: guessed"
+                                                }
+                      }
+                  ]
+},
+    "GAFR": {
+    "Templates":  [
+                      {
+                          "Name":  "Gas Fire",
+                          "Level":  1,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  1,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  234586,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Gas Fire on the dock containers (AO-Universe #2, Randy screenshot). Hash GAFR, mesh sl_campfire 234586: guessed"
+                                                }
+                      }
+                  ]
+},
+    "WODO": {
+    "Templates":  [
+                      {
+                          "Name":  "Wounded Dockworker",
+                          "Level":  1,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  1,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  11,
+                                        "174":  11,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  296008,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Wounded Dockworker lying on the deck (AO-Universe #2, Randy screenshot). Mesh 296008 \"wounded dock worker\" from the client; hash WODO: guessed"
+                                                }
+                      }
+                  ]
+},
+    "IESY": {
+    "Templates":  [
+                      {
+                          "Name":  "Dockworker",
+                          "Level":  5,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  5,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Dockworker by the dock door (Randy screenshot). Hash IESY, borrowed look: guessed"
+                                                }
+                      }
+                  ]
+},
+    "OIUR": {
+    "Templates":  [
+                      {
+                          "Name":  "ICC Peacekeeper",
+                          "Level":  10,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  10,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink OIUR mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "CPPS": {
+    "Templates":  [
+                      {
+                          "Name":  "Clan Protester",
+                          "Level":  20,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  20,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink CPPS mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "CSPE": {
+    "Templates":  [
+                      {
+                          "Name":  "Clan Protester",
+                          "Level":  20,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  20,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink CSPE mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "ONGA": {
+    "Templates":  [
+                      {
+                          "Name":  "Omni-Pol Guard",
+                          "Level":  20,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  20,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink ONGA mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "LUSN": {
+    "Templates":  [
+                      {
+                          "Name":  "Omni-AF Private",
+                          "Level":  25,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  25,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink LUSN mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "KLHG": {
+    "Templates":  [
+                      {
+                          "Name":  "Omni-AF Private",
+                          "Level":  20,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  20,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink KLHG mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "DART": {
+    "Templates":  [
+                      {
+                          "Name":  "Omni-AF Private",
+                          "Level":  20,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  20,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink DART mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "OMCN": {
+    "Templates":  [
+                      {
+                          "Name":  "Omni-AF Officer Milne",
+                          "Level":  35,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  35,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink OMCN mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "CSPT": {
+    "Templates":  [
+                      {
+                          "Name":  "Clan Unit Sentinel",
+                          "Level":  20,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  20,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink CSPT mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "CAGD": {
+    "Templates":  [
+                      {
+                          "Name":  "Clan Guard Elina Jones",
+                          "Level":  25,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  25,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink CAGD mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "FDCS": {
+    "Templates":  [
+                      {
+                          "Name":  "Field Commander Ericson",
+                          "Level":  35,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  35,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink FDCS mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "VAHE": {
+    "Templates":  [
+                      {
+                          "Name":  "Vanguard Henri Zure",
+                          "Level":  10,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  10,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "ICC HQ faction area (Randy live screenshot). Pink VAHE mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "ODDD": {
+    "Templates":  [
+                      {
+                          "Name":  "Omni-Trans Equipment Vendor",
+                          "Level":  40,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  1650,
+                                        "4":  3,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  1650,
+                                        "33":  2,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  40,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  137,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  60,
+                                        "286":  20,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  250380,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  88,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  40173
+                                    },
+                          "HasHeadMesh":  true,
+                          "Equipment":  [
+                                            [
+                                                248368,
+                                                248368
+                                            ]
+                                        ],
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "OITA",
+                                                    "Source":  "Omni-Trans counter (Randy screenshot); look from the 4582 vendor OITA; pink ODDD mapping guessed; shop not wired"
+                                                }
+                      }
+                  ]
+},
+    "LKNG": {
+    "Templates":  [
+                      {
+                          "Name":  "Leet King",
+                          "Level":  10,
+                          "Stats":  {
+                                        "0":  268964353,
+                                        "1":  194,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  194,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  10,
+                                        "59":  0,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  5,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  10,
+                                        "286":  4,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  17655,
+                                        "360":  140,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  36,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0
+                                    },
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "LE04",
+                                                    "Source":  "Leet King (AO-Universe #16). Spot and scale guessed"
+                                                }
+                      }
+                  ]
+},
+    "PRLT": {
+    "Templates":  [
+                      {
+                          "Name":  "Princess Leet",
+                          "Level":  8,
+                          "Stats":  {
+                                        "0":  268964353,
+                                        "1":  194,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  194,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  8,
+                                        "59":  0,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  5,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  10,
+                                        "286":  4,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  17655,
+                                        "360":  115,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  36,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0
+                                    },
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "LE04",
+                                                    "Source":  "Princess Leet (AO-Universe #16). Spot and scale guessed"
+                                                }
+                      }
+                  ]
+},
+    "YBSH": {
+    "Templates":  [
+                      {
+                          "Name":  "Gnarl the Roller",
+                          "Level":  7,
+                          "Stats":  {
+                                        "0":  268964353,
+                                        "1":  232,
+                                        "4":  6,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  232,
+                                        "33":  3,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  7,
+                                        "59":  5,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  5,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  5,
+                                        "286":  2,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  17687,
+                                        "360":  170,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  0,
+                                        "61":  50
+                                    },
+                          "LootTable":  [
+                                            {
+                                                "Hash":  "CMTR",
+                                                "Repeats":  1,
+                                                "Chance":  40,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "CMHK",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "OFAB",
+                                                "Repeats":  1,
+                                                "Chance":  1,
+                                                "LevelMod":  0
+                                            },
+                                            {
+                                                "Hash":  "QRRI",
+                                                "Repeats":  1,
+                                                "Chance":  35,
+                                                "LevelMod":  0
+                                            },
+                                            {
+                                                "Hash":  "RRFL",
+                                                "Repeats":  1,
+                                                "Chance":  30,
+                                                "LevelMod":  0
+                                            },
+                                            {
+                                                "Hash":  "RRTL",
+                                                "Repeats":  1,
+                                                "Chance":  15,
+                                                "LevelMod":  0
+                                            },
+                                            {
+                                                "Hash":  "MPRT",
+                                                "Repeats":  1,
+                                                "Chance":  50,
+                                                "LevelMod":  0
+                                            },
+                                            {
+                                                "Hash":  "SHSW",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  0
+                                            }
+                                        ],
+                          "Features":  [
+                                           "Wander"
+                                       ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "WSSC",
+                                                    "Source":  "Gnarl the Roller, rollerrat boss wandering the desert edge / beach near town (wiki.aodb.us, AO forum; Randy). Hash YBSH (L7, 600 s), level, scale 170, 4x HP guessed; rollerrat-part loot from WSSC"
+                                                }
+                      }
+                  ]
+},
+    "FACS": {
+    "Templates":  [
+                      {
+                          "Name":  "Logistics Manager Fausto",
+                          "Level":  20,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  20,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Market, by the barrels (Randy). Pink FACS mapping and look guessed; Emiel delivery not built"
+                                                }
+                      }
+                  ]
+},
+    "MJUY": {
+    "Templates":  [
+                      {
+                          "Name":  "Robotic Guard Dog",
+                          "Level":  13,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  13,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  17720,
+                                        "360":  110,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Guards the strongbox room door (AO-Universe #5 security dog, Randy). Pink MJUY mapping guessed; attackable"
+                                                }
+                      }
+                  ]
+},
+    "LEMY": {
+    "Templates":  [
+                      {
+                          "Name":  "Leonora Marty",
+                          "Level":  10,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  10,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Street near the Weapons/Implants signs (Randy). Pink LEMY mapping guessed"
+                                                }
+                      }
+                  ]
+},
+    "FMXT": {
+    "Templates":  [
+                      {
+                          "Name":  "Furniture Merchant",
+                          "Level":  20,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  20,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Market (Randy). Pink FMXT mapping guessed; no stock"
+                                                }
+                      }
+                  ]
+},
+    "FPBY": {
+    "Templates":  [
+                      {
+                          "Name":  "Food Provider",
+                          "Level":  10,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  10,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Market food stall (Randy). Pink FPBY mapping guessed; no stock"
+                                                }
+                      }
+                  ]
+},
+    "CGSA": {
+    "Templates":  [
+                      {
+                          "Name":  "Cyrus Cervenak",
+                          "Level":  10,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  10,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  26092,
+                                        "360":  100,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Market food stall (Randy). Pink CGSA mapping guessed; no stock"
+                                                }
+                      }
+                  ]
+},
+    "SPAU": {
+    "Templates":  [
+                      {
+                          "Name":  "Tasty Chocolates!",
+                          "Level":  1,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  1,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  253599,
+                                        "360":  50,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Stall sign (Randy). Pink SPAU mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "SLPW": {
+    "Templates":  [
+                      {
+                          "Name":  "Romantic Flowers!",
+                          "Level":  1,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  1,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  253599,
+                                        "360":  50,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Stall sign (Randy). Pink SLPW mapping and look guessed"
+                                                }
+                      }
+                  ]
+},
+    "BBOC": {
+    "Templates":  [
+                      {
+                          "Name":  "Bank of Rubi-Ka Credit Card",
+                          "Level":  1,
+                          "Stats":  {
+                                        "0":  277352961,
+                                        "1":  941,
+                                        "4":  1,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  941,
+                                        "33":  0,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  1,
+                                        "59":  2,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  129,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  38,
+                                        "286":  12,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  253599,
+                                        "360":  30,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  0,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  223803
+                                    },
+                          "HasHeadMesh":  true,
+                          "Features":  [
+                                           "NoCombat",
+                                           "NoMove"
+                                       ],
+                          "LootTable":  [
+
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ADAF",
+                                                    "Source":  "Lost credit card behind the barrels, Underground 3448,889 (AO-Universe #19). Talk-to pickup and look guessed"
                                                 }
                       }
                   ]
