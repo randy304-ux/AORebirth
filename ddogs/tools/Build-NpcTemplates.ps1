@@ -17,6 +17,8 @@ $ErrorActionPreference = 'Stop'
 function Q($sql) { & $MySql "--defaults-extra-file=$Cnf" -N -B cellao_codex_clean -e $sql }
 
 $existing = Get-Content $Out -Raw | ConvertFrom-Json
+# Snapshot content NPCs so hand-made entries (e.g. Arete cargo box, strongbox, house plant, dead thief) survive the rebuild.
+$npcSnap = @{}; Get-ChildItem (Join-Path (Split-Path ([IO.Path]::GetFullPath($Out))) 'PlayfieldContent') -Filter Npcs.json -Recurse -ErrorAction SilentlyContinue | ForEach-Object { $npcSnap[$_.FullName] = (Get-Content $_.FullName -Raw | ConvertFrom-Json) }
 $catalog = [ordered]@{ AAAA = $existing.AAAA }
 
 function CapturedBands($name) {
@@ -360,7 +362,37 @@ $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-N
 # Insipid Ring actors (Ergo, Long Stare, molokhai): Build-InsipidContent.ps1. Quest text is Build-NewbieQuests.ps1.
 & "$PSScriptRoot\Build-InsipidContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 
+# Carry over hand-made keys (no generator, e.g. MARC Mario Carles) from the previous file so the Arete chain below can patch them.
+$rebuilt = [IO.File]::ReadAllText($Out) | ConvertFrom-Json
+$carried = @($existing.PSObject.Properties.Name | Where-Object { -not $rebuilt.PSObject.Properties[$_] })
+foreach ($k in $carried) { $rebuilt | Add-Member -Force NoteProperty $k $existing.$k }
+if ($carried.Count) { [IO.File]::WriteAllText($Out, ($rebuilt | ConvertTo-Json -Depth 12) + "`n", [Text.UTF8Encoding]::new($false)); Write-Output ("carried hand-made keys: " + ($carried -join ',')) }
+foreach ($nf in $npcSnap.Keys) {
+  $old = $npcSnap[$nf]; if (-not (Test-Path $nf)) { continue }
+  $cur = Get-Content $nf -Raw | ConvertFrom-Json; $have = @($cur.Npcs | ForEach-Object { $_.Key })
+  $lost = @($old.Npcs | Where-Object { $_.Key -and $have -notcontains $_.Key })
+  if ($lost.Count) { $cur.Npcs = @($cur.Npcs) + $lost; [IO.File]::WriteAllText($nf, ($cur | ConvertTo-Json -Depth 20), [Text.UTF8Encoding]::new($false)); Write-Output ("carried hand-made content NPCs: " + (($lost | ForEach-Object Key) -join ',')) }
+}
+# Newbie quest text, then the Arete chain (Karli -> Wildlife -> ShoulderpadsJunkyard -> Docks -> ReetsFactions -> Market -> RewardsFix; Docks re-patches Knubot after NewbieQuests) and the Alien Invasion overlays.
+& "$PSScriptRoot\Build-NewbieQuests.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+& "$PSScriptRoot\Build-KarliAlienShip.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+& "$PSScriptRoot\Build-AlienInvasion.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Mercenary overhaul (14 professions, mobile looks, Mercs.json armor, contract terminals): Build-Mercs.ps1. Runs after the sub-builders above.
 & "$PSScriptRoot\Build-Mercs.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Worn looks (protesters, Cedric, dockworkers): Build-Appearance.ps1. Keep last.
 & "$PSScriptRoot\Build-Appearance.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Live-only fixes no other builder makes (fleas/waste collector looks, etc.): Build-AreteLiveFixes.ps1. Runs after Build-Appearance.ps1.
+& "$PSScriptRoot\Build-AreteLiveFixes.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+
+# Keep live placement and hand data on content NPCs: Position/Rotation (moved in game), SpawnHash (Apply-PlaceholderCleanup.ps1) and vendor stock.
+foreach ($nf in $npcSnap.Keys) {
+  if (-not (Test-Path $nf)) { continue }
+  $old = @{}; foreach ($n in $npcSnap[$nf].Npcs) { if ($n.Key) { $old[$n.Key] = $n } }
+  $cur = Get-Content $nf -Raw | ConvertFrom-Json; $touched = $false
+  foreach ($n in $cur.Npcs) {
+    $o = $old[$n.Key]; if (-not $o) { continue }
+    foreach ($p in 'Position','Rotation','SpawnHash') { if ($o.PSObject.Properties[$p] -and (($o.$p | ConvertTo-Json -Compress) -ne ($n.$p | ConvertTo-Json -Compress))) { $n | Add-Member -Force NoteProperty $p $o.$p; $touched = $true } }
+    if ($o.Vendor -and $n.Vendor -and @($o.Vendor.Stock).Count -and -not @($n.Vendor.Stock).Count) { $n.Vendor.Stock = $o.Vendor.Stock; $touched = $true }
+  }
+  if ($touched) { [IO.File]::WriteAllText($nf, ($cur | ConvertTo-Json -Depth 20), [Text.UTF8Encoding]::new($false)) }
+}
