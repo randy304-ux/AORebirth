@@ -1,0 +1,3286 @@
+[
+    {
+        "Name":  "Analyze clump (Pristine)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247102,
+                       247103
+                   ],
+        "Result":  [
+                       247106,
+                       247107
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (Mutated)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247104,
+                       247105,
+                       247764,
+                       254804
+                   ],
+        "Result":  [
+                       247108,
+                       247109
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 0)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247697,
+                       247698
+                   ],
+        "Result":  [
+                       247673,
+                       247674
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 1)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247699,
+                       247700
+                   ],
+        "Result":  [
+                       247675,
+                       247676
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 2)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247701,
+                       247702
+                   ],
+        "Result":  [
+                       247677,
+                       247678
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 3)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247703,
+                       247704
+                   ],
+        "Result":  [
+                       247679,
+                       247680
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 4)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247705,
+                       247706
+                   ],
+        "Result":  [
+                       247681,
+                       247682
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 5)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247707,
+                       247708
+                   ],
+        "Result":  [
+                       247683,
+                       247684
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 6)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247709,
+                       247710
+                   ],
+        "Result":  [
+                       247685,
+                       247686
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 7)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247711,
+                       247712
+                   ],
+        "Result":  [
+                       247687,
+                       247688
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 8)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247713,
+                       247714
+                   ],
+        "Result":  [
+                       247689,
+                       247690
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 9)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247715,
+                       247716
+                   ],
+        "Result":  [
+                       247691,
+                       247692
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 10)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247717,
+                       247718
+                   ],
+        "Result":  [
+                       247693,
+                       247694
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (type 11)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       247719,
+                       247720
+                   ],
+        "Result":  [
+                       247695,
+                       247696
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Analyze clump (Type 48)",
+        "Source":  [
+                       247100
+                   ],
+        "Target":  [
+                       288699,
+                       288700
+                   ],
+        "Result":  [
+                       288672,
+                       288673
+                   ],
+        "Skills":  [
+                       [
+                           126,
+                           450
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "DNA-Soup (Pristine)",
+        "Source":  [
+                       247110
+                   ],
+        "Target":  [
+                       247106,
+                       247107
+                   ],
+        "Result":  [
+                       247111,
+                       247112
+                   ],
+        "Skills":  [
+                       [
+                           163,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "DNA-Soup (Mutated)",
+        "Source":  [
+                       247110
+                   ],
+        "Target":  [
+                       247108,
+                       247109
+                   ],
+        "Result":  [
+                       247111,
+                       247112
+                   ],
+        "Skills":  [
+                       [
+                           163,
+                           700
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "DNA Cocktail",
+        "Source":  [
+                       247123
+                   ],
+        "Target":  [
+                       247111,
+                       247112
+                   ],
+        "Result":  [
+                       247124,
+                       247125
+                   ],
+        "Skills":  [
+                       [
+                           159,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Memory-Wiped Viralbots",
+        "Source":  [
+                       247099
+                   ],
+        "Target":  [
+                       247113,
+                       247114
+                   ],
+        "Result":  [
+                       247118,
+                       247119
+                   ],
+        "Skills":  [
+                       [
+                           161,
+                           450
+                       ],
+                       [
+                           160,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Formatted Viralbots",
+        "Source":  [
+                       161699
+                   ],
+        "Target":  [
+                       247118,
+                       247119
+                   ],
+        "Result":  [
+                       247120,
+                       247121
+                   ],
+        "Skills":  [
+                       [
+                           160,
+                           600
+                       ],
+                       [
+                           161,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  false,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Formatted Viralbot Solution",
+        "Source":  [
+                       247120,
+                       247121
+                   ],
+        "Target":  [
+                       247124,
+                       247125
+                   ],
+        "Result":  [
+                       247126,
+                       247127
+                   ],
+        "Skills":  [
+                       [
+                           159,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Formatted Viralbot Vest",
+        "Source":  [
+                       247163
+                   ],
+        "Target":  [
+                       247126,
+                       247127
+                   ],
+        "Result":  [
+                       247172,
+                       247173
+                   ],
+        "Skills":  [
+                       [
+                           163,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Formatted Viralbot Sleeve",
+        "Source":  [
+                       247164
+                   ],
+        "Target":  [
+                       247126,
+                       247127
+                   ],
+        "Result":  [
+                       247174,
+                       247175
+                   ],
+        "Skills":  [
+                       [
+                           163,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Formatted Viralbot Legwear",
+        "Source":  [
+                       247165
+                   ],
+        "Target":  [
+                       247126,
+                       247127
+                   ],
+        "Result":  [
+                       247176,
+                       247177
+                   ],
+        "Skills":  [
+                       [
+                           163,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Formatted Viralbot Gloves",
+        "Source":  [
+                       247166
+                   ],
+        "Target":  [
+                       247126,
+                       247127
+                   ],
+        "Result":  [
+                       247178,
+                       247179
+                   ],
+        "Skills":  [
+                       [
+                           163,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Formatted Viralbot Footwear",
+        "Source":  [
+                       247167
+                   ],
+        "Target":  [
+                       247126,
+                       247127
+                   ],
+        "Result":  [
+                       247180,
+                       247181
+                   ],
+        "Skills":  [
+                       [
+                           163,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Formatted Viralbot Headwear",
+        "Source":  [
+                       247157
+                   ],
+        "Target":  [
+                       247126,
+                       247127
+                   ],
+        "Result":  [
+                       247170,
+                       247171
+                   ],
+        "Skills":  [
+                       [
+                           163,
+                           450
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  0
+    },
+    {
+        "Name":  "Arithmetic Vest",
+        "Source":  [
+                       247144,
+                       247145
+                   ],
+        "Target":  [
+                       247172,
+                       247173
+                   ],
+        "Result":  [
+                       246559,
+                       246560
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Arithmetic Sleeve",
+        "Source":  [
+                       247144,
+                       247145
+                   ],
+        "Target":  [
+                       247174,
+                       247175
+                   ],
+        "Result":  [
+                       246563,
+                       246564
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Arithmetic Legwear",
+        "Source":  [
+                       247144,
+                       247145
+                   ],
+        "Target":  [
+                       247176,
+                       247177
+                   ],
+        "Result":  [
+                       246567,
+                       246568
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Arithmetic Gloves",
+        "Source":  [
+                       247144,
+                       247145
+                   ],
+        "Target":  [
+                       247178,
+                       247179
+                   ],
+        "Result":  [
+                       246565,
+                       246566
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Arithmetic Footwear",
+        "Source":  [
+                       247144,
+                       247145
+                   ],
+        "Target":  [
+                       247180,
+                       247181
+                   ],
+        "Result":  [
+                       246569,
+                       246570
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Arithmetic Headwear",
+        "Source":  [
+                       247144,
+                       247145
+                   ],
+        "Target":  [
+                       247170,
+                       247171
+                   ],
+        "Result":  [
+                       246561,
+                       246562
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Enduring Vest",
+        "Source":  [
+                       247136,
+                       247137
+                   ],
+        "Target":  [
+                       247172,
+                       247173
+                   ],
+        "Result":  [
+                       246579,
+                       246580
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Enduring Sleeve",
+        "Source":  [
+                       247136,
+                       247137
+                   ],
+        "Target":  [
+                       247174,
+                       247175
+                   ],
+        "Result":  [
+                       246577,
+                       246578
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Enduring Legwear",
+        "Source":  [
+                       247136,
+                       247137
+                   ],
+        "Target":  [
+                       247176,
+                       247177
+                   ],
+        "Result":  [
+                       246573,
+                       246574
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Enduring Gloves",
+        "Source":  [
+                       247136,
+                       247137
+                   ],
+        "Target":  [
+                       247178,
+                       247179
+                   ],
+        "Result":  [
+                       246575,
+                       246576
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Enduring Footwear",
+        "Source":  [
+                       247136,
+                       247137
+                   ],
+        "Target":  [
+                       247180,
+                       247181
+                   ],
+        "Result":  [
+                       246571,
+                       246572
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Enduring Headwear",
+        "Source":  [
+                       247136,
+                       247137
+                   ],
+        "Target":  [
+                       247170,
+                       247171
+                   ],
+        "Result":  [
+                       246581,
+                       246582
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Spiritual Vest",
+        "Source":  [
+                       247146,
+                       247147
+                   ],
+        "Target":  [
+                       247172,
+                       247173
+                   ],
+        "Result":  [
+                       246599,
+                       246600
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Spiritual Sleeve",
+        "Source":  [
+                       247146,
+                       247147
+                   ],
+        "Target":  [
+                       247174,
+                       247175
+                   ],
+        "Result":  [
+                       246601,
+                       246602
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Spiritual Legwear",
+        "Source":  [
+                       247146,
+                       247147
+                   ],
+        "Target":  [
+                       247176,
+                       247177
+                   ],
+        "Result":  [
+                       246605,
+                       246606
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Spiritual Gloves",
+        "Source":  [
+                       247146,
+                       247147
+                   ],
+        "Target":  [
+                       247178,
+                       247179
+                   ],
+        "Result":  [
+                       246603,
+                       246604
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Spiritual Footwear",
+        "Source":  [
+                       247146,
+                       247147
+                   ],
+        "Target":  [
+                       247180,
+                       247181
+                   ],
+        "Result":  [
+                       246595,
+                       246596
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Spiritual Headwear",
+        "Source":  [
+                       247146,
+                       247147
+                   ],
+        "Target":  [
+                       247170,
+                       247171
+                   ],
+        "Result":  [
+                       246597,
+                       246598
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Observant Vest",
+        "Source":  [
+                       247142,
+                       247143
+                   ],
+        "Target":  [
+                       247172,
+                       247173
+                   ],
+        "Result":  [
+                       246591,
+                       246592
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Observant Sleeve",
+        "Source":  [
+                       247142,
+                       247143
+                   ],
+        "Target":  [
+                       247174,
+                       247175
+                   ],
+        "Result":  [
+                       246589,
+                       246590
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Observant Legwear",
+        "Source":  [
+                       247142,
+                       247143
+                   ],
+        "Target":  [
+                       247176,
+                       247177
+                   ],
+        "Result":  [
+                       246585,
+                       246586
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Observant Gloves",
+        "Source":  [
+                       247142,
+                       247143
+                   ],
+        "Target":  [
+                       247178,
+                       247179
+                   ],
+        "Result":  [
+                       246587,
+                       246588
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Observant Footwear",
+        "Source":  [
+                       247142,
+                       247143
+                   ],
+        "Target":  [
+                       247180,
+                       247181
+                   ],
+        "Result":  [
+                       246583,
+                       246584
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Observant Headwear",
+        "Source":  [
+                       247142,
+                       247143
+                   ],
+        "Target":  [
+                       247170,
+                       247171
+                   ],
+        "Result":  [
+                       246593,
+                       246594
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Strong Vest",
+        "Source":  [
+                       247138,
+                       247139
+                   ],
+        "Target":  [
+                       247172,
+                       247173
+                   ],
+        "Result":  [
+                       246615,
+                       246616
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Strong Sleeve",
+        "Source":  [
+                       247138,
+                       247139
+                   ],
+        "Target":  [
+                       247174,
+                       247175
+                   ],
+        "Result":  [
+                       246613,
+                       246614
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Strong Legwear",
+        "Source":  [
+                       247138,
+                       247139
+                   ],
+        "Target":  [
+                       247176,
+                       247177
+                   ],
+        "Result":  [
+                       246609,
+                       246610
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Strong Gloves",
+        "Source":  [
+                       247138,
+                       247139
+                   ],
+        "Target":  [
+                       247178,
+                       247179
+                   ],
+        "Result":  [
+                       246611,
+                       246612
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Strong Footwear",
+        "Source":  [
+                       247138,
+                       247139
+                   ],
+        "Target":  [
+                       247180,
+                       247181
+                   ],
+        "Result":  [
+                       246607,
+                       246608
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Strong Headwear",
+        "Source":  [
+                       247138,
+                       247139
+                   ],
+        "Target":  [
+                       247170,
+                       247171
+                   ],
+        "Result":  [
+                       246617,
+                       246618
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Supple Vest",
+        "Source":  [
+                       247140,
+                       247141
+                   ],
+        "Target":  [
+                       247172,
+                       247173
+                   ],
+        "Result":  [
+                       246621,
+                       246622
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Supple Sleeve",
+        "Source":  [
+                       247140,
+                       247141
+                   ],
+        "Target":  [
+                       247174,
+                       247175
+                   ],
+        "Result":  [
+                       246623,
+                       246624
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Supple Legwear",
+        "Source":  [
+                       247140,
+                       247141
+                   ],
+        "Target":  [
+                       247176,
+                       247177
+                   ],
+        "Result":  [
+                       246629,
+                       246630
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Supple Gloves",
+        "Source":  [
+                       247140,
+                       247141
+                   ],
+        "Target":  [
+                       247178,
+                       247179
+                   ],
+        "Result":  [
+                       246625,
+                       246626
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Supple Footwear",
+        "Source":  [
+                       247140,
+                       247141
+                   ],
+        "Target":  [
+                       247180,
+                       247181
+                   ],
+        "Result":  [
+                       246627,
+                       246628
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Supple Headwear",
+        "Source":  [
+                       247140,
+                       247141
+                   ],
+        "Target":  [
+                       247170,
+                       247171
+                   ],
+        "Result":  [
+                       246619,
+                       246620
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Vest",
+        "Source":  [
+                       246615,
+                       246616
+                   ],
+        "Target":  [
+                       246621,
+                       246622
+                   ],
+        "Result":  [
+                       246659,
+                       246660
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Vest (swapped)",
+        "Source":  [
+                       246621,
+                       246622
+                   ],
+        "Target":  [
+                       246615,
+                       246616
+                   ],
+        "Result":  [
+                       246659,
+                       246660
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Sleeve",
+        "Source":  [
+                       246613,
+                       246614
+                   ],
+        "Target":  [
+                       246623,
+                       246624
+                   ],
+        "Result":  [
+                       246661,
+                       246662
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Sleeve (swapped)",
+        "Source":  [
+                       246623,
+                       246624
+                   ],
+        "Target":  [
+                       246613,
+                       246614
+                   ],
+        "Result":  [
+                       246661,
+                       246662
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Legwear",
+        "Source":  [
+                       246609,
+                       246610
+                   ],
+        "Target":  [
+                       246629,
+                       246630
+                   ],
+        "Result":  [
+                       246665,
+                       246666
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Legwear (swapped)",
+        "Source":  [
+                       246629,
+                       246630
+                   ],
+        "Target":  [
+                       246609,
+                       246610
+                   ],
+        "Result":  [
+                       246665,
+                       246666
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Gloves",
+        "Source":  [
+                       246611,
+                       246612
+                   ],
+        "Target":  [
+                       246625,
+                       246626
+                   ],
+        "Result":  [
+                       246663,
+                       246664
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Gloves (swapped)",
+        "Source":  [
+                       246625,
+                       246626
+                   ],
+        "Target":  [
+                       246611,
+                       246612
+                   ],
+        "Result":  [
+                       246663,
+                       246664
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Footwear",
+        "Source":  [
+                       246607,
+                       246608
+                   ],
+        "Target":  [
+                       246627,
+                       246628
+                   ],
+        "Result":  [
+                       246667,
+                       246668
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Footwear (swapped)",
+        "Source":  [
+                       246627,
+                       246628
+                   ],
+        "Target":  [
+                       246607,
+                       246608
+                   ],
+        "Result":  [
+                       246667,
+                       246668
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Headwear",
+        "Source":  [
+                       246617,
+                       246618
+                   ],
+        "Target":  [
+                       246619,
+                       246620
+                   ],
+        "Result":  [
+                       246633,
+                       246634
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Commando\u0027s Headwear (swapped)",
+        "Source":  [
+                       246619,
+                       246620
+                   ],
+        "Target":  [
+                       246617,
+                       246618
+                   ],
+        "Result":  [
+                       246633,
+                       246634
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Vest",
+        "Source":  [
+                       246615,
+                       246616
+                   ],
+        "Target":  [
+                       246579,
+                       246580
+                   ],
+        "Result":  [
+                       246637,
+                       246638
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Vest (swapped)",
+        "Source":  [
+                       246579,
+                       246580
+                   ],
+        "Target":  [
+                       246615,
+                       246616
+                   ],
+        "Result":  [
+                       246637,
+                       246638
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Sleeve",
+        "Source":  [
+                       246613,
+                       246614
+                   ],
+        "Target":  [
+                       246577,
+                       246578
+                   ],
+        "Result":  [
+                       246639,
+                       246640
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Sleeve (swapped)",
+        "Source":  [
+                       246577,
+                       246578
+                   ],
+        "Target":  [
+                       246613,
+                       246614
+                   ],
+        "Result":  [
+                       246639,
+                       246640
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Legwear",
+        "Source":  [
+                       246609,
+                       246610
+                   ],
+        "Target":  [
+                       246573,
+                       246574
+                   ],
+        "Result":  [
+                       246643,
+                       246644
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Legwear (swapped)",
+        "Source":  [
+                       246573,
+                       246574
+                   ],
+        "Target":  [
+                       246609,
+                       246610
+                   ],
+        "Result":  [
+                       246643,
+                       246644
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Gloves",
+        "Source":  [
+                       246611,
+                       246612
+                   ],
+        "Target":  [
+                       246575,
+                       246576
+                   ],
+        "Result":  [
+                       246641,
+                       246642
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Gloves (swapped)",
+        "Source":  [
+                       246575,
+                       246576
+                   ],
+        "Target":  [
+                       246611,
+                       246612
+                   ],
+        "Result":  [
+                       246641,
+                       246642
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Footwear",
+        "Source":  [
+                       246607,
+                       246608
+                   ],
+        "Target":  [
+                       246571,
+                       246572
+                   ],
+        "Result":  [
+                       246645,
+                       246646
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Footwear (swapped)",
+        "Source":  [
+                       246571,
+                       246572
+                   ],
+        "Target":  [
+                       246607,
+                       246608
+                   ],
+        "Result":  [
+                       246645,
+                       246646
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Headwear",
+        "Source":  [
+                       246617,
+                       246618
+                   ],
+        "Target":  [
+                       246581,
+                       246582
+                   ],
+        "Result":  [
+                       246635,
+                       246636
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Mercenary\u0027s Headwear (swapped)",
+        "Source":  [
+                       246581,
+                       246582
+                   ],
+        "Target":  [
+                       246617,
+                       246618
+                   ],
+        "Result":  [
+                       246635,
+                       246636
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Vest",
+        "Source":  [
+                       246599,
+                       246600
+                   ],
+        "Target":  [
+                       246559,
+                       246560
+                   ],
+        "Result":  [
+                       246671,
+                       246672
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Vest (swapped)",
+        "Source":  [
+                       246559,
+                       246560
+                   ],
+        "Target":  [
+                       246599,
+                       246600
+                   ],
+        "Result":  [
+                       246671,
+                       246672
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Sleeve",
+        "Source":  [
+                       246601,
+                       246602
+                   ],
+        "Target":  [
+                       246563,
+                       246564
+                   ],
+        "Result":  [
+                       246673,
+                       246674
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Sleeve (swapped)",
+        "Source":  [
+                       246563,
+                       246564
+                   ],
+        "Target":  [
+                       246601,
+                       246602
+                   ],
+        "Result":  [
+                       246673,
+                       246674
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Legwear",
+        "Source":  [
+                       246605,
+                       246606
+                   ],
+        "Target":  [
+                       246567,
+                       246568
+                   ],
+        "Result":  [
+                       246677,
+                       246678
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Legwear (swapped)",
+        "Source":  [
+                       246567,
+                       246568
+                   ],
+        "Target":  [
+                       246605,
+                       246606
+                   ],
+        "Result":  [
+                       246677,
+                       246678
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Gloves",
+        "Source":  [
+                       246603,
+                       246604
+                   ],
+        "Target":  [
+                       246565,
+                       246566
+                   ],
+        "Result":  [
+                       246675,
+                       246676
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Gloves (swapped)",
+        "Source":  [
+                       246565,
+                       246566
+                   ],
+        "Target":  [
+                       246603,
+                       246604
+                   ],
+        "Result":  [
+                       246675,
+                       246676
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Footwear",
+        "Source":  [
+                       246595,
+                       246596
+                   ],
+        "Target":  [
+                       246569,
+                       246570
+                   ],
+        "Result":  [
+                       246679,
+                       246680
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Footwear (swapped)",
+        "Source":  [
+                       246569,
+                       246570
+                   ],
+        "Target":  [
+                       246595,
+                       246596
+                   ],
+        "Result":  [
+                       246679,
+                       246680
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Headwear",
+        "Source":  [
+                       246597,
+                       246598
+                   ],
+        "Target":  [
+                       246561,
+                       246562
+                   ],
+        "Result":  [
+                       246669,
+                       246670
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Officer\u0027s Headwear (swapped)",
+        "Source":  [
+                       246561,
+                       246562
+                   ],
+        "Target":  [
+                       246597,
+                       246598
+                   ],
+        "Result":  [
+                       246669,
+                       246670
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Vest",
+        "Source":  [
+                       246599,
+                       246600
+                   ],
+        "Target":  [
+                       246579,
+                       246580
+                   ],
+        "Result":  [
+                       246647,
+                       246648
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Vest (swapped)",
+        "Source":  [
+                       246579,
+                       246580
+                   ],
+        "Target":  [
+                       246599,
+                       246600
+                   ],
+        "Result":  [
+                       246647,
+                       246648
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Sleeve",
+        "Source":  [
+                       246601,
+                       246602
+                   ],
+        "Target":  [
+                       246577,
+                       246578
+                   ],
+        "Result":  [
+                       246649,
+                       246650
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Sleeve (swapped)",
+        "Source":  [
+                       246577,
+                       246578
+                   ],
+        "Target":  [
+                       246601,
+                       246602
+                   ],
+        "Result":  [
+                       246649,
+                       246650
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Legwear",
+        "Source":  [
+                       246605,
+                       246606
+                   ],
+        "Target":  [
+                       246573,
+                       246574
+                   ],
+        "Result":  [
+                       246653,
+                       246654
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Legwear (swapped)",
+        "Source":  [
+                       246573,
+                       246574
+                   ],
+        "Target":  [
+                       246605,
+                       246606
+                   ],
+        "Result":  [
+                       246653,
+                       246654
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Gloves",
+        "Source":  [
+                       246603,
+                       246604
+                   ],
+        "Target":  [
+                       246575,
+                       246576
+                   ],
+        "Result":  [
+                       246651,
+                       246652
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Gloves (swapped)",
+        "Source":  [
+                       246575,
+                       246576
+                   ],
+        "Target":  [
+                       246603,
+                       246604
+                   ],
+        "Result":  [
+                       246651,
+                       246652
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Footwear",
+        "Source":  [
+                       246595,
+                       246596
+                   ],
+        "Target":  [
+                       246571,
+                       246572
+                   ],
+        "Result":  [
+                       246655,
+                       246656
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Footwear (swapped)",
+        "Source":  [
+                       246571,
+                       246572
+                   ],
+        "Target":  [
+                       246595,
+                       246596
+                   ],
+        "Result":  [
+                       246655,
+                       246656
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Headwear",
+        "Source":  [
+                       246597,
+                       246598
+                   ],
+        "Target":  [
+                       246581,
+                       246582
+                   ],
+        "Result":  [
+                       246631,
+                       246632
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Paramedic\u0027s Headwear (swapped)",
+        "Source":  [
+                       246581,
+                       246582
+                   ],
+        "Target":  [
+                       246597,
+                       246598
+                   ],
+        "Result":  [
+                       246631,
+                       246632
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Vest",
+        "Source":  [
+                       246591,
+                       246592
+                   ],
+        "Target":  [
+                       246559,
+                       246560
+                   ],
+        "Result":  [
+                       246683,
+                       246684
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Vest (swapped)",
+        "Source":  [
+                       246559,
+                       246560
+                   ],
+        "Target":  [
+                       246591,
+                       246592
+                   ],
+        "Result":  [
+                       246683,
+                       246684
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Sleeve",
+        "Source":  [
+                       246589,
+                       246590
+                   ],
+        "Target":  [
+                       246563,
+                       246564
+                   ],
+        "Result":  [
+                       246685,
+                       246686
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Sleeve (swapped)",
+        "Source":  [
+                       246563,
+                       246564
+                   ],
+        "Target":  [
+                       246589,
+                       246590
+                   ],
+        "Result":  [
+                       246685,
+                       246686
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Legwear",
+        "Source":  [
+                       246585,
+                       246586
+                   ],
+        "Target":  [
+                       246567,
+                       246568
+                   ],
+        "Result":  [
+                       246689,
+                       246690
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Legwear (swapped)",
+        "Source":  [
+                       246567,
+                       246568
+                   ],
+        "Target":  [
+                       246585,
+                       246586
+                   ],
+        "Result":  [
+                       246689,
+                       246690
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Gloves",
+        "Source":  [
+                       246587,
+                       246588
+                   ],
+        "Target":  [
+                       246565,
+                       246566
+                   ],
+        "Result":  [
+                       246687,
+                       246688
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Gloves (swapped)",
+        "Source":  [
+                       246565,
+                       246566
+                   ],
+        "Target":  [
+                       246587,
+                       246588
+                   ],
+        "Result":  [
+                       246687,
+                       246688
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Footwear",
+        "Source":  [
+                       246583,
+                       246584
+                   ],
+        "Target":  [
+                       246569,
+                       246570
+                   ],
+        "Result":  [
+                       246691,
+                       246692
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Footwear (swapped)",
+        "Source":  [
+                       246569,
+                       246570
+                   ],
+        "Target":  [
+                       246583,
+                       246584
+                   ],
+        "Result":  [
+                       246691,
+                       246692
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Headwear",
+        "Source":  [
+                       246593,
+                       246594
+                   ],
+        "Target":  [
+                       246561,
+                       246562
+                   ],
+        "Result":  [
+                       246681,
+                       246682
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Scout\u0027s Headwear (swapped)",
+        "Source":  [
+                       246561,
+                       246562
+                   ],
+        "Target":  [
+                       246593,
+                       246594
+                   ],
+        "Result":  [
+                       246681,
+                       246682
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Vest",
+        "Source":  [
+                       246591,
+                       246592
+                   ],
+        "Target":  [
+                       246621,
+                       246622
+                   ],
+        "Result":  [
+                       246695,
+                       246696
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Vest (swapped)",
+        "Source":  [
+                       246621,
+                       246622
+                   ],
+        "Target":  [
+                       246591,
+                       246592
+                   ],
+        "Result":  [
+                       246695,
+                       246696
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Sleeve",
+        "Source":  [
+                       246589,
+                       246590
+                   ],
+        "Target":  [
+                       246623,
+                       246624
+                   ],
+        "Result":  [
+                       246697,
+                       246698
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Sleeve (swapped)",
+        "Source":  [
+                       246623,
+                       246624
+                   ],
+        "Target":  [
+                       246589,
+                       246590
+                   ],
+        "Result":  [
+                       246697,
+                       246698
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Legwear",
+        "Source":  [
+                       246585,
+                       246586
+                   ],
+        "Target":  [
+                       246629,
+                       246630
+                   ],
+        "Result":  [
+                       246701,
+                       246702
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Legwear (swapped)",
+        "Source":  [
+                       246629,
+                       246630
+                   ],
+        "Target":  [
+                       246585,
+                       246586
+                   ],
+        "Result":  [
+                       246701,
+                       246702
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Gloves",
+        "Source":  [
+                       246587,
+                       246588
+                   ],
+        "Target":  [
+                       246625,
+                       246626
+                   ],
+        "Result":  [
+                       246699,
+                       246700
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Gloves (swapped)",
+        "Source":  [
+                       246625,
+                       246626
+                   ],
+        "Target":  [
+                       246587,
+                       246588
+                   ],
+        "Result":  [
+                       246699,
+                       246700
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Footwear",
+        "Source":  [
+                       246583,
+                       246584
+                   ],
+        "Target":  [
+                       246627,
+                       246628
+                   ],
+        "Result":  [
+                       246703,
+                       246704
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Footwear (swapped)",
+        "Source":  [
+                       246627,
+                       246628
+                   ],
+        "Target":  [
+                       246583,
+                       246584
+                   ],
+        "Result":  [
+                       246703,
+                       246704
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Headwear",
+        "Source":  [
+                       246593,
+                       246594
+                   ],
+        "Target":  [
+                       246619,
+                       246620
+                   ],
+        "Result":  [
+                       246693,
+                       246694
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    },
+    {
+        "Name":  "Combined Sharpshooter\u0027s Headwear (swapped)",
+        "Source":  [
+                       246619,
+                       246620
+                   ],
+        "Target":  [
+                       246593,
+                       246594
+                   ],
+        "Result":  [
+                       246693,
+                       246694
+                   ],
+        "Skills":  [
+                       [
+                           162,
+                           600
+                       ]
+                   ],
+        "DeleteSource":  true,
+        "DeleteTarget":  true,
+        "MinSourcePct":  80
+    }
+]

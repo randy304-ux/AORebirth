@@ -1,0 +1,64 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  6112,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:alien:shippilot",
+                     "Provenance":  "Way back from the breeding ship; name and spot guessed",
+                     "ContentNpcIdentity":  "SimpleChar:0x7A0EA004",
+                     "PlayfieldId":  6112,
+                     "InstanceId":  2047778820,
+                     "Name":  "Unicorn Shuttle Pilot",
+                     "Position":  [
+                                      150,
+                                      6.4,
+                                      106
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  200,
+                                   "4":  1,
+                                   "27":  200,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  220,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  96056,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "Attackable":  false,
+                     "Passive":  true
+                 }
+             ],
+    "StandaloneShops":  [
+
+                        ]
+}

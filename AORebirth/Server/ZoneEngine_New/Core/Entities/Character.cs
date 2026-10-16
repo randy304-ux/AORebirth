@@ -926,7 +926,21 @@ namespace ZoneEngine_New.Core.Entities
         /// AlienXp.json step to the next level. One grant is capped at 10% of that step. Levels up through
         /// the table while the progress covers it.
         /// </summary>
-        public void AwardAlienXp(int amount)
+        /// <summary>Quest alien XP: <paramref name="percent"/> of the current alien level bar, without the 10% kill cap.</summary>
+        public void AwardAlienXpPercent(int percent)
+        {
+            if (percent <= 0 || !IsPlayer)
+                return;
+            IGameData? gameData = Playfield?.GetRequiredService<IGameData>();
+            if (gameData == null)
+                return;
+            int alienLevel = Stats.GetOrZero(CharacterStat.AlienLevel);
+            if (!gameData.TryGetAlienXpLevel(alienLevel + 1, out AlienXpLevelEntry step) || step.NextLevelXp <= 0)
+                return;
+            AwardAlienXp((int)Math.Min(int.MaxValue, (long)step.NextLevelXp * percent / 100), capped: false);
+        }
+
+        public void AwardAlienXp(int amount, bool capped = true)
         {
             if (amount <= 0 || !IsPlayer)
                 return;
@@ -942,7 +956,7 @@ namespace ZoneEngine_New.Core.Entities
             int alienLevel = Stats.GetOrZero(CharacterStat.AlienLevel);
 
             // Like kill XP, one grant is capped at 10% of the current alien level's bar.
-            if (gameData.TryGetAlienXpLevel(alienLevel + 1, out AlienXpLevelEntry current) && current.NextLevelXp > 0)
+            if (capped && gameData.TryGetAlienXpLevel(alienLevel + 1, out AlienXpLevelEntry current) && current.NextLevelXp > 0)
             {
                 int cap = Math.Max(1, current.NextLevelXp * KillXpCapPercent / 100);
                 if (amount > cap)

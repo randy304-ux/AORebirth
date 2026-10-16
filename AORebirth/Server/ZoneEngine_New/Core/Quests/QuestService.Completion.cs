@@ -412,6 +412,8 @@ public sealed partial class QuestService
                     QuestEnded?.Invoke(player, quest);
                 }
                 xp.PublishAfterCommit(player);
+                if (reward?.AlienXpPercent > 0)
+                    player.AwardAlienXpPercent(reward.AlienXpPercent);
                 foreach (var pair in values.Where(pair => !xp.Stats.ContainsKey(pair.Key)))
                     player.Stats.Set(pair.Key, pair.Value, StatDetail.Base, dirty: true);
                 player.FlushDirtyStats();

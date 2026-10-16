@@ -31,11 +31,14 @@ namespace ZoneEngine_New.Core.MessageHandlers
 
         private readonly InventoryActionService _inventoryActions;
         private readonly TeamService _teams;
+        private readonly ZoneEngine_New.Core.Tradeskills.TradeskillService _tradeskills;
 
-        public CharacterActionMessageHandler(InventoryActionService inventoryActions, TeamService teams)
+        public CharacterActionMessageHandler(InventoryActionService inventoryActions, TeamService teams,
+            ZoneEngine_New.Core.Tradeskills.TradeskillService tradeskills)
         {
             _inventoryActions = inventoryActions;
             _teams = teams;
+            _tradeskills = tradeskills;
         }
 
         public Type MessageBodyType => typeof(CharacterActionMessage);
@@ -70,6 +73,9 @@ namespace ZoneEngine_New.Core.MessageHandlers
                     player.Identity.Instance));
 
             if (_teams.TryHandle(player, message))
+                return;
+
+            if (_tradeskills.TryHandle(player, message))
                 return;
 
             switch (message.Action)

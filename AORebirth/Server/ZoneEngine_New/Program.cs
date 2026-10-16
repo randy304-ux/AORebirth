@@ -235,6 +235,7 @@ namespace ZoneEngine_New
             services.AddSingleton<InventoryFlushService>();
             services.AddSingleton<IInventoryMutationPersistence, MySqlInventoryMutationPersistence>();
             services.AddSingleton<InventoryActionService>();
+            services.AddSingleton<ZoneEngine_New.Core.Tradeskills.TradeskillService>();
             services.AddSingleton(_ => new MySqlMissionDao(() =>
             {
                 var connection = new MySqlConnection(MySqlConnectionSettings.GetRequiredConnectionString());

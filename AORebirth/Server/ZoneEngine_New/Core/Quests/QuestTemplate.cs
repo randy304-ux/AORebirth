@@ -100,6 +100,9 @@ namespace ZoneEngine_New.Core.Quests
 
         public int Xp { get; set; }
 
+        /// <summary>Alien XP as a percent of the player's current alien level bar (AlienXp.json step); 0 = none. Not capped.</summary>
+        public int AlienXpPercent { get; set; }
+
         /// <summary>Alternative item sets; one record is given, all its items together.</summary>
         public List<List<QuestRewardItem>>? Records { get; set; }
     }

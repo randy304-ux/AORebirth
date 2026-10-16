@@ -482,7 +482,7 @@ namespace ZoneEngine_New.Core.GameData
 
             try
             {
-                _npcTemplates = NpcTemplateCatalog.Parse(File.ReadAllText(path));
+                _npcTemplates = NpcTemplateCatalog.Parse(GameDataOverlay.ReadMerged(path));
                 LoadSpawnSkips(Path.Combine(Path.GetDirectoryName(path) ?? string.Empty, "SpawnSkips.json"));
                 _logger.Info(
                     string.Format(
@@ -570,7 +570,7 @@ namespace ZoneEngine_New.Core.GameData
 
             try
             {
-                _hashItems = HashItemCatalog.Parse(File.ReadAllText(path));
+                _hashItems = HashItemCatalog.Parse(GameDataOverlay.ReadMerged(path));
                 _logger.Info(
                     string.Format(
                         CultureInfo.InvariantCulture,

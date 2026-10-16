@@ -45,7 +45,7 @@ namespace ZoneEngine_New.Core.Quests
             try
             {
                 List<QuestTemplate>? loaded = JsonSerializer.Deserialize<List<QuestTemplate>>(
-                    File.ReadAllText(path), QuestTemplate.JsonOptions);
+                    ZoneEngine_New.Core.GameData.GameDataOverlay.ReadMerged(path), QuestTemplate.JsonOptions);
                 int skipped = 0;
                 foreach (QuestTemplate template in loaded ?? [])
                 {

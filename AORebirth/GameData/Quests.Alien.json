@@ -1,0 +1,218 @@
+[
+    {
+        "Hash":  "AIWP",
+        "Name":  "We Come in Peace...",
+        "QasInstance":  920201,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 10 alien larvae at the crashed ship north of ICC in Andromeda",
+        "Objective":  {
+                          "Count":  10,
+                          "Npc":  "AALV",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RIWP",
+                       "Credits":  5000,
+                       "Xp":  15000,
+                       "AlienXpPercent":  25,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AIBG",
+        "Name":  "Bugs",
+        "QasInstance":  920202,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Get rid of 100 Zixes on the infested Serenity Island",
+        "Objective":  {
+                          "Count":  100,
+                          "Npc":  "VEZI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RIBG",
+                       "Credits":  20000,
+                       "Xp":  60000,
+                       "AlienXpPercent":  25,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AICC",
+        "Name":  "Terminate the Alien Cocoons",
+        "QasInstance":  920203,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Board the alien breeding ship and terminate 10 alien cocoons",
+        "Objective":  {
+                          "Count":  10,
+                          "Npc":  "AICO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RICC",
+                       "Credits":  15000,
+                       "Xp":  40000,
+                       "AlienXpPercent":  25,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AILP",
+        "Name":  "...And you will leave in pieces",
+        "QasInstance":  920204,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Enter the alien ship and kill the cocoon that spawns the larvae",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "AIMC",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RILP",
+                       "Credits":  15000,
+                       "Xp":  50000,
+                       "AlienXpPercent":  25,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AIPD",
+        "Name":  "A-Pods",
+        "QasInstance":  920205,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Destroy two alien pods in the Perpetual Wastelands",
+        "Objective":  {
+                          "Count":  2,
+                          "Npc":  "ALPO",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RIPD",
+                       "Credits":  60000,
+                       "Xp":  400000,
+                       "AlienXpPercent":  25,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "S10M",
+        "Name":  "Kill 5 Alien Medics",
+        "QasInstance":  920206,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Sector 10: kill 5 Alien Medics",
+        "Objective":  {
+                          "Count":  5,
+                          "Npc":  "AEMD",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "R10M",
+                       "Credits":  20000,
+                       "Xp":  80000,
+                       "AlienXpPercent":  10,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "S10C",
+        "Name":  "Kill 5 Alien Communication Officers",
+        "QasInstance":  920207,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Sector 10: kill 5 Alien Communication Officers",
+        "Objective":  {
+                          "Count":  5,
+                          "Npc":  "AOCI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "R10C",
+                       "Credits":  20000,
+                       "Xp":  80000,
+                       "AlienXpPercent":  10,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "S10L",
+        "Name":  "Kill 5 Alien Leaders",
+        "QasInstance":  920208,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Sector 10: kill 5 Alien Leaders",
+        "Objective":  {
+                          "Count":  5,
+                          "Npc":  "ALLR",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "R10L",
+                       "Credits":  20000,
+                       "Xp":  80000,
+                       "AlienXpPercent":  10,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "S10V",
+        "Name":  "Kill 20 Alien Immature Vectors",
+        "QasInstance":  920209,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Sector 10: kill 20 Alien Immature Vectors",
+        "Objective":  {
+                          "Count":  20,
+                          "Npc":  "IUAI",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "R10V",
+                       "Credits":  30000,
+                       "Xp":  120000,
+                       "AlienXpPercent":  15,
+                       "Records":  null
+                   }
+    }
+]

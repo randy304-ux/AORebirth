@@ -4,7 +4,7 @@
     "Npcs":  [
                  {
                      "Key":  "ddogs:icc:buffbot",
-                     "Provenance":  "Client monster 96056 protocol droid (catMesh 96024). One buffbot for every profession, standing at Randy's outdoor ICC hub pin 3251.4, 35.1, 823.4. That pin is where Randy was standing, not a measured row of bot characters. White uniforms are not on a hash template.",
+                     "Provenance":  "Client monster 96056 protocol droid (catMesh 96024). One buffbot for every profession, standing at Randy\u0027s outdoor ICC hub pin 3251.4, 35.1, 823.4. That pin is where Randy was standing, not a measured row of bot characters. White uniforms are not on a hash template.",
                      "ContentNpcIdentity":  "ddogs-buffbot",
                      "PlayfieldId":  655,
                      "InstanceId":  2110836806,
@@ -56,6 +56,188 @@
                      "Presentation":  {
 
                                       }
+                 },
+                 {
+                     "Key":  "ddogs:alien:handler",
+                     "Provenance":  "ddogs/tools/Build-AlienInvasion.ps1 (real role; spot beside the ICC buff droid guessed; real handler is in the mission agency HQs)",
+                     "ContentNpcIdentity":  "SimpleChar:0x7A0EA001",
+                     "PlayfieldId":  655,
+                     "InstanceId":  2047778817,
+                     "Name":  "Alien Agency Handler",
+                     "Position":  [
+                                      3256,
+                                      35.1,
+                                      823.4
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  200,
+                                   "4":  1,
+                                   "27":  200,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  220,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  96056,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "Attackable":  false,
+                     "Passive":  true
+                 },
+                 {
+                     "Key":  "ddogs:alien:bazzit",
+                     "Provenance":  "ddogs/tools/Build-AlienInvasion.ps1 (real shop for Generic Nano-Solvent and Essential Human DNA; spot and the extra stock guessed)",
+                     "ContentNpcIdentity":  "SimpleChar:0x7A0EA002",
+                     "PlayfieldId":  655,
+                     "InstanceId":  2047778818,
+                     "Name":  "Uncle Bazzit",
+                     "Position":  [
+                                      3246.8,
+                                      35.1,
+                                      823.4
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  200,
+                                   "4":  1,
+                                   "27":  200,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  220,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  0,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  96056,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "Attackable":  false,
+                     "Passive":  true,
+                     "Vendor":  {
+                                    "InstanceId":  319725570,
+                                    "TemplateId":  99634,
+                                    "Stock":  [
+                                                  {
+                                                      "Slot":  0,
+                                                      "LowId":  247110,
+                                                      "HighId":  247110,
+                                                      "Quality":  100
+                                                  },
+                                                  {
+                                                      "Slot":  1,
+                                                      "LowId":  247123,
+                                                      "HighId":  247123,
+                                                      "Quality":  100
+                                                  },
+                                                  {
+                                                      "Slot":  2,
+                                                      "LowId":  161699,
+                                                      "HighId":  161699,
+                                                      "Quality":  1
+                                                  },
+                                                  {
+                                                      "Slot":  3,
+                                                      "LowId":  247100,
+                                                      "HighId":  247100,
+                                                      "Quality":  100
+                                                  },
+                                                  {
+                                                      "Slot":  4,
+                                                      "LowId":  247099,
+                                                      "HighId":  247099,
+                                                      "Quality":  100
+                                                  },
+                                                  {
+                                                      "Slot":  5,
+                                                      "LowId":  247163,
+                                                      "HighId":  247163,
+                                                      "Quality":  1
+                                                  },
+                                                  {
+                                                      "Slot":  6,
+                                                      "LowId":  247164,
+                                                      "HighId":  247164,
+                                                      "Quality":  1
+                                                  },
+                                                  {
+                                                      "Slot":  7,
+                                                      "LowId":  247165,
+                                                      "HighId":  247165,
+                                                      "Quality":  1
+                                                  },
+                                                  {
+                                                      "Slot":  8,
+                                                      "LowId":  247166,
+                                                      "HighId":  247166,
+                                                      "Quality":  1
+                                                  },
+                                                  {
+                                                      "Slot":  9,
+                                                      "LowId":  247167,
+                                                      "HighId":  247167,
+                                                      "Quality":  1
+                                                  },
+                                                  {
+                                                      "Slot":  10,
+                                                      "LowId":  247157,
+                                                      "HighId":  247157,
+                                                      "Quality":  1
+                                                  }
+                                              ]
+                                }
                  }
              ],
     "StandaloneShops":  [
