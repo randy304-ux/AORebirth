@@ -1019,7 +1019,20 @@ namespace aorf
             }
 
             Log("DAILYLOGIN route=READY importPatchEvents=%lu", totalPatches);
-            return 0;
+
+            // Modules loaded after the first minute (the Store / Daily Rewards web view loads when the window is first
+            // opened) were never patched, so their port-80 connect to the rerouted host was refused. Keep sweeping
+            // for the whole session at a slower rate; already-patched imports no longer match and cost nothing.
+            for (;;)
+            {
+                unsigned long late = PatchAllLoadedModules();
+                if (late > 0)
+                {
+                    Log("DAILYLOGIN route=late_patch importPatchEvents=%lu", late);
+                }
+
+                Sleep(1000);
+            }
         }
 
         int WSAAPI HookGetAddrInfoA(
