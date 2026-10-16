@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Core.GameData
+namespace ZoneEngine_New.Core.GameData
 {
     using System;
     using System.Collections.Generic;
@@ -19,19 +19,19 @@
         /// <summary>Every dyna: base size multiplier over its template scale.</summary>
         public const int DynaScalePercent = 150;
 
-        public sealed record Modifier(string Name, int R, int G, int B, CharacterStat? Ac, CharacterStat? Reflect, int ScalePercent);
+        public sealed record Modifier(string Name, int R, int G, int B, CharacterStat? Ac, CharacterStat? Reflect, int ScalePercent, int BossItem);
 
         public static readonly Modifier[] All =
         [
-            new("Chemical", 0, 255, 0, CharacterStat.ChemicalAC, CharacterStat.ReflectChemicalAC, 100),
-            new("Cold", 255, 255, 255, CharacterStat.ColdAC, CharacterStat.ReflectColdAC, 100),
-            new("Energy", 0, 64, 255, CharacterStat.EnergyAC, CharacterStat.ReflectEnergyAC, 100),
-            new("Fire", 255, 0, 0, CharacterStat.FireAC, CharacterStat.ReflectFireAC, 100),
-            new("Poison", 0, 200, 200, CharacterStat.PoisonAC, CharacterStat.ReflectPoisonAC, 100),
-            new("Radiation", 160, 0, 255, CharacterStat.RadiationAC, CharacterStat.ReflectRadiationAC, 100),
-            new("Crit", 210, 180, 140, null, null, 160),
-            new("Shield", 255, 140, 0, null, null, 140),
-            new("Big", 255, 255, 0, null, null, 130),
+            new("Chemical", 0, 255, 0, CharacterStat.ChemicalAC, CharacterStat.ReflectChemicalAC, 100, 164346),
+            new("Cold", 255, 255, 255, CharacterStat.ColdAC, CharacterStat.ReflectColdAC, 100, 164301),
+            new("Energy", 0, 64, 255, CharacterStat.EnergyAC, CharacterStat.ReflectEnergyAC, 100, 164337),
+            new("Fire", 255, 0, 0, CharacterStat.FireAC, CharacterStat.ReflectFireAC, 100, 164328),
+            new("Poison", 0, 200, 200, CharacterStat.PoisonAC, CharacterStat.ReflectPoisonAC, 100, 164356),
+            new("Radiation", 160, 0, 255, CharacterStat.RadiationAC, CharacterStat.ReflectRadiationAC, 100, 164319),
+            new("Crit", 210, 180, 140, null, null, 160, 164365),
+            new("Shield", 255, 140, 0, null, null, 140, 164292),
+            new("Big", 255, 255, 0, null, null, 130, 164283),
         ];
 
         public static bool IsDyna(NpcLevelBand band)
@@ -85,6 +85,16 @@
             Set(stats, CharacterStat.EffectGreen, mod.G);
             Set(stats, CharacterStat.EffectBlue, mod.B);
             return mod.Name;
+        }
+
+        /// <summary>
+        /// The live "Boss Modifier Item (...)" for a modifier at this level (9 QL tiers per kind, ids from itemnames).
+        /// Live dynas wear one; it carries the modifier's own effects. GUESS: tier = level / 25, capped at 8.
+        /// </summary>
+        public static int BossItemFor(string modifierName, int level)
+        {
+            Modifier? mod = Array.Find(All, m => string.Equals(m.Name, modifierName, StringComparison.OrdinalIgnoreCase));
+            return mod == null ? 0 : mod.BossItem + Math.Clamp(level / 25, 0, 8);
         }
 
         static int Get(Dictionary<int, int> s, CharacterStat k) => s.TryGetValue((int)k, out int v) ? v : 0;

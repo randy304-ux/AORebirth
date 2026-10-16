@@ -348,6 +348,15 @@ namespace ZoneEngine_New.Core.GameData
             return found;
         }
 
+        /// <summary>A dyna wears its modifier's live Boss Modifier Item (see <see cref="DynaModifiers.BossItemFor"/>).</summary>
+        static List<List<int>> WithDynaBossItem(List<List<int>> equipment, string? dynaModifier, int level)
+        {
+            int item = string.IsNullOrEmpty(dynaModifier) ? 0 : DynaModifiers.BossItemFor(dynaModifier, level);
+            if (item > 0)
+                equipment.Add(new List<int> { item, item });
+            return equipment;
+        }
+
         public static MobTemplate Materialize(NpcLeaf leaf, int? desiredLevel)
         {
             ArgumentNullException.ThrowIfNull(leaf);
@@ -371,7 +380,7 @@ namespace ZoneEngine_New.Core.GameData
                 stats[(int)CharacterStat.Flags] = nearest.CharacterFlags.Value;
 
             stats[(int)CharacterStat.Level] = level;
-            DynaModifiers.Apply(nearest, stats);
+            string? dynaModifier = DynaModifiers.Apply(nearest, stats);
             bool isFallback = string.Equals(leaf.Hash, MobTemplate.FallbackHash, StringComparison.Ordinal);
 
             return new MobTemplate
@@ -385,7 +394,7 @@ namespace ZoneEngine_New.Core.GameData
                 MinLevel = min,
                 MaxLevel = max,
                 UnresolvedPlaceholder = isFallback,
-                Equipment = CopyPairs(nearest.Equipment),
+                Equipment = WithDynaBossItem(CopyPairs(nearest.Equipment), dynaModifier, level),
                 TextureOverrides = new List<TextureOverride>(nearest.TextureOverrides),
                 CorpseFullUpdateTemplate = CopyCorpseFullUpdateTemplate(nearest.CorpseFullUpdateTemplate),
                 KnuBotId = nearest.KnuBotId,

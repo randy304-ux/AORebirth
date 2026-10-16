@@ -31,9 +31,9 @@ $curve = @{ 1 = 15; 2 = 24; 3 = 35; 4 = 60; 5 = 58; 6 = 69; 7 = 80 }
 $mobs = @(
   @('MLCE','Malfunctioning Cleaning Robot',1,1,297023,100,1019),
   @('JUCO','Cleaning Robot',1,1,297023,120,1019),
-  @('JNME','Garbage Flea',2,2,17657,100,0),   # NPCFamily 0: 25 rendered see-through on RC-LT (2026-10-16, guess)
+  @('JNME','Garbage Flea',2,2,40069,100,0),   # NPCFamily 0: 25 rendered see-through on RC-LT (2026-10-16, guess)
   @('32DO','32-V Docker',3,3,17649,110,1019),
-  @('01V1','Waste Collector',5,5,17714,75,0),   # NPCFamily 0: 1019 rendered see-through (guess)
+  @('01V1','Waste Collector',5,5,45873,75,0),   # NPCFamily 0: 1019 rendered see-through (guess)
   @('WSSC','Rollerrat',5,6,17687,125,0),
   @('DERT','Desert Reet',5,6,30365,93,0),
   @('GRDS','Greedy Desert Reet',7,7,30365,130,0)

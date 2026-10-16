@@ -29,7 +29,7 @@ $new = [ordered]@{}
 $ix = Mk '32DO' 'IIV-X Advanced Docker' 4 17649 115 1 'IIV-X Advanced Docker (Randy live screenshot, inside the building at 3515.8,901.7, resource 2150461). Mesh 17649 android (green battle droid). Level 4 from PO51: guessed'
 $new.IIVX = [pscustomobject]@{ Templates = @($ix) }
 $sc = Mk '01V1' 'Supreme Collector of Waste' 13 17714 130 3 'Boss (Randy live screenshot; wiki.aodb.us: northeast part of the map). Hash SOCW (L13, east side 4067,667) by name/level, mesh 17714 organic waste collector (orange skin not settable), scale 130, 3x HP: guessed'
-$sc | Add-Member -Force NoteProperty LootTable @(PartLoot 40); $sc.Stats.'455' = 0
+$sc | Add-Member -Force NoteProperty LootTable @(PartLoot 40); $sc.Stats.'455' = 0; $sc.Stats.'359' = 45873
 $new.SCWS = [pscustomobject]@{ Templates = @($sc) }
 $cm = Mk 'JUCO' 'Cleanmeister Intelligence Robot' 4 297023 170 4 'Cleanmeister boss (Randy live screenshot: green box robot with antenna, among Cleaning Robots). Mesh 297023, scale 170, L4, 4x HP, hash PRC2 (L2, 600 s, inside the JUCO cluster): guessed'
 $cm | Add-Member -Force NoteProperty LootTable @(PartLoot 40)
@@ -71,7 +71,8 @@ foreach ($p in $nt.PSObject.Properties) {
   if (-not $hashes.ContainsKey($p.Name)) { continue }
   $ts = @($p.Value.Templates); if (-not ($ts | Where-Object { $_.Name -match 'Flea' })) { continue }
   $km = [regex]::Match($nraw, "`n[ ]*`"" + $p.Name + "`":"); if (-not $km.Success) { Write-Warning ("flea key not found: " + $p.Name); continue }
-  foreach ($t in $ts) { $t.Stats.'359' = 17657; $t.Stats.'360' = $(if ($t.Name -match 'Mutated|Dyna|King|Queen|Boss') { 160 } else { 100 }); $t.Stats.'455' = 0 }   # fleas were see-through, not tiny: NPCFamily 0 (guess), original mesh/size
+  foreach ($t in $ts) { $t.Stats.'359' = 40069;   # gunbeetle: 17657/275710 flea models render see-through on 18.8.50 (Randy .set test 2026-10-16)
+  $t.Stats.'360' = $(if ($t.Name -match 'Mutated|Dyna|King|Queen|Boss') { 160 } else { 100 }); $t.Stats.'455' = 0 }   # fleas were see-through, not tiny: NPCFamily 0 (guess), original mesh/size
   $start = $km.Index
   $m = [regex]::new("`n {0,4}`"[^`"]{1,6}`":").Match($nraw, $start + 5)
   $endIdx = if ($m.Success) { $m.Index } else { $nraw.TrimEnd().LastIndexOf('}') }
