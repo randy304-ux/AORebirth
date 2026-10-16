@@ -34,11 +34,11 @@ $new.HXHR = [pscustomobject]@{ Templates = @($h) }
 $m8 = Band 'E03C' 'Angry Minibull' 8 38387 $null $null 'AO-Universe Arete: Angry Minibull (Aggro, Flocks, Level 8-13). Mesh 30360 minibull. Stats scaled from E03C donor'
 $m13 = Band 'E03C' 'Angry Minibull' 13 38387 $null $null 'AO-Universe Arete: Angry Minibull (Aggro, Flocks, Level 8-13)'
 $new.WTSO = [pscustomobject]@{ Templates = @($m8, $m13) }
-$hv = Band 'E03C' 'Harvey the Bully' 10 38387 125 @('Wander') 'Harvey the Bully L10 aggro dyna (AO forum Arete guide; wiki.aodb.us). Hash REGD (L10, 600 s respawn, near 3700,517) mapping, scale 125 and 2x HP guessed'
+$hv = Band 'E03C' 'Harvey the Bully' 10 38387 125 @('Wander') 'Harvey the Bully L10 aggro dyna (AO forum Arete guide; wiki.aodb.us). Hash REGD (L10, 180 s respawn, near 3700,517) mapping, scale 125 and 2x HP guessed'
 $hv.Stats.'1' = 876; $hv.Stats.'27' = 876; $m8.Stats.'1' = 216; $m8.Stats.'27' = 216; $m13.Stats.'1' = 416; $m13.Stats.'27' = 416
 foreach ($t in @($m8, $m13, $hv)) { $t.Stats | Add-Member -Force NoteProperty '33' 3; $t.Stats | Add-Member -Force NoteProperty '204' 1 }   # sensible HP + aggro (2026-10-16)
 $new.REGD = [pscustomobject]@{ Templates = @($hv) }
-$sw = Band 'E03C' 'Saltworm' 13 17712 110 @('Wander') 'Saltworm L13 aggro dyna, wanders around the southern desert lake (AO forum Arete guide; wiki.aodb.us). Hash XUDP (L13, 600 s respawn, 3466,629). Mesh 17712 sandworm, scale and 3x HP guessed'
+$sw = Band 'E03C' 'Saltworm' 13 17712 110 @('Wander') 'Saltworm L13 aggro dyna, wanders around the southern desert lake (AO forum Arete guide; wiki.aodb.us). Hash XUDP (L13, 180 s respawn, 3466,629). Mesh 17712 sandworm, scale and 3x HP guessed'
 $sw.Stats.'1' = [int]$sw.Stats.'1' * 3; $sw.Stats.'27' = $sw.Stats.'1'
 $sw.LootTable = @([pscustomobject]@{ Hash='USLT'; Repeats=1; Chance=60; LevelMod=0 }, [pscustomobject]@{ Hash='MPRT'; Repeats=1; Chance=50; LevelMod=0 })
 $new.XUDP = [pscustomobject]@{ Templates = @($sw) }
@@ -86,7 +86,7 @@ $s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
 $i = 0
 foreach ($sp in $s.spawns) {
   if ($sp.hashText -in 'HX1V','HXHR') { $sp.hashText = $(if ($i % 2) { 'HXHR' } else { 'HX1V' }); $sp.hash = 0; $sp.respawnTime = 30; $i++ }
-  if ($sp.hashText -in 'REGD','XUDP') { $sp.respawnTime = 900 }   # 15 min dyna respawn, guessed
+  if ($sp.hashText -in 'REGD','XUDP','IEGA') { $sp.respawnTime = 180 }   # 3 min dyna boss respawn
 }
 [IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)
 foreach ($p in @($npath, $ipath)) { [IO.File]::WriteAllText($p, ([IO.File]::ReadAllText($p, $u) -replace "`r`n", "`n"), $u) }

@@ -1,7 +1,7 @@
 # ddogs/tools/Build-DynaContent.ps1 - Rubi-Ka dyna camps from the AO-Universe table (ddogs/tools/dyna-camps.csv).
 # Boss and adds are hash spawns so the boss LootTable is copied onto the corpse. PlayfieldContent NPCs do not get that table.
 # Positions: guide x,z. Y is the nearest client spawn in that playfield. ContentProvenance.Guessed=true.
-# The dyna color buff is not implemented. Boss HP is 4x the rescaled donor, respawn 20 min; adds respawn in 3 min.
+# The dyna color buff is not implemented. Boss HP is 4x the rescaled donor. Boss and adds both respawn in 3 min (180 s).
 # Boss loot is applied by Build-DynaLoot.ps1 (5 to 7 items from that level band). Adds keep the common family table below.
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
 $ErrorActionPreference = 'Stop'
@@ -150,11 +150,25 @@ $offs = @(
   ,@(0, 14)
   ,@(0, -14)
 )
-$added = 0; $far = 0
+$bossNames = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+foreach ($v in $bossHash.Values) { [void]$bossNames.Add([string]$v) }
+$added = 0; $far = 0; $respawnFixed = 0
+$spawnRe = [regex]::new('"hashText":\s*"(?<h>[A-Z0-9]+)"[\s\S]{0,800}?"respawnTime":\s*(?<t>\d+)')
 foreach ($id in $byPf.Keys) {
   $spath = Join-Path $GameData "Playfields\$id\Spawns.json"
   if (-not (Test-Path $spath)) { throw "missing spawns $spath" }
   $sraw = [IO.File]::ReadAllText($spath, $u)
+  $dirty = $false
+  $hits = @($spawnRe.Matches($sraw))
+  for ($mi = $hits.Count - 1; $mi -ge 0; $mi--) {
+    $hm = $hits[$mi]
+    if (-not $bossNames.Contains($hm.Groups['h'].Value)) { continue }
+    if ($hm.Groups['t'].Value -eq '180') { continue }
+    $tg = $hm.Groups['t']
+    $sraw = $sraw.Remove($tg.Index, $tg.Length).Insert($tg.Index, '180')
+    $respawnFixed++
+    $dirty = $true
+  }
   $sp = ($sraw | ConvertFrom-Json).spawns
   $metaPath = Join-Path $GameData "Playfields\$id\metadata.json"
   $world = 99999
@@ -178,7 +192,7 @@ foreach ($id in $byPf.Keys) {
     if ($x -lt 0 -or $z -lt 0 -or $x -gt $world -or $z -gt $world) { $script:far++ }
     $ys = '{0:0.###}' -f $y
     $points = New-Object System.Collections.Generic.List[object]
-    $points.Add(@($bossHash[($c.type + '|' + $c.boss)], [int]$c.boss, 1200, $x, $z))
+    $points.Add(@($bossHash[($c.type + '|' + $c.boss)], [int]$c.boss, 180, $x, $z))
     if ($c.mobs -ne '(no mobs)') {
       $ah = $addHash[($c.type + '|' + $c.mobs)]
       $lo, $hi = $c.mobs -split '-'
@@ -226,9 +240,10 @@ foreach ($id in $byPf.Keys) {
       $cut = $sraw.LastIndexOf("  ]")
     }
     $sraw = $sraw.Insert($cut, (($pieces -join ",`n") + "`n"))
-    [IO.File]::WriteAllText($spath, $sraw, $u)
     $added += $pieces.Count
+    $dirty = $true
   }
+  if ($dirty) { [IO.File]::WriteAllText($spath, $sraw, $u) }
 }
-"dyna templatesNew=$($made.Count) bossGroups=$($bossHash.Count) addGroups=$($addHash.Count) spawnsAdded=$added outsideMap=$far"
+"dyna templatesNew=$($made.Count) bossGroups=$($bossHash.Count) addGroups=$($addHash.Count) spawnsAdded=$added bossRespawn180=$respawnFixed outsideMap=$far"
 & "$PSScriptRoot\Build-DynaLoot.ps1" -GameData $GameData

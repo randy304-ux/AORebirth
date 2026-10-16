@@ -6,7 +6,7 @@
 #   faction-area NPC names (ICC Peacekeeper, Omni-AF Private, Omni-Pol Guard, Clan Protester, Clan Guard Elina Jones, Omni-AF Officer Milne,
 #   Omni-Trans Equipment Vendor, Field Commander Ericson, Vanguard Henri Zure, Clan Unit Sentinel).
 # Guessed: every pink-code -> name mapping (by code letters, cluster and count), all looks (human mesh 26092; Omni-Trans vendor 250380 from 4582),
-#   Gnarl = YBSH (L7, 600 s, 3426,748) at scale 170; Leet King and Princess Leet spots; sword drop 8%; sword hand-in by trade instead of right-click
+#   Gnarl = YBSH (L7, 180 s, 3426,748) at scale 170; Leet King and Princess Leet spots; sword drop 8%; sword hand-in by trade instead of right-click
 #   mission; treasure smashing skipped (kill the Greedy Desert Reet is the step); gifts not itemised; fixed Light Bio Mesh instead of random.
 #   EJVC (To Be Determined, inside the Greedy Desert Reet) and HEZU (same spot as VAHE) removed as overlaps. Faction recruitment quests NOT built.
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
@@ -34,7 +34,7 @@ $new.LKNG = Npc 'LE04' 'Leet King' 10 17655 140 'Leet King (AO-Universe #16). Sp
 $new.PRLT = Npc 'LE04' 'Princess Leet' 8 17655 115 'Princess Leet (AO-Universe #16). Spot and scale guessed'
 $g = Clone ($nt.WSSC.Templates | Select-Object -First 1); $g.Name = 'Gnarl the Roller'; $g.Level = 7; $g.Stats.'54' = 7; $g.Stats.'360' = 170
 $g.Stats.'1' = [int]$g.Stats.'1' * 4; $g.Stats.'27' = $g.Stats.'1'; $g | Add-Member -Force NoteProperty Features @('Wander')
-Prov $g 'WSSC' 'Gnarl the Roller, rollerrat boss wandering the desert edge / beach near town (wiki.aodb.us, AO forum; Randy). Hash YBSH (L7, 600 s), level, scale 170, 4x HP guessed; rollerrat-part loot from WSSC'
+Prov $g 'WSSC' 'Gnarl the Roller, rollerrat boss wandering the desert edge / beach near town (wiki.aodb.us, AO forum; Randy). Hash YBSH (L7, 180 s), level, scale 170, 4x HP guessed; rollerrat-part loot from WSSC'
 $new.YBSH = [pscustomobject]@{ Templates = @($g) }
 # in-place: Shiny Sword on Desert Reets and Rollerrats
 $nraw = [IO.File]::ReadAllText($npath, $u) -replace "`r`n", "`n"
@@ -58,7 +58,7 @@ $il = [IO.File]::ReadAllLines($ipath, $u) | Where-Object { $_ -notmatch '^\s*"(S
 $spath = Join-Path $gd 'Playfields\6553\Spawns.json'
 $s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
 $s.spawns = @($s.spawns | Where-Object { $_.hashText -notin 'EJVC','HEZU','LKNG','PRLT' })
-foreach ($sp in $s.spawns) { if ($sp.hashText -eq 'YBSH') { $sp.respawnTime = 900; $sp.radius = 40 } }
+foreach ($sp in $s.spawns) { if ($sp.hashText -eq 'YBSH') { $sp.respawnTime = 180; $sp.radius = 40 } }
 foreach ($a in @(@('LKNG',10,3345.0,4.3,640.0), @('PRLT',8,3335.4,0.8,600.0))) {
   $s.spawns += [pscustomobject]@{ districtIndex=1; hash=0; hashText=$a[0]; manifestHash=0; minLevel=$a[1]; maxLevel=$a[1]; respawnChance=100; flags=1; respawnTime=60; version7Extra=0; hasOptionalFlagBlock=$false; nativeFlags=0; moreFlags=0; assistanceRadius=0; unknownOptionalU8=0; angle=0; angleW=1; position=@($a[2],$a[3],$a[4]); radius=1; additionalPoints=@(); extensions=$null }
 }
