@@ -2386,12 +2386,12 @@
                                       }
                  },
                  {
-                     "Key":  "ddogs:alienship:karli",
-                     "Provenance":  "ddogs/tools/Build-KarliAlienShip.ps1 (guessed look, cloned from Sarah Greene)",
-                     "ContentNpcIdentity":  "SimpleChar:7A0EC001",
+                     "Key":  "ddogs:alienship:entry",
+                     "Provenance":  "ddogs/tools/Build-KarliAlienShip.ps1 (guessed look, cloned from Shipping Manifest Terminal)",
+                     "ContentNpcIdentity":  "SimpleChar:7A0EC003",
                      "PlayfieldId":  6553,
-                     "InstanceId":  2047787009,
-                     "Name":  "Karli Cappelleri",
+                     "InstanceId":  2047787011,
+                     "Name":  "Crashed Ship Hatch",
                      "Position":  [
                                       3790,
                                       0.6,
@@ -2404,25 +2404,25 @@
                                       1
                                   ],
                      "Stats":  {
-                                   "0":  279450113,
-                                   "1":  559,
-                                   "4":  1,
-                                   "27":  559,
+                                   "0":  268964353,
+                                   "1":  724,
+                                   "4":  6,
+                                   "27":  724,
                                    "33":  0,
                                    "47":  1,
-                                   "54":  20,
-                                   "59":  3,
+                                   "54":  25,
+                                   "59":  1,
                                    "60":  0,
-                                   "64":  40618,
+                                   "64":  0,
                                    "89":  1,
-                                   "156":  72,
+                                   "156":  87,
                                    "173":  3,
                                    "174":  3,
-                                   "359":  295889,
-                                   "360":  99,
+                                   "359":  279184,
+                                   "360":  100,
                                    "368":  0,
                                    "389":  0,
-                                   "455":  137,
+                                   "455":  0,
                                    "466":  0,
                                    "660":  0,
                                    "673":  31
@@ -2430,50 +2430,27 @@
                      "Textures":  [
                                       {
                                           "Place":  0,
-                                          "Id":  164946
+                                          "Id":  0
                                       },
                                       {
                                           "Place":  1,
-                                          "Id":  164943
+                                          "Id":  0
                                       },
                                       {
                                           "Place":  2,
-                                          "Id":  164945
+                                          "Id":  0
                                       },
                                       {
                                           "Place":  3,
-                                          "Id":  164944
+                                          "Id":  0
                                       },
                                       {
                                           "Place":  4,
-                                          "Id":  164948
+                                          "Id":  0
                                       }
                                   ],
                      "Meshes":  [
-                                    {
-                                        "Position":  0,
-                                        "OverrideTextureId":  0,
-                                        "Id":  204942,
-                                        "Layer":  0
-                                    },
-                                    {
-                                        "Position":  0,
-                                        "OverrideTextureId":  0,
-                                        "Id":  40618,
-                                        "Layer":  4
-                                    },
-                                    {
-                                        "Position":  1,
-                                        "OverrideTextureId":  0,
-                                        "Id":  99152,
-                                        "Layer":  2
-                                    },
-                                    {
-                                        "Position":  5,
-                                        "OverrideTextureId":  0,
-                                        "Id":  291500,
-                                        "Layer":  0
-                                    }
+
                                 ],
                      "Passive":  true,
                      "Attackable":  false,
@@ -2481,7 +2458,7 @@
                      "Presentation":  {
 
                                       },
-                     "SpawnHash":  "KRLI"
+                     "SpawnHash":  "SHEN"
                  }
              ],
     "StandaloneShops":  [

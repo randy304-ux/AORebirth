@@ -9,9 +9,10 @@ $ErrorActionPreference = 'Stop'
 Remove-TypeData System.Array -ErrorAction SilentlyContinue  # PS5: arrays serialize as {value,Count} otherwise
 $u = [Text.UTF8Encoding]::new($false)
 $gd = [IO.Path]::GetFullPath($GameData)
-$karliPos = @(3790.0, 0.6, 270.0)          # guessed: centre of the Zix crash-site spawns
-$shipIn  = @(44.0, 0.5, 44.0)              # guessed landing inside 8009
-$shipOut = @(3790.0, 0.6, 262.0)           # beside Karli
+$karliPos = @(45.4, 0.4, 41.5)            # Randy (in game): inside the crashed ship 8009, near Kalari's spot
+$entryPos = @(3790.0, 0.6, 270.0)          # guessed: crash-site entry hatch on 6553 (Karli's old spot)
+$shipIn  = @(40.0, 0.5, 44.0)              # guessed landing inside 8009
+$shipOut = @(3790.0, 0.6, 262.0)           # beside the entry hatch
 # --- templates
 $npath = Join-Path $gd 'NpcTemplates.json'
 $nt = [IO.File]::ReadAllText($npath, $u) | ConvertFrom-Json
@@ -19,6 +20,8 @@ function Clone($o) { $o | ConvertTo-Json -Depth 8 | ConvertFrom-Json }
 $gen = Clone ($nt.CRDY.Templates | Sort-Object Level | Select-Object -Last 1)
 $gen.Name = 'Alien General'; $gen.Level = 14; $gen.Stats.'54' = 14; $gen.Stats.'359' = 247742; $gen.Stats.'360' = 75
 $gen.Stats.'1' = [int]$gen.Stats.'1' * 3; $gen.Stats.'27' = $gen.Stats.'1'
+# exit hatch spawns when the General dies and despawns after 5 min (DespawnSeconds), so the ship resets with the General's 300 s respawn
+$gen | Add-Member -Force NoteProperty BossTriggers @([pscustomobject]@{ On = 'Death'; Pct = 0; Actions = @([pscustomobject]@{ Type = 'SpawnAdds'; Hash = 'SHXT'; Count = 1; Radius = 3; Level = 1; DespawnSeconds = 300 }) })
 $gen | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = 'CRDY'; Source = 'Name real (AO-Universe Arete #20 "Alien General", level ?). Mesh 247742 "alien boss detached" = Khaz battle-spider without rider, matches Randy PRK screenshot (big mech spider, cyan lights). Scale 75, level 14, 3x HP guessed' })
 $nt | Add-Member -Force NoteProperty ALGN ([pscustomobject]@{ Templates = @($gen) })
 $zk = Clone ($nt.ZIXI.Templates | Sort-Object Level | Select-Object -Last 1)
@@ -41,7 +44,13 @@ foreach ($r in $crew) {
   $nt | Add-Member -Force NoteProperty $r[0] ([pscustomobject]@{ Templates = @($t) })
   $crewKeys += $r[0]
 }
-$ourKeys = @('ALGN','ZIXK') + $crewKeys
+# exit hatch template (talks via Knubot AlienShipHatch.json, bound by spawn hash SHXT)
+$hx = Clone ($nt.CRDY.Templates | Sort-Object Level | Select-Object -Last 1)
+$hx.Name = 'Ship Hatch'; $hx.Level = 1; $hx.Stats.'54' = 1; $hx.Stats.'359' = 253599; $hx.Stats.'360' = 60
+$hx | Add-Member -Force NoteProperty Features @('NoCombat','NoMove')
+$hx | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = 'CRDY'; Source = 'Exit hatch spawned by the Alien General death trigger (Randy request). Mesh 253599 alien defense turret as a stand-in hatch: guessed' })
+$nt | Add-Member -Force NoteProperty SHXT ([pscustomobject]@{ Templates = @($hx) })
+$ourKeys = @('ALGN','ZIXK') + $crewKeys + @('SHXT')
 # insert as text so the rest of the 4 MB file keeps its formatting; our keys are appended at the end, so cut and re-append
 $nraw = [IO.File]::ReadAllText($npath, $u) -replace "`r`n", "`n"
 $cut = $nraw.IndexOf(",`n    `"ALGN`":")
@@ -83,11 +92,15 @@ $cpath = Join-Path $gd 'PlayfieldContent\6553\Npcs.json'
 $c = [IO.File]::ReadAllText($cpath, $u) | ConvertFrom-Json
 $sarah = $c.Npcs | Where-Object Name -eq 'Sarah Greene'
 $term = $c.Npcs | Where-Object Name -eq 'Shipping Manifest Terminal'
-$c.Npcs = @($c.Npcs | Where-Object { $_.Key -notlike 'ddogs:alienship:*' }) + (Npc 6553 '7A0EC001' 'Karli Cappelleri' $karliPos $sarah 'KRLI' 'ddogs:alienship:karli')
+$entry = Npc 6553 '7A0EC003' 'Crashed Ship Hatch' $entryPos $term 'SHEN' 'ddogs:alienship:entry'
+$c.Npcs = @($c.Npcs | Where-Object { $_.Key -notlike 'ddogs:alienship:*' }) + $entry
 [IO.File]::WriteAllText($cpath, ($c | ConvertTo-Json -Depth 8) + "`n", $u)
 $d8 = Join-Path $gd 'PlayfieldContent\8009'; New-Item -ItemType Directory -Force $d8 | Out-Null
-$hatch = Npc 8009 '7A0EC002' 'Ship Hatch' @(40.0, 0.5, 44.0) $term 'SHHT' 'ddogs:alienship:hatch'
-[IO.File]::WriteAllText((Join-Path $d8 'Npcs.json'), ([pscustomobject]@{ SchemaVersion = 1; PlayfieldId = 8009; Npcs = @($hatch); StandaloneShops = @() } | ConvertTo-Json -Depth 8) + "`n", $u)
+$karliNpc = Npc 8009 '7A0EC001' 'Karli Cappelleri' $karliPos $sarah 'KRLI' 'ddogs:alienship:karli'
+# look: Uri centaur battlesuit (rooted) as the alien-disguise costume. The veteran/loyalty-store costume item was not found in the client RDB: guessed
+$karliNpc.Stats.'359' = 247464; $karliNpc.Stats.'360' = 100; $karliNpc.Meshes = @(); $karliNpc.Textures = @()
+$karliNpc.Provenance = 'ddogs/tools/Build-KarliAlienShip.ps1 (spot from Randy; look = Uri centaur mesh 247464 standing in for the alien disguise costume, guessed)'
+[IO.File]::WriteAllText((Join-Path $d8 'Npcs.json'), ([pscustomobject]@{ SchemaVersion = 1; PlayfieldId = 8009; Npcs = @($karliNpc); StandaloneShops = @() } | ConvertTo-Json -Depth 8) + "`n", $u)
 # --- interior spawns (Playfields is gitignored; rerun this script after a data re-extract)
 $spath = Join-Path $gd 'Playfields\8009\Spawns.json'
 $s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
@@ -107,7 +120,7 @@ foreach ($a in $adds) {
 # --- dialog
 $kd = Join-Path $gd 'Knubot'
 $karli = [ordered]@{
-  Notes = 'Karli Cappelleri, Arete Landing alien crash site (AO-Universe Arete #20). Dialog from the guide; hatch teleport and solo turn-in guessed. Generated by ddogs/tools/Build-KarliAlienShip.ps1.'
+  Notes = 'Karli Cappelleri, inside the crashed alien ship 8009 (AO-Universe Arete #20). Dialog from the guide; spot from Randy; solo turn-in guessed. Generated by ddogs/tools/Build-KarliAlienShip.ps1.'
   Npcs = @('SimpleChar:7A0EC001')
   Openers = @( [ordered]@{ If = @('HasQuest FBUD'); Say = 'fb_back' }, [ordered]@{ Say = 'hello' } )
   Replies = [ordered]@{
@@ -115,27 +128,25 @@ $karli = [ordered]@{
     fight = [ordered]@{ Text = 'I want to fight aliens too!'; If = @('!HasAnyQuest FBUD','!HasCompletedQuest FBUD'); Goto = 'friends' }
     nofriends = [ordered]@{ Text = "But, I don't have any friends..."; Goto = 'give_can' }
     ready = [ordered]@{ Text = 'We are ready to help you out.'; If = @('!HasQuest ZXK1'); Goto = 'team' }
-    enter = [ordered]@{ Text = 'Get me into the ship.'; If = @('HasQuest ZXK1'); Goto = 'enter' }
     used = [ordered]@{ Text = 'I found a teammate and used the can on them.'; Goto = 'fb_done' }
     notyet = [ordered]@{ Text = 'Not yet.'; Goto = 'bye' }
     nothing = [ordered]@{ Text = 'Never mind.'; Goto = 'bye' }
   }
   Lines = [ordered]@{
     hello = [ordered]@{ Text = "I'm a little busy here..."; Replies = @('what','nothing') }
-    spy = [ordered]@{ Text = "I'm an alien spy. I find and terminate aliens... Quietly!"; Replies = @('fight','ready','enter','nothing') }
+    spy = [ordered]@{ Text = "I'm an alien spy. I find and terminate aliens... Quietly!"; Replies = @('fight','ready','nothing') }
     friends = [ordered]@{ Text = 'I think you should find some friends to help you out for this one.'; Replies = @('nofriends') }
     give_can = [ordered]@{ Text = @('You know we have a lookup system to find people with similar interests here on Rubi-Ka. Just open your team search interface. Or perhaps just look for someone around you that you can start a team with.', '{spawn FBCN 1}', '{givequest FBUD}', '{delay 1}Here, take this Friendly Buff Nano can and see if you can find a friend to use it on.'); Replies = @('nothing') }
     fb_back = [ordered]@{ Text = 'Did you find a friend for that Friendly Buff can?'; Replies = @('used','notyet') }
     fb_done = [ordered]@{ Text = @('{completequest FBUD}', 'See? Rubi-Ka is friendlier with a team. Take these memory chips.'); Replies = @('nothing') }
-    team = [ordered]@{ Text = @('{givequest ZXK1}', 'Enter the crashed ship and do your killing there. Try not to blow my cover.'); Replies = @('enter','nothing') }
-    enter = [ordered]@{ Text = ('{teleport 8009 ' + ($shipIn -join ' ') + '}Quietly, now.{close}') }
+    team = [ordered]@{ Text = @('{givequest ZXK1}', 'The Zix is in the Alien General''s room, deeper in. A hatch opens when the General falls. Try not to blow my cover.'); Replies = @('nothing') }
     bye = [ordered]@{ Text = 'Keep your head down.{close}' }
   }
 }
 [IO.File]::WriteAllText((Join-Path $kd 'KarliCappelleri.json'), ($karli | ConvertTo-Json -Depth 8) + "`n", $u)
 $hs = [ordered]@{
-  Notes = 'Crashed alien ship exit (8009). Guessed: no client door; talk-to teleport back beside Karli. Generated by ddogs/tools/Build-KarliAlienShip.ps1.'
-  Npcs = @('SimpleChar:7A0EC002')
+  Notes = 'Crashed alien ship exit (8009), spawned by the Alien General death trigger for 5 min. Guessed: no client door; talk-to teleport back beside the entry hatch. Generated by ddogs/tools/Build-KarliAlienShip.ps1.'
+  Npcs = @('SHXT')
   Openers = @( [ordered]@{ Say = 'hello' } )
   Replies = [ordered]@{ out = [ordered]@{ Text = 'Leave the ship.'; Goto = 'out' }; stay = [ordered]@{ Text = 'Stay.'; Goto = 'stay' } }
   Lines = [ordered]@{
@@ -145,7 +156,20 @@ $hs = [ordered]@{
   }
 }
 [IO.File]::WriteAllText((Join-Path $kd 'AlienShipHatch.json'), ($hs | ConvertTo-Json -Depth 8) + "`n", $u)
+$en = [ordered]@{
+  Notes = 'Crashed alien ship entry on 6553 near the crash site. Guessed: talk-to teleport into 8009. Generated by ddogs/tools/Build-KarliAlienShip.ps1.'
+  Npcs = @('SimpleChar:7A0EC003')
+  Openers = @( [ordered]@{ Say = 'hello' } )
+  Replies = [ordered]@{ in = [ordered]@{ Text = 'Climb inside.'; Goto = 'in' }; stay = [ordered]@{ Text = 'Stay out.'; Goto = 'stay' } }
+  Lines = [ordered]@{
+    hello = [ordered]@{ Text = 'A torn hatch in the hull. Something moves inside.'; Replies = @('in','stay') }
+    in = [ordered]@{ Text = ('{teleport 8009 ' + ($shipIn -join ' ') + '}{close}') }
+    stay = [ordered]@{ Text = '{close}' }
+  }
+}
+[IO.File]::WriteAllText((Join-Path $kd 'AlienShipEntry.json'), ($en | ConvertTo-Json -Depth 8) + "`n", $u)
 # repo files are LF
-foreach ($p in @($npath, $ipath, $qpath, $cpath, (Join-Path $d8 'Npcs.json'), (Join-Path $kd 'KarliCappelleri.json'), (Join-Path $kd 'AlienShipHatch.json'))) { [IO.File]::WriteAllText($p, ([IO.File]::ReadAllText($p, $u) -replace "`r`n", "`n"), $u) }
+foreach ($p in @($npath, $ipath, $qpath, $cpath, (Join-Path $d8 'Npcs.json'), (Join-Path $kd 'KarliCappelleri.json'), (Join-Path $kd 'AlienShipHatch.json'), (Join-Path $kd 'AlienShipEntry.json'))) { [IO.File]::WriteAllText($p, ([IO.File]::ReadAllText($p, $u) -replace "`r`n", "`n"), $u) }
 'karli ship content written'
+& (Join-Path $PSScriptRoot 'Build-AreteWildlife.ps1') -GameData $gd
 

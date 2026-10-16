@@ -3,16 +3,16 @@
     "PlayfieldId":  8009,
     "Npcs":  [
                  {
-                     "Key":  "ddogs:alienship:hatch",
-                     "Provenance":  "ddogs/tools/Build-KarliAlienShip.ps1 (guessed look, cloned from Shipping Manifest Terminal)",
-                     "ContentNpcIdentity":  "SimpleChar:7A0EC002",
+                     "Key":  "ddogs:alienship:karli",
+                     "Provenance":  "ddogs/tools/Build-KarliAlienShip.ps1 (spot from Randy; look = Uri centaur mesh 247464 standing in for the alien disguise costume, guessed)",
+                     "ContentNpcIdentity":  "SimpleChar:7A0EC001",
                      "PlayfieldId":  8009,
-                     "InstanceId":  2047787010,
-                     "Name":  "Ship Hatch",
+                     "InstanceId":  2047787009,
+                     "Name":  "Karli Cappelleri",
                      "Position":  [
-                                      40,
-                                      0.5,
-                                      44
+                                      45.4,
+                                      0.4,
+                                      41.5
                                   ],
                      "Rotation":  [
                                       0,
@@ -21,50 +21,31 @@
                                       1
                                   ],
                      "Stats":  {
-                                   "0":  268964353,
-                                   "1":  724,
-                                   "4":  6,
-                                   "27":  724,
+                                   "0":  279450113,
+                                   "1":  559,
+                                   "4":  1,
+                                   "27":  559,
                                    "33":  0,
                                    "47":  1,
-                                   "54":  25,
-                                   "59":  1,
+                                   "54":  20,
+                                   "59":  3,
                                    "60":  0,
-                                   "64":  0,
+                                   "64":  40618,
                                    "89":  1,
-                                   "156":  87,
+                                   "156":  72,
                                    "173":  3,
                                    "174":  3,
-                                   "359":  279184,
+                                   "359":  247464,
                                    "360":  100,
                                    "368":  0,
                                    "389":  0,
-                                   "455":  0,
+                                   "455":  137,
                                    "466":  0,
                                    "660":  0,
                                    "673":  31
                                },
                      "Textures":  [
-                                      {
-                                          "Place":  0,
-                                          "Id":  0
-                                      },
-                                      {
-                                          "Place":  1,
-                                          "Id":  0
-                                      },
-                                      {
-                                          "Place":  2,
-                                          "Id":  0
-                                      },
-                                      {
-                                          "Place":  3,
-                                          "Id":  0
-                                      },
-                                      {
-                                          "Place":  4,
-                                          "Id":  0
-                                      }
+
                                   ],
                      "Meshes":  [
 
@@ -75,7 +56,7 @@
                      "Presentation":  {
 
                                       },
-                     "SpawnHash":  "SHHT"
+                     "SpawnHash":  "KRLI"
                  }
              ],
     "StandaloneShops":  [

@@ -262,8 +262,18 @@ namespace ZoneEngine_New.Core.Entities
             return BuildCharacterInfoPacket(1, InfoPacketType.Monster, string.Empty, string.Empty);
         }
 
+        /// <summary>Timed trigger adds (NpcBossAction.DespawnSeconds) leave the world at this time.</summary>
+        public DateTime? DespawnAtUtc { get; set; }
+
         public override void Tick(double deltaTime)
         {
+            if (DespawnAtUtc is { } despawnAt && DateTime.UtcNow >= despawnAt && !IsDead && Playfield != null)
+            {
+                DespawnAtUtc = null;
+                Playfield.GetRequiredService<SpawnService>().DespawnNpc(this);
+                return;
+            }
+
             if (!IsDead)
                 Brain?.Tick(deltaTime);
 
@@ -361,6 +371,8 @@ namespace ZoneEngine_New.Core.Entities
                 try
                 {
                     NpcCharacter add = spawns.SpawnMob(template, at, level: level, spawnHash: action.Hash);
+                    if (action.DespawnSeconds is int life && life > 0)
+                        add.DespawnAtUtc = DateTime.UtcNow.AddSeconds(life);
                     if (attacker != null)
                         add.Brain?.AddThreat(attacker.Identity, 1);
                     if (track)

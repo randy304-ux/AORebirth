@@ -33,6 +33,9 @@ namespace ZoneEngine_New.Core.Mobs
         public float Radius { get; set; } = 4f;
 
         public int? Level { get; set; }
+
+        /// <summary>Death triggers: despawn the add after this many seconds (e.g. an exit hatch that resets).</summary>
+        public int? DespawnSeconds { get; set; }
     }
 
     public sealed class MobItemTableEntry
