@@ -61,4 +61,8 @@ $leo = [ordered]@{ Notes = 'Leonora Marty (AO-Universe #19); dialog from the gui
 [IO.File]::WriteAllText((Join-Path $kd 'CreditCard.json'), ($card | ConvertTo-Json -Depth 8) + "`n", $u)
 [IO.File]::WriteAllText((Join-Path $kd 'LeonoraMarty.json'), ($leo | ConvertTo-Json -Depth 8) + "`n", $u)
 foreach ($p in @($npath, $qpath)) { [IO.File]::WriteAllText($p, ([IO.File]::ReadAllText($p, $u) -replace "`r`n", "`n"), $u) }
+# dead thief (Sarah Greene #7) lies on the ground next to the Mutated Garbage Flea: mesh 296008 lying body, movement mode 11 (guessed)
+$cp = Join-Path $gd 'PlayfieldContent\6553\Npcs.json'; $cj = [IO.File]::ReadAllText($cp, $u) | ConvertFrom-Json
+foreach ($n in $cj.Npcs) { if ($n.Key -eq 'ddogs:arete:dead-thief') { $n.Stats.'359' = 296008; $n.Stats | Add-Member -Force NoteProperty '173' 11; $n.Stats | Add-Member -Force NoteProperty '174' 11; $n.Meshes = @(); $n.Textures = @() } }
+[IO.File]::WriteAllText($cp, (($cj | ConvertTo-Json -Depth 8) -replace "`r`n", "`n") + "`n", $u)
 'market written'
