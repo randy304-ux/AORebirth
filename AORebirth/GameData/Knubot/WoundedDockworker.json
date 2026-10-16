@@ -21,7 +21,7 @@
                              },
                     "leave":  {
                                   "Text":  "Leave him.",
-                                  "Goto":  "close"
+                                  "Goto":  "shut"
                               }
                 },
     "Lines":  {
@@ -42,8 +42,8 @@
                   "groan":  {
                                 "Text":  "The dockworker groans and clutches his side.{close}"
                             },
-                  "close":  {
-                                "Text":  "{close}"
-                            }
+                  "shut":  {
+                               "Text":  "{close}"
+                           }
               }
 }

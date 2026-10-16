@@ -21,7 +21,7 @@
                               },
                     "back":  {
                                  "Text":  "Step back.",
-                                 "Goto":  "close"
+                                 "Goto":  "shut"
                              }
                 },
     "Lines":  {
@@ -41,8 +41,8 @@
                   "hot":  {
                               "Text":  "Gas hisses out of the container and burns blue. Too hot to touch.{close}"
                           },
-                  "close":  {
-                                "Text":  "{close}"
-                            }
+                  "shut":  {
+                               "Text":  "{close}"
+                           }
               }
 }

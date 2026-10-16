@@ -37,7 +37,7 @@
                               },
                     "keep":  {
                                  "Text":  "Leave it be for now.",
-                                 "Goto":  "close"
+                                 "Goto":  "shut"
                              }
                 },
     "Lines":  {
@@ -75,8 +75,8 @@
                   "empty":  {
                                 "Text":  "Nothing left here.{close}"
                             },
-                  "close":  {
-                                "Text":  "{close}"
-                            }
+                  "shut":  {
+                               "Text":  "{close}"
+                           }
               }
 }

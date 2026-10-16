@@ -19,7 +19,7 @@
                              },
                     "bye":  {
                                 "Text":  "Goodbye.",
-                                "Goto":  "close"
+                                "Goto":  "shut"
                             }
                 },
     "Lines":  {
@@ -36,8 +36,8 @@
                                               "Really? Thank you so much. I really hope that the vendor still have the t-shirt I wanted! Finally I can go shopping again!{close}"
                                           ]
                              },
-                  "close":  {
-                                "Text":  "{close}"
-                            }
+                  "shut":  {
+                               "Text":  "{close}"
+                           }
               }
 }
