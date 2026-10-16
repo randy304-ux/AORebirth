@@ -156,6 +156,25 @@ public sealed record KnubotSpawnItem(string Hash, int? Quality, int Count) : Knu
     }
 }
 
+/// <summary><c>{take ITEMHASH}</c>: removes one matching item from the main inventory (a hand-over). The line fails when none is carried.</summary>
+public sealed record KnubotTakeItem(HashSet<int> TemplateIds) : KnubotEffect
+{
+    public override bool Check(KnubotContext context, KnubotPlan plan, KnubotEffectServices services)
+        => KnubotItems.CountCarried(context.Player, TemplateIds) > 0;
+
+    public override void Apply(KnubotContext context, KnubotEffectServices services)
+    {
+        foreach (KeyValuePair<int, Item> entry in context.Player.Inventory.Inventory.Content)
+        {
+            Item item = entry.Value;
+            if (item != null && (TemplateIds.Contains(item.LowId) || TemplateIds.Contains(item.HighId)))
+            {
+                item.DestroyOne(context.Player, new Identity { Type = IdentityType.Inventory, Instance = entry.Key });
+                return;
+            }
+        }
+    }
+}
 /// <summary><c>{shop}</c>: opens the NPC's vendor window.</summary>
 public sealed record KnubotOpenShop : KnubotEffect
 {

@@ -136,12 +136,35 @@ namespace ZoneEngine_New.Core.Pets
             if (owner is Player player)
                 SendAddPet(player, pet);
             RefreshOverEquip(pet);
+            if (owner is Player && Mercs.ByHash(hash) is Mercs.Kind ownKind && Mercs.PetFor(_gameData.RootPath, ownKind) is { Length: > 0 } mercPet)
+                SpawnMercPet(pet, mercPet, pet.Stats.GetOrOne(CharacterStat.Level));
 
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
                 "Summoned pet id={0} hash={1} type={2} level={3} owner={4} expires={5}",
                 pet.Identity.Instance, hash, type, pet.Stats.GetOrZero(CharacterStat.Level), owner.Identity.Instance,
                 expires?.ToString("o", CultureInfo.InvariantCulture) ?? "never"));
             return pet;
+        }
+
+        /// <summary>
+        /// The merc's own pet (MP, Engineer, Bureaucrat): owned by the merc, so it assists the merc (NPC owners default to
+        /// Assist) and is removed with it on dismiss, death and zone change (see <see cref="DismissMercPets"/>).
+        /// </summary>
+        void SpawnMercPet(NpcCharacter merc, string hash, int level)
+        {
+            NpcCharacter? pet = Spawn(merc, hash, Types.TypeOf(hash), level, null, PetMode.Assist, 100, 100, []);
+            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc pet hash={0} merc={1} spawned={2}",
+                hash, merc.Identity.Instance, pet != null));
+        }
+
+        /// <summary>Removes the pets a merc (or any pet) owns before the merc itself leaves.</summary>
+        void DismissMercPets(NpcCharacter pet, string reason)
+        {
+            if (pet.OwnedPets.Count == 0)
+                return;
+            pet.OwnedPets.Stash.Clear();
+            foreach (NpcCharacter sub in pet.OwnedPets.All.ToArray())
+                Dismiss(sub, reason);
         }
 
         /// <summary>GameData/Mercs.json toggle for hiring mercenaries.</summary>
@@ -213,6 +236,10 @@ namespace ZoneEngine_New.Core.Pets
                 if (npc.WearExtra(pair[0], pair.Count > 1 ? pair[1] : pair[0], level, _logger))
                     worn++;
             }
+
+            if (Mercs.WeaponFor(_gameData.RootPath, kind) is { Count: > 0 } weapon
+                && npc.WearExtra(weapon[0], weapon.Count > 1 ? weapon[1] : weapon[0], level, _logger))
+                worn++;
 
             npc.Rebase();
             int max = npc.Stats.GetOrZero(CharacterStat.MaxHealth);
@@ -308,6 +335,7 @@ namespace ZoneEngine_New.Core.Pets
             if (controller == null)
                 return;
 
+            DismissMercPets(pet, "owner " + reason);
             Character owner = controller.Owner;
             if (reason != "merc dismissed" && reason != "replaced")
                 ScheduleMercRevive(owner, controller);
@@ -347,6 +375,7 @@ namespace ZoneEngine_New.Core.Pets
             if (controller == null)
                 return;
 
+            DismissMercPets(pet, "owner died");
             Character owner = controller.Owner;
             ScheduleMercRevive(owner, controller);
             if (owner.OwnedPets.Remove(pet))
@@ -385,6 +414,7 @@ namespace ZoneEngine_New.Core.Pets
             foreach (NpcCharacter pet in pets)
             {
                 PetController? controller = pet.Pet;
+                DismissMercPets(pet, "owner zoned");
                 owner.OwnedPets.Remove(pet);
                 pet.Brain?.StopPathing();
                 if (pet.Playfield != null)

@@ -64,6 +64,16 @@ foreach ($p in $profs) {
   }
   $nt | Add-Member -NotePropertyName $hash -NotePropertyValue ([pscustomobject]@{ Templates = $bands }) -Force
 }
+# Merc-owned pets (MP, Engineer, Bureaucrat): bands cloned from the merc's own, weaker. Looks guessed: Engineer robot = Android 17649,
+# MP anima = Shadowmutant 30464, Bureaucrat robot = junkbot 45873 (all mobile MonsterData bodies).
+$mercPets = @{ metaphysicist = @('MPPT', 'MRMP', 'Anima', 30464, 92); engineer = @('MEPT', 'MREG', 'Robot', 17649, 91); bureaucrat = @('MBPT', 'MRBU', 'Robot', 45873, 93) }
+foreach ($k in $mercPets.Keys) { $ph, $src, $pname, $pmd, $pscale = $mercPets[$k]
+  $bands = @(); foreach ($d in @($nt.$src.Templates)) { $b = $d | ConvertTo-Json -Depth 8 | ConvertFrom-Json; $b.Name = "Mercenary $pname"; $s2 = $b.Stats
+    $s2.'1' = [int][math]::Max(20, [double]$s2.'1' * 0.5); if ($s2.PSObject.Properties['27']) { $s2.'27' = $s2.'1' }
+    $s2.'285' = [int][math]::Max(2, [double]$s2.'285' * 0.6); $s2.'286' = [int][math]::Max(1, [double]$s2.'286' * 0.6)
+    $s2.'359' = $pmd; $s2 | Add-Member -Force NoteProperty '360' $pscale; $s2.'60' = 0
+    foreach ($x in '64','4','59') { $s2.PSObject.Properties.Remove($x) }; if ($b.PSObject.Properties['Equipment']) { $b.Equipment = @() }; $bands += $b }
+  $nt | Add-Member -NotePropertyName $ph -NotePropertyValue ([pscustomobject]@{ Templates = $bands }) -Force }
 Save $ntPath $nt
 
 # Mobile-body check against MonsterData.json
@@ -88,6 +98,9 @@ function Pieces($prefix) {
 }
 $jobe = Pieces 'Jobe Suit'
 $doctorHeals = @(@{ MinLevel = 1; Nanos = @(26465) }, @{ MinLevel = 25; Nanos = @(26466) }, @{ MinLevel = 75; Nanos = @(28665) }, @{ MinLevel = 150; Nanos = @(28676) })
+# Visible weapon per profession (held prop; the merc's monster weapon still rolls damage). Picks guessed, low-QL items with a WeaponMesh.
+$weapons = @{ enforcer = 129026; soldier = 124348; keeper = 154905; doctor = 157636; adventurer = 124313; agent = 161126; bureaucrat = 123742
+  engineer = 124836; fixer = 247228; martialartist = 267258; metaphysicist = 254612; nanotechnician = 245627; shade = 160125; trader = 124241 }
 $catalog = [ordered]@{ Enabled = $true; ReviveSeconds = 10; ArmorStats = $true; Professions = [ordered]@{} }
 $report = @()
 foreach ($p in $profs) {
@@ -109,7 +122,7 @@ foreach ($p in $profs) {
   if ($t1.Count -lt 5 -or $t2.Count -lt 5 -or $fa.Count -lt 5 -or $ch.Count -lt 5) { throw "armor lookup short for $key : $($report[-1])" }
   $nanos = New-Object System.Collections.ArrayList
   if ($p[8]) { foreach ($h in $doctorHeals) { [void]$nanos.Add($h) } }
-  $catalog.Professions[$key] = [ordered]@{ Heals = [bool]$p[8]; Nanos = [object[]]$nanos.ToArray(); Armor = $armor }
+  $catalog.Professions[$key] = [ordered]@{ Heals = [bool]$p[8]; Nanos = [object[]]$nanos.ToArray(); Armor = $armor; Weapon = @($weapons[$key], $weapons[$key]); Pet = $(if ($mercPets[$key]) { $mercPets[$key][0] } else { $null }) }
 }
 Save (Join-Path $GameData 'Mercs.json') $catalog
 

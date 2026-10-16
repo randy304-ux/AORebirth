@@ -100,6 +100,10 @@ namespace ZoneEngine_New.Core.Pets
             public bool Heals { get; set; }
             public List<NanoBand> Nanos { get; set; } = new();
             public List<ArmorTier> Armor { get; set; } = new();
+            /// <summary>Held weapon (low/high item id) shown in the right hand; looks only.</summary>
+            public List<int>? Weapon { get; set; }
+            /// <summary>NpcTemplates hash of the pet this merc keeps out (MP, Engineer, Bureaucrat); null for none.</summary>
+            public string? Pet { get; set; }
         }
 
         public sealed class Catalog
@@ -173,6 +177,10 @@ namespace ZoneEngine_New.Core.Pets
                 return [];
             return ownerSide == 2 && best.OmniItems is { Count: > 0 } omni ? omni : best.Items;
         }
+
+        public static List<int>? WeaponFor(string gameDataRoot, Kind kind) => Load(gameDataRoot).For(kind)?.Weapon;
+
+        public static string? PetFor(string gameDataRoot, Kind kind) => Load(gameDataRoot).For(kind)?.Pet;
 
         public static bool Heals(string gameDataRoot, string? hash)
         {

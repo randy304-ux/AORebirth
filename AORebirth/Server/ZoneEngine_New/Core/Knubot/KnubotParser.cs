@@ -10,7 +10,7 @@ using ZoneEngine_New.Core.Inventory;
 /// <summary>
 /// Turns line text into ordered pieces and effects. Tags:
 /// text <c>{name}</c> <c>{npc}</c> <c>{itemref LOW HIGH QL}</c> <c>{emote}…{/emote}</c> <c>{delay SECONDS}</c>;
-/// effects (applied when the text reaches them) <c>{givequest HASH}</c> <c>{completequest HASH}</c> <c>{spawn ITEMHASH QL|level [count]}</c> <c>{shop}</c> <c>{opentrade}</c> <c>{buffmenu}</c> <c>{teleport PF X Y Z}</c>; flow <c>{goto LINE}</c> <c>{close [SECONDS]}</c>.
+/// effects (applied when the text reaches them) <c>{givequest HASH}</c> <c>{completequest HASH}</c> <c>{spawn ITEMHASH QL|level [count]}</c> <c>{take ITEMHASH}</c> <c>{shop}</c> <c>{opentrade}</c> <c>{buffmenu}</c> <c>{teleport PF X Y Z}</c>; flow <c>{goto LINE}</c> <c>{close [SECONDS]}</c>.
 /// <c>{{</c> and <c>}}</c> write literal braces. Reply text allows only the text tags without delay.
 /// </summary>
 public static class KnubotParser
@@ -178,6 +178,15 @@ public static class KnubotParser
                     Effect(new KnubotSpawnItem(words[1], atLevel ? null : quality, spawnCount));
                     break;
 
+                case "take":
+                    if (words.Length != 2 || !load.TryItemTemplates(words[1], out HashSet<int> takeIds))
+                    {
+                        errors.Add("expected {take ITEMHASH} with a known item hash: {" + body + "}");
+                        break;
+                    }
+
+                    Effect(new KnubotTakeItem(takeIds));
+                    break;
                 case "startarea":
                     if (words.Length != 2 || (words[1] != "arete" && words[1] != "icc"))
                     {

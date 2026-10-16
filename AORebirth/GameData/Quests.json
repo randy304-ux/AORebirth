@@ -4006,5 +4006,119 @@
                        "Xp":  0,
                        "Records":  null
                    }
+    },
+    {
+        "Hash":  "EMB1",
+        "Name":  "Deliver Emiel\u0027s box",
+        "QasInstance":  920181,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Bring Emiel\u0027s Box of Foodstuff to Logistics Manager Fausto in the Bazaar",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "FACS",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  711,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "REB1",
+                       "Credits":  500,
+                       "Xp":  1500,
+                       "Records":  [
+
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "EMB2",
+        "Name":  "Deliver Emiel\u0027s box",
+        "QasInstance":  920184,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Bring Emiel\u0027s Box of Foodstuff to Logistics Manager Fausto in the Bazaar",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "FACS",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  714,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "REB2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "EMBH",
+        "Name":  "Heavy Bio Mesh tip",
+        "QasInstance":  920182,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Ask Fausto for a tip",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "FACS",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  712,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "REBH",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  246926,
+                                               "HighId":  246926,
+                                               "Name":  "Heavy Bio Mesh",
+                                               "Quality":  10
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "EMBL",
+        "Name":  "Light Bio Mesh tip",
+        "QasInstance":  920183,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Ask Fausto for a tip",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "FACS",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  713,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "REBL",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  246925,
+                                               "HighId":  246925,
+                                               "Name":  "Light Bio Mesh",
+                                               "Quality":  10
+                                           }
+                                       ]
+                                   ]
+                   }
     }
 ]
