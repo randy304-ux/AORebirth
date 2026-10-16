@@ -47,6 +47,15 @@ namespace ZoneEngine_New.Core.Mobs
         public int Chance { get; set; }
 
         public int LevelMod { get; set; }
+
+        /// <summary>
+        /// When <see cref="CountMax"/> is greater than zero, this row ignores chance and instead adds a
+        /// uniform random count of items in [<see cref="CountMin"/>, <see cref="CountMax"/>]. Each item
+        /// is its own quality roll of <see cref="Hash"/>.
+        /// </summary>
+        public int CountMin { get; set; }
+
+        public int CountMax { get; set; }
     }
 
     /// <summary>

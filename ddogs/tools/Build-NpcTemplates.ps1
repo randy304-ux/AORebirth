@@ -383,6 +383,8 @@ foreach ($nf in $npcSnap.Keys) {
 & "$PSScriptRoot\Build-Appearance.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Live-only fixes no other builder makes (fleas/waste collector looks, etc.): Build-AreteLiveFixes.ps1. Runs after Build-Appearance.ps1.
 & "$PSScriptRoot\Build-AreteLiveFixes.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Dyna boss loot last, so a full rebuild puts the 5-7 band tables back after the Arete chain.
+& "$PSScriptRoot\Build-DynaLoot.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 
 # Keep live placement and hand data on content NPCs: Position/Rotation (moved in game), SpawnHash (Apply-PlaceholderCleanup.ps1) and vendor stock.
 foreach ($nf in $npcSnap.Keys) {

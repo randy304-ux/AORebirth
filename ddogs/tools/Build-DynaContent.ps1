@@ -2,7 +2,7 @@
 # Boss and adds are hash spawns so the boss LootTable is copied onto the corpse. PlayfieldContent NPCs do not get that table.
 # Positions: guide x,z. Y is the nearest client spawn in that playfield. ContentProvenance.Guessed=true.
 # The dyna color buff is not implemented. Boss HP is 4x the rescaled donor, respawn 20 min; adds respawn in 3 min.
-# Rare loot is only what the guide names for dynas in general (Nullity Sphere, MK II, Empty Data Receptacle). No camp weapon was invented.
+# Boss loot is applied by Build-DynaLoot.ps1 (5 to 7 items from that level band). Adds keep the common family table below.
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
 $ErrorActionPreference = 'Stop'
 $u = [Text.UTF8Encoding]::new($false)
@@ -231,3 +231,4 @@ foreach ($id in $byPf.Keys) {
   }
 }
 "dyna templatesNew=$($made.Count) bossGroups=$($bossHash.Count) addGroups=$($addHash.Count) spawnsAdded=$added outsideMap=$far"
+& "$PSScriptRoot\Build-DynaLoot.ps1" -GameData $GameData

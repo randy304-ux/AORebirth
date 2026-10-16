@@ -533,7 +533,9 @@ namespace ZoneEngine_New.Core.GameData
                         Hash = entry.Hash,
                         Repeats = entry.Repeats,
                         Chance = entry.Chance,
-                        LevelMod = entry.LevelMod
+                        LevelMod = entry.LevelMod,
+                        CountMin = entry.CountMin,
+                        CountMax = entry.CountMax
                     });
             }
 

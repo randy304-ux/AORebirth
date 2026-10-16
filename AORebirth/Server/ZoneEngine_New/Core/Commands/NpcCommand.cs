@@ -379,11 +379,13 @@ namespace ZoneEngine_New.Core.Commands
                 lines.Add(
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        "  itemTable[{0}] hash={1} repeats={2} chance={3} levelMod={4}",
+                        table.CountMax > 0
+                            ? "  itemTable[{0}] hash={1} count={2}-{3} levelMod={4}"
+                            : "  itemTable[{0}] hash={1} repeats={2} chance={3} levelMod={4}",
                         i,
                         table.Hash,
-                        table.Repeats,
-                        table.Chance,
+                        table.CountMax > 0 ? table.CountMin : table.Repeats,
+                        table.CountMax > 0 ? table.CountMax : table.Chance,
                         table.LevelMod));
             }
 
@@ -552,10 +554,12 @@ namespace ZoneEngine_New.Core.Commands
                 rows.Add(
                     string.Format(
                         CultureInfo.InvariantCulture,
-                        "{0} Chance {1}% x{2} levelMod={3}",
+                        entry.CountMax > 0
+                            ? "{0} count {1}-{2} levelMod={3}"
+                            : "{0} Chance {1}% x{2} levelMod={3}",
                         entry.Hash.Replace('"', '\''),
-                        entry.Chance,
-                        entry.Repeats,
+                        entry.CountMax > 0 ? entry.CountMin : entry.Chance,
+                        entry.CountMax > 0 ? entry.CountMax : entry.Repeats,
                         entry.LevelMod));
 
                 instances.Clear();

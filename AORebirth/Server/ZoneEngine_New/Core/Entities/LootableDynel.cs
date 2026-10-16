@@ -89,6 +89,7 @@ namespace ZoneEngine_New.Core.Entities
         /// <summary>
         /// One corpse's loot roll: every item table row is tried Repeats times at its Chance, each hit rolls a quality
         /// around <paramref name="level"/> and spawns its hash's items, until <paramref name="capacity"/> items.
+        /// A row with CountMax set instead adds a random count in [CountMin, CountMax], one quality roll per item.
         /// Appends template ids and quality to <paramref name="into"/>; builds no items (GM loot simulation uses it too).
         /// </summary>
         public static void RollItemTable(
@@ -107,7 +108,18 @@ namespace ZoneEngine_New.Core.Entities
             var spawned = new List<(int LowId, int HighId, int Quality)>();
             foreach (MobItemTableEntry entry in itemTable)
             {
-                if (entry == null || string.IsNullOrEmpty(entry.Hash) || entry.Repeats <= 0)
+                if (entry == null || string.IsNullOrEmpty(entry.Hash))
+                    continue;
+
+                if (entry.CountMax > 0)
+                {
+                    RollCounted(entry, level, minter, capacity, start, into, spawned);
+                    if (into.Count - start >= capacity)
+                        return;
+                    continue;
+                }
+
+                if (entry.Repeats <= 0)
                     continue;
 
                 for (int repeat = 0; repeat < entry.Repeats; repeat++)
@@ -126,6 +138,43 @@ namespace ZoneEngine_New.Core.Entities
                             return;
                         into.Add(spawned[i]);
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds a uniform random number of items from one hash. A quality that matches nothing is re-rolled,
+        /// so a pool that covers the boss window still fills the count.
+        /// </summary>
+        static void RollCounted(
+            MobItemTableEntry entry,
+            int level,
+            HashItemMinter minter,
+            int capacity,
+            int start,
+            List<(int LowId, int HighId, int Quality)> into,
+            List<(int LowId, int HighId, int Quality)> spawned)
+        {
+            int minCount = entry.CountMin > 0 ? entry.CountMin : 1;
+            int maxCount = entry.CountMax;
+            if (minCount > maxCount)
+                minCount = maxCount;
+
+            int count = LootRandom.Next(minCount, maxCount + 1);
+            for (int n = 0; n < count; n++)
+            {
+                if (into.Count - start >= capacity)
+                    return;
+
+                for (int attempt = 0; attempt < 16; attempt++)
+                {
+                    spawned.Clear();
+                    minter.RollSpawnIds(entry.Hash, RollQuality(level, entry.LevelMod), spawned);
+                    if (spawned.Count == 0)
+                        continue;
+
+                    into.Add(spawned[0]);
+                    break;
                 }
             }
         }
