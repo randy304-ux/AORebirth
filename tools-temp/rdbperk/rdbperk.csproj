@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AODB"><HintPath>I:\AO\cache\nuget\aodb\1.0.12\lib\netstandard2.1\AODB.dll</HintPath></Reference>
+    <Reference Include="AODB.Common"><HintPath>I:\AO\cache\nuget\aodb\1.0.12\lib\netstandard2.1\AODB.Common.dll</HintPath></Reference>
+  </ItemGroup>
+</Project>
+

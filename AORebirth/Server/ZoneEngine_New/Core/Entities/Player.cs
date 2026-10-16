@@ -451,6 +451,98 @@ namespace ZoneEngine_New.Core.Entities
             return true;
         }
 
+        public ResearchCatalog ResearchCatalog { get; init; } = ResearchCatalog.Default;
+
+        // Research state lives in base stats (persisted with the others). GUESS: the client's own meaning of these
+        // stats is not confirmed; PersonalResearchGoal = active research perk (next tier), PersonalResearchLevel =
+        // research XP banked toward it, GlobalResearchGoal = percent of earned XP diverted to research.
+        public int ActiveResearchPerk => Stats.GetOrZero(CharacterStat.PersonalResearchGoal);
+        public int ResearchXp => Stats.GetOrZero(CharacterStat.PersonalResearchLevel);
+        public int ResearchPercent => Math.Clamp(Stats.GetOrZero(CharacterStat.GlobalResearchGoal), 0, 100);
+
+        /// <summary>Next untrained tier of <paramref name="line"/>, or 0 when the line is finished.</summary>
+        public int NextResearchTier(ResearchCatalog.Line line)
+            => line.PerkIds.FirstOrDefault(id => !TrainedPerks.Contains(id));
+
+        /// <summary>Why <paramref name="perkId"/> cannot be researched now, or null when it can.</summary>
+        public string? ResearchBlocker(int perkId)
+        {
+            if (!ResearchCatalog.TryGetLine(perkId, out ResearchCatalog.Line line))
+                return "not a personal research perk";
+            if (TrainedPerks.Contains(perkId))
+                return "already researched";
+            if (!ResearchCatalog.AllowsProfession(line, Stats.GetOrZero(CharacterStat.Profession)))
+                return "not a line for your profession";
+            if (PerkCatalog.TryGetPreviousId(perkId, out int previousId) && previousId != 0 && !TrainedPerks.Contains(previousId))
+                return "previous tier not researched";
+            if (!PerkCatalog.TryGetItemId(perkId, out int itemId))
+                return "no perk item";
+            try
+            {
+                if (!_items.CreateTemplate(itemId, itemId, quality: 1).MeetsActionRequirements(stat => Stats.Get(stat), ActionType.ToWear, ResolvePerkRequirement))
+                    return "requirements not met (level cap)";
+            }
+            catch (Exception)
+            {
+                return "no perk item template";
+            }
+            return null;
+        }
+
+        public void SetResearch(int perkId, int? percent = null)
+        {
+            if (perkId != ActiveResearchPerk)
+                Stats.Set(CharacterStat.PersonalResearchLevel, 0, StatDetail.Base, dirty: true);
+            Stats.Set(CharacterStat.PersonalResearchGoal, perkId, StatDetail.Base, dirty: true);
+            if (percent.HasValue)
+                Stats.Set(CharacterStat.GlobalResearchGoal, Math.Clamp(percent.Value, 0, 100), StatDetail.Base, dirty: true);
+            FlushDirtyStats();
+        }
+
+        /// <summary>
+        /// Banks research XP on the active line and trains each finished tier (moving on to the next tier of the same
+        /// line). Overflow carries to the next tier. Returns the perks completed.
+        /// </summary>
+        public List<int> AddResearchXp(long amount)
+        {
+            var done = new List<int>();
+            int perkId = ActiveResearchPerk;
+            if (amount <= 0 || perkId == 0)
+                return done;
+            long banked = Math.Max(0, ResearchXp) + amount;
+            while (perkId != 0)
+            {
+                long cost = ResearchCatalog.CostOf(perkId);
+                if (cost <= 0 || banked < cost || ResearchBlocker(perkId) != null)
+                    break;
+                banked -= cost;
+                TrainedPerks.Add(perkId);
+                done.Add(perkId);
+                perkId = ResearchCatalog.TryGetLine(perkId, out ResearchCatalog.Line line) ? NextResearchTier(line) : 0;
+                if (perkId != 0 && ResearchBlocker(perkId) != null)
+                {
+                    // Capped by level: keep researching this tier, the XP waits.
+                }
+            }
+            Stats.Set(CharacterStat.PersonalResearchGoal, perkId, StatDetail.Base, dirty: true);
+            Stats.Set(CharacterStat.PersonalResearchLevel, (int)Math.Min(int.MaxValue, banked), StatDetail.Base, dirty: true);
+            if (done.Count > 0)
+                OnTrainedPerksChanged(null);
+            FlushDirtyStats();
+            return done;
+        }
+
+        /// <summary>GM: researches <paramref name="perkId"/> outright (still needs the previous tier).</summary>
+        public bool ForceResearch(int perkId)
+        {
+            if (!ResearchCatalog.IsResearch(perkId) || TrainedPerks.Contains(perkId))
+                return false;
+            if (PerkCatalog.TryGetPreviousId(perkId, out int previousId) && previousId != 0 && !TrainedPerks.Contains(previousId))
+                return false;
+            TrainedPerks.Add(perkId);
+            OnTrainedPerksChanged(null);
+            return true;
+        }
         /// <summary>
         /// One perk untrain (reset) per two hours: the client's perk reset timer is hard coded to 7200 seconds
         /// (GUI.dll 0x10060d7e).

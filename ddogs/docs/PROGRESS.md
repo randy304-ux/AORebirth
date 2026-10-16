@@ -185,3 +185,14 @@ Greedy Desert Reet GRDS: Shiny Sword (297289) drops 8% from Desert Reets DERT an
 Gnarl the Roller YBSH: L7, WSSC rollerrat loot, scale 170, 4x HP, Wander, 900 s. Hash and level GUESSED.
 Faction area names (no quests, NoCombat, human mesh 26092): OIUR x7 ICC Peacekeeper, CPPS/CSPE Clan Protester, ONGA x4 Omni-Pol Guard, LUSN x4 + KLHG x2 + DART Omni-AF Private, OMCN Omni-AF Officer Milne, ODDD Omni-Trans Equipment Vendor (mesh 250380, no stock), CSPT x2 Clan Unit Sentinel, CAGD Clan Guard Elina Jones, FDCS Field Commander Ericson, VAHE Vanguard Henri Zure; HEZU removed (same spot as VAHE). All mappings GUESSED by code letters. Ericson/Milne faction quests NOT built.
 Market: FACS Logistics Manager Fausto, MJUY Robotic Guard Dog (mesh 17720), LEMY Leonora Marty, FMXT Furniture Merchant, FPBY Food Provider, CGSA Cyrus Cervenak, SPAU/SLPW Tasty Chocolates!/Romantic Flowers! signs, BBOC Credit Card: CCS1 bit 708 steal 15000 cr / CCR1 bit 709 return to Leonora -> 2080 xp + Vacuum Packed Omni-Med Suit 297054. Mappings GUESSED; no shop stock. Not placed (no confident pink): Tabitha Ginsberg, Jacinto, Wilda Dartt, Emile Western, Herschel Musco, Mario Schmeisser.
+
+## LE personal research (2026-10-16)
+Real (confirmed):
+- 98 profession lines + 10 general lines (Apotheosis etc.), 10 tiers each, from client perk records (type 1000036, flag 0x40). Research XP per tier comes from the client's own Field18: 50k, 450k, 1.6M, 4.7M, 12.75M, 32M, 54M, 64M, 740M, 900M (general lines 100M). Profession filter is Field6 (bit 1<<profession), checked against Doctor/Trader/Shade/Keeper lines. Data: GameData/ResearchCosts.json (tool: tools-temp/rdbperk).
+- A share of earned XP (after the normal 10%/20% grant cap) goes to the active line, as AO-Universe describes (slider for XP to research). A finished tier is trained as a perk (its skills/actions apply via the normal perk path), and research moves on to the next tier of the same line. Per-tier level cap = the perk item's own ToWear requirements; extra XP waits in the bank.
+GUESSES:
+- The client research window protocol (ResearchRequest 0x3115534d has no known fields; ResearchUpdate entries are Unknown1-3) is NOT wired. Use `.research` instead. Picking a line in the window does nothing yet.
+- Stat storage: PersonalResearchGoal(265)=active perk id, PersonalResearchLevel(263)=banked research XP, GlobalResearchGoal(266)=XP percent. The client may read these differently.
+- Default share is 50% when you first pick a line. SK (Shadowlands) split is not done, only XP.
+- Global research (vehicles, Global Advantage, 0x80 lines) is not done. On live it's finished anyway.
+- Research perks are not given the research value in the FullCharacter perk map (sent as 0).

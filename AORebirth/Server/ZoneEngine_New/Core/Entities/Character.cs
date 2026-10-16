@@ -426,6 +426,17 @@ namespace ZoneEngine_New.Core.Entities
                     amount = cap;
             }
 
+            // LE research: the allocated share of the (capped) grant goes to the active research line instead.
+            if (this is Player researcher && researcher.ActiveResearchPerk != 0 && researcher.ResearchPercent > 0)
+            {
+                int share = (int)((long)amount * researcher.ResearchPercent / 100);
+                if (share > 0)
+                {
+                    amount -= share;
+                    OnResearchXp(researcher, share);
+                }
+            }
+
             int levelBefore = level;
             int xp = Stats.GetOrZero(CharacterStat.XP) + amount;
             while (level < MaxXpLevel
@@ -452,6 +463,19 @@ namespace ZoneEngine_New.Core.Entities
             {
                 // Preserve each award's XP delta when several rewards arrive before the next tick.
                 FlushDirtyStats();
+            }
+        }
+
+        static void OnResearchXp(Player player, int share)
+        {
+            List<int> done = player.AddResearchXp(share);
+            if (player.Session == null)
+                return;
+            foreach (int perkId in done)
+            {
+                string name = player.ResearchCatalog.TryGetLine(perkId, out ResearchCatalog.Line line) ? line.Name : perkId.ToString(CultureInfo.InvariantCulture);
+                int tier = Array.IndexOf(line?.PerkIds ?? [], perkId) + 1;
+                Commands.GmCommandFeedback.Send(player.Session!, player, string.Format(CultureInfo.InvariantCulture, "Research complete: {0} {1}.", name, tier));
             }
         }
 
