@@ -72,6 +72,8 @@ namespace ZoneEngine_New.Core.Entities
 
         // Live DeathRespawn action parameters (CharacterAction 0xAB).
         const int DeathRespawnActionParameter1 = 1000020;
+        public const int AreteLandingPlayfield = 6553;
+        public static readonly float[] AreteLandingReclaim = { 3609f, 52.3f, 786.2f };
         const int DeathRespawnActionParameter2 = 295830;
 
         bool _respawnPending;
@@ -492,8 +494,7 @@ namespace ZoneEngine_New.Core.Entities
 
         public void SetResearch(int perkId, int? percent = null)
         {
-            if (perkId != ActiveResearchPerk)
-                Stats.Set(ResearchXpStat, 0, StatDetail.Base);
+            // Banked XP is kept across line changes (the client re-sends 265 whenever the window opens).
             Stats.Set(CharacterStat.PersonalResearchGoal, perkId, StatDetail.Base, dirty: true);
             if (percent.HasValue)
                 Stats.Set(CharacterStat.PersonalResearchLevel, Math.Clamp(percent.Value, 0, 100), StatDetail.Base, dirty: true);
@@ -1168,13 +1169,20 @@ namespace ZoneEngine_New.Core.Entities
                 throw new InvalidOperationException("No respawn destination is configured.");
 
             Vector3 landing = new Vector3(respawn.Position[0], respawn.Position[1], respawn.Position[2]);
+            int respawnPf = respawn.PlayfieldId;
+            // Arete Landing deaths reclaim on Arete Landing (start deck; real reclaim terminal coords are a guess).
+            if (playfield.Identity.Instance == AreteLandingPlayfield)
+            {
+                respawnPf = AreteLandingPlayfield;
+                landing = new Vector3(AreteLandingReclaim[0], AreteLandingReclaim[1], AreteLandingReclaim[2]);
+            }
 
             // Never build the respawn playfield on this tick: stay dead while it builds in the background, and
             // respawn once it is ready.
             PlayfieldManager manager = playfield.GetRequiredService<PlayfieldManager>();
-            if (playfield.Identity.Instance != respawn.PlayfieldId && !manager.TryGet(respawn.PlayfieldId, out _))
+            if (playfield.Identity.Instance != respawnPf && !manager.TryGet(respawnPf, out _))
             {
-                bool queued = manager.WithPlayfield(respawn.PlayfieldId, this, _ =>
+                bool queued = manager.WithPlayfield(respawnPf, this, _ =>
                 {
                     if (IsDead && Playfield != null)
                         TryRespawn();
@@ -1192,7 +1200,7 @@ namespace ZoneEngine_New.Core.Entities
 
             // In-zone respawn: observers in range keep the dead copy unless it is despawned, and they only show the
             // fresh spawn when it comes on a later tick than the despawn. Despawn now, respawn next tick.
-            if (playfield.Identity.Instance == respawn.PlayfieldId && !_respawnObserversCleared)
+            if (playfield.Identity.Instance == respawnPf && !_respawnObserversCleared)
             {
                 playfield.GetRequiredService<PlayfieldLocality>().DespawnForObservers(this);
                 _respawnObserversCleared = true;
@@ -1212,9 +1220,9 @@ namespace ZoneEngine_New.Core.Entities
                     landing.xf,
                     landing.yf,
                     landing.zf,
-                    respawn.PlayfieldId));
+                    respawnPf));
 
-            if (playfield.Identity.Instance == respawn.PlayfieldId)
+            if (playfield.Identity.Instance == respawnPf)
             {
                 playfield.GetRequiredService<SpawnService>().CompleteSamePlayfieldDeathRespawn(this, landing);
                 return;
@@ -1227,7 +1235,7 @@ namespace ZoneEngine_New.Core.Entities
             Stats.Set(CharacterStat.ExternalPlayfieldInstance, 0, StatDetail.Base, dirty: true);
             Stats.Set(CharacterStat.ExternalDoorInstance, 0, StatDetail.Base, dirty: true);
 
-            using PlayfieldAdmission destinationAdmission = manager.AcquirePlayfield(respawn.PlayfieldId);
+            using PlayfieldAdmission destinationAdmission = manager.AcquirePlayfield(respawnPf);
             Playfield destination = destinationAdmission.Playfield;
             if (Session != null)
             {

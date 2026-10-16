@@ -35,7 +35,7 @@ namespace ZoneEngine_New.Core.Commands
         public int RequiredGmLevel => GmLevel;
 
         public string Usage =>
-            ".tp <x> <z> <playfieldId> or .tp <x> <y> <z> <playfieldId> (look-at player if selected) | .tp summon <character name> | .tp to <character name>";
+            ".tp arete | .tp <x> <z> <playfieldId> or .tp <x> <y> <z> <playfieldId> (look-at player if selected) | .tp summon <character name> | .tp to <character name>";
 
         public string Topic => "travel";
 
@@ -57,13 +57,17 @@ namespace ZoneEngine_New.Core.Commands
                 return;
             }
 
-            bool hasExplicitY = context.Args.Length >= 4;
+            string[] args = context.Args;
+            if (args.Length == 1 && string.Equals(args[0], "arete", StringComparison.OrdinalIgnoreCase))
+                args = new[] { "3609", "52.3", "786.2", "6553" };
+
+            bool hasExplicitY = args.Length >= 4;
             int zIndex = hasExplicitY ? 2 : 1;
             int playfieldIndex = hasExplicitY ? 3 : 2;
-            if (context.Args.Length < 3
-                || !float.TryParse(context.Args[0], NumberStyles.Float, CultureInfo.InvariantCulture, out float x)
-                || !float.TryParse(context.Args[zIndex], NumberStyles.Float, CultureInfo.InvariantCulture, out float z)
-                || !int.TryParse(context.Args[playfieldIndex], NumberStyles.Integer, CultureInfo.InvariantCulture, out int playfieldId)
+            if (args.Length < 3
+                || !float.TryParse(args[0], NumberStyles.Float, CultureInfo.InvariantCulture, out float x)
+                || !float.TryParse(args[zIndex], NumberStyles.Float, CultureInfo.InvariantCulture, out float z)
+                || !int.TryParse(args[playfieldIndex], NumberStyles.Integer, CultureInfo.InvariantCulture, out int playfieldId)
                 || playfieldId <= 0)
             {
                 GmCommandFeedback.Send(context.Session, context.Player, "Usage: " + Usage);
@@ -98,7 +102,7 @@ namespace ZoneEngine_New.Core.Commands
 
             float y = subject.Position.yf;
             if (hasExplicitY
-                && !float.TryParse(context.Args[1], NumberStyles.Float, CultureInfo.InvariantCulture, out y))
+                && !float.TryParse(args[1], NumberStyles.Float, CultureInfo.InvariantCulture, out y))
             {
                 GmCommandFeedback.Send(context.Session, context.Player, "Usage: " + Usage);
                 return;

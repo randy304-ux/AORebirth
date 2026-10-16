@@ -210,3 +210,11 @@ GUESSES:
 - Fleas: the 310 scale in old notes had been reset to 100/160 by a later regenerate; set regular 300, Mutated 400, Fleas Dyna base 300 (then x1.5+ as a dyna). Exact sizes GUESSED.
 - Dyna modifiers (athenpaladins t=2166): any band with ContentProvenance.CampKey "boss|..." or a DynaModifier field gets one modifier (named or random each spawn): Chemical/Cold/Energy/Fire/Poison/Radiation = DamageType + AC(level*10) + 25 reflect of that type; Crit (tan, +50 crit, fast init, size x1.6); Shield (orange, all-type damage shield level/2, size x1.4); Big (yellow, 3x HP, +3*level damage, 2x attack delay, half run speed, x1.3). All dynas x1.5 size first.
 - Aura GUESS: no client aura id found. Sent as EffectType=1 + EffectRed/Green/Blue stats (StatMessage right after spawn). If no glow shows, try `.set EffectType <n>` on a targeted dyna (GM 100) to find the value. Initiative debuff on targets not done; reflect/shield only work if combat honours those stats.
+
+## 2026-10-16 01:30 - Arete wildlife, research bank, Arete reclaim
+- Saltworm (XUDP): model changed to giant sandworm 226557 at scale 60, HP set to 1248 (3x the curve), Side 3 and BreedHostility 1 so it aggroes. GUESS: whether it shows teal, and whether scale 60 is the right size.
+- Angry Minibull (WTSO): HP 216 (L8) / 416 (L13). Harvey (REGD): HP 876. Both now Side 3 / BreedHostility 1. They were Side 0, which is neutral and never aggroes. Mesh 30360 is still the "minibull" record from the RDB; the invisible model is not explained yet.
+- Fleas (VUFL/FCTO/JNME/IEGA, dynas D011/D017): model changed from 17657 "flea" to 275710 "flea mutant", scale 100/130/120. GUESS: the 17657 mesh renders tiny no matter what Scale is.
+- Research: changing the line no longer wipes banked XP. The client re-sends 265 when the window opens, and that was resetting the bank to 0. Overflow already carried over between tiers; it waits in the bank when the next tier is level-capped.
+- Death respawn: dying on PF 6553 now respawns on Arete Landing at 3609,52.3,786.2. GUESS: these are the start-deck coords, not the real reclaim terminal. Everywhere else still uses Respawn.json (Bor 800).
+- .tp arete takes you to that point.
