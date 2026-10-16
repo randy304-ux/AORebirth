@@ -685,6 +685,21 @@ namespace ZoneEngine_New.Core.Entities
                 || (value >= 'a' && value <= 'z')
                 || (value >= '0' && value <= '9');
 
+        /// <summary>Worn armor (not weapons) adds its stats, like a player's (hired mercs).</summary>
+        public bool WearsArmorStats { get; set; }
+
+        /// <summary>
+        /// Puts one more item on (armor, clothing or a held prop) at <paramref name="quality"/>; call <see cref="Rebase"/>
+        /// afterwards so the look (and, with <see cref="WearsArmorStats"/>, the stats) update.
+        /// </summary>
+        public bool WearExtra(int lowId, int highId, int quality, IZoneLogger? logger = null)
+        {
+            if (lowId <= 0)
+                return false;
+            Item item = _items.CreateWithNewInstance(lowId, highId > 0 ? highId : lowId, Math.Max(1, quality), ItemSource.Other);
+            return TryAddEquipment(item, logger);
+        }
+
         public override void Rebase()
         {
             RebaseStats();
@@ -700,7 +715,8 @@ namespace ZoneEngine_New.Core.Entities
             Stats.ClearBonuses(dirty: true);
             foreach (KeyValuePair<int, Item> slot in Equipment.EnumerateSlots())
             {
-                if (slot.Value.Definition?.Name?.Contains("lootgiver", StringComparison.OrdinalIgnoreCase) == true)
+                if (slot.Value.Definition?.Name?.Contains("lootgiver", StringComparison.OrdinalIgnoreCase) == true
+                    || (WearsArmorStats && !_combatWeaponSlots.Contains(slot.Key) && !IsVisualWeapon(slot.Value)))
                     WearBonusApplier.ApplyItem(slot.Value, includeWield: false, Stats);
             }
 
@@ -756,7 +772,7 @@ namespace ZoneEngine_New.Core.Entities
         void ArmMonsterWeapons()
         {
             int armed = 0;
-            Item? rangeSource = VisualRightHand;
+            Item? rangeSource = VisualRightHand != null && IsRealWeapon(VisualRightHand) ? VisualRightHand : null;
             foreach (KeyValuePair<int, Item> slot in Equipment.EnumerateSlots())
             {
                 if (armed >= MaxNpcCombatWeapons)
@@ -776,8 +792,12 @@ namespace ZoneEngine_New.Core.Entities
             }
         }
 
-        static bool IsVisualWeapon(Item item)
+        static bool IsRealWeapon(Item item)
             => (item.GetWeaponFlags() & (WeaponFlags.Melee | WeaponFlags.Ranged)) != 0;
+
+        /// <summary>Drawn in the hand: real weapons, and held props with a weapon mesh (protest placards).</summary>
+        static bool IsVisualWeapon(Item item)
+            => IsRealWeapon(item) || StatCollection.Normalize(item.GetStat(CharacterStat.WeaponMesh)) > 0;
 
         const int RightHandMeshPosition = 1;
         const int LeftHandMeshPosition = 2;

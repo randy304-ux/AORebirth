@@ -1,82 +1,183 @@
 namespace ZoneEngine_New.Core.Pets
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.IO;
     using System.Text.Json;
 
     /// <summary>
-    /// Dungeon Dogs hired mercenaries: pet-based companions a player hires from a recruiter NPC (Knubot
-    /// <c>{hiremerc KIND}</c> / <c>{dismissmercs}</c>). A merc is an ordinary player pet (in memory only, never saved),
-    /// so it follows, fights for its owner, goes with it through zone changes, and is gone on logout or owner death.
-    /// One merc per profession; each profession has its own pet slot so mercs do not replace the player's own pets,
-    /// except the Doctor, which uses the heal slot so the pet AI heals its owner. GameData/Mercs.json "Enabled" toggles hiring.
+    /// Dungeon Dogs hired mercenaries: pet-based companions a player hires from a Mercenary Contracts terminal (Knubot
+    /// <c>{hiremerc KIND}</c> / <c>{dismissmerc KIND}</c> / <c>{dismissmercs}</c>) or with <c>.merc</c>. A merc is a player pet
+    /// in its own pet slot (10 and up), so it never replaces the player's own pets. Contracts are saved on the character
+    /// (server-only stat <see cref="ContractsStat"/>, one bit per profession): a merc that dies, or whose owner dies or logs
+    /// off, comes back beside its owner with full health after <see cref="Catalog.ReviveSeconds"/>, and on the next login.
+    /// Professions are fixed here (key, hash, slot); levels, looks, heals, nanos and armor come from GameData
+    /// (NpcTemplates MR** and Mercs.json, both written by ddogs/tools/Build-Mercs.ps1).
     /// </summary>
     public static class Mercs
     {
-        public sealed record Kind(string Key, string Hash, string Title, int PetType);
+        /// <summary>Server-only character stat: bit <c>Kind.Bit</c> set while that contract is active.</summary>
+        public const SmokeLounge.AOtomation.Messaging.GameData.CharacterStat ContractsStat =
+            (SmokeLounge.AOtomation.Messaging.GameData.CharacterStat)10280;
+
+        public sealed record Kind(string Key, string Hash, string Title, int Profession, int Slot, int Bit)
+        {
+            public int PetType => (Slot * 1000) + 1;
+        }
 
         public static readonly Kind[] Kinds =
         [
-            new("doctor", "MRDR", "Doctor", PetTypes.Heal),
-            new("enforcer", "MREN", "Enforcer", 10001),
-            new("soldier", "MRSO", "Soldier", 11001),
-            new("keeper", "MRKE", "Keeper", 12001),
+            new("enforcer", "MREN", "Enforcer", 9, 10, 0),
+            new("soldier", "MRSO", "Soldier", 1, 11, 1),
+            new("keeper", "MRKE", "Keeper", 14, 12, 2),
+            new("doctor", "MRDR", "Doctor", 10, 13, 3),
+            new("adventurer", "MRAD", "Adventurer", 6, 14, 4),
+            new("agent", "MRAG", "Agent", 5, 15, 5),
+            new("bureaucrat", "MRBU", "Bureaucrat", 8, 16, 6),
+            new("engineer", "MREG", "Engineer", 3, 17, 7),
+            new("fixer", "MRFI", "Fixer", 4, 18, 8),
+            new("martialartist", "MRMA", "Martial Artist", 2, 19, 9),
+            new("metaphysicist", "MRMP", "Metaphysicist", 12, 20, 10),
+            new("nanotechnician", "MRNT", "Nano-Technician", 11, 21, 11),
+            new("shade", "MRSH", "Shade", 15, 22, 12),
+            new("trader", "MRTR", "Trader", 7, 23, 13),
         ];
+
+        static readonly Dictionary<string, string> Aliases = new(StringComparer.OrdinalIgnoreCase)
+        {
+            ["enf"] = "enforcer", ["sol"] = "soldier", ["doc"] = "doctor", ["adv"] = "adventurer", ["crat"] = "bureaucrat",
+            ["engi"] = "engineer", ["eng"] = "engineer", ["ma"] = "martialartist", ["martial"] = "martialartist",
+            ["mp"] = "metaphysicist", ["meta"] = "metaphysicist", ["nt"] = "nanotechnician", ["nano"] = "nanotechnician",
+            ["keep"] = "keeper", ["fix"] = "fixer"
+        };
 
         public static Kind? Find(string key)
         {
+            if (string.IsNullOrWhiteSpace(key))
+                return null;
+            string k = key.Trim().Replace("-", string.Empty).Replace(" ", string.Empty);
+            if (Aliases.TryGetValue(k, out string? full))
+                k = full;
             foreach (Kind kind in Kinds)
             {
-                if (string.Equals(kind.Key, key, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(kind.Key, k, StringComparison.OrdinalIgnoreCase))
                     return kind;
             }
 
             return null;
         }
 
-        public static bool IsMercHash(string? hash)
+        public static Kind? ByHash(string? hash)
         {
             foreach (Kind kind in Kinds)
             {
                 if (string.Equals(kind.Hash, hash, StringComparison.OrdinalIgnoreCase))
-                    return true;
+                    return kind;
             }
 
-            return false;
+            return null;
         }
 
-        /// <summary>Doctor heal nanos by merc level (Minor Healing, Healing, Improved Healing, Superior Healing).</summary>
-        public static IReadOnlyList<int> NanosFor(string hash, int level)
-        {
-            if (!string.Equals(hash, "MRDR", StringComparison.OrdinalIgnoreCase))
-                return [];
+        public static bool IsMercHash(string? hash) => ByHash(hash) != null;
 
-            return level switch
-            {
-                < 25 => [26465],
-                < 75 => [26466],
-                < 150 => [28665],
-                _ => [28676]
-            };
+        public sealed class ArmorTier
+        {
+            public int MinLevel { get; set; }
+            public List<List<int>> Items { get; set; } = new();
+            /// <summary>Omni owners (Side 2) wear these instead when set (Chosen); others wear Items (Faithful).</summary>
+            public List<List<int>>? OmniItems { get; set; }
         }
 
-        /// <summary>GameData/Mercs.json { "Enabled": false } turns hiring off. Missing file: enabled.</summary>
-        public static bool Enabled(string gameDataRoot)
+        public sealed class NanoBand
         {
+            public int MinLevel { get; set; }
+            public List<int> Nanos { get; set; } = new();
+        }
+
+        public sealed class Profession
+        {
+            public bool Heals { get; set; }
+            public List<NanoBand> Nanos { get; set; } = new();
+            public List<ArmorTier> Armor { get; set; } = new();
+        }
+
+        public sealed class Catalog
+        {
+            public bool Enabled { get; set; } = true;
+            public int ReviveSeconds { get; set; } = 10;
+            public bool ArmorStats { get; set; } = true;
+            public Dictionary<string, Profession> Professions { get; set; } = new(StringComparer.OrdinalIgnoreCase);
+
+            public Profession? For(Kind kind) => Professions.TryGetValue(kind.Key, out Profession? p) ? p : null;
+        }
+
+        static readonly ConcurrentDictionary<string, (DateTime Stamp, Catalog Catalog)> Cache = new(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>GameData/Mercs.json, re-read when the file changes. Missing or broken file: enabled, no extras.</summary>
+        public static Catalog Load(string gameDataRoot)
+        {
+            string path = Path.Combine(gameDataRoot, "Mercs.json");
             try
             {
-                string path = Path.Combine(gameDataRoot, "Mercs.json");
                 if (!File.Exists(path))
-                    return true;
-
-                using JsonDocument doc = JsonDocument.Parse(File.ReadAllText(path));
-                return !doc.RootElement.TryGetProperty("Enabled", out JsonElement value) || value.ValueKind != JsonValueKind.False;
+                    return new Catalog();
+                DateTime stamp = File.GetLastWriteTimeUtc(path);
+                if (Cache.TryGetValue(path, out var hit) && hit.Stamp == stamp)
+                    return hit.Catalog;
+                Catalog loaded = JsonSerializer.Deserialize<Catalog>(File.ReadAllText(path),
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new Catalog();
+                loaded.Professions = new Dictionary<string, Profession>(loaded.Professions ?? new(), StringComparer.OrdinalIgnoreCase);
+                Cache[path] = (stamp, loaded);
+                return loaded;
             }
             catch
             {
-                return true;
+                return new Catalog();
             }
+        }
+
+        public static bool Enabled(string gameDataRoot) => Load(gameDataRoot).Enabled;
+
+        /// <summary>Nanos the merc uploads at <paramref name="level"/> (the highest band at or below it).</summary>
+        public static IReadOnlyList<int> NanosFor(string gameDataRoot, string hash, int level)
+        {
+            Kind? kind = ByHash(hash);
+            Profession? prof = kind == null ? null : Load(gameDataRoot).For(kind);
+            if (prof == null)
+                return [];
+            NanoBand? best = null;
+            foreach (NanoBand band in prof.Nanos)
+            {
+                if (band.MinLevel <= level && (best == null || band.MinLevel > best.MinLevel))
+                    best = band;
+            }
+
+            return best?.Nanos ?? [];
+        }
+
+        /// <summary>Armor pieces (low/high item id pairs) for this merc level and owner side.</summary>
+        public static IReadOnlyList<List<int>> ArmorFor(string gameDataRoot, Kind kind, int level, int ownerSide)
+        {
+            Profession? prof = Load(gameDataRoot).For(kind);
+            if (prof == null)
+                return [];
+            ArmorTier? best = null;
+            foreach (ArmorTier tier in prof.Armor)
+            {
+                if (tier.MinLevel <= level && (best == null || tier.MinLevel > best.MinLevel))
+                    best = tier;
+            }
+
+            if (best == null)
+                return [];
+            return ownerSide == 2 && best.OmniItems is { Count: > 0 } omni ? omni : best.Items;
+        }
+
+        public static bool Heals(string gameDataRoot, string? hash)
+        {
+            Kind? kind = ByHash(hash);
+            return kind != null && Load(gameDataRoot).For(kind)?.Heals == true;
         }
     }
 }

@@ -261,9 +261,36 @@ namespace ZoneEngine_New.Core.Ai
                 pet.EndHeal();
             }
 
-            return healPet ? pet.Owner : null;
+            return healPet || pet.Heals ? NeediestCharge(brain) : null;
         }
 
+        /// <summary>A healer looks after its owner and the owner's other pets (mercs) within this range of itself.</summary>
+        public const double HealCoverMeters = 30.0;
+
+        /// <summary>
+        /// The most hurt of the owner and the owner's other living pets nearby; the owner when nobody is hurt. A heal pet
+        /// or healer merc so keeps the whole party up, not just its owner.
+        /// </summary>
+        static Character NeediestCharge(NpcBrain brain)
+        {
+            PetController pet = brain.Pet!;
+            Character owner = pet.Owner;
+            Character best = owner;
+            int bestPct = owner.IsDead ? 101 : HealthPercent(owner);
+            foreach (NpcCharacter other in owner.OwnedPets.All)
+            {
+                if (other.IsDead || !ReferenceEquals(other.Playfield, brain.Npc.Playfield) || Distance(other, brain.Npc) > HealCoverMeters)
+                    continue;
+                int pct = HealthPercent(other);
+                if (pct < bestPct)
+                {
+                    best = other;
+                    bestPct = pct;
+                }
+            }
+
+            return best;
+        }
         public static int HealthPercent(Character character)
         {
             int max = character.Stats.GetOrZero(CharacterStat.MaxHealth);

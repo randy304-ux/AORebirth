@@ -1,0 +1,426 @@
+{
+    "Notes":  "Mercenary Contracts terminal (Build-Mercs.ps1). Hires any of the 14 professions; contracts are saved per character.",
+    "Npcs":  [
+                 "ddogs-merc-terminal",
+                 "ddogs-merc-strike"
+             ],
+    "Openers":  [
+                    {
+                        "Say":  "hello"
+                    }
+                ],
+    "Replies":  {
+                    "hire":  {
+                                 "Text":  "Show me the contracts.",
+                                 "Goto":  "hire"
+                             },
+                    "end":  {
+                                "Text":  "End a contract.",
+                                "Goto":  "end"
+                            },
+                    "how":  {
+                                "Text":  "How do contracts work?",
+                                "Goto":  "how"
+                            },
+                    "back":  {
+                                 "Text":  "Back.",
+                                 "Goto":  "hello"
+                             },
+                    "h_enforcer":  {
+                                       "Text":  "Hire an Enforcer.",
+                                       "Goto":  "h_enforcer"
+                                   },
+                    "e_enforcer":  {
+                                       "Text":  "End my Enforcer contract.",
+                                       "Goto":  "e_enforcer"
+                                   },
+                    "h_soldier":  {
+                                      "Text":  "Hire a Soldier.",
+                                      "Goto":  "h_soldier"
+                                  },
+                    "e_soldier":  {
+                                      "Text":  "End my Soldier contract.",
+                                      "Goto":  "e_soldier"
+                                  },
+                    "h_keeper":  {
+                                     "Text":  "Hire a Keeper.",
+                                     "Goto":  "h_keeper"
+                                 },
+                    "e_keeper":  {
+                                     "Text":  "End my Keeper contract.",
+                                     "Goto":  "e_keeper"
+                                 },
+                    "h_doctor":  {
+                                     "Text":  "Hire a Doctor.",
+                                     "Goto":  "h_doctor"
+                                 },
+                    "e_doctor":  {
+                                     "Text":  "End my Doctor contract.",
+                                     "Goto":  "e_doctor"
+                                 },
+                    "h_adventurer":  {
+                                         "Text":  "Hire an Adventurer.",
+                                         "Goto":  "h_adventurer"
+                                     },
+                    "e_adventurer":  {
+                                         "Text":  "End my Adventurer contract.",
+                                         "Goto":  "e_adventurer"
+                                     },
+                    "h_agent":  {
+                                    "Text":  "Hire an Agent.",
+                                    "Goto":  "h_agent"
+                                },
+                    "e_agent":  {
+                                    "Text":  "End my Agent contract.",
+                                    "Goto":  "e_agent"
+                                },
+                    "h_bureaucrat":  {
+                                         "Text":  "Hire a Bureaucrat.",
+                                         "Goto":  "h_bureaucrat"
+                                     },
+                    "e_bureaucrat":  {
+                                         "Text":  "End my Bureaucrat contract.",
+                                         "Goto":  "e_bureaucrat"
+                                     },
+                    "h_engineer":  {
+                                       "Text":  "Hire an Engineer.",
+                                       "Goto":  "h_engineer"
+                                   },
+                    "e_engineer":  {
+                                       "Text":  "End my Engineer contract.",
+                                       "Goto":  "e_engineer"
+                                   },
+                    "h_fixer":  {
+                                    "Text":  "Hire a Fixer.",
+                                    "Goto":  "h_fixer"
+                                },
+                    "e_fixer":  {
+                                    "Text":  "End my Fixer contract.",
+                                    "Goto":  "e_fixer"
+                                },
+                    "h_martialartist":  {
+                                            "Text":  "Hire a Martial Artist.",
+                                            "Goto":  "h_martialartist"
+                                        },
+                    "e_martialartist":  {
+                                            "Text":  "End my Martial Artist contract.",
+                                            "Goto":  "e_martialartist"
+                                        },
+                    "h_metaphysicist":  {
+                                            "Text":  "Hire a Metaphysicist.",
+                                            "Goto":  "h_metaphysicist"
+                                        },
+                    "e_metaphysicist":  {
+                                            "Text":  "End my Metaphysicist contract.",
+                                            "Goto":  "e_metaphysicist"
+                                        },
+                    "h_nanotechnician":  {
+                                             "Text":  "Hire a Nano-Technician.",
+                                             "Goto":  "h_nanotechnician"
+                                         },
+                    "e_nanotechnician":  {
+                                             "Text":  "End my Nano-Technician contract.",
+                                             "Goto":  "e_nanotechnician"
+                                         },
+                    "h_shade":  {
+                                    "Text":  "Hire a Shade.",
+                                    "Goto":  "h_shade"
+                                },
+                    "e_shade":  {
+                                    "Text":  "End my Shade contract.",
+                                    "Goto":  "e_shade"
+                                },
+                    "h_trader":  {
+                                     "Text":  "Hire a Trader.",
+                                     "Goto":  "h_trader"
+                                 },
+                    "e_trader":  {
+                                     "Text":  "End my Trader contract.",
+                                     "Goto":  "e_trader"
+                                 },
+                    "endall":  {
+                                   "Text":  "End every contract.",
+                                   "Goto":  "endall"
+                               }
+                },
+    "Lines":  {
+                  "hello":  {
+                                "Text":  "MERCENARY CONTRACTS. All fourteen professions available. Contracts are free for now. One of each profession per client.",
+                                "Replies":  [
+                                                "hire",
+                                                "end",
+                                                "how"
+                                            ]
+                            },
+                  "busy":  {
+                               "Text":  "Contract could not be filed right now. Try again in a moment.",
+                               "Replies":  [
+                                               "back"
+                                           ]
+                           },
+                  "how":  {
+                              "Text":  "Each contract puts one mercenary of that profession at your side, at your level, in armor for your level (Jobe, then Tier 1, 2 and 3). Use the pet window or /pet to give orders. A fallen mercenary is back beside you in 10 seconds, and contracts stay signed when you log off. Healers (Doctor, Adventurer, Metaphysicist) look after you and your other mercenaries. Type .merc in chat to see your contracts.",
+                              "Replies":  [
+                                              "hire",
+                                              "end"
+                                          ]
+                          },
+                  "endall":  {
+                                 "Text":  "{dismissmercs}All contracts ended.",
+                                 "Replies":  [
+                                                 "back"
+                                             ]
+                             },
+                  "h_enforcer":  {
+                                     "Text":  "{hiremerc enforcer}Contract signed. Your Enforcer is on the way.",
+                                     "Fail":  "busy",
+                                     "Replies":  [
+                                                     "hire",
+                                                     "back"
+                                                 ]
+                                 },
+                  "e_enforcer":  {
+                                     "Text":  "{dismissmerc enforcer}Your Enforcer contract has ended.",
+                                     "Replies":  [
+                                                     "end",
+                                                     "back"
+                                                 ]
+                                 },
+                  "h_soldier":  {
+                                    "Text":  "{hiremerc soldier}Contract signed. Your Soldier is on the way.",
+                                    "Fail":  "busy",
+                                    "Replies":  [
+                                                    "hire",
+                                                    "back"
+                                                ]
+                                },
+                  "e_soldier":  {
+                                    "Text":  "{dismissmerc soldier}Your Soldier contract has ended.",
+                                    "Replies":  [
+                                                    "end",
+                                                    "back"
+                                                ]
+                                },
+                  "h_keeper":  {
+                                   "Text":  "{hiremerc keeper}Contract signed. Your Keeper is on the way.",
+                                   "Fail":  "busy",
+                                   "Replies":  [
+                                                   "hire",
+                                                   "back"
+                                               ]
+                               },
+                  "e_keeper":  {
+                                   "Text":  "{dismissmerc keeper}Your Keeper contract has ended.",
+                                   "Replies":  [
+                                                   "end",
+                                                   "back"
+                                               ]
+                               },
+                  "h_doctor":  {
+                                   "Text":  "{hiremerc doctor}Contract signed. Your Doctor is on the way.",
+                                   "Fail":  "busy",
+                                   "Replies":  [
+                                                   "hire",
+                                                   "back"
+                                               ]
+                               },
+                  "e_doctor":  {
+                                   "Text":  "{dismissmerc doctor}Your Doctor contract has ended.",
+                                   "Replies":  [
+                                                   "end",
+                                                   "back"
+                                               ]
+                               },
+                  "h_adventurer":  {
+                                       "Text":  "{hiremerc adventurer}Contract signed. Your Adventurer is on the way.",
+                                       "Fail":  "busy",
+                                       "Replies":  [
+                                                       "hire",
+                                                       "back"
+                                                   ]
+                                   },
+                  "e_adventurer":  {
+                                       "Text":  "{dismissmerc adventurer}Your Adventurer contract has ended.",
+                                       "Replies":  [
+                                                       "end",
+                                                       "back"
+                                                   ]
+                                   },
+                  "h_agent":  {
+                                  "Text":  "{hiremerc agent}Contract signed. Your Agent is on the way.",
+                                  "Fail":  "busy",
+                                  "Replies":  [
+                                                  "hire",
+                                                  "back"
+                                              ]
+                              },
+                  "e_agent":  {
+                                  "Text":  "{dismissmerc agent}Your Agent contract has ended.",
+                                  "Replies":  [
+                                                  "end",
+                                                  "back"
+                                              ]
+                              },
+                  "h_bureaucrat":  {
+                                       "Text":  "{hiremerc bureaucrat}Contract signed. Your Bureaucrat is on the way.",
+                                       "Fail":  "busy",
+                                       "Replies":  [
+                                                       "hire",
+                                                       "back"
+                                                   ]
+                                   },
+                  "e_bureaucrat":  {
+                                       "Text":  "{dismissmerc bureaucrat}Your Bureaucrat contract has ended.",
+                                       "Replies":  [
+                                                       "end",
+                                                       "back"
+                                                   ]
+                                   },
+                  "h_engineer":  {
+                                     "Text":  "{hiremerc engineer}Contract signed. Your Engineer is on the way.",
+                                     "Fail":  "busy",
+                                     "Replies":  [
+                                                     "hire",
+                                                     "back"
+                                                 ]
+                                 },
+                  "e_engineer":  {
+                                     "Text":  "{dismissmerc engineer}Your Engineer contract has ended.",
+                                     "Replies":  [
+                                                     "end",
+                                                     "back"
+                                                 ]
+                                 },
+                  "h_fixer":  {
+                                  "Text":  "{hiremerc fixer}Contract signed. Your Fixer is on the way.",
+                                  "Fail":  "busy",
+                                  "Replies":  [
+                                                  "hire",
+                                                  "back"
+                                              ]
+                              },
+                  "e_fixer":  {
+                                  "Text":  "{dismissmerc fixer}Your Fixer contract has ended.",
+                                  "Replies":  [
+                                                  "end",
+                                                  "back"
+                                              ]
+                              },
+                  "h_martialartist":  {
+                                          "Text":  "{hiremerc martialartist}Contract signed. Your Martial Artist is on the way.",
+                                          "Fail":  "busy",
+                                          "Replies":  [
+                                                          "hire",
+                                                          "back"
+                                                      ]
+                                      },
+                  "e_martialartist":  {
+                                          "Text":  "{dismissmerc martialartist}Your Martial Artist contract has ended.",
+                                          "Replies":  [
+                                                          "end",
+                                                          "back"
+                                                      ]
+                                      },
+                  "h_metaphysicist":  {
+                                          "Text":  "{hiremerc metaphysicist}Contract signed. Your Metaphysicist is on the way.",
+                                          "Fail":  "busy",
+                                          "Replies":  [
+                                                          "hire",
+                                                          "back"
+                                                      ]
+                                      },
+                  "e_metaphysicist":  {
+                                          "Text":  "{dismissmerc metaphysicist}Your Metaphysicist contract has ended.",
+                                          "Replies":  [
+                                                          "end",
+                                                          "back"
+                                                      ]
+                                      },
+                  "h_nanotechnician":  {
+                                           "Text":  "{hiremerc nanotechnician}Contract signed. Your Nano-Technician is on the way.",
+                                           "Fail":  "busy",
+                                           "Replies":  [
+                                                           "hire",
+                                                           "back"
+                                                       ]
+                                       },
+                  "e_nanotechnician":  {
+                                           "Text":  "{dismissmerc nanotechnician}Your Nano-Technician contract has ended.",
+                                           "Replies":  [
+                                                           "end",
+                                                           "back"
+                                                       ]
+                                       },
+                  "h_shade":  {
+                                  "Text":  "{hiremerc shade}Contract signed. Your Shade is on the way.",
+                                  "Fail":  "busy",
+                                  "Replies":  [
+                                                  "hire",
+                                                  "back"
+                                              ]
+                              },
+                  "e_shade":  {
+                                  "Text":  "{dismissmerc shade}Your Shade contract has ended.",
+                                  "Replies":  [
+                                                  "end",
+                                                  "back"
+                                              ]
+                              },
+                  "h_trader":  {
+                                   "Text":  "{hiremerc trader}Contract signed. Your Trader is on the way.",
+                                   "Fail":  "busy",
+                                   "Replies":  [
+                                                   "hire",
+                                                   "back"
+                                               ]
+                               },
+                  "e_trader":  {
+                                   "Text":  "{dismissmerc trader}Your Trader contract has ended.",
+                                   "Replies":  [
+                                                   "end",
+                                                   "back"
+                                               ]
+                               },
+                  "hire":  {
+                               "Text":  "Available contracts:",
+                               "Replies":  [
+                                               "h_enforcer",
+                                               "h_soldier",
+                                               "h_keeper",
+                                               "h_doctor",
+                                               "h_adventurer",
+                                               "h_agent",
+                                               "h_bureaucrat",
+                                               "h_engineer",
+                                               "h_fixer",
+                                               "h_martialartist",
+                                               "h_metaphysicist",
+                                               "h_nanotechnician",
+                                               "h_shade",
+                                               "h_trader",
+                                               "back"
+                                           ]
+                           },
+                  "end":  {
+                              "Text":  "Which contract do you want to end?",
+                              "Replies":  [
+                                              "e_enforcer",
+                                              "e_soldier",
+                                              "e_keeper",
+                                              "e_doctor",
+                                              "e_adventurer",
+                                              "e_agent",
+                                              "e_bureaucrat",
+                                              "e_engineer",
+                                              "e_fixer",
+                                              "e_martialartist",
+                                              "e_metaphysicist",
+                                              "e_nanotechnician",
+                                              "e_shade",
+                                              "e_trader",
+                                              "endall",
+                                              "back"
+                                          ]
+                          }
+              }
+}

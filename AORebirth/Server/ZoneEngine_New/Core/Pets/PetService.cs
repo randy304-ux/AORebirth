@@ -108,8 +108,12 @@ namespace ZoneEngine_New.Core.Pets
                     npc.Stats.Set(CharacterStat.PetType, type);
                     npc.Stats.Set(CharacterStat.Side, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base));
                     MatchOwnerRunSpeed(npc, owner);
+                    int petLevel = level > 0 ? level : npc.Stats.GetOrOne(CharacterStat.Level);
+                    controller.Heals = IsHealPet(type) || Mercs.Heals(_gameData.RootPath, hash);
                     npc.BindPet(controller);
-                    npc.UploadedNanoIds.AddRange(Mercs.NanosFor(hash, level > 0 ? level : npc.Stats.GetOrOne(CharacterStat.Level)));
+                    npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, hash, petLevel));
+                    if (Mercs.ByHash(hash) is Mercs.Kind mercKind)
+                        DressMerc(npc, mercKind, petLevel, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base));
                     if (healthPercent is > 0 and < 100)
                     {
                         int max = npc.Stats.GetOrZero(CharacterStat.MaxHealth);
@@ -154,7 +158,123 @@ namespace ZoneEngine_New.Core.Pets
             if (!MercsEnabled || owner.IsDead || !ReferenceEquals(owner.Playfield, _playfield))
                 return null;
 
-            return Spawn(owner, kind.Hash, kind.PetType, Math.Clamp(level, 1, 220), null, PetMode.Guard, 100, 100, []);
+            owner.OwnedPets.MercReviveUtc.Remove(kind.Key);
+            NpcCharacter? merc = Spawn(owner, kind.Hash, kind.PetType, Math.Clamp(level, 1, 220), null, PetMode.Guard, 100, 100, []);
+            if (merc != null)
+                SetContract(owner, kind, true);
+            return merc;
+        }
+
+        /// <summary>Ends one merc contract and sends that merc home; false when there was no such contract or merc.</summary>
+        public bool DismissMerc(Player owner, Mercs.Kind kind)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            ArgumentNullException.ThrowIfNull(kind);
+            bool had = HasContract(owner, kind);
+            SetContract(owner, kind, false);
+            owner.OwnedPets.MercReviveUtc.Remove(kind.Key);
+            owner.OwnedPets.Stash.RemoveAll(stash => string.Equals(stash.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase));
+            foreach (NpcCharacter pet in owner.OwnedPets.All.ToArray())
+            {
+                if (pet.Pet != null && string.Equals(pet.Pet.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase))
+                {
+                    Dismiss(pet, "merc dismissed");
+                    had = true;
+                }
+            }
+
+            return had;
+        }
+
+        public static bool HasContract(Player owner, Mercs.Kind kind)
+            => (owner.Stats.GetOrZero(Mercs.ContractsStat, StatDetail.Base) & (1 << kind.Bit)) != 0;
+
+        static void SetContract(Player owner, Mercs.Kind kind, bool on)
+        {
+            int bits = owner.Stats.GetOrZero(Mercs.ContractsStat, StatDetail.Base);
+            int next = on ? bits | (1 << kind.Bit) : bits & ~(1 << kind.Bit);
+            if (next != bits)
+            {
+                owner.Stats.Set(Mercs.ContractsStat, next, StatDetail.Base);
+                owner.SaveState.MarkDirty();
+            }
+        }
+
+        /// <summary>Tier armor for the merc's level (Mercs.json), worn for looks and, with ArmorStats, its stats too.</summary>
+        void DressMerc(NpcCharacter npc, Mercs.Kind kind, int level, int ownerSide)
+        {
+            Mercs.Catalog catalog = Mercs.Load(_gameData.RootPath);
+            npc.WearsArmorStats = catalog.ArmorStats;
+            int worn = 0;
+            foreach (List<int> pair in Mercs.ArmorFor(_gameData.RootPath, kind, level, ownerSide))
+            {
+                if (pair == null || pair.Count == 0)
+                    continue;
+                if (npc.WearExtra(pair[0], pair.Count > 1 ? pair[1] : pair[0], level, _logger))
+                    worn++;
+            }
+
+            npc.Rebase();
+            int max = npc.Stats.GetOrZero(CharacterStat.MaxHealth);
+            if (max > 0)
+                npc.Stats.Set(CharacterStat.Health, max);
+            int maxNano = npc.Stats.GetOrZero(CharacterStat.MaxNanoEnergy);
+            if (maxNano > 0)
+                npc.Stats.Set(CharacterStat.CurrentNano, maxNano);
+            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc dressed hash={0} level={1} side={2} pieces={3}",
+                kind.Hash, level, ownerSide, worn));
+        }
+
+        /// <summary>
+        /// Brings back every contracted merc the owner is missing: on login, after the owner's or the merc's death
+        /// (once its revive time is up), and after a zone change that lost it. Runs about once a second per player.
+        /// </summary>
+        public void TickMercs(Player owner)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            int bits = owner.Stats.GetOrZero(Mercs.ContractsStat, StatDetail.Base);
+            if (bits == 0)
+                return;
+            DateTime now = DateTime.UtcNow;
+            OwnedPets roster = owner.OwnedPets;
+            if (now < roster.MercCheckUtc)
+                return;
+            roster.MercCheckUtc = now.AddSeconds(1);
+            if (owner.IsDead || owner.ZoneReconnectPending || !ReferenceEquals(owner.Playfield, _playfield) || !MercsEnabled
+                || roster.Stash.Count > 0)
+                return;
+
+            int level = owner.Stats.GetOrOne(CharacterStat.Level);
+            foreach (Mercs.Kind kind in Mercs.Kinds)
+            {
+                if ((bits & (1 << kind.Bit)) == 0)
+                    continue;
+                if (roster.MercReviveUtc.TryGetValue(kind.Key, out DateTime due) && now < due)
+                    continue;
+                bool present = false;
+                foreach (NpcCharacter pet in roster.All)
+                {
+                    if (pet.Pet != null && !pet.IsDead && string.Equals(pet.Pet.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase))
+                    {
+                        present = true;
+                        break;
+                    }
+                }
+
+                if (present)
+                    continue;
+                roster.MercReviveUtc.Remove(kind.Key);
+                if (Spawn(owner, kind.Hash, kind.PetType, Math.Clamp(level, 1, 220), null, PetMode.Guard, 100, 100, []) != null)
+                    _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc returned hash={0} owner={1}", kind.Hash, owner.Identity.Instance));
+            }
+        }
+
+        void ScheduleMercRevive(Character owner, PetController controller)
+        {
+            if (owner is not Player || Mercs.ByHash(controller.Hash) is not Mercs.Kind kind)
+                return;
+            int seconds = Math.Max(0, Mercs.Load(_gameData.RootPath).ReviveSeconds);
+            owner.OwnedPets.MercReviveUtc[kind.Key] = DateTime.UtcNow.AddSeconds(seconds);
         }
 
         /// <summary>Dismisses every merc <paramref name="owner"/> has; returns how many.</summary>
@@ -172,6 +292,12 @@ namespace ZoneEngine_New.Core.Pets
             }
 
             owner.OwnedPets.Stash.RemoveAll(stash => Mercs.IsMercHash(stash.Hash));
+            owner.OwnedPets.MercReviveUtc.Clear();
+            if (owner.Stats.GetOrZero(Mercs.ContractsStat, StatDetail.Base) != 0)
+            {
+                owner.Stats.Set(Mercs.ContractsStat, 0, StatDetail.Base);
+                owner.SaveState.MarkDirty();
+            }
             return count;
         }
         /// <summary>Removes a pet from the world and from its owner.</summary>
@@ -183,6 +309,8 @@ namespace ZoneEngine_New.Core.Pets
                 return;
 
             Character owner = controller.Owner;
+            if (reason != "merc dismissed" && reason != "replaced")
+                ScheduleMercRevive(owner, controller);
             bool owned = owner.OwnedPets.Remove(pet);
             pet.Brain?.StopPathing();
             if (pet.Playfield != null)
@@ -220,6 +348,7 @@ namespace ZoneEngine_New.Core.Pets
                 return;
 
             Character owner = controller.Owner;
+            ScheduleMercRevive(owner, controller);
             if (owner.OwnedPets.Remove(pet))
             {
                 PublishPetsStat(owner);

@@ -69,6 +69,12 @@ namespace ZoneEngine_New.Core.Pets
 
         public bool IsPlayerPet => Owner is Player;
 
+        /// <summary>A hired mercenary (Mercs.cs).</summary>
+        public bool IsMerc => Mercs.IsMercHash(Hash);
+
+        /// <summary>Heals like a heal pet (heal-slot pets and healer mercs): looks after its owner and the owner's other pets.</summary>
+        public bool Heals { get; internal set; }
+
         /// <summary>Set when the pet cannot follow its owner on foot; it rejoins the owner on the next tick.</summary>
         internal bool WarpRequested { get; set; }
 
@@ -126,6 +132,11 @@ namespace ZoneEngine_New.Core.Pets
     /// <summary>The pets a character owns, one per pet slot, in summon order (which is also their formation order).</summary>
     public sealed class OwnedPets
     {
+        /// <summary>Merc profession key -> when it may come back (after it or its owner died, or the owner left).</summary>
+        public Dictionary<string, DateTime> MercReviveUtc { get; } = new(StringComparer.OrdinalIgnoreCase);
+
+        internal DateTime MercCheckUtc;
+
         readonly List<NpcCharacter> _pets = new();
         readonly List<PetStash> _stash = new();
 

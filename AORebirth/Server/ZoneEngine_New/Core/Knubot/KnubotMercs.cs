@@ -29,3 +29,14 @@ public sealed record KnubotDismissMercs : KnubotEffect
     public override void Apply(KnubotContext context, KnubotEffectServices services)
         => context.Player.Playfield?.GetService<PetService>()?.DismissMercs(context.Player);
 }
+/// <summary><c>{dismissmerc KIND}</c>: ends one merc contract and sends that merc home.</summary>
+public sealed record KnubotDismissMerc(string Kind) : KnubotEffect
+{
+    public override bool Check(KnubotContext context, KnubotPlan plan, KnubotEffectServices services) => Mercs.Find(Kind) != null;
+
+    public override void Apply(KnubotContext context, KnubotEffectServices services)
+    {
+        if (Mercs.Find(Kind) is { } kind)
+            context.Player.Playfield?.GetService<PetService>()?.DismissMerc(context.Player, kind);
+    }
+}

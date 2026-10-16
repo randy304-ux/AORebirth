@@ -191,11 +191,21 @@ public static class KnubotParser
                 case "hiremerc":
                     if (words.Length != 2 || ZoneEngine_New.Core.Pets.Mercs.Find(words[1]) == null)
                     {
-                        errors.Add("expected {hiremerc doctor|enforcer|soldier|keeper}: {" + body + "}");
+                        errors.Add("expected {hiremerc PROFESSION} (see Mercs.Kinds): {" + body + "}");
                         break;
                     }
 
                     Effect(new KnubotHireMerc(words[1]));
+                    break;
+
+                case "dismissmerc":
+                    if (words.Length != 2 || ZoneEngine_New.Core.Pets.Mercs.Find(words[1]) == null)
+                    {
+                        errors.Add("expected {dismissmerc PROFESSION}: {" + body + "}");
+                        break;
+                    }
+
+                    Effect(new KnubotDismissMerc(words[1]));
                     break;
 
                 case "dismissmercs":

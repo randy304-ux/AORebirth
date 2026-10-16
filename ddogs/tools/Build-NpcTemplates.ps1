@@ -359,3 +359,8 @@ $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-N
 & "$PSScriptRoot\Build-DynaContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Insipid Ring actors (Ergo, Long Stare, molokhai): Build-InsipidContent.ps1. Quest text is Build-NewbieQuests.ps1.
 & "$PSScriptRoot\Build-InsipidContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+
+# Mercenary overhaul (14 professions, mobile looks, Mercs.json armor, contract terminals): Build-Mercs.ps1. Runs after the sub-builders above.
+& "$PSScriptRoot\Build-Mercs.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Worn looks (protesters, Cedric, dockworkers): Build-Appearance.ps1. Keep last.
+& "$PSScriptRoot\Build-Appearance.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))

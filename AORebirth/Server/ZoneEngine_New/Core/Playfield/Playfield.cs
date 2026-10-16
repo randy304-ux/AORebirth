@@ -724,6 +724,7 @@ namespace ZoneEngine_New.Core.Playfield
                     if (!ReferenceEquals(player.Playfield, this))
                         continue;
                     _characterSnapshot.CheckpointIfDue(player);
+                    GetService<Pets.PetService>()?.TickMercs(player);
                 }
             }
 
