@@ -27,7 +27,7 @@ $new.WODO = [pscustomobject]@{ Templates = @($w) }
 $new.IESY = [pscustomobject]@{ Templates = @(Obj 'Dockworker' 5 26092 100 'Dockworker by the dock door (Randy screenshot). Hash IESY, borrowed look: guessed') }
 # in-place edits: Mario's car, Saltworm look
 foreach ($t in @($nt.MARC.Templates)) { $t.Stats.'359' = 203157; $t.Stats.'360' = 100; $t | Add-Member -Force NoteProperty Features @('Wander'); Prov $t 'MARC' 'Mario Carles L10 in a white car wandering the desert (AO-Universe #17, Randy). Mesh 203157 yalmaha_executive; spot near 3700,640: guessed' }
-foreach ($t in @($nt.XUDP.Templates)) { $t.Stats.'359' = 205942; $t.Stats.'360' = 220 }
+foreach ($t in @($nt.XUDP.Templates)) { $t.Stats.'359' = 226557; $t.Stats.'360' = 60; $t.Stats.'1' = 1248; $t.Stats.'27' = 1248; $t.Stats.'33' = 3; $t.Stats.'204' = 1; $t.Stats.'455' = 0 }   # giant sandworm, sensible HP, aggro (2026-10-16)
 $nraw = [IO.File]::ReadAllText($npath, $u) -replace "`r`n", "`n"
 $cut = $nraw.IndexOf(",`n    `"GAFR`":")
 if ($cut -ge 0) { $nraw = $nraw.Substring(0, $cut) + "`n}`n" }

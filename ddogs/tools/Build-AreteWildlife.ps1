@@ -19,6 +19,7 @@ function Band($donorKey, $name, $level, $mesh, $scale, $features, $src) {
   $t = Clone ($nt.$donorKey.Templates | Sort-Object Level | Select-Object -Last 1)
   $t.Name = $name; $t.Level = $level; $t.Stats.'54' = $level
   if ($mesh) { $t.Stats.'359' = $mesh }; if ($scale) { $t.Stats.'360' = $scale }
+  $t.Stats.'455' = 0   # NPCFamily 0: non-zero families rendered see-through on RC-LT (2026-10-16, guess)
   if ($features) { $t | Add-Member -Force NoteProperty Features @($features) }
   Prov $t $donorKey $src; $t
 }
@@ -29,12 +30,13 @@ $h = Band 'CRDY' "Dead Specialist - Cha'Heru" 10 247468 100 @('NoCombat','NoMove
 foreach ($t in @($z, $h)) { $t.Stats.'173' = 11; $t.Stats.'174' = 11; $t.Stats.'1' = 1; $t.Stats.'27' = 1 }
 $new.HX1V = [pscustomobject]@{ Templates = @($z) }
 $new.HXHR = [pscustomobject]@{ Templates = @($h) }
-# minibulls
-$m8 = Band 'E03C' 'Angry Minibull' 8 30360 $null $null 'AO-Universe Arete: Angry Minibull (Aggro, Flocks, Level 8-13). Mesh 30360 minibull. Stats scaled from E03C donor'
-$m13 = Band 'E03C' 'Angry Minibull' 13 30360 $null $null 'AO-Universe Arete: Angry Minibull (Aggro, Flocks, Level 8-13)'
+# minibulls: 38387 (solid on RC-LT); 30360 'minibull' renders see-through (its record has flag 0x4000 the others lack)
+$m8 = Band 'E03C' 'Angry Minibull' 8 38387 $null $null 'AO-Universe Arete: Angry Minibull (Aggro, Flocks, Level 8-13). Mesh 30360 minibull. Stats scaled from E03C donor'
+$m13 = Band 'E03C' 'Angry Minibull' 13 38387 $null $null 'AO-Universe Arete: Angry Minibull (Aggro, Flocks, Level 8-13)'
 $new.WTSO = [pscustomobject]@{ Templates = @($m8, $m13) }
-$hv = Band 'E03C' 'Harvey the Bully' 10 30360 125 @('Wander') 'Harvey the Bully L10 aggro dyna (AO forum Arete guide; wiki.aodb.us). Hash REGD (L10, 600 s respawn, near 3700,517) mapping, scale 125 and 2x HP guessed'
-$hv.Stats.'1' = [int]$hv.Stats.'1' * 2; $hv.Stats.'27' = $hv.Stats.'1'
+$hv = Band 'E03C' 'Harvey the Bully' 10 38387 125 @('Wander') 'Harvey the Bully L10 aggro dyna (AO forum Arete guide; wiki.aodb.us). Hash REGD (L10, 600 s respawn, near 3700,517) mapping, scale 125 and 2x HP guessed'
+$hv.Stats.'1' = 876; $hv.Stats.'27' = 876; $m8.Stats.'1' = 216; $m8.Stats.'27' = 216; $m13.Stats.'1' = 416; $m13.Stats.'27' = 416
+foreach ($t in @($m8, $m13, $hv)) { $t.Stats.'33' = 3; $t.Stats.'204' = 1 }   # sensible HP + aggro (2026-10-16)
 $new.REGD = [pscustomobject]@{ Templates = @($hv) }
 $sw = Band 'E03C' 'Saltworm' 13 17712 110 @('Wander') 'Saltworm L13 aggro dyna, wanders around the southern desert lake (AO forum Arete guide; wiki.aodb.us). Hash XUDP (L13, 600 s respawn, 3466,629). Mesh 17712 sandworm, scale and 3x HP guessed'
 $sw.Stats.'1' = [int]$sw.Stats.'1' * 3; $sw.Stats.'27' = $sw.Stats.'1'
