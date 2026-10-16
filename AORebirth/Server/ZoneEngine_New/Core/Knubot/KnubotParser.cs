@@ -10,7 +10,7 @@ using ZoneEngine_New.Core.Inventory;
 /// <summary>
 /// Turns line text into ordered pieces and effects. Tags:
 /// text <c>{name}</c> <c>{npc}</c> <c>{itemref LOW HIGH QL}</c> <c>{emote}…{/emote}</c> <c>{delay SECONDS}</c>;
-/// effects (applied when the text reaches them) <c>{givequest HASH}</c> <c>{completequest HASH}</c> <c>{spawn ITEMHASH QL|level [count]}</c> <c>{shop}</c> <c>{opentrade}</c> <c>{buffmenu}</c>; flow <c>{goto LINE}</c> <c>{close [SECONDS]}</c>.
+/// effects (applied when the text reaches them) <c>{givequest HASH}</c> <c>{completequest HASH}</c> <c>{spawn ITEMHASH QL|level [count]}</c> <c>{shop}</c> <c>{opentrade}</c> <c>{buffmenu}</c> <c>{teleport PF X Y Z}</c>; flow <c>{goto LINE}</c> <c>{close [SECONDS]}</c>.
 /// <c>{{</c> and <c>}}</c> write literal braces. Reply text allows only the text tags without delay.
 /// </summary>
 public static class KnubotParser
@@ -205,6 +205,19 @@ public static class KnubotParser
                 case "shop":
                     Expect(words, 1, 1, body, errors);
                     Effect(new KnubotOpenShop());
+                    break;
+
+                case "teleport":
+                    if (words.Length != 5 || !int.TryParse(words[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out int tpPf) || tpPf <= 0
+                        || !float.TryParse(words[2], NumberStyles.Float, CultureInfo.InvariantCulture, out float tpX)
+                        || !float.TryParse(words[3], NumberStyles.Float, CultureInfo.InvariantCulture, out float tpY)
+                        || !float.TryParse(words[4], NumberStyles.Float, CultureInfo.InvariantCulture, out float tpZ))
+                    {
+                        errors.Add("expected {teleport PF X Y Z}: {" + body + "}");
+                        break;
+                    }
+
+                    Effect(new KnubotTeleport(tpPf, tpX, tpY, tpZ));
                     break;
 
                 case "opentrade":

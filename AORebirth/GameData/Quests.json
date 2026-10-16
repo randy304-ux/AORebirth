@@ -3598,5 +3598,72 @@
                        "Xp":  11266,
                        "Records":  null
                    }
+    },
+    {
+        "Hash":  "FBUD",
+        "Name":  "Help From a Friend",
+        "QasInstance":  920128,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Use the Nano Can: Friendly Buff on a teammate, then tell Karli Cappelleri",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "FBTM",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  663,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RFBD",
+                       "Credits":  2520,
+                       "Xp":  1386,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  36778,
+                                               "HighId":  36780,
+                                               "Name":  "8 - 15 NCU Memory",
+                                               "Quality":  30
+                                           },
+                                           {
+                                               "Id":  36778,
+                                               "HighId":  36780,
+                                               "Name":  "8 - 15 NCU Memory",
+                                               "Quality":  30
+                                           },
+                                           {
+                                               "Id":  36778,
+                                               "HighId":  36780,
+                                               "Name":  "8 - 15 NCU Memory",
+                                               "Quality":  30
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "ZXK1",
+        "Name":  "The Alien Ship",
+        "QasInstance":  920129,
+        "Scope":  "Team",
+        "Action":  "KillOne",
+        "Summary":  "Enter the crashed ship and kill the Alien Spider - Zix in the Alien General\u0027s room",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ZIXK",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  664,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RZK1",
+                       "Credits":  1500,
+                       "Xp":  1500,
+                       "Records":  null
+                   }
     }
 ]

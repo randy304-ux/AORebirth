@@ -1,0 +1,84 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  8009,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:alienship:hatch",
+                     "Provenance":  "ddogs/tools/Build-KarliAlienShip.ps1 (guessed look, cloned from Shipping Manifest Terminal)",
+                     "ContentNpcIdentity":  "SimpleChar:7A0EC002",
+                     "PlayfieldId":  8009,
+                     "InstanceId":  2047787010,
+                     "Name":  "Ship Hatch",
+                     "Position":  [
+                                      40,
+                                      0.5,
+                                      44
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  268964353,
+                                   "1":  724,
+                                   "4":  6,
+                                   "27":  724,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  25,
+                                   "59":  1,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  87,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  279184,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  0
+                                      }
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "SHHT"
+                 }
+             ],
+    "StandaloneShops":  [
+
+                        ]
+}

@@ -2384,6 +2384,104 @@
                      "Presentation":  {
 
                                       }
+                 },
+                 {
+                     "Key":  "ddogs:alienship:karli",
+                     "Provenance":  "ddogs/tools/Build-KarliAlienShip.ps1 (guessed look, cloned from Sarah Greene)",
+                     "ContentNpcIdentity":  "SimpleChar:7A0EC001",
+                     "PlayfieldId":  6553,
+                     "InstanceId":  2047787009,
+                     "Name":  "Karli Cappelleri",
+                     "Position":  [
+                                      3790,
+                                      0.6,
+                                      270
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  279450113,
+                                   "1":  559,
+                                   "4":  1,
+                                   "27":  559,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  20,
+                                   "59":  3,
+                                   "60":  0,
+                                   "64":  40618,
+                                   "89":  1,
+                                   "156":  72,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  295889,
+                                   "360":  99,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  164946
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  164943
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  164945
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  164944
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  164948
+                                      }
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  204942,
+                                        "Layer":  0
+                                    },
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40618,
+                                        "Layer":  4
+                                    },
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  99152,
+                                        "Layer":  2
+                                    },
+                                    {
+                                        "Position":  5,
+                                        "OverrideTextureId":  0,
+                                        "Id":  291500,
+                                        "Layer":  0
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "KRLI"
                  }
              ],
     "StandaloneShops":  [

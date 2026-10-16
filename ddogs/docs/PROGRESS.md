@@ -123,3 +123,16 @@ Guide NPCs are hash templates and NoCombat. RALPH was not moved.
 - Arbitration Drone (RPPI) matches that capture exactly. MonsterData 260229, no head, scale 100, level 100.
 
 ASDM, the guardians, and the other untemplated 7001 bodies were not spawned. Not tested in the client: walking in through the Holo Deck door and back out.
+
+## Karli Cappelleri and the crashed alien ship (Arete 6553) - deployed 2026-10-15 20:40
+
+Backup `I:\AO\backups\cellao_codex_clean-20261015-2035-karli.sql`. ZoneEngine_New built alone (full ao-build blocked by the Account API dotnet PID 76036 locking Built\Debug\AORebirth.Core.dll; Core was not changed). ZoneEngine start 20:40: quests=143 skipped=0, Knubot scripts=68 rejected=0. Ports 7500, 7501, 7012, 8098 listening. Generator: `ddogs/tools/Build-KarliAlienShip.ps1` (rerun after a data re-extract; it also writes the gitignored `Playfields/8009/Spawns.json`). New Knubot tag `{teleport PF X Y Z}`.
+
+Real (AO-Universe Arete Landing #20, AOGalaxy): Karli's dialog lines, quest name Help From a Friend, rewards 2520 credits / 1386 XP / 3x 8-15 NCU Memory, Nano Can: Friendly Buff AOID 301250 (hash FBCN), mob names Alien Spider - Zix, Scout Jaax'Sinuh (ACFJ), Specialist Cha'Heru (CRDY; both existing captured templates).
+
+Guessed, needs PRK screenshots:
+
+- Karli's spot `.tp 3790 0.6 270 6553` (middle of the Zix spawns, not inside a ship) and look (Sarah Greene's female body).
+- No alien-ship door exists in the 6553 client dynels and nothing in 6553 links to 8009. The way in is talking to Karli ("Get me into the ship"); the way out is a "Ship Hatch" terminal-look NPC in 8009 at 40, 0.5, 44 that puts you back beside Karli.
+- Interior is playfield 8009 "Crashed Alien Ship" (84 m outdoor map with one client spawn, YZWI, still pink). Not a random-room instance and not per team. Spawns added: 2 Zix, 2 Jaax, 2 Cha'Heru, Alien General (new ALGN: Cha'Heru mesh 251772 at scale 140, L14, 3x HP) and the target Zix (new ZIXK, L12, scale 130, 60 s respawn), all at y 0.5 around 50-62, 40-64; heights not checked.
+- Solo quest FBUD (bit 663): using the can on a teammate does not complete it; you tell Karli you did. Team quest ZXK1 "The Alien Ship" (bit 664, Scope Team, KillOne ZIXK): reward 1500 credits / 1500 XP invented (guide lists none). NCU chips are id 36778/36780 at QL 30.

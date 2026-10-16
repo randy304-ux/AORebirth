@@ -68616,5 +68616,161 @@
     "BQWR": {"Templates":[{"Name":"Basic Quality Weaponsdealer","Level":180,"Stats":{"0":271061505,"1":17841,"4":1,"27":17841,"33":0,"47":1,"54":180,"59":2,"64":40694,"89":1,"156":448,"359":26092,"360":119,"455":0,"466":0,"673":31},"HasHeadMesh":true,"Equipment":[],"Features":["NoCombat"]}],"ContentProvenance":{"Guessed":false,"Source":"docs/accepted/npc/delmus/NpcTemplate.json recorded template."}},
     "BTMV": {"Templates":[{"Name":"Basic Tools Merchant","Level":180,"Stats":{"0":271061505,"1":17841,"4":2,"27":17841,"33":0,"47":1,"54":180,"59":3,"64":40209,"89":1,"156":448,"359":26137,"360":119,"455":0,"466":0,"673":31},"HasHeadMesh":true,"Equipment":[],"Features":["NoCombat"]}],"ContentProvenance":{"Guessed":false,"Source":"docs/accepted/npc/delmus/NpcTemplate.json recorded template."}},
     "CSBI": {"Templates":[{"Name":"Container Supplier","Level":180,"Stats":{"0":271061505,"1":17841,"4":1,"27":17841,"33":0,"47":1,"54":180,"59":3,"64":40634,"89":1,"156":448,"359":26082,"360":119,"455":0,"466":0,"673":31},"HasHeadMesh":true,"Equipment":[],"Features":["NoCombat"]}],"ContentProvenance":{"Guessed":false,"Source":"docs/accepted/npc/delmus/NpcTemplate.json recorded template."}},
-    "TAIL": {"Templates":[{"Name":"Tailor","Level":180,"Stats":{"0":271061505,"1":17841,"4":1,"27":17841,"33":0,"47":1,"54":180,"59":3,"64":40635,"89":1,"156":448,"359":26076,"360":119,"455":0,"466":0,"673":31},"HasHeadMesh":true,"Equipment":[],"Features":["NoCombat"]}],"ContentProvenance":{"Guessed":false,"Source":"docs/accepted/npc/delmus/NpcTemplate.json recorded template."}}
+    "TAIL": {"Templates":[{"Name":"Tailor","Level":180,"Stats":{"0":271061505,"1":17841,"4":1,"27":17841,"33":0,"47":1,"54":180,"59":3,"64":40635,"89":1,"156":448,"359":26076,"360":119,"455":0,"466":0,"673":31},"HasHeadMesh":true,"Equipment":[],"Features":["NoCombat"]}],"ContentProvenance":{"Guessed":false,"Source":"docs/accepted/npc/delmus/NpcTemplate.json recorded template."}},
+    "ALGN": {
+    "Templates":  [
+                      {
+                          "Name":  "Alien General",
+                          "Level":  14,
+                          "Stats":  {
+                                        "0":  268964353,
+                                        "1":  3024,
+                                        "4":  6,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  3024,
+                                        "33":  3,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  14,
+                                        "59":  4,
+                                        "60":  15,
+                                        "89":  41,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  5,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  20,
+                                        "286":  6,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  251772,
+                                        "360":  140,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  220,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  0,
+                                        "61":  130
+                                    },
+                          "LootTable":  [
+                                            {
+                                                "Hash":  "CMTR",
+                                                "Repeats":  1,
+                                                "Chance":  40,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "CMHK",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "OFAB",
+                                                "Repeats":  1,
+                                                "Chance":  1,
+                                                "LevelMod":  0
+                                            }
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "CRDY",
+                                                    "Source":  "AO-Universe Arete #20 lists Alien General (level ?). Specialist Cha-Heru mesh 251772 scaled 140, level 14, 3x HP"
+                                                }
+                      }
+                  ]
+},
+    "ZIXK": {
+    "Templates":  [
+                      {
+                          "Name":  "Alien Spider - Zix",
+                          "Level":  12,
+                          "Stats":  {
+                                        "0":  268964353,
+                                        "1":  37,
+                                        "4":  6,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  37,
+                                        "33":  3,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  12,
+                                        "59":  4,
+                                        "60":  15,
+                                        "89":  1,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  5,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  3,
+                                        "286":  1,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  247728,
+                                        "360":  130,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  220,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  0,
+                                        "61":  40
+                                    },
+                          "LootTable":  [
+                                            {
+                                                "Hash":  "CMTR",
+                                                "Repeats":  1,
+                                                "Chance":  40,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "CMHK",
+                                                "Repeats":  1,
+                                                "Chance":  8,
+                                                "LevelMod":  20
+                                            },
+                                            {
+                                                "Hash":  "OFAB",
+                                                "Repeats":  1,
+                                                "Chance":  1,
+                                                "LevelMod":  0
+                                            }
+                                        ],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "ZIXI",
+                                                    "Source":  "Team mission target: the Zix in the Alien General room (AO-Universe Arete #20). Level 12 and scale guessed"
+                                                }
+                      }
+                  ]
+}
 }
