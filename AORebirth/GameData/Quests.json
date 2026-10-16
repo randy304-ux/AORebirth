@@ -3665,5 +3665,81 @@
                        "Xp":  1500,
                        "Records":  null
                    }
+    },
+    {
+        "Hash":  "SPA1",
+        "Name":  "Acquiring the robot parts (Alvin)",
+        "QasInstance":  920170,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Bring Alvin Odeleder the eight robot parts",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ALOD",
+                          "SpecItem":  "SPP1",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  700,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RSA1",
+                       "Credits":  0,
+                       "Xp":  5000,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  158000,
+                                               "HighId":  158000,
+                                               "Name":  "Pads of Interest",
+                                               "Quality":  30
+                                           },
+                                           {
+                                               "Id":  155722,
+                                               "HighId":  155722,
+                                               "Name":  "Alvin\u0027s Card I",
+                                               "Quality":  30
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "SPC1",
+        "Name":  "Acquiring the robot parts (Dodga)",
+        "QasInstance":  920171,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Bring Dodga Demercel the eight robot parts",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "DODE",
+                          "SpecItem":  "SPP1",
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  701,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RSC1",
+                       "Credits":  0,
+                       "Xp":  5000,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  158087,
+                                               "HighId":  158087,
+                                               "Name":  "Clan Shoulderpads for the Suspicious",
+                                               "Quality":  30
+                                           },
+                                           {
+                                               "Id":  156950,
+                                               "HighId":  156950,
+                                               "Name":  "Dodga\u0027s Card I",
+                                               "Quality":  30
+                                           }
+                                       ]
+                                   ]
+                   }
     }
 ]

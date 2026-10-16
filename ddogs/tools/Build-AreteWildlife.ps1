@@ -1,4 +1,4 @@
-﻿# ddogs/tools/Build-AreteWildlife.ps1 - Arete Landing (6553) wildlife fill-ins + rollerrat loot. Run after Build-KarliAlienShip.ps1 (it calls this).
+# ddogs/tools/Build-AreteWildlife.ps1 - Arete Landing (6553) wildlife fill-ins + rollerrat loot. Run after Build-KarliAlienShip.ps1 (it calls this).
 # Real (AO-Universe Arete guide; AO forum "Arete Landing - The NEW Starter Isle"; wiki.aodb.us):
 #   Angry Minibull L8-13 aggro/flocks; Harvey the Bully L10 aggro dyna, wanders near 3700,517 among minibulls;
 #   Saltworm L13 aggro dyna, wanders around the southern desert lake; rollerrat drops: Rollerrat Intestines (248333),
@@ -89,3 +89,4 @@ foreach ($sp in $s.spawns) {
 [IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)
 foreach ($p in @($npath, $ipath)) { [IO.File]::WriteAllText($p, ([IO.File]::ReadAllText($p, $u) -replace "`r`n", "`n"), $u) }
 'arete wildlife written; rollerrat loot on: ' + ($ratKeys -join ',')
+& (Join-Path $PSScriptRoot 'Build-ShoulderpadsJunkyard.ps1') -GameData $gd
