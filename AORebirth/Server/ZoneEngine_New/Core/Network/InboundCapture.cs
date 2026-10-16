@@ -6,13 +6,13 @@
 
     /// <summary>
     /// Opt-in capture of every inbound zone packet (type, N3 id, full hex) to I:\AO\logs\zone-inbound-capture.log.
-    /// On at startup; toggled at runtime with <c>.capture on|off</c>; unknown messages are always captured.
+    /// Off at startup; toggled at runtime with <c>.capture on|off</c>; unknown messages are always captured.
     /// </summary>
     public static class InboundCapture
     {
         public const string DefaultPath = @"I:\AO\logs\zone-inbound-capture.log";
         static readonly object Sync = new();
-        public static volatile bool Enabled = true;
+        public static volatile bool Enabled;
         public static string Path = DefaultPath;
 
         public static void Write(byte[] packet, object? n3Id, object? body)
@@ -34,4 +34,5 @@
         }
     }
 }
+
 

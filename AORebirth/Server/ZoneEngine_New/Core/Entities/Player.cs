@@ -454,11 +454,12 @@ namespace ZoneEngine_New.Core.Entities
         public ResearchCatalog ResearchCatalog { get; init; } = ResearchCatalog.Default;
 
         // Research state lives in base stats (persisted with the others). GUESS: the client's own meaning of these
-        // stats is not confirmed; PersonalResearchGoal = active research perk (next tier), PersonalResearchLevel =
-        // research XP banked toward it, GlobalResearchGoal = percent of earned XP diverted to research.
+        // stats is confirmed by RC-LT capture 2026-10-16 (client SetStat): PersonalResearchGoal(265) = selected research perk, PersonalResearchLevel(263) =
+        // Personal slider %, GlobalResearchLevel(264) = Global slider %. Banked research XP is server-only stat ResearchXpStat (GUESS: not sent to client).
+        public const CharacterStat ResearchXpStat = (CharacterStat)10263;
         public int ActiveResearchPerk => Stats.GetOrZero(CharacterStat.PersonalResearchGoal);
-        public int ResearchXp => Stats.GetOrZero(CharacterStat.PersonalResearchLevel);
-        public int ResearchPercent => Math.Clamp(Stats.GetOrZero(CharacterStat.GlobalResearchGoal), 0, 100);
+        public int ResearchXp => Stats.GetOrZero(ResearchXpStat);
+        public int ResearchPercent => Math.Clamp(Stats.GetOrZero(CharacterStat.PersonalResearchLevel), 0, 100);
 
         /// <summary>Next untrained tier of <paramref name="line"/>, or 0 when the line is finished.</summary>
         public int NextResearchTier(ResearchCatalog.Line line)
@@ -492,10 +493,10 @@ namespace ZoneEngine_New.Core.Entities
         public void SetResearch(int perkId, int? percent = null)
         {
             if (perkId != ActiveResearchPerk)
-                Stats.Set(CharacterStat.PersonalResearchLevel, 0, StatDetail.Base, dirty: true);
+                Stats.Set(ResearchXpStat, 0, StatDetail.Base);
             Stats.Set(CharacterStat.PersonalResearchGoal, perkId, StatDetail.Base, dirty: true);
             if (percent.HasValue)
-                Stats.Set(CharacterStat.GlobalResearchGoal, Math.Clamp(percent.Value, 0, 100), StatDetail.Base, dirty: true);
+                Stats.Set(CharacterStat.PersonalResearchLevel, Math.Clamp(percent.Value, 0, 100), StatDetail.Base, dirty: true);
             FlushDirtyStats();
         }
 
@@ -525,7 +526,7 @@ namespace ZoneEngine_New.Core.Entities
                 }
             }
             Stats.Set(CharacterStat.PersonalResearchGoal, perkId, StatDetail.Base, dirty: true);
-            Stats.Set(CharacterStat.PersonalResearchLevel, (int)Math.Min(int.MaxValue, banked), StatDetail.Base, dirty: true);
+            Stats.Set(ResearchXpStat, (int)Math.Min(int.MaxValue, banked), StatDetail.Base);
             if (done.Count > 0)
                 OnTrainedPerksChanged(null);
             FlushDirtyStats();

@@ -210,6 +210,21 @@ namespace ZoneEngine_New.Core.Entities
 
             if (BuildKnubotStatMessage() is { } knubot)
                 yield return knubot;
+
+            // Dyna aura (DynaModifiers): effect stats are not in the spawn packet, so send them alongside.
+            int effectType = Stats.GetOrZero(CharacterStat.EffectType);
+            if (effectType != 0 && !IsDead)
+                yield return new StatMessage
+                {
+                    Identity = Identity,
+                    Stats =
+                    [
+                        new GameTuple<CharacterStat, uint> { Value1 = CharacterStat.EffectType, Value2 = (uint)effectType },
+                        new GameTuple<CharacterStat, uint> { Value1 = CharacterStat.EffectRed, Value2 = (uint)Stats.GetOrZero(CharacterStat.EffectRed) },
+                        new GameTuple<CharacterStat, uint> { Value1 = CharacterStat.EffectGreen, Value2 = (uint)Stats.GetOrZero(CharacterStat.EffectGreen) },
+                        new GameTuple<CharacterStat, uint> { Value1 = CharacterStat.EffectBlue, Value2 = (uint)Stats.GetOrZero(CharacterStat.EffectBlue) },
+                    ]
+                };
         }
 
         /// <summary>

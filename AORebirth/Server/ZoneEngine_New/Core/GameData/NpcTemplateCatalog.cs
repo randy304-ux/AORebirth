@@ -371,6 +371,7 @@ namespace ZoneEngine_New.Core.GameData
                 stats[(int)CharacterStat.Flags] = nearest.CharacterFlags.Value;
 
             stats[(int)CharacterStat.Level] = level;
+            DynaModifiers.Apply(nearest, stats);
             bool isFallback = string.Equals(leaf.Hash, MobTemplate.FallbackHash, StringComparison.Ordinal);
 
             return new MobTemplate
@@ -606,6 +607,11 @@ namespace ZoneEngine_New.Core.GameData
         public List<MobItemTableEntry> LootTable { get; set; } = new();
 
         public List<NpcBossTrigger> BossTriggers { get; set; } = new();
+
+        /// <summary>Dyna modifier name (DynaModifiers.All) or empty for random when the band is a dyna camp boss.</summary>
+        public string? DynaModifier { get; set; }
+
+        public NpcContentProvenance? ContentProvenance { get; set; }
     }
 
     public sealed class NpcLeaf

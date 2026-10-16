@@ -65,13 +65,13 @@ foreach ($p in $nt.PSObject.Properties) {
   $nraw = $nraw.Substring(0, $start) + "`n    `"" + $p.Name + "`": " + ($p.Value | ConvertTo-Json -Depth 8) + $comma + $nraw.Substring($endIdx)
   $mk += $p.Name
 }
-# --- flea sizes (Randy live screenshot: a normal Garbage Flea is knee-to-waist on a player). Regular 100, named/dyna fleas 160. Exact scales guessed.
+# --- flea sizes (Randy live screenshot: a normal Garbage Flea is knee-to-waist on a player). Regular 300, named 400 (100/160 looked microscopic on RC-LT 2026-10-16; dynas get x1.5+ from DynaModifiers). Exact scales guessed.
 $fleas = @()
 foreach ($p in $nt.PSObject.Properties) {
   if (-not $hashes.ContainsKey($p.Name)) { continue }
   $ts = @($p.Value.Templates); if (-not ($ts | Where-Object { $_.Name -match 'Flea' })) { continue }
   $km = [regex]::Match($nraw, "`n[ ]*`"" + $p.Name + "`":"); if (-not $km.Success) { Write-Warning ("flea key not found: " + $p.Name); continue }
-  foreach ($t in $ts) { $t.Stats.'360' = $(if ($t.Name -match 'Mutated|Dyna|King|Queen|Boss') { 160 } else { 100 }) }
+  foreach ($t in $ts) { $t.Stats.'360' = $(if ($t.Name -match 'Mutated|Dyna|King|Queen|Boss') { 400 } else { 300 }) }
   $start = $km.Index
   $m = [regex]::new("`n {0,4}`"[^`"]{1,6}`":").Match($nraw, $start + 5)
   $endIdx = if ($m.Success) { $m.Index } else { $nraw.TrimEnd().LastIndexOf('}') }

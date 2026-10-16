@@ -33,7 +33,27 @@ namespace ZoneEngine_New.Core.MessageHandlers
 
             Player? player = session.Player;
             if (player == null || !ReferenceEquals(player.Session, session) || player.IsPersistenceQuarantined
-                || message.Identity != player.Identity || message.Stat != CharacterStat.AggDef)
+                || message.Identity != player.Identity)
+                return;
+
+            // Research window (RC-LT capture 2026-10-16): Personal slider -> 263, Global slider -> 264, line pick -> 265.
+            if (message.Stat is CharacterStat.PersonalResearchLevel or CharacterStat.GlobalResearchLevel)
+            {
+                player.Stats.Set(message.Stat, Math.Clamp(message.Value, 0, 100), StatDetail.Base, dirty: true);
+                player.FlushDirtyStats();
+                return;
+            }
+            if (message.Stat == CharacterStat.PersonalResearchGoal)
+            {
+                int perk = message.Value;
+                if (perk != 0 && player.ResearchCatalog.TryGetLine(perk, out var line))
+                    perk = player.NextResearchTier(line); // client names a line; research its next untrained tier
+                else if (perk != 0)
+                    perk = player.ActiveResearchPerk;
+                player.SetResearch(perk);
+                return;
+            }
+            if (message.Stat != CharacterStat.AggDef)
                 return;
 
             int clamped = Math.Clamp(message.Value, NanoDelayCalculator.AggDefMin, NanoDelayCalculator.AggDefMax);
