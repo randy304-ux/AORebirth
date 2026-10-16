@@ -280,6 +280,7 @@ namespace ZoneEngine_New
             services.AddSingleton<IGmCommand, TeleportCommand>();
             services.AddSingleton<IGmCommand, SetCommand>();
             services.AddSingleton<IGmCommand, ResearchCommand>();
+            services.AddSingleton<IGmCommand, CaptureCommand>();
             services.AddSingleton<IGmCommand, GetCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Commands.Setups.AoSetupsClient>();
             services.AddSingleton<ZoneEngine_New.Core.Commands.Setups.GiveSetupService>();

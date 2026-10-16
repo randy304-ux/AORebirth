@@ -602,6 +602,7 @@ namespace ZoneEngine_New.Core.Network
                         try
                         {
                             Message? message = _codec.Deserialize(packet);
+                            InboundCapture.Write(packet, TryReadN3MessageId(packet), message?.Body);
                             if (message?.Body == null)
                             {
                                 _logger.Warn(
@@ -610,7 +611,7 @@ namespace ZoneEngine_New.Core.Network
                                         "Unknown or empty zone message id={0} ({0:X8}) from {1} header={2}",
                                         TryReadN3MessageId(packet),
                                         RemoteEndPoint(),
-                                        Convert.ToHexString(packet, 0, Math.Min(packet.Length, 24))));
+                                        Convert.ToHexString(packet)));
                                 continue;
                             }
 
