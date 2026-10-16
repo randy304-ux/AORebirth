@@ -3594,9 +3594,23 @@
         "NextStep":  null,
         "Reward":  {
                        "Hash":  "RNSR",
-                       "Credits":  0,
+                       "Credits":  1000,
                        "Xp":  11266,
-                       "Records":  null
+                       "Stats":  {
+                                     "695":  1,
+                                     "696":  1
+                                 },
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  1
+                                           }
+                                       ]
+                                   ]
                    }
     },
     {
@@ -3814,13 +3828,15 @@
                                                "Id":  291082,
                                                "HighId":  291082,
                                                "Name":  "Health and Nano Recharger",
-                                               "Quality":  1
+                                               "Quality":  1,
+                                               "Count":  50
                                            },
                                            {
                                                "Id":  291043,
                                                "HighId":  291043,
                                                "Name":  "Health and Nano Stim",
-                                               "Quality":  1
+                                               "Quality":  1,
+                                               "Count":  25
                                            }
                                        ]
                                    ]
@@ -3966,6 +3982,29 @@
                                            }
                                        ]
                                    ]
+                   }
+    },
+    {
+        "Hash":  "VHBR",
+        "Name":  "Bribe Vaughn Hammond",
+        "QasInstance":  920180,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Pay Vaughn Hammond 15000 credits to overlook your missing ID",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "AVHA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  710,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RVHB",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
                    }
     }
 ]

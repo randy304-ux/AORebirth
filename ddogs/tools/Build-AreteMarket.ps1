@@ -66,3 +66,4 @@ $cp = Join-Path $gd 'PlayfieldContent\6553\Npcs.json'; $cj = [IO.File]::ReadAllT
 foreach ($n in $cj.Npcs) { if ($n.Key -eq 'ddogs:arete:dead-thief') { $n.Stats.'359' = 296008; $n.Stats | Add-Member -Force NoteProperty '173' 11; $n.Stats | Add-Member -Force NoteProperty '174' 11; $n.Meshes = @(); $n.Textures = @() } }
 [IO.File]::WriteAllText($cp, (($cj | ConvertTo-Json -Depth 8) -replace "`r`n", "`n") + "`n", $u)
 'market written'
+& (Join-Path $PSScriptRoot 'Build-AreteRewardsFix.ps1') -GameData $GameData

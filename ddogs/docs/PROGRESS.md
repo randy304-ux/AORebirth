@@ -196,3 +196,11 @@ GUESSES:
 - Default share is 50% when you first pick a line. SK (Shadowlands) split is not done, only XP.
 - Global research (vehicles, Global Advantage, 0x80 lines) is not done. On live it's finished anyway.
 - Research perks are not given the research value in the FullCharacter perk map (sent as 0).
+
+## 2026-10-16 Arete reveal pass: #22 Janos rewards, #11a Vaughn bribe, reward recheck (ddogs/tools/Build-AreteRewardsFix.ps1)
+- Engine: QuestReward.Stats (stat id -> amount added) and QuestRewardItem.Count (stack size). Compile-checked in a clean worktree; NOT yet in the running binary (the engine was not rebuilt because another job has uncommitted engine changes). Until the next engine build, Stats/Count are ignored (1 item each, no commendation/token stat).
+- JNSR (Janos -> RALPH): 11266 xp, +1 ICC Commendations (695), +1 Freelancers Inc. Tokens (696), 1 item. GUESSED: credits 1000 (guide/screenshot give no amount; 90907 was the balance), the item = Freelancers Inc. Token 303237.
+- #11a VHBR (bit 710): tell Vaughn you're rich -> "really rich" -> 15000-credit trade -> false ID filed. Money from earning or Credit Card CCS1 (15000). GUESSED: ICC HQ Access Terminal is a reply on Vaughn (after AVHR or VHBR) teleporting to 4582 934.9 24.8 762.0 (by Brandon Thorn); ICC HQ Andromeda isn't modelled.
+- WDK2 (Marcus, wounded dockworkers): Health and Nano Recharger x50, Health and Nano Stim x25 (guide; was 1/1).
+- Recheck against reveals (no change needed): Rex 1040/1281; Marcus gas fire 1080/1281 + Generic Nano Transmitter; Alex Gibbs; Stanley 1240/2229 + chip; Marco 1120/2229 + crystal; Shady Guy 5000/1540 + Kodaik; Credit Card 15000 / 2080 + Omni-Med Suit; Alien Ship (FBUD) 2520/1386 + 3x 8-15 NCU.
+- Known gaps: Desmond (#12) gives all three armors (engine has no reward choice); Emiel Dijkman (#18, Heavy OR Light Bio Mesh) not built.

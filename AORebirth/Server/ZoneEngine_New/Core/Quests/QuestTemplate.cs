@@ -105,6 +105,9 @@ namespace ZoneEngine_New.Core.Quests
 
         /// <summary>Alternative item sets; one record is given, all its items together.</summary>
         public List<List<QuestRewardItem>>? Records { get; set; }
+
+        /// <summary>Stat id to amount added on completion (695 ICC Commendations, 696 Freelancers Inc. Tokens).</summary>
+        public Dictionary<int, int>? Stats { get; set; }
     }
 
     public sealed class QuestRewardItem
@@ -116,5 +119,8 @@ namespace ZoneEngine_New.Core.Quests
         public string Name { get; set; } = string.Empty;
 
         public int Quality { get; set; } = 1;
+
+        /// <summary>Stack size of the granted item (rechargers x50 etc.); 1 = single item.</summary>
+        public int Count { get; set; } = 1;
     }
 }

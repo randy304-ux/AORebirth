@@ -340,6 +340,8 @@ public sealed partial class QuestService
                         throw new InvalidOperationException("Reward item definition is invalid; delivery remains pending.");
                     var item = _items.CreateWithNewInstance(definition.Id, definition.HighId ?? definition.Id,
                         definition.Quality, ItemSource.Quest);
+                    if (definition.Count > 1)
+                        item.StackCount = Math.Min(definition.Count, InventoryStacking.MaxStackCount);
                     if (ZoneEngine_New.Core.Trade.TradeRules.IsUnique(item) && (ZoneEngine_New.Core.Trade.TradeRules.WouldDuplicateUnique(player, item.LowId, item.HighId)
                         || items.Any(existing => existing.LowId == item.LowId || existing.HighId == item.HighId)))
                     {
@@ -360,6 +362,13 @@ public sealed partial class QuestService
                 if (reward?.Credits > 0)
                     values[CharacterStat.Cash] = (int)Math.Min(int.MaxValue,
                         (long)player.Stats.GetOrZero(CharacterStat.Cash, StatDetail.Base) + reward.Credits);
+                if (reward?.Stats != null)
+                    foreach (var (statId, amount) in reward.Stats)
+                        if (amount != 0)
+                        {
+                            var rewardStat = (CharacterStat)statId;
+                            values[rewardStat] = (int)Math.Clamp((long)player.Stats.GetOrZero(rewardStat, StatDetail.Base) + amount, 0, int.MaxValue);
+                        }
                 if (rewardTemplate.MissionBit is int bit && MissionBits.IsValid(bit))
                 {
                     var (stat, mask) = MissionBits.Locate(bit);
