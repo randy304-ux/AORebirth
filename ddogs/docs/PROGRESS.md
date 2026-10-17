@@ -338,3 +338,10 @@ Live after restart 23:41 (online count 0, backup `I:\AO\backups\cellao_codex_cle
 `.give buff` draws the glow with CastNanoSpell (Unknown1=1), FinishNanoCasting, then SetNanoDuration. The dyna re-apply was sending only SetNanoDuration, and the wear cast's land had already gone out before the NPC had a cell. The re-apply now calls that same land once the NPC has a cell, and a player who walks into range gets those three packets.
 
 Live after restart 00:00 (online count 0 at 23:58:39, immediately before stop; backup `I:\AO\backups\cellao_codex_clean-20261016-2358-dyna-aura.sql`, 18648156 bytes): leaves=1170 families=79, quests=167 skipped=0, Knubot scripts=83 rejected=0. Ports 7500 pid 106172, 7501 pid 97912, 7012/6996 pid 106232, 8098 and 80 pid 81092. No new zone errors. Engines left up. Zone build 0 errors.
+
+## 2026-10-17 00:13 - Launcher tools folder and AO-VK
+The Tools tab was empty with "Tools folder would be on C:" whenever the launcher exe sat on C:. The folder is now `DungeonDogs-Tools` beside the client the launcher uses, or the launcher's own Tools folder when that one is not on C:. A folder chosen in Settings wins. C: is still refused.
+
+AO-VK / aoReloaded is the first Tools row: Install, Uninstall, and Start with Play. Install downloads ao-vk 0.4.1 from https://github.com/wannabuh/ao-vk/releases/download/v0.4.1/ao-vk-0.4.1.zip (sha256 `4ad547a798477582853e2b6cfca049e92d3b2be293459fadac39aa803e430768`) and installs it on a client copy: stock randy31.dll is kept as randy31_orig.dll, ao-vk's randy31.dll replaces it, and AOReloaded's version.dll is stored as aovk-reloaded.dll. Ctrl+Shift+E switches the Vulkan look. The download test installed and removed that package on `I:\AO\cache\client-vulkan-copy`. Live `I:\AO\client-ddogs` randy31.dll stayed `9d9e0da25ac6f8c7ecdce7a47a2409575945966a29e3b77850f7c62033a04be3`.
+
+Published launcher 2026.10.17-0013. Launcher zip sha256 `c178ab27dbafd9bfaa6917d2adf0f0165a9f086413af1eedd7f86c22bcbae2c0`, size 60555550. `https://dungeondogs.org/downloads/ao/version.json` returns that record. Zone engines were not restarted.
