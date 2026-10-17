@@ -98,7 +98,7 @@ $s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
 foreach ($sp in $s.spawns) {
   $x = $sp.position[0]; $z = $sp.position[2]
   if ($sp.hashText -eq 'PO51' -or $sp.hashText -eq 'IIVX' -or ($sp.hashText -eq '32DO' -and [Math]::Sqrt(($x-3515.8)*($x-3515.8)+($z-901.7)*($z-901.7)) -lt 14)) { $sp.hashText = 'IIVX'; $sp.hash = 0; $sp.minLevel = 4; $sp.maxLevel = 4; $sp.respawnTime = 180 }
-  if ($sp.hashText -in 'SOCW','SCWS') { $sp.hashText = 'SCWS'; $sp.hash = 0; $sp.minLevel = 13; $sp.maxLevel = 13; $sp.respawnTime = 180 }
+  if ($sp.hashText -eq 'FRAG' -or ($sp.hashText -eq 'SCWS' -and $x -lt 4000)) { $sp.hashText = 'SCWS'; $sp.hash = 0; $sp.minLevel = 10; $sp.maxLevel = 10; $sp.respawnTime = 180 }  # 2026-10-17: Randy's shot puts him in the junkyard (FRAG), not at SOCW
   if ($sp.hashText -eq 'PRC2' -or $sp.hashText -eq 'CMBS') { $sp.hashText = 'CMBS'; $sp.hash = 0; $sp.minLevel = 4; $sp.maxLevel = 4; $sp.respawnTime = 180 }
 }
 [IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)

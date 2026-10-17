@@ -71398,7 +71398,7 @@
                  "Templates":  [
                                    {
                                        "Name":  "Supreme Collector of Waste",
-                                       "Level":  13,
+                                       "Level":  10,
                                        "Stats":  {
                                                      "0":  268964353,
                                                      "1":  522,
@@ -71409,7 +71409,6 @@
                                                      "33":  3,
                                                      "37":  1,
                                                      "47":  1,
-                                                     "54":  13,
                                                      "59":  5,
                                                      "60":  15,
                                                      "89":  1,
@@ -71441,14 +71440,15 @@
                                                      "61":  50,
                                                      "359":  17714,
                                                      "360":  130,
-                                                     "455":  0
+                                                     "455":  0,
+                                                     "54":  10
                                                  },
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
                                                                  "Donor":  "01V1",
-                                                                 "Source":  "Boss (Randy live screenshot; wiki.aodb.us: northeast part of the map). Hash SOCW (L13, east side 4067,667) by name/level, mesh 17714 organic waste collector (orange skin not settable), scale 130, 3x HP: guessed",
-                                                                 "CampKey":  "boss|Supreme Collector of Waste|13"
+                                                                 "Source":  "Randy reference shot: rust/orange collector among Waste Collectors in the junkyard. Spot FRAG (3533.3, 3.4, 733.7, client L10). Texture 95885 on Material #22 (RDB match to collector texture 17318)",
+                                                                 "CampKey":  "boss|Supreme Collector of Waste|10"
                                                              },
                                        "LootTable":  [
                                                          {
@@ -71459,7 +71459,15 @@
                                                              "CountMin":  5,
                                                              "CountMax":  7
                                                          }
-                                                     ]
+                                                     ],
+                                       "TextureOverrides":  [
+                                                                {
+                                                                    "Material":  "Material #22",
+                                                                    "Texture":  95885,
+                                                                    "Unknown1":  0,
+                                                                    "Unknown2":  0
+                                                                }
+                                                            ]
                                    }
                                ]
              },
@@ -71896,8 +71904,6 @@
                                                      "339":  91,
                                                      "342":  600,
                                                      "343":  0,
-                                                     "359":  26092,
-                                                     "360":  100,
                                                      "368":  15,
                                                      "387":  503,
                                                      "389":  0,
@@ -71909,9 +71915,10 @@
                                                      "660":  0,
                                                      "673":  31,
                                                      "1003":  0,
-                                                     "64":  223803
+                                                     "359":  254118,
+                                                     "64":  40627,
+                                                     "360":  105
                                                  },
-                                       "HasHeadMesh":  true,
                                        "Features":  [
                                                         "NoCombat",
                                                         "NoMove"
@@ -71924,7 +71931,8 @@
                                                                  "Confirmed":  false,
                                                                  "Donor":  "ADAF",
                                                                  "Source":  "ICC HQ faction area (Randy live screenshot). Pink OIUR mapping and look guessed"
-                                                             }
+                                                             },
+                                       "HasHeadMesh":  true
                                    }
                                ]
              },
@@ -104360,8 +104368,6 @@
                                                      "339":  91,
                                                      "342":  600,
                                                      "343":  0,
-                                                     "359":  26092,
-                                                     "360":  100,
                                                      "368":  15,
                                                      "387":  503,
                                                      "389":  0,
@@ -104373,12 +104379,13 @@
                                                      "660":  0,
                                                      "673":  31,
                                                      "1003":  0,
-                                                     "64":  223803,
                                                      "54":  40,
                                                      "1":  3764,
-                                                     "27":  3764
+                                                     "27":  3764,
+                                                     "359":  254118,
+                                                     "64":  40627,
+                                                     "360":  105
                                                  },
-                                       "HasHeadMesh":  true,
                                        "Features":  [
                                                         "NoCombat",
                                                         "NoMove"
@@ -104391,7 +104398,8 @@
                                                                  "Confirmed":  false,
                                                                  "Donor":  "OIUR",
                                                                  "Source":  "ICC Peacekeeper at the IPPC guard spots (3378.8,814.0 / 3421.8,781.2 / 3443.2,901.8 / 3466.9,782.2). Mapping and look guessed"
-                                                             }
+                                                             },
+                                       "HasHeadMesh":  true
                                    }
                                ]
              },
@@ -104513,6 +104521,132 @@
                                                                  "Confirmed":  false,
                                                                  "Donor":  "FPBY",
                                                                  "Source":  "Barry the Food Vendor (AO-Universe: west of Desmond down the street, floating food vehicle). VJTN mapping and look guessed; menu from Randy"
+                                                             }
+                                   }
+                               ]
+             },
+    "SOCW":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Waste Collector",
+                                       "Level":  13,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "4":  6,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "33":  3,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "59":  5,
+                                                     "60":  15,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  5,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  5,
+                                                     "286":  2,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "64":  0,
+                                                     "61":  50,
+                                                     "54":  13,
+                                                     "359":  17714,
+                                                     "360":  92,
+                                                     "455":  0,
+                                                     "1":  151,
+                                                     "27":  151
+                                                 },
+                                       "LootTable":  [
+                                                         {
+                                                             "Hash":  "CMTR",
+                                                             "Repeats":  1,
+                                                             "Chance":  40,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "CMHK",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "OFAB",
+                                                             "Repeats":  1,
+                                                             "Chance":  1,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SPP1",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SPP2",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SPP3",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SPP4",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SPP5",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SPP6",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SPP7",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SPP8",
+                                                             "Repeats":  1,
+                                                             "Chance":  12,
+                                                             "LevelMod":  0
+                                                         }
+                                                     ],
+                                       "ContentProvenance":  {
+                                                                 "Guessed":  true,
+                                                                 "Confirmed":  false,
+                                                                 "Donor":  "01V1",
+                                                                 "Source":  "East-side SOCW camp centre after the boss moved to FRAG: Waste Collector, guessed"
                                                              }
                                    }
                                ]
