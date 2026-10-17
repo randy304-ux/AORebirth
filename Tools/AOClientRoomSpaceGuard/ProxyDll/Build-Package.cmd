@@ -59,6 +59,7 @@ cl /nologo /std:c++17 /O2 /GL /Gy /EHsc /W4 /WX /MT ^
   /DAO_REBIRTH_CLIENT_PATCH_VERSION=\"%PATCH_VERSION%\" ^
   /DAO_REBIRTH_CLIENT_PATCH_SOURCE_SHA=\"%SOURCE_SHA%\" ^
   /I"%SRC%" /LD ^
+  "%SRC%\aovk_chain.cpp" ^
   "%SRC%\crash_dump.cpp" ^
   "%SRC%\daily_login_routing.cpp" ^
   "%SRC%\dllmain.cpp" ^
