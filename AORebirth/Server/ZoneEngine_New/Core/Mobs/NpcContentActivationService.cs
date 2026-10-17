@@ -64,7 +64,31 @@ internal sealed class NpcContentActivationService(Playfield playfield, DynelRegi
             }
         }
         ActivateStandaloneShops(playfieldContent);
+        ActivateMailTerminals(playfieldContent);
         ActivateDatabaseShops();
+    }
+
+    void ActivateMailTerminals(PlayfieldNpcContentCatalog playfieldContent)
+    {
+        foreach (WorldMailTerminalDefinition definition in playfieldContent.MailTerminals)
+        {
+            if (_activated.Contains(definition.Key))
+                continue;
+            if (!catalog.TryGet(definition.TemplateId, out ItemTemplate template))
+                continue;
+
+            var identity = new Identity { Type = IdentityType.MailTerminal, Instance = definition.InstanceId };
+            var terminal = new MailTerminal(identity, items.CreateTemplate(definition.TemplateId, definition.TemplateId, 1))
+            {
+                Playfield = playfield,
+                Position = new(definition.Position[0], definition.Position[1], definition.Position[2]),
+                Rotation = new(definition.Rotation[0], definition.Rotation[1], definition.Rotation[2], definition.Rotation[3])
+            };
+            if (!registry.TryRegister(terminal))
+                throw new InvalidOperationException("Mail terminal identity collision: " + definition.Key);
+            locality.RegisterDynel(terminal);
+            _activated.Add(definition.Key);
+        }
     }
 
     void ActivateStandaloneShops(PlayfieldNpcContentCatalog playfieldContent)

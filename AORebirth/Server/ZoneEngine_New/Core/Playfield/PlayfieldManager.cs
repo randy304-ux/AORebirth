@@ -84,11 +84,13 @@ namespace ZoneEngine_New.Core.Playfield
             Quests.QuestService? quests = null,
             ZoneEngine_New.Core.Quests.Dungeons.QuestDungeonService? questDungeons = null,
             ZoneEngine_New.Core.Knubot.KnubotService? knubot = null,
-            ZoneEngine_New.Core.Configuration.GameplaySettings? gameplay = null)
+            ZoneEngine_New.Core.Configuration.GameplaySettings? gameplay = null,
+            ZoneEngine_New.Core.Claims.ClaimService? claims = null)
         {
             QuestDungeons = questDungeons;
             Knubot = knubot;
             Gameplay = gameplay;
+            Claims = claims;
             ArgumentNullException.ThrowIfNull(logger);
             ArgumentNullException.ThrowIfNull(router);
             ArgumentNullException.ThrowIfNull(playerHydrator);
@@ -139,6 +141,9 @@ namespace ZoneEngine_New.Core.Playfield
 
         /// <summary>Root quest service, forwarded into every playfield container.</summary>
         public Quests.QuestService? Quests { get; }
+
+        /// <summary>Claim Center mailbox, forwarded so a mail terminal on the playfield can open it.</summary>
+        public ZoneEngine_New.Core.Claims.ClaimService? Claims { get; }
 
         /// <summary>Root quest dungeon service, forwarded into every playfield container.</summary>
         public ZoneEngine_New.Core.Quests.Dungeons.QuestDungeonService? QuestDungeons { get; }

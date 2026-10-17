@@ -30,6 +30,18 @@ public sealed class WorldNpcDefinition
     public string? SpawnHash { get; set; }
 }
 
+public sealed class WorldMailTerminalDefinition
+{
+    public string Key { get; set; } = string.Empty;
+    public string Provenance { get; set; } = string.Empty;
+    public int PlayfieldId { get; set; }
+    public int InstanceId { get; set; }
+    /// <summary>Item template the client draws. 37180 is the Mail Terminal.</summary>
+    public int TemplateId { get; set; }
+    public float[] Position { get; set; } = [];
+    public float[] Rotation { get; set; } = [];
+}
+
 public sealed class WorldStandaloneShopDefinition
 {
     public string Key { get; set; } = string.Empty;

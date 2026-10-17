@@ -1,6 +1,26 @@
 {
     "SchemaVersion":  1,
     "PlayfieldId":  6553,
+    "MailTerminals":  [
+                          {
+                              "Key":  "ddogs:mail:6553:antonio",
+                              "Provenance":  "Mail terminal beside Antonio Stacklund, Arete Landing marketplace. Template 37180.",
+                              "PlayfieldId":  6553,
+                              "InstanceId":  231769427,
+                              "TemplateId":  37180,
+                              "Position":  [
+                                               3446.5,
+                                               9.145,
+                                               830.2
+                                           ],
+                              "Rotation":  [
+                                               0,
+                                               0,
+                                               0,
+                                               1
+                                           ]
+                          }
+                      ],
     "Npcs":  [
                  {
                      "Key":  "legacy:AreteLandingSpawn:6553:78E0FC65",

@@ -4120,5 +4120,78 @@
                                        ]
                                    ]
                    }
+    },
+    {
+        "Hash":  "MIL1",
+        "Name":  "Arrest Henri",
+        "QasInstance":  920185,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Show Milne's notice to an Omni-AF Private and bring him to Vanguard Henri Zure",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "VAHE",
+                          "SpecItem":  "OTNT",
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  715,
+        "NextStep":  "MIL2",
+        "Reward":  {
+                       "Hash":  "RMI1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "MIL2",
+        "Name":  "Report the arrest to Milne",
+        "QasInstance":  920186,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tell Omni-AF Officer Milne that Henri was arrested",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "OMCN",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "None",
+        "MissionBit":  716,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RMI2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  81753,
+                                               "HighId":  81753,
+                                               "Name":  "Low Level Omni-Tek Application Form",
+                                               "Quality":  1
+                                           },
+                                           {
+                                               "Id":  96349,
+                                               "HighId":  96349,
+                                               "Name":  "Omni-Tek Mission Token",
+                                               "Quality":  1
+                                           },
+                                           {
+                                               "Id":  248360,
+                                               "HighId":  248360,
+                                               "Name":  "Omni-Tek Shoulderpad",
+                                               "Quality":  1
+                                           },
+                                           {
+                                               "Id":  248360,
+                                               "HighId":  248360,
+                                               "Name":  "Omni-Tek Shoulderpad",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
     }
 ]

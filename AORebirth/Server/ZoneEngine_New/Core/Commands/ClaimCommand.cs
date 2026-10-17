@@ -45,9 +45,11 @@
                 if (context.Args.Length == 0)
                 {
                     Say("Your claim code is " + _claims.GetOrCreateCode(id) + ". Open the Info window (Shop menu > Store) > Claim Center and enter it. Type .claim list to claim from chat instead.");
-                    int n = _claims.DeliverPending(context.Player);
-                    if (n == 0)
-                        Say("No claimed items are waiting for you.");
+                    _claims.Announce(context.Player);
+                    int n = _claims.CountPending(context.Player);
+                    Say(n == 0
+                        ? "No claimed items are waiting for you."
+                        : n.ToString(CultureInfo.InvariantCulture) + " claimed item(s) are waiting at a mail terminal.");
                     return;
                 }
 
@@ -79,7 +81,8 @@
                     return;
                 }
 
-                _claims.DeliverPending(context.Player);
+                _claims.Announce(context.Player);
+                Say(item.Name + " is waiting at a mail terminal.");
             }
             catch (Exception ex)
             {

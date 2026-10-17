@@ -20,6 +20,8 @@ public sealed class PlayfieldNpcContentCatalog
 
     public WorldStandaloneShopDefinition[] StandaloneShops { get; set; } = [];
 
+    public WorldMailTerminalDefinition[] MailTerminals { get; set; } = [];
+
     public static PlayfieldNpcContentCatalog Load(string root, int playfieldId)
     {
         if (string.IsNullOrWhiteSpace(root) || playfieldId <= 0) return Empty;
@@ -39,7 +41,7 @@ public sealed class PlayfieldNpcContentCatalog
 
     public void Validate(int expectedPlayfieldId)
     {
-        if (SchemaVersion != 1 || PlayfieldId != expectedPlayfieldId || Npcs == null || StandaloneShops == null)
+        if (SchemaVersion != 1 || PlayfieldId != expectedPlayfieldId || Npcs == null || StandaloneShops == null || MailTerminals == null)
             throw new InvalidDataException("Unsupported or incomplete playfield NPC content document.");
 
         var keys = new HashSet<string>(StringComparer.Ordinal);
@@ -76,6 +78,16 @@ public sealed class PlayfieldNpcContentCatalog
             RequireVendor(shop.Vendor);
             if (!shopIdentities.Add(shop.Vendor.InstanceId))
                 throw new InvalidDataException("Duplicate playfield shop identity.");
+        }
+
+        foreach (WorldMailTerminalDefinition terminal in MailTerminals)
+        {
+            if (terminal == null || terminal.PlayfieldId != PlayfieldId || string.IsNullOrWhiteSpace(terminal.Key)
+                || !keys.Add(terminal.Key) || string.IsNullOrWhiteSpace(terminal.Provenance)
+                || terminal.InstanceId <= 0 || terminal.TemplateId <= 0 || !identities.Add(terminal.InstanceId))
+                throw new InvalidDataException("Invalid or duplicate mail terminal definition.");
+
+            RequireTransform(terminal.Position, terminal.Rotation, terminal.Key);
         }
     }
 

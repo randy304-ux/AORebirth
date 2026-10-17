@@ -95,7 +95,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
     return await c.ExecuteNonQueryAsync() == 1;
   }
 
-  const string CodeHelp = "Type <b>.claim</b> in the game chat to see your character's claim code, then enter it here. Items arrive in your inventory right away if you are online (or on your next login/zone).";
+  const string CodeHelp = "Type <b>.claim</b> in the game chat to see your character's claim code, then enter it here. The item waits at a mail terminal. One stands beside Antonio Stacklund.";
 
   static string CodeForm(string action, string code, string msg) =>
     $"<div class=\"nav\"><a href=\"/store\">&laquo; Back to Info</a></div>{msg}<p>{CodeHelp}</p><form method=\"get\" action=\"{action}\">Claim code: <input type=\"text\" name=\"code\" size=\"12\" value=\"{H(code)}\"> <input type=\"submit\" value=\"Continue\"></form>";

@@ -696,6 +696,8 @@ namespace ZoneEngine_New.Core.Playfield
                 spawn.Tick();
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("npc.activation");
                 GetRequiredService<NpcContentActivationService>().Tick();
+                ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("quest.escort");
+                GetRequiredService<ZoneEngine_New.Core.Quests.QuestEscortService>().Tick();
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("inventory.moves");
                 _inventoryMoves.Tick(this, deltaTime);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("itemuse");
@@ -788,6 +790,8 @@ namespace ZoneEngine_New.Core.Playfield
             services.AddSingleton(_playfieldManager.AuthoredQuests);
             if (_playfieldManager.Quests != null)
                 services.AddSingleton(_playfieldManager.Quests);
+            if (_playfieldManager.Claims != null)
+                services.AddSingleton(_playfieldManager.Claims);
             if (_playfieldManager.QuestDungeons != null)
                 services.AddSingleton(_playfieldManager.QuestDungeons);
             if (_playfieldManager.Knubot != null)
@@ -842,6 +846,7 @@ namespace ZoneEngine_New.Core.Playfield
             services.AddSingleton(_shopDao);
             services.AddSingleton<NpcContentActivationService>();
             services.AddSingleton<ZoneEngine_New.Core.Missions.QuestPropService>();
+            services.AddSingleton(provider => new ZoneEngine_New.Core.Quests.QuestEscortService(this, provider.GetRequiredService<DynelRegistry>(), _gameData));
             services.AddSingleton<HashSpawnSystem>();
             services.AddSingleton<ItemUseService>();
             return services;

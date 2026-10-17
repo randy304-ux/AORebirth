@@ -1,6 +1,26 @@
 {
     "SchemaVersion":  1,
     "PlayfieldId":  4582,
+    "MailTerminals":  [
+                          {
+                              "Key":  "ddogs:mail:4582:antonio",
+                              "Provenance":  "Mail terminal beside Vendor Antonio Stacklund, ICC Shuttleport. Template 37180.",
+                              "PlayfieldId":  4582,
+                              "InstanceId":  231760258,
+                              "TemplateId":  37180,
+                              "Position":  [
+                                               938.0,
+                                               47.5,
+                                               871.0
+                                           ],
+                              "Rotation":  [
+                                               0,
+                                               0,
+                                               0,
+                                               1
+                                           ]
+                          }
+                      ],
     "Npcs":  [
                  {
                      "Key":  "ddogs:transit:4582:officer",

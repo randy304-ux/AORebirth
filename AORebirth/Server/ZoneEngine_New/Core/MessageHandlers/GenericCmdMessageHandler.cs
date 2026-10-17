@@ -160,6 +160,9 @@ namespace ZoneEngine_New.Core.MessageHandlers
                         && _dungeons?.TryDuplicate(player, message.Target[0], message.Target[1]) == true)
                         Acknowledge(session, message, message.Target[1]);
                     else if (message.Target is { Length: >= 2 }
+                        && playfield.GetService<Quests.QuestEscortService>()?.TryRecruit(player, message.Target[0], message.Target[1]) == true)
+                        Acknowledge(session, message, message.Target[1]);
+                    else if (message.Target is { Length: >= 2 }
                         && TryUseItemOnItem(player, playfield, message.Target[0], message.Target[1]))
                         Acknowledge(session, message, message.Target[1]);
                     else Deny(session, message, player, "no accepted item-on-target interaction");
