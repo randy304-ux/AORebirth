@@ -75,7 +75,7 @@ namespace ZoneEngine_New.Core.Pets
         /// <summary>Fights the target it was sent at, then goes back to what it was doing before.</summary>
         Attack,
 
-        /// <summary>An NPC's pet: fights what its owner fights and stays with it.</summary>
+        /// <summary>An NPC's pet: assists the target its owner is attacking however far, and only picks its own fights nearby.</summary>
         Assist
     }
 

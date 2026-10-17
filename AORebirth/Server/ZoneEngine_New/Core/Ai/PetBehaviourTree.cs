@@ -178,10 +178,12 @@ namespace ZoneEngine_New.Core.Ai
 
         /// <summary>
         /// Picks the pet's enemy for this tick and hands it to the brain. An attack order's target comes first
-        /// while it lives. A guarding pet (and an NPC's pet) stays on an enemy it already fights, then takes its
-        /// owner's opponent, then whoever is fighting its owner, then whoever is fighting it, all within
-        /// <see cref="GuardRange"/> of the owner. A following pet, a waiting pet and a heal pet that was not
-        /// ordered to attack stay out of it: follow means come along now, fight or no fight.
+        /// while it lives, after a merc pet's assist of its master's own target. A guarding pet stays on an
+        /// enemy it already fights, then takes its owner's opponent, then whoever is fighting its owner, then
+        /// whoever is fighting it, all within <see cref="GuardRange"/> of the owner. A merc pet does the same
+        /// for a fight it picks on its own, but when its master is attacking it assists that target however far
+        /// away and paths to it. A following pet, a waiting pet and a heal pet that was not ordered to attack
+        /// stay out of it: follow means come along now, fight or no fight.
         /// </summary>
         public static bool PickEnemy(NpcBrain brain)
         {
@@ -189,9 +191,15 @@ namespace ZoneEngine_New.Core.Ai
             NpcCharacter npc = brain.Npc;
             Character? enemy = null;
 
-            // Leashed to the owner: with the owner too far away, any fight (an attack order too) is dropped and the
-            // pet heads back; past MaxPlayerPetDistance it is warped back instead.
-            if (OwnerDistance(brain) > GuardRange)
+            // A merc's pet assists whatever its master is attacking, however far that is, and PetFightNode
+            // paths to it the same way a player's pet closes on an attack order. A fight it picks on its own
+            // still has to be inside GuardRange, and a heal pet never auto-attacks.
+            if (pet.Mode == PetMode.Assist && PetTypes.Slot(pet.Type) != PetTypes.Slot(PetTypes.Heal))
+                enemy = Resolve(npc, pet.Owner.FightingTarget, requireNearOwner: false);
+
+            // Leashed to the owner: with the owner too far away, any other fight (an attack order too) is dropped
+            // and the pet heads back; past MaxPlayerPetDistance a player's pet is warped back instead.
+            if (enemy == null && OwnerDistance(brain) > GuardRange)
             {
                 pet.EndAttack();
                 brain.SetCurrentTarget(Identity.None);
