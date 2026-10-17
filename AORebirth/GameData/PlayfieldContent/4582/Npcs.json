@@ -2,24 +2,7 @@
     "SchemaVersion":  1,
     "PlayfieldId":  4582,
     "MailTerminals":  [
-                          {
-                              "Key":  "ddogs:mail:4582:antonio",
-                              "Provenance":  "Mail terminal beside Vendor Antonio Stacklund, ICC Shuttleport. Template 37180.",
-                              "PlayfieldId":  4582,
-                              "InstanceId":  231760258,
-                              "TemplateId":  37180,
-                              "Position":  [
-                                               936.4,
-                                               47.0,
-                                               878.3
-                                           ],
-                              "Rotation":  [
-                                               0,
-                                               0,
-                                               0,
-                                               1
-                                           ]
-                          }
+
                       ],
     "Npcs":  [
                  {
@@ -121,6 +104,80 @@
                                   ],
                      "Stats":  {
                                    "0":  277352961,
+                                   "1":  1650,
+                                   "4":  6,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  1,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  279184,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  0
+                                      }
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:mail-npc:4582",
+                     "Provenance":  "ddogs mail terminal, ICC Shuttleport, beside Vendor Antonio Stacklund. Body 279184 computer terminal (as the Contract Terminals). Build-AreteFinish.ps1",
+                     "ContentNpcIdentity":  "ddogs-mail-4582",
+                     "PlayfieldId":  4582,
+                     "InstanceId":  231760258,
+                     "Name":  "Mail Terminal",
+                     "Position":  [
+                                      936.4,
+                                      47,
+                                      878.3
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  268964353,
                                    "1":  1650,
                                    "4":  6,
                                    "27":  1650,

@@ -157,7 +157,7 @@ foreach ($sp in $s.spawns) {
   if ($sp.hashText -eq 'MARC') { $sp.position = @(3470.0, 2.5, 690.0); $sp.radius = 40 }      # rollerrat flats (WSSC cluster), Wander
 }
 # Waste Collector camp tight around the boss so the junkyard reads as his camp (Randy 18:15: regulars not there).
-foreach ($o in @(@(9, 0), @(-9, 2), @(3, 10), @(-4, -9), @(10, -7), @(-11, -3))) { AddPoint 'CMDI' (3533.3 + $o[0]) 3.4 (733.7 + $o[1]) 7 7 30 }
+# (19:30: the ring at the old junkyard spot is dropped; the boss moved to FMII and the fleas there became his camp.)
 # Crickets around the crash site, between the HX1V/HXHR points.
 foreach ($pt in @(@(3825.0, 4.0, 260.0), @(3845.0, 5.0, 235.0), @(3870.0, 6.0, 262.0), @(3880.0, 6.0, 245.0), @(3830.0, 3.0, 228.0), @(3858.0, 8.0, 280.0))) { AddPoint 'JXSC' $pt[0] $pt[1] $pt[2] 9 11 30 }
 [IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)
@@ -179,4 +179,41 @@ foreach ($sp in $s.spawns) {
   Write-Host ('  removed pink {0} under {1} ({2:N2} m)' -f $sp.hashText, $name, $bd)
 }
 [IO.File]::WriteAllText($kpath, ($sk | ConvertTo-Json -Depth 8) + "`n", $u)
+
+# --- 2026-10-17 19:30 pass (Randy 19:13) ---
+# Supreme Collector belongs at "Pos: 3506.0, 941.8, 11.1" (AO x, z, y), the market-side spot. The pink FMII client point sits there
+#   (3505.8, 11.6, 943.1): FMII becomes the boss point, and the junkyard point (3533.3, 733.7) is dropped.
+$s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
+$s.spawns = @($s.spawns | Where-Object { -not ($_.hashText -eq 'SCWS' -and [Math]::Abs($_.position[0] - 3533.3) -lt 1 -and [Math]::Abs($_.position[2] - 733.7) -lt 1) })
+$s.spawns = @($s.spawns | Where-Object { -not ($_.hashText -eq 'CMDI' -and $_.hash -eq 0 -and [Math]::Sqrt([Math]::Pow($_.position[0] - 3533.3, 2) + [Math]::Pow($_.position[2] - 733.7, 2)) -lt 15) })
+foreach ($sp in $s.spawns) {
+  if ($sp.hashText -eq 'FMII') { $sp.hashText = 'SCWS'; $sp.hash = 0; $sp.minLevel = 10; $sp.maxLevel = 10; $sp.respawnTime = 180; $sp.position = @(3506.0, 11.1, 941.8) }
+}
+# Fleas near the boss and near the IIV-X Advanced Docker (3515.8, 902.5) are Waste Collectors (Randy 19:13). Within 25 m of the boss:
+#   CMDI L7 (his camp); the rest within 35 m of either spot: 01V1 L5.
+foreach ($sp in $s.spawns) {
+  if ($sp.hashText -notin 'JNME', 'VUFL', 'IEGA') { continue }
+  $db = [Math]::Sqrt([Math]::Pow($sp.position[0] - 3506.0, 2) + [Math]::Pow($sp.position[2] - 941.8, 2))
+  $dd = [Math]::Sqrt([Math]::Pow($sp.position[0] - 3515.8, 2) + [Math]::Pow($sp.position[2] - 902.5, 2))
+  if ($db -le 25) { $sp.hashText = 'CMDI'; $sp.hash = 0; $sp.minLevel = 7; $sp.maxLevel = 7; $sp.respawnTime = 30 }
+  elseif ($db -le 35 -or $dd -le 35) { $sp.hashText = '01V1'; $sp.hash = 0; $sp.minLevel = 5; $sp.maxLevel = 5; $sp.respawnTime = 30 }
+}
+[IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)
+
+# Mail terminals: the item-based MailTerminals static (template 37180) was never drawn by the client. Place them as content NPCs named
+#   "Mail Terminal" with the computer-terminal body 279184 the merc Contract Terminals already use (drawn in game); the engine opens the
+#   mailbox when a Mail Terminal NPC is used (NpcCharacter.TryOpenMail).
+foreach ($m in @(@{ Pf = 6553; Id = 231769427; Pos = @(3464.1, 9.0, 805.6); Where = 'Arete Landing marketplace' }, @{ Pf = 4582; Id = 231760258; Pos = @(936.4, 47.0, 878.3); Where = 'ICC Shuttleport, beside Vendor Antonio Stacklund' })) {
+  $cp = Join-Path $gd ("PlayfieldContent\{0}\Npcs.json" -f $m.Pf); $doc = [IO.File]::ReadAllText($cp, $u) | ConvertFrom-Json
+  $doc.MailTerminals = @($doc.MailTerminals | Where-Object { $_.Key -notlike 'ddogs:mail:*' })
+  $key = 'ddogs:mail-npc:{0}' -f $m.Pf
+  $npcs = @($doc.Npcs | Where-Object { $_.Key -ne $key })
+  $stats = [ordered]@{ '0' = 268964353; '1' = 1650; '4' = 6; '27' = 1650; '33' = 0; '47' = 1; '54' = 40; '59' = 1; '60' = 0; '64' = 0; '89' = 1; '156' = 137; '173' = 3; '174' = 3; '359' = 279184; '360' = 100; '368' = 0; '389' = 0; '455' = 0; '466' = 0; '660' = 0; '673' = 31 }
+  $tex = foreach ($pl in 0..4) { [ordered]@{ Place = $pl; Id = 0 } }
+  $npcs += [pscustomobject][ordered]@{ Key = $key; Provenance = ('ddogs mail terminal, {0}. Body 279184 computer terminal (as the Contract Terminals). Build-AreteFinish.ps1' -f $m.Where)
+    ContentNpcIdentity = ('ddogs-mail-{0}' -f $m.Pf); PlayfieldId = $m.Pf; InstanceId = $m.Id; Name = 'Mail Terminal'; Position = $m.Pos; Rotation = @(0, 0, 0, 1)
+    Stats = [pscustomobject]$stats; Textures = @($tex); Meshes = @(); Passive = $true; Attackable = $false; TickLiving = $true; Presentation = [pscustomobject]@{} }
+  $doc.Npcs = $npcs
+  [IO.File]::WriteAllText($cp, ($doc | ConvertTo-Json -Depth 12) + "`n", $u)
+}
 Write-Host 'Build-AreteFinish done'

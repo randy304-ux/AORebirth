@@ -136,14 +136,10 @@ namespace
 
             if (!aorf::InstallRandyColorFix())
             {
-                aorf::Log("ERROR randy31 renderer repair was not installed");
-                MessageBoxW(
-                    nullptr,
-                    L"AORebirth Client Patch could not install the renderer crash repair. "
-                    L"Close AO and review %LOCALAPPDATA%\\AORebirthClientPatch\\AORebirthClientPatch.log.",
-                    L"AORebirth Client Patch",
-                    MB_OK | MB_ICONERROR | MB_SETFOREGROUND);
-                return 1;
+                // The repair targets the stock randy31.dll. AO-VK replaces randy31.dll, so its layout is "unsupported" and
+                // the repair does not apply. Returning here also skipped the RoomSpace repair and the Store/Daily web
+                // routing, which sent the Store and Daily windows to Funcom's servers (502). Carry on without it.
+                aorf::Log("WARN randy31 renderer repair skipped: renderer is not the stock randy31 (AO-VK?); continuing");
             }
         }
 
