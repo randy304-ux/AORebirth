@@ -284,3 +284,12 @@ Live after restart 21:04 (online count 0, backup `I:\AO\backups\cellao_codex_cle
 The AO-Universe Arete guide names the junkyard mob a Cleaning Robot (Flint's seven robots). JUCO is that mob, and Randy's shot showed a Cleaning Robot beside the Cleanmeister. JUCO is now named Cleaning Robot. Flint's lines and the "Kill 7 Cleaning Robots" step say the same. Rex's outdoor robots stay Cleanmeister Intelligence Robot (MLCE), which is the name his dialog already uses. The Cleanmeister boss in that cluster is unchanged.
 
 Live after restart 21:12 (online count 0, backup `I:\AO\backups\cellao_codex_clean-20261016-2110-cleaning-robot.sql`, 18647190 bytes): leaves=1078, quests=167 skipped=0, Knubot scripts=82 rejected=0. Ports 7500 pid 104052, 7501 pid 96672, 7012/6996 pid 104160, 8098 and 80 pid 81092. No new zone errors. Emiel and Fausto "bye" warnings are unchanged. Commit `5123d042` (local only). Engines left up. Build 0 errors.
+
+## 2026-10-16 - Emiel reward
+AO-Universe Arete guide #18 lists one reward: a choice of Heavy Bio Mesh 246926 or Light Bio Mesh 246925. It does not list credits or XP. The first delivery (EMB1) no longer pays the guessed 500 credits and 1500 XP. Later deliveries (EMB2) were already unpaid. The mesh choice is unchanged.
+
+## 2026-10-16 - Fausto's tie
+Fausto stays in the white shirt and black pants from the guide screenshot. No tie was added.
+
+## 2026-10-16 - Research window bar
+Stat 263 is the personal XP-share slider (the percent of earned XP that goes to research), and stat 264 is the global slider. The client sends both. Banked research XP stays on server-only stat 10263. The completion bar would need the ResearchUpdate reply, and that packet layout is still unknown, so it was not invented. `.research` still reports banked XP against the tier cost.

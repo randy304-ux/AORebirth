@@ -39,10 +39,10 @@ function Rq($h, $n, $qi, $sum, $npc, $bit, $rh, $cr, $xp, $recs) { [pscustomobje
   Objective=[pscustomobject]@{ Count=$null; Npc=$npc; SpecItem=$null; WorldItem=$null }; Flags='NoCash'; MissionBit=$bit; NextStep=$null
   Reward=[pscustomobject]@{ Hash=$rh; Credits=$cr; Xp=$xp; Records=$recs } } }
 function Rec($id, $n) { [pscustomobject]@{ Id=$id; HighId=$id; Name=$n; Quality=10 } }
-# Repeatable per the guide; credits/XP on the first run only (EMB1, bit 711), later runs use EMB2 (no pay, bit 714). Amounts guessed.
+# Repeatable per the guide. The guide's reward is the Heavy or Light Bio Mesh choice, not credits or XP.
 # Emiel's Box of Foodstuff 297048 (item hash EBOX) is given by Emiel ({spawn}) and taken by Fausto ({take}).
 $q = @($q | Where-Object { $_.Hash -ne 'EMB2' })
-$q += Rq 'EMB1' "Deliver Emiel's box" 920181 "Bring Emiel's Box of Foodstuff to Logistics Manager Fausto in the Bazaar" 'FACS' 711 'REB1' 500 1500 @()
+$q += Rq 'EMB1' "Deliver Emiel's box" 920181 "Bring Emiel's Box of Foodstuff to Logistics Manager Fausto in the Bazaar" 'FACS' 711 'REB1' 0 0 @()
 $q += Rq 'EMB2' "Deliver Emiel's box" 920184 "Bring Emiel's Box of Foodstuff to Logistics Manager Fausto in the Bazaar" 'FACS' 714 'REB2' 0 0 @()
 $q += Rq 'EMBH' 'Heavy Bio Mesh tip' 920182 'Ask Fausto for a tip' 'FACS' 712 'REBH' 0 0 @(,@((Rec 246926 'Heavy Bio Mesh')))
 $q += Rq 'EMBL' 'Light Bio Mesh tip' 920183 'Ask Fausto for a tip' 'FACS' 713 'REBL' 0 0 @(,@((Rec 246925 'Light Bio Mesh')))
