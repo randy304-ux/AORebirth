@@ -192,7 +192,8 @@
                                                         129026,
                                                         129026
                                                     ],
-                                         "Pet":  null
+                                         "Pet":  null,
+                                         "Pets":  null
                                      },
                         "soldier":  {
                                         "Heals":  false,
@@ -383,7 +384,8 @@
                                                        124348,
                                                        124348
                                                    ],
-                                        "Pet":  null
+                                        "Pet":  null,
+                                        "Pets":  null
                                     },
                         "keeper":  {
                                        "Heals":  false,
@@ -574,7 +576,8 @@
                                                       154905,
                                                       154905
                                                   ],
-                                       "Pet":  null
+                                       "Pet":  null,
+                                       "Pets":  null
                                    },
                         "doctor":  {
                                        "Heals":  true,
@@ -788,7 +791,8 @@
                                                       157636,
                                                       157636
                                                   ],
-                                       "Pet":  null
+                                       "Pet":  null,
+                                       "Pets":  null
                                    },
                         "adventurer":  {
                                            "Heals":  true,
@@ -1002,7 +1006,8 @@
                                                           124313,
                                                           124313
                                                       ],
-                                           "Pet":  null
+                                           "Pet":  null,
+                                           "Pets":  null
                                        },
                         "agent":  {
                                       "Heals":  false,
@@ -1193,7 +1198,8 @@
                                                      161126,
                                                      161126
                                                  ],
-                                      "Pet":  null
+                                      "Pet":  null,
+                                      "Pets":  null
                                   },
                         "bureaucrat":  {
                                            "Heals":  false,
@@ -1384,7 +1390,8 @@
                                                           123742,
                                                           123742
                                                       ],
-                                           "Pet":  "MBPT"
+                                           "Pet":  "MBPT",
+                                           "Pets":  null
                                        },
                         "engineer":  {
                                          "Heals":  false,
@@ -1575,7 +1582,8 @@
                                                         124836,
                                                         124836
                                                     ],
-                                         "Pet":  "MEPT"
+                                         "Pet":  "MEPT",
+                                         "Pets":  null
                                      },
                         "fixer":  {
                                       "Heals":  false,
@@ -1766,7 +1774,8 @@
                                                      247228,
                                                      247228
                                                  ],
-                                      "Pet":  null
+                                      "Pet":  null,
+                                      "Pets":  null
                                   },
                         "martialartist":  {
                                               "Heals":  false,
@@ -1957,7 +1966,8 @@
                                                              267258,
                                                              267258
                                                          ],
-                                              "Pet":  null
+                                              "Pet":  null,
+                                              "Pets":  null
                                           },
                         "metaphysicist":  {
                                               "Heals":  true,
@@ -2171,7 +2181,24 @@
                                                              254612,
                                                              254612
                                                          ],
-                                              "Pet":  "MPPT"
+                                              "Pet":  "MPAT",
+                                              "Pets":  [
+                                                           {
+                                                               "Hash":  "MPAT",
+                                                               "MinLevel":  1,
+                                                               "Type":  1
+                                                           },
+                                                           {
+                                                               "Hash":  "MPMZ",
+                                                               "MinLevel":  5,
+                                                               "Type":  2001
+                                                           },
+                                                           {
+                                                               "Hash":  "MPHL",
+                                                               "MinLevel":  14,
+                                                               "Type":  1001
+                                                           }
+                                                       ]
                                           },
                         "nanotechnician":  {
                                                "Heals":  false,
@@ -2362,7 +2389,8 @@
                                                               245627,
                                                               245627
                                                           ],
-                                               "Pet":  null
+                                               "Pet":  null,
+                                               "Pets":  null
                                            },
                         "shade":  {
                                       "Heals":  false,
@@ -2553,7 +2581,8 @@
                                                      160125,
                                                      160125
                                                  ],
-                                      "Pet":  null
+                                      "Pet":  null,
+                                      "Pets":  null
                                   },
                         "trader":  {
                                        "Heals":  false,
@@ -2744,7 +2773,8 @@
                                                       124241,
                                                       124241
                                                   ],
-                                       "Pet":  null
+                                       "Pet":  null,
+                                       "Pets":  null
                                    }
                     }
 }

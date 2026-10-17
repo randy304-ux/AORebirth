@@ -64,21 +64,49 @@ foreach ($p in $profs) {
   }
   $nt | Add-Member -NotePropertyName $hash -NotePropertyValue ([pscustomobject]@{ Templates = $bands }) -Force
 }
-# Merc-owned pets (MP, Engineer, Bureaucrat): bands cloned from the merc's own, weaker. Looks guessed: Engineer robot = Android 17649,
-# MP anima = Shadowmutant 30464, Bureaucrat robot = junkbot 45873 (all mobile MonsterData bodies).
-$mercPets = @{ metaphysicist = @('MPPT', 'MRMP', 'Anima', 30464, 92); engineer = @('MEPT', 'MREG', 'Robot', 17649, 91); bureaucrat = @('MBPT', 'MRBU', 'Robot', 45873, 93) }
-foreach ($k in $mercPets.Keys) { $ph, $src, $pname, $pmd, $pscale = $mercPets[$k]
-  $bands = @(); foreach ($d in @($nt.$src.Templates)) { $b = $d | ConvertTo-Json -Depth 8 | ConvertFrom-Json; $b.Name = "Mercenary $pname"; $s2 = $b.Stats
-    $s2.'1' = [int][math]::Max(20, [double]$s2.'1' * 0.5); if ($s2.PSObject.Properties['27']) { $s2.'27' = $s2.'1' }
-    $s2.'285' = [int][math]::Max(2, [double]$s2.'285' * 0.6); $s2.'286' = [int][math]::Max(1, [double]$s2.'286' * 0.6)
-    $s2.'359' = $pmd; $s2 | Add-Member -Force NoteProperty '360' $pscale; $s2.'60' = 0
-    foreach ($x in '64','4','59') { $s2.PSObject.Properties.Remove($x) }; if ($b.PSObject.Properties['Equipment']) { $b.Equipment = @() }; $bands += $b }
-  $nt | Add-Member -NotePropertyName $ph -NotePropertyValue ([pscustomobject]@{ Templates = $bands }) -Force }
+# Merc-owned pets. Engineer stays the android body (17649). The Crat uses monster 96056: the client mesh texture is
+# bureuacrat_protocol_android.png (protocol droid), the Worker-Droid body, not the android and not junkbot 45873.
+# MP pets are the captured metapet bodies: attack 96195, heal 96193, mezz 96194. Mezz starts at merc level 5
+# (Lesser Distracting Sphere, pet level 5). Heal starts at merc level 14 (Calling of Medinos, pet level 14).
+# Each row: hash, source merc hash, name, monsterData, scale (0 = grow with level), minLevel, pet type.
+$mercPets = [ordered]@{
+  metaphysicist = @(
+    @('MPAT', 'MRMP', 'Anger Manifestation', 96195, 0, 1, 1),
+    @('MPMZ', 'MRMP', 'Distracting Sphere', 96194, 0, 5, 2001),
+    @('MPHL', 'MRMP', 'Salvinous', 96193, 0, 14, 1001)
+  )
+  engineer = @(, @('MEPT', 'MREG', 'Robot', 17649, 91, 1, 1))
+  bureaucrat = @(, @('MBPT', 'MRBU', 'Worker-Droid', 96056, 100, 1, 1))
+}
+if ($nt.PSObject.Properties['MPPT']) { $nt.PSObject.Properties.Remove('MPPT') }
+foreach ($group in $mercPets.Values) {
+  foreach ($spec in $group) {
+    $ph = [string]$spec[0]; $src = [string]$spec[1]; $pname = [string]$spec[2]; $pmd = [int]$spec[3]; $pscale = [int]$spec[4]
+    $bands = @()
+    foreach ($d in @($nt.$src.Templates)) {
+      $b = $d | ConvertTo-Json -Depth 8 | ConvertFrom-Json
+      $b.Name = $pname
+      $s2 = $b.Stats
+      $lvl = [int]$b.Level
+      $s2.'1' = [int][math]::Max(20, [double]$s2.'1' * 0.5); if ($s2.PSObject.Properties['27']) { $s2.'27' = $s2.'1' }
+      $s2.'285' = [int][math]::Max(2, [double]$s2.'285' * 0.6); $s2.'286' = [int][math]::Max(1, [double]$s2.'286' * 0.6)
+      $s2.'359' = $pmd
+      $scale = $(if ([int]$pscale -gt 0) { [int]$pscale } else { [int][math]::Min(121, 91 + [int](($lvl - 1) / 3)) })
+      $s2 | Add-Member -Force NoteProperty '360' $scale
+      $s2.'60' = 0
+      foreach ($x in '64','4','59') { $s2.PSObject.Properties.Remove($x) }
+      if ($b.PSObject.Properties['Equipment']) { $b.Equipment = @() }
+      $bands += $b
+    }
+    $nt | Add-Member -NotePropertyName $ph -NotePropertyValue ([pscustomobject]@{ Templates = $bands }) -Force
+  }
+}
 Save $ntPath $nt
 
 # Mobile-body check against MonsterData.json
 $md = [IO.File]::ReadAllText((Join-Path $GameData 'MonsterData.json')) | ConvertFrom-Json
 foreach ($l in $looks.Values) { $r = $md | Where-Object { $_.monsterData -eq $l.Md } | Select-Object -First 1; if (-not $r -or ($r.features -band 4) -eq 0) { throw "merc look $($l.Md) is not a mobile body" } }
+foreach ($mdId in 17649, 96056, 96193, 96194, 96195) { $r = $md | Where-Object { $_.monsterData -eq $mdId } | Select-Object -First 1; if (-not $r -or ($r.features -band 4) -eq 0) { throw "merc pet look $mdId is not a mobile body" } }
 
 # 2. Mercs.json
 $names = @{}
@@ -122,7 +150,11 @@ foreach ($p in $profs) {
   if ($t1.Count -lt 5 -or $t2.Count -lt 5 -or $fa.Count -lt 5 -or $ch.Count -lt 5) { throw "armor lookup short for $key : $($report[-1])" }
   $nanos = New-Object System.Collections.ArrayList
   if ($p[8]) { foreach ($h in $doctorHeals) { [void]$nanos.Add($h) } }
-  $catalog.Professions[$key] = [ordered]@{ Heals = [bool]$p[8]; Nanos = [object[]]$nanos.ToArray(); Armor = $armor; Weapon = @($weapons[$key], $weapons[$key]); Pet = $(if ($mercPets[$key]) { $mercPets[$key][0] } else { $null }) }
+  $petSpecs = @()
+  if ($mercPets.Contains($key)) { foreach ($spec in $mercPets[$key]) { $petSpecs += [ordered]@{ Hash = [string]$spec[0]; MinLevel = [int]$spec[5]; Type = [int]$spec[6] } } }
+  # A one-element Pets array collapses under ConvertTo-Json, so a single pet stays on Pet. MP has three.
+  $petsValue = $(if ($petSpecs.Count -gt 1) { @($petSpecs) } else { $null })
+  $catalog.Professions[$key] = [ordered]@{ Heals = [bool]$p[8]; Nanos = [object[]]$nanos.ToArray(); Armor = $armor; Weapon = @($weapons[$key], $weapons[$key]); Pet = $(if ($petSpecs.Count) { [string]$petSpecs[0].Hash } else { $null }); Pets = $petsValue }
 }
 Save (Join-Path $GameData 'Mercs.json') $catalog
 
@@ -173,6 +205,19 @@ $replies['endall'] = @{ Text = 'End every contract.'; Goto = 'endall' }
 $lines['hire'] = [ordered]@{ Text = 'Available contracts:'; Replies = @($hireList + 'back') }
 $lines['end'] = [ordered]@{ Text = 'Which contract do you want to end?'; Replies = @($endList + 'endall','back') }
 Save (Join-Path $kb 'MercContracts.json') ([ordered]@{ Notes = 'Mercenary Contracts terminal (Build-Mercs.ps1). Hires any of the 14 professions; contracts are saved per character.'; Npcs = @('ddogs-merc-terminal','ddogs-merc-strike'); Openers = @(@{ Say = 'hello' }); Replies = $replies; Lines = $lines })
+
+# PetTypes.json: merc pet hashes must not fall through to DefaultType 1 (the heal and mezz would attack).
+$ptPath = Join-Path $GameData 'PetTypes.json'
+$ptText = [IO.File]::ReadAllText($ptPath)
+foreach ($group in $mercPets.Values) {
+  foreach ($spec in $group) {
+    $hash = [string]$spec[0]; $ptype = [int]$spec[6]
+    if ($ptText -notmatch ('"' + $hash + '"\s*:')) {
+      $ptText = [regex]::Replace($ptText, '("Types"\s*:\s*\{)', ('$1' + "`n    `"$hash`": $ptype,"), 1)
+    }
+  }
+}
+[IO.File]::WriteAllText($ptPath, $ptText, $utf8)
 
 $report | Set-Content -Encoding UTF8 (Join-Path $PSScriptRoot 'Build-Mercs.last.txt')
 "Build-Mercs: $($report -join '; ')"

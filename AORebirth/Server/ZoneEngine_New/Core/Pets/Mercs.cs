@@ -102,8 +102,18 @@ namespace ZoneEngine_New.Core.Pets
             public List<ArmorTier> Armor { get; set; } = new();
             /// <summary>Held weapon (low/high item id) shown in the right hand; looks only.</summary>
             public List<int>? Weapon { get; set; }
-            /// <summary>NpcTemplates hash of the pet this merc keeps out (MP, Engineer, Bureaucrat); null for none.</summary>
+            /// <summary>NpcTemplates hash of the one pet this merc keeps out, when <see cref="Pets"/> is empty.</summary>
             public string? Pet { get; set; }
+            /// <summary>Pets this merc keeps out. Absent or empty falls back to <see cref="Pet"/>.</summary>
+            public List<MercPetSpec>? Pets { get; set; }
+        }
+
+        /// <summary>One pet a merc summons: hash, the merc level it starts appearing at, and its pet type (0 = PetTypes.json).</summary>
+        public sealed class MercPetSpec
+        {
+            public string Hash { get; set; } = "";
+            public int MinLevel { get; set; } = 1;
+            public int Type { get; set; }
         }
 
         public sealed class Catalog
@@ -181,6 +191,27 @@ namespace ZoneEngine_New.Core.Pets
         public static List<int>? WeaponFor(string gameDataRoot, Kind kind) => Load(gameDataRoot).For(kind)?.Weapon;
 
         public static string? PetFor(string gameDataRoot, Kind kind) => Load(gameDataRoot).For(kind)?.Pet;
+
+        /// <summary>Pets this merc should have out at <paramref name="level"/> (attack, and for an MP the mezz and heal once the level allows).</summary>
+        public static IReadOnlyList<MercPetSpec> PetsFor(string gameDataRoot, Kind kind, int level)
+        {
+            Profession? prof = Load(gameDataRoot).For(kind);
+            if (prof == null)
+                return [];
+            if (prof.Pets is { Count: > 0 })
+            {
+                var list = new List<MercPetSpec>();
+                foreach (MercPetSpec spec in prof.Pets)
+                {
+                    if (spec.Hash.Length > 0 && spec.MinLevel <= level)
+                        list.Add(spec);
+                }
+
+                return list;
+            }
+
+            return string.IsNullOrEmpty(prof.Pet) ? [] : [new MercPetSpec { Hash = prof.Pet, MinLevel = 1, Type = 0 }];
+        }
 
         public static bool Heals(string gameDataRoot, string? hash)
         {

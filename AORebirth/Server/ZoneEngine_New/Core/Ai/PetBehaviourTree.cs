@@ -277,16 +277,26 @@ namespace ZoneEngine_New.Core.Ai
             Character owner = pet.Owner;
             Character best = owner;
             int bestPct = owner.IsDead ? 101 : HealthPercent(owner);
-            foreach (NpcCharacter other in owner.OwnedPets.All)
+            void Consider(Character candidate)
             {
-                if (other.IsDead || !ReferenceEquals(other.Playfield, brain.Npc.Playfield) || Distance(other, brain.Npc) > HealCoverMeters)
-                    continue;
-                int pct = HealthPercent(other);
+                if (candidate.IsDead || !ReferenceEquals(candidate.Playfield, brain.Npc.Playfield) || Distance(candidate, brain.Npc) > HealCoverMeters)
+                    return;
+                int pct = HealthPercent(candidate);
                 if (pct < bestPct)
                 {
-                    best = other;
+                    best = candidate;
                     bestPct = pct;
                 }
+            }
+
+            foreach (NpcCharacter other in owner.OwnedPets.All)
+                Consider(other);
+            // A merc's heal pet looks after the player who hired that merc, and that player's other mercs.
+            if (owner is NpcCharacter { PetOwner: Player master })
+            {
+                Consider(master);
+                foreach (NpcCharacter other in master.OwnedPets.All)
+                    Consider(other);
             }
 
             return best;

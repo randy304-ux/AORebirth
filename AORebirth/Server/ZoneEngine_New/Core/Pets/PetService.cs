@@ -136,8 +136,8 @@ namespace ZoneEngine_New.Core.Pets
             if (owner is Player player)
                 SendAddPet(player, pet);
             RefreshOverEquip(pet);
-            if (owner is Player && Mercs.ByHash(hash) is Mercs.Kind ownKind && Mercs.PetFor(_gameData.RootPath, ownKind) is { Length: > 0 } mercPet)
-                SpawnMercPet(pet, mercPet, pet.Stats.GetOrOne(CharacterStat.Level));
+            if (owner is Player && Mercs.ByHash(hash) is Mercs.Kind)
+                EnsureMercPets(pet, pet.Stats.GetOrOne(CharacterStat.Level));
 
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
                 "Summoned pet id={0} hash={1} type={2} level={3} owner={4} expires={5}",
@@ -147,14 +147,37 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
-        /// The merc's own pet (MP, Engineer, Bureaucrat): owned by the merc, so it assists the merc (NPC owners default to
-        /// Assist) and is removed with it on dismiss, death and zone change (see <see cref="DismissMercPets"/>).
+        /// The merc's own pets (Crat worker-droid, Engineer robot, MP attack/mezz/heal): owned by the merc, so they
+        /// assist it and leave with it on dismiss, death and zone change (see <see cref="DismissMercPets"/>).
         /// </summary>
-        void SpawnMercPet(NpcCharacter merc, string hash, int level)
+        void EnsureMercPets(NpcCharacter merc, int level)
         {
-            NpcCharacter? pet = Spawn(merc, hash, Types.TypeOf(hash), level, null, PetMode.Assist, 100, 100, []);
-            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc pet hash={0} merc={1} spawned={2}",
-                hash, merc.Identity.Instance, pet != null));
+            if (Mercs.ByHash(merc.Pet?.Hash) is not Mercs.Kind kind)
+                return;
+            foreach (Mercs.MercPetSpec spec in Mercs.PetsFor(_gameData.RootPath, kind, level))
+            {
+                bool present = false;
+                foreach (NpcCharacter sub in merc.OwnedPets.All)
+                {
+                    if (sub.Pet != null && !sub.IsDead && string.Equals(sub.Pet.Hash, spec.Hash, StringComparison.OrdinalIgnoreCase))
+                    {
+                        present = true;
+                        break;
+                    }
+                }
+
+                if (!present)
+                    SpawnMercPet(merc, spec.Hash, level, spec.Type);
+            }
+        }
+
+        void SpawnMercPet(NpcCharacter merc, string hash, int level, int type)
+        {
+            if (type <= 0)
+                type = Types.TypeOf(hash);
+            NpcCharacter? pet = Spawn(merc, hash, type, level, null, PetMode.Assist, 100, 100, []);
+            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc pet hash={0} type={1} merc={2} spawned={3}",
+                hash, type, merc.Identity.Instance, pet != null));
         }
 
         /// <summary>Removes the pets a merc (or any pet) owns before the merc itself leaves.</summary>
@@ -278,18 +301,21 @@ namespace ZoneEngine_New.Core.Pets
                     continue;
                 if (roster.MercReviveUtc.TryGetValue(kind.Key, out DateTime due) && now < due)
                     continue;
-                bool present = false;
+                NpcCharacter? merc = null;
                 foreach (NpcCharacter pet in roster.All)
                 {
                     if (pet.Pet != null && !pet.IsDead && string.Equals(pet.Pet.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase))
                     {
-                        present = true;
+                        merc = pet;
                         break;
                     }
                 }
 
-                if (present)
+                if (merc != null)
+                {
+                    EnsureMercPets(merc, merc.Stats.GetOrOne(CharacterStat.Level));
                     continue;
+                }
                 roster.MercReviveUtc.Remove(kind.Key);
                 if (Spawn(owner, kind.Hash, kind.PetType, Math.Clamp(level, 1, 220), null, PetMode.Guard, 100, 100, []) != null)
                     _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc returned hash={0} owner={1}", kind.Hash, owner.Identity.Instance));
