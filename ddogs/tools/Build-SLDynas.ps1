@@ -1,7 +1,7 @@
 # ddogs/tools/Build-SLDynas.ps1
-# Elysium, Scheol, Penumbra, and Inferno camps that already have a coordinate, a playfield id,
+# Elysium, Scheol, Penumbra, Inferno, and Adonis camps that already have a coordinate, a playfield id,
 # and a mesh donor. Same corpse rule as Nascence: 5 to 7 items, respawn 180 s.
-# CampKey is elysium| scheol| penumbra| inferno| so Build-DynaLoot's boss| pass does not overwrite them.
+# CampKey is elysium| scheol| penumbra| inferno| adonis| so Build-DynaLoot's boss| pass does not overwrite them.
 # Called at the end of Build-DynaLoot.ps1, after Build-NascenceDynas.ps1. Idempotent.
 # Piece leaves are SP + AOID hex and pools are SL + hex, so the Nascence NP/NC rewrite leaves them.
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
@@ -33,6 +33,29 @@ $patternIds = @{
   'The Indomitable Chimera' = @(242783, 234273, 234274, 234275)
   'Pazuzu' = @(242780, 234244, 234245, 234246)
   'Arch Bigot Aliel' = @(242788, 234320, 234321, 234322)
+  'Black Fang' = @(242675, 231415, 231416, 231417)
+  'Silver Fang' = @(242673, 231397, 231398, 231399)
+  'The Numb One' = @(242717, 231793, 231794, 231795)
+  'The Enrapt One' = @(242718, 231802, 231803, 231804)
+  'The Talus Suzerain' = @(242681, 231469, 231470, 231471)
+  'The Dune Suzerain' = @(242680, 231460, 231461, 231462)
+  'The Elysian Soul Dredge' = @(242683, 231487, 231488, 231489)
+  'Brutal Soul Dredge' = @(242679, 231451, 231452, 231453)
+  'Defiler of Scheol' = @(242720, 231820, 231821, 231822)
+  'Destroyer of Scheol' = @(242722, 231838, 231839, 231840)
+  'Devastator of Scheol' = @(242721, 231829, 231830, 231831)
+  'Devourer of Scheol' = @(242719, 231811, 231812, 231813)
+  'Moochy' = @(242749, 232090, 232091, 232092)
+  'Skulky' = @(242748, 232081, 232082, 232083)
+  'Slinky' = @(242746, 232063, 232064, 232065)
+  'Lurky' = @(242747, 232072, 232073, 232074)
+  'The Adonian Soul Dredge' = @(242755, 232144, 232145, 232146)
+  'Viscious Visitant' = @(242754, 232135, 232136, 232137)
+  'Infernal Demon' = @(242665, 232575, 232576, 232577)
+  'The Adonis Spirit Master' = @(242758, 232171, 232172, 232173)
+  'The Watchdog' = @(242756, 232153, 232154, 232155)
+  'The Abyssal Widow' = @(242760, 232189, 232190, 232191)
+  'The Abysmal Lord' = @(242796, 239491, 239492, 239493)
 }
 $patternQl = @{
   'Ungulera' = 90; 'The Archbile Queen' = 120; 'The Achbile Guardian' = 120
@@ -41,16 +64,26 @@ $patternQl = @{
   'The Stupendous Breeder' = 185; 'The Brobdingnagian Mother' = 185
   'The Penumbral Spirit Hunter' = 165; 'The Indomitable Chimera' = 220
   'Pazuzu' = 220; 'Arch Bigot Aliel' = 255
+  'Black Fang' = 80; 'Silver Fang' = 80; 'The Numb One' = 120; 'The Enrapt One' = 120
+  'The Talus Suzerain' = 90; 'The Dune Suzerain' = 90; 'The Elysian Soul Dredge' = 90
+  'Brutal Soul Dredge' = 85
+  'Defiler of Scheol' = 220; 'Destroyer of Scheol' = 220; 'Devastator of Scheol' = 220; 'Devourer of Scheol' = 205
+  'Moochy' = 165; 'Skulky' = 165; 'Slinky' = 165; 'Lurky' = 165
+  'The Adonian Soul Dredge' = 165; 'Viscious Visitant' = 165; 'Infernal Demon' = 160
+  'The Adonis Spirit Master' = 165; 'The Watchdog' = 165
+  'The Abyssal Widow' = 165; 'The Abysmal Lord' = 160
 }
 # Donors already used by Nascence, plus the captured chimera (LLBE) and heckler (MOOM).
 # Spider uses WROM, the same stand-in Hwall already uses.
 $donorOf = @{
   'hiathlin' = 'ATHL'; 'croaker' = 'CEON'; 'dryad' = 'PODR'; 'spirit' = 'NASI'
   'chimera' = 'LLBE'; 'spider' = 'WROM'; 'leet' = 'LE04'; 'heckler' = 'MOOM'
+  'predator' = 'PDST'; 'mortiig' = 'PIMR'; 'eremite' = 'ALEM'; 'stalker' = 'PUSL'
+  'visitant' = 'NASI'; 'golem' = 'MOOM'; 'demon' = 'TEDM'; 'hydra' = 'LLBE'; 'horror' = 'NASI'
 }
-$standIn = @('dryad', 'spider')
-$bossPrefix = @{ elysium = 'Y'; scheol = 'S'; penumbra = 'P'; inferno = 'I' }
-$addPrefix = @{ elysium = 'W'; scheol = 'T'; penumbra = 'Q'; inferno = 'J' }
+$standIn = @('dryad', 'spider', 'mortiig', 'visitant', 'golem', 'demon', 'hydra', 'horror')
+$bossPrefix = @{ elysium = 'Y'; scheol = 'S'; penumbra = 'P'; inferno = 'I'; adonis = 'R' }
+$addPrefix = @{ elysium = 'W'; scheol = 'T'; penumbra = 'Q'; inferno = 'J'; adonis = 'U' }
 $bands = @(
   @{ Hash = 'DYB1'; Lo = 1;   Hi = 15 }
   @{ Hash = 'DYB2'; Lo = 16;  Hi = 35 }
@@ -74,11 +107,24 @@ function Add-Camp($zone, $name, [int]$level, [int]$pf, $x, $z, $model, $patterns
   })
 }
 
-# Elysium. A place is wired only when the wiki printed a playfield id. Compass labels are not a playfield.
-# 1164,1567 is also the minx camp, so that croaker point stays out.
+# Elysium. Compass labels were checked against playfield size and the nearest client spawn.
+# 1164,1567 is the croaker waypoint on North 4544. 930,1480 is the level-70 kuir, which has no mesh.
+# Predator and mortiig "NO" do not fit North (z max 1884). They sit on East 4543 beside a level-matched spawn.
 Add-Camp 'elysium' 'Hithalin' 85 4541 966 777 'hiathlin' @('Ungulera') @(246310) $false $false
 Add-Camp 'elysium' 'Hithalin' 85 4543 490 1510 'hiathlin' @('Ungulera') @(246310) $false $false
 Add-Camp 'elysium' 'Croaker' 115 4541 634 1383 'croaker' @('The Archbile Queen', 'The Achbile Guardian') @(246309) $false $false
+Add-Camp 'elysium' 'Croaker' 115 4544 1164 1567 'croaker' @('The Archbile Queen', 'The Achbile Guardian') @(246309) $false $false
+Add-Camp 'elysium' 'Predator' 75 4540 745 953 'predator' @('Black Fang', 'Silver Fang') $null $false $false
+Add-Camp 'elysium' 'Predator' 75 4543 861 1919 'predator' @('Black Fang', 'Silver Fang') $null $false $false
+Add-Camp 'elysium' 'Mortiig' 115 4540 556 640 'mortiig' @('The Numb One', 'The Enrapt One') $null $false $false
+Add-Camp 'elysium' 'Mortiig' 115 4543 855 2448 'mortiig' @('The Numb One', 'The Enrapt One') $null $false $false
+Add-Camp 'elysium' 'Eremite' 85 4540 1931 1070 'eremite' @('The Talus Suzerain', 'The Dune Suzerain') $null $false $false
+Add-Camp 'elysium' 'Dryad' 75 4540 1226 1302 'dryad' $null @(246287) $false $false
+Add-Camp 'elysium' 'Dryad' 75 4540 696 914 'dryad' $null @(246287) $false $false
+Add-Camp 'elysium' 'Lost Soul' 80 4540 1434 939 'spirit' @('The Elysian Soul Dredge') $null $true $false
+Add-Camp 'elysium' 'Lost Soul' 80 4543 656 884 'spirit' @('The Elysian Soul Dredge') $null $true $false
+Add-Camp 'elysium' 'Sadistic Soul Dredge' 85 4543 701 940 'spirit' @('Brutal Soul Dredge') $null $false $false
+Add-Camp 'elysium' 'Sadistic Soul Dredge' 85 4540 1548 1008 'spirit' @('Brutal Soul Dredge') $null $false $false
 
 # Scheol upper, playfield 4880. Personal names are a set, not pinned to one coordinate, so the mob name is the family.
 Add-Camp 'scheol' 'Chimera' 130 4880 1306 1580 'chimera' @('Bellowing Chimera', 'Thunderous Chimera') $null $false $false
@@ -96,7 +142,9 @@ Add-Camp 'scheol' 'Spider' 130 4880 1377 1077 'spider' @('Borer') $null $false $
 Add-Camp 'scheol' 'Spider' 130 4880 1386 1030 'spider' @('Borer') $null $false $false
 Add-Camp 'scheol' 'Spider' 130 4880 1397 1055 'spider' @('Borer') $null $false $false
 
-# Scheol lower, playfield 4881. Greek brink bosses are not here: the wiki and Aquarius coordinates disagree.
+# Scheol lower, playfield 4881. Brink bosses use the wiki coordinates: they sit on the level-matched spawns.
+# Aquarius prints the same camps with rounded figures.
+$scheolFour = @('Defiler of Scheol', 'Destroyer of Scheol', 'Devastator of Scheol', 'Devourer of Scheol')
 Add-Camp 'scheol' 'Leet' 130 4881 790 1173 'leet' $null $null $false $false
 Add-Camp 'scheol' 'Leet' 130 4881 792 1174 'leet' $null $null $false $false
 Add-Camp 'scheol' 'Croaker' 130 4881 1658 1216 'croaker' @('Iunmin', 'Marem') $null $false $false
@@ -105,6 +153,13 @@ Add-Camp 'scheol' 'Croaker' 130 4881 1700 1246 'croaker' @('Iunmin', 'Marem') $n
 Add-Camp 'scheol' 'Croaker' 130 4881 1722 1198 'croaker' @('Iunmin', 'Marem') $null $false $false
 Add-Camp 'scheol' 'Croaker' 130 4881 1804 1306 'croaker' @('Iunmin', 'Marem') $null $false $false
 Add-Camp 'scheol' 'Croaker' 130 4881 1819 1383 'croaker' @('Iunmin', 'Marem') $null $false $false
+Add-Camp 'scheol' 'Naxos' 200 4881 1854 1536 'demon' $scheolFour $null $true $false
+Add-Camp 'scheol' 'Lesvos' 210 4881 1828 1578 'demon' $scheolFour $null $true $false
+Add-Camp 'scheol' 'Kalymnos' 210 4881 1736 1680 'demon' $scheolFour $null $true $false
+Add-Camp 'scheol' 'Scheol Demon' 210 4881 1682 1711 'demon' $scheolFour $null $true $false
+Add-Camp 'scheol' 'Kefallonia' 220 4881 1755 1850 'hydra' $scheolFour $null $false $false
+Add-Camp 'scheol' 'Sifnos' 200 4881 1790 1558 'horror' $null $null $false $false
+Add-Camp 'scheol' 'Poros' 220 4881 1556 1772 'horror' $null $null $false $false
 
 # Penumbra. Rows whose playfield id is flagged as a guess stay out.
 Add-Camp 'penumbra' 'Skedadding Spirit' 172 4321 2345 1937 'spirit' @('The Penumbral Spirit Hunter') $null $false $false
@@ -123,6 +178,48 @@ Add-Camp 'inferno' 'Limnos' 250 4605 3110 2980 'heckler' @('Pazuzu') $null $true
 Add-Camp 'inferno' 'Syros' 250 4605 3200 2970 'heckler' @('Pazuzu') $null $true $false
 Add-Camp 'inferno' 'Crete' 250 4605 3130 3010 'heckler' @('Pazuzu') $null $true $false
 Add-Camp 'inferno' 'Pursued Spirit' 215 4605 710 1100 'spirit' @('Arch Bigot Aliel') $null $false $false
+
+# Adonis. Outdoor camps are City 4872. The Silent Pit is the Abyss district on 4873.
+# Sinful Souldredge's cut-off coordinates stay out. CrackerJack Sleeves has no itemnames row.
+$toundra = @('Moochy', 'Skulky')
+$island = @('Slinky', 'Lurky')
+$platformSoul = @('The Adonian Soul Dredge', 'Infernal Demon')
+$platformVisit = @('Viscious Visitant', 'Infernal Demon')
+$sacellumSpirit = @('The Adonis Spirit Master', 'Infernal Demon')
+$sacellumSoul = @('The Watchdog', 'Infernal Demon')
+$pit = @('The Abyssal Widow', 'The Abysmal Lord')
+Add-Camp 'adonis' 'Stealing Dryad' 150 4872 920 2440 'dryad' $toundra @(248420) $false $false
+Add-Camp 'adonis' 'Snaking Dryad' 150 4872 865 2500 'dryad' $toundra @(245674) $false $false
+Add-Camp 'adonis' 'Mooching Dryad' 150 4872 985 2575 'dryad' $toundra @(245582) $false $false
+Add-Camp 'adonis' 'Skulking Dryad' 150 4872 1120 2635 'dryad' $toundra $null $false $false
+Add-Camp 'adonis' 'Lurking Dryad' 150 4872 1230 2800 'dryad' $toundra @(245577) $false $false
+Add-Camp 'adonis' 'Slinking Dryad' 160 4872 1675 2695 'dryad' $island $null $false $false
+Add-Camp 'adonis' 'Slinking Dryad' 160 4872 1710 2830 'dryad' $island $null $false $false
+Add-Camp 'adonis' 'Mooching Dryad' 160 4872 1750 2835 'dryad' $island $null $false $false
+Add-Camp 'adonis' 'Skulking Dryad' 160 4872 1615 2705 'dryad' $island $null $false $false
+Add-Camp 'adonis' 'Lurking Dryad' 160 4872 1650 2835 'dryad' $island $null $false $false
+Add-Camp 'adonis' 'Lurking Dryad' 160 4872 1665 2780 'dryad' $island $null $false $false
+Add-Camp 'adonis' 'Snatching Souldredge' 150 4872 2640 2480 'spirit' $platformSoul $null $false $false
+Add-Camp 'adonis' 'Gashing Souldredge' 150 4872 2900 2580 'spirit' $platformSoul $null $false $false
+Add-Camp 'adonis' 'Scratching Souldredge' 150 4872 2665 2560 'spirit' $platformSoul $null $false $false
+Add-Camp 'adonis' 'Tearing Souldredge' 150 4872 2765 2640 'spirit' $platformSoul $null $false $false
+Add-Camp 'adonis' 'Wilted Visitant' 150 4872 2890 2500 'visitant' $platformVisit $null $false $false
+Add-Camp 'adonis' 'Wobbly Visitant' 150 4872 2710 2490 'visitant' $platformVisit $null $false $false
+Add-Camp 'adonis' 'Whispering Visitant' 150 4872 2810 2480 'visitant' $platformVisit $null $false $false
+Add-Camp 'adonis' 'Weary Visitant' 150 4872 2770 2590 'visitant' $platformVisit $null $false $false
+Add-Camp 'adonis' 'Corrupt Spirit' 155 4872 1940 2240 'spirit' $sacellumSpirit $null $false $false
+Add-Camp 'adonis' 'Vile Spirit' 155 4872 1750 2245 'spirit' $sacellumSpirit $null $false $false
+Add-Camp 'adonis' 'Wiked Souldredge' 155 4872 1930 2210 'spirit' $sacellumSoul $null $false $false
+Add-Camp 'adonis' 'Wiked Souldredge' 155 4872 2015 2415 'spirit' $sacellumSoul $null $false $false
+Add-Camp 'adonis' 'Sinful Souldredge' 155 4872 1743 2200 'spirit' $sacellumSoul $null $false $false
+Add-Camp 'adonis' 'Trip' 160 4873 1770 1490 'stalker' $pit $null $false $true
+Add-Camp 'adonis' 'Trap' 160 4873 1715 1460 'stalker' $pit $null $false $true
+Add-Camp 'adonis' 'Trup' 160 4873 1730 1530 'stalker' $pit $null $false $true
+Add-Camp 'adonis' 'Tiny' 160 4873 1690 1510 'stalker' $pit $null $false $true
+Add-Camp 'adonis' 'Cranky Golem' 195 4872 1149 870 'golem' $null @(245320) $false $false
+Add-Camp 'adonis' 'Irascible Golem' 195 4872 863 1306 'golem' $null @(245481) $false $false
+Add-Camp 'adonis' 'Crabby Golem' 195 4872 786 1013 'golem' $null @(245321, 245372) $false $false
+Add-Camp 'adonis' 'Cantankerous Golem' 195 4872 784 896 'golem' $null @(245339, 245355) $false $false
 
 function Band-Of([int]$level) {
   foreach ($b in $script:bands) { if ($level -ge $b.Lo -and $level -le $b.Hi) { return $b.Hash } }
@@ -156,7 +253,12 @@ foreach ($m in $discRx.Matches($sql)) {
   if (-not $itemName.ContainsKey($id)) { $itemName[$id] = $name }
 }
 foreach ($id in @(150504, 150503, 155190, 155192, 155191, 155193)) { $nanoIds[$id] = $true }
-$expect = @{ 246309 = 'Cuirass'; 246310 = 'Ring' }
+$expect = @{
+  246309 = 'Cuirass'; 246310 = 'Ring'; 246287 = 'Pelisse'
+  245674 = 'Herodotus'; 245582 = 'Cleaver'; 248420 = 'Boots'; 245577 = 'Pistol'
+  245320 = 'Eye'; 245321 = 'Headache'; 245372 = 'Doubleknit'; 245339 = 'Cantankerous'
+  245355 = 'Fingerspitzgefuhl'; 245481 = 'Opportunity'
+}
 foreach ($id in @($expect.Keys)) {
   if (-not $itemName.ContainsKey($id)) { throw "itemnames missing $id" }
   if ($itemName[$id] -notlike ('*' + $expect[$id] + '*')) { throw "AOID $id is '$($itemName[$id])'" }
@@ -500,19 +602,19 @@ foreach ($id in ($byPf.Keys | Sort-Object)) {
   }
 }
 $skips = @(
-  'SKIP elysium no playfield id (compass label only): Predator, Mortiig, Dryad'
-  'SKIP elysium 1164,1567 and 930,1480: printed on two camps, not resolved (croaker north, minx, Unredeemed Kuir)'
-  'SKIP elysium no donor: Eremite, Lost Soul, Minx, Sadistic Soul Dredge, Unredeemed Kuir'
-  'SKIP scheol no donor: Beit, Girder, Eremite, Rash, Shadow, Demon, Hydra, Minx, lower spider range, hiathlin range, soul dredges'
-  'SKIP scheol Greek brink: wiki and Aquarius coordinates disagree (Naxos, Lesvos, Kalymnos, Sifnos, Poros). Both stay recorded, neither is placed'
-  'SKIP adonis: outdoor areas have coordinates and no playfield id (City 4872 vs Abyss 4873). Sinful Souldredge extra coordinates stay unguessed'
-  'SKIP penumbra no donor: rafter, stalker, hiisi, eremite, and unnamed valley bosses'
+  'SKIP minx: 930,1480 is the level-70 kuir on West 4541, and 1164,1567 is the croaker on North 4544. The minx has no coordinate of its own'
+  'SKIP Unredeemed Kuir: 4541 930,1480 matches the level-70 spawn, and no kuir mesh was captured'
+  'SKIP scheol camps still out: girder, beit, rash, shadow, eremite field, lower spider range, hiathlin range, soul-dredge field, minx'
+  'SKIP adonis Sinful Souldredge extra coordinates were cut off. CrackerJack Sleeves, Commanders Ceremonial Chest, and Golems Warm Notum Hood have no itemnames row'
+  'SKIP penumbra no donor or not in this pass: rafter, hiisi, and unnamed valley bosses'
   'SKIP penumbra playfield id is flagged as a guess: Frozen Plateau, west, extreme north, The Pipe'
   'SKIP penumbra no coordinate: Daring Dryad, Skyros, Folegandros, Alonissos, Lefkodo, Maar, Wing, Malah-Eadem'
-  'SKIP inferno no coordinate: Chimera Drivers'
+  'SKIP inferno Chimera Drivers: the Galahad page lists them with no coordinate'
   'SKIP inferno no donor: dragon, shadow, afreet, medusa, and the named bosses whose family is blank (including Nyame and the Fester Leila set)'
-  'SKIP inferno spirit hunter has no donor (Devoted Spirit Hunter, Bigot Nzaemihiel)'
-  'SKIP pandemonium: raids, not dynas'
+  'SKIP inferno spirit hunter has no separate camp in this pass (Devoted Spirit Hunter, Bigot Nzaemihiel)'
+  'SKIP nascence Papageno: he walks, and no source gives a spot. 653,1323 is the Paradise entrance'
+  'SKIP nascence heckler runs other than Steppe 4311 170,1950. Core and Two Mountains starts are not on a level-80 heckler'
+  'SKIP pandemonium raids, research only. Caina 4328, Antenora 4329, Ptolemea 4330 are 604x804. Judecca 4331 is 400x400 indoor. Also 4389, 4390, 4391, and tower 4900. No coordinates and no item ids'
 )
 $report = @("sl templatesNew=$($made.Count) pools=$poolN pieces=$($pieceLeaves.Count) spawnsAdded=$added places=$($camps.Count)") + $lines + $skips
 $report | Set-Content -Encoding UTF8 (Join-Path $PSScriptRoot 'Build-SLDynas.last.txt')

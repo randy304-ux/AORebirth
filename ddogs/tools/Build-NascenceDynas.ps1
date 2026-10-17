@@ -34,6 +34,7 @@ $donorOf = @{
   'crippler' = 'CIOG'; 'hiathlin' = 'ATHL'; 'croaker' = 'CEON'; 'spinetooth' = 'SIHA'
   'spirit' = 'NASI'; 'imp' = 'IMDR'; 'leet' = 'LE04'
   'dryad' = 'PODR'; 'mortiig' = 'PIMR'; 'feather' = 'SWSI'; 'claw' = 'PDST'; 'spider' = 'WROM'
+  'heckler' = 'MOOM'
 }
 $standIn = @('dryad', 'mortiig', 'feather', 'claw', 'spider')
 $bands = @(
@@ -125,6 +126,8 @@ Add-Camp 'Vile Weaver' 35 4311 221 1166 'weaver' @('Careening Death', 'Careening
 Add-Camp 'Remur-Nefer' 38 4311 251 561 'croaker' @('Tcheser', 'Upenpet') $null '' $false
 Add-Camp 'Nesbaneb' 40 4311 143 663 'croaker' @('Tcheser', 'Upenpet') $null '' $false
 Add-Camp 'Takheperu' 35 4311 176 748 'croaker' @('Tcheser', 'Upenpet') $null '' $false
+# AOWiki Hunting Grounds Steppe run start. The spawn 12 m away is a level-80 MOOM. Not a named unique.
+Add-Camp 'Heckler of Metals' 80 4311 170 1950 'heckler' $null $null '' $false
 
 function Band-Of([int]$level) {
   foreach ($b in $script:bands) { if ($level -ge $b.Lo -and $level -le $b.Hi) { return $b.Hash } }
@@ -349,6 +352,7 @@ foreach ($c in $camps) {
     $note = "Aquarius Nascence v1.2. Donor $($donorOf[$c.Model]). "
     if ($c.Model -in $standIn) { $note += "Stand-in mesh. " }
     if ($c.ModelGuess) { $note += "Family is a guess. " }
+    if ($c.Name -eq 'Heckler of Metals') { $note += 'AOWiki Hunting Grounds Steppe run start, not a named unique. ' }
     if ($pool.LevelMod -gt 25) { $note += "LevelMod $($pool.LevelMod) so the pattern QL is inside the roll. " }
     $note += 'Y from the nearest client spawn.'
     $row = [pscustomobject]@{ Hash = $pool.Hash; Repeats = 1; Chance = 100; LevelMod = $pool.LevelMod; CountMin = 5; CountMax = 7 }

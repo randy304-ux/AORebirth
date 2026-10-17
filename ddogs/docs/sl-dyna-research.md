@@ -162,7 +162,7 @@ Which Nascence section sits on 4310 / 4311 / 4312 is taken from Aquarius heading
 
 Aquarius v1.2. Outdoor named bosses. Training-grounds bosses are included and flagged: AOWiki says that starter area is closed and Arete replaced it. Dungeon bosses (Havaris, floor bosses) are not dynas and are left out.
 
-Hecklers of Metals / Stones / Earth are level 80 everywhere Aquarius mentions them. It does not give them camp coordinates. Lord of the Void is "level 250+", one of the highest mobs in the game, walking the Wilds. Ran-Roth-Or is level 110 at 480, 1822 and also walks. Hwall is level 110 at 833, 1832 and also walks. Those three are uniques, not a normal dyna camp.
+Hecklers of Metals / Stones / Earth are level 80 everywhere Aquarius mentions them. Aquarius does not give them camp coordinates. AOWiki Hunting Grounds gives run starts; only Steppe 170, 1950 on Wilds 4311 sits on a level-80 heckler, and that one camp is placed. Lord of the Void is "level 250+", one of the highest mobs in the game, walking the Wilds. Ran-Roth-Or is level 110 at 480, 1822 and also walks. Hwall is level 110 at 833, 1832 and also walks. Those three are uniques, not a normal dyna camp.
 
 Training grounds (retired), bosses that "can drop symbiants":
 
@@ -303,16 +303,34 @@ The Mordeth garden-key page names more Inferno dynas (spirits in the Yuttos Mars
 
 Albtraum's five Xan Essence crystals (Divided Loyalty, Gruesome Misery, Sister Merciless, Sister Pestilence, Summoned Terror) drop inside the instance, especially on mini-bosses and the keeper. They are not outdoor dynas.
 
+## Finish pass
+
+Checked against our playfield metadata, the nearest client spawn, and the district name. The wide-map pixel fit stayed unused. Guide coordinates won when a level-matched spawn sat on them.
+
+Adonis outdoor camps are City 4872 (4004x4004). The same coordinates on Abyss 4873 are a different stack. The Silent Pit bosses (Trip, Trap, Trup, Tiny) are the exception: 4873's district is "The Silent Pit" and the spawns are 3 to 6 m away at level 155-160. On 4872 those points are open ocean. There is no third outdoor Adonis playfield in metadata or SLmap.xml. Hallway 4877 is the indoor entrance. Silent Pit bosses are level 160, the top of the guide's 155-160 band.
+
+Elysium 930, 1480 is West 4541, Garden District I, one metre from a level-70 spawn. That is the Unredeemed Kuir, not the level-115 minx. No kuir mesh was captured, so the kuir is not spawned, and the minx is not dropped on that point. 1164, 1567 is North 4544, Trial District, two metres from a level-115 spawn, which is the croaker waypoint. The minx is not placed there either. Predator 745, 953 and mortiig 556, 640 fit South 4540. Predator 861, 1919 and mortiig 855, 2448 do not fit North (z max 1884). They fit East 4543, beside a level-75 spawn and a level-115 TUAN spawn. Eremite 1931, 1070 is South 4540, Silt Lakes. Dryads, lost souls, and the sadistic soul dredges use the wiki playfield when one is printed, and South or East when the compass point is the only label and the spawn level matches.
+
+Scheol brink uses the wiki coordinates. They sit on the client spawns (Sifnos 2 m, Naxos 3 m, Kalymnos 7 m, and the hash ALYM contains the name). Aquarius is the same camps with rounded figures. Respawn stays 180 s. Naxos is level 200, Lesvos and Kalymnos 210, the unnamed demon 210, Kefallonia 220, Sifnos 200, Poros 220, taken from those spawns. The four destroyer patterns go on the demon and hydra rows. Sifnos and Poros have a blank drop line, so they get the band discs only. Naxos, Lesvos, Kalymnos, and the unnamed demon (named Scheol Demon here) use the demon family as a guess. Kefallonia is the hydra the wiki names. Sifnos and Poros are the horror the wiki names.
+
+Nascence Papageno still has no spot. He walks between the Starry Feathers camps, which are already placed, as is Papagena. Czech 653, 1323 is the Papageno's Paradise entrance. Hecklers of Metals, Stones, and Earth are level 80. AOWiki Hunting Grounds gives three run starts, not unique camps. Only the Steppe start 170, 1950 sits on a heckler: Wilds 4311, 12 m from a level-80 MOOM in the Gypsie Camp district. Core 1400, 1810 and Two Mountains 190, 425 do not. One Heckler of Metals is placed at that Steppe start. Stones and Earth are not given invented offsets.
+
+Chimera Drivers stay out. The Galahad page lists them with the Monitor and the Trainer and does not give them a coordinate.
+
+Meshes used for the new families: eremite ALEM 226823, predator PDST 209022, stalker PUSL 209022, spirit and soul dredge NASI 209215. Stand-ins, flagged on the template: dryad PODR (already used), mortiig PIMR (already used), visitant NASI, golem MOOM, Scheol demon TEDM, hydra LLBE, horror NASI. The heckler donor is MOOM itself, mesh 214982, and is not a stand-in. Girder, beit, rash, shadow, hiisi, dragon, afreet, medusa, kuir, and minx still have no defensible body, so those camps stay out.
+
+Pinned uniques that itemnames.sql actually contains: Pelisse of the Elysian Nymph 246287, Ring of Herodotus 245674, Chief Cook Cleaver 245582, Bunny Boots of Gridstream Productions 248420, Jobe Explorer Personal Pistol 245577, Cranky Golem Eye 245320, The Cause of Headache 245321, Doubleknit Pants 245372, Cantankerous 245339, Fingerspitzgefuhl 245355, Spirit of Opportunity 245481. CrackerJack Sleeves, Commander's Ceremonial Chest, and Golem's Warm Notum Hood have no row, so they are not dropped. Cranky drops the Eye only. Irascible drops Spirit of Opportunity only.
+
 ## Pandemonium
 
-Not dynas. AOWiki: 18 raid bosses.
+Not dynas. Research only. AOWiki: 18 raid bosses. Not spawned.
 
 - Portal bosses, no loot, respawn 30 minutes, in order: Zodiac, Timid Spectral Scourge, Senior Subjugator, Pandemonium Subjugator.
 - Twelve zodiac bosses, one of three at each of four places, respawn 6 hours. West: Aries, Leo, Virgo. East: Aquarius, Cancer, Gemini. Middle: Libra, Pisces, Taurus. North: Capricorn, Sagittarius, Scorpio. Coordinates are not on the page.
 - The Night Heart, respawn 6 hours. Belts and high symbiants. No item ids on the page.
 - The Beast. Respawn was 18 hours, then 9 hours after the 17.2 Lost Eden patch. Unique and nodrop loot. No item ids on the page.
 
-Playfield ids: Caina 4328, Antenora 4329, Ptolemea 4330, Judecca 4331.
+Playfield ids from our metadata: Caina 4328, Antenora 4329, and Ptolemea 4330 are outdoor 604x804. Judecca 4331 is indoor 400x400. Also present: instance 4389, Notum Vein 4390, Judecca instance 4391, and Pandemonium Tower Gigantomachy 4900 (indoor 804x804). The wiki still has no coordinates and no item ids for the 18 bosses.
 
 ## Left out on purpose
 
@@ -343,7 +361,7 @@ Mesh id is stat 359 on a captured NpcTemplates donor. A stand-in is flagged: the
 | Mortiig | 209196 | PIMR | Stand-in. This is the Hiathlin mesh. |
 | Feathers / Papagena | 208922 | SWSI | Stand-in. No feathers mesh was captured. |
 
-Eremite, girder, beit, rash, demon, shadow, hydra, minx, rafter, stalker, hiisi, visitant, golem, dragon, and the Inferno uniques still have no captured mesh. Those zones are not wired.
+Eremite ALEM, predator PDST, and stalker PUSL are captured meshes and are used as themselves. Visitant, golem, Scheol demon, hydra, and horror use a flagged stand-in (NASI, MOOM, TEDM, LLBE, NASI). Girder, beit, rash, shadow, hiisi, dragon, afreet, medusa, kuir, and minx still have no captured mesh. Those camps are not wired.
 
 ## Pattern pieces
 
@@ -357,14 +375,14 @@ Imk's complete is 232005, piece QL 182. The earlier gap on that id is closed.
 - Nascence section-to-playfield is the Aquarius heading, except Malah-Aya: the captured QEGO spawn is on 4310 at 976.4, 31.6, 1599.9, and the training-ground bosses already placed are on 4313. Adsunt was shifted +8 X off 1702, 1576 because Annos is printed on the same point.
 - A fixed-QL piece only covers a roll at or above its QL. Where the piece sits above boss level x 1.25, that camp's LevelMod is widened so the top of the window reaches the piece (and the lowest instruction disc in its band). The Empty Data Receptacle (275056, QL 1) is in every Nascence pool so the 5-7 count still resolves on the low rolls. The 1-15 band has no instruction disc at all. The 16-35 band's discs are QL 40 and 43.
 - Armor-family lines (Outsider, Sanguisugent, Killer, Pernicious, Exploiter) are not pinned to one AOID. They are not invented onto a boss.
-- Elysium coordinate collisions at 930, 1480 and 1164, 1567 are in the wiki. Not resolved.
+- Elysium 930, 1480 is the level-70 kuir on West 4541. 1164, 1567 is the level-115 croaker on North 4544. The minx is not given either point.
 - Elysium lost-soul respawn is blank. Minx and kuir families are blank.
 - Scheol Haxxor drops, Hiathlin drops, Sifnos drops, and several "???" lines are blank in the source.
-- Scheol Greek-boss coordinates disagree between AOWiki and Aquarius.
+- Scheol Greek-boss coordinates disagree between AOWiki and Aquarius. The wiki figures are the ones on the client spawns, and those are the ones placed.
 - Nascence playfield id for a section is the Aquarius heading mapped onto the three wiki ids. Training-grounds id is unknown.
 - Nascence Adsunt and Annos share 1702, 1576 in Aquarius.
-- Adonis Sinful Souldredge is missing the extra coordinates the Aquarius cell cut off. The Prominence "Uniques" loot line is not pinned to one boss.
-- Chimera Drivers have no coordinate. The Mordeth-side Inferno dyna list still did not survive a clean fetch. Inferno's playfield id is 4605 from SLmap.xml.
+- Adonis outdoor camps are City 4872, except the Silent Pit on Abyss 4873. Sinful Souldredge is still missing the extra coordinates the Aquarius cell cut off. The Prominence "Uniques" loot line is not pinned to one boss.
+- Chimera Drivers have no coordinate, so they are not placed. The Mordeth-side Inferno dyna list still did not survive a clean fetch. Inferno's playfield id is 4605 from SLmap.xml.
 - Penumbra Frozen Plateau bosses other than Ipakut, Skyros, Folegandros, Alonissos, Lefkodo, Maar, Wing, and A Daring Dryad have no coordinate. Imk's complete AOID was not pulled.
 - Auno pages were not opened. Ids are from itemnames.sql, which is the same AOID space.
 - No source in this pass said SL dynas drop 5 to 7 items. That RK house rule is not applied here.
