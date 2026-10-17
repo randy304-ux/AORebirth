@@ -333,3 +333,8 @@ Live after restart 22:56 (online count 0, backup `I:\AO\backups\cellao_codex_cle
 Roving Eye and Baleful Eye use the Distracting Sphere mesh 96194 at scale 91. Neleb is a Nanomage male (breed 3, head 40173, body 26092) wearing Nano-master Robe 274956 and holding Nightmare Battlerod 274955. His drops are unchanged.
 
 Live after restart 23:41 (online count 0, backup `I:\AO\backups\cellao_codex_clean-20261016-2339-steps-of-madness-looks.sql`, 18647190 bytes): leaves=1170, quests=167 skipped=0, Knubot scripts=83 rejected=0. Ports 7500 pid 100532, 7501 pid 105032, 7012/6996 pid 105400, 8098 and 80 pid 81092. No new zone errors. Engines left up. Zone build 0 errors.
+
+## 2026-10-17 00:00 - Dyna aura land packets
+`.give buff` draws the glow with CastNanoSpell (Unknown1=1), FinishNanoCasting, then SetNanoDuration. The dyna re-apply was sending only SetNanoDuration, and the wear cast's land had already gone out before the NPC had a cell. The re-apply now calls that same land once the NPC has a cell, and a player who walks into range gets those three packets.
+
+Live after restart 00:00 (online count 0 at 23:58:39, immediately before stop; backup `I:\AO\backups\cellao_codex_clean-20261016-2358-dyna-aura.sql`, 18648156 bytes): leaves=1170 families=79, quests=167 skipped=0, Knubot scripts=83 rejected=0. Ports 7500 pid 106172, 7501 pid 97912, 7012/6996 pid 106232, 8098 and 80 pid 81092. No new zone errors. Engines left up. Zone build 0 errors.
