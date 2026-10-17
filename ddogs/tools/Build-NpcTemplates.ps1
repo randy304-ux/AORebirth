@@ -385,6 +385,8 @@ foreach ($nf in $npcSnap.Keys) {
 & "$PSScriptRoot\Build-Appearance.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Live-only fixes no other builder makes (fleas/waste collector looks, etc.): Build-AreteLiveFixes.ps1. Runs after Build-Appearance.ps1.
 & "$PSScriptRoot\Build-AreteLiveFixes.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Randy's 2026-10-17 Arete list (waste boss camp, Cleanmeister dyna, Peacekeepers, Barry, Marco, Omni-AF gear): Build-AreteFinish.ps1.
+& "$PSScriptRoot\Build-AreteFinish.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Dyna boss loot last, so a full rebuild puts the 5-7 band tables back after the Arete chain.
 & "$PSScriptRoot\Build-DynaLoot.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 

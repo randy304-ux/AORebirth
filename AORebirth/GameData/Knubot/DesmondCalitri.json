@@ -63,7 +63,7 @@
     "Lines":  {
                   "offer_strike":  {
                                        "Text":  [
-                                                    "Buy a plain Bronto Burger from Barry, 30 credits, first food row on the far right. I will hand you one because Barry\u0027s counter is not stocked.",
+                                                    "Buy a plain Bronto Burger from Barry, 30 credits, first food row on the far right. Barry\u0027s stall is due west, down the street.",
                                                     "{delay 1}Bring it back. Then kill two Protesters, level 2. Then Cedric Harding, level 6, the organizer. Violent Protesters may join him; they are not a separate count."
                                                 ],
                                        "Replies":  [
@@ -73,9 +73,8 @@
                                    },
                   "give_strike":  {
                                       "Text":  [
-                                                   "{spawn QBRG 1}",
                                                    "{givequest ADP0}",
-                                                   "The burger first. Then the strikers."
+                                                   "The burger first. Buy the plain one from Barry, then the strikers."
                                                ]
                                   },
                   "done_strike":  {
