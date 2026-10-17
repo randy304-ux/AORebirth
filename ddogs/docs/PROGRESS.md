@@ -295,3 +295,10 @@ Fausto stays in the white shirt and black pants from the guide screenshot. No ti
 
 ## 2026-10-16 - Research window bar
 Stat 263 is the personal XP-share slider (the percent of earned XP that goes to research), and stat 264 is the global slider. The client sends both. Banked research XP stays on server-only stat 10263. The completion bar would need the ResearchUpdate reply, and that packet layout is still unknown, so it was not invented. `.research` still reports banked XP against the tier cost.
+
+## 2026-10-16 - Store external links
+The Info window is the Awesomium shop view. A card whose URL contains `://` is written with `target="_blank"`, which is the click Awesomium delivers to `AweOpenExternalLinkCallback` in GUI.dll. That function already calls `ShellExecuteA` for `http://` and `https://`, but only when `BrowserView::GetExternalLinksEnabled` is true. The Store window leaves the flag off, so the callback returns and the click does nothing. `chatcmd:///` and ordinary in-window links use a different callback.
+
+version.dll now NOPs that one six-byte jump (GUI.dll RVA 0x10B6C6, signature matched once in the 2023-06-02 GUI.dll). The http(s) test stays. Offline self-test passed. The live client folder was not modified.
+
+LAN `http://192.168.1.68/index.app`, `http://192.168.1.68:8098/index.app`, and public `http://71.75.37.88:8098/index.app` all return the Info page with Auno, AO-Universe, and the Dungeon Dogs home link as `target="_blank"`. Published in the existing launcher 2026.10.16-1515 patch. client patch sha256 `4ef31b1670463109be0529d01fb1ebc3807779e5a98531d25f75a886d63754ce`. Patch zip sha256 `1b06c0dbd484e457bc7edb1341bceb4d696da0d875f326a4623dc21ffb38607f`. `https://dungeondogs.org/downloads/ao/version.json` serves that hash. Zone engines were not restarted.

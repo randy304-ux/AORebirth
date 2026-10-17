@@ -2,6 +2,7 @@
 #include "roomspace_fix.h"
 #include "build_info.h"
 #include "daily_login_routing.h"
+#include "external_link_patch.h"
 
 #include <cstdio>
 
@@ -25,8 +26,14 @@ int main()
         return 1;
     }
 
+    if (!aorf::RunExternalLinkPatchSelfTest())
+    {
+        std::fprintf(stderr, "AO external-link patch self-test failed.\n");
+        return 1;
+    }
+
     std::printf(
-        "AORebirthClientPatch self-test passed: version=%s source=%s loginkey=memory-scan dailylogin=bounded-routing crash-repairs=enabled.\n",
+        "AORebirthClientPatch self-test passed: version=%s source=%s loginkey=memory-scan dailylogin=bounded-routing crash-repairs=enabled externallink=http-shellexecute.\n",
         aorf::ClientPatchVersion,
         aorf::ClientPatchSourceSha);
     return 0;

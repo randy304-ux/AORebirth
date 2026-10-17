@@ -5,6 +5,7 @@
 #include "crash_dump.h"
 #include "build_info.h"
 #include "daily_login_routing.h"
+#include "external_link_patch.h"
 #include "gui_rect_fix.h"
 #include "login_key_patch.h"
 #include "logging.h"
@@ -17,6 +18,14 @@
 namespace
 {
     LONG WorkerStarted = 0;
+
+    struct ExternalLinkPatchOnExit
+    {
+        ~ExternalLinkPatchOnExit()
+        {
+            aorf::InstallExternalLinkPatch();
+        }
+    };
 
     bool IsAnarchyOnlineProcess()
     {
@@ -45,6 +54,8 @@ namespace
     DWORD WINAPI DeferredInstall(LPVOID)
     {
         aorf::LogInit();
+        ExternalLinkPatchOnExit externalLinkPatch;
+        (void)externalLinkPatch;
         aorf::Log(
             "START product=AORebirthClientPatch version=%s source=%s mode=combined pid=%lu",
             aorf::ClientPatchVersion,
