@@ -129,8 +129,32 @@ namespace ZoneEngine_New.Core.Inventory
                     out Item item,
                     out LootableDynel? lootSource))
             {
+                // Logged so a refused corpse drag (Randy 2026-10-17, KIWD 37 Hunter Crossbow) shows which source the client named.
+                _logger.Warn(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "ClientMoveItemToInventory unresolved source char={0} source={1}:{2} handle={3} slot={4} target={5} reason={6}",
+                        player.Identity.Instance,
+                        message.SourceContainer.Type,
+                        message.SourceContainer.Instance,
+                        message.SourceContainer.Type == IdentityType.Backpack ? DecodeBackpackHandle(message.SourceContainer) : -1,
+                        message.SourceContainer.Type == IdentityType.Backpack ? DecodeBackpackSlot(message.SourceContainer) : -1,
+                        message.TargetPlacement,
+                        DescribeLootSourceFailure(player, message.SourceContainer)));
                 return;
             }
+
+            if (lootSource != null)
+                _logger.Info(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Loot move char={0} corpse={1} item={2} low={3} ql={4} slot={5}",
+                        player.Identity.Instance,
+                        lootSource.Identity,
+                        item.Name,
+                        item.LowId,
+                        item.Quality,
+                        sourceSlot));
 
             bool sourceIsWear = sourcePage.Identity.Type.IsWearPage();
             if (!player.Inventory.TryResolveTargetSlot(
@@ -468,6 +492,32 @@ namespace ZoneEngine_New.Core.Inventory
 
             instanceId = item.InstanceId;
             return instanceId > 0;
+        }
+
+        static string DescribeLootSourceFailure(Player player, Identity source)
+        {
+            if (source.Type != IdentityType.Backpack)
+                return "not a backpack/corpse identity";
+            int handle = DecodeBackpackHandle(source);
+            int slot = DecodeBackpackSlot(source);
+            Playfield? playfield = player.Playfield;
+            if (playfield == null)
+                return "no playfield";
+            foreach (Dynel dynel in playfield.GetRequiredService<DynelRegistry>().Dynels())
+            {
+                if (dynel is not LootableDynel lootable || lootable.InventoryHandle != handle)
+                    continue;
+                if (lootable.OpenerIdentity != player.Identity)
+                    return "opener is " + lootable.OpenerIdentity;
+                if ((lootable.Loot.Flags & ContainerFlags.CanRemove) == 0)
+                    return "loot container lacks CanRemove";
+                if (!lootable.Loot.Content.TryGetValue(slot, out Item? item) || item == null)
+                    return "no item in slot " + slot.ToString(CultureInfo.InvariantCulture) + " (slots: "
+                        + string.Join(",", lootable.Loot.Content.Keys) + ")";
+                return item.Locked ? "item locked: " + item.Name : "unknown";
+            }
+
+            return "no lootable with handle " + handle.ToString(CultureInfo.InvariantCulture);
         }
 
         internal static bool TryResolveSource(

@@ -288,8 +288,11 @@ namespace ZoneEngine_New.Core.Trade
                 && player.GetEdgeDistanceTo(owner != null ? owner : machine) <= RangeCancelDistance
                 && field.GetRequiredService<DynelRegistry>().TryGet(player.Identity, out var currentPlayer)
                 && ReferenceEquals(currentPlayer, player)
-                && field.GetRequiredService<ZoneEngine_New.Core.Mobs.NpcContentActivationService>()
-                    .TryGetShopBinding(machine, out _);
+                && (field.GetRequiredService<ZoneEngine_New.Core.Mobs.NpcContentActivationService>()
+                        .TryGetShopBinding(machine, out _)
+                    // A template vendor (Marco Spida, Barry) whose stock comes from its NpcTemplates ShopStock is bound
+                    // to its own live NPC; without this every Use on it was refused silently (Randy 2026-10-17).
+                    || (owner != null && owner.MobTemplate?.ShopStock is { Count: > 0 } && ReferenceEquals(owner.Shop, machine)));
         }
 
         void HandleAddItem(Player player, TradeSession session, TradeMessage message)

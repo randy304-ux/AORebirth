@@ -259,7 +259,7 @@ namespace ZoneEngine_New.Core.Ai
                 return null;
 
             bool healPet = PetTypes.Slot(pet.Type) == PetTypes.Slot(PetTypes.Heal);
-            if (healPet && pet.Mode is PetMode.Follow or PetMode.Wait)
+            if (healPet && pet.Mode == PetMode.Wait)
                 return null;
 
             if (pet.HealTarget.Instance != 0)

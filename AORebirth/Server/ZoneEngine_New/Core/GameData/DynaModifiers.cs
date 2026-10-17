@@ -60,7 +60,9 @@ namespace ZoneEngine_New.Core.GameData
                 || key.StartsWith("scheol|", StringComparison.OrdinalIgnoreCase)
                 || key.StartsWith("adonis|", StringComparison.OrdinalIgnoreCase)
                 || key.StartsWith("penumbra|", StringComparison.OrdinalIgnoreCase)
-                || key.StartsWith("inferno|", StringComparison.OrdinalIgnoreCase);
+                || key.StartsWith("inferno|", StringComparison.OrdinalIgnoreCase)
+                // Nascence dynas (49 camps) were left out, so they had no aura or dyna size (Randy 2026-10-17).
+                || key.StartsWith("nascence|", StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>Applies the band's named modifier, or a random one, to freshly materialized stats.</summary>

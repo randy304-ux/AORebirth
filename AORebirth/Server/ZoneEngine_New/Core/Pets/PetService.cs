@@ -112,6 +112,9 @@ namespace ZoneEngine_New.Core.Pets
                     controller.Heals = IsHealPet(type) || Mercs.Heals(_gameData.RootPath, hash);
                     npc.BindPet(controller);
                     npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, hash, petLevel));
+                    // A heal pet (the MP's Salvinous) has no merc profession of its own: it casts the doctor's heal band.
+                    if (npc.UploadedNanoIds.Count == 0 && IsHealPet(type))
+                        npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, "MRDR", petLevel));
                     if (Mercs.ByHash(hash) is Mercs.Kind mercKind)
                         DressMerc(npc, mercKind, petLevel, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base));
                     if (healthPercent is > 0 and < 100)

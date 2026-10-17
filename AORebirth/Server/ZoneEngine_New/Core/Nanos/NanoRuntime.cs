@@ -575,7 +575,9 @@ namespace ZoneEngine_New.Core.Nanos
                 CasterIsRecharging = caster.IsInNanoRecharge(nowUtc),
                 // NPC casts are not upload gated; an NPC's list only holds its equipped crystals.
                 IsUploaded = !caster.IsPlayer || caster.UploadedNanoIds.Contains(spell.Id),
-                RequirementsMet = spell.MeetsActionRequirements(
+                // Pets and mercs cast from their crystal list without player skill or nano gates; their templates
+                // carry no nano skills or nano pool, so the gate refused every heal (Randy 2026-10-17).
+                RequirementsMet = caster is NpcCharacter { Pet: not null } || spell.MeetsActionRequirements(
                     stat => caster.Stats.Get(stat),
                     ActionType.ToUse,
                     resolve: ItemTemplate.WithActionTarget(
@@ -583,7 +585,7 @@ namespace ZoneEngine_New.Core.Nanos
                     getTargetStat: recipient == null ? null : stat => recipient.Stats.Get(stat)),
                 TargetExists = recipient != null,
                 TargetIsDead = recipient?.IsDead == true,
-                CurrentNano = caster.Stats.GetOrZero(CharacterStat.CurrentNano),
+                CurrentNano = caster is NpcCharacter { Pet: not null } ? int.MaxValue : caster.Stats.GetOrZero(CharacterStat.CurrentNano),
                 NanoCost = nanoCost
             };
 

@@ -80,7 +80,8 @@ $iraw = $iraw -replace '"QBRG": \{"Templates": \[297042,297042\]\}', '"QBRG": {"
 foreach ($t in @($nt.SCWS.Templates)) {
   $t.Level = 10; SetStat $t '54' 10
   $t.PSObject.Properties.Remove('Textures')
-  SetProp $t 'TextureOverrides' @([pscustomobject][ordered]@{ Material = 'Material #22'; Texture = 95885; Unknown1 = 0; Unknown2 = 0 })
+  # 18:30 pass: the TextureOverride left only the aura in game (Randy 18:18). No override until the material is proven.
+  $t.PSObject.Properties.Remove('TextureOverrides')
   $t.ContentProvenance.CampKey = 'boss|Supreme Collector of Waste|10'
   $t.ContentProvenance.Source = 'Randy reference shot: rust/orange collector among Waste Collectors in the junkyard. Spot FRAG (3533.3, 3.4, 733.7, client L10). Texture 95885 on Material #22 (RDB match to collector texture 17318)'
 }
@@ -109,4 +110,73 @@ $barry = [ordered]@{ Notes = "Barry the Food Vendor (VJTN). Greeting and replies
   Lines = [ordered]@{ hello = [ordered]@{ Text = "Step on up, stranger. I've got the delicous, meaty goodness that you crave."; Replies = @('sell', 'bye') }
     shop = [ordered]@{ Text = '{shop}' }; bye = [ordered]@{ Text = '{close}' } } }
 [IO.File]::WriteAllText((Join-Path $kd 'BarryFoodVendor.json'), ($barry | ConvertTo-Json -Depth 8) + "`n", $u)
+
+# --- 2026-10-17 18:30 pass from Randy's in-game test (18:14-18:21) ---
+$nt = [IO.File]::ReadAllText($npath, $u) | ConvertFrom-Json
+# Supreme Collector: no texture override (body vanished, only the aura drew), plain dyna size, Fire (red) aura so the random
+#   "Big" modifier (x3 HP, x1.3 size on top of x1.5) cannot roll; sane HP for an L10 dyna (Waste Collector L13 = ~150).
+foreach ($t in @($nt.SCWS.Templates)) {
+  $t.PSObject.Properties.Remove('TextureOverrides'); $t.PSObject.Properties.Remove('Textures')
+  SetStat $t '360' 100; SetStat $t '1' 300; SetStat $t '27' 300
+  SetProp $t 'DynaModifier' 'Fire'
+}
+# ICC Peacekeepers: the captured ICC Arbiter Guard (ABGU, same body 254118) carries no breed (4) or sex (59); ours drew as a plain
+#   female human. Drop both to match the capture. Unverified in the client.
+foreach ($k in 'OIUR', 'IPPC') { foreach ($t in @($nt.$k.Templates)) { $t.Stats.PSObject.Properties.Remove('4'); $t.Stats.PSObject.Properties.Remove('59') } }
+# Leonora Marty: AO-U says she lost her card and wants to go shopping. Body was 26092 = "solitus male". Client monster record
+#   203736 "deranged shopper" is the only shopper body in the RDB (guess that it is the bag-carrying shopper).
+foreach ($t in @($nt.LEMY.Templates)) { SetStat $t '359' 203736; SetStat $t '64' 0; SetProp $t 'HasHeadMesh' $false; $t.Stats.PSObject.Properties.Remove('4'); $t.Stats.PSObject.Properties.Remove('59') }
+# Crash site: HX1V/HXHR were made unattackable "dead" bodies. Randy expects live aliens: Zix and Cha'Heru, L10, attackable.
+function LiveClone($donorKey, $name, $lvl) {
+  $d = First $donorKey; $c = Clone $d; $c.Name = $name; $c.Level = $lvl; SetStat $c '54' $lvl
+  $hp = [int]([int]$d.Stats.'1' * $lvl / [Math]::Max(1, [int]$d.Level)); if ($hp -lt 1) { $hp = 1 }; SetStat $c '1' $hp; SetStat $c '27' $hp
+  $c.PSObject.Properties.Remove('Features'); $c
+}
+$t = LiveClone 'ZIXK' 'Alien Spider - Zix' 10; Prov $t 'ZIXK' 'Crash-site HX1V points, live Zix (Randy 18:15: "Dead" Zix could not be attacked)' $null; Put 'HX1V' $t
+$t = LiveClone 'CRDY' "Specialist - Cha'Heru" 10; Prov $t 'CRDY' 'Crash-site HXHR points, live Cha''Heru (Randy 18:15)' $null; SetStat $t '1' 250; SetStat $t '27' 250; Put 'HXHR' $t  # CRDY scaled to L10 was 775 HP, too much for the L10 crash-site area
+# Crickets: the cricket-looking aliens are client body 251782 alien_mini_bug_melee_unrooted = ACFJ "Scout - Jaax'Sinuh".
+$t = LiveClone 'ACFJ' "Scout - Jaax'Sinuh" 10; Prov $t 'ACFJ' 'Crickets around the crashed ship (Randy 18:15). Count and spots guessed' $null; Put 'JXSC' $t
+# Leet hill (YODE x20, untemplated pink, L10-13) is leets; GADP on the hill too. Leet King moves to the middle of the hill.
+$le = First 'LE04'
+$bands = foreach ($lvl in 10, 13) { $c = Clone $le; $c.Name = 'Leet'; $c.Level = $lvl; SetStat $c '54' $lvl; $hp = [int]([int]$le.Stats.'1' * $lvl / [Math]::Max(1, [int]$le.Level)); SetStat $c '1' $hp; SetStat $c '27' $hp; Prov $c 'LE04' 'Leet hill between the Princess and 3709.8x743.3 (Randy 18:21). Levels from the client spawn (10-13)' $null; $c }
+SetProp $nt 'YODE' ([pscustomobject]@{ Templates = @($bands) })
+$c = Clone $le; $c.Name = 'Leet'; $c.Level = 13; SetStat $c '54' 13; $hp = [int]([int]$le.Stats.'1' * 13 / [Math]::Max(1, [int]$le.Level)); SetStat $c '1' $hp; SetStat $c '27' $hp; Prov $c 'LE04' 'GADP spot on the leet hill (client L15, shown as a leet L13; guessed)' $null; Put 'GADP' $c
+[IO.File]::WriteAllText($npath, ($nt | ConvertTo-Json -Depth 12) + "`n", $u)
+
+$s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
+$proto = @($s.spawns | Where-Object { $_.hashText -eq '01V1' })[0]
+function AddPoint($hashText, $x, $y, $z, $lmin, $lmax, $resp) {
+  $near = @($s.spawns | Where-Object { $_.hashText -eq $hashText -and [Math]::Abs($_.position[0] - $x) -lt 0.5 -and [Math]::Abs($_.position[2] - $z) -lt 0.5 })
+  if ($near.Count) { return }
+  $p = $proto | ConvertTo-Json -Depth 8 | ConvertFrom-Json
+  $p.hash = 0; $p.hashText = $hashText; $p.manifestHash = 0; $p.minLevel = $lmin; $p.maxLevel = $lmax; $p.respawnTime = $resp; $p.position = @($x, $y, $z); $p.additionalPoints = @()
+  $s.spawns = @($s.spawns) + $p
+}
+foreach ($sp in $s.spawns) {
+  if ($sp.hashText -eq 'LKNG') { $sp.position = @(3693.0, 31.6, 672.0) }                      # middle of the YODE hill
+  if ($sp.hashText -eq 'MARC') { $sp.position = @(3470.0, 2.5, 690.0); $sp.radius = 40 }      # rollerrat flats (WSSC cluster), Wander
+}
+# Waste Collector camp tight around the boss so the junkyard reads as his camp (Randy 18:15: regulars not there).
+foreach ($o in @(@(9, 0), @(-9, 2), @(3, 10), @(-4, -9), @(10, -7), @(-11, -3))) { AddPoint 'CMDI' (3533.3 + $o[0]) 3.4 (733.7 + $o[1]) 7 7 30 }
+# Crickets around the crash site, between the HX1V/HXHR points.
+foreach ($pt in @(@(3825.0, 4.0, 260.0), @(3845.0, 5.0, 235.0), @(3870.0, 6.0, 262.0), @(3880.0, 6.0, 245.0), @(3830.0, 3.0, 228.0), @(3858.0, 8.0, 280.0))) { AddPoint 'JXSC' $pt[0] $pt[1] $pt[2] 9 11 30 }
+[IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)
+
+# Pink placeholders standing on top of a content NPC (the content NPC is the real one): remove that one spawn point.
+$cpath = Join-Path $gd 'PlayfieldContent\6553\Npcs.json'; $content = [IO.File]::ReadAllText($cpath, $u) | ConvertFrom-Json
+$real = @($content.Npcs) + @($content.MailTerminals) + @($content.StandaloneShops) | Where-Object { $_.Position }
+$keys = @{}; foreach ($p in $nt.PSObject.Properties) { $keys[$p.Name] = 1 }
+$kpath = Join-Path $gd 'SpawnSkips.json'; $sk = [IO.File]::ReadAllText($kpath, $u) | ConvertFrom-Json
+foreach ($sp in $s.spawns) {
+  if ($keys[$sp.hashText]) { continue }
+  $best = $null; $bd = 1e9
+  foreach ($r in $real) { $d = [Math]::Sqrt([Math]::Pow($r.Position[0] - $sp.position[0], 2) + [Math]::Pow($r.Position[2] - $sp.position[2], 2)); if ($d -lt $bd) { $bd = $d; $best = $r } }
+  if ($bd -gt 3) { continue }
+  $have = @($sk.removedPoints | Where-Object { $_.playfield -eq 6553 -and $_.hash -eq $sp.hashText })
+  if ($have.Count) { continue }
+  $name = if ($best.Name) { $best.Name } else { $best.Key }
+  $sk.removedPoints = @($sk.removedPoints) + [pscustomobject][ordered]@{ playfield = 6553; hash = $sp.hashText; position = $sp.position; reason = ('on top of {0} (content, {1} m)' -f $name, [Math]::Round($bd, 2)) }
+  Write-Host ('  removed pink {0} under {1} ({2:N2} m)' -f $sp.hashText, $name, $bd)
+}
+[IO.File]::WriteAllText($kpath, ($sk | ConvertTo-Json -Depth 8) + "`n", $u)
 Write-Host 'Build-AreteFinish done'
