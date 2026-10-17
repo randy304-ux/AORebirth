@@ -205,7 +205,7 @@ $hLor = Handoff 'HLOR' 'Talk to Lorelei' 'LRTH'
 
 $rex = Job 'RELS' 'ARX' @(@('KillMultiple','MLCE',5,'Terminate 5 Cleanmeisters'),@('TargetNpc',$null,$null,'Open the Cargo Box')) 'Return to Rex Larsson' 1281 1040 $null
 $marcus = Job 'AMST' 'AMR' @() 'Extinguish the gas fire' 1281 1080 @(Item 296569 'Generic Nano Transmitter') @{ Bit = 656; Ret = 'FindItem'; Spec = 'QCFS' }
-$flint = Job 'FLNV' 'AFL' @(,@('KillMultiple','JUCO',7,'Kill 7 Cleanmeisters')) 'Bring the computer to Alex' 0 0 @(Item 296570 'Blank Info Chip') @{ Ret = 'FindItem'; Spec = 'QBAC' }
+$flint = Job 'FLNV' 'AFL' @(,@('KillMultiple','JUCO',7,'Kill 7 Cleaning Robots')) 'Bring the computer to Alex' 0 0 @(Item 296570 'Blank Info Chip') @{ Ret = 'FindItem'; Spec = 'QBAC' }
 $alex = Job 'ALGI' 'AAX' @(
   @('TargetNpc','SRDO',$null,'Hack the Surveillance Droid'),
   @('TargetNpc',$null,$null,'Plant the Recording Device'),
@@ -238,7 +238,7 @@ Script 'MarcusStone.json' @('SimpleChar:78E0FC62') 'Marcus Stone, upper deck (36
 ) 'The wounded dockworkers are a separate errand. I do not have them standing here yet.' $null
 
 Script 'FlintNovak.json' @('SimpleChar:78E0FC64') 'Flint Novak, junkyard (3598x863). Guide: seven junkyard robots, Bio Analyzing Computer goes to Alex, not back to Flint.' @('{delay 1}Flint Novak. I find things, and I fix things.') @(
-  (J 'computer' $flint 'Marcus sent me.' @('Alex Gibbs needs a Bio Analyzing Computer. On retail any mix of seven junkyard robots will do: Cleanmeister Intelligence Robots, Waste Collectors or 32-V Dockers.', '{delay 1}This counter is the seven Cleanmeister Intelligence Robots, because one objective counts one kind. Take the computer to Alex Gibbs. Do not bring it back to me.') 'I''ll find one.' 'Seven Cleanmeister Intelligence Robots. Take the Bio Analyzing Computer to Alex Gibbs.' $marcus.Return @{ Mode = 'elsewhere'; Luck = 'Take whatever you find to Alex Gibbs, by the shuttle pad. Not back here.' })
+  (J 'computer' $flint 'Marcus sent me.' @('Alex Gibbs needs a Bio Analyzing Computer. On retail any mix of seven junkyard robots will do: Cleaning Robots, Waste Collectors or 32-V Dockers.', '{delay 1}This counter is the seven Cleaning Robots, because one objective counts one kind. Take the computer to Alex Gibbs. Do not bring it back to me.') 'I''ll find one.' 'Seven Cleaning Robots. Take the Bio Analyzing Computer to Alex Gibbs.' $marcus.Return @{ Mode = 'elsewhere'; Luck = 'Take whatever you find to Alex Gibbs, by the shuttle pad. Not back here.' })
 ) 'Alex Gibbs is by the shuttle pad.' (Arrive $hFlint @('Marcus sent you? Then you have earned a hearing.'))
 
 $alexTurn = @{ Openers = @([ordered]@{ If = @('HasQuest AFLR'); Say = 'bac' })

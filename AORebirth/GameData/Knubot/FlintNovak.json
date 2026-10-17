@@ -59,8 +59,8 @@
     "Lines":  {
                   "offer_computer":  {
                                          "Text":  [
-                                                      "Alex Gibbs needs a Bio Analyzing Computer. On retail any mix of seven junkyard robots will do: Cleanmeister Intelligence Robots, Waste Collectors or 32-V Dockers.",
-                                                      "{delay 1}This counter is the seven Cleanmeister Intelligence Robots, because one objective counts one kind. Take the computer to Alex Gibbs. Do not bring it back to me."
+                                                      "Alex Gibbs needs a Bio Analyzing Computer. On retail any mix of seven junkyard robots will do: Cleaning Robots, Waste Collectors or 32-V Dockers.",
+                                                      "{delay 1}This counter is the seven Cleaning Robots, because one objective counts one kind. Take the computer to Alex Gibbs. Do not bring it back to me."
                                                   ],
                                          "Replies":  [
                                                          "take_computer",
@@ -74,7 +74,7 @@
                                                  ]
                                     },
                   "busy_computer":  {
-                                        "Text":  "Seven Cleanmeister Intelligence Robots. Take the Bio Analyzing Computer to Alex Gibbs.",
+                                        "Text":  "Seven Cleaning Robots. Take the Bio Analyzing Computer to Alex Gibbs.",
                                         "Replies":  [
                                                         "bye"
                                                     ]
