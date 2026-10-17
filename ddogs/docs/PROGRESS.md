@@ -369,3 +369,12 @@ Antonio's shop is stocked on Arete (content vendor, template 248368) and on ICC 
 Mail terminals moved to Randy's spots: shuttleport 4582 at 936.4, 47.0, 878.3, and Arete 6553 at 3464.1, 9.0, 805.6.
 
 Online count was 0 at 01:17:34, immediately before stop. Backup `I:\AO\backups\cellao_codex_clean-20261017-0117-vendors.sql`. Zone boot 01:19: leaves=1170 families=79, quests=169 skipped=0, Knubot scripts=84 rejected=0, vending machines=2 skipped=0, no ERROR. Ports 7500, 7501, 7012, 6996, 8098, and 80. This boot also brings up merc pet assist and Milne's arrest quest. Account API pid 81092 was left running. Commit `b7ca9d78` (local only).
+
+## 2026-10-17 01:47 - Dyna weapon loot and Antonio's backpack (live)
+SOL K-94 Baby Monster and the KIWD crossbows are valid items: they exist, the rolled QL sits inside the template pair, and they are not NoDrop or unique. The corpse inventory packet was sending them as WeaponInstance identities. Live loot rows use an empty item identity, and the client then ignores the drag. Corpse loot now sends that empty identity. The same scan of the wired dyna pools found no other missing templates and no nano programs sitting in the pools. Unique drops still refuse a second copy: the Wen-Wen line, Senior Omni Intern-Op Coat, Power Puller, and the Empty Data Receptacle. Those flags match the item data.
+
+Antonio on Arete and on EQVE now sells Small Backpack 99228 at QL 1. Its items.dat value is 850, so the window price is that value plus the usual 5%.
+
+Nazzgrom's restore is still not applied. The plan is in `ddogs/docs/nazzgrom-restore.md`. From the 18:25 backup it now also puts Solar-Powered Assault Rifle 121569 back in his right hand and Colonist Survival Pack 296977 back on his back. Do it only after he is offline.
+
+Online count was 0 at 01:45:42, immediately before stop. Backup `I:\AO\backups\cellao_codex_clean-20261017-0145-loot.sql`. Zone boot 01:47: leaves=1170 families=79, quests=169 skipped=0, Knubot scripts=84 rejected=0, vending machines=2 skipped=0, no ERROR. Ports 7500 pid 94672, 7501 pid 104980, 7012/6996 pid 94120, 8098 and 80 pid 81092. Engines left up. Account API was left running. Commit `9d0f1675` (local only).
