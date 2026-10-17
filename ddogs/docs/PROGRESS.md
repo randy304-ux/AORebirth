@@ -362,3 +362,10 @@ Omni-AF Officer Milne (OMCN, the white-kiss tent on Arete) now gives the AO-Univ
 Claim Center and daily rewards no longer drop straight into inventory. Login and `.claim` raise the unread-mail count and say the item is waiting at a mail terminal. A Mail Terminal (template 37180) stands beside Antonio on Arete Landing (playfield 6553) and beside him on ICC Shuttleport (playfield 4582, hash EQVE). Take All puts that claim in inventory. Quest turn-in rewards still go into inventory. The account API process was left running, so the Info page sentence may still say the old inventory line until that process is rebuilt later.
 
 Side compile of ZoneEngine_New: 0 errors. Not live. Nazzgrom (character 20) was online at 00:57:15, so the engines were not stopped. The next restart, once the online count is 0 immediately before stop, also carries the merc pet assist from 00:32. A heal pet still does not auto-attack. Commit `ad07698a` (local only).
+
+## 2026-10-17 01:19 - Vendor stock and mail spots (live)
+Antonio's shop is stocked on Arete (content vendor, template 248368) and on ICC Shuttleport (hash EQVE). The Omni-Trans vendors OITA and ODDD carry the Omni list. The Clan vendor CNTD carries the Joint Clans Badge and Joint Clans Shades, which is the AO-Universe clan list. There is no Neutral equipment vendor. Shop prices still come from the item value plus the 5% sell modifier. Several of Randy's credit amounts differ from items.dat, so the window will show the data price, not a hand-entered price.
+
+Mail terminals moved to Randy's spots: shuttleport 4582 at 936.4, 47.0, 878.3, and Arete 6553 at 3464.1, 9.0, 805.6.
+
+Online count was 0 at 01:17:34, immediately before stop. Backup `I:\AO\backups\cellao_codex_clean-20261017-0117-vendors.sql`. Zone boot 01:19: leaves=1170 families=79, quests=169 skipped=0, Knubot scripts=84 rejected=0, vending machines=2 skipped=0, no ERROR. Ports 7500, 7501, 7012, 6996, 8098, and 80. This boot also brings up merc pet assist and Milne's arrest quest. Account API pid 81092 was left running. Commit `b7ca9d78` (local only).
