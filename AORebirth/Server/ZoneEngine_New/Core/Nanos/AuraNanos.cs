@@ -16,10 +16,12 @@ namespace ZoneEngine_New.Core.Nanos
 
     /// <summary>
     /// Dyna glow nanos (Boss Modifier Item OnWear CastNano, e.g. 160084 Red glow) last TimeExist 10000
-    /// (100 s). The wear cast runs before the NPC has a cell, so the first SetNanoDuration has nobody to
-    /// reach, and the buff then expires. This refreshes those buffs through the existing duration packet
-    /// and sends that packet again when a player walks into range. Unlocked colours are a server-only
-    /// bitfield; a container drop replaces one of the dyna's 5–7 items so the corpse count stays put.
+    /// (100 s). The wear cast runs before the NPC has a cell, so that land's CastNanoSpell reaches nobody.
+    /// SetNanoDuration alone does not draw the glow; .give buff does, via CastNanoSpell Unknown1=1,
+    /// FinishNanoCasting, then SetNanoDuration. Once the NPC has a cell this re-lands through that same
+    /// path, and a player who walks into range gets those three packets on their session.
+    /// Unlocked colours are a server-only bitfield; a container drop replaces one of the dyna's 5–7 items
+    /// so the corpse count stays put.
     /// </summary>
     public static class AuraNanos
     {
@@ -46,7 +48,10 @@ namespace ZoneEngine_New.Core.Nanos
                 MaintainDyna(npc, nowUtc);
         }
 
-        /// <summary>A player just came into range of <paramref name="source"/>. Send the glow's duration packet to that player.</summary>
+        /// <summary>
+        /// A player just came into range of <paramref name="source"/>. Replay the .give buff land
+        /// onto that session. The caster is the mob, not the viewer.
+        /// </summary>
         public static void AnnounceToViewer(Player viewer, Character source)
         {
             ArgumentNullException.ThrowIfNull(viewer);
@@ -58,7 +63,7 @@ namespace ZoneEngine_New.Core.Nanos
             for (int i = 0; i < buffs.Count; i++)
             {
                 if (DynaModifiers.IsGlowNano(buffs[i].Id))
-                    NanoRuntime.AnnounceBuffTo(viewer, source, buffs[i]);
+                    NanoRuntime.ReplayGiveBuff(viewer, source, source, buffs[i]);
             }
         }
 
@@ -191,7 +196,6 @@ namespace ZoneEngine_New.Core.Nanos
             if (ids.Count == 0)
                 return;
 
-            bool first = !npc.AuraAnnounced && npc.Cell != null;
             bool due = false;
             for (int i = 0; i < ids.Count; i++)
             {
@@ -202,28 +206,35 @@ namespace ZoneEngine_New.Core.Nanos
                 }
             }
 
+            // Wear cast lands before this NPC has a cell, so those packets reach nobody.
+            // Keep the server buff alive until a cell exists, then use the .give buff land.
+            if (npc.Cell == null)
+            {
+                if (!due)
+                    return;
+
+                IItemBuilder earlyItems = npc.Playfield.GetRequiredService<IItemBuilder>();
+                IInventoryRepository earlyInventory = npc.Playfield.GetRequiredService<IInventoryRepository>();
+                for (int i = 0; i < ids.Count; i++)
+                    Ensure(npc, npc, ids[i], earlyItems, earlyInventory, nowUtc);
+                return;
+            }
+
+            bool first = !npc.AuraAnnounced;
             if (!first && !due)
                 return;
 
             IItemBuilder items = npc.Playfield.GetRequiredService<IItemBuilder>();
             IInventoryRepository inventory = npc.Playfield.GetRequiredService<IInventoryRepository>();
-            if (due)
+            bool landed = true;
+            for (int i = 0; i < ids.Count; i++)
             {
-                for (int i = 0; i < ids.Count; i++)
-                    Ensure(npc, npc, ids[i], items, inventory, nowUtc);
+                if (!NanoRuntime.TryApplyImmediate(npc, npc, ids[i], items, inventory, nowUtc, gmApply: true))
+                    landed = false;
             }
 
-            if (!first)
-                return;
-
-            IReadOnlyList<Buff> buffs = npc.Buffs;
-            for (int i = 0; i < buffs.Count; i++)
-            {
-                if (ids.Contains(buffs[i].Id))
-                    NanoRuntime.AnnounceBuff(npc, buffs[i]);
-            }
-
-            npc.AuraAnnounced = true;
+            if (landed)
+                npc.AuraAnnounced = true;
         }
 
         static void ApplyToPets(Player player, int nanoId, IItemBuilder items, IInventoryRepository inventory, DateTime nowUtc)

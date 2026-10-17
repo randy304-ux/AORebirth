@@ -816,32 +816,34 @@ namespace ZoneEngine_New.Core.Nanos
         /// 0x1004f322) closes the pending cast entry CastNanoSpell opened and records the success result.
         /// </summary>
         static void AnnounceImmediateLand(Character source, Character target, int nanoId)
-            => Announce(
-                target,
-                new CastNanoSpellMessage
-                {
-                    Identity = target.Identity,
-                    NanoId = nanoId,
-                    Target = target.Identity,
-                    Unknown = 0,
-                    Unknown1 = 1,
-                    Caster = source.Identity
-                });
+            => Announce(target, ImmediateLandMessage(source, target, nanoId));
 
         static void AnnounceCastFinished(Character caster, int nanoId)
-            => Announce(
-                caster,
-                new CharacterActionMessage
-                {
-                    Identity = caster.Identity,
-                    Unknown = 0x00,
-                    Action = CharacterActionType.FinishNanoCasting,
-                    Unknown1 = 0,
-                    Target = Identity.None,
-                    Parameter1 = 1,
-                    Parameter2 = nanoId,
-                    Unknown2 = 0
-                });
+            => Announce(caster, CastFinishedMessage(caster, nanoId));
+
+        static CastNanoSpellMessage ImmediateLandMessage(Character source, Character target, int nanoId)
+            => new()
+            {
+                Identity = target.Identity,
+                NanoId = nanoId,
+                Target = target.Identity,
+                Unknown = 0,
+                Unknown1 = 1,
+                Caster = source.Identity
+            };
+
+        static CharacterActionMessage CastFinishedMessage(Character caster, int nanoId)
+            => new()
+            {
+                Identity = caster.Identity,
+                Unknown = 0x00,
+                Action = CharacterActionType.FinishNanoCasting,
+                Unknown1 = 0,
+                Target = Identity.None,
+                Parameter1 = 1,
+                Parameter2 = nanoId,
+                Unknown2 = 0
+            };
 
         // Live IN InterruptNanoCasting: Parameter1=nanoId, Parameter2=reason (observed 7 / 4).
         // FinishNanoCasting keeps Parameter1=1, Parameter2=nanoId — do not reuse that layout here.
@@ -949,21 +951,25 @@ namespace ZoneEngine_New.Core.Nanos
                 alsoExclude: ReferenceEquals(caster, owner) ? null : caster);
         }
 
-        /// <summary>The owner's cell hears the buff again. Used once a dyna is registered, after the wear cast.</summary>
-        public static void AnnounceBuff(Character owner, Buff buff)
+        /// <summary>
+        /// The three packets <see cref="TryApplyImmediate"/> sends for a buff (.give buff):
+        /// CastNanoSpell Unknown1=1, FinishNanoCasting(1, nano), then SetNanoDuration.
+        /// Delivered to one player who was not in the cell when that land happened.
+        /// <paramref name="source"/> stays the caster, so FinishNanoCasting is about that character.
+        /// </summary>
+        public static void ReplayGiveBuff(Player viewer, Character source, Character target, Buff buff)
         {
-            ArgumentNullException.ThrowIfNull(owner);
+            ArgumentNullException.ThrowIfNull(viewer);
+            ArgumentNullException.ThrowIfNull(source);
+            ArgumentNullException.ThrowIfNull(target);
             ArgumentNullException.ThrowIfNull(buff);
-            SendNanoDuration(owner, owner, buff);
-        }
+            IZoneSession? session = viewer.Session;
+            if (session == null)
+                return;
 
-        /// <summary>One player who just came into range hears a buff that is already up.</summary>
-        public static void AnnounceBuffTo(Player recipient, Character owner, Buff buff)
-        {
-            ArgumentNullException.ThrowIfNull(recipient);
-            ArgumentNullException.ThrowIfNull(owner);
-            ArgumentNullException.ThrowIfNull(buff);
-            recipient.Session?.Send(DurationMessage(owner, owner, buff));
+            session.Send(ImmediateLandMessage(source, target, buff.Id));
+            session.Send(CastFinishedMessage(source, buff.Id));
+            session.Send(DurationMessage(source, target, buff));
         }
 
         /// <summary>
