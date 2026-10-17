@@ -110,12 +110,34 @@ namespace ZoneEngine_New.Core.Entities
             Brain = brain;
         }
 
+        /// <summary>
+        /// A mail terminal placed as a content NPC (terminal body 279184, like the merc Contract Terminals the client
+        /// already draws). The item-based MailTerminal static was never drawn by the client (Randy 2026-10-17).
+        /// </summary>
+        public bool IsMailTerminal => string.Equals(Name, "Mail Terminal", StringComparison.Ordinal);
+
+        bool TryOpenMail(Player player)
+        {
+            if (IsDead || Playfield == null || player.Playfield == null || player.Session == null)
+                return false;
+            if (player.Playfield.Identity.Instance != Playfield.Identity.Instance)
+                return false;
+            if (GetEdgeDistanceTo(player) > LootableDynel.OpenRange)
+                return false;
+            if (Playfield.GetService<ZoneEngine_New.Core.Claims.ClaimService>() is not { } claims)
+                return false;
+            player.Session.Send(claims.BuildList(player));
+            return true;
+        }
+
         /// <summary>Using a vendor NPC opens its shop; other NPCs have no use action yet.</summary>
         public bool TryUse(Player player)
         {
             ArgumentNullException.ThrowIfNull(player);
 
             VendingMachine? shop = Shop;
+            if (shop == null && IsMailTerminal)
+                return TryOpenMail(player);
             if (shop == null || IsDead || Playfield == null || player.Playfield == null)
                 return false;
 
