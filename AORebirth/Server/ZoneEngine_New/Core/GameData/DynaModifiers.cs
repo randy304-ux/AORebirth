@@ -19,20 +19,32 @@ namespace ZoneEngine_New.Core.GameData
         /// <summary>Every dyna: base size multiplier over its template scale.</summary>
         public const int DynaScalePercent = 150;
 
-        public sealed record Modifier(string Name, int R, int G, int B, CharacterStat? Ac, CharacterStat? Reflect, int ScalePercent, int BossItem);
+        /// <summary>
+        /// One modifier. <see cref="GlowNano"/> is the OnWear CastNano from the live Boss Modifier Item
+        /// (items.dat: Fire = 160084 "Red glow", whose only function is GfxEffect). <see cref="ContainerId"/>
+        /// is an existing client item that uses icon 20407, the spongy/muddy container look (same icon as
+        /// Spongy Novictum and Notum Container). The client shows that item's own name; using it tells the
+        /// player which aura it unlocked.
+        /// </summary>
+        public sealed record Modifier(string Name, int R, int G, int B, CharacterStat? Ac, CharacterStat? Reflect, int ScalePercent, int BossItem, int GlowNano, int ContainerId, string ContainerName);
 
         public static readonly Modifier[] All =
         [
-            new("Chemical", 0, 255, 0, CharacterStat.ChemicalAC, CharacterStat.ReflectChemicalAC, 100, 164346),
-            new("Cold", 255, 255, 255, CharacterStat.ColdAC, CharacterStat.ReflectColdAC, 100, 164301),
-            new("Energy", 0, 64, 255, CharacterStat.EnergyAC, CharacterStat.ReflectEnergyAC, 100, 164337),
-            new("Fire", 255, 0, 0, CharacterStat.FireAC, CharacterStat.ReflectFireAC, 100, 164328),
-            new("Poison", 0, 200, 200, CharacterStat.PoisonAC, CharacterStat.ReflectPoisonAC, 100, 164356),
-            new("Radiation", 160, 0, 255, CharacterStat.RadiationAC, CharacterStat.ReflectRadiationAC, 100, 164319),
-            new("Crit", 210, 180, 140, null, null, 160, 164365),
-            new("Shield", 255, 140, 0, null, null, 140, 164292),
-            new("Big", 255, 255, 0, null, null, 130, 164283),
+            new("Chemical", 0, 255, 0, CharacterStat.ChemicalAC, CharacterStat.ReflectChemicalAC, 100, 164346, 160083, 218474, "Spongy Novictum"),
+            new("Cold", 255, 255, 255, CharacterStat.ColdAC, CharacterStat.ReflectColdAC, 100, 164301, 160082, 218472, "Novictum Mud"),
+            new("Energy", 0, 64, 255, CharacterStat.EnergyAC, CharacterStat.ReflectEnergyAC, 100, 164337, 160086, 218468, "Transparent Novictum Gas"),
+            new("Fire", 255, 0, 0, CharacterStat.FireAC, CharacterStat.ReflectFireAC, 100, 164328, 160084, 218476, "Caustic Novictum"),
+            new("Poison", 0, 200, 200, CharacterStat.PoisonAC, CharacterStat.ReflectPoisonAC, 100, 164356, 160085, 218475, "Plastic Novictum"),
+            new("Radiation", 160, 0, 255, CharacterStat.RadiationAC, CharacterStat.ReflectRadiationAC, 100, 164319, 160081, 218469, "Radiant Novictum Gas"),
+            new("Crit", 210, 180, 140, null, null, 160, 164365, 160073, 218473, "Compact Novictum Stone"),
+            new("Shield", 255, 140, 0, null, null, 140, 164292, 160077, 100354, "Radioactive Isotope Container"),
+            new("Big", 255, 255, 0, null, null, 130, 164283, 160074, 225998, "Dangerous Container"),
         ];
+
+        public const string BossItemPrefix = "Boss Modifier Item";
+
+        /// <summary>Chance that one of a dyna's 5–7 drops is replaced by its colour's container.</summary>
+        public const int ContainerDropPercent = 20;
 
         public static bool IsDyna(NpcLevelBand band)
             => !string.IsNullOrEmpty(band.DynaModifier)
@@ -93,8 +105,53 @@ namespace ZoneEngine_New.Core.GameData
         /// </summary>
         public static int BossItemFor(string modifierName, int level)
         {
-            Modifier? mod = Array.Find(All, m => string.Equals(m.Name, modifierName, StringComparison.OrdinalIgnoreCase));
-            return mod == null ? 0 : mod.BossItem + Math.Clamp(level / 25, 0, 8);
+            Modifier? mod = Find(modifierName);
+            if (mod == null)
+                return 0;
+
+            int id = mod.BossItem + Math.Clamp(level / 25, 0, 8);
+            // 164349 is Metallic Mantis Body Armor, sitting in the chemical tier list.
+            return id == 164349 ? 164348 : id;
+        }
+
+        public static Modifier? Find(string? name)
+            => string.IsNullOrEmpty(name)
+                ? null
+                : Array.Find(All, m => string.Equals(m.Name, name, StringComparison.OrdinalIgnoreCase));
+
+        public static int IndexOf(string? name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return -1;
+            for (int i = 0; i < All.Length; i++)
+            {
+                if (string.Equals(All[i].Name, name, StringComparison.OrdinalIgnoreCase))
+                    return i;
+            }
+
+            return -1;
+        }
+
+        public static Modifier? ByContainer(int aoid)
+        {
+            for (int i = 0; i < All.Length; i++)
+            {
+                if (All[i].ContainerId == aoid)
+                    return All[i];
+            }
+
+            return null;
+        }
+
+        public static bool IsGlowNano(int nanoId)
+        {
+            for (int i = 0; i < All.Length; i++)
+            {
+                if (All[i].GlowNano == nanoId)
+                    return true;
+            }
+
+            return false;
         }
 
         static int Get(Dictionary<int, int> s, CharacterStat k) => s.TryGetValue((int)k, out int v) ? v : 0;

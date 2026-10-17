@@ -9,6 +9,7 @@ namespace ZoneEngine_New.Core.Playfield.Locality
 
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.Logging;
+    using ZoneEngine_New.Core.Nanos;
     using ZoneEngine_New.Core.Network;
 
     /// <summary>
@@ -398,6 +399,9 @@ namespace ZoneEngine_New.Core.Playfield.Locality
 
             foreach (MessageBody companion in source.BuildSpawnCompanionMessages())
                 recipient.Session.Send(companion);
+
+            if (source is Character auraOwner)
+                AuraNanos.AnnounceToViewer(recipient, auraOwner);
 
             return true;
         }

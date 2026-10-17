@@ -83,7 +83,8 @@ namespace ZoneEngine_New.Core.Entities
         public static bool IsServerOnly(CharacterStat stat)
             => stat is CharacterStat.UsedIP or CharacterStat.MissionBits19 or CharacterStat.MissionBits20
                 or CharacterStat.MissionBits21 or CharacterStat.MissionBits22 or CharacterStat.MissionBits23 or CharacterStat.MissionBits24
-                or CharacterStat.DebugFlags;
+                or CharacterStat.DebugFlags
+                || (int)stat is 10281 or 10282 or 10283;
 
         /// <summary>
         /// The value the client is sent for a stat, when it is not simply the stored base (a player's IP is sent as

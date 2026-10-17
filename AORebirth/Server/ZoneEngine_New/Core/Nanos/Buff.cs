@@ -107,7 +107,7 @@ namespace ZoneEngine_New.Core.Nanos
         /// <summary>Per-character NCU entry id the client uses to address this buff.</summary>
         public int NanoInstance { get; }
 
-        public DateTime ExpiresAtUtc { get; }
+        public DateTime ExpiresAtUtc { get; internal set; }
 
         /// <summary>
         /// Buff functions the target runs while the nano is up. Reapplied by every rebase,

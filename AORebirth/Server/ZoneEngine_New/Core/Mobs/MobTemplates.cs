@@ -118,6 +118,9 @@ namespace ZoneEngine_New.Core.Mobs
 
         public List<MobItemTableEntry> ItemTable { get; set; } = new();
 
+        /// <summary>Dyna modifier that was rolled for this spawn (DynaModifiers.All name), or null.</summary>
+        public string? DynaModifier { get; set; }
+
         /// <summary>Data-driven boss triggers (NpcTemplates.json band "BossTriggers"), see <see cref="NpcBossTrigger"/>.</summary>
         public List<NpcBossTrigger> BossTriggers { get; set; } = new();
 

@@ -41,6 +41,7 @@ namespace ZoneEngine_New.Core.Nanos
             }
 
             TickPeriodicEffects(character, nowUtc);
+            AuraNanos.Maintain(character, nowUtc);
 
             List<Buff> expired = character.DrainExpiredBuffs(nowUtc);
             for (int i = 0; i < expired.Count; i++)
@@ -936,7 +937,50 @@ namespace ZoneEngine_New.Core.Nanos
         /// </summary>
         static void SendNanoDuration(Character caster, Character owner, Buff buff)
         {
-            var message = new CharacterActionMessage
+            CharacterActionMessage message = DurationMessage(caster, owner, buff);
+
+            SessionOf(caster)?.Send(message);
+            if (!ReferenceEquals(caster, owner))
+                SessionOf(owner)?.Send(message);
+
+            owner.Cell?.Announce(
+                message,
+                exclude: owner,
+                alsoExclude: ReferenceEquals(caster, owner) ? null : caster);
+        }
+
+        /// <summary>The owner's cell hears the buff again. Used once a dyna is registered, after the wear cast.</summary>
+        public static void AnnounceBuff(Character owner, Buff buff)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            ArgumentNullException.ThrowIfNull(buff);
+            SendNanoDuration(owner, owner, buff);
+        }
+
+        /// <summary>One player who just came into range hears a buff that is already up.</summary>
+        public static void AnnounceBuffTo(Player recipient, Character owner, Buff buff)
+        {
+            ArgumentNullException.ThrowIfNull(recipient);
+            ArgumentNullException.ThrowIfNull(owner);
+            ArgumentNullException.ThrowIfNull(buff);
+            recipient.Session?.Send(DurationMessage(owner, owner, buff));
+        }
+
+        /// <summary>
+        /// Pushes the buff's full template duration out again and matches the server deadline to it.
+        /// Same SetNanoDuration packet as a fresh land, without a cast-bar announcement.
+        /// </summary>
+        public static void RefreshBuffDuration(Character owner, Buff buff, DateTime nowUtc)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            ArgumentNullException.ThrowIfNull(buff);
+            int duration = Math.Clamp(buff.DurationCentiseconds, 1, Buff.MaxDurationCentiseconds);
+            buff.ExpiresAtUtc = nowUtc.AddMilliseconds(duration * 10L);
+            SendNanoDuration(owner, owner, buff);
+        }
+
+        static CharacterActionMessage DurationMessage(Character caster, Character owner, Buff buff)
+            => new()
             {
                 Identity = owner.Identity,
                 Unknown = 0x00,
@@ -951,16 +995,6 @@ namespace ZoneEngine_New.Core.Nanos
                 Parameter2 = buff.DurationCentiseconds,
                 Unknown2 = 0
             };
-
-            SessionOf(caster)?.Send(message);
-            if (!ReferenceEquals(caster, owner))
-                SessionOf(owner)?.Send(message);
-
-            owner.Cell?.Announce(
-                message,
-                exclude: owner,
-                alsoExclude: ReferenceEquals(caster, owner) ? null : caster);
-        }
 
         static void LogCastRefused(
             Character caster,

@@ -521,6 +521,8 @@ namespace ZoneEngine_New.Core.Playfield
             }
 
             corpse.ResolveLoot(_hashItems);
+            if (dead is NpcCharacter auraNpc && !string.IsNullOrEmpty(auraNpc.MobTemplate?.DynaModifier))
+                ZoneEngine_New.Core.Nanos.AuraNanos.TrySwapLoot(corpse, auraNpc.MobTemplate.DynaModifier, _items);
 
             _registry.Register(corpse);
             _playfield.GetRequiredService<PlayfieldLocality>().RegisterDynel(corpse);

@@ -10,6 +10,7 @@ namespace ZoneEngine_New.Core.Inventory
 
     using ZoneEngine_New.Core.Data;
     using ZoneEngine_New.Core.Entities;
+    using ZoneEngine_New.Core.Nanos;
     using ZoneEngine_New.Core.Playfield;
     using ZoneEngine_New.Core.Playfield.Locality;
 
@@ -168,6 +169,9 @@ namespace ZoneEngine_New.Core.Inventory
 
             if (Locked)
                 return false;
+
+            if (AuraNanos.TryConsumeUnlock(player, this, slotIdentity))
+                return true;
 
             if (IsBackpackUse)
             {

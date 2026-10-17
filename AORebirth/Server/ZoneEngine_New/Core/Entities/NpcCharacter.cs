@@ -280,6 +280,9 @@ namespace ZoneEngine_New.Core.Entities
         /// <summary>Timed trigger adds (NpcBossAction.DespawnSeconds) leave the world at this time.</summary>
         public DateTime? DespawnAtUtc { get; set; }
 
+        /// <summary>The dyna glow has been announced to the cell once the NPC was registered.</summary>
+        public bool AuraAnnounced { get; set; }
+
         public override void Tick(double deltaTime)
         {
             if (DespawnAtUtc is { } despawnAt && DateTime.UtcNow >= despawnAt && !IsDead && Playfield != null)

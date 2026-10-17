@@ -294,6 +294,7 @@ namespace ZoneEngine_New
             services.AddSingleton<ZoneEngine_New.Core.Claims.ClaimService>();
             services.AddSingleton<IGmCommand, ClaimCommand>();
             services.AddSingleton<IGmCommand, MercCommand>();
+            services.AddSingleton<IGmCommand, AuraCommand>();
             services.AddSingleton<IGmCommand, DespawnCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Lifecycle.IEngineShutdown, ProgramShutdown>();
             services.AddSingleton<ZoneEngine_New.Core.Lifecycle.ShutdownScheduler>();

@@ -399,6 +399,7 @@ namespace ZoneEngine_New.Core.GameData
                 CorpseFullUpdateTemplate = CopyCorpseFullUpdateTemplate(nearest.CorpseFullUpdateTemplate),
                 KnuBotId = nearest.KnuBotId,
                 ItemTable = CopyLoot(nearest.LootTable),
+                DynaModifier = dynaModifier,
                 BossTriggers = nearest.BossTriggers ?? new List<NpcBossTrigger>()
             };
         }
