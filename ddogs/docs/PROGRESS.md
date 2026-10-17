@@ -345,3 +345,8 @@ The Tools tab was empty with "Tools folder would be on C:" whenever the launcher
 AO-VK / aoReloaded is the first Tools row: Install, Uninstall, and Start with Play. Install downloads ao-vk 0.4.1 from https://github.com/wannabuh/ao-vk/releases/download/v0.4.1/ao-vk-0.4.1.zip (sha256 `4ad547a798477582853e2b6cfca049e92d3b2be293459fadac39aa803e430768`) and installs it on a client copy: stock randy31.dll is kept as randy31_orig.dll, ao-vk's randy31.dll replaces it, and AOReloaded's version.dll is stored as aovk-reloaded.dll. Ctrl+Shift+E switches the Vulkan look. The download test installed and removed that package on `I:\AO\cache\client-vulkan-copy`. Live `I:\AO\client-ddogs` randy31.dll stayed `9d9e0da25ac6f8c7ecdce7a47a2409575945966a29e3b77850f7c62033a04be3`.
 
 Published launcher 2026.10.17-0013. Launcher zip sha256 `c178ab27dbafd9bfaa6917d2adf0f0165a9f086413af1eedd7f86c22bcbae2c0`, size 60555550. `https://dungeondogs.org/downloads/ao/version.json` returns that record. Zone engines were not restarted.
+
+## 2026-10-17 00:20 - Tools under the install folder
+Randy's clarification: Tools belongs under the install folder the player chose, for example `<install dir>\Tools`, and it follows that folder when they change it. A folder chosen in Settings is kept until the install folder changes, then it is dropped so Tools moves with the new install. C: is still refused. The folder-resolution check passed. AO-VK is unchanged from 0013: the author's 0.4.1 zip still installs beside our version.dll.
+
+Published launcher 2026.10.17-0020. Launcher zip sha256 `d8f715094f855d87f29fb8b215ba65a03e42542b66d1d67f3ad5e8eb8f40f110`, size 60555738. Zone engines were not restarted.
