@@ -282,3 +282,5 @@ Live after restart 21:04 (online count 0, backup `I:\AO\backups\cellao_codex_cle
 
 ## 2026-10-16 - Cleaning Robot
 The AO-Universe Arete guide names the junkyard mob a Cleaning Robot (Flint's seven robots). JUCO is that mob, and Randy's shot showed a Cleaning Robot beside the Cleanmeister. JUCO is now named Cleaning Robot. Flint's lines and the "Kill 7 Cleaning Robots" step say the same. Rex's outdoor robots stay Cleanmeister Intelligence Robot (MLCE), which is the name his dialog already uses. The Cleanmeister boss in that cluster is unchanged.
+
+Live after restart 21:12 (online count 0, backup `I:\AO\backups\cellao_codex_clean-20261016-2110-cleaning-robot.sql`, 18647190 bytes): leaves=1078, quests=167 skipped=0, Knubot scripts=82 rejected=0. Ports 7500 pid 104052, 7501 pid 96672, 7012/6996 pid 104160, 8098 and 80 pid 81092. No new zone errors. Emiel and Fausto "bye" warnings are unchanged. Commit `5123d042` (local only). Engines left up. Build 0 errors.
