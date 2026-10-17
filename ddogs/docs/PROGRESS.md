@@ -378,3 +378,9 @@ Antonio on Arete and on EQVE now sells Small Backpack 99228 at QL 1. Its items.d
 Nazzgrom's restore is still not applied. The plan is in `ddogs/docs/nazzgrom-restore.md`. From the 18:25 backup it now also puts Solar-Powered Assault Rifle 121569 back in his right hand and Colonist Survival Pack 296977 back on his back. Do it only after he is offline.
 
 Online count was 0 at 01:45:42, immediately before stop. Backup `I:\AO\backups\cellao_codex_clean-20261017-0145-loot.sql`. Zone boot 01:47: leaves=1170 families=79, quests=169 skipped=0, Knubot scripts=84 rejected=0, vending machines=2 skipped=0, no ERROR. Ports 7500 pid 94672, 7501 pid 104980, 7012/6996 pid 94120, 8098 and 80 pid 81092. Engines left up. Account API was left running. Commit `9d0f1675` (local only).
+
+## 2026-10-17 09:53 EDT - Nazzgrom restore applied
+- Followed docs/nazzgrom-restore.md with everyone offline (online=0). Pre-change backup: I:\AO\backups\cellao_codex_clean-20261017-0952-pre-nazzgrom-restore.sql.
+- Character 20 stats set from the 18:25 backup: Level 15, XP 81757, LastXP 80150, NextXP 90550, TitleLevel 2, abilities 51, AR 65, Treatment 59, Burst 59, Full Auto 12, Ranged Energy/Multi Ranged/Fling 5. Research, IP and cash untouched.
+- Instance ids 5 and 7 were taken (orphan ContainerType 0 rows for char 20), so new ids were used: 150513 Solar-Powered Assault Rifle 121569 (101/6), 150514 Colonist Survival Pack 296977 (102/19).
+- No engine restart (character was offline, data loads from DB on login). The 7 ContainerType 0 rows for char 20 (ids 4-9,15) were left alone.
