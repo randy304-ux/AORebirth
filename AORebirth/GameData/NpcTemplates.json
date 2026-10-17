@@ -101312,8 +101312,8 @@
                                                      "64":  40695,
                                                      "89":  1,
                                                      "156":  34,
-                                                     "359":  17653,
-                                                     "360":  80,
+                                                     "359":  96194,
+                                                     "360":  91,
                                                      "455":  136,
                                                      "466":  0,
                                                      "673":  31,
@@ -101362,8 +101362,8 @@
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
-                                                                 "Donor":  "17653",
-                                                                 "Source":  "Eyemutant mesh, stand-in for the floating eye.",
+                                                                 "Donor":  "96194",
+                                                                 "Source":  "Distracting Sphere mesh 96194, scale 91, the MP mezz pet.",
                                                                  "Levels":  "50-55"
                                                              }
                                    },
@@ -101382,8 +101382,8 @@
                                                      "64":  40695,
                                                      "89":  1,
                                                      "156":  34,
-                                                     "359":  17653,
-                                                     "360":  80,
+                                                     "359":  96194,
+                                                     "360":  91,
                                                      "455":  136,
                                                      "466":  0,
                                                      "673":  31,
@@ -101432,8 +101432,8 @@
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
-                                                                 "Donor":  "17653",
-                                                                 "Source":  "Eyemutant mesh, stand-in for the floating eye.",
+                                                                 "Donor":  "96194",
+                                                                 "Source":  "Distracting Sphere mesh 96194, scale 91, the MP mezz pet.",
                                                                  "Levels":  "50-55"
                                                              }
                                    }
@@ -101912,8 +101912,8 @@
                                                      "64":  40695,
                                                      "89":  1,
                                                      "156":  34,
-                                                     "359":  17653,
-                                                     "360":  75,
+                                                     "359":  96194,
+                                                     "360":  91,
                                                      "455":  136,
                                                      "466":  0,
                                                      "673":  31,
@@ -101962,8 +101962,8 @@
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
-                                                                 "Donor":  "17653",
-                                                                 "Source":  "Client attack item spells it Roaving Eye. Eyemutant mesh.",
+                                                                 "Donor":  "96194",
+                                                                 "Source":  "Client attack item spells it Roaving Eye. Distracting Sphere mesh 96194, scale 91.",
                                                                  "Levels":  "40-55"
                                                              }
                                    },
@@ -101982,8 +101982,8 @@
                                                      "64":  40695,
                                                      "89":  1,
                                                      "156":  34,
-                                                     "359":  17653,
-                                                     "360":  75,
+                                                     "359":  96194,
+                                                     "360":  91,
                                                      "455":  136,
                                                      "466":  0,
                                                      "673":  31,
@@ -102032,8 +102032,8 @@
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
-                                                                 "Donor":  "17653",
-                                                                 "Source":  "Client attack item spells it Roaving Eye. Eyemutant mesh.",
+                                                                 "Donor":  "96194",
+                                                                 "Source":  "Client attack item spells it Roaving Eye. Distracting Sphere mesh 96194, scale 91.",
                                                                  "Levels":  "40-55"
                                                              }
                                    }
@@ -102673,16 +102673,16 @@
                                        "Stats":  {
                                                      "0":  268964353,
                                                      "1":  15818,
-                                                     "4":  1,
+                                                     "4":  3,
                                                      "27":  15818,
                                                      "33":  3,
                                                      "47":  1,
                                                      "54":  70,
                                                      "59":  2,
-                                                     "64":  40695,
+                                                     "64":  40173,
                                                      "89":  1,
                                                      "156":  34,
-                                                     "359":  203745,
+                                                     "359":  26092,
                                                      "360":  110,
                                                      "455":  136,
                                                      "466":  0,
@@ -102741,11 +102741,22 @@
                                                              "LevelMod":  0
                                                          }
                                                      ],
+                                       "HasHeadMesh":  true,
+                                       "Equipment":  [
+                                                         [
+                                                             274956,
+                                                             274956
+                                                         ],
+                                                         [
+                                                             274955,
+                                                             274955
+                                                         ]
+                                                     ],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
-                                                                 "Donor":  "DCQV",
-                                                                 "Source":  "HP 15818 from the wiki. Two Fractured Sanity. Robe, battlerod, and Dream Mesh Circuit 100 percent. Dark Dreams 55 percent for one copy. Hide in Memory is not scripted.",
+                                                                 "Donor":  "OITA+26092",
+                                                                 "Source":  "HP 15818 from the wiki. Two Fractured Sanity. Drops stay the circuit robe and Notum Battlerod. Worn look is Nano-master Robe 274956 and Nightmare Battlerod 274955. Hide in Memory is not scripted.",
                                                                  "Levels":  "70-70"
                                                              }
                                    }

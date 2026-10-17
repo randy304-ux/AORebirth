@@ -328,3 +328,8 @@ Research only, in `ddogs/docs/static-dungeons-research.md`. Nothing wired. Templ
 Playfield 1933 is populated from the 114 client spawn points. No second set of points, and the client respawn times stay (Neleb, Betrayer of Memory, and Thief of Reason 600 seconds). No Childhood Memory key and no level lock. Zyvania Bagh is the existing Andromeda hash ZYBA at 3158.1, 35.5, 899.1. She teleports to 40, 33.8, 170 on 1933. Neleb drops two Fractured Sanity plus the robe 151895, battlerod 152026, and Dream Mesh Circuit 274972 at 100 percent, and one Dark Dreams 274971 at 55 percent. His HP is the wiki figure 15818.
 
 Live after restart 22:56 (online count 0, backup `I:\AO\backups\cellao_codex_clean-20261016-2253-steps-of-madness.sql`, 18647190 bytes): leaves=1170, quests=167 skipped=0, Knubot scripts=83 rejected=0. Ports 7500 pid 93396, 7501 pid 83368, 7012/6996 pid 105008, 8098 and 80 pid 81092. No new zone errors. Engines left up. Zone build 0 errors.
+
+## 2026-10-16 23:41 - Steps of Madness looks
+Roving Eye and Baleful Eye use the Distracting Sphere mesh 96194 at scale 91. Neleb is a Nanomage male (breed 3, head 40173, body 26092) wearing Nano-master Robe 274956 and holding Nightmare Battlerod 274955. His drops are unchanged.
+
+Live after restart 23:41 (online count 0, backup `I:\AO\backups\cellao_codex_clean-20261016-2339-steps-of-madness-looks.sql`, 18647190 bytes): leaves=1170, quests=167 skipped=0, Knubot scripts=83 rejected=0. Ports 7500 pid 100532, 7501 pid 105032, 7012/6996 pid 105400, 8098 and 80 pid 81092. No new zone errors. Engines left up. Zone build 0 errors.

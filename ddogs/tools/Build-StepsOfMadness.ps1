@@ -9,7 +9,8 @@
 #  (Repeats 2). Dark Dreams is 55% for one copy; the wiki's 15% second copy is not a separate exclusive roll.
 #  Other named uniques have no published percent, so they are 25% (Emotional Sponge 40%, Childhood Horror's arachnid ether
 #  40%, Gleeful Greeter ethers 5%). Those percents are flagged in ContentProvenance.
-#  Meshes are captured donors, not the retail SoM bodies. See $mesh.
+#  Meshes are captured donors, not the retail SoM bodies. See $mesh. Eye mobs use the MP mezz pet
+#  (Distracting Sphere, monsterData 96194). Neleb is a Nanomage male in the Nano-master Robe, holding the Nightmare Battlerod.
 #  Zyvania Bagh is the existing Andromeda hash ZYBA at the guide pin. Her script teleports to the dungeon entrance.
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
 $ErrorActionPreference = 'Stop'
@@ -53,7 +54,7 @@ if ($lines[0].Trim() -ne '{') { throw 'ItemTemplates.json: unexpected first line
 # ---------- 2. templates ----------
 # Captured monsterData donors. None of these is the retail Steps of Madness body.
 $mesh = @{
-  eye    = 17653   # Eyemutant Bully EM01. Stand-in for the floating eyes.
+  eye    = 96194   # Distracting Sphere MPMZ. MP mezz pet. Roving Eye and Baleful Eye.
   spider = 209354  # Weaver of Malice WROM. Stand-in for the arachnid horror.
   spirit = 217008  # Cascading Spirit. Stand-in for the two meatballs beside Neleb.
   figment= 100419  # Captured Figment of Imagination. One look for every figment hash.
@@ -100,18 +101,18 @@ $def = [ordered]@{
   DEPS=@('Detached Psyche',0,100,$u100,'','General ethers only. Mesh is the human skeleton.')
   MIFR=@('Mind Fragment',0,90,$u100,'','Name from Equip_MindFragmentAtk. No pinned unique. Mesh is the human skeleton.')
   FMOI=@('Figment of Imagination',$mesh.figment,100,8,'','Figment look. One captured Figment mesh for every figment hash.')
-  BLEY=@('Baleful Eye',$mesh.eye,80,$u100,'','Eyemutant mesh, stand-in for the floating eye.')
+  BLEY=@('Baleful Eye',$mesh.eye,91,$u100,'','Distracting Sphere mesh 96194, scale 91, the MP mezz pet.')
   MISH=@('Mind Shard',0,100,$u100,'MBRC:25:1,MDDR:20:1','Brainchopper 25 percent. Dark Dreams 20 percent (guide: sometimes).')
   FRNE=@('Frazzled Nerves',0,100,$u100,'','Name from Equip_FrazzledNervesAtk. General ethers only.')
   NEFE=@('Nebulous Feeling',0,100,$u100,'','Name from Equip_NebulousFeelingAtk. Not on the unique table. General ethers only.')
-  ROEY=@('Roving Eye',$mesh.eye,75,$u100,'','Client attack item spells it Roaving Eye. Eyemutant mesh.')
+  ROEY=@('Roving Eye',$mesh.eye,91,$u100,'','Client attack item spells it Roaving Eye. Distracting Sphere mesh 96194, scale 91.')
   SAED=@("Sanity's Edge",0,100,$u100,'MLHV:25:1','Loving Hands 25 percent (AO-Universe; rate not published).')
   JEAL=@('Jealousy',0,105,$u100,'MJEA:25:1','Essence of Pure Jealousy 25 percent (rate not published).')
   GUOF=@('Guardian of Thought',0,100,$u100,'','Neleb add, already standing. General ethers only.')
   NOHA=@('Notum Habit',0,105,$u100,'MFLA:100:1,MDDR:20:1','Neutrino Flash 100 percent. Dark Dreams 20 percent (guide: sometimes).')
   BYOM=@('Betrayer of Memory',$mesh.spirit,70,$u100,'MCTX:25:1','Cortex of the Executioner 25 percent. The 1 percent on the guide is the crit on the item, not the drop rate. Spirit mesh stands in for the meatball.')
   THOF=@('Thief of Reason',$mesh.spirit,70,$u100,'MBRH:25:1','Brutal Hands 25 percent (AO-Universe; rate not published). Spirit mesh stands in for the meatball.')
-  NETH=@('Neleb the Deranged',0,110,-1,'MROB:100:1,MBAT:100:1,MFRS:100:2,MDMC:100:1,MDDR:55:1','HP 15818 from the wiki. Two Fractured Sanity. Robe, battlerod, and Dream Mesh Circuit 100 percent. Dark Dreams 55 percent for one copy. Hide in Memory is not scripted.')
+  NETH=@('Neleb the Deranged',0,110,-1,'MROB:100:1,MBAT:100:1,MFRS:100:2,MDMC:100:1,MDDR:55:1','HP 15818 from the wiki. Two Fractured Sanity. Drops stay the circuit robe and Notum Battlerod. Worn look is Nano-master Robe 274956 and Nightmare Battlerod 274955. Hide in Memory is not scripted.')
 }
 foreach ($h in @('FIOI','FIOF','FMOI','FMOF','FGOI','FGOF','FEOF')) {
   if ($h -eq 'FMOI') { continue }
@@ -141,9 +142,22 @@ foreach ($h in @($def.Keys)) {
     $st['1'] = $hp; $st['27'] = $hp; $st['54'] = $l; $st['360'] = [int]$d[2]; $st['455'] = 136
     $st['285'] = $mx; $st['286'] = [math]::Max(1, [int][math]::Round($mx / 2)); $st['61'] = 10 * $l
     if ([int]$d[1] -gt 0) { $st['359'] = [int]$d[1] }
+    # Neleb: Nanomage male. Head 40173 is the captured nanomage (OITA). Body 26092 is the clothed male
+    # paperdoll wear textures already attach to. 274956 is ChangeBodyMesh "robe" plus the robe textures.
+    # 274955 WeaponMesh 30238 is the visible right-hand rod; it is not the attack cycle.
+    if ($h -eq 'NETH') {
+      $st['4'] = 3; $st['59'] = 2; $st['64'] = 40173; $st['359'] = 26092
+    }
     $b = [ordered]@{ Name = [string]$d[0]; Level = $l; Stats = $st; LootTable = @(Pack ([int]$d[3]) ([string]$d[4])) }
+    if ($h -eq 'NETH') {
+      $wear = New-Object System.Collections.ArrayList
+      foreach ($id in @(274956, 274955)) { [void]$wear.Add([int[]]@($id, $id)) }
+      $b['HasHeadMesh'] = $true
+      $b['Equipment'] = [object[]]$wear.ToArray()
+    }
+    $donor = $(if ($h -eq 'NETH') { 'OITA+26092' } elseif ([int]$d[1] -gt 0) { [string]$d[1] } else { 'DCQV' })
     $b['ContentProvenance'] = [pscustomobject]@{
-      Guessed = $true; Confirmed = $false; Donor = $(if ([int]$d[1] -gt 0) { [string]$d[1] } else { 'DCQV' })
+      Guessed = $true; Confirmed = $false; Donor = $donor
       Source = [string]$d[5]; Levels = "$lo-$hi"
     }
     $bands += $b
