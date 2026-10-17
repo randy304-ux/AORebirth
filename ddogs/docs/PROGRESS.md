@@ -288,6 +288,8 @@ Live after restart 21:12 (online count 0, backup `I:\AO\backups\cellao_codex_cle
 ## 2026-10-16 - Emiel reward
 AO-Universe Arete guide #18 lists one reward: a choice of Heavy Bio Mesh 246926 or Light Bio Mesh 246925. It does not list credits or XP. The first delivery (EMB1) no longer pays the guessed 500 credits and 1500 XP. Later deliveries (EMB2) were already unpaid. The mesh choice is unchanged.
 
+Live after restart 21:20 (online count 0, backup `I:\AO\backups\cellao_codex_clean-20261016-2118-emiel.sql`, 18647190 bytes): leaves=1078, quests=167 skipped=0, Knubot scripts=82 rejected=0. Ports 7500 pid 102304, 7501 pid 98892, 7012/6996 pid 18620, 8098 and 80 pid 81092. No new zone errors. Emiel and Fausto "bye" warnings are unchanged. Commit `6d3fff9b` (local only). Engines left up. Build 0 errors.
+
 ## 2026-10-16 - Fausto's tie
 Fausto stays in the white shirt and black pants from the guide screenshot. No tie was added.
 
