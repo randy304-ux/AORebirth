@@ -350,3 +350,8 @@ Published launcher 2026.10.17-0013. Launcher zip sha256 `c178ab27dbafd9bfaa6917d
 Randy's clarification: Tools belongs under the install folder the player chose, for example `<install dir>\Tools`, and it follows that folder when they change it. A folder chosen in Settings is kept until the install folder changes, then it is dropped so Tools moves with the new install. C: is still refused. The folder-resolution check passed. AO-VK is unchanged from 0013: the author's 0.4.1 zip still installs beside our version.dll.
 
 Published launcher 2026.10.17-0020. Launcher zip sha256 `d8f715094f855d87f29fb8b215ba65a03e42542b66d1d67f3ad5e8eb8f40f110`, size 60555738. Zone engines were not restarted.
+
+## 2026-10-17 00:32 - Merc pet assist (not live)
+A merc's attack and support pets still only pick a fight of their own inside 30 m of the merc. When that merc is attacking a target, those pets assist that target at any distance and path to it the same way a player pet closes on an attack order. A heal pet still does not auto-attack. When the merc stops attacking, the short leash applies again and the pets follow back.
+
+Side compile of ZoneEngine_New: 0 errors. Not live. Nazzgrom (character 20) was online from 00:25 through 00:32, so the engines were not stopped. Restart waits until the online count is 0, rechecked immediately before stop.
