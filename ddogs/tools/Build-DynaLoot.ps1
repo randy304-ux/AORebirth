@@ -307,3 +307,5 @@ $ar = $edits.Count - $rk
 "dyna loot leaves=$($drops.Count) discs=$discUsed crystalFallback=$crystalFallback nanosSkipped=$nanoSkipped bosses=$rk arete=$ar"
 # Nascence camps use CampKey nascence| so the boss| pass above does not replace their tables.
 & "$PSScriptRoot\Build-NascenceDynas.ps1" -GameData $GameData
+# Other SL camps use elysium| scheol| adonis| penumbra| inferno|. Same reason.
+& "$PSScriptRoot\Build-SLDynas.ps1" -GameData $GameData

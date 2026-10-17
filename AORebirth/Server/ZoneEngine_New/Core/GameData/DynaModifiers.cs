@@ -47,8 +47,21 @@ namespace ZoneEngine_New.Core.GameData
         public const int ContainerDropPercent = 20;
 
         public static bool IsDyna(NpcLevelBand band)
-            => !string.IsNullOrEmpty(band.DynaModifier)
-                || (band.ContentProvenance?.CampKey?.StartsWith("boss|", StringComparison.OrdinalIgnoreCase) ?? false);
+        {
+            if (!string.IsNullOrEmpty(band.DynaModifier))
+                return true;
+            string? key = band.ContentProvenance?.CampKey;
+            if (string.IsNullOrEmpty(key))
+                return false;
+            // CampKey stays zone| so Build-DynaLoot's boss| pass does not replace the loot table.
+            // Adds use zone-add| and must not match.
+            return key.StartsWith("boss|", StringComparison.OrdinalIgnoreCase)
+                || key.StartsWith("elysium|", StringComparison.OrdinalIgnoreCase)
+                || key.StartsWith("scheol|", StringComparison.OrdinalIgnoreCase)
+                || key.StartsWith("adonis|", StringComparison.OrdinalIgnoreCase)
+                || key.StartsWith("penumbra|", StringComparison.OrdinalIgnoreCase)
+                || key.StartsWith("inferno|", StringComparison.OrdinalIgnoreCase);
+        }
 
         /// <summary>Applies the band's named modifier, or a random one, to freshly materialized stats.</summary>
         public static string? Apply(NpcLevelBand band, Dictionary<int, int> stats, Random? random = null)
