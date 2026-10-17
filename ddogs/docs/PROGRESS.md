@@ -320,3 +320,6 @@ Adonis outdoor camps are City 4872. The Silent Pit (Trip, Trap, Trup, Tiny) is A
 Stand-in meshes, flagged: visitant and horror use the spirit (NASI), golems use the heckler (MOOM), Scheol demons use TEDM, Kefallonia uses the chimera (LLBE). Eremite, predator, and stalker use their own captured meshes. Dryad and mortiig keep the stand-ins already live. Pinned uniques that itemnames.sql contains are on the corpse. CrackerJack Sleeves, Commander's Ceremonial Chest, and Golem's Warm Notum Hood have no row.
 
 Live after restart 22:22 (online count 0, backup `I:\AO\backups\cellao_codex_clean-20261016-2219-sl-dynas-finish.sql`, 18647190 bytes): leaves=1140, quests=167 skipped=0, Knubot scripts=82 rejected=0. Ports 7500 pid 99608, 7501 pid 29872, 7012/6996 pid 100720, 8098 and 80 pid 81092. No new zone errors. Engines left up. Zone build 0 errors.
+
+## 2026-10-16 - Static dungeon research
+Research only, in `ddogs/docs/static-dungeons-research.md`. Nothing wired. Temple of Three Winds 1931 and Condemned Subway 127 are already populated. Foreman's Office is Biomare, playfield 1941, and it is layout only. Proposed order: Steps of Madness 1933, Biomare 1941, Crypt of Home 4805, then the Elysium garden key dungeons.
