@@ -395,6 +395,7 @@ namespace ZoneEngine_New.Core.GameData
                 MaxLevel = max,
                 UnresolvedPlaceholder = isFallback,
                 Equipment = WithDynaBossItem(CopyPairs(nearest.Equipment), dynaModifier, level),
+                ShopStock = CopyShopStock(nearest.ShopStock),
                 TextureOverrides = new List<TextureOverride>(nearest.TextureOverrides),
                 CorpseFullUpdateTemplate = CopyCorpseFullUpdateTemplate(nearest.CorpseFullUpdateTemplate),
                 KnuBotId = nearest.KnuBotId,
@@ -497,6 +498,30 @@ namespace ZoneEngine_New.Core.GameData
 
             foreach (KeyValuePair<int, int> pair in source)
                 copy[pair.Key] = pair.Value;
+
+            return copy;
+        }
+
+        static List<NpcShopStockLine> CopyShopStock(List<NpcShopStockLine>? source)
+        {
+            var copy = new List<NpcShopStockLine>();
+            if (source == null)
+                return copy;
+
+            for (int i = 0; i < source.Count; i++)
+            {
+                NpcShopStockLine? line = source[i];
+                if (line == null || line.LowId <= 0 || line.Quality <= 0)
+                    continue;
+
+                copy.Add(
+                    new NpcShopStockLine
+                    {
+                        LowId = line.LowId,
+                        HighId = line.HighId > 0 ? line.HighId : line.LowId,
+                        Quality = line.Quality
+                    });
+            }
 
             return copy;
         }
@@ -609,6 +634,9 @@ namespace ZoneEngine_New.Core.GameData
         public int KnuBotId { get; set; }
 
         public List<List<int>> Equipment { get; set; } = new();
+
+        /// <summary>Fixed shop lines. Empty means the equipped shop item keeps the shared vending table.</summary>
+        public List<NpcShopStockLine> ShopStock { get; set; } = new();
 
         /// <summary>Material texture overrides sent on the spawn packet (SCFU extended textures).</summary>
         public List<TextureOverride> TextureOverrides { get; set; } = new();

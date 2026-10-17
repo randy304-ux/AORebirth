@@ -416,6 +416,7 @@ namespace ZoneEngine_New.Core.Playfield
                     SpawnSource = SpawnSource.None
                 };
                 npc.AttachShop(machine);
+                ApplyConfiguredShopStock(npc, machine);
 
                 _logger.Info(
                     string.Format(
@@ -453,6 +454,7 @@ namespace ZoneEngine_New.Core.Playfield
                     SpawnSource = SpawnSource.None
                 };
                 npc.AttachShop(machine);
+                ApplyConfiguredShopStock(npc, machine);
 
             _logger.Info(
                     string.Format(
@@ -471,6 +473,29 @@ namespace ZoneEngine_New.Core.Playfield
                 && buy > 0
                 && template.Stats.TryGetValue(CharacterStat.SellModifier, out int sell)
                 && sell > 0;
+
+        /// <summary>
+        /// Replaces the shared vending-machine roll when the NPC template lists its own stock.
+        /// The shop item still supplies the buy and sell modifiers.
+        /// </summary>
+        static void ApplyConfiguredShopStock(NpcCharacter npc, VendingMachine machine)
+        {
+            List<NpcShopStockLine>? lines = npc.MobTemplate?.ShopStock;
+            if (lines == null || lines.Count == 0)
+                return;
+
+            var slots = new List<ShopStockSlot>(lines.Count);
+            foreach (NpcShopStockLine line in lines)
+            {
+                if (line == null || line.LowId <= 0 || line.Quality <= 0)
+                    continue;
+                int high = line.HighId > 0 ? line.HighId : line.LowId;
+                slots.Add(new ShopStockSlot(line.LowId, high, line.Quality));
+            }
+
+            if (slots.Count > 0)
+                machine.Stock.SetConfiguredSnapshot(slots);
+        }
 
         /// <summary>
         /// Tells whoever holds loot rights before the corpse spawns. A solo winner gets "You can loot these remains."

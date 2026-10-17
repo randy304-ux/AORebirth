@@ -58,6 +58,16 @@ namespace ZoneEngine_New.Core.Mobs
         public int CountMax { get; set; }
     }
 
+    /// <summary>One fixed line in a hash vendor's shop. HighId may equal LowId.</summary>
+    public sealed class NpcShopStockLine
+    {
+        public int LowId { get; set; }
+
+        public int HighId { get; set; }
+
+        public int Quality { get; set; }
+    }
+
     /// <summary>
     /// Resolved NPC template used at spawn. Materialized from NpcTemplates.json.
     /// </summary>
@@ -104,6 +114,9 @@ namespace ZoneEngine_New.Core.Mobs
 
         /// <summary>Per-slot AOID lists from the template Equipment jagged array.</summary>
         public List<List<int>> Equipment { get; set; } = new();
+
+        /// <summary>Fixed shop lines for a hash vendor. Empty leaves the shared vending-machine table in place.</summary>
+        public List<NpcShopStockLine> ShopStock { get; set; } = new();
 
         /// <summary>SCFU texture overrides keyed by place. Empty omits the texture block.</summary>
         public Dictionary<int, int> Textures { get; set; } = new();
