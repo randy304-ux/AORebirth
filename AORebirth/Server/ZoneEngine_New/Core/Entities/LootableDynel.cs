@@ -206,7 +206,8 @@ namespace ZoneEngine_New.Core.Entities
             OpenerIdentity = player.Identity;
             _wasOpened = true;
             OnOpened(player);
-            player.Session.Send(Loot.BuildInventoryUpdateMessage(player.Identity, Identity, _inventoryHandle));
+            player.Session.Send(Loot.BuildInventoryUpdateMessage(
+                player.Identity, Identity, _inventoryHandle, anonymousItems: true));
             NotifyLootChanged();
             return true;
         }

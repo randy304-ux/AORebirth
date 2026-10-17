@@ -144,7 +144,8 @@ namespace ZoneEngine_New.Core.Inventory
             Identity bagIdentity,
             int slotNumberInMainInventory,
             int unknown1 = 2,
-            int unknown2 = 1)
+            int unknown2 = 1,
+            bool anonymousItems = false)
         {
             var entries = new InventoryEntry[Content.Count];
             int index = 0;
@@ -158,7 +159,10 @@ namespace ZoneEngine_New.Core.Inventory
                     Slotnumber = slot.Key,
                     UnknownFlags = item.ToInventoryPacketFlags(),
                     Unknown1 = count,
-                    Identity = item.Identity,
+                    // Live corpse InventoryUpdate rows identify every slot as None:0 (training-ground
+                    // inventory-updates.csv). A WeaponInstance identity makes the client treat the slot
+                    // as a world weapon and ignore the loot drag.
+                    Identity = anonymousItems ? Identity.None : item.Identity,
                     LowId = item.LowId,
                     HighId = item.HighId,
                     Quality = item.Quality,
