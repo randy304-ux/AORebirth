@@ -348,6 +348,8 @@ $report | Set-Content -Encoding UTF8 ([IO.Path]::Combine($PSScriptRoot, 'Build-N
 & "$PSScriptRoot\Build-AreteContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Temple of the Three Winds (PF 1931) mobs, bosses, loot and boss triggers: Build-TotwContent.ps1.
 & "$PSScriptRoot\Build-TotwContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Steps of Madness (PF 1933) mobs, bosses, loot, and Zyvania Bagh's teleport: Build-StepsOfMadness.ps1.
+& "$PSScriptRoot\Build-StepsOfMadness.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Nascence garden key NPCs, items and insignia drops: Build-GardenContent.ps1 (then run Build-NewbieQuests.ps1).
 & "$PSScriptRoot\Build-GardenContent.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Best-guess fills (ContentProvenance.Guessed) for uncaptured spawn points: Build-GuessedContent.ps1.

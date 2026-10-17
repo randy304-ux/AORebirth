@@ -1,12 +1,12 @@
 # Static dungeons
 
-Research only. Nothing in this note was wired in.
+Steps of Madness, playfield 1933, is wired by `ddogs/tools/Build-StepsOfMadness.ps1`. The rest of this note is still research.
 
 A spawn counts as populated when its `hashText` is a key in `AORebirth/GameData/NpcTemplates.json`. A client hash with no template does not produce one of our mobs. Item ids are Auno AOIDs from `itemnames.sql`. Boss lists for Biomare, Steps of Madness, and the Crypt of Home are the AOWiki pages read for this pass (https://wiki.aodb.us/wiki/Biomare, https://wiki.aodb.us/wiki/Steps_of_Madness, https://wiki.aodb.us/wiki/Crypt_of_Home). Temple of Three Winds loot is the table already in `ddogs/tools/Build-TotwContent.ps1`, checked against itemnames.
 
 ## Order
 
-1. Steps of Madness, playfield 1933. The layout is already there (114 client spawns, none of them templates). No key. The uniques are a short named list.
+1. Steps of Madness, playfield 1933. Wired. 114 client spawns, each hash now has a template. No key. Biomare is next and is not started.
 2. Biomare, playfield 1941. This is the Foreman's Office. The layout is there (268 client spawns, none of them templates). Level cap 100. Missions and nodrop uniques.
 3. Crypt of Home, playfield 4805. Layout is there (139 client spawns, none of them templates). Switch doors and Cerubin. The Inner Sanctum key halves already have ids. The Pyramid of Home is a separate level-201 raid door and was not found as its own playfield name.
 4. Elysium garden key dungeons, playfields 4678-4681. Nascence gardens already have the key quest. These four have client spawns and no templates. Keys exist: Enel 226987 and Shere 226993.
@@ -62,7 +62,6 @@ The key quest is live via `Build-GardenContent.ps1`. Keys: The Key to the Garden
 | Playfield | Name | Client spawns | In templates | Max level |
 | --- | --- | --- | --- | --- |
 | 1941 | Bio MARE | 268 | 0 | 100 |
-| 1933 | Dng: Steps of Madness | 114 | 0 | 70 |
 | 4805 | The Crypt of Home | 139 | 0 | 150 |
 | 1862 | The Smugglers Den | 153 | 13 | not counted |
 | 125 | Smuggler's Rearranged | 279 | 2 | 225 |
@@ -101,7 +100,7 @@ Collar of Amplification is the mission reward, not a boss drop. Notum chips and 
 
 ### Steps of Madness, 1933
 
-Northern Omni Forest, about 800, 2840. Entrance is the eyeball. Zyvania Bagh in ICC HQ can teleport you there. There is no return teleport. The Childhood Memory teddy bear was the old key and is no longer required.
+Wired. All 114 client spawns have templates. Respawn times on those points were left as they are (Neleb, Betrayer of Memory, and Thief of Reason 600 seconds). Northern Omni Forest, about 800, 2840, playfield 716. The eyeball surface record names destination 1933. There is no row in the teleports table. Zyvania Bagh is the existing Andromeda spawn ZYBA at 3158.1, 35.5, 899.1 on playfield 655. Talking to her teleports to 40, 33.8, 170 on 1933. The Childhood Memory teddy bear is not a key.
 
 Designed as hard, low-level mobs so the loot is the point, not the XP. Teams from about 30, solo from about 50. Final boss Neleb the Deranged, level 70, inside 1933 at 256, 125. Respawn 10 minutes on the wiki. Adds: Thief of Reason, Betrayer of Memory, Guardian of Thought. He casts Hiding in Memory (98 percent absorb for 34 seconds).
 
@@ -119,7 +118,7 @@ Uniques, itemnames ids:
 | Neutrino Flash | 152027 | Notum Habit, 100% |
 | Emotional Sponge | 152031 | Suppressed Emotion |
 
-Dark Dreams, Dream Mesh Circuit, the five Nightmare Ethers, and the Hand armor pieces are named on the wiki and were not given their own id check this pass. Do not invent those ids.
+The rest of the corpse uniques are in itemnames.sql and are on the mobs. Dream Mesh Circuit 274972 and Dark Dreams 274971 (Neleb, 55 percent for one copy). Loving Hands 152022, Brutal Hands 152021, Gentle Hands 152023. Essence of Pure Jealousy 152030. Cortex of the Executioner 152032. Brainchopper 152024. Nightmare Arachnid Ether 274958, Darkness 274961, Spacial 274959, Burning 274960, Tidal 274879. Sanity Recovery Medication 275003 and Nightmare Therapy Pills 275004. Rates that the guides do not number are 25 percent, except Emotional Sponge at 40 and the Childhood Horror arachnid ether at 40. The upgrade results (Neleb's Nano-master Robe 274956, Neleb's Nightmare Battlerod 274955) are tradeskill, not drops.
 
 ### Crypt of Home, 4805
 
