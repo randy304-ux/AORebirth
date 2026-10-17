@@ -423,3 +423,8 @@ Still open: store/daily pages (8098 serves /, /store, /daily on LAN and public; 
 - Mail Terminal content NPCs (body 279184) on 6553 (3464.1,805.6) and 4582 (936.4,878.3); NpcCharacter.TryUse opens the claims list. Static MailTerminals removed.
 - SCWS moved to 3506.0/941.8/11.1; fleas near boss -> CMDI L7, near Docker -> 01V1 L5.
 - Restart 19:25 (backup arete-fix1930), quests=169, Knubot rejected=0, page check 4/4 PASS.
+
+## 2026-10-17 19:35 EDT - launcher release 2026.10.17-1935
+- Published the AO-VK-safe version.dll (sha f59689e5...) via tools-temp/publish-launcher.ps1: launcher zip 3c2567cb..., patch zip d4024832..., version.json bumped from 0020.
+- Verified via https://dungeondogs.org/downloads/ao/version.json (launcher UA, from box and RC-PC), launcher zip downloaded and hash-matched, patch zip range-fetched and matched; zip's version.dll hash = build.
+- Rollback: I:\AO\backups\ao-release-2026.10.17-0020 (version.json, Patch.zip, Launcher.zip, release.json, old version.dll); the 0020 launcher zip is still in downloads/ao.
