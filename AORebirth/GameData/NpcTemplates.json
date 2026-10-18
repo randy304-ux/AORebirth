@@ -63650,7 +63650,7 @@
                                                      "342":  600,
                                                      "343":  0,
                                                      "359":  203157,
-                                                     "360":  100,
+                                                     "360":  25,
                                                      "368":  15,
                                                      "387":  503,
                                                      "389":  0,
@@ -70359,9 +70359,9 @@
     "OIUR":  {
                  "Templates":  [
                                    {
-                                       "Name":  "ICC Peacekeeper",
+                                       "Name":  "Omni-AF Private",
                                        "Level":  10,
-                                       "Stats":  {
+                                       "Stats":  { "59":  2, "4":  3,
                                                      "0":  277352961,
                                                      "1":  941,
                                                      "18":  0,
@@ -70398,9 +70398,9 @@
                                                      "660":  0,
                                                      "673":  31,
                                                      "1003":  0,
-                                                     "359":  254118,
-                                                     "64":  40627,
-                                                     "360":  105
+                                                     "359":  26151,
+                                                     "64":  223923,
+                                                     "360":  100
                                                  },
                                        "Features":  [
                                                         "NoCombat",
@@ -70413,9 +70413,9 @@
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
                                                                  "Donor":  "ADAF",
-                                                                 "Source":  "ICC HQ faction area (Randy live screenshot). Pink OIUR mapping and look guessed"
+                                                                 "Source":  "Omni-AF Private (OIUR: the OTAF Official Notice targets Object 0x4F495552 OIUR; L10 26151 nano male from live captures). Omni-Armed Forces set + OT M500 SWAT Rifle by name. Build-Appearance.ps1"
                                                              },
-                                       "HasHeadMesh":  true
+                                       "HasHeadMesh":  true, "Equipment":  [[203447,203447],[203449,203449],[203530,203530],[203445,203445],[203446,203446],[203448,203448],[124350,124350]]
                                    }
                                ]
              },
@@ -70427,7 +70427,7 @@
                                        "Stats":  {
                                                      "0":  277352961,
                                                      "1":  941,
-                                                     "4":  4,
+                                                     "4":  1,
                                                      "18":  0,
                                                      "21":  0,
                                                      "27":  941,
@@ -70435,7 +70435,7 @@
                                                      "37":  1,
                                                      "47":  1,
                                                      "54":  20,
-                                                     "59":  1,
+                                                     "59":  3,
                                                      "60":  15,
                                                      "89":  1,
                                                      "99":  503,
@@ -70452,7 +70452,7 @@
                                                      "339":  91,
                                                      "342":  600,
                                                      "343":  0,
-                                                     "359":  26097,
+                                                     "359":  26090,
                                                      "360":  100,
                                                      "368":  15,
                                                      "387":  503,
@@ -70465,7 +70465,7 @@
                                                      "660":  0,
                                                      "673":  31,
                                                      "1003":  0,
-                                                     "64":  40111
+                                                     "64":  40695
                                                  },
                                        "HasHeadMesh":  true,
                                        "Features":  [
@@ -70481,16 +70481,7 @@
                                                                  "Donor":  "ADAF",
                                                                  "Source":  "ICC HQ faction area (Randy live screenshot). Pink CPPS mapping and look guessed"
                                                              },
-                                       "Equipment":  [
-                                                         [
-                                                             295698,
-                                                             295698
-                                                         ],
-                                                         [
-                                                             284185,
-                                                             284185
-                                                         ]
-                                                     ]
+                                       "Equipment":  [[284185,284185]]
                                    }
                                ]
              },
@@ -70527,7 +70518,7 @@
                                                      "339":  91,
                                                      "342":  600,
                                                      "343":  0,
-                                                     "359":  26097,
+                                                     "359":  26103,
                                                      "360":  100,
                                                      "368":  15,
                                                      "387":  503,
@@ -70540,7 +70531,7 @@
                                                      "660":  0,
                                                      "673":  31,
                                                      "1003":  0,
-                                                     "64":  40111
+                                                     "64":  40103
                                                  },
                                        "HasHeadMesh":  true,
                                        "Features":  [
@@ -70556,16 +70547,7 @@
                                                                  "Donor":  "ADAF",
                                                                  "Source":  "ICC HQ faction area (Randy live screenshot). Pink CSPE mapping and look guessed"
                                                              },
-                                       "Equipment":  [
-                                                         [
-                                                             295698,
-                                                             295698
-                                                         ],
-                                                         [
-                                                             284185,
-                                                             284185
-                                                         ]
-                                                     ]
+                                       "Equipment":  [[284185,284185]]
                                    }
                                ]
              },
@@ -70952,7 +70934,7 @@
                                                      "339":  91,
                                                      "342":  600,
                                                      "343":  0,
-                                                     "359":  26092,
+                                                     "359":  165186,
                                                      "360":  100,
                                                      "368":  15,
                                                      "387":  503,
