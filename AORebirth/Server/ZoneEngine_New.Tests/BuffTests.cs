@@ -2,12 +2,14 @@ namespace ZoneEngine_New.Tests
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using AORebirth.Enums;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using SmokeLounge.AOtomation.Messaging.GameData;
+    using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
 
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.Inventory;
@@ -186,6 +188,13 @@ namespace ZoneEngine_New.Tests
             Assert.AreEqual(BuffApplyDecision.Apply,
                 player.TryApplyBuff(spell, Caster, start, out Buff? applied, out _));
             Assert.AreEqual(900, player.Stats.Get(CharacterStat.MonsterData));
+            var swap = player.BuildBodySwapSpawnMessages().ToList();
+            Assert.AreEqual(2, swap.Count);
+            var swapStat = (StatMessage)swap[0];
+            Assert.AreEqual(CharacterStat.MonsterData, swapStat.Stats[0].Value1);
+            Assert.AreEqual(900u, swapStat.Stats[0].Value2);
+            Assert.IsInstanceOfType(swap[1], typeof(AppearanceUpdateMessage));
+            Assert.IsTrue(player.BuildSpawnCompanionMessages().Any(m => m is StatMessage));
             player.RebaseStats();
             player.RebaseStats();
             Assert.AreEqual(900, player.Stats.Get(CharacterStat.MonsterData));
@@ -199,6 +208,7 @@ namespace ZoneEngine_New.Tests
             Assert.AreEqual(BuffRemovalOutcome.Removed,
                 player.TryRemoveBuff(spell.Id, BuffRemovalReason.Cancelled, out _));
             Assert.AreEqual(17, player.Stats.Get(CharacterStat.MonsterData));
+            Assert.AreEqual(0, player.BuildBodySwapSpawnMessages().Count());
             Assert.AreEqual(1, restored.DrainExpiredBuffs(applied.ExpiresAtUtc).Count);
             Assert.AreEqual(17, restored.Stats.Get(CharacterStat.MonsterData));
             Assert.AreEqual(17, restored.Stats.Get(CharacterStat.MonsterData, StatDetail.Base));

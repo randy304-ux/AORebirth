@@ -1684,6 +1684,32 @@ namespace ZoneEngine_New.Core.Entities
                 yield return message;
             foreach (MessageBody message in BuildCombatStanceMessages())
                 yield return message;
+            foreach (MessageBody message in BuildBodySwapSpawnMessages())
+                yield return message;
+        }
+
+        /// <summary>
+        /// A worn body swap (battle suit, costume, morph) for an observer that just got this player's spawn. The SCFU
+        /// already carries the full MonsterData, but the client keeps the player's breed body from it; the suit only
+        /// showed after a re-equip, which sends MonsterData as a stat and then AppearanceUpdate. Sending the same pair
+        /// after CharInPlay makes observers see the suit at once (zone-in, login, coming into range).
+        /// </summary>
+        internal IEnumerable<MessageBody> BuildBodySwapSpawnMessages()
+        {
+            int shape = Stats.GetOrZero(CharacterStat.MonsterData);
+            if (shape == 0 || shape == Stats.GetOrZero(CharacterStat.MonsterData, StatDetail.Base))
+                yield break;
+
+            yield return new StatMessage
+            {
+                Identity = Identity,
+                Stats = [new GameTuple<CharacterStat, uint>
+                {
+                    Value1 = CharacterStat.MonsterData,
+                    Value2 = unchecked((uint)shape),
+                }],
+            };
+            yield return BuildAppearanceUpdateMessage();
         }
 
         public override List<WeaponItemFullUpdateMessage> BuildWeaponInstanceMessages()
