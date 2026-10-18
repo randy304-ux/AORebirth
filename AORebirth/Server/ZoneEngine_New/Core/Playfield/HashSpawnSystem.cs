@@ -1001,6 +1001,12 @@ namespace ZoneEngine_New.Core.Playfield
             if (members.Length == 0)
                 return;
 
+            // One-shot points (generated mission dungeons: no respawns) keep their NPCs through sleep. Sleep-despawning
+            // them re-created the same crew at full health with new ids when a player came back (ZXK1 2026-10-18
+            // 18:40 ET), which reads as a respawn. Static playfields' points respawn and still sleep as before.
+            if (!point.RespawnsAfterDeath)
+                return;
+
             // Stay Alive — sleep-despawned; respawn on next awake tick.
             point.State = HashSpawnState.Alive;
             for (int i = 0; i < members.Length; i++)
