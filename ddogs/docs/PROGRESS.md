@@ -522,9 +522,8 @@ Launcher commit 7cec228 (DeltaUpdate.cs, SelfUpdate.cs, Models.cs). version.json
 - Loot/respawn from c91bbda8 go live together: ALGN 500 credits, Bio-Material 60%, Viralbots 25%, Lead Viralbots 5%, weapons 50/15; crew Bio-Material 10%.
 - Layout modelled on AO-Universe Place the Bomb (scout ship, Brigadier General plus an add on the flight deck). Mothership notes for later: ddogs/docs/alien-ships-notes.md.
 - Guessed: rates, sizes, QL 12, the 24 h lifetime, the exit door and the entrance door choice.
-- Friendly Buff can (Randy ~18:05, teamed with Doobert and targeting him: "Must be in team with target"). The zone log of this boot has no GenericCmd Use for either character's can, so the client refused the use before sending it; the server-side op 138 check never ran.
-  - Cause: other clients never learned a player's Team id. The SCFU sent for other players hard-coded SimplePcInfo.Team = 0, and TeamService sent the Team stat only to the player's own client.
-  - Fix (e86b66ce): SCFU carries the live Team stat, and a Team change is announced as a StatMessage to the player's vicinity, so teammates see each other's Team id. Built, untested in game.## 2026-10-18 15:45 ET - Arete Kyr'ozch aliens: aggro, alien XP, Kyr'Ozch weapon loot, Friendly Buff can, ship spawns; restart 15:40
+- Friendly Buff can (Randy ~18:05, "Must be in team with target"): it worked on retry, so this was the can's ~1 m use range, not team data. No GenericCmd Use reached the server for the failed tries (the client blocked them). A team-id-to-other-clients change was built (e86b66ce) and reverted, so it is not shipped.
+ 2026-10-18 15:45 ET - Arete Kyr'ozch aliens: aggro, alien XP, Kyr'Ozch weapon loot, Friendly Buff can, ship spawns; restart 15:40
 
 - Restart 15:40 (backup cellao_codex_clean-20261018-1539-alien1018.sql, online 0 at 15:40:01 and 15:40:28 after stop). Boot 15:40:50: quests=169 skipped=0, Knubot scripts=87 rejected=0, no Error, Test-StorePages 6/6 PASS. GameData ready mobs 1178->1179 (YZWI), hashTemplates 130->132 (KZWP, KZTW), hashInstances 6596->6644 (48 weapon leaves).
 - Aggro: Build-AreteAliens.ps1 sets BreedHostility 204=1 on ZIXI ACFJ CRDY ALGN ZIXK KSAU KGRU KCIU KGXH HX1V HXHR JXSC YZWI (none had it, so none proximity-aggroed). The grey skip (TeamLevelEligibility) already matches the client's grey. Untested in game.
