@@ -136,6 +136,7 @@ public sealed class QuestDungeonPlayfield : Playfield
         if (dungeon != null)
         {
             SpawnDoors(dungeon.Doors, locality);
+            SpawnArrivalExitBeacon(dungeon);
             SpawnFloorTransitions(locality);
             if (_objectiveNpc != null)
             {
@@ -592,15 +593,21 @@ public sealed class QuestDungeonPlayfield : Playfield
         // match all 2,242 catalog rows. The engine's Quaternion constructor takes XYZW.
         heading = new AORebirth.Core.Vector.Quaternion(
             Entrance.RotationComponent1, Entrance.RotationComponent2, Entrance.RotationComponent3, Entrance.RotationComponent0);
-        landing = PortalDoorLandingResolver.LandingInFront(
-            entrancePosition, heading, PortalDoorLandingResolver.ExitDoorClearance);
+        landing = PortalDoorLandingResolver.LandingInFront(entrancePosition, heading, DungeonExitClearance);
     }
 
     /// <summary>
-    /// Usable statel the completed-quest exit terminal borrows: the dungeon "Button (boss)" (CanFlags Use, no
-    /// requirements, no client UI). Items.dat terminals open client UIs (mission/transport) or carry requirements.
+    /// How far in front of the outside entrance a dungeon exit lands. The portal exit clearance (2.5 m) was inside
+    /// the 8009 alien ship entrance's walk-in volume, which took the player straight back in.
     /// </summary>
-    const int ExitTerminalTemplate = 159864;
+    const float DungeonExitClearance = 6f;
+
+    /// <summary>
+    /// The exit's body: "Dust Brigade Exit Beacon" 269820, the game's own exit beacon statel (DynelType 51005,
+    /// CanFlags Use, mesh 258404, no use requirements). Its template OnUse (teleport to 2137) is not run: the
+    /// server's use sends the player to this dungeon's entrance instead.
+    /// </summary>
+    const int ExitTerminalTemplate = 269820;
 
     bool _exitTerminalSpawned;
 
@@ -623,6 +630,43 @@ public sealed class QuestDungeonPlayfield : Playfield
         AORebirth.Core.Vector.Vector3 at = _objectiveNpc != null
             ? new AORebirth.Core.Vector.Vector3(_objectiveNpc.X + 1.5f, _objectiveNpc.Y, _objectiveNpc.Z)
             : new AORebirth.Core.Vector.Vector3(completer.Position.xf + 1.5f, completer.Position.yf, completer.Position.zf);
+        PlaceExitBeacon(template, SnapFeetToFloor(at), "completed");
+    }
+
+    /// <summary>
+    /// Always-present exit beacon beside the arrival point (2 m to one side of the line from the exit door to the
+    /// arrival, whichever side has floor), so a player can always leave, mission done or not.
+    /// </summary>
+    void SpawnArrivalExitBeacon(AORebirth.World.Collision.DungeonWorldLayout dungeon)
+    {
+        if (!ItemTemplates.TryGet(ExitTerminalTemplate, out ItemTemplate? template) || template == null)
+            return;
+        AORebirth.Core.Vector.Vector3 arrival = Arrival;
+        AORebirth.World.Collision.DungeonDoorPlacement? exit = dungeon.Doors.FirstOrDefault(d => d.IsExit);
+        float dx = 1f, dz = 0f;
+        if (exit != null)
+        {
+            dx = arrival.xf - exit.Position.X;
+            dz = arrival.zf - exit.Position.Z;
+            float length = MathF.Sqrt(dx * dx + dz * dz);
+            if (length > 0.01f) { dx /= length; dz /= length; } else { dx = 1f; dz = 0f; }
+        }
+
+        foreach (float side in new[] { 2f, -2f })
+        {
+            var spot = new AORebirth.Core.Vector.Vector3(arrival.xf - dz * side, arrival.yf, arrival.zf + dx * side);
+            if (TrySnapFeetToFloor(spot, out AORebirth.Core.Vector.Vector3 floor))
+            {
+                PlaceExitBeacon(template, floor, "arrival");
+                return;
+            }
+        }
+
+        Logger.Warn("Quest dungeon " + QuestId + ": no floor beside the arrival for the exit beacon");
+    }
+
+    void PlaceExitBeacon(ItemTemplate template, AORebirth.Core.Vector.Vector3 at, string reason)
+    {
         var registry = GetRequiredService<DynelRegistry>();
         var terminal = new DungeonExitTerminal(registry.AllocateStaticDynelIdentity(), template, LeaveToEntrance)
         {
@@ -633,8 +677,8 @@ public sealed class QuestDungeonPlayfield : Playfield
         registry.Register(terminal);
         GetRequiredService<PlayfieldLocality>().RegisterDynel(terminal);
         Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
-            "Quest dungeon {0} completed: exit terminal {1} at ({2:0.#}, {3:0.#}, {4:0.#})",
-            QuestId, terminal.Identity.Instance, at.xf, at.yf, at.zf));
+            "Quest dungeon {0} {1}: exit beacon {2} at ({3:0.#}, {4:0.#}, {5:0.#})",
+            QuestId, reason, terminal.Identity.Instance, at.xf, at.yf, at.zf));
     }
 
     void LeaveToEntrance(Player player)

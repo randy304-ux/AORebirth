@@ -20,10 +20,9 @@
     },
     {
       "Style": 382,
-      "DoorTemplate": 41886,
+      "DoorTemplate": 0,
       "ExitTemplate": 41886,
-      "OpenChancePercent": 100,
-      "Source": "stand-in: no alien door template found in items.dat or the alien ship playfields. Without door dynels the client drew the room-to-room doorways as solid green (Randy 2026-10-18), so every doorway gets the 321 office sliding door (mesh 41809), always spawned open"
+      "Source": "No alien door template in items.dat, and the style playfield 382 has no door dynels (Dynels.dat empty). Open office doors in every doorway (19:11 restart) did not clear the solid green doorway fill and looked wrong (Randy 19:33), so interior doorways are open archways again. The exit borrows the 321 office exit door 41886 because the walk-out needs a door; stand-in"
     },
     {
       "Style": 351,

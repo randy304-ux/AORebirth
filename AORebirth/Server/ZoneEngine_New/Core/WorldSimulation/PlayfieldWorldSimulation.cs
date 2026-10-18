@@ -276,7 +276,7 @@
                 {
                     // First sighting: arriving through a door lands on top of that door, so adopt
                     // whatever the character already overlaps instead of firing it back at them.
-                    state = new PlayerTriggerState();
+                    state = new PlayerTriggerState { FirstSeen = now };
                     _playerTriggerState[id] = state;
                     _triggers.CollectOverlapping(x, y, z, state.Overlapping);
                 }
@@ -300,7 +300,10 @@
                     if (crossing.Trigger.Kind == ZoneTriggerKind.TargetVicinity)
                         FireTargetVicinity(playfield, player, crossing.Trigger);
                     else if (crossing.Trigger.Kind == ZoneTriggerKind.MissionEntrance)
-                        EnterMissionEntrance(playfield, player, crossing.Trigger);
+                    {
+                        if (now - state.FirstSeen >= MissionEntranceArrivalGraceSeconds)
+                            EnterMissionEntrance(playfield, player, crossing.Trigger);
+                    }
                     else if (crossing.Trigger.Kind == ZoneTriggerKind.ExitDoor && crossing.DestPlayfieldId == 0)
                         TellExitDestinationUnknown(player, crossing.Trigger);
                     else
@@ -1291,7 +1294,17 @@
             public float PreviousZ { get; set; }
 
             public bool HasPrevious { get; set; }
+
+            /// <summary>When the character was first seen on this playfield (arrival), in tick seconds.</summary>
+            public double FirstSeen { get; set; }
         }
+
+        /// <summary>
+        /// A mission entrance does not take a character who arrived here this recently: walking out of a generated
+        /// dungeon lands in front of its entrance, and the entrance pulled Randy straight back in 2 s later
+        /// (2026-10-18 19:2x ET).
+        /// </summary>
+        const double MissionEntranceArrivalGraceSeconds = 5.0;
 
         struct LosCacheEntry
         {
