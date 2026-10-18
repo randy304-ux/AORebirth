@@ -47,6 +47,7 @@ namespace ZoneEngine_New.Core.Inventory
             _trainedPerks = trainedPerks;
             _perkLocks = perkLocks;
             _logger = logger;
+            AORebirth.Database.Domain.Characters.MySqlCharacterPersistenceDao.StaleSlotWarning = message => _logger.Warn(message);
 
             _writer = new Thread(WriterLoop)
             {

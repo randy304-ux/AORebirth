@@ -95,8 +95,51 @@ namespace AORebirth.Database.Domain.Characters
         {
             // Preserve the existing unique-slot-safe ordering, including insert into a vacated slot.
             for (int i = 0; i < locations.Count; i++) WriteItemLocation(c, t, locations[i], -(i + 1));
-            foreach (var item in inserts) WriteItem(c, t, item);
-            foreach (var location in locations) WriteItemLocation(c, t, location, location.ContainerPlacement);
+            var batch = new HashSet<int>();
+            foreach (var item in inserts) batch.Add(item.InstanceId);
+            foreach (var location in locations) batch.Add(location.InstanceId);
+            foreach (var item in inserts)
+            {
+                ParkStaleOccupant(c, t, item.ContainerType, item.ContainerInstance, item.ContainerPlacement, item.InstanceId, batch);
+                WriteItem(c, t, item);
+            }
+            foreach (var location in locations)
+            {
+                ParkStaleOccupant(c, t, location.ContainerType, location.ContainerInstance, location.ContainerPlacement, location.InstanceId, batch);
+                WriteItemLocation(c, t, location, location.ContainerPlacement);
+            }
+        }
+
+        /// <summary>
+        /// Raised (inside the write transaction) when a stale row is moved off a slot this batch needs.
+        /// The zone engine wires this to its log.
+        /// </summary>
+        public static Action<string> StaleSlotWarning;
+
+        /// <summary>
+        /// The engine's memory is authoritative for every slot it writes. A row that is NOT part of this batch but
+        /// still sits on a target slot is stale: its item has moved in memory without a row write, e.g. an item put
+        /// into a trade/shop window (the client then re-uses the visibly free slot, e.g. for an item taken back out
+        /// of the window). Writing over it would fail the unique slot key and roll back the whole save. Park the
+        /// stale row at (None, owner, InstanceId), the same convention retired trade rows use; the item's own later
+        /// write (returned to inventory, or sold) moves it again by InstanceId. A conflict with a row that IS in
+        /// the batch means two dirty items claim one slot and still fails loudly.
+        /// </summary>
+        private static void ParkStaleOccupant(IDbConnection c, IDbTransaction t, int type, int owner, int placement, int writer, HashSet<int> batch)
+        {
+            if (placement < 0) return;
+            using (var command = Command(c, t, "SELECT InstanceId FROM item_instances WHERE ContainerType=@Type AND ContainerInstance=@Owner AND ContainerPlacement=@Slot FOR UPDATE",
+                "@Type", type, "@Owner", owner, "@Slot", placement))
+            {
+                object found = command.ExecuteScalar();
+                if (found == null || found is DBNull) return;
+                int occupant = Convert.ToInt32(found, CultureInfo.InvariantCulture);
+                if (occupant == writer || batch.Contains(occupant)) return;
+                Execute(c, t, "UPDATE item_instances SET ContainerType=@None,ContainerPlacement=InstanceId WHERE InstanceId=@Id",
+                    "@None", (int)IdentityType.None, "@Id", occupant);
+                StaleSlotWarning?.Invoke("Item save: parked stale row InstanceId=" + occupant + " from slot " + type + "-" + owner + "-" + placement
+                    + " (not in this batch) so InstanceId=" + writer + " can take it");
+            }
         }
 
         private static void WriteStacks(IDbConnection c, IDbTransaction t, IList<ItemStackData> stacks)
