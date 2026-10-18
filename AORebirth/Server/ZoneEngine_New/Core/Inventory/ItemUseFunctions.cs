@@ -186,9 +186,17 @@ namespace ZoneEngine_New.Core.Inventory
         /// </summary>
         internal const FunctionType SendMailFunction = (FunctionType)53252;
 
-        internal const int PersonalMailboxItemId = 297053;
+        /// <summary>
+        /// The personal mailbox carrier: Letter from Penelope 252503 (Carry + Use, NoDrop, Unique; no functions of its own).
+        /// Send Mail 297053 is the client mail window's internal action template and never shows in the inventory
+        /// (Randy 2026-10-18: delivered at slots 91 and 77, both invisible), so the mailbox moved to a normal item.
+        /// GenericCmdMessageHandler opens the mailbox on its use; 297053's 53252 function still opens it too.
+        /// </summary>
+        internal const int PersonalMailboxItemId = 252503;
 
-        static bool OpenMailbox(Player player)
+        internal const int LegacySendMailItemId = 297053;
+
+        internal static bool OpenMailbox(Player player)
         {
             if (player.Session == null
                 || player.Playfield?.GetService<ZoneEngine_New.Core.Claims.ClaimService>() is not { } claims)

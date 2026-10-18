@@ -283,6 +283,24 @@ namespace ZoneEngine_New.Core.MessageHandlers
                 return;
             }
 
+            // The personal mailbox item opens the mailbox list (Claim Center rows) from anywhere.
+            if (target.Type == IdentityType.Inventory && item.LowId == Inventory.ItemUseFunctions.PersonalMailboxItemId)
+            {
+                if (Inventory.ItemUseFunctions.OpenMailbox(player))
+                    Acknowledge(session, message, target);
+                else
+                    Deny(session, message, player, "personal mailbox: claim service unavailable");
+                return;
+            }
+
+            // Escort quest items (OTAF Official Notice): a plain Use with the recruit selected (QuestEscortService).
+            Quests.QuestEscortService? escort = playfield.GetService<Quests.QuestEscortService>();
+            if (escort != null && target.Type == IdentityType.Inventory && escort.IsEscortItem(item)
+                && escort.TryRecruitSelected(player, target))
+            {
+                Acknowledge(session, message, target);
+                return;
+            }
             ItemUseService uses = playfield.GetRequiredService<ItemUseService>();
             ItemUseStart start = uses.TryBegin(player, target, item);
             if (start == ItemUseStart.Rejected)

@@ -39,6 +39,24 @@ namespace ZoneEngine_New.Core.Quests
             _rules = Load(gameData?.RootPath);
         }
 
+        /// <summary>True when <paramref name="item"/> is an escort rule's quest item (EscortQuests.json ItemLowId).</summary>
+        public bool IsEscortItem(Item item)
+            => item != null && _rules.Exists(rule => item.LowId == rule.ItemLowId || item.HighId == rule.ItemLowId);
+
+        /// <summary>
+        /// A plain Use of an escort item from the inventory: the client sends only the item slot (Use, one target) and the
+        /// NPC is the player's selected target. The OTAF Official Notice 297243 is used this way on an Omni-AF Private;
+        /// its own OnUse spells need requirement operator 104 (target template hash, 0x4F495552 "OIUR"), which the server
+        /// does not implement, so the recruit happens here instead. Always true: the item is handled either way.
+        /// </summary>
+        public bool TryRecruitSelected(Player player, Identity sourceSlot)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            if (player.Target.Instance != 0 && TryRecruit(player, sourceSlot, player.Target))
+                return true;
+            Say(player, "Select the one you want to give this to, then use it.");
+            return true;
+        }
         /// <summary>Use-item-on-NPC. True when this service accepted the use.</summary>
         public bool TryRecruit(Player player, Identity sourceSlot, Identity target)
         {

@@ -29,7 +29,8 @@ namespace ZoneEngine_New.Core.Trade
         public static bool IsNoDrop(Item item)
         {
             ArgumentNullException.ThrowIfNull(item);
-            return (item.Flags & (int)ItemFlags.NoDrop) != 0;
+            // The personal mailbox is never traded or sold, whatever its instance flags say.
+            return (item.Flags & (int)ItemFlags.NoDrop) != 0 || item.LowId == Inventory.ItemUseFunctions.PersonalMailboxItemId;
         }
 
         public static bool IsUnique(Item item)

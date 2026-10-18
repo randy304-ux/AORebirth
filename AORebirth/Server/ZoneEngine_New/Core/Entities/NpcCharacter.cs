@@ -256,7 +256,10 @@ namespace ZoneEngine_New.Core.Entities
         /// </summary>
         protected StatMessage? BuildKnubotStatMessage()
         {
-            if (IsDead || Playfield?.GetService<Knubot.KnubotCatalog>() is not { } knubot || !knubot.TryResolve(this, out _))
+            // Mail terminals have no script but must open as a talk window too (KnubotService.TryOpen opens the mailbox);
+            // without HasKnubotData the client treated a click on one as a trade and nothing reached the mail code.
+            if (IsDead || Playfield?.GetService<Knubot.KnubotCatalog>() is not { } knubot
+                || (!IsMailTerminal && !knubot.TryResolve(this, out _)))
                 return null;
 
             return new StatMessage
