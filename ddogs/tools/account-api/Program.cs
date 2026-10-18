@@ -179,6 +179,27 @@ app.MapGet("/players", async () => {
     return Results.Json(new { online = Convert.ToInt32(await c.ExecuteScalarAsync()) });
   } catch (Exception ex) { Log($"players error {ex.GetType().Name}: {ex.Message}"); return Results.Json(new { online = (int?)null, error = "unavailable" }, statusCode: 503); }
 });
+// The launcher pre-creates Prefs\<account>\Char<id> with the default UI before a character first logs in (the client
+// only makes that folder at the first logout). Returns character ids only, never names; ?account= repeats (max 8),
+// ?after=<id> returns only ids above it. Polled every few seconds while the client runs, so the limit is generous.
+app.MapGet("/account-characters", async (HttpContext c) => {
+  var ip = ClientIp(c);
+  if (Limited("ac:" + ip, 3000, TimeSpan.FromHours(1))) return Results.Json(new { ok = false, error = "too many requests" }, statusCode: 429);
+  var names = c.Request.Query["account"].Select(a => (a ?? "").Trim().ToLowerInvariant()).Where(a => userRx.IsMatch(a)).Distinct().Take(8).ToArray();
+  if (names.Length == 0) return Results.Json(new { ok = false, error = "account required" }, statusCode: 400);
+  int after = int.TryParse(c.Request.Query["after"], out var a0) && a0 > 0 ? a0 : 0;
+  var result = names.ToDictionary(n => n, _ => new List<int>());
+  try {
+    await using var db = new MySqlConnection(connStr); await db.OpenAsync();
+    var ps = string.Join(",", names.Select((_, i) => "@u" + i));
+    await using var cmd = new MySqlCommand($"SELECT LOWER(Username), Id FROM characters WHERE LOWER(Username) IN ({ps}) AND Id>@after ORDER BY Id LIMIT 400", db);
+    for (int i = 0; i < names.Length; i++) cmd.Parameters.AddWithValue("@u" + i, names[i]);
+    cmd.Parameters.AddWithValue("@after", after);
+    await using var r = await cmd.ExecuteReaderAsync();
+    while (await r.ReadAsync()) if (result.TryGetValue(r.GetString(0), out var l)) l.Add(r.GetInt32(1));
+  } catch (Exception ex) { Log($"account-characters error {ex.GetType().Name}: {ex.Message}"); return Results.Json(new { ok = false, error = "unavailable" }, statusCode: 503); }
+  return Results.Json(new { ok = true, accounts = result });
+});
 DDogsStore.Map(app, connStr, Log, Limited);
 Log($"start port={port} also80={listen80} pid={Environment.ProcessId}");
 app.Run();
