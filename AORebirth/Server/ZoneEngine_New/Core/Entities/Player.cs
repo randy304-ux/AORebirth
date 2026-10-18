@@ -1434,7 +1434,12 @@ namespace ZoneEngine_New.Core.Entities
                 return true;
 
             Stats.Set(CharacterStat.VisualFlags, visualFlags, StatDetail.Base, dirty: true);
-            RebaseWearAppearance();
+            // A social battle suit's body is a MonsterData bonus, so the social toggle needs the stat pass too.
+            if (Inventory.IsHydrated && ZoneEngine_New.Core.Appearance.AppearanceGroups.All.Any(group =>
+                    FindGroupShape(Inventory.Social, group) != 0 || FindGroupShape(Inventory.Armor, group) != 0))
+                RebaseStats();
+            else
+                RebaseWearAppearance();
             // Live answers a toggle with the VisualFlags stat, then AppearanceUpdate (capture 2026-10-06T19:22:51Z).
             FlushDirtyStats();
             AnnounceAppearance();
@@ -1529,6 +1534,70 @@ namespace ZoneEngine_New.Core.Entities
             ApplyTimedEffectBonuses();
             ApplyLevelIpBonus();
             SkillCatalog.ApplyTrickle(Stats);
+            ApplyAppearanceGroups();
+        }
+
+        /// <summary>True while a battle-suit style group look shows and the player chose to hide every other worn look.</summary>
+        bool _hideWornForGroup;
+
+        protected override bool HideWornAppearance => _hideWornForGroup;
+
+        /// <summary>
+        /// Store-window look toggles for body-swap groups (<see cref="ZoneEngine_New.Core.Appearance.AppearanceGroups"/>). Runs after the
+        /// bonus layers, where a worn armor battle suit's MonsterShape already set MonsterData:
+        /// look off removes that body; a group item in the social back slot shows its body (appearance only, the social
+        /// page never adds stats) while social is shown; social-only hides an armor-page body without a social one.
+        /// </summary>
+        void ApplyAppearanceGroups()
+        {
+            _hideWornForGroup = false;
+            if (!Inventory.IsHydrated)
+                return;
+
+            var prefs = Playfield?.GetService<ZoneEngine_New.Core.Appearance.AppearancePrefsService>();
+            int characterId = Identity.Instance;
+            foreach (ZoneEngine_New.Core.Appearance.AppearanceGroup group in ZoneEngine_New.Core.Appearance.AppearanceGroups.All)
+            {
+                int armorShape = FindGroupShape(Inventory.Armor, group);
+                int socialShape = ShowSocialAppearance ? FindGroupShape(Inventory.Social, group) : 0;
+                if (armorShape == 0 && socialShape == 0)
+                    continue;
+
+                bool look = (prefs?.Get(characterId, group.LookKey, 1) ?? 1) != 0;
+                bool only = (prefs?.Get(characterId, group.OnlyKey, 0) ?? 0) != 0;
+                int @base = Stats.GetOrZero(CharacterStat.MonsterData, StatDetail.Base);
+                int full = Stats.GetOrZero(CharacterStat.MonsterData);
+                bool armorBodyShowing = armorShape != 0 && full == armorShape;
+                bool hideArmorBody = !look || (SocialOnlyAppearance && socialShape == 0);
+                if (armorBodyShowing && hideArmorBody)
+                {
+                    Stats.Set(CharacterStat.MonsterData, 0, StatDetail.Bonus);
+                    full = @base;
+                }
+
+                if (look && socialShape != 0 && (full == @base || armorBodyShowing))
+                {
+                    Stats.Set(CharacterStat.MonsterData, socialShape - @base, StatDetail.Bonus);
+                    full = socialShape;
+                }
+
+                if (look && only && full != @base && (full == socialShape || full == armorShape))
+                    _hideWornForGroup = true;
+            }
+        }
+
+        static int FindGroupShape(Container page, ZoneEngine_New.Core.Appearance.AppearanceGroup group)
+        {
+            if (page == null)
+                return 0;
+            foreach (KeyValuePair<int, Item> slot in page.EnumerateSlots())
+            {
+                int shape = group.ShapeOf(slot.Value);
+                if (shape != 0)
+                    return shape;
+            }
+
+            return 0;
         }
 
         /// <summary>Prospective level-up bonus layers, without changing worn items or the live actor.</summary>

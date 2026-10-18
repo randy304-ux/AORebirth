@@ -102,6 +102,7 @@ namespace ZoneEngine_New
                 chatEngineLink.Start();
                 playfieldManager = rootServices.GetRequiredService<PlayfieldManager>();
                 _ = rootServices.GetRequiredService<InventoryFlushService>();
+                rootServices.GetRequiredService<ZoneEngine_New.Core.Appearance.AppearancePrefsService>().Start();
                 // Subscribes to quest endings and starts the dungeon expiry and idle-release sweep.
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Quests.Dungeons.QuestDungeonService>();
                 networkHost = rootServices.GetRequiredService<ZoneNetworkHost>();
@@ -292,7 +293,9 @@ namespace ZoneEngine_New
             services.AddSingleton<IGmCommand, DebugCommand>();
             services.AddSingleton<IGmCommand, OnlineCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Claims.ClaimService>();
+            services.AddSingleton<ZoneEngine_New.Core.Appearance.AppearancePrefsService>();
             services.AddSingleton<IGmCommand, ClaimCommand>();
+            services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.BattlesuitCommand>();
             services.AddSingleton<IGmCommand, MercCommand>();
             services.AddSingleton<IGmCommand, AuraCommand>();
             services.AddSingleton<IGmCommand, DespawnCommand>();

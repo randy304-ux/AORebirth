@@ -428,3 +428,9 @@ Still open: store/daily pages (8098 serves /, /store, /daily on LAN and public; 
 - Published the AO-VK-safe version.dll (sha f59689e5...) via tools-temp/publish-launcher.ps1: launcher zip 3c2567cb..., patch zip d4024832..., version.json bumped from 0020.
 - Verified via https://dungeondogs.org/downloads/ao/version.json (launcher UA, from box and RC-PC), launcher zip downloaded and hash-matched, patch zip range-fetched and matched; zip's version.dll hash = build.
 - Rollback: I:\AO\backups\ao-release-2026.10.17-0020 (version.json, Patch.zip, Launcher.zip, release.json, old version.dll); the 0020 launcher zip is still in downloads/ao.
+
+## 2026-10-17 20:50 EDT - battle suit looks
+- Research: battle suits (and Divaad's Armor, Charred Abaddon Chassis, Hellfyre Magma Suit, Cyborg/Catgirl costumes) are Armor-class BACK-slot items (Slot 8) whose OnWear MonsterShape (53060) swaps the whole body to a MonsterData record (e.g. Desert 273570). ToWear needs MonsterData 0, so only one suit at a time. The server never blocked other armor; what you see is the client drawing a monster body.
+- Engine: Core/Appearance (AppearanceGroups + AppearancePrefsService, polls ddogs_appearance_prefs every 3 s and rebases the player). Player.ApplyAppearanceGroups: look off removes an armor suit's body; a suit in the Social back slot shows its body only (no stats) while social is shown; 'only' clears worn meshes/textures (Character.HideWornAppearance). .battlesuit command sets the same toggles.
+- Account API: /battlesuits page (claim code, two toggles) built and staged in I:\AO\cache\temp\account-api-publish but NOT live: the running API (pid 81092) can't be stopped from this account (Access denied), so the hub link was left out until it is swapped.
+- DB: ddogs/sql/ddogs_appearance_prefs.sql applied (table + aoaccount grant). Restart 20:43 (backup battlesuit2050), quests=169, Knubot rejected=0, page check 4/4 PASS, prefs poll verified with a test row.

@@ -151,6 +151,61 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
     return Page("Daily Reward", sb.ToString());
   }
 
+  // Battlesuits page: per-character look toggles for body-swap item groups. ZoneEngine_New reads ddogs_appearance_prefs
+  // every few seconds (AppearancePrefsService) and rebuilds the look. Add a group here and in AppearanceGroups.cs.
+  record LookGroup(string Key, string Title, string Items);
+  static readonly LookGroup[] LookGroups =
+  {
+    new("battlesuit", "Battle suits", "Desert, Plasteel, Urban and Omni-Pol battle suits, Desert Scorpiod, Divaad's Armor, Charred Abaddon Chassis, Hellfyre Magma Suit, Cyborg and Catgirl costumes"),
+  };
+  record LookToggle(string Suffix, string Title, string Help, int Default);
+  static readonly LookToggle[] LookToggles =
+  {
+    new("look", "Battle suit appearance", "Draw the battle suit's body over what you are wearing. Pieces the game can still draw on that body (shoulder pads, back items) stay visible. Off: you look like your normal armor and keep the suit's stats.", 1),
+    new("only", "Only show battle suit", "While the battle suit look shows, hide every other piece of worn armor so only the suit is drawn.", 0),
+  };
+
+  static async Task<Dictionary<string, int>> Prefs(string connStr, int charId)
+  {
+    var d = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+    await using var db = new MySqlConnection(connStr); await db.OpenAsync();
+    await using var c = new MySqlCommand("SELECT PrefKey, Value FROM ddogs_appearance_prefs WHERE CharId=@c", db);
+    c.Parameters.AddWithValue("@c", charId);
+    await using var r = await c.ExecuteReaderAsync();
+    while (await r.ReadAsync()) d[r.GetString(0)] = r.GetInt32(1);
+    return d;
+  }
+
+  static async Task SetPref(string connStr, int charId, string key, int value)
+  {
+    await using var db = new MySqlConnection(connStr); await db.OpenAsync();
+    await using var c = new MySqlCommand("INSERT INTO ddogs_appearance_prefs (CharId,PrefKey,Value) VALUES (@c,@k,@v) ON DUPLICATE KEY UPDATE Value=VALUES(Value)", db);
+    c.Parameters.AddWithValue("@c", charId); c.Parameters.AddWithValue("@k", key); c.Parameters.AddWithValue("@v", value);
+    await c.ExecuteNonQueryAsync();
+  }
+
+  static async Task<string> LooksPage(string connStr, string code, string msg, bool ok)
+  {
+    var who = string.IsNullOrWhiteSpace(code) ? null : await Lookup(connStr, code);
+    if (who == null)
+      return Page("Battlesuits", "<h1>Battlesuits</h1>" + CodeForm("/battlesuits", code, Msg(string.IsNullOrWhiteSpace(code) ? msg : "That claim code was not found.", false)));
+    var prefs = await Prefs(connStr, who.CharId);
+    var sb = new StringBuilder($"<h1>Battlesuits</h1><div class=\"sub\">Look settings for <b>{H(who.Name)}</b>. They apply within a few seconds, no relog needed.</div><div class=\"nav\"><a href=\"/store\">&laquo; Back to Info</a></div>{Msg(msg, ok)}");
+    sb.Append("<p>Battle suits go in the <b>back</b> slot, so you can wear them with the rest of your armor. In the <b>Social</b> tab's back slot a suit only changes how you look (no stats) while your social clothes are shown.</p>");
+    foreach (var g in LookGroups)
+    {
+      sb.Append($"<h2>{H(g.Title)}</h2><div class=\"sub\">{H(g.Items)}</div>");
+      foreach (var t in LookToggles)
+      {
+        var key = g.Key + "." + t.Suffix;
+        bool on = (prefs.TryGetValue(key, out var v) ? v : t.Default) != 0;
+        sb.Append($"<div class=\"row\"><form method=\"post\" action=\"/battlesuits\"><input type=\"hidden\" name=\"code\" value=\"{H(code)}\"><input type=\"hidden\" name=\"key\" value=\"{H(key)}\"><input type=\"hidden\" name=\"value\" value=\"{(on ? 0 : 1)}\"><input type=\"submit\" value=\"{(on ? "Turn off" : "Turn on")}\"></form>");
+        sb.Append($"<b style=\"color:#bff8f2\">{H(t.Title)}</b>: <span class=\"{(on ? "ok" : "err")}\">{(on ? "ON" : "OFF")}</span><span style=\"display:block;color:#8fbab5;margin-top:2px\">{H(t.Help)}</span></div>");
+      }
+    }
+    return Page("Battlesuits", sb.ToString());
+  }
+
   static bool IsDailyHost(HttpContext c) => c.Request.Host.Host.Contains("daily", StringComparison.OrdinalIgnoreCase);
 
   public static void Map(WebApplication app, string connStr, Action<string> log, Func<string, int, TimeSpan, bool> limited)
@@ -197,6 +252,24 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
       bool added = await Insert(connStr, who.CharId, S(item, "key"), I(item, "lowId"), I(item, "highId"), I(item, "ql"), "web");
       log($"claim char={who.CharId} key={S(item, "key")} added={added}");
       return Html(await ClaimPage(connStr, code, added ? $"{S(item, "name")} is on its way to {who.Name}." : "You already claimed that item.", added));
+    });
+
+    app.MapGet("/battlesuits", async (HttpContext c) => {
+      if (limited("cl:" + c.Connection.RemoteIpAddress, 120, TimeSpan.FromMinutes(10))) return Html(Page("Battlesuits", "<p class=\"err\">Too many requests, try again in a few minutes.</p>"));
+      return Html(await LooksPage(connStr, c.Request.Query["code"], null, false));
+    });
+
+    app.MapPost("/battlesuits", async (HttpContext c) => {
+      var f = await c.Request.ReadFormAsync();
+      string code = f["code"], key = f["key"];
+      if (limited("cl:" + c.Connection.RemoteIpAddress, 120, TimeSpan.FromMinutes(10))) return Html(Page("Battlesuits", "<p class=\"err\">Too many requests, try again in a few minutes.</p>"));
+      var who = await Lookup(connStr, code);
+      if (who == null) return Html(await LooksPage(connStr, code, null, false));
+      bool known = LookGroups.Any(g => LookToggles.Any(t => string.Equals(g.Key + "." + t.Suffix, key, StringComparison.OrdinalIgnoreCase)));
+      if (!known || !int.TryParse(f["value"], out var value) || (value != 0 && value != 1)) return Html(await LooksPage(connStr, code, "Unknown setting.", false));
+      await SetPref(connStr, who.CharId, key.ToLowerInvariant(), value);
+      log($"look char={who.CharId} key={key} value={value}");
+      return Html(await LooksPage(connStr, code, "Saved.", true));
     });
 
     app.MapPost("/daily", async (HttpContext c) => {

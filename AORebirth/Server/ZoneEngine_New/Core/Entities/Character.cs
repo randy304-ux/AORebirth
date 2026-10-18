@@ -2931,6 +2931,14 @@ namespace ZoneEngine_New.Core.Entities
             foreach (Item item in AppearanceBackMeshItems)
                 ApplyBackMesh(item, meshes);
 
+            // Store-window "only show battle suit": the body swap is the whole look, so no worn piece is sent.
+            if (HideWornAppearance)
+            {
+                textures.Clear();
+                meshes.Clear();
+                robe = false;
+            }
+
             if (robe == _wearRobe && SameWearAppearance(textures, meshes))
                 return;
 
@@ -3017,6 +3025,9 @@ namespace ZoneEngine_New.Core.Entities
         /// where a back item's mesh does: position 5.
         /// </summary>
         const int BackSlot = 19;
+
+        /// <summary>True when worn textures and meshes are left off the wire (a player's "only show battle suit" toggle).</summary>
+        protected virtual bool HideWornAppearance => false;
 
         /// <summary>Items outside <see cref="AppearanceWearPages"/> whose worn BackMesh still shows (a player's utility slots).</summary>
         protected virtual IEnumerable<Item> AppearanceBackMeshItems => [];
