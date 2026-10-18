@@ -21,8 +21,8 @@
     {
       "Style": 382,
       "DoorTemplate": 0,
-      "ExitTemplate": 41886,
-      "Source": "No alien door template in items.dat, and the style playfield 382 has no door dynels (Dynels.dat empty). Open office doors in every doorway (19:11 restart) did not clear the solid green doorway fill and looked wrong (Randy 19:33), so interior doorways are open archways again. The exit borrows the 321 office exit door 41886 because the walk-out needs a door; stand-in"
+      "ExitTemplate": 303198,
+      "Source": "No alien door template in items.dat, and the style playfield 382 has no door dynels (Dynels.dat empty). Open office doors in every doorway (19:11 restart) did not clear the solid green doorway fill and looked wrong (Randy 19:33), so interior doorways are open archways again. The exit is the blue mission Exit portal 303198 (mesh 44891, the standard generated-mission exit), placed in the round entrance doorway"
     },
     {
       "Style": 351,

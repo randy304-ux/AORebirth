@@ -627,10 +627,54 @@ public sealed class QuestDungeonPlayfield : Playfield
         }
 
         _exitTerminalSpawned = true;
-        AORebirth.Core.Vector.Vector3 at = _objectiveNpc != null
-            ? new AORebirth.Core.Vector.Vector3(_objectiveNpc.X + 1.5f, _objectiveNpc.Y, _objectiveNpc.Z)
-            : new AORebirth.Core.Vector.Vector3(completer.Position.xf + 1.5f, completer.Position.yf, completer.Position.zf);
-        PlaceExitBeacon(template, SnapFeetToFloor(at), "completed");
+        // The portal is a walk-in exit: never put it on top of the completer. 3.5 m past the objective, on the far
+        // side from the completer (or 3.5 m from the completer when there is no objective spot); back on the
+        // objective spot when there is no floor there.
+        float ox = _objectiveNpc?.X ?? completer.Position.xf, oy = _objectiveNpc?.Y ?? completer.Position.yf,
+            oz = _objectiveNpc?.Z ?? completer.Position.zf;
+        float dx = ox - completer.Position.xf, dz = oz - completer.Position.zf;
+        float length = MathF.Sqrt(dx * dx + dz * dz);
+        if (length < 0.1f) { dx = 1f; dz = 0f; } else { dx /= length; dz /= length; }
+        var at = new AORebirth.Core.Vector.Vector3(ox + dx * 3.5f, oy, oz + dz * 3.5f);
+        if (!TrySnapFeetToFloor(at, out AORebirth.Core.Vector.Vector3 floor))
+            floor = SnapFeetToFloor(new AORebirth.Core.Vector.Vector3(ox, oy, oz));
+        SpawnCompletionPortal(floor);
+    }
+
+    /// <summary>
+    /// The completion exit: the game's blue mission "Exit" portal 303198 (door DynelType 51016, mesh 44891, the
+    /// standard generated-mission exit Randy showed), placed open as a door with the exit door's walk-out volume.
+    /// Walking into it returns the player outside the entrance.
+    /// </summary>
+    const int CompletionPortalTemplate = 303198;
+
+    /// <summary>Door instance of the completion portal, clear of the layout's doors.</summary>
+    const int CompletionPortalInstance = FirstDoorInstance + 0xF000;
+
+    void SpawnCompletionPortal(AORebirth.Core.Vector.Vector3 at)
+    {
+        if (!ItemTemplates.TryGet(CompletionPortalTemplate, out ItemTemplate? template) || template == null)
+        {
+            Logger.Warn("Quest dungeon " + QuestId + ": exit portal template " + CompletionPortalTemplate + " is not in items.dat");
+            return;
+        }
+
+        int flags = template.Stats.TryGetValue(CharacterStat.Flags, out int baseFlags) ? baseFlags : 0;
+        flags = (flags & ~Door.LockedFlag) | Door.OpenFlag;
+        int room = _objectiveNpc?.RoomIndex ?? 0;
+        var portal = new Door(new Identity { Type = IdentityType.Door, Instance = CompletionPortalInstance }, CompletionPortalTemplate,
+            flags, (room << 16) | 0xFFFF, lockDifficulty: 1)
+        {
+            Playfield = this,
+            Position = at,
+            Rotation = new AORebirth.Core.Vector.Quaternion(0, 0, 0, 1)
+        };
+        GetRequiredService<DynelRegistry>().Register(portal);
+        GetRequiredService<PlayfieldLocality>().RegisterDynel(portal);
+        RegisterExit(portal);
+        Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+            "Quest dungeon {0} completed: exit portal {1:X8} at ({2:0.#}, {3:0.#}, {4:0.#})",
+            QuestId, portal.Identity.Instance, at.xf, at.yf, at.zf));
     }
 
     /// <summary>
