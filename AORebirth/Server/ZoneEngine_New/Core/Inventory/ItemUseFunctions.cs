@@ -187,12 +187,17 @@ namespace ZoneEngine_New.Core.Inventory
         internal const FunctionType SendMailFunction = (FunctionType)53252;
 
         /// <summary>
-        /// The personal mailbox carrier: Letter from Penelope 252503 (Carry + Use, NoDrop, Unique; no functions of its own).
+        /// The personal mailbox carrier: Portable Bank Terminal 288762 (Randy 2026-10-18 19:05: a portable terminal the
+        /// client already draws and uses; Carry + Use, NoDrop). Its own OnUse (OpenBank 53092) is not run: the mailbox
+        /// opens instead (GenericCmdMessageHandler). Before that it was Letter from Penelope 252503 (drawn, but the
+        /// client ignored the pushed MailboxList: live opens MailWindow client-side, then asks with Mail action 1).
         /// Send Mail 297053 is the client mail window's internal action template and never shows in the inventory
         /// (Randy 2026-10-18: delivered at slots 91 and 77, both invisible), so the mailbox moved to a normal item.
         /// GenericCmdMessageHandler opens the mailbox on its use; 297053's 53252 function still opens it too.
         /// </summary>
-        internal const int PersonalMailboxItemId = 252503;
+        internal const int PersonalMailboxItemId = 288762;
+
+        internal const int PreviousMailboxItemId = 252503;
 
         internal const int LegacySendMailItemId = 297053;
 
@@ -201,8 +206,17 @@ namespace ZoneEngine_New.Core.Inventory
             if (player.Session == null
                 || player.Playfield?.GetService<ZoneEngine_New.Core.Claims.ClaimService>() is not { } claims)
                 return false;
+            // The client draws its mail icon while UnreadMailCount > 0 (GUI.dll "s:UnreadMailCount > 0"); clicking it opens
+            // MailWindow, which asks for the list itself (Mail action 1, MailMessageHandler). A pushed list alone is not drawn.
+            if (player.Stats.GetOrZero(CharacterStat.UnreadMailCount) < 1)
+            {
+                player.Stats.Set(CharacterStat.UnreadMailCount, 1, dirty: true);
+                player.FlushDirtyStats();
+            }
             player.Session.Send(claims.BuildList(player));
-            player.Logger.Info("Mail item open char=" + player.Identity.Instance.ToString(CultureInfo.InvariantCulture));
+            RequirementFeedback.SendText(player, "Your mailbox is ready: click the mail icon to open it.");
+            player.Logger.Info("Mail item open char=" + player.Identity.Instance.ToString(CultureInfo.InvariantCulture)
+                + " unread=" + player.Stats.GetOrZero(CharacterStat.UnreadMailCount).ToString(CultureInfo.InvariantCulture));
             return true;
         }
 

@@ -21,6 +21,8 @@ public sealed class MailMessageHandler(ClaimService claims) : IMessageHandler<Ma
         if (session.State != SessionState.InPlay || player == null || player.IsPersistenceQuarantined || player.IsDead)
             return;
 
+        player.Logger.Info("Mail recv char=" + player.Identity.Instance + " action=" + message.Action + "(" + (int)message.Action
+            + ") mail=" + message.RequestedMailId);
         switch (message.Action)
         {
             case MailAction.OpenOrRequest:
