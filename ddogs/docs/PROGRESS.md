@@ -439,3 +439,9 @@ Still open: store/daily pages (8098 serves /, /store, /daily on LAN and public; 
 - Randy killed the old admin-started API (pid 81092). Old bin-publish backed up to I:\AO\backups\account-api-bin-publish-20261017-2100; staged build swapped in and started ONLY via the task (AMP, S4U, RunLevel Limited = not elevated). New pid 90448, session 0.
 - Battlesuits link back in store.json; /battlesuits 200 on 127.0.0.1, LAN and ao.dungeondogs.org with hub link, back link and toggles. Test-StorePages now also checks the public route: 6/6 PASS.
 - Restart test: Stop-ScheduledTask ends only the task's cmd.exe; dotnet stayed (orphan 90448, still serving) and Stop-Process from our session is Access denied (other logon session, not elevation). Fix: API now exits when its cmd parent exits (ParentWatch, verified on scratch port 18098); watchdog and swap script stop via the task. That build is staged in I:\AO\cache\temp\account-api-publish and needs 90448 killed once more (admin) before it can be swapped in.
+
+## 2026-10-17 21:15 EDT - account API restartable via its task
+- Randy killed orphan 90448; ports were free. Backup I:\AO\backups\account-api-bin-publish-20261017-2112, ParentWatch build swapped in, started only via the task (AMP, S4U, Limited).
+- Real test: Stop-ScheduledTask -> service exited, 80/8098 closed, task Ready; Start-ScheduledTask -> back on both ports. Watchdog -ForceRestart (new test switch) stopped and restarted it (pid 125004 -> 125880), post-check PASS; normal watchdog run exit 0.
+- Test-StorePages 6/6 PASS (local, LAN, ao.dungeondogs.org); /battlesuits 200 on all three with hub link and back link.
+- watch-account-api.ps1 now also kept in ddogs/tools/account-api (live copy stays in I:\AO\tools\account-api).
