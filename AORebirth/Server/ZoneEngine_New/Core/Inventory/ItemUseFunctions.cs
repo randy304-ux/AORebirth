@@ -54,6 +54,8 @@ namespace ZoneEngine_New.Core.Inventory
             bool addDamage = !isTick;
             switch ((FunctionType)spell.FunctionType)
             {
+                case SendMailFunction:
+                    return target is Player mailPlayer && OpenMailbox(mailPlayer);
                 case FunctionType.OpenBank:
                     return target is Player bankPlayer
                         && OpenBank(bankPlayer, inventoryRepository, items);
@@ -153,6 +155,25 @@ namespace ZoneEngine_New.Core.Inventory
                             target.Identity.Instance));
                     return false;
             }
+        }
+
+        /// <summary>
+        /// FunctionType 53252 (not in the enum): the Send Mail item 297053's OnUse. Live used it for a scripted test
+        /// letter (Fia Lou / "Testing 1 2 3"); here it is the personal mailbox: using it opens the mailbox list
+        /// (Claim Center rows), the same window a Mail Terminal opens, from anywhere.
+        /// </summary>
+        internal const FunctionType SendMailFunction = (FunctionType)53252;
+
+        internal const int PersonalMailboxItemId = 297053;
+
+        static bool OpenMailbox(Player player)
+        {
+            if (player.Session == null
+                || player.Playfield?.GetService<ZoneEngine_New.Core.Claims.ClaimService>() is not { } claims)
+                return false;
+            player.Session.Send(claims.BuildList(player));
+            player.Logger.Info("Mail item open char=" + player.Identity.Instance.ToString(CultureInfo.InvariantCulture));
+            return true;
         }
 
         static bool OpenBank(Player player, IInventoryRepository inventoryRepository, IItemBuilder items)
