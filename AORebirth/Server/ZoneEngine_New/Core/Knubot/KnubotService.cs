@@ -95,8 +95,19 @@ public sealed class KnubotService(KnubotCatalog catalog, KnubotEffectServices ef
                 Remove(previous);
             }
 
-            if (!playfield.GetRequiredService<DynelRegistry>().TryGet(target, out var dynel) || dynel is not NpcCharacter npc
-                || !catalog.TryResolve(npc, out KnubotScript script))
+            if (!playfield.GetRequiredService<DynelRegistry>().TryGet(target, out var dynel) || dynel is not NpcCharacter npc)
+                return false;
+
+            // Mail terminals are terminal-body NPCs: the client opens a talk window on them (as on the Contract Terminals)
+            // and never sends Use, so opening one shows the mailbox.
+            if (npc.IsMailTerminal)
+            {
+                bool opened = npc.TryOpenMail(player);
+                player.Logger.Info("Mail terminal talk-open char=" + player.Identity.Instance + " npc=" + npc.Identity + " opened=" + opened);
+                return true;
+            }
+
+            if (!catalog.TryResolve(npc, out KnubotScript script))
                 return false;
 
             if (!InReach(player, npc))

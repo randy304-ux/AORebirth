@@ -211,9 +211,29 @@ foreach ($m in @(@{ Pf = 6553; Id = 231769427; Pos = @(3464.1, 9.0, 805.6); Wher
   $stats = [ordered]@{ '0' = 268964353; '1' = 1650; '4' = 6; '27' = 1650; '33' = 0; '47' = 1; '54' = 40; '59' = 1; '60' = 0; '64' = 0; '89' = 1; '156' = 137; '173' = 3; '174' = 3; '359' = 279184; '360' = 100; '368' = 0; '389' = 0; '455' = 0; '466' = 0; '660' = 0; '673' = 31 }
   $tex = foreach ($pl in 0..4) { [ordered]@{ Place = $pl; Id = 0 } }
   $npcs += [pscustomobject][ordered]@{ Key = $key; Provenance = ('ddogs mail terminal, {0}. Body 279184 computer terminal (as the Contract Terminals). Build-AreteFinish.ps1' -f $m.Where)
-    ContentNpcIdentity = ('ddogs-mail-{0}' -f $m.Pf); PlayfieldId = $m.Pf; InstanceId = $m.Id; Name = 'Mail Terminal'; Position = $m.Pos; Rotation = @(0, 0, 0, 1)
+    ContentNpcIdentity = ('ddogs-mail-{0}' -f $m.Pf); PlayfieldId = $m.Pf; InstanceId = $m.Id; Name = 'Mail Terminal'; Position = $m.Pos; Rotation = @(0, -0.7071068, 0, 0.7071068)
     Stats = [pscustomobject]$stats; Textures = @($tex); Meshes = @(); Passive = $true; Attackable = $false; TickLiving = $true; Presentation = [pscustomobject]@{} }
   $doc.Npcs = $npcs
   [IO.File]::WriteAllText($cp, ($doc | ConvertTo-Json -Depth 12) + "`n", $u)
 }
+# --- 2026-10-18 00:10 pass (Randy 00:05) ---
+# Mail terminal rotation above: yaw -90 deg, the same heading as the Arete insurance terminal static (template 300813 at 3464, 9, 811,
+#   Dynels.dat heading 0,-0.7071,0,0.7071) and the statics beside the 4582 spot. Identity rotation stood sideways.
+# IIV-X Advanced Docker: one dyna, not four. The original PO51 point (3515.2, 5.5, 904.2) stays the Docker; the three 32-V Docker points
+#   Build-ShoulderpadsJunkyard.ps1 also turned into IIVX (within 14 m) go back to 32DO L3, 30 s.
+#   Dyna: boss| camp key (glow + 150% size) and HP 240 like the Cleanmeister (L4). DYAR 5-7 loot and 180 s respawn were already set.
+#   Level 4 stays a guess: neither the wiki nor the AO-Universe Arete guide gives his level.
+$nt = [IO.File]::ReadAllText($npath, $u) | ConvertFrom-Json
+foreach ($t in @($nt.IIVX.Templates)) {
+  $t.ContentProvenance | Add-Member -Force NoteProperty CampKey 'boss|IIV-X Advanced Docker|4'
+  SetStat $t '1' 240; SetStat $t '27' 240
+}
+[IO.File]::WriteAllText($npath, ($nt | ConvertTo-Json -Depth 12) + "`n", $u)
+$s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
+foreach ($sp in $s.spawns) {
+  if ($sp.hashText -ne 'IIVX') { continue }
+  if ([Math]::Abs($sp.position[0] - 3515.2) -lt 1 -and [Math]::Abs($sp.position[2] - 904.2) -lt 1) { continue }
+  $sp.hashText = '32DO'; $sp.hash = 858932303; $sp.minLevel = 3; $sp.maxLevel = 3; $sp.respawnTime = 30
+}
+[IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)
 Write-Host 'Build-AreteFinish done'

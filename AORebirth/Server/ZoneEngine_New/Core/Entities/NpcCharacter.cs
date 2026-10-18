@@ -116,7 +116,8 @@ namespace ZoneEngine_New.Core.Entities
         /// </summary>
         public bool IsMailTerminal => string.Equals(Name, "Mail Terminal", StringComparison.Ordinal);
 
-        bool TryOpenMail(Player player)
+        /// <summary>Opens the mailbox (Claim Center list). Called from Use and from the talk window open (KnubotService).</summary>
+        public bool TryOpenMail(Player player)
         {
             if (IsDead || Playfield == null || player.Playfield == null || player.Session == null)
                 return false;

@@ -64,8 +64,30 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
 
   record Who(int CharId, string Name);
 
+  // Address of the current request. The in-game browser calls from the same address as the game client, and the zone
+  // engine publishes online characters' addresses in ddogs_web_sessions (WebSessionMap), so a blank claim code resolves
+  // to the one character online from that address. The claim code stays as the fallback (shared address, outside the game).
+  static readonly AsyncLocal<string> RequestIp = new();
+
+  static async Task<Who> ByIp(string connStr, string ip)
+  {
+    if (string.IsNullOrEmpty(ip)) return null;
+    await using var db = new MySqlConnection(connStr); await db.OpenAsync();
+    await using var c = new MySqlCommand("SELECT w.CharId, ch.Name FROM ddogs_web_sessions w JOIN characters ch ON ch.Id=w.CharId WHERE w.Ip=@ip AND ch.Online=1 AND w.UpdatedAt > NOW() - INTERVAL 60 SECOND LIMIT 2", db);
+    c.Parameters.AddWithValue("@ip", ip);
+    await using var r = await c.ExecuteReaderAsync();
+    var found = new List<Who>();
+    while (await r.ReadAsync()) found.Add(new Who(r.GetInt32(0), r.GetString(1)));
+    return found.Count == 1 ? found[0] : null;
+  }
+
   static async Task<Who> Lookup(string connStr, string code)
   {
+    if (string.IsNullOrWhiteSpace(code))
+    {
+      try { return await ByIp(connStr, RequestIp.Value); }
+      catch (MySqlException) { return null; }
+    }
     code = (code ?? "").Trim().ToUpperInvariant();
     if (code.Length < 6 || code.Length > 12) return null;
     await using var db = new MySqlConnection(connStr); await db.OpenAsync();
@@ -95,7 +117,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
     return await c.ExecuteNonQueryAsync() == 1;
   }
 
-  const string CodeHelp = "Type <b>.claim</b> in the game chat to see your character's claim code, then enter it here. The item waits at a mail terminal. One stands beside Antonio Stacklund.";
+  const string CodeHelp = "Opened from the in-game Info window while you are logged in, this page knows your character by itself. If it does not (two players on one connection, or a normal browser), type <b>.claim</b> in the game chat to see your character's claim code, then enter it here. The item waits at a mail terminal. One stands beside Antonio Stacklund.";
 
   static string CodeForm(string action, string code, string msg) =>
     $"<div class=\"nav\"><a href=\"/store\">&laquo; Back to Info</a></div>{msg}<p>{CodeHelp}</p><form method=\"get\" action=\"{action}\">Claim code: <input type=\"text\" name=\"code\" size=\"12\" value=\"{H(code)}\"> <input type=\"submit\" value=\"Continue\"></form>";
@@ -104,7 +126,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
 
   static async Task<string> ClaimPage(string connStr, string code, string msg, bool ok)
   {
-    var who = string.IsNullOrWhiteSpace(code) ? null : await Lookup(connStr, code);
+    var who = await Lookup(connStr, code);
     if (who == null)
       return Page("Claim Center", "<h1>Claim Center</h1>" + CodeForm("/claim", code, Msg(string.IsNullOrWhiteSpace(code) ? msg : "That claim code was not found.", false)));
     var claimed = await Claimed(connStr, who.CharId);
@@ -134,7 +156,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
 
   static async Task<string> DailyPage(string connStr, string code, string msg, bool ok)
   {
-    var who = string.IsNullOrWhiteSpace(code) ? null : await Lookup(connStr, code);
+    var who = await Lookup(connStr, code);
     if (who == null)
       return Page("Daily Reward", "<h1>Daily Reward</h1>" + CodeForm("/daily", code, Msg(string.IsNullOrWhiteSpace(code) ? msg : "That claim code was not found.", false)));
     var reward = TodaysReward(out var dayKey);
@@ -186,7 +208,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
 
   static async Task<string> LooksPage(string connStr, string code, string msg, bool ok)
   {
-    var who = string.IsNullOrWhiteSpace(code) ? null : await Lookup(connStr, code);
+    var who = await Lookup(connStr, code);
     if (who == null)
       return Page("Battlesuits", "<h1>Battlesuits</h1>" + CodeForm("/battlesuits", code, Msg(string.IsNullOrWhiteSpace(code) ? msg : "That claim code was not found.", false)));
     var prefs = await Prefs(connStr, who.CharId);
@@ -210,6 +232,11 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
 
   public static void Map(WebApplication app, string connStr, Action<string> log, Func<string, int, TimeSpan, bool> limited)
   {
+    app.Use(async (c, next) => {
+      var a = c.Connection.RemoteIpAddress;
+      RequestIp.Value = a == null ? null : (a.IsIPv4MappedToIPv6 ? a.MapToIPv4() : a).ToString();
+      await next(c);
+    });
     Func<HttpContext, Task<IResult>> Root = async c =>
       IsDailyHost(c) ? Html(await DailyPage(connStr, c.Request.Query["code"], null, false)) : Html(Hub());
     app.MapGet("/", Root);
