@@ -76,11 +76,16 @@ namespace ZoneEngine_New.Core.Inventory
         /// <summary>
         /// The count a freshly minted item starts with: MaxEnergy when set, otherwise MultipleCount, otherwise 1.
         /// Only a new mint takes it; a stored item keeps its own (possibly spent) count.
+        /// Weapons never take MaxEnergy: on a weapon it is not a charge count (KIWD 37 Hunter Crossbow 212=12,
+        /// HSR Arms F-59 212=30), and live corpse rows send such weapons with count 1. A weapon minted as a
+        /// "stack of 12" showed in the loot window but the client would not drag it (Randy 2026-10-18).
         /// </summary>
         public int MintStackCount
-            => Stats.TryGetValue(CharacterStat.MaxEnergy, out int maxEnergy) && maxEnergy > 0 ? maxEnergy
+            => !IsWeapon && Stats.TryGetValue(CharacterStat.MaxEnergy, out int maxEnergy) && maxEnergy > 0 ? maxEnergy
                 : Stats.TryGetValue(CharacterStat.MultipleCount, out int multipleCount) && multipleCount > 0 ? multipleCount
                 : 1;
+
+        bool IsWeapon => Stats.TryGetValue(CharacterStat.ItemClass, out int itemClass) && itemClass == (int)ItemClass.Weapon;
 
         /// <summary>
         /// The client's weapon type bitmask (Gamecode.dll 0x1009c8e1, weapon object +0x1F0), which feeds the
