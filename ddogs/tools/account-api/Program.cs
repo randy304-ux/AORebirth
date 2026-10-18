@@ -25,6 +25,10 @@ bool Check(string pw, string h) { try { return (bool)mValidate.Invoke(null, new 
 
 var logLock = new object();
 void Log(string msg) { lock (logLock) File.AppendAllText(Path.Combine(logDir, "account-api.log"), $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} {msg}{Environment.NewLine}"); }
+// The scheduled task starts us through cmd.exe. Stop-ScheduledTask ends only that cmd, and a task-started (S4U, session 0)
+// process cannot be killed from another logon session, so follow the parent: when the task's cmd goes away, exit.
+// That keeps "stop the task, start the task" a real restart for the watchdog. Runs on its own thread so a hung web host can't block it.
+ParentWatch.Start(Log);
 
 var hits = new ConcurrentDictionary<string, List<DateTime>>();
 bool Limited(string key, int max, TimeSpan win) {
@@ -199,3 +203,34 @@ static string ResetPage(string error, bool done = false)
 record SignupReq(string username, string password, string email, string invite);
 record ChangeReq(string username, string oldPassword, string newPassword);
 record ResetReq(string username, string email, string password, string confirm);
+
+static class ParentWatch
+{
+  [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+  struct BasicInfo { public IntPtr ExitStatus, Peb, Affinity, BasePriority, UniqueProcessId, InheritedFromUniqueProcessId; }
+
+  [System.Runtime.InteropServices.DllImport("ntdll.dll")]
+  static extern int NtQueryInformationProcess(IntPtr process, int infoClass, ref BasicInfo info, int length, out int returned);
+
+  public static void Start(Action<string> log)
+  {
+    System.Diagnostics.Process parent;
+    try
+    {
+      var self = System.Diagnostics.Process.GetCurrentProcess();
+      var info = new BasicInfo();
+      if (NtQueryInformationProcess(self.Handle, 0, ref info, System.Runtime.InteropServices.Marshal.SizeOf<BasicInfo>(), out _) != 0) return;
+      parent = System.Diagnostics.Process.GetProcessById(info.InheritedFromUniqueProcessId.ToInt32());
+      // A reused pid would be younger than us; only follow the cmd.exe wrapper (a manual run from a shell is left alone).
+      if (parent.StartTime > self.StartTime || !parent.ProcessName.Equals("cmd", StringComparison.OrdinalIgnoreCase)) return;
+    }
+    catch { return; }
+    log($"parent watch: following cmd pid={parent.Id}");
+    new Thread(() =>
+    {
+      try { parent.WaitForExit(); } catch { }
+      log("parent cmd exited (task stopped); exiting");
+      Environment.Exit(0);
+    }) { IsBackground = true, Name = "parent-watch" }.Start();
+  }
+}

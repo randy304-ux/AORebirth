@@ -1,7 +1,7 @@
-﻿# ddogs/tools/Test-StorePages.ps1 - fetch the in-game Store and Daily pages the way the patched client does
+# ddogs/tools/Test-StorePages.ps1 - fetch the in-game Store and Daily pages the way the patched client does
 # (TCP to the web host:8098, Host header uwg.store.icc-rk / uwg.daily.icc-rk, path /index.app). Exit 0 only when both pages answer 200
-# with their own titles. Used after every engine restart and by the account-API watchdog.
-param([string[]]$Bases = @('http://127.0.0.1:8098', 'http://192.168.1.68:8098'), [int]$TimeoutSec = 8)
+# with their own titles. Bases: local, LAN, and the public route remote players use (ao.dungeondogs.org). Used after every engine restart and by the account-API watchdog.
+param([string[]]$Bases = @('http://127.0.0.1:8098', 'http://192.168.1.68:8098', 'http://ao.dungeondogs.org:8098'), [int]$TimeoutSec = 8)
 $want = @{ 'uwg.store.icc-rk' = 'Info'; 'uwg.daily.icc-rk' = 'Daily Reward' }
 $bad = 0
 foreach ($b in $Bases) {
