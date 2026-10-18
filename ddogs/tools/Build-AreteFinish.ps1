@@ -208,7 +208,7 @@ foreach ($m in @(@{ Pf = 6553; Id = 231769427; Pos = @(3464.1, 9.0, 805.6); Wher
   $doc.MailTerminals = @($doc.MailTerminals | Where-Object { $_.Key -notlike 'ddogs:mail:*' })
   $key = 'ddogs:mail-npc:{0}' -f $m.Pf
   $npcs = @($doc.Npcs | Where-Object { $_.Key -ne $key })
-  $stats = [ordered]@{ '0' = 268964353; '1' = 1650; '4' = 6; '27' = 1650; '33' = 0; '47' = 1; '54' = 40; '59' = 1; '60' = 0; '64' = 0; '89' = 1; '156' = 137; '173' = 3; '174' = 3; '359' = 279184; '360' = 100; '368' = 0; '389' = 0; '455' = 0; '466' = 0; '660' = 0; '673' = 31 }
+  $stats = [ordered]@{ '0' = 277352961; '1' = 1650; '4' = 6; '27' = 1650; '33' = 0; '47' = 1; '54' = 40; '59' = 1; '60' = 0; '64' = 0; '89' = 1; '156' = 137; '173' = 3; '174' = 3; '359' = 279184; '360' = 100; '368' = 0; '389' = 0; '455' = 0; '466' = 0; '660' = 0; '673' = 31 }
   $tex = foreach ($pl in 0..4) { [ordered]@{ Place = $pl; Id = 0 } }
   $npcs += [pscustomobject][ordered]@{ Key = $key; Provenance = ('ddogs mail terminal, {0}. Body 279184 computer terminal (as the Contract Terminals). Build-AreteFinish.ps1' -f $m.Where)
     ContentNpcIdentity = ('ddogs-mail-{0}' -f $m.Pf); PlayfieldId = $m.Pf; InstanceId = $m.Id; Name = 'Mail Terminal'; Position = $m.Pos; Rotation = @(0, -0.7071068, 0, 0.7071068)
@@ -216,6 +216,8 @@ foreach ($m in @(@{ Pf = 6553; Id = 231769427; Pos = @(3464.1, 9.0, 805.6); Wher
   $doc.Npcs = $npcs
   [IO.File]::WriteAllText($cp, ($doc | ConvertTo-Json -Depth 12) + "`n", $u)
 }
+# 2026-10-18 02:00: Flags 277352961 (= 268964353 | HasBlueName 0x800000), as the Contract Terminals. Without the blue-name bit the
+#   client sends nothing when the terminal is clicked or talked to (no Use, no KnuBotOpenChatWindow in the 01:4x log).
 # --- 2026-10-18 00:10 pass (Randy 00:05) ---
 # Mail terminal rotation above: yaw -90 deg, the same heading as the Arete insurance terminal static (template 300813 at 3464, 9, 811,
 #   Dynels.dat heading 0,-0.7071,0,0.7071) and the statics beside the 4582 spot. Identity rotation stood sideways.

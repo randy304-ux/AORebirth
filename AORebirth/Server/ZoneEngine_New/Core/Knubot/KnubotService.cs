@@ -104,6 +104,10 @@ public sealed class KnubotService(KnubotCatalog catalog, KnubotEffectServices ef
             {
                 bool opened = npc.TryOpenMail(player);
                 player.Logger.Info("Mail terminal talk-open char=" + player.Identity.Instance + " npc=" + npc.Identity + " opened=" + opened);
+                transport.Send(new KnuBotCloseChatWindowMessage
+                {
+                    Identity = player.Identity, Target = npc.Identity, Unknown = 0, Unknown1 = 2, Seconds = 0, Unknown3 = 0
+                });
                 return true;
             }
 

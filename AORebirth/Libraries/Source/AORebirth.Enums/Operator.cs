@@ -42,6 +42,12 @@ namespace AORebirth.Enums
         Unknown3 = 110,
 
         /// <summary>
+        /// Only on the 30 whole-body suits' ToWear (battle suits, Charred Abaddon Chassis, Hellfyre Magma Suit), stat 0 value 0.
+        /// The client's social-armor rule; Dungeon Dogs lets a suit be worn with other armor (Randy 2026-10-18), so the server passes it.
+        /// </summary>
+        WholeBodySuit = 111,
+
+        /// <summary>
         /// </summary>
         And = 4,
 

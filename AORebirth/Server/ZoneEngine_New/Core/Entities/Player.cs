@@ -243,6 +243,8 @@ namespace ZoneEngine_New.Core.Entities
                 Operator.HasNotWieldedItem => !Inventory.IsEquipped(id, wieldedOnly: true),
                 Operator.MustNotAlliedCombat => !IsAlliedInCombat(),
                 Operator.MustAlliedCombat => IsAlliedInCombat(),
+                // Whole-body suits may be worn with other armor here (the client patch lifts the client's own check).
+                Operator.WholeBodySuit => true,
                 _ => base.ResolveRequirement(requirement)
             };
         }
