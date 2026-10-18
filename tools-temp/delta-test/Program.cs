@@ -56,6 +56,20 @@ static class Program
     static async Task<int> Main(string[] args)
     {
         SelfUpdate.SwapHook = Swap;
+        if (args.Length == 3 && args[0] == "live")
+        {
+            // live <versionUrl> <baseDir>: the real update logic against a public URL (scratch install only)
+            Json.BaseDirOverride = args[2].TrimEnd('\\') + "\\"; swappedRoot = null;
+            var cfg = new LauncherConfig { SelfUpdateUrls = new() { args[1] } };
+            var t0 = DateTime.Now;
+            bool rs = await SelfUpdate.RunAsync(cfg, null, CancellationToken.None);
+            Console.WriteLine($"launcher: restart={rs} version={SelfUpdate.LocalVersion()} ({(DateTime.Now - t0).TotalSeconds:0}s)");
+            if (swappedRoot != null) Console.WriteLine("staged: " + string.Join(",", Directory.GetFiles(swappedRoot, "*", SearchOption.AllDirectories).Select(x => Path.GetRelativePath(swappedRoot, x))));
+            t0 = DateTime.Now;
+            await SelfUpdate.EnsurePatchAsync(cfg, null, CancellationToken.None);
+            Console.WriteLine($"patch done ({(DateTime.Now - t0).TotalSeconds:0}s)");
+            return 0;
+        }
         if (args.Length == 2)
         {
             // real <stageDir> <baseDir>: one launcher + patch check against a real staged release
