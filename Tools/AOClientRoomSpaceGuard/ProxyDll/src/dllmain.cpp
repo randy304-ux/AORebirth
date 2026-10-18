@@ -3,6 +3,7 @@
 // settings, camera, input, and UI modifications.
 
 #include "aovk_chain.h"
+#include "battlesuit_social_patch.h"
 #include "crash_dump.h"
 #include "build_info.h"
 #include "daily_login_routing.h"
@@ -25,6 +26,7 @@ namespace
         ~ExternalLinkPatchOnExit()
         {
             aorf::InstallExternalLinkPatch();
+            aorf::InstallBattlesuitSocialPatch();
         }
     };
 

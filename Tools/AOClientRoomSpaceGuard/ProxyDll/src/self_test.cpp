@@ -3,6 +3,7 @@
 #include "build_info.h"
 #include "daily_login_routing.h"
 #include "external_link_patch.h"
+#include "battlesuit_social_patch.h"
 
 #include <cstdio>
 
@@ -29,6 +30,12 @@ int main()
     if (!aorf::RunExternalLinkPatchSelfTest())
     {
         std::fprintf(stderr, "AO external-link patch self-test failed.\n");
+        return 1;
+    }
+
+    if (!aorf::RunBattlesuitSocialPatchSelfTest())
+    {
+        std::fprintf(stderr, "AO battlesuit social-armor patch self-test failed.\n");
         return 1;
     }
 
