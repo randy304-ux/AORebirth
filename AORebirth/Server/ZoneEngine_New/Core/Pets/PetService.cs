@@ -95,6 +95,10 @@ namespace ZoneEngine_New.Core.Pets
 
             int index = owner.OwnedPets.Count;
             Vector3 at = _playfield.SnapNpcSpawn(PetFormation.PointFor(owner, index));
+            // A formation spot with no floor under it (behind a dungeon wall, past a ledge) would leave the pet
+            // in the void at the owner's height; it starts on the owner's own floor instead.
+            if (!_playfield.TrySnapFeetToFloor(at, out _) && _playfield.TrySnapFeetToFloor(owner.Position, out Vector3 ownerFloor))
+                at = ownerFloor;
             NpcCharacter pet = _playfield.GetRequiredService<SpawnService>().SpawnMob(
                 template,
                 at,

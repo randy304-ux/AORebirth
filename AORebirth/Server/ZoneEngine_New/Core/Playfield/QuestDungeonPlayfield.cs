@@ -89,6 +89,30 @@ public sealed class QuestDungeonPlayfield : Playfield
     /// <summary>The mission's quality level (0 when unknown); locked doors use it as their lock difficulty.</summary>
     public int Quality { get; }
 
+    AORebirth.Core.Vector.Vector3? _arrival;
+
+    /// <summary>
+    /// Where entering players land: the layout spawn on the room's real floor. The generator puts the spawn at the
+    /// entrance template's origin height, which is the floor for most styles but 1.4 m under it in the alien
+    /// style 382 (floor 21.43 over origin 20.0); a landing under the floor kept the server's player and every
+    /// pet summoned around it buried. Before Build, or with no floor found, the layout spawn.
+    /// </summary>
+    public AORebirth.Core.Vector.Vector3 Arrival => _arrival ?? Layout.Spawn;
+
+    /// <summary>Highest floor within 2 m above to 1 m below the layout spawn, straight down.</summary>
+    AORebirth.Core.Vector.Vector3? FloorAtArrival(PlayfieldWorldSimulation world)
+    {
+        AORebirth.Core.Vector.Vector3 spawn = Layout.Spawn;
+        var from = new AORebirth.Core.Vector.Vector3(spawn.x, spawn.y + 2.0, spawn.z);
+        if (!world.TryRaycastDown(from, 3.0f, out AORebirth.Core.Vector.Vector3 hit))
+            return null;
+        var floor = new AORebirth.Core.Vector.Vector3(spawn.x, hit.y + 0.01, spawn.z);
+        if (Math.Abs(hit.y - spawn.y) > 0.05)
+            Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                "Quest dungeon {0} arrival lifted onto the floor: y {1:0.00} -> {2:0.00}", QuestId, spawn.yf, floor.yf));
+        return floor;
+    }
+
     public override void Build()
     {
         if (IsBuilt) return;
@@ -106,6 +130,7 @@ public sealed class QuestDungeonPlayfield : Playfield
             _simulation = PlayfieldWorldSimulation.Create(
                 Identity.Instance, geometry, MetaData, DestinationsCatalog.Instance, GameData, Logger, ItemTemplates);
             RegisterWorldServices(_simulation);
+            _arrival = FloorAtArrival(_simulation);
         }
 
         if (dungeon != null)
@@ -554,15 +579,77 @@ public sealed class QuestDungeonPlayfield : Playfield
             return;
         }
 
+        ExitLanding(out AORebirth.Core.Vector.Vector3 landing, out AORebirth.Core.Vector.Quaternion entranceHeading);
+        _simulation.RegisterDungeonExit(exit.Position.xf, exit.Position.yf, exit.Position.zf, exit.Identity.Instance,
+            Entrance.PlayfieldId, landing, entranceHeading, exit.TemplateId, exit.Rotation);
+    }
+
+    /// <summary>Outside the ACG entrance door, a portal exit's clearance in front of it, facing along its heading.</summary>
+    void ExitLanding(out AORebirth.Core.Vector.Vector3 landing, out AORebirth.Core.Vector.Quaternion heading)
+    {
         var entrancePosition = new AORebirth.Core.Vector.Vector3(Entrance.LocalX, Entrance.LocalY, Entrance.LocalZ);
         // Raw placement components are WXYZ: exact-identity comparisons against the current Dynels reader
         // match all 2,242 catalog rows. The engine's Quaternion constructor takes XYZW.
-        var entranceHeading = new AORebirth.Core.Vector.Quaternion(
+        heading = new AORebirth.Core.Vector.Quaternion(
             Entrance.RotationComponent1, Entrance.RotationComponent2, Entrance.RotationComponent3, Entrance.RotationComponent0);
-        AORebirth.Core.Vector.Vector3 landing = PortalDoorLandingResolver.LandingInFront(
-            entrancePosition, entranceHeading, PortalDoorLandingResolver.ExitDoorClearance);
-        _simulation.RegisterDungeonExit(exit.Position.xf, exit.Position.yf, exit.Position.zf, exit.Identity.Instance,
-            Entrance.PlayfieldId, landing, entranceHeading, exit.TemplateId, exit.Rotation);
+        landing = PortalDoorLandingResolver.LandingInFront(
+            entrancePosition, heading, PortalDoorLandingResolver.ExitDoorClearance);
+    }
+
+    /// <summary>
+    /// Usable statel the completed-quest exit terminal borrows: the dungeon "Button (boss)" (CanFlags Use, no
+    /// requirements, no client UI). Items.dat terminals open client UIs (mission/transport) or carry requirements.
+    /// </summary>
+    const int ExitTerminalTemplate = 159864;
+
+    bool _exitTerminalSpawned;
+
+    /// <summary>
+    /// Dungeon Dogs: once the quest is completed, an exit terminal appears by the objective (kill missions) or by
+    /// <paramref name="completer"/>; using it returns the player outside the entrance door. Once per dungeon build.
+    /// Runs on this playfield's tick.
+    /// </summary>
+    public void SpawnExitTerminal(Player completer)
+    {
+        if (_exitTerminalSpawned || IsDisposed)
+            return;
+        if (!ItemTemplates.TryGet(ExitTerminalTemplate, out ItemTemplate? template) || template == null)
+        {
+            Logger.Warn("Quest dungeon " + QuestId + ": exit terminal template " + ExitTerminalTemplate + " is not in items.dat");
+            return;
+        }
+
+        _exitTerminalSpawned = true;
+        AORebirth.Core.Vector.Vector3 at = _objectiveNpc != null
+            ? new AORebirth.Core.Vector.Vector3(_objectiveNpc.X + 1.5f, _objectiveNpc.Y, _objectiveNpc.Z)
+            : new AORebirth.Core.Vector.Vector3(completer.Position.xf + 1.5f, completer.Position.yf, completer.Position.zf);
+        var registry = GetRequiredService<DynelRegistry>();
+        var terminal = new DungeonExitTerminal(registry.AllocateStaticDynelIdentity(), template, LeaveToEntrance)
+        {
+            Playfield = this,
+            Position = at,
+            Rotation = new AORebirth.Core.Vector.Quaternion(0, 0, 0, 1)
+        };
+        registry.Register(terminal);
+        GetRequiredService<PlayfieldLocality>().RegisterDynel(terminal);
+        Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+            "Quest dungeon {0} completed: exit terminal {1} at ({2:0.#}, {3:0.#}, {4:0.#})",
+            QuestId, terminal.Identity.Instance, at.xf, at.yf, at.zf));
+    }
+
+    void LeaveToEntrance(Player player)
+    {
+        ExitLanding(out AORebirth.Core.Vector.Vector3 landing, out AORebirth.Core.Vector.Quaternion heading);
+        // As the exit door's walk-out: no recorded way back (the entrance, with a key, is the way in).
+        player.Stats.Set(CharacterStat.ExternalPlayfieldInstance, 0, StatDetail.Base, dirty: true);
+        player.Stats.Set(CharacterStat.ExternalDoorInstance, 0, StatDetail.Base, dirty: true);
+        Logger.Info("Quest dungeon " + QuestId + ": exit terminal used by character=" + player.Identity.Instance);
+        GetRequiredService<PlayfieldManager>().WithPlayfield(Entrance.PlayfieldId, player, destination =>
+        {
+            if (!ReferenceEquals(player.Playfield, this) || player.Session is not IZoneSession session)
+                return;
+            session.TransferToPlayfield(destination, landing, heading);
+        });
     }
 
     protected override void OnDispose()

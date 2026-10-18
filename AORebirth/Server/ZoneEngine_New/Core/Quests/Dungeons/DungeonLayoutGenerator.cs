@@ -163,6 +163,9 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
             public int DoorTemplate { get; set; }
 
             public int ExitTemplate { get; set; }
+
+            /// <summary>Optional per-style interior open chance; the file-wide value otherwise.</summary>
+            public int? OpenChancePercent { get; set; }
         }
 
         public DungeonLayoutGenerator(IGameData gameData, IZoneLogger logger)
@@ -292,7 +295,8 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 {
                     // DoorTemplate 0: open archways inside, only the exit door (alien ships).
                     if (row.Style > 0 && row.DoorTemplate >= 0 && row.ExitTemplate > 0)
-                        _doorStyles[row.Style] = new DungeonDoorStyle(row.DoorTemplate, row.ExitTemplate, open, locked);
+                        _doorStyles[row.Style] = new DungeonDoorStyle(row.DoorTemplate, row.ExitTemplate,
+                            row.OpenChancePercent is int styleOpen ? Math.Clamp(styleOpen, 0, 100) : open, locked);
                 }
 
                 logger.Info(string.Format(CultureInfo.InvariantCulture, "GameData dungeon door styles={0} from {1}", _doorStyles.Count, path));

@@ -537,7 +537,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                         dungeon.TargetHash, dungeon.Parameters.Quality, UncollectedObjective(dungeon.Parameters), TryCollectObjective,
                         tokenProgress == null ? unfinishedNpc : dungeon.Parameters.ObjectiveNpc, tokenProgress,
                         spawnNpcObjective: unfinishedNpc != null);
-                    session.TransferToPlayfield(world, layout.Spawn);
+                    session.TransferToPlayfield(world, world.Arrival);
                     return true;
                 }
 
@@ -633,10 +633,11 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 {
                     MissionTokenProgress? tokenProgress = CreateTokenProgress(questId, dungeon);
                     MissionNpcObjectiveBinding? unfinishedNpc = UnfinishedNpc(dungeon.Parameters);
-                    return (playfields.GetOrCreateQuestDungeon(storedPlayfield, questId, layout, entrance, dungeon.TargetHash,
+                    QuestDungeonPlayfield rebuilt = playfields.GetOrCreateQuestDungeon(storedPlayfield, questId, layout, entrance, dungeon.TargetHash,
                         dungeon.Parameters.Quality, UncollectedObjective(dungeon.Parameters), TryCollectObjective,
                         tokenProgress == null ? unfinishedNpc : dungeon.Parameters.ObjectiveNpc, tokenProgress,
-                        spawnNpcObjective: unfinishedNpc != null), layout.Spawn, null);
+                        spawnNpcObjective: unfinishedNpc != null);
+                    return (rebuilt, rebuilt.Arrival, null);
                 }
 
                 PlayfieldAdmission admission = playfields.AcquirePlayfield(entrance.PlayfieldId);
@@ -848,6 +849,13 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                             using PlayfieldAdmission admission = playfields.AcquirePlayfield(dungeon.Entrance.PlayfieldId);
                             inside.Session.TransferToPlayfield(admission.Playfield, landing);
                         });
+                }
+                else
+                {
+                    // Completed: an exit terminal back to the entrance door appears for those still inside.
+                    Player? inside = dungeon.GetRequiredService<DynelRegistry>().PlayerEntities().FirstOrDefault();
+                    if (inside != null)
+                        dungeon.DispatchPlayerProjection(inside, () => dungeon.SpawnExitTerminal(inside));
                 }
 
                 // Occupied: the sweep releases it once empty.
