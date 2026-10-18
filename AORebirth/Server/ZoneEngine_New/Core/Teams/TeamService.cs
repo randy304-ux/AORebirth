@@ -709,8 +709,13 @@ namespace ZoneEngine_New.Core.Teams
             Dispatch(player, () =>
             {
                 player.Stats.Set(stat, value);
-                if (send) SendNow(player, new StatMessage { Identity = player.Identity, Stats =
-                    [new GameTuple<CharacterStat, uint> { Value1 = stat, Value2 = (uint)value }] });
+                if (!send) return;
+                var message = new StatMessage { Identity = player.Identity, Stats =
+                    [new GameTuple<CharacterStat, uint> { Value1 = stat, Value2 = (uint)value }] };
+                SendNow(player, message);
+                // Other clients evaluate item requirement op 138 (InTeamWithTarget) locally against
+                // the target's Team stat; without this they only ever see Team=0 for other players.
+                if (stat == CharacterStat.Team) player.Cell?.Announce(message, exclude: player);
             });
         }
 

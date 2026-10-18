@@ -3617,7 +3617,9 @@ namespace ZoneEngine_New.Core.Entities
                 var pcInfo = new SimplePcInfo
                 {
                     CurrentNano = (uint)Stats.GetOrZero(CharacterStat.CurrentNano),
-                    Team = 0,
+                    // Live team id (process-local, set by TeamService). The client's own
+                    // InTeamWithTarget (op 138) check reads the target's team from here.
+                    Team = Stats.GetOrZero(CharacterStat.Team),
                     Swim = 5,
                     StrengthBase = ClampToShort(Stats.GetOrZero(CharacterStat.Strength, StatDetail.Base)),
                     AgilityBase = ClampToShort(Stats.GetOrZero(CharacterStat.Agility, StatDetail.Base)),
