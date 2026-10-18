@@ -195,9 +195,10 @@ namespace ZoneEngine_New.Core.Inventory
         /// (Randy 2026-10-18: delivered at slots 91 and 77, both invisible), so the mailbox moved to a normal item.
         /// GenericCmdMessageHandler opens the mailbox on its use; 297053's 53252 function still opens it too.
         /// </summary>
-        internal const int PersonalMailboxItemId = 288762;
-
-        internal const int PreviousMailboxItemId = 252503;
+        // 2026-10-18 19:33: Randy wants the Portable Bank Terminal 288762 to stay a portable bank (its own OnUse OpenBank
+        // runs again). The way into mail is the always-shown mail icon (ClaimService.Announce keeps UnreadMailCount >= 1).
+        // The mailbox hook stays on Letter from Penelope 252503, which nobody is given any more (harmless).
+        internal const int PersonalMailboxItemId = 252503;
 
         internal const int LegacySendMailItemId = 297053;
 

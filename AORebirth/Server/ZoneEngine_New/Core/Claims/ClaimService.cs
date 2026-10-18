@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Core.Claims
+namespace ZoneEngine_New.Core.Claims
 {
     using System;
     using System.Collections.Generic;
@@ -127,14 +127,18 @@
             return cmd.ExecuteNonQuery() == 1;
         }
 
-        /// <summary>Sets the envelope count. Speaks the new-mail line only when the count went up.</summary>
+        /// <summary>
+        /// Sets the envelope count, never below 1: the client draws its mail icon only while UnreadMailCount &gt; 0
+        /// (GUI.dll "s:UnreadMailCount &gt; 0"), and Randy wants that icon always there as the way into the mailbox.
+        /// Speaks the new-mail line only when the real count went up.
+        /// </summary>
         public void Announce(Player player)
         {
             try
             {
                 int waiting = CountPending(player.Identity.Instance);
                 int shown = player.Stats.GetOrZero(CharacterStat.UnreadMailCount);
-                player.Stats.Set(CharacterStat.UnreadMailCount, waiting, dirty: true);
+                player.Stats.Set(CharacterStat.UnreadMailCount, Math.Max(waiting, 1), dirty: true);
                 player.FlushDirtyStats();
                 if (waiting > shown)
                     Feedback(player, "You have new mail. Visit a mail terminal to read it.");
@@ -284,7 +288,7 @@
             }
 
             int waiting = CountPending(player.Identity.Instance);
-            player.Stats.Set(CharacterStat.UnreadMailCount, waiting, dirty: true);
+            player.Stats.Set(CharacterStat.UnreadMailCount, Math.Max(waiting, 1), dirty: true);
             player.FlushDirtyStats();
             if (player.Session != null)
             {
