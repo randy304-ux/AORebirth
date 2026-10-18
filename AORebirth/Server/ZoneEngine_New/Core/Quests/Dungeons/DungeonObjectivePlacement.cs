@@ -13,6 +13,11 @@ internal static class DungeonObjectivePlacement
 {
     internal static bool TrySelect(string gameDataRoot, DungeonLayout layout, IZoneLogger logger,
         out int roomIndex, out Vector3 position)
+        => TrySelect(gameDataRoot, layout, logger, 0, out roomIndex, out position);
+
+    /// <summary>As above, preferring rooms with at least <paramref name="minRoomPoints"/> spawn points (a boss room needs space); falls back to any room.</summary>
+    internal static bool TrySelect(string gameDataRoot, DungeonLayout layout, IZoneLogger logger, int minRoomPoints,
+        out int roomIndex, out Vector3 position)
     {
         roomIndex = -1;
         position = new Vector3();
@@ -35,13 +40,14 @@ internal static class DungeonObjectivePlacement
             int districtIndex = districts.ZoneToDistrictMap is { } map && zone >= 0 && zone < map.Length ? map[zone] : zone;
             if (!byIndex.TryGetValue(districtIndex, out var district))
                 continue;
+            int roomPoints = (district.SpawnPoints ?? []).Count(p => p?.Position is { Length: >= 3 });
             foreach (var point in district.SpawnPoints ?? [])
             {
                 if (point?.Position is not { Length: >= 3 } raw)
                     continue;
                 var placed = placement.TransformTemplatePoint(new System.Numerics.Vector3(raw[0], raw[1], raw[2]));
                 if (float.IsFinite(placed.X) && float.IsFinite(placed.Y) && float.IsFinite(placed.Z))
-                    candidates.Add((placement.Index, distance[placement.Index], placed));
+                    candidates.Add((placement.Index, distance[placement.Index] + (roomPoints >= minRoomPoints ? 1000 : 0), placed));
             }
         }
         if (candidates.Count == 0)

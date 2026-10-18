@@ -69157,22 +69157,6 @@
                                                      "61":  500
                                                  },
                                        "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":50,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":15,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":60,"LevelMod":20},{"Hash":"KZVB","Repeats":1,"Chance":25,"LevelMod":20},{"Hash":"KZLV","Repeats":1,"Chance":5,"LevelMod":20}],
-                                       "BossTriggers":  [
-                                                            {
-                                                                "On":  "Death",
-                                                                "Pct":  0,
-                                                                "Actions":  [
-                                                                                {
-                                                                                    "Type":  "SpawnAdds",
-                                                                                    "Hash":  "SHXT",
-                                                                                    "Count":  1,
-                                                                                    "Radius":  3,
-                                                                                    "Level":  1,
-                                                                                    "DespawnSeconds":  300
-                                                                                }
-                                                                            ]
-                                                            }
-                                                        ],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,

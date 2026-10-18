@@ -32,6 +32,10 @@ namespace ZoneEngine_New.Core.Data
 
         string? TryAddDuplicateKey(int sourceKeyInstanceId, QuestDungeonKeyItemRow copy, int maxKeys, long nowUtcTicks);
 
+        /// <summary>NPC-given dungeon quest: quest, owner row and key in one transaction, no terminal offer.</summary>
+        bool TryAcceptAuthoredQuest(GeneratedQuestRow quest, CharacterQuestRow characterRow, QuestDungeonKeyItemRow key)
+            => throw new NotSupportedException("The quest store does not support authored dungeon quests.");
+
         IDictionary<int, string> LoadKeyQuests(IReadOnlyCollection<int> keyInstanceIds);
 
         IList<RetiredDungeonKey> EndQuestKeys(string questId);
@@ -81,6 +85,9 @@ namespace ZoneEngine_New.Core.Data
         public bool TryAcceptOfferQuest(int ownerId, int offerType, int offerInstance, GeneratedQuestRow quest,
             CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, QuestDungeonKeyItemRow? sourceItem, long nowUtcTicks)
             => Run(() => _dao.TryAcceptOfferQuest(ownerId, offerType, offerInstance, quest, characterRow, key, sourceItem, nowUtcTicks), _logger);
+
+        public bool TryAcceptAuthoredQuest(GeneratedQuestRow quest, CharacterQuestRow characterRow, QuestDungeonKeyItemRow key)
+            => Run(() => _dao.TryAcceptAuthoredQuest(quest, characterRow, key), _logger);
 
         public string? TryAddDuplicateKey(int sourceKeyInstanceId, QuestDungeonKeyItemRow copy, int maxKeys, long nowUtcTicks)
             => Run(() => _dao.TryAddDuplicateKey(sourceKeyInstanceId, copy, maxKeys, nowUtcTicks), _logger);

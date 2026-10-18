@@ -1,5 +1,5 @@
 {
-  "_comment": "Entrance rooms per ACG style and the door of each that is the dungeon's way in (index into the room's Rooms.json doorConnections). Nothing in the client or style data marks it: the client treats whichever door is left unpaired as the exit, and the entrance room is modelled with a plug filling that doorway, so it must face outside; placed any other way, the plug seals the way into the dungeon. Only rooms listed here are used as generated dungeon entrances. MainHalls: the style's main hall rooms (the *_mh* rooms); the first room past the entrance is always one of them. Source: 'geometry' = the only doorway the room's collision surfaces plug; 'live' = the unpaired door in a captured live layout. Not yet mapped (no single plug and no live layout): 320, 322, 362, 382, 386, 331 tarm_entrance1, and the other 341/351 entrances.",
+  "_comment": "Entrance rooms per ACG style and the door of each that is the dungeon's way in (index into the room's Rooms.json doorConnections). Nothing in the client or style data marks it: the client treats whichever door is left unpaired as the exit, and the entrance room is modelled with a plug filling that doorway, so it must face outside; placed any other way, the plug seals the way into the dungeon. Only rooms listed here are used as generated dungeon entrances. MainHalls: the style's main hall rooms (the *_mh* rooms); the first room past the entrance is always one of them. Source: 'geometry' = the only doorway the room's collision surfaces plug; 'live' = the unpaired door in a captured live layout. Not yet mapped (no single plug and no live layout): 320, 322, 362, 386, 331 tarm_entrance1, and the other 341/351 entrances.",
   "Styles": [
     {
       "Style": 320,
@@ -111,7 +111,9 @@
     },
     {
       "Style": 382,
-      "Entrances": [],
+      "Entrances": [
+        {"Room": 2, "Name": "AI_entrance", "ExitDoor": 0, "Source": "symmetric: neither doorway is plugged in the collision (both show only frame hits), so either works; door 0 picked (2026-10-18, alien ship for Karli's mission)"}
+      ],
       "MainHalls": [0, 5, 6]
     },
     {

@@ -192,6 +192,9 @@ public sealed class QuestDungeonPlayfield : Playfield
             // The target's point is taken; the target counts as that room's NPC.
             bool holdsFrozenTarget = _objectiveNpc?.RoomIndex == placement.Index;
             bool holdsTarget = holdsFrozenTarget || target is { } held && held.Room == placement.Index;
+            // An NPC-given dungeon keeps the objective's room for its boss.
+            if (holdsFrozenTarget && Layout.AuthoredBossHash != null)
+                continue;
             var candidates = points.FindAll(point =>
                 !(target is { } legacyTarget && legacyTarget.Room == placement.Index && ReferenceEquals(point, legacyTarget.Point))
                 && !(holdsFrozenTarget && IsObjectiveNpcPoint(placement, point)));
@@ -249,6 +252,7 @@ public sealed class QuestDungeonPlayfield : Playfield
         }
 
         SpawnTeamBoss(rooms, spawns, population);
+        SpawnAuthoredBoss(rooms, spawns);
         Logger.Info("Quest dungeon " + QuestId + " spawn points=" + added + " skipped=" + skipped
             + " requestedNpcLevel=" + Quality + " families=" + string.Join(",", population.RegularNpcHashes));
     }
@@ -287,6 +291,39 @@ public sealed class QuestDungeonPlayfield : Playfield
             }
         }
         Logger.Warn("Quest dungeon " + QuestId + ": team boss " + bossHash + " could not be placed");
+    }
+
+    /// <summary>
+    /// NPC-given dungeons (AuthoredDungeons.json): the boss stands in the objective NPC's room, on another of its spawn
+    /// points (the nearest other room when it has none). It does not respawn.
+    /// </summary>
+    void SpawnAuthoredBoss(
+        List<(AORebirth.World.Collision.DungeonRoomPlacement Placement, PlayfieldDistrictEntry District, List<PlayfieldDistrictSpawnPoint> Points)> rooms,
+        HashSpawnSystem spawns)
+    {
+        string? bossHash = Layout.AuthoredBossHash;
+        if (bossHash == null || !GameData.HasMobTemplate(bossHash) || TokenProgress?.IsKilled("authoredboss", 0) == true)
+            return;
+        int objectiveRoom = _objectiveNpc?.RoomIndex ?? -1;
+        int level = Math.Max(1, Layout.AuthoredBossLevel > 0 ? Layout.AuthoredBossLevel : Quality);
+        foreach (var room in rooms.OrderByDescending(r => r.Placement.Index == objectiveRoom).ThenByDescending(r => r.Placement.Index))
+        {
+            foreach (PlayfieldDistrictSpawnPoint point in room.Points)
+            {
+                if (IsObjectiveNpcPoint(room.Placement, point))
+                    continue;
+                System.Numerics.Vector3 placed = room.Placement.TransformTemplatePoint(
+                    new System.Numerics.Vector3(point.Position[0], point.Position[1], point.Position[2]));
+                if (!spawns.AddPlacedDistrictPoint(bossHash, room.District, new AORebirth.Core.Vector.Vector3(placed.X, placed.Y, placed.Z),
+                        point.Radius, useDistrictLevels: false, respawns: false, requestedLevel: level))
+                    continue;
+                Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    "Quest dungeon {0} authored boss {1} L{2} in room {3} (objective room {4}) at ({5:0.#}, {6:0.#}, {7:0.#})",
+                    QuestId, bossHash, level, room.Placement.Index, objectiveRoom, placed.X, placed.Y, placed.Z));
+                return;
+            }
+        }
+        Logger.Warn("Quest dungeon " + QuestId + ": authored boss " + bossHash + " could not be placed");
     }
 
     bool IsObjectiveNpcPoint(AORebirth.World.Collision.DungeonRoomPlacement placement, PlayfieldDistrictSpawnPoint point)
@@ -467,6 +504,8 @@ public sealed class QuestDungeonPlayfield : Playfield
         for (int i = 0; i < placements.Count; i++)
         {
             AORebirth.World.Collision.DungeonDoorPlacement placement = placements[i];
+            if (!placement.IsExit && style.DoorTemplate == 0)
+                continue;
             int templateId = placement.IsExit ? style.ExitTemplate : style.DoorTemplate;
             if (!ItemTemplates.TryGet(templateId, out ItemTemplate? template) || template == null)
             {

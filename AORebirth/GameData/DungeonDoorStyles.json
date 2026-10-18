@@ -19,6 +19,12 @@
       "ExitTemplate": 41878
     },
     {
+      "Style": 382,
+      "DoorTemplate": 0,
+      "ExitTemplate": 41886,
+      "Source": "stand-in: no alien door template found in items.dat or the alien ship playfields; interior doorways stay open archways (DoorTemplate 0), the exit borrows the 321 office exit door so the way out works"
+    },
+    {
       "Style": 351,
       "DoorTemplate": 41883,
       "ExitTemplate": 41884

@@ -33,9 +33,6 @@
                                   },
                     "ready":  {
                                   "Text":  "We are ready to help you out.",
-                                  "If":  [
-                                             "!HasQuest ZXK1"
-                                         ],
                                   "Goto":  "team"
                               },
                     "used":  {
@@ -101,8 +98,8 @@
                               },
                   "team":  {
                                "Text":  [
-                                            "{givequest ZXK1}",
-                                            "The Zix is in the Alien General\u0027s room, deeper in. A hatch opens when the General falls. Try not to blow my cover."
+                                            "{givedungeon ZXK1}",
+                                            "The Zix hides in the Alien General\u0027s room, deep inside the ship. Take this key and go through the Crashed Alien Ship door at the back of this room. Try not to blow my cover."
                                         ],
                                "Replies":  [
                                                "nothing"

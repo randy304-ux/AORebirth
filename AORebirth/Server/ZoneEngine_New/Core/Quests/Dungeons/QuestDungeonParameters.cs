@@ -76,6 +76,9 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
         /// <summary>The accepted offer's quality level; locked doors use it as their lock difficulty. 0 on older quests.</summary>
         public int Quality { get; set; }
 
+        /// <summary>Set on a dungeon given by an NPC (GameData/AuthoredDungeons.json Hash): its population, boss and objective come from there. Null on terminal missions.</summary>
+        public string? AuthoredHash { get; set; }
+
         public string ToJson() => JsonSerializer.Serialize(this, JsonOptions);
 
         public static bool TryParse(string? json, out QuestDungeonParameters parameters)

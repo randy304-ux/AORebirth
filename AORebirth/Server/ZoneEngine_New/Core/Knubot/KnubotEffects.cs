@@ -106,6 +106,29 @@ public sealed record KnubotAcceptQuest(string Hash) : KnubotEffect
     }
 }
 
+/// <summary>
+/// <c>{givedungeon HASH}</c>: gives the NPC-given dungeon mission HASH from GameData/AuthoredDungeons.json (a generated,
+/// no-respawn dungeon behind its mission entrance, with a mission key). A refusal (already held, full inventory) is told
+/// to the player and the rest of the line still plays.
+/// </summary>
+public sealed record KnubotGiveDungeon(string Hash) : KnubotEffect
+{
+    public override bool Check(KnubotContext context, KnubotPlan plan, KnubotEffectServices services)
+    {
+        plan.SlotsNeeded += 1;
+        return true;
+    }
+
+    public override void Apply(KnubotContext context, KnubotEffectServices services)
+    {
+        Player player = context.Player;
+        var dungeons = player.Playfield?.GetService<ZoneEngine_New.Core.Quests.Dungeons.QuestDungeonService>();
+        string? refused = dungeons == null ? "Mission dungeons are unavailable." : dungeons.AcceptAuthored(player, Hash);
+        if (refused != null)
+            player.Session?.Send(new ChatTextMessage { Identity = player.Identity, Text = refused });
+    }
+}
+
 /// <summary><c>{completequest HASH}</c>: completes an active quest, granting its reward and next step.</summary>
 public sealed record KnubotCompleteQuest(string Hash) : KnubotEffect
 {

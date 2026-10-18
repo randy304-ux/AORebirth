@@ -499,6 +499,29 @@ Launcher commit 7cec228 (DeltaUpdate.cs, SelfUpdate.cs, Models.cs). version.json
 - Dual-log: no GM or per-account concurrency gate exists (LoginEngine SelectCharacterHandler, ZoneHandoffStore generation only fences an in-flight handoff, ChatSessionOwnership is per session; AllowedCharacters is slot count). No change; only Randy's account exists so not tested with a non-GM account.
 - AOReloaded crash: only WER crashes today/yesterday are AnarchyOnline.exe MSVCR100.dll+0x1e80 DEP at 14:08:08 (pid 17640, 350 ms after start) and 10-17 18:58; sessions 8964 (14:08-~14:16/23) and 8108 (14:23-<14:32) ended with no WER event and no CRASH line in AORebirthClientPatch.log.
 
+## 2026-10-18 18:30 ET - Karli's alien ship: generated interior (ZXK1), 8009 entrance only, General loot
+
+- Randy 17:14/17:16/17:36: the 8009 landing was crowded with respawning aliens and the General. Cause: 8009 is one ~22x24 m room and every alien now aggros at 10 m; the d959fc2f spots put 12 aggressive spawns (300 s, ZIXK 60 s, YZWI 30 s) on that floor. Live had one mob per spawn point, so nothing was duplicated.
+- 8009 is now the entrance room only:
+  - Karli; the native YZWI (L13, 600 s) and one Zix (ZIXI L10, 600 s at 32,48), both by the back (north) door 20+ m from the landing;
+  - the Ship Hatch (SHXT) by the south door as a fixed spawn (the client exit door there has no destination);
+  - the landing moved from 40,44 to 38,0.5,28, just inside the south door (2.4 m clear, ColProbe).
+  - Crew, General, mission Zix and the General's hatch death trigger are gone from 8009.
+- Interior: Karli's "We are ready to help you out." runs the new Knubot effect `{givedungeon ZXK1}`.
+  - QuestDungeonService.AcceptAuthored builds the same generated quest, key and dungeon a terminal mission gets, with no offer row (new DAO TryAcceptAuthoredQuest).
+  - The dungeon sits behind the 8009 MissionEntrance "Crashed Alien Ship" (0xC0002049).
+  - New GameData/AuthoredDungeons.json: one solo floor of style 382 "Alien ACG", 6-9 rooms.
+  - Crew ACFJ CRDY KSAU KGRU KCIU KGXH at QL 12, at 25% per district point, at least one per room.
+  - ZIXK is the bound objective, in the deepest room with 4+ spawn points; ALGN L14 is on another point of the same room.
+  - No respawns. Killing the Zix completes the quest (1500 credits / 1500 XP) and sends everyone out. Unfinished, it expires in 24 h. An empty dungeon is released after 10 min and comes back full.
+  - The authored ZXK1 in Quests.json is kept for old holders (none in the DB).
+- Style 382 data:
+  - DungeonEntrances: AI_entrance room 2, ExitDoor 0. Neither doorway is plugged in the collision, so the choice is a guess.
+  - DungeonDoorStyles: 382 has open archways inside (DoorTemplate 0 now means no interior doors) and the exit borrows the 321 office exit door 41886. No alien door template was found in items.dat or the alien ship playfields, so this is a stand-in.
+- Offline harness (tools-temp/alien1018/authtest, zout DLLs and real GameData), 200 seeds: 0 failures, average 12.9 rooms, one exit each, every room reachable, objective room always 4+ points (AI_Room_1/2, AI_Endblocker_1, sometimes a main hall).
+- Loot/respawn from c91bbda8 go live together: ALGN 500 credits, Bio-Material 60%, Viralbots 25%, Lead Viralbots 5%, weapons 50/15; crew Bio-Material 10%.
+- Layout modelled on AO-Universe Place the Bomb (scout ship, Brigadier General plus an add on the flight deck). Mothership notes for later: ddogs/docs/alien-ships-notes.md.
+- Guessed: rates, sizes, QL 12, the 24 h lifetime, the exit door and the entrance door choice.
 ## 2026-10-18 15:45 ET - Arete Kyr'ozch aliens: aggro, alien XP, Kyr'Ozch weapon loot, Friendly Buff can, ship spawns; restart 15:40
 
 - Restart 15:40 (backup cellao_codex_clean-20261018-1539-alien1018.sql, online 0 at 15:40:01 and 15:40:28 after stop). Boot 15:40:50: quests=169 skipped=0, Knubot scripts=87 rejected=0, no Error, Test-StorePages 6/6 PASS. GameData ready mobs 1178->1179 (YZWI), hashTemplates 130->132 (KZWP, KZTW), hashInstances 6596->6644 (48 weapon leaves).

@@ -303,6 +303,147 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
             }
         }
 
+        /// <summary>
+        /// An NPC gives a dungeon quest (Knubot {givedungeon HASH}, GameData/AuthoredDungeons.json): the same generated
+        /// quest, key and dungeon as a terminal mission, with no offer. The objective NPC goes to the deepest room, the
+        /// spec's boss stands with it and the spec's population fills the rest; nothing respawns. Completing the
+        /// objective ends the quest and its dungeon as any generated mission. Returns null on success, else the reason.
+        /// </summary>
+        public string? AcceptAuthored(Player player, string hash)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            lock (player.PersistenceGate)
+            {
+                if (player.IsPersistenceQuarantined || player.Session == null || player.Playfield == null || !player.Inventory.IsHydrated)
+                    return "Mission acceptance is unavailable right now.";
+                if (!_layouts.IsAvailable || !_layouts.TryGetAuthored(hash, out AuthoredDungeonSpec spec))
+                    return "Mission dungeons are unavailable.";
+                foreach (PlayerQuest held in _quests.GetLog(player).Quests.Values)
+                {
+                    if (held.IsActive && held.Source == QuestSource.Generated
+                        && QuestDungeonParameters.TryParse(held.AcgBuildingGeneratorJson, out var heldParameters)
+                        && string.Equals(heldParameters.AuthoredHash, spec.Hash, StringComparison.Ordinal))
+                        return "You already have this mission. Use your mission key at the " + heldParameters.EntranceName + ".";
+                }
+
+                if (!_entrances.TryGetByIdentity((uint)IdentityType.MissionEntrance, spec.EntranceInstance, out MissionEntrancePlacement entrance))
+                {
+                    _logger.Warn("Authored dungeon " + spec.Hash + ": entrance " + spec.EntranceInstance.ToString("X8", CultureInfo.InvariantCulture) + " is not in the mission entrance catalog");
+                    return "That mission's location is unavailable.";
+                }
+
+                // Indoor entrances (8009) have no WorldPos: the journal waypoint then names only the playfield.
+                bool hasWorldPosition = _entrances.TryGetWorldPosition(entrance.Identity, out MissionDestinationWorldPosition worldPosition);
+                if (!QuestDungeonIds.TryCreate(_ids.Allocate(), out string questId, out int dungeonPlayfield))
+                    return "Mission acceptance is unavailable right now.";
+
+                DateTime now = DateTime.UtcNow;
+                var parameters = new QuestDungeonParameters
+                {
+                    Seed = RandomNumberGenerator.GetInt32(int.MaxValue),
+                    GeneratorVersion = DungeonLayoutGenerator.CurrentVersion,
+                    DungeonPlayfield = dungeonPlayfield,
+                    EntranceType = unchecked((int)entrance.IdentityType),
+                    EntranceInstance = unchecked((int)entrance.IdentityInstance),
+                    EntrancePlayfield = entrance.PlayfieldId,
+                    EntranceName = entrance.DisplayName,
+                    EntranceX = entrance.LocalX,
+                    EntranceY = entrance.LocalY,
+                    EntranceZ = entrance.LocalZ,
+                    DestinationType = hasWorldPosition ? unchecked((int)worldPosition.PlayfieldIdentityType) : 40016,
+                    BuildingLowId = hasWorldPosition ? worldPosition.WorldOffsetX : 0,
+                    BuildingHighId = hasWorldPosition ? worldPosition.WorldOffsetZ : 0,
+                    MissionType = (int)MissionRollType.KillPerson,
+                    Quality = spec.Quality,
+                    MissionIconId = MissionRollPolicy.Current.Icon(MissionRollType.KillPerson)
+                };
+                if (!_layouts.ConfigureAuthoredDungeon(parameters, spec) || !_layouts.TryGenerate(parameters, out DungeonLayout layout))
+                    return "Mission dungeons are unavailable.";
+
+                if (!_gameData.TryResolveMobTemplate(spec.ObjectiveNpcHash, spec.Quality, out MobTemplate objectiveTemplate)
+                    || objectiveTemplate.UnresolvedPlaceholder || !NpcTemplateValidation.CanSpawn(objectiveTemplate)
+                    || objectiveTemplate.Has(NpcFeature.NoCombat)
+                    || !DungeonObjectivePlacement.TrySelect(_gameData.RootPath, layout, _logger, 4, out int room, out Vector3 point))
+                {
+                    _logger.Warn("Authored dungeon " + spec.Hash + ": objective NPC " + spec.ObjectiveNpcHash + " could not be placed");
+                    return "Mission NPC objective data is unavailable.";
+                }
+                var objective = new MissionNpcObjectiveBinding
+                {
+                    QuestId = questId, OwnerId = player.Identity.Instance, Instance = _ids.Allocate(),
+                    NpcHash = objectiveTemplate.Hash, Quality = spec.Quality, ScalePercent = null, RoomIndex = room,
+                    X = point.xf, Y = point.yf, Z = point.zf, MissionType = parameters.MissionType
+                };
+                if (!objective.IsValid)
+                    return "Mission NPC objective data is unavailable.";
+                parameters.ObjectiveNpc = objective;
+
+                var template = new QuestTemplate
+                {
+                    Hash = questId,
+                    Name = spec.Title,
+                    Summary = spec.Summary,
+                    Scope = "Solo",
+                    Action = QuestTemplate.KillOneAction,
+                    Objective = new QuestObjective { Npc = objective.NpcHash },
+                    Flags = "None",
+                    Reward = new QuestReward { Hash = string.Empty, Credits = spec.Credits, Xp = spec.Xp }
+                };
+                DateTime expires = now.AddSeconds(spec.LifetimeSeconds);
+                string parametersJson = parameters.ToJson();
+
+                try
+                {
+                    _flush.HardFlush(player);
+                    Item key = CreateKey();
+                    if (!InventoryGrantPlan.TryCreate(player, [key], out InventoryGrantPlan plan))
+                        return "Your inventory is full.";
+
+                    var quest = new GeneratedQuestRow
+                    {
+                        QuestId = questId,
+                        OwnerType = (int)QuestOwnerType.Character,
+                        OwnerId = player.Identity.Instance,
+                        DefinitionJson = System.Text.Json.JsonSerializer.Serialize(template, QuestTemplate.JsonOptions),
+                        AcgBuildingGeneratorJson = parametersJson,
+                        CreatedAtUtcTicks = now.Ticks,
+                        ExpiresAtUtcTicks = expires.Ticks,
+                        UpdatedAtUtcTicks = now.Ticks
+                    };
+                    var characterRow = new CharacterQuestRow
+                    {
+                        CharacterId = player.Identity.Instance,
+                        QuestId = questId,
+                        Source = (int)QuestSource.Generated,
+                        State = (int)QuestState.Active,
+                        Progress = 0,
+                        RequiredCount = template.RequiredCount,
+                        AssignedAtUtcTicks = now.Ticks,
+                        UpdatedAtUtcTicks = now.Ticks
+                    };
+
+                    if (!_store.TryAcceptAuthoredQuest(quest, characterRow, KeyRow(plan.Rows[0], now)))
+                        return "Mission acceptance is unavailable right now.";
+
+                    _dungeons[questId] = new CachedDungeon(parameters, expires.Ticks, null,
+                        OwnerId: player.Identity.Instance, AssignedAtUtcTicks: now.Ticks);
+                    plan.PublishAfterCommit(notify: false);
+                    SendKey(player, key, plan.Rows[0].ContainerPlacement, parameters.EntranceName);
+                    _quests.AdoptGenerated(player, questId, template, now, expires, parametersJson);
+                    _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                        "Authored dungeon quest accepted char={0} quest={1} hash={2} entrance={3} ({4}) dungeon={5} style={6} floorSize={7} objective={8} room={9}",
+                        player.Identity.Instance, questId, spec.Hash, parameters.EntranceInstance, entrance.DisplayName, dungeonPlayfield,
+                        parameters.LayoutPlan!.StyleId, parameters.LayoutPlan.FloorSize, objective.NpcHash, room));
+                    return null;
+                }
+                catch (DatabaseCommitOutcomeUnknownException exception)
+                {
+                    Quarantine(player, exception);
+                    return "Mission acceptance needs to be reconciled; please reconnect.";
+                }
+            }
+        }
+
         /// <summary>Resolves only the selected placement identity and verifies its exact offered WorldPos.</summary>
         internal static bool TryResolveOfferEntrance(MissionDestinationCatalog catalog, GeneratedMissionOffer offer,
             out MissionEntrancePlacement entrance)

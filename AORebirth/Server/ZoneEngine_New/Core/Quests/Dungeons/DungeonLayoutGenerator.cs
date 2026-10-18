@@ -24,6 +24,35 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
         public IReadOnlyList<AORebirth.DungeonGenerator.DungeonFloorTransition> FloorTransitions { get; init; } = [];
         public int? BossRoomIndex { get; init; }
         public DungeonPopulationPolicy Population { get; init; } = new();
+
+        /// <summary>NPC-given dungeons: one boss spawned with the objective NPC (no boss floor needed). Null otherwise.</summary>
+        public string? AuthoredBossHash { get; init; }
+
+        public int AuthoredBossLevel { get; init; }
+    }
+
+    /// <summary>
+    /// GameData/AuthoredDungeons.json row: a generated, no-respawn mission dungeon an NPC gives (Knubot {givedungeon HASH})
+    /// instead of a terminal. Single floor of <see cref="Style"/> behind the MissionEntrance <see cref="EntranceInstance"/>;
+    /// the objective NPC goes to the deepest room as on kill missions, with the boss next to it.
+    /// </summary>
+    public sealed class AuthoredDungeonSpec
+    {
+        public string Hash { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Summary { get; set; } = string.Empty;
+        public uint EntranceInstance { get; set; }
+        public int Style { get; set; }
+        public int MinFloorSize { get; set; }
+        public int MaxFloorSize { get; set; }
+        public int Quality { get; set; }
+        public string ObjectiveNpcHash { get; set; } = string.Empty;
+        public string? BossNpcHash { get; set; }
+        public int BossLevel { get; set; }
+        public int Credits { get; set; }
+        public int Xp { get; set; }
+        public int LifetimeSeconds { get; set; }
+        public DungeonPopulationPolicy Population { get; set; } = new();
     }
 
     /// <summary>GameData/DungeonDoorStyles.json for one ACG style: door item templates and spawn-state chances.</summary>
@@ -86,6 +115,8 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
         readonly AORebirth.DungeonGenerator.DungeonGenerator? _generator;
         readonly IZoneLogger _logger;
         GenerationPolicy? _policy;
+        readonly Dictionary<string, AuthoredDungeonSpec> _authored = new(StringComparer.Ordinal);
+        public const string AuthoredFileName = "AuthoredDungeons.json";
 
         sealed class GenerationPolicy
         {
@@ -151,6 +182,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
             }
 
             LoadDoorStyles(Path.Combine(gameData.RootPath, DoorStylesFileName), logger);
+            LoadAuthored(gameData, Path.Combine(gameData.RootPath, AuthoredFileName), logger);
             try
             {
                 _policy = JsonSerializer.Deserialize<GenerationPolicy>(File.ReadAllText(Path.Combine(gameData.RootPath, GenerationFileName)),
@@ -182,6 +214,66 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
             }
         }
 
+        sealed class AuthoredFile
+        {
+            public List<AuthoredDungeonSpec> Dungeons { get; set; } = [];
+        }
+
+        void LoadAuthored(IGameData gameData, string path, IZoneLogger logger)
+        {
+            if (!File.Exists(path) || _generator == null)
+                return;
+            try
+            {
+                AuthoredFile? file = JsonSerializer.Deserialize<AuthoredFile>(File.ReadAllText(path),
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                foreach (AuthoredDungeonSpec spec in file?.Dungeons ?? [])
+                {
+                    _generator.LoadStyle(spec.Style);
+                    if (string.IsNullOrWhiteSpace(spec.Hash) || spec.EntranceInstance == 0 || spec.Quality < 1
+                        || spec.MinFloorSize < 3 || spec.MaxFloorSize > 40 || spec.MinFloorSize > spec.MaxFloorSize
+                        || spec.Population?.IsValid(gameData) != true || !gameData.HasMobTemplate(spec.ObjectiveNpcHash)
+                        || (spec.BossNpcHash != null && !gameData.HasMobTemplate(spec.BossNpcHash))
+                        || spec.LifetimeSeconds < 600 || spec.Credits < 0 || spec.Xp < 0)
+                        throw new InvalidDataException("Invalid authored dungeon " + spec.Hash);
+                    _authored[spec.Hash] = spec;
+                }
+                logger.Info(string.Format(CultureInfo.InvariantCulture, "GameData authored dungeons={0} ({1})", _authored.Count, string.Join(",", _authored.Keys)));
+            }
+            catch (Exception exception)
+            {
+                _authored.Clear();
+                logger.Error(exception, "Failed to load " + path + "; NPC-given dungeons are unavailable");
+            }
+        }
+
+        public bool TryGetAuthored(string? hash, out AuthoredDungeonSpec spec)
+        {
+            spec = null!;
+            return hash != null && _authored.TryGetValue(hash, out spec!);
+        }
+
+        /// <summary>Freezes an NPC-given dungeon's plan: one solo floor of its style, sized from its seed.</summary>
+        public bool ConfigureAuthoredDungeon(QuestDungeonParameters parameters, AuthoredDungeonSpec spec)
+        {
+            ArgumentNullException.ThrowIfNull(parameters);
+            ArgumentNullException.ThrowIfNull(spec);
+            if (_generator == null || _policy == null)
+                return false;
+            var random = new Random(parameters.Seed);
+            parameters.GeneratorVersion = CurrentVersion;
+            parameters.IsTeam = false;
+            parameters.AuthoredHash = spec.Hash;
+            parameters.LayoutPlan = new DungeonLayoutPlan
+            {
+                StyleId = spec.Style, FloorCount = 1,
+                FloorSize = random.Next(spec.MinFloorSize, spec.MaxFloorSize + 1),
+                FloorHeight = _policy.FloorHeight, BossFloor = false, DescendingFloors = false,
+                LockedDoorChancePercent = 0
+            };
+            return parameters.LayoutPlan.IsValid;
+        }
+
         void LoadDoorStyles(string path, IZoneLogger logger)
         {
             if (!File.Exists(path))
@@ -198,7 +290,8 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 int locked = Math.Clamp(file?.LockedChancePercent ?? 0, 0, 100);
                 foreach (DoorStyleRow row in file?.Styles ?? [])
                 {
-                    if (row.Style > 0 && row.DoorTemplate > 0 && row.ExitTemplate > 0)
+                    // DoorTemplate 0: open archways inside, only the exit door (alien ships).
+                    if (row.Style > 0 && row.DoorTemplate >= 0 && row.ExitTemplate > 0)
                         _doorStyles[row.Style] = new DungeonDoorStyle(row.DoorTemplate, row.ExitTemplate, open, locked);
                 }
 
@@ -256,6 +349,9 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
             DungeonLayoutPlan? plan = parameters.LayoutPlan;
             if (parameters.GeneratorVersion != CurrentVersion || _generator == null || plan?.IsValid != true
                 || parameters.IsTeam != plan.BossFloor) return false;
+            AuthoredDungeonSpec? authored = null;
+            if (parameters.AuthoredHash != null && !_authored.TryGetValue(parameters.AuthoredHash, out authored))
+                _logger.Warn("Authored dungeon " + parameters.AuthoredHash + " is no longer in " + AuthoredFileName + "; using the default population");
             try
             {
                 var result = _generator.Generate(new AORebirth.DungeonGenerator.DungeonGenerationRequest
@@ -271,7 +367,8 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     new Vector3(result.Spawn.X, result.Spawn.Y, result.Spawn.Z), parameters.Seed, doors)
                 {
                     FloorTransitions = result.Transitions, BossRoomIndex = result.BossRoomIndex,
-                    Population = _policy?.Population ?? new DungeonPopulationPolicy()
+                    Population = authored?.Population ?? _policy?.Population ?? new DungeonPopulationPolicy(),
+                    AuthoredBossHash = authored?.BossNpcHash, AuthoredBossLevel = authored?.BossLevel ?? 0
                 };
                 return true;
             }

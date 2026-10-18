@@ -265,6 +265,24 @@ namespace AORebirth.Database.Domain.Quests
         }
 
         /// <summary>
+        /// Stores an NPC-given (authored) dungeon quest with no terminal offer, in one transaction: the generated quest,
+        /// the owner's quest row and the mission key with its dungeon link.
+        /// </summary>
+        public bool TryAcceptAuthoredQuest(GeneratedQuestRow quest, CharacterQuestRow characterRow, QuestDungeonKeyItemRow key)
+        {
+            if (quest == null) throw new ArgumentNullException(nameof(quest));
+            if (characterRow == null) throw new ArgumentNullException(nameof(characterRow));
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            return Transaction((c, t) =>
+            {
+                InsertGenerated(c, t, quest);
+                InsertCharacterQuest(c, t, characterRow);
+                InsertKey(c, t, key, quest.QuestId);
+                return true;
+            });
+        }
+
+        /// <summary>
         /// Adds a copy of <paramref name="sourceKeyInstanceId"/> for the same quest: only while that key is still
         /// linked, its quest is unexpired and the quest has fewer than <paramref name="maxKeys"/> keys. The source
         /// link and the quest's key count are locked for the check. Returns the quest id, or null when refused.

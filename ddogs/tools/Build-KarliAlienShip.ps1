@@ -11,7 +11,7 @@ $u = [Text.UTF8Encoding]::new($false)
 $gd = [IO.Path]::GetFullPath($GameData)
 $karliPos = @(45.4, 0.4, 41.5)            # Randy (in game): inside the crashed ship 8009, near Kalari's spot
 $entryPos = @(3790.0, 0.6, 270.0)          # guessed: crash-site entry hatch on 6553 (Karli's old spot)
-$shipIn  = @(40.0, 0.5, 44.0)              # guessed landing inside 8009
+$shipIn  = @(38.0, 0.5, 28.0)              # landing just inside the south door of 8009 (2.4 m clear, ColProbe); 2026-10-18 moved from 40,44 so the arrival is clear
 $shipOut = @(3790.0, 0.6, 262.0)           # beside the entry hatch
 # --- templates
 $npath = Join-Path $gd 'NpcTemplates.json'
@@ -20,8 +20,7 @@ function Clone($o) { $o | ConvertTo-Json -Depth 8 | ConvertFrom-Json }
 $gen = Clone ($nt.CRDY.Templates | Sort-Object Level | Select-Object -Last 1)
 $gen.Name = 'Alien General'; $gen.Level = 14; $gen.Stats.'54' = 14; $gen.Stats.'359' = 247742; $gen.Stats.'360' = 75
 $gen.Stats.'1' = [int]$gen.Stats.'1' * 3; $gen.Stats.'27' = $gen.Stats.'1'
-# exit hatch spawns when the General dies and despawns after 5 min (DespawnSeconds), so the ship resets with the General's 300 s respawn
-$gen | Add-Member -Force NoteProperty BossTriggers @([pscustomobject]@{ On = 'Death'; Pct = 0; Actions = @([pscustomobject]@{ Type = 'SpawnAdds'; Hash = 'SHXT'; Count = 1; Radius = 3; Level = 1; DespawnSeconds = 300 }) })
+# 2026-10-18: the General lives in the generated ship interior (GameData/AuthoredDungeons.json ZXK1); no death trigger, the ship hatch is a fixed spawn by the south door
 $gen | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = 'CRDY'; Source = 'Name real (AO-Universe Arete #20 "Alien General", level ?). Mesh 247742 "alien boss detached" = Khaz battle-spider without rider, matches Randy PRK screenshot (big mech spider, cyan lights). Scale 75, level 14, 3x HP guessed' })
 $nt | Add-Member -Force NoteProperty ALGN ([pscustomobject]@{ Templates = @($gen) })
 $zk = Clone ($nt.ZIXI.Templates | Sort-Object Level | Select-Object -Last 1)
@@ -108,16 +107,15 @@ $s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
 # 2026-10-18: the ship's collision (Surfaces.dat) is a closed hull x 25.96-53.95, z 24.65-55.66 with the walkable floor about x 29-51, z 28-52.
 # The old spots put ACFJ (54,52) and KSAU (46,54) inside the hull wall and eight more outside it; every spot below is open floor with
 # at least 1.9 m clearance to any wall (ColProbe over 8009 collision). Landing (40,44) and Karli (45.4,41.5) are left clear.
-$adds = @(
-  @('ZIXI',10,48,0.5,38), @('ZIXI',11,48,0.5,42), @('ACFJ',11,32,0.5,48), @('ACFJ',13,32,0.5,38),
-  @('CRDY',12,30,0.5,50), @('CRDY',13,50,0.5,32), @('ALGN',14,38,0.5,28), @('ZIXK',12,40,0.5,28),
-  @('KSAU',11,40,0.5,52), @('KGRU',12,42,0.5,36), @('KCIU',13,48,0.5,30), @('KGXH',12,32,0.5,42)
-)
+# 2026-10-18 (Randy): 8009 is only the entrance room: Karli, the native YZWI and one Zix by the back (north) door, 20+ m from the
+# landing; the crew, the General and the mission Zix are in the generated interior behind the 'Crashed Alien Ship' door
+# (Karli gives it: {givedungeon ZXK1}, GameData/AuthoredDungeons.json). SHXT is the way back out to 6553, by the south door.
+$adds = @( @('ZIXI',10,32,0.5,48), @('SHXT',1,36,0.5,28) )
 # floor: 8009 heightmap is flat 0; native spawn YZWI sits at y=0.498, so 0.5 is the ship floor
 $s.spawns = @($s.spawns | Where-Object { $_.hash -ne 0 -or $_.hashText -notin (@('ZIXI','ACFJ','CRDY') + $ourKeys) })
 foreach ($a in $adds) {
   $s.spawns += [pscustomobject]@{ districtIndex=0; hash=0; hashText=$a[0]; manifestHash=0; minLevel=$a[1]; maxLevel=$a[1]; respawnChance=100; flags=1
-    respawnTime= $(if ($a[0] -eq 'ZIXK') { 60 } else { 300 }); version7Extra=0; hasOptionalFlagBlock=$true; nativeFlags=0; moreFlags=0; assistanceRadius=0
+    respawnTime= $(if ($a[0] -eq 'SHXT') { 30 } else { 600 }); version7Extra=0; hasOptionalFlagBlock=$true; nativeFlags=0; moreFlags=0; assistanceRadius=0
     unknownOptionalU8=0; angle=0; angleW=1; position=@([double]$a[2],[double]$a[3],[double]$a[4]); radius=1; additionalPoints=@(); extensions=$null }
 }
 # YZWI (native L15 'To Be Determined' at 48.97,49.25) is Specialist - Cha'Heru L13 from Build-AreteAliens.ps1 (AO-Universe: ship aliens L11-13).
@@ -134,7 +132,7 @@ $karli = [ordered]@{
     what = [ordered]@{ Text = 'What are you doing?'; Goto = 'spy' }
     fight = [ordered]@{ Text = 'I want to fight aliens too!'; If = @('!HasAnyQuest FBUD','!HasCompletedQuest FBUD'); Goto = 'friends' }
     nofriends = [ordered]@{ Text = "But, I don't have any friends..."; Goto = 'give_can' }
-    ready = [ordered]@{ Text = 'We are ready to help you out.'; If = @('!HasQuest ZXK1'); Goto = 'team' }
+    ready = [ordered]@{ Text = 'We are ready to help you out.'; Goto = 'team' }
     used = [ordered]@{ Text = 'I found a teammate and used the can on them.'; Goto = 'fb_done' }
     notyet = [ordered]@{ Text = 'Not yet.'; Goto = 'bye' }
     nothing = [ordered]@{ Text = 'Never mind.'; Goto = 'bye' }
@@ -146,13 +144,13 @@ $karli = [ordered]@{
     give_can = [ordered]@{ Text = @('You know we have a lookup system to find people with similar interests here on Rubi-Ka. Just open your team search interface. Or perhaps just look for someone around you that you can start a team with.', '{spawn FBCN 1}', '{givequest FBUD}', '{delay 1}Here, take this Friendly Buff Nano can and see if you can find a friend to use it on.'); Replies = @('nothing') }
     fb_back = [ordered]@{ Text = 'Did you find a friend for that Friendly Buff can?'; Replies = @('notyet') }
     fb_done = [ordered]@{ Text = @('{completequest FBUD}', 'See? Rubi-Ka is friendlier with a team. Take these memory chips.'); Replies = @('nothing') }
-    team = [ordered]@{ Text = @('{givequest ZXK1}', 'The Zix is in the Alien General''s room, deeper in. A hatch opens when the General falls. Try not to blow my cover.'); Replies = @('nothing') }
+    team = [ordered]@{ Text = @('{givedungeon ZXK1}', 'The Zix hides in the Alien General''s room, deep inside the ship. Take this key and go through the Crashed Alien Ship door at the back of this room. Try not to blow my cover.'); Replies = @('nothing') }
     bye = [ordered]@{ Text = 'Keep your head down.{close}' }
   }
 }
 [IO.File]::WriteAllText((Join-Path $kd 'KarliCappelleri.json'), ($karli | ConvertTo-Json -Depth 8) + "`n", $u)
 $hs = [ordered]@{
-  Notes = 'Crashed alien ship exit (8009), spawned by the Alien General death trigger for 5 min. Guessed: no client door; talk-to teleport back beside the entry hatch. Generated by ddogs/tools/Build-KarliAlienShip.ps1.'
+  Notes = 'Crashed alien ship exit (8009), a fixed spawn by the south door (the client exit door there has no destination). Guessed: talk-to teleport back beside the entry hatch. Generated by ddogs/tools/Build-KarliAlienShip.ps1.'
   Npcs = @('SHXT')
   Openers = @( [ordered]@{ Say = 'hello' } )
   Replies = [ordered]@{ out = [ordered]@{ Text = 'Leave the ship.'; Goto = 'out' }; stay = [ordered]@{ Text = 'Stay.'; Goto = 'stay' } }
