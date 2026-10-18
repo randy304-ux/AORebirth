@@ -459,3 +459,10 @@ Still open: store/daily pages (8098 serves /, /store, /daily on LAN and public; 
 - Verified: patch self-tests pass; hook installed against the real Gamecode.dll in a test process (suit -> allowed without running the check, other item -> original check ran through the trampoline); UI seed tests ALL PASS on a fake Prefs tree; staged zips contain no Funcom/client files.
 - Untested in game: new-character seeding timing (does the client create CharN before reading prefs?), the hook in the live client, wearing armor after the suit (the other direction may have its own check).
 - Staged at I:\AO\cache\temp\staged-2026.10.18-0107 (stage-only script tools-temp\stage-launcher.ps1). Publish = tools-temp\publish-launcher.ps1 after Randy approves. Old version.dll backups: I:\AO\cache\temp\client-patch-backup-20261018-0110.
+
+## 2026-10-18 01:30 EDT - launcher 2026.10.18-0107 PUBLISHED (Randy approved)
+- Published the staged files byte-for-byte (tools-temp\publish-staged.ps1, same targets as publish-launcher.ps1; re-running publish-launcher would re-zip and change the hashes from what was staged/tested).
+- Targets: H:\amp-dashboard\public\downloads\ao\{DungeonDogs-AO-Launcher-2026.10.18-0107.zip, DungeonDogs-AO-Launcher.zip, DungeonDogs-AO-Patch.zip, version.json}; I:\AO\dist\{DungeonDogsLauncher.zip, DungeonDogs-AO-Patch.zip, DungeonDogsLauncher\}.
+- Public check (https://dungeondogs.org/downloads/ao/): version.json = 2026.10.18-0107; launcher zip sha256 ffe87a39...c89f; patch zip 02c82d6d...b81f; version.dll inside patch b8ed24c2...7d3f. All match the staged files.
+- Rollback: I:\AO\cache\temp\rollback-2026.10.17-1935 (public-downloads-ao\ + dist\). The versioned 1935 zip is still in downloads\ao.
+- No server restart. Not yet tested in game.
