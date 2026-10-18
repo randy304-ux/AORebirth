@@ -14198,7 +14198,7 @@
                                                      "64":  0,
                                                      "61":  100
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}]
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}]
                                    },
                                    {
                                        "Name":  "Scout - Jaax\u0027Sinuh",
@@ -14248,7 +14248,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}]
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}]
                                    }
                                ]
              },
@@ -16320,7 +16320,7 @@
                                                      "64":  0,
                                                      "61":  100
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}]
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}]
                                    },
                                    {
                                        "Name":  "Specialist - Cha\u0027Heru",
@@ -16370,7 +16370,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}]
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}]
                                    }
                                ]
              },
@@ -69154,9 +69154,9 @@
                                                      "673":  31,
                                                      "1003":  0,
                                                      "64":  0,
-                                                     "61":  130
+                                                     "61":  500
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":50,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":15,"LevelMod":20}],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":50,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":15,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":60,"LevelMod":20},{"Hash":"KZVB","Repeats":1,"Chance":25,"LevelMod":20},{"Hash":"KZLV","Repeats":1,"Chance":5,"LevelMod":20}],
                                        "BossTriggers":  [
                                                             {
                                                                 "On":  "Death",
@@ -69311,7 +69311,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -69371,7 +69371,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -69431,7 +69431,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -69491,7 +69491,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -102267,7 +102267,7 @@
                                                      "1":  250,
                                                      "27":  250
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -102327,7 +102327,7 @@
                                                      "1":  282,
                                                      "27":  282
                                                  },
-                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -102551,7 +102551,7 @@
                                         "64":  0,
                                         "61":  130
                                     },
-                          "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
+                          "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20},{"Hash":"KZBM","Repeats":1,"Chance":10,"LevelMod":20}],
                           "ContentProvenance":  {
                                                     "Guessed":  true,
                                                     "Confirmed":  false,

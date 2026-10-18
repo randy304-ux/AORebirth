@@ -21,13 +21,17 @@ $typed = [ordered]@{ KT01 = 254472; KT02 = 254479; KT03 = 254493; KT04 = 254500;
   KT09 = 254549; KT10 = 254556; KT11 = 254570; KT12 = 254584; KT13 = 254598; KT14 = 254605; KT15 = 254619; KT16 = 254626; KT17 = 254640
   KT18 = 254654; KT19 = 254661; KT20 = 254675; KT21 = 254689; KT22 = 254703; KT23 = 254717; KT24 = 254731; KT25 = 254745; KT26 = 254759
   KT27 = 254766; KT28 = 254780; KT29 = 288665 }
-$mine = '^\s*"(KZWP|KZTW|KZ\d\d|KT\d\d)":'
+# Alien tradeskill drops (wiki.aodb.us Alien Loot; AO forum: Generals drop Kyr'Ozch Viralbots and, rarely, Lead Viralbots). QL1/QL300 pairs from items.dat.
+$pairs = [ordered]@{ KZBM = @(247102, 247103); KZVB = @(247113, 247114); KL01 = @(247136, 247137); KL02 = @(247138, 247139); KL03 = @(247140, 247141); KL04 = @(247142, 247143); KL05 = @(247144, 247145); KL06 = @(247146, 247147) }
+$mine = '^\s*"(KZWP|KZTW|KZ\d\d|KT\d\d|KZBM|KZVB|KZLV|KL\d\d)":'
 $il = [IO.File]::ReadAllLines($ipath, $u) | Where-Object { $_ -notmatch $mine }
 if ($il[0].Trim() -ne '{') { throw 'ItemTemplates.json: unexpected first line' }
 $new = New-Object System.Collections.Generic.List[string]
 foreach ($set in @($untyped, $typed)) {
   foreach ($k in $set.Keys) { $b = $set[$k]; $new.Add(('    "{0}": {{"Templates": [{1}]}},' -f $k, ((0..6 | ForEach-Object { $b + $_ }) -join ','))) }
 }
+foreach ($k in $pairs.Keys) { $new.Add(('    "{0}": {{"Templates": [{1},{2}]}},' -f $k, $pairs[$k][0], $pairs[$k][1])) }
+$new.Add('    "KZLV": {"Children": ["KL01","KL02","KL03","KL04","KL05","KL06"]},')
 $new.Add(('    "KZWP": {{"Children": [{0}]}},' -f (($untyped.Keys | ForEach-Object { '"' + $_ + '"' }) -join ',')))
 $new.Add(('    "KZTW": {{"Children": [{0}]}},' -f (($typed.Keys | ForEach-Object { '"' + $_ + '"' }) -join ',')))
 [IO.File]::WriteAllText($ipath, ([string[]](@($il[0]) + $new + $il[1..($il.Count - 1)]) -join "`n") + "`n", $u)
@@ -86,6 +90,8 @@ foreach ($key in $aliens) {
     if ($body -match '"204"\s*:\s*-?\d+') { return $m.Groups[1].Value + $m.Groups[2].Value + ($body -replace '"204"(\s*):(\s*)-?\d+', '"204"$1:${2}1') + $m.Groups[4].Value }
     $m.Groups[1].Value + $m.Groups[2].Value + '"204":  1,' + $m.Groups[2].Value + $body + $m.Groups[4].Value
   })
+  # General's corpse credits (Cash 61, paid to the first opener): 500 instead of the crew's 130. Guessed.
+  if ($key -eq 'ALGN') { $text = [regex]::Replace($text, '("61"\s*:\s*)\d+', '${1}500') }
   # loot: drop our rows, add the weapon rows
   $out = ''; $from = 0
   while ($true) {
@@ -95,11 +101,14 @@ foreach ($key in $aliens) {
     for ($i = $br; $i -lt $text.Length; $i++) { if ($text[$i] -eq '[') { $depth++ } elseif ($text[$i] -eq ']') { $depth--; if ($depth -eq 0) { $stop = $i; break } } }
     if ($stop -lt 0) { throw "unclosed loot on $key" }
     $parsed = ConvertFrom-Json -InputObject $text.Substring($br, $stop - $br + 1)
-    $rows = @(@($parsed) | ForEach-Object { $_ } | Where-Object { $_.Hash -notin 'KZWP','KZTW' })
+    $rows = @(@($parsed) | ForEach-Object { $_ } | Where-Object { $_.Hash -notin 'KZWP','KZTW','KZBM','KZVB','KZLV' })
     if ($noWeapons -notcontains $key) {
       $ut = $(if ($key -eq 'ALGN') { 50 } else { 12 }); $ty = $(if ($key -eq 'ALGN') { 15 } else { 2 })
       $rows += [pscustomobject]@{ Hash = 'KZWP'; Repeats = 1; Chance = $ut; LevelMod = 20 }
       $rows += [pscustomobject]@{ Hash = 'KZTW'; Repeats = 1; Chance = $ty; LevelMod = 20 }
+      # Solid Clump of Kyr'Ozch Bio-Material: crew 10%, General 60%. General only: Kyr'Ozch Viralbots 25%, one Lead Viralbots 5% (rare). Guessed rates.
+      $rows += [pscustomobject]@{ Hash = 'KZBM'; Repeats = 1; Chance = $(if ($key -eq 'ALGN') { 60 } else { 10 }); LevelMod = 20 }
+      if ($key -eq 'ALGN') { $rows += [pscustomobject]@{ Hash = 'KZVB'; Repeats = 1; Chance = 25; LevelMod = 20 }; $rows += [pscustomobject]@{ Hash = 'KZLV'; Repeats = 1; Chance = 5; LevelMod = 20 } }
     }
     $lootText = $(if ($noWeapons -contains $key -and @($parsed).Count -eq $rows.Count) { $text.Substring($at, $stop - $at + 1) } else { Loot-Text $rows })
     $out += $text.Substring($from, $at - $from) + $lootText

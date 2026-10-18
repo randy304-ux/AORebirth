@@ -121,7 +121,8 @@ foreach ($a in $adds) {
     unknownOptionalU8=0; angle=0; angleW=1; position=@([double]$a[2],[double]$a[3],[double]$a[4]); radius=1; additionalPoints=@(); extensions=$null }
 }
 # YZWI (native L15 'To Be Determined' at 48.97,49.25) is Specialist - Cha'Heru L13 from Build-AreteAliens.ps1 (AO-Universe: ship aliens L11-13).
-foreach ($x in @($s.spawns | Where-Object { $_.hashText -eq 'YZWI' })) { $x.minLevel = 13; $x.maxLevel = 13 }
+# Its native respawn is 30 s; 600 s for a small server (Randy 2026-10-18 17:14: the ship 'keeps respawning').
+foreach ($x in @($s.spawns | Where-Object { $_.hashText -eq 'YZWI' })) { $x.minLevel = 13; $x.maxLevel = 13; $x.respawnTime = 600 }
 [IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)
 # --- dialog
 $kd = Join-Path $gd 'Knubot'
