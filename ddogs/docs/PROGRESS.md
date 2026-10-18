@@ -545,3 +545,9 @@ Launcher commit 7cec228 (DeltaUpdate.cs, SelfUpdate.cs, Models.cs). version.json
 - ICC Peacekeeper (IPPC, blue armour): unchanged. No worn-item/texture data in captures and no ICC Peacekeeper armour item found; needs a capture.
 - Mail: Nazzgrom sold his mailbox 297053 to the Omni-Trans vendor (3000010) at 5:41 PM ET; re-granted slot 77 (instance 220028). No mailbox use or Mail Terminal interaction was ever logged.
 - Boot: quests=169, Knubot rejected=0, 0 errors, authored dungeons=1 (ZXK1), door styles=5, 8009 spawns=3, StorePages 6/6. All appearance and quest changes are untested in game.
+
+## 2026-10-18 18:56 ET: Milne escort use path, mailbox carrier, Mail Terminal talk (restart from 6c811b9a, clean worktree)
+- Milne/OTAF Official Notice: the client sends a plain Use (one target: the inventory slot) with the Private selected; the server ran the Notice's OnUse, whose leaves need requirement operator 104 (target template hash 0x4F495552 "OIUR"), unimplemented, so "OnUse spells returned false" (Doobert 18:35 ET). The escort recruit only ran for two-target uses. Now a plain Use of an EscortQuests item recruits the player's selected NPC (QuestEscortService.TryRecruitSelected).
+- Mailbox: Send Mail 297053 was in the DB and in FullCharacter (slot 77) but never drawn by the client: it is the mail window's internal action template. The personal mailbox is now Letter from Penelope 252503 (Carry+Use, NoDrop, Unique), opened by GenericCmdMessageHandler; TradeRules treats it as NoDrop always (no trade or vendor sell); start packages (14) and the two inventory rows (Nazzgrom 77, Doobert 69) converted.
+- Mail Terminal: no script, so the server never sent HasKnubotData and the client treated a click as a trade; it now gets HasKnubotData and opens through KnubotService's mail talk-open path.
+- Boot: quests=169, Knubot rejected=0, 0 errors, ZXK1 + 5 door styles, StorePages 6/6. All three untested in game.
