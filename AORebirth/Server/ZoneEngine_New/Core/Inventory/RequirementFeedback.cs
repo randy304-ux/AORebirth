@@ -74,6 +74,9 @@ namespace ZoneEngine_New.Core.Inventory
                 Operator.IsPetOverEquipped => "needs an over-equipped pet",
                 Operator.MustAlliedCombat => "an ally must be in combat",
                 Operator.MustNotAlliedCombat => "no ally may be in combat",
+                (Operator)MissionRequirements.HasActiveMission => "needs the mission " + (MissionRequirements.HashText(requirement.Value) ?? line) + " active",
+                (Operator)MissionRequirements.InTeamWithTarget => "must be in a team with the target",
+                (Operator)MissionRequirements.HasFreeNcuFor => "needs free NCU for " + Named(requirement.Value),
                 _ => null
             };
             if (state != null)

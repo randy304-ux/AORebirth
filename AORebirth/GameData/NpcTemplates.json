@@ -14012,6 +14012,7 @@
                                        "Name":  "Alien Spider - Zix",
                                        "Level":  3,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  34,
                                                      "4":  6,
@@ -14080,6 +14081,7 @@
                                        "Name":  "Alien Spider - Zix",
                                        "Level":  4,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  37,
                                                      "4":  6,
@@ -14152,6 +14154,7 @@
                                        "Name":  "Scout - Jaax\u0027Sinuh",
                                        "Level":  10,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  280,
                                                      "4":  6,
@@ -14195,31 +14198,13 @@
                                                      "64":  0,
                                                      "61":  100
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ]
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}]
                                    },
                                    {
                                        "Name":  "Scout - Jaax\u0027Sinuh",
                                        "Level":  13,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  367,
                                                      "4":  6,
@@ -14263,26 +14248,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ]
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}]
                                    }
                                ]
              },
@@ -16310,6 +16276,7 @@
                                        "Name":  "Specialist - Cha\u0027Heru",
                                        "Level":  10,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  770,
                                                      "4":  6,
@@ -16353,31 +16320,13 @@
                                                      "64":  0,
                                                      "61":  100
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ]
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}]
                                    },
                                    {
                                        "Name":  "Specialist - Cha\u0027Heru",
                                        "Level":  13,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  1008,
                                                      "4":  6,
@@ -16421,26 +16370,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ]
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}]
                                    }
                                ]
              },
@@ -69182,6 +69112,7 @@
                                        "Name":  "Alien General",
                                        "Level":  14,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  3024,
                                                      "4":  6,
@@ -69225,26 +69156,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":50,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":15,"LevelMod":20}],
                                        "BossTriggers":  [
                                                             {
                                                                 "On":  "Death",
@@ -69276,6 +69188,7 @@
                                        "Name":  "Alien Spider - Zix",
                                        "Level":  12,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  37,
                                                      "4":  6,
@@ -69354,6 +69267,7 @@
                                        "Name":  "Scout - Ankari\u0027Sinuh",
                                        "Level":  11,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  367,
                                                      "4":  6,
@@ -69397,26 +69311,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -69432,6 +69327,7 @@
                                        "Name":  "Guard - Rimah\u0027Uri",
                                        "Level":  12,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  1008,
                                                      "4":  6,
@@ -69475,26 +69371,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -69510,6 +69387,7 @@
                                        "Name":  "Commando - Ilari\u0027Uri",
                                        "Level":  13,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  1008,
                                                      "4":  6,
@@ -69553,26 +69431,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -69588,6 +69447,7 @@
                                        "Name":  "Guard - Xoch\u0027Heru",
                                        "Level":  12,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "1":  1008,
                                                      "4":  6,
@@ -69631,26 +69491,7 @@
                                                      "64":  0,
                                                      "61":  130
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -102303,6 +102144,7 @@
                                        "Name":  "Alien Spider - Zix",
                                        "Level":  10,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "4":  6,
                                                      "18":  0,
@@ -102381,6 +102223,7 @@
                                        "Name":  "Specialist - Cha\u0027Heru",
                                        "Level":  10,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "4":  6,
                                                      "18":  0,
@@ -102424,26 +102267,7 @@
                                                      "1":  250,
                                                      "27":  250
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -102459,6 +102283,7 @@
                                        "Name":  "Scout - Jaax\u0027Sinuh",
                                        "Level":  10,
                                        "Stats":  {
+                                                     "204":  1,
                                                      "0":  268964353,
                                                      "4":  6,
                                                      "18":  0,
@@ -102502,26 +102327,7 @@
                                                      "1":  282,
                                                      "27":  282
                                                  },
-                                       "LootTable":  [
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "CMHK",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  20
-                                                         },
-                                                         {
-                                                             "Hash":  "OFAB",
-                                                             "Repeats":  1,
-                                                             "Chance":  1,
-                                                             "LevelMod":  0
-                                                         }
-                                                     ],
+                                       "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
@@ -102694,5 +102500,65 @@
                                                              }
                                    }
                                ]
-             }
+             },
+    "YZWI": {
+    "Templates":  [
+                      {
+                          "Name":  "Specialist - Cha\u0027Heru",
+                          "Level":  13,
+                          "Stats":  {
+                                        "204":  1,
+                                        "0":  268964353,
+                                        "1":  1008,
+                                        "4":  6,
+                                        "18":  0,
+                                        "21":  0,
+                                        "27":  1008,
+                                        "33":  3,
+                                        "37":  1,
+                                        "47":  1,
+                                        "54":  13,
+                                        "59":  4,
+                                        "60":  15,
+                                        "89":  41,
+                                        "99":  503,
+                                        "132":  5,
+                                        "156":  5,
+                                        "173":  3,
+                                        "174":  3,
+                                        "214":  1,
+                                        "274":  0,
+                                        "284":  0,
+                                        "285":  20,
+                                        "286":  6,
+                                        "292":  0,
+                                        "339":  91,
+                                        "342":  600,
+                                        "343":  0,
+                                        "359":  251772,
+                                        "360":  154,
+                                        "368":  15,
+                                        "387":  503,
+                                        "389":  0,
+                                        "417":  503,
+                                        "421":  3,
+                                        "436":  91,
+                                        "455":  220,
+                                        "466":  15,
+                                        "660":  0,
+                                        "673":  31,
+                                        "1003":  0,
+                                        "64":  0,
+                                        "61":  130
+                                    },
+                          "LootTable": [{"Hash":"CMTR","Repeats":1,"Chance":40,"LevelMod":20},{"Hash":"CMHK","Repeats":1,"Chance":8,"LevelMod":20},{"Hash":"OFAB","Repeats":1,"Chance":1,"LevelMod":0},{"Hash":"KZWP","Repeats":1,"Chance":12,"LevelMod":20},{"Hash":"KZTW","Repeats":1,"Chance":2,"LevelMod":20}],
+                          "ContentProvenance":  {
+                                                    "Guessed":  true,
+                                                    "Confirmed":  false,
+                                                    "Donor":  "CRDY",
+                                                    "Source":  "Pink \"To Be Determined\" YZWI inside the crashed ship 8009 (48.97, 49.25). AO-Universe Arete #20 lists ship aliens Zix, Scout Jaax\u0027Sinuh, Specialist Cha\u0027Heru (L11-13); mapped to Cha\u0027Heru L13: guessed"
+                                                }
+                      }
+                  ]
+}
 }

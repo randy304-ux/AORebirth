@@ -70,8 +70,9 @@ $q = @(); foreach ($x in (ConvertFrom-Json -InputObject ([IO.File]::ReadAllText(
 $used = $q | ForEach-Object { $_.MissionBit } | Where-Object { $_ -ne $null }
 if ($used -contains 663 -or $used -contains 664) { throw 'bits 663/664 taken' }
 $ncu = [pscustomobject]@{ Id = 36778; HighId = 36780; Name = '8 - 15 NCU Memory'; Quality = 30 }
-$q += [pscustomobject]@{ Hash='FBUD'; Name='Help From a Friend'; QasInstance=920128; Scope='Solo'; Action='TargetNpc'
-  Summary='Use the Nano Can: Friendly Buff on a teammate, then tell Karli Cappelleri'
+# SolveHash W4XY: the can's SolveQuest (items.dat 301250) names mission W4XY; using it on a teammate completes FBUD.
+$q += [pscustomobject]@{ Hash='FBUD'; SolveHash='W4XY'; Name='Help From a Friend'; QasInstance=920128; Scope='Solo'; Action='TargetNpc'
+  Summary='Team up and use the Nano Can: Friendly Buff on your teammate'
   Objective=[pscustomobject]@{ Count=$null; Npc='FBTM'; SpecItem=$null; WorldItem=$null }; Flags='None'; MissionBit=663; NextStep=$null
   Reward=[pscustomobject]@{ Hash='RFBD'; Credits=2520; Xp=1386; Records=@(,@($ncu,$ncu,$ncu)) } }
 $q += [pscustomobject]@{ Hash='ZXK1'; Name='The Alien Ship'; QasInstance=920129; Scope='Team'; Action='KillOne'
@@ -104,10 +105,13 @@ $karliNpc.Provenance = 'ddogs/tools/Build-KarliAlienShip.ps1 (spot from Randy; l
 # --- interior spawns (Playfields is gitignored; rerun this script after a data re-extract)
 $spath = Join-Path $gd 'Playfields\8009\Spawns.json'
 $s = [IO.File]::ReadAllText($spath, $u) | ConvertFrom-Json
+# 2026-10-18: the ship's collision (Surfaces.dat) is a closed hull x 25.96-53.95, z 24.65-55.66 with the walkable floor about x 29-51, z 28-52.
+# The old spots put ACFJ (54,52) and KSAU (46,54) inside the hull wall and eight more outside it; every spot below is open floor with
+# at least 1.9 m clearance to any wall (ColProbe over 8009 collision). Landing (40,44) and Karli (45.4,41.5) are left clear.
 $adds = @(
-  @('ZIXI',10,50,0.5,40), @('ZIXI',11,56,0.5,44), @('ACFJ',11,54,0.5,52), @('ACFJ',13,58,0.5,50),
-  @('CRDY',12,60,0.5,56), @('CRDY',13,52,0.5,58), @('ALGN',14,62,0.5,62), @('ZIXK',12,60,0.5,64),
-  @('KSAU',11,46,0.5,54), @('KGRU',12,64,0.5,48), @('KCIU',13,66,0.5,58), @('KGXH',12,56,0.5,62)
+  @('ZIXI',10,48,0.5,38), @('ZIXI',11,48,0.5,42), @('ACFJ',11,32,0.5,48), @('ACFJ',13,32,0.5,38),
+  @('CRDY',12,30,0.5,50), @('CRDY',13,50,0.5,32), @('ALGN',14,38,0.5,28), @('ZIXK',12,40,0.5,28),
+  @('KSAU',11,40,0.5,52), @('KGRU',12,42,0.5,36), @('KCIU',13,48,0.5,30), @('KGXH',12,32,0.5,42)
 )
 # floor: 8009 heightmap is flat 0; native spawn YZWI sits at y=0.498, so 0.5 is the ship floor
 $s.spawns = @($s.spawns | Where-Object { $_.hash -ne 0 -or $_.hashText -notin (@('ZIXI','ACFJ','CRDY') + $ourKeys) })
@@ -116,6 +120,8 @@ foreach ($a in $adds) {
     respawnTime= $(if ($a[0] -eq 'ZIXK') { 60 } else { 300 }); version7Extra=0; hasOptionalFlagBlock=$true; nativeFlags=0; moreFlags=0; assistanceRadius=0
     unknownOptionalU8=0; angle=0; angleW=1; position=@([double]$a[2],[double]$a[3],[double]$a[4]); radius=1; additionalPoints=@(); extensions=$null }
 }
+# YZWI (native L15 'To Be Determined' at 48.97,49.25) is Specialist - Cha'Heru L13 from Build-AreteAliens.ps1 (AO-Universe: ship aliens L11-13).
+foreach ($x in @($s.spawns | Where-Object { $_.hashText -eq 'YZWI' })) { $x.minLevel = 13; $x.maxLevel = 13 }
 [IO.File]::WriteAllText($spath, ($s | ConvertTo-Json -Depth 8) + "`n", $u)
 # --- dialog
 $kd = Join-Path $gd 'Knubot'
@@ -137,7 +143,7 @@ $karli = [ordered]@{
     spy = [ordered]@{ Text = "I'm an alien spy. I find and terminate aliens... Quietly!"; Replies = @('fight','ready','nothing') }
     friends = [ordered]@{ Text = 'I think you should find some friends to help you out for this one.'; Replies = @('nofriends') }
     give_can = [ordered]@{ Text = @('You know we have a lookup system to find people with similar interests here on Rubi-Ka. Just open your team search interface. Or perhaps just look for someone around you that you can start a team with.', '{spawn FBCN 1}', '{givequest FBUD}', '{delay 1}Here, take this Friendly Buff Nano can and see if you can find a friend to use it on.'); Replies = @('nothing') }
-    fb_back = [ordered]@{ Text = 'Did you find a friend for that Friendly Buff can?'; Replies = @('used','notyet') }
+    fb_back = [ordered]@{ Text = 'Did you find a friend for that Friendly Buff can?'; Replies = @('notyet') }
     fb_done = [ordered]@{ Text = @('{completequest FBUD}', 'See? Rubi-Ka is friendlier with a team. Take these memory chips.'); Replies = @('nothing') }
     team = [ordered]@{ Text = @('{givequest ZXK1}', 'The Zix is in the Alien General''s room, deeper in. A hatch opens when the General falls. Try not to blow my cover.'); Replies = @('nothing') }
     bye = [ordered]@{ Text = 'Keep your head down.{close}' }

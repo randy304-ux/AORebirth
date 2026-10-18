@@ -54,6 +54,8 @@ namespace ZoneEngine_New.Core.Inventory
             bool addDamage = !isTick;
             switch ((FunctionType)spell.FunctionType)
             {
+                case FunctionType.SolveQuest:
+                    return SolveQuest(ResolveApplyOn(target, source, spell), spell);
                 case SendMailFunction:
                     return target is Player mailPlayer && OpenMailbox(mailPlayer);
                 case FunctionType.OpenBank:
@@ -155,6 +157,26 @@ namespace ZoneEngine_New.Core.Inventory
                             target.Identity.Instance));
                     return false;
             }
+        }
+
+        /// <summary>
+        /// SolveQuest [mission hash] (Nano Can: Friendly Buff 301250 on its User: "W4XY"): completes that active quest
+        /// (Quests.json Hash or SolveHash) with its reward.
+        /// </summary>
+        static bool SolveQuest(Character subject, ItemSpell spell)
+        {
+            if (subject is not Player player || !spell.TryReadString(0, out string hash)
+                || player.Playfield?.GetService<Quests.QuestService>() is not Quests.QuestService quests)
+                return false;
+
+            Quests.PlayerQuest? quest = MissionRequirements.FindActive(player, hash);
+            if (quest == null)
+                return false;
+
+            bool done = quests.TryComplete(player, quest.QuestId, out string result);
+            LogUtil.Debug(DebugInfoDetail.Engine, string.Format(CultureInfo.InvariantCulture,
+                "SolveQuest {0} char={1} quest={2}: {3}", hash, player.Identity.Instance, quest.QuestId, result));
+            return done;
         }
 
         /// <summary>

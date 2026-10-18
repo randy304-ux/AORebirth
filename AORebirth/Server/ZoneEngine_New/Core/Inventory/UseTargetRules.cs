@@ -50,7 +50,23 @@ namespace ZoneEngine_New.Core.Inventory
             if (!IsHostileTargeted(can)
                 && template.Stats.TryGetValue(CharacterStat.SkillTimeOnSelectedTarget, out int selected) && selected == 1)
                 can |= CanFlags.ApplyOnFriendly;
+            // ApplyOnSelf with an OnTarget check group in ToUse (Nano Can: Friendly Buff 301250: target must have free NCU)
+            // is used on the selected character too; the client checks that group against its selection.
+            if (!IsHostileTargeted(can) && (can & CanFlags.ApplyOnSelf) != 0 && HasOnTargetUseCheck(template))
+                can |= CanFlags.ApplyOnFriendly;
             return can;
+        }
+
+        static bool HasOnTargetUseCheck(ItemTemplate template)
+        {
+            foreach (ItemAction action in template.Actions)
+            {
+                if (action.ActionType == (int)ActionType.ToUse
+                    && action.Requirements.Exists(requirement => (Operator)requirement.Operator == Operator.OnTarget))
+                    return true;
+            }
+
+            return false;
         }
 
         public static bool NeedsFightingTarget(CanFlags can) => (can & CanFlags.ApplyOnFightingTarget) != 0;

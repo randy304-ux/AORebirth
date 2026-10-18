@@ -905,6 +905,7 @@ namespace ZoneEngine_New.Core.Entities
                 return;
 
             int monsterLevel = Stats.GetOrOne(CharacterStat.Level);
+            IGameData gameData = playfield.GetRequiredService<IGameData>();
             DynelRegistry registry = playfield.GetRequiredService<DynelRegistry>();
             List<AwardShare> shares = _killRewards.Divide(AlienShareBasis, present, AwardCredit.Shared);
             for (int i = 0; i < shares.Count; i++)
@@ -919,7 +920,13 @@ namespace ZoneEngine_New.Core.Entities
                 for (int r = 0; r < recipients.Count; r++)
                 {
                     Character recipient = recipients[r];
-                    long solo = SoloAlienXp(recipient.Stats.GetOrOne(CharacterStat.Level), monsterLevel);
+                    int recipientLevel = recipient.Stats.GetOrOne(CharacterStat.Level);
+                    long solo = SoloAlienXp(recipientLevel, monsterLevel);
+                    // The formula reaches 0 for low-level aliens a few levels under the player (L15 on a L10 Zix:
+                    // 1315 * (1 - 5 * 2.1 / 10) < 0), though the client does not show them gray. Live: only gray
+                    // aliens give no or very little AXP, so a non-gray alien is worth at least the floor.
+                    if (!IsBelowKillRange(recipient, monsterLevel, gameData))
+                        solo = Math.Max(solo, MinNonGrayAlienXp(recipientLevel));
                     long amount = solo * share.Amount / AlienShareBasis / recipients.Count;
                     if (amount > 0)
                         recipient.AwardAlienXp((int)amount);
@@ -933,6 +940,9 @@ namespace ZoneEngine_New.Core.Entities
             long scaled = (long)amount * (100 + Stats.GetOrZero(CharacterStat.XPModifier)) / 100;
             return (int)Math.Clamp(scaled, 0, int.MaxValue);
         }
+
+        /// <summary>Least solo AXP from a non-gray alien: a fifth of an even-level kill, (1300 + PL) / 5. GUESSED floor.</summary>
+        internal static int MinNonGrayAlienXp(int playerLevel) => (1300 + Math.Max(1, playerLevel)) / 5;
 
         /// <summary>SoloAxp = (1300 + PL) * (1 + (ML - PL) * 2.1 / ML), floored at 0.</summary>
         internal static int SoloAlienXp(int playerLevel, int monsterLevel)
@@ -1747,8 +1757,13 @@ namespace ZoneEngine_New.Core.Entities
             int previousHealth = Math.Max(0, Stats.GetOrZero(CharacterStat.Health));
             int newHealth = Math.Max(0, previousHealth - damage);
             int hpRemoved = previousHealth - newHealth;
-            // A player's pet earns its owner the credit for the damage it does.
-            Character credited = attacker is NpcCharacter { PetOwner: Player petOwner } ? petOwner : attacker;
+            // A player's pet earns its owner the credit for the damage it does, also through a pet's own pets
+            // (a mercenary Metaphysicist's Anger Manifestation and Salvinous belong to the merc, the merc to the player).
+            Character credited = attacker;
+            for (int hop = 0; hop < 3 && credited is NpcCharacter { PetOwner: { } owner } && !ReferenceEquals(owner, credited); hop++)
+                credited = owner;
+            if (!credited.IsPlayer)
+                credited = attacker;
             if (hpRemoved > 0 && credited.IsPlayer && !ReferenceEquals(credited, this))
                 _killRewards.Record(credited.Identity, hpRemoved);
 
@@ -2106,8 +2121,26 @@ namespace ZoneEngine_New.Core.Entities
                 // Value = nano id among this character's uploaded nanos (a nano crystal's ToUse: HasNotFormula).
                 Operator.HasFormula => UploadedNanoIds.Contains(value),
                 Operator.HasNotFormula => !UploadedNanoIds.Contains(value),
+                (Operator)MissionRequirements.HasFreeNcuFor => HasRoomInNcuFor(value),
                 _ => null
             };
+        }
+
+        /// <summary>
+        /// Requirement 127 (Value = nano id): the nano would land here now (strain, stacking and free NCU, the same gate as
+        /// a cast). False when the nano is unknown or not a buff.
+        /// </summary>
+        bool HasRoomInNcuFor(int nanoId)
+        {
+            if (nanoId <= 0 || Playfield?.GetService<IItemBuilder>() is not IItemBuilder items)
+                return false;
+
+            ItemTemplate template = items.CreateTemplate(nanoId, nanoId, quality: 1);
+            if (template.Id != nanoId)
+                return false;
+
+            BuffApplyDecision decision = BuffApplyRules.Evaluate(NanoSpell.From(template), _buffs, BuffNcuCapacity, out _);
+            return decision is BuffApplyDecision.Apply or BuffApplyDecision.Replace;
         }
 
         /// <summary>NCU consumed by friendly buffs that use NCU; mirrored into CurrentNCU.</summary>

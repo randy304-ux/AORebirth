@@ -32,6 +32,12 @@ namespace ZoneEngine_New.Core.Quests
 
         public string Hash { get; set; } = string.Empty;
 
+        /// <summary>
+        /// The mission hash items.dat uses for this quest, when it differs from <see cref="Hash"/>: requirement 117
+        /// ("must have specific active mission") and the SolveQuest function (53229) name it (Help From a Friend: W4XY).
+        /// </summary>
+        public string? SolveHash { get; set; }
+
         public string Name { get; set; } = string.Empty;
 
         public int QasInstance { get; set; }

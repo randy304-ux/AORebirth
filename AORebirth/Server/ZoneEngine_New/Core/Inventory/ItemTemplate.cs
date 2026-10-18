@@ -638,6 +638,8 @@ namespace ZoneEngine_New.Core.Inventory
             return requirement => (Operator)requirement.Operator switch
             {
                 Operator.IsSameAs => ReferenceEquals(user, target),
+                (Operator)MissionRequirements.InTeamWithTarget => MissionRequirements.AreTeammates(user, target),
+                (Operator)MissionRequirements.HasActiveMission => MissionRequirements.HasActive(user, requirement.Value),
                 Operator.MustBeCastersPet => target is NpcCharacter { Pet: { } pet } && ReferenceEquals(pet.Owner, user),
                 _ => resolve?.Invoke(requirement)
             };

@@ -3615,11 +3615,12 @@
     },
     {
         "Hash":  "FBUD",
+        "SolveHash":  "W4XY",
         "Name":  "Help From a Friend",
         "QasInstance":  920128,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Use the Nano Can: Friendly Buff on a teammate, then tell Karli Cappelleri",
+        "Summary":  "Team up and use the Nano Can: Friendly Buff on your teammate",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "FBTM",
