@@ -39,11 +39,12 @@ $new = @(
   (MkQuest 'AMA2' 'Assemble an Implant 2/2' 920188 'Tradeskill: Stamina Cluster - Bright (Leg) into the Leg Implant: Agility, Shiny' @(113186, 113187) 'AMA3' $null $null),
   (MkQuest 'AMA3' 'Assemble an Implant 3/3' 920189 'Tradeskill: Max Health Cluster - Faded (Leg) into the Leg Implant: Agility, Shiny' @(113440, 113441) 'AMAR' $null $null),
   (MkQuest 'AMAR' 'Show Doctor Mason the implant' 920079 'Show Doctor Mason the Leg Implant: Agility, Shiny' $null $null 637 $implant),
-  (MkQuest 'AMIN' 'Install the Leg Implant' 920190 'Install the Leg Implant: Agility, Shiny at the Surgery Clinic, then talk to Doctor Mason' $null $null $null $chip)
+  (MkQuest 'AMIN' 'Install the Leg Implant' 920190 'Install the Leg Implant: Agility, Shiny at the Surgery Clinic, then talk to Doctor Mason' $null $null 717 $chip)
 )
 $qp = Join-Path $gd 'Quests.json'
 $hashes = $new | ForEach-Object Hash
 $q = @(); foreach ($x in (ConvertFrom-Json -InputObject ([IO.File]::ReadAllText($qp, $u)))) { if ($hashes -notcontains $x.Hash) { $q += $x } }
+if ($q | Where-Object { $_.MissionBit -eq 717 -and $hashes -notcontains $_.Hash }) { throw 'bit 717 taken' }
 foreach ($n in $new) { if ($q | Where-Object { $_.QasInstance -eq $n.QasInstance }) { throw "QasInstance $($n.QasInstance) taken" } }
 $q += $new
 [IO.File]::WriteAllText($qp, ((ConvertTo-Json -InputObject @($q) -Depth 8) -replace "`r`n", "`n") + "`n", $u)
