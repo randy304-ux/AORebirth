@@ -38,3 +38,5 @@ A neutral starter-island character uses the form: it sets Side to Omni (or Clan)
    - OIHO and CNAD (premium forms): look them up first (probably premium side items or boards); defer if unsure.
 2. Check that 53026 (set stat), 53030, 53033 (timed set) and 53057 are implemented, and that the side change persists and updates the client. If they aren't, the form will fail with the next "not implemented".
 3. Test as a neutral: Omni form gives Side=2 and board 99719; Clan form gives Side=1 and board 96358; the failure path destroys the form.
+## Status
+Fixed in d6db91a6 (2026-10-19): ItemTemplates.SideForms.json (OMAW, CLMR, OIHO = Omni-Tek Honor 296371-296378, CNAD = Clan Advancement 296363-296370, LLLO, LLLC). Faction (53189) now handled; GfxEffect and HeadText succeed. Built, not live, untested in game.
