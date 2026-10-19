@@ -60,7 +60,23 @@
                     "nothing":  {
                                     "Text":  "Nothing right now, thanks.",
                                     "Goto":  "nothing"
-                                }
+                                },
+                    "lost_mon":  {
+                                     "Text":  "I lost the SecTec Monitor.",
+                                     "If":  [
+                                                "HasAnyQuest AAX0,AAX1,AAX2",
+                                                "!has QMON"
+                                            ],
+                                     "Goto":  "regive_mon"
+                                 },
+                    "lost_rcp":  {
+                                     "Text":  "I lost the recording device.",
+                                     "If":  [
+                                                "HasAnyQuest AAX0,AAX1",
+                                                "!has QRCP"
+                                            ],
+                                     "Goto":  "regive_rcp"
+                                 }
                 },
     "Lines":  {
                   "offer_watch":  {
@@ -96,7 +112,9 @@
                   "busy_watch":  {
                                      "Text":  "Droid, house plant, Bill, then Kneebreaker Alfonzo.",
                                      "Replies":  [
-                                                     "bye"
+                                                     "bye",
+                                                     "lost_mon",
+                                                     "lost_rcp"
                                                  ]
                                  },
                   "later":  {
@@ -111,9 +129,11 @@
                   "bac_done":  {
                                    "Text":  [
                                                 "{completequest AFLR}",
-                                                "This is the one. Here is a Blank Info Chip. Hold onto it.",
+                                                "This is the one. Here is a Blank Info Chip. Hold onto it. And take this Rebuilt HC-12 SecTec Monitor and this RC-P Audio Recording Device.",
+                                                "{spawn QMON 1}",
+                                                "{spawn QRCP 1}",
                                                 "{givequest AAX0}",
-                                                "{delay 1}Next: the surveillance droid at 3563 by 823. Hack it, plant the recorder on the prized house plant in Desmond\u0027s office, take the monitor to Immigration Officer Bill, then deal with Kneebreaker Alfonzo."
+                                                "{delay 1}Next: the Surveillance Droid at 3563 by 823. Target it and use the monitor. Then plant the recorder on the prized house plant in the house at the end of that road, where Bodyguard Logan Fixx stands. Take the monitor to Immigration Officer Bill, then deal with Kneebreaker Alfonzo."
                                             ],
                                    "Replies":  [
                                                    "more",
@@ -131,7 +151,25 @@
                                                 "ask_watch",
                                                 "nothing"
                                             ]
-                            }
+                            },
+                  "regive_mon":  {
+                                     "Text":  [
+                                                  "{spawn QMON 1}",
+                                                  "Here is another Rebuilt HC-12 SecTec Monitor. Try not to drop this one."
+                                              ],
+                                     "Replies":  [
+                                                     "bye"
+                                                 ]
+                                 },
+                  "regive_rcp":  {
+                                     "Text":  [
+                                                  "{spawn QRCP 1}",
+                                                  "Another RC-P Audio Recording Device. The prized house plant is in the house at the end of the road, past the droid."
+                                              ],
+                                     "Replies":  [
+                                                     "bye"
+                                                 ]
+                                 }
               },
     "Trades":  {
                    "bac":  {

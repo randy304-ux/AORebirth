@@ -2040,61 +2040,6 @@
                                       }
                  },
                  {
-                     "Key":  "ddogs:arete:house-plant",
-                     "Provenance":  "Desmond Calitri is at 3605.2, 8.075, 826.9. The plant is a few meters into that office. The guide does not pin the pot. Mesh borrowed.",
-                     "ContentNpcIdentity":  "ddogs-house-plant",
-                     "PlayfieldId":  6553,
-                     "InstanceId":  2110836803,
-                     "Name":  "Prized House Plant",
-                     "Position":  [
-                                      3602.2,
-                                      8.075,
-                                      824.5
-                                  ],
-                     "Rotation":  [
-                                      0,
-                                      0,
-                                      0,
-                                      1
-                                  ],
-                     "Stats":  {
-                                   "0":  277352961,
-                                   "1":  80,
-                                   "4":  1,
-                                   "27":  80,
-                                   "33":  0,
-                                   "47":  1,
-                                   "54":  5,
-                                   "59":  2,
-                                   "60":  0,
-                                   "64":  0,
-                                   "89":  1,
-                                   "156":  0,
-                                   "173":  3,
-                                   "174":  3,
-                                   "359":  297023,
-                                   "360":  30,
-                                   "368":  0,
-                                   "389":  0,
-                                   "455":  0,
-                                   "466":  0,
-                                   "660":  0,
-                                   "673":  31
-                               },
-                     "Textures":  [
-
-                                  ],
-                     "Meshes":  [
-
-                                ],
-                     "Passive":  true,
-                     "Attackable":  false,
-                     "TickLiving":  true,
-                     "Presentation":  {
-
-                                      }
-                 },
-                 {
                      "Key":  "ddogs:arete:dead-thief",
                      "Provenance":  "Beside IEGA, the level-7 underground spawn at 3424.1, 0.4, 888.2. Guide: the armor is on the thief under the Mutated Garbage Flea. Human mesh borrowed.",
                      "ContentNpcIdentity":  "ddogs-dead-thief",

@@ -393,6 +393,8 @@ foreach ($nf in $npcSnap.Keys) {
 & "$PSScriptRoot\Build-AreteAliens.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Randy's 2026-10-18 22:58 Arete clan/ICC HQ NPCs (Elsa CARP, Wounded Clan Protester ODDD, Gamma Unit Sentinel GMUN, Ericson, Henri Zure): Build-AreteClanLooks.ps1.
 & "$PSScriptRoot\Build-AreteClanLooks.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Alex Gibbs' surveillance job (Arete guide #4): plant PRHO, Logan Fixx SWOO, monitor/recorder from Alex: Build-AreteSurveillance.ps1.
+& "$PSScriptRoot\Build-AreteSurveillance.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 
 # Keep live placement and hand data on content NPCs: Position/Rotation (moved in game), SpawnHash (Apply-PlaceholderCleanup.ps1) and vendor stock.
 foreach ($nf in $npcSnap.Keys) {
