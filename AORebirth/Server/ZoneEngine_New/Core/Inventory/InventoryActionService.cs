@@ -93,6 +93,40 @@ namespace ZoneEngine_New.Core.Inventory
             return result;
         }
 
+        /// <summary>
+        /// Uses up one item of a main-inventory stack (a tradeskill source). The client is told with DeleteItem on the old
+        /// slot plus an AddTemplate of the rest, and AddTemplate lands in the first free slot, so the server parks the
+        /// remaining stack there too: the old slot itself unless a lower one is free. False for a single item, another
+        /// page, or a changed slot.
+        /// </summary>
+        public bool TryTakeOneFromStack(Player player, Identity slot, int expectedInstanceId, out int newPlacement)
+        {
+            newPlacement = -1;
+            if (player.Session?.State != SessionState.InPlay || player.IsPersistenceQuarantined || player.IsDead
+                || slot.Type != IdentityType.Inventory
+                || !TryResolveOwnedSlot(player, slot, out Container page, out Item item)
+                || item.InstanceId != expectedInstanceId || item.StackCount <= 1) return false;
+            int placement = slot.Instance;
+            int originalCount = item.StackCount;
+            int free = page.FindFreeSlot();
+            int destination = free >= 0 && free < placement ? free : placement;
+            bool result = TryCommit(player,
+                [new InventoryRowChange(item, page.Identity, destination, originalCount - 1)],
+                () => IsCurrent(page, placement, item, expectedInstanceId) && item.StackCount == originalCount
+                    && (destination == placement || !page.Content.ContainsKey(destination)),
+                () =>
+                {
+                    item.StackCount = originalCount - 1;
+                    if (destination != placement)
+                    {
+                        page.Content.Remove(placement);
+                        if (!page.Add(destination, item)) throw new InvalidOperationException("Reserved stack slot changed.");
+                    }
+                });
+            if (result)
+                newPlacement = destination;
+            return result;
+        }
         public bool TrySplit(Player player, Identity slot, int expectedInstanceId, int amount)
         {
             if (player.Session?.State != SessionState.InPlay || player.IsPersistenceQuarantined || player.IsDead

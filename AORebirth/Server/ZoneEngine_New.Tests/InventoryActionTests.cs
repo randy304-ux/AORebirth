@@ -52,6 +52,43 @@ namespace ZoneEngine_New.Tests
             Assert.AreEqual(10, w.Persistence.Rows.Values.Sum(r => r.StackCount));
         }
 
+        [TestMethod]
+        public void TradeskillSourceStackLosesOneAndKeepsItsSlot()
+        {
+            using var w = new World();
+            Item stack = w.Add(11, 10);
+            Assert.IsTrue(w.Actions.TryTakeOneFromStack(w.Player, Slot(), 11, out int placement));
+            Assert.AreEqual(64, placement);
+            Assert.AreSame(stack, w.Player.Inventory.Inventory.Content[64]);
+            Assert.AreEqual(9, stack.StackCount);
+            Assert.AreEqual(9, w.Persistence.Rows[11].StackCount);
+        }
+
+        [TestMethod]
+        public void TradeskillSourceStackMovesToTheFirstFreeSlotLikeAddTemplate()
+        {
+            using var w = new World();
+            w.Add(12, 1, slot: 64, lowId: 2000);
+            Item stack = w.Add(11, 5, slot: 66);
+            Assert.IsTrue(w.Actions.TryTakeOneFromStack(w.Player, Slot(66), 11, out int placement));
+            Assert.AreEqual(65, placement);
+            Assert.AreSame(stack, w.Player.Inventory.Inventory.Content[65]);
+            Assert.IsFalse(w.Player.Inventory.Inventory.Content.ContainsKey(66));
+            Assert.AreEqual(4, stack.StackCount);
+            Assert.AreEqual(4, w.Persistence.Rows[11].StackCount);
+            Assert.AreEqual(65, w.Persistence.Rows[11].ContainerPlacement);
+        }
+
+        [TestMethod]
+        public void TradeskillSourceTakeOneRefusesASingleItemOrAStaleInstance()
+        {
+            using var w = new World();
+            w.Add(11, 1);
+            Assert.IsFalse(w.Actions.TryTakeOneFromStack(w.Player, Slot(), 11, out _));
+            w.Add(13, 4, slot: 65);
+            Assert.IsFalse(w.Actions.TryTakeOneFromStack(w.Player, Slot(65), 999, out _));
+            Assert.AreEqual(0, w.Persistence.Calls);
+        }
         [DataTestMethod]
         [DataRow(0)] [DataRow(-1)] [DataRow(10)] [DataRow(11)] [DataRow(int.MaxValue)]
         public void SplitRejectsInvalidAmountsWithoutAllocatingOrWriting(int amount)

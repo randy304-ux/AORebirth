@@ -232,7 +232,13 @@ namespace ZoneEngine_New.Core.Tradeskills
                     : "A QL 99 implant takes a Jobe cluster only when the combine bumps it to QL 100; you need more Nano Programming.");
                 return false;
             }
-            if (player.Inventory.Inventory.FindFreeSlot() < 0 && !recipe.DeleteTarget && !recipe.DeleteSource)
+            bool sourceStacked = recipe.DeleteSource && source.StackCount > 1;
+            if (sourceStacked && window.Source.Type != IdentityType.Inventory)
+            {
+                Feedback(player, "Put the " + source.Name + " stack in your main inventory to combine it.");
+                return false;
+            }
+            if (player.Inventory.Inventory.FindFreeSlot() < 0 && !recipe.DeleteTarget && (!recipe.DeleteSource || sourceStacked))
             {
                 Feedback(player, "Your inventory is full.");
                 return false;
@@ -240,11 +246,11 @@ namespace ZoneEngine_New.Core.Tradeskills
 
             int low = recipe.ResultLow, high = recipe.ResultHigh;
             Identity sourceSlot = window.Source, targetSlot = window.Target;
-            int sourceInstance = source.InstanceId, targetInstance = target.InstanceId;
+            int targetInstance = target.InstanceId;
             string sourceName = source.Name, targetName = target.Name;
             if (recipe.DeleteTarget && !Remove(player, targetSlot, targetInstance))
                 return false;
-            if (recipe.DeleteSource && !Remove(player, sourceSlot, sourceInstance))
+            if (recipe.DeleteSource && !UseSource(player, sourceSlot, source))
                 return false;
 
             Item result = _items.CreateWithNewInstance(low, high, quality, ItemSource.Other);
@@ -289,6 +295,33 @@ namespace ZoneEngine_New.Core.Tradeskills
 
         static string SkillName(int stat)
             => Enum.IsDefined(typeof(CharacterStat), stat) ? ((CharacterStat)stat).ToString() : "skill " + stat;
+
+        /// <summary>A combine uses one source item: the last of a stack is deleted, a bigger stack loses one (live).</summary>
+        bool UseSource(Player player, Identity slot, Item source)
+        {
+            if (source.StackCount <= 1)
+                return Remove(player, slot, source.InstanceId);
+            int remaining = source.StackCount - 1;
+            if (!_actions.TryTakeOneFromStack(player, slot, source.InstanceId, out int placement))
+            {
+                Feedback(player, "The combine failed: an item changed.");
+                return false;
+            }
+            player.Session?.Send(new CharacterActionMessage
+            {
+                Identity = player.Identity, Action = CharacterActionType.DeleteItem, Target = slot,
+                Parameter1 = 0, Parameter2 = 0
+            });
+            player.Session?.Send(new AddTemplateMessage
+            {
+                Identity = player.Identity, LowId = source.LowId, HighId = source.HighId,
+                Quality = source.Quality, Count = remaining
+            });
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Tradeskill source stack char={0} {1} slot {2} -> {3} count={4}",
+                player.Identity.Instance, source.Name, slot.Instance, placement, remaining));
+            return true;
+        }
 
         bool Remove(Player player, Identity slot, int instance)
         {
