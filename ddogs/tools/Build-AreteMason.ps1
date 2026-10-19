@@ -60,7 +60,10 @@ $m = [ordered]@{
     [pscustomobject]@{ If = @('HasQuest HDMA'); Say = 'arrive' },
     [pscustomobject]@{ If = @('HasQuest AMIN', 'wears QLA3'); Say = 'installed' },
     [pscustomobject]@{ If = @('HasQuest AMIN'); Say = 'not_installed' },
-    [pscustomobject]@{ If = @('HasQuest AMAR'); Say = 'show' },
+    [pscustomobject]@{ If = @('HasQuest AMAR', 'has QLA3'); Say = 'show' },
+    [pscustomobject]@{ If = @('HasQuest AMAR', 'has QLA2'); Say = 'show_need3' },
+    [pscustomobject]@{ If = @('HasQuest AMAR', 'has QLA1'); Say = 'show_need2' },
+    [pscustomobject]@{ If = @('HasQuest AMAR'); Say = 'show_start' },
     [pscustomobject]@{ If = @('HasQuest AMA1'); Say = 'step1' },
     [pscustomobject]@{ If = @('HasQuest AMA2'); Say = 'step2' },
     [pscustomobject]@{ If = @('HasQuest AMA3'); Say = 'step3' },
@@ -68,7 +71,7 @@ $m = [ordered]@{
   Replies = [ordered]@{
     ask_implant = (MkReply 'Vernon sent me about the chip.' 'offer_implant' $fresh)
     take_implant = (MkReply 'I''ll follow your recipe.' 'give_implant' $fresh)
-    lost = (MkReply 'I lost the Basic Leg Implant.' 'lost' @('HasQuest AMA1', '!has QBLI'))
+    fresh = (MkReply 'My implant came out wrong. Can I have a fresh Basic Leg Implant?' 'fresh' @('HasAnyQuest AMA1,AMA2,AMA3,AMAR'))
     later = (MkReply 'Maybe later.' 'later' $null)
     bye = (MkReply 'I''m on it.' 'bye' $null)
     more = (MkReply 'Anything else?' 'hello' $null)
@@ -79,11 +82,14 @@ $m = [ordered]@{
     arrive = (MkLine @('{completequest HDMA}', 'Vernon''s patient? Sit down.') @('ask_implant', 'nothing'))
     offer_implant = (MkLine @('I can unlock that chip for you, but first I want to test my implant assembly process on you. Follow my recipe exactly.', '{delay 1}The terminals to your right sell Shiny, Bright and Faded clusters and blank implants. Basic Leg Implant first, then an Agility Cluster - Shiny (Leg), a Stamina Cluster - Bright (Leg) and a Max Health Cluster - Faded (Leg). Each cluster goes in as the source, the implant as the target, in that order.', '{delay 1}Make it with any other clusters and I will not touch it.') @('take_implant', 'later'))
     give_implant = (MkLine @('{spawn QBLI 1}', '{givequest AMA1}', 'Here is a Basic Leg Implant to start with. Shift+T for the Tradeskill window. Agility Cluster - Shiny (Leg) first.') @('bye'))
-    lost = (MkLine @('{spawn QBLI 1}', 'Another one. Try not to sell this one.') @('bye'))
-    step1 = (MkLine 'Agility Cluster - Shiny (Leg) as the source, the Basic Leg Implant as the target. The Shiny terminal has it.' @('lost', 'bye'))
-    step2 = (MkLine 'Now the Stamina Cluster - Bright (Leg) into that implant. Bright terminal.' @('bye'))
-    step3 = (MkLine 'Last, the Max Health Cluster - Faded (Leg). Faded terminal.' @('bye'))
-    show = (MkLine 'Let me see it. The Leg Implant: Agility, Shiny, with Stamina Bright and Max Health Faded in it.{opentrade}' $null)
+    fresh = (MkLine @('{spawn QBLI 1}', 'Here is a fresh Basic Leg Implant. Agility Cluster - Shiny (Leg) first, then Stamina Cluster - Bright (Leg), then Max Health Cluster - Faded (Leg). The spoiled one you can sell at any terminal.') @('bye'))
+    show_start = (MkLine 'That implant is not what I asked for. Start from a Basic Leg Implant with the Agility Cluster - Shiny (Leg), then Stamina Bright, then Max Health Faded. Need a fresh implant?' @('fresh', 'bye'))
+    show_need2 = (MkLine 'One cluster in. Now the Stamina Cluster - Bright (Leg), then the Max Health Cluster - Faded (Leg). Then show me.' @('fresh', 'bye'))
+    show_need3 = (MkLine 'Two clusters in. Last, the Max Health Cluster - Faded (Leg). Then show me.' @('fresh', 'bye'))
+    step1 = (MkLine 'Agility Cluster - Shiny (Leg) as the source, the Basic Leg Implant as the target. The Shiny terminal has it.' @('fresh', 'bye'))
+    step2 = (MkLine 'Now the Stamina Cluster - Bright (Leg) into that implant. Bright terminal.' @('fresh', 'bye'))
+    step3 = (MkLine 'Last, the Max Health Cluster - Faded (Leg). Faded terminal.' @('fresh', 'bye'))
+    show = (MkLine 'Let me see it. The Leg Implant: Agility, Shiny, with Stamina Bright and Max Health Faded in it. Put it in the trade window and press Accept.{opentrade}' $null)
     shown = (MkLine @('{completequest AMAR}', 'Good work. Here, it is yours. Install it at the Surgery Clinic in the corner: use the clinic, then drop the implant in your Leg slot on the Implants tab of the Wear window (Ctrl+1).', '{givequest AMIN}') @('bye'))
     not_installed = (MkLine 'It is not in your leg yet. Use the Surgery Clinic in the corner, then put the implant in the Leg slot.' @('bye'))
     installed = (MkLine 'Installed properly. Now hand me the Blank ICC ID Chip and the Biological Survey Nanobots.{opentrade}' $null)

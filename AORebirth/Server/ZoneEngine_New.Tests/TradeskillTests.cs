@@ -223,6 +223,38 @@ namespace ZoneEngine_New.Tests
             Assert.IsFalse(book.TryFind(Fam(101781, 101782), Fam(101117, 101118), out _));
             Assert.IsTrue(book.TargetProcesses(Fam(101261, 101261)) > 0);
         }
+        [TestMethod]
+        public void LegImplantClustersGiveTheSameImplantInEitherOrder()
+        {
+            string? root = FindGameData();
+            if (root == null)
+                Assert.Inconclusive("GameData not found");
+            TradeskillRecipeBook book = TradeskillRecipeBook.Load(root!, _ => { });
+
+            // Randy 2026-10-19 16:33: Shiny Agility then Bright Stamina.
+            Assert.IsTrue(book.TryFind(Fam(101781, 101782), Fam(101261, 101261), out TradeskillRecipe agi));
+            Assert.AreEqual(113127, agi.ResultLow);
+            Assert.IsTrue(book.TryFind(Fam(101785, 101786), Fam(agi.ResultLow, agi.ResultHigh), out TradeskillRecipe agiStam));
+            Assert.AreEqual(113186, agiStam.ResultLow);
+            Assert.AreEqual(113187, agiStam.ResultHigh);
+            // Bright Stamina first, then Shiny Agility: the same Agility+Stamina implant.
+            Assert.IsTrue(book.TryFind(Fam(101785, 101786), Fam(101261, 101261), out TradeskillRecipe stam));
+            Assert.AreEqual(113258, stam.ResultHigh);
+            Assert.AreNotEqual(stam.ResultHigh, agi.ResultHigh);
+            Assert.IsTrue(book.TryFind(Fam(101781, 101782), Fam(stam.ResultLow, stam.ResultHigh), out TradeskillRecipe stamAgi));
+            Assert.AreEqual(113186, stamAgi.ResultLow);
+            // Faded Max Health completes the guide implant.
+            Assert.IsTrue(book.TryFind(Fam(101807, 101808), Fam(113186, 113187), out TradeskillRecipe full));
+            Assert.AreEqual(113440, full.ResultLow);
+            // Faded first (Randy's later tries): Max Health + Agility, Max Health + Stamina.
+            Assert.IsTrue(book.TryFind(Fam(101807, 101808), Fam(101261, 101261), out TradeskillRecipe mh));
+            Assert.AreEqual(113397, mh.ResultHigh);
+            Assert.IsTrue(book.TryFind(Fam(101781, 101782), Fam(mh.ResultLow, mh.ResultHigh), out TradeskillRecipe mhAgi));
+            Assert.AreEqual(113420, mhAgi.ResultLow);
+            Assert.IsTrue(book.TryFind(Fam(101785, 101786), Fam(mh.ResultLow, mh.ResultHigh), out TradeskillRecipe mhStam));
+            Assert.AreEqual(113521, mhStam.ResultLow);
+        }
+
         static string? FindGameData()
         {
             for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir != null; dir = dir.Parent)

@@ -25,9 +25,30 @@
                     },
                     {
                         "If":  [
-                                   "HasQuest AMAR"
+                                   "HasQuest AMAR",
+                                   "has QLA3"
                                ],
                         "Say":  "show"
+                    },
+                    {
+                        "If":  [
+                                   "HasQuest AMAR",
+                                   "has QLA2"
+                               ],
+                        "Say":  "show_need3"
+                    },
+                    {
+                        "If":  [
+                                   "HasQuest AMAR",
+                                   "has QLA1"
+                               ],
+                        "Say":  "show_need2"
+                    },
+                    {
+                        "If":  [
+                                   "HasQuest AMAR"
+                               ],
+                        "Say":  "show_start"
                     },
                     {
                         "If":  [
@@ -70,14 +91,13 @@
                                                 ],
                                          "Goto":  "give_implant"
                                      },
-                    "lost":  {
-                                 "Text":  "I lost the Basic Leg Implant.",
-                                 "If":  [
-                                            "HasQuest AMA1",
-                                            "!has QBLI"
-                                        ],
-                                 "Goto":  "lost"
-                             },
+                    "fresh":  {
+                                  "Text":  "My implant came out wrong. Can I have a fresh Basic Leg Implant?",
+                                  "If":  [
+                                             "HasAnyQuest AMA1,AMA2,AMA3,AMAR"
+                                         ],
+                                  "Goto":  "fresh"
+                              },
                     "later":  {
                                   "Text":  "Maybe later.",
                                   "Goto":  "later"
@@ -136,21 +156,48 @@
                                                        "bye"
                                                    ]
                                    },
-                  "lost":  {
-                               "Text":  [
-                                            "{spawn QBLI 1}",
-                                            "Another one. Try not to sell this one."
-                                        ],
-                               "Replies":  [
-                                               "bye"
-                                           ]
-                           },
+                  "fresh":  {
+                                "Text":  [
+                                             "{spawn QBLI 1}",
+                                             "Here is a fresh Basic Leg Implant. Agility Cluster - Shiny (Leg) first, then Stamina Cluster - Bright (Leg), then Max Health Cluster - Faded (Leg). The spoiled one you can sell at any terminal."
+                                         ],
+                                "Replies":  [
+                                                "bye"
+                                            ]
+                            },
+                  "show_start":  {
+                                     "Text":  [
+                                                  "That implant is not what I asked for. Start from a Basic Leg Implant with the Agility Cluster - Shiny (Leg), then Stamina Bright, then Max Health Faded. Need a fresh implant?"
+                                              ],
+                                     "Replies":  [
+                                                     "fresh",
+                                                     "bye"
+                                                 ]
+                                 },
+                  "show_need2":  {
+                                     "Text":  [
+                                                  "One cluster in. Now the Stamina Cluster - Bright (Leg), then the Max Health Cluster - Faded (Leg). Then show me."
+                                              ],
+                                     "Replies":  [
+                                                     "fresh",
+                                                     "bye"
+                                                 ]
+                                 },
+                  "show_need3":  {
+                                     "Text":  [
+                                                  "Two clusters in. Last, the Max Health Cluster - Faded (Leg). Then show me."
+                                              ],
+                                     "Replies":  [
+                                                     "fresh",
+                                                     "bye"
+                                                 ]
+                                 },
                   "step1":  {
                                 "Text":  [
                                              "Agility Cluster - Shiny (Leg) as the source, the Basic Leg Implant as the target. The Shiny terminal has it."
                                          ],
                                 "Replies":  [
-                                                "lost",
+                                                "fresh",
                                                 "bye"
                                             ]
                             },
@@ -159,6 +206,7 @@
                                              "Now the Stamina Cluster - Bright (Leg) into that implant. Bright terminal."
                                          ],
                                 "Replies":  [
+                                                "fresh",
                                                 "bye"
                                             ]
                             },
@@ -167,12 +215,13 @@
                                              "Last, the Max Health Cluster - Faded (Leg). Faded terminal."
                                          ],
                                 "Replies":  [
+                                                "fresh",
                                                 "bye"
                                             ]
                             },
                   "show":  {
                                "Text":  [
-                                            "Let me see it. The Leg Implant: Agility, Shiny, with Stamina Bright and Max Health Faded in it.{opentrade}"
+                                            "Let me see it. The Leg Implant: Agility, Shiny, with Stamina Bright and Max Health Faded in it. Put it in the trade window and press Accept.{opentrade}"
                                         ]
                            },
                   "shown":  {

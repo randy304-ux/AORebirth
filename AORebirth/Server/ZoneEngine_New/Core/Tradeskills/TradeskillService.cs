@@ -283,8 +283,9 @@ namespace ZoneEngine_New.Core.Tradeskills
             if (xp > 0)
                 player.AwardXp(xp, XpSource.Quest);
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                "Tradeskill made char={0} source={1} target={2} result={3}/{4} ql={5} range={6}-{7} xp={8}",
-                player.Identity.Instance, sourceName, targetName, low, high, result.Quality, range.Min, range.Max, xp));
+                "Tradeskill made char={0} source={1} target={2} result={3}/{4} ql={5} range={6}-{7} xp={8} slot={9} (source slot {10}, target slot {11})",
+                player.Identity.Instance, sourceName, targetName, low, high, result.Quality, range.Min, range.Max, xp, slot,
+                sourceSlot.Instance, targetSlot.Instance));
             return true;
         }
 

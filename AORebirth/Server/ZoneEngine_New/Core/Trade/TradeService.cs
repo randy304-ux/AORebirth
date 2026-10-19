@@ -1130,12 +1130,28 @@ namespace ZoneEngine_New.Core.Trade
             ArgumentNullException.ThrowIfNull(player);
             ArgumentNullException.ThrowIfNull(message);
 
-            if (player.Session == null || player.Playfield == null || !player.Inventory.IsHydrated
-                || !TryGetSession(player, out TradeSession session) || session.Kind != TradeKind.Knubot || session.Committing
-                || session.Npc == null || message.Target != session.Npc.Identity
-                || player.GetEdgeDistanceTo(session.Npc) > RangeCancelDistance)
+            TradeSession session = null!;
+            string? ignored = player.Session == null || player.Playfield == null ? "no session"
+                : !player.Inventory.IsHydrated ? "inventory not loaded"
+                : !TryGetSession(player, out session) ? "no trade open"
+                : session.Kind != TradeKind.Knubot ? "not an NPC trade"
+                : session.Committing ? "trade committing"
+                : session.Npc == null || message.Target != session.Npc.Identity ? "wrong NPC " + message.Target
+                : player.GetEdgeDistanceTo(session.Npc) > RangeCancelDistance ? "out of range"
+                : null;
+            if (ignored != null)
+            {
+                _logger.Warn(string.Format(CultureInfo.InvariantCulture, "Knubot trade {0} ignored player={1} item={2}: {3}",
+                    message.Action, player.Identity.Instance, message.Container, ignored));
+                // The client already moved the item into its trade window; put it back so both views agree on the slot.
+                if (message.Action == KnuBotTradeAction.Add && player.Session != null)
+                    SendReturnToInventory(player, session != null && session.Kind == TradeKind.Knubot
+                        ? Math.Max(0, FirstFreeOfferSlot(session.InitiatorOffer)) : 0);
                 return;
+            }
 
+            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Knubot trade {0} player={1} item={2}",
+                message.Action, player.Identity.Instance, message.Container));
             if (message.Action == KnuBotTradeAction.Add)
                 AddKnubotItem(player, session.InitiatorOffer, message.Container);
             else if (message.Action == KnuBotTradeAction.Remove)
