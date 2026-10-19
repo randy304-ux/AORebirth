@@ -12,16 +12,23 @@
 # 203445-203449/203530 + OT M500 SWAT Rifle (black Omni-AF armour, big gun; armour set by name, worn items not in the captures). Protesters lose
 # the orange Dockworker Overalls (the reference wears light clothes; worn items not captured, so they keep their base body clothing) and keep the
 # placard. Heads are ones our data already pairs with each body. Mario Carles (MARC) is scaled to 25 (Randy: a quarter of the size).
+# 2026-10-18 23:10 (Randy's PRK Omni start-area shots 22:55): protesters wear White Shirt with Clan Symbol 41103, ORANGE pants (Orange Leather
+# Pants 31240; orange is right, the shirt is the light part) and Black Leather Boots 41051 (live: black studded boots; closest black boots by
+# name), each with a different protest placard on a pole: CSPE "Oppressors!" 259212, CPPS "Clan Logo" 259318, ROTE "Omni Go Home!" 262801
+# (live 'OMNI ...' sign). Omni-Pol Guard (ONGA): white/grey heavy Omni armour = Assault-Issue Omni-Pol set (plain, not Elite/Forest/Desert)
+# + Omni-Pol Riot Shield 285501 (placement 298 = left hand; NpcCharacter.AssignVisualHands draws left-hand-only props in the left hand).
+# Milne keeps captured body 165186 (live record; the black bodysuit). Pants/boots/armour colours are by item name, not seen in game.
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
 $ErrorActionPreference = 'Stop'
 $path = [IO.Path]::GetFullPath((Join-Path $GameData 'NpcTemplates.json'))
 $nt = [IO.File]::ReadAllText($path) | ConvertFrom-Json
-$overalls = 295698; $placard = 284185
+$overalls = 295698; $placard = 284185; $clanShirt = 41103; $orangePants = 31240; $blackBoots = 41051
 function Pairs([int[]]$ids) { $l = New-Object System.Collections.ArrayList; foreach ($i in $ids) { [void]$l.Add([int[]]@($i, $i)) }; return ,([object[]]$l.ToArray()) }
 $looks = @(
-  @{ Hash = 'ROTE'; Md = 26097; Head = 40111; Breed = 4; Gender = 1; Items = @($overalls, $placard) },
-  @{ Hash = 'CPPS'; Md = 26090; Head = 40695; Breed = 1; Gender = 3; Items = @($placard) },
-  @{ Hash = 'CSPE'; Md = 26103; Head = 40103; Breed = 4; Gender = 1; Items = @($placard) },
+  @{ Hash = 'ROTE'; Md = 26097; Head = 40111; Breed = 4; Gender = 1; Items = @($clanShirt, $orangePants, $blackBoots, 262801) },
+  @{ Hash = 'CPPS'; Md = 26090; Head = 40695; Breed = 1; Gender = 3; Items = @($clanShirt, $orangePants, $blackBoots, 259318) },
+  @{ Hash = 'CSPE'; Md = 26103; Head = 40103; Breed = 4; Gender = 1; Items = @($clanShirt, $orangePants, $blackBoots, 259212) },
+  @{ Hash = 'ONGA'; Items = @(22064, 21955, 22331, 22142, 22196, 22246, 285501) },
   @{ Hash = 'OIUR'; Name = 'Omni-AF Private'; Md = 26151; Head = 223923; Breed = 3; Gender = 2; Scale = 100; Items = @(203447, 203449, 203530, 203445, 203446, 203448, 124350) },
   @{ Hash = 'OMCN'; Md = 165186; Head = 223803; Breed = 1; Gender = 2; Scale = 100; Items = @() },
   # ICC Peacekeeper (IPPC, Arete guard spots): exactly the captured live ICC Shuttle Guard (ICST, 4582, baseline-proven): record 254118

@@ -1,4 +1,4 @@
-namespace ZoneEngine_New.Core.Entities
+﻿namespace ZoneEngine_New.Core.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -785,17 +785,40 @@ namespace ZoneEngine_New.Core.Entities
             ClearHandMesh(RightHandMeshPosition);
             ClearHandMesh(LeftHandMeshPosition);
 
+            bool leftDone = false;
             foreach (KeyValuePair<int, Item> slot in Equipment.EnumerateSlots())
             {
                 if (_combatWeaponSlots.Contains(slot.Key) || !IsVisualWeapon(slot.Value))
                     continue;
 
-                VisualRightHand = slot.Value;
                 int meshId = StatCollection.Normalize(slot.Value.GetStat(CharacterStat.WeaponMesh));
+
+                // Left-hand-only held props (Omni-Pol Riot Shield 285501: slot mask 298 = 256) draw in the left hand
+                // and leave the right hand to the weapon. First one wins; never the swinging weapon.
+                if (IsLeftHandOnly(slot.Value))
+                {
+                    if (!leftDone && meshId > 0)
+                    {
+                        SetHandMesh(LeftHandMeshPosition, meshId, overrideTextureId: 0);
+                        leftDone = true;
+                    }
+                    continue;
+                }
+
+                if (VisualRightHand != null)
+                    continue;
+
+                VisualRightHand = slot.Value;
                 if (meshId > 0)
                     SetHandMesh(RightHandMeshPosition, meshId, overrideTextureId: 0);
-                return;
             }
+        }
+
+        /// <summary>Placement mask (298) allows the left hand (bit 8) but not the right hand (bit 6).</summary>
+        static bool IsLeftHandOnly(Item item)
+        {
+            int mask = StatCollection.Normalize(item.GetStat((CharacterStat)298));
+            return (mask & (1 << 8)) != 0 && (mask & (1 << 6)) == 0;
         }
 
         void ArmMonsterWeapons()
