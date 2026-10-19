@@ -197,9 +197,12 @@ namespace ZoneEngine_New.Core.Network
             }
 
             int receiver = Player?.Identity.Instance ?? 0;
-            int sender = Player?.Playfield?.Identity.Instance ?? 0;
+            int sender = HeaderServerId;
             Send(body, sender, receiver);
         }
+
+        /// <summary>Header server id (wire field after the size); see Send.</summary>
+        public const int HeaderServerId = 0x0F00;
 
         public void Send(MessageBody body, int sender, int receiver)
         {
@@ -216,7 +219,10 @@ namespace ZoneEngine_New.Core.Network
 
             try
             {
-                byte[] packet = _codec.Serialize(body, sender, receiver);
+                // Randy 20:57 (AO Item Assistant): the header server id is a fixed 0x0F00, never the playfield id. AOIA+ files
+                // characters under dimension = server id >> 8 (live sends ~0x0DBA = 13 "Rubi-Ka"); the playfield id put ours in
+                // unknown dimensions 17/25/31 by zone. 0x0F00 = 15, AOIA's existing "TestLive" entry, apart from live characters.
+                byte[] packet = _codec.Serialize(body, HeaderServerId, receiver);
                 LogNetworkMessage("Sent", body);
                 if (body is InfoPacketMessage)
                 {
