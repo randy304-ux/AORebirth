@@ -126,7 +126,7 @@
                                              ]
                              },
                   "lib":  {
-                              "Text":  "Hacker Tool and the Omni-Tek Technical Library, together.{opentrade}"
+                              "Text":  "Hack the library first: Tradeskill window, Hacker Tool as source, the Omni-Tek Technical Library as target. Then give me the Hacked Technical Library.{opentrade}"
                           },
                   "lib_done":  {
                                    "Text":  [
@@ -154,7 +154,18 @@
                                                 "ask_chip",
                                                 "nothing"
                                             ]
-                            }
+                            },
+                  "lib_hacked":  {
+                                     "Text":  [
+                                                  "{completequest AVG0}",
+                                                  "{spawn QHKL 1}",
+                                                  "Hacked. Keep it, and the tool. Now the Shipping Manifest Terminal, same building as the Kneebreaker. Use the Hacker Tool on it and bring me the chip it releases."
+                                              ],
+                                     "Fail":  "full",
+                                     "Replies":  [
+                                                     "nothing"
+                                                 ]
+                                 }
               },
     "Trades":  {
                    "turnin_chip":  {
@@ -184,6 +195,18 @@
                                              }
                                          ],
                                "Goto":  "lib_done"
-                           }
+                           },
+                   "lib_hacked":  {
+                                      "If":  [
+                                                 "HasQuest AVG0"
+                                             ],
+                                      "Items":  [
+                                                    {
+                                                        "Hash":  "QHKL",
+                                                        "Count":  1
+                                                    }
+                                                ],
+                                      "Goto":  "lib_hacked"
+                                  }
                }
 }

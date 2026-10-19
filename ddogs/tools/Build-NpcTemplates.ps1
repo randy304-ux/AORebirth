@@ -414,3 +414,5 @@ foreach ($nf in $npcSnap.Keys) {
 & "$PSScriptRoot\Build-AntonioUpgrades.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Marco Spida: profession nano containers (Build-MarcoContainers.ps1).
 & "$PSScriptRoot\Build-MarcoContainers.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Vernon Godfray: hacked library hand-in (Build-AreteVernon.ps1).
+& "$PSScriptRoot\Build-AreteVernon.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
