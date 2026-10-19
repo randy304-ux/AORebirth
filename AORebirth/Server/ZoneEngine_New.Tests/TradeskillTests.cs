@@ -173,6 +173,56 @@ namespace ZoneEngine_New.Tests
             Assert.AreEqual(400, library.Skills[0][1]);
         }
 
+        static readonly Dictionary<int, string> Names = new()
+        {
+            [101261] = "Basic Leg Implant", [101262] = "Basic Leg Implant",
+            [101101] = "Basic Eye Implant", [101102] = "Basic Eye Implant",
+            [101117] = "Basic Head Implant", [101118] = "Basic Head Implant",
+            [101213] = "Basic Waist Implant", [101214] = "Basic Waist Implant",
+            [101103] = "Eye Implant: Sharp Obj, Faded", [101104] = "Eye Implant: Sharp Obj, Faded",
+            [101369] = "Sharp Obj Cluster - Faded (Eye)", [101370] = "Sharp Obj Cluster - Faded (Eye)",
+        };
+
+        static int[] Fam(int low, int high) => TradeskillRecipeBook.Family(low, high, id => Names.GetValueOrDefault(id));
+
+        [TestMethod]
+        public void SingleIdItemsFindTheirPair()
+        {
+            CollectionAssert.AreEquivalent(new[] { 101261, 101262 }, Fam(101261, 101261));
+            CollectionAssert.AreEquivalent(new[] { 101262, 101261 }, Fam(101262, 101262));
+            CollectionAssert.AreEquivalent(new[] { 101782, 101781 }, Fam(101781, 101782));
+            CollectionAssert.AreEquivalent(new[] { 555 }, Fam(555, 555));
+        }
+
+        [TestMethod]
+        public void ClustersGoIntoEmptyBasicImplantsWhateverIdTheItemWasMintedWith()
+        {
+            string? root = FindGameData();
+            if (root == null)
+                Assert.Inconclusive("GameData not found");
+            TradeskillRecipeBook book = TradeskillRecipeBook.Load(root!, _ => { });
+
+            // Randy 2026-10-19: Agility Cluster - Shiny (Leg) QL 5 (101781/101782) + Basic Leg Implant QL 1 (101261/101261).
+            Assert.IsTrue(book.TryFind(Fam(101781, 101782), Fam(101261, 101261), out TradeskillRecipe shiny));
+            Assert.AreEqual(113128, shiny.ResultHigh);
+            Assert.AreEqual(450, shiny.Skills[0][1]); // Agility 2.25 x2
+            Assert.AreEqual(14, shiny.QlRangePercent);
+            // Faded Sharp Obj (single id) into Basic Eye (single id).
+            Assert.IsTrue(book.TryFind(Fam(101369, 101369), Fam(101101, 101101), out TradeskillRecipe faded));
+            Assert.AreEqual(101104, faded.ResultHigh);
+            // Bright Grenade (Eye) into the Faded Sharp Obj eye implant: second slot.
+            Assert.IsTrue(book.TryFind(Fam(101431, 101432), Fam(101103, 101103), out TradeskillRecipe bright));
+            Assert.AreEqual(101862, bright.ResultHigh);
+            Assert.AreEqual(285, bright.Skills[0][1]);
+            // Shiny Treatment (Head) and Faded Evade-ClsC (Waist).
+            Assert.IsTrue(book.TryFind(Fam(101523, 101524), Fam(101117, 101117), out TradeskillRecipe head));
+            Assert.AreEqual(430, head.Skills[0][1]);
+            Assert.IsTrue(book.TryFind(Fam(101681, 101682), Fam(101213, 101213), out TradeskillRecipe waist));
+            Assert.AreEqual(200, waist.Skills[0][1]);
+            // Wrong body location: a Leg cluster does not go into a Head implant.
+            Assert.IsFalse(book.TryFind(Fam(101781, 101782), Fam(101117, 101118), out _));
+            Assert.IsTrue(book.TargetProcesses(Fam(101261, 101261)) > 0);
+        }
         static string? FindGameData()
         {
             for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir != null; dir = dir.Parent)

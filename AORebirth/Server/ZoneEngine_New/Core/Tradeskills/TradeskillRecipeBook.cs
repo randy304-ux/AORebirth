@@ -83,6 +83,40 @@ namespace ZoneEngine_New.Core.Tradeskills
                 || _byPair.TryGetValue(Key(sourceLow, targetLow), out recipe!);
         }
 
+        /// <summary>First recipe for any source id x target id pair (an item's low, high and same-name neighbour ids).</summary>
+        public bool TryFind(IReadOnlyList<int> sourceIds, IReadOnlyList<int> targetIds, out TradeskillRecipe recipe)
+        {
+            foreach (int source in sourceIds)
+            foreach (int target in targetIds)
+                if (_byPair.TryGetValue(Key(source, target), out recipe!))
+                    return true;
+            recipe = null!;
+            return false;
+        }
+
+        public int SourceProcesses(IEnumerable<int> ids) => ids.Distinct().Sum(id => _sourceProcesses.GetValueOrDefault(id));
+
+        public int TargetProcesses(IEnumerable<int> ids) => ids.Distinct().Sum(id => _targetProcesses.GetValueOrDefault(id));
+
+        /// <summary>
+        /// Ids a recipe may list for an item: its low and high ids, plus, for an item minted with one id, the id just above or below when that
+        /// template has the same name. A QL 1 Basic Leg Implant is minted as 101261/101261, but the CellAO recipes name
+        /// the family by its high id 101262.
+        /// </summary>
+        public static int[] Family(int low, int high, Func<int, string?> nameOf)
+        {
+            if (low != high)
+                return new[] { high, low };
+            // Only a single-id item guesses its pair; a real low/high pair is already the family.
+            var ids = new List<int> { high };
+            string? name = nameOf(high);
+            if (!string.IsNullOrEmpty(name))
+                foreach (int near in new[] { high + 1, high - 1 })
+                    if (string.Equals(nameOf(near), name, StringComparison.Ordinal))
+                        ids.Add(near);
+            return ids.ToArray();
+        }
+
         public int SourceProcesses(int low, int high)
             => _sourceProcesses.GetValueOrDefault(high) + (low != high ? _sourceProcesses.GetValueOrDefault(low) : 0);
 

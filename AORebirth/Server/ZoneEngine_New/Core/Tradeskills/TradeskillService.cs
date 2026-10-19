@@ -125,7 +125,8 @@ namespace ZoneEngine_New.Core.Tradeskills
             _windows[player.Identity.Instance] = window;
             if (!valid || !InventoryActionService.TryResolveOwnedSlot(player, slot, out _, out Item item))
                 return;
-            int processes = source ? _book.SourceProcesses(item.LowId, item.HighId) : _book.TargetProcesses(item.LowId, item.HighId);
+            int[] family = Family(item);
+            int processes = source ? _book.SourceProcesses(family) : _book.TargetProcesses(family);
             Send(player, source ? CharacterActionType.TradeskillSource : CharacterActionType.TradeskillTarget, Identity.None, 0, processes);
             Evaluate(player, window);
         }
@@ -139,11 +140,15 @@ namespace ZoneEngine_New.Core.Tradeskills
                 || !InventoryActionService.TryResolveOwnedSlot(player, window.Target, out _, out target)
                 || ReferenceEquals(source, target))
                 return false;
-            if (!_book.TryFind(source.LowId, source.HighId, target.LowId, target.HighId, out TradeskillRecipe found))
+            if (!_book.TryFind(Family(source), Family(target), out TradeskillRecipe found))
                 return false;
             recipe = found;
             return true;
         }
+
+        int[] Family(Item item)
+            => TradeskillRecipeBook.Family(item.LowId, item.HighId,
+                id => _catalog != null && _catalog.TryGet(id, out ItemTemplate template) ? template.Name : null);
 
         int Skill(Player player, int stat) => player.Stats.GetOrZero((CharacterStat)stat);
 
