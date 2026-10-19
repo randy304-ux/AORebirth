@@ -3,7 +3,9 @@
 // Supercharged <Profession> Nano Crystals (e.g. 304505, 304511) list the same nanos. Each container has two SpawnItem
 // hashes (Nano-Technician three) and 3-7 crystals; how live splits them between hashes is unknown, so each hash is a
 // SpawnAll parent over part of the list and the container as a whole gives the full list. Keeper 300892 and Shade
-// 300893 (FRG7/NTCB, 887K/NWCH) are not in that table and stay unmapped. Leaf keys are not client hashes.
+// 300893 are not in that table; contents from Randy 2026-10-18 (Keeper: Ambient Restoration, Tone of Clarity, Vengeance of the
+// Loyal; Shade: Slap of the Zombie, Ritualistic Touch, Spirit Siphon). The only crystals for the first two are the Adaptive
+// ones (210529, 210590), which cast them. Leaf keys are not client hashes.
 {
     "I4S6": {"Children": ["NanoContainer.75368", "NanoContainer.161504"], "SpawnAll": true},
     "NanoContainer.75368": {"Templates": [75368]},
@@ -88,5 +90,15 @@
     "CJRP": {"Children": ["NanoContainer.85873", "NanoContainer.121360", "NanoContainer.118257"], "SpawnAll": true},
     "NanoContainer.85873": {"Templates": [85873]},
     "NanoContainer.121360": {"Templates": [121360]},
-    "NanoContainer.118257": {"Templates": [118257]}
+    "NanoContainer.118257": {"Templates": [118257]},
+    "FRG7": {"Children": ["NanoContainer.210529", "NanoContainer.210590"], "SpawnAll": true},
+    "NanoContainer.210529": {"Templates": [210529]},
+    "NanoContainer.210590": {"Templates": [210590]},
+    "NTCB": {"Children": ["NanoContainer.210612"], "SpawnAll": true},
+    "NanoContainer.210612": {"Templates": [210612]},
+    "887K": {"Children": ["NanoContainer.210733", "NanoContainer.210354"], "SpawnAll": true},
+    "NanoContainer.210733": {"Templates": [210733]},
+    "NanoContainer.210354": {"Templates": [210354]},
+    "NWCH": {"Children": ["NanoContainer.297333"], "SpawnAll": true},
+    "NanoContainer.297333": {"Templates": [297333]}
 }
