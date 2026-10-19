@@ -24,6 +24,10 @@ $looks = @(
   @{ Hash = 'CSPE'; Md = 26103; Head = 40103; Breed = 4; Gender = 1; Items = @($placard) },
   @{ Hash = 'OIUR'; Name = 'Omni-AF Private'; Md = 26151; Head = 223923; Breed = 3; Gender = 2; Scale = 100; Items = @(203447, 203449, 203530, 203445, 203446, 203448, 124350) },
   @{ Hash = 'OMCN'; Md = 165186; Head = 223803; Breed = 1; Gender = 2; Scale = 100; Items = @() },
+  # ICC Peacekeeper (IPPC, Arete guard spots): exactly the captured live ICC Shuttle Guard (ICST, 4582, baseline-proven): record 254118
+  #   'icc shuttle guard-rooted' (armour, helmet and rifle come from the record), head 40627, Solitus (1) sex 2, scale 105. Randy's PRK
+  #   shots 2026-10-18 22:50. The 18:30 pass dropped breed/sex (ABGU guess); the live guard has them.
+  @{ Hash = 'IPPC'; Md = 254118; Head = 40627; Breed = 1; Gender = 2; Scale = 105 },
   @{ Hash = 'MARC'; Scale = 25 },
   @{ Hash = 'CEHA'; Md = 26092; Head = 40694; Breed = 1; Gender = 2; Items = @($overalls) },
   @{ Hash = 'IESY'; Items = @($overalls) },
