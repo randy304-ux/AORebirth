@@ -26,11 +26,14 @@ namespace ZoneEngine_New.Core.MessageHandlers
         private readonly IItemBuilder _items;
         private readonly AuthoredQuestService _quests;
         private readonly Quests.Dungeons.QuestDungeonService? _dungeons;
+        private readonly Tradeskills.TradeskillService? _tradeskills;
 
         public GenericCmdMessageHandler(IInventoryRepository inventoryRepository, IItemBuilder items,
-            AuthoredQuestService quests, Quests.Dungeons.QuestDungeonService? dungeons = null)
+            AuthoredQuestService quests, Quests.Dungeons.QuestDungeonService? dungeons = null,
+            Tradeskills.TradeskillService? tradeskills = null)
         {
             _dungeons = dungeons;
+            _tradeskills = tradeskills;
             ArgumentNullException.ThrowIfNull(inventoryRepository);
             ArgumentNullException.ThrowIfNull(items);
             _inventoryRepository = inventoryRepository;
@@ -117,6 +120,10 @@ namespace ZoneEngine_New.Core.MessageHandlers
                     break;
 
                 case GenericCmdAction.UseItemOnItem:
+                    if (message.Target is { Length: >= 2 })
+                        player.Logger.Info(string.Format(CultureInfo.InvariantCulture,
+                            "GenericCmd action=UseItemOnItem char={0} source={1} target={2}",
+                            player.Identity.Instance, message.Target[0], message.Target[1]));
                     if (message.Target is { Length: >= 2 } && _dungeons != null)
                     {
                         bool committed = _dungeons.TryUseGeneratedMissionItem(player, message.Target[0], message.Target[1], out bool handled);
@@ -165,6 +172,15 @@ namespace ZoneEngine_New.Core.MessageHandlers
                     else if (message.Target is { Length: >= 2 }
                         && TryUseItemOnItem(player, playfield, message.Target[0], message.Target[1]))
                         Acknowledge(session, message, message.Target[1]);
+                    else if (message.Target is { Length: >= 2 } && _tradeskills != null
+                        && _tradeskills.TryCombine(player, message.Target[0], message.Target[1], out bool combined))
+                    {
+                        // A recipe matched: the combine itself sends its feedback line (made X, or why not).
+                        if (combined)
+                            Acknowledge(session, message, message.Target[1]);
+                        else
+                            Deny(session, message, player, "tradeskill combine refused");
+                    }
                     else Deny(session, message, player, "no accepted item-on-target interaction");
                     break;
 
