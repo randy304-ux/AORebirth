@@ -675,6 +675,12 @@ public sealed class QuestDungeonPlayfield : Playfield
         Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
             "Quest dungeon {0} completed: exit portal {1:X8} at ({2:0.#}, {3:0.#}, {4:0.#})",
             QuestId, portal.Identity.Instance, at.xf, at.yf, at.zf));
+        // Randy 20:37 (D251696, completed 20:33 ET): the door above was registered and its walk-in volume armed, but no portal
+        // was drawn. A free-standing door added mid-session is not drawn by the client (dungeon doors render at the
+        // layout's doorways); server-placed statels are (the 19:16 completion terminal showed beside the Zix). So the
+        // same 303198 portal also goes out as a usable statel (SimpleItemFullUpdate; CanFlags Use, mesh 44891): click it
+        // or walk into it to leave.
+        PlaceExitBeacon(template, at, "completed (portal statel)");
     }
 
     /// <summary>
