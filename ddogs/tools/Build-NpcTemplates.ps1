@@ -412,3 +412,5 @@ foreach ($nf in $npcSnap.Keys) {
 & "$PSScriptRoot\Build-AreteStrongbox.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Antonio's Adaptation Factory upgrade recipes (Tradeskills.antonio.json), part drop hashes and the loot rows on the mobs the guides name: Build-AntonioUpgrades.ps1.
 & "$PSScriptRoot\Build-AntonioUpgrades.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Marco Spida: profession nano containers (Build-MarcoContainers.ps1).
+& "$PSScriptRoot\Build-MarcoContainers.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))

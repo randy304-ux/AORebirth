@@ -36,15 +36,6 @@
                                             ],
                                      "Goto":  "offer_nano"
                                  },
-                    "take_nano":  {
-                                      "Text":  "I will open it.",
-                                      "If":  [
-                                                 "!HasCompletedQuest AMPR",
-                                                 "!HasAnyQuest AMPR",
-                                                 "HasCompletedQuest ASTR"
-                                             ],
-                                      "Goto":  "give_nano"
-                                  },
                     "later":  {
                                   "Text":  "Maybe later.",
                                   "Goto":  "later"
@@ -60,6 +51,263 @@
                     "nothing":  {
                                     "Text":  "Nothing right now, thanks.",
                                     "Goto":  "nothing"
+                                },
+                    "take_nano_1":  {
+                                        "Text":  "I will open it.",
+                                        "If":  [
+                                                   "!HasCompletedQuest AMPR",
+                                                   "!HasAnyQuest AMPR",
+                                                   "HasCompletedQuest ASTR",
+                                                   "prof 1"
+                                               ],
+                                        "Goto":  "give_nano_1"
+                                    },
+                    "take_nano_2":  {
+                                        "Text":  "I will open it.",
+                                        "If":  [
+                                                   "!HasCompletedQuest AMPR",
+                                                   "!HasAnyQuest AMPR",
+                                                   "HasCompletedQuest ASTR",
+                                                   "prof 2"
+                                               ],
+                                        "Goto":  "give_nano_2"
+                                    },
+                    "swap_2":  {
+                                   "Text":  "You gave me the wrong nano container.",
+                                   "If":  [
+                                              "prof 2",
+                                              "has QNSO",
+                                              "!has QNMA"
+                                          ],
+                                   "Goto":  "swapped_2"
+                               },
+                    "take_nano_3":  {
+                                        "Text":  "I will open it.",
+                                        "If":  [
+                                                   "!HasCompletedQuest AMPR",
+                                                   "!HasAnyQuest AMPR",
+                                                   "HasCompletedQuest ASTR",
+                                                   "prof 3"
+                                               ],
+                                        "Goto":  "give_nano_3"
+                                    },
+                    "swap_3":  {
+                                   "Text":  "You gave me the wrong nano container.",
+                                   "If":  [
+                                              "prof 3",
+                                              "has QNSO",
+                                              "!has QNEN"
+                                          ],
+                                   "Goto":  "swapped_3"
+                               },
+                    "take_nano_4":  {
+                                        "Text":  "I will open it.",
+                                        "If":  [
+                                                   "!HasCompletedQuest AMPR",
+                                                   "!HasAnyQuest AMPR",
+                                                   "HasCompletedQuest ASTR",
+                                                   "prof 4"
+                                               ],
+                                        "Goto":  "give_nano_4"
+                                    },
+                    "swap_4":  {
+                                   "Text":  "You gave me the wrong nano container.",
+                                   "If":  [
+                                              "prof 4",
+                                              "has QNSO",
+                                              "!has QNFI"
+                                          ],
+                                   "Goto":  "swapped_4"
+                               },
+                    "take_nano_5":  {
+                                        "Text":  "I will open it.",
+                                        "If":  [
+                                                   "!HasCompletedQuest AMPR",
+                                                   "!HasAnyQuest AMPR",
+                                                   "HasCompletedQuest ASTR",
+                                                   "prof 5"
+                                               ],
+                                        "Goto":  "give_nano_5"
+                                    },
+                    "swap_5":  {
+                                   "Text":  "You gave me the wrong nano container.",
+                                   "If":  [
+                                              "prof 5",
+                                              "has QNSO",
+                                              "!has QNAG"
+                                          ],
+                                   "Goto":  "swapped_5"
+                               },
+                    "take_nano_6":  {
+                                        "Text":  "I will open it.",
+                                        "If":  [
+                                                   "!HasCompletedQuest AMPR",
+                                                   "!HasAnyQuest AMPR",
+                                                   "HasCompletedQuest ASTR",
+                                                   "prof 6"
+                                               ],
+                                        "Goto":  "give_nano_6"
+                                    },
+                    "swap_6":  {
+                                   "Text":  "You gave me the wrong nano container.",
+                                   "If":  [
+                                              "prof 6",
+                                              "has QNSO",
+                                              "!has QNAD"
+                                          ],
+                                   "Goto":  "swapped_6"
+                               },
+                    "take_nano_7":  {
+                                        "Text":  "I will open it.",
+                                        "If":  [
+                                                   "!HasCompletedQuest AMPR",
+                                                   "!HasAnyQuest AMPR",
+                                                   "HasCompletedQuest ASTR",
+                                                   "prof 7"
+                                               ],
+                                        "Goto":  "give_nano_7"
+                                    },
+                    "swap_7":  {
+                                   "Text":  "You gave me the wrong nano container.",
+                                   "If":  [
+                                              "prof 7",
+                                              "has QNSO",
+                                              "!has QNTR"
+                                          ],
+                                   "Goto":  "swapped_7"
+                               },
+                    "take_nano_8":  {
+                                        "Text":  "I will open it.",
+                                        "If":  [
+                                                   "!HasCompletedQuest AMPR",
+                                                   "!HasAnyQuest AMPR",
+                                                   "HasCompletedQuest ASTR",
+                                                   "prof 8"
+                                               ],
+                                        "Goto":  "give_nano_8"
+                                    },
+                    "swap_8":  {
+                                   "Text":  "You gave me the wrong nano container.",
+                                   "If":  [
+                                              "prof 8",
+                                              "has QNSO",
+                                              "!has QNBU"
+                                          ],
+                                   "Goto":  "swapped_8"
+                               },
+                    "take_nano_9":  {
+                                        "Text":  "I will open it.",
+                                        "If":  [
+                                                   "!HasCompletedQuest AMPR",
+                                                   "!HasAnyQuest AMPR",
+                                                   "HasCompletedQuest ASTR",
+                                                   "prof 9"
+                                               ],
+                                        "Goto":  "give_nano_9"
+                                    },
+                    "swap_9":  {
+                                   "Text":  "You gave me the wrong nano container.",
+                                   "If":  [
+                                              "prof 9",
+                                              "has QNSO",
+                                              "!has QNEF"
+                                          ],
+                                   "Goto":  "swapped_9"
+                               },
+                    "take_nano_10":  {
+                                         "Text":  "I will open it.",
+                                         "If":  [
+                                                    "!HasCompletedQuest AMPR",
+                                                    "!HasAnyQuest AMPR",
+                                                    "HasCompletedQuest ASTR",
+                                                    "prof 10"
+                                                ],
+                                         "Goto":  "give_nano_10"
+                                     },
+                    "swap_10":  {
+                                    "Text":  "You gave me the wrong nano container.",
+                                    "If":  [
+                                               "prof 10",
+                                               "has QNSO",
+                                               "!has QNDO"
+                                           ],
+                                    "Goto":  "swapped_10"
+                                },
+                    "take_nano_11":  {
+                                         "Text":  "I will open it.",
+                                         "If":  [
+                                                    "!HasCompletedQuest AMPR",
+                                                    "!HasAnyQuest AMPR",
+                                                    "HasCompletedQuest ASTR",
+                                                    "prof 11"
+                                                ],
+                                         "Goto":  "give_nano_11"
+                                     },
+                    "swap_11":  {
+                                    "Text":  "You gave me the wrong nano container.",
+                                    "If":  [
+                                               "prof 11",
+                                               "has QNSO",
+                                               "!has QNNT"
+                                           ],
+                                    "Goto":  "swapped_11"
+                                },
+                    "take_nano_12":  {
+                                         "Text":  "I will open it.",
+                                         "If":  [
+                                                    "!HasCompletedQuest AMPR",
+                                                    "!HasAnyQuest AMPR",
+                                                    "HasCompletedQuest ASTR",
+                                                    "prof 12"
+                                                ],
+                                         "Goto":  "give_nano_12"
+                                     },
+                    "swap_12":  {
+                                    "Text":  "You gave me the wrong nano container.",
+                                    "If":  [
+                                               "prof 12",
+                                               "has QNSO",
+                                               "!has QNMP"
+                                           ],
+                                    "Goto":  "swapped_12"
+                                },
+                    "take_nano_14":  {
+                                         "Text":  "I will open it.",
+                                         "If":  [
+                                                    "!HasCompletedQuest AMPR",
+                                                    "!HasAnyQuest AMPR",
+                                                    "HasCompletedQuest ASTR",
+                                                    "prof 14"
+                                                ],
+                                         "Goto":  "give_nano_14"
+                                     },
+                    "swap_14":  {
+                                    "Text":  "You gave me the wrong nano container.",
+                                    "If":  [
+                                               "prof 14",
+                                               "has QNSO",
+                                               "!has QNKE"
+                                           ],
+                                    "Goto":  "swapped_14"
+                                },
+                    "take_nano_15":  {
+                                         "Text":  "I will open it.",
+                                         "If":  [
+                                                    "!HasCompletedQuest AMPR",
+                                                    "!HasAnyQuest AMPR",
+                                                    "HasCompletedQuest ASTR",
+                                                    "prof 15"
+                                                ],
+                                         "Goto":  "give_nano_15"
+                                     },
+                    "swap_15":  {
+                                    "Text":  "You gave me the wrong nano container.",
+                                    "If":  [
+                                               "prof 15",
+                                               "has QNSO",
+                                               "!has QNSH"
+                                           ],
+                                    "Goto":  "swapped_15"
                                 }
                 },
     "Lines":  {
@@ -69,17 +317,23 @@
                                                   "{delay 1}Open it, then tell me."
                                               ],
                                      "Replies":  [
-                                                     "take_nano",
+                                                     "take_nano_1",
+                                                     "take_nano_2",
+                                                     "take_nano_3",
+                                                     "take_nano_4",
+                                                     "take_nano_5",
+                                                     "take_nano_6",
+                                                     "take_nano_7",
+                                                     "take_nano_8",
+                                                     "take_nano_9",
+                                                     "take_nano_10",
+                                                     "take_nano_11",
+                                                     "take_nano_12",
+                                                     "take_nano_14",
+                                                     "take_nano_15",
                                                      "later"
                                                  ]
                                  },
-                  "give_nano":  {
-                                    "Text":  [
-                                                 "{spawn QNPC 1}",
-                                                 "{givequest AMPR}",
-                                                 "{delay 1}Good luck. Come back to me when it is done."
-                                             ]
-                                },
                   "done_nano":  {
                                     "Text":  [
                                                  "{completequest AMPR}",
@@ -95,6 +349,19 @@
                   "busy_nano":  {
                                     "Text":  "Open the profession nano container Marco gives you.",
                                     "Replies":  [
+                                                    "swap_2",
+                                                    "swap_3",
+                                                    "swap_4",
+                                                    "swap_5",
+                                                    "swap_6",
+                                                    "swap_7",
+                                                    "swap_8",
+                                                    "swap_9",
+                                                    "swap_10",
+                                                    "swap_11",
+                                                    "swap_12",
+                                                    "swap_14",
+                                                    "swap_15",
                                                     "bye"
                                                 ]
                                 },
@@ -115,16 +382,257 @@
                                              ]
                              },
                   "nothing":  {
-                                  "Text":  "The can I handed you is the Soldier nanoprogram container. The other professions have their own can on retail. The crystal is the same.{close}"
+                                  "Text":  "Open your profession\u0027s nanoprogram container. If I handed you the wrong one, say so.{close}"
                               },
                   "hello":  {
                                 "Text":  [
                                              "{delay 1}Marco Spida. Nanos, for people who can pay."
                                          ],
                                 "Replies":  [
+                                                "swap_2",
+                                                "swap_3",
+                                                "swap_4",
+                                                "swap_5",
+                                                "swap_6",
+                                                "swap_7",
+                                                "swap_8",
+                                                "swap_9",
+                                                "swap_10",
+                                                "swap_11",
+                                                "swap_12",
+                                                "swap_14",
+                                                "swap_15",
                                                 "ask_nano",
                                                 "nothing"
                                             ]
-                            }
+                            },
+                  "give_nano_1":  {
+                                      "Text":  [
+                                                   "{spawn QNSO 1}",
+                                                   "{givequest AMPR}",
+                                                   "{delay 1}The Soldier Nanoprogram Container. Good luck. Come back to me when it is done."
+                                               ]
+                                  },
+                  "give_nano_2":  {
+                                      "Text":  [
+                                                   "{spawn QNMA 1}",
+                                                   "{givequest AMPR}",
+                                                   "{delay 1}The Martial Artist Nanoprogram Container. Good luck. Come back to me when it is done."
+                                               ]
+                                  },
+                  "swapped_2":  {
+                                    "Text":  [
+                                                 "{take QNSO}",
+                                                 "{spawn QNMA 1}",
+                                                 "My mistake. That was the Soldier can. Here is the Martial Artist Nanoprogram Container."
+                                             ],
+                                    "Replies":  [
+                                                    "nothing"
+                                                ]
+                                },
+                  "give_nano_3":  {
+                                      "Text":  [
+                                                   "{spawn QNEN 1}",
+                                                   "{givequest AMPR}",
+                                                   "{delay 1}The Engineer Nanoprogram Container. Good luck. Come back to me when it is done."
+                                               ]
+                                  },
+                  "swapped_3":  {
+                                    "Text":  [
+                                                 "{take QNSO}",
+                                                 "{spawn QNEN 1}",
+                                                 "My mistake. That was the Soldier can. Here is the Engineer Nanoprogram Container."
+                                             ],
+                                    "Replies":  [
+                                                    "nothing"
+                                                ]
+                                },
+                  "give_nano_4":  {
+                                      "Text":  [
+                                                   "{spawn QNFI 1}",
+                                                   "{givequest AMPR}",
+                                                   "{delay 1}The Fixer Nanoprogram Container. Good luck. Come back to me when it is done."
+                                               ]
+                                  },
+                  "swapped_4":  {
+                                    "Text":  [
+                                                 "{take QNSO}",
+                                                 "{spawn QNFI 1}",
+                                                 "My mistake. That was the Soldier can. Here is the Fixer Nanoprogram Container."
+                                             ],
+                                    "Replies":  [
+                                                    "nothing"
+                                                ]
+                                },
+                  "give_nano_5":  {
+                                      "Text":  [
+                                                   "{spawn QNAG 1}",
+                                                   "{givequest AMPR}",
+                                                   "{delay 1}The Agent Nanoprogram Container. Good luck. Come back to me when it is done."
+                                               ]
+                                  },
+                  "swapped_5":  {
+                                    "Text":  [
+                                                 "{take QNSO}",
+                                                 "{spawn QNAG 1}",
+                                                 "My mistake. That was the Soldier can. Here is the Agent Nanoprogram Container."
+                                             ],
+                                    "Replies":  [
+                                                    "nothing"
+                                                ]
+                                },
+                  "give_nano_6":  {
+                                      "Text":  [
+                                                   "{spawn QNAD 1}",
+                                                   "{givequest AMPR}",
+                                                   "{delay 1}The Adventurer Nanoprogram Container. Good luck. Come back to me when it is done."
+                                               ]
+                                  },
+                  "swapped_6":  {
+                                    "Text":  [
+                                                 "{take QNSO}",
+                                                 "{spawn QNAD 1}",
+                                                 "My mistake. That was the Soldier can. Here is the Adventurer Nanoprogram Container."
+                                             ],
+                                    "Replies":  [
+                                                    "nothing"
+                                                ]
+                                },
+                  "give_nano_7":  {
+                                      "Text":  [
+                                                   "{spawn QNTR 1}",
+                                                   "{givequest AMPR}",
+                                                   "{delay 1}The Trader Nanoprogram Container. Good luck. Come back to me when it is done."
+                                               ]
+                                  },
+                  "swapped_7":  {
+                                    "Text":  [
+                                                 "{take QNSO}",
+                                                 "{spawn QNTR 1}",
+                                                 "My mistake. That was the Soldier can. Here is the Trader Nanoprogram Container."
+                                             ],
+                                    "Replies":  [
+                                                    "nothing"
+                                                ]
+                                },
+                  "give_nano_8":  {
+                                      "Text":  [
+                                                   "{spawn QNBU 1}",
+                                                   "{givequest AMPR}",
+                                                   "{delay 1}The Bureaucrat Nanoprogram Container. Good luck. Come back to me when it is done."
+                                               ]
+                                  },
+                  "swapped_8":  {
+                                    "Text":  [
+                                                 "{take QNSO}",
+                                                 "{spawn QNBU 1}",
+                                                 "My mistake. That was the Soldier can. Here is the Bureaucrat Nanoprogram Container."
+                                             ],
+                                    "Replies":  [
+                                                    "nothing"
+                                                ]
+                                },
+                  "give_nano_9":  {
+                                      "Text":  [
+                                                   "{spawn QNEF 1}",
+                                                   "{givequest AMPR}",
+                                                   "{delay 1}The Enforcer Nanoprogram Container. Good luck. Come back to me when it is done."
+                                               ]
+                                  },
+                  "swapped_9":  {
+                                    "Text":  [
+                                                 "{take QNSO}",
+                                                 "{spawn QNEF 1}",
+                                                 "My mistake. That was the Soldier can. Here is the Enforcer Nanoprogram Container."
+                                             ],
+                                    "Replies":  [
+                                                    "nothing"
+                                                ]
+                                },
+                  "give_nano_10":  {
+                                       "Text":  [
+                                                    "{spawn QNDO 1}",
+                                                    "{givequest AMPR}",
+                                                    "{delay 1}The Doctor Nanoprogram Container. Good luck. Come back to me when it is done."
+                                                ]
+                                   },
+                  "swapped_10":  {
+                                     "Text":  [
+                                                  "{take QNSO}",
+                                                  "{spawn QNDO 1}",
+                                                  "My mistake. That was the Soldier can. Here is the Doctor Nanoprogram Container."
+                                              ],
+                                     "Replies":  [
+                                                     "nothing"
+                                                 ]
+                                 },
+                  "give_nano_11":  {
+                                       "Text":  [
+                                                    "{spawn QNNT 1}",
+                                                    "{givequest AMPR}",
+                                                    "{delay 1}The Nano-Technician Nanoprogram Container. Good luck. Come back to me when it is done."
+                                                ]
+                                   },
+                  "swapped_11":  {
+                                     "Text":  [
+                                                  "{take QNSO}",
+                                                  "{spawn QNNT 1}",
+                                                  "My mistake. That was the Soldier can. Here is the Nano-Technician Nanoprogram Container."
+                                              ],
+                                     "Replies":  [
+                                                     "nothing"
+                                                 ]
+                                 },
+                  "give_nano_12":  {
+                                       "Text":  [
+                                                    "{spawn QNMP 1}",
+                                                    "{givequest AMPR}",
+                                                    "{delay 1}The Meta-Physicist Nanoprogram Container. Good luck. Come back to me when it is done."
+                                                ]
+                                   },
+                  "swapped_12":  {
+                                     "Text":  [
+                                                  "{take QNSO}",
+                                                  "{spawn QNMP 1}",
+                                                  "My mistake. That was the Soldier can. Here is the Meta-Physicist Nanoprogram Container."
+                                              ],
+                                     "Replies":  [
+                                                     "nothing"
+                                                 ]
+                                 },
+                  "give_nano_14":  {
+                                       "Text":  [
+                                                    "{spawn QNKE 1}",
+                                                    "{givequest AMPR}",
+                                                    "{delay 1}The Keeper Nanoprogram Container. Good luck. Come back to me when it is done."
+                                                ]
+                                   },
+                  "swapped_14":  {
+                                     "Text":  [
+                                                  "{take QNSO}",
+                                                  "{spawn QNKE 1}",
+                                                  "My mistake. That was the Soldier can. Here is the Keeper Nanoprogram Container."
+                                              ],
+                                     "Replies":  [
+                                                     "nothing"
+                                                 ]
+                                 },
+                  "give_nano_15":  {
+                                       "Text":  [
+                                                    "{spawn QNSH 1}",
+                                                    "{givequest AMPR}",
+                                                    "{delay 1}The Shade Nanoprogram Container. Good luck. Come back to me when it is done."
+                                                ]
+                                   },
+                  "swapped_15":  {
+                                     "Text":  [
+                                                  "{take QNSO}",
+                                                  "{spawn QNSH 1}",
+                                                  "My mistake. That was the Soldier can. Here is the Shade Nanoprogram Container."
+                                              ],
+                                     "Replies":  [
+                                                     "nothing"
+                                                 ]
+                                 }
               }
 }
