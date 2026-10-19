@@ -120,5 +120,14 @@
     "KAOF": { "Templates": [ 304636 ] },
     "SDOY": { "Templates": [ 304637 ] },
     "ADHA": { "Templates": [ 87810, 87814 ] },
-    "BRAN": { "Templates": [ 95577 ] }
+    "BRAN": { "Templates": [ 95577 ] },
+  // Omni-Med Suit (297054/304006, AOGalaxy): OMME x2 = sleeves, OMMU/ONMU = gloves/boots; by Gender==3 (female) DYWA body + OMMD legs,
+  // otherwise ONMD body + SKGN legs. Body/legs pairing inferred (both variants fill the same two slots).
+  "OMME": { "Templates": [ 27385 ] },
+  "OMMU": { "Templates": [ 27381 ] },
+  "ONMU": { "Templates": [ 27382 ] },
+  "DYWA": { "Templates": [ 27387 ] },
+  "ONMD": { "Templates": [ 27383 ] },
+  "OMMD": { "Templates": [ 27384 ] },
+  "SKGN": { "Templates": [ 27386 ] }
 }
