@@ -66,14 +66,14 @@
                   "go_nascence":  {
                                       "Text":  [
                                                    "Nascence it is.",
-                                                   "{delay 2}Hold still, the transfer beacon will pull you over now.{teleport 4310 849.0 30.4 1073.0}{close}"
+                                                   "{delay 2}Hold still, the transfer beacon will pull you over now.{teleport 4313 412.8 76.7 353.5}{close}"
                                                ]
                                   },
                   "bye":  {
                               "Text":  "Come back whenever you need a transfer.{close}"
                           },
                   "travel":  {
-                                 "Text":  "{delay 1}Need a transfer? I can send you to Arete Landing or to Nascence.",
+                                 "Text":  "{delay 1}Need a transfer? I can send you to Arete Landing or to the Nascence Training Grounds.",
                                  "Replies":  [
                                                  "to_arete",
                                                  "to_nascence",
@@ -109,7 +109,7 @@
                   "nascence_start":  {
                                          "Text":  [
                                                       "Nascence it is. Good luck out there!",
-                                                      "{delay 2}Hold still, the transfer beacon will pull you over now.{startarea icc}{teleport 4310 849.0 30.4 1073.0}{close}"
+                                                      "{delay 2}Hold still, the transfer beacon will pull you over now.{startarea icc}{teleport 4313 412.8 76.7 353.5}{close}"
                                                   ]
                                      },
                   "icc":  {
