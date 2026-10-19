@@ -87,6 +87,7 @@ namespace ZoneEngine_New.Core.Missions
             float dx = player.Position.xf - row.X, dz = player.Position.zf - row.Z;
             if (dx * dx + dz * dz > row.Range * row.Range)
             {
+                player.Logger.Info(FormattableString.Invariant($"StatelLocks too far char={player.Identity.Instance} at ({player.Position.xf:0.0}, {player.Position.zf:0.0}) {row.Name} at ({row.X:0.0}, {row.Z:0.0})"));
                 Say(player, "You are too far away from the " + row.Name + ".");
                 return true;
             }
