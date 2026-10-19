@@ -71,7 +71,7 @@ foreach ($b in 705,706,707) { if ($used -contains $b) { throw "bit $b taken" } }
 function Rec($id, $name) { [pscustomobject]@{ Id = $id; HighId = $id; Name = $name; Quality = 10 } }
 $q += [pscustomobject]@{ Hash='SSW1'; Name='The Shiny Sword'; QasInstance=920175; Scope='Solo'; Action='FindItem'; Summary='Give the Shiny Sword to the Greedy Desert Reet'
   Objective=[pscustomobject]@{ Count=$null; Npc='GRDS'; SpecItem='SHSW'; WorldItem=$null }; Flags='None'; MissionBit=705; NextStep=$null
-  Reward=[pscustomobject]@{ Hash='RSSW'; Credits=0; Xp=1000; Records=@(,@((Rec 223381 'Nano Crystal (Composite Nano Expertise)'))) } }
+  Reward=[pscustomobject]@{ Hash='RSSW'; Credits=1400; Xp=2170; Records=@(,@((Rec 223381 'Nano Crystal (Composite Nano Expertise)'))) } }
 $q += [pscustomobject]@{ Hash='LKQ1'; Name='The wrath of the Leet King'; QasInstance=920176; Scope='Solo'; Action='KillOne'; Summary='Kill the Greedy Desert Reet and smash his stolen treasure'
   Objective=[pscustomobject]@{ Count=$null; Npc='GRDS'; SpecItem=$null; WorldItem=$null }; Flags='NoCash'; MissionBit=706; NextStep=$null
   Reward=[pscustomobject]@{ Hash='RLK1'; Credits=0; Xp=500; Records=$null } }
