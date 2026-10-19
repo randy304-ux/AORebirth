@@ -1079,7 +1079,7 @@ namespace ZoneEngine_New.Core.Trade
         /// at the index the client used, the first free one. Nothing is written until the trade commits, so an
         /// interrupted trade leaves every item at its stored location.
         /// </summary>
-        public bool TryOpenKnubot(Player player, NpcCharacter npc, string message)
+        public bool TryOpenKnubot(Player player, NpcCharacter npc, string message, int slots = TradeOffer.Capacity)
         {
             ArgumentNullException.ThrowIfNull(player);
             ArgumentNullException.ThrowIfNull(npc);
@@ -1110,12 +1110,12 @@ namespace ZoneEngine_New.Core.Trade
                 Identity = player.Identity,
                 Unknown1 = 2,
                 Target = npc.Identity,
-                NumberOfItemSlotsInTradeWindow = TradeOffer.Capacity,
+                NumberOfItemSlotsInTradeWindow = Math.Clamp(slots, 1, TradeOffer.Capacity),
                 Message = string.IsNullOrWhiteSpace(message) ? "Trade" : message
             });
 
-            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Knubot trade opened player={0} npc={1}",
-                player.Identity.Instance, npc.Identity.Instance));
+            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Knubot trade opened player={0} npc={1} slots={2}",
+                player.Identity.Instance, npc.Identity.Instance, Math.Clamp(slots, 1, TradeOffer.Capacity)));
             return true;
         }
 

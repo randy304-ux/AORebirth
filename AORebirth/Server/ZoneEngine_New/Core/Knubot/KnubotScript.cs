@@ -2,6 +2,7 @@ namespace ZoneEngine_New.Core.Knubot;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -159,6 +160,33 @@ public sealed record KnubotReply(string Id, KnubotTextPiece[] Text, KnubotCondit
 /// <summary><see cref="Id"/> is the trade's key in the script's Trades, for logs.</summary>
 public sealed record KnubotTrade(string Id, KnubotCondition[] If, KnubotTradeItem[] Items, int Credits, string Goto)
 {
+    /// <summary>Items one hand-in needs (counts summed, at least one).</summary>
+    public int SlotCount => Math.Max(1, Items.Sum(x => Math.Max(1, x.Count)));
+
+    /// <summary>
+    /// Give Item window size, like live AO: the largest hand-in the player can make right now
+    /// (trades whose conditions pass); every trade when none pass; the full window when there are none.
+    /// </summary>
+    public static int SlotsFor(KnubotTrade[] trades, KnubotContext? context)
+    {
+        if (trades.Length == 0)
+            return ZoneEngine_New.Core.Trade.TradeOffer.Capacity;
+        KnubotTrade[] open = context == null ? trades : trades.Where(x => KnubotCondition.All(x.If, context)).ToArray();
+        if (open.Length == 0)
+            open = trades;
+        return Math.Min(ZoneEngine_New.Core.Trade.TradeOffer.Capacity, open.Max(x => x.SlotCount));
+    }
+
+    /// <summary>What the player hears when a trade matched nothing; the items are already handed back.</summary>
+    public static string RejectText(KnubotTrade[] trades, KnubotContext? context, int offered)
+    {
+        int need = SlotsFor(trades, context);
+        string back = offered == 0 ? "" : " Your items have been returned to your inventory.";
+        return need > offered && offered > 0
+            ? $"That is not everything needed: give all {need} items together in one trade.{back}"
+            : $"That is not what is wanted right now.{back}";
+    }
+
     /// <summary>
     /// True when <paramref name="offered"/> is exactly this trade: every item counts toward one wanted hash, every
     /// count is met, nothing is left over, and the credits are exact.

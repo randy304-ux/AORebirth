@@ -64,5 +64,6 @@
   <ItemGroup Condition="'$(TradeskillFocusedTests)' == 'true'">
     <Compile Remove="@(Compile)" />
     <Compile Include="TradeskillTests.cs" />
+    <Compile Include="KnubotTradeTests.cs" />
   </ItemGroup>
 </Project>

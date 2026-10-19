@@ -272,7 +272,7 @@ public sealed class KnubotService(KnubotCatalog catalog, KnubotEffectServices ef
             }
 
             conversation.LastActivityAt = _milliseconds();
-            effects.Trades.TryOpenKnubot(player, npc, TradeText(npc));
+            effects.Trades.TryOpenKnubot(player, npc, TradeText(npc), KnubotTrade.SlotsFor(script.Trades, Context(conversation)));
             return true;
         }
     }
@@ -344,6 +344,9 @@ public sealed class KnubotService(KnubotCatalog catalog, KnubotEffectServices ef
             if (trade == null || !effects.Trades.TryCommitKnubot(player, npc, credits))
             {
                 effects.Trades.EndKnubot(player, npc, refund, trade == null ? "no matching trade" : "commit failed");
+                if (trade == null && player.Session != null)
+                    ZoneEngine_New.Core.Commands.GmCommandFeedback.Send(player.Session, player,
+                        KnubotTrade.RejectText(conversation.Script.Trades, context, offered.Length));
                 return true;
             }
 
