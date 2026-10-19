@@ -639,6 +639,9 @@ public sealed class QuestDungeonPlayfield : Playfield
         if (!TrySnapFeetToFloor(at, out AORebirth.Core.Vector.Vector3 floor))
             floor = SnapFeetToFloor(new AORebirth.Core.Vector.Vector3(ox, oy, oz));
         SpawnCompletionPortal(floor);
+        // Randy 20:43: always say so in chat as well, in case nothing new is drawn.
+        if (completer.Session is IZoneSession completerSession)
+            Commands.GmCommandFeedback.Send(completerSession, completer, "Mission complete: the exit is open, use the Exit Beacon by the entrance or the exit door.");
     }
 
     /// <summary>
