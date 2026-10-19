@@ -61,4 +61,8 @@
     <Compile Include="SkillLockTests.cs" />
     <Compile Include="RequirementExpressionTests.cs" />
   </ItemGroup>
+  <ItemGroup Condition="'$(TradeskillFocusedTests)' == 'true'">
+    <Compile Remove="@(Compile)" />
+    <Compile Include="TradeskillTests.cs" />
+  </ItemGroup>
 </Project>

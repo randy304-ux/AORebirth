@@ -4,9 +4,6 @@ namespace ZoneEngine_New.Core.Tradeskills
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Globalization;
-    using System.IO;
-    using System.Linq;
-    using System.Text.Json;
 
     using AORebirth.Enums;
 
@@ -18,61 +15,45 @@ namespace ZoneEngine_New.Core.Tradeskills
     using ZoneEngine_New.Core.GameData;
     using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
-    using ZoneEngine_New.Core.Network;
-
-    /// <summary>One source + target combine from GameData/Tradeskills.json (plus Tradeskills.*.json overlays).</summary>
-    public sealed class TradeskillRecipe
-    {
-        public string Name { get; set; } = string.Empty;
-        public int[] Source { get; set; } = Array.Empty<int>();
-        public int[] Target { get; set; } = Array.Empty<int>();
-        /// <summary>Result low/high ids; the result QL is the target's QL, clamped to the result's QL range by the item builder.</summary>
-        public int[] Result { get; set; } = Array.Empty<int>();
-        public bool DeleteSource { get; set; }
-        public bool DeleteTarget { get; set; } = true;
-        /// <summary>Source QL must be at least this percent of the target QL (alien armor 80% rule); 0 = any.</summary>
-        public int MinSourcePct { get; set; }
-        /// <summary>[stat id, percent of target QL] pairs, e.g. [126, 450] = EE at 4.5x QL.</summary>
-        public int[][] Skills { get; set; } = Array.Empty<int[]>();
-    }
 
     /// <summary>
-    /// Tradeskill window: the client names the source and target slots (TradeskillSourceChanged/TargetChanged,
-    /// Parameter1 = container type, Parameter2 = slot), then presses Build. Replies follow the CellAO layout
-    /// (TradeskillSource/Target with the process count, TradeskillRequirement per skill, TradeskillResult with the
-    /// QL range); not yet checked against a live capture. Only main-inventory items take part.
+    /// Tradeskill window and item-on-item combines. The window names the source and target slots
+    /// (TradeskillSourceChanged/TargetChanged, Parameter1 = container type, Parameter2 = slot) and the server answers
+    /// with the process counts, one TradeskillRequirement per skill and TradeskillResult (min QL, max QL with bumps).
+    /// Build (Target.Instance = the slider QL, as CellAO reads it) makes the item. Dragging an item onto another runs
+    /// the same combine at the highest QL. Reply layouts follow CellAO; not yet checked against a live capture. Only
+    /// items the player owns in a resolvable slot take part.
     /// </summary>
     public sealed class TradeskillService
     {
         readonly IItemBuilder _items;
+        readonly IItemTemplateCatalog? _catalog;
         readonly InventoryActionService _actions;
         readonly InventoryFlushService _flush;
         readonly IZoneLogger _logger;
-        readonly List<TradeskillRecipe> _recipes = new();
+        readonly TradeskillRecipeBook _book;
         readonly ConcurrentDictionary<int, (Identity Source, Identity Target)> _windows = new();
 
         public TradeskillService(IGameData gameData, IItemBuilder items, InventoryActionService actions,
-            InventoryFlushService flush, IZoneLogger logger)
+            InventoryFlushService flush, IZoneLogger logger, IItemTemplateCatalog? catalog = null)
         {
             _items = items;
+            _catalog = catalog;
             _actions = actions;
             _flush = flush;
             _logger = logger;
-            string path = Path.Combine(gameData.RootPath, "Tradeskills.json");
             try
             {
-                if (File.Exists(path))
-                    _recipes.AddRange(JsonSerializer.Deserialize<List<TradeskillRecipe>>(GameDataOverlay.ReadMerged(path),
-                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new());
-                _logger.Info("GameData tradeskill recipes=" + _recipes.Count + " from " + path);
+                _book = TradeskillRecipeBook.Load(gameData.RootPath, _logger.Info);
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, "Failed to load Tradeskills.json from " + path);
+                _logger.Error(exception, "Failed to load tradeskill recipes from " + gameData.RootPath);
+                _book = new TradeskillRecipeBook();
             }
         }
 
-        public int Count => _recipes.Count;
+        public int Count => _book.Count;
 
         public bool TryHandle(Player player, CharacterActionMessage message)
         {
@@ -85,8 +66,15 @@ namespace ZoneEngine_New.Core.Tradeskills
                     SlotChanged(player, message, source: false);
                     return true;
                 case CharacterActionType.TradeskillBuildPressed:
-                    Build(player, message);
+                {
+                    var window = _windows.GetValueOrDefault(player.Identity.Instance);
+                    _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                        "Tradeskill build char={0} target={1} p1={2} p2={3} source={4} tgt={5}",
+                        player.Identity.Instance, message.Target, message.Parameter1, message.Parameter2, window.Source, window.Target));
+                    if (Build(player, window, message.Target.Instance))
+                        _windows[player.Identity.Instance] = (Identity.None, Identity.None);
                     return true;
+                }
                 case CharacterActionType.UseItemOnItem:
                 {
                     // CellAO's layout for an item dragged onto another: Target = source slot, Parameter1/2 = target slot.
@@ -94,12 +82,30 @@ namespace ZoneEngine_New.Core.Tradeskills
                     _logger.Info(string.Format(CultureInfo.InvariantCulture,
                         "CharacterAction UseItemOnItem char={0} source={1} target={2}", player.Identity.Instance, message.Target, target));
                     if (!TryCombine(player, message.Target, target, out _))
-                        Feedback(player, "These items cannot be combined.");
+                        Feedback(player, NoRecipeText(player, message.Target, target));
                     return true;
                 }
                 default:
                     return false;
             }
+        }
+
+        /// <summary>
+        /// Item dragged onto another item in the inventory (GenericCmd UseItemOnItem or CharacterAction UseItemOnItem):
+        /// the same combine as the Build button, at the highest QL the skills allow. False when no recipe takes this
+        /// source and target, so the caller can try its other item-on-item uses; true when a recipe matched (built
+        /// says whether the combine went through).
+        /// </summary>
+        public bool TryCombine(Player player, Identity sourceSlot, Identity targetSlot, out bool built)
+        {
+            built = false;
+            if (!TryResolve(player, (sourceSlot, targetSlot), out Item source, out Item target, out TradeskillRecipe? recipe))
+                return false;
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Tradeskill combine (item on item) char={0} source={1} {2} target={3} {4}",
+                player.Identity.Instance, sourceSlot, source.Name, targetSlot, target.Name));
+            built = Build(player, (sourceSlot, targetSlot), desiredQuality: 0);
+            return true;
         }
 
         static Identity SlotOf(CharacterActionMessage message)
@@ -119,14 +125,13 @@ namespace ZoneEngine_New.Core.Tradeskills
             _windows[player.Identity.Instance] = window;
             if (!valid || !InventoryActionService.TryResolveOwnedSlot(player, slot, out _, out Item item))
                 return;
-            int processes = _recipes.Count(r => (source ? r.Source : r.Target).Any(id => Is(item, id)));
+            int processes = source ? _book.SourceProcesses(item.LowId, item.HighId) : _book.TargetProcesses(item.LowId, item.HighId);
             Send(player, source ? CharacterActionType.TradeskillSource : CharacterActionType.TradeskillTarget, Identity.None, 0, processes);
             Evaluate(player, window);
         }
 
-        static bool Is(Item item, int id) => id == item.LowId || id == item.HighId;
-
-        bool TryResolve(Player player, (Identity Source, Identity Target) window, out Item source, out Item target, out TradeskillRecipe? recipe)
+        bool TryResolve(Player player, (Identity Source, Identity Target) window, out Item source, out Item target,
+            out TradeskillRecipe? recipe)
         {
             source = null!; target = null!; recipe = null;
             if (window.Source.Instance <= 0 || window.Target.Instance <= 0
@@ -134,9 +139,29 @@ namespace ZoneEngine_New.Core.Tradeskills
                 || !InventoryActionService.TryResolveOwnedSlot(player, window.Target, out _, out target)
                 || ReferenceEquals(source, target))
                 return false;
-            Item s = source, t = target;
-            recipe = _recipes.FirstOrDefault(r => r.Source.Any(id => Is(s, id)) && r.Target.Any(id => Is(t, id)));
-            return recipe != null;
+            if (!_book.TryFind(source.LowId, source.HighId, target.LowId, target.HighId, out TradeskillRecipe found))
+                return false;
+            recipe = found;
+            return true;
+        }
+
+        int Skill(Player player, int stat) => player.Stats.GetOrZero((CharacterStat)stat);
+
+        (int Low, int High) ResultQualities(TradeskillRecipe recipe)
+        {
+            int low = 1, high = 0;
+            if (_catalog != null && _catalog.TryGet(recipe.ResultLow, out ItemTemplate lowTemplate))
+                low = Math.Max(1, lowTemplate.Quality);
+            if (_catalog != null && _catalog.TryGet(recipe.ResultHigh, out ItemTemplate highTemplate))
+                high = highTemplate.Quality;
+            return (low, Math.Max(low, high));
+        }
+
+        (int Min, int Max) Range(Player player, TradeskillRecipe recipe, Item target)
+        {
+            int bumps = TradeskillRules.Bumps(recipe, target.Quality, stat => Skill(player, stat));
+            var qualities = ResultQualities(recipe);
+            return TradeskillRules.ResultRange(recipe, target.Quality, bumps, qualities.Low, qualities.High);
         }
 
         void Evaluate(Player player, (Identity Source, Identity Target) window)
@@ -148,81 +173,72 @@ namespace ZoneEngine_New.Core.Tradeskills
                 Send(player, CharacterActionType.TradeskillNotValid, Identity.None, 0, 0);
                 return;
             }
-            if (!SourceInRange(recipe, source, target))
+            if (!TradeskillRules.SourceInRange(recipe, source.Quality, target.Quality))
             {
-                Send(player, CharacterActionType.TradeskillOutOfRange, Identity.None, 0, MinSourceQl(recipe, target));
+                Send(player, CharacterActionType.TradeskillOutOfRange, Identity.None, 0,
+                    TradeskillRules.MinSourceQuality(recipe, target.Quality));
                 return;
             }
-            foreach (int[] skill in recipe.Skills.Where(s => s.Length >= 2))
-                Send(player, CharacterActionType.TradeskillRequirement, Identity.None, skill[0], Required(skill[1], target.Quality));
+            foreach (int[] skill in recipe.Skills)
+                if (skill.Length >= 2)
+                    Send(player, CharacterActionType.TradeskillRequirement, Identity.None, skill[0],
+                        TradeskillRules.Required(skill[1], target.Quality));
+            var range = Range(player, recipe, target);
             Send(player, CharacterActionType.TradeskillResult,
-                new Identity { Type = (IdentityType)target.Quality, Instance = recipe.Result[^1] }, target.Quality, recipe.Result[0]);
+                new Identity { Type = (IdentityType)range.Max, Instance = recipe.ResultHigh }, range.Min, recipe.ResultLow);
         }
 
-        static int Required(int percent, int quality) => (int)Math.Ceiling(quality * percent / 100.0);
-
-        static int MinSourceQl(TradeskillRecipe recipe, Item target) => (int)Math.Ceiling(target.Quality * recipe.MinSourcePct / 100.0);
-
-        static bool SourceInRange(TradeskillRecipe recipe, Item source, Item target)
-            => recipe.MinSourcePct <= 0 || source.Quality >= MinSourceQl(recipe, target);
-
-        /// <summary>
-        /// Item dragged onto another item in the inventory (GenericCmd UseItemOnItem or CharacterAction UseItemOnItem):
-        /// the same combine as the Build button. False when no recipe takes this source and target, so the caller can
-        /// try its other item-on-item uses; true when a recipe matched (built says whether the combine went through).
-        /// </summary>
-        public bool TryCombine(Player player, Identity sourceSlot, Identity targetSlot, out bool built)
-        {
-            built = false;
-            var window = (sourceSlot, targetSlot);
-            if (!TryResolve(player, window, out _, out _, out TradeskillRecipe? recipe) || recipe == null)
-                return false;
-            _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                "Tradeskill combine (item on item) char={0} source={1} target={2} recipe={3}",
-                player.Identity.Instance, sourceSlot, targetSlot, recipe.Name));
-            built = BuildWindow(player, window);
-            return true;
-        }
-
-        void Build(Player player, CharacterActionMessage message)
-        {
-            var window = _windows.GetValueOrDefault(player.Identity.Instance);
-            _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                "Tradeskill build char={0} target={1} p1={2} p2={3} source={4} tgt={5}",
-                player.Identity.Instance, message.Target, message.Parameter1, message.Parameter2, window.Source, window.Target));
-            BuildWindow(player, window);
-        }
-
-        bool BuildWindow(Player player, (Identity Source, Identity Target) window)
+        bool Build(Player player, (Identity Source, Identity Target) window, int desiredQuality)
         {
             if (player.IsDead || player.IsPersistenceQuarantined || player.Session == null)
                 return false;
-            if (!TryResolve(player, window, out Item source, out Item target, out TradeskillRecipe? recipe) || recipe == null || recipe.Result.Length == 0)
+            if (!TryResolve(player, window, out Item source, out Item target, out TradeskillRecipe? recipe) || recipe == null)
             {
-                Feedback(player, "These items cannot be combined.");
+                Feedback(player, NoRecipeText(player, window.Source, window.Target));
                 return false;
             }
-            if (!SourceInRange(recipe, source, target))
+            if (source.Locked || target.Locked)
+            {
+                Feedback(player, "The combine failed: one of the items is locked.");
+                return false;
+            }
+            if (!TradeskillRules.TargetAllowed(recipe, target.Quality))
             {
                 Feedback(player, string.Format(CultureInfo.InvariantCulture,
-                    "The {0} must be at least QL {1} for a QL {2} {3}.", source.Name, MinSourceQl(recipe, target), target.Quality, target.Name));
+                    "The {0} must be at least QL {1}.", target.Name, recipe.MinTargetQl));
                 return false;
             }
-            foreach (int[] skill in recipe.Skills.Where(s => s.Length >= 2))
+            if (!TradeskillRules.SourceInRange(recipe, source.Quality, target.Quality))
             {
-                int need = Required(skill[1], target.Quality);
-                int have = player.Stats.GetOrZero((CharacterStat)skill[0]);
-                if (have < need)
-                {
-                    Feedback(player, string.Format(CultureInfo.InvariantCulture,
-                        "You need {0} {1} for this ({2} now).", need, (CharacterStat)skill[0], have));
-                    return false;
-                }
+                Feedback(player, string.Format(CultureInfo.InvariantCulture,
+                    "The {0} must be at least QL {1} for a QL {2} {3}.", source.Name,
+                    TradeskillRules.MinSourceQuality(recipe, target.Quality), target.Quality, target.Name));
+                return false;
+            }
+            if (TradeskillRules.TryFindMissingSkill(recipe, target.Quality, stat => Skill(player, stat),
+                out int stat, out int need, out int have))
+            {
+                Feedback(player, string.Format(CultureInfo.InvariantCulture,
+                    "You need {0} {1} for this ({2} now).", need, SkillName(stat), have));
+                return false;
             }
 
-            int quality = target.Quality;
-            int low = recipe.Result[0];
-            int high = recipe.Result.Length > 1 ? recipe.Result[1] : low;
+            var range = Range(player, recipe, target);
+            int quality = TradeskillRules.PickQuality(desiredQuality, range);
+            if (!TradeskillRules.JobeAllowed(recipe, target.Quality, quality))
+            {
+                Feedback(player, target.Quality < 99
+                    ? "Jobe clusters only go into QL 99 or higher implants."
+                    : "A QL 99 implant takes a Jobe cluster only when the combine bumps it to QL 100; you need more Nano Programming.");
+                return false;
+            }
+            if (player.Inventory.Inventory.FindFreeSlot() < 0 && !recipe.DeleteTarget && !recipe.DeleteSource)
+            {
+                Feedback(player, "Your inventory is full.");
+                return false;
+            }
+
+            int low = recipe.ResultLow, high = recipe.ResultHigh;
             Identity sourceSlot = window.Source, targetSlot = window.Target;
             int sourceInstance = source.InstanceId, targetInstance = target.InstanceId;
             string sourceName = source.Name, targetName = target.Name;
@@ -246,13 +262,33 @@ namespace ZoneEngine_New.Core.Tradeskills
                 Identity = player.Identity, LowId = result.LowId, HighId = result.HighId,
                 Quality = result.Quality, Count = result.StackCount
             });
-            _windows[player.Identity.Instance] = (recipe.DeleteSource ? Identity.None : sourceSlot, Identity.None);
             Feedback(player, string.Format(CultureInfo.InvariantCulture,
-                "You combined {0} with {1} and made {2} (QL {3}).", sourceName, targetName, result.Name, result.Quality));
+                "You combined \"{0}\" with \"{1}\" and the result is a quality level {2} \"{3}\".",
+                sourceName, targetName, result.Quality, result.Name));
+
+            var qualities = ResultQualities(recipe);
+            int xp = TradeskillRules.Xp(recipe, result.Quality, qualities.Low, qualities.High);
+            if (xp > 0)
+                player.AwardXp(xp, XpSource.Quest);
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                "Tradeskill {0} char={1} result={2}/{3} ql={4}", recipe.Name, player.Identity.Instance, low, high, quality));
+                "Tradeskill made char={0} source={1} target={2} result={3}/{4} ql={5} range={6}-{7} xp={8}",
+                player.Identity.Instance, sourceName, targetName, low, high, result.Quality, range.Min, range.Max, xp));
             return true;
         }
+
+        /// <summary>Why nothing matched, with a hint when a cluster meets an implant (taken grade slot or wrong body part).</summary>
+        static string NoRecipeText(Player player, Identity sourceSlot, Identity targetSlot)
+        {
+            if (InventoryActionService.TryResolveOwnedSlot(player, sourceSlot, out _, out Item source)
+                && InventoryActionService.TryResolveOwnedSlot(player, targetSlot, out _, out Item target)
+                && source.Name.Contains("Cluster", StringComparison.OrdinalIgnoreCase)
+                && target.Name.Contains("Implant", StringComparison.OrdinalIgnoreCase))
+                return "That cluster does not fit this implant: its Shiny/Bright/Faded slot is taken or it belongs in another body location.";
+            return "It is not possible to assemble those two items. Maybe the order was wrong?";
+        }
+
+        static string SkillName(int stat)
+            => Enum.IsDefined(typeof(CharacterStat), stat) ? ((CharacterStat)stat).ToString() : "skill " + stat;
 
         bool Remove(Player player, Identity slot, int instance)
         {
@@ -261,7 +297,6 @@ namespace ZoneEngine_New.Core.Tradeskills
                 Feedback(player, "The combine failed: an item changed.");
                 return false;
             }
-            InventoryActionService.TryResolveOwnedSlot(player, slot, out _, out _);
             player.Session?.Send(new CharacterActionMessage
             {
                 Identity = player.Identity, Action = CharacterActionType.DeleteItem, Target = slot,
