@@ -76,6 +76,14 @@ namespace ZoneEngine_New.Core.Inventory
                     return Set(target, spell);
                 case FunctionType.SetFlag:
                     return SetFlag(target, spell);
+                // Faction [stat, value] sets a faction standing stat (567-572: Omni/Clan follower/operator points);
+                // the side application forms zero them on a side change.
+                case FunctionType.Faction:
+                    return Set(target, spell);
+                // Client-side cosmetics: the user's client plays the item's own effect and overhead text from its template.
+                case FunctionType.GfxEffect:
+                case FunctionType.HeadText:
+                    return true;
                 case FunctionType.ClearFlag:
                     return ClearFlag(target, spell);
                 case FunctionType.SystemText:
