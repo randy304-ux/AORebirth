@@ -653,6 +653,13 @@ namespace ZoneEngine_New.Core.Inventory
             if (spell.TryReadInt(2, out int mode) && mode is not 0 and not 1)
                 return false;
 
+            // One per character: the Remains of Shop Thief (DLPT, Sarah Greene's DNA-Locked armor 295618) gives nothing once
+            // the character holds or banks the armor or has finished "Recover the DNA-Locked Armor" (mission bit 635).
+            if (OncePerCharacter.TryGetValue(hash, out (int TemplateId, int MissionBit) once) && AlreadyHas(player, once.TemplateId, once.MissionBit))
+            {
+                ClientFeedback.SendFormatted(player, ClientFeedback.PlainText, "You find nothing more on the remains.");
+                return true;
+            }
             // A SpawnAll parent (a profession Nanoprogram Container hash) grants every branch; any other hash one item.
             HashItemMinter minter = player.Playfield.GetRequiredService<HashItemMinter>();
             var items = new List<Item>();
@@ -670,6 +677,23 @@ namespace ZoneEngine_New.Core.Inventory
             return all;
         }
 
+        static readonly Dictionary<string, (int TemplateId, int MissionBit)> OncePerCharacter = new(StringComparer.Ordinal)
+        {
+            ["DLPT"] = (295618, 635),
+        };
+
+        static bool AlreadyHas(Player player, int templateId, int missionBit)
+        {
+            if (Quests.MissionBits.Has(player.Stats, missionBit))
+                return true;
+            foreach (Item item in player.Inventory.EnumerateHeldItems())
+                if (item.LowId == templateId || item.HighId == templateId)
+                    return true;
+            foreach (Item item in player.Inventory.Bank.Content.Values)
+                if (item != null && (item.LowId == templateId || item.HighId == templateId))
+                    return true;
+            return false;
+        }
         static bool GrantSpawnedItem(Player player, Item item)
         {
             if (player.Playfield == null || player.Session == null)

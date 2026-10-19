@@ -13,3 +13,4 @@ Tradeskill window: Hacker Tool (source) + Omni-Tek Technical Library (target) = 
 - Tradeskills.arete.json: 87810 + 248377 -> 295756 Hacked Technical Library, keeps the tool (DeleteSource false), Computer Literacy 20 (guessed, same as Antonio's).
 - Vernon (Build-AreteVernon.ps1): a trade taking QHKL (the hacked library) completes AVG0 and hands it back. The old both-items trade still works.
 - ItemTemplates.Arete.json: DLPT = DNA-Locked Prototype Raven Combat Armor 295618 (QL200), the item next to the Remains in items.dat and the one the Dead Thief Knubot gives (QDLA).
+- Follow-up (Randy 3:20 PM): DLPT gives the armor once per character. Nothing if the armor is held, equipped or in the loaded bank, or 'Recover the DNA-Locked Armor' is done (mission bit 635); then 'You find nothing more on the remains.' The flea still spawns.
