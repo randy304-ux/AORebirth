@@ -418,3 +418,5 @@ foreach ($nf in $npcSnap.Keys) {
 & "$PSScriptRoot\Build-AreteVernon.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Doctor Mason, Arete guide #9b implant steps and Personalized ICC ID Chip (Build-AreteMason.ps1). Keep after Build-AreteVernon.ps1.
 & "$PSScriptRoot\Build-AreteMason.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Whereis-named placeholder spawns (Nadybot/Budabot/BeBot high-confidence matches, whereis_named_spawns.csv): Build-WhereisNamed.ps1. Only fills empty codes.
+& "$PSScriptRoot\Build-WhereisNamed.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
