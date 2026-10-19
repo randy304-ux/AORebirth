@@ -61,7 +61,16 @@
                     "nothing":  {
                                     "Text":  "Nothing right now, thanks.",
                                     "Goto":  "nothing"
-                                }
+                                },
+                    "lost_pick":  {
+                                      "Text":  "I lost my Lock Pick.",
+                                      "If":  [
+                                                 "HasQuest AST0",
+                                                 "!has QLOK",
+                                                 "!has BRAN"
+                                             ],
+                                      "Goto":  "regive_pick"
+                                  }
                 },
     "Lines":  {
                   "offer_factory":  {
@@ -100,7 +109,8 @@
                                        "Text":  "Lockpick the strongbox, then bring the factory, the transmitter, the info chip and the compiler.",
                                        "Replies":  [
                                                        "handin_factory",
-                                                       "bye"
+                                                       "bye",
+                                                       "lost_pick"
                                                    ]
                                    },
                   "later":  {
@@ -130,7 +140,16 @@
                                                 "ask_factory",
                                                 "nothing"
                                             ]
-                            }
+                            },
+                  "regive_pick":  {
+                                      "Text":  [
+                                                   "{spawn QLOK 1}",
+                                                   "Here is another Vacuum Packed Lock Pick. Use the lock pick on the strongbox itself, do not hand it to anyone."
+                                               ],
+                                      "Replies":  [
+                                                      "bye"
+                                                  ]
+                                  }
               },
     "Trades":  {
                    "turnin_factory":  {

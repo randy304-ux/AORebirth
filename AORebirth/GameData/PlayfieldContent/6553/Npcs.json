@@ -1985,61 +1985,6 @@
                                       }
                  },
                  {
-                     "Key":  "ddogs:arete:strongbox",
-                     "Provenance":  "Guide room 3407.9 by 877.6. Y 9.4 is the camp deck height of the nearby FACS spawn. Mesh borrowed.",
-                     "ContentNpcIdentity":  "ddogs-strongbox",
-                     "PlayfieldId":  6553,
-                     "InstanceId":  2110836802,
-                     "Name":  "Merchant\u0027s Strongbox",
-                     "Position":  [
-                                      3407.9,
-                                      9.4,
-                                      877.6
-                                  ],
-                     "Rotation":  [
-                                      0,
-                                      0,
-                                      0,
-                                      1
-                                  ],
-                     "Stats":  {
-                                   "0":  277352961,
-                                   "1":  80,
-                                   "4":  1,
-                                   "27":  80,
-                                   "33":  0,
-                                   "47":  1,
-                                   "54":  5,
-                                   "59":  2,
-                                   "60":  0,
-                                   "64":  0,
-                                   "89":  1,
-                                   "156":  0,
-                                   "173":  3,
-                                   "174":  3,
-                                   "359":  297023,
-                                   "360":  40,
-                                   "368":  0,
-                                   "389":  0,
-                                   "455":  0,
-                                   "466":  0,
-                                   "660":  0,
-                                   "673":  31
-                               },
-                     "Textures":  [
-
-                                  ],
-                     "Meshes":  [
-
-                                ],
-                     "Passive":  true,
-                     "Attackable":  false,
-                     "TickLiving":  true,
-                     "Presentation":  {
-
-                                      }
-                 },
-                 {
                      "Key":  "ddogs:arete:dead-thief",
                      "Provenance":  "Beside IEGA, the level-7 underground spawn at 3424.1, 0.4, 888.2. Guide: the armor is on the thief under the Mutated Garbage Flea. Human mesh borrowed.",
                      "ContentNpcIdentity":  "ddogs-dead-thief",

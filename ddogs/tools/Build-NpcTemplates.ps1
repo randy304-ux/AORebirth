@@ -408,3 +408,5 @@ foreach ($nf in $npcSnap.Keys) {
   }
   if ($touched) { [IO.File]::WriteAllText($nf, ($cur | ConvertTo-Json -Depth 20), [Text.UTF8Encoding]::new($false)) }
 }
+# Lockpick the Merchant Strongbox (AST0): fake strongbox NPC removed, real statel via StatelLocks.json, Stan lost-pick reply.
+& "$PSScriptRoot\Build-AreteStrongbox.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))

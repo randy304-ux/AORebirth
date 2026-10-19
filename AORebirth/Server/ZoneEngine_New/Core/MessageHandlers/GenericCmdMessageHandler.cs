@@ -144,6 +144,15 @@ namespace ZoneEngine_New.Core.MessageHandlers
                             Deny(session, message, player, "accepted Strongbox item/target is not eligible");
                     }
                     else if (message.Target is { Length: >= 2 }
+                        && StatelLocks.TryPick(player, playfield, message.Target[0], message.Target[1], PickRating, out bool picked))
+                    {
+                        // A locked client statel (Merchant's Strongbox): GameData/StatelLocks.json.
+                        if (picked)
+                            Acknowledge(session, message, message.Target[1]);
+                        else
+                            Deny(session, message, player, "statel lock refused");
+                    }
+                    else if (message.Target is { Length: >= 2 }
                         && TryGetBreakAndEnter(player, playfield, message.Target[0], message.Target[1], out IBreakAndEnterTarget lockable,
                             out Item pick))
                     {
