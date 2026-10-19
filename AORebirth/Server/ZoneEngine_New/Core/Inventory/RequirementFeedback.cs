@@ -64,6 +64,7 @@ namespace ZoneEngine_New.Core.Inventory
             string? state = (Operator)requirement.Operator switch
             {
                 Operator.HasPerk => "needs perk " + Named(requirement.Value),
+                Operator.HasFreeSlots => "needs " + requirement.Value + " free inventory slots",
                 Operator.HasNotPerk => "must not have perk " + Named(requirement.Value),
                 Operator.IsPerkLocked => Named(requirement.Value) + " must be on cooldown",
                 Operator.IsPerkUnlocked => Named(requirement.Value) + " is on cooldown",

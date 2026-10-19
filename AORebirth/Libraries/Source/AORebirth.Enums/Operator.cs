@@ -344,6 +344,12 @@ namespace AORebirth.Enums
         NotBitAnd = 107,
 
         /// <summary>
+        /// The user has at least Value free main-inventory slots (stat number is 0, unused). Vacuum Packed armor and
+        /// Christmas Gift ToUse rows ask for one slot per item they spawn (AOSharp UseCriteriaOperator.HasFreeSlots).
+        /// </summary>
+        HasFreeSlots = 106,
+
+        /// <summary>
         /// </summary>
         NumberOfItems = 67,
 

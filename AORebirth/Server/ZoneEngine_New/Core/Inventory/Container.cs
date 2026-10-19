@@ -89,6 +89,18 @@ namespace ZoneEngine_New.Core.Inventory
             }
         }
 
+        public int FreeSlotCount()
+        {
+            int free = 0;
+            for (int slot = Offset; slot < Offset + Capacity; slot++)
+            {
+                if (!Content.ContainsKey(slot))
+                    free++;
+            }
+
+            return free;
+        }
+
         public int FindFreeSlot()
         {
             for (int slot = Offset; slot < Offset + Capacity; slot++)

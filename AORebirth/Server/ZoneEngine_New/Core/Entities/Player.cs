@@ -245,6 +245,8 @@ namespace ZoneEngine_New.Core.Entities
                 Operator.MustAlliedCombat => IsAlliedInCombat(),
                 // Whole-body suits may be worn with other armor here (the client patch lifts the client's own check).
                 Operator.WholeBodySuit => true,
+                // Value is how many free main-inventory slots the use needs (Vacuum Packed armor: one per piece).
+                Operator.HasFreeSlots => Inventory.IsHydrated && Inventory.Inventory.FreeSlotCount() >= id,
                 _ => base.ResolveRequirement(requirement)
             };
         }
