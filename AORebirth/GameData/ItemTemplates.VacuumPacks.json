@@ -3,8 +3,8 @@
 // Kryoguard KUNB boots, Luxurious HMOL/GLOL/BLOX, Digummy DRSG graspers / DKSF footsies / DMSH helmet): the pack lists the
 // pieces in item id order; a paired piece (sleeves, often shoulders) is listed twice, next to itself or interleaved
 // helmet, shoulder, sleeve, shoulder, body, sleeve (Elite Desert Nomad, Zenith). Exceptions, inferred:
-// Zenith Commando 305604 has no Bastion; Preserved Colonist 306119 has no helmet (subscription offer text) so PVCD is
-// the life support; Desert Nomad 290287 lists the cloak (DSND) second. Single ids by name: Santa Hat SAHT 206001,
+// Zenith Commando 305604 has no Bastion; Preserved Colonist 306119 follows id order (PVCD helmet, no life support;
+// Randy 2026-10-18 says the set has the helmet; the offer text said no helmet); Desert Nomad 290287 lists the cloak (DSND) second. Single ids by name: Santa Hat SAHT 206001,
 // Santa Suit XBXE 257560, Santa Bag GDNF 284567 (guess: the original bag), Fresh Cyborg Costume FECB, Personalized
 // Pioneer Backpack PNPB, Kabuto/Sode of Yamauchi KAOF/SDOY, Hacker Tool ADHA 87810/87814, Lock Pick BRAN 95577 (guess).
 // Not mapped (piece count or order does not fit): Omni-Med Suit, Captain Anarchy Costume, Captain Anarchy Turbo Suit,
@@ -17,7 +17,7 @@
     "ZECM": { "Templates": [ 305596, 305597 ] },
     "ZECA": { "Templates": [ 305598, 305599 ] },
     "ZNCM": { "Templates": [ 305600, 305601 ] },
-    "PVCD": { "Templates": [ 306094, 306095 ] },
+    "PVCD": { "Templates": [ 306080, 306081 ] },
     "PVCN": { "Templates": [ 306082, 306083 ] },
     "PVCS": { "Templates": [ 306084, 306085 ] },
     "PDCO": { "Templates": [ 306086, 306087 ] },
