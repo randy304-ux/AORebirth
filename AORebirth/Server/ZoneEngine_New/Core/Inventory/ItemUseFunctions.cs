@@ -572,6 +572,11 @@ namespace ZoneEngine_New.Core.Inventory
                 return false;
 
             target.Stats.Set((CharacterStat)statId, value, StatDetail.Base, dirty: true);
+            // A side change (application forms) carries over to the owner's pets and mercs: they take the owner's Side
+            // when summoned, and a pet left on the old side reads as another faction to the client (tab-targetable).
+            if ((CharacterStat)statId == CharacterStat.Side)
+                foreach (NpcCharacter pet in target.OwnedPets.All)
+                    pet.Stats.Set(CharacterStat.Side, value, StatDetail.Base, dirty: true);
             return true;
         }
 
