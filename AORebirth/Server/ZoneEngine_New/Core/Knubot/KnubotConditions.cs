@@ -164,6 +164,16 @@ public abstract record KnubotCondition(bool Negated)
                 condition = new KnubotHasCondition(negated, templates, count);
                 return true;
 
+            case "wears":
+                if (words.Length != 2 || !load.TryItemTemplates(words[1], out HashSet<int> worn))
+                {
+                    error = "expected 'wears ITEMHASH' with a known item hash: " + trimmed;
+                    return false;
+                }
+
+                condition = new KnubotWearsCondition(negated, worn);
+                return true;
+
             case "startareapending":
                 if (words.Length != 1)
                 {
@@ -365,6 +375,29 @@ public sealed record KnubotMissionBitCondition(bool Negated, int Bit) : KnubotCo
 public sealed record KnubotHasCondition(bool Negated, HashSet<int> TemplateIds, int Count) : KnubotCondition(Negated)
 {
     protected override bool Test(KnubotContext context) => KnubotItems.CountCarried(context.Player, TemplateIds) >= Count;
+}
+
+/// <summary><c>wears HASH</c>: the item is installed in an implant slot or worn (weapons, armor, social).</summary>
+public sealed record KnubotWearsCondition(bool Negated, HashSet<int> TemplateIds) : KnubotCondition(Negated)
+{
+    protected override bool Test(KnubotContext context)
+    {
+        var inventory = context.Player.Inventory;
+        if (!inventory.IsHydrated)
+            return false;
+        foreach (var page in new[] { inventory.Implant, inventory.Equipment, inventory.Armor, inventory.Social })
+        {
+            if (page == null)
+                continue;
+            foreach (var item in page.Content.Values)
+            {
+                if (item != null && (TemplateIds.Contains(item.LowId) || TemplateIds.Contains(item.HighId)))
+                    return true;
+            }
+        }
+
+        return false;
+    }
 }
 
 /// <summary>Item-requirement rows, checked against the player's stats exactly as an item's requirements are.</summary>

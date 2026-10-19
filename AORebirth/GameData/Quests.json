@@ -2326,38 +2326,6 @@
                    }
     },
     {
-        "Hash":  "AMAR",
-        "Name":  "Fit the agility implant",
-        "QasInstance":  920079,
-        "Scope":  "Solo",
-        "Action":  "TargetNpc",
-        "Summary":  "Fit the agility implant",
-        "Objective":  {
-                          "Count":  null,
-                          "Npc":  "ADMA",
-                          "SpecItem":  null,
-                          "WorldItem":  null
-                      },
-        "Flags":  "NoCash",
-        "MissionBit":  637,
-        "NextStep":  null,
-        "Reward":  {
-                       "Hash":  "RMAR",
-                       "Credits":  0,
-                       "Xp":  0,
-                       "Records":  [
-                                       [
-                                           {
-                                               "Id":  295706,
-                                               "HighId":  295706,
-                                               "Name":  "Leg Implant: Agility, Shiny",
-                                               "Quality":  1
-                                           }
-                                       ]
-                                   ]
-                   }
-    },
-    {
         "Hash":  "ASHR",
         "Name":  "Speak with Lady Sheila",
         "QasInstance":  920080,
@@ -4128,7 +4096,7 @@
         "QasInstance":  920185,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Show Milne's notice to an Omni-AF Private and bring him to Vanguard Henri Zure",
+        "Summary":  "Show Milne\u0027s notice to an Omni-AF Private and bring him to Vanguard Henri Zure",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "VAHE",
@@ -4189,6 +4157,151 @@
                                                "Id":  248360,
                                                "HighId":  248360,
                                                "Name":  "Omni-Tek Shoulderpad",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AMA1",
+        "Name":  "Assemble an Implant 1/1",
+        "QasInstance":  920187,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tradeskill: Agility Cluster - Shiny (Leg) as source, Basic Leg Implant as target",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ADMA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "AMA2",
+        "Reward":  {
+                       "Hash":  "RMA1",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   },
+        "MadeItems":  [
+                          113127,
+                          113128
+                      ]
+    },
+    {
+        "Hash":  "AMA2",
+        "Name":  "Assemble an Implant 2/2",
+        "QasInstance":  920188,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tradeskill: Stamina Cluster - Bright (Leg) into the Leg Implant: Agility, Shiny",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ADMA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "AMA3",
+        "Reward":  {
+                       "Hash":  "RMA2",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   },
+        "MadeItems":  [
+                          113186,
+                          113187
+                      ]
+    },
+    {
+        "Hash":  "AMA3",
+        "Name":  "Assemble an Implant 3/3",
+        "QasInstance":  920189,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Tradeskill: Max Health Cluster - Faded (Leg) into the Leg Implant: Agility, Shiny",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ADMA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  "AMAR",
+        "Reward":  {
+                       "Hash":  "RMA3",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   },
+        "MadeItems":  [
+                          113440,
+                          113441
+                      ]
+    },
+    {
+        "Hash":  "AMAR",
+        "Name":  "Show Doctor Mason the implant",
+        "QasInstance":  920079,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Show Doctor Mason the Leg Implant: Agility, Shiny",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ADMA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  637,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RMAR",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  113440,
+                                               "HighId":  113441,
+                                               "Name":  "Leg Implant: Agility, Shiny",
+                                               "Quality":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AMIN",
+        "Name":  "Install the Leg Implant",
+        "QasInstance":  920190,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Install the Leg Implant: Agility, Shiny at the Surgery Clinic, then talk to Doctor Mason",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ADMA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RMIN",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  296576,
+                                               "HighId":  296576,
+                                               "Name":  "Personalized ICC ID Chip",
                                                "Quality":  1
                                            }
                                        ]

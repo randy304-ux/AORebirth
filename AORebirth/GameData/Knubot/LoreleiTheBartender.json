@@ -196,6 +196,22 @@
                                                 }
                                             ],
                                   "Goto":  "caged"
-                              }
+                              },
+                   "turnin_pet_personal":  {
+                                               "If":  [
+                                                          "HasQuest ALOR"
+                                                      ],
+                                               "Items":  [
+                                                             {
+                                                                 "Hash":  "QPCR",
+                                                                 "Count":  1
+                                                             },
+                                                             {
+                                                                 "Hash":  "QPIC",
+                                                                 "Count":  1
+                                                             }
+                                                         ],
+                                               "Goto":  "done_pet"
+                                           }
                }
 }

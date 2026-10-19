@@ -277,6 +277,7 @@ namespace ZoneEngine_New.Core.Tradeskills
                 "You combined \"{0}\" with \"{1}\" and the result is a quality level {2} \"{3}\".",
                 sourceName, targetName, result.Quality, result.Name));
 
+            player.Playfield?.GetService<ZoneEngine_New.Core.Quests.QuestService>()?.CompleteMadeItem(player, result.LowId, result.HighId);
             var qualities = ResultQualities(recipe);
             int xp = TradeskillRules.Xp(recipe, result.Quality, qualities.Low, qualities.High);
             if (xp > 0)

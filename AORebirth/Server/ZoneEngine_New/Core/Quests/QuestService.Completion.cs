@@ -278,6 +278,31 @@ public sealed partial class QuestService
         && player.Inventory.IsHydrated && player.Playfield != null
         && player.Session is { State: SessionState.InPlay } session && ReferenceEquals(session.Player, player);
 
+    /// <summary>
+    /// The player just made <paramref name="lowId"/>/<paramref name="highId"/> in the Tradeskill window: completes
+    /// every active quest whose <see cref="QuestTemplate.MadeItems"/> names either id (reward and NextStep as usual).
+    /// </summary>
+    public int CompleteMadeItem(Player player, int lowId, int highId)
+    {
+        ArgumentNullException.ThrowIfNull(player);
+        var due = new List<PlayerQuest>();
+        foreach (PlayerQuest quest in GetLog(player).Quests.Values)
+        {
+            int[]? made = quest.Template.MadeItems;
+            if (quest.IsActive && made != null && (Array.IndexOf(made, lowId) >= 0 || Array.IndexOf(made, highId) >= 0))
+                due.Add(quest);
+        }
+
+        foreach (PlayerQuest quest in due)
+        {
+            Complete(player, quest);
+            _logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture, "Quest {0} finished by making {1}/{2} char={3}",
+                quest.Template.Hash, lowId, highId, player.Identity.Instance));
+        }
+
+        return due.Count;
+    }
+
     void Complete(Player player, PlayerQuest quest)
     {
         lock (player.PersistenceGate)
