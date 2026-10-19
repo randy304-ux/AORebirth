@@ -282,13 +282,18 @@ public sealed partial class QuestService
     /// The player just made <paramref name="lowId"/>/<paramref name="highId"/> in the Tradeskill window: completes
     /// every active quest whose <see cref="QuestTemplate.MadeItems"/> names either id (reward and NextStep as usual).
     /// </summary>
-    public int CompleteMadeItem(Player player, int lowId, int highId)
+    public int CompleteMadeItem(Player player, int lowId, int highId) => CompleteByItem(player, lowId, highId, worn: false);
+
+    /// <summary>The player just equipped <paramref name="lowId"/>/<paramref name="highId"/>: completes active quests whose WornItems name it.</summary>
+    public int CompleteWornItem(Player player, int lowId, int highId) => CompleteByItem(player, lowId, highId, worn: true);
+
+    int CompleteByItem(Player player, int lowId, int highId, bool worn)
     {
         ArgumentNullException.ThrowIfNull(player);
         var due = new List<PlayerQuest>();
         foreach (PlayerQuest quest in GetLog(player).Quests.Values)
         {
-            int[]? made = quest.Template.MadeItems;
+            int[]? made = worn ? quest.Template.WornItems : quest.Template.MadeItems;
             if (quest.IsActive && made != null && (Array.IndexOf(made, lowId) >= 0 || Array.IndexOf(made, highId) >= 0))
                 due.Add(quest);
         }
@@ -296,8 +301,8 @@ public sealed partial class QuestService
         foreach (PlayerQuest quest in due)
         {
             Complete(player, quest);
-            _logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture, "Quest {0} finished by making {1}/{2} char={3}",
-                quest.Template.Hash, lowId, highId, player.Identity.Instance));
+            _logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture, "Quest {0} finished by {4} {1}/{2} char={3}",
+                quest.Template.Hash, lowId, highId, player.Identity.Instance, worn ? "wearing" : "making"));
         }
 
         return due.Count;

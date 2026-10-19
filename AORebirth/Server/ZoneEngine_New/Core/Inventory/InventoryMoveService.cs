@@ -657,6 +657,7 @@ namespace ZoneEngine_New.Core.Inventory
             SendEquipActions(player, pending);
             NotifyEquipmentChanged(player, pending);
             player.AnnounceDeferredAppearance();
+            player.Playfield?.GetService<ZoneEngine_New.Core.Quests.QuestService>()?.CompleteWornItem(player, pending.Item.LowId, pending.Item.HighId);
         }
 
         /// <summary>

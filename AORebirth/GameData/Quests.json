@@ -4282,7 +4282,7 @@
         "QasInstance":  920190,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Install the Leg Implant: Agility, Shiny at the Surgery Clinic, then talk to Doctor Mason",
+        "Summary":  "Use the Surgery Clinic, then put the Leg Implant: Agility, Shiny in your Leg implant slot",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "ADMA",
@@ -4291,9 +4291,36 @@
                       },
         "Flags":  "NoCash",
         "MissionBit":  717,
-        "NextStep":  null,
+        "NextStep":  "AMCH",
         "Reward":  {
                        "Hash":  "RMIN",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   },
+        "WornItems":  [
+                          113440,
+                          113441
+                      ]
+    },
+    {
+        "Hash":  "AMCH",
+        "Name":  "Return to Doctor Mason",
+        "QasInstance":  920191,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Give Doctor Mason the Blank ICC ID Chip and the Biological Survey Nanobots",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "ADMA",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  718,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RMCH",
                        "Credits":  0,
                        "Xp":  0,
                        "Records":  [

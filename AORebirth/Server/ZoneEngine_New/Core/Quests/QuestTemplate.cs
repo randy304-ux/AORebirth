@@ -43,6 +43,10 @@ namespace ZoneEngine_New.Core.Quests
         /// (Doctor Mason's "Assemble an Implant" steps). Null for every other quest.
         /// </summary>
         public int[]? MadeItems { get; set; }
+
+        /// <summary>Item AOIDs (low or high) that finish this quest when the player equips one (an implant in its slot).</summary>
+        public int[]? WornItems { get; set; }
+
         public string Name { get; set; } = string.Empty;
 
         public int QasInstance { get; set; }

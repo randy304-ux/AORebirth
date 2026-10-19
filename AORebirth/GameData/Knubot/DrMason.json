@@ -12,10 +12,16 @@
                     },
                     {
                         "If":  [
+                                   "HasQuest AMCH"
+                               ],
+                        "Say":  "installed"
+                    },
+                    {
+                        "If":  [
                                    "HasQuest AMIN",
                                    "wears QLA3"
                                ],
-                        "Say":  "installed"
+                        "Say":  "installed_late"
                     },
                     {
                         "If":  [
@@ -76,8 +82,8 @@
                     "ask_implant":  {
                                         "Text":  "Vernon sent me about the chip.",
                                         "If":  [
-                                                   "!HasCompletedQuest AMIN",
-                                                   "!HasAnyQuest AMA1,AMA2,AMA3,AMAR,AMIN",
+                                                   "!HasCompletedQuest AMCH",
+                                                   "!HasAnyQuest AMA1,AMA2,AMA3,AMAR,AMIN,AMCH",
                                                    "HasCompletedQuest AVGR"
                                                ],
                                         "Goto":  "offer_implant"
@@ -85,8 +91,8 @@
                     "take_implant":  {
                                          "Text":  "I\u0027ll follow your recipe.",
                                          "If":  [
-                                                    "!HasCompletedQuest AMIN",
-                                                    "!HasAnyQuest AMA1,AMA2,AMA3,AMAR,AMIN",
+                                                    "!HasCompletedQuest AMCH",
+                                                    "!HasAnyQuest AMA1,AMA2,AMA3,AMAR,AMIN,AMCH",
                                                     "HasCompletedQuest AVGR"
                                                 ],
                                          "Goto":  "give_implant"
@@ -243,6 +249,12 @@
                                                         "bye"
                                                     ]
                                     },
+                  "installed_late":  {
+                                         "Text":  [
+                                                      "{completequest AMIN}",
+                                                      "Installed properly. Now hand me the Blank ICC ID Chip and the Biological Survey Nanobots.{opentrade}"
+                                                  ]
+                                     },
                   "installed":  {
                                     "Text":  [
                                                  "Installed properly. Now hand me the Blank ICC ID Chip and the Biological Survey Nanobots.{opentrade}"
@@ -250,7 +262,7 @@
                                 },
                   "done":  {
                                "Text":  [
-                                            "{completequest AMIN}",
+                                            "{completequest AMCH}",
                                             "He pokes you with a DNA-unlocking device. Done. Your chip is personalized now. Lorelei at the bar can finish your card.",
                                             "{givequest HLOR}"
                                         ],
@@ -296,8 +308,7 @@
                                     },
                    "chip":  {
                                 "If":  [
-                                           "HasQuest AMIN",
-                                           "wears QLA3"
+                                           "HasQuest AMCH"
                                        ],
                                 "Items":  [
                                               {
