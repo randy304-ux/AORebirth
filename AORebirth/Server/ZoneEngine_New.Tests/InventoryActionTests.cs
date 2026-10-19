@@ -245,6 +245,48 @@ namespace ZoneEngine_New.Tests
         }
 
         [TestMethod]
+        public void FullBagGoesIntoTheBankAndBackWithItsContentsButNotIntoAnotherBag()
+        {
+            // Randy 2026-10-18: backpacks would not go into the bank. Live allows bags in the bank, full or empty.
+            using var w = new World(); Item bag = w.Add(21, 1);
+            bag.Identity = new Identity { Type = IdentityType.Container, Instance = bag.InstanceId };
+            Container backpack = w.Player.Inventory.GetOrCreateBackpackPage(bag, bag.Identity, Slot());
+            backpack.IsHydrated = true;
+            Item inside = TestWorld.CreateItem(instanceId: 22);
+            backpack.Add(0, inside);
+            w.Persistence.Rows[22] = inside.ToRecord(bag.Identity, 0, 1);
+            Item other = w.Add(23, 1, slot: 65);
+            other.Identity = new Identity { Type = IdentityType.Container, Instance = other.InstanceId };
+            Container bank = w.Player.Inventory.Bank; bank.IsHydrated = true;
+            var moves = new InventoryMoveService(new StubLogger(), w.Flush, w.Actions);
+
+            moves.Handle(w.Player, new ClientContainerAddItemMessage { Source = Slot(65), Target = bag.Identity });
+            Assert.AreSame(other, w.Player.Inventory.Inventory.Content[65]);
+            Assert.AreEqual(0, w.Persistence.Calls);
+
+            moves.Handle(w.Player, new ClientContainerAddItemMessage
+            {
+                Source = Slot(), Target = new Identity { Type = IdentityType.BankByRef, Instance = w.Player.Identity.Instance }
+            });
+            Assert.AreSame(bag, bank.Content[bank.Offset]);
+            Assert.IsFalse(w.Player.Inventory.Inventory.Content.ContainsKey(64));
+            Assert.AreEqual((int)IdentityType.BankByRef, w.Persistence.Rows[21].ContainerType);
+            Assert.AreEqual(bank.Offset, w.Persistence.Rows[21].ContainerPlacement);
+            Assert.AreEqual(21, w.Persistence.Rows[22].ContainerInstance);
+            Assert.AreEqual((int)IdentityType.Container, w.Persistence.Rows[22].ContainerType);
+
+            moves.Handle(w.Player, new ClientMoveItemToInventoryMessage
+            {
+                SourceContainer = new Identity { Type = IdentityType.BankByRef, Instance = bank.Offset }, TargetPlacement = 70
+            });
+            Assert.AreSame(bag, w.Player.Inventory.Inventory.Content[70]);
+            Assert.AreEqual(0, bank.Content.Count);
+            Assert.AreEqual((int)IdentityType.Inventory, w.Persistence.Rows[21].ContainerType);
+            Assert.AreEqual(21, w.Persistence.Rows[22].ContainerInstance);
+            Assert.AreSame(inside, backpack.Content[0]);
+        }
+
+        [TestMethod]
         public void StoredStackCountSurvivesHydrationInsteadOfTemplateDefault()
         {
             var catalog = new StubCatalog().Add(1000, 1);

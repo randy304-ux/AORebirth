@@ -1,0 +1,29 @@
+// Vacuum Packed armor OnUse SpawnItem hashes (Randy 2026-10-18: ZECO/PVCD/HMOL not implemented).
+// 305604 Zenith Commando (no Bastion in the pack), 306119 Preserved Colonist (no helmet, per the
+// subscription offer), 303474 Luxurious. Each hash is one piece, QL1..200 template pair. Paired pieces
+// (shoulders, sleeves) are the hashes the pack spawns twice; the rest follow the pack order = item id
+// order (Luxurious letters confirm: HMOL helmet, TNAR tank armor, SEOX sleeves, GLOL gloves, BLOX boots).
+// Colonist: life support first (back), then id order. Mapping of the single pieces is inferred.
+{
+    "ZECO": { "Templates": [ 305588, 305589 ] },
+    "ZNCO": { "Templates": [ 305590, 305591 ] },
+    "ZICO": { "Templates": [ 305592, 305593 ] },
+    "ZICM": { "Templates": [ 305594, 305595 ] },
+    "ZECM": { "Templates": [ 305596, 305597 ] },
+    "ZECA": { "Templates": [ 305598, 305599 ] },
+    "ZNCM": { "Templates": [ 305600, 305601 ] },
+    "PVCD": { "Templates": [ 306094, 306095 ] },
+    "PVCN": { "Templates": [ 306082, 306083 ] },
+    "PVCS": { "Templates": [ 306084, 306085 ] },
+    "PDCO": { "Templates": [ 306086, 306087 ] },
+    "PVCE": { "Templates": [ 306088, 306089 ] },
+    "PDCT": { "Templates": [ 306090, 306091 ] },
+    "PDCB": { "Templates": [ 306092, 306093 ] },
+    "HMOL": { "Templates": [ 300673, 300674 ] },
+    "TNAR": { "Templates": [ 300690, 300691 ] },
+    "PUOX": { "Templates": [ 300693, 300694 ] },
+    "SUOX": { "Templates": [ 300696, 300697 ] },
+    "SEOX": { "Templates": [ 300700, 300701 ] },
+    "GLOL": { "Templates": [ 300703, 300704 ] },
+    "BLOX": { "Templates": [ 300705, 300706 ] }
+}

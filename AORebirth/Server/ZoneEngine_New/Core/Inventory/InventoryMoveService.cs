@@ -223,11 +223,17 @@ namespace ZoneEngine_New.Core.Inventory
                 return;
 
             // TODO: Block temporary items on ClientContainerAddItem
-            if (IsBagItem(item))
-                return;
-
             if (!TryResolveAddTarget(player, message.Target, out Container destPage))
                 return;
+
+            // No bag inside a bag. A bag (full or empty) may go into the bank, as on live: its contents stay on
+            // rows keyed by the bag's own instance, so moving the bag row moves them with it.
+            if (IsBagItem(item) && destPage.Identity.Type != IdentityType.BankByRef)
+            {
+                _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                    "ContainerAddItem refused: bag {0} ({1}) cannot go into {2}", item.InstanceId, item.Name, destPage.Identity));
+                return;
+            }
 
             if (ReferenceEquals(sourcePage, destPage))
                 return;
