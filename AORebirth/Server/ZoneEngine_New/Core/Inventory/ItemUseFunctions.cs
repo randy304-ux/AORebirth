@@ -640,7 +640,26 @@ namespace ZoneEngine_New.Core.Inventory
             if (spell.TryReadInt(2, out int mode) && mode is not 0 and not 1)
                 return false;
 
-            if (!player.Playfield.GetRequiredService<HashItemMinter>().TryMint(hash, quality, ItemSource.Other, out Item item))
+            // A SpawnAll parent (a profession Nanoprogram Container hash) grants every branch; any other hash one item.
+            HashItemMinter minter = player.Playfield.GetRequiredService<HashItemMinter>();
+            var items = new List<Item>();
+            minter.MintSpawns(hash, quality, ItemSource.Other, items);
+            if (items.Count == 0)
+            {
+                if (!minter.TryMint(hash, quality, ItemSource.Other, out Item single))
+                    return false;
+                items.Add(single);
+            }
+
+            bool all = true;
+            foreach (Item item in items)
+                all &= GrantSpawnedItem(player, item);
+            return all;
+        }
+
+        static bool GrantSpawnedItem(Player player, Item item)
+        {
+            if (player.Playfield == null || player.Session == null)
                 return false;
             if (InventoryStacking.TryGrantOntoStack(player, item, player.Playfield.GetService<InventoryFlushService>()))
                 return true;
