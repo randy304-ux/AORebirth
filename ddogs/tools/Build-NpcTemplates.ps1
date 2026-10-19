@@ -410,3 +410,5 @@ foreach ($nf in $npcSnap.Keys) {
 }
 # Lockpick the Merchant Strongbox (AST0): fake strongbox NPC removed, real statel via StatelLocks.json, Stan lost-pick reply.
 & "$PSScriptRoot\Build-AreteStrongbox.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# Antonio's Adaptation Factory upgrade recipes (Tradeskills.antonio.json), part drop hashes and the loot rows on the mobs the guides name: Build-AntonioUpgrades.ps1.
+& "$PSScriptRoot\Build-AntonioUpgrades.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))

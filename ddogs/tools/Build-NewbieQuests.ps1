@@ -279,7 +279,28 @@ Script 'Strongbox.json' @('ddogs-strongbox') 'Merchant''s Strongbox in the room 
 Script 'StanGoodman.json' @('SimpleChar:78E0FC65') 'Stan Goodman, camp (3463x880). Guide: lockpick from ICC Tech, the strongbox, then four parts. 1240 credits, up to 2229 xp, Unprogrammed Identification Chip.' @('{delay 1}Stan Goodman, purveyor of recently used merchandise.') @(
   (J 'factory' $stan 'Alex sent me.' @('Buy a Vacuum Packed Lock Pick from ICC Tech Supplies if you do not have one. I will hand you one, because that counter is not stocked here.', '{delay 1}Sneak past the security dog and lockpick the Merchant''s Strongbox in the room at 3408 by 878. Bring me Antonio''s Adaptation Factory, the Generic Nano Transmitter, the Blank Info Chip and the 2560-Bit Encryption Compiler.') 'Deal.' 'Lockpick the strongbox, then bring the factory, the transmitter, the info chip and the compiler.' $alex.Return @{ Mode = 'trade'; Items = @((TI 'QAAF'), (TI 'QGNT'), (TI 'QBIC'), (TI 'QENC')); Give = '{spawn QLOK 1}'; Thanks = @('That is the set. The Unprogrammed Identification Chip is yours.'); After = @('{givequest HMPS}', '{delay 1}Marco Spida is in the camp, about 3408 by 831. He sells profession nanos.') })
 ) 'Stay sharp out there.' (Arrive $hStan @('Alex sent you, did he?'))
-Script 'AntonioStacklundArete.json' @('SimpleChar:78E0FC7C') 'Antonio Stacklund, Arete camp. The Adaptation Factory is in the strongbox, not a gift from him. He sells the upgrade parts.' @('{delay 1}Antonio Stacklund. If it is for sale, I have it. Mostly.', '{delay 1}The Adaptation Factory people keep asking me for was in a strongbox. I sell the parts the upgrades eat: plates, hides, chambers, beaks, intestines. The factory itself is consumed each time you combine.') @() 'Come back any time.' $null
+# Antonio (Arete): dialogue per AO-Universe Arete spoiler #13 / Antonio's Upgrades guide (2026-10-19). He SELLS the Adaptation Factory and the starter weapons; the raw parts drop from mobs (Build-AntonioUpgrades.ps1).
+$antMelee = @('{delay 1}Melee. Combine the Factory with the part, then the part with your worn weapon:', 'Worn Baseball Bat: Reet Beak (Desert Reet) for the Wailing Bat, or a Power Supply (32-V Docker) for the Surge Baseball Bat.', 'Worn Sword: Spinal Section (Leet). Worn Dagger and Damaged Staff of Naja: Venom Sample (Garbage Flea).', 'Worn Hammer: Large Skull (Angry Minibull). Worn Blade and Worn Oak Bo: Leather Hide (Angry Minibull).')
+$antRanged = @('{delay 1}Ranged. Same idea, Factory plus part, then part plus the Solar-Powered gun:', 'Pistol: Power Supply (32-V Docker). Submachine Gun: Bone Plates (Angry Minibull). Assault Rifle: Fluid Sample (Garbage Flea or Waste Collector).', 'Rifle: Optical Enhancer (32-V Docker). Energy Rifle: Fuel Chamber (Waste Collector). Shotgun: no Factory, just my Screwdriver on the Solar-Powered Shotgun.')
+$antSpecial = @('{delay 1}Specials:', 'Grenade Launcher: Compression Chamber (Waste Collector). Worn Bow: Rollerrat Intestines (Rollerrat).', 'Every combine uses up a Factory, so buy one for each step. You need Computer Literacy 20 for all of it.')
+$antOther = @('{delay 1}The Factory builds other things too. A Poison Injector Bracelet: a Venom Cartridge (Venom Sample) plus a Pneumatic Compression Chamber (Compression Chamber).', 'A Leather Vest: a Gut Bowstring (Rollerrat Intestines) plus a Leather Hide (Angry Minibull). A Range Meter: an Adapted Power Supply (Power Supply) plus a Recalibrated Scope Unit (Optical Enhancer).')
+Script 'AntonioStacklundArete.json' @('SimpleChar:78E0FC7C') 'Antonio Stacklund, Arete camp. Sells the Adaptation Factory, the starter weapons and Newcomer''s Armor; the dialogue lists what each upgrade needs and which mob drops it. The strongbox Factory is only Stan Goodman''s errand.' @('{delay 1}Hello there, welcome to Rubi-Ka! Looking for an upgrade for your weapon?', '{delay 1}With my greatest creation, the Adaptation Factory, you can improve your old, worn weapon! It is in my shop, along with the starter weapons.') @() 'Come back any time.' ([ordered]@{
+  Hello = @('upgrade', 'other')
+  Replies = [ordered]@{
+    upgrade = [ordered]@{ Text = 'As a matter of fact I would like to upgrade my weapon...'; Goto = 'upgrade' }
+    other = [ordered]@{ Text = 'Do you only have weapons and weapon upgrades?'; Goto = 'other' }
+    melee = [ordered]@{ Text = 'A melee weapon.'; Goto = 'melee' }
+    ranged = [ordered]@{ Text = 'A ranged weapon.'; Goto = 'ranged' }
+    special = [ordered]@{ Text = 'A grenade launcher or a bow.'; Goto = 'special' }
+  }
+  Lines = [ordered]@{
+    upgrade = [ordered]@{ Text = 'Good! What type of weapon would you like to upgrade?'; Replies = @('melee', 'ranged', 'special', 'more', 'nothing') }
+    melee = [ordered]@{ Text = $antMelee; Replies = @('ranged', 'special', 'more', 'nothing') }
+    ranged = [ordered]@{ Text = $antRanged; Replies = @('melee', 'special', 'more', 'nothing') }
+    special = [ordered]@{ Text = $antSpecial; Replies = @('melee', 'ranged', 'more', 'nothing') }
+    other = [ordered]@{ Text = $antOther; Replies = @('more', 'nothing') }
+  }
+})
 
 Script 'MarcoSpida.json' @('ONRP') 'Marco Spida (3408x831). Guide: buy your profession nano container from him and open it. 1120 credits, up to 2229 xp, Composite Attribute Boost.' @('{delay 1}Marco Spida. Nanos, for people who can pay.') @(
   (J 'nano' $marco 'Stan said you sell nanos.' @('Buy the nano container for your profession and open it. My counter is not a full shop yet, so I will hand you the container.', '{delay 1}Open it, then tell me.') 'I will open it.' 'Open the profession nano container Marco gives you.' $stan.Return @{ Mode = 'talk'; Give = '{spawn QNPC 1}'; Thanks = @('Opened. Here is a Composite Attribute Boost crystal. Sarah Greene is next.'); After = @('{givequest HSAG}', '{delay 1}Sarah Greene, the armorsmith, about 3471 by 841.') })
