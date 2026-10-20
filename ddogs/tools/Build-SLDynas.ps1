@@ -1,4 +1,4 @@
-# ddogs/tools/Build-SLDynas.ps1
+﻿# ddogs/tools/Build-SLDynas.ps1
 # Elysium, Scheol, Penumbra, Inferno, and Adonis camps that already have a coordinate, a playfield id,
 # and a mesh donor. Same corpse rule as Nascence: 5 to 7 items, respawn 180 s.
 # CampKey is elysium| scheol| penumbra| inferno| adonis| so Build-DynaLoot's boss| pass does not overwrite them.
@@ -216,7 +216,7 @@ Add-Camp 'adonis' 'Trip' 160 4873 1770 1490 'stalker' $pit $null $false $true
 Add-Camp 'adonis' 'Trap' 160 4873 1715 1460 'stalker' $pit $null $false $true
 Add-Camp 'adonis' 'Trup' 160 4873 1730 1530 'stalker' $pit $null $false $true
 Add-Camp 'adonis' 'Tiny' 160 4873 1690 1510 'stalker' $pit $null $false $true
-Add-Camp 'adonis' 'Cranky Golem' 195 4872 1149 870 'golem' $null @(245320) $false $false
+Add-Camp 'adonis' 'Cranky Golem' 195 4872 849 1177 'golem' $null @(245320) $false $false
 Add-Camp 'adonis' 'Irascible Golem' 195 4872 863 1306 'golem' $null @(245481) $false $false
 Add-Camp 'adonis' 'Crabby Golem' 195 4872 786 1013 'golem' $null @(245321, 245372) $false $false
 Add-Camp 'adonis' 'Cantankerous Golem' 195 4872 784 896 'golem' $null @(245339, 245355) $false $false

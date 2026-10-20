@@ -420,3 +420,5 @@ foreach ($nf in $npcSnap.Keys) {
 & "$PSScriptRoot\Build-AreteMason.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
 # Whereis-named placeholder spawns (Nadybot/Budabot/BeBot high-confidence matches, whereis_named_spawns.csv): Build-WhereisNamed.ps1. Only fills empty codes.
 & "$PSScriptRoot\Build-WhereisNamed.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
+# SLmap v2.22 Shadowlands NPCs checked by eye + Cranky Golem SW camp move: Build-SLMapSpawns.ps1 (slmap_spawns.csv). Keep after Build-WhereisNamed.ps1.
+& "$PSScriptRoot\Build-SLMapSpawns.ps1" -GameData (Split-Path ([IO.Path]::GetFullPath($Out)))
