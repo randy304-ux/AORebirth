@@ -53,6 +53,13 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
         public int Xp { get; set; }
         public int LifetimeSeconds { get; set; }
         public DungeonPopulationPolicy Population { get; set; } = new();
+        /// <summary>Team version: Floors regular floors plus a boss floor (the style needs floor transition roles); the
+        /// objective NPC stands in the boss room. Accepting needs a team of MinTeamSize; teammates enter on the owner's mission.</summary>
+        public bool Team { get; set; }
+        public int Floors { get; set; } = 1;
+        public int MinTeamSize { get; set; } = 2;
+        /// <summary>Objective NPC level; 0 uses Quality.</summary>
+        public int ObjectiveLevel { get; set; }
     }
 
     /// <summary>GameData/DungeonDoorStyles.json for one ACG style: door item templates and spawn-state chances.</summary>
@@ -265,13 +272,13 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 return false;
             var random = new Random(parameters.Seed);
             parameters.GeneratorVersion = CurrentVersion;
-            parameters.IsTeam = false;
+            parameters.IsTeam = spec.Team;
             parameters.AuthoredHash = spec.Hash;
             parameters.LayoutPlan = new DungeonLayoutPlan
             {
-                StyleId = spec.Style, FloorCount = 1,
+                StyleId = spec.Style, FloorCount = spec.Team ? Math.Max(1, spec.Floors) + 1 : 1,
                 FloorSize = random.Next(spec.MinFloorSize, spec.MaxFloorSize + 1),
-                FloorHeight = _policy.FloorHeight, BossFloor = false, DescendingFloors = false,
+                FloorHeight = _policy.FloorHeight, BossFloor = spec.Team, DescendingFloors = false,
                 LockedDoorChancePercent = 0
             };
             return parameters.LayoutPlan.IsValid;

@@ -18,6 +18,11 @@ internal static class DungeonObjectivePlacement
     /// <summary>As above, preferring rooms with at least <paramref name="minRoomPoints"/> spawn points (a boss room needs space); falls back to any room.</summary>
     internal static bool TrySelect(string gameDataRoot, DungeonLayout layout, IZoneLogger logger, int minRoomPoints,
         out int roomIndex, out Vector3 position)
+        => TrySelect(gameDataRoot, layout, logger, minRoomPoints, -1, out roomIndex, out position);
+
+    /// <summary>As above; points in <paramref name="preferRoom"/> (the boss room of a team dungeon) win when it has any.</summary>
+    internal static bool TrySelect(string gameDataRoot, DungeonLayout layout, IZoneLogger logger, int minRoomPoints, int preferRoom,
+        out int roomIndex, out Vector3 position)
     {
         roomIndex = -1;
         position = new Vector3();
@@ -34,7 +39,7 @@ internal static class DungeonObjectivePlacement
         var candidates = new List<(int Room, int Distance, System.Numerics.Vector3 Position)>();
         foreach (var placement in dungeon.Placements)
         {
-            if (distance[placement.Index] <= 0)
+            if (distance[placement.Index] <= 0 && placement.Index != preferRoom)
                 continue;
             int zone = placement.Template.InstanceId;
             int districtIndex = districts.ZoneToDistrictMap is { } map && zone >= 0 && zone < map.Length ? map[zone] : zone;
@@ -47,7 +52,8 @@ internal static class DungeonObjectivePlacement
                     continue;
                 var placed = placement.TransformTemplatePoint(new System.Numerics.Vector3(raw[0], raw[1], raw[2]));
                 if (float.IsFinite(placed.X) && float.IsFinite(placed.Y) && float.IsFinite(placed.Z))
-                    candidates.Add((placement.Index, distance[placement.Index] + (roomPoints >= minRoomPoints ? 1000 : 0), placed));
+                    candidates.Add((placement.Index, distance[placement.Index] + (roomPoints >= minRoomPoints ? 1000 : 0)
+                        + (placement.Index == preferRoom ? 1000000 : 0), placed));
             }
         }
         if (candidates.Count == 0)

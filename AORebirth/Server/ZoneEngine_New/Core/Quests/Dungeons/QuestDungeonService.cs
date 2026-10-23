@@ -1,3 +1,4 @@
+using ZoneEngine_New.Core.Teams;
 namespace ZoneEngine_New.Core.Quests.Dungeons
 {
     using System;
@@ -326,6 +327,9 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                         return "You already have this mission. Use your mission key at the " + heldParameters.EntranceName + ".";
                 }
 
+                if (spec.Team && (player.Playfield.GetService<TeamService>()?.GetTeam(player)?.MemberIds.Count ?? 1) < Math.Max(2, spec.MinTeamSize))
+                    return "You need a team of at least " + Math.Max(2, spec.MinTeamSize).ToString(CultureInfo.InvariantCulture) + " for this. Come back with your team.";
+
                 if (!_entrances.TryGetByIdentity((uint)IdentityType.MissionEntrance, spec.EntranceInstance, out MissionEntrancePlacement entrance))
                 {
                     _logger.Warn("Authored dungeon " + spec.Hash + ": entrance " + spec.EntranceInstance.ToString("X8", CultureInfo.InvariantCulture) + " is not in the mission entrance catalog");
@@ -363,7 +367,8 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 if (!_gameData.TryResolveMobTemplate(spec.ObjectiveNpcHash, spec.Quality, out MobTemplate objectiveTemplate)
                     || objectiveTemplate.UnresolvedPlaceholder || !NpcTemplateValidation.CanSpawn(objectiveTemplate)
                     || objectiveTemplate.Has(NpcFeature.NoCombat)
-                    || !DungeonObjectivePlacement.TrySelect(_gameData.RootPath, layout, _logger, 4, out int room, out Vector3 point))
+                    || !DungeonObjectivePlacement.TrySelect(_gameData.RootPath, layout, _logger, spec.Team ? 1 : 4,
+                        spec.Team ? layout.BossRoomIndex ?? -1 : -1, out int room, out Vector3 point))
                 {
                     _logger.Warn("Authored dungeon " + spec.Hash + ": objective NPC " + spec.ObjectiveNpcHash + " could not be placed");
                     return "Mission NPC objective data is unavailable.";
@@ -371,7 +376,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 var objective = new MissionNpcObjectiveBinding
                 {
                     QuestId = questId, OwnerId = player.Identity.Instance, Instance = _ids.Allocate(),
-                    NpcHash = objectiveTemplate.Hash, Quality = spec.Quality, ScalePercent = null, RoomIndex = room,
+                    NpcHash = objectiveTemplate.Hash, Quality = spec.ObjectiveLevel > 0 ? spec.ObjectiveLevel : spec.Quality, ScalePercent = null, RoomIndex = room,
                     X = point.xf, Y = point.yf, Z = point.zf, MissionType = parameters.MissionType
                 };
                 if (!objective.IsValid)
@@ -383,7 +388,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     Hash = questId,
                     Name = spec.Title,
                     Summary = spec.Summary,
-                    Scope = "Solo",
+                    Scope = spec.Team ? "Team" : "Solo",
                     Action = QuestTemplate.KillOneAction,
                     Objective = new QuestObjective { Npc = objective.NpcHash },
                     Flags = "None",
@@ -506,14 +511,36 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     return false;
 
                 List<Item> keys = CarriedKeys(player);
-                if (keys.Count == 0)
+                long now = DateTime.UtcNow.Ticks;
+                var questIds = new List<string>();
+                if (keys.Count > 0)
+                {
+                    IDictionary<int, string> links = _store.LoadKeyQuests(keys.ConvertAll(key => key.InstanceId));
+                    RemoveDeadKeys(player, keys.Where(key => !links.ContainsKey(key.InstanceId)));
+                    questIds.AddRange(links.Values.Distinct(StringComparer.Ordinal));
+                }
+
+                // Team NPC-given dungeons (AuthoredDungeons.json Team): a teammate of the owner enters the owner's
+                // instance without a key, so a team that walks in together shares one ship. Own keys win.
+                TeamSnapshot? team = playfield.GetService<TeamService>()?.GetTeam(player);
+                if (team != null && team.MemberIds.Count > 1)
+                {
+                    foreach (KeyValuePair<string, CachedDungeon> entry in _dungeons)
+                    {
+                        CachedDungeon shared = entry.Value;
+                        if (!shared.Ended && shared.ExpiresAtUtcTicks > now && shared.Parameters.IsTeam
+                            && shared.Parameters.AuthoredHash != null && shared.OwnerId != player.Identity.Instance
+                            && team.MemberIds.Contains(shared.OwnerId) && !questIds.Contains(entry.Key)
+                            && unchecked((uint)shared.Parameters.EntranceType) == entrance.IdentityType
+                            && unchecked((uint)shared.Parameters.EntranceInstance) == entrance.IdentityInstance)
+                            questIds.Add(entry.Key);
+                    }
+                }
+
+                if (questIds.Count == 0)
                     return false;
 
-                IDictionary<int, string> links = _store.LoadKeyQuests(keys.ConvertAll(key => key.InstanceId));
-                RemoveDeadKeys(player, keys.Where(key => !links.ContainsKey(key.InstanceId)));
-
-                long now = DateTime.UtcNow.Ticks;
-                foreach (string questId in links.Values.Distinct(StringComparer.Ordinal))
+                foreach (string questId in questIds)
                 {
                     if (!TryGetDungeon(questId, out CachedDungeon dungeon) || dungeon.Ended || dungeon.ExpiresAtUtcTicks <= now
                         || unchecked((uint)dungeon.Parameters.EntranceType) != entrance.IdentityType
