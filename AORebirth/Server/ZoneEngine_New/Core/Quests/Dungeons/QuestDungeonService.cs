@@ -291,6 +291,8 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                         SendGrantedMissionItem(player, sourceItem, plan.Rows[1].ContainerPlacement, sourceItem.Name);
                     using (ZoneEngine_New.Core.Metrics.TickStallWatch.Enter("mission.accept.adopt", player.Identity.Instance))
                         _quests.AdoptGenerated(player, questId, template, now, expires, parametersJson);
+                    if (parameters.IsTeam)
+                        ShareWithTeam(player, questId, template, parametersJson, parameters.EntranceName, now, expires);
                     _logger.Info(string.Format(CultureInfo.InvariantCulture,
                         "Dungeon quest accepted char={0} quest={1} offer={2}:{3} entrance={4} ({5}) dungeon={6}",
                         player.Identity.Instance, questId, offer.OfferType, offer.OfferInstance, parameters.EntranceInstance, entrance.DisplayName, dungeonPlayfield));
@@ -435,6 +437,8 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     plan.PublishAfterCommit(notify: false);
                     SendKey(player, key, plan.Rows[0].ContainerPlacement, parameters.EntranceName);
                     _quests.AdoptGenerated(player, questId, template, now, expires, parametersJson);
+                    if (parameters.IsTeam)
+                        ShareWithTeam(player, questId, template, parametersJson, parameters.EntranceName, now, expires);
                     _logger.Info(string.Format(CultureInfo.InvariantCulture,
                         "Authored dungeon quest accepted char={0} quest={1} hash={2} entrance={3} ({4}) dungeon={5} style={6} floorSize={7} objective={8} room={9}",
                         player.Identity.Instance, questId, spec.Hash, parameters.EntranceInstance, entrance.DisplayName, dungeonPlayfield,
@@ -518,23 +522,6 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     IDictionary<int, string> links = _store.LoadKeyQuests(keys.ConvertAll(key => key.InstanceId));
                     RemoveDeadKeys(player, keys.Where(key => !links.ContainsKey(key.InstanceId)));
                     questIds.AddRange(links.Values.Distinct(StringComparer.Ordinal));
-                }
-
-                // Team NPC-given dungeons (AuthoredDungeons.json Team): a teammate of the owner enters the owner's
-                // instance without a key, so a team that walks in together shares one ship. Own keys win.
-                TeamSnapshot? team = playfield.GetService<TeamService>()?.GetTeam(player);
-                if (team != null && team.MemberIds.Count > 1)
-                {
-                    foreach (KeyValuePair<string, CachedDungeon> entry in _dungeons)
-                    {
-                        CachedDungeon shared = entry.Value;
-                        if (!shared.Ended && shared.ExpiresAtUtcTicks > now && shared.Parameters.IsTeam
-                            && shared.Parameters.AuthoredHash != null && shared.OwnerId != player.Identity.Instance
-                            && team.MemberIds.Contains(shared.OwnerId) && !questIds.Contains(entry.Key)
-                            && unchecked((uint)shared.Parameters.EntranceType) == entrance.IdentityType
-                            && unchecked((uint)shared.Parameters.EntranceInstance) == entrance.IdentityInstance)
-                            questIds.Add(entry.Key);
-                    }
                 }
 
                 if (questIds.Count == 0)
@@ -810,6 +797,24 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
             if (!QuestDungeonParameters.TryParse(quest.AcgBuildingGeneratorJson, out QuestDungeonParameters parameters))
                 return;
 
+            if (parameters.IsTeam)
+            {
+                // Team missions are shared: one holder finishing pays every other holder; one holder leaving
+                // (abandon, expiry) ends the dungeon only when nobody else still holds it.
+                IList<int> others = _store.LoadActiveQuestHolders(quest.QuestId).Where(id => id != player.Identity.Instance).ToList();
+                if (quest.State == QuestState.Completed)
+                {
+                    PlayfieldManager manager = _playfields.Value;
+                    foreach (int id in others)
+                        if (manager.FindPlayer(id, out Player mate) && mate.Playfield is Playfield at)
+                            at.DispatchPlayerProjection(mate, () => _quests.CompleteShared(mate, quest.QuestId));
+                    if (_dungeons.TryGetValue(quest.QuestId, out CachedDungeon? done) && done.Ended)
+                        return;
+                }
+                else if (others.Count > 0)
+                    return;
+            }
+
             try
             {
                 // Completing the quest lets whoever is inside stay (and leave by the exit); expiry and abandoning empty it.
@@ -977,6 +982,8 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 }
             }
 
+            if (ended && parameters.IsTeam && _store.LoadActiveQuestHolders(questId).Count > 0)
+                ended = false;
             dungeon = new CachedDungeon(parameters, row.ExpiresAtUtcTicks,
                 parameters.ObjectiveNpc == null ? KillTarget(template) : null, ended, row.OwnerId, assignedAtUtcTicks);
             if (row.ExpiresAtUtcTicks > DateTime.UtcNow.Ticks)
@@ -1223,6 +1230,77 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
         {
             int id = _ids.Allocate();
             return _items.Create(KeyLowId, KeyLowId, 1, ItemSource.Quest, 1, id, new Identity { Type = (IdentityType)KeyItemType, Instance = id });
+        }
+
+        /// <summary>
+        /// Team missions (terminal team offers and team NPC dungeons): as on live, taking one shares it with the whole
+        /// team at once, wherever they are on this server: each online teammate gets the mission in their journal and
+        /// their own key to the same dungeon. Offline teammates and full inventories are told to the taker and skipped.
+        /// </summary>
+        void ShareWithTeam(Player owner, string questId, QuestTemplate template, string parametersJson, string entranceName,
+            DateTime assignedAt, DateTime expires)
+        {
+            TeamSnapshot? team = owner.Playfield?.GetService<TeamService>()?.GetTeam(owner);
+            if (team == null)
+                return;
+            PlayfieldManager manager = _playfields.Value;
+            foreach (int id in team.MemberIds)
+            {
+                if (id == owner.Identity.Instance)
+                    continue;
+                if (!manager.FindPlayer(id, out Player mate) || mate.Playfield is not Playfield at)
+                {
+                    _logger.Info(string.Format(CultureInfo.InvariantCulture, "Team mission {0}: teammate {1} offline, not shared", questId, id));
+                    continue;
+                }
+                at.DispatchPlayerProjection(mate, () =>
+                {
+                    string? refused = JoinShared(mate, questId, template, parametersJson, entranceName, assignedAt, expires);
+                    if (refused != null && owner.Playfield is Playfield home)
+                        home.DispatchPlayerProjection(owner, () => SendText(owner, mate.Name + " did not get the team mission: " + refused));
+                });
+            }
+        }
+
+        string? JoinShared(Player mate, string questId, QuestTemplate template, string parametersJson, string entranceName,
+            DateTime assignedAt, DateTime expires)
+        {
+            lock (mate.PersistenceGate)
+            {
+                if (mate.IsPersistenceQuarantined || mate.Session == null || mate.Playfield == null || !mate.Inventory.IsHydrated)
+                    return "they are not available right now.";
+                if (_quests.GetLog(mate).Quests.ContainsKey(questId))
+                    return null;
+                try
+                {
+                    _flush.HardFlush(mate);
+                    Item key = CreateKey();
+                    if (!InventoryGrantPlan.TryCreate(mate, [key], out InventoryGrantPlan plan))
+                    {
+                        SendText(mate, "Your team took a mission, but your inventory is full so you got no key.");
+                        return "their inventory is full.";
+                    }
+                    var row = new CharacterQuestRow
+                    {
+                        CharacterId = mate.Identity.Instance, QuestId = questId, Source = (int)QuestSource.Generated,
+                        State = (int)QuestState.Active, Progress = 0, RequiredCount = template.RequiredCount,
+                        // The owner's assignment time: token kill progress is keyed by it.
+                        AssignedAtUtcTicks = assignedAt.Ticks, UpdatedAtUtcTicks = DateTime.UtcNow.Ticks
+                    };
+                    if (!_store.TryJoinSharedQuest(row, KeyRow(plan.Rows[0], DateTime.UtcNow), DateTime.UtcNow.Ticks))
+                        return "the mission is gone or they already have it.";
+                    plan.PublishAfterCommit(notify: false);
+                    SendKey(mate, key, plan.Rows[0].ContainerPlacement, entranceName);
+                    _quests.AdoptGenerated(mate, questId, template, assignedAt, expires, parametersJson);
+                    _logger.Info(string.Format(CultureInfo.InvariantCulture, "Team mission shared quest={0} char={1}", questId, mate.Identity.Instance));
+                    return null;
+                }
+                catch (DatabaseCommitOutcomeUnknownException exception)
+                {
+                    Quarantine(mate, exception);
+                    return "a database error; they should reconnect.";
+                }
+            }
         }
 
         static QuestDungeonKeyItemRow KeyRow(ItemInstanceRecord row, DateTime now) => new()

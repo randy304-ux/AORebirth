@@ -283,6 +283,37 @@ namespace AORebirth.Database.Domain.Quests
         }
 
         /// <summary>
+        /// Team missions: a teammate joins an existing generated quest (their own characterquests row and key, linked to
+        /// the same quest and dungeon). Refused when the quest is gone or expired, or the character already has it.
+        /// </summary>
+        public bool TryJoinSharedQuest(CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, long nowUtcTicks)
+        {
+            if (characterRow == null) throw new ArgumentNullException(nameof(characterRow));
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            return Transaction((c, t) =>
+            {
+                using (IDbCommand command = Prepare(c, t,
+                    "SELECT COUNT(*) FROM generatedquests WHERE QuestId=@Quest AND ExpiresAtUtcTicks>@Now FOR UPDATE",
+                    new object[] { "@Quest", characterRow.QuestId, "@Now", nowUtcTicks }))
+                    if (Convert.ToInt64(command.ExecuteScalar(), System.Globalization.CultureInfo.InvariantCulture) == 0)
+                        return false;
+                using (IDbCommand command = Prepare(c, t,
+                    "SELECT COUNT(*) FROM characterquests WHERE QuestId=@Quest AND CharacterId=@Character",
+                    new object[] { "@Quest", characterRow.QuestId, "@Character", characterRow.CharacterId }))
+                    if (Convert.ToInt64(command.ExecuteScalar(), System.Globalization.CultureInfo.InvariantCulture) != 0)
+                        return false;
+                InsertCharacterQuest(c, t, characterRow);
+                InsertKey(c, t, key, characterRow.QuestId);
+                return true;
+            });
+        }
+
+        /// <summary>Characters whose row for <paramref name="questId"/> is still active (State 1).</summary>
+        public IList<int> LoadActiveQuestHolders(string questId)
+            => Query("SELECT CharacterId FROM characterquests WHERE QuestId=@Id AND State=1",
+                reader => Convert.ToInt32(reader.GetValue(0), System.Globalization.CultureInfo.InvariantCulture), "@Id", questId);
+
+        /// <summary>
         /// Adds a copy of <paramref name="sourceKeyInstanceId"/> for the same quest: only while that key is still
         /// linked, its quest is unexpired and the quest has fewer than <paramref name="maxKeys"/> keys. The source
         /// link and the quest's key count are locked for the check. Returns the quest id, or null when refused.

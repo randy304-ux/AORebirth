@@ -180,7 +180,8 @@ namespace AORebirth.Database.Domain.Missions
                 if (quest == null || quest.CharacterId != this.CharacterId || assigned <= 0 || now <= 0
                     || quest.AssignedAtUtcTicks != assigned || quest.RequiredCount <= 0 || (quest.Source != 0 && quest.Source != 1))
                     return false;
-                return quest.Source == 0 || (quest.OwnerType == 0 && quest.OwnerId == this.CharacterId && quest.ExpiresAtUtcTicks > 0
+                // Team missions: every holder has its own characterquests row (checked above) on the shared generated quest.
+                return quest.Source == 0 || (quest.OwnerType == 0 && quest.OwnerId > 0 && quest.ExpiresAtUtcTicks > 0
                     && !string.IsNullOrEmpty(definition) && string.Equals(quest.DefinitionJson, definition, StringComparison.Ordinal)
                     && string.Equals(quest.AcgBuildingGeneratorJson, acg, StringComparison.Ordinal));
             }

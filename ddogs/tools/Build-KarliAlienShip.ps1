@@ -133,18 +133,20 @@ $karli = [ordered]@{
     fight = [ordered]@{ Text = 'I want to fight aliens too!'; If = @('!HasAnyQuest FBUD','!HasCompletedQuest FBUD'); Goto = 'friends' }
     nofriends = [ordered]@{ Text = "But, I don't have any friends..."; Goto = 'give_can' }
     ready = [ordered]@{ Text = 'We are ready to help you out.'; Goto = 'team' }
+    teamready = [ordered]@{ Text = 'My team is ready to storm the ship.'; Goto = 'team_big' }
     used = [ordered]@{ Text = 'I found a teammate and used the can on them.'; Goto = 'fb_done' }
     notyet = [ordered]@{ Text = 'Not yet.'; Goto = 'bye' }
     nothing = [ordered]@{ Text = 'Never mind.'; Goto = 'bye' }
   }
   Lines = [ordered]@{
     hello = [ordered]@{ Text = "I'm a little busy here..."; Replies = @('what','nothing') }
-    spy = [ordered]@{ Text = "I'm an alien spy. I find and terminate aliens... Quietly!"; Replies = @('fight','ready','nothing') }
+    spy = [ordered]@{ Text = "I'm an alien spy. I find and terminate aliens... Quietly!"; Replies = @('fight','ready','teamready','nothing') }
     friends = [ordered]@{ Text = 'I think you should find some friends to help you out for this one.'; Replies = @('nofriends') }
     give_can = [ordered]@{ Text = @('You know we have a lookup system to find people with similar interests here on Rubi-Ka. Just open your team search interface. Or perhaps just look for someone around you that you can start a team with.', '{spawn FBCN 1}', '{givequest FBUD}', '{delay 1}Here, take this Friendly Buff Nano can and see if you can find a friend to use it on.'); Replies = @('nothing') }
     fb_back = [ordered]@{ Text = 'Did you find a friend for that Friendly Buff can?'; Replies = @('notyet') }
     fb_done = [ordered]@{ Text = @('{completequest FBUD}', 'See? Rubi-Ka is friendlier with a team. Take these memory chips.'); Replies = @('nothing') }
     team = [ordered]@{ Text = @('{givedungeon ZXK1}', 'The Zix hides in the Alien General''s room, deep inside the ship. Take this key and go through the Crashed Alien Ship door at the back of this room. Try not to blow my cover.'); Replies = @('nothing') }
+    team_big = [ordered]@{ Text = @('{givedungeon ZXT1}', 'The General itself is holed up in the arena at the bottom of the ship, three decks down. Every one of your team gets the mission and a key; go through the Crashed Alien Ship door together.'); Replies = @('nothing') }
     bye = [ordered]@{ Text = 'Keep your head down.{close}' }
   }
 }

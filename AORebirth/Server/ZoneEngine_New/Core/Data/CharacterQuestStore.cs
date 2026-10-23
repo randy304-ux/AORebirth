@@ -36,6 +36,13 @@ namespace ZoneEngine_New.Core.Data
         bool TryAcceptAuthoredQuest(GeneratedQuestRow quest, CharacterQuestRow characterRow, QuestDungeonKeyItemRow key)
             => throw new NotSupportedException("The quest store does not support authored dungeon quests.");
 
+        /// <summary>Team missions: a teammate's own row and key for an existing generated quest, in one transaction.</summary>
+        bool TryJoinSharedQuest(CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, long nowUtcTicks)
+            => throw new NotSupportedException("The quest store does not support shared team quests.");
+
+        /// <summary>Characters still holding <paramref name="questId"/> active.</summary>
+        IList<int> LoadActiveQuestHolders(string questId) => Array.Empty<int>();
+
         IDictionary<int, string> LoadKeyQuests(IReadOnlyCollection<int> keyInstanceIds);
 
         IList<RetiredDungeonKey> EndQuestKeys(string questId);
@@ -88,6 +95,11 @@ namespace ZoneEngine_New.Core.Data
 
         public bool TryAcceptAuthoredQuest(GeneratedQuestRow quest, CharacterQuestRow characterRow, QuestDungeonKeyItemRow key)
             => Run(() => _dao.TryAcceptAuthoredQuest(quest, characterRow, key), _logger);
+
+        public bool TryJoinSharedQuest(CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, long nowUtcTicks)
+            => Run(() => _dao.TryJoinSharedQuest(characterRow, key, nowUtcTicks), _logger);
+
+        public IList<int> LoadActiveQuestHolders(string questId) => Run(() => _dao.LoadActiveQuestHolders(questId), _logger);
 
         public string? TryAddDuplicateKey(int sourceKeyInstanceId, QuestDungeonKeyItemRow copy, int maxKeys, long nowUtcTicks)
             => Run(() => _dao.TryAddDuplicateKey(sourceKeyInstanceId, copy, maxKeys, nowUtcTicks), _logger);

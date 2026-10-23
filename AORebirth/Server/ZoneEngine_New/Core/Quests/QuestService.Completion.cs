@@ -40,7 +40,9 @@ public sealed partial class QuestService
             if (!CanDeliver(player) || _completionDao == null || !quest.IsActive || quest.IsRewardPending
                 || !QuestDungeonParameters.TryParse(quest.AcgBuildingGeneratorJson, out var parameters)
                 || parameters.ObjectiveNpc is not { IsValid: true } binding
-                || binding.MissionType != (inspected ? 1 : 0) || binding.OwnerId != player.Identity.Instance
+                || binding.MissionType != (inspected ? 1 : 0)
+                // Any holder of a shared team mission may earn it (their own row is checked in the transaction).
+                || (binding.OwnerId != player.Identity.Instance && !(parameters.IsTeam && !inspected))
                 || binding.QuestId != quest.QuestId || npc.Identity != binding.Identity
                 || npc.Playfield is not ZoneEngine_New.Core.Playfield.QuestDungeonPlayfield world
                 || !ReferenceEquals(player.Playfield, world) || world.Identity.Instance != parameters.DungeonPlayfield
@@ -308,6 +310,33 @@ public sealed partial class QuestService
         return due.Count;
     }
 
+    /// <summary>
+    /// Team missions: a teammate finished the shared mission, so this holder's copy is earned and paid too (wherever
+    /// they are). Bound-objective missions are earned first; a failed earn retries like a pending NPC objective.
+    /// </summary>
+    public void CompleteShared(Player player, string questId)
+    {
+        ArgumentNullException.ThrowIfNull(player);
+        lock (player.PersistenceGate)
+        {
+            if (!CanDeliver(player) || _completionDao == null
+                || !GetLog(player).Quests.TryGetValue(questId ?? string.Empty, out PlayerQuest? quest) || !quest.IsActive)
+                return;
+            if (RequiresBoundObjective(quest) && quest.Progress < quest.RequiredCount)
+            {
+                if (!QuestDungeonParameters.TryParse(quest.AcgBuildingGeneratorJson, out var parameters))
+                    return;
+                if (!TryEarnBoundObjective(player, quest, parameters, null))
+                {
+                    quest.NpcObjectiveCommitPending = true;
+                    quest.NextRewardRetryUtcTicks = _now().AddSeconds(5).Ticks;
+                    return;
+                }
+            }
+            Complete(player, quest);
+        }
+    }
+
     void Complete(Player player, PlayerQuest quest)
     {
         lock (player.PersistenceGate)
@@ -500,7 +529,7 @@ public sealed partial class QuestService
         if (stored == null || stored.CharacterId != player.Identity.Instance || stored.Source != (int)quest.Source
             || stored.AssignedAtUtcTicks != quest.AssignedAtUtc.Ticks
             || (quest.Source == QuestSource.Generated && (stored.OwnerType != (int)QuestOwnerType.Character
-                || stored.OwnerId != player.Identity.Instance || stored.AcgBuildingGeneratorJson != quest.AcgBuildingGeneratorJson)))
+                || stored.OwnerId <= 0 || stored.AcgBuildingGeneratorJson != quest.AcgBuildingGeneratorJson)))
             throw new InvalidOperationException("Accepted quest authority changed.");
     }
 
