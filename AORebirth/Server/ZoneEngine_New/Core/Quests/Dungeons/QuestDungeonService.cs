@@ -1,4 +1,4 @@
-using ZoneEngine_New.Core.Teams;
+﻿using ZoneEngine_New.Core.Teams;
 namespace ZoneEngine_New.Core.Quests.Dungeons
 {
     using System;
@@ -366,7 +366,18 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     Quality = quality,
                     MissionIconId = MissionRollPolicy.Current.Icon(MissionRollType.KillPerson)
                 };
-                if (!_layouts.ConfigureAuthoredDungeon(parameters, spec) || !_layouts.TryGenerate(parameters, out DungeonLayout layout))
+                // Some seeds cannot be laid out for a style/size; retry with fresh seeds instead of refusing the mission.
+                DungeonLayout layout = null!;
+                bool generated = false;
+                for (int attempt = 0; attempt < 20 && !generated; attempt++)
+                {
+                    if (attempt > 0)
+                        parameters.Seed = RandomNumberGenerator.GetInt32(int.MaxValue);
+                    generated = _layouts.ConfigureAuthoredDungeon(parameters, spec) && _layouts.TryGenerate(parameters, out layout);
+                    if (!generated)
+                        _logger.Warn("Authored dungeon " + spec.Hash + ": layout failed for seed " + parameters.Seed + " (attempt " + (attempt + 1) + ")");
+                }
+                if (!generated)
                     return "Mission dungeons are unavailable.";
 
                 if (!_gameData.TryResolveMobTemplate(spec.ObjectiveNpcHash, spec.Quality, out MobTemplate objectiveTemplate)

@@ -55,6 +55,9 @@ $ht.Name = 'Healing Tower'; $ht.Stats.'360' = 90
 $ht | Add-Member -Force NoteProperty Features @('NoMove')
 $ht | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = 'SHXT'; Source = 'Master of Biological Metamorphoses healing tower (AO-Universe LE Alien Motherships): two towers next to the Alien General, heal it until killed, no respawn. Mesh 253599 alien defense turret; level set at spawn to the General''s; stats guessed' })
 $nt | Add-Member -Force NoteProperty ALHT ([pscustomobject]@{ Templates = @($ht) })
+# level-220 bands so mission difficulty / puller level actually scales these mobs (AlienLevelBands.ps1)
+. (Join-Path $PSScriptRoot 'AlienLevelBands.ps1')
+foreach ($k in @('ALGN','ZIXK') + $crewKeys + @('ALHT')) { $nt.$k = Add-AlienHighBand $nt.$k }
 $ourKeys = @('ALGN','ZIXK') + $crewKeys + @('SHXT','ALHT')
 # insert as text so the rest of the 4 MB file keeps its formatting; our keys are appended at the end, so cut and re-append
 $nraw = [IO.File]::ReadAllText($npath, $u) -replace "`r`n", "`n"

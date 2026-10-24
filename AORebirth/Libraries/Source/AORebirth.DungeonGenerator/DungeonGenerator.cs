@@ -730,6 +730,7 @@ namespace AORebirth.DungeonGenerator
             DungeonStyleCatalog catalog = DungeonStyleCatalog.Load(gameDataRoot, styleId);
             DungeonEntranceMap map = DungeonEntranceMap.Load(gameDataRoot, styleId);
             var shapes = catalog.Rooms
+                .Where(room => !map.ExcludedRooms.Contains(room.InstanceId))
                 .Select(room => RoomShape.FromTemplate(room, catalog.Dcga, catalog.MapWidth, catalog.MapHeight).WithEntranceMap(map.ExitDoors))
                 .ToList();
             var set = new StyleRoomSet(styleId, shapes, map.MainHalls, map.Transitions);

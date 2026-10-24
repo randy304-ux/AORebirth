@@ -26,6 +26,9 @@ namespace AORebirth.DungeonGenerator
 
         public DungeonTransitionMap? Transitions { get; init; }
 
+        /// <summary>Rooms of the style never used (e.g. the alien ship's tiny 4-door connectors). Empty by default.</summary>
+        public IReadOnlySet<int> ExcludedRooms { get; init; } = new HashSet<int>();
+
         sealed class EntrancesFile
         {
             public List<StyleRow> Styles { get; set; } = [];
@@ -38,6 +41,8 @@ namespace AORebirth.DungeonGenerator
             public List<EntranceRow> Entrances { get; set; } = [];
 
             public List<int> MainHalls { get; set; } = [];
+
+            public List<int> ExcludeRooms { get; set; } = [];
 
             public TransitionRows? FloorTransitions { get; set; }
         }
@@ -74,6 +79,7 @@ namespace AORebirth.DungeonGenerator
             var exits = new Dictionary<int, int>();
             var mainHalls = new HashSet<int>();
             DungeonTransitionMap? transitions = null;
+            var excluded = new HashSet<int>();
             if (!File.Exists(path))
                 return new DungeonEntranceMap(exits, mainHalls);
 
@@ -91,6 +97,8 @@ namespace AORebirth.DungeonGenerator
 
                 foreach (int room in style.MainHalls ?? [])
                     mainHalls.Add(room);
+                foreach (int room in style.ExcludeRooms ?? [])
+                    excluded.Add(room);
 
                 if (style.FloorTransitions is TransitionRows roles)
                 {
@@ -101,7 +109,7 @@ namespace AORebirth.DungeonGenerator
                 }
             }
 
-            return new DungeonEntranceMap(exits, mainHalls) { Transitions = transitions };
+            return new DungeonEntranceMap(exits, mainHalls) { Transitions = transitions, ExcludedRooms = excluded };
         }
 
         static IReadOnlyList<DungeonTransitionRoom> ReadTransitionRooms(List<TransitionRoomRow>? rows)
