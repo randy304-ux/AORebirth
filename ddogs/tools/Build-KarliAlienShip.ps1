@@ -49,7 +49,13 @@ $hx.Name = 'Ship Hatch'; $hx.Level = 1; $hx.Stats.'54' = 1; $hx.Stats.'359' = 25
 $hx | Add-Member -Force NoteProperty Features @('NoCombat','NoMove')
 $hx | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = 'CRDY'; Source = 'Exit hatch spawned by the Alien General death trigger (Randy request). Mesh 253599 alien defense turret as a stand-in hatch: guessed' })
 $nt | Add-Member -Force NoteProperty SHXT ([pscustomobject]@{ Templates = @($hx) })
-$ourKeys = @('ALGN','ZIXK') + $crewKeys + @('SHXT')
+# healing towers next to the Alien General in the team ship (AuthoredDungeons TowerHash ALHT)
+$ht = Clone $hx
+$ht.Name = 'Healing Tower'; $ht.Stats.'360' = 90
+$ht | Add-Member -Force NoteProperty Features @('NoMove')
+$ht | Add-Member -Force NoteProperty ContentProvenance ([pscustomobject]@{ Guessed = $true; Confirmed = $false; Donor = 'SHXT'; Source = 'Master of Biological Metamorphoses healing tower (AO-Universe LE Alien Motherships): two towers next to the Alien General, heal it until killed, no respawn. Mesh 253599 alien defense turret; level set at spawn to the General''s; stats guessed' })
+$nt | Add-Member -Force NoteProperty ALHT ([pscustomobject]@{ Templates = @($ht) })
+$ourKeys = @('ALGN','ZIXK') + $crewKeys + @('SHXT','ALHT')
 # insert as text so the rest of the 4 MB file keeps its formatting; our keys are appended at the end, so cut and re-append
 $nraw = [IO.File]::ReadAllText($npath, $u) -replace "`r`n", "`n"
 $cut = $nraw.IndexOf(",`n    `"ALGN`":")
@@ -132,8 +138,14 @@ $karli = [ordered]@{
     what = [ordered]@{ Text = 'What are you doing?'; Goto = 'spy' }
     fight = [ordered]@{ Text = 'I want to fight aliens too!'; If = @('!HasAnyQuest FBUD','!HasCompletedQuest FBUD'); Goto = 'friends' }
     nofriends = [ordered]@{ Text = "But, I don't have any friends..."; Goto = 'give_can' }
-    ready = [ordered]@{ Text = 'We are ready to help you out.'; Goto = 'team' }
-    teamready = [ordered]@{ Text = 'My team is ready to storm the ship.'; Goto = 'team_big' }
+    ready = [ordered]@{ Text = 'We are ready to help you out.'; Goto = 'solo_pick' }
+    teamready = [ordered]@{ Text = 'My team is ready to storm the ship.'; Goto = 'team_pick' }
+    s_easy = [ordered]@{ Text = 'Take it easy on us.'; Goto = 'solo_e' }
+    s_med = [ordered]@{ Text = 'We can handle our business.'; Goto = 'team' }
+    s_hard = [ordered]@{ Text = 'Give us the mission the others are too chicken to take.'; Goto = 'solo_h' }
+    t_easy = [ordered]@{ Text = 'Take it easy on us.'; Goto = 'team_e' }
+    t_med = [ordered]@{ Text = 'We can handle our business.'; Goto = 'team_big' }
+    t_hard = [ordered]@{ Text = 'Give us the mission the others are too chicken to take.'; Goto = 'team_h' }
     used = [ordered]@{ Text = 'I found a teammate and used the can on them.'; Goto = 'fb_done' }
     notyet = [ordered]@{ Text = 'Not yet.'; Goto = 'bye' }
     nothing = [ordered]@{ Text = 'Never mind.'; Goto = 'bye' }
@@ -147,6 +159,12 @@ $karli = [ordered]@{
     fb_done = [ordered]@{ Text = @('{completequest FBUD}', 'See? Rubi-Ka is friendlier with a team. Take these memory chips.'); Replies = @('nothing') }
     team = [ordered]@{ Text = @('{givedungeon ZXK1}', 'The Zix hides in the Alien General''s room, deep inside the ship. Take this key and go through the Crashed Alien Ship door at the back of this room. Try not to blow my cover.'); Replies = @('nothing') }
     team_big = [ordered]@{ Text = @('{givedungeon ZXT1}', 'The General itself is holed up in the arena at the bottom of the ship, three decks down. Every one of your team gets the mission and a key; go through the Crashed Alien Ship door together.'); Replies = @('nothing') }
+    solo_pick = [ordered]@{ Text = 'How tough do you want it?'; Replies = @('s_easy','s_med','s_hard','nothing') }
+    team_pick = [ordered]@{ Text = 'How tough does your team want it?'; Replies = @('t_easy','t_med','t_hard','nothing') }
+    solo_e = [ordered]@{ Text = @('{givedungeon ZXKE}', 'The crew is a bit below you. The Zix hides in the Alien General''s room, deep inside the ship. Take this key and go through the Crashed Alien Ship door at the back of this room.'); Replies = @('nothing') }
+    solo_h = [ordered]@{ Text = @('{givedungeon ZXKH}', 'The crew is above you and the General is nasty. The Zix hides in its room, deep inside the ship. Take this key and go through the Crashed Alien Ship door at the back of this room.'); Replies = @('nothing') }
+    team_e = [ordered]@{ Text = @('{givedungeon ZXTE}', 'Easy, then. The General waits in the arena three decks down, with two healing towers. Kill the towers first. Every one of your team gets the mission and a key.'); Replies = @('nothing') }
+    team_h = [ordered]@{ Text = @('{givedungeon ZXTH}', 'Your funeral. The General waits in the arena three decks down, with two healing towers. Kill the towers first. Every one of your team gets the mission and a key.'); Replies = @('nothing') }
     bye = [ordered]@{ Text = 'Keep your head down.{close}' }
   }
 }

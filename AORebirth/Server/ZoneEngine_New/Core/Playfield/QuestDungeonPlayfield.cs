@@ -388,11 +388,45 @@ public sealed class QuestDungeonPlayfield : Playfield
             },
             fixedIdentity: _objectiveNpc.Identity);
         TokenProgress?.BindActor("objective", npc, 0);
+        SpawnHealingTowers(npc);
         Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
             "Quest dungeon {0} objective NPC {1}:{2} hash={3} in room {4} at ({5:0.#}, {6:0.#}, {7:0.#}) scale={8}",
             QuestId, (int)npc.Identity.Type, npc.Identity.Instance, _objectiveNpc.NpcHash,
             _objectiveNpc.RoomIndex, npc.Position.xf, npc.Position.yf, npc.Position.zf,
             npc.Stats.GetOrZero(CharacterStat.Scale)));
+    }
+
+    /// <summary>
+    /// "Master of X" (AO-Universe LE motherships): healing towers around the objective NPC at its level. They do not
+    /// move or respawn; while alive each heals it a share of its max health on a timer.
+    /// </summary>
+    void SpawnHealingTowers(NpcCharacter target)
+    {
+        string? hash = Layout.AuthoredTowerHash;
+        int count = Math.Clamp(Layout.AuthoredTowerCount, 0, 6);
+        if (hash == null || count == 0)
+            return;
+        int level = Math.Max(1, target.Stats.GetOrOne(CharacterStat.Level));
+        var templates = new List<MobTemplate>();
+        GameData.CollectMobSpawns(hash, level, templates);
+        if (templates.Count == 0)
+        {
+            Logger.Warn("Quest dungeon " + QuestId + ": healing tower template " + hash + " unresolved");
+            return;
+        }
+        for (int n = 0; n < count; n++)
+        {
+            double angle = 2 * Math.PI * n / count;
+            var at = new AORebirth.Core.Vector.Vector3(target.Position.xf + (float)(Math.Cos(angle) * 6), target.Position.yf,
+                target.Position.zf + (float)(Math.Sin(angle) * 6));
+            NpcCharacter tower = GetRequiredService<SpawnService>().SpawnMob(templates[0], at, level: level, spawnHash: hash);
+            tower.HealTarget = target;
+            tower.HealPercent = Math.Clamp(Layout.AuthoredTowerHealPercent, 0, 100);
+            tower.HealIntervalSeconds = Math.Max(1, Layout.AuthoredTowerHealSeconds);
+        }
+        Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+            "Quest dungeon {0} healing towers {1}x{2} L{3} heal {4}%/{5}s", QuestId, count, hash, level,
+            Layout.AuthoredTowerHealPercent, Layout.AuthoredTowerHealSeconds));
     }
 
     /// <summary>

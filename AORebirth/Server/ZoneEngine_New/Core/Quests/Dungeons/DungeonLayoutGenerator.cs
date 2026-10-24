@@ -29,6 +29,11 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
         public string? AuthoredBossHash { get; init; }
 
         public int AuthoredBossLevel { get; init; }
+
+        public string? AuthoredTowerHash { get; init; }
+        public int AuthoredTowerCount { get; init; }
+        public int AuthoredTowerHealPercent { get; init; }
+        public int AuthoredTowerHealSeconds { get; init; }
     }
 
     /// <summary>
@@ -60,6 +65,15 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
         public int MinTeamSize { get; set; } = 2;
         /// <summary>Objective NPC level; 0 uses Quality.</summary>
         public int ObjectiveLevel { get; set; }
+        /// <summary>Difficulty (AO-Universe mothership rules): when set, the crew level is the puller's level plus this,
+        /// and the objective and boss keep their offsets over Quality (ObjectiveLevel - Quality, BossLevel - Quality).</summary>
+        public int? PullerLevelOffset { get; set; }
+        /// <summary>"Master of X" healing towers: TowerCount NoMove NPCs of TowerHash around the objective NPC (same level),
+        /// each healing it TowerHealPercent of its max health every TowerHealSeconds while alive. Never respawn.</summary>
+        public string? TowerHash { get; set; }
+        public int TowerCount { get; set; }
+        public int TowerHealPercent { get; set; }
+        public int TowerHealSeconds { get; set; } = 3;
     }
 
     /// <summary>GameData/DungeonDoorStyles.json for one ACG style: door item templates and spawn-state chances.</summary>
@@ -379,7 +393,11 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 {
                     FloorTransitions = result.Transitions, BossRoomIndex = result.BossRoomIndex,
                     Population = authored?.Population ?? _policy?.Population ?? new DungeonPopulationPolicy(),
-                    AuthoredBossHash = authored?.BossNpcHash, AuthoredBossLevel = authored?.BossLevel ?? 0
+                    AuthoredBossHash = authored?.BossNpcHash,
+                    AuthoredBossLevel = authored == null || authored.BossLevel <= 0 ? 0
+                        : Math.Clamp(authored.BossLevel + parameters.Quality - authored.Quality, 1, 220),
+                    AuthoredTowerHash = authored?.TowerHash, AuthoredTowerCount = authored?.TowerCount ?? 0,
+                    AuthoredTowerHealPercent = authored?.TowerHealPercent ?? 0, AuthoredTowerHealSeconds = authored?.TowerHealSeconds ?? 3
                 };
                 return true;
             }

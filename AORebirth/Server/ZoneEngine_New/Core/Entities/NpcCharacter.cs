@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Core.Entities
+namespace ZoneEngine_New.Core.Entities
 {
     using System;
     using System.Collections.Generic;
@@ -309,8 +309,36 @@
         /// <summary>The dyna glow has been announced to the cell once the NPC was registered.</summary>
         public bool AuraAnnounced { get; set; }
 
+        /// <summary>Healing tower: the NPC this one heals while both live on the same playfield.</summary>
+        public NpcCharacter? HealTarget { get; set; }
+        public int HealPercent { get; set; }
+        public int HealIntervalSeconds { get; set; } = 3;
+        double _healTimer;
+
+        void TickHeal(double deltaTime)
+        {
+            NpcCharacter? target = HealTarget;
+            if (target == null || HealPercent <= 0 || IsDead)
+                return;
+            if (target.IsDead || !ReferenceEquals(target.Playfield, Playfield))
+            {
+                HealTarget = null;
+                return;
+            }
+            _healTimer += deltaTime;
+            if (_healTimer < HealIntervalSeconds)
+                return;
+            _healTimer = 0;
+            int max = target.Stats.GetOrZero(CharacterStat.MaxHealth);
+            int health = target.Stats.GetOrZero(CharacterStat.Health);
+            if (max <= 0 || health <= 0 || health >= max)
+                return;
+            target.Stats.Set(CharacterStat.Health, (int)Math.Min(max, health + (long)max * HealPercent / 100), StatDetail.Base, dirty: true);
+        }
+
         public override void Tick(double deltaTime)
         {
+            TickHeal(deltaTime);
             if (DespawnAtUtc is { } despawnAt && DateTime.UtcNow >= despawnAt && !IsDead && Playfield != null)
             {
                 DespawnAtUtc = null;

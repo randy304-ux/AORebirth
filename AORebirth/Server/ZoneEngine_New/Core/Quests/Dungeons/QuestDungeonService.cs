@@ -325,7 +325,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 {
                     if (held.IsActive && held.Source == QuestSource.Generated
                         && QuestDungeonParameters.TryParse(held.AcgBuildingGeneratorJson, out var heldParameters)
-                        && string.Equals(heldParameters.AuthoredHash, spec.Hash, StringComparison.Ordinal))
+                        && heldParameters.AuthoredHash != null && unchecked((uint)heldParameters.EntranceInstance) == spec.EntranceInstance)
                         return "You already have this mission. Use your mission key at the " + heldParameters.EntranceName + ".";
                 }
 
@@ -344,6 +344,9 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     return "Mission acceptance is unavailable right now.";
 
                 DateTime now = DateTime.UtcNow;
+                int quality = spec.PullerLevelOffset is int offset
+                    ? Math.Clamp(player.Stats.GetOrOne(CharacterStat.Level) + offset, 1, 220) : spec.Quality;
+                int objectiveLevel = spec.ObjectiveLevel > 0 ? Math.Clamp(spec.ObjectiveLevel + quality - spec.Quality, 1, 220) : quality;
                 var parameters = new QuestDungeonParameters
                 {
                     Seed = RandomNumberGenerator.GetInt32(int.MaxValue),
@@ -360,7 +363,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     BuildingLowId = hasWorldPosition ? worldPosition.WorldOffsetX : 0,
                     BuildingHighId = hasWorldPosition ? worldPosition.WorldOffsetZ : 0,
                     MissionType = (int)MissionRollType.KillPerson,
-                    Quality = spec.Quality,
+                    Quality = quality,
                     MissionIconId = MissionRollPolicy.Current.Icon(MissionRollType.KillPerson)
                 };
                 if (!_layouts.ConfigureAuthoredDungeon(parameters, spec) || !_layouts.TryGenerate(parameters, out DungeonLayout layout))
@@ -378,7 +381,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                 var objective = new MissionNpcObjectiveBinding
                 {
                     QuestId = questId, OwnerId = player.Identity.Instance, Instance = _ids.Allocate(),
-                    NpcHash = objectiveTemplate.Hash, Quality = spec.ObjectiveLevel > 0 ? spec.ObjectiveLevel : spec.Quality, ScalePercent = null, RoomIndex = room,
+                    NpcHash = objectiveTemplate.Hash, Quality = objectiveLevel, ScalePercent = null, RoomIndex = room,
                     X = point.xf, Y = point.yf, Z = point.zf, MissionType = parameters.MissionType
                 };
                 if (!objective.IsValid)
