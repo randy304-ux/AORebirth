@@ -119,9 +119,9 @@
       "FloorTransitions": {
         "_comment": "Authored 2026-10-23 for the team Crashed Alien Ship (AuthoredDungeons ZXT1): no capture. Lift platform/button templates borrowed from style 324. Positions are room-local district spawn points (mh_2 departure, mh_3 arrival, AI_bossroom boss floor).",
         "DescendingFloors": false,
-        "ArrivalRooms": [ { "Room": 6, "Position": [-1.3, 1.81, -8.5], "PlatformTemplateId": 159867, "ButtonTemplateId": 159864 } ],
-        "DepartureRooms": [ { "Room": 5, "Position": [-0.6, 1.81, 16.9], "PlatformTemplateId": 159867, "ButtonTemplateId": 159864, "BossButtonTemplateId": 159864 } ],
-        "BossRooms": [ { "Room": 4, "Position": [0.48, 0.53, -6.84], "PlatformTemplateId": 159867, "ButtonTemplateId": 159863 } ]
+        "ArrivalRooms": [ { "Room": 6, "Position": [-1.3, 1.81, -8.5], "PlatformTemplateId": 159867, "ButtonTemplateId": 159869 } ],
+        "DepartureRooms": [ { "Room": 5, "Position": [-0.6, 1.81, 16.9], "PlatformTemplateId": 159867, "ButtonTemplateId": 159863, "BossButtonTemplateId": 159864 } ],
+        "BossRooms": [ { "Room": 4, "Position": [0.48, 0.53, -6.84], "PlatformTemplateId": 159867, "ButtonTemplateId": 159869 } ]
       }
     },
     {

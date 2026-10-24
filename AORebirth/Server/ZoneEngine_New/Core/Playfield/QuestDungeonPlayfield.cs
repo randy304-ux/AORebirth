@@ -1,4 +1,4 @@
-namespace ZoneEngine_New.Core.Playfield;
+﻿namespace ZoneEngine_New.Core.Playfield;
 
 using System;
 using System.Collections.Concurrent;
@@ -136,7 +136,7 @@ public sealed class QuestDungeonPlayfield : Playfield
         if (dungeon != null)
         {
             SpawnDoors(dungeon.Doors, locality);
-            SpawnArrivalExitBeacon(dungeon);
+            // Randy 2026-10-24: the arrival exit beacon (red pillar) is not needed beside the exit door; removed.
             SpawnFloorTransitions(locality);
             if (_objectiveNpc != null)
             {
@@ -542,6 +542,7 @@ public sealed class QuestDungeonPlayfield : Playfield
                 };
                 registry.Register(dynel);
                 locality.RegisterDynel(dynel);
+                Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture, "Quest dungeon {0} floor transition {1} at ({2:0.#}, {3:0.#}, {4:0.#}) -> ({5:0.#}, {6:0.#}, {7:0.#})", QuestId, templateId, source.Position.X, source.Position.Y, source.Position.Z, target.Position.X, target.Position.Y, target.Position.Z));
             }
         }
     }
