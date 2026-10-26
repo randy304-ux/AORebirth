@@ -635,10 +635,29 @@ namespace ZoneEngine_New.Core.Nanos
             if (playfield == null)
                 return false;
 
-            ItemTemplate template = playfield
-                .GetRequiredService<IItemBuilder>()
-                .CreateTemplate(nanoId, nanoId, quality: 1);
-            if (template.Id != nanoId)
+            IItemBuilder items = playfield.GetRequiredService<IItemBuilder>();
+            int lowId = nanoId;
+            int highId = nanoId;
+            int quality = 1;
+            // A twinked merc names a cast QL. Only a two-id pair interpolates; a single catalog row stays as it is.
+            if (caster is NpcCharacter { NanoCastQuality: > 1 } npc)
+            {
+                ItemTemplate anchor = items.CreateTemplate(nanoId, nanoId, 1);
+                if (anchor.Id == nanoId && anchor.Relations is { Count: 2 } rel)
+                {
+                    int a = rel[0];
+                    int b = rel[1];
+                    if (a > 0 && b > 0 && a != b && (nanoId == a || nanoId == b))
+                    {
+                        lowId = Math.Min(a, b);
+                        highId = Math.Max(a, b);
+                        quality = npc.NanoCastQuality;
+                    }
+                }
+            }
+
+            ItemTemplate template = items.CreateTemplate(lowId, highId, quality);
+            if (template.Id != nanoId && template.Id != lowId)
                 return false;
 
             spell = NanoSpell.From(template);

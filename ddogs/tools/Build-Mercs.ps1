@@ -126,6 +126,10 @@ function Pieces($prefix) {
 }
 $jobe = Pieces 'Jobe Suit'
 $doctorHeals = @(@{ MinLevel = 1; Nanos = @(26465) }, @{ MinLevel = 25; Nanos = @(26466) }, @{ MinLevel = 75; Nanos = @(28665) }, @{ MinLevel = 150; Nanos = @(28676) })
+# Soldier nukes are the single-id programs (no QL pair in the catalog). Taunt 227152 is the QL 1 end of 227152/227153 (QL 500).
+# Enforcer: Brawl 82210, Channel Rage 211753, Anger Management 261239, and the same taunt pair.
+$soldierNanos = @(@{ MinLevel = 1; Nanos = @(82208, 82209, 82211, 82215, 227152) })
+$enforcerNanos = @(@{ MinLevel = 1; Nanos = @(82210, 211753, 261239, 227152) })
 # Visible weapon per profession (held prop; the merc's monster weapon still rolls damage). Picks guessed, low-QL items with a WeaponMesh.
 $weapons = @{ enforcer = 129026; soldier = 124348; keeper = 154905; doctor = 157636; adventurer = 124313; agent = 161126; bureaucrat = 123742
   engineer = 124836; fixer = 247228; martialartist = 267258; metaphysicist = 254612; nanotechnician = 245627; shade = 160125; trader = 124241 }
@@ -150,6 +154,8 @@ foreach ($p in $profs) {
   if ($t1.Count -lt 5 -or $t2.Count -lt 5 -or $fa.Count -lt 5 -or $ch.Count -lt 5) { throw "armor lookup short for $key : $($report[-1])" }
   $nanos = New-Object System.Collections.ArrayList
   if ($p[8]) { foreach ($h in $doctorHeals) { [void]$nanos.Add($h) } }
+  elseif ($key -eq 'soldier') { foreach ($h in $soldierNanos) { [void]$nanos.Add($h) } }
+  elseif ($key -eq 'enforcer') { foreach ($h in $enforcerNanos) { [void]$nanos.Add($h) } }
   $petSpecs = @()
   if ($mercPets.Contains($key)) { foreach ($spec in $mercPets[$key]) { $petSpecs += [ordered]@{ Hash = [string]$spec[0]; MinLevel = [int]$spec[5]; Type = [int]$spec[6] } } }
   # A one-element Pets array collapses under ConvertTo-Json, so a single pet stays on Pet. MP has three.

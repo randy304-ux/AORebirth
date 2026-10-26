@@ -115,17 +115,27 @@ namespace ZoneEngine_New.Core.Pets
                     int petLevel = level > 0 ? level : npc.Stats.GetOrOne(CharacterStat.Level);
                     controller.Heals = IsHealPet(type) || Mercs.Heals(_gameData.RootPath, hash);
                     npc.BindPet(controller);
-                    npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, hash, petLevel));
+                    Mercs.Kind? mercKind = Mercs.ByHash(hash);
+                    Mercs.Tier tier = mercKind != null && owner is Player tierOwner
+                        ? Mercs.GetTier(tierOwner, mercKind)
+                        : Mercs.Tier.Basic;
+                    int nanoLevel = mercKind != null ? Mercs.PowerLevel(petLevel, tier) : petLevel;
+                    npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, hash, nanoLevel));
                     // A heal pet (the MP's Salvinous) has no merc profession of its own: it casts the doctor's heal band.
                     if (npc.UploadedNanoIds.Count == 0 && IsHealPet(type))
                         npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, "MRDR", petLevel));
-                    if (Mercs.ByHash(hash) is Mercs.Kind mercKind)
+                    if (mercKind != null)
                     {
-                        Mercs.Tier tier = owner is Player tierOwner ? Mercs.GetTier(tierOwner, mercKind) : Mercs.Tier.Basic;
-                        DressMerc(npc, mercKind, petLevel, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base));
+                        int gearQl = Mercs.GearQuality(petLevel, tier);
+                        DressMerc(npc, mercKind, nanoLevel, gearQl, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base), tier);
+                        if (gearQl != petLevel)
+                            npc.RaiseCombatWeaponQuality(gearQl, _logger);
                         ApplyMercTier(npc, tier);
                         if (tier != Mercs.Tier.Basic)
+                        {
+                            npc.NanoCastQuality = gearQl;
                             npc.Name = npc.Name + " (" + Mercs.TierName(tier) + ")";
+                        }
                     }
                     if (healthPercent is > 0 and < 100)
                     {
@@ -149,8 +159,8 @@ namespace ZoneEngine_New.Core.Pets
             if (owner is Player player)
                 SendAddPet(player, pet);
             RefreshOverEquip(pet);
-            if (owner is Player && Mercs.ByHash(hash) is Mercs.Kind)
-                EnsureMercPets(pet, pet.Stats.GetOrOne(CharacterStat.Level));
+            if (owner is Player mercOwner && Mercs.ByHash(hash) is Mercs.Kind mercPetKind)
+                EnsureMercPets(pet, Mercs.PowerLevel(pet.Stats.GetOrOne(CharacterStat.Level), Mercs.GetTier(mercOwner, mercPetKind)));
 
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
                 "Summoned pet id={0} hash={1} type={2} level={3} owner={4} expires={5}",
@@ -220,7 +230,7 @@ namespace ZoneEngine_New.Core.Pets
             owner.OwnedPets.MercReviveUtc.Remove(kind.Key);
             Mercs.Tier previous = Mercs.GetTier(owner, kind);
             Mercs.SetTier(owner, kind, tier);
-            int spawnLevel = Mercs.GearLevel(level, tier);
+            int spawnLevel = Mercs.BodyLevel(level);
             NpcCharacter? merc = Spawn(owner, kind.Hash, kind.PetType, spawnLevel, null, PetMode.Guard, 100, 100, []);
             if (merc == null)
             {
@@ -268,23 +278,33 @@ namespace ZoneEngine_New.Core.Pets
             }
         }
 
-        /// <summary>Tier armor for the merc's level (Mercs.json), worn for looks and, with ArmorStats, its stats too.</summary>
-        void DressMerc(NpcCharacter npc, Mercs.Kind kind, int level, int ownerSide)
+        /// <summary>
+        /// Tier armor for <paramref name="armorLevel"/> (Mercs.json), each piece minted at <paramref name="itemQuality"/>.
+        /// A soldier above basic holds a Perennium Blaster instead of the basic mesh.
+        /// </summary>
+        void DressMerc(NpcCharacter npc, Mercs.Kind kind, int armorLevel, int itemQuality, int ownerSide, Mercs.Tier tier)
         {
             Mercs.Catalog catalog = Mercs.Load(_gameData.RootPath);
             npc.WearsArmorStats = catalog.ArmorStats;
             int worn = 0;
-            foreach (List<int> pair in Mercs.ArmorFor(_gameData.RootPath, kind, level, ownerSide))
+            foreach (List<int> pair in Mercs.ArmorFor(_gameData.RootPath, kind, armorLevel, ownerSide))
             {
                 if (pair == null || pair.Count == 0)
                     continue;
-                if (npc.WearExtra(pair[0], pair.Count > 1 ? pair[1] : pair[0], level, _logger))
+                if (npc.WearExtra(pair[0], pair.Count > 1 ? pair[1] : pair[0], itemQuality, _logger))
                     worn++;
             }
 
-            if (Mercs.WeaponFor(_gameData.RootPath, kind) is { Count: > 0 } weapon
-                && npc.WearExtra(weapon[0], weapon.Count > 1 ? weapon[1] : weapon[0], level, _logger))
+            if (kind.Key == "soldier" && tier != Mercs.Tier.Basic)
+            {
+                if (npc.WearExtra(Mercs.PerenniumBlasterLow, Mercs.PerenniumBlasterHigh, itemQuality, _logger))
+                    worn++;
+            }
+            else if (Mercs.WeaponFor(_gameData.RootPath, kind) is { Count: > 0 } weapon
+                && npc.WearExtra(weapon[0], weapon.Count > 1 ? weapon[1] : weapon[0], itemQuality, _logger))
+            {
                 worn++;
+            }
 
             npc.Rebase();
             int max = npc.Stats.GetOrZero(CharacterStat.MaxHealth);
@@ -293,34 +313,62 @@ namespace ZoneEngine_New.Core.Pets
             int maxNano = npc.Stats.GetOrZero(CharacterStat.MaxNanoEnergy);
             if (maxNano > 0)
                 npc.Stats.Set(CharacterStat.CurrentNano, maxNano);
-            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc dressed hash={0} level={1} side={2} pieces={3}",
-                kind.Hash, level, ownerSide, worn));
+            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc dressed hash={0} armorLevel={1} ql={2} side={3} pieces={4}",
+                kind.Hash, armorLevel, itemQuality, ownerSide, worn));
         }
 
         /// <summary>
-        /// Extra health and character damage on top of the raised level. The swing itself is still the monster
-        /// weapon minted at that level (the held weapon is a look).
+        /// Flat health, damage, ability, AC, and skill adds. The swing itself is the monster weapon, re-minted at
+        /// the gear QL before this runs. Basic adds nothing.
         /// </summary>
         static void ApplyMercTier(NpcCharacter npc, Mercs.Tier tier)
         {
             Mercs.Package package = Mercs.PackageFor(tier);
-            if (package.HpPercent == 100 && package.DamagePercent == 100)
+            if (package.IsBasic)
                 return;
-            ScaleBase(npc, CharacterStat.MaxHealth, package.HpPercent);
-            ScaleBase(npc, CharacterStat.MaxDamage, package.DamagePercent);
-            ScaleBase(npc, CharacterStat.MinDamage, package.DamagePercent);
+            AddBase(npc, CharacterStat.MaxHealth, package.HealthAdd);
+            AddBase(npc, CharacterStat.MaxDamage, package.DamageAdd);
+            AddBase(npc, CharacterStat.MinDamage, package.DamageAdd);
+            foreach (CharacterStat skill in TwinkSkills)
+                AddBase(npc, skill, package.SkillAdd);
             npc.Rebase();
             int max = npc.Stats.GetOrZero(CharacterStat.MaxHealth);
             if (max > 0)
                 npc.Stats.Set(CharacterStat.Health, max);
         }
 
-        static void ScaleBase(NpcCharacter npc, CharacterStat stat, int percent)
+        /// <summary>Abilities, weapon and nano skills, and AC. Not level, side, or run speed (the owner already sets that).</summary>
+        static readonly CharacterStat[] TwinkSkills =
+        [
+            CharacterStat.Strength, CharacterStat.Agility, CharacterStat.Stamina,
+            CharacterStat.Intelligence, CharacterStat.Sense, CharacterStat.Psychic,
+            CharacterStat.ProjectileAC, CharacterStat.MeleeAC, CharacterStat.EnergyAC,
+            CharacterStat.ChemicalAC, CharacterStat.RadiationAC, CharacterStat.ColdAC,
+            CharacterStat.PoisonAC, CharacterStat.FireAC, CharacterStat.NanoAC,
+            CharacterStat.MartialArts, CharacterStat.MultiMelee, CharacterStat._1hBlunt,
+            CharacterStat._1hEdged, CharacterStat.MeleeEnergy, CharacterStat.Skill2hEdged,
+            CharacterStat.Piercing, CharacterStat._2hBlunt, CharacterStat.SharpObject,
+            CharacterStat.Grenade, CharacterStat.HeavyWeapons, CharacterStat.Bow,
+            CharacterStat.Pistol, CharacterStat.Rifle, CharacterStat.MGSMG,
+            CharacterStat.Shotgun, CharacterStat.AssaultRifle,
+            CharacterStat.MeleeInit, CharacterStat.RangedInit, CharacterStat.PhysicalInit,
+            CharacterStat.FirstAid, CharacterStat.Treatment,
+            CharacterStat.MaterialMetamorphosis, CharacterStat.BiologicalMetamorphosis,
+            CharacterStat.PsychologicalModification, CharacterStat.MaterialCreation,
+            CharacterStat.SpaceTime, CharacterStat.NanoPool,
+            CharacterStat.RangedEnergy, CharacterStat.MultiRanged,
+            CharacterStat.Brawl, CharacterStat.Dimach, CharacterStat.SneakAttack,
+            CharacterStat.FastAttack, CharacterStat.Burst, CharacterStat.NanoCInit,
+            CharacterStat.FlingShot, CharacterStat.AimedShot, CharacterStat.BodyDevelopment,
+            CharacterStat.FullAuto
+        ];
+
+        static void AddBase(NpcCharacter npc, CharacterStat stat, int add)
         {
-            int value = npc.Stats.GetOrZero(stat, StatDetail.Base);
-            if (value <= 0 || percent == 100)
+            if (add == 0)
                 return;
-            int next = (int)Math.Min(int.MaxValue, (long)value * percent / 100);
+            int value = npc.Stats.GetOrZero(stat, StatDetail.Base);
+            int next = (int)Math.Min(int.MaxValue, (long)value + add);
             npc.Stats.Set(stat, next, StatDetail.Base, dirty: true);
         }
 
@@ -350,7 +398,7 @@ namespace ZoneEngine_New.Core.Pets
                     continue;
                 if (roster.MercReviveUtc.TryGetValue(kind.Key, out DateTime due) && now < due)
                     continue;
-                int spawnLevel = Mercs.GearLevel(level, Mercs.GetTier(owner, kind));
+                int spawnLevel = Mercs.BodyLevel(level);
                 NpcCharacter? merc = null;
                 foreach (NpcCharacter pet in roster.All)
                 {
@@ -363,7 +411,7 @@ namespace ZoneEngine_New.Core.Pets
 
                 if (merc != null)
                 {
-                    EnsureMercPets(merc, merc.Stats.GetOrOne(CharacterStat.Level));
+                    EnsureMercPets(merc, Mercs.PowerLevel(merc.Stats.GetOrOne(CharacterStat.Level), Mercs.GetTier(owner, kind)));
                     continue;
                 }
                 roster.MercReviveUtc.Remove(kind.Key);

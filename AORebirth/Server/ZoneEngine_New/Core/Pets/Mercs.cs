@@ -18,7 +18,10 @@ namespace ZoneEngine_New.Core.Pets
     /// off, comes back beside its owner with full health after <see cref="Catalog.ReviveSeconds"/>, and on the next login.
     /// Professions are fixed here (key, hash, slot); levels, looks, heals, nanos and armor come from GameData
     /// (NpcTemplates MR** and Mercs.json, both written by ddogs/tools/Build-Mercs.ps1).
-    /// A tier above basic raises the merc's level (capped at 220) and then its health. It does not copy the owner's stats.
+    /// A tier above basic does not raise the merc's level. The body stays at the owner's level (capped at 220)
+    /// so a level 20 still walks with a level 20. The tier twinks that body: higher-QL gear and a higher-QL
+    /// monster weapon, a fixed stat and skill package, merc pets and nano bands taken from a higher level,
+    /// and (where the nano is a two-id QL pair) casts resolved at the gear QL.
     /// </summary>
     public static class Mercs
     {
@@ -36,19 +39,48 @@ namespace ZoneEngine_New.Core.Pets
             Super = 3
         }
 
-        public readonly record struct Package(int LevelBonus, int HpPercent, int DamagePercent);
+        /// <summary>
+        /// Fixed twink package. <see cref="GearQlBonus"/> raises worn-item and monster-weapon QL (cap 300).
+        /// <see cref="PowerLevelBonus"/> raises the level used for armor tier, nano band, and this merc's own pets (cap 220).
+        /// Health, damage, and skill are flat adds on the body, not a percent of the owner.
+        /// </summary>
+        public readonly record struct Package(int GearQlBonus, int PowerLevelBonus, int HealthAdd, int DamageAdd, int SkillAdd)
+        {
+            public bool IsBasic => GearQlBonus == 0 && PowerLevelBonus == 0 && HealthAdd == 0 && DamageAdd == 0 && SkillAdd == 0;
+        }
 
         public static Package PackageFor(Tier tier) => tier switch
         {
-            Tier.Elite => new Package(40, 125, 125),
-            Tier.Champion => new Package(80, 150, 150),
-            Tier.Super => new Package(120, 175, 175),
-            _ => new Package(0, 100, 100)
+            // A level 60 elite's pet lands at 140, inside the QL 100-200 cast a buffed player would get.
+            Tier.Elite => new Package(80, 80, 800, 40, 200),
+            Tier.Champion => new Package(140, 120, 2000, 90, 400),
+            Tier.Super => new Package(220, 160, 4000, 160, 700),
+            _ => new Package(0, 0, 0, 0, 0)
         };
 
-        /// <summary>Owner level plus the tier bonus, never above 220. A level 1000 GM still tops out here.</summary>
-        public static int GearLevel(int bodyLevel, Tier tier)
-            => Math.Clamp(Math.Clamp(bodyLevel, 1, 220) + PackageFor(tier).LevelBonus, 1, 220);
+        /// <summary>Perennium Blaster QL 50 through the QL 200 superior (itemnames 246422-246428).</summary>
+        public const int PerenniumBlasterLow = 246422;
+
+        public const int PerenniumBlasterHigh = 246428;
+
+        /// <summary>The merc's displayed level: the owner's level, never above 220. A level 1000 GM still tops out here.</summary>
+        public static int BodyLevel(int ownerLevel) => Math.Clamp(ownerLevel, 1, 220);
+
+        /// <summary>QL of the twinked gear and the monster weapon. Basic stays at the body level.</summary>
+        public static int GearQuality(int ownerLevel, Tier tier)
+        {
+            int body = BodyLevel(ownerLevel);
+            int bonus = PackageFor(tier).GearQlBonus;
+            return bonus <= 0 ? body : Math.Clamp(body + bonus, 1, 300);
+        }
+
+        /// <summary>Level used for armor bands, nano bands, and the merc's pets. Capped at 220. Basic equals the body.</summary>
+        public static int PowerLevel(int ownerLevel, Tier tier)
+        {
+            int body = BodyLevel(ownerLevel);
+            int bonus = PackageFor(tier).PowerLevelBonus;
+            return bonus <= 0 ? body : Math.Clamp(body + bonus, 1, 220);
+        }
 
         public static bool TryParseTier(string text, out Tier tier)
         {

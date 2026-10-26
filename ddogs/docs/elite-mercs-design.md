@@ -6,7 +6,7 @@ Research date: 2026-10-26. The hireable companions are the fourteen pet mercs in
 
 `PetService.HireMerc` spawns the profession hash (MRSO and the rest) into a pet slot at 10 and up. The level passed in is the owner's level clamped to 1–220. Template bands supply health and the body. `FillEquipment` then mints a monster weapon (item 144742–144743 when the template lists none) at that same level. That weapon is what `DamageCalculator` swings. The weapon in `Mercs.json` (soldier 124348, and one per profession) is put in the hand by `DressMerc` and is a look only. `NpcCharacter` says so: the monster weapon rolls the damage.
 
-Nanos come from `Mercs.json` bands. Only Doctor, Adventurer, and Metaphysicist have any, and they are the doctor heal line (26465, 26466, 28665, 28676). Soldier, Enforcer, and the rest have an empty nano list, so they do not taunt or nuke.
+Nanos come from `Mercs.json` bands. Doctor, Adventurer, and Metaphysicist use the doctor heal line (26465, 26466, 28665, 28676). Soldier now also uploads Fling Shot 82208, Full Auto 82209, Burst 82211, Aimed Shot 82215, and Taunt 227152. Enforcer uploads Brawl 82210, Channel Rage 211753, Anger Management 261239, and the same taunt. The shot and brawl programs are single catalog ids. Taunt 227152/227153 is a QL 1–500 pair.
 
 `NanoRuntime` skips skill checks and nano cost for any pet, mercs included (comment dated 2026-10-17: the templates have no nano skills, and the gate was refusing every heal). A merc can cast whatever is in its uploaded list, at any owner level. It cannot cast a nano that was never added to the list.
 
@@ -26,26 +26,23 @@ Not with the current pet code, and it is the wrong model for this server.
 
 ## Recommendation
 
-Hybrid, with the fixed package doing the work.
+The body stays at the owner's level. Randy does not want a level 20 walking with a level 100 merc. Rarity twinks the same body.
 
-1. Body level = min(owner level, 220) + a tier bonus, still capped at 220. That one number raises the template health, the monster-weapon QL, the armor band, the nano band, and the merc's own pets together. This is the "twink" knob: a level 60 elite is a level 100 merc wearing level-100 armor and swinging a level-100 monster weapon, with an MP pet at 100.
-2. A small extra health and character-damage percent on top, so a tier still matters when the owner is already 220 and the level bonus has nowhere to go. A level 1000 GM gets a level 220 merc of that tier, not a level 1000 merc and not a slice of GM stats.
-3. Do not inherit owner skills. If a later tier needs a real high-QL gun's damage (a Perennium blaster, not the look-only hand item), mint that item as the monster weapon. Do not percent-copy the owner.
-
-The held weapon staying a look is a limitation. Soldier 124348 is whatever `Build-Mercs.ps1` picked as a low-QL mesh, worn at the boosted level. It is not a named Perennium blaster. Swapping the mesh is a content edit once the item id is confirmed. It still will not change the swing until it is the monster weapon.
-
-Soldier and enforcer still have no taunt nano. Casting "above level" already works for any nano we put on the list. The elite prototype does not invent taunt ids. Healer mercs do move up the existing heal bands because their level moved up.
+1. Body level = min(owner level, 220). No tier bonus on the level. A level 1000 GM still gets a level 220 body, not a slice of GM stats.
+2. Gear QL = min(300, body + a tier bonus). Armor is chosen from the higher band and minted at that QL. The monster weapon (144742–144743, which is what the swing uses) is minted again at that QL, because item quality cannot be changed after create. A soldier above basic holds a real Perennium Blaster (246422 QL 50 through 246428 QL 200) instead of mesh 124348.
+3. A fixed package on top: flat health, flat min/max damage, and a flat add to abilities, AC, weapon skills, and nano skills. Not a percent of the owner.
+4. Merc pets (MP, engineer, crat) and the nano band use min(220, body + a second bonus), so the pet and the heals sit well above the body. Where a nano is a two-id QL pair, the cast is resolved at the gear QL. Single-id programs stay at the catalog snapshot.
 
 ## Tiers
 
-| Tier | Level bonus | Extra health and damage | Example at owner level 60 |
-| --- | --- | --- | --- |
-| Basic | 0 | none | Level 60, same as before |
-| Elite | +40 | 125% | Level 100 |
-| Champion | +80 | 150% | Level 140 |
-| Super | +120 | 175% | Level 180 |
+| Tier | Gear QL over body (cap 300) | Pet and nano level over body (cap 220) | Health / damage / skills | Level 20 body | Level 60 body |
+| --- | --- | --- | --- | --- | --- |
+| Basic | 0 | 0 | none | level 20, unchanged | level 60, unchanged |
+| Elite | +80 | +80 | +800 / +40 / +200 | gear QL 100, pet 100 | gear QL 140, pet 140 |
+| Champion | +140 | +120 | +2000 / +90 / +400 | gear QL 160, pet 140 | gear QL 200, pet 180 |
+| Super | +220 | +160 | +4000 / +160 / +700 | gear QL 240, pet 180 | gear QL 280, pet 220 |
 
-All four cap at 220. Stored as two bits per profession in server stat 10284 (10281–10283 are aura unlocks). The bit survives logout with the contract. The terminal and `{hiremerc}` still sign a basic contract.
+The 220 cap is only the body and the pet/nano level. Gear QL stops at 300. Stored as two bits per profession in server stat 10284 (10281–10283 are aura unlocks). The bit survives logout with the contract. The terminal and `{hiremerc}` still sign a basic contract.
 
 ## How a player would get one
 
@@ -61,18 +58,18 @@ Recommendation: (1) until a raid is actually being run, then (2) tied to the inv
 
 ## What was built
 
-- `Mercs.Tier` and stat 10284.
-- `.merc hire <profession> basic|elite|champion|super`. Above basic requires GM level 1.
-- The spawned merc's level is `GearLevel`. Name gains " (Elite)" and the rest. Health and the character min/max damage stats are scaled after dress. The monster weapon is minted at the new level, which is the swing that matters.
-- Revive and login bring the same tier back. Dismiss clears it.
-- MP / engineer / crat pets spawn at that raised level, so an elite MP's pet is 40 levels above the owner, capped at 220.
+- `Mercs.Tier` and stat 10284. The first cut raised the body level. That is replaced: the body is `BodyLevel` (owner, cap 220) for every tier.
+- `.merc hire <profession> basic|elite|champion|super`. Above basic requires GM level 1. A basic hire does not take the package, does not swap the soldier's gun, and does not set a cast QL.
+- Above basic, the name gains " (Elite)" and the rest. Armor band and nano band use `PowerLevel`. Pieces are minted at `GearQuality`. The monster weapon is removed and minted again at that QL. The flat package is added to base stats and then rebased so armor still stacks.
+- A soldier above basic wears Perennium Blaster 246422–246428 at the gear QL. The blaster is the hand item (and the range source when it counts as a real weapon). The swing is still the monster weapon at the gear QL.
+- Soldier and enforcer upload the nanos listed above. `NanoCastQuality` is the gear QL, so Taunt 227152/227153 interpolates. Fling Shot, Full Auto, Burst, Aimed Shot, Brawl, Channel Rage, and Anger Management are single ids, so their strength is the catalog row.
+- Revive and login bring the same tier back at the owner's current level. Dismiss clears the tier. MP / engineer / crat pets spawn at `PowerLevel`.
 
 ## Still to build
 
 - A real obtainment item, once Randy picks option 2 or stays on GM grants.
-- Taunt, nuke, and buff nano ids per profession, in `Mercs.json` bands, if those mercs should cast. The cast gate is already open.
-- Optional: replace the look-only hand item with a high-QL mesh (Perennium blaster for the soldier) after the id is confirmed. Damage will not change until that item is the monster weapon.
-- Do not let owner level 1000 leak into the merc. The cap is the point.
+- QL ladders for the single-id nukes, if a second id for those programs turns up. Until then they do not grow with the tier.
+- Do not let owner level 1000 leak into the merc. The body cap is the point.
 
 ## Restart
 

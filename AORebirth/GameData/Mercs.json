@@ -6,7 +6,15 @@
                         "enforcer":  {
                                          "Heals":  false,
                                          "Nanos":  [
-
+                                                       {
+                                                           "MinLevel":  1,
+                                                           "Nanos":  [
+                                                                         82210,
+                                                                         211753,
+                                                                         261239,
+                                                                         227152
+                                                                     ]
+                                                       }
                                                    ],
                                          "Armor":  [
                                                        {
@@ -198,7 +206,16 @@
                         "soldier":  {
                                         "Heals":  false,
                                         "Nanos":  [
-
+                                                      {
+                                                          "MinLevel":  1,
+                                                          "Nanos":  [
+                                                                        82208,
+                                                                        82209,
+                                                                        82211,
+                                                                        82215,
+                                                                        227152
+                                                                    ]
+                                                      }
                                                   ],
                                         "Armor":  [
                                                       {

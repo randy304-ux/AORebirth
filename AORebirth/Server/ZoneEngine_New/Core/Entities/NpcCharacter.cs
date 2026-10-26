@@ -632,6 +632,30 @@ namespace ZoneEngine_New.Core.Entities
             return TryAddEquipment(weapon, logger, combatWeapon: true);
         }
 
+        /// <summary>
+        /// Drops the monster weapon minted at body level and puts the same pair back at <paramref name="quality"/>.
+        /// Item quality is fixed at create, so a twinked merc has to be given a new weapon. Call <see cref="Rebase"/> after.
+        /// </summary>
+        public void RaiseCombatWeaponQuality(int quality, IZoneLogger? logger = null)
+        {
+            if (quality < 1 || _combatWeaponSlots.Count == 0)
+                return;
+            int[] slots = new int[_combatWeaponSlots.Count];
+            _combatWeaponSlots.CopyTo(slots);
+            foreach (int slot in slots)
+            {
+                Equipment.Remove(slot);
+                _combatWeaponSlots.Remove(slot);
+                _equipmentSawHashes.Remove(slot);
+            }
+
+            TryAddEquipment(
+                _items.CreateWithNewInstance(144742, 144743, quality, ItemSource.Other),
+                logger,
+                combatWeapon: true,
+                sawHash: "SIW1");
+        }
+
         bool TryAddEquipment(Item item, IZoneLogger? logger, bool combatWeapon = false, string? sawHash = null)
         {
             int slot = Equipment.FindFreeSlot();
@@ -744,6 +768,12 @@ namespace ZoneEngine_New.Core.Entities
 
         /// <summary>Worn armor (not weapons) adds its stats, like a player's (hired mercs).</summary>
         public bool WearsArmorStats { get; set; }
+
+        /// <summary>
+        /// When greater than 1, a nano whose catalog row is a two-id QL pair is resolved at this quality.
+        /// 0 and 1 keep the single catalog snapshot. Ordinary NPCs and basic mercs leave this at 0.
+        /// </summary>
+        public int NanoCastQuality { get; set; }
 
         /// <summary>
         /// Puts one more item on (armor, clothing or a held prop) at <paramref name="quality"/>; call <see cref="Rebase"/>
