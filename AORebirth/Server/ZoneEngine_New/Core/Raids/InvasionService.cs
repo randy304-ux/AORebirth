@@ -84,7 +84,7 @@ namespace ZoneEngine_New.Core.Raids
         }
 
         /// <summary>Queues a wave encounter. The next tick of <paramref name="playfield"/> spawns wave 1.</summary>
-        public bool TryStart(Playfield playfield, string title, IReadOnlyList<Vector3> pads, bool overhead, out string message)
+        public bool TryStart(Playfield playfield, string title, IReadOnlyList<Vector3> pads, bool overhead, out string message, int? forcedLevel = null)
         {
             ArgumentNullException.ThrowIfNull(playfield);
             ArgumentNullException.ThrowIfNull(pads);
@@ -107,7 +107,8 @@ namespace ZoneEngine_New.Core.Raids
                 MaxGapSeconds = _catalog.MaxGapSeconds,
                 CleanupSeconds = _catalog.CleanupSeconds,
                 VictoryPointsPerTenLevels = _catalog.VictoryPointsPerTenLevels,
-                WaveIndex = -1
+                WaveIndex = -1,
+                ForcedLevel = forcedLevel is > 0 and <= 220 ? forcedLevel.Value : 0
             };
             lock (_gate)
             {
@@ -252,6 +253,8 @@ namespace ZoneEngine_New.Core.Raids
                 encounter.Ship = TrySpawnMothership(playfield, encounter);
 
             Measure(playfield, encounter, out int players, out int level);
+            if (encounter.ForcedLevel > 0)
+                level = encounter.ForcedLevel;
             SpawnService spawns = playfield.GetRequiredService<SpawnService>();
             int spawned = 0;
             NpcCharacter? boss = null;
@@ -570,6 +573,7 @@ namespace ZoneEngine_New.Core.Raids
             public int MaxGapSeconds = 75;
             public int CleanupSeconds = 45;
             public int VictoryPointsPerTenLevels = 5;
+            public int ForcedLevel;
             public int WaveIndex = -1;
             public DateTime WaveSpawnedUtc;
             public bool CleanupArmed;

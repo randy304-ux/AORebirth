@@ -16,10 +16,12 @@ using ZoneEngine_New.Core.Trade;
 /// <summary>Services a line's effects are applied through.</summary>
 public sealed class KnubotEffectServices(QuestService quests, HashItemMinter minter, InventoryFlushService flush, TradeService trades,
     Lazy<ZoneEngine_New.Core.Playfield.PlayfieldManager>? playfields = null, AORebirth.Interfaces.Persistence.Missions.IMissionDao? missions = null,
-    ZoneEngine_New.Core.Bots.BuffbotService? buffs = null)
+    ZoneEngine_New.Core.Bots.BuffbotService? buffs = null, ZoneEngine_New.Core.Cities.OrgCityService? cities = null)
 {
     /// <summary>Root buffbot. Playfield providers do not register it, so {buffmenu} must not look it up there.</summary>
     public ZoneEngine_New.Core.Bots.BuffbotService? Buffs { get; } = buffs;
+
+    public ZoneEngine_New.Core.Cities.OrgCityService? Cities { get; } = cities;
     public Lazy<ZoneEngine_New.Core.Playfield.PlayfieldManager>? Playfields { get; } = playfields;
     public AORebirth.Interfaces.Persistence.Missions.IMissionDao? Missions { get; } = KnubotStartArea.Register(missions);
 

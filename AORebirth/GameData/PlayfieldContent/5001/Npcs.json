@@ -1,0 +1,83 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  5001,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:city:5001:controller",
+                     "Provenance":  "Playa del Desierto controller. Map center, Y is a guess.",
+                     "ContentNpcIdentity":  "ddogs-city-controller",
+                     "PlayfieldId":  5001,
+                     "InstanceId":  2110920001,
+                     "Name":  "City Controller",
+                     "Position":  [
+                                      242,
+                                      5,
+                                      242
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  6,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  1,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  279184,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  0
+                                      }
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 }
+             ],
+    "StandaloneShops":  [
+
+                        ]
+}

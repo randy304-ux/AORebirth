@@ -716,6 +716,8 @@ namespace ZoneEngine_New.Core.Playfield
 
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("locality");
                 _serviceProvider.GetRequiredService<PlayfieldLocality>().Tick(deltaTime);
+                ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("orgcity");
+                ZoneEngine_New.Core.Cities.OrgCityClock.Tick(this);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("stats.rebase");
                 DrainRebases();
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("knubot");

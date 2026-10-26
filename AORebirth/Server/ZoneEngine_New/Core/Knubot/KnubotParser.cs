@@ -236,6 +236,16 @@ public static class KnubotParser
                     Effect(new KnubotOpenShop());
                     break;
 
+                case "city":
+                    if (words.Length < 2 || words.Length > 3)
+                    {
+                        errors.Add("expected {city status|enter|raid} or {city claim|buy KEY}: {" + body + "}");
+                        break;
+                    }
+
+                    Effect(new KnubotCity(words.Length == 2 ? new[] { words[1] } : new[] { words[1], words[2] }));
+                    break;
+
                 case "teleport":
                     if (words.Length != 5 || !int.TryParse(words[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out int tpPf) || tpPf <= 0
                         || !float.TryParse(words[2], NumberStyles.Float, CultureInfo.InvariantCulture, out float tpX)

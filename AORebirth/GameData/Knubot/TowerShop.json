@@ -1,0 +1,75 @@
+{
+  "Notes": "Premade org city buildings. Price 0 and upkeep 0. Talk runs .city. Use does not open a credit shop.",
+  "Npcs": [ "ddogs-tower-shop" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "claims": { "Text": "Claim a plot.", "Goto": "claims" },
+    "buildings": { "Text": "Buy a building.", "Goto": "buildings" },
+    "more": { "Text": "More buildings.", "Goto": "more" },
+    "enter": { "Text": "Take me to our city.", "Goto": "enter" },
+    "status": { "Text": "What do we own?", "Goto": "status" },
+    "raid": { "Text": "Call the aliens.", "Goto": "raid" },
+    "back": { "Text": "Back.", "Goto": "hello" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" },
+    "desierto": { "Text": "Playa del Desierto (small).", "Goto": "desierto" },
+    "montroyal": { "Text": "Montroyal (medium).", "Goto": "montroyal" },
+    "serenity": { "Text": "Serenity Island (large).", "Goto": "serenity" },
+    "borealis": { "Text": "Borealis open plot.", "Goto": "borealis" },
+    "rome": { "Text": "Rome Red open plot.", "Goto": "rome" },
+    "tir": { "Text": "Tir open plot.", "Goto": "tir" },
+    "hq": { "Text": "Large Headquarters.", "Goto": "hq" },
+    "hq-small": { "Text": "Small Headquarters.", "Goto": "hq-small" },
+    "grid": { "Text": "Grid House.", "Goto": "grid" },
+    "mining": { "Text": "Notum Mining.", "Goto": "mining" },
+    "silo": { "Text": "Notum Silo.", "Goto": "silo" },
+    "pad": { "Text": "Landing Pad.", "Goto": "pad" },
+    "pool": { "Text": "Swimming Pool.", "Goto": "pool" },
+    "guard": { "Text": "Guard House.", "Goto": "guard" },
+    "uplink": { "Text": "Satellite Uplink.", "Goto": "uplink" },
+    "ecm": { "Text": "ECM Tower.", "Goto": "ecm" },
+    "cafe": { "Text": "Sidewalk Cafe.", "Goto": "cafe" },
+    "skybar": { "Text": "Sky Bar.", "Goto": "skybar" },
+    "sauna": { "Text": "Sauna.", "Goto": "sauna" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Tower Shop. Premade org city buildings. The plot costs nothing and the rent is nothing. A headquarters has to go in first.",
+      "Replies": [ "claims", "buildings", "enter", "status", "raid", "bye" ]
+    },
+    "claims": {
+      "Text": "Small: Playa del Desierto. Medium: Montroyal. Large: Serenity Island. Open plots: Borealis, Rome Red, Tir. Retail prices are not charged.",
+      "Replies": [ "desierto", "montroyal", "serenity", "borealis", "rome", "tir", "back" ]
+    },
+    "buildings": {
+      "Text": "Price 0. A small plot cannot hold the large headquarters or the pool. .city buildings lists footprints.",
+      "Replies": [ "hq", "hq-small", "grid", "mining", "silo", "pad", "more", "back" ]
+    },
+    "more": {
+      "Text": "The rest of the premade list. The sauna is included here. Retail did not sell it from the Tower Shop.",
+      "Replies": [ "pool", "guard", "uplink", "ecm", "cafe", "skybar", "sauna", "back" ]
+    },
+    "desierto": { "Text": "{city claim desierto}" },
+    "montroyal": { "Text": "{city claim montroyal}" },
+    "serenity": { "Text": "{city claim serenity}" },
+    "borealis": { "Text": "{city claim borealis}" },
+    "rome": { "Text": "{city claim rome}" },
+    "tir": { "Text": "{city claim tir}" },
+    "hq": { "Text": "{city buy hq}" },
+    "hq-small": { "Text": "{city buy hq-small}" },
+    "grid": { "Text": "{city buy grid}" },
+    "mining": { "Text": "{city buy mining}" },
+    "silo": { "Text": "{city buy silo}" },
+    "pad": { "Text": "{city buy pad}" },
+    "pool": { "Text": "{city buy pool}" },
+    "guard": { "Text": "{city buy guard}" },
+    "uplink": { "Text": "{city buy uplink}" },
+    "ecm": { "Text": "{city buy ecm}" },
+    "cafe": { "Text": "{city buy cafe}" },
+    "skybar": { "Text": "{city buy skybar}" },
+    "sauna": { "Text": "{city buy sauna}" },
+    "enter": { "Text": "{city enter}" },
+    "status": { "Text": "{city status}" },
+    "raid": { "Text": "Aliens hit the controller at level 30, so the Kyr'Ozch loot stays low QL. {city raid}" },
+    "bye": { "Text": "{close}" }
+  }
+}

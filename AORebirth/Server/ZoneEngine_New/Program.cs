@@ -274,6 +274,7 @@ namespace ZoneEngine_New
 
             //Knubot
             services.AddSingleton<ZoneEngine_New.Core.Knubot.KnubotCatalog>();
+            services.AddSingleton<ZoneEngine_New.Core.Cities.OrgCityService>();
             services.AddSingleton<ZoneEngine_New.Core.Knubot.KnubotEffectServices>();
             services.AddSingleton<ZoneEngine_New.Core.Knubot.KnubotService>();
 
@@ -301,6 +302,7 @@ namespace ZoneEngine_New
             services.AddSingleton<IGmCommand, MercCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Raids.InvasionService>();
             services.AddSingleton<IGmCommand, InvasionCommand>();
+            services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.CityCommand>();
             services.AddSingleton<IGmCommand, AuraCommand>();
             services.AddSingleton<IGmCommand, DespawnCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Lifecycle.IEngineShutdown, ProgramShutdown>();

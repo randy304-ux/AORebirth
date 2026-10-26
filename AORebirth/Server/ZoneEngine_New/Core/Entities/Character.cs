@@ -2620,7 +2620,20 @@
 
             for (int i = 0; i < _buffs.Count; i++)
                 StatModifierSpells.Apply(_buffs[i].ModifierSpells, stats);
+
+            // Org-city contracts. OrgCityService replaces the whole array; a rebase applies it and a later
+            // rebase drops it when the array is empty. Not an NCU buff.
+            (CharacterStat Stat, int Amount)[] city = CityContractBonuses;
+            for (int i = 0; i < city.Length; i++)
+            {
+                if (city[i].Amount == 0 || city[i].Stat == CharacterStat.Cash || city[i].Stat == CharacterStat.Health)
+                    continue;
+                stats.AddBonus(city[i].Stat, city[i].Amount, dirty: true);
+            }
         }
+
+        /// <summary>Org-city contract bonuses for the current rebase. Empty outside the org's city.</summary>
+        public (CharacterStat Stat, int Amount)[] CityContractBonuses { get; set; } = [];
 
         /// <summary>
         /// Wipes movement flags, path and speed. An NPC settles its FollowTarget; a player that was

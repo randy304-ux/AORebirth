@@ -1,0 +1,170 @@
+{
+  "note": "House rule: every plot costs 0 and upkeep is 0. Retail prices are recorded and not charged. Buff numbers are the guide's QL 300 / level 200 contracts; the server scales them by QL/300 and level/200 (level capped at 220). Lab tradeskill rooms are not detected, so those bonuses are not applied. Sauna is sold here; retail Tower Shops did not sell it. Markets are omitted.",
+  "lowRaidLevel": 30,
+  "plots": [
+    {
+      "key": "desierto",
+      "name": "Playa del Desierto",
+      "kind": "instance",
+      "playfield": 5001,
+      "units": 464,
+      "maxFootprint": 225,
+      "radius": 0,
+      "landing": [242, 5, 242],
+      "retailCost": 300000000,
+      "retailUpkeep": 5000000,
+      "note": "Small city. Playfield 5001, map center. One org claims the map; it is not a private copy."
+    },
+    {
+      "key": "montroyal",
+      "name": "Montroyal",
+      "kind": "instance",
+      "playfield": 5002,
+      "units": 2270,
+      "maxFootprint": 400,
+      "radius": 0,
+      "landing": [502, 5, 502],
+      "retailCost": 500000000,
+      "retailUpkeep": 15000000,
+      "note": "Medium city. Playfield 5002, map center."
+    },
+    {
+      "key": "serenity",
+      "name": "Serenity Island",
+      "kind": "instance",
+      "playfield": 6010,
+      "units": 2386,
+      "maxFootprint": 400,
+      "radius": 0,
+      "landing": [1202, 30, 1202],
+      "retailCost": 500000000,
+      "retailUpkeep": 15000000,
+      "note": "Large city. No separate org-city template is in GameData. 6010 is Serenity Islands. Landing is the map center and needs a walk."
+    },
+    {
+      "key": "borealis",
+      "name": "Borealis open plot",
+      "kind": "open",
+      "playfield": 800,
+      "units": 464,
+      "maxFootprint": 225,
+      "radius": 80,
+      "landing": [650, 5, 640],
+      "retailCost": 0,
+      "retailUpkeep": 0,
+      "note": "Open-world plot on the invasion pads between the grid and the whompas. Small budget. Walk it."
+    },
+    {
+      "key": "rome",
+      "name": "Rome Red open plot",
+      "kind": "open",
+      "playfield": 730,
+      "units": 464,
+      "maxFootprint": 225,
+      "radius": 80,
+      "landing": [250, 5, 320],
+      "retailCost": 0,
+      "retailUpkeep": 0,
+      "note": "Open-world plot at the Rome Red grid offsets. Walk it."
+    },
+    {
+      "key": "tir",
+      "name": "Tir open plot",
+      "kind": "open",
+      "playfield": 640,
+      "units": 464,
+      "maxFootprint": 225,
+      "radius": 80,
+      "landing": [542, 5, 536],
+      "retailCost": 0,
+      "retailUpkeep": 0,
+      "note": "Open-world plot at the Tir grid offsets. Walk it."
+    }
+  ],
+  "buildings": [
+    {
+      "key": "hq",
+      "name": "Large Organization Headquarters",
+      "footprint": 400,
+      "ql": 300,
+      "hq": true,
+      "buffs": [
+        { "stat": "Strength", "amount": 9 },
+        { "stat": "Agility", "amount": 9 },
+        { "stat": "Stamina", "amount": 9 },
+        { "stat": "Intelligence", "amount": 9 },
+        { "stat": "Sense", "amount": 9 },
+        { "stat": "Psychic", "amount": 9 },
+        { "stat": "RunSpeed", "amount": 90 }
+      ]
+    },
+    {
+      "key": "hq-small",
+      "name": "Small Organization Headquarters",
+      "footprint": 225,
+      "ql": 100,
+      "hq": true,
+      "buffs": [
+        { "stat": "Strength", "amount": 9 },
+        { "stat": "Agility", "amount": 9 },
+        { "stat": "Stamina", "amount": 9 },
+        { "stat": "Intelligence", "amount": 9 },
+        { "stat": "Sense", "amount": 9 },
+        { "stat": "Psychic", "amount": 9 },
+        { "stat": "RunSpeed", "amount": 90 }
+      ]
+    },
+    { "key": "grid", "name": "Grid House", "footprint": 25, "ql": 300, "buffs": [ { "stat": "ComputerLiteracy", "amount": 54 } ] },
+    {
+      "key": "mining",
+      "name": "Notum Mining Operations",
+      "footprint": 100,
+      "ql": 300,
+      "buffs": [
+        { "stat": "MaterialMetamorphosis", "amount": 36 },
+        { "stat": "BiologicalMetamorphosis", "amount": 36 },
+        { "stat": "PsychologicalModification", "amount": 36 },
+        { "stat": "MaterialCreation", "amount": 36 },
+        { "stat": "SpaceTime", "amount": 36 }
+      ]
+    },
+    {
+      "key": "silo",
+      "name": "Notum Silo",
+      "footprint": 225,
+      "ql": 300,
+      "buffs": [
+        { "stat": "NanoDelta", "amount": 36 },
+        { "stat": "NPCostModifier", "amount": -6 }
+      ]
+    },
+    {
+      "key": "pad",
+      "name": "Landing Pad",
+      "footprint": 100,
+      "ql": 300,
+      "buffs": [
+        { "stat": "VehicleWater", "amount": 54 },
+        { "stat": "VehicleAir", "amount": 54 },
+        { "stat": "VehicleGround", "amount": 54 },
+        { "stat": "MapNavigation", "amount": 54 }
+      ]
+    },
+    {
+      "key": "pool",
+      "name": "Swimming Pool",
+      "footprint": 300,
+      "ql": 300,
+      "buffs": [
+        { "stat": "BodyDevelopment", "amount": 54 },
+        { "stat": "Swimming", "amount": 54 }
+      ]
+    },
+    { "key": "guard", "name": "Guard House", "footprint": 25, "ql": 300, "buffs": [ { "stat": "HealDelta", "amount": 18 } ] },
+    { "key": "uplink", "name": "Satellite Uplink", "footprint": 25, "ql": 300, "uplink": true, "buffs": [] },
+    { "key": "ecm", "name": "ECM Tower", "footprint": 100, "ql": 300, "cloak": true, "buffs": [] },
+    { "key": "cafe", "name": "Sidewalk Cafe", "footprint": 150, "ql": 300, "buffs": [] },
+    { "key": "skybar", "name": "Sky Bar", "footprint": 150, "ql": 300, "buffs": [] },
+    { "key": "sauna", "name": "Sauna", "footprint": 25, "ql": 300, "buffs": [ { "stat": "XPModifier", "amount": 11 } ] }
+  ]
+}

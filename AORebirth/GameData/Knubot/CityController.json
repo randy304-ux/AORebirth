@@ -1,0 +1,17 @@
+{
+  "Notes": "City controller. Aliens are a level-30 invasion on pads around this point. The president calls it.",
+  "Npcs": [ "ddogs-city-controller" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "raid": { "Text": "Call the raid.", "Goto": "raid" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "City controller. Aliens attack this point. They do not path onto the controller, and there is no charge bar. A president can call a level 30 raid. That is the low QL Kyr'Ozch loot.",
+      "Replies": [ "raid", "bye" ]
+    },
+    "raid": { "Text": "{city raid}" },
+    "bye": { "Text": "{close}" }
+  }
+}
