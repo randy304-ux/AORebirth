@@ -172,6 +172,53 @@ public sealed class QuestDungeonPlayfield : Playfield
 
     int _wallStopLogs;
 
+    public sealed class ArenaSpot { public float[] Position { get; set; } = [0, 0, 0]; public float[]? Facing { get; set; } }
+    public sealed class BossArena { public int Style { get; set; } public int Room { get; set; } public ArenaSpot? Boss { get; set; } public ArenaSpot? Entry { get; set; } public ArenaSpot[]? Towers { get; set; } public float[][]? WavePads { get; set; } }
+    sealed class BossArenaFile { public List<BossArena> Arenas { get; set; } = []; }
+
+    static readonly ConcurrentDictionary<string, IReadOnlyList<BossArena>> ArenaCache = new();
+
+    BossArena? Arena()
+    {
+        IReadOnlyList<BossArena> arenas = ArenaCache.GetOrAdd(GameData.RootPath, root =>
+        {
+            string path = Path.Combine(root, "BossArenas.json");
+            if (!File.Exists(path)) return [];
+            try { return JsonSerializer.Deserialize<BossArenaFile>(File.ReadAllText(path))?.Arenas ?? []; }
+            catch (Exception ex) { Logger.Warn("BossArenas.json unreadable: " + ex.Message); return []; }
+        });
+        if (Layout.BossRoomIndex is not int boss || boss >= Layout.Generator.Rooms.Count()) return null;
+        int roomId = Layout.Generator.Rooms.ElementAt(boss).RoomId;
+        return arenas.FirstOrDefault(a => a.Style == Layout.Generator.Style && a.Room == roomId);
+    }
+
+    /// <summary>
+    /// World position and heading of a boss-arena spot (BossArenas.json, room-local like the lift positions). The room
+    /// origin comes from the boss-floor lift: lift world = origin + RotateY(entry local, facing).
+    /// </summary>
+    bool TryArenaSpot(Func<BossArena, ArenaSpot?> pick, out AORebirth.Core.Vector.Vector3 world, out AORebirth.Core.Vector.Quaternion heading)
+    {
+        world = new AORebirth.Core.Vector.Vector3(0, 0, 0);
+        heading = new AORebirth.Core.Vector.Quaternion(0, 0, 0, 1);
+        BossArena? arena = Arena();
+        ArenaSpot? spot = arena == null ? null : pick(arena);
+        if (arena?.Entry == null || spot == null || Layout.BossRoomIndex is not int boss) return false;
+        var lift = Layout.FloorTransitions.Select(t => t.To).FirstOrDefault(e => e.RoomIndex == boss);
+        if (lift == null) return false;
+        int rot = Layout.Generator.Rooms.ElementAt(boss).Facing & 3;
+        System.Numerics.Vector3 V(float[] p) => new(p[0], p[1], p[2]);
+        System.Numerics.Vector3 origin = lift.Position - AORebirth.World.Collision.DungeonRoomPlacer.RotateY(V(arena.Entry.Position), rot);
+        System.Numerics.Vector3 at = origin + AORebirth.World.Collision.DungeonRoomPlacer.RotateY(V(spot.Position), rot);
+        world = new AORebirth.Core.Vector.Vector3(at.X, at.Y, at.Z);
+        if (TrySnapFeetToFloor(world, out var floor) && Math.Abs(floor.y - world.y) < 1.0) world = floor;
+        if (spot.Facing is { Length: 3 } f)
+        {
+            System.Numerics.Vector3 dir = AORebirth.World.Collision.DungeonRoomPlacer.RotateY(V(f), rot);
+            float half = MathF.Atan2(dir.X, dir.Z) * 0.5f;
+            heading = new AORebirth.Core.Vector.Quaternion(0, MathF.Sin(half), 0, MathF.Cos(half));
+        }
+        return true;
+    }
     public override void Build()
     {
         if (IsBuilt) return;
@@ -434,9 +481,15 @@ public sealed class QuestDungeonPlayfield : Playfield
             throw new InvalidDataException("Accepted NPC objective template is unavailable.");
 
         int? objectiveScale = _objectiveNpc.ScalePercent;
+        var objectiveAt = new AORebirth.Core.Vector.Vector3(_objectiveNpc.X, _objectiveNpc.Y, _objectiveNpc.Z);
+        var objectiveHeading = new AORebirth.Core.Vector.Quaternion(0, 0, 0, 1);
+        if (_objectiveNpc.RoomIndex == Layout.BossRoomIndex && TryArenaSpot(a => a.Boss, out var bossAt, out var bossHeading))
+        {
+            objectiveAt = bossAt;
+            objectiveHeading = bossHeading;
+        }
         NpcCharacter npc = GetRequiredService<SpawnService>().SpawnMob(template,
-            new AORebirth.Core.Vector.Vector3(_objectiveNpc.X, _objectiveNpc.Y, _objectiveNpc.Z),
-            new AORebirth.Core.Vector.Quaternion(0, 0, 0, 1), _objectiveNpc.Quality,
+            objectiveAt, objectiveHeading, _objectiveNpc.Quality,
             SpawnSource.HashSpawn, spawnHash: _objectiveNpc.NpcHash,
             configure: actor =>
             {
@@ -478,7 +531,16 @@ public sealed class QuestDungeonPlayfield : Playfield
             double angle = 2 * Math.PI * n / count;
             var at = new AORebirth.Core.Vector.Vector3(target.Position.xf + (float)(Math.Cos(angle) * 6), target.Position.yf,
                 target.Position.zf + (float)(Math.Sin(angle) * 6));
-            NpcCharacter tower = GetRequiredService<SpawnService>().SpawnMob(templates[0], at, level: level, spawnHash: hash);
+            AORebirth.Core.Vector.Quaternion? towerHeading = null;
+            int towerIndex = n;
+            if (TryArenaSpot(a => a.Towers != null && towerIndex < a.Towers.Length ? a.Towers[towerIndex] : null, out var arenaAt, out var arenaHeading))
+            {
+                at = arenaAt;
+                towerHeading = arenaHeading;
+            }
+            NpcCharacter tower = towerHeading != null
+                ? GetRequiredService<SpawnService>().SpawnMob(templates[0], at, towerHeading, level, spawnHash: hash)
+                : GetRequiredService<SpawnService>().SpawnMob(templates[0], at, level: level, spawnHash: hash);
             tower.HealTarget = target;
             tower.HealPercent = Math.Clamp(Layout.AuthoredTowerHealPercent, 0, 100);
             tower.HealIntervalSeconds = Math.Max(1, Layout.AuthoredTowerHealSeconds);
@@ -594,6 +656,7 @@ public sealed class QuestDungeonPlayfield : Playfield
                 var dynel = new DungeonFloorTransitionDynel(registry.AllocateStaticDynelIdentity(),
                     template, new AORebirth.Core.Vector.Vector3(target.Position.X, target.Position.Y, target.Position.Z))
                 {
+                    LandingHeading = target.RoomIndex == Layout.BossRoomIndex && TryArenaSpot(a => a.Entry, out _, out var entryHeading) ? entryHeading : null,
                     Playfield = this,
                     Position = new AORebirth.Core.Vector.Vector3(source.Position.X, source.Position.Y, source.Position.Z),
                     // Platform/button updates retain world identity heading even in rotated captured rooms.

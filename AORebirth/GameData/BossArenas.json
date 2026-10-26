@@ -1,0 +1,19 @@
+﻿{
+  "_comment": "Boss-room arena spots, room-local to the boss room template (same frame as DungeonEntrances FloorTransitions LocalPosition), with a local facing direction. Randy 2026-10-25 from in-game /pos in team ship D430176 (seed 2064540503: boss room 4 at (84, 212.0, 90), facing 3); /pos prints X, Z, height. WavePads are saved for the future full-ship raid variant; no wave mechanic uses them yet.",
+  "Arenas": [
+    {
+      "Style": 382,
+      "Room": 4,
+      "Boss": { "Position": [0.3, 0.4, 35.4], "Facing": [0, 0, -1] },
+      "Entry": { "Position": [0.5, 0.42, -38.7], "Facing": [0, 0, 1] },
+      "Towers": [
+        { "Position": [-9.6, 0.6, 8.3], "Facing": [1, 0, 0] },
+        { "Position": [10.4, 0.6, 8.2], "Facing": [-1, 0, 0] }
+      ],
+      "WavePads": [
+        [10.2, 0.6, -1.4], [10.2, 0.6, -11.5], [10.3, 0.6, -21.5],
+        [-10.2, 0.6, -21.7], [-9.9, 0.6, -11.9], [-10.2, 0.6, -2.0]
+      ]
+    }
+  ]
+}

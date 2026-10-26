@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Core.Entities
+namespace ZoneEngine_New.Core.Entities
 {
     using System;
     using System.Linq;
@@ -256,13 +256,13 @@
         /// is warped (path and speed dropped), the client snaps in place from an intrazone N3Teleport without unloading
         /// the zone, and observers see a full stop at the landing.
         /// </summary>
-        public void TeleportWithinPlayfield(Vector3 landing)
+        public void TeleportWithinPlayfield(Vector3 landing, Quaternion? heading = null)
         {
             ArgumentNullException.ThrowIfNull(landing);
             if (Playfield is not Playfield playfield)
                 return;
 
-            Motor.Warp(landing);
+            Motor.Warp(landing, heading);
             Session?.SendIntrazoneTeleport(landing, Rotation, playfield.Identity.Instance);
             // Pets and mercs ride the lift with their owner (Randy 2026-10-25: after the second lift his mercs stayed
             // on the deck below, out of sight). Each lands in a small ring around the owner and observers see it stop there.

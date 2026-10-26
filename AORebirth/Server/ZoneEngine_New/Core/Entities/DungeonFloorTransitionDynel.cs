@@ -21,6 +21,9 @@ public sealed class DungeonFloorTransitionDynel : StaticDynel
 
     public Vector3 Landing { get; }
 
+    /// <summary>Facing on arrival (boss arena entry); null keeps the player's heading.</summary>
+    public AORebirth.Core.Vector.Quaternion? LandingHeading { get; init; }
+
     protected override bool DelaysUse => false;
 
     protected override bool OnUse(Player player)
@@ -28,7 +31,7 @@ public sealed class DungeonFloorTransitionDynel : StaticDynel
         if (player.IsDead || player.IsPersistenceQuarantined || player.Session == null
             || Playfield == null || !ReferenceEquals(player.Playfield, Playfield)
             || !CanBeginUse(player)) return false;
-        player.TeleportWithinPlayfield(Landing);
+        player.TeleportWithinPlayfield(Landing, LandingHeading);
         return true;
     }
 
