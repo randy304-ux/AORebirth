@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Core.Playfield;
+namespace ZoneEngine_New.Core.Playfield;
 
 using System;
 using System.Collections.Concurrent;
@@ -112,6 +112,65 @@ public sealed class QuestDungeonPlayfield : Playfield
                 "Quest dungeon {0} arrival lifted onto the floor: y {1:0.00} -> {2:0.00}", QuestId, spawn.yf, floor.yf));
         return floor;
     }
+
+    /// <summary>Styles whose room meshes have a walkable floor above the style's own ground heightmap (alien 382: 21.43 over 20.00).</summary>
+    static readonly HashSet<int> RaisedRoomFloorStyles = [382];
+
+    /// <summary>
+    /// The base snap probes only 0.5 m above the feet, so anything that once dropped onto the style ground under an
+    /// alien room floor (1.43 m lower: a pathing step, a follow target under the floor, a knockback) kept snapping to
+    /// that ground and never came back up (Randy 2026-10-25: mercs and aliens on the "lower green floor"). In these
+    /// styles a surface 1.0-1.8 m over the snapped ground is the room floor (21.43 over 20.00), which lifts them back onto the deck.
+    /// </summary>
+    public override bool TrySnapFeetToFloor(AORebirth.Core.Vector.Vector3 position, out AORebirth.Core.Vector.Vector3 floor)
+    {
+        bool snapped = base.TrySnapFeetToFloor(position, out floor);
+        if (!RaisedRoomFloorStyles.Contains(Layout.Generator.Style))
+            return snapped;
+        WorldSimulation.PlayfieldWorldSimulation? world = WorldAccess.Instance;
+        AORebirth.Core.Vector.Vector3 basis = snapped ? floor : position;
+        if (world != null
+            && world.TryRaycastDown(new AORebirth.Core.Vector.Vector3(basis.x, basis.y + 2.0, basis.z), 2.0f, out AORebirth.Core.Vector.Vector3 hit)
+            && hit.y > basis.y + 1.0 && hit.y < basis.y + 1.8)
+        {
+            floor = new AORebirth.Core.Vector.Vector3(basis.x, hit.y, basis.z);
+            if (System.Threading.Interlocked.Increment(ref _floorLiftLogs) <= 20)
+                Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    "Quest dungeon {0} lifted onto the room floor: ({1:0.0}, {2:0.00}, {3:0.0}) -> y {4:0.00}", QuestId, basis.xf, basis.yf, basis.zf, hit.yf));
+            return true;
+        }
+        return snapped;
+    }
+
+    int _floorLiftLogs;
+
+    /// <summary>
+    /// One NPC/pet motor step: a step whose path at knee height crosses a wall is undone (the body stays where it was
+    /// and halts), so chasing or knocked-back mobs cannot end up inside the room shells where players can't target
+    /// them; and feet under the deck floor (the alien style ground 1.4 m lower) are lifted back onto it.
+    /// </summary>
+    public AORebirth.Core.Vector.Vector3 ConstrainNpcStep(AORebirth.Core.Vector.Vector3 before, AORebirth.Core.Vector.Vector3 after, out bool blocked)
+    {
+        blocked = false;
+        WorldSimulation.PlayfieldWorldSimulation? world = WorldAccess.Instance;
+        if (world == null)
+            return after;
+        double dx = after.x - before.x, dz = after.z - before.z;
+        if (dx * dx + dz * dz > 0.0001
+            && !world.HasLineOfSight(before.xf, before.yf + 0.6f, before.zf, after.xf, after.yf + 0.6f, after.zf))
+        {
+            blocked = true;
+            if (System.Threading.Interlocked.Increment(ref _wallStopLogs) <= 20)
+                Logger.Info(string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    "Quest dungeon {0} NPC step into a wall undone at ({1:0.0}, {2:0.0}, {3:0.0})", QuestId, before.xf, before.yf, before.zf));
+            after = before;
+        }
+        if (TrySnapFeetToFloor(after, out AORebirth.Core.Vector.Vector3 floor) && floor.y > after.y + 0.05)
+            after = new AORebirth.Core.Vector.Vector3(after.x, floor.y, after.z);
+        return after;
+    }
+
+    int _wallStopLogs;
 
     public override void Build()
     {

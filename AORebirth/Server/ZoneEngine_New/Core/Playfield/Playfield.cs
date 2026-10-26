@@ -219,7 +219,7 @@ namespace ZoneEngine_New.Core.Playfield
         /// <summary>
         /// Same XZ; Y is the heightfield / surface-mesh floor. No Recast.
         /// </summary>
-        public bool TrySnapFeetToFloor(
+        public virtual bool TrySnapFeetToFloor(
             AORebirth.Core.Vector.Vector3 position,
             out AORebirth.Core.Vector.Vector3 floor)
         {

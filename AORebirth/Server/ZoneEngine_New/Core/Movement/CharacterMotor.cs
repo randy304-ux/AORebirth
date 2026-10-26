@@ -685,7 +685,17 @@ namespace ZoneEngine_New.Core.Movement
 
             _sim.Run(dt);
 
-            _character.Position = ToVector3(_sim.Position);
+            Vector3 before = _character.Position;
+            Vector3 after = ToVector3(_sim.Position);
+            // Generated dungeons: keep NPCs and pets on the deck floor and out of the walls (Randy 2026-10-25).
+            if (_npc != null && _character.Playfield is ZoneEngine_New.Core.Playfield.QuestDungeonPlayfield dungeon)
+            {
+                after = dungeon.ConstrainNpcStep(before, after, out bool blocked);
+                _sim.Position = ToVec3(after);
+                if (blocked)
+                    _sim.Halt();
+            }
+            _character.Position = after;
             PullHeading();
 
             if (_npc != null && _path.Count > 0 && (_npc.Path.Empty || NpcPathFinished()))

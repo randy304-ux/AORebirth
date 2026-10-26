@@ -1,4 +1,4 @@
-namespace ZoneEngine_New.Core.Entities
+﻿namespace ZoneEngine_New.Core.Entities
 {
     using System;
     using System.Linq;
@@ -3523,11 +3523,7 @@ namespace ZoneEngine_New.Core.Entities
             {
                 characterFlags &= ~(int)CharacterFlags.NpcStyleFlag28;
                 characterFlags |= (int)CharacterFlags.HasBlueName;
-                if (name != null
-                    && name.IndexOf("[GM]", StringComparison.OrdinalIgnoreCase) < 0)
-                {
-                    name += " [GM]";
-                }
+                // No " [GM]" name suffix: the client resolves /assist, /tell-style name lookups against this exact name, so "Blitzkreig [GM]" made "/assist Blitzkreig" fail (Randy 2026-10-25). The blue name already marks a GM.
             }
 
             int maxHealth = Stats.GetOrZero(CharacterStat.MaxHealth);
