@@ -644,6 +644,8 @@ namespace ZoneEngine_New.Core.Movement
             _sim.SetRelRot(Quat.LookRotation(forward / forward.Length, _sim.SurfaceNormal));
         }
 
+        bool _pendingBlockedStop;
+
         public void Tick(double deltaTime)
         {
             RefreshFlightAuthority();
@@ -693,13 +695,25 @@ namespace ZoneEngine_New.Core.Movement
                 after = dungeon.ConstrainNpcStep(before, after, out bool blocked);
                 _sim.Position = ToVec3(after);
                 if (blocked)
+                {
                     _sim.Halt();
+                    // Observers were following the NPC's announced path: show them the stop at the held spot.
+                    if (_character is NpcCharacter blockedNpc && blockedNpc.Brain != null)
+                        _pendingBlockedStop = true;
+                }
             }
             _character.Position = after;
             PullHeading();
 
             if (_npc != null && _path.Count > 0 && (_npc.Path.Empty || NpcPathFinished()))
                 ClearPath();
+
+            if (_pendingBlockedStop && _character is NpcCharacter stopped)
+            {
+                _pendingBlockedStop = false;
+                stopped.Brain?.StopPathing();
+                Ai.NpcFollowTarget.AnnounceStop(stopped, _character.Position);
+            }
         }
 
         /// <summary>

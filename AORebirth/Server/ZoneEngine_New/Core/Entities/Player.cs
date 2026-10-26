@@ -1,4 +1,4 @@
-namespace ZoneEngine_New.Core.Entities
+﻿namespace ZoneEngine_New.Core.Entities
 {
     using System;
     using System.Linq;
@@ -264,6 +264,21 @@ namespace ZoneEngine_New.Core.Entities
 
             Motor.Warp(landing);
             Session?.SendIntrazoneTeleport(landing, Rotation, playfield.Identity.Instance);
+            // Pets and mercs ride the lift with their owner (Randy 2026-10-25: after the second lift his mercs stayed
+            // on the deck below, out of sight). Each lands in a small ring around the owner and observers see it stop there.
+            int petIndex = 0;
+            foreach (NpcCharacter pet in OwnedPets.All.ToList())
+            {
+                if (!ReferenceEquals(pet.Playfield, playfield) || pet.IsDead)
+                    continue;
+                double angle = petIndex++ * Math.PI / 3.0;
+                var spot = new Vector3(landing.x + Math.Cos(angle) * 1.5, landing.y, landing.z + Math.Sin(angle) * 1.5);
+                if (!playfield.TrySnapFeetToFloor(spot, out Vector3 petFloor) || Math.Abs(petFloor.y - landing.y) > 1.0)
+                    petFloor = landing;
+                pet.Brain?.StopPathing();
+                pet.Motor.Warp(petFloor);
+                Ai.NpcFollowTarget.AnnounceStop(pet, petFloor);
+            }
             playfield.GetRequiredService<PlayfieldLocality>().Announce(this, new CharDCMoveMessage
             {
                 Identity = Identity,
