@@ -219,6 +219,36 @@ public sealed class QuestDungeonPlayfield : Playfield
         }
         return true;
     }
+
+    /// <summary>World positions of BossArenas.json WavePads for this boss room. Empty when this dungeon has no saved pads.</summary>
+    public int CopyWavePads(List<AORebirth.Core.Vector.Vector3> into)
+    {
+        ArgumentNullException.ThrowIfNull(into);
+        BossArena? arena = Arena();
+        if (arena?.WavePads == null || arena.Entry == null || Layout.BossRoomIndex is not int boss)
+            return 0;
+        var lift = Layout.FloorTransitions.Select(t => t.To).FirstOrDefault(e => e.RoomIndex == boss);
+        if (lift == null)
+            return 0;
+        int rot = Layout.Generator.Rooms.ElementAt(boss).Facing & 3;
+        System.Numerics.Vector3 Local(float[] p) => new(p[0], p.Length > 1 ? p[1] : 0, p.Length > 2 ? p[2] : 0);
+        System.Numerics.Vector3 origin = lift.Position - AORebirth.World.Collision.DungeonRoomPlacer.RotateY(Local(arena.Entry.Position), rot);
+        int added = 0;
+        foreach (float[] pad in arena.WavePads)
+        {
+            if (pad == null || pad.Length < 3)
+                continue;
+            System.Numerics.Vector3 at = origin + AORebirth.World.Collision.DungeonRoomPlacer.RotateY(Local(pad), rot);
+            var world = new AORebirth.Core.Vector.Vector3(at.X, at.Y, at.Z);
+            if (TrySnapFeetToFloor(world, out AORebirth.Core.Vector.Vector3 floor) && Math.Abs(floor.y - world.y) < 1.0)
+                world = floor;
+            into.Add(world);
+            added++;
+        }
+
+        return added;
+    }
+
     public override void Build()
     {
         if (IsBuilt) return;

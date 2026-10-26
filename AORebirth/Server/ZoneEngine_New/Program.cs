@@ -299,6 +299,8 @@ namespace ZoneEngine_New
             services.AddSingleton<IGmCommand, ClaimCommand>();
             services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.BattlesuitCommand>();
             services.AddSingleton<IGmCommand, MercCommand>();
+            services.AddSingleton<ZoneEngine_New.Core.Raids.InvasionService>();
+            services.AddSingleton<IGmCommand, InvasionCommand>();
             services.AddSingleton<IGmCommand, AuraCommand>();
             services.AddSingleton<IGmCommand, DespawnCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Lifecycle.IEngineShutdown, ProgramShutdown>();

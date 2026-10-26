@@ -720,6 +720,8 @@ namespace ZoneEngine_New.Core.Playfield
                 DrainRebases();
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("knubot");
                 _playfieldManager.Knubot?.Tick(this);
+                ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("invasion");
+                ZoneEngine_New.Core.Raids.WaveClock.Tick(this, deltaTime);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("checkpoint");
                 foreach (Player player in new System.Collections.Generic.List<Player>(_dynelRegistry.PlayerEntities()))
                 {

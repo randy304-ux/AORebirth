@@ -1,0 +1,59 @@
+{
+  "_comment": "GM capital-city alien invasion (.invasion / /invasion). Pads are X, Y, Z in metres; Y 0 is snapped to the floor. X,Z are offsets of about 40 m from AOWiki landmarks (Tir grid 542x536, Rome Red grid 250x320, Rome Blue shops around 620x340, Rome Green between the GMI and the Jobe whompah, Borealis between the grid and the whompas). Walk them with /pos and edit this file; the next .invasion start re-reads it. Waves reuse the crashed-ship hashes. Trash counts grow with players inside Radius; bosses and towers stay Fixed.",
+  "Radius": 90,
+  "MinGapSeconds": 20,
+  "MaxGapSeconds": 75,
+  "CleanupSeconds": 45,
+  "VictoryPointsPerTenLevels": 5,
+  "Waves": [
+    { "Spawns": [ { "Hash": "KSAU", "Count": 3 } ] },
+    { "Spawns": [ { "Hash": "KGRU", "Count": 2 }, { "Hash": "KCIU", "Count": 2 } ] },
+    { "Spawns": [ { "Hash": "KGXH", "Count": 2 }, { "Hash": "ZIXK", "Count": 1 } ] },
+    { "Spawns": [
+      { "Hash": "ALGT", "Count": 1, "Fixed": true, "Boss": true },
+      { "Hash": "ALHT", "Count": 2, "Fixed": true, "HealBoss": true, "HealPercent": 3 }
+    ] }
+  ],
+  "Cities": [
+    {
+      "Key": "tir",
+      "Name": "Tir",
+      "Playfield": 640,
+      "Aliases": [ "clan" ],
+      "Note": "Offsets from the grid at 542 x 536 (AOWiki).",
+      "Pads": [ [502, 0, 536], [582, 0, 536], [542, 0, 496], [542, 0, 576] ]
+    },
+    {
+      "Key": "borealis",
+      "Name": "Borealis",
+      "Playfield": 800,
+      "Aliases": [ "bor", "neutral" ],
+      "Note": "Between the north grid (640 x 730) and the whompas (670 x 550).",
+      "Pads": [ [610, 0, 640], [690, 0, 640], [650, 0, 600], [650, 0, 680] ]
+    },
+    {
+      "Key": "rome-red",
+      "Name": "Rome Red",
+      "Playfield": 730,
+      "Aliases": [ "rr", "red", "rome" ],
+      "Note": "Offsets from the grid at 250 x 320 (AOWiki).",
+      "Pads": [ [210, 0, 320], [290, 0, 320], [250, 0, 280], [250, 0, 360] ]
+    },
+    {
+      "Key": "rome-blue",
+      "Name": "Rome Blue",
+      "Playfield": 735,
+      "Aliases": [ "rb", "blue" ],
+      "Note": "Street square near the 545 x 340 and 675 x 360 shops. Guessed; walk it.",
+      "Pads": [ [580, 0, 340], [660, 0, 340], [620, 0, 300], [620, 0, 380] ]
+    },
+    {
+      "Key": "rome-green",
+      "Name": "Rome Green",
+      "Playfield": 740,
+      "Aliases": [ "rg", "green" ],
+      "Note": "Between the GMI at 300 x 230 and the Jobe whompah at 415 x 315. Guessed; walk it.",
+      "Pads": [ [340, 0, 300], [420, 0, 300], [380, 0, 260], [380, 0, 340] ]
+    }
+  ]
+}
