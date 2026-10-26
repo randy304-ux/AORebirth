@@ -19,7 +19,7 @@ namespace ZoneEngine_New.Core.Commands
 
         public int RequiredGmLevel => 0;
 
-        public string Usage => ".merc | .merc hire <profession> | .merc dismiss <profession|all> | .merc call";
+        public string Usage => ".merc | .merc hire <profession> [basic|elite|champion|super] | .merc dismiss <profession|all> | .merc call";
 
         public string Topic => "mercs";
 
@@ -42,14 +42,28 @@ namespace ZoneEngine_New.Core.Commands
             switch (sub)
             {
                 case "hire":
-                    if (Mercs.Find(rest) is not { } hire)
+                    string[] hireParts = rest.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                    Mercs.Tier tier = Mercs.Tier.Basic;
+                    if (hireParts.Length > 1 && !Mercs.TryParseTier(hireParts[1], out tier))
+                    {
+                        Say("Tiers: basic, elite, champion, super.");
+                        return;
+                    }
+
+                    if (tier != Mercs.Tier.Basic && player.Stats.GetOrZero(CharacterStat.GmLevel) < 1)
+                    {
+                        Say("Elite, champion and super contracts are GM-only until a drop is chosen. .merc hire " + (hireParts.Length > 0 ? hireParts[0] : "<profession>") + " still hires a basic.");
+                        return;
+                    }
+
+                    if (Mercs.Find(hireParts.Length > 0 ? hireParts[0] : "") is not { } hire)
                     {
                         Say("Unknown profession. Professions: " + string.Join(", ", Mercs.Kinds.Select(k => k.Key)));
                         return;
                     }
 
-                    Say(pets.HireMerc(player, hire, player.Stats.GetOrOne(CharacterStat.Level)) != null
-                        ? "Contract signed: your " + hire.Title + " is on the way."
+                    Say(pets.HireMerc(player, hire, player.Stats.GetOrOne(CharacterStat.Level), tier) != null
+                        ? "Contract signed: your " + Mercs.TierName(tier) + " " + hire.Title + " is on the way."
                         : "Could not hire right now (mercenaries off, or you are dead or zoning).");
                     return;
                 case "dismiss":
@@ -90,7 +104,10 @@ namespace ZoneEngine_New.Core.Commands
                                     : "hired, on the way";
                         }
 
-                        sb.Append("\n").Append(k.Title).Append(" (").Append(k.Key).Append("): ").Append(state);
+                        string tierLabel = PetService.HasContract(player, k) && Mercs.GetTier(player, k) != Mercs.Tier.Basic
+                            ? " " + Mercs.TierName(Mercs.GetTier(player, k))
+                            : "";
+                        sb.Append("\n").Append(k.Title).Append(tierLabel).Append(" (").Append(k.Key).Append("): ").Append(state);
                     }
 
                     Say(sb.ToString());

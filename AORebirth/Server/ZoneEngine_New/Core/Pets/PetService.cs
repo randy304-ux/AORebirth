@@ -120,7 +120,13 @@ namespace ZoneEngine_New.Core.Pets
                     if (npc.UploadedNanoIds.Count == 0 && IsHealPet(type))
                         npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, "MRDR", petLevel));
                     if (Mercs.ByHash(hash) is Mercs.Kind mercKind)
+                    {
+                        Mercs.Tier tier = owner is Player tierOwner ? Mercs.GetTier(tierOwner, mercKind) : Mercs.Tier.Basic;
                         DressMerc(npc, mercKind, petLevel, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base));
+                        ApplyMercTier(npc, tier);
+                        if (tier != Mercs.Tier.Basic)
+                            npc.Name = npc.Name + " (" + Mercs.TierName(tier) + ")";
+                    }
                     if (healthPercent is > 0 and < 100)
                     {
                         int max = npc.Stats.GetOrZero(CharacterStat.MaxHealth);
@@ -204,7 +210,7 @@ namespace ZoneEngine_New.Core.Pets
         /// Hires a mercenary for <paramref name="owner"/> at <paramref name="level"/>: a pet of the merc's own slot that
         /// guards its owner until dismissed. A merc of the same profession already hired is replaced.
         /// </summary>
-        public NpcCharacter? HireMerc(Player owner, Mercs.Kind kind, int level)
+        public NpcCharacter? HireMerc(Player owner, Mercs.Kind kind, int level, Mercs.Tier tier = Mercs.Tier.Basic)
         {
             ArgumentNullException.ThrowIfNull(owner);
             ArgumentNullException.ThrowIfNull(kind);
@@ -212,9 +218,17 @@ namespace ZoneEngine_New.Core.Pets
                 return null;
 
             owner.OwnedPets.MercReviveUtc.Remove(kind.Key);
-            NpcCharacter? merc = Spawn(owner, kind.Hash, kind.PetType, Math.Clamp(level, 1, 220), null, PetMode.Guard, 100, 100, []);
-            if (merc != null)
-                SetContract(owner, kind, true);
+            Mercs.Tier previous = Mercs.GetTier(owner, kind);
+            Mercs.SetTier(owner, kind, tier);
+            int spawnLevel = Mercs.GearLevel(level, tier);
+            NpcCharacter? merc = Spawn(owner, kind.Hash, kind.PetType, spawnLevel, null, PetMode.Guard, 100, 100, []);
+            if (merc == null)
+            {
+                Mercs.SetTier(owner, kind, previous);
+                return null;
+            }
+
+            SetContract(owner, kind, true);
             return merc;
         }
 
@@ -225,6 +239,7 @@ namespace ZoneEngine_New.Core.Pets
             ArgumentNullException.ThrowIfNull(kind);
             bool had = HasContract(owner, kind);
             SetContract(owner, kind, false);
+            Mercs.SetTier(owner, kind, Mercs.Tier.Basic);
             owner.OwnedPets.MercReviveUtc.Remove(kind.Key);
             owner.OwnedPets.Stash.RemoveAll(stash => string.Equals(stash.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase));
             foreach (NpcCharacter pet in owner.OwnedPets.All.ToArray())
@@ -283,6 +298,33 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
+        /// Extra health and character damage on top of the raised level. The swing itself is still the monster
+        /// weapon minted at that level (the held weapon is a look).
+        /// </summary>
+        static void ApplyMercTier(NpcCharacter npc, Mercs.Tier tier)
+        {
+            Mercs.Package package = Mercs.PackageFor(tier);
+            if (package.HpPercent == 100 && package.DamagePercent == 100)
+                return;
+            ScaleBase(npc, CharacterStat.MaxHealth, package.HpPercent);
+            ScaleBase(npc, CharacterStat.MaxDamage, package.DamagePercent);
+            ScaleBase(npc, CharacterStat.MinDamage, package.DamagePercent);
+            npc.Rebase();
+            int max = npc.Stats.GetOrZero(CharacterStat.MaxHealth);
+            if (max > 0)
+                npc.Stats.Set(CharacterStat.Health, max);
+        }
+
+        static void ScaleBase(NpcCharacter npc, CharacterStat stat, int percent)
+        {
+            int value = npc.Stats.GetOrZero(stat, StatDetail.Base);
+            if (value <= 0 || percent == 100)
+                return;
+            int next = (int)Math.Min(int.MaxValue, (long)value * percent / 100);
+            npc.Stats.Set(stat, next, StatDetail.Base, dirty: true);
+        }
+
+        /// <summary>
         /// Brings back every contracted merc the owner is missing: on login, after the owner's or the merc's death
         /// (once its revive time is up), and after a zone change that lost it. Runs about once a second per player.
         /// </summary>
@@ -308,6 +350,7 @@ namespace ZoneEngine_New.Core.Pets
                     continue;
                 if (roster.MercReviveUtc.TryGetValue(kind.Key, out DateTime due) && now < due)
                     continue;
+                int spawnLevel = Mercs.GearLevel(level, Mercs.GetTier(owner, kind));
                 NpcCharacter? merc = null;
                 foreach (NpcCharacter pet in roster.All)
                 {
@@ -324,7 +367,7 @@ namespace ZoneEngine_New.Core.Pets
                     continue;
                 }
                 roster.MercReviveUtc.Remove(kind.Key);
-                if (Spawn(owner, kind.Hash, kind.PetType, Math.Clamp(level, 1, 220), null, PetMode.Guard, 100, 100, []) != null)
+                if (Spawn(owner, kind.Hash, kind.PetType, spawnLevel, null, PetMode.Guard, 100, 100, []) != null)
                     _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc returned hash={0} owner={1}", kind.Hash, owner.Identity.Instance));
             }
         }
@@ -358,6 +401,8 @@ namespace ZoneEngine_New.Core.Pets
                 owner.Stats.Set(Mercs.ContractsStat, 0, StatDetail.Base);
                 owner.SaveState.MarkDirty();
             }
+
+            Mercs.ClearTiers(owner);
             return count;
         }
         /// <summary>Removes a pet from the world and from its owner.</summary>

@@ -6,6 +6,10 @@ namespace ZoneEngine_New.Core.Pets
     using System.IO;
     using System.Text.Json;
 
+    using SmokeLounge.AOtomation.Messaging.GameData;
+
+    using ZoneEngine_New.Core.Entities;
+
     /// <summary>
     /// Dungeon Dogs hired mercenaries: pet-based companions a player hires from a Mercenary Contracts terminal (Knubot
     /// <c>{hiremerc KIND}</c> / <c>{dismissmerc KIND}</c> / <c>{dismissmercs}</c>) or with <c>.merc</c>. A merc is a player pet
@@ -14,12 +18,99 @@ namespace ZoneEngine_New.Core.Pets
     /// off, comes back beside its owner with full health after <see cref="Catalog.ReviveSeconds"/>, and on the next login.
     /// Professions are fixed here (key, hash, slot); levels, looks, heals, nanos and armor come from GameData
     /// (NpcTemplates MR** and Mercs.json, both written by ddogs/tools/Build-Mercs.ps1).
+    /// A tier above basic raises the merc's level (capped at 220) and then its health. It does not copy the owner's stats.
     /// </summary>
     public static class Mercs
     {
         /// <summary>Server-only character stat: bit <c>Kind.Bit</c> set while that contract is active.</summary>
-        public const SmokeLounge.AOtomation.Messaging.GameData.CharacterStat ContractsStat =
-            (SmokeLounge.AOtomation.Messaging.GameData.CharacterStat)10280;
+        public const CharacterStat ContractsStat = (CharacterStat)10280;
+
+        /// <summary>Two bits per profession: 0 basic, 1 elite, 2 champion, 3 super. 10281-10283 are aura unlocks.</summary>
+        public const CharacterStat TierStat = (CharacterStat)10284;
+
+        public enum Tier
+        {
+            Basic = 0,
+            Elite = 1,
+            Champion = 2,
+            Super = 3
+        }
+
+        public readonly record struct Package(int LevelBonus, int HpPercent, int DamagePercent);
+
+        public static Package PackageFor(Tier tier) => tier switch
+        {
+            Tier.Elite => new Package(40, 125, 125),
+            Tier.Champion => new Package(80, 150, 150),
+            Tier.Super => new Package(120, 175, 175),
+            _ => new Package(0, 100, 100)
+        };
+
+        /// <summary>Owner level plus the tier bonus, never above 220. A level 1000 GM still tops out here.</summary>
+        public static int GearLevel(int bodyLevel, Tier tier)
+            => Math.Clamp(Math.Clamp(bodyLevel, 1, 220) + PackageFor(tier).LevelBonus, 1, 220);
+
+        public static bool TryParseTier(string text, out Tier tier)
+        {
+            tier = Tier.Basic;
+            if (string.IsNullOrWhiteSpace(text))
+                return false;
+            switch (text.Trim().ToLowerInvariant())
+            {
+                case "basic":
+                case "normal":
+                    tier = Tier.Basic;
+                    return true;
+                case "elite":
+                case "e":
+                    tier = Tier.Elite;
+                    return true;
+                case "champion":
+                case "champ":
+                case "c":
+                    tier = Tier.Champion;
+                    return true;
+                case "super":
+                case "s":
+                    tier = Tier.Super;
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        public static string TierName(Tier tier) => tier switch
+        {
+            Tier.Elite => "Elite",
+            Tier.Champion => "Champion",
+            Tier.Super => "Super",
+            _ => "Basic"
+        };
+
+        public static Tier GetTier(Player owner, Kind kind)
+        {
+            int packed = owner.Stats.GetOrZero(TierStat, StatDetail.Base);
+            return (Tier)((packed >> (kind.Bit * 2)) & 3);
+        }
+
+        public static void SetTier(Player owner, Kind kind, Tier tier)
+        {
+            int shift = kind.Bit * 2;
+            int packed = owner.Stats.GetOrZero(TierStat, StatDetail.Base);
+            int next = (packed & ~(3 << shift)) | (((int)tier & 3) << shift);
+            if (next == packed)
+                return;
+            owner.Stats.Set(TierStat, next, StatDetail.Base);
+            owner.SaveState.MarkDirty();
+        }
+
+        public static void ClearTiers(Player owner)
+        {
+            if (owner.Stats.GetOrZero(TierStat, StatDetail.Base) == 0)
+                return;
+            owner.Stats.Set(TierStat, 0, StatDetail.Base);
+            owner.SaveState.MarkDirty();
+        }
 
         public sealed record Kind(string Key, string Hash, string Title, int Profession, int Slot, int Bit)
         {
