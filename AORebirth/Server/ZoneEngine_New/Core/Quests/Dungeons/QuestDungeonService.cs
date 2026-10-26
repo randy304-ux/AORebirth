@@ -27,6 +27,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
     using ZoneEngine_New.Core.Mobs;
     using ZoneEngine_New.Core.Network;
     using ZoneEngine_New.Core.Playfield;
+    using ZoneEngine_New.Core.Raids;
 
     using Quaternion = AORebirth.Core.Vector.Quaternion;
     using Vector3 = AORebirth.Core.Vector.Vector3;
@@ -408,7 +409,16 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     Action = QuestTemplate.KillOneAction,
                     Objective = new QuestObjective { Npc = objective.NpcHash },
                     Flags = "None",
-                    Reward = new QuestReward { Hash = string.Empty, Credits = spec.Credits, Xp = spec.Xp }
+                    Reward = new QuestReward
+                    {
+                        Hash = string.Empty,
+                        Credits = spec.Credits,
+                        Xp = spec.Xp,
+                        // Same house rule as a capital invasion: 5 VP per 10 levels of the general. Team ships only.
+                        Stats = spec.Team
+                            ? new Dictionary<int, int> { [InvasionService.VictoryPointsStatId] = Math.Max(1, objectiveLevel / 10) * 5 }
+                            : null
+                    }
                 };
                 DateTime expires = now.AddSeconds(spec.LifetimeSeconds);
                 string parametersJson = parameters.ToJson();

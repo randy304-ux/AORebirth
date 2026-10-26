@@ -13,12 +13,13 @@ namespace ZoneEngine_New.Core.Trade
     /// <summary>One purchasable line in a vending machine's generated stock.</summary>
     public readonly struct ShopStockSlot
     {
-        public ShopStockSlot(int lowId, int highId, int quality, string itemHash = "")
+        public ShopStockSlot(int lowId, int highId, int quality, string itemHash = "", int explicitPrice = 0)
         {
             LowId = lowId;
             HighId = highId;
             Quality = quality;
             ItemHash = itemHash ?? string.Empty;
+            ExplicitPrice = explicitPrice;
         }
 
         public int LowId { get; }
@@ -29,6 +30,9 @@ namespace ZoneEngine_New.Core.Trade
 
         /// <summary>The exact item-pair correlation used by DAO-backed stock, when uniquely available.</summary>
         public string ItemHash { get; }
+
+        /// <summary>When greater than 0, this line has its own price and the credit formula is not used.</summary>
+        public int ExplicitPrice { get; }
     }
 
     internal readonly struct ShopStockRange

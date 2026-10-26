@@ -48,7 +48,14 @@ public static class WorldNpcFactory
             { failure = "Missing vendor item template at slot " + row.Slot; return false; }
         shop = new VendingMachine(optionalIdentity ?? new Identity
             { Type = IdentityType.VendingMachine, Instance = definition.InstanceId }, template);
-        shop.Stock.SetConfiguredSnapshot(definition.Stock.Select(row => new ShopStockSlot(row.LowId, row.HighId, row.Quality)).ToArray());
+        shop.Stock.SetConfiguredSnapshot(definition.Stock.Select(row =>
+            new ShopStockSlot(row.LowId, row.HighId, row.Quality, explicitPrice: row.Price)).ToArray());
+        if (definition.SpendsVictoryPoints)
+        {
+            shop.SpendsVictoryPoints = true;
+            shop.Stats.Set(CharacterStat.SellModifier, 0);
+            shop.Stats.Set(CharacterStat.BuyModifier, 0);
+        }
         return true;
     }
     public static bool TryAttachShop(NpcCharacter npc, WorldVendorDefinition definition, IItemTemplateCatalog catalog,

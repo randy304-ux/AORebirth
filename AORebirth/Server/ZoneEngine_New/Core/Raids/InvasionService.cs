@@ -30,7 +30,7 @@ namespace ZoneEngine_New.Core.Raids
 
     public sealed class InvasionService
     {
-        /// <summary>Client stat Victory Points (AORebirth.Stats id 669). No vendor spends it yet.</summary>
+        /// <summary>Client stat Victory Points (AORebirth.Stats id 669). Ofab terminals on Andromeda spend it.</summary>
         public const int VictoryPointsStatId = 669;
 
         /// <summary>MonsterData whose RDB neighbour string is "alien boss mothership". Overhead prop only.</summary>
@@ -403,7 +403,7 @@ namespace ZoneEngine_New.Core.Raids
                 {
                     Identity = player.Identity,
                     Text = "Victory Points +" + amount.ToString(CultureInfo.InvariantCulture) + " (total "
-                        + total.ToString(CultureInfo.InvariantCulture) + "). Nothing spends these yet."
+                        + total.ToString(CultureInfo.InvariantCulture) + ")."
                 });
                 paid++;
             }

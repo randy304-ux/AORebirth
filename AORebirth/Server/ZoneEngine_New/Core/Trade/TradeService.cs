@@ -860,6 +860,12 @@ namespace ZoneEngine_New.Core.Trade
 
             TradeOffer offer = session.InitiatorOffer;
             int skillSteps = TradeRules.PricingSkillSteps(player, machine.PricingSkill);
+            bool victoryPoints = machine.SpendsVictoryPoints;
+            if (victoryPoints && offer.Count > 0)
+            {
+                Tell(player, "This terminal does not buy items. It sells for Victory Points.");
+                return;
+            }
 
             // Price the purchase off the live stock list: a slot may have been re-rolled since the
             // client picked it, and the shopper must pay for what they will actually receive.
@@ -870,10 +876,17 @@ namespace ZoneEngine_New.Core.Trade
                 if (!machine.Stock.TryGetSlot(stockIndex, out ShopStockSlot stock))
                     continue;
 
-                int price = TradeRules.BuyPrice(
-                    TradeRules.ItemValue(_catalog, stock.LowId, stock.HighId, stock.Quality),
-                    machine.SellModifier,
-                    skillSteps);
+                int price = victoryPoints
+                    ? stock.ExplicitPrice
+                    : TradeRules.BuyPrice(
+                        TradeRules.ItemValue(_catalog, stock.LowId, stock.HighId, stock.Quality),
+                        machine.SellModifier,
+                        skillSteps);
+                if (victoryPoints && price <= 0)
+                {
+                    Tell(player, "That line has no Victory Point price.");
+                    return;
+                }
                 purchases.Add(new Purchase(stock, price));
                 buyTotal += price;
             }
@@ -893,7 +906,18 @@ namespace ZoneEngine_New.Core.Trade
                     skillSteps);
             }
 
-            long finalCash = (long)player.Stats.GetOrZero(CharacterStat.Cash) - buyTotal + sellTotal;
+            var victoryStat = (CharacterStat)ZoneEngine_New.Core.Raids.InvasionService.VictoryPointsStatId;
+            int victoryHave = victoryPoints ? player.Stats.GetOrZero(victoryStat, StatDetail.Base) : 0;
+            if (victoryPoints && victoryHave < buyTotal)
+            {
+                Tell(player, "Not enough Victory Points. That is " + buyTotal.ToString(CultureInfo.InvariantCulture)
+                    + " and you have " + victoryHave.ToString(CultureInfo.InvariantCulture) + ".");
+                return;
+            }
+
+            long finalCash = victoryPoints
+                ? player.Stats.GetOrZero(CharacterStat.Cash)
+                : (long)player.Stats.GetOrZero(CharacterStat.Cash) - buyTotal + sellTotal;
             if (finalCash < 0)
             {
                 ClientFeedback.Send(player, "Feedback_NotEnoughCredits");
@@ -953,6 +977,14 @@ namespace ZoneEngine_New.Core.Trade
                     offer.DrainAll();
                     ApplyDeliveries(deliveries);
                     SetCash(player, finalCash);
+                    if (victoryPoints)
+                    {
+                        int left = player.Stats.GetOrZero(victoryStat, StatDetail.Base) - (int)buyTotal;
+                        if (left < 0)
+                            throw new InvalidOperationException("Victory Point balance changed during the purchase.");
+                        player.Stats.Set(victoryStat, left, StatDetail.Base);
+                        player.SaveState.MarkDirty();
+                    }
                     foreach (Delivery delivery in deliveries) SendDelivery(delivery);
                 });
             }
@@ -964,6 +996,8 @@ namespace ZoneEngine_New.Core.Trade
 
             Unregister(player);
             machine.Stock.CloseTrade();
+            if (victoryPoints)
+                Tell(player, "Victory Points -" + buyTotal.ToString(CultureInfo.InvariantCulture) + ".");
 
             Identity shopIdentity = machine.ShopIdentity;
             player.Session!.Send(EndFrame(player.Identity, TradeAction.Complete, shopIdentity, shopIdentity));

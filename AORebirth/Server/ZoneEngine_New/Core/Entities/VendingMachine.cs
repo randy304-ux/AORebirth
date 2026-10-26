@@ -77,6 +77,9 @@ namespace ZoneEngine_New.Core.Entities
         /// <summary>Credits the machine charges per unit of item value when selling to a player.</summary>
         public int SellModifier => Stats.GetOrZero(CharacterStat.SellModifier);
 
+        /// <summary>Stock prices are Victory Points (<see cref="ShopStockSlot.ExplicitPrice"/>), not credits.</summary>
+        public bool SpendsVictoryPoints { get; set; }
+
         /// <summary>
         /// The client binds a shop pane to the machine dynel it was told about in
         /// <see cref="VendingMachineFullUpdateMessage"/>, so shop and trade frames are always keyed to

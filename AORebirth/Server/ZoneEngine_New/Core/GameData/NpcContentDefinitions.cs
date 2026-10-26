@@ -80,6 +80,9 @@ public sealed class WorldVendorDefinition
     public int TemplateId { get; set; }
     public WorldVendorStock[] Stock { get; set; } = [];
     public JsonElement? CompanionPacket { get; set; }
+
+    /// <summary>The pane still opens as a shop. The number charged is <see cref="WorldVendorStock.Price"/> in Victory Points, and the machine's sell modifier is 0 so the window shows 0 credits.</summary>
+    public bool SpendsVictoryPoints { get; set; }
 }
 
 public sealed class WorldVendorStock
@@ -88,4 +91,7 @@ public sealed class WorldVendorStock
     public int LowId { get; set; }
     public int HighId { get; set; }
     public int Quality { get; set; }
+
+    /// <summary>Victory Point price when the vendor spends VP. 0 means the credit formula.</summary>
+    public int Price { get; set; }
 }

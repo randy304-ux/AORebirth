@@ -1,0 +1,15 @@
+{
+  "Notes": "The two Ofab nano terminals. The program lists were not found by name in itemnames, so these do not sell anything.",
+  "Npcs": [ "ddogs-ofab-nano" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "This terminal is the Ofab nano counter. The Ranged and Support list and the Melee and Hybrid list are not in the item name table under those names, so nothing is for sale until those program names are known. Vehicles and orbital strikes are not sold here.",
+      "Replies": [ "bye" ]
+    },
+    "bye": { "Text": "{close}" }
+  }
+}

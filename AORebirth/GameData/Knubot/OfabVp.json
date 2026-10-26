@@ -1,0 +1,22 @@
+{
+  "Notes": "Ofab armor and weapon terminals on Andromeda (655). The pane shows 0 credits. The server charges Victory Points from the stock Price field (QL * QL / 40).",
+  "Npcs": [ "ddogs-ofab-vp" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "price": { "Text": "What does this cost?", "Goto": "price" },
+    "shop": { "Text": "Show me the stock.", "Goto": "shop" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Unicorn Defense Hub. Ofab armor and weapons are paid in Victory Points, not credits. The window shows 0 credits on purpose. Use opens the stock.",
+      "Replies": [ "price", "shop", "bye" ]
+    },
+    "price": {
+      "Text": "House price: QL times QL, divided by 40. QL 1 is 1 VP. QL 100 is 250. QL 200 is 1000. QL 300 is 2250. Team alien ships, invasions, and city raids pay Victory Points.",
+      "Replies": [ "shop", "bye" ]
+    },
+    "shop": { "Text": "{shop}" },
+    "bye": { "Text": "{close}" }
+  }
+}
