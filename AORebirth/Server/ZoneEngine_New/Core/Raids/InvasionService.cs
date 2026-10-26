@@ -37,14 +37,14 @@ namespace ZoneEngine_New.Core.Raids
         public const int MothershipMonsterData = 263884;
 
         readonly IGameData _gameData;
-        readonly PlayfieldManager _playfields;
+        readonly Lazy<PlayfieldManager> _playfields;
         readonly IZoneLogger _logger;
         readonly object _gate = new();
         readonly Dictionary<int, Encounter> _byPlayfield = new();
         InvasionCatalog _catalog;
         DateTime _catalogStamp;
 
-        public InvasionService(IGameData gameData, PlayfieldManager playfields, IZoneLogger logger)
+        public InvasionService(IGameData gameData, Lazy<PlayfieldManager> playfields, IZoneLogger logger)
         {
             ArgumentNullException.ThrowIfNull(gameData);
             ArgumentNullException.ThrowIfNull(playfields);
@@ -144,7 +144,7 @@ namespace ZoneEngine_New.Core.Raids
                 encounter.Cancelled = true;
             }
 
-            if (_playfields.SnapshotPlayfields() is { } snapshot)
+            if (_playfields.Value.SnapshotPlayfields() is { } snapshot)
             {
                 foreach (Playfield playfield in snapshot)
                 {
@@ -169,7 +169,7 @@ namespace ZoneEngine_New.Core.Raids
                 _byPlayfield.Clear();
             }
 
-            foreach (Playfield playfield in _playfields.SnapshotPlayfields())
+            foreach (Playfield playfield in _playfields.Value.SnapshotPlayfields())
             {
                 foreach (Encounter encounter in stopped)
                 {
@@ -480,7 +480,7 @@ namespace ZoneEngine_New.Core.Raids
 
         void Announce(int? playfieldId, string text)
         {
-            foreach (Playfield playfield in _playfields.SnapshotPlayfields())
+            foreach (Playfield playfield in _playfields.Value.SnapshotPlayfields())
             {
                 if (playfield.IsDisposed)
                     continue;

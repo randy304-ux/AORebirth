@@ -45,7 +45,6 @@ namespace ZoneEngine_New.Core.Cities
 
         readonly IGameData _gameData;
         readonly Lazy<PlayfieldManager> _playfields;
-        readonly InvasionService _invasions;
         readonly IZoneLogger _logger;
         readonly object _gate = new();
         readonly Dictionary<int, string> _bonusSig = new();
@@ -54,15 +53,13 @@ namespace ZoneEngine_New.Core.Cities
         Dictionary<int, OrgCityState> _byOrg = new();
         Dictionary<string, int> _plotOwner = new(StringComparer.OrdinalIgnoreCase);
 
-        public OrgCityService(IGameData gameData, Lazy<PlayfieldManager> playfields, InvasionService invasions, IZoneLogger logger)
+        public OrgCityService(IGameData gameData, Lazy<PlayfieldManager> playfields, IZoneLogger logger)
         {
             ArgumentNullException.ThrowIfNull(gameData);
             ArgumentNullException.ThrowIfNull(playfields);
-            ArgumentNullException.ThrowIfNull(invasions);
             ArgumentNullException.ThrowIfNull(logger);
             _gameData = gameData;
             _playfields = playfields;
-            _invasions = invasions;
             _logger = logger;
             _catalog = LoadCatalog();
             LoadState();
@@ -443,7 +440,16 @@ namespace ZoneEngine_New.Core.Cities
                 Say(player, "Satellite Uplink: aliens are on the controller.");
             if (cloak)
                 Say(player, "ECM cloak is down. This raid was called in.");
-            Say(player, _invasions.TryStart(playfield, plot.Name + " controller", pads, overhead: false, out string message, level)
+            // InvasionService owns PlayfieldManager, and this service is created while that manager is still
+            // being built (Knubot -> org cities). Take the clock set at the end of InvasionService's constructor.
+            InvasionService? invasions = WaveClock.Service;
+            if (invasions == null)
+            {
+                Say(player, "Alien raids are not available yet.");
+                return;
+            }
+
+            Say(player, invasions.TryStart(playfield, plot.Name + " controller", pads, overhead: false, out string message, level)
                 ? message + " Alien level " + level.ToString(CultureInfo.InvariantCulture) + " (low-QL raid loot)."
                 : message);
         }

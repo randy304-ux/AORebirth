@@ -19,9 +19,9 @@ namespace ZoneEngine_New.Core.Commands
     {
         readonly InvasionService _invasions;
         readonly IGameData _gameData;
-        readonly PlayfieldManager _playfields;
+        readonly Lazy<PlayfieldManager> _playfields;
 
-        public InvasionCommand(InvasionService invasions, IGameData gameData, PlayfieldManager playfields)
+        public InvasionCommand(InvasionService invasions, IGameData gameData, Lazy<PlayfieldManager> playfields)
         {
             ArgumentNullException.ThrowIfNull(invasions);
             ArgumentNullException.ThrowIfNull(gameData);
@@ -102,7 +102,7 @@ namespace ZoneEngine_New.Core.Commands
             Playfield playfield;
             try
             {
-                playfield = _playfields.GetOrCreate(city.Playfield);
+                playfield = _playfields.Value.GetOrCreate(city.Playfield);
             }
             catch (Exception exception)
             {
