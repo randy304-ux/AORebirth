@@ -38,7 +38,7 @@ MonsterData: `pumpkinman` 154136. Loot uses real DB item families: Lya's Sangi (
 - **Ganking Uncle Pumpkin-Head (`GNKP`)**: 100% chance every accept; official 6-hour respawn ignored; level = BS bracket max for the player (30/60/100/150/200/214/220)
 - Rogue miners drop Illegal Notum Chunk (`ILNC`)
 
-Add more dailies later by appending `DailyMissions.json` + a Quests.json row + a `{givedaily HASH}` knubot line.
+Add more dailies later by appending `DailyMissions.json` + a Quests.json row + a `{givedaily HASH}` knubot line. Randy's full dailies list (Agency, DOJA, PvP menu, Reck) is tracked in `dailies-design.md` and `the-reck-design.md`.
 
 ## Deferred (high tier / instanced raid)
 

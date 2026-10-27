@@ -1,20 +1,40 @@
 {
-  "Notes": "Victory Point daily giver at Antiques n' such, Borealis. {givedaily KTCM} assigns Killing the Competition and spawns the field.",
+  "Notes": "PvP daily giver behind Antiques n' such, Borealis. KTCM (Illegal Notum Mining) is live via {givedaily KTCM}. Other options are listed but deferred — see ddogs/docs/dailies-design.md.",
   "Npcs": [ "JNSM", "ddogs-john-smith" ],
   "Openers": [ { "Say": "hello" } ],
   "Replies": {
-    "daily": { "Text": "I want a Victory Point mission.", "Goto": "daily" },
+    "jobs": { "Text": "What kind of work do you have?", "Goto": "jobs" },
+    "bs": { "Text": "Battlestation. Tip the scales for UBSL.", "Goto": "bs" },
+    "tara": { "Text": "Tarasque in Camelot.", "Goto": "tara" },
+    "miners": { "Text": "Illegal notum miners.", "Goto": "miners" },
+    "land": { "Text": "Reclaiming the land — land control towers.", "Goto": "land" },
     "done": { "Text": "The miners are dealt with.", "Goto": "done" },
     "bye": { "Text": "Goodbye", "Goto": "bye" }
   },
   "Lines": {
     "hello": {
-      "Text": "John Smith. Antiques n' such. If you would rather skip Battle Station, I have a Victory Point job in the notum field.",
-      "Replies": [ "daily", "done", "bye" ]
+      "Text": "John Smith. Keep your voice down. I move Victory Point work for people who would rather not sit a full Battle Station, and a few dirtier jobs besides.",
+      "Replies": [ "jobs", "done", "bye" ]
     },
-    "daily": {
-      "Text": "Kill three Rogue Notum Miners dealing in illegal notum. The field is Stret West Notum Ore for now. A Ganking Uncle Pumpkin-Head can show up on every run.{givedaily KTCM}",
+    "jobs": {
+      "Text": "Four cards on the table: Battlestation tip, Tarasque, illegal notum miners, or reclaiming land-control towers. Officially each track locks eighteen hours — Battlestation you could run three times. Pick one.",
+      "Replies": [ "bs", "tara", "miners", "land", "bye" ]
+    },
+    "bs": {
+      "Text": "Battlestation for UBSL is not wired yet. Come back when that daily hooks the 425-point update. Try the notum miners if you want something live.",
+      "Replies": [ "miners", "bye" ]
+    },
+    "tara": {
+      "Text": "Tarasque is not on our board yet — Camelot spawn and the daily target still need content. Try the notum miners.",
+      "Replies": [ "miners", "bye" ]
+    },
+    "miners": {
+      "Text": "Kill three Rogue Notum Miners dealing in illegal notum. Field is Stret West Notum Ore for now until the real Notum Mining Area is up. A Ganking Uncle Pumpkin-Head can show every run.{givedaily KTCM}",
       "Replies": [ "bye" ]
+    },
+    "land": {
+      "Text": "Reclaiming the Land needs land-control tower targeting we do not have yet. Try the notum miners.",
+      "Replies": [ "miners", "bye" ]
     },
     "done": {
       "Text": "Good work. Here is your pay.{completequest KTCM}",

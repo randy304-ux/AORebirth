@@ -1,10 +1,12 @@
 {
-  "_comment": "Reusable outdoor/daily mission catalog. Knubot {givedaily HASH} assigns Quests.json HASH and spawns the field. Randy will expand this list.",
+  "_comment": "Reusable outdoor/daily mission catalog. Knubot {givedaily HASH} assigns Quests.json and may spawn a field. See ddogs/docs/dailies-design.md. Deferred entries are documentation for Randy's list; DailyMissionService ignores Status=Deferred.",
   "Missions": [
     {
       "Hash": "KTCM",
       "Name": "Killing the Competition",
       "QuestHash": "KTCM",
+      "Status": "Live",
+      "Track": "PvPDaily",
       "Playfield": 791,
       "Pads": [[220, 1.2, 1060], [240, 1.2, 1080], [200, 1.2, 1040], [260, 1.2, 1050]],
       "Miners": { "Hash": "RGNM", "Count": 3, "Level": 1 },
@@ -12,10 +14,90 @@
         "Hash": "GNKP",
         "ChancePercent": 100,
         "LevelFromPlayer": true,
-        "Note": "Ganking Uncle Pumpkin-Head. Official 6h respawn ignored: every accept can spawn one. Level = BS bracket max for the player."
+        "Note": "Ganking Uncle Pumpkin-Head. Official 6h respawn ignored: every accept can spawn one."
       },
       "WaypointText": "Stret West Notum Ore (playfield 791). Kill three Rogue Notum Miners, then return to John Smith.",
-      "Note": "AO-Universe daily. Field stand-in for Notum Mining Area until that map is wired; pads are the Stret West Notum Ore district."
+      "Note": "AO-Universe Illegal Notum Mining / Killing the Competition. NMA map deferred."
+    }
+  ],
+  "Deferred": [
+    {
+      "Hash": "AGRK",
+      "Name": "Agency Handler (Rubi-Ka daily)",
+      "Track": "FreelancersInc",
+      "Priority": 1,
+      "Status": "Deferred",
+      "Needs": ["Rome Blue / Old Athen Agency NPCs", "Receptionist contract", "Mission roll table", "18h lock-out", "Freelancers Inc. Token 303237 rewards"],
+      "Note": "AO-Universe Daily Missions overview. Omni Rome Blue 660x315, Clan Old Athen 515x440."
+    },
+    {
+      "Hash": "AGEL",
+      "Name": "Senior Agency Handler (Elite daily)",
+      "Track": "FreelancersIncElite",
+      "Priority": 1,
+      "Status": "Deferred",
+      "Needs": ["Senior Agency Handler NPCs", "Dungeon wave objectives L1-149 / IS L150+ / Escaped Prisoners Dust Brigade Biodomes L200+"],
+      "Note": "Same Agency offices. Separate 18h lock-out."
+    },
+    {
+      "Hash": "AGAX",
+      "Name": "Alien Agency Handler (AXP daily)",
+      "Track": "FreelancersIncAlien",
+      "Priority": 1,
+      "Status": "Deferred",
+      "Needs": ["Alien Handler NPCs", "Solo/team alien mission catalog", "AXP% reward table", "Unicorn Outpost shuttle link"],
+      "Note": "Separate 18h lock-out. AXP scales with AI level."
+    },
+    {
+      "Hash": "DOJA",
+      "Name": "DOJA Chip turn-in",
+      "Track": "Doja",
+      "Priority": 2,
+      "Status": "Deferred",
+      "Needs": [
+        "ItemTemplates + right-click for chips 284954-284962 and 282144",
+        "Outdoor SL drop tables",
+        "Scarlett Dalquist in Jobe Research Lab R1 (PF 4001 content)",
+        "Return-item quest + shared lock-out (Dark Ruins separate)"
+      ],
+      "ChipIds": [284954, 284955, 284956, 284957, 284958, 284959, 284960, 284961, 284962, 282144],
+      "Note": "AO-Universe DOJA Chips. Geometry for PF 4001 exists; Scarlett/Lab R1 missing."
+    },
+    {
+      "Hash": "PVBS",
+      "Name": "Battlestation (UBSL tip)",
+      "Track": "PvPDaily",
+      "Priority": 3,
+      "Status": "Deferred",
+      "Needs": ["Mission update when either side hits 425 points while player is present", "Up to 3 completes per 18h", "Palmiero Freelancer counter"],
+      "Note": "John Smith option. BS runtime exists; daily hook does not."
+    },
+    {
+      "Hash": "PVTA",
+      "Name": "Tarasque",
+      "Track": "PvPDaily",
+      "Priority": 3,
+      "Status": "Deferred",
+      "Needs": ["Camelot / Avalon Tarasque spawn", "Target Tarasque objective", "Optional De'Valos Attendant up-check"],
+      "Note": "John Smith option. Immortal window / respawn per guide."
+    },
+    {
+      "Hash": "PVRL",
+      "Name": "Reclaiming the Land",
+      "Track": "PvPDaily",
+      "Priority": 3,
+      "Status": "Deferred",
+      "Needs": ["Land-control tower targeting (Massive Cannon, SAM, Guardian Conductor, Fire Spouting, opposing Control Tower)", "Faction rules for Neutrals"],
+      "Note": "John Smith option. Mini XP + VP."
+    },
+    {
+      "Hash": "RECK",
+      "Name": "The Reck daily set",
+      "Track": "Reck",
+      "Priority": 4,
+      "Status": "Deferred",
+      "Needs": ["See ddogs/docs/the-reck-design.md", "55 missing NpcTemplates hashes", "Sovic / Tettle / Observer content NPCs", "0 mobspawns DB rows for PF 750"],
+      "Note": "Sparse. Full build plan written; no implementation until Phase 1-2."
     }
   ]
 }
