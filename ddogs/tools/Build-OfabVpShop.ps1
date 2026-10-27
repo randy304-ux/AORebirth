@@ -1,9 +1,9 @@
 # Stocks the Ofab vending machines that already stand in the Unicorn Defence Hub (playfield 6007)
 # and writes the nano shops plus the battle-station queue terminals into PlayfieldContent/6007/Npcs.json.
 # Strips the old Ofab content terminals from playfield 655. The Tower Shop and the buffbot stay.
-# Armor and weapon ids are the base (not Improved / Penultimate) pairs. QL for crystals and devices
-# comes from tools-temp/ofab-item-check.txt. Gear and nano price is max(1, floor(QL * QL / 40)).
-# Attunement prices are 200 / 600 / 1500. Targeting stations are 250.
+# Armor ids are the base pairs. Weapon stock is Mk 1 only. QL for crystals comes from tools-temp/ofab-item-check.txt.
+# Published nano VP prices are in $knownVp. Armor, weapon, and unpublished nano prices stay QL*QL/40.
+# Attunement stock is level 1 at 200 VP. Targeting stations stay 250 until a screenshot confirms them.
 param(
   [string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'),
   [string]$QlFile = (Join-Path $PSScriptRoot '..\..\tools-temp\ofab-item-check.txt')
@@ -16,6 +16,24 @@ foreach ($line in [IO.File]::ReadAllLines($QlFile)) {
   if ($line -match '^(\d+)\t(\d+)\t') { $qlOf[[int]$Matches[1]] = [int]$Matches[2] }
 }
 function Vp([int]$ql) { return [Math]::Max(1, [int][Math]::Floor($ql * $ql / 40.0)) }
+# Published Victory Point prices from wiki.aodb.us/wiki/OFAB_Nanos (Maori, 2011). TBC rows are not in here.
+$knownVp = @{
+  218167=8000; 265441=3750; 265442=3750; 265443=3750; 265445=3750; 265446=3750; 265447=3750; 265448=3750
+  265449=3750; 265450=3750; 265451=3750; 265452=3750; 265453=3750; 265454=3750; 265455=920; 265456=920
+  265457=920; 265458=1800; 265459=1800; 265460=1800; 265461=3520; 265462=3520; 265463=3520; 265464=5915
+  265465=5915; 265466=5915; 265467=7310; 265468=7310; 265469=7310; 265470=8000; 265471=8000
+  267111=6000; 267115=6000; 267118=8000; 267122=6000; 267267=6000; 267268=8000; 267270=8000; 267273=8000
+  267274=6000; 267276=6000; 267282=8500; 267284=8000; 267537=6000; 267539=5000; 267629=5000; 267630=5000
+  267631=5000; 267632=5000; 267633=3000; 267634=4000; 267635=5000; 267636=3000; 267637=4000; 267638=5000
+  267639=5000; 267640=5000; 267641=5000; 267642=5000; 267643=4000; 267644=3000; 267645=3000; 267646=7000
+  267647=6000; 267648=5000; 267650=4000; 267919=4000; 267920=6000; 269871=1200; 269880=8000
+  274372=1000; 274374=1000; 279341=1000; 279346=1000; 279350=1000; 279373=1000; 279375=1000; 279377=1000
+  279380=1000; 280053=1000
+}
+function PriceOf([int]$id, [int]$ql) {
+  if ($knownVp.ContainsKey($id)) { return [int]$knownVp[$id] }
+  return (Vp $ql)
+}
 function NeedQl([int]$id) {
   if (-not $qlOf.ContainsKey($id)) { throw "missing QL for $id" }
   return [int]$qlOf[$id]
@@ -100,11 +118,11 @@ function GearRows($pieces) {
   }
   return $rows
 }
-function WeaponRows($table, $qls) {
+function WeaponRows($table, $qls, [int]$marks) {
   $rows = @()
   foreach ($name in ($table.Keys | Sort-Object)) {
     $ids = $table[$name]
-    for ($m = 0; $m -lt 6; $m++) {
+    for ($m = 0; $m -lt $marks; $m++) {
       $low = [int]$ids[$m * 2]; $high = [int]$ids[$m * 2 + 1]
       foreach ($q in $qls) {
         $rows += [ordered]@{ Low = $low; High = $high; Ql = [int]$q; Price = (Vp $q) }
@@ -117,7 +135,7 @@ function CrystalRows($ids) {
   $rows = @()
   foreach ($id in $ids) {
     $q = NeedQl $id
-    $rows += [ordered]@{ Low = [int]$id; High = [int]$id; Ql = $q; Price = (Vp $q) }
+    $rows += [ordered]@{ Low = [int]$id; High = [int]$id; Ql = $q; Price = (PriceOf $id $q) }
   }
   return $rows
 }
@@ -127,8 +145,11 @@ foreach ($prof in $armor.Keys) {
   $id = [string]$machine[$prof]
   $vendors[$id] = @(GearRows $armor[$prof])
 }
-$vendors['266577'] = @(WeaponRows $melee @(100,300))
-$vendors['266576'] = @(WeaponRows $ranged @(300))
+$step25 = 25,50,75,100,125,150,175,200,225,250,275,300
+$vendors['266577'] = @(WeaponRows $melee $step25 1)
+# Six ranged Mk 1s at all 12 steps is 72 lines. QL 25 and 50 are left off so the pane stays at 60.
+$rangedQl = 75,100,125,150,175,200,225,250,275,300
+$vendors['266576'] = @(WeaponRows $ranged $rangedQl 1)
 
 $general = @()
 $general += CrystalRows @(269909,269910,268170,269871,269880,301144)
@@ -141,13 +162,10 @@ $families = @(
   @(269415,269413,269414),
   @(293693,293699,293701)
 )
-$tierPrice = @(200,600,1500)
 foreach ($fam in $families) {
-  for ($t = 0; $t -lt 3; $t++) {
-    $id = [int]$fam[$t]
-    $q = NeedQl $id
-    $general += [ordered]@{ Low = $id; High = $id; Ql = $q; Price = [int]$tierPrice[$t] }
-  }
+  $id = [int]$fam[0]
+  $q = NeedQl $id
+  $general += [ordered]@{ Low = $id; High = $id; Ql = $q; Price = 200 }
 }
 foreach ($id in @(265405,265406)) {
   $q = NeedQl $id
@@ -160,7 +178,7 @@ foreach ($key in @($vendors.Keys)) {
   if ($n -lt 1 -or $n -gt 64) { throw "vendor $key has $n lines" }
 }
 $stockDoc = [ordered]@{
-  Notes = 'Hub vending machines on playfield 6007. Key is the machine template id. Gear and nanos use QL*QL/40. Attunement is 200/600/1500. Targeting stations are 250. Build-OfabVpShop.ps1'
+  Notes = 'Hub vending machines on playfield 6007. Weapons are Mk 1. Attunement stock is level 1 at 200 VP. Nano prices that wiki.aodb.us published are used; the rest are QL*QL/40. Armor and weapon VP prices are not published. Build-OfabVpShop.ps1'
   Vendors = $vendors
 }
 $stockPath = Join-Path $GameData 'OfabHubStock.json'
@@ -194,7 +212,7 @@ function ShopStock($ids) {
   $rows = @(); $slot = 0
   foreach ($id in $ids) {
     $q = NeedQl $id
-    $rows += [ordered]@{ Slot = $slot; LowId = [int]$id; HighId = [int]$id; Quality = $q; Price = (Vp $q) }
+    $rows += [ordered]@{ Slot = $slot; LowId = [int]$id; HighId = [int]$id; Quality = $q; Price = (PriceOf $id $q) }
     $slot++
   }
   if ($rows.Count -lt 1 -or $rows.Count -gt 64) { throw "nano pane has $($rows.Count) lines" }

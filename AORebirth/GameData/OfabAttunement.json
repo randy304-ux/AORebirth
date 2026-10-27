@@ -1,5 +1,5 @@
 {
-  "Notes": "Right-click upgrades the worn-path device. Retail only sold level one (200 VP) and the item's own OnUse is SpawnItem plus DestroyItem; this table is the path the server runs so a missing item hash cannot stop the upgrade. Level gates are a house rule (this server has no Ofab global-research track). Buying a higher tier from the vendor does not check the level.",
+  "Notes": "The shop sells level one only, at 200 VP (AO-Universe attunement guide). Right-click upgrades it. Retail also required global research, which this server does not track. The level gates match the guide: level two from 150, level three from 200.",
   "Levels": [1, 150, 200],
   "Prices": [200, 600, 1500],
   "Families": [
