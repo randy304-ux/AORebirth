@@ -1,0 +1,65 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  505,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:daily:505:tarasque",
+                     "Provenance":  "Stand-in daily NPC. Tarasque",
+                     "ContentNpcIdentity":  "ddogs-tarasque",
+                     "SpawnHash":  "TARA",
+                     "PlayfieldId":  505,
+                     "InstanceId":  2110950401,
+                     "Name":  "Tarasque",
+                     "Position":  [
+                                      2092,
+                                      20,
+                                      3822
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  268964353,
+                                   "1":  50000,
+                                   "4":  1,
+                                   "27":  50000,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  200,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40700,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  158175,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  false,
+                     "Attackable":  true,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 }
+             ],
+    "StandaloneShops":  [
+
+                        ]
+}

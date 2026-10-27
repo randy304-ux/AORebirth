@@ -1,0 +1,20 @@
+{
+  "Notes": "Freelancers Inc. Agency Receptionist (Rome Blue / Old Athen). Points players to Handler / Senior / Alien desks. Stand-in.",
+  "Npcs": [ "AGRC", "ddogs-agency-receptionist" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "work": { "Text": "I need Agency work.", "Goto": "work" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Freelancers Inc. Mission Agency. Sign the contract at the desk, then speak to the Handler for Rubi-Ka dailies, the Senior Handler for elite work, or the Alien Handler for AXP contracts. Each desk locks eighteen hours.",
+      "Replies": [ "work", "bye" ]
+    },
+    "work": {
+      "Text": "I stamp the paperwork. The Handlers issue the actual missions. Eighteen-hour lock-out per track once you finish.",
+      "Replies": [ "bye" ]
+    },
+    "bye": { "Text": "{close}" }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Notes": "Stand-in Alien Agency Handler at Rome Blue / Old Athen desks. Wraps existing AI** quests with {givedaily AGAX} for the FreelancersIncAlien 18h lock-out. Unicorn Outpost script AlienAgencyHandler.json remains for shuttle lines.",
+  "Npcs": [ "AGAX", "ddogs-agency-alien" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "daily": { "Text": "Alien Agency contract.", "Goto": "daily" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Alien Agency Handler. AXP contracts against the Kyr'Ozch — one roll per eighteen hours. Shuttles still run from the Unicorn Outpost desk.",
+      "Replies": [ "daily", "bye" ]
+    },
+    "daily": {
+      "Text": "Alien contract issued.{givedaily AGAX}",
+      "Replies": [ "bye" ]
+    },
+    "bye": { "Text": "{close}" }
+  }
+}

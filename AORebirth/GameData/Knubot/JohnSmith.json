@@ -1,5 +1,5 @@
 {
-  "Notes": "PvP daily giver behind Antiques n' such, Borealis. KTCM (Illegal Notum Mining) is live via {givedaily KTCM}. Other options are listed but deferred — see ddogs/docs/dailies-design.md.",
+  "Notes": "PvP daily giver behind Antiques n' such, Borealis. KTCM / PVBS / PVTA live. Reclaiming the Land still deferred.",
   "Npcs": [ "JNSM", "ddogs-john-smith" ],
   "Openers": [ { "Say": "hello" } ],
   "Replies": {
@@ -8,7 +8,7 @@
     "tara": { "Text": "Tarasque in Camelot.", "Goto": "tara" },
     "miners": { "Text": "Illegal notum miners.", "Goto": "miners" },
     "land": { "Text": "Reclaiming the land — land control towers.", "Goto": "land" },
-    "done": { "Text": "The miners are dealt with.", "Goto": "done" },
+    "done": { "Text": "The miners are dealt with.", "If": [ "HasQuest KTCM" ], "Goto": "done" },
     "bye": { "Text": "Goodbye", "Goto": "bye" }
   },
   "Lines": {
@@ -17,24 +17,24 @@
       "Replies": [ "jobs", "done", "bye" ]
     },
     "jobs": {
-      "Text": "Four cards on the table: Battlestation tip, Tarasque, illegal notum miners, or reclaiming land-control towers. Officially each track locks eighteen hours — Battlestation you could run three times. Pick one.",
+      "Text": "Four cards: Battlestation tip (up to three per eighteen hours), Tarasque, illegal notum miners, or reclaiming land-control towers. Pick one.",
       "Replies": [ "bs", "tara", "miners", "land", "bye" ]
     },
     "bs": {
-      "Text": "Battlestation for UBSL is not wired yet. Come back when that daily hooks the 425-point update. Try the notum miners if you want something live.",
-      "Replies": [ "miners", "bye" ]
+      "Text": "Queue the Battle Station. When either side hits four-twenty-five while you are in the match, the daily pays. You can clear it up to three times per eighteen hours.{givedaily PVBS}",
+      "Replies": [ "bye" ]
     },
     "tara": {
-      "Text": "Tarasque is not on our board yet — Camelot spawn and the daily target still need content. Try the notum miners.",
-      "Replies": [ "miners", "bye" ]
+      "Text": "Tarasque stalks Avalon by Camelot Castle. Put it down and the daily pays.{givedaily PVTA}",
+      "Replies": [ "bye" ]
     },
     "miners": {
       "Text": "Kill three Rogue Notum Miners dealing in illegal notum. Field is Stret West Notum Ore for now until the real Notum Mining Area is up. A Ganking Uncle Pumpkin-Head can show every run.{givedaily KTCM}",
       "Replies": [ "bye" ]
     },
     "land": {
-      "Text": "Reclaiming the Land needs land-control tower targeting we do not have yet. Try the notum miners.",
-      "Replies": [ "miners", "bye" ]
+      "Text": "Reclaiming the Land still needs land-control tower targeting we do not have. Try Battlestation, Tarasque, or the notum miners.",
+      "Replies": [ "bs", "tara", "miners", "bye" ]
     },
     "done": {
       "Text": "Good work. Here is your pay.{completequest KTCM}",

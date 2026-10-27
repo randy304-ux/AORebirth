@@ -1,0 +1,35 @@
+{
+  "Notes": "Scarlett Dalquist — DOJA chip turn-in, Jobe Research Lab R1 (PF 4001). Right-click chip assigns DJ**; she takes the chip and completes.",
+  "Npcs": [ "SCAR", "ddogs-scarlett" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "ns": { "Text": "Nascense chip.", "If": [ "HasQuest DJNS", "has DJNS" ], "Goto": "ns" },
+    "el": { "Text": "Elysium chip.", "If": [ "HasQuest DJEL", "has DJEL" ], "Goto": "el" },
+    "sc": { "Text": "Scheol chip.", "If": [ "HasQuest DJSC", "has DJSC" ], "Goto": "sc" },
+    "ad": { "Text": "Adonis chip.", "If": [ "HasQuest DJAD", "has DJAD" ], "Goto": "ad" },
+    "pn": { "Text": "Penumbra chip.", "If": [ "HasQuest DJPN", "has DJPN" ], "Goto": "pn" },
+    "inf": { "Text": "Inferno chip.", "If": [ "HasQuest DJIN", "has DJIN" ], "Goto": "inf" },
+    "aa": { "Text": "Alappaa chip.", "If": [ "HasQuest DJAA", "has DJAA" ], "Goto": "aa" },
+    "ab": { "Text": "Albtraum chip.", "If": [ "HasQuest DJAB", "has DJAB" ], "Goto": "ab" },
+    "pd": { "Text": "Pandemonium chip.", "If": [ "HasQuest DJPD", "has DJPD" ], "Goto": "pd" },
+    "dr": { "Text": "Dark Ruins chip.", "If": [ "HasQuest DJDR", "has DJDR" ], "Goto": "dr" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Scarlett Dalquist, Jobe Research. Hand me a DOJA chip when you have a return mission loaded. Shared eighteen-hour lock-out — Dark Ruins is separate.",
+      "Replies": [ "ns", "el", "sc", "ad", "pn", "inf", "aa", "ab", "pd", "dr", "bye" ]
+    },
+    "ns": { "Text": "Nascense sample logged. Good work.{take DJNS}{completequest DJNS}", "Replies": [ "bye" ] },
+    "el": { "Text": "Elysium sample logged.{take DJEL}{completequest DJEL}", "Replies": [ "bye" ] },
+    "sc": { "Text": "Scheol sample logged.{take DJSC}{completequest DJSC}", "Replies": [ "bye" ] },
+    "ad": { "Text": "Adonis sample logged.{take DJAD}{completequest DJAD}", "Replies": [ "bye" ] },
+    "pn": { "Text": "Penumbra sample logged.{take DJPN}{completequest DJPN}", "Replies": [ "bye" ] },
+    "inf": { "Text": "Inferno sample logged.{take DJIN}{completequest DJIN}", "Replies": [ "bye" ] },
+    "aa": { "Text": "Alappaa sample logged.{take DJAA}{completequest DJAA}", "Replies": [ "bye" ] },
+    "ab": { "Text": "Albtraum sample logged.{take DJAB}{completequest DJAB}", "Replies": [ "bye" ] },
+    "pd": { "Text": "Pandemonium sample logged.{take DJPD}{completequest DJPD}", "Replies": [ "bye" ] },
+    "dr": { "Text": "Dark Ruins sample logged.{take DJDR}{completequest DJDR}", "Replies": [ "bye" ] },
+    "bye": { "Text": "{close}" }
+  }
+}

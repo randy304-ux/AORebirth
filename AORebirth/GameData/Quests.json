@@ -1231,7 +1231,7 @@
         "Name":  "Kill 10 Swift Silvertails",
         "QasInstance":  920035,
         "Scope":  "Solo",
-        "Action":  "KillMultiple",
+        "Action":  "FindItem",
         "Summary":  "Kill 10 Swift Silvertails",
         "Objective":  {
                           "Count":  10,
@@ -1254,7 +1254,7 @@
         "Name":  "Kill 10 Barking Chimeras",
         "QasInstance":  920036,
         "Scope":  "Solo",
-        "Action":  "KillMultiple",
+        "Action":  "FindItem",
         "Summary":  "Kill 10 Barking Chimeras",
         "Objective":  {
                           "Count":  10,
@@ -1277,7 +1277,7 @@
         "Name":  "Return to Joshua Falker",
         "QasInstance":  920037,
         "Scope":  "Solo",
-        "Action":  "TargetNpc",
+        "Action":  "FindItem",
         "Summary":  "Return to Joshua Falker",
         "Objective":  {
                           "Count":  null,
@@ -4359,6 +4359,875 @@
                                  },
                        "Hash":  "RKTC",
                        "Records":  null
+                   }
+    },
+    {
+        "Hash":  "AG01",
+        "Name":  "Agency: Cull the Leets",
+        "QasInstance":  940001,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 10 Leets for Freelancers Inc.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "LE01",
+                          "Count":  10
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  1500,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AG02",
+        "Name":  "Agency: Rogue Notum Sweep",
+        "QasInstance":  940002,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 5 Rogue Notum Miners.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "RGNM",
+                          "Count":  5
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  4000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AG03",
+        "Name":  "Agency: Overseer Hunt",
+        "QasInstance":  940003,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Tentaclemutant Overseers.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "BT01",
+                          "Count":  3
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  8000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AG04",
+        "Name":  "Agency: Modified Threat",
+        "QasInstance":  940004,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Destroy a Clan Modified A-4000.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "CLMO",
+                          "Count":  1
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  12000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  25
+                                 }
+                   }
+    },
+    {
+        "Hash":  "AG05",
+        "Name":  "Agency: High-Band Sweep",
+        "QasInstance":  940005,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 5 Tentaclemutant Overseers (high band).",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "BT01",
+                          "Count":  5
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  20000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  3
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  50
+                                 }
+                   }
+    },
+    {
+        "Hash":  "AE01",
+        "Name":  "Elite Agency: Pumpkinhead Cull",
+        "QasInstance":  940011,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 3 Uncle Pumpkin-Heads.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "UPH1",
+                          "Count":  3
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  10000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  25
+                                 }
+                   }
+    },
+    {
+        "Hash":  "AE02",
+        "Name":  "Elite Agency: Ganking Pumpkinhead",
+        "QasInstance":  940012,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill a Ganking Uncle Pumpkin-Head.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "GNKP",
+                          "Count":  1
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  20000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  3
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  50
+                                 }
+                   }
+    },
+    {
+        "Hash":  "AE03",
+        "Name":  "Elite Agency: Griefing Pumpkinhead",
+        "QasInstance":  940013,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill a Griefing Uncle Pumpkin-Head.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "GRPH",
+                          "Count":  1
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  30000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  3
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  75
+                                 }
+                   }
+    },
+    {
+        "Hash":  "DJNS",
+        "Name":  "Return DOJA Chip (Nascense)",
+        "QasInstance":  941001,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Nascense DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  5000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DJEL",
+        "Name":  "Return DOJA Chip (Elysium)",
+        "QasInstance":  941002,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Elysium DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  8000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DJSC",
+        "Name":  "Return DOJA Chip (Scheol)",
+        "QasInstance":  941003,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Scheol DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  12000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DJAD",
+        "Name":  "Return DOJA Chip (Adonis)",
+        "QasInstance":  941004,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Adonis DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  16000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "DJPN",
+        "Name":  "Return DOJA Chip (Penumbra)",
+        "QasInstance":  941005,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Penumbra DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  20000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  25
+                                 }
+                   }
+    },
+    {
+        "Hash":  "DJIN",
+        "Name":  "Return DOJA Chip (Inferno)",
+        "QasInstance":  941006,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Inferno DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  25000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  3
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  50
+                                 }
+                   }
+    },
+    {
+        "Hash":  "DJAA",
+        "Name":  "Return Special DOJA (Alappaa)",
+        "QasInstance":  941007,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Alappaa DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  22000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  40
+                                 }
+                   }
+    },
+    {
+        "Hash":  "DJAB",
+        "Name":  "Return Special DOJA (Albtraum)",
+        "QasInstance":  941008,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Albtraum DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  24000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  50
+                                 }
+                   }
+    },
+    {
+        "Hash":  "DJPD",
+        "Name":  "Return Special DOJA (Pandemonium)",
+        "QasInstance":  941009,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Pandemonium DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  30000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  3
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  75
+                                 }
+                   }
+    },
+    {
+        "Hash":  "DJDR",
+        "Name":  "Return Special DOJA (Dark Ruins)",
+        "QasInstance":  941010,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Take the Dark Ruins DOJA chip to Scarlett Dalquist.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "SCAR",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  15000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  25
+                                 }
+                   }
+    },
+    {
+        "Hash":  "PVTA",
+        "Name":  "Slay Tarasque",
+        "QasInstance":  942002,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill Tarasque near Camelot Castle in Avalon.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "TARA",
+                          "Count":  1
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  50000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  3
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  100
+                                 }
+                   }
+    },
+    {
+        "Hash":  "PVBS",
+        "Name":  "Battlestation Tip (UBSL)",
+        "QasInstance":  942001,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Fight in the Battle Station until either side reaches 425 points. Completes automatically in-match.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "PVBS",
+                          "Count":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  50000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  3
+                                           }
+                                       ]
+                                   ],
+                       "Stats":  {
+                                     "669":  100
+                                 }
+                   }
+    },
+    {
+        "Hash":  "AIWP",
+        "Name":  "We Come in Peace...",
+        "QasInstance":  943001,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 10 Alien Spiders - Zix near the ICC crash site.",
+        "Objective":  {
+                          "Npc":  "HX1V",
+                          "Count":  10,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  5000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "AlienXpPercent":  5,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AIBG",
+        "Name":  "Bugs",
+        "QasInstance":  943002,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 20 Alien Spiders - Zix (Serenity / Zix stand-in).",
+        "Objective":  {
+                          "Npc":  "ZIXI",
+                          "Count":  20,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  8000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "AlienXpPercent":  8,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  1
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AILP",
+        "Name":  "...And you will leave in pieces",
+        "QasInstance":  943003,
+        "Scope":  "Solo",
+        "Action":  "KillOne",
+        "Summary":  "Kill the deep-ship Zix (cocoon source stand-in).",
+        "Objective":  {
+                          "Npc":  "ZIXK",
+                          "Count":  null,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  10000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "AlienXpPercent":  10,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AICC",
+        "Name":  "Terminate the Alien Cocoons",
+        "QasInstance":  943004,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill 10 Alien Spiders - Zix (cocoon stand-in).",
+        "Objective":  {
+                          "Npc":  "HX1V",
+                          "Count":  10,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  12000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "AlienXpPercent":  12,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  2
+                                           }
+                                       ]
+                                   ]
+                   }
+    },
+    {
+        "Hash":  "AIPD",
+        "Name":  "A-Pods",
+        "QasInstance":  943005,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Bring down 2 Pendpod Trappers (A-Pod stand-in).",
+        "Objective":  {
+                          "Npc":  "PNTP",
+                          "Count":  2,
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  20000,
+                       "Credits":  0,
+                       "Hash":  "FRTK",
+                       "AlienXpPercent":  15,
+                       "Records":  [
+                                       [
+                                           {
+                                               "Id":  303237,
+                                               "HighId":  303237,
+                                               "Name":  "Freelancers Inc. Token",
+                                               "Quality":  1,
+                                               "Count":  3
+                                           }
+                                       ]
+                                   ]
                    }
     }
 ]

@@ -1,0 +1,233 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  735,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:agency:735:receptionist",
+                     "Provenance":  "Stand-in daily NPC. Agency Receptionist",
+                     "ContentNpcIdentity":  "ddogs-agency-receptionist",
+                     "PlayfieldId":  735,
+                     "InstanceId":  2110950101,
+                     "Name":  "Agency Receptionist",
+                     "Position":  [
+                                      655,
+                                      5,
+                                      315
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  50,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40700,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  204985,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "AGRC"
+                 },
+                 {
+                     "Key":  "ddogs:agency:735:handler",
+                     "Provenance":  "Stand-in daily NPC. Agency Handler",
+                     "ContentNpcIdentity":  "ddogs-agency-handler",
+                     "PlayfieldId":  735,
+                     "InstanceId":  2110950102,
+                     "Name":  "Agency Handler",
+                     "Position":  [
+                                      660,
+                                      5,
+                                      320
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  50,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40700,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  204985,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "AGHN"
+                 },
+                 {
+                     "Key":  "ddogs:agency:735:senior",
+                     "Provenance":  "Stand-in daily NPC. Senior Agency Handler",
+                     "ContentNpcIdentity":  "ddogs-agency-senior",
+                     "PlayfieldId":  735,
+                     "InstanceId":  2110950103,
+                     "Name":  "Senior Agency Handler",
+                     "Position":  [
+                                      665,
+                                      5,
+                                      315
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  50,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40700,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  204985,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "AGSR"
+                 },
+                 {
+                     "Key":  "ddogs:agency:735:alien",
+                     "Provenance":  "Stand-in daily NPC. Alien Agency Handler",
+                     "ContentNpcIdentity":  "ddogs-agency-alien",
+                     "PlayfieldId":  735,
+                     "InstanceId":  2110950104,
+                     "Name":  "Alien Agency Handler",
+                     "Position":  [
+                                      670,
+                                      5,
+                                      320
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  50,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40700,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  204985,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "AGAX"
+                 }
+             ],
+    "StandaloneShops":  [
+
+                        ]
+}
