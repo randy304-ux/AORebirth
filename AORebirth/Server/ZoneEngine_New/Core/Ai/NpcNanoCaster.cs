@@ -169,9 +169,10 @@ namespace ZoneEngine_New.Core.Ai
                 return NanoRuntime.CanStartCast(Npc, spell, Npc, nowUtc) ? Npc : null;
             }
 
-            // Heals never use the fight target — doctor merc nanos carry ApplyOnFightingTarget / can be
-            // flagged IsHostile while still raising Health, which would out-heal the player's damage on the mob.
-            if (spell.IsHostile && !IsHeal(spell))
+            // Offensive nanos (damage, drains that hurt the cast target, hostile debuffs) → fight target only.
+            // Support nanos (heals/HoTs/buffs, and hostile-flagged programs that still heal/buff the recipient
+            // such as Shade's Caress AddDefProc(Heal)) never use the fight target.
+            if (NpcSupportRules.IsOffensiveNano(Npc, spell))
             {
                 Character? enemy = Npc.FightingTarget.Instance != 0 ? _brain.ResolveCurrentTarget() : null;
                 if (enemy == null || !InRange(spell, enemy, NpcAiRules.NearbyRange) || HasNano(enemy, spell))
@@ -182,14 +183,19 @@ namespace ZoneEngine_New.Core.Ai
                 return enemy;
             }
 
-            // Heals, including heal-over-time buffs, only go on someone who is actually hurt.
-            // The caster looks after itself first; only then does it help a neighbour.
+            // Everything else is support-aimed (explicit support nano, heal, buff, or non-hostile utility).
+            if (!NpcSupportRules.IsSupportNano(Npc, spell)
+                && !IsHeal(spell)
+                && !IsBuffLike(spell)
+                && spell.IsHostile)
+                return null;
+
+            // Support buffs that are not heals: self first, then a random allow-listed ally.
             if (IsBuffLike(spell) && !IsHeal(spell))
             {
                 if (!HasNano(Npc, spell) && NanoRuntime.CanStartCast(Npc, spell, Npc, nowUtc))
                     return Npc;
 
-                // Random pick among supportable allies that can take it.
                 Character? chosen = null;
                 int eligible = 0;
                 foreach (Character candidate in FriendlyCandidates(spell))
