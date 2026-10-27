@@ -5061,173 +5061,72 @@
                    }
     },
     {
-        "Hash":  "AIWP",
-        "Name":  "We Come in Peace...",
-        "QasInstance":  943001,
-        "Scope":  "Solo",
-        "Action":  "KillMultiple",
-        "Summary":  "Kill 10 Alien Spiders - Zix near the ICC crash site.",
-        "Objective":  {
-                          "Npc":  "HX1V",
-                          "Count":  10,
-                          "SpecItem":  null,
-                          "WorldItem":  null
-                      },
-        "Flags":  "NoCash",
-        "MissionBit":  null,
-        "NextStep":  null,
-        "Reward":  {
-                       "Xp":  5000,
-                       "Credits":  0,
-                       "Hash":  "FRTK",
-                       "AlienXpPercent":  5,
-                       "Records":  [
-                                       [
-                                           {
-                                               "Id":  303237,
-                                               "HighId":  303237,
-                                               "Name":  "Freelancers Inc. Token",
-                                               "Quality":  1,
-                                               "Count":  1
-                                           }
-                                       ]
-                                   ]
-                   }
-    },
-    {
-        "Hash":  "AIBG",
-        "Name":  "Bugs",
-        "QasInstance":  943002,
-        "Scope":  "Solo",
-        "Action":  "KillMultiple",
-        "Summary":  "Kill 20 Alien Spiders - Zix (Serenity / Zix stand-in).",
-        "Objective":  {
-                          "Npc":  "ZIXI",
-                          "Count":  20,
-                          "SpecItem":  null,
-                          "WorldItem":  null
-                      },
-        "Flags":  "NoCash",
-        "MissionBit":  null,
-        "NextStep":  null,
-        "Reward":  {
-                       "Xp":  8000,
-                       "Credits":  0,
-                       "Hash":  "FRTK",
-                       "AlienXpPercent":  8,
-                       "Records":  [
-                                       [
-                                           {
-                                               "Id":  303237,
-                                               "HighId":  303237,
-                                               "Name":  "Freelancers Inc. Token",
-                                               "Quality":  1,
-                                               "Count":  1
-                                           }
-                                       ]
-                                   ]
-                   }
-    },
-    {
-        "Hash":  "AILP",
-        "Name":  "...And you will leave in pieces",
-        "QasInstance":  943003,
+        "Hash":  "AGRK",
+        "Name":  "Agency Handler (Rubi-Ka daily)",
+        "QasInstance":  944001,
         "Scope":  "Solo",
         "Action":  "KillOne",
-        "Summary":  "Kill the deep-ship Zix (cocoon source stand-in).",
+        "Summary":  "Agency Handler (Rubi-Ka daily) (catalog roll entry; DailyMissionService assigns the rolled contract).",
         "Objective":  {
-                          "Npc":  "ZIXK",
-                          "Count":  null,
                           "SpecItem":  null,
-                          "WorldItem":  null
+                          "WorldItem":  null,
+                          "Npc":  "LE01",
+                          "Count":  null
                       },
         "Flags":  "NoCash",
         "MissionBit":  null,
         "NextStep":  null,
         "Reward":  {
-                       "Xp":  10000,
+                       "Xp":  0,
                        "Credits":  0,
                        "Hash":  "FRTK",
-                       "AlienXpPercent":  10,
-                       "Records":  [
-                                       [
-                                           {
-                                               "Id":  303237,
-                                               "HighId":  303237,
-                                               "Name":  "Freelancers Inc. Token",
-                                               "Quality":  1,
-                                               "Count":  2
-                                           }
-                                       ]
-                                   ]
+                       "Records":  null
                    }
     },
     {
-        "Hash":  "AICC",
-        "Name":  "Terminate the Alien Cocoons",
-        "QasInstance":  943004,
+        "Hash":  "AGEL",
+        "Name":  "Senior Agency Handler (Elite daily)",
+        "QasInstance":  944002,
         "Scope":  "Solo",
-        "Action":  "KillMultiple",
-        "Summary":  "Kill 10 Alien Spiders - Zix (cocoon stand-in).",
+        "Action":  "KillOne",
+        "Summary":  "Senior Agency Handler (Elite daily) (catalog roll entry; DailyMissionService assigns the rolled contract).",
         "Objective":  {
-                          "Npc":  "HX1V",
-                          "Count":  10,
                           "SpecItem":  null,
-                          "WorldItem":  null
+                          "WorldItem":  null,
+                          "Npc":  "LE01",
+                          "Count":  null
                       },
         "Flags":  "NoCash",
         "MissionBit":  null,
         "NextStep":  null,
         "Reward":  {
-                       "Xp":  12000,
+                       "Xp":  0,
                        "Credits":  0,
                        "Hash":  "FRTK",
-                       "AlienXpPercent":  12,
-                       "Records":  [
-                                       [
-                                           {
-                                               "Id":  303237,
-                                               "HighId":  303237,
-                                               "Name":  "Freelancers Inc. Token",
-                                               "Quality":  1,
-                                               "Count":  2
-                                           }
-                                       ]
-                                   ]
+                       "Records":  null
                    }
     },
     {
-        "Hash":  "AIPD",
-        "Name":  "A-Pods",
-        "QasInstance":  943005,
+        "Hash":  "AGAX",
+        "Name":  "Alien Agency Handler (AXP daily)",
+        "QasInstance":  944003,
         "Scope":  "Solo",
-        "Action":  "KillMultiple",
-        "Summary":  "Bring down 2 Pendpod Trappers (A-Pod stand-in).",
+        "Action":  "KillOne",
+        "Summary":  "Alien Agency Handler (AXP daily) (catalog roll entry; DailyMissionService assigns the rolled contract).",
         "Objective":  {
-                          "Npc":  "PNTP",
-                          "Count":  2,
                           "SpecItem":  null,
-                          "WorldItem":  null
+                          "WorldItem":  null,
+                          "Npc":  "LE01",
+                          "Count":  null
                       },
         "Flags":  "NoCash",
         "MissionBit":  null,
         "NextStep":  null,
         "Reward":  {
-                       "Xp":  20000,
+                       "Xp":  0,
                        "Credits":  0,
                        "Hash":  "FRTK",
-                       "AlienXpPercent":  15,
-                       "Records":  [
-                                       [
-                                           {
-                                               "Id":  303237,
-                                               "HighId":  303237,
-                                               "Name":  "Freelancers Inc. Token",
-                                               "Quality":  1,
-                                               "Count":  3
-                                           }
-                                       ]
-                                   ]
+                       "Records":  null
                    }
     }
 ]
