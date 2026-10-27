@@ -348,51 +348,53 @@ namespace ZoneEngine_New.Core.Pets
         // Tier lists are cumulative; NanoCastQuality (gear QL) interpolates two-id QL pairs.
         static int[] ProfessionNanoBasic(string key) => key switch
         {
-            // Reflect / AMS-line stand-ins + Total Focus + AR specials + taunt. (AMS Matrix Sphere not in items.dat.)
+            // Team Reflective Field + Damage Shield + Total Focus + specials/taunt.
             "soldier" => [82208, 82209, 82211, 82215, 227152, 70312, 70254, 29255],
-            // Taunt / Mongo / self absorb + low Essence HP.
+            // Taunt / Mongo / self absorb + low Essence HP. (No classic team buff line.)
             "enforcer" => [82210, 211753, 261239, 227152, 100195, 75412, 95707],
-            // Big/team heal + HoT + max-HP starters; DoTs arrive elite+.
-            "doctor" => [26465, 26466, 42405, 28651, 42399, 28658],
+            // Big/team heal + HoT + team HP (Enlarge / Iron Circle).
+            "doctor" => [26465, 26466, 42405, 28651, 42399, 28658, 42400],
             // Heals / HoT / damage shield + specials.
             "adventurer" => [82208, 82215, 26465, 26466, 28651, 70254],
             // Aimed shot / crit starter + False Profession (Soldier).
             "agent" => [82215, 129082, 82208, 81856, 32038],
-            // Calm + init debuff + robot-policy / pet starters.
-            "bureaucrat" => [267538, 279340, 267603, 100442, 26707],
-            // Armor/reflect starter + blind + low robot pet.
-            "engineer" => [266309, 267606, 83954, 154970],
+            // Calm + XP buff (Wit of the Atrox) + robot-policy / pet starters.
+            "bureaucrat" => [267538, 279340, 267603, 100442, 26707, 252506],
+            // Team armor (Sympathetic Armor Boost) + blind + low robot pet.
+            "engineer" => [266309, 267606, 83954, 154970, 154567],
             // NCU + HoT + team Grid + evade/snare starters + specials.
             "fixer" => [162994, 162714, 162582, 43370, 56226, 82208, 82211],
-            // Heal aura + Courage + cover blow.
-            "keeper" => [279378, 266301, 301471],
+            // Heal/nano/damage auras (Ambient / Tone / Vengeance) + Courage. Live aura lockout → one heal/nano slot.
+            "keeper" => [279378, 266301, 210530, 210591, 210611],
             // Self heal + special attacks.
             "martialartist" => [82210, 82213, 82214, 26465],
-            // Team nano-skill buff + scourges.
-            "metaphysicist" => [267275, 267272, 266299, 29299, 29301],
-            // Nuke + Nullity + low Enfraam shield.
-            "nanotechnician" => [28619, 150501, 266302, 150630],
+            // Team nano-skill buffs (Mochams / Composite Nano) + scourges.
+            "metaphysicist" => [267275, 267272, 266299, 29299, 29301, 223380],
+            // Nuke + Nullity + team nano HoT + NCU shelter. (Classic nano-cost line not in items.dat.)
+            "nanotechnician" => [28619, 150501, 266302, 150630, 43833, 263265],
             // Drain heal-self (Caress elite+) + sneak / specials. (Spirit procs not in items.dat.)
             "shade" => [129082, 82214, 82213, 230467],
-            // Weak skill/AC drains + wrangle/heal starters.
+            // Weak skill/AC drains + team wrangle starters (owner/team).
             "trader" => [301533, 301525, 280050, 121218, 121505, 91139],
             _ => []
         };
 
         static int[] ProfessionNanoElite(string key) => key switch
         {
+            // Team Reactive Reflect + Aggression Multiplier (team damage).
             "soldier" => [266310, 267624, 301897, 70314, 83919],
             "enforcer" => [266304, 279347, 287753, 75407, 95702, 29652],
-            "doctor" => [28665, 28676, 266303, 267649, 279372, 42052, 28669, 95707],
+            // Heal-delta (Instinctive Control) + heals/DoTs.
+            "doctor" => [28665, 28676, 266303, 267649, 279372, 28669, 95707],
             "adventurer" => [28665, 266306, 301835, 302223, 222824, 85054],
             "agent" => [266307, 82211, 275007],
             "bureaucrat" => [267535, 267604, 267611, 266305, 259367],
             "engineer" => [267607, 302254, 83960, 154976],
             "fixer" => [163005, 162732, 85234, 162586, 162486, 56221, 266308, 279374, 279376],
-            "keeper" => [301153, 216603],
+            "keeper" => [301153, 216603, 210532, 210593, 210613],
             "martialartist" => [266311, 287559, 279345, 28665],
             "metaphysicist" => [267269, 267271, 267598, 29300, 29302, 154980],
-            "nanotechnician" => [266298, 266293, 266292, 150502, 150628],
+            "nanotechnician" => [266298, 266293, 266292, 150502, 150628, 43905, 301610],
             "shade" => [266300],
             "trader" => [301529, 301521, 266312, 301899, 121228, 121497, 91133],
             _ => []
@@ -402,16 +404,16 @@ namespace ZoneEngine_New.Core.Pets
         {
             "soldier" => [302395, 70324, 70251, 270806],
             "enforcer" => [301853, 75403, 95708],
-            "doctor" => [28650, 267620, 301845, 222824, 43868, 43873, 95708],
+            "doctor" => [28650, 267620, 301845, 222824, 43868, 43873, 95708, 270349],
             "adventurer" => [28676, 302235, 302229, 302217, 70251, 85052],
             "agent" => [301838],
             "bureaucrat" => [267605, 267311, 222687, 267612],
             "engineer" => [267608, 274369, 154974],
             "fixer" => [163012, 162734, 85227, 162587, 162488, 82502, 274373, 301861, 301859],
-            "keeper" => [301602, 280496],
+            "keeper" => [301602, 280496, 210534, 210595, 210617],
             "martialartist" => [301936, 301493],
             "metaphysicist" => [267600, 267601, 267599, 301888, 29303, 29304, 154983],
-            "nanotechnician" => [266297, 266296, 266294, 302274, 150621],
+            "nanotechnician" => [266297, 266296, 266294, 302274, 150621, 43811],
             "shade" => [301593],
             "trader" => [267121, 267264, 267114, 121219, 121500, 91125],
             _ => []
@@ -421,13 +423,13 @@ namespace ZoneEngine_New.Core.Pets
         {
             "soldier" => [302399, 233020],
             "enforcer" => [301291, 75401, 273629],
-            "doctor" => [267623, 267621, 222856, 273629],
+            "doctor" => [267623, 267621, 222856, 273629, 273315],
             "adventurer" => [28650, 302243, 217672],
             "agent" => [82209],
             "bureaucrat" => [267616, 267916, 302247, 302154, 267917],
             "engineer" => [301855, 154972],
             "fixer" => [163057, 270352, 273352, 162588, 273355, 56219, 302412, 301867],
-            "keeper" => [301117],
+            "keeper" => [301117, 210528, 210589, 210621],
             "martialartist" => [100195, 225615],
             "metaphysicist" => [267609, 267617, 302257, 300506, 267281, 267283, 154981],
             "nanotechnician" => [218168, 266287, 302074, 266289],
