@@ -1,6 +1,6 @@
 # DEPRECATED: prefer Build-MothershipBioLoot.ps1.
-# Kept so old docs still run something safe: adds VP clumps (KVCL) after crew KZBM Chance 10
-# instead of the old numbered KBTY Chance 3 (removed — Generals only via KBMG on ALGT).
+# Adds VP clumps (KVCL Chance 90) after crew KZBM Chance 10.
+# Weighted tier mix lives on the KVCL item group (50% Cell / ~16.7% each higher tier).
 $ErrorActionPreference = 'Stop'
 $path = Join-Path $PSScriptRoot '..\..\AORebirth\GameData\NpcTemplates.json' | Resolve-Path
 $u = New-Object Text.UTF8Encoding $false
@@ -23,7 +23,7 @@ $insert = @'
                                             {
                                                 "Hash":  "KVCL",
                                                 "Repeats":  1,
-                                                "Chance":  15,
+                                                "Chance":  90,
                                                 "LevelMod":  20
                                             }
 '@
@@ -48,4 +48,4 @@ while ($true) {
   $idx = $at + $needle.Length
 }
 [IO.File]::WriteAllText($path, $sb.ToString(), $u)
-Write-Output ("crew KVCL Chance=15 added on $count KZBM Chance=10 loot rows (use Build-MothershipBioLoot.ps1 for full setup)")
+Write-Output ("crew KVCL Chance=90 added on $count KZBM Chance=10 loot rows (use Build-MothershipBioLoot.ps1 for full setup)")

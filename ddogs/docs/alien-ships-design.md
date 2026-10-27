@@ -1,6 +1,6 @@
 # Alien mothership missions vs alien city-raid ships
 
-Research date: 2026-10-26. Local implementation covers **drop rules only** for Unicorn Recruiter **team** mothership missions (ZXTE / ZXT1 / ZXTH → ALGT). Layout / Admiral / boarding behavior changes stay proposed below for Randy’s approval.
+Research date: 2026-10-26 (addendum same day). Drop rules for Unicorn Recruiter **team** motherships (ZXTE / ZXT1 / ZXTH → **ALMS**). City invasions keep **ALGT**. Layout / Admiral / LE-form spawn work stays proposed for Randy’s approval.
 
 ## Sources
 
@@ -9,12 +9,13 @@ Research date: 2026-10-26. Local implementation covers **drop rules only** for U
 | LE team mothership missions | https://www.ao-universe.com/guides/lost-eden/encounter-guides/high-level-encounter/le-missions---alien-motherships |
 | Alien hierarchy (General vs Fleet Admiral) | https://www.ao-universe.com/guides/alien-invasion/gameplay-guides-3/alien-hierarchy |
 | City / org alien raids (boarding ship) | https://www.ao-universe.com/guides/alien-invasion/gameplay-guides-3/alien-raiding-in-your-city |
+| Kyr’ozch morphology (mothership forms) | https://wiki.aodb.us/wiki/Kyr%27ozch |
+| Lost Eden Q&A (team mothership ACG) | https://wiki.aodb.us/wiki/Lost_Eden_Q%26A_2 |
 | Ofab armor bio types | https://www.ao-universe.com/guides/lost-eden/tradeskill-guides/armor/upgrading-ofab-armor |
 | AI weapon bio types (analyzer) | https://www.ao-universe.com/guides/alien-invasion/tradeskill-guides-3/weapon-2/upgrading-alien-weapons |
-| Alien loot distribution | https://www.ao-universe.com/guides/alien-invasion/gameplay-guides-3/alien-loot-distribution |
-| Local notes (prior pass) | `ddogs/docs/alien-ships-notes.md`, `ddogs/docs/city-raids-design.md` |
+| Local notes | `ddogs/docs/alien-ships-notes.md`, `ddogs/docs/city-raids-design.md` |
 
-Auno item pages returned 403 from this environment; item IDs and OnUse Hit 669 amounts were verified from the client **items.dat** via `tools-temp/itemdump`.
+Auno item pages returned 403 here; item IDs / OnUse Hit 669 verified from client **items.dat** (`tools-temp/itemdump`).
 
 ---
 
@@ -22,90 +23,107 @@ Auno item pages returned 403 from this environment; item IDs and OnUse Hit 669 a
 
 ### A) Lost Eden mothership missions (Unicorn Recruiter)
 
-- **Entry:** Unicorn Outpost (Andromeda ~3124×905). Speak to the **Unicorn Recruiter** while **teamed**. Easy / Medium / Hard. Shuttle west/NW of the outpost gate.
-- **Purpose:** AXP alternative; no level lock; no mission-count lock.
-- **Layout / bosses:** Two room styles — **Master of X** (healing towers, nuke markers, Mind Warp /disco, Nanovoid drains, etc.) or **cocoon room** (attendant + Cocoon Accelerator with the good loot). New LE alien forms (Esox, Cornuta, Dasyatis, Cyathus, Oneirides).
-- **Boss name:** Guides call these mothership mission bosses “Master of …” / Cocoon Accelerator — **not** the city-raid Fleet Admiral.
-- **Loot (AO-U + Randy rules):**
-  - **VP clumps** (NODROP, right-click → Victory Points / stat **669**): Cell Templates, Plasmid Cultures, Mitochondria Samples, Protein Mapping Data. Higher QL → more VP (items.dat bakes the amount).
-  - **Numbered Kyr’Ozch Bio-Material** for LE/Ofab upgrades from **bosses** (AO-U lists Types 18, 34, 64, 295, 328, 468, 687, 812, 935). Randy: trash does **not** drop numbered types; Generals drop **2–4**; trash + General also drop VP clumps (General **5**).
-  - Mission completion: Omni-Tek / Clan **mission token**.
+- **Entry:** Unicorn Outpost (Andromeda ~3124×905). **Unicorn Recruiter**, must be **teamed**. Easy / Medium / Hard. Shuttle west/NW of the gate.
+- **Purpose:** AXP without an org city raid; no level lock; no mission-count lock ([LE Q&A](https://wiki.aodb.us/wiki/Lost_Eden_Q%26A_2)).
+- **Layout / bosses:** **Master of X** rooms (healing towers, nuke markers, Mind Warp /disco, Nanovoid drains) or **cocoon room** (attendant + **Cocoon Accelerator**).
+- **Boss name:** Master of … / Cocoon Accelerator — **not** the city-raid Fleet Admiral.
+- **Loot:** VP clumps + Ofab/LE typed bios from the mothership General; mission tokens on complete.
 
-### B) Alien Invasion city raid → boarded mothership
+### B) Alien Invasion city raid → boarded ship
 
-- **Entry:** Org city cloak off → waves → outdoor **General** (`…'Khaz`) → boarding lottery (4–18 players, up to 6 ship instances) if defense succeeds.
-- **Layout:** Work to the boss room before the pilot/technician timer orbits the ship. Two retail boss rooms: **mini-boss ladder → Fleet Admiral** (`…'Khazoh`), or **cocoons → Recruitment Director**.
-- **Loot:** Class-keyed **Lead Viralbots** on Generals; **Kyr’Ozch Viralbots**, pristine/mutated bio, typed AI weapon bios, AI armor path — the classic AI raid pool. **Not** the LE VP-clump / Ofab-type pool as the primary reward. Hierarchy guide: https://www.ao-universe.com/guides/alien-invasion/gameplay-guides-3/alien-hierarchy
+- **Entry:** Org city cloak off → waves → outdoor **General** (`…'Khaz`) → boarding lottery → ship instance.
+- **Layout:** Pilot/technician timer; mini-boss ladder → **Fleet Admiral** (`…'Khazoh`), or cocoons → **Recruitment Director**.
+- **Loot:** Lead Viralbots / Kyr’Ozch Viralbots / AI armor path — **not** the LE VP-clump / Ofab-type pool.
 
-**Admiral appears** on the **city-raid boarded ship** after the mini-boss chain (or Recruitment Director in the cocoon room). LE Unicorn Recruiter missions use Master/Cocoon bosses instead.
+Randy confirmed these are **completely different** systems (addendum 2026-10-26).
 
 ---
 
-## GENERAL vs ADMIRAL loot pools (summary)
+## Mothership-only alien types (LE)
+
+AO-Universe “The New Aliens” and [AOWiki Kyr’ozch](https://wiki.aodb.us/wiki/Kyr%27ozch) list forms that appear on the **mothership**, not in classic city-raid hierarchy (Scout/Guard/… Uri/Sinuh/Heru/Nakthi):
+
+| Form | Retail notes | In our DB? |
+| --- | --- | --- |
+| **Esox** | Pike-like; mothership; still uses AI classes (e.g. Cha, Jaax, Rimah) | **No** `NpcTemplates` / `MonsterData` name. Client **items.dat** has Esox-* animation / equip strings (e.g. 263520–263540). |
+| **Cornuta** | C-clamp fish; mothership | **No** NPC template. items.dat has Cornuta_* anims (264043+). |
+| **Dasyatis** | Manta-like nuker; **mothership only** (AOWiki) | **No** NPC template. |
+| **Cyathus** | Hard hitters; mothership | **No** NPC template. items.dat has Cyathus_* / CyathusCha_* anims (263541+). |
+| **Oneirides** / **Oneirodes** | Tentacled nano casters only; mothership | **No** NPC template (AO-U spelling Oneirides; wiki Oneirodes). |
+| **Nanovoid** (adds) | Master of Silence companions; nano drain; fast respawn | **No** NPC template. |
+| **Masters / Cocoon Accelerator** | LE mission bosses | **No** dedicated hashes; we use **ALMS** “Alien General” + ALHT towers only. |
+
+**Present today (AI / Arete ship crew, not LE forms):** KSAU, KGRU, KCIU, KGXH, ACFJ, CRDY, ALGN, ALGT, ZIXK, ALHT. Team mothership RegularNpcHashes are still those hierarchy crew hashes.
+
+**Client evidence without NPC rows:** animation item names prove LE meshes/anims shipped; we have not authored mothership-only NPC hashes yet. Spawning Esox/etc. is a **proposed next step**, not done.
+
+---
+
+## Loot pools in code (kept separate)
+
+| Pool hash | Used by | Drops |
+| --- | --- | --- |
+| **ALMS** | ZXTE / ZXT1 / ZXTH `ObjectiveNpcHash` | **KBMG** 2–4 (mothership numbered bios) + **KVCL** ×5 (VP clumps) + shared weapon/armor extras |
+| **ALGT** | `Invasions.json` city-wave boss; AI raid table | **KBTY** ×2 (AI weapon-special bios) + KZTW / KZPM / KAAR — **no** KBMG / KVCL |
+| **ALGN** | Solo ship boss | Pre-raid General table (no mothership VP/Ofab pool) |
+| Crew + `KZBM` 10% | Shared ship crew (incl. team RegularNpcHashes) | **KVCL** Chance **90** (one VP bio); numbered types **not** on trash |
+
+Trash tier mix when a VP bio drops (`KVCL` Children, uniform pick with Cell tripled):
+
+- **50%** Cell Templates (`KVPC` ×3)
+- **~16.7%** Plasmid Cultures (`KVPP`)
+- **~16.7%** Mitochondria Samples (`KVPM`)
+- **~16.7%** Protein Mapping Data (`KVPR`)
+
+Script: `ddogs/tools/Build-MothershipBioLoot.ps1`.
+
+Admiral / city-General viralbot pools are **not** wired to KBMG/KVCL.
+
+---
+
+## GENERAL vs ADMIRAL (retail summary)
 
 | Pool | Who | Typical drops | Sources |
 | --- | --- | --- | --- |
-| **City General** (`Khaz`) | Outdoor city-raid boss | Class Lead Viralbots (Arithmetic/Enduring/…), Solid Clumps / analyzer-typed AI weapon bios, AI armor ingredients | AO-U hierarchy + armor/weapon guides; `city-raids-design.md` |
-| **Fleet Admiral** (`Khazoh`) | City-raid ship final boss (mini-boss room) | Ship-boss AI loot (viralbots, high-end AI mats) — **different** from LE mothership VP/Ofab typed list | AO-U city raiding + hierarchy |
-| **LE mothership “General” (our ALGT)** | Team ZXTE/ZXT1/ZXTH objective | **5× VP clumps** + **2–4×** numbered bios (weapon 1/2/3/4/5/12/13/18/34 + Ofab 64/295/468/687/812/935 + 328) | Randy 2026-10-26; AO-U LE motherships |
-| **LE mothership trash** | Crew on team ships | **VP clumps** (not numbered typed bios) | Randy 2026-10-26 |
-
-Randy’s uploaded notes mixed “right-click → VP” onto Ofab **upgrade** type names (18/34/687/812). items.dat shows those typed bios have **no** OnUse Hit 669; only Cell/Plasmid/Mito/Protein do. Implementation follows Randy’s explicit rules 1–3 and items.dat, not that conflation.
+| City General (`Khaz`) | Outdoor city boss | Class Lead Viralbots, AI clumps / typed weapon bios | AO-U hierarchy + armor guides |
+| Fleet Admiral (`Khazoh`) | City-raid ship final (after mini-bosses) | AI ship-boss loot | AO-U city raiding + hierarchy |
+| LE mothership General (**ALMS**) | Unicorn Recruiter team objective | 5× VP clumps + 2–4× KBMG | Randy; AO-U LE motherships |
+| LE mothership trash | Crew | 90% one VP bio; tier mix above | Randy addendum |
 
 ---
 
 ## Verified item IDs (items.dat)
 
-### VP clumps (OnUse Hit 669 + “Victory points collected”)
+### VP clumps (OnUse Hit 669)
 
-| Name | AOIDs (QL band) | items.dat VP at endpoints |
+| Name | AOIDs | VP at endpoints |
 | --- | --- | --- |
 | Plasmid Cultures | 266354 / 266355 | 4 → 20 |
 | Mitochondria Samples | 266356 / 266357 | 4 → 20 |
 | Protein Mapping Data | 266358 / 266359 | 4 → 40 |
 | Cell Templates | 266363 / 266361 (loot pair); also 266360, 266364 | 4 → 8 |
 
-Flags/Can in the dump lack `Can.Use` / `Consume`; runtime conversion is `VictoryPointClumps` → ExecuteOnUseSpells (Hit **669**) → DestroyOne.
+Runtime: `VictoryPointClumps` (no `Can.Use` on dump) → Hit **669** → DestroyOne.
 
-### Numbered bios (General / KBMG)
+### Numbered bios (`KBMG`)
 
-| Type | AOIDs | Role |
-| --- | --- | --- |
-| 1, 2, 3, 4, 5, 12, 13 | 247683–247696 pairs (existing KB01–KB07) | AI / Ofab weapon specials Randy listed |
-| 18 | 265321 / 265322 | Ofab edged/pierce |
-| 34 | 265323 / 265324 | Ofab blunt |
-| 64 | 265333 / 265334 | Ofab armor Doc/Eng/Kee/MP |
-| 295 | 265329 / 265330 | Ofab armor Adv/Enf/MA/Sol |
-| 468 | 265335 / 265336 | Ofab armor Crat/NT/Trader |
-| 687 | 265327 / 265328 | Ofab heavy ranged |
-| 812 | 265325 / 265326 | Ofab light ranged |
-| 935 | 265331 / 265332 | Ofab armor Agent/Fix/Shade |
-| 328 | 266352 / 266353 | On AO-U mothership loot table; included in KBMG |
-
-All of the above **exist** in items.dat. Nothing from Randy’s numbered list was missing.
-
-Loot groups: `KVCL` (VP children), `KBMG` (mothership General typed set). Script: `ddogs/tools/Build-MothershipBioLoot.ps1`.
+Types 1/2/3/4/5/12/13/18/34/64/295/328/468/687/812/935 — all present in items.dat (see prior commit notes / KB01–KB22).
 
 ---
 
-## What our code already matched
+## What matches / what is still missing
 
-- Team authored dungeons ZXTE / ZXT1 / ZXTH with objective **ALGT**; solo ships stay ALGN.
-- Crew hashes KSAU / KGRU / KCIU / KGXH (+ ACFJ / CRDY) with Solid Clumps (`KZBM` 10%).
-- ALGT raid-style extras from `Build-AlienRaidLoot.ps1` (typed weapons, pristine/mutated, bio armor) — left in place; not part of rules 1–3.
-- Team mission accept already grants VP onto the quest reward (`QuestDungeonService` / stat 669). Ofab hub spends 669.
-- Style 386 mothership playfield data exists; full LE room scripts do not.
+**Matches**
 
-## What was missing (fixed this pass)
+- Team ships → **ALMS** mothership loot; invasions → **ALGT** city/AI loot.
+- Trash VP 90% + weighted tiers; General 5 clumps + 2–4 KBMG.
+- Right-click VP (stat 669); Ofab spends 669.
+- ALHT healing towers for Master-of-Bio style fights.
 
-- Trash **KBTY 3%** from `Add-ShipCrewBioMats.ps1` / commit 793a0efe — **removed**; trash gets **KVCL** instead.
-- ALGT numbered bios were AI `KBTY`×2 only — now **KBMG** 2–4 and **KVCL×5**.
-- VP clump item groups and right-click Hit 669 path (`VictoryPointClumps`).
+**Missing (proposed — need Randy approval)**
 
-## Proposed next steps (needs Randy approval — not implemented)
-
-1. Split LE mothership **Master of X / cocoon** scripts from city-raid **Admiral / Recruitment Director** rooms (today ALGT is one General).
-2. Difficulty-scaled clump QL (Easy/Med/Hard vs puller level) per AO-U.
-3. Mission tokens on completion; LE-only alien forms.
-4. Keep city-raid Admiral loot on the AI viralbot / AI-armor path; do **not** merge KBMG/KVCL into Admiral without an explicit call.
-5. Revisit whether ALGT should keep AI raid rows (KZTW / KZPM / KAAR) once LE bosses are distinct.
+1. Author NPC templates for Esox / Cornuta / Dasyatis / Cyathus / Oneirides (+ Nanovoid adds) using client meshes/anims; put them on mothership RegularNpcHashes only.
+2. Master of X / Cocoon Accelerator scripts (distinct from city Admiral / Recruitment Director).
+3. Easy/Med/Hard clump QL vs puller level; mission tokens.
+4. Dedicated mothership-only crew hashes if shared KSAU VP rate on solo ships is unwanted.
+5. Full Admiral viralbot loot table (separate from ALMS/ALGT).

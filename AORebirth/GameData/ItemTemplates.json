@@ -96,7 +96,7 @@
     "KVPP": {"Templates": [266354,266355]},
     "KVPM": {"Templates": [266356,266357]},
     "KVPR": {"Templates": [266358,266359]},
-    "KVCL": {"Children": ["KVPC","KVPP","KVPM","KVPR"]},
+    "KVCL": {"Children": ["KVPC","KVPC","KVPC","KVPP","KVPM","KVPR"]},
     "KBPR": {"Templates": [247106,247107]},
     "KBMU": {"Templates": [247108,247109]},
     "KZPM": {"Children": ["KBPR","KBMU"]},
