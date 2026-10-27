@@ -56,10 +56,15 @@ namespace ZoneEngine_New.Core.Bots
             }
 
             if (verb.Equals("macro", StringComparison.OrdinalIgnoreCase)
-                || verb.Equals("buffmacro", StringComparison.OrdinalIgnoreCase)
-                || verb.Equals("rebuff", StringComparison.OrdinalIgnoreCase))
+                || verb.Equals("buffmacro", StringComparison.OrdinalIgnoreCase))
             {
                 Macro(player);
+                return;
+            }
+
+            if (verb.Equals("rebuff", StringComparison.OrdinalIgnoreCase))
+            {
+                Rebuff(player);
                 return;
             }
 
@@ -132,12 +137,52 @@ namespace ZoneEngine_New.Core.Bots
             GmCommandFeedback.Send(player.Session!, player, "Your level is too low for that buff.");
         }
 
+        /// <summary>
+        /// Builds a client rebuff macro for the player's current buffbot buffs. Never casts or applies a nano.
+        /// </summary>
         void Macro(Player player)
         {
+            List<BuffOffer> chosen = ChosenBuffs(player);
+            if (chosen.Count == 0)
+            {
+                GmCommandFeedback.Send(
+                    player.Session!,
+                    player,
+                    "No buffbot buffs are running. Click buffs from the menu first, then Buffmacro again. Nothing was cast.");
+                return;
+            }
+
+            string macroBody = BuildMacroBody(chosen);
+            // AO macro create: /macro Name commands. Never land nanos from this path.
+            string href = "chatcmd:///macro Buffbot " + macroBody;
+            var body = new StringBuilder();
+            body.Append(DiagAoml.Title("Buffmacro"));
+            body.Append("<br>").Append(DiagAoml.Muted(string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} buff(s) from your current buffbot set. This does not cast anything.",
+                chosen.Count)));
+            body.Append("<br><br><a href='").Append(Esc(href)).Append("'>")
+                .Append(DiagAoml.Label("Create Buffbot macro")).Append("</a>");
+            body.Append("<br><br>").Append(DiagAoml.Muted("Macro commands:"));
+            body.Append("<br>").Append(DiagAoml.Muted(Esc(macroBody)));
+            body.Append("<br><br><a href='chatcmd:///say .buff menu'>").Append(DiagAoml.Label("Back")).Append("</a>");
+            GmCommandFeedback.Send(player.Session!, player, Link(body.ToString(), "Buffmacro"));
+        }
+
+        /// <summary>Re-lands the player's current buffbot buffs (or all castable if none are running).</summary>
+        void Rebuff(Player player)
+        {
             int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
+            List<BuffOffer> chosen = ChosenBuffs(player);
+            if (chosen.Count == 0)
+            {
+                foreach (BuffOffer offer in _catalog.Castable(level))
+                    chosen.Add(offer);
+            }
+
             int landed = 0;
             int skipped = 0;
-            foreach (BuffOffer offer in _catalog.Castable(level))
+            foreach (BuffOffer offer in chosen)
             {
                 if (NanoRuntime.TryApplyServiceBuff(player, offer.NanoId, announceRefusal: false, out _))
                     landed++;
@@ -150,11 +195,40 @@ namespace ZoneEngine_New.Core.Bots
                 player,
                 string.Format(
                     CultureInfo.InvariantCulture,
-                    "Buffmacro finished. Landed {0}. Skipped {1}. NCU {2}/{3}.",
+                    "Rebuff finished. Landed {0}. Skipped {1}. NCU {2}/{3}.",
                     landed,
                     skipped,
                     player.UsedNcu,
                     player.MaxNcu));
+        }
+
+        List<BuffOffer> ChosenBuffs(Player player)
+        {
+            int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
+            var chosen = new List<BuffOffer>();
+            var seenLines = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (Buff buff in player.Buffs)
+            {
+                if (!_catalog.TryGetLine(buff.Id, out BuffLine line) || !seenLines.Add(line.Name))
+                    continue;
+                if (_catalog.TryOffer(line, level, out BuffOffer offer) && offer.Available)
+                    chosen.Add(offer);
+            }
+
+            return chosen;
+        }
+
+        static string BuildMacroBody(IReadOnlyList<BuffOffer> offers)
+        {
+            var parts = new List<string>(offers.Count * 2);
+            for (int i = 0; i < offers.Count; i++)
+            {
+                if (i > 0)
+                    parts.Add("/delay 1500");
+                parts.Add("/say .buff cast " + offers[i].NanoId.ToString(CultureInfo.InvariantCulture));
+            }
+
+            return string.Join(" | ", parts);
         }
 
         List<string> Status(Player player)
@@ -196,7 +270,7 @@ namespace ZoneEngine_New.Core.Bots
             var head = new StringBuilder();
             head.Append(DiagAoml.Title("Buffbot"));
             head.Append("<br>").Append(DiagAoml.Muted(
-                "One bot for every profession. A click casts the nano your level allows. No charge."));
+                "One bot for every profession. A click casts the nano your level allows. Buffmacro builds a client macro (does not cast). Rebuff casts again. No charge."));
             head.Append("<br><a href='chatcmd:///say .buff macro'>").Append(DiagAoml.Label("Buffmacro")).Append("</a>");
             head.Append(" &#160; <a href='chatcmd:///say .buff rebuff'>").Append(DiagAoml.Label("Rebuff")).Append("</a>");
             head.Append(" &#160; <a href='chatcmd:///say .buff help'>").Append(DiagAoml.Label("Help")).Append("</a>");

@@ -84,6 +84,13 @@ namespace ZoneEngine_New.Core.Bots
                         string name = (raw ?? string.Empty).Trim();
                         if (name.Length == 0)
                             continue;
+                        // Morph / appearance nanos must never be on the buffbot (L33t Transformation, etc.).
+                        if (IsExcludedBuffName(name))
+                        {
+                            _missing.Add(name + " (excluded morph/appearance)");
+                            continue;
+                        }
+
                         if (!byName.TryGetValue(name, out List<ItemTemplate>? templates))
                         {
                             _missing.Add(name);
@@ -95,6 +102,9 @@ namespace ZoneEngine_New.Core.Bots
                         {
                             NanoSpell spell = NanoSpell.From(template);
                             if (!spell.IsBuff || spell.IsHostile)
+                                continue;
+                            // Timed composite variants (2/4/8 hours) stay out; base name ranks only.
+                            if (!string.Equals(template.Name, name, StringComparison.OrdinalIgnoreCase))
                                 continue;
                             ranks.Add(template);
                         }
@@ -143,6 +153,9 @@ namespace ZoneEngine_New.Core.Bots
         }
 
         public bool Contains(int nanoId) => _byId.ContainsKey(nanoId);
+
+        public bool TryGetLine(int nanoId, out BuffLine line)
+            => _byId.TryGetValue(nanoId, out line!);
 
         /// <summary>Highest rank whose required level is at or below <paramref name="level"/>.</summary>
         public bool TryOffer(BuffLine line, int level, out BuffOffer offer)
@@ -206,6 +219,19 @@ namespace ZoneEngine_New.Core.Bots
             }
 
             return need;
+        }
+
+        static bool IsExcludedBuffName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                return true;
+            if (name.Contains("L33t", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Leet Transformation", StringComparison.OrdinalIgnoreCase))
+                return true;
+            if (name.Contains("Transformation", StringComparison.OrdinalIgnoreCase)
+                && !name.Contains("Composite", StringComparison.OrdinalIgnoreCase))
+                return true;
+            return false;
         }
 
         static string Bonus(ItemTemplate template)

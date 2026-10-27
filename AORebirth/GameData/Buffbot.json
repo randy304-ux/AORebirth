@@ -1,11 +1,10 @@
 {
   "SchemaVersion": 1,
-  "Notes": "Names only. The zone resolves each name in items.dat and casts the highest QL the player level allows. Ids are not stored here. Based on the ChewysBuffs info window (Budabot/Nadybot). Names that are not in items.dat are omitted at startup.",
+  "Notes": "Names only. The zone resolves each name in items.dat and casts the highest QL the player level allows. Ids are not stored here. Based on the ChewysBuffs / AO-Universe buffing guide profession lines. Morph/appearance nanos (e.g. L33t Transformation) must not appear here. Names that are not friendly buff templates in items.dat are omitted at startup.",
   "Sections": [
     {
       "Name": "Generic",
       "Nanos": [
-        "L33t Transformation",
         "Composite Attribute Boost",
         "Composite Nano Expertise",
         "Composite Utility Expertise",
@@ -39,7 +38,14 @@
       "Name": "Doctor",
       "Nanos": [
         "Continuous Reconstruction",
-        "Instinctive Control"
+        "Instinctive Control",
+        "Iron Circle",
+        "Enlarge",
+        "Cellular Restoration",
+        "Cellular Rebuild",
+        "Cellular Recuperation",
+        "Cellular Reformation",
+        "Cellular Rebirth"
       ]
     },
     {
@@ -51,7 +57,78 @@
         "Essence of Cyclops",
         "Essence of Might",
         "Essence of Vitality",
-        "Essence of Boundless Health"
+        "Essence of Boundless Health",
+        "Improved Essence of Behemoth",
+        "Prodigious Strength"
+      ]
+    },
+    {
+      "Name": "Martial Artist",
+      "Nanos": [
+        "Muscle Booster",
+        "Muscle Stim"
+      ]
+    },
+    {
+      "Name": "Nano Technician",
+      "Nanos": [
+        "Neuronal Stimulator",
+        "Nullity Sphere",
+        "Ambient Purification"
+      ]
+    },
+    {
+      "Name": "Fixer",
+      "Nanos": [
+        "Gridspace Freedom"
+      ]
+    },
+    {
+      "Name": "Adventurer",
+      "Nanos": [
+        "Team Skill Wrangler",
+        "Team Skill Wrangler (Premium)",
+        "Team Skill Wrangler (Superior)"
+      ]
+    },
+    {
+      "Name": "Metaphysicist",
+      "Nanos": [
+        "Mocham's Gift: BioMet",
+        "Mocham's Gift: MatCrea",
+        "Mocham's Gift: MatMet",
+        "Mocham's Gift: PsyMod",
+        "Mocham's Gift: SenseImp",
+        "Mocham's Gift: SpaceTime",
+        "Evocation of The Enlightened",
+        "Evocation of The Empowered",
+        "Evocation of The Reinforced",
+        "Evocation of The Pure"
+      ]
+    },
+    {
+      "Name": "Keeper",
+      "Nanos": [
+        "Courage Of The Just",
+        "Clarion Call",
+        "Blessing of The Light",
+        "Blessing of Life"
+      ]
+    },
+    {
+      "Name": "Trader",
+      "Nanos": [
+        "Borrow Reflect",
+        "Corporate Protection",
+        "Team Skill Wrangler (Sophisticated)"
+      ]
+    },
+    {
+      "Name": "Soldier",
+      "Nanos": [
+        "Aggression Multiplier",
+        "Reactive Reflective Field",
+        "Damage Shield Projector"
       ]
     }
   ]
