@@ -102,6 +102,7 @@ namespace ZoneEngine_New.Core.Ai
         long _engageSerial = -1;
         readonly Dictionary<ulong, bool> _engageByTarget = new();
         readonly List<Player> _nearbyPlayers = new();
+        readonly List<NpcCharacter> _nearbyNpcs = new();
 
         /// <summary>A start offset spread over the interval, so brains that spawn together do not think in the same tick.</summary>
         static double ThinkPhase(NpcCharacter npc)
@@ -124,6 +125,14 @@ namespace ZoneEngine_New.Core.Ai
         public Vector3? Home { get; private set; }
 
         public bool HasHome => Home is not null;
+
+        /// <summary>Drops the leash anchor so a patrol can cross a map larger than the leash.</summary>
+        public void ReleaseHome()
+        {
+            Home = null;
+            _returningHome = false;
+            _returnFailed = false;
+        }
 
         // Wandering (district spawns): strolls at walking pace to random navmesh points within the radius of Home,
         // pausing between them. Combat, leash and evade always run.
@@ -352,6 +361,19 @@ namespace ZoneEngine_New.Core.Ai
             for (int i = 0; i < _nearbyPlayers.Count; i++)
                 TryProximityAggro(_nearbyPlayers[i]);
             _nearbyPlayers.Clear();
+
+            // Battle-station guards also start fights with the other team's guards. Ordinary mobs do not.
+            if (Npc.Stats.GetOrZero(CharacterStat.BattlestationSide) != 0)
+            {
+                locality.CollectNearby(Npc, range, _nearbyNpcs);
+                for (int i = 0; i < _nearbyNpcs.Count; i++)
+                {
+                    if (!ReferenceEquals(_nearbyNpcs[i], Npc))
+                        TryProximityAggro(_nearbyNpcs[i]);
+                }
+
+                _nearbyNpcs.Clear();
+            }
         }
 
         /// <summary>
@@ -359,7 +381,11 @@ namespace ZoneEngine_New.Core.Ai
         /// </summary>
         public void TryProximityAggro(Character player)
         {
-            if (player == null || !player.IsPlayer || player.IsDead)
+            if (player == null || player.IsDead)
+                return;
+
+            bool battle = Npc.Stats.GetOrZero(CharacterStat.BattlestationSide) != 0;
+            if (!battle && !player.IsPlayer)
                 return;
             if (!Npc.Attackable || _evading || Npc.IsPacified)
                 return;
@@ -367,13 +393,25 @@ namespace ZoneEngine_New.Core.Ai
                 return;
             if (Hate.Contains(player.Identity))
                 return;
-            if (!NpcAiRules.SideAllowsProximityAggro(
+
+            int npcTeam = Npc.Stats.GetOrZero(CharacterStat.BattlestationSide);
+            int targetTeam = player.Stats.GetOrZero(CharacterStat.BattlestationSide);
+            if (npcTeam != 0 || targetTeam != 0)
+            {
+                if (npcTeam == 0 || targetTeam == 0 || npcTeam == targetTeam)
+                    return;
+            }
+            else if (!NpcAiRules.SideAllowsProximityAggro(
                     Npc.Stats.GetOrZero(CharacterStat.Side),
                     player.Stats.GetOrZero(CharacterStat.Side)))
+            {
                 return;
+            }
+
             // A "gray" NPC (below the player's LevelEligibility.json range, the same rule that makes its kill worth
-            // 1 XP) never starts a fight. It still fights back when attacked.
-            if (Teams.TeamLevelEligibility.Current.IsTooLowForMember(
+            // 1 XP) never starts a fight. It still fights back when attacked. Guards in a bracket are the same level.
+            if (player.IsPlayer
+                && Teams.TeamLevelEligibility.Current.IsTooLowForMember(
                     player.Stats.GetOrOne(CharacterStat.Level),
                     Npc.Stats.GetOrOne(CharacterStat.Level)))
                 return;
@@ -444,7 +482,7 @@ namespace ZoneEngine_New.Core.Ai
         public Character? ResolveCurrentTarget() => Resolve(_currentTarget);
 
         public bool HasArrivedHome()
-            => !HasHome || NpcAiRules.IsNearby(Npc.Position, Home, NpcAiRules.ArriveHomeMeters);
+            => !HasHome || NpcAiRules.IsNearby(Npc.Position, Home!, NpcAiRules.ArriveHomeMeters);
 
         public bool HasChance(Character target)
         {

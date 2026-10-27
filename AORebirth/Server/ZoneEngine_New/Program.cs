@@ -101,6 +101,7 @@ namespace ZoneEngine_New
                 chatEngineLink = rootServices.GetRequiredService<IChatEngineLink>();
                 chatEngineLink.Start();
                 playfieldManager = rootServices.GetRequiredService<PlayfieldManager>();
+                _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Battlestations.BattleStationService>();
                 _ = rootServices.GetRequiredService<InventoryFlushService>();
                 rootServices.GetRequiredService<ZoneEngine_New.Core.Appearance.AppearancePrefsService>().Start();
                 rootServices.GetRequiredService<ZoneEngine_New.Core.Claims.WebSessionMap>().Start();
@@ -301,6 +302,7 @@ namespace ZoneEngine_New
             services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.BattlesuitCommand>();
             services.AddSingleton<IGmCommand, MercCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Raids.InvasionService>();
+            services.AddSingleton<ZoneEngine_New.Core.Battlestations.BattleStationService>();
             services.AddSingleton<IGmCommand, InvasionCommand>();
             services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.CityCommand>();
             services.AddSingleton<IGmCommand, AuraCommand>();

@@ -58,6 +58,16 @@ namespace ZoneEngine_New.Core.Helpers
             if (targetSide is Player && !ReferenceEquals(targetSide, target))
                 return CanAttack(attacker, targetSide);
 
+            int battleAttacker = attackerSide.Stats.GetOrZero(SmokeLounge.AOtomation.Messaging.GameData.CharacterStat.BattlestationSide);
+            int battleTarget = targetSide.Stats.GetOrZero(SmokeLounge.AOtomation.Messaging.GameData.CharacterStat.BattlestationSide);
+            if (battleAttacker != 0 && battleTarget != 0)
+            {
+                if (battleAttacker == battleTarget)
+                    return false;
+
+                return targetSide is not NpcCharacter teamNpc || teamNpc.Attackable;
+            }
+
             if (target is Player player)
             {
                 // Mobs can still hit players. Only another player needs the PvP flags.

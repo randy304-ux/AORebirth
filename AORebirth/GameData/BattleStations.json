@@ -1,0 +1,53 @@
+{
+  "HubPlayfield": 6007,
+  "HubReturn": [219.0, 6.02, 190.0],
+  "ScoreCap": 500,
+  "TickSeconds": 10,
+  "DominatedTickSeconds": 2.5,
+  "HackSeconds": 60,
+  "ConfirmSeconds": 5,
+  "IdleSeconds": 180,
+  "QueueWaitSeconds": 45,
+  "TeamSize": 6,
+  "BotFillMaxHumans": 3,
+  "LoyaltyStart": 10,
+  "LoyaltyAcceptCost": 1,
+  "LoyaltyComplete": 2,
+  "LoyaltyMax": 10,
+  "WinVpPerLevel": 4,
+  "LossVpPerLevel": 1,
+  "BotHashes": ["MRSO", "MREN"],
+  "Consoles": [
+    { "Id": "Core", "Points": 2, "X": 1008.29, "Y": 66.16, "Z": 1257.36 },
+    { "Id": "A", "Points": 1, "X": 1515.02, "Y": 53.55, "Z": 1540.35 },
+    { "Id": "B", "Points": 1, "X": 993.32, "Y": 53.52, "Z": 656.52 },
+    { "Id": "C", "Points": 1, "X": 488.68, "Y": 53.53, "Z": 1550.28 }
+  ],
+  "Spawns": {
+    "Red": { "X": 1420.0, "Y": 53.6, "Z": 1500.0 },
+    "Blue": { "X": 996.0, "Y": 53.6, "Z": 740.0 }
+  },
+  "Warps": [
+    { "X": 998.89, "Y": 63.83, "Z": 1141.36, "ToX": 998.80, "ToY": 54.16, "ToZ": 844.24 },
+    { "X": 905.50, "Y": 63.36, "Z": 1303.15, "ToX": 649.20, "ToY": 54.09, "ToZ": 1451.89 },
+    { "X": 1092.24, "Y": 63.83, "Z": 1303.09, "ToX": 1348.71, "ToY": 54.18, "ToZ": 1451.17 },
+    { "X": 1374.45, "Y": 53.66, "Z": 1421.59, "ToX": 1028.27, "ToY": 54.17, "ToZ": 836.77 },
+    { "X": 1343.22, "Y": 53.67, "Z": 1447.86, "ToX": 1086.49, "ToY": 64.40, "ToZ": 1300.26 },
+    { "X": 1335.81, "Y": 53.75, "Z": 1488.41, "ToX": 654.61, "ToY": 54.09, "ToZ": 1483.05 },
+    { "X": 960.38, "Y": 53.66, "Z": 837.78, "ToX": 624.81, "ToY": 54.09, "ToZ": 1430.01 },
+    { "X": 999.00, "Y": 53.66, "Z": 851.66, "ToX": 998.89, "ToY": 63.93, "ToZ": 1148.32 },
+    { "X": 1037.51, "Y": 53.65, "Z": 837.71, "ToX": 1375.36, "ToY": 54.17, "ToZ": 1429.00 },
+    { "X": 661.86, "Y": 53.57, "Z": 1488.23, "ToX": 1340.14, "ToY": 54.17, "ToZ": 1482.71 },
+    { "X": 654.69, "Y": 53.58, "Z": 1447.89, "ToX": 914.27, "ToY": 63.36, "ToZ": 1298.48 },
+    { "X": 623.36, "Y": 53.58, "Z": 1421.57, "ToX": 968.54, "ToY": 54.17, "ToZ": 834.22 }
+  ],
+  "Brackets": [
+    { "Name": "Battle Station 10-30", "MinLevel": 10, "MaxLevel": 30, "Playfield": 4383 },
+    { "Name": "Battle Station 31-60", "MinLevel": 31, "MaxLevel": 60, "Playfield": 4384 },
+    { "Name": "Battle Station 61-100", "MinLevel": 61, "MaxLevel": 100, "Playfield": 4385 },
+    { "Name": "Battle Station 101-150", "MinLevel": 101, "MaxLevel": 150, "Playfield": 4386 },
+    { "Name": "Battle Station 151-200", "MinLevel": 151, "MaxLevel": 200, "Playfield": 4387 },
+    { "Name": "Battle Station 201-214", "MinLevel": 201, "MaxLevel": 214, "Playfield": 4382 },
+    { "Name": "Battle Station 215-220", "MinLevel": 215, "MaxLevel": 220, "Playfield": 4388 }
+  ]
+}

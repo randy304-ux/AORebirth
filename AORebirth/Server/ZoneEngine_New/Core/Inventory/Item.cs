@@ -232,6 +232,11 @@ namespace ZoneEngine_New.Core.Inventory
             ArgumentNullException.ThrowIfNull(inventoryRepository);
             ArgumentNullException.ThrowIfNull(items);
 
+            // Ofab attunement devices upgrade on use. Their own OnUse is SpawnItem plus DestroyItem,
+            // and the spawn hash is not what this server mints, so the table in OfabAttunement.json wins.
+            if (ZoneEngine_New.Core.Battlestations.AttunementDevices.TryUpgrade(this, player, slotIdentity, items))
+                return true;
+
             // The user is the source: Fightingtarget functions resolve through it and damage is credited to it.
             if (!Definition.ExecuteOnUseSpells(
                     target ?? player,

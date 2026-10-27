@@ -614,6 +614,9 @@ namespace ZoneEngine_New.Core.Playfield
             else
                 dynel = new PlayfieldStaticDynel(identity, template);
 
+            if (dynel is VendingMachine ofabShop)
+                ZoneEngine_New.Core.Trade.OfabHubStock.Apply(_gameData, _logger, ofabShop);
+
             dynel.Playfield = _playfield;
             dynel.Position = new Vector3(record.Position.X, record.Position.Y, record.Position.Z);
             dynel.Rotation = new Quaternion(

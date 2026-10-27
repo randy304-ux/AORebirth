@@ -1,15 +1,17 @@
 {
-  "Notes": "The two Ofab nano terminals. The program lists were not found by name in itemnames, so these do not sell anything.",
+  "Notes": "The Ofab nano terminals in the Unicorn Defence Hub (playfield 6007). Ranged and Support is split across three panes so each stays under 64 slots. Melee and Hybrid is one pane. General nanos sit on the hub's Ofab General Vendor with the attunement devices. Price is the same house rule as the armor: QL * QL / 40, paid in Victory Points.",
   "Npcs": [ "ddogs-ofab-nano" ],
   "Openers": [ { "Say": "hello" } ],
   "Replies": {
+    "shop": { "Text": "Show me the stock.", "Goto": "shop" },
     "bye": { "Text": "Goodbye", "Goto": "bye" }
   },
   "Lines": {
     "hello": {
-      "Text": "This terminal is the Ofab nano counter. The Ranged and Support list and the Melee and Hybrid list are not in the item name table under those names, so nothing is for sale until those program names are known. Vehicles and orbital strikes are not sold here.",
-      "Replies": [ "bye" ]
+      "Text": "Ofab nanos, paid in Victory Points. Ranged and Support is three terminals. Melee and Hybrid is the fourth. General nanos and the attunement devices are on the Ofab General Vendor along the north wall.",
+      "Replies": [ "shop", "bye" ]
     },
+    "shop": { "Text": "{shop}" },
     "bye": { "Text": "{close}" }
   }
 }

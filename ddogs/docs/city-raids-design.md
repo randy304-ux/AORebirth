@@ -59,7 +59,7 @@ Low-level city loot is the existing ALGT table at the wave's level. A level 30 i
 ## Still to build
 
 1. Walk and fix the five cities' pads. Add Old Athen, Omni-1 HQ / Entertainment / Trade, and an ICC plaza once someone stands there and runs `/pos`.
-2. Stat 669 is spent at the Ofab terminals on Andromeda. See `ddogs/docs/ofab-vp-shop.md`. VP clump items are still not added. Whether 669 shows on the client is still open.
+2. Stat 669 is spent at the Ofab machines in the Unicorn Defence Hub (playfield 6007). See `ddogs/docs/ofab-vp-shop.md`. VP clump items are still not added. Whether 669 shows on the client is still open.
 3. Org plots, premade buildings, and in-city contract buffs are in. See `ddogs/docs/org-cities.md`. The client controller window, cloak UI, rent, and CRUs are still not built.
 4. A level-30 alien wave can be called on the controller pads. Aliens still do not path to the controller or drain a charge.
 5. Full mothership boarding: difficulty, team lock, pilot timer, the two boss-room scripts. The wave spawner and the six pads are the piece that was missing. Wire `.invasion ship`'s call into the boss-room entry when that raid is designed, instead of only the GM command.

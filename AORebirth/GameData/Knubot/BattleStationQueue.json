@@ -1,0 +1,17 @@
+{
+  "Notes": "Signup terminals on playfield 6007. The NPC name is the bracket key in BattleStations.json. {bsqueue} spends 1 loyalty and joins that bracket.",
+  "Npcs": [ "ddogs-bs-queue" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "signup": { "Text": "Sign up", "Goto": "signup" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Battle station signup. Teams are Red and Blue, assigned at random, and your faction does not matter. Signing up spends 1 loyalty. You start at 10. Finishing a match returns 2, up to 10. At 0 this terminal will not take you.",
+      "Replies": [ "signup", "bye" ]
+    },
+    "signup": { "Text": "{bsqueue}", "Replies": [ "bye" ] },
+    "bye": { "Text": "{close}" }
+  }
+}

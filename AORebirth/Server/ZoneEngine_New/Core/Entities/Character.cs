@@ -1691,6 +1691,7 @@
 
             // Break first so a broken pacify lets this strike's threat stick.
             target.RollBuffBreaks(BuffBreakCause.Attack, this);
+            ZoneEngine_New.Core.Battlestations.BattleStationClock.NotifyHit(target);
 
             // The hit is announced before the damage lands: a killing hit runs the target's death (stop fight,
             // death action) inside ApplyDamage, and a client that already saw the death drops the AttackInfo,
@@ -2188,7 +2189,9 @@
             => HasBuffFunction(
                 FunctionType.RestrictAction,
                 spell => spell.TryReadInt(0, out int restricted) && (restricted & RestrictMovementBit) != 0)
-                || HasBuffFunction(FunctionType.Stun);
+                || HasBuffFunction(FunctionType.Stun)
+                || (this is Player battlePlayer
+                    && ZoneEngine_New.Core.Battlestations.BattleStationClock.IsChanneling(battlePlayer));
 
         /// <summary>RestrictAction bit that forbids fighting (e.g. 304935 Immortal).</summary>
         public const int RestrictFightingBit = 2;

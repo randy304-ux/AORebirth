@@ -1,6 +1,6 @@
 # Org cities
 
-House rule: plot cost is 0 and upkeep is 0. Retail prices are in `GameData/OrgCities.json` and are not charged. `.city` and the Tower Shop on Andromeda (655, west of the Ofab row) do the same thing. The president claims and buys. Any member can enter their own city.
+House rule: plot cost is 0 and upkeep is 0. Retail prices are in `GameData/OrgCities.json` and are not charged. `.city` and the Tower Shop on Andromeda (655) do the same thing. The president claims and buys. Any member can enter their own city.
 
 ## Plots
 

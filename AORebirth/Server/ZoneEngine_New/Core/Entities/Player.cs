@@ -1202,6 +1202,24 @@ namespace ZoneEngine_New.Core.Entities
                 throw new InvalidOperationException("No respawn destination is configured.");
 
             Vector3 landing = new Vector3(respawn.Position[0], respawn.Position[1], respawn.Position[2]);
+            // A battle station death stays inside the station, at that team's safe spawn.
+            if (ZoneEngine_New.Core.Battlestations.BattleStationClock.TryRespawn(this, out Vector3 stationLanding))
+            {
+                if (!_respawnObserversCleared)
+                {
+                    playfield.GetRequiredService<PlayfieldLocality>().DespawnForObservers(this);
+                    _respawnObserversCleared = true;
+                    _respawnPending = true;
+                    _respawnRemainingSeconds = 0;
+                    return;
+                }
+
+                _respawnObserversCleared = false;
+                Revive();
+                playfield.GetRequiredService<SpawnService>().CompleteSamePlayfieldDeathRespawn(this, stationLanding);
+                return;
+            }
+
             // Insurance point saved at an insurance terminal; unset characters use the Arete Landing insurance terminal.
             int respawnPf = Stats.GetOrZero(InsurancePlayfieldStat);
             if (respawnPf > 0)

@@ -231,6 +231,10 @@ public static class KnubotParser
                     Expect(words, 1, 1, body, errors);
                     Effect(new KnubotDismissMercs());
                     break;
+                case "bsqueue":
+                    Expect(words, 1, 1, body, errors);
+                    Effect(new KnubotBattleStationQueue());
+                    break;
                 case "shop":
                     Expect(words, 1, 1, body, errors);
                     Effect(new KnubotOpenShop());

@@ -84,6 +84,9 @@ namespace ZoneEngine_New.Core.Entities
             if (Playfield == null || player.Session == null)
                 return false;
 
+            if (ZoneEngine_New.Core.Battlestations.BattleStationClock.TryUseConsole(player, this))
+                return true;
+
             return Template.ExecuteOnUseSpells(
                 player,
                 Playfield.GetRequiredService<IInventoryRepository>(),

@@ -1,0 +1,14 @@
+{
+  "Notes": "Right-click upgrades the worn-path device. Retail only sold level one (200 VP) and the item's own OnUse is SpawnItem plus DestroyItem; this table is the path the server runs so a missing item hash cannot stop the upgrade. Level gates are a house rule (this server has no Ofab global-research track). Buying a higher tier from the vendor does not check the level.",
+  "Levels": [1, 150, 200],
+  "Prices": [200, 600, 1500],
+  "Families": [
+    { "Name": "Combat", "Ids": [269401, 269402, 269403] },
+    { "Name": "Nano Technology", "Ids": [269406, 269404, 269405] },
+    { "Name": "Medical", "Ids": [269407, 269408, 269409] },
+    { "Name": "Defense", "Ids": [269412, 269410, 269411] },
+    { "Name": "Offense", "Ids": [269415, 269413, 269414] },
+    { "Name": "Health", "Ids": [269418, 269416, 269417] },
+    { "Name": "Tradeskill", "Ids": [293693, 293699, 293701] }
+  ]
+}
