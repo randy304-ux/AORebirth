@@ -173,6 +173,10 @@ namespace ZoneEngine_New.Core.Inventory
             if (AuraNanos.TryConsumeUnlock(player, this, slotIdentity))
                 return true;
 
+            // VP clumps (Cell/Plasmid/Mito/Protein) have OnUse Hit 669 but no Can.Use bit.
+            if (VictoryPointClumps.TryConvert(this, player, slotIdentity, inventoryRepository, items))
+                return true;
+
             if (IsBackpackUse)
             {
                 if (TryUseBackpack(player, slotIdentity, inventoryRepository, items))
