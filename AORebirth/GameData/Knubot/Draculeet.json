@@ -1,0 +1,20 @@
+{
+  "Notes": "Halloween city quest giver. Outdoor/low season only (spawned by .event halloween on).",
+  "Npcs": [ "DRCL" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "games": { "Text": "We have been playing these games for my entire life.", "Goto": "games" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "sup? j00 no liekz trix or treeetz?",
+      "Replies": [ "games", "bye" ]
+    },
+    "games": {
+      "Text": "U wantz challeng3? Outdoor Uncle Pumpkin-Heads are out while the Halloween event is on. High-wave Enigma Grove and the Hollow Reaper come later.",
+      "Replies": [ "bye" ]
+    },
+    "bye": { "Text": "{close}" }
+  }
+}

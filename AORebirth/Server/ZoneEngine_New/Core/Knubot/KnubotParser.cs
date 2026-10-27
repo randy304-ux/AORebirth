@@ -173,6 +173,17 @@ public static class KnubotParser
                     Effect(new KnubotGiveDungeon(words[1]));
                     break;
 
+                case "givedaily":
+                    if (words.Length != 2 || words[1].Length == 0 || !System.Linq.Enumerable.All(words[1], char.IsLetterOrDigit)
+                        || !load.Quests.TryGet(words[1], out _))
+                    {
+                        errors.Add("expected {givedaily HASH} with a Quests.json / DailyMissions.json hash: {" + body + "}");
+                        break;
+                    }
+
+                    Effect(new KnubotGiveDaily(words[1]));
+                    break;
+
                 case "spawn":
                     int spawnCount = 1, quality = 0;
                     bool atLevel = words.Length >= 3 && words[2].Equals("level", StringComparison.OrdinalIgnoreCase);

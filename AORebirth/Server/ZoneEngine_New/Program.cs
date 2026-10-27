@@ -102,6 +102,8 @@ namespace ZoneEngine_New
                 chatEngineLink.Start();
                 playfieldManager = rootServices.GetRequiredService<PlayfieldManager>();
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Battlestations.BattleStationService>();
+                _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.HalloweenService>();
+                _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.DailyMissionService>();
                 _ = rootServices.GetRequiredService<InventoryFlushService>();
                 rootServices.GetRequiredService<ZoneEngine_New.Core.Appearance.AppearancePrefsService>().Start();
                 rootServices.GetRequiredService<ZoneEngine_New.Core.Claims.WebSessionMap>().Start();
@@ -303,7 +305,10 @@ namespace ZoneEngine_New
             services.AddSingleton<IGmCommand, MercCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Raids.InvasionService>();
             services.AddSingleton<ZoneEngine_New.Core.Battlestations.BattleStationService>();
+            services.AddSingleton<ZoneEngine_New.Core.Events.HalloweenService>();
+            services.AddSingleton<ZoneEngine_New.Core.Events.DailyMissionService>();
             services.AddSingleton<IGmCommand, InvasionCommand>();
+            services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.EventCommand>();
             services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.CityCommand>();
             services.AddSingleton<IGmCommand, AuraCommand>();
             services.AddSingleton<IGmCommand, DespawnCommand>();

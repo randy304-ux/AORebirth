@@ -1,0 +1,64 @@
+{
+  "_comment": "Outdoor / low Halloween encounter. GM: .event halloween on|off|status. High-tier and instanced raid content is deferred (see ddogs/docs/halloween-design.md).",
+  "RespawnSeconds": 180,
+  "QuestNpcs": [
+    {
+      "Key": "draculeet-borealis",
+      "Hash": "DRCL",
+      "Name": "Draculeet",
+      "Playfield": 800,
+      "Pad": [690, 5, 590],
+      "Note": "Near Antiques n' such, Borealis (AO-Universe)."
+    },
+    {
+      "Key": "frankenleet-borealis",
+      "Hash": "FRKL",
+      "Name": "Frankenleet",
+      "Playfield": 800,
+      "Pad": [695, 5, 585],
+      "Note": "Beside Draculeet."
+    }
+  ],
+  "Outdoor": [
+    {
+      "Key": "uph-borealis",
+      "Hash": "UPH1",
+      "Level": 10,
+      "Playfield": 800,
+      "Pads": [[620, 5, 700], [700, 5, 680], [640, 5, 560]],
+      "Note": "Around Borealis, level 5-15."
+    },
+    {
+      "Key": "uph-icc",
+      "Hash": "UPH1",
+      "Level": 40,
+      "Playfield": 655,
+      "Pads": [[3180, 35, 880], [3260, 35, 920], [3220, 35, 820]],
+      "Note": "ICC HQ floor on Andromeda (district centre 3220,35,900), level 25-50."
+    },
+    {
+      "Key": "uph-last-ditch",
+      "Hash": "UPH1",
+      "Level": 40,
+      "Playfield": 790,
+      "Pads": [[1140, 5, 2860], [1180, 5, 2820], [1100, 5, 2900]],
+      "Note": "Last Ditch district on Stret West Bank, level 25-50."
+    },
+    {
+      "Key": "grief-holes",
+      "Hash": "GRPH",
+      "Level": 30,
+      "Playfield": 791,
+      "Pads": [[400, 1, 720], [360, 1, 680]],
+      "Note": "Southern Holes / Borealis Approach low griefing band (~30)."
+    },
+    {
+      "Key": "grief-stret-west",
+      "Hash": "GRPH",
+      "Level": 75,
+      "Playfield": 790,
+      "Pads": [[1284, 5, 2891], [1240, 5, 2920]],
+      "Note": "Stret West Bank north of Omni-Pol outpost, level 50-100ish."
+    }
+  ]
+}

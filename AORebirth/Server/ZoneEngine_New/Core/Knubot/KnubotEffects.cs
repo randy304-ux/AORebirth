@@ -9,6 +9,7 @@ using SmokeLounge.AOtomation.Messaging.GameData;
 using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
 
 using ZoneEngine_New.Core.Entities;
+using ZoneEngine_New.Core.Events;
 using ZoneEngine_New.Core.Inventory;
 using ZoneEngine_New.Core.Quests;
 using ZoneEngine_New.Core.Trade;
@@ -105,6 +106,38 @@ public sealed record KnubotAcceptQuest(string Hash) : KnubotEffect
             return;
 
         services.Quests.TryAssignTemplate(context.Player, Hash, out _);
+    }
+}
+
+/// <summary>
+/// <c>{givedaily HASH}</c>: assigns a Quests.json daily and spawns its outdoor field from DailyMissions.json
+/// (miners + optional special such as Ganking Uncle Pumpkin-Head). Reusable for Randy's later dailies list.
+/// </summary>
+public sealed record KnubotGiveDaily(string Hash) : KnubotEffect
+{
+    public override bool Check(KnubotContext context, KnubotPlan plan, KnubotEffectServices services)
+    {
+        plan.Quests[Hash] = QuestState.Active;
+        return true;
+    }
+
+    public override void Apply(KnubotContext context, KnubotEffectServices services)
+    {
+        DailyMissionService? dailies = DailyMissionService.Instance;
+        if (dailies == null)
+        {
+            context.Player.Session?.Send(new ChatTextMessage
+            {
+                Identity = context.Player.Identity,
+                Text = "Daily missions are unavailable."
+            });
+            return;
+        }
+
+        if (!dailies.TryGive(context.Player, Hash, out string message) && !string.IsNullOrWhiteSpace(message))
+            context.Player.Session?.Send(new ChatTextMessage { Identity = context.Player.Identity, Text = message });
+        else if (!string.IsNullOrWhiteSpace(message))
+            context.Player.Session?.Send(new ChatTextMessage { Identity = context.Player.Identity, Text = message });
     }
 }
 

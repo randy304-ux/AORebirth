@@ -1,0 +1,20 @@
+{
+  "Notes": "Halloween city quest giver twin. Outdoor/low season only.",
+  "Npcs": [ "FRKL" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "games": { "Text": "We have been playing these games for my entire life.", "Goto": "games" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Hrrr. Frankenleet. Trix? Treeetz? Outdoor pumpkin-heads haunt the low roads while Halloween is on.",
+      "Replies": [ "games", "bye" ]
+    },
+    "games": {
+      "Text": "Hunt Uncle Pumpkin-Head around Borealis, ICC HQ, and Last Ditch. GM turns the event with .event halloween.",
+      "Replies": [ "bye" ]
+    },
+    "bye": { "Text": "{close}" }
+  }
+}
