@@ -138,9 +138,14 @@ namespace ChatEngine.CoreServer
         public void OnClientDisconnect(IClient client, bool forced)
         {
             Client cl = (Client)client;
+            uint disconnectId = cl.Character != null ? cl.Character.CharacterId : 0;
             this.clientOwnership.Disconnect(cl.Character.CharacterId, cl,
                 id => CharacterOnlineOwnershipGuard.TryClearLoginOwnership(unchecked((int)id), CharacterDao.Instance.SetOffline),
                 LftRegistry.Remove);
+            if (disconnectId != 0)
+            {
+                BuddyList.AnnounceStatusToWatchers(this, disconnectId, 0);
+            }
         }
 
         internal bool RegisterClient(Client client)

@@ -31,6 +31,7 @@ namespace ChatEngine.PacketHandlers
     using AORebirth.Database.Dao;
 
     using ChatEngine.CoreClient;
+    using ChatEngine.Lists;
     using ChatEngine.Packets;
 
     using Utility;
@@ -167,6 +168,7 @@ namespace ChatEngine.PacketHandlers
                 new Character(
                     characterId,
                     client);
+            client.ChatAuthenticatedUtc = DateTime.UtcNow;
 
             /*
              * Add client to connected clients list.
@@ -208,6 +210,12 @@ namespace ChatEngine.PacketHandlers
              * Add client to channels.
              */
             client.ChatServer().AddClientToChannels(client);
+
+            /*
+             * Friend list: push buddy online statuses, then announce self online to watchers.
+             */
+            BuddyList.SendBuddyStatuses(client);
+            BuddyList.AnnounceStatusToWatchers(client.ChatServer(), characterId, 1);
         }
 
         #endregion

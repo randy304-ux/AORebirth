@@ -41,6 +41,7 @@ namespace ChatEngine.PacketHandlers
 
     using ChatEngine.Channels;
     using ChatEngine.CoreClient;
+    using ChatEngine.Lists;
     using ChatEngine.Packets;
 
     using Utility;
@@ -113,7 +114,8 @@ namespace ChatEngine.PacketHandlers
                     string.Empty);
                 client.Send(anonv);
 
-                // TODO: Add Buddies List/BuddyOnlineStatus messages
+                BuddyList.SendBuddyStatuses(client);
+                BuddyList.AnnounceStatusToWatchers(client.ChatServer(), client.Character.CharacterId, 1);
 
                 foreach (ChannelBase channel in client.Channels)
                 {

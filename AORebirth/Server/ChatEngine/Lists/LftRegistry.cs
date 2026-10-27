@@ -5,7 +5,7 @@ namespace ChatEngine.Lists
 
     /// <summary>
     /// In-memory Looking for Team registrations (chat-server only).
-    /// 05DC + comment = listed; 05DD or empty 05DC = unlisted.
+    /// 05DC = listed (comment may be empty); 05DD = unlisted.
     /// </summary>
     public static class LftRegistry
     {
@@ -14,7 +14,8 @@ namespace ChatEngine.Lists
         private static readonly Dictionary<uint, string> ListedByCharacterId = new Dictionary<uint, string>();
 
         /// <summary>
-        /// Ignore Personal Description echo right after chat login (checkbox still off).
+        /// Ignore non-empty Personal Description echo right after chat login (checkbox still off).
+        /// Empty 05DC is the LFT checkbox itself and must list.
         /// </summary>
         private static readonly TimeSpan LoginEchoGrace = TimeSpan.FromSeconds(20);
 
@@ -30,7 +31,8 @@ namespace ChatEngine.Lists
         }
 
         /// <summary>
-        /// Empty comment = unlist. Non-empty = list / update comment.
+        /// List / update comment. Empty comment still lists (checkbox on, no Personal Description).
+        /// Call <see cref="Remove"/> (05DD) to unlist.
         /// </summary>
         public static ApplyResult Apply(uint characterId, string comment, DateTime chatAuthUtc)
         {
@@ -44,20 +46,16 @@ namespace ChatEngine.Lists
 
             lock (Sync)
             {
-                if (blank)
-                {
-                    ListedByCharacterId.Remove(characterId);
-                    return ApplyResult.Unlisted;
-                }
-
                 if (ListedByCharacterId.ContainsKey(characterId))
                 {
                     ListedByCharacterId[characterId] = trimmed;
                     return ApplyResult.UpdatedComment;
                 }
 
-                // Not listed yet: ignore description echo in the first seconds after chat login.
-                if (chatAuthUtc != default(DateTime)
+                // Not listed yet: ignore non-empty description echo in the first seconds after chat login.
+                // Empty 05DC is the Looking-for-Team check, not an uncheck (uncheck is 05DD).
+                if (!blank
+                    && chatAuthUtc != default(DateTime)
                     && DateTime.UtcNow - chatAuthUtc < LoginEchoGrace)
                 {
                     return ApplyResult.IgnoredLoginEcho;

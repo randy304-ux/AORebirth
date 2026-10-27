@@ -9,13 +9,14 @@ namespace ZoneEngine_New.Core.Helpers
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Nanos;
+    using ZoneEngine_New.Core.Pets;
     using ZoneEngine_New.Core.Playfield;
     using ZoneEngine_New.Core.Teams;
 
     /// <summary>
-    /// Who an NPC may heal or buff. Mercs and other player pets may only support their owner, that owner's
-    /// team, the owner's other pets/mercs, and friendly players. Battle-station bots may only support the
-    /// same side. Never support attackable mobs/aliens or anyone the caster (or its master) is fighting.
+    /// Who an NPC may heal or buff. Mercs and other player pets use an allow-list only: owner, owner's team,
+    /// the owner's other pets/mercs, and friendly players. Never any outdoor/wild NPC mob (faction, side, or
+    /// Attackable:false must not grant support). Battle-station bots may only support the same side's players/bots.
     /// </summary>
     public static class NpcSupportRules
     {
@@ -29,25 +30,36 @@ namespace ZoneEngine_New.Core.Helpers
             if (ReferenceEquals(caster, target))
                 return true;
 
-            Character master = ResolveMaster(caster) ?? caster;
-
-            // Never heal/buff something we (or our master) can fight, or are fighting.
-            if (CombatRules.CanAttack(caster, target) || CombatRules.CanAttack(master, target))
-                return false;
-            if (IsEngagedWith(caster, target) || IsEngagedWith(master, target))
+            Character masterProbe = ResolveMaster(caster) ?? caster;
+            if (IsEngagedWith(caster, target) || IsEngagedWith(masterProbe, target))
                 return false;
 
-            // Player pet / merc (Pet controller or PetMaster stat): owner party only — never wild NPCs.
-            if (ResolveMaster(caster) is Character petMaster)
-                return IsOwnerParty(petMaster, target);
+            // Player pet / merc: allow-list only. Do not use CanAttack / Attackable / faction as permission —
+            // outdoor neutrals (e.g. Eumenides) are often not attackable to the pet and were wrongly allowed
+            // by the old "non-attackable NPC" fallthrough when PetMaster/PetOwner was missing.
+            if (IsPlayerPetOrMerc(caster))
+            {
+                Character? petMaster = ResolveMaster(caster);
+                return petMaster != null && IsOwnerParty(petMaster, target);
+            }
 
-            // Battle-station bot: same side only (players or bots).
+            // Battle-station bot: same side, players or other BS bots only — never outdoor mobs.
             int side = caster.Stats.GetOrZero(CharacterStat.BattlestationSide);
             if (side != 0)
-                return target.Stats.GetOrZero(CharacterStat.BattlestationSide) == side;
+            {
+                if (target.Stats.GetOrZero(CharacterStat.BattlestationSide) != side)
+                    return false;
+                if (target is Player)
+                    return true;
+                return target is NpcCharacter bot
+                    && bot.PetOwner == null
+                    && bot.Stats.GetOrZero(CharacterStat.PetMaster) == 0
+                    && !IsPlayerPetOrMerc(bot)
+                    && bot.Stats.GetOrZero(CharacterStat.BattlestationSide) == side;
+            }
 
-            // Other wild NPCs may support non-attackable (blue-name) NPCs only — never monsters/aliens.
-            return target is NpcCharacter { Attackable: false };
+            // Uncontrolled wild NPC: no support through this shared gate.
+            return false;
         }
 
         /// <summary>
@@ -91,6 +103,7 @@ namespace ZoneEngine_New.Core.Helpers
 
         /// <summary>
         /// Owner, owner's other pets/mercs, teammates (and their pets), and other players the owner cannot attack.
+        /// Never a wild/outdoor NPC mob.
         /// </summary>
         public static bool IsOwnerParty(Character master, Character target)
         {
@@ -138,6 +151,27 @@ namespace ZoneEngine_New.Core.Helpers
                 && dynel is Character character && !character.IsDead
                 ? character
                 : null;
+        }
+
+        /// <summary>
+        /// True for hired mercs and other player pets (bound controller, PetMaster, or merc spawn hash).
+        /// </summary>
+        public static bool IsPlayerPetOrMerc(Character caster)
+        {
+            if (caster is not NpcCharacter npc)
+                return false;
+
+            if (npc.PetOwner != null || npc.Pet != null)
+                return true;
+
+            if (npc.Stats.GetOrZero(CharacterStat.PetMaster) != 0)
+                return true;
+
+            if (Mercs.IsMercHash(npc.Pet?.Hash) || Mercs.IsMercHash(npc.SpawnHash))
+                return true;
+
+            string? templateHash = npc.MobTemplate?.Hash;
+            return Mercs.IsMercHash(templateHash);
         }
 
         static bool AreTeammates(Player a, Player b)

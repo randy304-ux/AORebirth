@@ -33,6 +33,7 @@ namespace AORebirth.Database.Entities
 {
     #region Usings ...
 
+    using System;
     using System.Collections.Generic;
 
     using AORebirth.Database.Dao;
@@ -152,20 +153,24 @@ namespace AORebirth.Database.Entities
         public List<int> GetBuddiesIds()
         {
             List<int> buddiesIds = new List<int>();
-            foreach (string strId in this.BuddyList.Split(','))
+            foreach (string strId in SplitBuddyTokens())
             {
-                buddiesIds.Add(int.Parse(strId));
+                int id;
+                if (int.TryParse(strId, out id) && id > 0)
+                {
+                    buddiesIds.Add(id);
+                }
             }
             return buddiesIds;
         }
 
         public void AddBuddy(int buddyId)
         {
-            List<string> buddies = new List<string>();
-            buddies.AddRange(this.BuddyList.Split(','));
-            if (!buddies.Contains(buddyId.ToString()))
+            List<string> buddies = new List<string>(SplitBuddyTokens());
+            string token = buddyId.ToString();
+            if (!buddies.Contains(token))
             {
-                buddies.Add(buddyId.ToString());
+                buddies.Add(token);
             }
 
             this.BuddyList = string.Join(",", buddies);
@@ -173,14 +178,19 @@ namespace AORebirth.Database.Entities
 
         public void RemoveBuddy(int buddyId)
         {
-            List<string> buddies = new List<string>();
-            buddies.AddRange(this.BuddyList.Split(','));
-            if (buddies.Contains(buddyId.ToString()))
+            List<string> buddies = new List<string>(SplitBuddyTokens());
+            buddies.Remove(buddyId.ToString());
+            this.BuddyList = string.Join(",", buddies);
+        }
+
+        private string[] SplitBuddyTokens()
+        {
+            if (string.IsNullOrWhiteSpace(this.BuddyList))
             {
-                buddies.Remove(buddyId.ToString());
+                return new string[0];
             }
 
-            this.BuddyList = string.Join(",", buddies);
+            return this.BuddyList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         #endregion

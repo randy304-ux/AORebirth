@@ -237,8 +237,8 @@ namespace ZoneEngine_New.Core.Ai
 
         /// <summary>
         /// Self, then characters <see cref="NpcSupportRules.CanSupport"/> allows: for pets/mercs the owner
-        /// party (owner, team, sibling pets, friendly players); for battle-station bots the same side; for wild
-        /// NPCs only non-attackable allies. Never attackable mobs/aliens.
+        /// party (owner, team, sibling pets, friendly players); for battle-station bots the same side.
+        /// Never outdoor/wild NPC mobs.
         /// </summary>
         IEnumerable<Character> FriendlyCandidates(NanoSpell spell)
         {
