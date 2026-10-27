@@ -542,6 +542,14 @@ namespace ZoneEngine_New.Core.Battlestations
             match.ScoreDebt = 0;
             match.RedScore += redPoints;
             match.BlueScore += bluePoints;
+            // PvP daily (John Smith): update when either side first reaches 425 while humans are present.
+            if (!match.Daily425Fired && (match.RedScore >= 425 || match.BlueScore >= 425))
+            {
+                match.Daily425Fired = true;
+                for (int h = 0; h < match.Humans.Count; h++)
+                    ZoneEngine_New.Core.Events.DailyMissionService.Instance?.NotifyBattlestationThreshold(match.Humans[h].Player);
+            }
+
             match.AnnounceDebt += interval;
             if (match.AnnounceDebt < 30)
                 return;
@@ -1089,6 +1097,8 @@ namespace ZoneEngine_New.Core.Battlestations
             public double AnnounceDebt;
 
             public bool Ending;
+
+            public bool Daily425Fired;
 
             public bool UsesBots;
 

@@ -8,6 +8,7 @@ namespace ZoneEngine_New.Core.Events
 
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.GameData;
+    using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Mobs;
     using ZoneEngine_New.Core.Playfield;
@@ -17,8 +18,7 @@ namespace ZoneEngine_New.Core.Events
     using Vector3 = AORebirth.Core.Vector.Vector3;
 
     /// <summary>
-    /// Reusable outdoor daily missions. Catalog: GameData/DailyMissions.json. Knubot <c>{givedaily HASH}</c>
-    /// assigns Quests.json and spawns the field (miners + optional special). First entry: Killing the Competition.
+    /// Reusable outdoor/daily missions. Catalog: GameData/DailyMissions.json. Knubot <c>{givedaily HASH}</c>.
     /// </summary>
     public sealed class DailyMissionService
     {
@@ -27,22 +27,30 @@ namespace ZoneEngine_New.Core.Events
         readonly IGameData _gameData;
         readonly Lazy<PlayfieldManager> _playfields;
         readonly QuestService _quests;
+        readonly DailyLockoutService _lockouts;
         readonly IZoneLogger _logger;
-        readonly object _gate = new();
         DailyMissionCatalog _catalog;
         DateTime _catalogStamp;
 
-        public DailyMissionService(IGameData gameData, Lazy<PlayfieldManager> playfields, QuestService quests, IZoneLogger logger)
+        public DailyMissionService(
+            IGameData gameData,
+            Lazy<PlayfieldManager> playfields,
+            QuestService quests,
+            DailyLockoutService lockouts,
+            IZoneLogger logger)
         {
             ArgumentNullException.ThrowIfNull(gameData);
             ArgumentNullException.ThrowIfNull(playfields);
             ArgumentNullException.ThrowIfNull(quests);
+            ArgumentNullException.ThrowIfNull(lockouts);
             ArgumentNullException.ThrowIfNull(logger);
             _gameData = gameData;
             _playfields = playfields;
             _quests = quests;
+            _lockouts = lockouts;
             _logger = logger;
             _catalog = Load();
+            _quests.QuestEnded += OnQuestEnded;
             Instance = this;
         }
 
@@ -57,7 +65,15 @@ namespace ZoneEngine_New.Core.Events
                 return false;
             }
 
-            string questHash = string.IsNullOrWhiteSpace(spec.QuestHash) ? spec.Hash : spec.QuestHash;
+            string track = string.IsNullOrWhiteSpace(spec.Track) ? spec.Hash : spec.Track;
+            int maxPer = Math.Max(1, spec.MaxPerWindow);
+            if (!_lockouts.TryBegin(player, track, out string lockMsg, maxPer))
+            {
+                message = lockMsg;
+                return false;
+            }
+
+            string questHash = ResolveQuestHash(player, spec);
             if (_quests.GetLog(player).Quests.TryGetValue(questHash, out PlayerQuest? held) && held.IsActive)
             {
                 message = "You already have " + spec.Name + ".";
@@ -72,23 +88,71 @@ namespace ZoneEngine_New.Core.Events
             }
 
             int spawned = SpawnField(player, spec);
-            message = spec.Name + " accepted. " + (spec.WaypointText ?? string.Empty)
-                + " Field spawns=" + spawned.ToString(CultureInfo.InvariantCulture) + ".";
+            message = spec.Name + " accepted (" + questHash + "). " + (spec.WaypointText ?? string.Empty)
+                + (spawned > 0 ? " Field spawns=" + spawned.ToString(CultureInfo.InvariantCulture) + "." : string.Empty);
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                "Daily given char={0} hash={1} spawned={2}", player.Identity.Instance, spec.Hash, spawned));
+                "Daily given char={0} hash={1} quest={2} spawned={3}",
+                player.Identity.Instance, spec.Hash, questHash, spawned));
             return true;
+        }
+
+        /// <summary>Battle Station daily: either side reached 425 while the player is in the match.</summary>
+        public void NotifyBattlestationThreshold(Player player)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            if (!_quests.GetLog(player).Quests.TryGetValue("PVBS", out PlayerQuest? quest) || !quest.IsActive)
+                return;
+            if (quest.Progress >= quest.RequiredCount)
+                return;
+            quest.Progress = quest.RequiredCount;
+            if (_quests.TryComplete(player, "PVBS", out string result))
+                player.Session?.Send(new SmokeLounge.AOtomation.Messaging.Messages.N3Messages.ChatTextMessage
+                {
+                    Identity = player.Identity,
+                    Text = "Battlestation daily updated (425 points). Return to John Smith if needed. " + result
+                });
+        }
+
+        void OnQuestEnded(Player player, PlayerQuest quest)
+        {
+            if (player == null || quest == null || quest.State != QuestState.Completed)
+                return;
+
+            ReloadIfStale();
+            DailyMissionSpec? spec = FindByQuest(quest.QuestId);
+            string? track = spec?.Track;
+            int maxPer = spec != null ? Math.Max(1, spec.MaxPerWindow) : 1;
+            if (string.IsNullOrEmpty(track))
+                track = DojaChips.TrackForQuest(quest.QuestId);
+            if (string.IsNullOrEmpty(track))
+                return;
+            _lockouts.RecordComplete(player, track, maxPer);
+        }
+
+        static string ResolveQuestHash(Player player, DailyMissionSpec spec)
+        {
+            if (spec.Roll == null || spec.Roll.Count == 0)
+                return string.IsNullOrWhiteSpace(spec.QuestHash) ? spec.Hash : spec.QuestHash;
+
+            int level = player.Stats.GetOrOne(CharacterStat.Level);
+            var matches = new List<DailyRollRow>();
+            foreach (DailyRollRow row in spec.Roll)
+            {
+                if (level >= row.MinLevel && level <= row.MaxLevel && !string.IsNullOrWhiteSpace(row.QuestHash))
+                    matches.Add(row);
+            }
+
+            if (matches.Count == 0)
+                return string.IsNullOrWhiteSpace(spec.QuestHash) ? spec.Hash : spec.QuestHash;
+            return matches[Random.Shared.Next(matches.Count)].QuestHash;
         }
 
         int SpawnField(Player player, DailyMissionSpec spec)
         {
-            if (spec.Pads == null || spec.Pads.Count == 0)
+            if (spec.Pads == null || spec.Pads.Count == 0 || spec.Playfield <= 0)
                 return 0;
             if (!_playfields.Value.TryGet(spec.Playfield, out Playfield? playfield) || playfield == null)
-            {
-                // Soft-load the field so pads can spawn.
                 playfield = _playfields.Value.GetOrCreate(spec.Playfield);
-            }
-
             if (playfield == null)
                 return 0;
 
@@ -110,8 +174,7 @@ namespace ZoneEngine_New.Core.Events
             if (spec.Special != null && !string.IsNullOrWhiteSpace(spec.Special.Hash))
             {
                 int roll = Random.Shared.Next(100);
-                int chance = Math.Clamp(spec.Special.ChancePercent, 0, 100);
-                if (roll < chance)
+                if (roll < Math.Clamp(spec.Special.ChancePercent, 0, 100))
                 {
                     int level = SpecialLevel(player, spec.Special);
                     if (TrySpawn(spawns, spec.Special.Hash, level, spec.Pads[pad % spec.Pads.Count], out NpcCharacter? special)
@@ -135,7 +198,6 @@ namespace ZoneEngine_New.Core.Events
         {
             if (!special.LevelFromPlayer)
                 return Math.Max(1, special.FixedLevel);
-            // AO-Universe: Ganking UPH level = max of the player's Battle Station bracket.
             int level = Math.Clamp(player.Stats.GetOrOne(CharacterStat.Level), 1, 220);
             if (level <= 30) return 30;
             if (level <= 60) return 60;
@@ -182,10 +244,19 @@ namespace ZoneEngine_New.Core.Events
                 if (string.Equals(spec.Hash, hash, StringComparison.OrdinalIgnoreCase)
                     || string.Equals(spec.QuestHash, hash, StringComparison.OrdinalIgnoreCase))
                     return spec;
+                if (spec.Roll == null)
+                    continue;
+                foreach (DailyRollRow row in spec.Roll)
+                {
+                    if (string.Equals(row.QuestHash, hash, StringComparison.OrdinalIgnoreCase))
+                        return spec;
+                }
             }
 
             return null;
         }
+
+        DailyMissionSpec? FindByQuest(string questId) => Find(questId);
 
         void ReloadIfStale()
         {
@@ -233,12 +304,23 @@ namespace ZoneEngine_New.Core.Events
         public string Hash { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
         public string QuestHash { get; set; } = string.Empty;
+        public string Track { get; set; } = string.Empty;
+        public int MaxPerWindow { get; set; } = 1;
+        public string Status { get; set; } = "Live";
         public int Playfield { get; set; }
         public List<float[]> Pads { get; set; } = new();
         public DailyMinerSpec? Miners { get; set; }
         public DailySpecialSpec? Special { get; set; }
+        public List<DailyRollRow>? Roll { get; set; }
         public string? WaypointText { get; set; }
         public string? Note { get; set; }
+    }
+
+    public sealed class DailyRollRow
+    {
+        public int MinLevel { get; set; } = 1;
+        public int MaxLevel { get; set; } = 220;
+        public string QuestHash { get; set; } = string.Empty;
     }
 
     public sealed class DailyMinerSpec

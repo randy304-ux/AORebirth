@@ -103,6 +103,7 @@ namespace ZoneEngine_New
                 playfieldManager = rootServices.GetRequiredService<PlayfieldManager>();
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Battlestations.BattleStationService>();
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.HalloweenService>();
+                _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.DailyLockoutService>();
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.DailyMissionService>();
                 _ = rootServices.GetRequiredService<InventoryFlushService>();
                 rootServices.GetRequiredService<ZoneEngine_New.Core.Appearance.AppearancePrefsService>().Start();
@@ -306,6 +307,7 @@ namespace ZoneEngine_New
             services.AddSingleton<ZoneEngine_New.Core.Raids.InvasionService>();
             services.AddSingleton<ZoneEngine_New.Core.Battlestations.BattleStationService>();
             services.AddSingleton<ZoneEngine_New.Core.Events.HalloweenService>();
+            services.AddSingleton<ZoneEngine_New.Core.Events.DailyLockoutService>();
             services.AddSingleton<ZoneEngine_New.Core.Events.DailyMissionService>();
             services.AddSingleton<IGmCommand, InvasionCommand>();
             services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.EventCommand>();

@@ -177,6 +177,10 @@ namespace ZoneEngine_New.Core.Inventory
             if (VictoryPointClumps.TryConvert(this, player, slotIdentity, inventoryRepository, items))
                 return true;
 
+            // DOJA chips: assign the return daily; chip stays until Scarlett takes it.
+            if (DojaChips.TryUse(this, player))
+                return true;
+
             if (IsBackpackUse)
             {
                 if (TryUseBackpack(player, slotIdentity, inventoryRepository, items))
