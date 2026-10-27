@@ -28,7 +28,7 @@ namespace ZoneEngine_New.Core.Pets
         /// <summary>Server-only character stat: bit <c>Kind.Bit</c> set while that contract is active.</summary>
         public const CharacterStat ContractsStat = (CharacterStat)10280;
 
-        /// <summary>Two bits per profession: 0 basic, 1 elite, 2 champion, 3 uber. 10281-10283 are aura unlocks.</summary>
+        /// <summary>Two bits per profession: 0 basic, 1 elite, 2 champion, 3 twink. 10281-10283 are aura unlocks.</summary>
         public const CharacterStat TierStat = (CharacterStat)10284;
 
         public enum Tier
@@ -36,8 +36,8 @@ namespace ZoneEngine_New.Core.Pets
             Basic = 0,
             Elite = 1,
             Champion = 2,
-            /// <summary>Highest tier. Stored value 3; display name Uber (alias Super still parses).</summary>
-            Uber = 3
+            /// <summary>Highest tier. Stored value 3; display name Twink (uber/super still parse as aliases).</summary>
+            Twink = 3
         }
 
         /// <summary>
@@ -57,8 +57,8 @@ namespace ZoneEngine_New.Core.Pets
             // Champion wears Alien (Combined) gear, weaker than Ofab: compensate with a higher gear-QL bonus
             // (not a separate weapon-damage hack). Same DressMerc QL path as every other tier.
             Tier.Champion => new Package(180, 120, 2000, 90, 400),
-            // Uber: largest flat package so the tier is clearly best (gear + nanos + these stats).
-            Tier.Uber => new Package(220, 160, 5500, 220, 1000),
+            // Twink: largest flat package so the tier is clearly best (gear + nanos + these stats).
+            Tier.Twink => new Package(220, 160, 5500, 220, 1000),
             _ => new Package(0, 0, 0, 0, 0)
         };
 
@@ -117,11 +117,13 @@ namespace ZoneEngine_New.Core.Pets
                 case "c":
                     tier = Tier.Champion;
                     return true;
+                case "twink":
+                case "t":
                 case "uber":
                 case "u":
                 case "super":
                 case "s":
-                    tier = Tier.Uber;
+                    tier = Tier.Twink;
                     return true;
                 default:
                     return false;
@@ -132,13 +134,13 @@ namespace ZoneEngine_New.Core.Pets
         {
             Tier.Elite => "Elite",
             Tier.Champion => "Champion",
-            Tier.Uber => "Uber",
+            Tier.Twink => "Twink",
             _ => "Basic"
         };
 
         /// <summary>
         /// Tier-specific worn armor (replaces Mercs.json bands above basic). Null means use Mercs.json.
-        /// Elite = Penultimate Ofab. Champion = Combined Alien. Uber = Beast helm/shoulders/back + Combined body.
+        /// Elite = Penultimate Ofab. Champion = Combined Alien. Twink = Beast helm/shoulders/back + Combined body.
         /// </summary>
         public static IReadOnlyList<GearPiece>? TierArmorFor(Kind kind, Tier tier)
         {
@@ -148,7 +150,7 @@ namespace ZoneEngine_New.Core.Pets
                 return EliteOfabArmor(kind.Key);
             if (tier == Tier.Champion)
                 return CombinedAlienArmor(kind.Key, includeHead: true);
-            // Uber: Beast shoulders, helmet, back + Combined Alien for the rest (no Combined head).
+            // Twink: Beast shoulders, helmet, back + Combined Alien for the rest (no Combined head).
             var body = CombinedAlienArmor(kind.Key, includeHead: false);
             var list = new List<GearPiece>(body.Count + 3)
             {
@@ -165,7 +167,7 @@ namespace ZoneEngine_New.Core.Pets
         {
             if (tier == Tier.Basic)
                 return null;
-            if (tier is Tier.Elite or Tier.Uber)
+            if (tier is Tier.Elite or Tier.Twink)
                 return OfabMk6Weapon(kind.Key);
             return KyrAlienWeapon(kind.Key);
         }
@@ -307,7 +309,7 @@ namespace ZoneEngine_New.Core.Pets
         static GearPiece P(int low, int high) => new(low, high);
 
         /// <summary>
-        /// Profession nanos uploaded for this tier. Cumulative: basic &lt; elite &lt; champion &lt; uber.
+        /// Profession nanos uploaded for this tier. Cumulative: basic &lt; elite &lt; champion &lt; twink.
         /// IDs are castable nano programs (Ofab crystal OnUse targets + classic specials/heals), verified in items.dat.
         /// </summary>
         public static IReadOnlyList<int> TierNanosFor(Kind kind, Tier tier)
@@ -315,10 +317,10 @@ namespace ZoneEngine_New.Core.Pets
             int[] basic = ProfessionNanoBasic(kind.Key);
             int[] elite = ProfessionNanoElite(kind.Key);
             int[] champion = ProfessionNanoChampion(kind.Key);
-            int[] uber = ProfessionNanoUber(kind.Key);
+            int[] twink = ProfessionNanoTwink(kind.Key);
             return tier switch
             {
-                Tier.Uber => MergeNanos(basic, elite, champion, uber),
+                Tier.Twink => MergeNanos(basic, elite, champion, twink),
                 Tier.Champion => MergeNanos(basic, elite, champion),
                 Tier.Elite => MergeNanos(basic, elite),
                 _ => basic
@@ -399,7 +401,7 @@ namespace ZoneEngine_New.Core.Pets
             _ => []
         };
 
-        static int[] ProfessionNanoUber(string key) => key switch
+        static int[] ProfessionNanoTwink(string key) => key switch
         {
             "soldier" => [302399],
             "enforcer" => [301291],

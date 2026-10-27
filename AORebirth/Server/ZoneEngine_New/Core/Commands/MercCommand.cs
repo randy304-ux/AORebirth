@@ -19,7 +19,7 @@ namespace ZoneEngine_New.Core.Commands
 
         public int RequiredGmLevel => 0;
 
-        public string Usage => ".merc | .merc hire <profession> [basic|elite|champion|uber] | .merc dismiss <profession|all> | .merc call | .merc list";
+        public string Usage => ".merc | .merc hire <profession> [basic|elite|champion|twink] | .merc dismiss <profession|all> | .merc call | .merc list";
 
         public string Topic => "mercs";
 
@@ -46,13 +46,13 @@ namespace ZoneEngine_New.Core.Commands
                     Mercs.Tier tier = Mercs.Tier.Basic;
                     if (hireParts.Length > 1 && !Mercs.TryParseTier(hireParts[1], out tier))
                     {
-                        Say("Tiers: basic, elite, champion, uber (super is an alias for uber).");
+                        Say("Tiers: basic, elite, champion, twink (uber/super are aliases for twink).");
                         return;
                     }
 
                     if (tier != Mercs.Tier.Basic && player.Stats.GetOrZero(CharacterStat.GmLevel) < 1)
                     {
-                        Say("Elite, champion and uber contracts are GM-only until a drop is chosen. .merc hire " + (hireParts.Length > 0 ? hireParts[0] : "<profession>") + " still hires a basic.");
+                        Say("Elite, champion and twink contracts are GM-only until a drop is chosen. .merc hire " + (hireParts.Length > 0 ? hireParts[0] : "<profession>") + " still hires a basic.");
                         return;
                     }
 

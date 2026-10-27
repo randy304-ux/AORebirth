@@ -122,7 +122,7 @@ namespace ZoneEngine_New.Core.Pets
                     int nanoLevel = mercKind != null ? Mercs.PowerLevel(petLevel, tier) : petLevel;
                     if (mercKind != null)
                     {
-                        // Own-profession spells/buffs/specials; stronger lists at higher tiers (basic < elite < champion < uber).
+                        // Own-profession spells/buffs/specials; stronger lists at higher tiers (basic < elite < champion < twink).
                         npc.UploadedNanoIds.AddRange(Mercs.TierNanosFor(mercKind, tier));
                     }
                     else
@@ -293,7 +293,7 @@ namespace ZoneEngine_New.Core.Pets
 
         /// <summary>
         /// Armor and hand weapon for <paramref name="tier"/>. Basic uses Mercs.json bands.
-        /// Elite/Champion/Uber use verified Ofab / Combined Alien / Beast template ids from <see cref="Mercs.TierArmorFor"/>.
+        /// Elite/Champion/Twink use verified Ofab / Combined Alien / Beast template ids from <see cref="Mercs.TierArmorFor"/>.
         /// Pieces are minted at <paramref name="itemQuality"/> (tier gear-QL bonus already applied by the caller).
         /// </summary>
         void DressMerc(NpcCharacter npc, Mercs.Kind kind, int armorLevel, int itemQuality, int ownerSide, Mercs.Tier tier)

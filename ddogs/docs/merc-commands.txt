@@ -5,8 +5,8 @@ Tiers above basic need GM level 1. Body level stays at your level (cap 220); tie
 Profession keys (aliases in parentheses): enforcer (enf), soldier (sol), keeper (keep),
 doctor (doc), adventurer (adv), agent, bureaucrat (crat), engineer (engi, eng), fixer (fix),
 martialartist (ma, martial), metaphysicist (mp, meta), nanotechnician (nt, nano), shade, trader.
-Tier words: basic|normal, elite|e, champion|champ|c, uber|u|super|s
-  (super is accepted as an alias for uber)
+Tier words: basic|normal, elite|e, champion|champ|c, twink|t|uber|u|super|s
+  (uber and super are accepted as aliases for twink)
 
 List current mercs
 ------------------
@@ -64,22 +64,22 @@ Hire CHAMPION (Combined Alien armor + Kyr'Ozch weapon, higher gear QL) — GM
 .merc hire shade champion
 .merc hire trader champion
 
-Hire UBER (Beast helm/shoulders/back + Combined Alien body + Mk 6 Ofab weapon) — GM
+Hire TWINK (Beast helm/shoulders/back + Combined Alien body + Mk 6 Ofab weapon) — GM
 ----------------------------------------------------------------------------------
-.merc hire enforcer uber
-.merc hire soldier uber
-.merc hire keeper uber
-.merc hire doctor uber
-.merc hire adventurer uber
-.merc hire agent uber
-.merc hire bureaucrat uber
-.merc hire engineer uber
-.merc hire fixer uber
-.merc hire martialartist uber
-.merc hire metaphysicist uber
-.merc hire nanotechnician uber
-.merc hire shade uber
-.merc hire trader uber
+.merc hire enforcer twink
+.merc hire soldier twink
+.merc hire keeper twink
+.merc hire doctor twink
+.merc hire adventurer twink
+.merc hire agent twink
+.merc hire bureaucrat twink
+.merc hire engineer twink
+.merc hire fixer twink
+.merc hire martialartist twink
+.merc hire metaphysicist twink
+.merc hire nanotechnician twink
+.merc hire shade twink
+.merc hire trader twink
 
 Dismiss one merc (ends that contract)
 -------------------------------------
