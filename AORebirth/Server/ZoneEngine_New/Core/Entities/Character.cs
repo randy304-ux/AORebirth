@@ -1662,10 +1662,31 @@
             if (GetEdgeDistanceTo(target) > characterWeapon.GetAttackRange())
                 return;
 
+            // Template MinDamage/MaxDamage (e.g. Abmouth 73-148) own the numeric hit for NPCs.
+            // The equipped monster weapon still supplies attack/defense skill and SAW/AttackInfo shape.
+            int? minDamageOverride = null;
+            int? maxDamageOverride = null;
+            if (!IsPlayer)
+            {
+                int templateMin = Stats.GetOrZero(CharacterStat.MinDamage);
+                int templateMax = Stats.GetOrZero(CharacterStat.MaxDamage);
+                if (templateMin > 0 || templateMax > 0)
+                {
+                    int lo = templateMin > 0 ? templateMin : templateMax;
+                    int hi = templateMax > 0 ? templateMax : templateMin;
+                    if (hi < lo)
+                        (lo, hi) = (hi, lo);
+                    minDamageOverride = lo;
+                    maxDamageOverride = hi;
+                }
+            }
+
             DamageCalculator.DamageResult result = DamageCalculator.CalculateFromWeapon(
                 this,
                 target,
-                characterWeapon.DamageItem);
+                characterWeapon.DamageItem,
+                minDamageOverride: minDamageOverride,
+                maxDamageOverride: maxDamageOverride);
             int attackInfoSlot = AttackInfoRules.ResolveWeaponSlot(
                 characterWeapon,
                 characterWeapon.LogicalSlot,

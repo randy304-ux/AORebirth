@@ -145,17 +145,20 @@ foreach ($h in $subway) {
   $report += "subway $h $($u.Name) L$lo-$hi recorded L$recLvl HP$recHp model $($u.Stats.'359') points $(@($pts).Count)"
 }
 
-# 5. Abmouth Supremus (ASSU). Level 30, HP 10324, melee 73-148 (AOWiki/Fandom; AO-Universe confirms the final-room boss).
-#    No recorded model exists, so it borrows the Infector (INFE, family 150, its two guards in the final room) look at a larger scale.
+# 5. Abmouth Supremus (ASSU). Level 30 subway final boss.
+#    HP 10324, melee 73-148, crits 140-209, RunSpeed 114: AOWiki Condemned_Subway (Auno NPC page 403).
+#    Live capture 20260716-220400: HP 10324, scale 162, RunSpeed 115, monster 155962, player hits 74-125.
+#    AO-Universe low-level Subway guide confirms final-room boss; birthday Abmouth Indomitus is a separate
+#    Coast of Peace world boss (5-8k AOE) and is not this ASSU row.
 $inf = $upstream | Where-Object { $_.Hash -eq 'INFE' } | Select-Object -First 1
 $skel = [ordered]@{ Stats = [ordered]@{} }; foreach ($p in $inf.Stats.PSObject.Properties) { $skel.Stats[$p.Name] = [int]$p.Value }
-$b = Band $skel 'Abmouth Supremus' 30 ([ordered]@{ '1' = 10324; '359' = 155962; '360' = 100 })   # client MonsterData 155962 is named 'abmouth' (catmesh 155548 abmouth.cir); native size, tune 360 if needed
+$b = Band $skel 'Abmouth Supremus' 30 ([ordered]@{ '1' = 10324; '359' = 155962; '360' = 162; '156' = 115 })
 $b.Stats['285'] = 148; $b.Stats['286'] = 73
 # Randy's rule: 2 Infectors on first aggro and again under 75/50/25% health (engine BossTriggers, once per fight, reset on death/leash).
 $adds = @([ordered]@{ Type = 'SpawnAdds'; Hash = 'INFE'; Count = 2; Radius = 4 })
 $b['BossTriggers'] = @([ordered]@{ On = 'FirstAggro'; Pct = 0; Actions = $adds }) + @(75, 50, 25 | ForEach-Object { [ordered]@{ On = 'HealthBelow'; Pct = $_; Actions = $adds } })
 $catalog['ASSU'] = [ordered]@{ Templates = @($b) }
-$report += "subway ASSU Abmouth Supremus L30 HP10324 dmg73-148 model 155962 (client abmouth) scale100"
+$report += "subway ASSU Abmouth Supremus L30 HP10324 dmg73-148 run115 scale162 model 155962 (client abmouth)"
 
 # 6. Subway loot (item hashes SW** in ItemTemplates.json, ids matched by name in itemnames).
 #    Ring 100% on Abmouth is from the Fandom wiki; every other chance is a placeholder for Randy to tune (guides only say rare/uncommon).
