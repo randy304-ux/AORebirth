@@ -57,7 +57,8 @@ namespace ZoneEngine_New.Core.Pets
             // Champion wears Alien (Combined) gear, weaker than Ofab: compensate with a higher gear-QL bonus
             // (not a separate weapon-damage hack). Same DressMerc QL path as every other tier.
             Tier.Champion => new Package(180, 120, 2000, 90, 400),
-            Tier.Uber => new Package(220, 160, 4000, 160, 700),
+            // Uber: largest flat package so the tier is clearly best (gear + nanos + these stats).
+            Tier.Uber => new Package(220, 160, 5500, 220, 1000),
             _ => new Package(0, 0, 0, 0, 0)
         };
 
@@ -304,6 +305,118 @@ namespace ZoneEngine_New.Core.Pets
         };
 
         static GearPiece P(int low, int high) => new(low, high);
+
+        /// <summary>
+        /// Profession nanos uploaded for this tier. Cumulative: basic &lt; elite &lt; champion &lt; uber.
+        /// IDs are castable nano programs (Ofab crystal OnUse targets + classic specials/heals), verified in items.dat.
+        /// </summary>
+        public static IReadOnlyList<int> TierNanosFor(Kind kind, Tier tier)
+        {
+            int[] basic = ProfessionNanoBasic(kind.Key);
+            int[] elite = ProfessionNanoElite(kind.Key);
+            int[] champion = ProfessionNanoChampion(kind.Key);
+            int[] uber = ProfessionNanoUber(kind.Key);
+            return tier switch
+            {
+                Tier.Uber => MergeNanos(basic, elite, champion, uber),
+                Tier.Champion => MergeNanos(basic, elite, champion),
+                Tier.Elite => MergeNanos(basic, elite),
+                _ => basic
+            };
+        }
+
+        static int[] MergeNanos(params int[][] bands)
+        {
+            var list = new List<int>();
+            var seen = new HashSet<int>();
+            foreach (int[] band in bands)
+            {
+                foreach (int id in band)
+                {
+                    if (id > 0 && seen.Add(id))
+                        list.Add(id);
+                }
+            }
+
+            return list.ToArray();
+        }
+
+        // Classic specials / heals + Ofab profession programs (cast IDs from crystal OnUse 53019).
+        static int[] ProfessionNanoBasic(string key) => key switch
+        {
+            "soldier" => [82208, 82209, 82211, 82215, 227152],
+            "enforcer" => [82210, 211753, 261239, 227152, 100195],
+            "doctor" => [26465, 26466, 42405],
+            "adventurer" => [82208, 82215, 26465, 26466],
+            "agent" => [82215, 129082, 82208],
+            "bureaucrat" => [267538, 279340, 267603],
+            "engineer" => [266309, 267606],
+            "fixer" => [93125, 82208, 82211],
+            "keeper" => [279378, 266301],
+            "martialartist" => [82210, 82213, 82214],
+            "metaphysicist" => [267275, 267272, 266299],
+            "nanotechnician" => [28619, 150501, 266302],
+            "shade" => [129082, 82214, 82213],
+            "trader" => [301533, 301525, 280050],
+            _ => []
+        };
+
+        static int[] ProfessionNanoElite(string key) => key switch
+        {
+            "soldier" => [266310, 267624, 301897],
+            "enforcer" => [266304, 279347, 287753],
+            "doctor" => [28665, 28676, 266303, 267649, 279372],
+            "adventurer" => [28665, 266306, 301835, 302223],
+            "agent" => [266307, 82211],
+            "bureaucrat" => [267535, 267604, 267611, 266305],
+            "engineer" => [267607, 302254],
+            "fixer" => [266308, 279374, 279376],
+            "keeper" => [301153],
+            "martialartist" => [266311, 287559, 279345],
+            "metaphysicist" => [267269, 267271, 267598],
+            "nanotechnician" => [266298, 266293, 266292],
+            "shade" => [266300],
+            "trader" => [301529, 301521, 266312, 301899],
+            _ => []
+        };
+
+        static int[] ProfessionNanoChampion(string key) => key switch
+        {
+            "soldier" => [302395],
+            "enforcer" => [301853],
+            "doctor" => [28650, 267620, 301845],
+            "adventurer" => [28676, 302235, 302229, 302217],
+            "agent" => [301838],
+            "bureaucrat" => [267605, 267311, 222687, 267612],
+            "engineer" => [267608, 274369],
+            "fixer" => [274373, 301861, 301859],
+            "keeper" => [301602],
+            "martialartist" => [301936, 301493],
+            "metaphysicist" => [267600, 267601, 267599, 301888],
+            "nanotechnician" => [266297, 266296, 266294, 302274],
+            "shade" => [301593],
+            "trader" => [267121, 267264, 267114],
+            _ => []
+        };
+
+        static int[] ProfessionNanoUber(string key) => key switch
+        {
+            "soldier" => [302399],
+            "enforcer" => [301291],
+            "doctor" => [267623, 267621],
+            "adventurer" => [28650, 302243],
+            "agent" => [82209],
+            "bureaucrat" => [267616, 267916, 302247, 302154, 267917],
+            "engineer" => [301855],
+            "fixer" => [302412, 301867, 93127],
+            "keeper" => [301117],
+            "martialartist" => [100195],
+            "metaphysicist" => [267609, 267617, 302257, 300506, 267281, 267283],
+            "nanotechnician" => [218168, 266287, 302074, 266289],
+            "shade" => [301895],
+            "trader" => [267117, 267266, 267110, 302288, 302401, 302290],
+            _ => []
+        };
 
         public static Tier GetTier(Player owner, Kind kind)
         {

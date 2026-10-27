@@ -120,10 +120,23 @@ namespace ZoneEngine_New.Core.Pets
                         ? Mercs.GetTier(tierOwner, mercKind)
                         : Mercs.Tier.Basic;
                     int nanoLevel = mercKind != null ? Mercs.PowerLevel(petLevel, tier) : petLevel;
-                    npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, hash, nanoLevel));
-                    // A heal pet (the MP's Salvinous) has no merc profession of its own: it casts the doctor's heal band.
-                    if (npc.UploadedNanoIds.Count == 0 && IsHealPet(type))
-                        npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, "MRDR", petLevel));
+                    if (mercKind != null)
+                    {
+                        // Own-profession spells/buffs/specials; stronger lists at higher tiers (basic < elite < champion < uber).
+                        npc.UploadedNanoIds.AddRange(Mercs.TierNanosFor(mercKind, tier));
+                    }
+                    else
+                    {
+                        npc.UploadedNanoIds.AddRange(Mercs.NanosFor(_gameData.RootPath, hash, nanoLevel));
+                    }
+
+                    // A heal pet (the MP's Salvinous) has no merc profession of its own: it casts the doctor's heal line.
+                    if (npc.UploadedNanoIds.Count == 0 && IsHealPet(type)
+                        && Mercs.Find("doctor") is { } docKind)
+                    {
+                        npc.UploadedNanoIds.AddRange(Mercs.TierNanosFor(docKind, Mercs.Tier.Basic));
+                    }
+
                     if (mercKind != null)
                     {
                         int gearQl = Mercs.GearQuality(petLevel, tier);
