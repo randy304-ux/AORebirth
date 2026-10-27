@@ -1,6 +1,6 @@
 # Alien mothership missions vs alien city-raid ships
 
-Research date: 2026-10-26 (addendum same day). Drop rules for Unicorn Recruiter **team** motherships (ZXTE / ZXT1 / ZXTH → **ALMS**). City invasions keep **ALGT**. Layout / Admiral / LE-form spawn work stays proposed for Randy’s approval.
+Research date: 2026-10-26 (addenda same day). Drop rules for Unicorn Recruiter **team** motherships (ZXTE / ZXT1 / ZXTH → **ALMS**). City invasions keep **ALGT**. Trash multi-drop rates live in `GameData/MothershipVpLoot.json`. Layout / Admiral / LE-form spawn work stays proposed for Randy’s approval.
 
 ## Sources
 
@@ -66,16 +66,18 @@ AO-Universe “The New Aliens” and [AOWiki Kyr’ozch](https://wiki.aodb.us/wi
 | **ALMS** | ZXTE / ZXT1 / ZXTH `ObjectiveNpcHash` | **KBMG** 2–4 (mothership numbered bios) + **KVCL** ×5 (VP clumps) + shared weapon/armor extras |
 | **ALGT** | `Invasions.json` city-wave boss; AI raid table | **KBTY** ×2 (AI weapon-special bios) + KZTW / KZPM / KAAR — **no** KBMG / KVCL |
 | **ALGN** | Solo ship boss | Pre-raid General table (no mothership VP/Ofab pool) |
-| Crew + `KZBM` 10% | Shared ship crew (incl. team RegularNpcHashes) | **KVCL** Chance **90** (one VP bio); numbered types **not** on trash |
+| Crew + `KZBM` 10% | Shared ship crew (incl. team RegularNpcHashes) | Independent **KVCL** rolls (default **90% / 30% / 10%**, max 3); numbered types **not** on trash |
 
-Trash tier mix when a VP bio drops (`KVCL` Children, uniform pick with Cell tripled):
+Tunables: `GameData/MothershipVpLoot.json` (re-run `ddogs/tools/Build-MothershipBioLoot.ps1` after edits).
 
-- **50%** Cell Templates (`KVPC` ×3)
-- **~16.7%** Plasmid Cultures (`KVPP`)
-- **~16.7%** Mitochondria Samples (`KVPM`)
-- **~16.7%** Protein Mapping Data (`KVPR`)
+Default trash chances (independent rolls, max 3): **90%** first, **30%** second, **10%** third.
 
-Script: `ddogs/tools/Build-MothershipBioLoot.ps1`.
+Default tier mix per successful roll (`TierWeights` → `KVCL` Children):
+
+- **50%** Cell Templates (`KVPC` weight 3)
+- **~16.7%** Plasmid Cultures (`KVPP` weight 1)
+- **~16.7%** Mitochondria Samples (`KVPM` weight 1)
+- **~16.7%** Protein Mapping Data (`KVPR` weight 1)
 
 Admiral / city-General viralbot pools are **not** wired to KBMG/KVCL.
 
