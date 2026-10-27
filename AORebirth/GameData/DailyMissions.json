@@ -1,0 +1,21 @@
+{
+  "_comment": "Reusable outdoor/daily mission catalog. Knubot {givedaily HASH} assigns Quests.json HASH and spawns the field. Randy will expand this list.",
+  "Missions": [
+    {
+      "Hash": "KTCM",
+      "Name": "Killing the Competition",
+      "QuestHash": "KTCM",
+      "Playfield": 791,
+      "Pads": [[220, 1.2, 1060], [240, 1.2, 1080], [200, 1.2, 1040], [260, 1.2, 1050]],
+      "Miners": { "Hash": "RGNM", "Count": 3, "Level": 1 },
+      "Special": {
+        "Hash": "GNKP",
+        "ChancePercent": 100,
+        "LevelFromPlayer": true,
+        "Note": "Ganking Uncle Pumpkin-Head. Official 6h respawn ignored: every accept can spawn one. Level = BS bracket max for the player."
+      },
+      "WaypointText": "Stret West Notum Ore (playfield 791). Kill three Rogue Notum Miners, then return to John Smith.",
+      "Note": "AO-Universe daily. Field stand-in for Notum Mining Area until that map is wired; pads are the Stret West Notum Ore district."
+    }
+  ]
+}

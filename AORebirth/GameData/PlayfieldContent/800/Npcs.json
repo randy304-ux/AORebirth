@@ -75,6 +75,61 @@
                      "Presentation":  {
 
                                       }
+                 },
+                 {
+                     "Key":  "ddogs:daily:800:john-smith",
+                     "Provenance":  "John Smith at Antiques n such Borealis ~690x590 (AO-Universe Killing the Competition).",
+                     "ContentNpcIdentity":  "ddogs-john-smith",
+                     "PlayfieldId":  800,
+                     "InstanceId":  2110940100,
+                     "Name":  "John Smith",
+                     "Position":  [
+                                      690,
+                                      5,
+                                      590
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  1,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  50,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40700,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  204985,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
                  }
              ],
     "StandaloneShops":  [

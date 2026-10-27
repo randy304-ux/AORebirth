@@ -1,0 +1,25 @@
+{
+  "Notes": "Victory Point daily giver at Antiques n' such, Borealis. {givedaily KTCM} assigns Killing the Competition and spawns the field.",
+  "Npcs": [ "JNSM", "ddogs-john-smith" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "daily": { "Text": "I want a Victory Point mission.", "Goto": "daily" },
+    "done": { "Text": "The miners are dealt with.", "Goto": "done" },
+    "bye": { "Text": "Goodbye", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "John Smith. Antiques n' such. If you would rather skip Battle Station, I have a Victory Point job in the notum field.",
+      "Replies": [ "daily", "done", "bye" ]
+    },
+    "daily": {
+      "Text": "Kill three Rogue Notum Miners dealing in illegal notum. The field is Stret West Notum Ore for now. A Ganking Uncle Pumpkin-Head can show up on every run.{givedaily KTCM}",
+      "Replies": [ "bye" ]
+    },
+    "done": {
+      "Text": "Good work. Here is your pay.{completequest KTCM}",
+      "Replies": [ "bye" ]
+    },
+    "bye": { "Text": "{close}" }
+  }
+}

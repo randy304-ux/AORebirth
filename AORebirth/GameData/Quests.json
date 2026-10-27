@@ -4334,5 +4334,31 @@
                                        ]
                                    ]
                    }
+    },
+    {
+        "Hash":  "KTCM",
+        "Name":  "Killing the Competition",
+        "QasInstance":  930001,
+        "Scope":  "Solo",
+        "Action":  "KillMultiple",
+        "Summary":  "Kill three Rogue Notum Miners dealing in illegal notum, then return to John Smith.",
+        "Objective":  {
+                          "SpecItem":  null,
+                          "WorldItem":  null,
+                          "Npc":  "RGNM",
+                          "Count":  3
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Xp":  500,
+                       "Credits":  0,
+                       "Stats":  {
+                                     "669":  25
+                                 },
+                       "Hash":  "RKTC",
+                       "Records":  null
+                   }
     }
 ]
