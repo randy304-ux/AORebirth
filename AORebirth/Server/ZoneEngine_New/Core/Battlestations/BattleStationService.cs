@@ -347,8 +347,11 @@ namespace ZoneEngine_New.Core.Battlestations
                 (team == 1 ? red : blue).Add(player);
             }
 
+            match.UsesBots = fill;
             if (fill)
             {
+                // Fill both sides now so the match is even when humans land. Mid-match backfill
+                // stays one bot per tick (see TryBackfill).
                 SpawnBots(match, 1, _catalog.TeamSize - red.Count);
                 SpawnBots(match, 2, _catalog.TeamSize - blue.Count);
             }
@@ -390,7 +393,7 @@ namespace ZoneEngine_New.Core.Battlestations
                     continue;
                 }
 
-                int slot = i;
+                int slot = match.Bots.Count + i;
                 int teamId = team;
                 NpcCharacter npc;
                 try
@@ -417,7 +420,8 @@ namespace ZoneEngine_New.Core.Battlestations
 
         void Dress(NpcCharacter body, int team, int slot)
         {
-            body.Name = (team == 1 ? "Red" : "Blue") + " Guard";
+            string tag = GuardNames[Math.Abs(slot) % GuardNames.Length];
+            body.Name = (team == 1 ? "Red" : "Blue") + " Guard " + tag;
             body.Stats.Set(CharacterStat.BattlestationSide, team);
             body.Stats.Set(CharacterStat.Side, (int)Side.Neutral);
             body.Stats.Set(CharacterStat.BreedHostility, Math.Max(1, body.Stats.GetOrZero(CharacterStat.BreedHostility)));
@@ -429,9 +433,13 @@ namespace ZoneEngine_New.Core.Battlestations
                 body.Brain.PatrolEnabled = true;
                 body.Brain.PatrolWaypoints = new[] { body.Position };
             }
-
-            _ = slot;
         }
+
+        static readonly string[] GuardNames =
+        [
+            "Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot",
+            "Golf", "Hotel", "India", "Juliet", "Kilo", "Lima"
+        ];
 
         void TickMatch(Playfield field, double deltaTime)
         {
@@ -445,9 +453,11 @@ namespace ZoneEngine_New.Core.Battlestations
             if (match.Ending)
                 return;
 
+            match.BotSpawnedThisTick = false;
             ExpireHacks(match, deltaTime);
             Score(match, deltaTime);
             TickHumans(match, deltaTime);
+            TryBackfill(match, deltaTime);
             TickBots(match, deltaTime);
 
             if (match.RedScore >= _catalog.ScoreCap || match.BlueScore >= _catalog.ScoreCap)
@@ -580,18 +590,55 @@ namespace ZoneEngine_New.Core.Battlestations
             }
         }
 
+        void TryBackfill(Match match, double deltaTime)
+        {
+            if (!match.UsesBots || match.Ending || match.BotSpawnedThisTick)
+                return;
+
+            if (match.BackfillLeft > 0)
+            {
+                match.BackfillLeft -= deltaTime;
+                if (match.BackfillLeft > 0)
+                    return;
+            }
+
+            for (int team = 1; team <= 2; team++)
+            {
+                int humans = 0;
+                for (int i = 0; i < match.Humans.Count; i++)
+                {
+                    if (match.Humans[i].Team == team)
+                        humans++;
+                }
+
+                int live = 0;
+                for (int i = 0; i < match.Bots.Count; i++)
+                {
+                    if (match.Bots[i].Team == team && !match.Bots[i].Dead)
+                        live++;
+                }
+
+                if (humans + live >= _catalog.TeamSize)
+                    continue;
+
+                SpawnBots(match, team, 1);
+                match.BotSpawnedThisTick = true;
+                return;
+            }
+        }
+
         void TickBots(Match match, double deltaTime)
         {
+            bool respawned = false;
             for (int i = 0; i < match.Bots.Count; i++)
             {
                 Bot bot = match.Bots[i];
                 if (bot.Dead)
                 {
                     bot.RespawnLeft -= deltaTime;
-                    if (bot.RespawnLeft > 0)
+                    if (bot.RespawnLeft > 0 || respawned || match.BotSpawnedThisTick)
                         continue;
 
-                    bot.RespawnLeft = 10;
                     try
                     {
                         match.Field.GetRequiredService<SpawnService>().DespawnNpc(bot.Npc);
@@ -601,17 +648,15 @@ namespace ZoneEngine_New.Core.Battlestations
                         _logger.Warn("Battle station bot despawn failed: " + exception.Message);
                     }
 
-                    int count = 1;
-                    int before = match.Bots.Count;
-                    SpawnBots(match, bot.Team, count);
-                    if (match.Bots.Count > before)
+                    int team = bot.Team;
+                    match.Bots.RemoveAt(i);
+                    i--;
+                    // One new body per tick.
+                    if (!respawned && !match.BotSpawnedThisTick)
                     {
-                        Bot born = match.Bots[match.Bots.Count - 1];
-                        match.Bots.RemoveAt(match.Bots.Count - 1);
-                        bot.Npc = born.Npc;
-                        bot.Dead = false;
-                        bot.HackConsole = -1;
-                        bot.Npc.Died += _ => bot.Dead = true;
+                        SpawnBots(match, team, 1);
+                        match.BotSpawnedThisTick = true;
+                        respawned = true;
                     }
 
                     continue;
@@ -621,6 +666,7 @@ namespace ZoneEngine_New.Core.Battlestations
                 {
                     bot.Dead = true;
                     bot.RespawnLeft = 10;
+                    bot.HackConsole = -1;
                     continue;
                 }
 
@@ -633,19 +679,25 @@ namespace ZoneEngine_New.Core.Battlestations
                             bot.Npc.Brain.PatrolEnabled = true;
                     }
 
+                    bot.StuckSeconds = 0;
                     continue;
                 }
 
-                StationConsole goal = _catalog.Consoles[bot.Goal];
-                if (match.Owner[bot.Goal] == bot.Team)
-                    bot.Goal = NextGoal(match, bot.Team);
+                if (match.Owner[bot.Goal] == bot.Team || bot.HackConsole < 0)
+                    bot.Goal = NextGoal(match, bot.Team, bot);
 
-                goal = _catalog.Consoles[bot.Goal];
+                StationConsole goal = _catalog.Consoles[bot.Goal];
                 float x = bot.Npc.Position.xf;
                 float z = bot.Npc.Position.zf;
                 float goalDist = Distance(x, z, goal.X, goal.Z);
                 if (goalDist < 6f && bot.HackConsole < 0 && match.Owner[bot.Goal] != bot.Team)
                 {
+                    if (EnemiesNear(match, bot, _catalog.BotEnemyClearRange))
+                    {
+                        bot.StuckSeconds = 0;
+                        continue;
+                    }
+
                     bot.HackConsole = bot.Goal;
                     bot.HackLeft = _catalog.HackSeconds;
                     if (bot.Npc.Brain != null)
@@ -655,24 +707,101 @@ namespace ZoneEngine_New.Core.Battlestations
                 }
 
                 if (bot.HackConsole >= 0)
+                {
+                    bot.StuckSeconds = 0;
                     continue;
+                }
+
+                float moved = Distance(x, z, bot.LastX, bot.LastZ);
+                bot.LastX = x;
+                bot.LastZ = z;
+                if (goalDist > 12f && moved < 1f)
+                {
+                    bot.StuckSeconds += deltaTime;
+                    if (bot.StuckSeconds >= _catalog.BotStuckSeconds && !HumanCanSee(match, bot))
+                    {
+                        bot.Npc.Motor.Warp(new Vector3(goal.X, goal.Y, goal.Z));
+                        bot.StuckSeconds = 0;
+                        continue;
+                    }
+                }
+                else
+                {
+                    bot.StuckSeconds = 0;
+                }
 
                 Steer(bot, goal);
             }
         }
 
-        int NextGoal(Match match, int team)
+        int NextGoal(Match match, int team, Bot self)
         {
-            if (match.Owner[0] != team)
-                return 0;
-
-            for (int i = 1; i < match.Owner.Length; i++)
+            int best = -1;
+            int bestCost = int.MaxValue;
+            for (int i = 0; i < match.Owner.Length; i++)
             {
-                if (match.Owner[i] != team)
-                    return i;
+                if (match.Owner[i] == team)
+                    continue;
+
+                int cost = i == 0 ? 0 : 10;
+                for (int b = 0; b < match.Bots.Count; b++)
+                {
+                    Bot other = match.Bots[b];
+                    if (ReferenceEquals(other, self) || other.Dead || other.Team != team)
+                        continue;
+                    if (other.Goal == i || other.HackConsole == i)
+                        cost += 25;
+                }
+
+                if (cost < bestCost)
+                {
+                    bestCost = cost;
+                    best = i;
+                }
             }
 
-            return 0;
+            return best >= 0 ? best : 0;
+        }
+
+        bool EnemiesNear(Match match, Bot bot, float range)
+        {
+            float x = bot.Npc.Position.xf;
+            float z = bot.Npc.Position.zf;
+            for (int i = 0; i < match.Humans.Count; i++)
+            {
+                Human human = match.Humans[i];
+                if (human.Team == bot.Team || human.Player.IsDead)
+                    continue;
+                if (Distance(x, z, human.Player.Position.xf, human.Player.Position.zf) <= range)
+                    return true;
+            }
+
+            for (int i = 0; i < match.Bots.Count; i++)
+            {
+                Bot other = match.Bots[i];
+                if (other.Dead || other.Team == bot.Team || ReferenceEquals(other, bot))
+                    continue;
+                if (Distance(x, z, other.Npc.Position.xf, other.Npc.Position.zf) <= range)
+                    return true;
+            }
+
+            return false;
+        }
+
+        bool HumanCanSee(Match match, Bot bot)
+        {
+            float x = bot.Npc.Position.xf;
+            float z = bot.Npc.Position.zf;
+            for (int i = 0; i < match.Humans.Count; i++)
+            {
+                Human human = match.Humans[i];
+                if (human.Player.Session == null || !ReferenceEquals(human.Player.Playfield, match.Field))
+                    continue;
+                if (Distance(x, z, human.Player.Position.xf, human.Player.Position.zf) < 80f)
+                    return true;
+            }
+
+            return false;
         }
 
         void Steer(Bot bot, StationConsole goal)
@@ -779,6 +908,9 @@ namespace ZoneEngine_New.Core.Battlestations
                 _channeling.Remove(human.Player.Identity.Instance);
                 match.Humans.Remove(human);
             }
+
+            if (match.UsesBots)
+                match.BackfillLeft = _catalog.BotBackfillSeconds;
 
             if (human.Player.Session != null)
                 Say(human.Player, text);
@@ -958,6 +1090,12 @@ namespace ZoneEngine_New.Core.Battlestations
 
             public bool Ending;
 
+            public bool UsesBots;
+
+            public double BackfillLeft;
+
+            public bool BotSpawnedThisTick;
+
             public List<Human> Humans { get; } = new();
 
             public List<Bot> Bots { get; } = new();
@@ -1000,6 +1138,8 @@ namespace ZoneEngine_New.Core.Battlestations
                 Npc = npc;
                 Team = team;
                 Goal = goal;
+                LastX = npc.Position.xf;
+                LastZ = npc.Position.zf;
             }
 
             public NpcCharacter Npc;
@@ -1013,6 +1153,12 @@ namespace ZoneEngine_New.Core.Battlestations
             public double HackLeft;
 
             public double RespawnLeft = 10;
+
+            public double StuckSeconds;
+
+            public float LastX;
+
+            public float LastZ;
 
             public bool Dead;
         }
@@ -1054,6 +1200,12 @@ namespace ZoneEngine_New.Core.Battlestations
         public int TeamSize { get; set; } = 6;
 
         public int BotFillMaxHumans { get; set; } = 3;
+
+        public double BotBackfillSeconds { get; set; } = 15;
+
+        public float BotEnemyClearRange { get; set; } = 20f;
+
+        public double BotStuckSeconds { get; set; } = 2;
 
         public int LoyaltyStart { get; set; } = 10;
 

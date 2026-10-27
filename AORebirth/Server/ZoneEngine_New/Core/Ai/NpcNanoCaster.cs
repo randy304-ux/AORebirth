@@ -251,18 +251,26 @@ namespace ZoneEngine_New.Core.Ai
 
             if (_allies.Count == 0)
             {
+                int side = Npc.Stats.GetOrZero(CharacterStat.BattlestationSide);
                 // Only this NPC's cell and the cells touching it; never the whole playfield.
                 Npc.Playfield!.GetRequiredService<PlayfieldLocality>().CollectNearby(Npc, _nearby);
                 foreach (Dynel dynel in _nearby)
                 {
-                    if (dynel is not NpcCharacter other || ReferenceEquals(other, Npc) || other.IsDead)
-                        continue;
-                    if (other.Stats.GetOrZero(CharacterStat.PetMaster) != 0)
-                        continue;
-                    if (Npc.GetEdgeDistanceTo(other) > DefaultSupportRange)
-                        continue;
+                    if (dynel is Character other && !ReferenceEquals(other, Npc) && !other.IsDead
+                        && Npc.GetEdgeDistanceTo(other) <= DefaultSupportRange)
+                    {
+                        if (other is Player player)
+                        {
+                            // Battle-station guards heal same-side humans.
+                            if (side != 0 && player.Stats.GetOrZero(CharacterStat.BattlestationSide) == side)
+                                _allies.Add(player);
+                            continue;
+                        }
 
-                    _allies.Add(other);
+                        if (other is NpcCharacter npcAlly
+                            && npcAlly.Stats.GetOrZero(CharacterStat.PetMaster) == 0)
+                            _allies.Add(npcAlly);
+                    }
                 }
 
                 _nearby.Clear();
