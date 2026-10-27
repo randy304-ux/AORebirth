@@ -14,27 +14,23 @@ Stat 669.
 - Team alien mothership missions (ZXTE, ZXT1, ZXTH) pay the same formula from the mission's objective level, written onto the quest reward when the mission is accepted. Solo ships (ZXKE, ZXK1, ZXKH) do not pay VP. A mission already in the log keeps the reward it was given.
 - A battle-station win pays `level * 4`. A loss pays `level * 1`. Leaving, idling out, or logging out pays nothing.
 
-A level 200 team ship is about 100 VP. Earn rates are unchanged. Shop prices are about one tenth of retail.
+A level 200 team ship is about 100 VP. Earn rates are unchanged. Shop prices follow Randy's house list at about one tenth.
 
 ## Prices
 
-`shopinventorytemplates` does not carry Victory Point prices. Where [AOWiki's OFAB Nanos table](https://wiki.aodb.us/wiki/OFAB_Nanos) prints a number, the shop uses about one tenth of that (tidy-rounded, minimum 1). Rows it marks TBC, and every armor and weapon line, use about one tenth of `max(1, floor(QL * QL / 40))`. A QL 300 Ofab piece is 225 VP.
+Armor: body 40, pants 30, helmet 25, sleeves 20, gloves/boots 15, back/shoulder/ring 20, times QL, then /10 (tidy, min 1). Weapons Mk 1: 25*QL/10. Nanos: 100 / 250 / 500. Attunement level 1: 20. Laser Tagging Device: 100. Targeting stations: 25. A QL 300 body is 1200 VP.
 
-Attunement devices are sold only at level 1, for 20 VP. Level 2 and 3 are the right-click upgrade, not shop stock. The guide's usable bands are level 50, 150, and 200. This server does not track global research, so the upgrade checks level only.
-
-The two targeting stations are 25 each.
+Attunement devices are sold at level 1 on the General machine and on every Ofab nano terminal. Level 2 and 3 are free right-click upgrades. This server does not track global research, so the upgrade checks level only.
 
 The shop packet only carries low id, high id, and QL. Sell modifier 0 is there so the pane shows 0 credits. The server charges the Price field as stat 669.
 
 ## What is stocked
 
-Fourteen profession machines, the hub's own Ofab vendor dynels (templates 266562-266575). Six pieces, QL 1, 25, 50, 100, 150, 200, 250, 300. Agent armor is on the Agent machine (266563). Item 266578, Ofab Agent Armor, is one armor item and is not a placed terminal. Skipped families: Improved, Penultimate, Special, Replica, Protective, Shoulder.
+Fourteen profession machines (templates 266562-266575). Each stocks Mk 1 body pieces (helmet, body, sleeves, gloves, pants, boots), Protective Gear, Shoulder Wear, the QL 300 Special Edition helmet, and that profession's Ofab ring. Armor QL steps are 1, 50, 100, 150, 200, 250, 300 (rings at 100/200/300). Ofab L/R sleeves, L/R shoulders, and Defensive/Offensive/Nano/Medical shields from the AI shop list do not exist as separate items. Agent armor is on 266563.
 
-Melee machine 266577: Bear, Mongoose, Panther, Viper, Wolf, Mk 1 only, QL 25 through 300 in steps of 25 (60 lines). AOWiki and AO-Universe both say the shop sells Mk 1 and the higher marks are the bio-material upgrade.
+Melee 266577 and ranged 266576: Mk 1 only, QL 1,50,100,150,200,250,300. Higher marks are bio-material upgrades. Hawk is the SMG.
 
-Ranged machine 266576: Cobra (rifle), Hawk (SMG), Peregrine (pistol), Shark (assault rifle), Silverback (shotgun), Tiger (bow), Mk 1 only. The same 12 qualities would be 72 lines. The pane holds 64, so QL 25 and 50 are not stocked (60 lines, from QL 75). Hawk is the SMG. There is no separate SMG Peregrine.
-
-General machine 266579: the six general nanos, the seven attunement devices at level 1 only, and the two targeting stations. The AO-Universe attunement guide calls this the nanos-and-devices terminal.
+General 266579: general nanos, seven attunement devices at level 1, Laser Tagging Device (259782), and the two targeting stations. Box of Mech Ammunition was not found in items.dat.
 
 Profession nanos, from the AO-Universe shopping guide, are four content terminals because a pane stops at 64 slots:
 
