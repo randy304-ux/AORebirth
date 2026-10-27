@@ -158,19 +158,32 @@ namespace ZoneEngine_New.Core.Teams
 
         public TeamSnapshot? GetTeam(Player player)
         {
+            ArgumentNullException.ThrowIfNull(player);
             lock (_sync)
-                return Owns(player) && _membership.TryGetValue(player.Identity.Instance, out Team? team)
-                    ? new TeamSnapshot(team.Id, team.Leader, Array.AsReadOnly(team.Members.ToArray()), team.IsRaid)
-                    : null;
+            {
+                if (_stopped)
+                    return null;
+                // Membership is keyed by character id. Do not require Owns(player): a replaced
+                // Player reference with the same id still belongs to the team, and mission-terminal
+                // / support checks must see that membership.
+                if (!_membership.TryGetValue(player.Identity.Instance, out Team? team))
+                    return null;
+                return new TeamSnapshot(team.Id, team.Leader, Array.AsReadOnly(team.Members.ToArray()), team.IsRaid);
+            }
         }
 
         public bool AreTeammates(Player first, Player second)
         {
+            ArgumentNullException.ThrowIfNull(first);
+            ArgumentNullException.ThrowIfNull(second);
             lock (_sync)
-                return Owns(first) && Owns(second)
-                    && _membership.TryGetValue(first.Identity.Instance, out Team? team)
+            {
+                if (_stopped)
+                    return false;
+                return _membership.TryGetValue(first.Identity.Instance, out Team? team)
                     && _membership.TryGetValue(second.Identity.Instance, out Team? other)
                     && ReferenceEquals(team, other);
+            }
         }
 
         public bool TryHandle(Player player, CharacterActionMessage message)
@@ -709,8 +722,21 @@ namespace ZoneEngine_New.Core.Teams
             Dispatch(player, () =>
             {
                 player.Stats.Set(stat, value);
-                if (send) SendNow(player, new StatMessage { Identity = player.Identity, Stats =
-                    [new GameTuple<CharacterStat, uint> { Value1 = stat, Value2 = (uint)value }] });
+                if (!send)
+                    return;
+                var message = new StatMessage
+                {
+                    Identity = player.Identity,
+                    Stats =
+                    [
+                        new GameTuple<CharacterStat, uint> { Value1 = stat, Value2 = (uint)value }
+                    ]
+                };
+                SendNow(player, message);
+                // Other clients evaluate InTeamWithTarget (op 138) against the target's Team from SCFU/stat
+                // updates; without vicinity announce they only ever see Team=0 for other players.
+                if (stat == CharacterStat.Team)
+                    player.Cell?.Announce(message, exclude: player);
             });
         }
 

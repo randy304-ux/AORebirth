@@ -2079,6 +2079,7 @@ namespace ZoneEngine_New.Core.Entities
             CharacterStat.RunSpeed,
             CharacterStat.DeadTimer,
             CharacterStat.Team,
+            CharacterStat.NumberOfTeamMembers,
             CharacterStat.Breed,
             CharacterStat.Sex,
             CharacterStat.LastSaveXP,

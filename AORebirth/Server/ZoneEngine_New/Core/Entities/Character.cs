@@ -3629,7 +3629,8 @@
                 var pcInfo = new SimplePcInfo
                 {
                     CurrentNano = (uint)Stats.GetOrZero(CharacterStat.CurrentNano),
-                    Team = 0,
+                    // Live team id (TeamService). Client InTeamWithTarget (op 138) reads the target's team from here.
+                    Team = Stats.GetOrZero(CharacterStat.Team),
                     Swim = 5,
                     StrengthBase = ClampToShort(Stats.GetOrZero(CharacterStat.Strength, StatDetail.Base)),
                     AgilityBase = ClampToShort(Stats.GetOrZero(CharacterStat.Agility, StatDetail.Base)),

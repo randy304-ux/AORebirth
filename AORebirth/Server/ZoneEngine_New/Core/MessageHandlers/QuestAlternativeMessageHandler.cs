@@ -83,8 +83,7 @@ namespace ZoneEngine_New.Core.MessageHandlers
                         MissionRollPolicy.Current.Fee(level), seed, nonce, now, selectedEntrances);
                 }
                 // Rolled in a team of two or more: team missions (multi-floor dungeon with a boss), as on retail.
-                TeamSnapshot? rollTeam = playfield.GetService<TeamService>()?.GetTeam(player);
-                if (rollTeam != null && rollTeam.MemberIds.Count >= 2)
+                if (IsTeamRoll(playfield, player))
                 {
                     foreach (var rolled in batch.Offers)
                         rolled.IsTeam = 1;
@@ -112,5 +111,17 @@ namespace ZoneEngine_New.Core.MessageHandlers
 
         private static void Feedback(IZoneSession session, Player player, string text)
             => session.Send(new ChatTextMessage { Identity = player.Identity, Text = text });
+
+        /// <summary>
+        /// Team membership for mission rolls: TeamService first, then NumberOfTeamMembers
+        /// (survives zone FullCharacter when the roster refresh is skipped on transfer).
+        /// </summary>
+        static bool IsTeamRoll(Playfield playfield, Player player)
+        {
+            TeamSnapshot? rollTeam = playfield.GetService<TeamService>()?.GetTeam(player);
+            if (rollTeam != null && rollTeam.MemberIds.Count >= 2)
+                return true;
+            return player.Stats.GetOrZero(CharacterStat.NumberOfTeamMembers) >= 2;
+        }
     }
 }

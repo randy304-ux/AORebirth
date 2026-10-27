@@ -107,6 +107,7 @@ namespace ZoneEngine_New.Core.Commands
             ("team", "Team / Org", "Team slash commands. Organization chat is the client org channel."),
             ("mercs", "Mercs / Pets", "Pet orders, then hiring a merc from a recruiter."),
             ("claims", "Claims / Rewards", "Claim Center and Daily Reward are cards on the Info window."),
+            ("dailies", "Daily missions", "Where the daily NPCs stand. Talk to them for the mission."),
             ("travel", "Travel", "Getting unstuck, and any teleport command you are allowed to use."),
             ("gm", "GM commands", "Shown because this character can run them.")
         ];
@@ -200,6 +201,15 @@ namespace ZoneEngine_New.Core.Commands
                     foreach (Mercs.Kind kind in Mercs.Kinds)
                         lines.Add(new Line("Hire " + kind.Title, "Talk to a merc recruiter. This merc then obeys /pet. Hiring again replaces that merc."));
                     lines.Add(new Line("Dismiss mercs", "A merc recruiter can send away every merc you hired."));
+                    break;
+                case "dailies":
+                    lines.Add(new Line("John Smith", "Borealis (800) at 690, 590 — Killing the Competition, Battlestation tip, Tarasque daily."));
+                    lines.Add(new Line("Agency Handler", "Rome Blue (540) at 515, 445 and Old Athen (735) at 660, 320 — Rubi-Ka Agency daily."));
+                    lines.Add(new Line("Senior Agency Handler", "Rome Blue (540) at 520, 440 and Old Athen (735) at 665, 315 — Elite Agency daily."));
+                    lines.Add(new Line("Alien Agency Handler", "Rome Blue (540) at 525, 445 and Old Athen (735) at 670, 320 — Alien Agency daily."));
+                    lines.Add(new Line("Agency Receptionist", "Rome Blue (540) at 510, 440 and Old Athen (735) at 655, 315 — Agency desk."));
+                    lines.Add(new Line("Scarlett Dalquist", "Jobe Research (4001) at 934, 910 — DOJA chip turn-in."));
+                    lines.Add(new Line("Tarasque", "Avalon (505) near Camelot at 2092, 3822 — PvP Tarasque kill target."));
                     break;
                 case "travel":
                     lines.Insert(0, new Line(StuckService.HelpSyntax, StuckService.HelpSummary));
