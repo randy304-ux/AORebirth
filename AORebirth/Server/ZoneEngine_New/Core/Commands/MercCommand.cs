@@ -19,7 +19,7 @@ namespace ZoneEngine_New.Core.Commands
 
         public int RequiredGmLevel => 0;
 
-        public string Usage => ".merc | .merc hire <profession> [basic|elite|champion|super] | .merc dismiss <profession|all> | .merc call";
+        public string Usage => ".merc | .merc hire <profession> [basic|elite|champion|uber] | .merc dismiss <profession|all> | .merc call | .merc list";
 
         public string Topic => "mercs";
 
@@ -46,13 +46,13 @@ namespace ZoneEngine_New.Core.Commands
                     Mercs.Tier tier = Mercs.Tier.Basic;
                     if (hireParts.Length > 1 && !Mercs.TryParseTier(hireParts[1], out tier))
                     {
-                        Say("Tiers: basic, elite, champion, super.");
+                        Say("Tiers: basic, elite, champion, uber (super is an alias for uber).");
                         return;
                     }
 
                     if (tier != Mercs.Tier.Basic && player.Stats.GetOrZero(CharacterStat.GmLevel) < 1)
                     {
-                        Say("Elite, champion and super contracts are GM-only until a drop is chosen. .merc hire " + (hireParts.Length > 0 ? hireParts[0] : "<profession>") + " still hires a basic.");
+                        Say("Elite, champion and uber contracts are GM-only until a drop is chosen. .merc hire " + (hireParts.Length > 0 ? hireParts[0] : "<profession>") + " still hires a basic.");
                         return;
                     }
 
@@ -88,6 +88,8 @@ namespace ZoneEngine_New.Core.Commands
                     pets.TickMercs(player);
                     Say("Calling your mercenaries back.");
                     return;
+                case "list":
+                case "ls":
                 default:
                     var sb = new StringBuilder("Mercenary contracts (hire at a Mercenary Contracts terminal or with .merc hire <profession>):");
                     DateTime now = DateTime.UtcNow;

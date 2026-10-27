@@ -1,0 +1,107 @@
+Dungeon Dogs merc GM cheat sheet
+================================
+Syntax checked against MercCommand.cs / Mercs.TryParseTier / Mercs.Kinds.
+Tiers above basic need GM level 1. Body level stays at your level (cap 220); tiers twink gear only.
+Profession keys (aliases in parentheses): enforcer (enf), soldier (sol), keeper (keep),
+doctor (doc), adventurer (adv), agent, bureaucrat (crat), engineer (engi, eng), fixer (fix),
+martialartist (ma, martial), metaphysicist (mp, meta), nanotechnician (nt, nano), shade, trader.
+Tier words: basic|normal, elite|e, champion|champ|c, uber|u|super|s
+  (super is accepted as an alias for uber)
+
+List current mercs
+------------------
+.merc
+.merc list
+
+Hire BASIC (one of each profession)
+-----------------------------------
+.merc hire enforcer
+.merc hire soldier
+.merc hire keeper
+.merc hire doctor
+.merc hire adventurer
+.merc hire agent
+.merc hire bureaucrat
+.merc hire engineer
+.merc hire fixer
+.merc hire martialartist
+.merc hire metaphysicist
+.merc hire nanotechnician
+.merc hire shade
+.merc hire trader
+
+Hire ELITE (Penultimate Ofab + Mk 6 weapon) — GM
+-----------------------------------------------
+.merc hire enforcer elite
+.merc hire soldier elite
+.merc hire keeper elite
+.merc hire doctor elite
+.merc hire adventurer elite
+.merc hire agent elite
+.merc hire bureaucrat elite
+.merc hire engineer elite
+.merc hire fixer elite
+.merc hire martialartist elite
+.merc hire metaphysicist elite
+.merc hire nanotechnician elite
+.merc hire shade elite
+.merc hire trader elite
+
+Hire CHAMPION (Combined Alien armor + Kyr'Ozch weapon, higher gear QL) — GM
+--------------------------------------------------------------------------
+.merc hire enforcer champion
+.merc hire soldier champion
+.merc hire keeper champion
+.merc hire doctor champion
+.merc hire adventurer champion
+.merc hire agent champion
+.merc hire bureaucrat champion
+.merc hire engineer champion
+.merc hire fixer champion
+.merc hire martialartist champion
+.merc hire metaphysicist champion
+.merc hire nanotechnician champion
+.merc hire shade champion
+.merc hire trader champion
+
+Hire UBER (Beast helm/shoulders/back + Combined Alien body + Mk 6 Ofab weapon) — GM
+----------------------------------------------------------------------------------
+.merc hire enforcer uber
+.merc hire soldier uber
+.merc hire keeper uber
+.merc hire doctor uber
+.merc hire adventurer uber
+.merc hire agent uber
+.merc hire bureaucrat uber
+.merc hire engineer uber
+.merc hire fixer uber
+.merc hire martialartist uber
+.merc hire metaphysicist uber
+.merc hire nanotechnician uber
+.merc hire shade uber
+.merc hire trader uber
+
+Dismiss one merc (ends that contract)
+-------------------------------------
+.merc dismiss enforcer
+.merc dismiss soldier
+.merc dismiss keeper
+.merc dismiss doctor
+.merc dismiss adventurer
+.merc dismiss agent
+.merc dismiss bureaucrat
+.merc dismiss engineer
+.merc dismiss fixer
+.merc dismiss martialartist
+.merc dismiss metaphysicist
+.merc dismiss nanotechnician
+.merc dismiss shade
+.merc dismiss trader
+
+Clear ALL mercs from your group (ends every contract)
+-----------------------------------------------------
+.merc dismiss all
+
+Call mercs back now (after death / zoning delay)
+------------------------------------------------
+.merc call

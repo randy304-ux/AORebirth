@@ -28,7 +28,7 @@ namespace ZoneEngine_New.Core.Pets
         /// <summary>Server-only character stat: bit <c>Kind.Bit</c> set while that contract is active.</summary>
         public const CharacterStat ContractsStat = (CharacterStat)10280;
 
-        /// <summary>Two bits per profession: 0 basic, 1 elite, 2 champion, 3 super. 10281-10283 are aura unlocks.</summary>
+        /// <summary>Two bits per profession: 0 basic, 1 elite, 2 champion, 3 uber. 10281-10283 are aura unlocks.</summary>
         public const CharacterStat TierStat = (CharacterStat)10284;
 
         public enum Tier
@@ -36,7 +36,8 @@ namespace ZoneEngine_New.Core.Pets
             Basic = 0,
             Elite = 1,
             Champion = 2,
-            Super = 3
+            /// <summary>Highest tier. Stored value 3; display name Uber (alias Super still parses).</summary>
+            Uber = 3
         }
 
         /// <summary>
@@ -53,15 +54,28 @@ namespace ZoneEngine_New.Core.Pets
         {
             // A level 60 elite's pet lands at 140, inside the QL 100-200 cast a buffed player would get.
             Tier.Elite => new Package(80, 80, 800, 40, 200),
-            Tier.Champion => new Package(140, 120, 2000, 90, 400),
-            Tier.Super => new Package(220, 160, 4000, 160, 700),
+            // Champion wears Alien (Combined) gear, weaker than Ofab: compensate with a higher gear-QL bonus
+            // (not a separate weapon-damage hack). Same DressMerc QL path as every other tier.
+            Tier.Champion => new Package(180, 120, 2000, 90, 400),
+            Tier.Uber => new Package(220, 160, 4000, 160, 700),
             _ => new Package(0, 0, 0, 0, 0)
         };
 
-        /// <summary>Perennium Blaster QL 50 through the QL 200 superior (itemnames 246422-246428).</summary>
+        /// <summary>One worn template pair (low/high item id for QL interpolation).</summary>
+        public readonly record struct GearPiece(int Low, int High);
+
+        /// <summary>Perennium Blaster QL 50 through the QL 200 superior (itemnames 246422-246428). Kept for older soldiers.</summary>
         public const int PerenniumBlasterLow = 246422;
 
         public const int PerenniumBlasterHigh = 246428;
+
+        // Pandemonium Beast pieces (Awakened). Verified in items.dat.
+        public const int BeastShoulderLow = 302725;
+        public const int BeastShoulderHigh = 302725;
+        public const int BeastHelmetLow = 302728;
+        public const int BeastHelmetHigh = 302728;
+        public const int BeastBackLow = 302730;
+        public const int BeastBackHigh = 302730;
 
         /// <summary>The merc's displayed level: the owner's level, never above 220. A level 1000 GM still tops out here.</summary>
         public static int BodyLevel(int ownerLevel) => Math.Clamp(ownerLevel, 1, 220);
@@ -102,9 +116,11 @@ namespace ZoneEngine_New.Core.Pets
                 case "c":
                     tier = Tier.Champion;
                     return true;
+                case "uber":
+                case "u":
                 case "super":
                 case "s":
-                    tier = Tier.Super;
+                    tier = Tier.Uber;
                     return true;
                 default:
                     return false;
@@ -115,9 +131,179 @@ namespace ZoneEngine_New.Core.Pets
         {
             Tier.Elite => "Elite",
             Tier.Champion => "Champion",
-            Tier.Super => "Super",
+            Tier.Uber => "Uber",
             _ => "Basic"
         };
+
+        /// <summary>
+        /// Tier-specific worn armor (replaces Mercs.json bands above basic). Null means use Mercs.json.
+        /// Elite = Penultimate Ofab. Champion = Combined Alien. Uber = Beast helm/shoulders/back + Combined body.
+        /// </summary>
+        public static IReadOnlyList<GearPiece>? TierArmorFor(Kind kind, Tier tier)
+        {
+            if (tier == Tier.Basic)
+                return null;
+            if (tier == Tier.Elite)
+                return EliteOfabArmor(kind.Key);
+            if (tier == Tier.Champion)
+                return CombinedAlienArmor(kind.Key, includeHead: true);
+            // Uber: Beast shoulders, helmet, back + Combined Alien for the rest (no Combined head).
+            var body = CombinedAlienArmor(kind.Key, includeHead: false);
+            var list = new List<GearPiece>(body.Count + 3)
+            {
+                new(BeastHelmetLow, BeastHelmetHigh),
+                new(BeastShoulderLow, BeastShoulderHigh),
+                new(BeastBackLow, BeastBackHigh)
+            };
+            list.AddRange(body);
+            return list;
+        }
+
+        /// <summary>Tier hand weapon (look only; swing is still the monster weapon). Null = Mercs.json / basic mesh.</summary>
+        public static GearPiece? TierWeaponFor(Kind kind, Tier tier)
+        {
+            if (tier == Tier.Basic)
+                return null;
+            if (tier is Tier.Elite or Tier.Uber)
+                return OfabMk6Weapon(kind.Key);
+            return KyrAlienWeapon(kind.Key);
+        }
+
+        static List<GearPiece> EliteOfabArmor(string key) => key switch
+        {
+            // Penultimate Ofab pairs verified in items.dat (ofab-all-names / penult dump).
+            "adventurer" =>
+            [
+                P(264184, 264185), P(264178, 264179), P(264180, 264181), P(264182, 264183), P(264174, 264175), P(264176, 264177)
+            ],
+            "agent" =>
+            [
+                P(264283, 264284), P(264301, 264302), P(264295, 264296), P(264289, 264290), P(264313, 264314), P(264307, 264308)
+            ],
+            "bureaucrat" =>
+            [
+                P(264499, 264500), P(264517, 264518), P(264511, 264512), P(264505, 264506), P(264529, 264530), P(264523, 264524)
+            ],
+            "doctor" =>
+            [
+                P(264646, 264647), P(264664, 264665), P(264658, 264659), P(264652, 264653), P(264676, 264677), P(264670, 264671)
+            ],
+            "enforcer" =>
+            [
+                P(264245, 264246), P(264227, 264228), P(264233, 264234), P(264239, 264240), P(264215, 264216), P(264221, 264222)
+            ],
+            "engineer" =>
+            [
+                P(264571, 264572), P(264592, 264593), P(264583, 264584), P(264577, 264578), P(264604, 264605), P(264598, 264599)
+            ],
+            "fixer" =>
+            [
+                P(264463, 264464), P(264481, 264482), P(264475, 264476), P(264469, 264470), P(264493, 264494), P(264487, 264488)
+            ],
+            "keeper" =>
+            [
+                P(264610, 264611), P(264628, 264629), P(264622, 264623), P(264616, 264617), P(264640, 264641), P(264634, 264635)
+            ],
+            "martialartist" =>
+            [
+                P(264319, 264320), P(264337, 264338), P(264331, 264332), P(264325, 264326), P(264349, 264350), P(264343, 264344)
+            ],
+            "metaphysicist" =>
+            [
+                P(264355, 264356), P(264373, 264374), P(264367, 264368), P(264361, 264362), P(264385, 264386), P(264379, 264380)
+            ],
+            "nanotechnician" =>
+            [
+                P(264391, 264392), P(264409, 264410), P(264403, 264404), P(264397, 264398), P(264421, 264422), P(264415, 264416)
+            ],
+            "shade" =>
+            [
+                P(264535, 264536), P(264553, 264554), P(264547, 264548), P(264541, 264542), P(264565, 264566), P(264559, 264560)
+            ],
+            "soldier" =>
+            [
+                P(264427, 264428), P(264445, 264446), P(264439, 264440), P(264433, 264434), P(264457, 264458), P(264451, 264452)
+            ],
+            "trader" =>
+            [
+                P(264247, 264248), P(264265, 264266), P(264259, 264260), P(264253, 264254), P(264271, 264272), P(264277, 264278)
+            ],
+            _ => []
+        };
+
+        /// <summary>
+        /// Combined Alien armor families (only six exist). Mapped to closest profession line.
+        /// Missing Soft/Hard Cap of the Beast style alien shoulders: not in this items.dat (listed in design doc).
+        /// </summary>
+        static List<GearPiece> CombinedAlienArmor(string key, bool includeHead)
+        {
+            // Commando / Mercenary / Paramedic / Scout / Sharpshooter / Officer.
+            List<GearPiece> pieces = key switch
+            {
+                "soldier" => CombinedCommando(includeHead),
+                "enforcer" or "martialartist" or "shade" => CombinedMercenary(includeHead),
+                "doctor" => CombinedParamedic(includeHead),
+                "adventurer" or "fixer" => CombinedScout(includeHead),
+                "agent" => CombinedSharpshooter(includeHead),
+                _ => CombinedOfficer(includeHead) // crat, engi, keeper, mp, nt, trader
+            };
+            return pieces;
+        }
+
+        static List<GearPiece> CombinedCommando(bool head) => head
+            ? [P(246657, 246658), P(246659, 246660), P(246661, 246662), P(246663, 246664), P(246665, 246666), P(246667, 246668)]
+            : [P(246659, 246660), P(246661, 246662), P(246663, 246664), P(246665, 246666), P(246667, 246668)];
+
+        static List<GearPiece> CombinedMercenary(bool head) => head
+            ? [P(246635, 246636), P(246637, 246638), P(246639, 246640), P(246641, 246642), P(246643, 246644), P(246645, 246646)]
+            : [P(246637, 246638), P(246639, 246640), P(246641, 246642), P(246643, 246644), P(246645, 246646)];
+
+        static List<GearPiece> CombinedParamedic(bool head) => head
+            ? [P(246631, 246632), P(246647, 246648), P(246649, 246650), P(246651, 246652), P(246653, 246654), P(246655, 246656)]
+            : [P(246647, 246648), P(246649, 246650), P(246651, 246652), P(246653, 246654), P(246655, 246656)];
+
+        static List<GearPiece> CombinedScout(bool head) => head
+            ? [P(246681, 246682), P(246683, 246684), P(246685, 246686), P(246687, 246688), P(246689, 246690), P(246691, 246692)]
+            : [P(246683, 246684), P(246685, 246686), P(246687, 246688), P(246689, 246690), P(246691, 246692)];
+
+        static List<GearPiece> CombinedSharpshooter(bool head) => head
+            ? [P(246693, 246694), P(246695, 246696), P(246697, 246698), P(246699, 246700), P(246701, 246702), P(246703, 246704)]
+            : [P(246695, 246696), P(246697, 246698), P(246699, 246700), P(246701, 246702), P(246703, 246704)];
+
+        static List<GearPiece> CombinedOfficer(bool head) => head
+            ? [P(246669, 246670), P(246671, 246672), P(246673, 246674), P(246675, 246676), P(246677, 246678), P(246679, 246680)]
+            : [P(246671, 246672), P(246673, 246674), P(246675, 246676), P(246677, 246678), P(246679, 246680)];
+
+        static GearPiece OfabMk6Weapon(string key) => key switch
+        {
+            "soldier" => P(265097, 265103),       // Shark
+            "agent" => P(265055, 265061),         // Peregrine
+            "enforcer" => P(265272, 265278),      // Bear
+            "martialartist" => P(264929, 264935), // Mongoose
+            "adventurer" => P(265139, 265145),    // Tiger
+            "fixer" => P(264892, 264898),         // Silverback
+            "keeper" => P(265230, 265236),        // Wolf
+            "shade" => P(264971, 264977),         // Panther
+            "engineer" => P(265314, 265320),      // Cobra
+            _ => P(265314, 265320)                // Cobra for casters / trader / doc / nt / mp / crat
+        };
+
+        static GearPiece KyrAlienWeapon(string key) => key switch
+        {
+            "soldier" => P(254507, 254513),       // Carbine Type 13
+            "agent" => P(254479, 254485),         // Rifle Type 3
+            "enforcer" => P(254731, 254737),      // Sledgehammer Type 76
+            "martialartist" => P(288665, 288671), // Nunchacko Type 48
+            "adventurer" => P(254689, 254695),    // Axe Type 240
+            "fixer" => P(254535, 254541),         // SMG Type 12
+            "engineer" => P(254570, 254576),      // Grenade Gun Type 1
+            "shade" => P(254780, 254786),         // Spear Type 112
+            "keeper" => P(254745, 254751),        // Energy Sword Type 76
+            "doctor" => P(254640, 254646),        // Energy Pistol Type 5
+            _ => P(254626, 254632)                // Pistol Type 4
+        };
+
+        static GearPiece P(int low, int high) => new(low, high);
 
         public static Tier GetTier(Player owner, Kind kind)
         {

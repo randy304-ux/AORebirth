@@ -279,25 +279,41 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
-        /// Tier armor for <paramref name="armorLevel"/> (Mercs.json), each piece minted at <paramref name="itemQuality"/>.
-        /// A soldier above basic holds a Perennium Blaster instead of the basic mesh.
+        /// Armor and hand weapon for <paramref name="tier"/>. Basic uses Mercs.json bands.
+        /// Elite/Champion/Uber use verified Ofab / Combined Alien / Beast template ids from <see cref="Mercs.TierArmorFor"/>.
+        /// Pieces are minted at <paramref name="itemQuality"/> (tier gear-QL bonus already applied by the caller).
         /// </summary>
         void DressMerc(NpcCharacter npc, Mercs.Kind kind, int armorLevel, int itemQuality, int ownerSide, Mercs.Tier tier)
         {
             Mercs.Catalog catalog = Mercs.Load(_gameData.RootPath);
             npc.WearsArmorStats = catalog.ArmorStats;
             int worn = 0;
-            foreach (List<int> pair in Mercs.ArmorFor(_gameData.RootPath, kind, armorLevel, ownerSide))
+            IReadOnlyList<Mercs.GearPiece>? tierArmor = Mercs.TierArmorFor(kind, tier);
+            if (tierArmor != null)
             {
-                if (pair == null || pair.Count == 0)
-                    continue;
-                if (npc.WearExtra(pair[0], pair.Count > 1 ? pair[1] : pair[0], itemQuality, _logger))
-                    worn++;
+                foreach (Mercs.GearPiece piece in tierArmor)
+                {
+                    if (piece.Low <= 0)
+                        continue;
+                    if (npc.WearExtra(piece.Low, piece.High > 0 ? piece.High : piece.Low, itemQuality, _logger))
+                        worn++;
+                }
+            }
+            else
+            {
+                foreach (List<int> pair in Mercs.ArmorFor(_gameData.RootPath, kind, armorLevel, ownerSide))
+                {
+                    if (pair == null || pair.Count == 0)
+                        continue;
+                    if (npc.WearExtra(pair[0], pair.Count > 1 ? pair[1] : pair[0], itemQuality, _logger))
+                        worn++;
+                }
             }
 
-            if (kind.Key == "soldier" && tier != Mercs.Tier.Basic)
+            Mercs.GearPiece? tierWeapon = Mercs.TierWeaponFor(kind, tier);
+            if (tierWeapon is { } tw && tw.Low > 0)
             {
-                if (npc.WearExtra(Mercs.PerenniumBlasterLow, Mercs.PerenniumBlasterHigh, itemQuality, _logger))
+                if (npc.WearExtra(tw.Low, tw.High > 0 ? tw.High : tw.Low, itemQuality, _logger))
                     worn++;
             }
             else if (Mercs.WeaponFor(_gameData.RootPath, kind) is { Count: > 0 } weapon
@@ -313,8 +329,8 @@ namespace ZoneEngine_New.Core.Pets
             int maxNano = npc.Stats.GetOrZero(CharacterStat.MaxNanoEnergy);
             if (maxNano > 0)
                 npc.Stats.Set(CharacterStat.CurrentNano, maxNano);
-            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc dressed hash={0} armorLevel={1} ql={2} side={3} pieces={4}",
-                kind.Hash, armorLevel, itemQuality, ownerSide, worn));
+            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc dressed hash={0} armorLevel={1} ql={2} side={3} tier={4} pieces={5}",
+                kind.Hash, armorLevel, itemQuality, ownerSide, Mercs.TierName(tier), worn));
         }
 
         /// <summary>
