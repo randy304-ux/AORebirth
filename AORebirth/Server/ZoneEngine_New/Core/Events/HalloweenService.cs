@@ -4,6 +4,7 @@ namespace ZoneEngine_New.Core.Events
     using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
+    using System.Text;
     using System.Text.Json;
 
     using ZoneEngine_New.Core.Entities;
@@ -32,6 +33,14 @@ namespace ZoneEngine_New.Core.Events
         bool _enabled;
         DateTime _catalogStamp;
 
+        static readonly Dictionary<int, string> ZoneNames = new()
+        {
+            [800] = "Borealis",
+            [655] = "Andromeda (ICC)",
+            [790] = "Stret West Bank",
+            [791] = "Stret West Notum Ore",
+        };
+
         public HalloweenService(IGameData gameData, Lazy<PlayfieldManager> playfields, IZoneLogger logger)
         {
             ArgumentNullException.ThrowIfNull(gameData);
@@ -54,10 +63,23 @@ namespace ZoneEngine_New.Core.Events
             lock (_gate)
             {
                 ReloadIfStale();
-                return _enabled
-                    ? "Halloween event ON. Living spawns=" + _living.Count.ToString(CultureInfo.InvariantCulture)
-                      + " (outdoor pads + quest NPCs from Halloween.json)."
-                    : "Halloween event OFF. Use .event halloween on to spawn outdoor/low Uncle Pumpkin-Heads and city leets.";
+                if (!_enabled)
+                    return "Halloween event OFF. Use .event halloween on to spawn outdoor/low Uncle Pumpkin-Heads and city leets.";
+
+                int living = 0, queued = 0;
+                var zones = new SortedSet<string>(StringComparer.Ordinal);
+                foreach (Tracked t in _living)
+                {
+                    if (t.Npc != null && !t.Npc.IsDead && t.Npc.Playfield != null)
+                        living++;
+                    else
+                        queued++;
+                    zones.Add(ZoneLabel(t.PlayfieldId));
+                }
+
+                return "Halloween event ON. Living=" + living.ToString(CultureInfo.InvariantCulture)
+                    + " queued=" + queued.ToString(CultureInfo.InvariantCulture)
+                    + " zones=" + string.Join(", ", zones) + ".";
             }
         }
 
@@ -71,9 +93,11 @@ namespace ZoneEngine_New.Core.Events
                 _enabled = true;
             }
 
-            int spawned = SpawnAll();
-            _logger.Info("Halloween event enabled; spawned=" + spawned.ToString(CultureInfo.InvariantCulture));
-            return "Halloween event ON. Spawned " + spawned.ToString(CultureInfo.InvariantCulture) + " NPCs.";
+            SpawnReport report = SpawnAll();
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Halloween event enabled; spawned={0} queued={1} skipped={2}",
+                report.Spawned, report.Queued, report.Skipped));
+            return FormatEnableReply(report);
         }
 
         public string Disable()
@@ -110,6 +134,10 @@ namespace ZoneEngine_New.Core.Events
             return "Halloween event OFF. Despawned " + remove.Count.ToString(CultureInfo.InvariantCulture) + " NPCs.";
         }
 
+        /// <summary>
+        /// Called every playfield tick. Ghost tracks (queued while the PF was unloaded) and death timers
+        /// spawn here as soon as the PF is live — typically when a player enters the zone.
+        /// </summary>
         public void Tick(Playfield playfield, double deltaTime)
         {
             ArgumentNullException.ThrowIfNull(playfield);
@@ -127,15 +155,15 @@ namespace ZoneEngine_New.Core.Events
                     Tracked t = _living[i];
                     if (t.PlayfieldId != playfield.Identity.Instance)
                         continue;
-                    if (t.Npc != null && !t.Npc.IsDead && t.Npc.Playfield != null)
+
+                    bool alive = t.Npc != null && !t.Npc.IsDead && t.Npc.Playfield != null;
+                    if (alive)
                         continue;
+
+                    // Death path sets RespawnAtUtc to now+RespawnSeconds. Ghosts / unloaded NPCs are due now
+                    // (RespawnAtUtc is UtcNow or null). Do not invent a delay when the timer was never armed.
                     if (t.RespawnAtUtc is DateTime when && when > now)
                         continue;
-                    if (t.RespawnAtUtc == null && (t.Npc == null || t.Npc.IsDead || t.Npc.Playfield == null))
-                    {
-                        t.RespawnAtUtc = now.AddSeconds(_catalog.RespawnSeconds);
-                        continue;
-                    }
 
                     (due ??= new List<Tracked>()).Add(t);
                 }
@@ -147,55 +175,75 @@ namespace ZoneEngine_New.Core.Events
                 Respawn(playfield, t);
         }
 
-        int SpawnAll()
+        SpawnReport SpawnAll()
         {
-            int count = 0;
+            var report = new SpawnReport();
             foreach (HalloweenQuestNpc q in _catalog.QuestNpcs)
-                count += SpawnOne(q.Playfield, q.Hash, 1, q.Pad, q.Key, social: true) ? 1 : 0;
+                Record(report, SpawnOne(q.Playfield, q.Hash, 1, q.Pad, q.Key, social: true), q.Playfield, q.Hash);
             foreach (HalloweenOutdoorGroup g in _catalog.Outdoor)
             {
                 foreach (float[] pad in g.Pads)
-                {
-                    if (SpawnOne(g.Playfield, g.Hash, g.Level, pad, g.Key, social: false))
-                        count++;
-                }
+                    Record(report, SpawnOne(g.Playfield, g.Hash, g.Level, pad, g.Key, social: false), g.Playfield, g.Hash);
             }
 
-            return count;
+            return report;
         }
 
-        bool SpawnOne(int playfieldId, string hash, int level, float[] pad, string key, bool social)
+        static void Record(SpawnReport report, SpawnOutcome outcome, int playfieldId, string hash)
+        {
+            string zone = ZoneLabel(playfieldId);
+            switch (outcome)
+            {
+                case SpawnOutcome.Spawned:
+                    report.Spawned++;
+                    report.SpawnedZones.Add(zone);
+                    break;
+                case SpawnOutcome.Queued:
+                    report.Queued++;
+                    report.QueuedZones.Add(zone);
+                    break;
+                default:
+                    report.Skipped++;
+                    report.SkippedHashes.Add(hash + "@" + zone);
+                    break;
+            }
+        }
+
+        SpawnOutcome SpawnOne(int playfieldId, string hash, int level, float[] pad, string key, bool social)
         {
             if (pad == null || pad.Length < 3)
-                return false;
+                return SpawnOutcome.Skipped;
             if (!_gameData.TryResolveMobTemplate(hash, level, out MobTemplate template)
                 || !NpcTemplateValidation.CanSpawn(template))
             {
-                _logger.Warn("Halloween skip unresolved hash " + hash);
-                return false;
+                _logger.Warn("Halloween skip unresolved hash " + hash + " pf=" + playfieldId.ToString(CultureInfo.InvariantCulture));
+                return SpawnOutcome.Skipped;
             }
 
             if (!_playfields.Value.TryGet(playfieldId, out Playfield? playfield) || playfield == null)
             {
-                // Playfield not loaded yet; remember a ghost track that ticks when the PF boots.
+                // Playfield not loaded yet; remember a ghost track that Tick() fulfills when the PF boots.
                 lock (_gate)
                 {
-                    _living.Add(new Tracked
+                    if (!HasTrack(key, playfieldId, pad))
                     {
-                        Key = key,
-                        Hash = hash,
-                        Level = level,
-                        PlayfieldId = playfieldId,
-                        Pad = new Vector3(pad[0], pad[1], pad[2]),
-                        Social = social,
-                        RespawnAtUtc = DateTime.UtcNow
-                    });
+                        _living.Add(new Tracked
+                        {
+                            Key = key,
+                            Hash = hash,
+                            Level = level,
+                            PlayfieldId = playfieldId,
+                            Pad = new Vector3(pad[0], pad[1], pad[2]),
+                            Social = social,
+                            RespawnAtUtc = DateTime.UtcNow
+                        });
+                    }
                 }
 
-                return false;
+                return SpawnOutcome.Queued;
             }
 
-            return Respawn(playfield, new Tracked
+            bool ok = Respawn(playfield, new Tracked
             {
                 Key = key,
                 Hash = hash,
@@ -204,13 +252,31 @@ namespace ZoneEngine_New.Core.Events
                 Pad = new Vector3(pad[0], pad[1], pad[2]),
                 Social = social
             });
+            return ok ? SpawnOutcome.Spawned : SpawnOutcome.Skipped;
+        }
+
+        bool HasTrack(string key, int playfieldId, float[] pad)
+        {
+            foreach (Tracked t in _living)
+            {
+                if (t.Key == key && t.PlayfieldId == playfieldId
+                    && Math.Abs(t.Pad.x - pad[0]) < 0.01f
+                    && Math.Abs(t.Pad.z - pad[2]) < 0.01f)
+                    return true;
+            }
+
+            return false;
         }
 
         bool Respawn(Playfield playfield, Tracked track)
         {
             if (!_gameData.TryResolveMobTemplate(track.Hash, track.Level, out MobTemplate template)
                 || !NpcTemplateValidation.CanSpawn(template))
+            {
+                _logger.Warn("Halloween skip unresolved hash " + track.Hash
+                    + " pf=" + track.PlayfieldId.ToString(CultureInfo.InvariantCulture));
                 return false;
+            }
 
             try
             {
@@ -253,6 +319,33 @@ namespace ZoneEngine_New.Core.Events
             }
         }
 
+        static string FormatEnableReply(SpawnReport report)
+        {
+            var sb = new StringBuilder();
+            sb.Append("Halloween event ON. Spawned ")
+                .Append(report.Spawned.ToString(CultureInfo.InvariantCulture))
+                .Append(" now");
+            if (report.SpawnedZones.Count > 0)
+                sb.Append(" (").Append(string.Join(", ", report.SpawnedZones)).Append(')');
+            sb.Append("; queued ")
+                .Append(report.Queued.ToString(CultureInfo.InvariantCulture))
+                .Append(" for unloaded zones");
+            if (report.QueuedZones.Count > 0)
+                sb.Append(" (").Append(string.Join(", ", report.QueuedZones)).Append(')');
+            sb.Append("; skipped ")
+                .Append(report.Skipped.ToString(CultureInfo.InvariantCulture))
+                .Append(" unresolved");
+            if (report.SkippedHashes.Count > 0)
+                sb.Append(" (").Append(string.Join(", ", report.SkippedHashes)).Append(')');
+            sb.Append('.');
+            return sb.ToString();
+        }
+
+        static string ZoneLabel(int playfieldId)
+            => ZoneNames.TryGetValue(playfieldId, out string? name)
+                ? name + " " + playfieldId.ToString(CultureInfo.InvariantCulture)
+                : "PF " + playfieldId.ToString(CultureInfo.InvariantCulture);
+
         void ReloadIfStale()
         {
             string path = Path.Combine(_gameData.RootPath, "Halloween.json");
@@ -286,6 +379,23 @@ namespace ZoneEngine_New.Core.Events
                 _logger.Warn("Halloween.json unreadable: " + exception.Message);
                 return new HalloweenCatalog();
             }
+        }
+
+        enum SpawnOutcome
+        {
+            Spawned,
+            Queued,
+            Skipped
+        }
+
+        sealed class SpawnReport
+        {
+            public int Spawned;
+            public int Queued;
+            public int Skipped;
+            public SortedSet<string> SpawnedZones { get; } = new(StringComparer.Ordinal);
+            public SortedSet<string> QueuedZones { get; } = new(StringComparer.Ordinal);
+            public SortedSet<string> SkippedHashes { get; } = new(StringComparer.Ordinal);
         }
 
         sealed class Tracked
