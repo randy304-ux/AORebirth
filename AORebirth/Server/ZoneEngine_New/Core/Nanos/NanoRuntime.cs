@@ -157,6 +157,11 @@ namespace ZoneEngine_New.Core.Nanos
             if (refusal == NanoCastRefusal.None && spell.IsHostile && !IsHostileNanoTarget(caster, recipient))
                 refusal = NanoCastRefusal.InvalidTarget;
 
+            // Merc/NPC heals must never land on mobs (doctor nanos carry ApplyOnFightingTarget).
+            if (refusal == NanoCastRefusal.None && recipient != null
+                && !NpcSupportRules.MayNpcLand(caster, recipient, spell))
+                refusal = NanoCastRefusal.InvalidTarget;
+
             if (refusal == NanoCastRefusal.None && (IsNoCombat(caster) || IsNoCombat(recipient)))
                 refusal = NanoCastRefusal.InvalidTarget;
 
@@ -214,6 +219,9 @@ namespace ZoneEngine_New.Core.Nanos
 
             // A self-only nano would land on the caster instead.
             if (spell.IsSelfOnly && !ReferenceEquals(caster, recipient))
+                return false;
+
+            if (!NpcSupportRules.MayNpcLand(caster, recipient, spell))
                 return false;
 
             NanoCastAttempt attempt = BuildAttempt(caster, spell, recipient, ResolveNanoCost(caster, spell), nowUtc);
@@ -395,6 +403,9 @@ namespace ZoneEngine_New.Core.Nanos
 
                 if (spell.IsHostile && target.IsEvading)
                     return false;
+
+                if (!NpcSupportRules.MayNpcLand(source, target, spell))
+                    return false;
             }
 
             AnnounceImmediateLand(source, target, spell.Id);
@@ -455,7 +466,8 @@ namespace ZoneEngine_New.Core.Nanos
                 return;
             }
 
-            if ((spell.IsHostile && !IsHostileNanoTarget(caster, recipient)) || IsNoCombat(recipient))
+            if ((spell.IsHostile && !IsHostileNanoTarget(caster, recipient)) || IsNoCombat(recipient)
+                || (recipient != null && !NpcSupportRules.MayNpcLand(caster, recipient, spell)))
             {
                 AnnounceCastInterrupted(caster, spell.Id);
                 Refuse(caster, NanoCastRefusal.InvalidTarget);

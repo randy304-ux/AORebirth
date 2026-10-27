@@ -1,8 +1,14 @@
 namespace ZoneEngine_New.Core.Helpers
 {
+    using System.Collections.Generic;
+
+    using AORebirth.Enums;
+
     using SmokeLounge.AOtomation.Messaging.GameData;
 
     using ZoneEngine_New.Core.Entities;
+    using ZoneEngine_New.Core.Inventory;
+    using ZoneEngine_New.Core.Nanos;
     using ZoneEngine_New.Core.Playfield;
     using ZoneEngine_New.Core.Teams;
 
@@ -42,6 +48,45 @@ namespace ZoneEngine_New.Core.Helpers
 
             // Other wild NPCs may support non-attackable (blue-name) NPCs only — never monsters/aliens.
             return target is NpcCharacter { Attackable: false };
+        }
+
+        /// <summary>
+        /// Whether an NPC may land <paramref name="spell"/> on <paramref name="target"/>. Support nanos and any
+        /// health-raising heal require <see cref="CanSupport"/>; true hostile damage/debuffs may hit enemies.
+        /// Doctor heals carry ApplyOnFightingTarget and must never land on the fight target.
+        /// </summary>
+        public static bool MayNpcLand(Character caster, Character target, NanoSpell spell)
+        {
+            if (caster == null || target == null || spell == null)
+                return false;
+            if (CanSupport(caster, target))
+                return true;
+            if (caster is not NpcCharacter)
+                return true;
+            if (IsHealthHeal(spell) || !spell.IsHostile)
+                return false;
+            return true;
+        }
+
+        /// <summary>OnUse (or tick) Hit that raises Health — a heal or heal-over-time.</summary>
+        public static bool IsHealthHeal(NanoSpell spell)
+        {
+            if (spell == null)
+                return false;
+
+            foreach (List<ItemSpell> spells in spell.SpellList.Values)
+            {
+                for (int i = 0; i < spells.Count; i++)
+                {
+                    ItemSpell hit = spells[i];
+                    if (hit.Is(FunctionType.Hit)
+                        && hit.TryReadInt(0, out int stat) && stat == (int)CharacterStat.Health
+                        && hit.TryReadInt(1, out int amount) && amount > 0)
+                        return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

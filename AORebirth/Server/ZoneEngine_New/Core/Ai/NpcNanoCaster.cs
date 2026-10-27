@@ -169,12 +169,17 @@ namespace ZoneEngine_New.Core.Ai
                 return NanoRuntime.CanStartCast(Npc, spell, Npc, nowUtc) ? Npc : null;
             }
 
-            if (spell.IsHostile)
+            // Heals never use the fight target — doctor merc nanos carry ApplyOnFightingTarget / can be
+            // flagged IsHostile while still raising Health, which would out-heal the player's damage on the mob.
+            if (spell.IsHostile && !IsHeal(spell))
             {
                 Character? enemy = Npc.FightingTarget.Instance != 0 ? _brain.ResolveCurrentTarget() : null;
                 if (enemy == null || !InRange(spell, enemy, NpcAiRules.NearbyRange) || HasNano(enemy, spell))
                     return null;
-                return NanoRuntime.CanStartCast(Npc, spell, enemy, nowUtc) ? enemy : null;
+                if (!NpcSupportRules.MayNpcLand(Npc, enemy, spell)
+                    || !NanoRuntime.CanStartCast(Npc, spell, enemy, nowUtc))
+                    return null;
+                return enemy;
             }
 
             // Heals, including heal-over-time buffs, only go on someone who is actually hurt.
@@ -184,12 +189,13 @@ namespace ZoneEngine_New.Core.Ai
                 if (!HasNano(Npc, spell) && NanoRuntime.CanStartCast(Npc, spell, Npc, nowUtc))
                     return Npc;
 
-                // Random pick among nearby NPCs that can take it, so NPCs buff each other.
+                // Random pick among supportable allies that can take it.
                 Character? chosen = null;
                 int eligible = 0;
                 foreach (Character candidate in FriendlyCandidates(spell))
                 {
                     if (ReferenceEquals(candidate, Npc)
+                        || !NpcSupportRules.CanSupport(Npc, candidate)
                         || HasNano(candidate, spell) || !NanoRuntime.CanStartCast(Npc, spell, candidate, nowUtc))
                         continue;
 
@@ -215,7 +221,7 @@ namespace ZoneEngine_New.Core.Ai
             int lowest = healBelow;
             foreach (Character candidate in FriendlyCandidates(spell))
             {
-                if (ReferenceEquals(candidate, Npc))
+                if (ReferenceEquals(candidate, Npc) || !NpcSupportRules.CanSupport(Npc, candidate))
                     continue;
 
                 int percent = HealthPercent(candidate);
@@ -407,35 +413,13 @@ namespace ZoneEngine_New.Core.Ai
         /// <summary>An OnUse Hit that raises Health, on the nano or a nano it casts: a heal or heal over time.</summary>
         bool IsHeal(NanoSpell spell)
         {
-            if (IsDirectHeal(spell))
+            if (NpcSupportRules.IsHealthHeal(spell))
                 return true;
 
             foreach (NanoSpell child in Children(spell))
             {
-                if (IsDirectHeal(child))
+                if (NpcSupportRules.IsHealthHeal(child))
                     return true;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// A Health-raising Hit in any of the nano's events: a direct heal (OnUse) or a heal over time (its ticks).
-        /// Looking only at OnUse let heal-over-time nanos pass as ordinary buffs, which go on anyone lacking them,
-        /// hurt or not.
-        /// </summary>
-        static bool IsDirectHeal(NanoSpell spell)
-        {
-            foreach (List<ItemSpell> spells in spell.SpellList.Values)
-            {
-                for (int i = 0; i < spells.Count; i++)
-                {
-                    ItemSpell hit = spells[i];
-                    if (hit.Is(FunctionType.Hit)
-                        && hit.TryReadInt(0, out int stat) && stat == (int)CharacterStat.Health
-                        && hit.TryReadInt(1, out int amount) && amount > 0)
-                        return true;
-                }
             }
 
             return false;

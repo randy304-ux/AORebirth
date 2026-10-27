@@ -111,8 +111,15 @@ namespace ZoneEngine_New.Core.Nanos
                 return false;
 
             Character? fightTarget = caster.TryResolveFightingTarget();
-            if (fightTarget != null)
-                NanoRuntime.TryApplyImmediate(caster, fightTarget, nanoId, items, inventory, nowUtc);
+            if (fightTarget == null)
+                return true;
+
+            // Never dump a heal onto the fight target (doctor merc ApplyOnFightingTarget / OnFight wrappers).
+            if (TryResolveChild(items, nanoId, out NanoSpell? child) && child != null
+                && !NpcSupportRules.MayNpcLand(caster, fightTarget, child))
+                return true;
+
+            NanoRuntime.TryApplyImmediate(caster, fightTarget, nanoId, items, inventory, nowUtc);
             return true;
         }
 
@@ -249,6 +256,9 @@ namespace ZoneEngine_New.Core.Nanos
         internal static bool AcceptsRecipient(Character source, Character candidate, NanoSpell child)
         {
             if (candidate.IsDead)
+                return false;
+
+            if (!NpcSupportRules.MayNpcLand(source, candidate, child))
                 return false;
 
             CanFlags can = ReadCan(child);

@@ -455,6 +455,10 @@ namespace ZoneEngine_New.Core.Inventory
                 return true;
             }
 
+            // NPC/merc heals must never raise an unsupported target (fight target / alien / mob).
+            if (caster is NpcCharacter && !NpcSupportRules.CanSupport(caster, target))
+                return false;
+
             int maxHealth = Math.Max(1, target.Stats.GetOrZero(CharacterStat.MaxHealth));
             int current = Math.Max(0, target.Stats.GetOrZero(CharacterStat.Health));
             int applied = Math.Min(delta, Math.Max(0, maxHealth - current));
