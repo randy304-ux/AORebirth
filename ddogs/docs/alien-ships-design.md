@@ -66,11 +66,11 @@ AO-Universe “The New Aliens” and [AOWiki Kyr’ozch](https://wiki.aodb.us/wi
 | **ALMS** | ZXTE / ZXT1 / ZXTH `ObjectiveNpcHash` | **KBMG** 2–4 (mothership numbered bios) + **KVCL** ×5 (VP clumps) + shared weapon/armor extras |
 | **ALGT** | `Invasions.json` city-wave boss; AI raid table | **KBTY** ×2 (AI weapon-special bios) + KZTW / KZPM / KAAR — **no** KBMG / KVCL |
 | **ALGN** | Solo ship boss | Pre-raid General table (no mothership VP/Ofab pool) |
-| Crew + `KZBM` 10% | Shared ship crew (incl. team RegularNpcHashes) | Independent **KVCL** rolls (default **90% / 30% / 10%**, max 3); numbered types **not** on trash |
+| Crew + `KZBM` 10% | Shared ship crew (incl. team RegularNpcHashes) | Independent **KVCL** rolls (default **90% / 50% / 30%**, max 3); numbered types **not** on trash |
 
 Tunables: `GameData/MothershipVpLoot.json` (re-run `ddogs/tools/Build-MothershipBioLoot.ps1` after edits).
 
-Default trash chances (independent rolls, max 3): **90%** first, **30%** second, **10%** third.
+Default trash chances (independent rolls, max 3): **90%** first, **50%** second, **30%** third.
 
 Default tier mix per successful roll (`TierWeights` → `KVCL` Children):
 

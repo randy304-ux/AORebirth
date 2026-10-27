@@ -2,7 +2,7 @@
   "Comment": "Tunables for Unicorn Recruiter mothership VP-bio drops. Re-run ddogs/tools/Build-MothershipBioLoot.ps1 after edits. Trash rolls are independent (up to MaxDrops); each successful roll picks a tier by TierWeights (Children duplication). General always uses GeneralVpBios.",
   "TrashVpBios": {
     "MaxDrops": 3,
-    "DropChancesPercent": [90, 30, 10],
+    "DropChancesPercent": [90, 50, 30],
     "TierWeights": {
       "KVPC": 3,
       "KVPP": 1,
