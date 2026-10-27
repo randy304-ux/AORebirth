@@ -11,9 +11,11 @@ namespace ZoneEngine_New.Core.Ai
     using SmokeLounge.AOtomation.Messaging.GameData;
 
     using ZoneEngine_New.Core.Entities;
+    using ZoneEngine_New.Core.Helpers;
     using ZoneEngine_New.Core.Metrics;
     using ZoneEngine_New.Core.Pets;
     using ZoneEngine_New.Core.Playfield;
+    using ZoneEngine_New.Core.Playfield.Locality;
 
     using Vector3 = AORebirth.Core.Vector.Vector3;
 
@@ -276,8 +278,9 @@ namespace ZoneEngine_New.Core.Ai
         public const double HealCoverMeters = 30.0;
 
         /// <summary>
-        /// The most hurt of the owner and the owner's other living pets nearby; the owner when nobody is hurt. A heal pet
-        /// or healer merc so keeps the whole party up, not just its owner.
+        /// The most hurt supportable character nearby (owner party / same rules as
+        /// <see cref="NpcSupportRules.CanSupport"/>); the owner when nobody is more hurt. A heal pet or healer merc
+        /// keeps the whole party up, not aliens or other mobs.
         /// </summary>
         static Character NeediestCharge(NpcBrain brain)
         {
@@ -287,7 +290,9 @@ namespace ZoneEngine_New.Core.Ai
             int bestPct = owner.IsDead ? 101 : HealthPercent(owner);
             void Consider(Character candidate)
             {
-                if (candidate.IsDead || !ReferenceEquals(candidate.Playfield, brain.Npc.Playfield) || Distance(candidate, brain.Npc) > HealCoverMeters)
+                if (!NpcSupportRules.CanSupport(brain.Npc, candidate)
+                    || !ReferenceEquals(candidate.Playfield, brain.Npc.Playfield)
+                    || Distance(candidate, brain.Npc) > HealCoverMeters)
                     return;
                 int pct = HealthPercent(candidate);
                 if (pct < bestPct)
@@ -297,6 +302,7 @@ namespace ZoneEngine_New.Core.Ai
                 }
             }
 
+            Consider(owner);
             foreach (NpcCharacter other in owner.OwnedPets.All)
                 Consider(other);
             // A merc's heal pet looks after the player who hired that merc, and that player's other mercs.
@@ -305,6 +311,18 @@ namespace ZoneEngine_New.Core.Ai
                 Consider(master);
                 foreach (NpcCharacter other in master.OwnedPets.All)
                     Consider(other);
+            }
+
+            // Team-mates and other supportable friendlies in cover range (never mobs/aliens).
+            if (brain.Npc.Playfield != null)
+            {
+                var nearby = new List<Dynel>();
+                brain.Npc.Playfield.GetRequiredService<PlayfieldLocality>().CollectNearby(brain.Npc, nearby);
+                foreach (Dynel dynel in nearby)
+                {
+                    if (dynel is Character candidate)
+                        Consider(candidate);
+                }
             }
 
             return best;

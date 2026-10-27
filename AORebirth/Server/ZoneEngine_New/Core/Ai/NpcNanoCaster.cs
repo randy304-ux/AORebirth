@@ -9,6 +9,7 @@ namespace ZoneEngine_New.Core.Ai
     using SmokeLounge.AOtomation.Messaging.GameData;
 
     using ZoneEngine_New.Core.Entities;
+    using ZoneEngine_New.Core.Helpers;
     using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Nanos;
     using ZoneEngine_New.Core.Playfield;
@@ -19,10 +20,10 @@ namespace ZoneEngine_New.Core.Ai
     /// <summary>
     /// Casts an NPC's uploaded nanos now and then. Every cast goes through <see cref="NanoRuntime"/>, so
     /// requirements, nano cost, recharge and NCU are the same as for players.
-    /// Hostile nanos go on the combat target. Friendly buffs, in or out of combat, go on the caster when it
-    /// lacks them, otherwise on a random nearby NPC that does. Heals go on the caster when it is hurt,
-    /// otherwise on the most hurt nearby NPC. A pet looks after its owner and the owner's other pets instead of
-    /// nearby NPCs. A summon (SummonPet) nano is cast once a fight starts, while that pet slot is free.
+    /// Hostile nanos go on the combat target. Friendly buffs and heals only go on targets
+    /// <see cref="NpcSupportRules.CanSupport"/> allows (pets/mercs: owner party; BS bots: same side;
+    /// wild NPCs: non-attackable allies). Never attackable mobs/aliens. A summon (SummonPet) nano is cast
+    /// once a fight starts, while that pet slot is free.
     /// </summary>
     /// <summary>Outcome of a heal order.</summary>
     enum HealOrderResult
@@ -116,6 +117,9 @@ namespace ZoneEngine_New.Core.Ai
         /// </summary>
         public HealOrderResult TryHeal(Character target, DateTime nowUtc)
         {
+            if (target == null || !NpcSupportRules.CanSupport(Npc, target))
+                return HealOrderResult.Busy;
+
             if (HealthPercent(target) >= 100)
                 return HealOrderResult.Busy;
 
@@ -226,8 +230,9 @@ namespace ZoneEngine_New.Core.Ai
         }
 
         /// <summary>
-        /// Self, then living NPCs in range and sight that are not player pets. A pet's friends are its owner and
-        /// the owner's other pets.
+        /// Self, then characters <see cref="NpcSupportRules.CanSupport"/> allows: for pets/mercs the owner
+        /// party (owner, team, sibling pets, friendly players); for battle-station bots the same side; for wild
+        /// NPCs only non-attackable allies. Never attackable mobs/aliens.
         /// </summary>
         IEnumerable<Character> FriendlyCandidates(NanoSpell spell)
         {
@@ -236,41 +241,52 @@ namespace ZoneEngine_New.Core.Ai
             if (!CanApplyOnFriendly(spell))
                 yield break;
 
-            if (Npc.PetOwner is Character owner)
+            // Pets/mercs: always consider the bound owner (and that owner's pets) even when outside the locality
+            // cell set used by CollectNearby below.
+            if (NpcSupportRules.ResolveMaster(Npc) is Character master)
             {
-                if (!owner.IsDead && InRange(spell, owner, DefaultSupportRange))
-                    yield return owner;
-                foreach (NpcCharacter sibling in owner.OwnedPets.All)
+                if (!ReferenceEquals(master, Npc)
+                    && NpcSupportRules.CanSupport(Npc, master)
+                    && InRange(spell, master, DefaultSupportRange))
+                    yield return master;
+
+                foreach (NpcCharacter sibling in master.OwnedPets.All)
                 {
-                    if (!ReferenceEquals(sibling, Npc) && !sibling.IsDead && InRange(spell, sibling, DefaultSupportRange))
+                    if (!ReferenceEquals(sibling, Npc)
+                        && NpcSupportRules.CanSupport(Npc, sibling)
+                        && InRange(spell, sibling, DefaultSupportRange))
                         yield return sibling;
                 }
 
-                yield break;
+                // A merc's heal pet: also the player who hired that merc, and that player's other mercs.
+                if (master is NpcCharacter merc && NpcSupportRules.ResolveMaster(merc) is Character grand)
+                {
+                    if (!ReferenceEquals(grand, Npc)
+                        && NpcSupportRules.CanSupport(Npc, grand)
+                        && InRange(spell, grand, DefaultSupportRange))
+                        yield return grand;
+
+                    foreach (NpcCharacter sibling in grand.OwnedPets.All)
+                    {
+                        if (!ReferenceEquals(sibling, Npc)
+                            && NpcSupportRules.CanSupport(Npc, sibling)
+                            && InRange(spell, sibling, DefaultSupportRange))
+                            yield return sibling;
+                    }
+                }
             }
 
             if (_allies.Count == 0)
             {
-                int side = Npc.Stats.GetOrZero(CharacterStat.BattlestationSide);
                 // Only this NPC's cell and the cells touching it; never the whole playfield.
                 Npc.Playfield!.GetRequiredService<PlayfieldLocality>().CollectNearby(Npc, _nearby);
                 foreach (Dynel dynel in _nearby)
                 {
-                    if (dynel is Character other && !ReferenceEquals(other, Npc) && !other.IsDead
+                    if (dynel is Character other
+                        && !ReferenceEquals(other, Npc)
+                        && NpcSupportRules.CanSupport(Npc, other)
                         && Npc.GetEdgeDistanceTo(other) <= DefaultSupportRange)
-                    {
-                        if (other is Player player)
-                        {
-                            // Battle-station guards heal same-side humans.
-                            if (side != 0 && player.Stats.GetOrZero(CharacterStat.BattlestationSide) == side)
-                                _allies.Add(player);
-                            continue;
-                        }
-
-                        if (other is NpcCharacter npcAlly
-                            && npcAlly.Stats.GetOrZero(CharacterStat.PetMaster) == 0)
-                            _allies.Add(npcAlly);
-                    }
+                        _allies.Add(other);
                 }
 
                 _nearby.Clear();
@@ -279,7 +295,7 @@ namespace ZoneEngine_New.Core.Ai
             for (int i = 0; i < _allies.Count; i++)
             {
                 Character ally = _allies[i];
-                if (!ally.IsDead && InRange(spell, ally, DefaultSupportRange))
+                if (!ally.IsDead && InRange(spell, ally, DefaultSupportRange) && NpcSupportRules.CanSupport(Npc, ally))
                     yield return ally;
             }
         }
