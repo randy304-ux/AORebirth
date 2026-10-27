@@ -1,7 +1,7 @@
 {
-  "Notes": "The shop sells level one only, at 200 VP (AO-Universe attunement guide). Right-click upgrades it. Retail also required global research, which this server does not track. The level gates match the guide: level two from 150, level three from 200.",
+  "Notes": "The shop sells level one only, at 20 VP (about one tenth of the AO-Universe 200). Right-click upgrades it. Retail also required global research, which this server does not track. The level gates match the guide: level two from 150, level three from 200. Prices are documentation for the shop tiers; the upgrade path itself does not charge VP.",
   "Levels": [1, 150, 200],
-  "Prices": [200, 600, 1500],
+  "Prices": [20, 60, 150],
   "Families": [
     { "Name": "Combat", "Ids": [269401, 269402, 269403] },
     { "Name": "Nano Technology", "Ids": [269406, 269404, 269405] },

@@ -2,8 +2,8 @@
 # and writes the nano shops plus the battle-station queue terminals into PlayfieldContent/6007/Npcs.json.
 # Strips the old Ofab content terminals from playfield 655. The Tower Shop and the buffbot stay.
 # Armor ids are the base pairs. Weapon stock is Mk 1 only. QL for crystals comes from tools-temp/ofab-item-check.txt.
-# Published nano VP prices are in $knownVp. Armor, weapon, and unpublished nano prices stay QL*QL/40.
-# Attunement stock is level 1 at 200 VP. Targeting stations stay 250 until a screenshot confirms them.
+# Published nano VP prices are in $knownVp (retail wiki numbers). Shop prices are about one tenth
+# of those / of QL*QL/40, rounded tidy, minimum 1. Attunement level 1 is 20 VP; markers 25.
 param(
   [string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'),
   [string]$QlFile = (Join-Path $PSScriptRoot '..\..\tools-temp\ofab-item-check.txt')
@@ -15,7 +15,13 @@ $qlOf = @{}
 foreach ($line in [IO.File]::ReadAllLines($QlFile)) {
   if ($line -match '^(\d+)\t(\d+)\t') { $qlOf[[int]$Matches[1]] = [int]$Matches[2] }
 }
-function Vp([int]$ql) { return [Math]::Max(1, [int][Math]::Floor($ql * $ql / 40.0)) }
+# Retail wiki numbers stay in $knownVp; ScaleVp applies the private-server tenth cut.
+function ScaleVp([int]$retail) {
+  $n = [Math]::Max(1, [int][Math]::Round($retail / 10.0))
+  if ($n -ge 50) { return [Math]::Max(1, 5 * [int][Math]::Round($n / 5.0)) }
+  return $n
+}
+function Vp([int]$ql) { return (ScaleVp ([Math]::Max(1, [int][Math]::Floor($ql * $ql / 40.0)))) }
 # Published Victory Point prices from wiki.aodb.us/wiki/OFAB_Nanos (Maori, 2011). TBC rows are not in here.
 $knownVp = @{
   218167=8000; 265441=3750; 265442=3750; 265443=3750; 265445=3750; 265446=3750; 265447=3750; 265448=3750
@@ -31,7 +37,7 @@ $knownVp = @{
   279380=1000; 280053=1000
 }
 function PriceOf([int]$id, [int]$ql) {
-  if ($knownVp.ContainsKey($id)) { return [int]$knownVp[$id] }
+  if ($knownVp.ContainsKey($id)) { return (ScaleVp ([int]$knownVp[$id])) }
   return (Vp $ql)
 }
 function NeedQl([int]$id) {
@@ -165,11 +171,11 @@ $families = @(
 foreach ($fam in $families) {
   $id = [int]$fam[0]
   $q = NeedQl $id
-  $general += [ordered]@{ Low = $id; High = $id; Ql = $q; Price = 200 }
+  $general += [ordered]@{ Low = $id; High = $id; Ql = $q; Price = 20 }
 }
 foreach ($id in @(265405,265406)) {
   $q = NeedQl $id
-  $general += [ordered]@{ Low = [int]$id; High = [int]$id; Ql = $q; Price = 250 }
+  $general += [ordered]@{ Low = [int]$id; High = [int]$id; Ql = $q; Price = 25 }
 }
 $vendors['266579'] = @($general)
 
@@ -178,7 +184,7 @@ foreach ($key in @($vendors.Keys)) {
   if ($n -lt 1 -or $n -gt 64) { throw "vendor $key has $n lines" }
 }
 $stockDoc = [ordered]@{
-  Notes = 'Hub vending machines on playfield 6007. Weapons are Mk 1. Attunement stock is level 1 at 200 VP. Nano prices that wiki.aodb.us published are used; the rest are QL*QL/40. Armor and weapon VP prices are not published. Build-OfabVpShop.ps1'
+  Notes = 'Hub vending machines on playfield 6007. Weapons are Mk 1. Shop VP is about one tenth of retail wiki / QL*QL/40, tidy-rounded, min 1. Attunement level 1 is 20 VP. Build-OfabVpShop.ps1'
   Vendors = $vendors
 }
 $stockPath = Join-Path $GameData 'OfabHubStock.json'
