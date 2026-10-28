@@ -98,6 +98,7 @@ namespace ZoneEngine_New.Core.Bots
                         }
 
                         var ranks = new List<ItemTemplate>();
+                        bool sawSelfOnly = false;
                         foreach (ItemTemplate template in templates)
                         {
                             NanoSpell spell = NanoSpell.From(template);
@@ -106,12 +107,19 @@ namespace ZoneEngine_New.Core.Bots
                             // Timed composite variants (2/4/8 hours) stay out; base name ranks only.
                             if (!string.Equals(template.Name, name, StringComparison.OrdinalIgnoreCase))
                                 continue;
+                            // Buffbot casts onto other players: need ApplyOnFriendly. Self/pulse/aura lines stay out.
+                            if (!CanTargetOtherPlayer(template))
+                            {
+                                sawSelfOnly = true;
+                                continue;
+                            }
+
                             ranks.Add(template);
                         }
 
                         if (ranks.Count == 0)
                         {
-                            _missing.Add(name);
+                            _missing.Add(sawSelfOnly ? name + " (self-only/pulse)" : name);
                             continue;
                         }
 
@@ -231,7 +239,40 @@ namespace ZoneEngine_New.Core.Bots
             if (name.Contains("Transformation", StringComparison.OrdinalIgnoreCase)
                 && !name.Contains("Composite", StringComparison.OrdinalIgnoreCase))
                 return true;
+            if (name.Contains("(Team)", StringComparison.OrdinalIgnoreCase))
+                return true;
+            // Keeper auras: self-cast, pulse to team — not castable onto another player as a buffbot hit.
+            if (name.Contains("Tone of", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Courage Of The Just", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Clarion Call", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Blessing of The Light", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Blessing of Life", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Barrier of the", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Benevolent Ward", StringComparison.OrdinalIgnoreCase))
+                return true;
+            // Soldier shields other than single-target reflect / damage-shield projector.
+            if (name.Contains("Absorption Shield", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Deflection Shield", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Mirror Shield", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Combat Barrier", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Adaptive Resonance Field", StringComparison.OrdinalIgnoreCase))
+                return true;
             return false;
+        }
+
+        /// <summary>
+        /// True when the nano can land on another player. Many buff templates leave Can=0; those are
+        /// allowed unless <see cref="NanoSpell.IsSelfOnly"/> (ApplyOnSelf-only or all functions User/Wearer).
+        /// When Can is set, ApplyOnFriendly is required.
+        /// </summary>
+        static bool CanTargetOtherPlayer(ItemTemplate template)
+        {
+            NanoSpell spell = NanoSpell.From(template);
+            if (spell.IsSelfOnly)
+                return false;
+            if (!template.Stats.TryGetValue(CharacterStat.Can, out int canRaw) || canRaw == 0)
+                return true;
+            return ((CanFlags)(uint)canRaw & CanFlags.ApplyOnFriendly) != 0;
         }
 
         static string Bonus(ItemTemplate template)
