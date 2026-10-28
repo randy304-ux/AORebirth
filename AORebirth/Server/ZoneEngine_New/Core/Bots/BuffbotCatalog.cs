@@ -76,58 +76,57 @@ namespace ZoneEngine_New.Core.Bots
             {
                 foreach (BuffbotSectionFile section in file.Sections)
                 {
-                    if (section == null || string.IsNullOrWhiteSpace(section.Name) || section.Nanos == null)
+                    if (section == null || string.IsNullOrWhiteSpace(section.Name))
                         continue;
                     var lines = new List<BuffLine>();
-                    foreach (string? raw in section.Nanos)
+                    if (section.Nanos != null)
                     {
-                        string name = (raw ?? string.Empty).Trim();
-                        if (name.Length == 0)
-                            continue;
-                        // Morph / appearance nanos must never be on the buffbot (L33t Transformation, etc.).
-                        if (IsExcludedBuffName(name))
+                        foreach (string? raw in section.Nanos)
                         {
-                            _missing.Add(name + " (excluded morph/appearance)");
-                            continue;
-                        }
-
-                        if (!byName.TryGetValue(name, out List<ItemTemplate>? templates))
-                        {
-                            _missing.Add(name);
-                            continue;
-                        }
-
-                        var ranks = new List<ItemTemplate>();
-                        bool sawSelfOnly = false;
-                        foreach (ItemTemplate template in templates)
-                        {
-                            NanoSpell spell = NanoSpell.From(template);
-                            if (!spell.IsBuff || spell.IsHostile)
-                                continue;
-                            // Timed composite variants (2/4/8 hours) stay out; base name ranks only.
-                            if (!string.Equals(template.Name, name, StringComparison.OrdinalIgnoreCase))
-                                continue;
-                            // Buffbot casts onto other players: need ApplyOnFriendly. Self/pulse/aura lines stay out.
-                            if (!CanTargetOtherPlayer(template))
+                            if (TryResolveLine(raw, byName, out BuffLine? line, out string miss) && line != null)
                             {
-                                sawSelfOnly = true;
+                                lines.Add(line);
+                                foreach (ItemTemplate template in line.Ranks)
+                                    _byId[template.Id] = line;
+                            }
+                            else if (!string.IsNullOrEmpty(miss))
+                                _missing.Add(miss);
+                        }
+                    }
+
+                    // Bundles (e.g. Fixer "NCU Nanos [Team]"): one menu entry that picks the highest
+                    // acceptable rank across the named member lines for the player's level.
+                    if (section.Bundles != null)
+                    {
+                        foreach (BuffbotBundleFile? bundle in section.Bundles)
+                        {
+                            if (bundle == null || string.IsNullOrWhiteSpace(bundle.Name) || bundle.Members == null)
+                                continue;
+                            var ranks = new List<ItemTemplate>();
+                            foreach (string? member in bundle.Members)
+                            {
+                                if (!TryResolveLine(member, byName, out BuffLine? memberLine, out string miss) || memberLine == null)
+                                {
+                                    if (!string.IsNullOrEmpty(miss))
+                                        _missing.Add(bundle.Name.Trim() + " member: " + miss);
+                                    continue;
+                                }
+
+                                ranks.AddRange(memberLine.Ranks);
+                            }
+
+                            if (ranks.Count == 0)
+                            {
+                                _missing.Add(bundle.Name.Trim() + " (empty bundle)");
                                 continue;
                             }
 
-                            ranks.Add(template);
+                            ranks.Sort((a, b) => a.Quality.CompareTo(b.Quality));
+                            var line = new BuffLine(bundle.Name.Trim(), ranks);
+                            lines.Add(line);
+                            foreach (ItemTemplate template in ranks)
+                                _byId[template.Id] = line;
                         }
-
-                        if (ranks.Count == 0)
-                        {
-                            _missing.Add(sawSelfOnly ? name + " (self-only/pulse)" : name);
-                            continue;
-                        }
-
-                        ranks.Sort((a, b) => a.Quality.CompareTo(b.Quality));
-                        var line = new BuffLine(name, ranks);
-                        lines.Add(line);
-                        foreach (ItemTemplate template in ranks)
-                            _byId[template.Id] = line;
                     }
 
                     if (lines.Count > 0)
@@ -229,6 +228,72 @@ namespace ZoneEngine_New.Core.Bots
             return need;
         }
 
+        bool TryResolveLine(
+            string? raw,
+            Dictionary<string, List<ItemTemplate>> byName,
+            out BuffLine? line,
+            out string missing)
+        {
+            line = null;
+            missing = string.Empty;
+            string name = (raw ?? string.Empty).Trim();
+            if (name.Length == 0)
+                return false;
+            if (IsExcludedBuffName(name))
+            {
+                missing = name + " (excluded morph/appearance)";
+                return false;
+            }
+
+            if (!byName.TryGetValue(name, out List<ItemTemplate>? templates))
+            {
+                missing = name;
+                return false;
+            }
+
+            var ranks = new List<ItemTemplate>();
+            bool sawSelfOnly = false;
+            foreach (ItemTemplate template in templates)
+            {
+                NanoSpell spell = NanoSpell.From(template);
+                // Friendly duration/transfer buffs (Skill Wrangler, Lend Nano) and morphs listed by name.
+                if (spell.IsHostile)
+                    continue;
+                if (!spell.IsBuff && !IsListedMorph(name) && !IsTransferBuffName(name))
+                    continue;
+                if (!string.Equals(template.Name, name, StringComparison.OrdinalIgnoreCase))
+                    continue;
+                if (!CanTargetOtherPlayer(template) && !IsListedMorph(name) && !IsTransferBuffName(name))
+                {
+                    sawSelfOnly = true;
+                    continue;
+                }
+
+                ranks.Add(template);
+            }
+
+            if (ranks.Count == 0)
+            {
+                missing = sawSelfOnly ? name + " (self-only/pulse)" : name;
+                return false;
+            }
+
+            ranks.Sort((a, b) => a.Quality.CompareTo(b.Quality));
+            line = new BuffLine(name, ranks);
+            return true;
+        }
+
+        static bool IsListedMorph(string name)
+            => name.Contains("Playful Cub", StringComparison.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// Trader transfers occupy NCU on live buffbots but sometimes omit the IsBuff catalog bit.
+        /// </summary>
+        static bool IsTransferBuffName(string name)
+            => name.StartsWith("Lend Nano", StringComparison.OrdinalIgnoreCase)
+                || name.Contains("Skill Wrangler", StringComparison.OrdinalIgnoreCase)
+                || name.StartsWith("Maestro:", StringComparison.OrdinalIgnoreCase);
+
         static bool IsExcludedBuffName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -236,10 +301,9 @@ namespace ZoneEngine_New.Core.Bots
             if (name.Contains("L33t", StringComparison.OrdinalIgnoreCase)
                 || name.Contains("Leet Transformation", StringComparison.OrdinalIgnoreCase))
                 return true;
+            // Morphs stay out unless the live menu lists them by exact name (Playful Cub (Other)).
             if (name.Contains("Transformation", StringComparison.OrdinalIgnoreCase)
                 && !name.Contains("Composite", StringComparison.OrdinalIgnoreCase))
-                return true;
-            if (name.Contains("(Team)", StringComparison.OrdinalIgnoreCase))
                 return true;
             // Keeper auras: self-cast, pulse to team — not castable onto another player as a buffbot hit.
             if (name.Contains("Tone of", StringComparison.OrdinalIgnoreCase)
@@ -250,12 +314,14 @@ namespace ZoneEngine_New.Core.Bots
                 || name.Contains("Barrier of the", StringComparison.OrdinalIgnoreCase)
                 || name.Contains("Benevolent Ward", StringComparison.OrdinalIgnoreCase))
                 return true;
-            // Soldier shields other than single-target reflect / damage-shield projector.
+            // Non-extended Soldier absorb/mirror lines stay out; Extended Deflection/Reflective are on the live menu.
             if (name.Contains("Absorption Shield", StringComparison.OrdinalIgnoreCase)
-                || name.Contains("Deflection Shield", StringComparison.OrdinalIgnoreCase)
                 || name.Contains("Mirror Shield", StringComparison.OrdinalIgnoreCase)
                 || name.Contains("Combat Barrier", StringComparison.OrdinalIgnoreCase)
                 || name.Contains("Adaptive Resonance Field", StringComparison.OrdinalIgnoreCase))
+                return true;
+            if (name.Contains("Deflection Shield", StringComparison.OrdinalIgnoreCase)
+                && !name.Contains("Extended", StringComparison.OrdinalIgnoreCase))
                 return true;
             return false;
         }
@@ -316,6 +382,15 @@ namespace ZoneEngine_New.Core.Bots
             public string? Name { get; set; }
 
             public List<string>? Nanos { get; set; }
+
+            public List<BuffbotBundleFile>? Bundles { get; set; }
+        }
+
+        sealed class BuffbotBundleFile
+        {
+            public string? Name { get; set; }
+
+            public List<string>? Members { get; set; }
         }
     }
 
