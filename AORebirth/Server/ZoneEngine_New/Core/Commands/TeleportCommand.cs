@@ -1,6 +1,7 @@
 namespace ZoneEngine_New.Core.Commands
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
 
@@ -35,11 +36,22 @@ namespace ZoneEngine_New.Core.Commands
         public int RequiredGmLevel => GmLevel;
 
         public string Usage =>
-            ".tp arete | .tp <x> <z> <playfieldId> or .tp <x> <y> <z> <playfieldId> (look-at player if selected) | .tp summon <character name> | .tp to <character name>";
+            ".tp arete | borealis | icc | .tp <x> <z> <playfieldId> or .tp <x> <y> <z> <playfieldId> (look-at player if selected) | .tp summon <character name> | .tp to <character name>";
 
         public string Topic => "travel";
 
         public string Summary => "Teleports you or the selected player, summons a character, or goes to a character.";
+
+        /// <summary>
+        /// Named landings for GM travel. Coordinates match common help desks / city pads
+        /// (Arete Arrival, Borealis John Smith, ICC 6055 pad).
+        /// </summary>
+        static readonly Dictionary<string, string[]> NamedDestinations = new(StringComparer.OrdinalIgnoreCase)
+        {
+            ["arete"] = ["3464.0", "9.1", "813.9", "6553"],
+            ["borealis"] = ["690.0", "5.0", "590.0", "800"],
+            ["icc"] = ["300.0", "50.0", "300.0", "6055"],
+        };
 
         public void Execute(GmCommandContext context)
         {
@@ -58,11 +70,10 @@ namespace ZoneEngine_New.Core.Commands
             }
 
             string[] args = context.Args;
-            if (args.Length == 1 && string.Equals(args[0], "arete", StringComparison.OrdinalIgnoreCase))
-                args = new[] { "3464.0", "9.1", "813.9", "6553" };
+            if (args.Length == 1 && NamedDestinations.TryGetValue(args[0], out string[]? named))
+                args = named;
 
-            bool hasExplicitY = args.Length >= 4;
-            int zIndex = hasExplicitY ? 2 : 1;
+            bool hasExplicitY = args.Length >= 4;            int zIndex = hasExplicitY ? 2 : 1;
             int playfieldIndex = hasExplicitY ? 3 : 2;
             if (args.Length < 3
                 || !float.TryParse(args[0], NumberStyles.Float, CultureInfo.InvariantCulture, out float x)
