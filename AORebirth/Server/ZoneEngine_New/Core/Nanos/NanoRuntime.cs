@@ -688,18 +688,26 @@ namespace ZoneEngine_New.Core.Nanos
         }
 
         /// <summary>
-        /// Pets/mercs skip caster skill gates but still require the recipient to meet OnTarget checks
-        /// (level locks on NCU compressors, composite lines, etc.).
+        /// Pets/mercs skip caster skill / profession gates (templates carry none) but still require
+        /// the recipient to meet OnTarget checks (level locks on NCU compressors, composite lines, etc.).
+        /// Using MaxValue for every caster leaf made Profession EqualTo fail, so no merc buff landed.
         /// </summary>
         static bool PetBuffRequirementsMet(NanoSpell spell, Character caster, Character? recipient)
         {
             if (recipient == null)
                 return true;
-            return spell.MeetsActionRequirements(
+            IReadOnlyList<UnmetRequirement> unmet = spell.UnmetActionRequirements(
                 _ => int.MaxValue,
                 ActionType.ToUse,
                 resolve: ItemTemplate.WithActionTarget(null, caster, recipient),
                 getTargetStat: stat => recipient.Stats.Get(stat));
+            for (int i = 0; i < unmet.Count; i++)
+            {
+                if (unmet[i].OnTarget)
+                    return false;
+            }
+
+            return true;
         }
 
         static bool TryResolveSpell(Character caster, int nanoId, out NanoSpell? spell)
