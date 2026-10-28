@@ -24,15 +24,35 @@ Attunement devices are sold at level 1 on the General machine and on every Ofab 
 
 The shop packet only carries low id, high id, and QL. Sell modifier 0 is there so the pane shows 0 credits. The server charges the Price field as stat 669.
 
-## What is stocked
+## What is stocked (terminal map)
 
-Fourteen profession machines (templates 266562-266575). Each stocks Mk 1 body pieces (helmet, body, sleeves, gloves, pants, boots), Protective Gear, Shoulder Wear, the QL 300 Special Edition helmet, and that profession's Ofab ring. Armor QL steps are 1, 50, 100, 150, 200, 250, 300 (rings at 100/200/300). Ofab L/R sleeves, L/R shoulders, and Defensive/Offensive/Nano/Medical shields from the AI shop list do not exist as separate items. Agent armor is on 266563.
+Live AO layout on the existing Dynels.dat machines in playfield 6007. Stock is `GameData/OfabHubStock.json`.
 
-Melee 266577 and ranged 266576: Mk 1 only, QL 1,50,100,150,200,250,300. Higher marks are bio-material upgrades. Hawk is the SMG.
+| Terminal (label) | Template | Sells |
+| --- | --- | --- |
+| Ofab Adventurer Vendor | 266562 | Adventurer Ofab armor |
+| Ofab Agent Vendor | 266563 | Agent Ofab armor |
+| Ofab Doctor Vendor | 266564 | Doctor Ofab armor |
+| Ofab Enforcer Vendor | 266565 | Enforcer Ofab armor |
+| Ofab Engineer Vendor | 266566 | Engineer Ofab armor |
+| Ofab Fixer Vendor | 266567 | Fixer Ofab armor |
+| Ofab Keeper Vendor | 266568 | Keeper Ofab armor |
+| Ofab Bureaucrat Vendor | 266569 | Bureaucrat Ofab armor |
+| Ofab Martial Artist Vendor | 266570 | Martial Artist Ofab armor |
+| Ofab Meta-Physicist Vendor | 266571 | Metaphysicist Ofab armor |
+| Ofab Nano-Technician Vendor | 266572 | Nano Technician Ofab armor |
+| Ofab Soldier Vendor | 266573 | Soldier Ofab armor |
+| Ofab Shade Vendor | 266574 | Shade Ofab armor |
+| Ofab Trader Vendor | 266575 | Trader Ofab armor |
+| Ofab Ranged Weapons | 266576 | Ranged Ofab weapons (Mk 1) |
+| Ofab Melee Weapons | 266577 | Melee Ofab weapons (Mk 1) |
+| Ofab General Vendor | 266579 | General nanos, attunement L1, Laser Tagging Device, targeting stations |
 
-General 266579: general nanos, seven attunement devices at level 1, Laser Tagging Device (259782), and the two targeting stations. Box of Mech Ammunition was not found in items.dat.
+Each profession armor machine stocks Mk 1 body pieces (helmet, body, sleeves, gloves, pants, boots), Protective Gear, Shoulder Wear, the QL 300 Special Edition helmet, and that profession's Ofab ring. Armor QL steps are 1, 50, 100, 150, 200, 250, 300 (rings at 100/200/300). Ofab L/R sleeves, L/R shoulders, and Defensive/Offensive/Nano/Medical shields from the AI shop list do not exist as separate items.
 
-Profession nanos, from the AO-Universe shopping guide, are four content terminals because a pane stops at 64 slots:
+Weapons are Mk 1 only, QL 1,50,100,150,200,250,300. Higher marks are bio-material upgrades. Hawk is the SMG. Box of Mech Ammunition was not found in items.dat.
+
+Profession nanos (extra content NPCs in `PlayfieldContent/6007/Npcs.json`, not the General machine) are four panes because a pane stops at 64 slots:
 
 - Melee and Hybrid: Enforcer, Martial Artist, Adventurer, Keeper, Shade (25).
 - Soldier, Agent, Fixer, Doctor, Engineer (29).
@@ -40,6 +60,8 @@ Profession nanos, from the AO-Universe shopping guide, are four content terminal
 - MP and NT (38).
 
 Every crystal's use is Upload Nano, which the server already runs.
+
+2026-10-28: static Ofab machines were stocked but `TradeService.IsCurrentAcceptedShop` refused Use because they have no content/database shop binding. Opening those terminals (armor / weapons / General) is accepted when the machine is a live static Dynels.dat vendor with `OfabHubStock` Victory Point stock.
 
 ## Attunement
 
@@ -51,7 +73,7 @@ Built. It loads on the next zone restart. Rules and coordinates are `GameData/Ba
 
 ## Not confirmed online
 
-Armor terminals (all fourteen profession machines) and both weapon machines: the item families are confirmed, the retail Victory Point price per QL is not. Shop prices are about one tenth of the old house formula. The Shade guide says armor starts at QL 25 and steps by 25, which is 12 qualities. Six pieces at that step is 72 lines, and the back piece (Ofab Protective Gear, a seventh part) makes it 84. The pane holds 64, so the armor machines still use the shorter QL set (1, 25, 50, 100, 150, 200, 250, 300) and do not yet include the back piece. A screenshot of one profession terminal and of the ranged terminal will settle the QL rows.
+Retail Victory Point price per QL for armor and weapons is not confirmed from a live capture. Shop prices are about one tenth of the old house formula. The Shade guide says armor starts at QL 25 and steps by 25, which is 12 qualities. Six pieces at that step is 72 lines, and the back piece (Ofab Protective Gear, a seventh part) makes it 84. The pane holds 64, so the armor machines still use the shorter QL set (1, 50, 100, 150, 200, 250, 300) and keep extras under the pane limit. A screenshot of one profession terminal and of the ranged terminal will settle the QL rows.
 
 Nanos whose AOWiki row is still TBC keep the house price. That includes most of Adventurer, Agent's Two Left Feet, several Bureaucrat and Trader lines, the Keeper line except Courage and Blow Their Cover, Martial Artist except Footsteps and Induce Stupor, and the pet-steal nanos.
 

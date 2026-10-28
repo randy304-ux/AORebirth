@@ -292,7 +292,16 @@ namespace ZoneEngine_New.Core.Trade
                         .TryGetShopBinding(machine, out _)
                     // A template vendor (Marco Spida, Barry) whose stock comes from its NpcTemplates ShopStock is bound
                     // to its own live NPC; without this every Use on it was refused silently (Randy 2026-10-17).
-                    || (owner != null && owner.MobTemplate?.ShopStock is { Count: > 0 } && ReferenceEquals(owner.Shop, machine)));
+                    || (owner != null && owner.MobTemplate?.ShopStock is { Count: > 0 } && ReferenceEquals(owner.Shop, machine))
+                    // Ofab hub machines (playfield 6007 Dynels.dat): OfabHubStock.json fills them at spawn. They are not
+                    // content StandaloneShops and skip database vendor bind once configured, so without this gate
+                    // every Use was refused and no profession armor sold (Randy 2026-10-28).
+                    || (owner == null
+                        && machine.SpendsVictoryPoints
+                        && machine.Stock.IsConfiguredSnapshot
+                        && machine.SpawnSource == SpawnSource.StaticDynel
+                        && field.GetRequiredService<DynelRegistry>().TryGet(machine.Identity, out Dynel? currentShop)
+                        && ReferenceEquals(currentShop, machine)));
         }
 
         void HandleAddItem(Player player, TradeSession session, TradeMessage message)
