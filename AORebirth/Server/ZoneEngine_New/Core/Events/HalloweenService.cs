@@ -72,7 +72,8 @@ namespace ZoneEngine_New.Core.Events
                 {
                     string zone = ZoneLabel(t.PlayfieldId);
                     perZone.TryGetValue(zone, out (int Living, int Queued) counts);
-                    if (t.Npc != null && !t.Npc.IsDead && t.Npc.Playfield != null)
+                    if (t.Npc != null && !t.Npc.IsDead && t.Npc.Playfield != null
+                        && !t.Npc.Playfield.IsDisposed)
                     {
                         living++;
                         counts.Living++;
@@ -172,7 +173,8 @@ namespace ZoneEngine_New.Core.Events
                     if (t.PlayfieldId != playfield.Identity.Instance)
                         continue;
 
-                    bool alive = t.Npc != null && !t.Npc.IsDead && t.Npc.Playfield != null;
+                    // Empty unload leaves disposed NPCs whose Playfield ref can still look non-null; require this live PF.
+                    bool alive = t.Npc != null && !t.Npc.IsDead && ReferenceEquals(t.Npc.Playfield, playfield);
                     if (alive)
                         continue;
 
@@ -191,6 +193,29 @@ namespace ZoneEngine_New.Core.Events
                 Respawn(playfield, t);
         }
 
+        /// <summary>
+        /// Empty playfield unload drops living Halloween NPCs; tracks can go stale. While the event is on,
+        /// re-seed this playfield's catalog pads every time it is built/loaded (including Borealis 800 and BS 665).
+        /// </summary>
+        public void OnPlayfieldReady(Playfield playfield)
+        {
+            ArgumentNullException.ThrowIfNull(playfield);
+            lock (_gate)
+            {
+                if (!_enabled)
+                    return;
+                ReloadIfStale();
+            }
+
+            SpawnReport report = ApplyPlayfield(playfield);
+            if (report.Spawned + report.Queued + report.Skipped == 0)
+                return;
+
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Halloween re-applied playfield={0} spawned={1} queued={2} skipped={3}",
+                playfield.Identity.Instance, report.Spawned, report.Queued, report.Skipped));
+        }
+
         SpawnReport SpawnAll()
         {
             var report = new SpawnReport();
@@ -198,6 +223,37 @@ namespace ZoneEngine_New.Core.Events
                 Record(report, SpawnOne(q.Playfield, q.Hash, 1, q.Pad, q.Key, social: true), q.Playfield, q.Hash);
             foreach (HalloweenOutdoorGroup g in _catalog.Outdoor)
             {
+                foreach (float[] pad in g.Pads)
+                    Record(report, SpawnOne(g.Playfield, g.Hash, g.Level, pad, g.Key, social: false), g.Playfield, g.Hash);
+            }
+
+            return report;
+        }
+
+        SpawnReport ApplyPlayfield(Playfield playfield)
+        {
+            int playfieldId = playfield.Identity.Instance;
+            lock (_gate)
+            {
+                for (int i = _living.Count - 1; i >= 0; i--)
+                {
+                    if (_living[i].PlayfieldId == playfieldId)
+                        _living.RemoveAt(i);
+                }
+            }
+
+            var report = new SpawnReport();
+            foreach (HalloweenQuestNpc q in _catalog.QuestNpcs)
+            {
+                if (q.Playfield != playfieldId)
+                    continue;
+                Record(report, SpawnOne(q.Playfield, q.Hash, 1, q.Pad, q.Key, social: true), q.Playfield, q.Hash);
+            }
+
+            foreach (HalloweenOutdoorGroup g in _catalog.Outdoor)
+            {
+                if (g.Playfield != playfieldId)
+                    continue;
                 foreach (float[] pad in g.Pads)
                     Record(report, SpawnOne(g.Playfield, g.Hash, g.Level, pad, g.Key, social: false), g.Playfield, g.Hash);
             }
@@ -436,6 +492,9 @@ namespace ZoneEngine_New.Core.Events
     {
         public static void Tick(Playfield playfield, double deltaTime)
             => HalloweenService.Instance?.Tick(playfield, deltaTime);
+
+        public static void OnPlayfieldReady(Playfield playfield)
+            => HalloweenService.Instance?.OnPlayfieldReady(playfield);
     }
 
     public sealed class HalloweenCatalog

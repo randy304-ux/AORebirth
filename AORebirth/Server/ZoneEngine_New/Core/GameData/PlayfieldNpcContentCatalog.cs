@@ -49,8 +49,9 @@ public sealed class PlayfieldNpcContentCatalog
         var shopIdentities = new HashSet<int>();
         foreach (WorldNpcDefinition npc in Npcs)
         {
+            // InstanceId 0 is invalid; negative values are legitimate unsigned AO identity bits.
             if (npc == null || npc.PlayfieldId != PlayfieldId || string.IsNullOrWhiteSpace(npc.Key)
-                || !keys.Add(npc.Key) || npc.InstanceId <= 0 || !identities.Add(npc.InstanceId)
+                || !keys.Add(npc.Key) || npc.InstanceId == 0 || !identities.Add(npc.InstanceId)
                 || string.IsNullOrWhiteSpace(npc.Name) || npc.Stats == null || npc.Textures == null
                 || npc.Meshes == null || npc.Presentation == null)
                 throw new InvalidDataException("Invalid or duplicate playfield NPC definition.");
@@ -84,7 +85,7 @@ public sealed class PlayfieldNpcContentCatalog
         {
             if (terminal == null || terminal.PlayfieldId != PlayfieldId || string.IsNullOrWhiteSpace(terminal.Key)
                 || !keys.Add(terminal.Key) || string.IsNullOrWhiteSpace(terminal.Provenance)
-                || terminal.InstanceId <= 0 || terminal.TemplateId <= 0 || !identities.Add(terminal.InstanceId))
+                || terminal.InstanceId == 0 || terminal.TemplateId <= 0 || !identities.Add(terminal.InstanceId))
                 throw new InvalidDataException("Invalid or duplicate mail terminal definition.");
 
             RequireTransform(terminal.Position, terminal.Rotation, terminal.Key);
@@ -100,7 +101,8 @@ public sealed class PlayfieldNpcContentCatalog
 
     internal static void RequireVendor(WorldVendorDefinition vendor)
     {
-        if (vendor == null || vendor.InstanceId <= 0 || vendor.TemplateId <= 0 || vendor.Stock == null
+        // InstanceId 0 is invalid; negative values are unsigned AO identity bits (e.g. Ofab 3180030000u).
+        if (vendor == null || vendor.InstanceId == 0 || vendor.TemplateId <= 0 || vendor.Stock == null
             || vendor.Stock.Length == 0 || vendor.Stock.Where((row, index) => row == null || row.Slot != index
                 || row.LowId <= 0 || row.HighId <= 0 || row.Quality <= 0).Any())
             throw new InvalidDataException("Invalid vendor identity, template or stock.");

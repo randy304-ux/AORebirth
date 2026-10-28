@@ -199,6 +199,7 @@ namespace ZoneEngine_New.Core.Playfield
             ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("pf.activate", Identity.Instance);
             GetRequiredService<NpcContentActivationService>().Activate();
             GetRequiredService<ZoneEngine_New.Core.Missions.QuestPropService>().Activate();
+            ZoneEngine_New.Core.Events.HalloweenClock.OnPlayfieldReady(this);
             ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("pf.heartbeat", Identity.Instance);
             _heartBeat = new PlayfieldHeartbeat(Identity, Tick);
         }

@@ -248,13 +248,16 @@ namespace ZoneEngine_New.Core.Playfield
                     if (!build.IsCompletedSuccessfully)
                     {
                         _pendingMoveByCharacter.TryRemove(characterId, out _);
+                        Exception failure = build.Exception?.GetBaseException()
+                            ?? new InvalidOperationException("Playfield build was cancelled.");
                         _logger.Error(
-                            build.Exception?.GetBaseException() ?? new InvalidOperationException("Playfield build was cancelled."),
+                            failure,
                             string.Format(
                                 CultureInfo.InvariantCulture,
                                 "Background build of playfield {0} failed; character {1} stays put",
                                 playfieldId,
                                 characterId));
+                        NotifyBackgroundBuildFailed(player, playfieldId, failure);
                         return;
                     }
 
@@ -416,8 +419,63 @@ namespace ZoneEngine_New.Core.Playfield
             }
 
             ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("pf.start", playfieldId);
-            created.StartHeartbeat();
+            try
+            {
+                created.StartHeartbeat();
+            }
+            catch
+            {
+                // Activate runs inside StartHeartbeat; a content/JSON failure must not leave a half-built
+                // world cached, or later WithPlayfield calls would reuse it and skip rebuild.
+                lock (_sync)
+                {
+                    if (_playfields.TryGetValue(playfieldId, out Playfield? current)
+                        && ReferenceEquals(current, created))
+                    {
+                        _playfields.Remove(playfieldId);
+                    }
+                }
+
+                try
+                {
+                    created.Dispose();
+                }
+                catch
+                {
+                    // Best-effort cleanup of the failed candidate.
+                }
+
+                throw;
+            }
+
             return created;
+        }
+
+        static void NotifyBackgroundBuildFailed(Player player, int playfieldId, Exception failure)
+        {
+            try
+            {
+                IZoneSession? session = player.Session;
+                if (session == null)
+                    return;
+
+                string detail = failure.Message;
+                if (detail.Length > 160)
+                    detail = detail.Substring(0, 157) + "...";
+
+                Commands.GmCommandFeedback.Send(
+                    session,
+                    player,
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Destination playfield {0} failed to load. You stay here. ({1})",
+                        playfieldId,
+                        detail));
+            }
+            catch
+            {
+                // Feedback must never mask the original build failure.
+            }
         }
 
         /// <summary>
