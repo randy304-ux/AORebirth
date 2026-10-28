@@ -51,7 +51,15 @@ namespace ZoneEngine_New.Core.Events
             _logger = logger;
             _catalog = Load();
             Instance = this;
-            // Headless boots have no GM console; Halloween.json EnabledOnBoot (or AO_REBIRTH_HALLOWEEN=1) is the server-side .event halloween on.
+        }
+
+        /// <summary>
+        /// Headless boots have no GM console. Call after DI is fully built — never from the ctor
+        /// (Enable touches PlayfieldManager and would deadlock the container).
+        /// </summary>
+        public void EnableOnBootIfConfigured()
+        {
+            ReloadIfStale();
             if (_catalog.EnabledOnBoot
                 || string.Equals(Environment.GetEnvironmentVariable("AO_REBIRTH_HALLOWEEN"), "1", StringComparison.Ordinal))
             {

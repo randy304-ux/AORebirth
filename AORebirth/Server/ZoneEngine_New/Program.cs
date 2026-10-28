@@ -102,7 +102,8 @@ namespace ZoneEngine_New
                 chatEngineLink.Start();
                 playfieldManager = rootServices.GetRequiredService<PlayfieldManager>();
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Battlestations.BattleStationService>();
-                _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.HalloweenService>();
+                var halloween = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.HalloweenService>();
+                halloween.EnableOnBootIfConfigured();
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.DailyLockoutService>();
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.DailyMissionService>();
                 _ = rootServices.GetRequiredService<InventoryFlushService>();
