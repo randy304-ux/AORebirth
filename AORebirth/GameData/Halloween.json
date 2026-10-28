@@ -1,4 +1,5 @@
-﻿{
+{
+    "EnabledOnBoot":  true,
     "_comment":  "Outdoor / low Halloween encounter. GM: .event halloween on|off|status. High-tier and instanced raid content is deferred (see ddogs/docs/halloween-design.md).",
     "RespawnSeconds":  180,
     "QuestNpcs":  [

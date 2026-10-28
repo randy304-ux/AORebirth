@@ -51,6 +51,12 @@ namespace ZoneEngine_New.Core.Events
             _logger = logger;
             _catalog = Load();
             Instance = this;
+            // Headless boots have no GM console; Halloween.json EnabledOnBoot (or AO_REBIRTH_HALLOWEEN=1) is the server-side .event halloween on.
+            if (_catalog.EnabledOnBoot
+                || string.Equals(Environment.GetEnvironmentVariable("AO_REBIRTH_HALLOWEEN"), "1", StringComparison.Ordinal))
+            {
+                Enable();
+            }
         }
 
         public bool Enabled
@@ -500,6 +506,9 @@ namespace ZoneEngine_New.Core.Events
     public sealed class HalloweenCatalog
     {
         public int RespawnSeconds { get; set; } = 180;
+
+        /// <summary>When true, ZoneEngine enables the event during service construction (headless equivalent of .event halloween on).</summary>
+        public bool EnabledOnBoot { get; set; }
 
         public List<HalloweenQuestNpc> QuestNpcs { get; set; } = new();
 
