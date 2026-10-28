@@ -43,6 +43,13 @@ namespace ZoneEngine_New.Core.Battlestations
         /// <summary>A console dynel was used. True when this click belongs to a live match, so the template's other OnUse spells stay unused.</summary>
         public static bool TryUseConsole(Player player, StaticDynel dynel)
             => Service != null && Service.TryUseConsole(player, dynel);
+
+        /// <summary>
+        /// True when this dynel is a control point in the caller's live match (open station, not Decontamination).
+        /// Used to skip the capture terminal's ToUse nano-line requirements before the hack starts.
+        /// </summary>
+        public static bool IsCaptureConsole(Player player, StaticDynel dynel)
+            => Service != null && Service.IsCaptureConsole(player, dynel);
     }
 
     /// <summary>
@@ -170,6 +177,19 @@ namespace ZoneEngine_New.Core.Battlestations
                 human.IdleSeconds = 0;
                 human.InField = false;
                 return true;
+            }
+        }
+
+        public bool IsCaptureConsole(Player player, StaticDynel dynel)
+        {
+            if (player == null || dynel == null)
+                return false;
+            lock (_gate)
+            {
+                Human? human = FindHuman(player);
+                if (human?.Match == null || !ReferenceEquals(player.Playfield, human.Match.Field))
+                    return false;
+                return NearestConsole(dynel.Position.xf, dynel.Position.zf, 15f) >= 0;
             }
         }
 
@@ -363,12 +383,23 @@ namespace ZoneEngine_New.Core.Battlestations
             }
 
             match.UsesBots = fill;
-            match.PendingBotRed = fill ? _catalog.TeamSize - red.Count : 0;
-            match.PendingBotBlue = fill ? _catalog.TeamSize - blue.Count : 0;
+            int pendingRed = fill ? _catalog.TeamSize - red.Count : 0;
+            int pendingBlue = fill ? _catalog.TeamSize - blue.Count : 0;
+            match.PendingBotRed = 0;
+            match.PendingBotBlue = 0;
             match.StartGateLeft = Math.Max(1, _catalog.StartGateSeconds);
 
             lock (_gate)
                 _matches[queue.Bracket.Playfield] = match;
+
+            // Spawn defenders as soon as the match field exists so empty seats are filled before the
+            // gate opens (ao-universe: bots pad each team to TeamSize). Pending was previously only
+            // flushed after StartGateSeconds, so a stuck gate / early leave looked like "no bots".
+            if (fill)
+            {
+                SpawnBots(match, 1, pendingRed);
+                SpawnBots(match, 2, pendingBlue);
+            }
 
             Point safe = SafePoint();
             for (int i = 0; i < match.Humans.Count; i++)
@@ -385,8 +416,8 @@ namespace ZoneEngine_New.Core.Battlestations
             }
 
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                "Battle station {0} started humans={1} gate={2}s (bots after gate)",
-                queue.Bracket.Name, match.Humans.Count, match.StartGateLeft));
+                "Battle station {0} started humans={1} bots={2} gate={3}s",
+                queue.Bracket.Name, match.Humans.Count, match.Bots.Count, match.StartGateLeft));
         }
 
         void SpawnBots(Match match, int team, int count)

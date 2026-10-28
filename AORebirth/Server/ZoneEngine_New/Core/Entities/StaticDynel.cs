@@ -54,9 +54,16 @@ namespace ZoneEngine_New.Core.Entities
 
         /// <summary>Gates checked when a use is asked for: <see cref="CanStillUse"/>, within reach and the ToUse requirements.</summary>
         public bool CanBeginUse(Player player)
-            => CanStillUse(player)
-                && GetEdgeDistanceTo(player) <= LootableDynel.OpenRange
-                && Template.MeetsActionRequirements(stat => player.Stats.Get(stat), ActionType.ToUse);
+        {
+            if (!CanStillUse(player) || GetEdgeDistanceTo(player) > LootableDynel.OpenRange)
+                return false;
+            // Battle Station capture consoles carry HasNotRunningNanoLine 669 (Assassin's Grin strain) and
+            // other ToUse gates meant for the live capture nano. Our match uses a custom hack flow in
+            // BattleStationService, so those item requirements must not block the click.
+            if (ZoneEngine_New.Core.Battlestations.BattleStationClock.IsCaptureConsole(player, this))
+                return true;
+            return Template.MeetsActionRequirements(stat => player.Stats.Get(stat), ActionType.ToUse);
+        }
 
         /// <summary>
         /// Gates checked again when a delayed use completes: the user is on this object's playfield. Reach and ToUse
