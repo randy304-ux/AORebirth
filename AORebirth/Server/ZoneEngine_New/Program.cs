@@ -1,9 +1,11 @@
 namespace ZoneEngine_New
 {
     using System;
+    using System.Globalization;
     using System.IO;
     using System.Text;
     using System.Threading;
+    using System.Threading.Tasks;
     using System.Runtime.InteropServices;
 
     using AORebirth.Database.Schema;
@@ -125,6 +127,28 @@ namespace ZoneEngine_New
                 RuntimeStartup.NotifyService("READY=1\nSTATUS=ZoneEngine_New ready");
                 Console.WriteLine("ZONEENGINE_NEW_READY");
                 logger.Info("ZoneEngine_New root container started.");
+                // After listen is up: warm Borealis + Broken Shores so Halloween pads spawn for verify (non-blocking).
+                if (halloween.Enabled)
+                {
+                    PlayfieldManager warmPlayfields = playfieldManager;
+                    IZoneLogger warmLog = logger;
+                    _ = Task.Run(() =>
+                    {
+                        foreach (int pf in new[] { 800, 665 })
+                        {
+                            try
+                            {
+                                warmPlayfields.GetOrCreate(pf);
+                                warmLog.Info("Halloween warm playfield ready id=" + pf.ToString(CultureInfo.InvariantCulture));
+                            }
+                            catch (Exception warmEx)
+                            {
+                                warmLog.Warn("Halloween warm playfield failed id=" + pf.ToString(CultureInfo.InvariantCulture) + ": " + warmEx.Message);
+                            }
+                        }
+                    });
+                }
+
                 StartShutdownFileWatcher(args);
                 CommandLoop(args);
                 return Shutdown() ? 0 : 3;
