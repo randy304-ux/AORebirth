@@ -65,6 +65,13 @@ namespace ZoneEngine_New.Core.Helpers
                 if (battleAttacker == battleTarget)
                     return false;
 
+                // Shared Decontamination Room is a no-combat safe zone for both teams.
+                if (ZoneEngine_New.Core.Battlestations.BattleStationClock.IsInDecontamination(attacker)
+                    || ZoneEngine_New.Core.Battlestations.BattleStationClock.IsInDecontamination(target)
+                    || ZoneEngine_New.Core.Battlestations.BattleStationClock.IsInDecontamination(attackerSide)
+                    || ZoneEngine_New.Core.Battlestations.BattleStationClock.IsInDecontamination(targetSide))
+                    return false;
+
                 return targetSide is not NpcCharacter teamNpc || teamNpc.Attackable;
             }
 

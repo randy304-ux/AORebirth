@@ -30,6 +30,10 @@ namespace ZoneEngine_New.Core.Battlestations
 
         public static void NotifyHit(Character target) => Service?.NotifyHit(target);
 
+        /// <summary>True when the character is inside the shared Decontamination Room (no combat).</summary>
+        public static bool IsInDecontamination(Character character)
+            => Service != null && Service.IsInDecontamination(character);
+
         public static bool TryRespawn(Player player, out Vector3 landing)
         {
             landing = new Vector3(0, 0, 0);
@@ -43,8 +47,8 @@ namespace ZoneEngine_New.Core.Battlestations
 
     /// <summary>
     /// One battle-station match per level bracket. Rules and coordinates are <c>GameData/BattleStations.json</c>.
-    /// Red is the arm-A spawn (the map's Omni homebase) and Blue is the arm-B spawn (the map's Clan homebase).
-    /// The team is random and is not the character's faction.
+    /// Both teams land in the shared Decontamination Room (district Entry). After <c>StartGateSeconds</c> the
+    /// Exit Decontamination pad opens into the contested floor; death returns to Decontamination. No combat there.
     /// </summary>
     public sealed class BattleStationService
     {
@@ -161,9 +165,10 @@ namespace ZoneEngine_New.Core.Battlestations
                 if (human?.Match == null)
                     return false;
 
-                Point spawn = human.Team == 1 ? _catalog.Spawns.Red : _catalog.Spawns.Blue;
+                Point spawn = SafePoint();
                 landing = new Vector3(spawn.X, spawn.Y, spawn.Z);
                 human.IdleSeconds = 0;
+                human.InField = false;
                 return true;
             }
         }
@@ -175,6 +180,12 @@ namespace ZoneEngine_New.Core.Battlestations
                 Human? human = FindHuman(player);
                 if (human?.Match == null || !ReferenceEquals(player.Playfield, human.Match.Field))
                     return false;
+
+                if (!human.InField || !human.Match.FieldOpen || IsInSafe(player.Position.xf, player.Position.zf))
+                {
+                    Say(player, "Capture points are on the open station. Use the Decontamination pad after the timer.");
+                    return true;
+                }
 
                 int console = NearestConsole(dynel.Position.xf, dynel.Position.zf, 15f);
                 if (console < 0)
@@ -202,7 +213,11 @@ namespace ZoneEngine_New.Core.Battlestations
                 _channeling.Add(player.Identity.Instance);
                 player.StopInPlace();
                 Say(player, "Hacking " + _catalog.Consoles[console].Id
-                    + ". Stay for 60 seconds, then click it again within 5 seconds. A hit breaks it.");
+                    + ". Stay for "
+                    + _catalog.HackSeconds.ToString(CultureInfo.InvariantCulture)
+                    + " seconds, then click it again within "
+                    + _catalog.ConfirmSeconds.ToString(CultureInfo.InvariantCulture)
+                    + " seconds. A hit breaks it.");
                 return true;
             }
         }
@@ -348,32 +363,30 @@ namespace ZoneEngine_New.Core.Battlestations
             }
 
             match.UsesBots = fill;
-            if (fill)
-            {
-                // Fill both sides now so the match is even when humans land. Mid-match backfill
-                // stays one bot per tick (see TryBackfill).
-                SpawnBots(match, 1, _catalog.TeamSize - red.Count);
-                SpawnBots(match, 2, _catalog.TeamSize - blue.Count);
-            }
+            match.PendingBotRed = fill ? _catalog.TeamSize - red.Count : 0;
+            match.PendingBotBlue = fill ? _catalog.TeamSize - blue.Count : 0;
+            match.StartGateLeft = Math.Max(1, _catalog.StartGateSeconds);
 
             lock (_gate)
                 _matches[queue.Bracket.Playfield] = match;
 
-            Point redSpawn = _catalog.Spawns.Red;
-            Point blueSpawn = _catalog.Spawns.Blue;
+            Point safe = SafePoint();
             for (int i = 0; i < match.Humans.Count; i++)
             {
                 Human human = match.Humans[i];
-                Point at = human.Team == 1 ? redSpawn : blueSpawn;
+                human.InField = false;
                 Say(human.Player, (human.Team == 1 ? "Red" : "Blue")
-                    + " team. Core is worth 2 points a tick, each arm 1. First to "
+                    + " team. Decontamination Room: buff up (safe zone). When the "
+                    + match.StartGateLeft.ToString(CultureInfo.InvariantCulture)
+                    + "s timer ends, step the teleport pad into the station. Core is worth 2 points a tick, each arm 1. First to "
                     + _catalog.ScoreCap.ToString(CultureInfo.InvariantCulture) + " wins.");
-                Transfer(human.Player, field, at);
+                Transfer(human.Player, field, safe);
+                RestoreSafeVitals(human.Player);
             }
 
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                "Battle station {0} started humans={1} bots={2}",
-                queue.Bracket.Name, match.Humans.Count, match.Bots.Count));
+                "Battle station {0} started humans={1} gate={2}s (bots after gate)",
+                queue.Bracket.Name, match.Humans.Count, match.StartGateLeft));
         }
 
         void SpawnBots(Match match, int team, int count)
@@ -454,11 +467,16 @@ namespace ZoneEngine_New.Core.Battlestations
                 return;
 
             match.BotSpawnedThisTick = false;
+            TickStartGate(match, deltaTime);
             ExpireHacks(match, deltaTime);
-            Score(match, deltaTime);
+            if (match.FieldOpen)
+                Score(match, deltaTime);
             TickHumans(match, deltaTime);
-            TryBackfill(match, deltaTime);
-            TickBots(match, deltaTime);
+            if (match.FieldOpen)
+            {
+                TryBackfill(match, deltaTime);
+                TickBots(match, deltaTime);
+            }
 
             if (match.RedScore >= _catalog.ScoreCap || match.BlueScore >= _catalog.ScoreCap)
                 Finish(match, match.RedScore >= _catalog.ScoreCap ? 1 : 2);
@@ -558,6 +576,37 @@ namespace ZoneEngine_New.Core.Battlestations
             Announce(match, "Score  Red " + match.RedScore + "  Blue " + match.BlueScore);
         }
 
+        void TickStartGate(Match match, double deltaTime)
+        {
+            if (match.FieldOpen)
+                return;
+
+            match.StartGateLeft -= deltaTime;
+            if (match.StartGateLeft > 0)
+                return;
+
+            match.FieldOpen = true;
+            match.StartGateLeft = 0;
+            Announce(match, "Decontamination pad is open. Step it to enter the station.");
+            for (int i = 0; i < match.Humans.Count; i++)
+            {
+                Human human = match.Humans[i];
+                if (human.Player.Session == null || !ReferenceEquals(human.Player.Playfield, match.Field))
+                    continue;
+                if (human.InField)
+                    continue;
+                // Guide: when time expires you are warped into the main station.
+                SendToArm(match, human, PickArm());
+            }
+
+            if (match.PendingBotRed > 0)
+                SpawnBots(match, 1, match.PendingBotRed);
+            if (match.PendingBotBlue > 0)
+                SpawnBots(match, 2, match.PendingBotBlue);
+            match.PendingBotRed = 0;
+            match.PendingBotBlue = 0;
+        }
+
         void TickHumans(Match match, double deltaTime)
         {
             for (int i = match.Humans.Count - 1; i >= 0; i--)
@@ -578,6 +627,15 @@ namespace ZoneEngine_New.Core.Battlestations
 
                 float x = player.Position.xf;
                 float z = player.Position.zf;
+                bool inSafe = IsInSafe(x, z);
+                if (inSafe)
+                {
+                    human.InField = false;
+                    RestoreSafeVitals(player);
+                    if (TryExitPad(match, human, x, z))
+                        continue;
+                }
+
                 float dx = x - human.LastX;
                 float dz = z - human.LastZ;
                 if ((dx * dx) + (dz * dz) > 4f || human.HackConsole >= 0 || player.FightingTarget != Identity.None)
@@ -586,7 +644,7 @@ namespace ZoneEngine_New.Core.Battlestations
                     human.LastZ = z;
                     human.IdleSeconds = 0;
                 }
-                else
+                else if (!inSafe)
                 {
                     human.IdleSeconds += deltaTime;
                     if (human.IdleSeconds >= _catalog.IdleSeconds)
@@ -596,6 +654,99 @@ namespace ZoneEngine_New.Core.Battlestations
                     }
                 }
             }
+        }
+
+        bool TryExitPad(Match match, Human human, float x, float z)
+        {
+            // Pad only opens after the start timer (ao-universe / Randy: leave Decontamination once the timer ends).
+            if (!match.FieldOpen || human.InField)
+                return false;
+
+            ExitPad[] pads = _catalog.ExitPads;
+            for (int i = 0; i < pads.Length; i++)
+            {
+                ExitPad pad = pads[i];
+                if (Distance(x, z, pad.X, pad.Z) > pad.Radius)
+                    continue;
+
+                Point? arm = string.IsNullOrWhiteSpace(pad.Arm) ? null : FindArm(pad.Arm);
+                if (arm == null)
+                    arm = PickArm();
+                SendToArm(match, human, arm);
+                return true;
+            }
+
+            return false;
+        }
+
+        void SendToArm(Match match, Human human, Point? arm)
+        {
+            Point at = arm ?? (_catalog.Arms.Length > 0 ? ArmPoint(_catalog.Arms[0]) : _catalog.Spawns.Red);
+            human.InField = true;
+            human.IdleSeconds = 0;
+            human.LastX = at.X;
+            human.LastZ = at.Z;
+            Transfer(human.Player, match.Field, at);
+            Say(human.Player, "Entering the station.");
+        }
+
+        Point? FindArm(string id)
+        {
+            for (int i = 0; i < _catalog.Arms.Length; i++)
+            {
+                if (string.Equals(_catalog.Arms[i].Id, id, StringComparison.OrdinalIgnoreCase))
+                    return ArmPoint(_catalog.Arms[i]);
+            }
+
+            return null;
+        }
+
+        Point PickArm()
+        {
+            if (_catalog.Arms.Length == 0)
+                return Random.Shared.Next(2) == 0 ? _catalog.Spawns.Red : _catalog.Spawns.Blue;
+            return ArmPoint(_catalog.Arms[Random.Shared.Next(_catalog.Arms.Length)]);
+        }
+
+        static Point ArmPoint(ArmLanding arm) => new(arm.X, arm.Y, arm.Z);
+
+        Point SafePoint()
+        {
+            if (_catalog.SafeSpawn != null)
+                return _catalog.SafeSpawn;
+            return _catalog.Spawns.Red;
+        }
+
+        bool IsInSafe(float x, float z)
+        {
+            Point safe = SafePoint();
+            return Distance(x, z, safe.X, safe.Z) <= _catalog.SafeRadius;
+        }
+
+        public bool IsInDecontamination(Character character)
+        {
+            if (character?.Playfield == null)
+                return false;
+
+            lock (_gate)
+            {
+                if (!_matches.TryGetValue(character.Playfield.Identity.Instance, out Match? match)
+                    || !ReferenceEquals(match.Field, character.Playfield)
+                    || match.Ending)
+                    return false;
+            }
+
+            return IsInSafe(character.Position.xf, character.Position.zf);
+        }
+
+        static void RestoreSafeVitals(Player player)
+        {
+            int maxHealth = player.Stats.GetOrZero(CharacterStat.MaxHealth);
+            if (maxHealth > 0)
+                player.Stats.Set(CharacterStat.Health, maxHealth, StatDetail.Base, dirty: true);
+            int maxNano = player.Stats.GetOrZero(CharacterStat.MaxNanoEnergy);
+            if (maxNano > 0)
+                player.Stats.Set(CharacterStat.CurrentNano, maxNano, StatDetail.Base, dirty: true);
         }
 
         void TryBackfill(Match match, double deltaTime)
@@ -1106,6 +1257,14 @@ namespace ZoneEngine_New.Core.Battlestations
 
             public bool BotSpawnedThisTick;
 
+            public double StartGateLeft;
+
+            public bool FieldOpen;
+
+            public int PendingBotRed;
+
+            public int PendingBotBlue;
+
             public List<Human> Humans { get; } = new();
 
             public List<Bot> Bots { get; } = new();
@@ -1139,6 +1298,9 @@ namespace ZoneEngine_New.Core.Battlestations
             public double HackLeft;
 
             public bool Confirm;
+
+            /// <summary>False while still in the shared Decontamination Room; true after an arm landing.</summary>
+            public bool InField;
         }
 
         sealed class Bot
@@ -1197,15 +1359,19 @@ namespace ZoneEngine_New.Core.Battlestations
 
         public double TickSeconds { get; set; } = 10;
 
-        public double DominatedTickSeconds { get; set; } = 2.5;
+        public double DominatedTickSeconds { get; set; } = 1;
 
-        public double HackSeconds { get; set; } = 60;
+        public double HackSeconds { get; set; } = 15;
 
         public double ConfirmSeconds { get; set; } = 5;
 
         public double IdleSeconds { get; set; } = 180;
 
         public double QueueWaitSeconds { get; set; } = 45;
+
+        public double StartGateSeconds { get; set; } = 60;
+
+        public float SafeRadius { get; set; } = 28f;
 
         public int TeamSize { get; set; } = 6;
 
@@ -1232,6 +1398,12 @@ namespace ZoneEngine_New.Core.Battlestations
         public string[] BotHashes { get; set; } = [];
 
         public StationConsole[] Consoles { get; set; } = [];
+
+        public Point? SafeSpawn { get; set; }
+
+        public ExitPad[] ExitPads { get; set; } = [];
+
+        public ArmLanding[] Arms { get; set; } = [];
 
         public Spawns Spawns { get; set; } = new();
 
@@ -1282,6 +1454,30 @@ namespace ZoneEngine_New.Core.Battlestations
         public float Y { get; set; }
 
         public float Z { get; set; }
+    }
+
+    sealed class ArmLanding
+    {
+        public string Id { get; set; } = "";
+
+        public float X { get; set; }
+
+        public float Y { get; set; }
+
+        public float Z { get; set; }
+    }
+
+    sealed class ExitPad
+    {
+        public string Arm { get; set; } = "";
+
+        public float X { get; set; }
+
+        public float Y { get; set; }
+
+        public float Z { get; set; }
+
+        public float Radius { get; set; } = 3.5f;
     }
 
     sealed class Spawns

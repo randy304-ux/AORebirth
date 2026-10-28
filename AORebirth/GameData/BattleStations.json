@@ -3,11 +3,13 @@
   "HubReturn": [219.0, 6.02, 190.0],
   "ScoreCap": 500,
   "TickSeconds": 10,
-  "DominatedTickSeconds": 2.5,
-  "HackSeconds": 60,
+  "DominatedTickSeconds": 1,
+  "HackSeconds": 15,
   "ConfirmSeconds": 5,
   "IdleSeconds": 180,
   "QueueWaitSeconds": 45,
+  "StartGateSeconds": 60,
+  "SafeRadius": 28,
   "TeamSize": 6,
   "BotFillMaxHumans": 3,
   "BotBackfillSeconds": 15,
@@ -20,6 +22,16 @@
   "WinVpPerLevel": 4,
   "LossVpPerLevel": 1,
   "BotHashes": ["MRSO", "MREN"],
+  "Notes": "Shared Decontamination Room (district Entry on each BS playfield, centre ~1860,42,300). Both Red and Blue land and respawn here; no combat inside SafeRadius. ExitPads sit on the teal Exit Decontamination floor pad (templates 290266-290274). After StartGateSeconds the pad opens into the open Battle Station district (arms A=NW, B=South, C=NE); AFK players are auto-sent. Consoles 287837/287828 are the four control points (Core worth 2, arms 1). Scoring and loyalty follow ao-universe Battle Stations guide.",
+  "SafeSpawn": { "X": 1862.0, "Y": 42.0, "Z": 300.0 },
+  "ExitPads": [
+    { "Arm": "", "X": 1862.5, "Y": 43.0, "Z": 303.5, "Radius": 6.0 }
+  ],
+  "Arms": [
+    { "Id": "A", "X": 1480.0, "Y": 53.6, "Z": 1500.0 },
+    { "Id": "B", "X": 996.0, "Y": 53.6, "Z": 700.0 },
+    { "Id": "C", "X": 520.0, "Y": 53.6, "Z": 1500.0 }
+  ],
   "Consoles": [
     { "Id": "Core", "Points": 2, "X": 1008.29, "Y": 66.16, "Z": 1257.36 },
     { "Id": "A", "Points": 1, "X": 1515.02, "Y": 53.55, "Z": 1540.35 },
@@ -27,8 +39,8 @@
     { "Id": "C", "Points": 1, "X": 488.68, "Y": 53.53, "Z": 1550.28 }
   ],
   "Spawns": {
-    "Red": { "X": 1420.0, "Y": 53.6, "Z": 1500.0 },
-    "Blue": { "X": 996.0, "Y": 53.6, "Z": 740.0 }
+    "Red": { "X": 1480.0, "Y": 53.6, "Z": 1500.0 },
+    "Blue": { "X": 996.0, "Y": 53.6, "Z": 700.0 }
   },
   "Warps": [
     { "X": 998.89, "Y": 63.83, "Z": 1141.36, "ToX": 998.80, "ToY": 54.16, "ToZ": 844.24 },
