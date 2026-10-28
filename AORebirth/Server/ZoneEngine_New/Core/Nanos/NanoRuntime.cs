@@ -128,7 +128,13 @@ namespace ZoneEngine_New.Core.Nanos
             // if (caster.IsDuplicateRecentNanoLand(nanoId, target, nowUtc))
             //     return NanoCastRefusal.None;
 
-            if (!TryResolveSpell(caster, nanoId, out NanoSpell? spell) || spell == null)
+            // Resolve the recipient first so twinked mercs can pick the highest QL the target can accept
+            // (Fixer NCU and other level-locked buffs fail on low-level teammates at full gear QL).
+            Character? recipientPreview = null;
+            if (target.Instance != 0)
+                recipientPreview = ResolveTarget(caster, target);
+
+            if (!TryResolveSpell(caster, nanoId, out NanoSpell? spell, recipientPreview) || spell == null)
             {
                 LogCastRefused(
                     caster,
@@ -146,6 +152,21 @@ namespace ZoneEngine_New.Core.Nanos
                 target = caster.Identity;
 
             Character? recipient = ResolveTarget(caster, target);
+            // Re-resolve when self-only redirected the target or preview missed the recipient.
+            if (!ReferenceEquals(recipient, recipientPreview)
+                && !TryResolveSpell(caster, nanoId, out spell, recipient))
+            {
+                LogCastRefused(
+                    caster,
+                    nanoId,
+                    target,
+                    NanoCastRefusal.NotUploaded,
+                    phase: "start",
+                    detail: "spell resolve failed for recipient");
+                Refuse(caster, NanoCastRefusal.NotUploaded);
+                return NanoCastRefusal.NotUploaded;
+            }
+
             int nanoCost = ResolveNanoCost(caster, spell);
             NanoCastAttempt attempt = BuildAttempt(caster, spell, recipient, nanoCost, nowUtc);
             NanoCastRefusal refusal = NanoCastRules.Evaluate(attempt);
@@ -205,6 +226,17 @@ namespace ZoneEngine_New.Core.Nanos
         }
 
         /// <summary>
+        /// Resolves a nano for a specific recipient (highest QL a twinked merc's target can accept).
+        /// </summary>
+        public static bool TryGetSpellForTarget(Character caster, int nanoId, Character recipient, out NanoSpell? spell)
+        {
+            ArgumentNullException.ThrowIfNull(caster);
+            ArgumentNullException.ThrowIfNull(recipient);
+            spell = null;
+            return nanoId > 0 && TryResolveSpell(caster, nanoId, out spell, recipient) && spell != null;
+        }
+
+        /// <summary>
         /// The <see cref="TryStartCast"/> gates without refusing, logging or starting anything:
         /// caster state, requirements, nano cost, target NCU and hostile-target legality.
         /// </summary>
@@ -230,6 +262,19 @@ namespace ZoneEngine_New.Core.Nanos
             if (!TargetCanHoldBuff(spell, recipient))
                 return false;
             return !spell.IsHostile || IsHostileNanoTarget(caster, recipient);
+        }
+
+        /// <summary>
+        /// Like <see cref="CanStartCast(Character, NanoSpell, Character, DateTime)"/> but re-resolves the
+        /// nano at the highest QL <paramref name="recipient"/> can accept (merc level-locked buffs).
+        /// </summary>
+        public static bool CanStartCast(Character caster, int nanoId, Character recipient, DateTime nowUtc)
+        {
+            ArgumentNullException.ThrowIfNull(caster);
+            ArgumentNullException.ThrowIfNull(recipient);
+            if (!TryGetSpellForTarget(caster, nanoId, recipient, out NanoSpell? spell) || spell == null)
+                return false;
+            return CanStartCast(caster, spell, recipient, nowUtc);
         }
 
         /// <summary>
@@ -587,14 +632,16 @@ namespace ZoneEngine_New.Core.Nanos
                 CasterIsRecharging = caster.IsInNanoRecharge(nowUtc),
                 // NPC casts are not upload gated; an NPC's list only holds its equipped crystals.
                 IsUploaded = !caster.IsPlayer || caster.UploadedNanoIds.Contains(spell.Id),
-                // Pets and mercs cast from their crystal list without player skill or nano gates; their templates
-                // carry no nano skills or nano pool, so the gate refused every heal (Randy 2026-10-17).
-                RequirementsMet = caster is NpcCharacter { Pet: not null } || spell.MeetsActionRequirements(
-                    stat => caster.Stats.Get(stat),
-                    ActionType.ToUse,
-                    resolve: ItemTemplate.WithActionTarget(
-                        caster is Player casterPlayer ? casterPlayer.ResolvePerkRequirement : null, caster, recipient),
-                    getTargetStat: recipient == null ? null : stat => recipient.Stats.Get(stat)),
+                // Pets/mercs skip caster skill and nano-pool gates (templates carry none), but still honour
+                // OnTarget level locks so Fixer NCU and other level-locked buffs do not fail on low teammates.
+                RequirementsMet = caster is NpcCharacter { Pet: not null }
+                    ? PetBuffRequirementsMet(spell, caster, recipient)
+                    : spell.MeetsActionRequirements(
+                        stat => caster.Stats.Get(stat),
+                        ActionType.ToUse,
+                        resolve: ItemTemplate.WithActionTarget(
+                            caster is Player casterPlayer ? casterPlayer.ResolvePerkRequirement : null, caster, recipient),
+                        getTargetStat: recipient == null ? null : stat => recipient.Stats.Get(stat)),
                 TargetExists = recipient != null,
                 TargetIsDead = recipient?.IsDead == true,
                 CurrentNano = caster is NpcCharacter { Pet: not null } ? int.MaxValue : caster.Stats.GetOrZero(CharacterStat.CurrentNano),
@@ -640,7 +687,30 @@ namespace ZoneEngine_New.Core.Nanos
             return decision != BuffApplyDecision.RefusedNotEnoughNcu;
         }
 
+        /// <summary>
+        /// Pets/mercs skip caster skill gates but still require the recipient to meet OnTarget checks
+        /// (level locks on NCU compressors, composite lines, etc.).
+        /// </summary>
+        static bool PetBuffRequirementsMet(NanoSpell spell, Character caster, Character? recipient)
+        {
+            if (recipient == null)
+                return true;
+            return spell.MeetsActionRequirements(
+                _ => int.MaxValue,
+                ActionType.ToUse,
+                resolve: ItemTemplate.WithActionTarget(null, caster, recipient),
+                getTargetStat: stat => recipient.Stats.Get(stat));
+        }
+
         static bool TryResolveSpell(Character caster, int nanoId, out NanoSpell? spell)
+            => TryResolveSpell(caster, nanoId, out spell, recipient: null);
+
+        /// <summary>
+        /// Resolves a nano template. When a twinked merc casts a QL-pair buff on a recipient, picks the
+        /// highest quality at or below <see cref="NpcCharacter.NanoCastQuality"/> that the recipient
+        /// can accept (target level locks). Hostile and self casts keep full gear QL.
+        /// </summary>
+        static bool TryResolveSpell(Character caster, int nanoId, out NanoSpell? spell, Character? recipient)
         {
             spell = null;
             Playfield? playfield = caster.Playfield;
@@ -651,6 +721,7 @@ namespace ZoneEngine_New.Core.Nanos
             int lowId = nanoId;
             int highId = nanoId;
             int quality = 1;
+            bool interpolates = false;
             // A twinked merc names a cast QL. Only a two-id pair interpolates; a single catalog row stays as it is.
             if (caster is NpcCharacter { NanoCastQuality: > 1 } npc)
             {
@@ -664,8 +735,29 @@ namespace ZoneEngine_New.Core.Nanos
                         lowId = Math.Min(a, b);
                         highId = Math.Max(a, b);
                         quality = npc.NanoCastQuality;
+                        interpolates = true;
                     }
                 }
+            }
+
+            if (interpolates && recipient != null && !ReferenceEquals(caster, recipient))
+            {
+                // Highest QL the target can accept (level-locked buffs / NCU). Step down from gear QL.
+                for (int q = quality; q >= 1; q--)
+                {
+                    ItemTemplate candidate = items.CreateTemplate(lowId, highId, q);
+                    if (candidate.Id != nanoId && candidate.Id != lowId)
+                        continue;
+                    NanoSpell trial = NanoSpell.From(candidate);
+                    if (!PetBuffRequirementsMet(trial, caster, recipient))
+                        continue;
+                    if (!TargetCanHoldBuff(trial, recipient))
+                        continue;
+                    spell = trial;
+                    return true;
+                }
+
+                return false;
             }
 
             ItemTemplate template = items.CreateTemplate(lowId, highId, quality);

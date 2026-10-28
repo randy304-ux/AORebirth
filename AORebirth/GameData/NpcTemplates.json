@@ -1,4 +1,4 @@
-{
+  GNKP LootTable matches=7 sectionLen=42371   GRPH LootTable matches=2 sectionLen=12158   UPH1 LootTable matches=3 sectionLen=18162 {
     "AAAA":  {
                  "Templates":  [
                                    {
@@ -130122,46 +130122,24 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
-                                                             "Chance":  25,
+                                                             "Chance":  40,
                                                              "LevelMod":  20
                                                          },
                                                          {
                                                              "Hash":  "TERT",
                                                              "Repeats":  1,
-                                                             "Chance":  5,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
                                                              "Chance":  8,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
-                                                             "Repeats":  1,
-                                                             "Chance":  5,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "LISP",
-                                                             "Repeats":  1,
-                                                             "Chance":  3,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "DMJK",
-                                                             "Repeats":  1,
-                                                             "Chance":  2,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    },
@@ -130213,9 +130191,17 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
-                                                             "Chance":  30,
+                                                             "Chance":  40,
                                                              "LevelMod":  20
                                                          },
                                                          {
@@ -130223,36 +130209,6 @@
                                                              "Repeats":  1,
                                                              "Chance":  8,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
-                                                             "Repeats":  1,
-                                                             "Chance":  5,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "LISP",
-                                                             "Repeats":  1,
-                                                             "Chance":  3,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "DMJK",
-                                                             "Repeats":  1,
-                                                             "Chance":  2,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    },
@@ -130304,9 +130260,17 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
-                                                             "Chance":  30,
+                                                             "Chance":  40,
                                                              "LevelMod":  20
                                                          },
                                                          {
@@ -130314,36 +130278,6 @@
                                                              "Repeats":  1,
                                                              "Chance":  8,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
-                                                             "Repeats":  1,
-                                                             "Chance":  5,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "LISP",
-                                                             "Repeats":  1,
-                                                             "Chance":  3,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "DMJK",
-                                                             "Repeats":  1,
-                                                             "Chance":  2,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    }
@@ -130399,46 +130333,48 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
                                                              "Chance":  40,
                                                              "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "TERT",
+                                                             "Hash":  "MIYS",
                                                              "Repeats":  1,
-                                                             "Chance":  10,
-                                                             "LevelMod":  0
+                                                             "Chance":  15,
+                                                             "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
+                                                             "Hash":  "FA39",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "LISP",
-                                                             "Repeats":  1,
-                                                             "Chance":  3,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "DMJK",
+                                                             "Hash":  "SSHB",
                                                              "Repeats":  1,
                                                              "Chance":  2,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "CMTR",
+                                                             "Hash":  "BBQ",
                                                              "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "HWRR",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  0
                                                          }
                                                      ]
                                    },
@@ -130490,46 +130426,48 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
                                                              "Chance":  40,
                                                              "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "TERT",
+                                                             "Hash":  "MIYS",
                                                              "Repeats":  1,
-                                                             "Chance":  12,
-                                                             "LevelMod":  0
+                                                             "Chance":  15,
+                                                             "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
+                                                             "Hash":  "FA39",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "LISP",
-                                                             "Repeats":  1,
-                                                             "Chance":  3,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "DMJK",
+                                                             "Hash":  "SSHB",
                                                              "Repeats":  1,
                                                              "Chance":  2,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "CMTR",
+                                                             "Hash":  "BBQ",
                                                              "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
+                                                             "Chance":  2,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "HWRR",
+                                                             "Repeats":  1,
+                                                             "Chance":  8,
+                                                             "LevelMod":  0
                                                          }
                                                      ]
                                    }
@@ -130585,46 +130523,48 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
                                                              "Chance":  45,
                                                              "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "TERT",
+                                                             "Hash":  "MIYS",
                                                              "Repeats":  1,
-                                                             "Chance":  15,
+                                                             "Chance":  20,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "FA39",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
+                                                             "Hash":  "SSHB",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "LISP",
+                                                             "Hash":  "BBQ",
                                                              "Repeats":  1,
-                                                             "Chance":  3,
+                                                             "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "DMJK",
+                                                             "Hash":  "HWRR",
                                                              "Repeats":  1,
-                                                             "Chance":  2,
+                                                             "Chance":  18,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    },
@@ -130676,46 +130616,48 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
                                                              "Chance":  45,
                                                              "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "TERT",
+                                                             "Hash":  "MIYS",
                                                              "Repeats":  1,
-                                                             "Chance":  15,
+                                                             "Chance":  20,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "FA39",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
+                                                             "Hash":  "SSHB",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "LISP",
+                                                             "Hash":  "BBQ",
                                                              "Repeats":  1,
-                                                             "Chance":  3,
+                                                             "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "DMJK",
+                                                             "Hash":  "HWRR",
                                                              "Repeats":  1,
-                                                             "Chance":  2,
+                                                             "Chance":  18,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    },
@@ -130767,46 +130709,48 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
                                                              "Chance":  45,
                                                              "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "TERT",
+                                                             "Hash":  "MIYS",
                                                              "Repeats":  1,
-                                                             "Chance":  15,
+                                                             "Chance":  20,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "FA39",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
+                                                             "Hash":  "SSHB",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "LISP",
+                                                             "Hash":  "BBQ",
                                                              "Repeats":  1,
-                                                             "Chance":  3,
+                                                             "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "DMJK",
+                                                             "Hash":  "HWRR",
                                                              "Repeats":  1,
-                                                             "Chance":  2,
+                                                             "Chance":  18,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    },
@@ -130858,46 +130802,48 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
                                                              "Chance":  45,
                                                              "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "TERT",
+                                                             "Hash":  "MIYS",
                                                              "Repeats":  1,
-                                                             "Chance":  15,
+                                                             "Chance":  20,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "FA39",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
+                                                             "Hash":  "SSHB",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "LISP",
+                                                             "Hash":  "BBQ",
                                                              "Repeats":  1,
-                                                             "Chance":  3,
+                                                             "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "DMJK",
+                                                             "Hash":  "HWRR",
                                                              "Repeats":  1,
-                                                             "Chance":  2,
+                                                             "Chance":  18,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    },
@@ -130949,46 +130895,48 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
                                                              "Chance":  45,
                                                              "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "TERT",
+                                                             "Hash":  "MIYS",
                                                              "Repeats":  1,
-                                                             "Chance":  15,
+                                                             "Chance":  20,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "FA39",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
+                                                             "Hash":  "SSHB",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "LISP",
+                                                             "Hash":  "BBQ",
                                                              "Repeats":  1,
-                                                             "Chance":  3,
+                                                             "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "DMJK",
+                                                             "Hash":  "HWRR",
                                                              "Repeats":  1,
-                                                             "Chance":  2,
+                                                             "Chance":  18,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    },
@@ -131040,46 +130988,48 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
                                                              "Chance":  45,
                                                              "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "TERT",
+                                                             "Hash":  "MIYS",
                                                              "Repeats":  1,
-                                                             "Chance":  15,
+                                                             "Chance":  20,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "FA39",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
+                                                             "Hash":  "SSHB",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "LISP",
+                                                             "Hash":  "BBQ",
                                                              "Repeats":  1,
-                                                             "Chance":  3,
+                                                             "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "DMJK",
+                                                             "Hash":  "HWRR",
                                                              "Repeats":  1,
-                                                             "Chance":  2,
+                                                             "Chance":  18,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    },
@@ -131131,46 +131081,48 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "HLFU",
+                                                             "CountMin":  4,
+                                                             "CountMax":  6,
+                                                             "Chance":  0,
+                                                             "Repeats":  0,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "LYAS",
                                                              "Repeats":  1,
                                                              "Chance":  45,
                                                              "LevelMod":  20
                                                          },
                                                          {
-                                                             "Hash":  "TERT",
+                                                             "Hash":  "MIYS",
                                                              "Repeats":  1,
-                                                             "Chance":  15,
+                                                             "Chance":  20,
+                                                             "LevelMod":  20
+                                                         },
+                                                         {
+                                                             "Hash":  "FA39",
+                                                             "Repeats":  1,
+                                                             "Chance":  10,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "HWCP",
-                                                             "Repeats":  1,
-                                                             "Chance":  8,
-                                                             "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "PHEL",
+                                                             "Hash":  "SSHB",
                                                              "Repeats":  1,
                                                              "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "LISP",
+                                                             "Hash":  "BBQ",
                                                              "Repeats":  1,
-                                                             "Chance":  3,
+                                                             "Chance":  5,
                                                              "LevelMod":  0
                                                          },
                                                          {
-                                                             "Hash":  "DMJK",
+                                                             "Hash":  "HWRR",
                                                              "Repeats":  1,
-                                                             "Chance":  2,
+                                                             "Chance":  18,
                                                              "LevelMod":  0
-                                                         },
-                                                         {
-                                                             "Hash":  "CMTR",
-                                                             "Repeats":  1,
-                                                             "Chance":  40,
-                                                             "LevelMod":  20
                                                          }
                                                      ]
                                    }

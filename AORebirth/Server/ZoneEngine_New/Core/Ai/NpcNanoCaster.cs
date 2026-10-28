@@ -95,11 +95,11 @@ namespace ZoneEngine_New.Core.Ai
                 if (spell == null)
                     continue;
 
-                Character? target = ChooseTarget(spell, nowUtc);
+                Character? target = ChooseTarget(nanoId, spell, nowUtc);
                 if (target == null)
                     continue;
 
-                if (NanoRuntime.TryStartCast(Npc, spell.Id, target.Identity, nowUtc) != NanoCastRefusal.None)
+                if (NanoRuntime.TryStartCast(Npc, nanoId, target.Identity, nowUtc) != NanoCastRefusal.None)
                     continue;
 
                 LogUtil.Debug(
@@ -178,7 +178,7 @@ namespace ZoneEngine_New.Core.Ai
             return spell;
         }
 
-        Character? ChooseTarget(NanoSpell spell, DateTime nowUtc)
+        Character? ChooseTarget(int nanoId, NanoSpell spell, DateTime nowUtc)
         {
             if (TrySummonedPetType(spell, out int petType))
             {
@@ -210,13 +210,18 @@ namespace ZoneEngine_New.Core.Ai
                 return null;
 
             // Support buffs that are not heals: players first (owner, then team), then mercs/pets, then self.
+            // Re-resolve per target so level-locked lines (Fixer NCU, etc.) use the highest QL each can accept.
             if (IsBuffLike(spell) && !IsHeal(spell))
             {
                 foreach (Character candidate in BuffPriorityCandidates(spell))
                 {
-                    if (!NpcSupportRules.CanSupport(Npc, candidate)
-                        || HasNano(candidate, spell)
-                        || !NanoRuntime.CanStartCast(Npc, spell, candidate, nowUtc))
+                    if (!NpcSupportRules.CanSupport(Npc, candidate))
+                        continue;
+                    if (!NanoRuntime.TryGetSpellForTarget(Npc, nanoId, candidate, out NanoSpell? forTarget)
+                        || forTarget == null)
+                        continue;
+                    if (HasNano(candidate, forTarget)
+                        || !NanoRuntime.CanStartCast(Npc, forTarget, candidate, nowUtc))
                         continue;
                     return candidate;
                 }

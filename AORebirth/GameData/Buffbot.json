@@ -1,6 +1,6 @@
 {
   "SchemaVersion": 1,
-  "Notes": "Names only. The zone resolves each name in items.dat and casts the highest QL the player level allows. Ids are not stored here. Based on the ChewysBuffs / AO-Universe buffing guide profession lines. Morph/appearance nanos (e.g. L33t Transformation) must not appear here. Names that are not friendly buff templates in items.dat are omitted at startup.",
+  "Notes": "Names only. Zone resolves each name in items.dat and casts the highest QL the player level allows. Based on AO-Universe Buffing Guide, AOWiki Who Buffs What, ChewysBuffs-style profession menus, and CellAO/AORebirth buffbot sections. Morph/appearance nanos excluded. Names that are not friendly buff templates are omitted at startup. Team and single wrangle ranks listed separately where they are distinct item names.",
   "Sections": [
     {
       "Name": "Generic",
@@ -13,7 +13,19 @@
         "Composite Melee Expertise",
         "Composite Physical Special Expertise",
         "Composite Martial Prowess Expertise",
-        "Composite Tradeskill Expertise"
+        "Composite Tradeskill Expertise",
+        "Composite Teachings",
+        "Composite Mastery",
+        "Composite Infuse With Knowledge",
+        "First Aid Expertise",
+        "First Aid Proficiency",
+        "Treatment Expertise",
+        "Treatment Proficiency",
+        "Martial Arts Expertise",
+        "Martial Arts Proficiency",
+        "Nano Delta",
+        "Regeneration",
+        "Improve Health"
       ]
     },
     {
@@ -21,52 +33,107 @@
       "Nanos": [
         "Assassin's Grin",
         "Feline Grace",
-        "Enhanced Senses"
+        "Enhanced Senses",
+        "Take the Shot",
+        "Sniper's Bliss",
+        "Unexpected Attack",
+        "Chemical Concoction"
       ]
     },
     {
       "Name": "Bureaucrat",
       "Nanos": [
         "Cut Red Tape",
+        "Improved Cut Red Tape",
         "Soothing Calm",
         "Baton of Command",
         "Baton of Leadership",
-        "Baton of Authority"
+        "Baton of Authority",
+        "Neuronal Stimulator",
+        "Gunslinger",
+        "Pistol Mastery",
+        "Authority Figure"
       ]
     },
     {
       "Name": "Doctor",
       "Nanos": [
         "Continuous Reconstruction",
+        "Improved Continuous Reconstruction",
         "Instinctive Control",
+        "Improved Instinctive Control",
         "Iron Circle",
         "Enlarge",
         "Cellular Restoration",
         "Cellular Rebuild",
         "Cellular Recuperation",
         "Cellular Reformation",
-        "Cellular Rebirth"
+        "Cellular Rebirth",
+        "Hearty Constitution",
+        "Improved Hearty Constitution",
+        "Health Augmentation",
+        "Life Channeler",
+        "Enhance Team Health",
+        "Superior Omni-Med Enhancement",
+        "Enhanced First Aid",
+        "Specialist Treatment",
+        "Superior First Aid",
+        "Pistol Mastery"
       ]
     },
     {
       "Name": "Enforcer",
       "Nanos": [
-        "Essence of Behemoth",
-        "Essence of Colossus",
-        "Essence of Gargantua",
-        "Essence of Cyclops",
-        "Essence of Might",
+        "Meatshield",
         "Essence of Vitality",
+        "Essence of Might",
         "Essence of Boundless Health",
+        "Essence of the Brave Challenger",
+        "Essence of Cyclops",
+        "Essence of Titan",
+        "Essence of Gargantua",
+        "Essence of Colossus",
+        "Essence of Leviathan",
+        "Essence of Behemoth",
         "Improved Essence of Behemoth",
-        "Prodigious Strength"
+        "Prodigious Strength",
+        "Thug's Delight",
+        "Headcracker",
+        "Brutal Thug",
+        "Fervor of the Henchman",
+        "Fervor of the Devotee"
+      ]
+    },
+    {
+      "Name": "Engineer",
+      "Nanos": [
+        "Extreme Prejudice",
+        "Philosopher's Stone",
+        "Crowbar Subtlety",
+        "Pistol Mastery",
+        "Electrical Engineering Knowledge",
+        "Mechanical Engineering Knowledge",
+        "Field Quantum Physics Knowledge",
+        "Pharmaceuticals Knowledge",
+        "Weapon Smithing Knowledge",
+        "Electrical Engineering Mastery",
+        "Mechanical Engineering Mastery",
+        "Field Quantum Physics Mastery",
+        "Pharmaceuticals Mastery",
+        "Weapon Smithing Mastery"
       ]
     },
     {
       "Name": "Martial Artist",
       "Nanos": [
         "Muscle Booster",
-        "Muscle Stim"
+        "Muscle Stim",
+        "Dirty Fighter",
+        "Lesser Controlled Rage",
+        "Martial Arts Mastery",
+        "Return Attack",
+        "Fervor of the Henchman",
+        "Fervor of the Devotee"
       ]
     },
     {
@@ -74,13 +141,21 @@
       "Nanos": [
         "Neuronal Stimulator",
         "Nullity Sphere",
-        "Ambient Purification"
+        "Ambient Purification",
+        "Izgimmer's Mockery"
       ]
     },
     {
       "Name": "Fixer",
       "Nanos": [
-        "Gridspace Freedom"
+        "Gridspace Freedom",
+        "NCU Compressor",
+        "Minor Suppressor",
+        "Back Pain",
+        "Cracker's Luck",
+        "Stack the Odds",
+        "Karma Harvest",
+        "Blood Makes Noise"
       ]
     },
     {
@@ -88,7 +163,15 @@
       "Nanos": [
         "Team Skill Wrangler",
         "Team Skill Wrangler (Premium)",
-        "Team Skill Wrangler (Superior)"
+        "Team Skill Wrangler (Superior)",
+        "Precision of the Hunter",
+        "Eagle Eye",
+        "Robust Treatment",
+        "Survival Aid",
+        "Lupine Agility",
+        "Lycanthropic Dexterity",
+        "Footpad Apprentice",
+        "Silent Dagger"
       ]
     },
     {
@@ -100,10 +183,30 @@
         "Mocham's Gift: PsyMod",
         "Mocham's Gift: SenseImp",
         "Mocham's Gift: SpaceTime",
+        "Teachings of Biological Metamorphose",
+        "Teachings of Material Metamorphose",
+        "Teachings of Sensory Improvement",
+        "Teachings of Psychological Modification",
+        "Teachings of Time and Space",
+        "Teachings of Material Creation",
+        "BioMet Mastery",
+        "MatMet Mastery",
+        "Sense Imp Mastery",
+        "PsyMod Mastery",
+        "SpaceTime Mastery",
+        "MatCrea Mastery",
+        "Infuse With Knowledge: Biological Metamorphose",
+        "Infuse With Knowledge: Material Metamorphose",
+        "Infuse With Knowledge: Sensory Improvement",
+        "Infuse With Knowledge: Psychological Modification",
+        "Infuse With Knowledge: Time and Space",
+        "Infuse With Knowledge: Material Creation",
         "Evocation of The Enlightened",
         "Evocation of The Empowered",
         "Evocation of The Reinforced",
-        "Evocation of The Pure"
+        "Evocation of The Pure",
+        "Neuronal Stimulator",
+        "Pistol Mastery"
       ]
     },
     {
@@ -112,7 +215,11 @@
         "Courage Of The Just",
         "Clarion Call",
         "Blessing of The Light",
-        "Blessing of Life"
+        "Blessing of Life",
+        "Fervor of the Henchman",
+        "Fervor of the Devotee",
+        "Footpad Apprentice",
+        "Silent Dagger"
       ]
     },
     {
@@ -120,7 +227,30 @@
       "Nanos": [
         "Borrow Reflect",
         "Corporate Protection",
-        "Team Skill Wrangler (Sophisticated)"
+        "Team Skill Wrangler",
+        "Team Skill Wrangler (Sophisticated)",
+        "Team Skill Wrangler (Premium)",
+        "Team Skill Wrangler (Superior)",
+        "Team Skill Wrangler (Exceptional)",
+        "Skill Wrangler",
+        "Skill Wrangler (Premium)",
+        "Skill Wrangler (Superior)",
+        "Skill Wrangler (Exceptional)",
+        "Apprentice: Field Quantum Physics",
+        "Journeyman: Field Quantum Physics",
+        "Maestro: Field Quantum Physics",
+        "Apprentice: Electrical Engineering",
+        "Journeyman: Electrical Engineering",
+        "Maestro: Electrical Engineering",
+        "Apprentice: Mechanical Engineering",
+        "Journeyman: Mechanical Engineering",
+        "Maestro: Mechanical Engineering",
+        "Apprentice: Pharmaceuticals",
+        "Journeyman: Pharmaceuticals",
+        "Maestro: Pharmaceuticals",
+        "Apprentice: Weapon Smithing",
+        "Journeyman: Weapon Smithing",
+        "Maestro: Weapon Smithing"
       ]
     },
     {
@@ -128,7 +258,25 @@
       "Nanos": [
         "Aggression Multiplier",
         "Reactive Reflective Field",
-        "Damage Shield Projector"
+        "Damage Shield Projector",
+        "Assault Rifle Mastery",
+        "Composite Heavy Artillery",
+        "Riot Control",
+        "Offensive Steamroller",
+        "Ranged Energy Weapon Mastery",
+        "Rifle Mastery",
+        "Pistol Mastery",
+        "Body Boost",
+        "Battlefield Endurance"
+      ]
+    },
+    {
+      "Name": "Shade",
+      "Nanos": [
+        "Fervor of the Henchman",
+        "Fervor of the Devotee",
+        "Footpad Apprentice",
+        "Silent Dagger"
       ]
     }
   ]
