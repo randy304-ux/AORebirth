@@ -7,16 +7,16 @@
       "Hash": "DRCL",
       "Name": "Draculeet",
       "Playfield": 800,
-      "Pad": [690, 5, 590],
-      "Note": "Near Antiques n' such, Borealis (AO-Universe)."
+      "Pad": [690.0, 67.6, 587.0],
+      "Note": "Near Antiques n' such, Borealis (real spawn height from Spawns.json ~690x587)."
     },
     {
       "Key": "frankenleet-borealis",
       "Hash": "FRKL",
       "Name": "Frankenleet",
       "Playfield": 800,
-      "Pad": [695, 5, 585],
-      "Note": "Beside Draculeet."
+      "Pad": [682.4, 72.8, 575.2],
+      "Note": "Beside Draculeet / Antiques cluster."
     }
   ],
   "Outdoor": [
@@ -25,8 +25,21 @@
       "Hash": "UPH1",
       "Level": 10,
       "Playfield": 800,
-      "Pads": [[620, 5, 700], [700, 5, 680], [640, 5, 560]],
-      "Note": "Around Borealis, level 5-15."
+      "Pads": [
+        [270.0, 37.4, 436.4],
+        [243.6, 36.1, 397.8],
+        [290.6, 56.9, 302.1],
+        [304.9, 63.2, 243.9],
+        [331.7, 91.9, 379.0],
+        [453.6, 33.3, 363.8],
+        [479.2, 21.3, 362.3],
+        [503.0, 22.0, 380.0],
+        [651.3, 73.2, 554.1],
+        [682.4, 72.8, 575.2],
+        [626.5, 67.0, 726.9],
+        [622.2, 38.0, 777.2]
+      ],
+      "Note": "Borealis dirt-path / village clearings (Spawns.json pads): west+center-left hut villages, path toward town, Antiques, north path toward Holes in the Wall zone line. Level 5-15."
     },
     {
       "Key": "uph-icc",

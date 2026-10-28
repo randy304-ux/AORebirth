@@ -116,6 +116,9 @@ namespace ZoneEngine_New.Core.Entities
 
         public string LastName { get; set; } = string.Empty;
 
+        /// <summary>Live org display name (Clan id is <see cref="CharacterStat.Clan"/>).</summary>
+        public string OrganizationName { get; set; } = string.Empty;
+
         public IZoneSession? Session { get; set; }
 
         public PlayerConnectionPhase ConnectionPhase { get; set; } = PlayerConnectionPhase.Online;

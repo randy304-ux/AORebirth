@@ -12,6 +12,7 @@ namespace ZoneEngine_New.Core.Ai
     using ZoneEngine_New.Core.Helpers;
     using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Nanos;
+    using ZoneEngine_New.Core.Pets;
     using ZoneEngine_New.Core.Playfield;
     using ZoneEngine_New.Core.Playfield.Locality;
 
@@ -78,10 +79,19 @@ namespace ZoneEngine_New.Core.Ai
             _allies.Clear();
 
             List<int> nanos = Npc.UploadedNanoIds;
-            int start = _random.Next(nanos.Count);
+            // Fixer mercs lead with NCU (compressor / retool / quarkstor) before other buffs.
+            bool fixerLead = IsFixerMerc();
+            int start = fixerLead ? 0 : _random.Next(nanos.Count);
+            for (int pass = 0; pass < (fixerLead ? 2 : 1); pass++)
+            {
+                bool ncuPass = fixerLead && pass == 0;
             for (int i = 0; i < nanos.Count; i++)
             {
-                NanoSpell? spell = Resolve(nanos[(start + i) % nanos.Count]);
+                int nanoId = nanos[(start + i) % nanos.Count];
+                if (fixerLead && ncuPass != IsFixerNcuNano(nanoId))
+                    continue;
+
+                NanoSpell? spell = Resolve(nanoId);
                 if (spell == null)
                     continue;
 
@@ -109,7 +119,16 @@ namespace ZoneEngine_New.Core.Ai
                 _nextAttemptUtc = nowUtc.AddSeconds(Between(MinCastIntervalSeconds, MaxCastIntervalSeconds));
                 return;
             }
+            }
         }
+
+        bool IsFixerMerc()
+            => Npc.Pet?.Hash is string hash
+               && Mercs.ByHash(hash) is { Key: "fixer" };
+
+        /// <summary>Fixer NCU line uploaded on mercs (compressor → quarkstor / vulnerability).</summary>
+        static bool IsFixerNcuNano(int nanoId)
+            => nanoId is 162994 or 163005 or 163006 or 163012 or 163057 or 302412;
 
         /// <summary>
         /// A heal order: casts the first heal this NPC has that can land on <paramref name="target"/> now.
@@ -190,27 +209,19 @@ namespace ZoneEngine_New.Core.Ai
                 && spell.IsHostile)
                 return null;
 
-            // Support buffs that are not heals: self first, then a random allow-listed ally.
+            // Support buffs that are not heals: players first (owner, then team), then mercs/pets, then self.
             if (IsBuffLike(spell) && !IsHeal(spell))
             {
-                if (!HasNano(Npc, spell) && NanoRuntime.CanStartCast(Npc, spell, Npc, nowUtc))
-                    return Npc;
-
-                Character? chosen = null;
-                int eligible = 0;
-                foreach (Character candidate in FriendlyCandidates(spell))
+                foreach (Character candidate in BuffPriorityCandidates(spell))
                 {
-                    if (ReferenceEquals(candidate, Npc)
-                        || !NpcSupportRules.CanSupport(Npc, candidate)
-                        || HasNano(candidate, spell) || !NanoRuntime.CanStartCast(Npc, spell, candidate, nowUtc))
+                    if (!NpcSupportRules.CanSupport(Npc, candidate)
+                        || HasNano(candidate, spell)
+                        || !NanoRuntime.CanStartCast(Npc, spell, candidate, nowUtc))
                         continue;
-
-                    eligible++;
-                    if (_random.Next(eligible) == 0)
-                        chosen = candidate;
+                    return candidate;
                 }
 
-                return chosen;
+                return null;
             }
 
             // A pet told to wait heals no one. Heal pets spawn in follow, so following still heals (Randy 2026-10-17).
@@ -242,14 +253,50 @@ namespace ZoneEngine_New.Core.Ai
         }
 
         /// <summary>
-        /// Self, then characters <see cref="NpcSupportRules.CanSupport"/> allows: for pets/mercs the owner
+        /// Buff target order for mercs/pets: owner → other players (team) → other mercs/pets → self.
+        /// </summary>
+        IEnumerable<Character> BuffPriorityCandidates(NanoSpell spell)
+        {
+            if (!CanApplyOnFriendly(spell))
+            {
+                yield return Npc;
+                yield break;
+            }
+
+            Character? owner = NpcSupportRules.ResolveMaster(Npc);
+            if (owner is NpcCharacter merc && NpcSupportRules.ResolveMaster(merc) is Character grand)
+                owner = grand;
+
+            if (owner is Player
+                && !ReferenceEquals(owner, Npc)
+                && InRange(spell, owner, DefaultSupportRange))
+                yield return owner;
+
+            foreach (Character candidate in FriendlyCandidates(spell))
+            {
+                if (ReferenceEquals(candidate, Npc) || ReferenceEquals(candidate, owner))
+                    continue;
+                if (candidate is Player)
+                    yield return candidate;
+            }
+
+            foreach (Character candidate in FriendlyCandidates(spell))
+            {
+                if (ReferenceEquals(candidate, Npc) || ReferenceEquals(candidate, owner) || candidate is Player)
+                    continue;
+                yield return candidate;
+            }
+
+            yield return Npc;
+        }
+
+        /// <summary>
+        /// Characters <see cref="NpcSupportRules.CanSupport"/> allows: for pets/mercs the owner
         /// party (owner, team, sibling pets, friendly players); for battle-station bots the same side.
-        /// Never outdoor/wild NPC mobs.
+        /// Never outdoor/wild NPC mobs. Self is not included — callers that need self add it.
         /// </summary>
         IEnumerable<Character> FriendlyCandidates(NanoSpell spell)
         {
-            yield return Npc;
-
             if (!CanApplyOnFriendly(spell))
                 yield break;
 

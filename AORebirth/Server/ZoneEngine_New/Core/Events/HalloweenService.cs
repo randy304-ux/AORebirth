@@ -67,19 +67,35 @@ namespace ZoneEngine_New.Core.Events
                     return "Halloween event OFF. Use .event halloween on to spawn outdoor/low Uncle Pumpkin-Heads and city leets.";
 
                 int living = 0, queued = 0;
-                var zones = new SortedSet<string>(StringComparer.Ordinal);
+                var perZone = new SortedDictionary<string, (int Living, int Queued)>(StringComparer.Ordinal);
                 foreach (Tracked t in _living)
                 {
+                    string zone = ZoneLabel(t.PlayfieldId);
+                    perZone.TryGetValue(zone, out (int Living, int Queued) counts);
                     if (t.Npc != null && !t.Npc.IsDead && t.Npc.Playfield != null)
+                    {
                         living++;
+                        counts.Living++;
+                    }
                     else
+                    {
                         queued++;
-                    zones.Add(ZoneLabel(t.PlayfieldId));
+                        counts.Queued++;
+                    }
+
+                    perZone[zone] = counts;
+                }
+
+                var parts = new List<string>(perZone.Count);
+                foreach (KeyValuePair<string, (int Living, int Queued)> pair in perZone)
+                {
+                    parts.Add(pair.Key + " alive=" + pair.Value.Living.ToString(CultureInfo.InvariantCulture)
+                        + " queued=" + pair.Value.Queued.ToString(CultureInfo.InvariantCulture));
                 }
 
                 return "Halloween event ON. Living=" + living.ToString(CultureInfo.InvariantCulture)
                     + " queued=" + queued.ToString(CultureInfo.InvariantCulture)
-                    + " zones=" + string.Join(", ", zones) + ".";
+                    + (parts.Count > 0 ? " [" + string.Join("; ", parts) + "]" : "") + ".";
             }
         }
 
@@ -280,10 +296,15 @@ namespace ZoneEngine_New.Core.Events
 
             try
             {
+                // Pads must sit on terrain; bad Y (e.g. literal 5 under Borealis hills) leaves ghosts "living" but invisible.
+                Vector3 at = track.Pad;
+                if (playfield.TrySnapFeetToFloor(at, out Vector3 floor))
+                    at = floor;
+
                 SpawnService spawns = playfield.GetRequiredService<SpawnService>();
                 NpcCharacter npc = spawns.SpawnMob(
                     template,
-                    track.Pad,
+                    at,
                     level: track.Level,
                     spawnHash: track.Hash,
                     spawnSource: SpawnSource.Command,

@@ -14,6 +14,7 @@ namespace ZoneEngine_New.Core.Pets
     using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Mobs;
+    using ZoneEngine_New.Core.Nanos;
     using ZoneEngine_New.Core.Playfield;
 
     using Vector3 = AORebirth.Core.Vector.Vector3;
@@ -562,8 +563,17 @@ namespace ZoneEngine_New.Core.Pets
                     PetMode.Attack => controller.ModeBeforeAttack,
                     _ => controller.Mode
                 };
-                owner.OwnedPets.Stash.Add(new PetStash(controller.Hash, controller.Type, controller.Level,
-                    controller.ExpiresUtc, mode, HealthPercent(pet), NanoPercent(pet), controller.SummonRequirements));
+                owner.OwnedPets.Stash.Add(new PetStash(
+                    controller.Hash,
+                    controller.Type,
+                    controller.Level,
+                    controller.ExpiresUtc,
+                    mode,
+                    HealthPercent(pet),
+                    NanoPercent(pet),
+                    controller.SummonRequirements,
+                    SnapshotBuffs(pet, now),
+                    SnapshotBuffsFromSource(owner, pet.Identity, now)));
             }
 
             foreach (NpcCharacter pet in pets)
@@ -595,8 +605,71 @@ namespace ZoneEngine_New.Core.Pets
             {
                 if (pet.ExpiresUtc is DateTime expires && now >= expires)
                     continue;
-                Spawn(owner, pet.Hash, pet.Type, pet.Level, pet.ExpiresUtc, pet.Mode, pet.HealthPercent, pet.NanoPercent,
-                    pet.SummonRequirements);
+                NpcCharacter? spawned = Spawn(owner, pet.Hash, pet.Type, pet.Level, pet.ExpiresUtc, pet.Mode,
+                    pet.HealthPercent, pet.NanoPercent, pet.SummonRequirements);
+                if (spawned == null)
+                    continue;
+                RestoreBuffs(spawned, pet.SelfBuffs, spawned.Identity);
+                RestoreBuffs(owner, pet.OwnerBuffs, spawned.Identity);
+            }
+        }
+
+        static List<StashedBuff> SnapshotBuffs(Character character, DateTime nowUtc)
+        {
+            var list = new List<StashedBuff>();
+            IReadOnlyList<Buff> buffs = character.Buffs;
+            for (int i = 0; i < buffs.Count; i++)
+            {
+                Buff buff = buffs[i];
+                if (buff.IsExpired(nowUtc) || buff.Id <= 0)
+                    continue;
+                list.Add(new StashedBuff(buff.Id, buff.NanoInstance, buff.ExpiresAtUtc.Ticks));
+            }
+
+            return list;
+        }
+
+        static List<StashedBuff> SnapshotBuffsFromSource(Character character, Identity source, DateTime nowUtc)
+        {
+            var list = new List<StashedBuff>();
+            IReadOnlyList<Buff> buffs = character.Buffs;
+            for (int i = 0; i < buffs.Count; i++)
+            {
+                Buff buff = buffs[i];
+                if (buff.IsExpired(nowUtc) || buff.Id <= 0)
+                    continue;
+                if (buff.Source.Type != source.Type || buff.Source.Instance != source.Instance)
+                    continue;
+                list.Add(new StashedBuff(buff.Id, buff.NanoInstance, buff.ExpiresAtUtc.Ticks));
+            }
+
+            return list;
+        }
+
+        void RestoreBuffs(Character target, IReadOnlyList<StashedBuff> stash, Identity source)
+        {
+            if (stash == null || stash.Count == 0 || target.Playfield == null)
+                return;
+            IItemBuilder items = target.Playfield.GetRequiredService<IItemBuilder>();
+            DateTime nowUtc = DateTime.UtcNow;
+            for (int i = 0; i < stash.Count; i++)
+            {
+                StashedBuff entry = stash[i];
+                var expires = new DateTime(entry.ExpiresAtUtcTicks, DateTimeKind.Utc);
+                if (expires <= nowUtc || entry.NanoId <= 0)
+                    continue;
+                if (target.TryGetBuff(entry.NanoId, out _))
+                    continue;
+                try
+                {
+                    NanoSpell spell = NanoSpell.From(items.CreateTemplate(entry.NanoId, entry.NanoId, quality: 1));
+                    target.TryRestoreBuff(spell, source, entry.NanoInstance, expires);
+                }
+                catch (Exception exception)
+                {
+                    _logger.Warn("Pet buff restore failed nano=" + entry.NanoId.ToString(CultureInfo.InvariantCulture)
+                        + ": " + exception.Message);
+                }
             }
         }
 

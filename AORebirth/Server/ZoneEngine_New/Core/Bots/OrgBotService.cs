@@ -13,6 +13,8 @@ namespace ZoneEngine_New.Core.Bots
     using MySqlConnector;
 
     using SmokeLounge.AOtomation.Messaging.GameData;
+    using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
+    using SmokeLounge.AOtomation.Messaging.Messages.N3Messages.OrgServerMessages;
 
     using ZoneEngine_New.Core.Chat;
     using ZoneEngine_New.Core.Data;
@@ -59,7 +61,7 @@ namespace ZoneEngine_New.Core.Bots
 
             if (verb.Equals("create", StringComparison.OrdinalIgnoreCase))
             {
-                Create(player, args.Length > 1 ? string.Join(' ', args[1..]) : string.Empty);
+                CreateOrganization(player, args.Length > 1 ? string.Join(' ', args[1..]) : string.Empty);
                 return;
             }
 
@@ -112,8 +114,14 @@ namespace ZoneEngine_New.Core.Bots
             Execute(player, trimmed.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries));
         }
 
-        void Create(Player player, string name)
+        /// <summary>
+        /// Forms an org with <paramref name="name"/> (spaces allowed). Leader becomes president,
+        /// row is persisted, Clan/ClanLevel update, and the client gets org info packets.
+        /// Used by <c>.org create</c> and the client <see cref="OrgClientCommand.Create"/> path.
+        /// </summary>
+        public void CreateOrganization(Player player, string name)
         {
+            ArgumentNullException.ThrowIfNull(player);
             name = (name ?? string.Empty).Trim();
             if (player.Stats.GetOrZero(CharacterStat.Clan) > 0)
             {
@@ -141,8 +149,9 @@ namespace ZoneEngine_New.Core.Bots
             }
 
             WriteClan(player.Identity.Instance, orgId, PresidentRank);
-            ApplyLive(player, orgId, PresidentRank);
+            ApplyLive(player, orgId, PresidentRank, name);
             OpenChannel(player, orgId);
+            PushOrgInfo(player, orgId, name, "President");
             Say(player, "Organization " + name + " is formed. Orgbot answers in org chat and by tell.");
             Post(orgId, name + " is formed. Tell Orgbot, or type .org help in org chat.");
         }
@@ -185,7 +194,11 @@ namespace ZoneEngine_New.Core.Bots
 
             WriteClan(target.Id, org.Id, MemberRank);
             if (online != null)
-                ApplyLive(online, org.Id, MemberRank);
+            {
+                ApplyLive(online, org.Id, MemberRank, org.Name);
+                PushOrgInfo(online, org.Id, org.Name, "Member");
+            }
+
             OpenChannel(online ?? player, org.Id);
             Say(player, target.Name + " is now in " + org.Name + ".");
             Post(org.Id, target.Name + " joined " + org.Name + ".");
@@ -498,11 +511,39 @@ namespace ZoneEngine_New.Core.Bots
             return connection;
         }
 
-        static void ApplyLive(Player player, int orgId, int rank)
+        static void ApplyLive(Player player, int orgId, int rank, string orgName)
         {
+            player.OrganizationName = orgName ?? string.Empty;
             player.Stats.Set(CharacterStat.Clan, orgId, StatDetail.Base, dirty: true);
             player.Stats.Set(CharacterStat.ClanLevel, rank, StatDetail.Base, dirty: true);
             player.FlushDirtyStats();
+        }
+
+        static void PushOrgInfo(Player player, int orgId, string orgName, string rank)
+        {
+            if (player.Session == null)
+                return;
+            var orgIdentity = new Identity { Type = IdentityType.Organization, Instance = orgId };
+            player.Session.Send(
+                new OrgInfoPacketMessage
+                {
+                    Identity = player.Identity,
+                    Name = orgName
+                });
+            player.Session.Send(
+                new OrgInfoMessage
+                {
+                    Identity = player.Identity,
+                    Organization = orgIdentity,
+                    OrganizationName = orgName,
+                    Description = string.Empty,
+                    Objective = string.Empty,
+                    History = string.Empty,
+                    GoverningForm = "Department",
+                    LeaderName = player.Name ?? string.Empty,
+                    Rank = rank,
+                    Unknown3 = Array.Empty<object>()
+                });
         }
 
         void OpenChannel(Player player, int orgId)

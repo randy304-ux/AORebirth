@@ -359,6 +359,7 @@ namespace ZoneEngine_New
             AddMessageHandler<CreateQuestMessageHandler>(services);
             AddMessageHandler<QuestMessageHandler>(services);
             AddMessageHandler<PetCommandMessageHandler>(services);
+            AddMessageHandler<OrgClientMessageHandler>(services);
             AddMessageHandler<TextMessageHandler>(services);
             AddMessageHandler<SkillMessageHandler>(services);
             AddMessageHandler<SetStatMessageHandler>(services);

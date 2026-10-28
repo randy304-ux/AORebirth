@@ -125,9 +125,21 @@ namespace ZoneEngine_New.Core.Pets
         public bool HasExpired(DateTime nowUtc) => ExpiresUtc is DateTime expires && nowUtc >= expires;
     }
 
+    /// <summary>One active buff carried across a zone change (remaining deadline preserved).</summary>
+    public readonly record struct StashedBuff(int NanoId, int NanoInstance, long ExpiresAtUtcTicks);
+
     /// <summary>A pet carried through a zone change: it is despawned on the way out and summoned again on arrival.</summary>
-    public sealed record PetStash(string Hash, int Type, int Level, DateTime? ExpiresUtc, PetMode Mode, int HealthPercent,
-        int NanoPercent, IReadOnlyList<ItemRequirement> SummonRequirements);
+    public sealed record PetStash(
+        string Hash,
+        int Type,
+        int Level,
+        DateTime? ExpiresUtc,
+        PetMode Mode,
+        int HealthPercent,
+        int NanoPercent,
+        IReadOnlyList<ItemRequirement> SummonRequirements,
+        IReadOnlyList<StashedBuff> SelfBuffs,
+        IReadOnlyList<StashedBuff> OwnerBuffs);
 
     /// <summary>The pets a character owns, one per pet slot, in summon order (which is also their formation order).</summary>
     public sealed class OwnedPets

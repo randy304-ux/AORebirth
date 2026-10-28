@@ -3668,10 +3668,8 @@
                     pcInfo.FirstName = namedPlayer.FirstName ?? string.Empty;
                     pcInfo.LastName = namedPlayer.LastName ?? string.Empty;
                 }
-                // if (!string.IsNullOrEmpty(OrganizationName))
-                // {
-                //     pcInfo.OrgName = OrganizationName;
-                // }
+                if (this is Player orgPlayer && !string.IsNullOrEmpty(orgPlayer.OrganizationName))
+                    pcInfo.OrgName = orgPlayer.OrganizationName;
 
                 scfu.CharacterInfo = pcInfo;
             }
