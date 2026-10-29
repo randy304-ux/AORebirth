@@ -699,7 +699,93 @@
             AwardRegularXp(playfield, present);
             AwardAlienXp(playfield, present);
             AwardPvpTitle(present);
+            RecordCombatTrackStats(playfield, present);
             AdvanceKillQuests(playfield, present);
+        }
+
+        /// <summary>
+        /// Character-info tracked counters: alien (invader) kills, monster level totals, and PvP ranked
+        /// solo/team kills when this victim is a player. Persisted CharacterStat rows; dirty so the client updates.
+        /// </summary>
+        void RecordCombatTrackStats(Playfield playfield, IReadOnlyList<int> present)
+        {
+            DynelRegistry registry = playfield.GetRequiredService<DynelRegistry>();
+            TeamService? teams = playfield.GetService<TeamService>();
+            int victimLevel = Stats.GetOrOne(CharacterStat.Level);
+            bool alienVictim = !IsPlayer && Stats.GetOrZero(CharacterStat.NPCFamily) == AlienNpcFamily;
+
+            for (int i = 0; i < present.Count; i++)
+            {
+                if (!_killRewards.TryGetIdentity(present[i], out Identity identity)
+                    || !registry.TryGet(identity, out Dynel? dynel)
+                    || dynel is not Player killer
+                    || killer.IsDead)
+                    continue;
+
+                if (!IsPlayer)
+                {
+                    BumpTrackedStat(killer, CharacterStat.MonsterLevelsKilled, victimLevel);
+                    if (alienVictim)
+                        BumpTrackedStat(killer, CharacterStat.InvadersKilled);
+                    continue;
+                }
+
+                // Victim is a player: credit PvP kills to each damage-share killer.
+                bool teamKill = teams?.GetTeam(killer) is { MemberIds.Count: > 1 };
+                if (teamKill)
+                {
+                    BumpTrackedStat(killer, CharacterStat.PVPRankedTeamKills);
+                    BumpTrackedStat(killer, CharacterStat.PVPTeamScore);
+                }
+                else
+                {
+                    BumpTrackedStat(killer, CharacterStat.PVPRankedSoloKills);
+                    BumpTrackedStat(killer, CharacterStat.PVPSoloScore);
+                }
+
+                BumpTrackedStat(killer, CharacterStat.PvPLevelsKilled, victimLevel);
+            }
+        }
+
+        /// <summary>
+        /// Victim-side death counters for the character info window (killed by invaders, PvP solo/team deaths).
+        /// </summary>
+        protected void RecordPlayerDeathTrackStats(Character? killer)
+        {
+            if (!IsPlayer || Playfield == null)
+                return;
+
+            Character? credited = killer;
+            for (int hop = 0; hop < 3 && credited is NpcCharacter { PetOwner: { } owner } && !ReferenceEquals(owner, credited); hop++)
+                credited = owner;
+
+            if (credited is NpcCharacter npc
+                && npc.Stats.GetOrZero(CharacterStat.NPCFamily) == AlienNpcFamily)
+            {
+                BumpTrackedStat(this, CharacterStat.KilledByInvaders);
+                return;
+            }
+
+            if (credited is not Player)
+                return;
+
+            bool teamDeath = Playfield.GetService<TeamService>()?.GetTeam((Player)this) is { MemberIds.Count: > 1 };
+            if (teamDeath)
+                BumpTrackedStat(this, CharacterStat.PVPRankedTeamDeaths);
+            else
+                BumpTrackedStat(this, CharacterStat.PVPRankedSoloDeaths);
+        }
+
+        static void BumpTrackedStat(Character character, CharacterStat stat, int amount = 1)
+        {
+            if (!character.IsPlayer || amount == 0)
+                return;
+
+            long next = (long)character.Stats.GetOrZero(stat) + amount;
+            character.Stats.Set(stat, (int)Math.Min(next, int.MaxValue), StatDetail.Base, dirty: true);
+            if (character is Player player)
+                player.SaveState.MarkDirty();
+            character.FlushDirtyStats();
         }
 
         /// <summary>
@@ -3525,14 +3611,14 @@
                     InvadersKilled = Stats.GetOrZero(CharacterStat.InvadersKilled),
                     KilledByInvaders = Stats.GetOrZero(CharacterStat.KilledByInvaders),
                     AiLevel = Stats.GetOrZero(CharacterStat.AlienLevel),
-                    PvpDuelWins = 0,
-                    PvpDuelLoses = 0,
-                    PvpProfessionDuelLoses = 0,
-                    PvpSoloKills = 0,
-                    PvpTeamKills = 0,
-                    PvpSoloScore = 0,
-                    PvpTeamScore = 0,
-                    PvpDuelScore = 0
+                    PvpDuelWins = Stats.GetOrZero(CharacterStat.PVPDuelKills),
+                    PvpDuelLoses = Stats.GetOrZero(CharacterStat.PVPDuelDeaths),
+                    PvpProfessionDuelLoses = Stats.GetOrZero(CharacterStat.PVPProfessionDuelDeaths),
+                    PvpSoloKills = Stats.GetOrZero(CharacterStat.PVPRankedSoloKills),
+                    PvpTeamKills = Stats.GetOrZero(CharacterStat.PVPRankedTeamKills),
+                    PvpSoloScore = Stats.GetOrZero(CharacterStat.PVPSoloScore),
+                    PvpTeamScore = Stats.GetOrZero(CharacterStat.PVPTeamScore),
+                    PvpDuelScore = Stats.GetOrZero(CharacterStat.PVPDuelScore)
                 }
             };
         }

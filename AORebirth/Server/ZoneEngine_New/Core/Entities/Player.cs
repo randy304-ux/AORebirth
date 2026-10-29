@@ -1124,6 +1124,7 @@ namespace ZoneEngine_New.Core.Entities
                 return;
 
             base.OnDeath(killer);
+            RecordPlayerDeathTrackStats(killer);
             _respawnObserversCleared = false;
             _respawnPending = true;
             _respawnRemainingSeconds = RespawnGracePeriodMilliseconds / 1000.0;
@@ -2008,6 +2009,8 @@ namespace ZoneEngine_New.Core.Entities
             CharacterStat.PVPSoloScore,
             CharacterStat.PVPTeamScore,
             CharacterStat.PVPDuelScore,
+            CharacterStat.MonsterLevelsKilled,
+            CharacterStat.PvPLevelsKilled,
             CharacterStat.Commendations,
             CharacterStat.DailyMissionResets,
             CharacterStat.UnreadMailCount,
@@ -2350,6 +2353,10 @@ namespace ZoneEngine_New.Core.Entities
             CharacterStat.PVPSoloScore,
             CharacterStat.PVPTeamScore,
             CharacterStat.PVPDuelScore,
+            CharacterStat.InvadersKilled,
+            CharacterStat.KilledByInvaders,
+            CharacterStat.MonsterLevelsKilled,
+            CharacterStat.PvPLevelsKilled,
             // The client shows no perk reset timer for 0; left out, its default reads as a reset far in the future.
             CharacterStat.LastPerkResetTime,
         ];
