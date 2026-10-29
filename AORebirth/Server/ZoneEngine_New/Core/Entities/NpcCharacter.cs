@@ -12,6 +12,7 @@ namespace ZoneEngine_New.Core.Entities
 
     using ZoneEngine_New.Core.Ai;
     using ZoneEngine_New.Core.GameData;
+    using ZoneEngine_New.Core.Helpers;
     using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Metrics;
@@ -152,6 +153,34 @@ namespace ZoneEngine_New.Core.Entities
         }
 
         /// <summary>
+        /// Immortal training dummies absorb the hit for DPS feedback, then snap HP back to full.
+        /// They never die, never grant kill credit/XP/loot, and never start a fight back.
+        /// </summary>
+        public override bool ApplyDamage(Character attacker, int damage, HitType hitType)
+        {
+            if (MobTemplate == null || !MobTemplate.Has(NpcFeature.Immortal))
+                return base.ApplyDamage(attacker, damage, hitType);
+
+            if (IsDead || damage <= 0 || IsEvading)
+                return false;
+
+            if (!ReferenceEquals(attacker, this) && !CombatRules.CanAttack(attacker, this))
+                return false;
+
+            int maxHealth = Math.Max(1, Stats.GetOrZero(CharacterStat.MaxHealth));
+            Stats.Set(CharacterStat.Health, maxHealth, StatDetail.Base, dirty: true);
+            OnDamaged(attacker, damage, hitType);
+            return false;
+        }
+
+        public override void StartFighting(Identity target, byte action)
+        {
+            if (MobTemplate != null && MobTemplate.Has(NpcFeature.Immortal))
+                return;
+            base.StartFighting(target, action);
+        }
+
+        /// <summary>
         /// Shops close the moment the vendor dies, not when the corpse swap lands: the flag has to be
         /// gone before <see cref="Character.OnDeath"/> snapshots stats onto the corpse, and shoppers
         /// must not be able to keep trading with a dead vendor during the swap delay.
@@ -160,6 +189,14 @@ namespace ZoneEngine_New.Core.Entities
         {
             if (IsDead)
                 return;
+
+            // Immortal dummies must never enter the death path even if something else zeroes HP.
+            if (MobTemplate != null && MobTemplate.Has(NpcFeature.Immortal))
+            {
+                int maxHealth = Math.Max(1, Stats.GetOrZero(CharacterStat.MaxHealth));
+                Stats.Set(CharacterStat.Health, maxHealth, StatDetail.Base, dirty: true);
+                return;
+            }
 
             RunDeathTriggers(killer);
             ReleaseForDeath("vendor died");

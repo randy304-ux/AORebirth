@@ -11,5 +11,11 @@ namespace ZoneEngine_New.Core.Mobs
         NoMove,
 
         Wander,
+
+        /// <summary>
+        /// Attackable punching-bag: takes hits for DPS testing, never dies (HP clamped/healed), no combat brain,
+        /// no XP or loot. Used by Ofab hub Training Dummy (PUBG) on playfield 6007.
+        /// </summary>
+        Immortal,
     }
 }

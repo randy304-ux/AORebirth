@@ -287,10 +287,10 @@ $stats = [ordered]@{
 $textures = @()
 foreach ($place in 0..4) { $textures += [ordered]@{ Place = $place; Id = 0 } }
 
-function ContentNpc($key, $identity, $instance, $name, $x, $z, $vendor) {
+function ContentNpc($key, $identity, $instance, $name, $x, $z, $vendor, $spawnHash = $null) {
   $npc = [ordered]@{
     Key = $key
-    Provenance = 'Unicorn Defence Hub playfield 6007. Build-OfabVpShop.ps1. Y 6.4 is the hub floor band, not a walked pin.'
+    Provenance = 'Unicorn Defence Hub playfield 6007. Build-OfabVpShop.ps1. Y 6.4 is the hub floor band, not a walked pin. Body 279184 = Shipping Manifest Terminal look.'
     ContentNpcIdentity = $identity
     PlayfieldId = 6007
     InstanceId = $instance
@@ -305,6 +305,7 @@ function ContentNpc($key, $identity, $instance, $name, $x, $z, $vendor) {
     TickLiving = $true
     Presentation = [ordered]@{}
   }
+  if ($null -ne $spawnHash) { $npc.SpawnHash = [string]$spawnHash }
   if ($null -ne $vendor) { $npc.Vendor = $vendor }
   return $npc
 }
@@ -316,13 +317,13 @@ $shops = @(
   @{ Key = 'support-c'; Name = 'Ofab Nanos (MP and NT)'; Ids = $supportC; X = 244; Z = 214 }
 )
 $queues = @(
-  @{ Name = 'Battle Station 10-30'; X = 248.5; Z = 189 }
-  @{ Name = 'Battle Station 31-60'; X = 241; Z = 196.5 }
-  @{ Name = 'Battle Station 61-100'; X = 241; Z = 181.5 }
-  @{ Name = 'Battle Station 101-150'; X = 225; Z = 196.5 }
-  @{ Name = 'Battle Station 151-200'; X = 217.5; Z = 189 }
-  @{ Name = 'Battle Station 201-214'; X = 225; Z = 181.5 }
-  @{ Name = 'Battle Station 215-220'; X = 231; Z = 189 }
+  @{ Name = 'Battle Station 10-30'; X = 248.5; Z = 189; SpawnHash = '1TTO' }
+  @{ Name = 'Battle Station 31-60'; X = 241; Z = 196.5; SpawnHash = '31TO' }
+  @{ Name = 'Battle Station 61-100'; X = 241; Z = 181.5; SpawnHash = '60T1' }
+  @{ Name = 'Battle Station 101-150'; X = 225; Z = 196.5; SpawnHash = '10T1' }
+  @{ Name = 'Battle Station 151-200'; X = 217.5; Z = 189; SpawnHash = '15T2' }
+  @{ Name = 'Battle Station 201-214'; X = 225; Z = 181.5; SpawnHash = '17TO' }
+  @{ Name = 'Battle Station 215-220'; X = 231; Z = 189; SpawnHash = '20TO' }
 )
 
 $npcs = @()
@@ -342,7 +343,7 @@ for ($i = 0; $i -lt $queues.Count; $i++) {
   $q = $queues[$i]
   $slug = ($q.Name.ToLower() -replace '[^a-z0-9]+','-').Trim('-')
   $key = 'ddogs:bs:6007:' + $slug
-  $npc = ContentNpc $key 'ddogs-bs-queue' (2110920000 + $i) $q.Name $q.X $q.Z $null
+  $npc = ContentNpc $key 'ddogs-bs-queue' (2110920000 + $i) $q.Name $q.X $q.Z $null $q.SpawnHash
   $npcs = $npcs + @(,$npc)
 }
 

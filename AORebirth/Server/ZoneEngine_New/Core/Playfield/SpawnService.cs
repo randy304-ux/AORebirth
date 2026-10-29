@@ -213,7 +213,8 @@ namespace ZoneEngine_New.Core.Playfield
             npc.Rebase();
             TryAttachShop(npc);
             // Vendors fight back like any NPC; only NoCombat (blue-named or flagged) NPCs stay brainless.
-            if (attachDefaultBrain && npc.Attackable)
+            // Immortal training dummies are attackable but never fight back or move onto hate.
+            if (attachDefaultBrain && npc.Attackable && !template.Has(NpcFeature.Immortal))
                 NpcBrain.Create(npc, new Vector3(at.x, at.y, at.z), NpcAiProfiles.Resolve(template.Hash));
 
             // Anything the first spawn packet has to carry (a pet's PetMaster) goes on before it is registered.
