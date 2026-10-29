@@ -111,14 +111,6 @@ namespace ZoneEngine_New.Core.Trade
                     machine.Stock.ConfigurationUnavailableReason));
                 return false;
             }
-            if (machine.Template.Id == OfabHubStock.GeneralTemplateId
-                && machine.SpendsVictoryPoints
-                && machine.Stock.IsConfiguredSnapshot
-                && !OfabHubStock.TryStockGeneralFor(machine, player, id => _catalog.TryGet(id, out ItemTemplate t) ? t : null))
-            {
-                Tell(player, "Another customer is using this terminal. Try again in a moment.");
-                return false;
-            }
             if (machine.Stock.IsConfiguredSnapshot)
             {
                 // Configured stock belongs only to its exact live accepted vendor, never to

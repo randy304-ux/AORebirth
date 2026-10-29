@@ -212,19 +212,33 @@ namespace ZoneEngine_New.Core.Battlestations
                     return false;
 
                 Touch(human);
-                if (human.Confirm && human.HackConsole == console)
+                Match match = human.Match;
+                if (match.Owner[console] == human.Team)
                 {
-                    LockConsole(human.Match, console, human.Team, player.Name ?? "You");
-                    human.HackConsole = -1;
-                    human.Confirm = false;
-                    _channeling.Remove(player.Identity.Instance);
+                    Say(player, "Your side already holds " + _catalog.Consoles[console].Id + ".");
                     return true;
                 }
 
-                if (human.HackConsole == console && !human.Confirm)
+                if (match.CaptureLockLeft[console] > 0)
                 {
-                    Say(player, "Keep hacking. Click again when the window opens.");
+                    int left = Math.Max(1, (int)Math.Ceiling(match.CaptureLockLeft[console]));
+                    Say(player, _catalog.Consoles[console].Id + " is locked for "
+                        + left.ToString(CultureInfo.InvariantCulture) + " more seconds.");
                     return true;
+                }
+
+                if (human.HackConsole == console)
+                {
+                    Say(player, "Still capturing " + _catalog.Consoles[console].Id
+                        + ". Stay alive and in range.");
+                    return true;
+                }
+
+                if (human.HackConsole >= 0)
+                {
+                    _channeling.Remove(player.Identity.Instance);
+                    human.HackConsole = -1;
+                    human.Confirm = false;
                 }
 
                 human.HackConsole = console;
@@ -232,11 +246,9 @@ namespace ZoneEngine_New.Core.Battlestations
                 human.Confirm = false;
                 _channeling.Add(player.Identity.Instance);
                 player.StopInPlace();
-                Say(player, "Hacking " + _catalog.Consoles[console].Id
-                    + ". Stay for "
+                Say(player, "Capturing " + _catalog.Consoles[console].Id
+                    + ". Stay alive and in range for "
                     + _catalog.HackSeconds.ToString(CultureInfo.InvariantCulture)
-                    + " seconds, then click it again within "
-                    + _catalog.ConfirmSeconds.ToString(CultureInfo.InvariantCulture)
                     + " seconds. A hit breaks it.");
                 return true;
             }
@@ -406,7 +418,7 @@ namespace ZoneEngine_New.Core.Battlestations
             {
                 Human human = match.Humans[i];
                 human.InField = false;
-                Say(human.Player, (human.Team == 1 ? "Red" : "Blue")
+                Say(human.Player, SideLabel(human.Team)
                     + " team. Decontamination Room: buff up (safe zone). When the "
                     + match.StartGateLeft.ToString(CultureInfo.InvariantCulture)
                     + "s timer ends, step the teleport pad into the station. Core is worth 2 points a tick, each arm 1. First to "
@@ -525,6 +537,12 @@ namespace ZoneEngine_New.Core.Battlestations
 
         void ExpireHacks(Match match, double deltaTime)
         {
+            for (int i = 0; i < match.CaptureLockLeft.Length; i++)
+            {
+                if (match.CaptureLockLeft[i] > 0)
+                    match.CaptureLockLeft[i] = Math.Max(0, match.CaptureLockLeft[i] - deltaTime);
+            }
+
             lock (_gate)
             {
                 for (int i = 0; i < match.Humans.Count; i++)
@@ -533,23 +551,28 @@ namespace ZoneEngine_New.Core.Battlestations
                     if (human.HackConsole < 0)
                         continue;
 
+                    int console = human.HackConsole;
+                    Player player = human.Player;
+                    StationConsole point = _catalog.Consoles[console];
+                    float dist = Distance(player.Position.xf, player.Position.zf, point.X, point.Z);
+                    if (player.IsDead || player.Session == null || dist > 15f)
+                    {
+                        _channeling.Remove(player.Identity.Instance);
+                        human.HackConsole = -1;
+                        human.Confirm = false;
+                        if (!player.IsDead && player.Session != null)
+                            Say(player, "Capture broken — stay next to the point.");
+                        continue;
+                    }
+
                     human.HackLeft -= deltaTime;
                     if (human.HackLeft > 0)
                         continue;
 
-                    if (!human.Confirm)
-                    {
-                        human.Confirm = true;
-                        human.HackLeft = _catalog.ConfirmSeconds;
-                        _channeling.Remove(human.Player.Identity.Instance);
-                        Say(human.Player, "Click the console again to lock it.");
-                    }
-                    else
-                    {
-                        human.HackConsole = -1;
-                        human.Confirm = false;
-                        Say(human.Player, "The lock window closed.");
-                    }
+                    LockConsole(match, console, human.Team, player.Name ?? "You");
+                    human.HackConsole = -1;
+                    human.Confirm = false;
+                    _channeling.Remove(player.Identity.Instance);
                 }
             }
 
@@ -558,6 +581,15 @@ namespace ZoneEngine_New.Core.Battlestations
                 Bot bot = match.Bots[i];
                 if (bot.Dead || bot.HackConsole < 0)
                     continue;
+
+                if (match.CaptureLockLeft[bot.HackConsole] > 0
+                    || match.Owner[bot.HackConsole] == bot.Team)
+                {
+                    bot.HackConsole = -1;
+                    if (bot.Npc.Brain != null)
+                        bot.Npc.Brain.PatrolEnabled = true;
+                    continue;
+                }
 
                 bot.HackLeft -= deltaTime;
                 if (bot.HackLeft > 0)
@@ -612,7 +644,8 @@ namespace ZoneEngine_New.Core.Battlestations
                 return;
 
             match.AnnounceDebt = 0;
-            Announce(match, "Score  Red " + match.RedScore + "  Blue " + match.BlueScore);
+            Announce(match, "Score  " + SideLabel(1) + " " + match.RedScore
+                + "  " + SideLabel(2) + " " + match.BlueScore);
         }
 
         static readonly int[] CountdownMarks = [45, 30, 15, 10, 5, 3, 2, 1];
@@ -962,7 +995,8 @@ namespace ZoneEngine_New.Core.Battlestations
                 float x = bot.Npc.Position.xf;
                 float z = bot.Npc.Position.zf;
                 float goalDist = Distance(x, z, goal.X, goal.Z);
-                if (goalDist < 6f && bot.HackConsole < 0 && match.Owner[bot.Goal] != bot.Team)
+                if (goalDist < 6f && bot.HackConsole < 0 && match.Owner[bot.Goal] != bot.Team
+                    && match.CaptureLockLeft[bot.Goal] <= 0)
                 {
                     if (EnemiesNear(match, bot, _catalog.BotEnemyClearRange))
                     {
@@ -1012,7 +1046,7 @@ namespace ZoneEngine_New.Core.Battlestations
             int bestCost = int.MaxValue;
             for (int i = 0; i < match.Owner.Length; i++)
             {
-                if (match.Owner[i] == team)
+                if (match.Owner[i] == team || match.CaptureLockLeft[i] > 0)
                     continue;
 
                 int cost = i == 0 ? 0 : 10;
@@ -1120,9 +1154,33 @@ namespace ZoneEngine_New.Core.Battlestations
                 return;
 
             match.Owner[console] = team;
-            Announce(match, who + " locked " + _catalog.Consoles[console].Id
-                + " for " + (team == 1 ? "Red" : "Blue") + ".");
+            match.CaptureLockLeft[console] = _catalog.CaptureLockSeconds;
+            Announce(match, who + " captured " + _catalog.Consoles[console].Id
+                + " for " + SideLabel(team)
+                + ". " + FormatBoard(match));
         }
+
+        string FormatBoard(Match match)
+        {
+            var parts = new string[match.Owner.Length];
+            for (int i = 0; i < match.Owner.Length; i++)
+            {
+                string hold = match.Owner[i] switch
+                {
+                    1 => SideLabel(1),
+                    2 => SideLabel(2),
+                    _ => "-"
+                };
+                parts[i] = _catalog.Consoles[i].Id + "=" + hold;
+            }
+
+            return "Board " + string.Join(" ", parts);
+        }
+
+        static string SideLabel(int team)
+            => team == 1
+                ? "<font color=#FF5555>Red</font>"
+                : "<font color=#5599FF>Blue</font>";
 
         void Finish(Match match, int winner)
         {
@@ -1132,7 +1190,9 @@ namespace ZoneEngine_New.Core.Battlestations
             match.Ending = true;
             string text = winner == 0
                 ? "The match ended with no one left."
-                : (winner == 1 ? "Red" : "Blue") + " wins.  Red " + match.RedScore + "  Blue " + match.BlueScore + ".";
+                : SideLabel(winner) + " wins.  "
+                    + SideLabel(1) + " " + match.RedScore + "  "
+                    + SideLabel(2) + " " + match.BlueScore + ".";
             Announce(match, text);
 
             var stat = (CharacterStat)InvasionService.VictoryPointsStatId;
@@ -1363,6 +1423,7 @@ namespace ZoneEngine_New.Core.Battlestations
                 Bracket = bracket;
                 Field = field;
                 Owner = new int[consoles];
+                CaptureLockLeft = new double[consoles];
             }
 
             public Bracket Bracket { get; }
@@ -1370,6 +1431,9 @@ namespace ZoneEngine_New.Core.Battlestations
             public Playfield Field { get; }
 
             public int[] Owner { get; }
+
+            /// <summary>Seconds remaining before this console can be captured again.</summary>
+            public double[] CaptureLockLeft { get; }
 
             public int RedScore;
 
@@ -1495,9 +1559,12 @@ namespace ZoneEngine_New.Core.Battlestations
 
         public double DominatedTickSeconds { get; set; } = 1;
 
-        public double HackSeconds { get; set; } = 15;
+        public double HackSeconds { get; set; } = 10;
 
         public double ConfirmSeconds { get; set; } = 5;
+
+        /// <summary>After a capture completes, nobody can start another on that point for this many seconds.</summary>
+        public double CaptureLockSeconds { get; set; } = 15;
 
         public double IdleSeconds { get; set; } = 180;
 

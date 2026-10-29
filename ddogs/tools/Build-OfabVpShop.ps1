@@ -198,15 +198,39 @@ foreach ($id in @(265405,265406)) {
   $q = NeedQl $id
   $general += [ordered]@{ Low = [int]$id; High = [int]$id; Ql = $q; Price = 25 }
 }
+# All Ofab nanos go on the original General Vendor (266579) in one scrollable list.
+# Profession panes below remain as convenience terminals; General is the full catalog.
+$allNanoIds = @(
+  287754,301854,301289,265449,279350,279346,265442,301937,301492,287556,
+  301836,302224,302244,302218,302237,265446,302230,265453,301154,279380,301601,301119,
+  301896,265454,301594,
+  301898,302396,302400,265441,267645,265445,302413,265444,274374,301863,279377,302388,301868,301860,279375,
+  267646,265451,267647,267648,301846,279373,267650,267638,274372,267636,301856,302255,267637,265443,
+  265447,267118,267115,267268,267122,267267,301530,301522,267111,302289,302403,301900,302291,280053,301534,301526,301542,
+  267644,267634,267641,267919,302248,267635,220622,302146,301082,267539,267537,267633,267643,267642,265448,267920,302151,302149,302155,279341,
+  267270,267640,267631,267630,267629,267639,267632,302258,267273,302189,301889,267276,267274,267284,265452,300507,267282,
+  265459,265462,265458,265460,265469,265468,265455,265457,265456,265465,302275,265471,265470,265464,265466,218167,302076,265461,265463,265450,265467
+)
+$seenNano = @{}
+foreach ($row in $general) { $seenNano["$($row.Low)"] = $true }
+foreach ($id in $allNanoIds) {
+  if ($seenNano.ContainsKey("$id")) { continue }
+  $seenNano["$id"] = $true
+  $q = NeedQl $id
+  $general += [ordered]@{ Low = [int]$id; High = [int]$id; Ql = $q; Price = (NanoPrice $id) }
+}
 $vendors['266579'] = @($general)
 
 foreach ($key in @($vendors.Keys)) {
   $n = @($vendors[$key]).Count
-  if ($n -lt 1 -or $n -gt 64) { throw "vendor $key has $n lines" }
+  if ($n -lt 1) { throw "vendor $key has $n lines" }
+  # General Vendor is the full nano catalog and may exceed 64; the client scrolls.
+  if ($key -ne '266579' -and $n -gt 64) { throw "vendor $key has $n lines" }
 }
 $stockDoc = [ordered]@{
-  Notes = 'Hub vending machines on playfield 6007. Randy house list: armor/weapon slot*QL then /10; nanos 100/250/500; attunement L1=20; laser tag=100. Mk 1 weapons. Armor QL steps 1,50,100,150,200,250,300. No Ofab shields (do not exist). Build-OfabVpShop.ps1'
+  Notes = 'Hub vending machines on playfield 6007. Randy house list: armor/weapon slot*QL then /10; nanos 100/250/500; attunement L1=20; laser tag=100. Mk 1 weapons. Armor QL steps 1,50,100,150,200,250,300. No Ofab shields. General Vendor 266579 holds general/HUD items plus ALL Ofab nanos in one scrollable list. Build-OfabVpShop.ps1'
   Vendors = $vendors
+  GeneralNanos = @()
 }
 $stockPath = Join-Path $GameData 'OfabHubStock.json'
 [IO.File]::WriteAllText($stockPath, (($stockDoc | ConvertTo-Json -Depth 6) + "`n"), $utf8)

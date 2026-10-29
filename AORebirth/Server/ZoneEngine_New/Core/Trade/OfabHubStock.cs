@@ -1,12 +1,9 @@
 namespace ZoneEngine_New.Core.Trade
 {
     using System;
-    using AORebirth.Enums;
     using System.Collections.Generic;
     using System.IO;
     using System.Text.Json;
-
-    using SmokeLounge.AOtomation.Messaging.GameData;
 
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.GameData;
@@ -16,77 +13,21 @@ namespace ZoneEngine_New.Core.Trade
     /// <summary>
     /// Fills the Ofab vending machines that already stand in the Unicorn Defence Hub (playfield 6007).
     /// Stock is <c>GameData/OfabHubStock.json</c>, keyed by the machine's item template.
+    /// The General Vendor (266579) carries general/HUD items plus every Ofab nano in one scrollable list.
     /// </summary>
     public static class OfabHubStock
     {
         static readonly object Gate = new();
         static Dictionary<int, ShopStockSlot[]>? _byTemplate;
         static bool _loaded;
-        static StockRow[] _generalNanos = [];
 
         /// <summary>The hub's original Ofab General Vendor machine.</summary>
         public const int GeneralTemplateId = 266579;
 
         /// <summary>
-        /// The General machine sells general items plus the Ofab nanos the viewer's profession can use.
-        /// All professions' nanos together exceed one 64-slot pane, so the pane is rebuilt for each customer.
-        /// False when another customer has the pane open (the snapshot cannot change under an open trade).
+        /// Configured Ofab panes can exceed the legacy 64-slot random-vendor band; the client scrolls.
         /// </summary>
-        public static bool TryStockGeneralFor(VendingMachine machine, Player player, Func<int, ItemTemplate?> lookup)
-        {
-            ArgumentNullException.ThrowIfNull(machine);
-            ArgumentNullException.ThrowIfNull(player);
-            Dictionary<int, ShopStockSlot[]>? stock;
-            StockRow[] nanos;
-            lock (Gate)
-            {
-                stock = _byTemplate;
-                nanos = _generalNanos;
-            }
-
-            if (stock == null || !stock.TryGetValue(GeneralTemplateId, out ShopStockSlot[]? general))
-                return true;
-            if (machine.Stock.OpenTradeCount != 0)
-                return false;
-
-            int profession = player.Stats.Get(CharacterStat.Profession);
-            var slots = new List<ShopStockSlot>(general);
-            foreach (StockRow row in nanos)
-            {
-                if (slots.Count >= 64)
-                    break;
-                if (row.Low <= 0 || row.High <= 0 || row.Ql <= 0)
-                    continue;
-                ItemTemplate? template = lookup(row.Low);
-                if (template != null && !ProfessionAllowed(template, profession))
-                    continue;
-                slots.Add(new ShopStockSlot(row.Low, row.High, row.Ql, explicitPrice: Math.Max(1, row.Price)));
-            }
-
-            machine.Stock.SetConfiguredSnapshot(slots);
-            return true;
-        }
-
-        static bool ProfessionAllowed(ItemTemplate template, int profession)
-        {
-            bool any = false;
-            foreach (ItemAction action in template.Actions)
-            {
-                if (action.ActionType != (int)ActionType.ToUse)
-                    continue;
-                foreach (ItemRequirement requirement in action.Requirements)
-                {
-                    if (requirement.StatNumber != (int)CharacterStat.Profession
-                        && requirement.StatNumber != (int)CharacterStat.VisualProfession)
-                        continue;
-                    any = true;
-                    if (requirement.Value == profession)
-                        return true;
-                }
-            }
-
-            return !any;
-        }
+        const int ConfiguredSlotCap = 512;
 
         public static void Apply(IGameData gameData, IZoneLogger logger, VendingMachine machine)
         {
@@ -99,8 +40,8 @@ namespace ZoneEngine_New.Core.Trade
 
             machine.Stock.SetConfiguredSnapshot(slots);
             machine.SpendsVictoryPoints = true;
-            machine.Stats.Set(CharacterStat.SellModifier, 0);
-            machine.Stats.Set(CharacterStat.BuyModifier, 0);
+            machine.Stats.Set(SmokeLounge.AOtomation.Messaging.GameData.CharacterStat.SellModifier, 0);
+            machine.Stats.Set(SmokeLounge.AOtomation.Messaging.GameData.CharacterStat.BuyModifier, 0);
         }
 
         static Dictionary<int, ShopStockSlot[]>? Load(IGameData gameData, IZoneLogger logger)
@@ -128,24 +69,32 @@ namespace ZoneEngine_New.Core.Trade
                             if (!int.TryParse(pair.Key, out int template) || pair.Value == null)
                                 continue;
 
-                            var slots = new List<ShopStockSlot>(pair.Value.Length);
-                            for (int i = 0; i < pair.Value.Length && slots.Count < 64; i++)
+                            var slots = BuildSlots(pair.Value);
+                            if (template == GeneralTemplateId && body.GeneralNanos is { Length: > 0 })
                             {
-                                StockRow row = pair.Value[i];
-                                if (row.Low <= 0 || row.High <= 0 || row.Ql <= 0)
-                                    continue;
+                                // Legacy files kept nanos in a side list for per-profession filtering.
+                                // Bake them onto the General machine so one open shows everything.
+                                var merged = new List<ShopStockSlot>(slots);
+                                foreach (ShopStockSlot nano in BuildSlots(body.GeneralNanos))
+                                {
+                                    if (merged.Count >= ConfiguredSlotCap)
+                                        break;
+                                    merged.Add(nano);
+                                }
 
-                                slots.Add(new ShopStockSlot(row.Low, row.High, row.Ql, explicitPrice: Math.Max(1, row.Price)));
+                                slots = merged.ToArray();
                             }
 
-                            if (slots.Count > 0)
-                                map[template] = slots.ToArray();
+                            if (slots.Length > 0)
+                                map[template] = slots;
                         }
                     }
 
                     _byTemplate = map;
-                    _generalNanos = body?.GeneralNanos ?? [];
-                    logger.Info("Ofab hub vendors stocked: " + map.Count);
+                    logger.Info("Ofab hub vendors stocked: " + map.Count
+                        + (map.TryGetValue(GeneralTemplateId, out ShopStockSlot[]? general)
+                            ? (" generalSlots=" + general.Length)
+                            : string.Empty));
                 }
                 catch (Exception exception)
                 {
@@ -155,6 +104,21 @@ namespace ZoneEngine_New.Core.Trade
 
                 return _byTemplate;
             }
+        }
+
+        static ShopStockSlot[] BuildSlots(StockRow[] rows)
+        {
+            var slots = new List<ShopStockSlot>(rows.Length);
+            for (int i = 0; i < rows.Length && slots.Count < ConfiguredSlotCap; i++)
+            {
+                StockRow row = rows[i];
+                if (row.Low <= 0 || row.High <= 0 || row.Ql <= 0)
+                    continue;
+
+                slots.Add(new ShopStockSlot(row.Low, row.High, row.Ql, explicitPrice: Math.Max(1, row.Price)));
+            }
+
+            return slots.ToArray();
         }
 
         sealed class FileBody
