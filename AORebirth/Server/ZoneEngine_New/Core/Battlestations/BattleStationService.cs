@@ -477,13 +477,24 @@ namespace ZoneEngine_New.Core.Battlestations
                 BotRole role = PickRole();
                 var bot = new Bot(npc, teamId, teamId == 1 ? 0 : 1, role);
                 AssignHunterPack(match, bot);
-                npc.Name = (npc.Name ?? "Guard") + " [" + bot.Role + "]";
+                SetBotRoleLabel(bot);
                 npc.Died += _ => bot.Dead = true;
                 match.Bots.Add(bot);
                 _logger.Info(string.Format(CultureInfo.InvariantCulture,
                     "Battle station bot role={0} team={1} pack={2} name={3}",
                     bot.Role, teamId, bot.PackId, npc.Name));
             }
+
+            RefreshEscorts(match);
+        }
+
+        static void SetBotRoleLabel(Bot bot)
+        {
+            string baseName = bot.Npc.Name ?? "Guard";
+            int bracket = baseName.LastIndexOf(" [", StringComparison.Ordinal);
+            if (bracket > 0)
+                baseName = baseName.Substring(0, bracket);
+            bot.Npc.Name = baseName + " [" + bot.Role + "]";
         }
 
         static BotRole PickRole()
@@ -1038,6 +1049,8 @@ namespace ZoneEngine_New.Core.Battlestations
 
         void TickBots(Match match, double deltaTime)
         {
+            RefreshEscorts(match);
+
             bool respawned = false;
             for (int i = 0; i < match.Bots.Count; i++)
             {
@@ -1078,7 +1091,7 @@ namespace ZoneEngine_New.Core.Battlestations
                     continue;
                 }
 
-                if (bot.Npc.FightingTarget != Identity.None)
+                if (bot.Npc.FightingTarget != Identity.None && bot.Role != BotRole.Escort)
                 {
                     if (bot.HackConsole >= 0)
                     {
@@ -1104,6 +1117,9 @@ namespace ZoneEngine_New.Core.Battlestations
 
                 switch (bot.Role)
                 {
+                    case BotRole.Escort:
+                        TickEscort(match, bot, deltaTime);
+                        break;
                     case BotRole.Defender:
                         TickDefender(match, bot, deltaTime);
                         break;
@@ -1118,6 +1134,249 @@ namespace ZoneEngine_New.Core.Battlestations
                         break;
                 }
             }
+        }
+
+        void RefreshEscorts(Match match)
+        {
+            if (!match.UsesBots || match.Ending)
+                return;
+
+            const int escortsPerHuman = 2;
+
+            // Drop escorts whose human died, left, or is no longer on this team/field.
+            for (int i = 0; i < match.Bots.Count; i++)
+            {
+                Bot bot = match.Bots[i];
+                if (bot.Dead || bot.EscortHumanInstance == 0)
+                    continue;
+                Human? human = FindHumanByInstance(match, bot.EscortHumanInstance);
+                if (human == null
+                    || human.Team != bot.Team
+                    || human.Player.IsDead
+                    || human.Player.Session == null
+                    || !ReferenceEquals(human.Player.Playfield, match.Field))
+                {
+                    ClearEscort(match, bot);
+                }
+            }
+
+            for (int h = 0; h < match.Humans.Count; h++)
+            {
+                Human human = match.Humans[h];
+                if (human.Player.IsDead
+                    || human.Player.Session == null
+                    || !ReferenceEquals(human.Player.Playfield, match.Field))
+                    continue;
+
+                int have = 0;
+                for (int i = 0; i < match.Bots.Count; i++)
+                {
+                    Bot bot = match.Bots[i];
+                    if (!bot.Dead && bot.EscortHumanInstance == human.Player.Identity.Instance)
+                        have++;
+                }
+
+                while (have < escortsPerHuman)
+                {
+                    Bot? free = FindFreeEscortCandidate(match, human.Team);
+                    if (free == null)
+                        break;
+                    AssignEscort(match, free, human);
+                    have++;
+                }
+            }
+        }
+
+        static Human? FindHumanByInstance(Match match, int instance)
+        {
+            for (int i = 0; i < match.Humans.Count; i++)
+            {
+                if (match.Humans[i].Player.Identity.Instance == instance)
+                    return match.Humans[i];
+            }
+
+            return null;
+        }
+
+        static Bot? FindFreeEscortCandidate(Match match, int team)
+        {
+            for (int i = 0; i < match.Bots.Count; i++)
+            {
+                Bot bot = match.Bots[i];
+                if (bot.Dead || bot.Team != team || bot.Role == BotRole.Escort || bot.EscortHumanInstance != 0)
+                    continue;
+                return bot;
+            }
+
+            return null;
+        }
+
+        void AssignEscort(Match match, Bot bot, Human human)
+        {
+            bot.EscortHumanInstance = human.Player.Identity.Instance;
+            bot.Role = BotRole.Escort;
+            bot.HackConsole = -1;
+            bot.PackId = -1;
+            bot.PackLeader = false;
+            bot.FlankVia = -1;
+            SetBotRoleLabel(bot);
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Battle station escort assign name={0} human={1} team={2}",
+                bot.Npc.Name, human.Player.Name ?? human.Player.Identity.Instance.ToString(CultureInfo.InvariantCulture), bot.Team));
+        }
+
+        void ClearEscort(Match match, Bot bot)
+        {
+            if (bot.EscortHumanInstance == 0 && bot.Role != BotRole.Escort)
+                return;
+
+            bot.EscortHumanInstance = 0;
+            bot.Role = bot.BaseRole;
+            bot.HackConsole = -1;
+            if (bot.Role == BotRole.Hunter)
+                AssignHunterPack(match, bot);
+            SetBotRoleLabel(bot);
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Battle station escort clear name={0} restore={1}",
+                bot.Npc.Name, bot.BaseRole));
+        }
+
+        void TickEscort(Match match, Bot bot, double deltaTime)
+        {
+            Human? human = FindHumanByInstance(match, bot.EscortHumanInstance);
+            if (human == null
+                || human.Player.IsDead
+                || human.Player.Session == null
+                || !ReferenceEquals(human.Player.Playfield, match.Field))
+            {
+                ClearEscort(match, bot);
+                TickByBaseRole(match, bot, deltaTime);
+                return;
+            }
+
+            if (bot.HackConsole >= 0)
+            {
+                bot.HackConsole = -1;
+                if (bot.Npc.Brain != null)
+                    bot.Npc.Brain.PatrolEnabled = true;
+            }
+
+            // Assist: human's fight target, then anyone attacking the human, then nearby enemies.
+            Character? assist = human.Player.TryResolveFightingTarget();
+            if (assist != null
+                && !assist.IsDead
+                && assist.Stats.GetOrZero(CharacterStat.BattlestationSide) != bot.Team
+                && CombatRules.CanAttack(bot.Npc, assist))
+            {
+                if (EngageTarget(match, bot, assist))
+                    return;
+            }
+
+            foreach (Character attacker in human.Player.Attackers)
+            {
+                if (attacker == null || attacker.IsDead || ReferenceEquals(attacker, bot.Npc))
+                    continue;
+                if (attacker.Stats.GetOrZero(CharacterStat.BattlestationSide) == bot.Team)
+                    continue;
+                if (!CombatRules.CanAttack(bot.Npc, attacker))
+                    continue;
+                if (EngageTarget(match, bot, attacker))
+                    return;
+            }
+
+            if (bot.Npc.FightingTarget == Identity.None && TryEngage(match, bot, 20f))
+                return;
+
+            // Already fighting something unrelated — stay in the scrap; otherwise follow.
+            if (bot.Npc.FightingTarget != Identity.None)
+            {
+                bot.StuckSeconds = 0;
+                return;
+            }
+
+            float hx = human.Player.Position.xf;
+            float hy = human.Player.Position.yf;
+            float hz = human.Player.Position.zf;
+            float dist = Distance(bot.Npc.Position.xf, bot.Npc.Position.zf, hx, hz);
+
+            // Human pad/warp hop: snap beside them when they jump far.
+            if (dist > 40f)
+            {
+                float angle = (float)(Random.Shared.NextDouble() * Math.PI * 2);
+                float radius = 6f + (float)(Random.Shared.NextDouble() * 3f);
+                bot.Npc.Motor.Warp(new Vector3(
+                    hx + (MathF.Cos(angle) * radius),
+                    hy,
+                    hz + (MathF.Sin(angle) * radius)));
+                bot.StuckSeconds = 0;
+                return;
+            }
+
+            if (dist > 10f)
+            {
+                SteerTo(bot, hx, hy, hz);
+                TrackStuck(match, bot, dist, hx, hy, hz, deltaTime);
+                return;
+            }
+
+            if (dist < 5f)
+            {
+                bot.StuckSeconds = 0;
+                bot.Npc.StopInPlace();
+                return;
+            }
+
+            // Comfort band 5-10 m: hold near the human.
+            bot.StuckSeconds = 0;
+            if (bot.Npc.Brain != null)
+            {
+                bot.Npc.Brain.PatrolEnabled = true;
+                bot.Npc.Brain.PatrolWaypoints = new[] { new Vector3(hx, hy, hz) };
+            }
+        }
+
+        void TickByBaseRole(Match match, Bot bot, double deltaTime)
+        {
+            switch (bot.Role)
+            {
+                case BotRole.Defender:
+                    TickDefender(match, bot, deltaTime);
+                    break;
+                case BotRole.Hunter:
+                    TickHunter(match, bot, deltaTime);
+                    break;
+                case BotRole.Flanker:
+                    TickFlanker(match, bot, deltaTime);
+                    break;
+                default:
+                    TickCapper(match, bot, deltaTime);
+                    break;
+            }
+        }
+
+        bool EngageTarget(Match match, Bot bot, Character enemy)
+        {
+            if (enemy == null || enemy.IsDead || !CombatRules.CanAttack(bot.Npc, enemy))
+                return false;
+
+            if (bot.HackConsole >= 0)
+            {
+                bot.HackConsole = -1;
+                if (bot.Npc.Brain != null)
+                    bot.Npc.Brain.PatrolEnabled = true;
+            }
+
+            bot.Npc.Brain?.AddThreat(enemy.Identity, NpcAiRules.ProximityHate);
+            bot.Npc.StartFighting(enemy.Identity, action: 0);
+            if (!match.LoggedEngage)
+            {
+                match.LoggedEngage = true;
+                _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                    "Battle station engage {0} ({1}) -> {2}",
+                    bot.Npc.Name ?? "bot", bot.Role, enemy.Name ?? "enemy"));
+            }
+
+            return bot.Npc.FightingTarget != Identity.None;
         }
 
         void TickCapper(Match match, Bot bot, double deltaTime)
@@ -1287,27 +1546,7 @@ namespace ZoneEngine_New.Core.Battlestations
         bool TryEngage(Match match, Bot bot, float range)
         {
             Character? enemy = FindNearestEnemy(match, bot, preferPlayers: true, maxRange: range);
-            if (enemy == null || !CombatRules.CanAttack(bot.Npc, enemy))
-                return false;
-
-            if (bot.HackConsole >= 0)
-            {
-                bot.HackConsole = -1;
-                if (bot.Npc.Brain != null)
-                    bot.Npc.Brain.PatrolEnabled = true;
-            }
-
-            bot.Npc.Brain?.AddThreat(enemy.Identity, NpcAiRules.ProximityHate);
-            bot.Npc.StartFighting(enemy.Identity, action: 0);
-            if (!match.LoggedEngage)
-            {
-                match.LoggedEngage = true;
-                _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                    "Battle station engage {0} ({1}) -> {2}",
-                    bot.Npc.Name ?? "bot", bot.Role, enemy.Name ?? "enemy"));
-            }
-
-            return bot.Npc.FightingTarget != Identity.None;
+            return enemy != null && EngageTarget(match, bot, enemy);
         }
 
         Character? FindNearestEnemy(Match match, Bot bot, bool preferPlayers, float maxRange)
@@ -1858,7 +2097,8 @@ namespace ZoneEngine_New.Core.Battlestations
             Capper = 0,
             Defender = 1,
             Hunter = 2,
-            Flanker = 3
+            Flanker = 3,
+            Escort = 4
         }
 
         sealed class Human
@@ -1903,6 +2143,7 @@ namespace ZoneEngine_New.Core.Battlestations
                 Npc = npc;
                 Team = team;
                 Goal = goal;
+                BaseRole = role;
                 Role = role;
                 LastX = npc.Position.xf;
                 LastZ = npc.Position.zf;
@@ -1913,7 +2154,13 @@ namespace ZoneEngine_New.Core.Battlestations
 
             public int Team { get; }
 
-            public BotRole Role { get; }
+            /// <summary>Permanent spawn role; restored when an Escort assignment ends.</summary>
+            public BotRole BaseRole { get; }
+
+            /// <summary>Active role (Escort while assigned to a human).</summary>
+            public BotRole Role { get; set; }
+
+            public int EscortHumanInstance;
 
             public int PackId = -1;
 
