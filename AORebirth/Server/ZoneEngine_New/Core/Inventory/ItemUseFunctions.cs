@@ -1219,8 +1219,9 @@ namespace ZoneEngine_New.Core.Inventory
                 return false;
             if (!spell.TryReadString(0, out string hash) || hash.Length == 0)
                 return false;
-            if (!spell.TryReadInt(1, out int level))
-                level = 0;
+            // Missing/zero pet level used to fall through to the template min (often 1) → grey con. Match the owner.
+            if (!spell.TryReadInt(1, out int level) || level <= 0)
+                level = target.Stats.GetOrOne(CharacterStat.Level);
             if (!spell.TryReadInt(2, out int duration))
                 duration = -1;
 

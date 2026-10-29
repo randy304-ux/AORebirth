@@ -114,6 +114,10 @@ namespace ZoneEngine_New.Core.Pets
                     npc.Stats.Set(CharacterStat.Side, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base));
                     MatchOwnerRunSpeed(npc, owner);
                     int petLevel = level > 0 ? level : npc.Stats.GetOrOne(CharacterStat.Level);
+                    // Con color reads SCFU Level. Force the resolved pet/merc level (and matching TitleLevel)
+                    // onto the body so a template TitleLevel=1 band or a level-0 summon never leaves Level at 1/0.
+                    npc.Stats.Set(CharacterStat.Level, petLevel, StatDetail.Base, dirty: true);
+                    npc.Stats.Set(CharacterStat.TitleLevel, Character.TitleLevelFor(petLevel), StatDetail.Base, dirty: true);
                     controller.Heals = IsHealPet(type) || Mercs.Heals(_gameData.RootPath, hash);
                     npc.BindPet(controller);
                     Mercs.Kind? mercKind = Mercs.ByHash(hash);
@@ -324,16 +328,27 @@ namespace ZoneEngine_New.Core.Pets
                 }
             }
 
+            // Held prop (look) and combat weapon (damage + skill type) use the same profession pair.
+            // Without ReplaceCombatWeapon, FillEquipment leaves SIW1 (breed hammer) as the swing for every merc.
+            int weaponLow = 0;
+            int weaponHigh = 0;
             Mercs.GearPiece? tierWeapon = Mercs.TierWeaponFor(kind, tier);
             if (tierWeapon is { } tw && tw.Low > 0)
             {
-                if (npc.WearExtra(tw.Low, tw.High > 0 ? tw.High : tw.Low, itemQuality, _logger))
-                    worn++;
+                weaponLow = tw.Low;
+                weaponHigh = tw.High > 0 ? tw.High : tw.Low;
             }
-            else if (Mercs.WeaponFor(_gameData.RootPath, kind) is { Count: > 0 } weapon
-                && npc.WearExtra(weapon[0], weapon.Count > 1 ? weapon[1] : weapon[0], itemQuality, _logger))
+            else if (Mercs.WeaponFor(_gameData.RootPath, kind) is { Count: > 0 } weapon)
             {
-                worn++;
+                weaponLow = weapon[0];
+                weaponHigh = weapon.Count > 1 ? weapon[1] : weapon[0];
+            }
+
+            if (weaponLow > 0)
+            {
+                if (npc.WearExtra(weaponLow, weaponHigh, itemQuality, _logger))
+                    worn++;
+                npc.ReplaceCombatWeapon(weaponLow, weaponHigh, itemQuality, _logger);
             }
 
             npc.Rebase();
@@ -441,6 +456,20 @@ namespace ZoneEngine_New.Core.Pets
 
                 if (merc != null)
                 {
+                    // Merc level must track the owner (BodyLevel). A stale hire-time Level cons grey once the
+                    // owner outlevels it; dismiss with "replaced" (no revive timer) and respawn at spawnLevel.
+                    int mercLevel = merc.Stats.GetOrOne(CharacterStat.Level);
+                    if (mercLevel != spawnLevel)
+                    {
+                        Dismiss(merc, "replaced");
+                        roster.MercReviveUtc.Remove(kind.Key);
+                        if (Spawn(owner, kind.Hash, kind.PetType, spawnLevel, null, PetMode.Guard, 100, 100, []) != null)
+                            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                                "Merc level-synced hash={0} owner={1} from={2} to={3}",
+                                kind.Hash, owner.Identity.Instance, mercLevel, spawnLevel));
+                        continue;
+                    }
+
                     EnsureMercPets(merc, Mercs.PowerLevel(merc.Stats.GetOrOne(CharacterStat.Level), Mercs.GetTier(owner, kind)));
                     continue;
                 }

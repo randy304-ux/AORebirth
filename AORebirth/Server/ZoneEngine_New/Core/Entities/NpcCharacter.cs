@@ -677,6 +677,44 @@ namespace ZoneEngine_New.Core.Entities
         {
             if (quality < 1 || _combatWeaponSlots.Count == 0)
                 return;
+
+            // Remint whatever combat weapon is already armed (profession weapons for mercs, SIW1 for plain NPCs).
+            int lowId = 144742;
+            int highId = 144743;
+            string? sawHash = "SIW1";
+            int[] slots = new int[_combatWeaponSlots.Count];
+            _combatWeaponSlots.CopyTo(slots);
+            foreach (int slot in slots)
+            {
+                Item? old = Equipment.Remove(slot);
+                _combatWeaponSlots.Remove(slot);
+                _equipmentSawHashes.TryGetValue(slot, out string? oldSaw);
+                _equipmentSawHashes.Remove(slot);
+                if (old != null && old.LowId > 0)
+                {
+                    lowId = old.LowId;
+                    highId = old.HighId > 0 ? old.HighId : old.LowId;
+                    sawHash = oldSaw;
+                }
+            }
+
+            TryAddEquipment(
+                _items.CreateWithNewInstance(lowId, highId, quality, ItemSource.Other),
+                logger,
+                combatWeapon: true,
+                sawHash: sawHash);
+        }
+
+        /// <summary>
+        /// Replaces every armed monster/combat weapon with <paramref name="lowId"/>/<paramref name="highId"/> at
+        /// <paramref name="quality"/>. Used so mercs swing their profession weapon (skill and damage type) instead of
+        /// the default SIW1 breed hammer. Call <see cref="Rebase"/> afterwards.
+        /// </summary>
+        public void ReplaceCombatWeapon(int lowId, int highId, int quality, IZoneLogger? logger = null, string? sawHash = null)
+        {
+            if (lowId <= 0 || quality < 1)
+                return;
+
             int[] slots = new int[_combatWeaponSlots.Count];
             _combatWeaponSlots.CopyTo(slots);
             foreach (int slot in slots)
@@ -687,10 +725,10 @@ namespace ZoneEngine_New.Core.Entities
             }
 
             TryAddEquipment(
-                _items.CreateWithNewInstance(144742, 144743, quality, ItemSource.Other),
+                _items.CreateWithNewInstance(lowId, highId > 0 ? highId : lowId, quality, ItemSource.Other),
                 logger,
                 combatWeapon: true,
-                sawHash: "SIW1");
+                sawHash: sawHash);
         }
 
         bool TryAddEquipment(Item item, IZoneLogger? logger, bool combatWeapon = false, string? sawHash = null)

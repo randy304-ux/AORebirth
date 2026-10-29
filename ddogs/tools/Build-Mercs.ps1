@@ -60,6 +60,8 @@ foreach ($p in $profs) {
     $s.'285' = [int][math]::Max(3, $lvl * 1.5 * $dmg)
     $s.'286' = [int][math]::Max(1, $lvl * 0.5 * $dmg)
     $s.'60' = $profId; $s.'359' = $look.Md; $s.'64' = $look.Head; $s.'4' = $look.Breed; $s.'59' = $look.Gender
+    # TitleLevel tracks the band level so InfoPacket / client con math never stay at the donor's TitleLevel 1.
+    $s.'37' = $(if ($lvl -ge 205) { 7 } elseif ($lvl -ge 190) { 6 } elseif ($lvl -ge 150) { 5 } elseif ($lvl -ge 100) { 4 } elseif ($lvl -ge 50) { 3 } elseif ($lvl -ge 15) { 2 } else { 1 })
     $bands += $b
   }
   $nt | Add-Member -NotePropertyName $hash -NotePropertyValue ([pscustomobject]@{ Templates = $bands }) -Force
@@ -130,9 +132,11 @@ $doctorHeals = @(@{ MinLevel = 1; Nanos = @(26465) }, @{ MinLevel = 25; Nanos = 
 # Enforcer: Brawl 82210, Channel Rage 211753, Anger Management 261239, and the same taunt pair.
 $soldierNanos = @(@{ MinLevel = 1; Nanos = @(82208, 82209, 82211, 82215, 227152) })
 $enforcerNanos = @(@{ MinLevel = 1; Nanos = @(82210, 211753, 261239, 227152) })
-# Visible weapon per profession (held prop; the merc's monster weapon still rolls damage). Picks guessed, low-QL items with a WeaponMesh.
-$weapons = @{ enforcer = 129026; soldier = 124348; keeper = 154905; doctor = 157636; adventurer = 124313; agent = 161126; bureaucrat = 123742
-  engineer = 124836; fixer = 247228; martialartist = 267258; metaphysicist = 254612; nanotechnician = 245627; shade = 160125; trader = 124241 }
+# Visible + combat weapon per profession (held prop AND ReplaceCombatWeapon swing). Must match live AO skill types:
+# Shade piercing, MA fists/MA items, Adv pistols/edged, Soldier AR/rifle, Agent rifle, Enforcer blunt, Keeper edged,
+# Fixer SMG/pistol, Engi grenade, Doc/Crat/MP/NT pistol, Trader shotgun. Low-QL items with a WeaponMesh; QL scales with body.
+$weapons = @{ enforcer = 129026; soldier = 124348; keeper = 154905; doctor = 157636; adventurer = 163582; agent = 161126; bureaucrat = 123742
+  engineer = 124836; fixer = 247228; martialartist = 267258; metaphysicist = 254612; nanotechnician = 123742; shade = 160125; trader = 124241 }
 $catalog = [ordered]@{ Enabled = $true; ReviveSeconds = 10; ArmorStats = $true; Professions = [ordered]@{} }
 $report = @()
 foreach ($p in $profs) {

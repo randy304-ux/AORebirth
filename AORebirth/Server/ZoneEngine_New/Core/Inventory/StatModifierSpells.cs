@@ -64,7 +64,9 @@ namespace ZoneEngine_New.Core.Inventory
                     continue;
                 // Health is current hit points. Folding a worn Modify into the bonus
                 // layer makes a hit write that bonus back as base, and the client adds it again.
-                if (stat == CharacterStat.Cash || stat == CharacterStat.Health)
+                // Level / TitleLevel must stay on the body (mercs/pets cons from Level); gear must not rewrite them.
+                if (stat == CharacterStat.Cash || stat == CharacterStat.Health
+                    || stat == CharacterStat.Level || stat == CharacterStat.TitleLevel)
                     continue;
 
                 if (spell.Is(FunctionType.Modify))
@@ -95,7 +97,8 @@ namespace ZoneEngine_New.Core.Inventory
         {
             if (!TryReadModify(spell, out CharacterStat stat, out int value))
                 return;
-            if (stat == CharacterStat.Cash || stat == CharacterStat.Health)
+            if (stat == CharacterStat.Cash || stat == CharacterStat.Health
+                || stat == CharacterStat.Level || stat == CharacterStat.TitleLevel)
                 return;
 
             stats.Set(stat, value - stats.GetOrZero(stat, StatDetail.Base), StatDetail.Bonus);
@@ -110,7 +113,8 @@ namespace ZoneEngine_New.Core.Inventory
         {
             if (!TryReadModify(spell, out CharacterStat stat, out int percent) || percent == 0)
                 return;
-            if (stat == CharacterStat.Cash || stat == CharacterStat.Health)
+            if (stat == CharacterStat.Cash || stat == CharacterStat.Health
+                || stat == CharacterStat.Level || stat == CharacterStat.TitleLevel)
                 return;
 
             long delta = (long)stats.GetOrZero(stat, StatDetail.Base) * percent / 100;

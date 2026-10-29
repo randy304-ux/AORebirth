@@ -162,7 +162,7 @@ namespace ZoneEngine_New.Core.Pets
             return list;
         }
 
-        /// <summary>Tier hand weapon (look only; swing is still the monster weapon). Null = Mercs.json / basic mesh.</summary>
+        /// <summary>Tier hand weapon (look and, via DressMerc ReplaceCombatWeapon, swing skill/damage). Null = Mercs.json / basic mesh.</summary>
         public static GearPiece? TierWeaponFor(Kind kind, Tier tier)
         {
             if (tier == Tier.Basic)
@@ -542,7 +542,7 @@ namespace ZoneEngine_New.Core.Pets
             public bool Heals { get; set; }
             public List<NanoBand> Nanos { get; set; } = new();
             public List<ArmorTier> Armor { get; set; } = new();
-            /// <summary>Held weapon (low/high item id) shown in the right hand; looks only.</summary>
+            /// <summary>Held weapon (low/high item id): right-hand look and combat swing (skill/damage type).</summary>
             public List<int>? Weapon { get; set; }
             /// <summary>NpcTemplates hash of the one pet this merc keeps out, when <see cref="Pets"/> is empty.</summary>
             public string? Pet { get; set; }
