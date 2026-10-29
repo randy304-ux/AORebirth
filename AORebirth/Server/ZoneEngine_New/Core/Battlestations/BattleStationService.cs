@@ -278,7 +278,7 @@ namespace ZoneEngine_New.Core.Battlestations
                     }
 
                     // Terminal Use on/near the teal Exit Decontamination pad after the gate opens.
-                    Point? arm = PickArm();
+                    Point? arm = PickArm(human.Team);
                     SendToArm(human.Match, human, arm);
                     return true;
                 }
@@ -532,7 +532,8 @@ namespace ZoneEngine_New.Core.Battlestations
             for (int i = 0; i < count; i++)
             {
                 // Same TELEPORT LOCATIONS destinations players get from the Decontamination exit pad.
-                Point at = PickArm();
+                // Each side lands on its own base pads: Red (team 1) arm A, Blue (team 2) arm B.
+                Point at = PickArm(team);
                 var home = new Vector3(at.X, at.Y, at.Z);
                 string hash = _catalog.BotHashes[Random.Shared.Next(_catalog.BotHashes.Length)];
                 if (!_gameData.TryResolveMobTemplate(hash, level, out MobTemplate? template) || template == null)
@@ -563,14 +564,15 @@ namespace ZoneEngine_New.Core.Battlestations
                 }
 
                 BotRole role = PickRole();
-                var bot = new Bot(npc, teamId, teamId == 1 ? 0 : 1, role, staggerIndex: match.Bots.Count);
+                int goal = InitialGoal(match, teamId, role);
+                var bot = new Bot(npc, teamId, goal, role, staggerIndex: match.Bots.Count);
                 AssignHunterPack(match, bot);
                 SetBotRoleLabel(bot);
                 npc.Died += _ => bot.Dead = true;
                 match.Bots.Add(bot);
                 _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                    "Battle station bot role={0} team={1} pack={2} name={3}",
-                    bot.Role, teamId, bot.PackId, npc.Name));
+                    "Battle station bot role={0} team={1} pack={2} goal={3} at={4:0},{5:0} name={6}",
+                    bot.Role, teamId, bot.PackId, _catalog.Consoles.Length > goal ? _catalog.Consoles[goal].Id : goal.ToString(CultureInfo.InvariantCulture), at.X, at.Z, npc.Name));
             }
         }
 
@@ -1020,7 +1022,7 @@ namespace ZoneEngine_New.Core.Battlestations
                 if (human.InField)
                     continue;
                 // Guide: when time expires you are warped into the main station.
-                SendToArm(match, human, PickArm());
+                SendToArm(match, human, PickArm(human.Team));
             }
 
             // Remaining pad bots keep draining via DrainPendingBots each tick.
@@ -1108,7 +1110,7 @@ namespace ZoneEngine_New.Core.Battlestations
 
                 Point? arm = string.IsNullOrWhiteSpace(pad.Arm) ? null : FindArm(pad.Arm);
                 if (arm == null)
-                    arm = PickArm();
+                    arm = PickArm(human.Team);
                 SendToArm(match, human, arm);
                 return true;
             }
@@ -1136,6 +1138,48 @@ namespace ZoneEngine_New.Core.Battlestations
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Round-start target: cappers and flankers rotate over all points, nearest first, so the side
+        /// spreads out instead of stacking on one console. Defenders hold the home arm; hunters rally at Core.
+        /// </summary>
+        int InitialGoal(Match match, int team, BotRole role)
+        {
+            int consoles = _catalog.Consoles.Length;
+            if (consoles == 0)
+                return 0;
+            int home = Math.Min(consoles - 1, team == 1 ? 1 : 2);
+            int away = Math.Min(consoles - 1, team == 1 ? 2 : 1);
+            if (role == BotRole.Defender)
+                return home;
+            if (role == BotRole.Hunter)
+                return 0;
+            int[] order = consoles >= 4 ? new[] { home, 0, 3, away } : new[] { 0 };
+            int same = 0;
+            foreach (Bot other in match.Bots)
+            {
+                if (other.Team == team && other.BaseRole == role)
+                    same++;
+            }
+
+            return order[(same + (role == BotRole.Flanker ? 2 : 0)) % order.Length];
+        }
+
+        /// <summary>Team base pads: Red (1) = arm A tip, Blue (2) = arm B tip. Falls back to the side spawn.</summary>
+        Point PickArm(int team)
+        {
+            string prefix = team == 1 ? "A" : "B";
+            var mine = new List<ArmLanding>();
+            foreach (ArmLanding arm in _catalog.Arms)
+            {
+                if (arm.Id != null && arm.Id.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                    mine.Add(arm);
+            }
+
+            if (mine.Count > 0)
+                return ArmPoint(mine[Random.Shared.Next(mine.Count)]);
+            return team == 1 ? _catalog.Spawns.Red : _catalog.Spawns.Blue;
         }
 
         Point PickArm()
@@ -1601,7 +1645,7 @@ namespace ZoneEngine_New.Core.Battlestations
         {
             ClearBotFight(bot);
             bot.HackConsole = -1;
-            Point at = PickArm();
+            Point at = PickArm(bot.Team);
             bot.Npc.Motor.Warp(new Vector3(at.X, at.Y, at.Z));
             bot.LastX = at.X;
             bot.LastZ = at.Z;
