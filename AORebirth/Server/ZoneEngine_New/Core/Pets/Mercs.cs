@@ -363,7 +363,7 @@ namespace ZoneEngine_New.Core.Pets
             // Team armor (Sympathetic Armor Boost) + blind + low robot pet.
             "engineer" => [266309, 267606, 83954, 154970, 154567],
             // NCU + HoT + team Grid + evade/snare starters + specials.
-            "fixer" => [162994, 162714, 162582, 43370, 56226, 82208, 82211],
+            "fixer" => [162994, 162714, 162582, 56226, 82208, 82211],
             // Heal/nano/damage auras (Ambient / Tone / Vengeance) + Courage. Live aura lockout → one heal/nano slot.
             "keeper" => [279378, 266301, 210530, 210591, 210611],
             // Self heal + special attacks.
@@ -390,7 +390,7 @@ namespace ZoneEngine_New.Core.Pets
             "agent" => [266307, 82211, 275007],
             "bureaucrat" => [267535, 267604, 267611, 266305, 259367],
             "engineer" => [267607, 302254, 83960, 154976],
-            "fixer" => [163005, 162732, 85234, 162586, 162486, 56221, 266308, 279374, 279376],
+            "fixer" => [163005, 162732, 85234, 162586, 56221, 266308, 279374, 279376],
             "keeper" => [301153, 216603, 210532, 210593, 210613],
             "martialartist" => [266311, 287559, 279345, 28665],
             "metaphysicist" => [267269, 267271, 267598, 29300, 29302, 154980],
@@ -409,7 +409,7 @@ namespace ZoneEngine_New.Core.Pets
             "agent" => [301838],
             "bureaucrat" => [267605, 267311, 222687, 267612],
             "engineer" => [267608, 274369, 154974],
-            "fixer" => [163012, 162734, 85227, 162587, 162488, 82502, 274373, 301861, 301859],
+            "fixer" => [163012, 162734, 85227, 162587, 82502, 274373, 301861, 301859],
             "keeper" => [301602, 280496, 210534, 210595, 210617],
             "martialartist" => [301936, 301493],
             "metaphysicist" => [267600, 267601, 267599, 301888, 29303, 29304, 154983],

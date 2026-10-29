@@ -1,6 +1,7 @@
 namespace ZoneEngine_New.Core.Trade
 {
     using System;
+    using AORebirth.Enums;
     using System.Collections.Generic;
     using System.IO;
     using System.Text.Json;
@@ -9,6 +10,7 @@ namespace ZoneEngine_New.Core.Trade
 
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.GameData;
+    using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
 
     /// <summary>
@@ -20,6 +22,71 @@ namespace ZoneEngine_New.Core.Trade
         static readonly object Gate = new();
         static Dictionary<int, ShopStockSlot[]>? _byTemplate;
         static bool _loaded;
+        static StockRow[] _generalNanos = [];
+
+        /// <summary>The hub's original Ofab General Vendor machine.</summary>
+        public const int GeneralTemplateId = 266579;
+
+        /// <summary>
+        /// The General machine sells general items plus the Ofab nanos the viewer's profession can use.
+        /// All professions' nanos together exceed one 64-slot pane, so the pane is rebuilt for each customer.
+        /// False when another customer has the pane open (the snapshot cannot change under an open trade).
+        /// </summary>
+        public static bool TryStockGeneralFor(VendingMachine machine, Player player, Func<int, ItemTemplate?> lookup)
+        {
+            ArgumentNullException.ThrowIfNull(machine);
+            ArgumentNullException.ThrowIfNull(player);
+            Dictionary<int, ShopStockSlot[]>? stock;
+            StockRow[] nanos;
+            lock (Gate)
+            {
+                stock = _byTemplate;
+                nanos = _generalNanos;
+            }
+
+            if (stock == null || !stock.TryGetValue(GeneralTemplateId, out ShopStockSlot[]? general))
+                return true;
+            if (machine.Stock.OpenTradeCount != 0)
+                return false;
+
+            int profession = player.Stats.Get(CharacterStat.Profession);
+            var slots = new List<ShopStockSlot>(general);
+            foreach (StockRow row in nanos)
+            {
+                if (slots.Count >= 64)
+                    break;
+                if (row.Low <= 0 || row.High <= 0 || row.Ql <= 0)
+                    continue;
+                ItemTemplate? template = lookup(row.Low);
+                if (template != null && !ProfessionAllowed(template, profession))
+                    continue;
+                slots.Add(new ShopStockSlot(row.Low, row.High, row.Ql, explicitPrice: Math.Max(1, row.Price)));
+            }
+
+            machine.Stock.SetConfiguredSnapshot(slots);
+            return true;
+        }
+
+        static bool ProfessionAllowed(ItemTemplate template, int profession)
+        {
+            bool any = false;
+            foreach (ItemAction action in template.Actions)
+            {
+                if (action.ActionType != (int)ActionType.ToUse)
+                    continue;
+                foreach (ItemRequirement requirement in action.Requirements)
+                {
+                    if (requirement.StatNumber != (int)CharacterStat.Profession
+                        && requirement.StatNumber != (int)CharacterStat.VisualProfession)
+                        continue;
+                    any = true;
+                    if (requirement.Value == profession)
+                        return true;
+                }
+            }
+
+            return !any;
+        }
 
         public static void Apply(IGameData gameData, IZoneLogger logger, VendingMachine machine)
         {
@@ -77,6 +144,7 @@ namespace ZoneEngine_New.Core.Trade
                     }
 
                     _byTemplate = map;
+                    _generalNanos = body?.GeneralNanos ?? [];
                     logger.Info("Ofab hub vendors stocked: " + map.Count);
                 }
                 catch (Exception exception)
@@ -92,6 +160,8 @@ namespace ZoneEngine_New.Core.Trade
         sealed class FileBody
         {
             public Dictionary<string, StockRow[]>? Vendors { get; set; }
+
+            public StockRow[]? GeneralNanos { get; set; }
         }
 
         sealed class StockRow

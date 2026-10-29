@@ -44,13 +44,13 @@ namespace ZoneEngine_New.Core.Commands
 
         /// <summary>
         /// Named landings for GM travel. Coordinates match common help desks / city pads
-        /// (Arete Arrival, Borealis John Smith, ICC 6055 pad).
+        /// (Arete Arrival, Borealis John Smith, ICC HQ Andromeda 655).
         /// </summary>
         static readonly Dictionary<string, string[]> NamedDestinations = new(StringComparer.OrdinalIgnoreCase)
         {
             ["arete"] = ["3464.0", "9.1", "813.9", "6553"],
             ["borealis"] = ["690.0", "5.0", "590.0", "800"],
-            ["icc"] = ["300.0", "50.0", "300.0", "6055"],
+            ["icc"] = ["3252.0", "37.0", "826.0", "655"],
         };
 
         public void Execute(GmCommandContext context)

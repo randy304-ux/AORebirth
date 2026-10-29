@@ -87,7 +87,8 @@ namespace ZoneEngine_New.Core.Ai
                 bool ncuPass = fixerLead && pass == 0;
             for (int i = 0; i < nanos.Count; i++)
             {
-                int nanoId = nanos[(start + i) % nanos.Count];
+                // NCU pass walks the upload list backwards so the highest tier the target accepts goes first.
+                int nanoId = ncuPass ? nanos[nanos.Count - 1 - i] : nanos[(start + i) % nanos.Count];
                 if (fixerLead && ncuPass != IsFixerNcuNano(nanoId))
                     continue;
 

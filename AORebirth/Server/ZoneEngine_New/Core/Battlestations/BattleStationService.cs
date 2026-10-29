@@ -491,7 +491,15 @@ namespace ZoneEngine_New.Core.Battlestations
             lock (_gate)
             {
                 if (!_matches.TryGetValue(field.Identity.Instance, out match) || !ReferenceEquals(match.Field, field))
-                    return;
+                    match = null;
+            }
+
+            if (match == null)
+            {
+                // Players can land on a station with no live match (relog after a restart, GM .tp, walk-in).
+                // Open one for them so the Decontamination countdown runs, bots fill and the pad opens.
+                TryOpenOrphanMatch(field, deltaTime);
+                return;
             }
 
             if (match.Ending)
@@ -607,14 +615,76 @@ namespace ZoneEngine_New.Core.Battlestations
             Announce(match, "Score  Red " + match.RedScore + "  Blue " + match.BlueScore);
         }
 
+        static readonly int[] CountdownMarks = [45, 30, 15, 10, 5, 3, 2, 1];
+
+        readonly Dictionary<int, double> _orphanCheck = new();
+
+        void TryOpenOrphanMatch(Playfield field, double deltaTime)
+        {
+            int pf = field.Identity.Instance;
+            Bracket? bracket = null;
+            for (int i = 0; i < _catalog.Brackets.Length; i++)
+            {
+                if (_catalog.Brackets[i].Playfield == pf)
+                {
+                    bracket = _catalog.Brackets[i];
+                    break;
+                }
+            }
+
+            if (bracket == null)
+                return;
+
+            lock (_gate)
+            {
+                double left = _orphanCheck.TryGetValue(pf, out double l) ? l - deltaTime : 0;
+                if (left > 0)
+                {
+                    _orphanCheck[pf] = left;
+                    return;
+                }
+
+                _orphanCheck[pf] = 5;
+                if (_matches.ContainsKey(pf))
+                    return;
+            }
+
+            var queue = new Queue(bracket) { Starting = true };
+            foreach (Player player in field.GetRequiredService<DynelRegistry>().PlayerEntities())
+            {
+                if (player.Session != null)
+                    queue.Players.Add(player);
+            }
+
+            if (queue.Players.Count == 0)
+                return;
+
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Battle station {0} opening for {1} player(s) already on the field (no live match)",
+                bracket.Name, queue.Players.Count));
+            Open(queue, field);
+        }
+
         void TickStartGate(Match match, double deltaTime)
         {
             if (match.FieldOpen)
                 return;
 
+            double before = match.StartGateLeft;
             match.StartGateLeft -= deltaTime;
             if (match.StartGateLeft > 0)
+            {
+                foreach (int mark in CountdownMarks)
+                {
+                    if (before > mark && match.StartGateLeft <= mark)
+                    {
+                        Announce(match, "Battle starts in " + mark.ToString(CultureInfo.InvariantCulture) + " seconds.");
+                        break;
+                    }
+                }
+
                 return;
+            }
 
             match.FieldOpen = true;
             match.StartGateLeft = 0;

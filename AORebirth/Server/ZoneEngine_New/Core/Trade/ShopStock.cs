@@ -66,6 +66,8 @@ namespace ZoneEngine_New.Core.Trade
         bool _sorted;
         ShopStockRange[]? _configuredRanges;
         int _openTrades;
+
+        internal int OpenTradeCount => _openTrades;
         long _idleSinceMs = Environment.TickCount64;
 
         public IReadOnlyList<ShopStockSlot> Slots => _slots.AsReadOnly();

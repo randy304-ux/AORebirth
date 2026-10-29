@@ -148,7 +148,7 @@ namespace ZoneEngine_New.Core.Nanos
             }
 
             // A self-only nano lands on the caster whatever the client had targeted.
-            if (spell.IsSelfOnly)
+            if (SelfOnlyFor(caster, spell))
                 target = caster.Identity;
 
             Character? recipient = ResolveTarget(caster, target);
@@ -250,7 +250,7 @@ namespace ZoneEngine_New.Core.Nanos
                 return false;
 
             // A self-only nano would land on the caster instead.
-            if (spell.IsSelfOnly && !ReferenceEquals(caster, recipient))
+            if (SelfOnlyFor(caster, spell) && !ReferenceEquals(caster, recipient))
                 return false;
 
             if (!NpcSupportRules.MayNpcLand(caster, recipient, spell))
@@ -692,6 +692,20 @@ namespace ZoneEngine_New.Core.Nanos
         /// the recipient to meet OnTarget checks (level locks on NCU compressors, composite lines, etc.).
         /// Using MaxValue for every caster leaf made Profession EqualTo fail, so no merc buff landed.
         /// </summary>
+        /// <summary>
+        /// Fixer NCU programs are User-targeted in items.dat (self-only), but live Fixers and buffbots put them on
+        /// teammates ("NCU Nanos [Team]"). Mercs may cast them on the owner and team.
+        /// </summary>
+        static readonly HashSet<int> FixerNcuLine =
+        [
+            162994, 162995, 163005, 163079, 163006, 163081, 163012, 163087, 163008, 163083,
+            163010, 163085, 163015, 163094, 163057, 163095, 275043, 275135
+        ];
+
+        static bool SelfOnlyFor(Character caster, NanoSpell spell)
+            => spell.IsSelfOnly
+               && !(caster is NpcCharacter { Pet: not null } && FixerNcuLine.Contains(spell.Id));
+
         static bool PetBuffRequirementsMet(NanoSpell spell, Character caster, Character? recipient)
         {
             if (recipient == null)
