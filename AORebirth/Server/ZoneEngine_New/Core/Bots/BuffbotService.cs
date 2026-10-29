@@ -42,10 +42,17 @@ namespace ZoneEngine_New.Core.Bots
 
             if (verb.Equals("page", StringComparison.OrdinalIgnoreCase))
             {
-                int page = 1;
-                if (args.Length > 1)
-                    int.TryParse(args[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out page);
-                OpenMenu(player, page);
+                // .buff page <Section words> [part]
+                int part = 1;
+                int last = args.Length;
+                if (args.Length > 2 && int.TryParse(args[^1], NumberStyles.Integer, CultureInfo.InvariantCulture, out int parsed))
+                {
+                    part = parsed;
+                    last = args.Length - 1;
+                }
+
+                string section = args.Length > 1 ? string.Join(" ", args, 1, last - 1) : string.Empty;
+                OpenSection(player, section, part);
                 return;
             }
 
@@ -95,46 +102,164 @@ namespace ZoneEngine_New.Core.Bots
         public void OpenMenu(Player player, int onlyPage)
         {
             ArgumentNullException.ThrowIfNull(player);
+            var body = new StringBuilder();
+            body.Append(DiagAoml.Title("Buffbot"));
+            body.Append("<br>").Append(DiagAoml.Muted(
+                "One bot for every profession. Click a buff to cast it. Greyed buffs need more free NCU. No charge."));
+            body.Append("<br>").Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "NCU {0}/{1}", player.UsedNcu, player.MaxNcu)));
+            body.Append("<br><br><a href='chatcmd:///say .buff macro'>").Append(DiagAoml.Label("Buffmacro")).Append("</a> ")
+                .Append(DiagAoml.Muted("- creates a macro of current NCU buffs"));
+            body.Append("<br><a href='chatcmd:///say .buff rebuff'>").Append(DiagAoml.Label("Rebuff")).Append("</a> ")
+                .Append(DiagAoml.Muted("- rebuffs current active NCU buffs"));
+            body.Append("<br><a href='chatcmd:///say .buff help'>").Append(DiagAoml.Label("Help")).Append("</a> ")
+                .Append(DiagAoml.Muted("- displays this window"));
+            body.Append("<br><a href='chatcmd:///say .buff status'>").Append(DiagAoml.Label("Status")).Append("</a> ")
+                .Append(DiagAoml.Muted("- shows your running buffbot nanos"));
+            body.Append("<br><br>");
+            if (_catalog.Sections.Count == 0)
+                body.Append(DiagAoml.Muted("No buff names from Buffbot.json matched the item catalog."));
+            foreach (BuffSection section in _catalog.Sections)
+            {
+                body.Append("<br><a href='chatcmd:///say .buff page ").Append(Esc(section.Name)).Append("'>")
+                    .Append(DiagAoml.Label(Esc(section.Name))).Append("</a> ")
+                    .Append(DiagAoml.Muted("(" + section.Lines.Count.ToString(CultureInfo.InvariantCulture) + ")"));
+            }
+
+            GmCommandFeedback.Send(player.Session!, player, Link(body.ToString(), "Buffbot"));
+        }
+
+        public void OpenSection(Player player, string sectionName, int part)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            BuffSection? section = null;
+            foreach (BuffSection candidate in _catalog.Sections)
+            {
+                if (string.Equals(candidate.Name, (sectionName ?? string.Empty).Trim(), StringComparison.OrdinalIgnoreCase))
+                {
+                    section = candidate;
+                    break;
+                }
+            }
+
+            if (section == null)
+            {
+                OpenMenu(player);
+                return;
+            }
+
+            List<string> parts = BuildSectionParts(player, section);
+            int index = Math.Clamp(part, 1, parts.Count) - 1;
+            string label = parts.Count == 1
+                ? "Buffbot: " + section.Name
+                : string.Format(CultureInfo.InvariantCulture, "Buffbot: {0} {1}/{2}", section.Name, index + 1, parts.Count);
+            GmCommandFeedback.Send(player.Session!, player, Link(parts[index], label));
+        }
+
+        List<string> BuildSectionParts(Player player, BuffSection section)
+        {
             int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
-            List<string> pages = BuildPages(level);
-            if (pages.Count == 0)
+            var lines = new List<string>();
+            foreach (BuffLine line in section.Lines)
             {
-                GmCommandFeedback.Send(player.Session!, player, "The buff list is empty.");
-                return;
+                _catalog.TryOffer(line, level, FreeNcuFor(player, line), out BuffOffer offer);
+                var text = new StringBuilder();
+                string bonus = offer.Bonus.Length == 0 ? string.Empty : " [" + offer.Bonus + "]";
+                string ncu = " [NCU: " + offer.Ncu.ToString(CultureInfo.InvariantCulture) + "]";
+                if (offer.Available)
+                {
+                    text.Append("<a href='chatcmd:///say .buff cast ")
+                        .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture))
+                        .Append("'>").Append(DiagAoml.Label(Esc(offer.Name))).Append("</a> ")
+                        .Append(DiagAoml.Muted(Esc(bonus.TrimStart() + ncu)));
+                }
+                else
+                {
+                    text.Append(DiagAoml.Muted(Esc(offer.Name + bonus + ncu + " - not enough free NCU")));
+                }
+
+                lines.Add(text.ToString());
             }
 
-            if (onlyPage > 0)
+            var chunks = new List<List<string>>();
+            var current = new List<string>();
+            int size = 0;
+            foreach (string line in lines)
             {
-                int index = Math.Clamp(onlyPage, 1, pages.Count) - 1;
-                GmCommandFeedback.Send(player.Session!, player, Link(pages[index], PageLabel(index, pages.Count)));
-                return;
+                if (current.Count > 0 && size + line.Length > PageMax)
+                {
+                    chunks.Add(current);
+                    current = new List<string>();
+                    size = 0;
+                }
+
+                current.Add(line);
+                size += line.Length + 4;
             }
 
-            var links = new List<string>(pages.Count);
-            for (int i = 0; i < pages.Count; i++)
-                links.Add(Link(pages[i], PageLabel(i, pages.Count)));
-            GmCommandFeedback.SendLines(player.Session!, player, links);
+            if (current.Count > 0 || chunks.Count == 0)
+                chunks.Add(current);
+
+            var parts = new List<string>(chunks.Count);
+            for (int i = 0; i < chunks.Count; i++)
+            {
+                var body = new StringBuilder();
+                body.Append(DiagAoml.Title(Esc(section.Name)));
+                if (chunks.Count > 1)
+                    body.Append(' ').Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "{0}/{1}", i + 1, chunks.Count)));
+                body.Append("<br>").Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "NCU {0}/{1}", player.UsedNcu, player.MaxNcu)));
+                foreach (string line in chunks[i])
+                    body.Append("<br>").Append(line);
+                body.Append("<br><br>");
+                if (i > 0)
+                    body.Append(PartLink(section.Name, i, "Back")).Append(" &#160; ");
+                if (i + 1 < chunks.Count)
+                    body.Append(PartLink(section.Name, i + 2, "Next")).Append(" &#160; ");
+                body.Append("<a href='chatcmd:///say .buff menu'>").Append(DiagAoml.Label("Index")).Append("</a>");
+                parts.Add(body.ToString());
+            }
+
+            return parts;
+        }
+
+        static string PartLink(string section, int part, string label)
+            => "<a href='chatcmd:///say .buff page " + Esc(section) + " " + part.ToString(CultureInfo.InvariantCulture) + "'>" + DiagAoml.Label(label) + "</a>";
+
+        /// <summary>Free NCU for this line, counting NCU the same line already holds (a recast replaces it).</summary>
+        int FreeNcuFor(Player player, BuffLine line)
+        {
+            int free = Math.Max(0, player.MaxNcu - player.UsedNcu);
+            foreach (Buff buff in player.Buffs)
+            {
+                if (_catalog.TryGetLine(buff.Id, out BuffLine running) && ReferenceEquals(running, line))
+                    free += Math.Max(0, buff.NcuCost);
+            }
+
+            return free;
+        }
+
+        bool TryCurrentOffer(Player player, BuffLine line, out BuffOffer offer)
+        {
+            int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
+            return _catalog.TryOffer(line, level, FreeNcuFor(player, line), out offer) && offer.Available;
         }
 
         void Cast(Player player, int nanoId, bool announceRefusal)
         {
-            if (!_catalog.Contains(nanoId))
+            if (!_catalog.TryGetLine(nanoId, out BuffLine line))
             {
                 GmCommandFeedback.Send(player.Session!, player, "That buff is not on the buffbot list.");
                 return;
             }
 
-            int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
-            foreach (BuffOffer offer in _catalog.Castable(level))
+            if (!TryCurrentOffer(player, line, out BuffOffer offer))
             {
-                if (offer.NanoId != nanoId)
-                    continue;
-                NanoRuntime.TryApplyServiceBuff(player, nanoId, announceRefusal, out string detail);
-                GmCommandFeedback.Send(player.Session!, player, detail);
+                GmCommandFeedback.Send(player.Session!, player, "You do not have enough free NCU for " + line.Name + ".");
                 return;
             }
 
-            GmCommandFeedback.Send(player.Session!, player, "Your level is too low for that buff.");
+            // Cast the rank the player can take now (a stale macro id still lands the best fitting rank).
+            NanoRuntime.TryApplyServiceBuff(player, offer.NanoId, announceRefusal, out string detail);
+            GmCommandFeedback.Send(player.Session!, player, detail);
         }
 
         /// <summary>
@@ -169,15 +294,14 @@ namespace ZoneEngine_New.Core.Bots
             GmCommandFeedback.Send(player.Session!, player, Link(body.ToString(), "Buffmacro"));
         }
 
-        /// <summary>Re-lands the player's current buffbot buffs (or all castable if none are running).</summary>
+        /// <summary>Re-lands the player's current buffbot buffs. Never casts buffs that are not running.</summary>
         void Rebuff(Player player)
         {
-            int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
             List<BuffOffer> chosen = ChosenBuffs(player);
             if (chosen.Count == 0)
             {
-                foreach (BuffOffer offer in _catalog.Castable(level))
-                    chosen.Add(offer);
+                GmCommandFeedback.Send(player.Session!, player, "No buffbot buffs are running. Click buffs from the menu first.");
+                return;
             }
 
             int landed = 0;
@@ -204,14 +328,13 @@ namespace ZoneEngine_New.Core.Bots
 
         List<BuffOffer> ChosenBuffs(Player player)
         {
-            int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
             var chosen = new List<BuffOffer>();
             var seenLines = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (Buff buff in player.Buffs)
             {
                 if (!_catalog.TryGetLine(buff.Id, out BuffLine line) || !seenLines.Add(line.Name))
                     continue;
-                if (_catalog.TryOffer(line, level, out BuffOffer offer) && offer.Available)
+                if (TryCurrentOffer(player, line, out BuffOffer offer))
                     chosen.Add(offer);
             }
 
@@ -262,101 +385,6 @@ namespace ZoneEngine_New.Core.Bots
                 body.Append("<br>").Append(DiagAoml.Muted("No buffbot nanos are running."));
             body.Append("<br><br><a href='chatcmd:///say .buff menu'>").Append(DiagAoml.Label("Back")).Append("</a>");
             return new List<string> { Link(body.ToString(), "Buff status") };
-        }
-
-        List<string> BuildPages(int level)
-        {
-            var blocks = new List<string>();
-            var head = new StringBuilder();
-            head.Append(DiagAoml.Title("Buffbot"));
-            head.Append("<br>").Append(DiagAoml.Muted(
-                "One bot for every profession. A click casts the nano your level allows. Buffmacro builds a client macro (does not cast). Rebuff casts again. No charge."));
-            head.Append("<br><a href='chatcmd:///say .buff macro'>").Append(DiagAoml.Label("Buffmacro")).Append("</a>");
-            head.Append(" &#160; <a href='chatcmd:///say .buff rebuff'>").Append(DiagAoml.Label("Rebuff")).Append("</a>");
-            head.Append(" &#160; <a href='chatcmd:///say .buff help'>").Append(DiagAoml.Label("Help")).Append("</a>");
-            head.Append(" &#160; <a href='chatcmd:///say .buff status'>").Append(DiagAoml.Label("Status")).Append("</a>");
-            blocks.Add(head.ToString());
-
-            if (_catalog.Sections.Count == 0)
-            {
-                blocks.Add(DiagAoml.Muted("No buff names from Buffbot.json matched the item catalog."));
-            }
-
-            foreach (BuffSection section in _catalog.Sections)
-            {
-                var sectionBody = new StringBuilder();
-                sectionBody.Append(DiagAoml.Section(Esc(section.Name)));
-                foreach (BuffLine line in section.Lines)
-                {
-                    _catalog.TryOffer(line, level, out BuffOffer offer);
-                    sectionBody.Append("<br>");
-                    if (offer.Available)
-                    {
-                        sectionBody.Append("<a href='chatcmd:///say .buff cast ")
-                            .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture))
-                            .Append("'>")
-                            .Append(DiagAoml.Label(Esc(offer.Name)))
-                            .Append("</a> ");
-                        sectionBody.Append(DiagAoml.Muted(Esc(Describe(offer))));
-                    }
-                    else
-                    {
-                        sectionBody.Append(DiagAoml.Muted(Esc(offer.Name + " needs level " + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture))));
-                    }
-                }
-
-                blocks.Add(sectionBody.ToString());
-            }
-
-            var pages = new List<string>();
-            var page = new StringBuilder();
-            foreach (string block in blocks)
-            {
-                if (page.Length > 0 && page.Length + block.Length > PageMax)
-                {
-                    pages.Add(Finish(page.ToString(), pages.Count + 1));
-                    page.Clear();
-                }
-
-                page.Append(block);
-            }
-
-            if (page.Length > 0)
-                pages.Add(Finish(page.ToString(), pages.Count + 1));
-
-            var finished = new List<string>(pages.Count);
-            for (int i = 0; i < pages.Count; i++)
-                finished.Add(pages[i].Replace("%%PAGES%%", pages.Count.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal));
-            return finished;
-        }
-
-        static string Finish(string body, int page)
-        {
-            var text = new StringBuilder(body);
-            text.Append("<br><br>");
-            if (page > 1)
-            {
-                text.Append("<a href='chatcmd:///say .buff page ")
-                    .Append((page - 1).ToString(CultureInfo.InvariantCulture))
-                    .Append("'>").Append(DiagAoml.Label("Back")).Append("</a> &#160; ");
-            }
-
-            text.Append("<a href='chatcmd:///say .buff page ")
-                .Append((page + 1).ToString(CultureInfo.InvariantCulture))
-                .Append("'>").Append(DiagAoml.Label("Forward")).Append("</a>");
-            text.Append("<br>").Append(DiagAoml.Muted("Page " + page.ToString(CultureInfo.InvariantCulture) + "/%%PAGES%%"));
-            return text.ToString();
-        }
-
-        static string Describe(BuffOffer offer)
-        {
-            string bonus = offer.Bonus.Length == 0 ? "buff" : offer.Bonus;
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "QL {0}, NCU {1}, {2}",
-                offer.Quality,
-                offer.Ncu,
-                bonus);
         }
 
         static string PageLabel(int index, int count)

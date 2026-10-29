@@ -1,222 +1,268 @@
 {
-  "SchemaVersion": 1,
-  "Notes": "Matched to live AO buffbot menus (screenshots 2026-10-28). Names resolve against items.dat; QL/level ranks picked at cast. NCU Nanos bundle casts the highest Fixer NCU line the target can accept. Excludes morphs except Playful Cub (Other).",
-  "Sections": [
-    {
-      "Name": "Generic",
-      "Nanos": [
-        "Composite Attribute Boost",
-        "Composite Nano Expertise",
-        "Composite Utility Expertise",
-        "Composite Tradeskill Expertise",
-        "Composite Martial Prowess Expertise",
-        "Composite Ranged Expertise",
-        "Composite Ranged Special Expertise",
-        "Composite Melee Expertise",
-        "Composite Physical Special Expertise"
-      ]
-    },
-    {
-      "Name": "Adventurer",
-      "Nanos": [
-        "Playful Cub (Other)"
-      ]
-    },
-    {
-      "Name": "Agent",
-      "Nanos": [
-        "Assassin's Grin",
-        "Feline Grace",
-        "Enhanced Senses",
-        "Enhanced Sureshot",
-        "Take the Shot",
-        "Unexpected Attack",
-        "Meld With Background (Team)"
-      ]
-    },
-    {
-      "Name": "Bureaucrat",
-      "Nanos": [
-        "Improved Cut Red Tape",
-        "Authority Figure",
-        "Soothing Calm",
-        "Baton of Leadership (Team)",
-        "Baton of Authority (Team)"
-      ]
-    },
-    {
-      "Name": "Doctor",
-      "Nanos": [
-        "Continuous Reconstruction",
-        "Instinctive Control",
-        "Improved Nano Repulsor",
-        "Iron Circle",
-        "Superior Omni-Med Enhancement (Team)",
-        "Life Channeler",
-        "Superior First Aid"
-      ]
-    },
-    {
-      "Name": "Engineer",
-      "Nanos": [
-        "Aegis Barrier",
-        "Superior Defensive Screen",
-        "Basic Defensive Screen",
-        "Extreme Prejudice",
-        "Philosopher's Stone",
-        "Rapid Weapon",
-        "Pistol Mastery"
-      ]
-    },
-    {
-      "Name": "Fixer",
-      "Nanos": [
-        "Back Pain",
-        "Lasting Ultimatum",
-        "Dr Hack 'n Quack",
-        "Gridspace Freedom (Team)",
-        "Gridspace Freedom",
-        "Grid Phase Accelerator",
-        "Partial Grid Jump",
-        "Grid Surfer",
-        "Leech Grid Vector",
-        "Grid Runner",
-        "Hack Grid Vector",
-        "Limited Grid Jump",
-        "Hack Grid Data Stream (Team)",
-        "Blood Makes Noise",
-        "Karma Harvest"
-      ],
-      "Bundles": [
-        {
-          "Name": "NCU Nanos [Team]",
-          "Members": [
-            "Firewalled Sync Compressor",
-            "Sentient Viral Recoder",
-            "Active Viral Compressor",
-            "QuarkStor NCU Core",
-            "Recompiling Memory Analyzer",
-            "Deck Recoder",
-            "Jury-rigged NCU Analyzer",
-            "Retool NCU",
-            "NCU Compressor"
-          ]
-        }
-      ]
-    },
-    {
-      "Name": "Martial Artist",
-      "Nanos": [
-        "Dirty Fighter",
-        "Fervor of the Devotee",
-        "Horde",
-        "Fists of Stellar Harmony",
-        "Lesser Controlled Rage",
-        "Limbo Mastery",
-        "Mark of Peril",
-        "Martial Arts Mastery",
-        "Reduce Inertia",
-        "Return Attack"
-      ]
-    },
-    {
-      "Name": "Metaphysicist",
-      "Nanos": [
-        "Neuronal Stimulator",
-        "Composite Mochams (8 hours)",
-        "Composite Mochams (4 hours)",
-        "Composite Mochams (2 hours)",
-        "Composite Mochams (1 hour)",
-        "Composite Infuse With Knowledge",
-        "Composite Mastery",
-        "Composite Teachings",
-        "Mocham's Gift: BioMet",
-        "Mocham's Gift: MatCrea",
-        "Mocham's Gift: SpaceTime",
-        "Mocham's Gift: MatMet",
-        "Mocham's Gift: PsyMod",
-        "Mocham's Gift: SenseImp",
-        "Infuse With Knowledge: Biological Metamorphose",
-        "Infuse With Knowledge: Material Creation",
-        "Infuse With Knowledge: Time and Space",
-        "Infuse With Knowledge: Material Metamorphose",
-        "Infuse With Knowledge: Psychological Modification",
-        "Infuse With Knowledge: Sensory Improvement",
-        "BioMet Mastery",
-        "MatCrea Mastery",
-        "SpaceTime Mastery",
-        "MatMet Mastery",
-        "PsyMod Mastery",
-        "Sense Imp Mastery",
-        "Teachings of Biological Metamorphose",
-        "Teachings of Material Creation",
-        "Teachings of Time and Space",
-        "Teachings of Material Metamorphose",
-        "Teachings of Psychological Modification",
-        "Teachings of Sensory Improvement",
-        "One Mind, One Purpose",
-        "Ease of Execution",
-        "Coherent Notum Web",
-        "Mocham's Neural Interface-Web",
-        "Advanced Symbol Manipulation"
-      ]
-    },
-    {
-      "Name": "Nano Technician",
-      "Nanos": [
-        "CrunchCom Nano Compressor Pro",
-        "Izgimmer's Obfuscated Recompiler",
-        "Superior Nano Command",
-        "Notum Overload",
-        "Personal Notum Harvester",
-        "Superior Humidity Extractor"
-      ]
-    },
-    {
-      "Name": "Soldier",
-      "Nanos": [
-        "Full Automatic Targeting",
-        "Riot Control",
-        "Assault Rifle Mastery",
-        "Ranged Energy Weapon Mastery",
-        "Offensive Steamroller",
-        "Reactive Reflective Field (Extended)",
-        "Minor Reflective Field (Extended)",
-        "Partial Reflective Field (Extended)",
-        "Reactive Deflection Shield (Extended)",
-        "Major Deflection Shield (Extended)",
-        "Greater Deflection Shield (Extended)",
-        "Deflection Shield (Extended)",
-        "Lesser Deflection Shield (Extended)",
-        "Partial Deflection Shield (Extended)"
-      ]
-    },
-    {
-      "Name": "Trader",
-      "Nanos": [
-        "Skill Wrangler (Premium)",
-        "Skill Wrangler (Advanced)",
-        "Skill Wrangler (Major)",
-        "Skill Wrangler",
-        "Skill Wrangler (Inferior)",
-        "Skill Wrangler Lesser",
-        "Skill Wrangler (Lossy)",
-        "Skill Wrangler (Commonplace)",
-        "Skill Wrangler (Minor)",
-        "Skill Wrangler (Patchy)",
-        "Skill Wrangler (Weak)",
-        "Lend Nano: 1000",
-        "Lend Nano: 500",
-        "Lend Nano: 250",
-        "Lend Nano: 100",
-        "Lend Nano: 50",
-        "Relentless Slayer",
-        "Maestro: Electrical Engineering",
-        "Maestro: Field Quantum Physics",
-        "Maestro: Mechanical Engineering",
-        "Maestro: Pharmaceutical",
-        "Maestro: Weapon Smithing"
-      ]
-    }
-  ]
+    "SchemaVersion":  1,
+    "Notes":  "PRK buffbot layout (2026-10-29): 12 profession pages. Names are exact items.dat names; unresolved names are logged at boot on one line. No QL level gate; greyed only when the target lacks free NCU.",
+    "Sections":  [
+                     {
+                         "Name":  "Generic",
+                         "Nanos":  [
+                                       "L33t Transformation",
+                                       "Composite Attribute Boost",
+                                       "Composite Nano Expertise",
+                                       "Composite Utility Expertise",
+                                       "Composite Tradeskill Expertise",
+                                       "Composite Martial Prowess Expertise",
+                                       "Composite Ranged Expertise",
+                                       "Composite Ranged Special Expertise",
+                                       "Composite Melee Expertise",
+                                       "Composite Physical Special Expertise"
+                                   ]
+                     },
+                     {
+                         "Name":  "Agent",
+                         "Nanos":  [
+                                       "Assassin\u0027s Grin",
+                                       "Feline Grace",
+                                       "Enhanced Senses",
+                                       "Enhanced Sureshot",
+                                       "Take the Shot",
+                                       "Unexpected Attack"
+                                   ]
+                     },
+                     {
+                         "Name":  "Bureaucrat",
+                         "Nanos":  [
+                                       "Improved Cut Red Tape",
+                                       "Authority Figure",
+                                       "Soothing Calm",
+                                       "Baton of Command",
+                                       "Baton of Command (Team)",
+                                       "Baton of Leadership",
+                                       "Baton of Leadership (Team)",
+                                       "Baton of Authority",
+                                       "Baton of Authority (Team)"
+                                   ]
+                     },
+                     {
+                         "Name":  "Doctor",
+                         "Nanos":  [
+                                       "Continuous Reconstruction",
+                                       "Instinctive Control",
+                                       "Improved Instinctive Control",
+                                       "Improved Nano Repulsor",
+                                       "Iron Circle",
+                                       "Superior Omni-Med Enhancement",
+                                       "Life Channeler",
+                                       "Specialist Treatment",
+                                       "Superior First Aid"
+                                   ]
+                     },
+                     {
+                         "Name":  "Enforcer",
+                         "Nanos":  [
+                                       "Improved Essence of Behemoth",
+                                       "Essence of Behemoth",
+                                       "Essence of Colossus",
+                                       "Essence of Gargantua",
+                                       "Essence of Cyclops",
+                                       "Essence of Boundless Health",
+                                       "Essence of Might",
+                                       "Coruscating Screen",
+                                       "Lick of Fire",
+                                       "Glacial Cloak",
+                                       "Toxic Barrier",
+                                       "Lightning Shield",
+                                       "Barbaric Blades",
+                                       "Bristling Guard",
+                                       "Immolation Shield",
+                                       "Poison Stingers",
+                                       "Arctic Cloak",
+                                       "Glowing Retribution",
+                                       "Field of Sparks",
+                                       "Bristling Shield",
+                                       "Avenging Shield",
+                                       "Failing Impregnability",
+                                       "Absorb Punishment",
+                                       "Shrug Off Blows",
+                                       "Deaden Pain",
+                                       "Physical Dominance",
+                                       "Focused Anger",
+                                       "Thug\u0027s Delight",
+                                       "Brutal Thug",
+                                       "Prodigious Strength"
+                                   ]
+                     },
+                     {
+                         "Name":  "Engineer",
+                         "Nanos":  [
+                                       "Gift of Assurance",
+                                       "Aegis Barrier",
+                                       "Superior Defensive Screen",
+                                       "Basic Defensive Screen",
+                                       "Extreme Prejudice",
+                                       "Philosopher\u0027s Stone",
+                                       "Rapid Weapon",
+                                       "Pistol Mastery"
+                                   ]
+                     },
+                     {
+                         "Name":  "Fixer",
+                         "Nanos":  [
+                                       "Improved Semi-Sentient Augmentation Cloud",
+                                       "Relieving Salve",
+                                       "Lasting Ultimatum",
+                                       "Basic Insurance Hack",
+                                       "Insurance Hack",
+                                       "Advanced Insurance Hack",
+                                       "Omni-Med Incursion",
+                                       "Back Pain",
+                                       "Dr Hack \u0027n Quack",
+                                       "Gridspace Freedom (Team)",
+                                       "Gridspace Freedom",
+                                       "Grid Phase Accelerator",
+                                       "Partial Grid Jump",
+                                       "Grid Surfer",
+                                       "Leech Grid Vector",
+                                       "Grid Runner",
+                                       "Hack Grid Vector",
+                                       "Limited Grid Jump",
+                                       "Hack Grid Data Stream (Team)",
+                                       "Blood Makes Noise",
+                                       "Karma Harvest"
+                                   ],
+                         "Bundles":  [
+                                         {
+                                             "Name":  "NCU Nanos [Team]",
+                                             "Members":  [
+                                                             "Firewalled Sync Compressor",
+                                                             "Sentient Viral Recoder",
+                                                             "Active Viral Compressor",
+                                                             "QuarkStor NCU Core",
+                                                             "Recompiling Memory Analyzer",
+                                                             "Deck Recoder",
+                                                             "Jury-rigged NCU Analyzer",
+                                                             "Retool NCU",
+                                                             "NCU Compressor"
+                                                         ]
+                                         }
+                                     ]
+                     },
+                     {
+                         "Name":  "Martial Artist",
+                         "Nanos":  [
+                                       "Dirty Fighter",
+                                       "Fervor of the Devotee",
+                                       "Horde",
+                                       "Fists of Stellar Harmony",
+                                       "Lesser Controlled Rage",
+                                       "Limbo Mastery",
+                                       "Mark of Peril",
+                                       "Martial Arts Mastery",
+                                       "Reduce Inertia",
+                                       "Return Attack"
+                                   ]
+                     },
+                     {
+                         "Name":  "Metaphysicist",
+                         "Nanos":  [
+                                       "Neuronal Stimulator",
+                                       "Composite Mochams (8 hours)",
+                                       "Composite Mochams (4 hours)",
+                                       "Composite Mochams (2 hours)",
+                                       "Composite Mochams (1 hour)",
+                                       "Composite Infuse With Knowledge",
+                                       "Composite Mastery",
+                                       "Composite Teachings",
+                                       "Mocham\u0027s Gift: BioMet",
+                                       "Mocham\u0027s Gift: MatCrea",
+                                       "Mocham\u0027s Gift: SpaceTime",
+                                       "Mocham\u0027s Gift: MatMet",
+                                       "Mocham\u0027s Gift: PsyMod",
+                                       "Mocham\u0027s Gift: SenseImp",
+                                       "Infuse With Knowledge: Biological Metamorphose",
+                                       "Infuse With Knowledge: Material Creation",
+                                       "Infuse With Knowledge: Time and Space",
+                                       "Infuse With Knowledge: Material Metamorphose",
+                                       "Infuse With Knowledge: Psychological Modification",
+                                       "Infuse With Knowledge: Sensory Improvement",
+                                       "BioMet Mastery",
+                                       "MatCrea Mastery",
+                                       "SpaceTime Mastery",
+                                       "MatMet Mastery",
+                                       "PsyMod Mastery",
+                                       "Sense Imp Mastery",
+                                       "Teachings of Biological Metamorphose",
+                                       "Teachings of Material Creation",
+                                       "Teachings of Time and Space",
+                                       "Teachings of Material Metamorphose",
+                                       "Teachings of Psychological Modification",
+                                       "Teachings of Sensory Improvement",
+                                       "One Mind, One Purpose",
+                                       "Ease of Execution",
+                                       "Coherent Notum Web",
+                                       "Mocham\u0027s Neural Interface-Web",
+                                       "Advanced Symbol Manipulation"
+                                   ]
+                     },
+                     {
+                         "Name":  "Nano-Technician",
+                         "Nanos":  [
+                                       "CrunchCom Nano Compressor Pro",
+                                       "Izgimmer\u0027s Obfuscated Recompiler",
+                                       "Superior Nano Command",
+                                       "Notum Overload",
+                                       "Personal Notum Harvester",
+                                       "Superior Humidity Extractor"
+                                   ]
+                     },
+                     {
+                         "Name":  "Soldier",
+                         "Nanos":  [
+                                       "Full Automatic Targeting",
+                                       "Riot Control",
+                                       "Assault Rifle Mastery",
+                                       "Ranged Energy Weapon Mastery",
+                                       "Offensive Steamroller",
+                                       "Reactive Reflective Field (Extended)",
+                                       "Minor Reflective Field (Extended)",
+                                       "Partial Reflective Field (Extended)",
+                                       "Reactive Deflection Shield (Extended)",
+                                       "Major Deflection Shield (Extended)",
+                                       "Greater Deflection Shield (Extended)",
+                                       "Deflection Shield (Extended)",
+                                       "Lesser Deflection Shield (Extended)",
+                                       "Partial Deflection Shield (Extended)"
+                                   ]
+                     },
+                     {
+                         "Name":  "Trader",
+                         "Nanos":  [
+                                       "Skill Wrangler (Premium)",
+                                       "Team Skill Wrangler (Premium)",
+                                       "Umbral Wrangler (Premium)",
+                                       "Umbral Wrangler (Exceptional)",
+                                       "Umbral Wrangler (Greater)",
+                                       "Skill Wrangler (Advanced)",
+                                       "Skill Wrangler (Major)",
+                                       "Skill Wrangler",
+                                       "Skill Wrangler (Inferior)",
+                                       "Skill Wrangler (Lesser)",
+                                       "Skill Wrangler (Lossy)",
+                                       "Skill Wrangler (Commonplace)",
+                                       "Skill Wrangler (Minor)",
+                                       "Skill Wrangler (Patchy)",
+                                       "Skill Wrangler (Weak)",
+                                       "Lend Nano: 1000",
+                                       "Lend Nano: 500",
+                                       "Lend Nano: 250",
+                                       "Lend Nano: 100",
+                                       "Lend Nano: 50",
+                                       "Relentless Slayer",
+                                       "Maestro: Electrical Engineering",
+                                       "Maestro: Field Quantum Physics",
+                                       "Maestro: Mechanical Engineering",
+                                       "Maestro: Pharmaceutical",
+                                       "Maestro: Weapon Smithing"
+                                   ]
+                     }
+                 ]
 }

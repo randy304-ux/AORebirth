@@ -136,12 +136,12 @@ namespace ZoneEngine_New.Core.Bots
 
             logger.Info(string.Format(
                 CultureInfo.InvariantCulture,
-                "Buffbot catalog sections={0} lines={1} missing={2}",
+                "Buffbot catalog sections={0} resolved={1} unresolved={2}",
                 _sections.Count,
                 LineCount,
                 _missing.Count));
             if (_missing.Count > 0)
-                logger.Warn("Buffbot names not in items.dat: " + string.Join(", ", _missing));
+                logger.Warn("Buffbot unresolved names: " + string.Join(" | ", _missing));
         }
 
         public IReadOnlyList<BuffSection> Sections => _sections;
@@ -165,7 +165,10 @@ namespace ZoneEngine_New.Core.Bots
             => _byId.TryGetValue(nanoId, out line!);
 
         /// <summary>Highest rank whose required level is at or below <paramref name="level"/>.</summary>
-        public bool TryOffer(BuffLine line, int level, out BuffOffer offer)
+        public bool TryOffer(BuffLine line, int level, out BuffOffer offer) => TryOffer(line, level, int.MaxValue, out offer);
+
+        /// <summary>Highest rank the target can take: real level requirement met and NCU cost within <paramref name="freeNcu"/>.</summary>
+        public bool TryOffer(BuffLine line, int level, int freeNcu, out BuffOffer offer)
         {
             ArgumentNullException.ThrowIfNull(line);
             ItemTemplate? best = null;
@@ -173,7 +176,7 @@ namespace ZoneEngine_New.Core.Bots
             foreach (ItemTemplate template in line.Ranks)
             {
                 lowest ??= template;
-                if (RequiredLevel(template) <= level)
+                if (RequiredLevel(template) <= level && NanoSpell.From(template).NcuCost <= freeNcu)
                     best = template;
             }
 
@@ -203,12 +206,12 @@ namespace ZoneEngine_New.Core.Bots
         }
 
         /// <summary>
-        /// QL is the level gate. A real ToUse level compare on the template can raise it.
+        /// Only a real ToUse Level requirement gates a rank. QL is never treated as a level (2026-10-29).
         /// Stat 54 on the nano's own stat map is NCU, not this check.
         /// </summary>
         public static int RequiredLevel(ItemTemplate template)
         {
-            int need = template.Quality < 1 ? 1 : template.Quality;
+            int need = 1;
             foreach (ItemAction action in template.Actions)
             {
                 if (action.ActionType != (int)ActionType.ToUse)
@@ -298,12 +301,10 @@ namespace ZoneEngine_New.Core.Bots
         {
             if (string.IsNullOrWhiteSpace(name))
                 return true;
-            if (name.Contains("L33t", StringComparison.OrdinalIgnoreCase)
-                || name.Contains("Leet Transformation", StringComparison.OrdinalIgnoreCase))
-                return true;
             // Morphs stay out unless the live menu lists them by exact name (Playful Cub (Other)).
             if (name.Contains("Transformation", StringComparison.OrdinalIgnoreCase)
-                && !name.Contains("Composite", StringComparison.OrdinalIgnoreCase))
+                && !name.Contains("Composite", StringComparison.OrdinalIgnoreCase)
+                && !name.Contains("L33t", StringComparison.OrdinalIgnoreCase))
                 return true;
             // Keeper auras: self-cast, pulse to team — not castable onto another player as a buffbot hit.
             if (name.Contains("Tone of", StringComparison.OrdinalIgnoreCase)
