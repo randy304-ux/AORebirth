@@ -12,6 +12,7 @@ namespace ZoneEngine_New.Core.Battlestations
     using ZoneEngine_New.Core.Ai;
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.GameData;
+    using ZoneEngine_New.Core.Helpers;
     using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Mobs;
     using ZoneEngine_New.Core.Pets;
@@ -473,10 +474,71 @@ namespace ZoneEngine_New.Core.Battlestations
                     continue;
                 }
 
-                var bot = new Bot(npc, teamId, teamId == 1 ? 0 : 1);
+                BotRole role = PickRole();
+                var bot = new Bot(npc, teamId, teamId == 1 ? 0 : 1, role);
+                AssignHunterPack(match, bot);
+                npc.Name = (npc.Name ?? "Guard") + " [" + bot.Role + "]";
                 npc.Died += _ => bot.Dead = true;
                 match.Bots.Add(bot);
+                _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                    "Battle station bot role={0} team={1} pack={2} name={3}",
+                    bot.Role, teamId, bot.PackId, npc.Name));
             }
+        }
+
+        static BotRole PickRole()
+        {
+            // Capper 35 / Defender 15 / Hunter 25 / Flanker 25.
+            int roll = Random.Shared.Next(100);
+            if (roll < 35)
+                return BotRole.Capper;
+            if (roll < 50)
+                return BotRole.Defender;
+            if (roll < 75)
+                return BotRole.Hunter;
+            return BotRole.Flanker;
+        }
+
+        void AssignHunterPack(Match match, Bot bot)
+        {
+            if (bot.Role != BotRole.Hunter)
+                return;
+
+            const int packMax = 4;
+            int openPack = -1;
+            bool openNeedsLeader = false;
+            for (int p = 0; p < match.NextPackId; p++)
+            {
+                int count = 0;
+                bool hasLeader = false;
+                for (int i = 0; i < match.Bots.Count; i++)
+                {
+                    Bot other = match.Bots[i];
+                    if (other.Dead || other.Team != bot.Team || other.Role != BotRole.Hunter || other.PackId != p)
+                        continue;
+                    count++;
+                    if (other.PackLeader)
+                        hasLeader = true;
+                }
+
+                if (count > 0 && count < packMax)
+                {
+                    openPack = p;
+                    openNeedsLeader = !hasLeader;
+                    break;
+                }
+            }
+
+            if (openPack >= 0)
+            {
+                bot.PackId = openPack;
+                bot.PackLeader = openNeedsLeader;
+                return;
+            }
+
+            // Start a new pack (fills toward 3-4 as more hunters spawn on this team).
+            bot.PackId = match.NextPackId++;
+            bot.PackLeader = true;
         }
 
         void Dress(NpcCharacter body, int team, int slot, string hash, int level)
@@ -998,7 +1060,6 @@ namespace ZoneEngine_New.Core.Battlestations
                     int team = bot.Team;
                     match.Bots.RemoveAt(i);
                     i--;
-                    // One new body per tick.
                     if (!respawned && !match.BotSpawnedThisTick)
                     {
                         SpawnBots(match, team, 1);
@@ -1027,59 +1088,268 @@ namespace ZoneEngine_New.Core.Battlestations
                     }
 
                     bot.StuckSeconds = 0;
+                    bot.ThinkLeft = Math.Max(0, bot.ThinkLeft - deltaTime);
                     continue;
                 }
 
-                if (match.Owner[bot.Goal] == bot.Team || bot.HackConsole < 0)
-                    bot.Goal = NextGoal(match, bot.Team, bot);
-
-                StationConsole goal = _catalog.Consoles[bot.Goal];
-                float x = bot.Npc.Position.xf;
-                float z = bot.Npc.Position.zf;
-                float goalDist = Distance(x, z, goal.X, goal.Z);
-                if (goalDist < 6f && bot.HackConsole < 0 && match.Owner[bot.Goal] != bot.Team
-                    && match.CaptureLockLeft[bot.Goal] <= 0)
+                bot.ThinkLeft -= deltaTime;
+                if (bot.ThinkLeft > 0)
                 {
-                    if (EnemiesNear(match, bot, _catalog.BotEnemyClearRange))
-                    {
+                    if (bot.HackConsole >= 0)
                         bot.StuckSeconds = 0;
-                        continue;
-                    }
-
-                    bot.HackConsole = bot.Goal;
-                    bot.HackLeft = _catalog.HackSeconds;
-                    if (bot.Npc.Brain != null)
-                        bot.Npc.Brain.PatrolEnabled = false;
-                    bot.Npc.StopInPlace();
                     continue;
                 }
 
-                if (bot.HackConsole >= 0)
-                {
-                    bot.StuckSeconds = 0;
-                    continue;
-                }
+                bot.ThinkLeft = 1.0 + (Random.Shared.NextDouble() * 1.0);
 
-                float moved = Distance(x, z, bot.LastX, bot.LastZ);
-                bot.LastX = x;
-                bot.LastZ = z;
-                if (goalDist > 12f && moved < 1f)
+                switch (bot.Role)
                 {
-                    bot.StuckSeconds += deltaTime;
-                    if (bot.StuckSeconds >= _catalog.BotStuckSeconds && !HumanCanSee(match, bot))
-                    {
-                        bot.Npc.Motor.Warp(new Vector3(goal.X, goal.Y, goal.Z));
-                        bot.StuckSeconds = 0;
-                        continue;
-                    }
+                    case BotRole.Defender:
+                        TickDefender(match, bot, deltaTime);
+                        break;
+                    case BotRole.Hunter:
+                        TickHunter(match, bot, deltaTime);
+                        break;
+                    case BotRole.Flanker:
+                        TickFlanker(match, bot, deltaTime);
+                        break;
+                    default:
+                        TickCapper(match, bot, deltaTime);
+                        break;
                 }
-                else
-                {
-                    bot.StuckSeconds = 0;
-                }
-
-                Steer(bot, goal);
             }
+        }
+
+        void TickCapper(Match match, Bot bot, double deltaTime)
+        {
+            // Fight anything in ~20 m before capturing.
+            if (TryEngage(match, bot, 20f))
+                return;
+
+            if (match.Owner[bot.Goal] == bot.Team || bot.HackConsole < 0)
+                bot.Goal = NextGoal(match, bot.Team, bot);
+
+            TryCaptureOrSteer(match, bot, deltaTime, requireClear: true);
+        }
+
+        void TickDefender(Match match, Bot bot, double deltaTime)
+        {
+            if (match.Owner[bot.Goal] != bot.Team)
+                bot.Goal = NextOwnedGoal(match, bot.Team);
+
+            // Guard ~25 m around the owned point.
+            if (TryEngage(match, bot, 25f))
+                return;
+
+            StationConsole goal = _catalog.Consoles[bot.Goal];
+            float dist = Distance(bot.Npc.Position.xf, bot.Npc.Position.zf, goal.X, goal.Z);
+            if (dist > 12f)
+            {
+                UnstickAndSteer(match, bot, goal, dist, deltaTime);
+                return;
+            }
+
+            bot.StuckSeconds = 0;
+            bot.Npc.StopInPlace();
+            if (bot.Npc.Brain != null)
+            {
+                bot.Npc.Brain.PatrolEnabled = true;
+                bot.Npc.Brain.PatrolWaypoints = new[] { new Vector3(goal.X, goal.Y, goal.Z) };
+            }
+        }
+
+        void TickHunter(Match match, Bot bot, double deltaTime)
+        {
+            PromotePackLeader(match, bot);
+            Bot? leader = bot.PackLeader ? bot : FindPackLeader(match, bot);
+            if (!bot.PackLeader && leader != null)
+            {
+                float packDist = Distance(
+                    bot.Npc.Position.xf, bot.Npc.Position.zf,
+                    leader.Npc.Position.xf, leader.Npc.Position.zf);
+                if (packDist > 15f)
+                {
+                    SteerTo(bot, leader.Npc.Position.xf, leader.Npc.Position.yf, leader.Npc.Position.zf);
+                    return;
+                }
+            }
+
+            Character? prey = FindNearestEnemy(match, bot, preferPlayers: true, maxRange: 800f);
+            if (prey != null)
+            {
+                float dist = Distance(bot.Npc.Position.xf, bot.Npc.Position.zf, prey.Position.xf, prey.Position.zf);
+                if (dist <= 25f && TryEngage(match, bot, 25f))
+                    return;
+                SteerTo(bot, prey.Position.xf, prey.Position.yf, prey.Position.zf);
+                TrackStuck(match, bot, dist, prey.Position.xf, prey.Position.yf, prey.Position.zf, deltaTime);
+                return;
+            }
+
+            // No prey: roam toward an enemy-held console as a group rally point.
+            if (match.Owner[bot.Goal] == bot.Team || bot.HackConsole < 0)
+                bot.Goal = NextGoal(match, bot.Team, bot);
+            StationConsole goal = _catalog.Consoles[bot.Goal];
+            float goalDist = Distance(bot.Npc.Position.xf, bot.Npc.Position.zf, goal.X, goal.Z);
+            UnstickAndSteer(match, bot, goal, goalDist, deltaTime);
+        }
+
+        void TickFlanker(Match match, Bot bot, double deltaTime)
+        {
+            if (TryEngage(match, bot, 20f))
+                return;
+
+            if (bot.Goal == 0 || match.Owner[bot.Goal] == bot.Team || bot.HackConsole < 0)
+                bot.Goal = NextEnemyArm(match, bot.Team, bot);
+
+            // Indirect hop: visit another arm tip first, then the target arm.
+            if (bot.FlankVia < 0)
+                bot.FlankVia = PickFlankVia(bot.Goal);
+
+            if (bot.FlankVia >= 0)
+            {
+                StationConsole via = _catalog.Consoles[bot.FlankVia];
+                float viaDist = Distance(bot.Npc.Position.xf, bot.Npc.Position.zf, via.X, via.Z);
+                if (viaDist > 14f)
+                {
+                    UnstickAndSteer(match, bot, via, viaDist, deltaTime);
+                    return;
+                }
+
+                bot.FlankVia = -1;
+            }
+
+            TryCaptureOrSteer(match, bot, deltaTime, requireClear: false);
+        }
+
+        void TryCaptureOrSteer(Match match, Bot bot, double deltaTime, bool requireClear)
+        {
+            StationConsole goal = _catalog.Consoles[bot.Goal];
+            float x = bot.Npc.Position.xf;
+            float z = bot.Npc.Position.zf;
+            float goalDist = Distance(x, z, goal.X, goal.Z);
+            if (goalDist < 6f && bot.HackConsole < 0 && match.Owner[bot.Goal] != bot.Team
+                && match.CaptureLockLeft[bot.Goal] <= 0)
+            {
+                if (requireClear && EnemiesNear(match, bot, _catalog.BotEnemyClearRange))
+                {
+                    bot.StuckSeconds = 0;
+                    TryEngage(match, bot, _catalog.BotEnemyClearRange);
+                    return;
+                }
+
+                bot.HackConsole = bot.Goal;
+                bot.HackLeft = _catalog.HackSeconds;
+                if (bot.Npc.Brain != null)
+                    bot.Npc.Brain.PatrolEnabled = false;
+                bot.Npc.StopInPlace();
+                return;
+            }
+
+            if (bot.HackConsole >= 0)
+            {
+                bot.StuckSeconds = 0;
+                return;
+            }
+
+            UnstickAndSteer(match, bot, goal, goalDist, deltaTime);
+        }
+
+        void UnstickAndSteer(Match match, Bot bot, StationConsole goal, float goalDist, double deltaTime)
+        {
+            TrackStuck(match, bot, goalDist, goal.X, goal.Y, goal.Z, deltaTime);
+            if (bot.Npc.FightingTarget != Identity.None)
+                return;
+            Steer(bot, goal);
+        }
+
+        void TrackStuck(Match match, Bot bot, float goalDist, float destX, float destY, float destZ, double deltaTime)
+        {
+            float x = bot.Npc.Position.xf;
+            float z = bot.Npc.Position.zf;
+            float moved = Distance(x, z, bot.LastX, bot.LastZ);
+            bot.LastX = x;
+            bot.LastZ = z;
+            if (goalDist > 12f && moved < 1f)
+            {
+                bot.StuckSeconds += deltaTime;
+                if (bot.StuckSeconds >= _catalog.BotStuckSeconds && !HumanCanSee(match, bot))
+                {
+                    bot.Npc.Motor.Warp(new Vector3(destX, destY, destZ));
+                    bot.StuckSeconds = 0;
+                }
+            }
+            else
+            {
+                bot.StuckSeconds = 0;
+            }
+        }
+
+        bool TryEngage(Match match, Bot bot, float range)
+        {
+            Character? enemy = FindNearestEnemy(match, bot, preferPlayers: true, maxRange: range);
+            if (enemy == null || !CombatRules.CanAttack(bot.Npc, enemy))
+                return false;
+
+            if (bot.HackConsole >= 0)
+            {
+                bot.HackConsole = -1;
+                if (bot.Npc.Brain != null)
+                    bot.Npc.Brain.PatrolEnabled = true;
+            }
+
+            bot.Npc.Brain?.AddThreat(enemy.Identity, NpcAiRules.ProximityHate);
+            bot.Npc.StartFighting(enemy.Identity, action: 0);
+            if (!match.LoggedEngage)
+            {
+                match.LoggedEngage = true;
+                _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                    "Battle station engage {0} ({1}) -> {2}",
+                    bot.Npc.Name ?? "bot", bot.Role, enemy.Name ?? "enemy"));
+            }
+
+            return bot.Npc.FightingTarget != Identity.None;
+        }
+
+        Character? FindNearestEnemy(Match match, Bot bot, bool preferPlayers, float maxRange)
+        {
+            float x = bot.Npc.Position.xf;
+            float z = bot.Npc.Position.zf;
+            Character? bestPlayer = null;
+            float bestPlayerDist = maxRange;
+            Character? bestBot = null;
+            float bestBotDist = maxRange;
+
+            for (int i = 0; i < match.Humans.Count; i++)
+            {
+                Human human = match.Humans[i];
+                if (human.Team == bot.Team || human.Player.IsDead || !human.InField)
+                    continue;
+                float d = Distance(x, z, human.Player.Position.xf, human.Player.Position.zf);
+                if (d <= bestPlayerDist)
+                {
+                    bestPlayerDist = d;
+                    bestPlayer = human.Player;
+                }
+            }
+
+            for (int i = 0; i < match.Bots.Count; i++)
+            {
+                Bot other = match.Bots[i];
+                if (other.Dead || other.Team == bot.Team || ReferenceEquals(other, bot) || other.Npc.IsDead)
+                    continue;
+                float d = Distance(x, z, other.Npc.Position.xf, other.Npc.Position.zf);
+                if (d <= bestBotDist)
+                {
+                    bestBotDist = d;
+                    bestBot = other.Npc;
+                }
+            }
+
+            if (preferPlayers && bestPlayer != null)
+                return bestPlayer;
+            if (bestPlayer != null && (bestBot == null || bestPlayerDist <= bestBotDist))
+                return bestPlayer;
+            return bestBot;
         }
 
         int NextGoal(Match match, int team, Bot self)
@@ -1111,29 +1381,97 @@ namespace ZoneEngine_New.Core.Battlestations
             return best >= 0 ? best : 0;
         }
 
-        bool EnemiesNear(Match match, Bot bot, float range)
+        int NextOwnedGoal(Match match, int team)
         {
-            float x = bot.Npc.Position.xf;
-            float z = bot.Npc.Position.zf;
-            for (int i = 0; i < match.Humans.Count; i++)
+            // Prefer an owned arm tip; else Core if owned; else rally at Core.
+            int ownedArm = -1;
+            bool ownCore = match.Owner.Length > 0 && match.Owner[0] == team;
+            for (int i = 1; i < match.Owner.Length; i++)
             {
-                Human human = match.Humans[i];
-                if (human.Team == bot.Team || human.Player.IsDead)
+                if (match.Owner[i] != team)
                     continue;
-                if (Distance(x, z, human.Player.Position.xf, human.Player.Position.zf) <= range)
-                    return true;
+                if (ownedArm < 0 || Random.Shared.Next(2) == 0)
+                    ownedArm = i;
             }
 
+            if (ownedArm >= 0)
+                return ownedArm;
+            return ownCore ? 0 : 0;
+        }
+
+        int NextEnemyArm(Match match, int team, Bot self)
+        {
+            int best = -1;
+            int bestCost = int.MaxValue;
+            for (int i = 1; i < match.Owner.Length; i++)
+            {
+                if (match.Owner[i] == team || match.CaptureLockLeft[i] > 0)
+                    continue;
+
+                int cost = 10;
+                for (int b = 0; b < match.Bots.Count; b++)
+                {
+                    Bot other = match.Bots[b];
+                    if (ReferenceEquals(other, self) || other.Dead || other.Team != team)
+                        continue;
+                    if (other.Role != BotRole.Flanker)
+                        continue;
+                    if (other.Goal == i || other.HackConsole == i)
+                        cost += 25;
+                }
+
+                if (cost < bestCost)
+                {
+                    bestCost = cost;
+                    best = i;
+                }
+            }
+
+            return best >= 0 ? best : NextGoal(match, team, self);
+        }
+
+        static int PickFlankVia(int goalArm)
+        {
+            // Pick a different arm tip as the indirect waypoint (consoles 1..3).
+            int a = 1 + Random.Shared.Next(3);
+            if (a == goalArm)
+                a = 1 + ((a) % 3);
+            if (a == goalArm)
+                a = goalArm == 1 ? 2 : 1;
+            return a;
+        }
+
+        void PromotePackLeader(Match match, Bot bot)
+        {
+            if (bot.Role != BotRole.Hunter || bot.PackId < 0 || bot.PackLeader)
+                return;
             for (int i = 0; i < match.Bots.Count; i++)
             {
                 Bot other = match.Bots[i];
-                if (other.Dead || other.Team == bot.Team || ReferenceEquals(other, bot))
-                    continue;
-                if (Distance(x, z, other.Npc.Position.xf, other.Npc.Position.zf) <= range)
-                    return true;
+                if (!other.Dead && other.Team == bot.Team && other.PackId == bot.PackId && other.PackLeader)
+                    return;
             }
 
-            return false;
+            bot.PackLeader = true;
+        }
+
+        Bot? FindPackLeader(Match match, Bot bot)
+        {
+            if (bot.PackId < 0)
+                return null;
+            for (int i = 0; i < match.Bots.Count; i++)
+            {
+                Bot other = match.Bots[i];
+                if (!other.Dead && other.Team == bot.Team && other.PackId == bot.PackId && other.PackLeader)
+                    return other;
+            }
+
+            return null;
+        }
+
+        bool EnemiesNear(Match match, Bot bot, float range)
+        {
+            return FindNearestEnemy(match, bot, preferPlayers: true, maxRange: range) != null;
         }
 
         bool HumanCanSee(Match match, Bot bot)
@@ -1153,16 +1491,19 @@ namespace ZoneEngine_New.Core.Battlestations
         }
 
         void Steer(Bot bot, StationConsole goal)
+            => SteerTo(bot, goal.X, goal.Y, goal.Z);
+
+        void SteerTo(Bot bot, float destX, float destY, float destZ)
         {
             float x = bot.Npc.Position.xf;
             float z = bot.Npc.Position.zf;
-            float goalDist = Distance(x, z, goal.X, goal.Z);
+            float goalDist = Distance(x, z, destX, destZ);
             WarpEdge? hop = null;
             float hopPad = float.MaxValue;
             for (int i = 0; i < _catalog.Warps.Length; i++)
             {
                 WarpEdge edge = _catalog.Warps[i];
-                float toGoal = Distance(edge.ToX, edge.ToZ, goal.X, goal.Z);
+                float toGoal = Distance(edge.ToX, edge.ToZ, destX, destZ);
                 if (toGoal >= goalDist - 8f)
                     continue;
 
@@ -1180,13 +1521,13 @@ namespace ZoneEngine_New.Core.Battlestations
                 return;
             }
 
-            float destX = hop != null ? hop.X : goal.X;
-            float destY = hop != null ? hop.Y : goal.Y;
-            float destZ = hop != null ? hop.Z : goal.Z;
+            float wx = hop != null ? hop.X : destX;
+            float wy = hop != null ? hop.Y : destY;
+            float wz = hop != null ? hop.Z : destZ;
             if (bot.Npc.Brain != null)
             {
                 bot.Npc.Brain.PatrolEnabled = true;
-                bot.Npc.Brain.PatrolWaypoints = new[] { new Vector3(destX, destY, destZ) };
+                bot.Npc.Brain.PatrolWaypoints = new[] { new Vector3(wx, wy, wz) };
             }
         }
 
@@ -1503,9 +1844,21 @@ namespace ZoneEngine_New.Core.Battlestations
 
             public int PendingBotBlue;
 
+            public int NextPackId;
+
+            public bool LoggedEngage;
+
             public List<Human> Humans { get; } = new();
 
             public List<Bot> Bots { get; } = new();
+        }
+
+        enum BotRole
+        {
+            Capper = 0,
+            Defender = 1,
+            Hunter = 2,
+            Flanker = 3
         }
 
         sealed class Human
@@ -1545,18 +1898,30 @@ namespace ZoneEngine_New.Core.Battlestations
 
         sealed class Bot
         {
-            public Bot(NpcCharacter npc, int team, int goal)
+            public Bot(NpcCharacter npc, int team, int goal, BotRole role)
             {
                 Npc = npc;
                 Team = team;
                 Goal = goal;
+                Role = role;
                 LastX = npc.Position.xf;
                 LastZ = npc.Position.zf;
+                ThinkLeft = Random.Shared.NextDouble() * 1.5;
             }
 
             public NpcCharacter Npc;
 
             public int Team { get; }
+
+            public BotRole Role { get; }
+
+            public int PackId = -1;
+
+            public bool PackLeader;
+
+            public int FlankVia = -1;
+
+            public double ThinkLeft;
 
             public int Goal;
 
@@ -1616,9 +1981,9 @@ namespace ZoneEngine_New.Core.Battlestations
 
         public float SafeRadius { get; set; } = 28f;
 
-        public int TeamSize { get; set; } = 6;
+        public int TeamSize { get; set; } = 11;
 
-        public int BotFillMaxHumans { get; set; } = 3;
+        public int BotFillMaxHumans { get; set; } = 11;
 
         public double BotBackfillSeconds { get; set; } = 15;
 
