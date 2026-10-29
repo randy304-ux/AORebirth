@@ -12,7 +12,8 @@ $u = [Text.UTF8Encoding]::new($false); $gd = [IO.Path]::GetFullPath($GameData); 
 function RJ($p) { [IO.File]::ReadAllText($p, $u) | ConvertFrom-Json }
 # ---------- 1. citizens
 $kpath = Join-Path $gd 'SpawnSkips.json'; $sk = RJ $kpath
-$sk.hiddenHashes = @(@($sk.hiddenHashes | Where-Object { $_ }) + '2CIE' | Sort-Object -Unique)
+# hiddenHashes entries are objects {hash, reason} (GameDataStore.LoadSpawnSkips reads h.GetProperty("hash")).
+$sk.hiddenHashes = @(@($sk.hiddenHashes | Where-Object { $_ -and $_.hash -and $_.hash -ne '2CIE' }) + [pscustomobject][ordered]@{ hash = '2CIE'; reason = 'ambient city citizen placeholder (Rome/Old Athen/West Athens/Andromeda/Borealis); Randy 2026-10-29' })
 [IO.File]::WriteAllText($kpath, ($sk | ConvertTo-Json -Depth 6) + "`n", $u)
 # ---------- 2. guards
 $npath = Join-Path $gd 'NpcTemplates.json'; $nt = RJ $npath
