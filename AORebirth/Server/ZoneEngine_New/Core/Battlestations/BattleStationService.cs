@@ -14,6 +14,7 @@ namespace ZoneEngine_New.Core.Battlestations
     using ZoneEngine_New.Core.GameData;
     using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Mobs;
+    using ZoneEngine_New.Core.Pets;
     using ZoneEngine_New.Core.Playfield;
     using ZoneEngine_New.Core.Raids;
 
@@ -438,12 +439,14 @@ namespace ZoneEngine_New.Core.Battlestations
                 return;
 
             SpawnService spawn = match.Field.GetRequiredService<SpawnService>();
-            Point at = team == 1 ? _catalog.Spawns.Red : _catalog.Spawns.Blue;
-            var home = new Vector3(at.X, at.Y, at.Z);
+            int level = match.Bracket.MaxLevel;
             for (int i = 0; i < count; i++)
             {
-                string hash = _catalog.BotHashes[i % _catalog.BotHashes.Length];
-                if (!_gameData.TryResolveMobTemplate(hash, match.Bracket.MaxLevel, out MobTemplate? template) || template == null)
+                // Same TELEPORT LOCATIONS destinations players get from the Decontamination exit pad.
+                Point at = PickArm();
+                var home = new Vector3(at.X, at.Y, at.Z);
+                string hash = _catalog.BotHashes[Random.Shared.Next(_catalog.BotHashes.Length)];
+                if (!_gameData.TryResolveMobTemplate(hash, level, out MobTemplate? template) || template == null)
                 {
                     _logger.Warn("Battle station bot template missing: " + hash);
                     continue;
@@ -451,16 +454,18 @@ namespace ZoneEngine_New.Core.Battlestations
 
                 int slot = match.Bots.Count + i;
                 int teamId = team;
+                string botHash = hash;
+                int botLevel = level;
                 NpcCharacter npc;
                 try
                 {
                     npc = spawn.SpawnMob(
                         template,
                         home,
-                        level: match.Bracket.MaxLevel,
+                        level: botLevel,
                         spawnSource: SpawnSource.None,
-                        spawnHash: hash,
-                        configure: body => Dress(body, teamId, slot));
+                        spawnHash: botHash,
+                        configure: body => Dress(body, teamId, slot, botHash, botLevel));
                 }
                 catch (Exception exception)
                 {
@@ -474,7 +479,7 @@ namespace ZoneEngine_New.Core.Battlestations
             }
         }
 
-        void Dress(NpcCharacter body, int team, int slot)
+        void Dress(NpcCharacter body, int team, int slot, string hash, int level)
         {
             string tag = GuardNames[Math.Abs(slot) % GuardNames.Length];
             body.Name = (team == 1 ? "Red" : "Blue") + " Guard " + tag;
@@ -489,6 +494,43 @@ namespace ZoneEngine_New.Core.Battlestations
                 body.Brain.PatrolEnabled = true;
                 body.Brain.PatrolWaypoints = new[] { body.Position };
             }
+
+            // Merc DressMerc path (basic): profession armor band + held/combat weapon for this level bracket.
+            Mercs.Kind? kind = Mercs.ByHash(hash);
+            if (kind == null)
+                return;
+
+            Mercs.Catalog catalog = Mercs.Load(_gameData.RootPath);
+            body.WearsArmorStats = catalog.ArmorStats;
+            int ql = Math.Clamp(level, 1, 300);
+            int worn = 0;
+            foreach (List<int> pair in Mercs.ArmorFor(_gameData.RootPath, kind, level, ownerSide: 0))
+            {
+                if (pair == null || pair.Count == 0)
+                    continue;
+                if (body.WearExtra(pair[0], pair.Count > 1 ? pair[1] : pair[0], ql, _logger))
+                    worn++;
+            }
+
+            if (Mercs.WeaponFor(_gameData.RootPath, kind) is { Count: > 0 } weapon)
+            {
+                int weaponLow = weapon[0];
+                int weaponHigh = weapon.Count > 1 ? weapon[1] : weapon[0];
+                if (body.WearExtra(weaponLow, weaponHigh, ql, _logger))
+                    worn++;
+                body.ReplaceCombatWeapon(weaponLow, weaponHigh, ql, _logger);
+            }
+
+            body.Rebase();
+            int max = body.Stats.GetOrZero(CharacterStat.MaxHealth);
+            if (max > 0)
+                body.Stats.Set(CharacterStat.Health, max);
+            int maxNano = body.Stats.GetOrZero(CharacterStat.MaxNanoEnergy);
+            if (maxNano > 0)
+                body.Stats.Set(CharacterStat.CurrentNano, maxNano);
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Battle station bot dressed hash={0} level={1} ql={2} pieces={3}",
+                hash, level, ql, worn));
         }
 
         static readonly string[] GuardNames =
