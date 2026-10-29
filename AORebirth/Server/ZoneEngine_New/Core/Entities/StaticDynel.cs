@@ -57,10 +57,11 @@ namespace ZoneEngine_New.Core.Entities
         {
             if (!CanStillUse(player) || GetEdgeDistanceTo(player) > LootableDynel.OpenRange)
                 return false;
-            // Battle Station capture consoles carry HasNotRunningNanoLine 669 (Assassin's Grin strain) and
-            // other ToUse gates meant for the live capture nano. Our match uses a custom hack flow in
-            // BattleStationService, so those item requirements must not block the click.
-            if (ZoneEngine_New.Core.Battlestations.BattleStationClock.IsCaptureConsole(player, this))
+            // Battle Station capture consoles / Decontamination exit terminals carry ToUse gates meant for
+            // live capture nanos. Our match uses a custom hack/exit flow in BattleStationService, so those
+            // item requirements must not block the click.
+            if (ZoneEngine_New.Core.Battlestations.BattleStationClock.IsMatchTerminal(player, this)
+                || ZoneEngine_New.Core.Battlestations.BattleStationClock.IsCaptureConsole(player, this))
                 return true;
             return Template.MeetsActionRequirements(stat => player.Stats.Get(stat), ActionType.ToUse);
         }

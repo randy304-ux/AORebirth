@@ -26,7 +26,7 @@
   "Notes": "Shared Decontamination Room (district Entry on each BS playfield, centre ~1860,42,300). Both Red and Blue land and respawn here; no combat inside SafeRadius. ExitPads sit on the teal Exit Decontamination floor pad (templates 290266-290274). After StartGateSeconds the pad opens into the open Battle Station district; AFK players are auto-sent to a random Arms tip pad (TELEPORT LOCATIONS map: 3 pads at arm A NE tip, 3 at arm B South tip, 3 at arm C NW tip; Core is centre). Bots spawn/respawn on the same Arms pads. Consoles 287837/287828 are the four control points (Core worth 2, arms 1). Scoring and loyalty follow ao-universe Battle Stations guide.",
   "SafeSpawn": { "X": 1862.0, "Y": 42.0, "Z": 300.0 },
   "ExitPads": [
-    { "Arm": "", "X": 1862.5, "Y": 43.0, "Z": 303.5, "Radius": 6.0 }
+    { "Arm": "", "X": 1862.5, "Y": 43.0, "Z": 303.5, "Radius": 12.0 }
   ],
   "Arms": [
     { "Id": "A1", "X": 1495.0, "Y": 53.6, "Z": 1520.0 },

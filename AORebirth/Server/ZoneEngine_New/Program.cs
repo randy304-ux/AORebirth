@@ -328,6 +328,7 @@ namespace ZoneEngine_New
             services.AddSingleton<ZoneEngine_New.Core.Claims.WebSessionMap>();
             services.AddSingleton<IGmCommand, ClaimCommand>();
             services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.BattlesuitCommand>();
+            services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.BattleStationCommand>();
             services.AddSingleton<IGmCommand, MercCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Raids.InvasionService>();
             services.AddSingleton<ZoneEngine_New.Core.Battlestations.BattleStationService>();

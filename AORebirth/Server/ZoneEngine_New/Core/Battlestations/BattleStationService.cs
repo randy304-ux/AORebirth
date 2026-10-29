@@ -52,6 +52,20 @@ namespace ZoneEngine_New.Core.Battlestations
         /// </summary>
         public static bool IsCaptureConsole(Player player, StaticDynel dynel)
             => Service != null && Service.IsCaptureConsole(player, dynel);
+
+        /// <summary>
+        /// True when a Terminal Use belongs to this player's live Battle Station match (Decontamination exit pad
+        /// or a capture console). Skips the template's ToUse gates the same way capture consoles do.
+        /// </summary>
+        public static bool IsMatchTerminal(Player player, StaticDynel dynel)
+            => Service != null && Service.IsMatchTerminal(player, dynel);
+
+        /// <summary>Leave the live match and return to the hub (stuck escape). True when handled.</summary>
+        public static bool TryLeave(Player player, out string message)
+        {
+            message = string.Empty;
+            return Service != null && Service.TryLeave(player, out message);
+        }
     }
 
     /// <summary>
@@ -191,7 +205,53 @@ namespace ZoneEngine_New.Core.Battlestations
                 Human? human = FindHuman(player);
                 if (human?.Match == null || !ReferenceEquals(player.Playfield, human.Match.Field))
                     return false;
+                if (IsInSafe(player.Position.xf, player.Position.zf))
+                    return false;
                 return NearestConsole(dynel.Position.xf, dynel.Position.zf, 15f) >= 0;
+            }
+        }
+
+        public bool IsMatchTerminal(Player player, StaticDynel dynel)
+        {
+            if (player == null || dynel == null)
+                return false;
+            lock (_gate)
+            {
+                Human? human = FindHuman(player);
+                if (human?.Match == null || !ReferenceEquals(player.Playfield, human.Match.Field))
+                    return false;
+                // Decontamination: any Terminal Use is the exit-pad click (or a pre-open timer message).
+                if (IsInSafe(player.Position.xf, player.Position.zf))
+                    return true;
+                return NearestConsole(dynel.Position.xf, dynel.Position.zf, 15f) >= 0;
+            }
+        }
+
+        public bool TryLeave(Player player, out string message)
+        {
+            message = string.Empty;
+            if (player == null)
+            {
+                message = "Not in a battle station.";
+                return false;
+            }
+
+            lock (_gate)
+            {
+                Human? human = FindHuman(player);
+                if (human?.Match == null)
+                {
+                    message = "You are not in a battle station match.";
+                    return false;
+                }
+
+                Match match = human.Match;
+                // DropHuman already Says the leave line; SendHome warps to the hub lobby.
+                DropHuman(match, human, "You left the battle station. Returned to the lobby.");
+                if (player.Session != null)
+                    SendHome(player);
+                message = "You left the battle station. Returned to the lobby.";
+                return true;
             }
         }
 
@@ -203,7 +263,27 @@ namespace ZoneEngine_New.Core.Battlestations
                 if (human?.Match == null || !ReferenceEquals(player.Playfield, human.Match.Field))
                     return false;
 
-                if (!human.InField || !human.Match.FieldOpen || IsInSafe(player.Position.xf, player.Position.zf))
+                float px = player.Position.xf;
+                float pz = player.Position.zf;
+                bool inSafe = IsInSafe(px, pz);
+                if (inSafe)
+                {
+                    human.InField = false;
+                    if (!human.Match.FieldOpen)
+                    {
+                        int left = Math.Max(1, (int)Math.Ceiling(human.Match.StartGateLeft));
+                        Say(player, "Decontamination pad opens in "
+                            + left.ToString(CultureInfo.InvariantCulture) + " seconds. Stand on the teal pad, or Use it.");
+                        return true;
+                    }
+
+                    // Terminal Use on/near the teal Exit Decontamination pad after the gate opens.
+                    Point? arm = PickArm();
+                    SendToArm(human.Match, human, arm);
+                    return true;
+                }
+
+                if (!human.InField || !human.Match.FieldOpen)
                 {
                     Say(player, "Capture points are on the open station. Use the Decontamination pad after the timer.");
                     return true;
@@ -706,7 +786,7 @@ namespace ZoneEngine_New.Core.Battlestations
                     if (human.HackLeft > 0)
                         continue;
 
-                    LockConsole(match, console, human.Team, player.Name ?? "You");
+                    LockConsole(match, console, human.Team, player.Name ?? "You", broadcast: true);
                     human.HackConsole = -1;
                     human.Confirm = false;
                     _channeling.Remove(player.Identity.Instance);
@@ -732,7 +812,7 @@ namespace ZoneEngine_New.Core.Battlestations
                 if (bot.HackLeft > 0)
                     continue;
 
-                LockConsole(match, bot.HackConsole, bot.Team, bot.Npc.Name ?? "A guard");
+                LockConsole(match, bot.HackConsole, bot.Team, bot.Npc.Name ?? "A guard", broadcast: false);
                 bot.HackConsole = -1;
                 if (bot.Npc.Brain != null)
                     bot.Npc.Brain.PatrolEnabled = true;
@@ -776,11 +856,17 @@ namespace ZoneEngine_New.Core.Battlestations
                     ZoneEngine_New.Core.Events.DailyMissionService.Instance?.NotifyBattlestationThreshold(match.Humans[h].Player);
             }
 
+            // Score line only on a real change, at most once every 10 seconds (never per-tick spam).
+            if (match.RedScore == match.LastAnnouncedRed && match.BlueScore == match.LastAnnouncedBlue)
+                return;
+
             match.AnnounceDebt += interval;
-            if (match.AnnounceDebt < 30)
+            if (match.AnnounceDebt < 10)
                 return;
 
             match.AnnounceDebt = 0;
+            match.LastAnnouncedRed = match.RedScore;
+            match.LastAnnouncedBlue = match.BlueScore;
             Announce(match, "Score  " + SideLabel(1) + " " + match.RedScore
                 + "  " + SideLabel(2) + " " + match.BlueScore);
         }
@@ -938,8 +1024,11 @@ namespace ZoneEngine_New.Core.Battlestations
         bool TryExitPad(Match match, Human human, float x, float z)
         {
             // Pad only opens after the start timer (ao-universe / Randy: leave Decontamination once the timer ends).
-            if (!match.FieldOpen || human.InField)
+            if (!match.FieldOpen)
                 return false;
+
+            // Standing in Decontamination always clears InField; do not require !InField here (race with auto-send).
+            human.InField = false;
 
             ExitPad[] pads = _catalog.ExitPads;
             for (int i = 0; i < pads.Length; i++)
@@ -1113,18 +1202,34 @@ namespace ZoneEngine_New.Core.Battlestations
                     continue;
                 }
 
-                if (bot.Npc.FightingTarget != Identity.None && bot.Role != BotRole.Escort)
+                // Decontamination is a hard no-go for bots: eject, clear fight, never path/warp/target there.
+                if (IsInSafe(bot.Npc.Position.xf, bot.Npc.Position.zf))
                 {
-                    if (bot.HackConsole >= 0)
+                    EjectBotFromDecon(match, bot);
+                    continue;
+                }
+
+                if (bot.Npc.FightingTarget != Identity.None)
+                {
+                    if (FightTargetInDecon(bot))
                     {
-                        bot.HackConsole = -1;
-                        if (bot.Npc.Brain != null)
-                            bot.Npc.Brain.PatrolEnabled = true;
+                        ClearBotFight(bot);
+                        continue;
                     }
 
-                    bot.StuckSeconds = 0;
-                    bot.ThinkLeft = Math.Max(0, bot.ThinkLeft - deltaTime);
-                    continue;
+                    if (bot.Role != BotRole.Escort)
+                    {
+                        if (bot.HackConsole >= 0)
+                        {
+                            bot.HackConsole = -1;
+                            if (bot.Npc.Brain != null)
+                                bot.Npc.Brain.PatrolEnabled = true;
+                        }
+
+                        bot.StuckSeconds = 0;
+                        bot.ThinkLeft = Math.Max(0, bot.ThinkLeft - deltaTime);
+                        continue;
+                    }
                 }
 
                 bot.ThinkLeft -= deltaTime;
@@ -1283,10 +1388,24 @@ namespace ZoneEngine_New.Core.Battlestations
                     bot.Npc.Brain.PatrolEnabled = true;
             }
 
+            float hx = human.Player.Position.xf;
+            float hy = human.Player.Position.yf;
+            float hz = human.Player.Position.zf;
+
+            // Human in Decontamination: never path/warp/target into the safe room. Hold on the field.
+            if (!human.InField || IsInSafe(hx, hz))
+            {
+                ClearBotFight(bot);
+                bot.StuckSeconds = 0;
+                bot.Npc.StopInPlace();
+                return;
+            }
+
             // Assist: human's fight target, then anyone attacking the human, then nearby enemies.
             Character? assist = human.Player.TryResolveFightingTarget();
             if (assist != null
                 && !assist.IsDead
+                && !IsInSafe(assist.Position.xf, assist.Position.zf)
                 && assist.Stats.GetOrZero(CharacterStat.BattlestationSide) != bot.Team
                 && CombatRules.CanAttack(bot.Npc, assist))
             {
@@ -1297,6 +1416,8 @@ namespace ZoneEngine_New.Core.Battlestations
             foreach (Character attacker in human.Player.Attackers)
             {
                 if (attacker == null || attacker.IsDead || ReferenceEquals(attacker, bot.Npc))
+                    continue;
+                if (IsInSafe(attacker.Position.xf, attacker.Position.zf))
                     continue;
                 if (attacker.Stats.GetOrZero(CharacterStat.BattlestationSide) == bot.Team)
                     continue;
@@ -1316,20 +1437,23 @@ namespace ZoneEngine_New.Core.Battlestations
                 return;
             }
 
-            float hx = human.Player.Position.xf;
-            float hy = human.Player.Position.yf;
-            float hz = human.Player.Position.zf;
             float dist = Distance(bot.Npc.Position.xf, bot.Npc.Position.zf, hx, hz);
 
-            // Human pad/warp hop: snap beside them when they jump far.
+            // Human pad/warp hop: snap beside them when they jump far — never into Decontamination.
             if (dist > 40f)
             {
                 float angle = (float)(Random.Shared.NextDouble() * Math.PI * 2);
                 float radius = 6f + (float)(Random.Shared.NextDouble() * 3f);
-                bot.Npc.Motor.Warp(new Vector3(
-                    hx + (MathF.Cos(angle) * radius),
-                    hy,
-                    hz + (MathF.Sin(angle) * radius)));
+                float wx = hx + (MathF.Cos(angle) * radius);
+                float wz = hz + (MathF.Sin(angle) * radius);
+                if (IsInSafe(wx, wz))
+                {
+                    bot.StuckSeconds = 0;
+                    bot.Npc.StopInPlace();
+                    return;
+                }
+
+                bot.Npc.Motor.Warp(new Vector3(wx, hy, wz));
                 bot.StuckSeconds = 0;
                 return;
             }
@@ -1380,6 +1504,9 @@ namespace ZoneEngine_New.Core.Battlestations
         {
             if (enemy == null || enemy.IsDead || !CombatRules.CanAttack(bot.Npc, enemy))
                 return false;
+            if (IsInSafe(bot.Npc.Position.xf, bot.Npc.Position.zf)
+                || IsInSafe(enemy.Position.xf, enemy.Position.zf))
+                return false;
 
             if (bot.HackConsole >= 0)
             {
@@ -1399,6 +1526,32 @@ namespace ZoneEngine_New.Core.Battlestations
             }
 
             return bot.Npc.FightingTarget != Identity.None;
+        }
+
+        void EjectBotFromDecon(Match match, Bot bot)
+        {
+            ClearBotFight(bot);
+            bot.HackConsole = -1;
+            Point at = PickArm();
+            bot.Npc.Motor.Warp(new Vector3(at.X, at.Y, at.Z));
+            bot.LastX = at.X;
+            bot.LastZ = at.Z;
+            bot.StuckSeconds = 0;
+            bot.ThinkLeft = 0.5;
+        }
+
+        static void ClearBotFight(Bot bot)
+        {
+            bot.Npc.Brain?.StopFighting();
+            bot.Npc.Brain?.ClearHate();
+            if (bot.Npc.FightingTarget != Identity.None)
+                bot.Npc.SetFightingTarget(Identity.None);
+        }
+
+        bool FightTargetInDecon(Bot bot)
+        {
+            Character? target = bot.Npc.TryResolveFightingTarget();
+            return target != null && IsInSafe(target.Position.xf, target.Position.zf);
         }
 
         void TickCapper(Match match, Bot bot, double deltaTime)
@@ -1555,8 +1708,15 @@ namespace ZoneEngine_New.Core.Battlestations
                 bot.StuckSeconds += deltaTime;
                 if (bot.StuckSeconds >= _catalog.BotStuckSeconds && !HumanCanSee(match, bot))
                 {
-                    bot.Npc.Motor.Warp(new Vector3(destX, destY, destZ));
-                    bot.StuckSeconds = 0;
+                    if (IsInSafe(destX, destZ))
+                    {
+                        bot.StuckSeconds = 0;
+                    }
+                    else
+                    {
+                        bot.Npc.Motor.Warp(new Vector3(destX, destY, destZ));
+                        bot.StuckSeconds = 0;
+                    }
                 }
             }
             else
@@ -1585,6 +1745,8 @@ namespace ZoneEngine_New.Core.Battlestations
                 Human human = match.Humans[i];
                 if (human.Team == bot.Team || human.Player.IsDead || !human.InField)
                     continue;
+                if (IsInSafe(human.Player.Position.xf, human.Player.Position.zf))
+                    continue;
                 float d = Distance(x, z, human.Player.Position.xf, human.Player.Position.zf);
                 if (d <= bestPlayerDist)
                 {
@@ -1597,6 +1759,8 @@ namespace ZoneEngine_New.Core.Battlestations
             {
                 Bot other = match.Bots[i];
                 if (other.Dead || other.Team == bot.Team || ReferenceEquals(other, bot) || other.Npc.IsDead)
+                    continue;
+                if (IsInSafe(other.Npc.Position.xf, other.Npc.Position.zf))
                     continue;
                 float d = Distance(x, z, other.Npc.Position.xf, other.Npc.Position.zf);
                 if (d <= bestBotDist)
@@ -1756,6 +1920,13 @@ namespace ZoneEngine_New.Core.Battlestations
 
         void SteerTo(Bot bot, float destX, float destY, float destZ)
         {
+            // Never steer or hop toward Decontamination.
+            if (IsInSafe(destX, destZ))
+            {
+                bot.Npc.StopInPlace();
+                return;
+            }
+
             float x = bot.Npc.Position.xf;
             float z = bot.Npc.Position.zf;
             float goalDist = Distance(x, z, destX, destZ);
@@ -1792,13 +1963,22 @@ namespace ZoneEngine_New.Core.Battlestations
             }
         }
 
-        void LockConsole(Match match, int console, int team, string who)
+        void LockConsole(Match match, int console, int team, string who, bool broadcast)
         {
             if (console < 0 || console >= match.Owner.Length)
                 return;
 
+            int previous = match.Owner[console];
             match.Owner[console] = team;
             match.CaptureLockLeft[console] = _catalog.CaptureLockSeconds;
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Battle station capture console={0} team={1} by={2} prev={3}",
+                _catalog.Consoles[console].Id, team, who, previous));
+
+            // Broadcast only on a real ownership change for a human capture — never per-bot events.
+            if (!broadcast || previous == team)
+                return;
+
             Announce(match, who + " captured " + _catalog.Consoles[console].Id
                 + " for " + SideLabel(team)
                 + ". " + FormatBoard(match));
@@ -1896,8 +2076,12 @@ namespace ZoneEngine_New.Core.Battlestations
         {
             for (int i = 0; i < match.Humans.Count; i++)
             {
-                if (match.Humans[i].Player.Session != null
-                    && ReferenceEquals(match.Humans[i].Player.Playfield, match.Field))
+                Human human = match.Humans[i];
+                if (human.Player.Session == null)
+                    continue;
+                // Hub→station transfer briefly leaves the Player off match.Field; Grace keeps the match alive
+                // so TryOpenOrphanMatch cannot wipe and re-open a second match under the same player.
+                if (human.Grace > 0 || ReferenceEquals(human.Player.Playfield, match.Field))
                     return true;
             }
 
@@ -2086,6 +2270,10 @@ namespace ZoneEngine_New.Core.Battlestations
             public double ScoreDebt;
 
             public double AnnounceDebt;
+
+            public int LastAnnouncedRed = int.MinValue;
+
+            public int LastAnnouncedBlue = int.MinValue;
 
             public bool Ending;
 
