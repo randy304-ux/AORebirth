@@ -422,6 +422,9 @@ namespace ZoneEngine_New.Core.Battlestations
                     int level = player.Stats.GetOrOne(CharacterStat.Level);
                     if (player.Session == null || level < queue.Bracket.MinLevel || level > queue.Bracket.MaxLevel)
                         continue;
+                    // Never seat someone already in a live match or still in the transfer/reconnect window.
+                    if (IsSeatedOrTransferringUnlocked(player))
+                        continue;
                     if (Loyalty(player) < _catalog.LoyaltyAcceptCost)
                     {
                         Say(player, "Your loyalty is too low to accept this match.");
@@ -483,7 +486,19 @@ namespace ZoneEngine_New.Core.Battlestations
             match.StartGateLeft = Math.Max(1, _catalog.StartGateSeconds);
 
             lock (_gate)
+            {
+                // Another Open / orphan path may have seated this bracket while we built the roster.
+                if (_matches.ContainsKey(queue.Bracket.Playfield))
+                {
+                    for (int i = 0; i < match.Humans.Count; i++)
+                        ClearSide(match.Humans[i].Player);
+                    return;
+                }
+
                 _matches[queue.Bracket.Playfield] = match;
+                for (int i = 0; i < match.Humans.Count; i++)
+                    NoteSeatGrace(match.Humans[i].Player.Identity.Instance);
+            }
 
             if (fill)
                 DrainPendingBots(match);
@@ -875,6 +890,12 @@ namespace ZoneEngine_New.Core.Battlestations
 
         readonly Dictionary<int, double> _orphanCheck = new();
 
+        /// <summary>
+        /// Character id → seconds remaining in the hub→station / reconnect seat window.
+        /// Survives a mistaken Finish so the orphan opener cannot re-seat the same player mid-transfer.
+        /// </summary>
+        readonly Dictionary<int, double> _seatGrace = new();
+
         void TryOpenOrphanMatch(Playfield field, double deltaTime)
         {
             int pf = field.Identity.Instance;
@@ -891,8 +912,11 @@ namespace ZoneEngine_New.Core.Battlestations
             if (bracket == null)
                 return;
 
+            var queue = new Queue(bracket) { Starting = true };
             lock (_gate)
             {
+                DecaySeatGraceUnlocked(deltaTime);
+
                 double left = _orphanCheck.TryGetValue(pf, out double l) ? l - deltaTime : 0;
                 if (left > 0)
                 {
@@ -901,15 +925,20 @@ namespace ZoneEngine_New.Core.Battlestations
                 }
 
                 _orphanCheck[pf] = 5;
+
+                // Never replace a live match — re-check under the same lock as the seat filter.
                 if (_matches.ContainsKey(pf))
                     return;
-            }
 
-            var queue = new Queue(bracket) { Starting = true };
-            foreach (Player player in field.GetRequiredService<DynelRegistry>().PlayerEntities())
-            {
-                if (player.Session != null)
+                foreach (Player player in field.GetRequiredService<DynelRegistry>().PlayerEntities())
+                {
+                    if (player.Session == null)
+                        continue;
+                    // Already seated in any live match, or still transferring / reconnecting (30 s grace).
+                    if (IsSeatedOrTransferringUnlocked(player))
+                        continue;
                     queue.Players.Add(player);
+                }
             }
 
             if (queue.Players.Count == 0)
@@ -919,6 +948,44 @@ namespace ZoneEngine_New.Core.Battlestations
                 "Battle station {0} opening for {1} player(s) already on the field (no live match)",
                 bracket.Name, queue.Players.Count));
             Open(queue, field);
+        }
+
+        /// <summary>Caller must hold <see cref="_gate"/>.</summary>
+        void NoteSeatGrace(int characterId)
+        {
+            if (characterId == 0)
+                return;
+            _seatGrace[characterId] = TransferGraceSeconds;
+        }
+
+        /// <summary>Caller must hold <see cref="_gate"/>.</summary>
+        void DecaySeatGraceUnlocked(double deltaTime)
+        {
+            if (_seatGrace.Count == 0 || deltaTime <= 0)
+                return;
+
+            // Snapshot keys so we never mutate the dictionary while enumerating it.
+            int[] ids = new int[_seatGrace.Count];
+            _seatGrace.Keys.CopyTo(ids, 0);
+            for (int i = 0; i < ids.Length; i++)
+            {
+                int id = ids[i];
+                if (!_seatGrace.TryGetValue(id, out double remaining))
+                    continue;
+                double left = remaining - deltaTime;
+                if (left > 0)
+                    _seatGrace[id] = left;
+                else
+                    _seatGrace.Remove(id);
+            }
+        }
+
+        /// <summary>Caller must hold <see cref="_gate"/>.</summary>
+        bool IsSeatedOrTransferringUnlocked(Player player)
+        {
+            if (FindHuman(player) != null)
+                return true;
+            return _seatGrace.TryGetValue(player.Identity.Instance, out double left) && left > 0;
         }
 
         void TickStartGate(Match match, double deltaTime)
@@ -989,6 +1056,8 @@ namespace ZoneEngine_New.Core.Battlestations
                 }
 
                 human.Grace = TransferGraceSeconds;
+                lock (_gate)
+                    NoteSeatGrace(player.Identity.Instance);
 
                 float x = player.Position.xf;
                 float z = player.Position.zf;
@@ -2077,11 +2146,13 @@ namespace ZoneEngine_New.Core.Battlestations
             for (int i = 0; i < match.Humans.Count; i++)
             {
                 Human human = match.Humans[i];
+                // Hub→station transfer can briefly null Session / leave Playfield off the station.
+                // Grace alone keeps the match alive so Finish cannot clear it for the orphan opener.
+                if (human.Grace > 0)
+                    return true;
                 if (human.Player.Session == null)
                     continue;
-                // Hub→station transfer briefly leaves the Player off match.Field; Grace keeps the match alive
-                // so TryOpenOrphanMatch cannot wipe and re-open a second match under the same player.
-                if (human.Grace > 0 || ReferenceEquals(human.Player.Playfield, match.Field))
+                if (ReferenceEquals(human.Player.Playfield, match.Field))
                     return true;
             }
 
