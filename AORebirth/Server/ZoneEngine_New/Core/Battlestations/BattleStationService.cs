@@ -714,17 +714,29 @@ namespace ZoneEngine_New.Core.Battlestations
             {
                 Human human = match.Humans[i];
                 Player player = human.Player;
-                if (player.Session == null || player.Playfield == null)
+                if (player.Session == null || player.Playfield == null || !ReferenceEquals(player.Playfield, match.Field))
                 {
-                    DropHuman(match, human, "You left the battle station. No payout.");
-                    continue;
+                    // The hub -> station transfer is a reconnect: for a moment the old Player is still on the hub
+                    // or replaced by a new object on the field. Rebind by character id; drop only after a grace.
+                    Player? current = FindOnField(match.Field, player.Identity.Instance);
+                    if (current != null)
+                    {
+                        human.Player = current;
+                        player = current;
+                    }
+                    else if (human.Grace > 0)
+                    {
+                        human.Grace -= deltaTime;
+                        continue;
+                    }
+                    else
+                    {
+                        DropHuman(match, human, "You left the battle station. No payout.");
+                        continue;
+                    }
                 }
 
-                if (!ReferenceEquals(player.Playfield, match.Field))
-                {
-                    DropHuman(match, human, "You left the battle station. No payout.");
-                    continue;
-                }
+                human.Grace = TransferGraceSeconds;
 
                 float x = player.Position.xf;
                 float z = player.Position.zf;
@@ -1236,14 +1248,33 @@ namespace ZoneEngine_New.Core.Battlestations
 
         Point HubPoint() => new(_catalog.HubReturn[0], _catalog.HubReturn[1], _catalog.HubReturn[2]);
 
+        const double TransferGraceSeconds = 30;
+
+        static Player? FindOnField(Playfield field, int instance)
+        {
+            foreach (Player candidate in field.GetRequiredService<DynelRegistry>().PlayerEntities())
+            {
+                if (candidate.Identity.Instance == instance && candidate.Session != null)
+                    return candidate;
+            }
+
+            return null;
+        }
+
         Human? FindHuman(Player player)
         {
             foreach (Match match in _matches.Values)
             {
                 for (int i = 0; i < match.Humans.Count; i++)
                 {
-                    if (ReferenceEquals(match.Humans[i].Player, player))
-                        return match.Humans[i];
+                    Human candidate = match.Humans[i];
+                    if (ReferenceEquals(candidate.Player, player)
+                        || candidate.Player.Identity.Instance == player.Identity.Instance)
+                    {
+                        if (player.Session != null)
+                            candidate.Player = player;
+                        return candidate;
+                    }
                 }
             }
 
@@ -1382,7 +1413,9 @@ namespace ZoneEngine_New.Core.Battlestations
                 LastZ = player.Position.zf;
             }
 
-            public Player Player { get; }
+            public Player Player { get; set; }
+
+            public double Grace = 30;
 
             public int Team { get; }
 
