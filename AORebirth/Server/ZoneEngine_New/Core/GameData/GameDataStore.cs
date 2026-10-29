@@ -978,6 +978,23 @@ namespace ZoneEngine_New.Core.GameData
             if (data.PlayfieldId == 0)
                 data.PlayfieldId = playfieldId;
 
+            // Tracked add-on points (PlayfieldContent/{id}/SpawnsAdd.json, same schema) appended to the
+            // gitignored client Spawns.json. Delete the file to revert. 2026-10-29 live-scrape import.
+            string addPath = Path.Combine(RootPath, "PlayfieldContent", playfieldId.ToString(System.Globalization.CultureInfo.InvariantCulture), "SpawnsAdd.json");
+            if (File.Exists(addPath))
+            {
+                try
+                {
+                    PlayfieldSpawnsData? extra = JsonSerializer.Deserialize<PlayfieldSpawnsData>(File.ReadAllText(addPath), SpawnsJsonOptions);
+                    if (extra?.Spawns is { Length: > 0 })
+                        data.Spawns = [.. data.Spawns, .. extra.Spawns];
+                }
+                catch (JsonException exception)
+                {
+                    throw new InvalidDataException("Playfield add-on spawns could not be read: " + addPath + ": " + exception.Message);
+                }
+            }
+
             return data;
         }
 
