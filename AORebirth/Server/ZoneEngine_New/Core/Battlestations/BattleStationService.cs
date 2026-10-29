@@ -397,23 +397,16 @@ namespace ZoneEngine_New.Core.Battlestations
             }
 
             match.UsesBots = fill;
-            int pendingRed = fill ? _catalog.TeamSize - red.Count : 0;
-            int pendingBlue = fill ? _catalog.TeamSize - blue.Count : 0;
-            match.PendingBotRed = 0;
-            match.PendingBotBlue = 0;
+            // Drain across ticks (SpawnBudgetPerTick) so 60 bots land without one hitch.
+            match.PendingBotRed = fill ? Math.Max(0, _catalog.TeamSize - red.Count) : 0;
+            match.PendingBotBlue = fill ? Math.Max(0, _catalog.TeamSize - blue.Count) : 0;
             match.StartGateLeft = Math.Max(1, _catalog.StartGateSeconds);
 
             lock (_gate)
                 _matches[queue.Bracket.Playfield] = match;
 
-            // Spawn defenders as soon as the match field exists so empty seats are filled before the
-            // gate opens (ao-universe: bots pad each team to TeamSize). Pending was previously only
-            // flushed after StartGateSeconds, so a stuck gate / early leave looked like "no bots".
             if (fill)
-            {
-                SpawnBots(match, 1, pendingRed);
-                SpawnBots(match, 2, pendingBlue);
-            }
+                DrainPendingBots(match);
 
             Point safe = SafePoint();
             for (int i = 0; i < match.Humans.Count; i++)
@@ -475,7 +468,7 @@ namespace ZoneEngine_New.Core.Battlestations
                 }
 
                 BotRole role = PickRole();
-                var bot = new Bot(npc, teamId, teamId == 1 ? 0 : 1, role);
+                var bot = new Bot(npc, teamId, teamId == 1 ? 0 : 1, role, staggerIndex: match.Bots.Count);
                 AssignHunterPack(match, bot);
                 SetBotRoleLabel(bot);
                 npc.Died += _ => bot.Dead = true;
@@ -484,8 +477,35 @@ namespace ZoneEngine_New.Core.Battlestations
                     "Battle station bot role={0} team={1} pack={2} name={3}",
                     bot.Role, teamId, bot.PackId, npc.Name));
             }
+        }
 
-            RefreshEscorts(match);
+        /// <summary>How many bot bodies may spawn this match tick (scales with TeamSize; ~6 at 30).</summary>
+        int SpawnBudgetPerTick() => Math.Max(2, _catalog.TeamSize / 5);
+
+        void DrainPendingBots(Match match)
+        {
+            if (!match.UsesBots || match.Ending)
+                return;
+
+            int budget = SpawnBudgetPerTick() - match.BotSpawnsThisTick;
+            while (budget > 0 && (match.PendingBotRed > 0 || match.PendingBotBlue > 0))
+            {
+                int team;
+                if (match.PendingBotRed > 0 && (match.PendingBotBlue <= 0 || match.PendingBotRed >= match.PendingBotBlue))
+                {
+                    team = 1;
+                    match.PendingBotRed--;
+                }
+                else
+                {
+                    team = 2;
+                    match.PendingBotBlue--;
+                }
+
+                SpawnBots(match, team, 1);
+                match.BotSpawnsThisTick++;
+                budget--;
+            }
         }
 
         static void SetBotRoleLabel(Bot bot)
@@ -515,7 +535,8 @@ namespace ZoneEngine_New.Core.Battlestations
             if (bot.Role != BotRole.Hunter)
                 return;
 
-            const int packMax = 4;
+            // ~25% hunters at TeamSize 30 → several packs of 3-5.
+            const int packMax = 5;
             int openPack = -1;
             bool openNeedsLeader = false;
             for (int p = 0; p < match.NextPackId; p++)
@@ -632,7 +653,8 @@ namespace ZoneEngine_New.Core.Battlestations
             if (match.Ending)
                 return;
 
-            match.BotSpawnedThisTick = false;
+            match.BotSpawnsThisTick = 0;
+            DrainPendingBots(match);
             TickStartGate(match, deltaTime);
             ExpireHacks(match, deltaTime);
             if (match.FieldOpen)
@@ -848,12 +870,8 @@ namespace ZoneEngine_New.Core.Battlestations
                 SendToArm(match, human, PickArm());
             }
 
-            if (match.PendingBotRed > 0)
-                SpawnBots(match, 1, match.PendingBotRed);
-            if (match.PendingBotBlue > 0)
-                SpawnBots(match, 2, match.PendingBotBlue);
-            match.PendingBotRed = 0;
-            match.PendingBotBlue = 0;
+            // Remaining pad bots keep draining via DrainPendingBots each tick.
+            DrainPendingBots(match);
         }
 
         void TickHumans(Match match, double deltaTime)
@@ -1012,7 +1030,7 @@ namespace ZoneEngine_New.Core.Battlestations
 
         void TryBackfill(Match match, double deltaTime)
         {
-            if (!match.UsesBots || match.Ending || match.BotSpawnedThisTick)
+            if (!match.UsesBots || match.Ending)
                 return;
 
             if (match.BackfillLeft > 0)
@@ -1022,7 +1040,8 @@ namespace ZoneEngine_New.Core.Battlestations
                     return;
             }
 
-            for (int team = 1; team <= 2; team++)
+            int budget = SpawnBudgetPerTick() - match.BotSpawnsThisTick;
+            for (int team = 1; team <= 2 && budget > 0; team++)
             {
                 int humans = 0;
                 for (int i = 0; i < match.Humans.Count; i++)
@@ -1032,33 +1051,40 @@ namespace ZoneEngine_New.Core.Battlestations
                 }
 
                 int live = 0;
+                int pending = team == 1 ? match.PendingBotRed : match.PendingBotBlue;
                 for (int i = 0; i < match.Bots.Count; i++)
                 {
                     if (match.Bots[i].Team == team && !match.Bots[i].Dead)
                         live++;
                 }
 
-                if (humans + live >= _catalog.TeamSize)
-                    continue;
-
-                SpawnBots(match, team, 1);
-                match.BotSpawnedThisTick = true;
-                return;
+                while (budget > 0 && humans + live + pending < _catalog.TeamSize)
+                {
+                    SpawnBots(match, team, 1);
+                    match.BotSpawnsThisTick++;
+                    live++;
+                    budget--;
+                }
             }
         }
 
         void TickBots(Match match, double deltaTime)
         {
-            RefreshEscorts(match);
+            match.EscortRefreshLeft -= deltaTime;
+            if (match.EscortRefreshLeft <= 0)
+            {
+                RefreshEscorts(match);
+                match.EscortRefreshLeft = 1.0 + (Random.Shared.NextDouble() * 1.0);
+            }
 
-            bool respawned = false;
+            int spawnBudget = SpawnBudgetPerTick() - match.BotSpawnsThisTick;
             for (int i = 0; i < match.Bots.Count; i++)
             {
                 Bot bot = match.Bots[i];
                 if (bot.Dead)
                 {
                     bot.RespawnLeft -= deltaTime;
-                    if (bot.RespawnLeft > 0 || respawned || match.BotSpawnedThisTick)
+                    if (bot.RespawnLeft > 0 || spawnBudget <= 0)
                         continue;
 
                     try
@@ -1073,13 +1099,9 @@ namespace ZoneEngine_New.Core.Battlestations
                     int team = bot.Team;
                     match.Bots.RemoveAt(i);
                     i--;
-                    if (!respawned && !match.BotSpawnedThisTick)
-                    {
-                        SpawnBots(match, team, 1);
-                        match.BotSpawnedThisTick = true;
-                        respawned = true;
-                    }
-
+                    SpawnBots(match, team, 1);
+                    match.BotSpawnsThisTick++;
+                    spawnBudget--;
                     continue;
                 }
 
@@ -2073,7 +2095,7 @@ namespace ZoneEngine_New.Core.Battlestations
 
             public double BackfillLeft;
 
-            public bool BotSpawnedThisTick;
+            public int BotSpawnsThisTick;
 
             public double StartGateLeft;
 
@@ -2084,6 +2106,8 @@ namespace ZoneEngine_New.Core.Battlestations
             public int PendingBotBlue;
 
             public int NextPackId;
+
+            public double EscortRefreshLeft;
 
             public bool LoggedEngage;
 
@@ -2138,7 +2162,7 @@ namespace ZoneEngine_New.Core.Battlestations
 
         sealed class Bot
         {
-            public Bot(NpcCharacter npc, int team, int goal, BotRole role)
+            public Bot(NpcCharacter npc, int team, int goal, BotRole role, int staggerIndex = 0)
             {
                 Npc = npc;
                 Team = team;
@@ -2147,7 +2171,8 @@ namespace ZoneEngine_New.Core.Battlestations
                 Role = role;
                 LastX = npc.Position.xf;
                 LastZ = npc.Position.zf;
-                ThinkLeft = Random.Shared.NextDouble() * 1.5;
+                // Spread first thinks across ~2s so 60 bots do not all decide on the same frame.
+                ThinkLeft = (Math.Abs(staggerIndex) % 20) * 0.1 + (Random.Shared.NextDouble() * 0.25);
             }
 
             public NpcCharacter Npc;
@@ -2228,9 +2253,9 @@ namespace ZoneEngine_New.Core.Battlestations
 
         public float SafeRadius { get; set; } = 28f;
 
-        public int TeamSize { get; set; } = 11;
+        public int TeamSize { get; set; } = 30;
 
-        public int BotFillMaxHumans { get; set; } = 11;
+        public int BotFillMaxHumans { get; set; } = 30;
 
         public double BotBackfillSeconds { get; set; } = 15;
 
