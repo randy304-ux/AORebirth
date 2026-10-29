@@ -113046,62 +113046,6 @@
                                            "Levels":  "180-200"
                                        }
              },
-    "ONUR":  {
-                 "Templates":  [
-                                   {
-                                       "Name":  "Rome Blue",
-                                       "Level":  250,
-                                       "Stats":  {
-                                                     "0":  268964353,
-                                                     "1":  5812,
-                                                     "4":  1,
-                                                     "18":  0,
-                                                     "21":  0,
-                                                     "33":  0,
-                                                     "37":  1,
-                                                     "47":  1,
-                                                     "54":  250,
-                                                     "59":  0,
-                                                     "60":  15,
-                                                     "89":  1,
-                                                     "99":  503,
-                                                     "132":  5,
-                                                     "156":  5,
-                                                     "173":  3,
-                                                     "174":  3,
-                                                     "214":  1,
-                                                     "274":  0,
-                                                     "284":  0,
-                                                     "285":  3,
-                                                     "286":  1,
-                                                     "292":  0,
-                                                     "339":  91,
-                                                     "342":  600,
-                                                     "343":  0,
-                                                     "359":  26103,
-                                                     "360":  92,
-                                                     "368":  15,
-                                                     "387":  503,
-                                                     "389":  0,
-                                                     "417":  503,
-                                                     "421":  3,
-                                                     "436":  91,
-                                                     "455":  118,
-                                                     "466":  15,
-                                                     "660":  0,
-                                                     "673":  31,
-                                                     "1003":  0,
-                                                     "27":  5812
-                                                 }
-                                   }
-                               ],
-                 "ContentProvenance":  {
-                                           "Guessed":  true,
-                                           "Donor":  "HW01",
-                                           "Source":  "whereis (Nadybot/Budabot/BeBot) 4.7 m: person-like name -\u003e hostile human donor HW01 (Fresh Highwayman look)",
-                                           "Levels":  "250-250"
-                                       }
-             },
     "AAHO":  {
                  "Templates":  [
                                    {
@@ -163427,6 +163371,455 @@
                                            "Guessed":  false,
                                            "Source":  "scrape-sl-20261029",
                                            "Note":  "live PRK scrape (hashpoint)"
+                                       }
+             },
+    "OMUA":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Omni-AF Urban Trooper",
+                                       "Level":  250,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "59":  0,
+                                                     "60":  15,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  5,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  120,
+                                                     "286":  40,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "61":  800,
+                                                     "52":  10000,
+                                                     "54":  250,
+                                                     "33":  2,
+                                                     "359":  26151,
+                                                     "360":  130,
+                                                     "455":  2,
+                                                     "1":  201270,
+                                                     "27":  201270,
+                                                     "4":  3,
+                                                     "12":  5921,
+                                                     "64":  40171
+                                                 },
+                                       "ContentProvenance":  {
+                                                                 "Guessed":  true,
+                                                                 "Confirmed":  false,
+                                                                 "Donor":  "MOOM",
+                                                                 "Source":  "SL dyna. Donor MOOM. Family is a guess. Y from the nearest client spawn. Respawn 180. Loot 5-7.",
+                                                                 "Levels":  "250",
+                                                                 "CampKey":  "inferno|Crete|250|Pazuzu",
+                                                                 "StandIn":  false
+                                                             },
+                                       "LootTable":  [
+
+                                                     ],
+                                       "Features":  [
+                                                        "NoCombat",
+                                                        "NoMove"
+                                                    ]
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  false,
+                                           "Source":  "rome-20261029",
+                                           "Note":  "live PRK scrape 2026-10-29 Rome Park 730: friendly Omni guard (NoCombat/NoMove), donor Crete L250"
+                                       }
+             },
+    "ONUR":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Omni-AF Urban Trooper",
+                                       "Level":  250,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "59":  0,
+                                                     "60":  15,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  5,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  120,
+                                                     "286":  40,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "61":  800,
+                                                     "52":  10000,
+                                                     "54":  250,
+                                                     "33":  2,
+                                                     "359":  26137,
+                                                     "360":  130,
+                                                     "455":  2,
+                                                     "1":  201270,
+                                                     "27":  201270,
+                                                     "4":  2,
+                                                     "12":  5934,
+                                                     "64":  40209
+                                                 },
+                                       "ContentProvenance":  {
+                                                                 "Guessed":  true,
+                                                                 "Confirmed":  false,
+                                                                 "Donor":  "MOOM",
+                                                                 "Source":  "SL dyna. Donor MOOM. Family is a guess. Y from the nearest client spawn. Respawn 180. Loot 5-7.",
+                                                                 "Levels":  "250",
+                                                                 "CampKey":  "inferno|Crete|250|Pazuzu",
+                                                                 "StandIn":  false
+                                                             },
+                                       "LootTable":  [
+
+                                                     ],
+                                       "Features":  [
+                                                        "NoCombat",
+                                                        "NoMove"
+                                                    ]
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  false,
+                                           "Source":  "rome-20261029",
+                                           "Note":  "live PRK scrape 2026-10-29 Rome Park 730: friendly Omni guard (NoCombat/NoMove), donor Crete L250"
+                                       }
+             },
+    "UISI":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Unicorn Specialist",
+                                       "Level":  250,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "59":  0,
+                                                     "60":  15,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  5,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  120,
+                                                     "286":  40,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "64":  0,
+                                                     "61":  800,
+                                                     "52":  10000,
+                                                     "54":  250,
+                                                     "33":  2,
+                                                     "359":  163003,
+                                                     "360":  130,
+                                                     "455":  219,
+                                                     "1":  800000,
+                                                     "27":  800000,
+                                                     "4":  1,
+                                                     "12":  163173
+                                                 },
+                                       "ContentProvenance":  {
+                                                                 "Guessed":  true,
+                                                                 "Confirmed":  false,
+                                                                 "Donor":  "MOOM",
+                                                                 "Source":  "SL dyna. Donor MOOM. Family is a guess. Y from the nearest client spawn. Respawn 180. Loot 5-7.",
+                                                                 "Levels":  "250",
+                                                                 "CampKey":  "inferno|Crete|250|Pazuzu",
+                                                                 "StandIn":  false
+                                                             },
+                                       "LootTable":  [
+
+                                                     ],
+                                       "Features":  [
+                                                        "NoCombat",
+                                                        "NoMove"
+                                                    ]
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  false,
+                                           "Source":  "rome-20261029",
+                                           "Note":  "live PRK scrape 2026-10-29 Rome Park 730: friendly Omni guard (NoCombat/NoMove), donor Crete L250"
+                                       }
+             },
+    "UNSQ":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Unicorn Squadleader",
+                                       "Level":  250,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "59":  0,
+                                                     "60":  15,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  5,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  120,
+                                                     "286":  40,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "64":  0,
+                                                     "61":  800,
+                                                     "52":  10000,
+                                                     "54":  250,
+                                                     "33":  2,
+                                                     "359":  247041,
+                                                     "360":  130,
+                                                     "455":  219,
+                                                     "1":  600700,
+                                                     "27":  600700,
+                                                     "4":  1,
+                                                     "12":  247037
+                                                 },
+                                       "ContentProvenance":  {
+                                                                 "Guessed":  true,
+                                                                 "Confirmed":  false,
+                                                                 "Donor":  "MOOM",
+                                                                 "Source":  "SL dyna. Donor MOOM. Family is a guess. Y from the nearest client spawn. Respawn 180. Loot 5-7.",
+                                                                 "Levels":  "250",
+                                                                 "CampKey":  "inferno|Crete|250|Pazuzu",
+                                                                 "StandIn":  false
+                                                             },
+                                       "LootTable":  [
+
+                                                     ],
+                                       "Features":  [
+                                                        "NoCombat",
+                                                        "NoMove"
+                                                    ]
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  false,
+                                           "Source":  "rome-20261029",
+                                           "Note":  "live PRK scrape 2026-10-29 Rome Park 730: friendly Omni guard (NoCombat/NoMove), donor Crete L250"
+                                       }
+             },
+    "UICO":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Unicorn Commander",
+                                       "Level":  255,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "59":  0,
+                                                     "60":  15,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  5,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  120,
+                                                     "286":  40,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "61":  800,
+                                                     "52":  10000,
+                                                     "54":  255,
+                                                     "33":  2,
+                                                     "359":  247033,
+                                                     "360":  131,
+                                                     "455":  219,
+                                                     "1":  453333,
+                                                     "27":  453333,
+                                                     "4":  1,
+                                                     "12":  246883,
+                                                     "64":  40694
+                                                 },
+                                       "ContentProvenance":  {
+                                                                 "Guessed":  true,
+                                                                 "Confirmed":  false,
+                                                                 "Donor":  "MOOM",
+                                                                 "Source":  "SL dyna. Donor MOOM. Family is a guess. Y from the nearest client spawn. Respawn 180. Loot 5-7.",
+                                                                 "Levels":  "250",
+                                                                 "CampKey":  "inferno|Syros|250|Pazuzu",
+                                                                 "StandIn":  false
+                                                             },
+                                       "LootTable":  [
+
+                                                     ],
+                                       "Features":  [
+                                                        "NoCombat",
+                                                        "NoMove"
+                                                    ]
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  false,
+                                           "Source":  "rome-20261029",
+                                           "Note":  "live PRK scrape 2026-10-29 Rome Park 730: friendly Omni guard (NoCombat/NoMove), donor Celeth-El L255"
+                                       }
+             },
+    "ALGO":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Alan Goodwin",
+                                       "Level":  204,
+                                       "Stats":  {
+                                                     "0":  268964353,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "59":  0,
+                                                     "60":  15,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  5,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  3,
+                                                     "286":  1,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  2,
+                                                     "436":  91,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "52":  8200,
+                                                     "54":  204,
+                                                     "33":  2,
+                                                     "359":  267323,
+                                                     "360":  100,
+                                                     "455":  158,
+                                                     "1":  277306,
+                                                     "27":  277306,
+                                                     "4":  2,
+                                                     "12":  5914,
+                                                     "64":  40279
+                                                 },
+                                       "ContentProvenance":  {
+                                                                 "Guessed":  true,
+                                                                 "Confirmed":  false,
+                                                                 "Donor":  "BFC2",
+                                                                 "Source":  "Stand-in mesh from BFC2. AO-Universe dyna table. Y from the nearest client spawn. No color buff. Boss rare loot is the guide\u0027s general list only.",
+                                                                 "Levels":  "205",
+                                                                 "CampKey":  "boss|Biledrinkers|205",
+                                                                 "StandIn":  true
+                                                             },
+                                       "LootTable":  [
+
+                                                     ],
+                                       "Features":  [
+                                                        "NoCombat",
+                                                        "NoMove"
+                                                    ]
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  false,
+                                           "Source":  "rome-20261029",
+                                           "Note":  "live PRK scrape 2026-10-29 Rome Park 730: friendly Omni guard (NoCombat/NoMove), donor Biledrinkers Dyna L205"
                                        }
              }
 }

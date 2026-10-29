@@ -112,6 +112,10 @@ namespace ZoneEngine_New.Core.Pets
                     npc.Stats.Set(CharacterStat.PetMaster, owner.Identity.Instance);
                     npc.Stats.Set(CharacterStat.PetType, type);
                     npc.Stats.Set(CharacterStat.Side, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base));
+                    // Battle station: a pet/merc wears its owner's BS team so the client's tab skips it like a teammate.
+                    int ownerBattleSide = owner.Stats.GetOrZero(CharacterStat.BattlestationSide);
+                    if (ownerBattleSide != 0)
+                        npc.Stats.Set(CharacterStat.BattlestationSide, ownerBattleSide);
                     MatchOwnerRunSpeed(npc, owner);
                     int petLevel = level > 0 ? level : npc.Stats.GetOrOne(CharacterStat.Level);
                     // Con color reads SCFU Level. Force the resolved pet/merc level (and matching TitleLevel)
@@ -418,12 +422,34 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
+        /// Keeps every pet/merc (and a merc's own pets) on its owner's battle-station team: set when the owner joins
+        /// a match, cleared when they leave. Combat already resolves pets through their owner; the client reads this
+        /// stat to treat them as teammates, so tab targeting skips them.
+        /// </summary>
+        public static void SyncBattleSide(Character owner)
+        {
+            int side = owner.Stats.GetOrZero(CharacterStat.BattlestationSide);
+            foreach (NpcCharacter pet in owner.OwnedPets.All)
+            {
+                if (pet.Stats.GetOrZero(CharacterStat.BattlestationSide) != side)
+                {
+                    pet.Stats.Set(CharacterStat.BattlestationSide, side, StatDetail.Base, dirty: true);
+                    pet.FlushDirtyStats();
+                }
+
+                if (pet.OwnedPets.Count > 0)
+                    SyncBattleSide(pet);
+            }
+        }
+
+        /// <summary>
         /// Brings back every contracted merc the owner is missing: on login, after the owner's or the merc's death
         /// (once its revive time is up), and after a zone change that lost it. Runs about once a second per player.
         /// </summary>
         public void TickMercs(Player owner)
         {
             ArgumentNullException.ThrowIfNull(owner);
+            SyncBattleSide(owner);
             int bits = owner.Stats.GetOrZero(Mercs.ContractsStat, StatDetail.Base);
             if (bits == 0)
                 return;

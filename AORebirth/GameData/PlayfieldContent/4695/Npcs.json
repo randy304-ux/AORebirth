@@ -2312,6 +2312,623 @@
                                                   }
                                               ]
                                 }
+                 },
+                 {
+                     "Key":  "ddogs:rome20261029:4695:nano",
+                     "Provenance":  "live PRK scrape 2026-10-29 shop 321181702 (91 items, no position/name logged); look cloned from 4695 Craig-Or of Preservation; placed past the vendor row",
+                     "ContentNpcIdentity":  "SimpleChar:7B5C0F01",
+                     "PlayfieldId":  4695,
+                     "InstanceId":  2069630721,
+                     "Name":  "Craig-Or of Nano Programs",
+                     "Position":  [
+                                      636.6,
+                                      17.01,
+                                      436.2
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.989,
+                                      0,
+                                      0.149
+                                  ],
+                     "Stats":  {
+                                   "0":  271061505,
+                                   "1":  32800,
+                                   "4":  1,
+                                   "27":  32800,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  30,
+                                   "59":  2,
+                                   "60":  15,
+                                   "64":  40694,
+                                   "89":  1,
+                                   "156":  513,
+                                   "359":  208640,
+                                   "360":  200,
+                                   "368":  15,
+                                   "389":  0,
+                                   "455":  137,
+                                   "466":  15,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+                                    {
+                                        "Position":  1,
+                                        "OverrideTextureId":  0,
+                                        "Id":  209532,
+                                        "Layer":  2
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  true,
+                     "TickLiving":  false,
+                     "Presentation":  {
+                                          "Meshes":  [
+                                                         {
+                                                             "Position":  1,
+                                                             "OverrideTextureId":  0,
+                                                             "Id":  209532,
+                                                             "Layer":  2
+                                                         }
+                                                     ]
+                                      },
+                     "Vendor":  {
+                                    "InstanceId":  332730113,
+                                    "TemplateId":  99634,
+                                    "Stock":  [
+                                                  {
+                                                      "Slot":  0,
+                                                      "LowId":  226719,
+                                                      "HighId":  226719,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  1,
+                                                      "LowId":  223025,
+                                                      "HighId":  223025,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  2,
+                                                      "LowId":  224074,
+                                                      "HighId":  224074,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  3,
+                                                      "LowId":  223286,
+                                                      "HighId":  223286,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  4,
+                                                      "LowId":  227677,
+                                                      "HighId":  227677,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  5,
+                                                      "LowId":  227679,
+                                                      "HighId":  227679,
+                                                      "Quality":  210
+                                                  },
+                                                  {
+                                                      "Slot":  6,
+                                                      "LowId":  223198,
+                                                      "HighId":  223198,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  7,
+                                                      "LowId":  223182,
+                                                      "HighId":  223182,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  8,
+                                                      "LowId":  223120,
+                                                      "HighId":  223120,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  9,
+                                                      "LowId":  226432,
+                                                      "HighId":  226432,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  10,
+                                                      "LowId":  226434,
+                                                      "HighId":  226434,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  11,
+                                                      "LowId":  225903,
+                                                      "HighId":  225903,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  12,
+                                                      "LowId":  224164,
+                                                      "HighId":  224164,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  13,
+                                                      "LowId":  220340,
+                                                      "HighId":  220340,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  14,
+                                                      "LowId":  235387,
+                                                      "HighId":  235387,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  15,
+                                                      "LowId":  252058,
+                                                      "HighId":  252058,
+                                                      "Quality":  208
+                                                  },
+                                                  {
+                                                      "Slot":  16,
+                                                      "LowId":  210507,
+                                                      "HighId":  210507,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  17,
+                                                      "LowId":  227118,
+                                                      "HighId":  227118,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  18,
+                                                      "LowId":  227116,
+                                                      "HighId":  227116,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  19,
+                                                      "LowId":  223322,
+                                                      "HighId":  223322,
+                                                      "Quality":  217
+                                                  },
+                                                  {
+                                                      "Slot":  20,
+                                                      "LowId":  229101,
+                                                      "HighId":  229101,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  21,
+                                                      "LowId":  223206,
+                                                      "HighId":  223206,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  22,
+                                                      "LowId":  226735,
+                                                      "HighId":  226735,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  23,
+                                                      "LowId":  224150,
+                                                      "HighId":  224150,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  24,
+                                                      "LowId":  224148,
+                                                      "HighId":  224148,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  25,
+                                                      "LowId":  226737,
+                                                      "HighId":  226737,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  26,
+                                                      "LowId":  223270,
+                                                      "HighId":  223270,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  27,
+                                                      "LowId":  224078,
+                                                      "HighId":  224078,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  28,
+                                                      "LowId":  252053,
+                                                      "HighId":  252053,
+                                                      "Quality":  204
+                                                  },
+                                                  {
+                                                      "Slot":  29,
+                                                      "LowId":  230389,
+                                                      "HighId":  230389,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  30,
+                                                      "LowId":  218085,
+                                                      "HighId":  218085,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  31,
+                                                      "LowId":  233024,
+                                                      "HighId":  233024,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  32,
+                                                      "LowId":  226279,
+                                                      "HighId":  226279,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  33,
+                                                      "LowId":  223031,
+                                                      "HighId":  223031,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  34,
+                                                      "LowId":  223142,
+                                                      "HighId":  223142,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  35,
+                                                      "LowId":  229103,
+                                                      "HighId":  229103,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  36,
+                                                      "LowId":  223252,
+                                                      "HighId":  223252,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  37,
+                                                      "LowId":  218143,
+                                                      "HighId":  218143,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  38,
+                                                      "LowId":  218141,
+                                                      "HighId":  218141,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  39,
+                                                      "LowId":  220350,
+                                                      "HighId":  220350,
+                                                      "Quality":  202
+                                                  },
+                                                  {
+                                                      "Slot":  40,
+                                                      "LowId":  218145,
+                                                      "HighId":  218145,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  41,
+                                                      "LowId":  218147,
+                                                      "HighId":  218147,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  42,
+                                                      "LowId":  218149,
+                                                      "HighId":  218149,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  43,
+                                                      "LowId":  223218,
+                                                      "HighId":  223218,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  44,
+                                                      "LowId":  252047,
+                                                      "HighId":  252047,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  45,
+                                                      "LowId":  252051,
+                                                      "HighId":  252051,
+                                                      "Quality":  211
+                                                  },
+                                                  {
+                                                      "Slot":  46,
+                                                      "LowId":  252049,
+                                                      "HighId":  252049,
+                                                      "Quality":  208
+                                                  },
+                                                  {
+                                                      "Slot":  47,
+                                                      "LowId":  252007,
+                                                      "HighId":  252007,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  48,
+                                                      "LowId":  252009,
+                                                      "HighId":  252009,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  49,
+                                                      "LowId":  227773,
+                                                      "HighId":  227773,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  50,
+                                                      "LowId":  223336,
+                                                      "HighId":  223336,
+                                                      "Quality":  215
+                                                  },
+                                                  {
+                                                      "Slot":  51,
+                                                      "LowId":  223110,
+                                                      "HighId":  223110,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  52,
+                                                      "LowId":  223108,
+                                                      "HighId":  223108,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  53,
+                                                      "LowId":  253383,
+                                                      "HighId":  253383,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  54,
+                                                      "LowId":  259353,
+                                                      "HighId":  259353,
+                                                      "Quality":  202
+                                                  },
+                                                  {
+                                                      "Slot":  55,
+                                                      "LowId":  227124,
+                                                      "HighId":  227124,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  56,
+                                                      "LowId":  227122,
+                                                      "HighId":  227122,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  57,
+                                                      "LowId":  224160,
+                                                      "HighId":  224160,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  58,
+                                                      "LowId":  224126,
+                                                      "HighId":  224126,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  59,
+                                                      "LowId":  223254,
+                                                      "HighId":  223254,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  60,
+                                                      "LowId":  224170,
+                                                      "HighId":  224170,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  61,
+                                                      "LowId":  233027,
+                                                      "HighId":  233027,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  62,
+                                                      "LowId":  223196,
+                                                      "HighId":  223196,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  63,
+                                                      "LowId":  226442,
+                                                      "HighId":  226442,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  64,
+                                                      "LowId":  223290,
+                                                      "HighId":  223290,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  65,
+                                                      "LowId":  223148,
+                                                      "HighId":  223148,
+                                                      "Quality":  207
+                                                  },
+                                                  {
+                                                      "Slot":  66,
+                                                      "LowId":  218067,
+                                                      "HighId":  218067,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  67,
+                                                      "LowId":  226405,
+                                                      "HighId":  226405,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  68,
+                                                      "LowId":  227775,
+                                                      "HighId":  227775,
+                                                      "Quality":  210
+                                                  },
+                                                  {
+                                                      "Slot":  69,
+                                                      "LowId":  227395,
+                                                      "HighId":  227395,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  70,
+                                                      "LowId":  227397,
+                                                      "HighId":  227397,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  71,
+                                                      "LowId":  218083,
+                                                      "HighId":  218083,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  72,
+                                                      "LowId":  252055,
+                                                      "HighId":  252055,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  73,
+                                                      "LowId":  223234,
+                                                      "HighId":  223234,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  74,
+                                                      "LowId":  225899,
+                                                      "HighId":  225899,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  75,
+                                                      "LowId":  224415,
+                                                      "HighId":  224415,
+                                                      "Quality":  201
+                                                  },
+                                                  {
+                                                      "Slot":  76,
+                                                      "LowId":  224417,
+                                                      "HighId":  224417,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  77,
+                                                      "LowId":  224419,
+                                                      "HighId":  224419,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  78,
+                                                      "LowId":  252156,
+                                                      "HighId":  252156,
+                                                      "Quality":  206
+                                                  },
+                                                  {
+                                                      "Slot":  79,
+                                                      "LowId":  223236,
+                                                      "HighId":  223236,
+                                                      "Quality":  209
+                                                  },
+                                                  {
+                                                      "Slot":  80,
+                                                      "LowId":  234080,
+                                                      "HighId":  234080,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  81,
+                                                      "LowId":  231025,
+                                                      "HighId":  231025,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  82,
+                                                      "LowId":  231026,
+                                                      "HighId":  231026,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  83,
+                                                      "LowId":  223288,
+                                                      "HighId":  223288,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  84,
+                                                      "LowId":  223132,
+                                                      "HighId":  223132,
+                                                      "Quality":  205
+                                                  },
+                                                  {
+                                                      "Slot":  85,
+                                                      "LowId":  235290,
+                                                      "HighId":  235290,
+                                                      "Quality":  204
+                                                  },
+                                                  {
+                                                      "Slot":  86,
+                                                      "LowId":  235288,
+                                                      "HighId":  235288,
+                                                      "Quality":  199
+                                                  },
+                                                  {
+                                                      "Slot":  87,
+                                                      "LowId":  223268,
+                                                      "HighId":  223268,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  88,
+                                                      "LowId":  226420,
+                                                      "HighId":  226420,
+                                                      "Quality":  203
+                                                  },
+                                                  {
+                                                      "Slot":  89,
+                                                      "LowId":  226277,
+                                                      "HighId":  226277,
+                                                      "Quality":  200
+                                                  },
+                                                  {
+                                                      "Slot":  90,
+                                                      "LowId":  229063,
+                                                      "HighId":  229063,
+                                                      "Quality":  1
+                                                  }
+                                              ]
+                                }
                  }
              ]
 }

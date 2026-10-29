@@ -1,6 +1,6 @@
 {
   "Notes": "PvP daily giver behind Antiques n' such, Borealis. KTCM / PVBS / PVTA live. Reclaiming the Land still deferred.",
-  "Npcs": [ "JNSM", "ddogs-john-smith" ],
+  "Npcs": [ "ddogs-john-smith-7013", "JNSM", "ddogs-john-smith" ],
   "Openers": [ { "Say": "hello" } ],
   "Replies": {
     "jobs": { "Text": "What kind of work do you have?", "Goto": "jobs" },

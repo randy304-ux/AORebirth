@@ -1,6 +1,6 @@
 {
   "Notes": "Scarlett Dalquist — DOJA chip turn-in, Jobe Research Lab R1 (PF 4001). Right-click chip assigns DJ**; she takes the chip and completes.",
-  "Npcs": [ "SCAR", "ddogs-scarlett" ],
+  "Npcs": [ "SimpleChar:7A18B924", "SCAR", "ddogs-scarlett" ],
   "Openers": [ { "Say": "hello" } ],
   "Replies": {
     "ns": { "Text": "Nascense chip.", "If": [ "HasQuest DJNS", "has DJNS" ], "Goto": "ns" },

@@ -2,7 +2,7 @@
     "note":  "Overlap/duplicate removals only. Unmatched hashes are NOT hidden so pink placeholders stay visible. removedPoints drop one Spawns.json point on top of a real NPC; dedupeRadius drops a point whose hash already spawns within that many metres. Generated originally by ddogs/tools/Apply-PlaceholderCleanup.ps1; unmatched hiddenHashes cleared 2026-10-15 so Randy can see missing NPCs.",
     "dedupeRadius":  0.5,
     "hiddenHashes":  [
-
+                         "2CIE"
                      ],
     "removedPoints":  [
                           {

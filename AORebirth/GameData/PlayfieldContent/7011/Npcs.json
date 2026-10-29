@@ -1,0 +1,284 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  7011,
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:rome20261029:7011:handler",
+                     "Provenance":  "live PRK scrape 2026-10-29 (position, heading, look) Agency Handler",
+                     "ContentNpcIdentity":  "ddogs-agency-handler-7011",
+                     "PlayfieldId":  7011,
+                     "InstanceId":  2110960102,
+                     "Name":  "Agency Handler",
+                     "Position":  [
+                                      65.702,
+                                      2.015,
+                                      87.869
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0.67,
+                                      0,
+                                      0.743
+                                  ],
+                     "Stats":  {
+                                   "47":  1,
+                                   "59":  2,
+                                   "60":  0,
+                                   "89":  1,
+                                   "173":  3,
+                                   "174":  3,
+                                   "368":  0,
+                                   "389":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31,
+                                   "0":  277352961,
+                                   "1":  16042,
+                                   "27":  16042,
+                                   "4":  1,
+                                   "33":  2,
+                                   "54":  150,
+                                   "359":  285023,
+                                   "360":  152,
+                                   "455":  88,
+                                   "156":  88,
+                                   "64":  223846
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "AGHN"
+                 },
+                 {
+                     "Key":  "ddogs:rome20261029:7011:alien",
+                     "Provenance":  "live PRK scrape 2026-10-29 (position, heading, look) Alien Agency Handler",
+                     "ContentNpcIdentity":  "ddogs-agency-alien-7011",
+                     "PlayfieldId":  7011,
+                     "InstanceId":  2110960103,
+                     "Name":  "Alien Agency Handler",
+                     "Position":  [
+                                      134.168,
+                                      2.035,
+                                      88.515
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.735,
+                                      0,
+                                      0.678
+                                  ],
+                     "Stats":  {
+                                   "47":  1,
+                                   "59":  2,
+                                   "60":  0,
+                                   "89":  1,
+                                   "173":  3,
+                                   "174":  3,
+                                   "368":  0,
+                                   "389":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31,
+                                   "0":  277352961,
+                                   "1":  16042,
+                                   "27":  16042,
+                                   "4":  1,
+                                   "33":  2,
+                                   "54":  150,
+                                   "359":  283531,
+                                   "360":  152,
+                                   "455":  88,
+                                   "156":  88,
+                                   "64":  40680
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "AGAX"
+                 },
+                 {
+                     "Key":  "ddogs:rome20261029:7011:senior",
+                     "Provenance":  "live PRK scrape 2026-10-29 (position, heading, look) Senior Agency Handler",
+                     "ContentNpcIdentity":  "ddogs-agency-senior-7011",
+                     "PlayfieldId":  7011,
+                     "InstanceId":  2110960104,
+                     "Name":  "Senior Agency Handler",
+                     "Position":  [
+                                      99.066,
+                                      2.015,
+                                      63.298
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.34,
+                                      0,
+                                      0.94
+                                  ],
+                     "Stats":  {
+                                   "47":  1,
+                                   "59":  2,
+                                   "60":  0,
+                                   "89":  1,
+                                   "173":  3,
+                                   "174":  3,
+                                   "368":  0,
+                                   "389":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31,
+                                   "0":  277352961,
+                                   "1":  122232,
+                                   "27":  122232,
+                                   "4":  1,
+                                   "33":  2,
+                                   "54":  220,
+                                   "359":  26090,
+                                   "360":  162,
+                                   "455":  88,
+                                   "156":  88,
+                                   "64":  40629
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "AGSR"
+                 },
+                 {
+                     "Key":  "ddogs:rome20261029:7011:receptionist",
+                     "Provenance":  "live PRK scrape 2026-10-29 (position, heading, look) Automated Agency Receptionist",
+                     "ContentNpcIdentity":  "ddogs-agency-receptionist-7011",
+                     "PlayfieldId":  7011,
+                     "InstanceId":  2110960105,
+                     "Name":  "Automated Agency Receptionist",
+                     "Position":  [
+                                      100.09,
+                                      2.015,
+                                      76.594
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      -0.155,
+                                      0,
+                                      0.988
+                                  ],
+                     "Stats":  {
+                                   "47":  1,
+                                   "59":  2,
+                                   "60":  0,
+                                   "89":  1,
+                                   "173":  3,
+                                   "174":  3,
+                                   "368":  0,
+                                   "389":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31,
+                                   "0":  277352961,
+                                   "1":  16042,
+                                   "27":  16042,
+                                   "4":  1,
+                                   "33":  2,
+                                   "54":  150,
+                                   "359":  17649,
+                                   "360":  152,
+                                   "455":  88,
+                                   "156":  88
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      },
+                     "SpawnHash":  "AGRC"
+                 },
+                 {
+                     "Key":  "ddogs:rome20261029:7011:mr-carlsberg",
+                     "Provenance":  "live PRK scrape 2026-10-29 (position, heading, look) Mr Carlsberg",
+                     "ContentNpcIdentity":  "ddogs-mr-carlsberg-7011",
+                     "PlayfieldId":  7011,
+                     "InstanceId":  2110960106,
+                     "Name":  "Mr Carlsberg",
+                     "Position":  [
+                                      88.324,
+                                      2.015,
+                                      93.456
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0.592,
+                                      0,
+                                      0.806
+                                  ],
+                     "Stats":  {
+                                   "47":  1,
+                                   "59":  2,
+                                   "60":  0,
+                                   "89":  1,
+                                   "173":  3,
+                                   "174":  3,
+                                   "368":  0,
+                                   "389":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31,
+                                   "0":  277352961,
+                                   "1":  4746,
+                                   "27":  4746,
+                                   "4":  1,
+                                   "33":  0,
+                                   "54":  70,
+                                   "359":  26088,
+                                   "360":  140,
+                                   "455":  137,
+                                   "156":  137,
+                                   "64":  40687
+                               },
+                     "Textures":  [
+
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 }
+             ]
+}
