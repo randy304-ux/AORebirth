@@ -401,7 +401,8 @@ namespace ZoneEngine_New.Core.GameData
                 KnuBotId = nearest.KnuBotId,
                 ItemTable = CopyLoot(nearest.LootTable),
                 DynaModifier = dynaModifier,
-                BossTriggers = nearest.BossTriggers ?? new List<NpcBossTrigger>()
+                BossTriggers = nearest.BossTriggers ?? new List<NpcBossTrigger>(),
+                Wander = nearest.Wander
             };
         }
 
@@ -614,6 +615,15 @@ namespace ZoneEngine_New.Core.GameData
         }
     }
 
+    /// <summary>Dungeon Dogs: "Wander": { "Home": [x,y,z] (optional, else the spawn point), "Radius": m, "MinPauseSeconds", "MaxPauseSeconds" }.</summary>
+    public sealed class NpcWanderSpec
+    {
+        public float[]? Home { get; set; }
+        public float Radius { get; set; }
+        public double MinPauseSeconds { get; set; } = 3;
+        public double MaxPauseSeconds { get; set; } = 15;
+    }
+
     public sealed class NpcLevelBand
     {
         public string Name { get; set; } = string.Empty;
@@ -630,6 +640,9 @@ namespace ZoneEngine_New.Core.GameData
 
         /// <summary>Behaviour switches, e.g. "Features": ["NoCombat"].</summary>
         public List<NpcFeature> Features { get; set; } = new();
+
+        /// <summary>Dungeon Dogs: per-NPC wander from live trails (home, radius, pause); overrides Gameplay.json Wander.</summary>
+        public NpcWanderSpec? Wander { get; set; }
 
         public int KnuBotId { get; set; }
 

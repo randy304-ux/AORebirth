@@ -7,10 +7,11 @@
 // Loyal; Shade: Slap of the Zombie, Ritualistic Touch, Spirit Siphon). The only crystals for the first two are the Adaptive
 // ones (210529, 210590), which cast them. Leaf keys are not client hashes.
 {
-    "I4S6": {"Children": ["NanoContainer.75368", "NanoContainer.161504"], "SpawnAll": true},
+    "I4S6": {"Children": ["NanoContainer.28742", "NanoContainer.161504"], "SpawnAll": true},
+    "NanoContainer.28742": {"Templates": [28742]},
     "NanoContainer.75368": {"Templates": [75368]},
     "NanoContainer.161504": {"Templates": [161504]},
-    "VBOX": {"Children": ["NanoContainer.28751", "NanoContainer.82082"], "SpawnAll": true},
+    "VBOX": {"Children": ["NanoContainer.28751"], "SpawnAll": true},
     "NanoContainer.28751": {"Templates": [28751]},
     "NanoContainer.82082": {"Templates": [82082]},
     "BHZS": {"Children": ["NanoContainer.56238", "NanoContainer.81952"], "SpawnAll": true},

@@ -65,7 +65,32 @@ internal sealed class NpcContentActivationService(Playfield playfield, DynelRegi
         }
         ActivateStandaloneShops(playfieldContent);
         ActivateMailTerminals(playfieldContent);
+        ActivatePickups(playfieldContent);
         ActivateDatabaseShops();
+    }
+
+    void ActivatePickups(PlayfieldNpcContentCatalog playfieldContent)
+    {
+        HashItemMinter? minter = playfield.GetService<HashItemMinter>();
+        if (minter == null) return;
+        foreach (WorldPickupDefinition definition in playfieldContent.Pickups ?? [])
+        {
+            if (_activated.Contains(definition.Key))
+                continue;
+            if (!minter.TryRollIds(definition.ItemHash, definition.Quality, out int lowId, out int highId, out int quality))
+                continue;
+
+            var pickup = new WorldPickup(registry.AllocateStaticDynelIdentity(), items.CreateTemplate(lowId, highId, quality),
+                lowId, highId, quality, definition)
+            {
+                Playfield = playfield,
+                Position = new(definition.Position[0], definition.Position[1], definition.Position[2]),
+                Rotation = new(definition.Rotation[0], definition.Rotation[1], definition.Rotation[2], definition.Rotation[3])
+            };
+            registry.Register(pickup);
+            locality.RegisterDynel(pickup);
+            _activated.Add(definition.Key);
+        }
     }
 
     void ActivateMailTerminals(PlayfieldNpcContentCatalog playfieldContent)

@@ -83,7 +83,14 @@ namespace ZoneEngine_New.Core.Quests
                 return false;
 
             QuestService? quests = _playfield.GetService<QuestService>();
-            if (quests == null || !quests.GetLog(player).Quests.TryGetValue(rule.Quest, out PlayerQuest? quest) || !quest.IsActive)
+            if (quests == null)
+                return true;
+            // Optional first step (Assist Omni-Tek 1/3 "Command an Omni-AF Private"): using the item on a recruit
+            // completes RecruitQuest, whose NextStep assigns the escort quest itself.
+            bool recruitStep = !string.IsNullOrEmpty(rule.RecruitQuest)
+                && quests.GetLog(player).Quests.TryGetValue(rule.RecruitQuest, out PlayerQuest? first) && first.IsActive;
+            bool escortActive = quests.GetLog(player).Quests.TryGetValue(rule.Quest, out PlayerQuest? quest) && quest.IsActive;
+            if (!recruitStep && !escortActive)
             {
                 Say(player, "That does nothing right now.");
                 return true;
@@ -110,6 +117,8 @@ namespace ZoneEngine_New.Core.Quests
             if (run > job.SavedRun)
                 recruit.Stats.Set(CharacterStat.RunSpeed, run);
             _active.Add(job);
+            if (recruitStep)
+                quests.TryComplete(player, rule.RecruitQuest!, out _);
             Say(player, "He follows you. Stay close and take him to the one you were sent for. He will not wait if you wander off.");
             return true;
         }
@@ -271,6 +280,7 @@ namespace ZoneEngine_New.Core.Quests
         sealed class EscortRule
         {
             public string Quest { get; set; } = string.Empty;
+            public string? RecruitQuest { get; set; }
             public int ItemLowId { get; set; }
             public string[] Recruits { get; set; } = [];
             public string Destination { get; set; } = string.Empty;

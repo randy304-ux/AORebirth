@@ -181,6 +181,10 @@ namespace ZoneEngine_New.Core.Inventory
             if (DojaChips.TryUse(this, player))
                 return true;
 
+            // Dungeon Dogs: Bank of Rubi-Ka Credit Card cashes in for 15000 (CCS1) and is consumed.
+            if (CreditCards.TryUse(this, player, slotIdentity))
+                return true;
+
             if (IsBackpackUse)
             {
                 if (TryUseBackpack(player, slotIdentity, inventoryRepository, items))

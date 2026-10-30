@@ -922,6 +922,14 @@ namespace ZoneEngine_New.Core.Playfield
                         npc.Brain.PatrolWaypoints = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(copy, p => new Vector3(p[0], p.Length > 1 ? p[1] : home.y, p.Length > 2 ? p[2] : home.z)));
                     };
                 }
+                else if (templates[i].Wander is { Radius: > 0f } own && !immobile)
+                {
+                    // Dungeon Dogs: live-trail wander (home + radius + pause) for this NPC.
+                    Vector3 anchor = own.Home is { Length: >= 3 } hp ? new Vector3(hp[0], hp[1], hp[2]) : point.Sites[0].Centre;
+                    if (TryScatter(anchor, own.Radius, out Vector3 scattered))
+                        position = scattered;
+                    configure = npc => npc.Brain?.EnableWander(anchor, own.Radius, own.MinPauseSeconds, own.MaxPauseSeconds);
+                }
                 else if (wander is { Radius: > 0f } && !immobile)
                 {
                     // Scattered over the walkable area around the point, so a district's NPCs are spread out from the

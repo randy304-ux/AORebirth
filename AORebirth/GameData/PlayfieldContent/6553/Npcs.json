@@ -1,6 +1,11 @@
 {
     "SchemaVersion":  1,
     "PlayfieldId":  6553,
+    "Pickups":  [
+                    { "Key": "pickup:6553:RomanticFlowers", "Provenance": "live scrape 2026-10-30 (mesh 207011)", "PlayfieldId": 6553, "ItemHash": "RFLW", "Quality": 1, "Position": [ 3434.91, 10.215, 848.41 ], "Rotation": [ 0, 1, 0, 0 ] },
+                    { "Key": "pickup:6553:TastyChocolates", "Provenance": "live scrape 2026-10-30 (mesh 207007)", "PlayfieldId": 6553, "ItemHash": "TCHC", "Quality": 1, "Position": [ 3433.76, 10.215, 848.43 ], "Rotation": [ 0, 1, 0, 0 ] },
+                    { "Key": "pickup:6553:CreditCard", "Provenance": "live scrape 2026-10-30 (BBOC point, mesh 297300)", "PlayfieldId": 6553, "ItemHash": "BRCC", "Quality": 1, "Position": [ 3449.29, 0.395, 889.06 ], "Rotation": [ 0, 0.98629, 0, 0.16505 ], "UnlessCompleted": [ "CCS1", "CCR1" ] }
+                ],
     "MailTerminals":  [
 
                       ],

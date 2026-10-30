@@ -21,8 +21,18 @@ public sealed class ClientGetItemMessageHandler : IMessageHandler<ClientGetItemM
         ArgumentNullException.ThrowIfNull(session);
         Player? player = session.Player;
         if (session.State != SessionState.InPlay || player == null || player.IsDead || player.IsPersistenceQuarantined
-            || !ReferenceEquals(player.Session, session) || message.Identity != player.Identity
-            || player.Playfield is not QuestDungeonPlayfield dungeon)
+            || !ReferenceEquals(player.Session, session) || message.Identity != player.Identity || player.Playfield == null)
+            return;
+
+        // Dungeon Dogs world pickups (any playfield): hands out a copy; the world item stays.
+        if (player.Playfield.GetService<DynelRegistry>()?.TryGet(message.Identity1, out Dynel? placed) == true
+            && placed is WorldPickup pickup)
+        {
+            pickup.TryGrant(player);
+            return;
+        }
+
+        if (player.Playfield is not QuestDungeonPlayfield dungeon)
             return;
 
         if (dungeon.GetRequiredService<DynelRegistry>().TryGet(message.Identity1, out Dynel? dynel)

@@ -25314,6 +25314,7 @@
                  "Templates":  [
                                    {
                                        "Name":  "Garbage Flea",
+                                       "Wander":  { "Radius": 25, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  2,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -64373,6 +64374,7 @@
                  "Templates":  [
                                    {
                                        "Name":  "Garbage Flea",
+                                       "Wander":  { "Radius": 25, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  1,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -64453,6 +64455,7 @@
                                    },
                                    {
                                        "Name":  "Garbage Flea",
+                                       "Wander":  { "Radius": 25, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  2,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -64533,6 +64536,7 @@
                                    },
                                    {
                                        "Name":  "Garbage Flea",
+                                       "Wander":  { "Radius": 25, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  5,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -64613,6 +64617,7 @@
                                    },
                                    {
                                        "Name":  "Garbage Flea",
+                                       "Wander":  { "Radius": 25, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  6,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -64701,6 +64706,7 @@
                  "Templates":  [
                                    {
                                        "Name":  "Garbage Flea",
+                                       "Wander":  { "Radius": 25, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  1,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -64781,6 +64787,7 @@
                                    },
                                    {
                                        "Name":  "Garbage Flea",
+                                       "Wander":  { "Radius": 25, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  2,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -64861,6 +64868,7 @@
                                    },
                                    {
                                        "Name":  "Garbage Flea",
+                                       "Wander":  { "Radius": 25, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  5,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -64941,6 +64949,7 @@
                                    },
                                    {
                                        "Name":  "Garbage Flea",
+                                       "Wander":  { "Radius": 25, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  6,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -65095,6 +65104,7 @@
                  "Templates":  [
                                    {
                                        "Name":  "Protester",
+                                       "Wander":  { "Radius": 30, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  2,
                                        "Stats":  {
                                                      "0":  268964353,
@@ -75366,6 +75376,7 @@
                  "Templates":  [
                                    {
                                        "Name":  "Leonora Marty",
+                                       "Wander":  { "Home": [ 3445.1, 9.01, 871.3 ], "Radius": 27, "MinPauseSeconds": 3, "MaxPauseSeconds": 15 },
                                        "Level":  10,
                                        "Stats":  {
                                                      "0":  277352961,

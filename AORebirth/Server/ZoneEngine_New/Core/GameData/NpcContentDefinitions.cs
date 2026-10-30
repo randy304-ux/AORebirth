@@ -47,6 +47,20 @@ public sealed class WorldMailTerminalDefinition
     public float[] Rotation { get; set; } = [];
 }
 
+/// <summary>Dungeon Dogs world pickup: an ItemTemplates.json hash placed in the world (see <c>WorldPickup</c>).</summary>
+public sealed class WorldPickupDefinition
+{
+    public string Key { get; set; } = string.Empty;
+    public string Provenance { get; set; } = string.Empty;
+    public int PlayfieldId { get; set; }
+    public string ItemHash { get; set; } = string.Empty;
+    public int Quality { get; set; } = 1;
+    public float[] Position { get; set; } = [];
+    public float[] Rotation { get; set; } = [];
+    /// <summary>Quests (with a MissionBit) that, once completed, close this pickup for that character.</summary>
+    public string[]? UnlessCompleted { get; set; }
+}
+
 public sealed class WorldStandaloneShopDefinition
 {
     public string Key { get; set; } = string.Empty;

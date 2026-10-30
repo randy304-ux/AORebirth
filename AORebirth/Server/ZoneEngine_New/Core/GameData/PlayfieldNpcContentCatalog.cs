@@ -22,6 +22,9 @@ public sealed class PlayfieldNpcContentCatalog
 
     public WorldMailTerminalDefinition[] MailTerminals { get; set; } = [];
 
+    /// <summary>Dungeon Dogs world pickups (optional).</summary>
+    public WorldPickupDefinition[] Pickups { get; set; } = [];
+
     public static PlayfieldNpcContentCatalog Load(string root, int playfieldId)
     {
         if (string.IsNullOrWhiteSpace(root) || playfieldId <= 0) return Empty;
@@ -89,6 +92,15 @@ public sealed class PlayfieldNpcContentCatalog
                 throw new InvalidDataException("Invalid or duplicate mail terminal definition.");
 
             RequireTransform(terminal.Position, terminal.Rotation, terminal.Key);
+        }
+
+        foreach (WorldPickupDefinition pickup in Pickups ?? [])
+        {
+            if (pickup == null || pickup.PlayfieldId != PlayfieldId || string.IsNullOrWhiteSpace(pickup.Key)
+                || !keys.Add(pickup.Key) || string.IsNullOrWhiteSpace(pickup.ItemHash) || pickup.Quality <= 0)
+                throw new InvalidDataException("Invalid or duplicate world pickup definition.");
+
+            RequireTransform(pickup.Position, pickup.Rotation, pickup.Key);
         }
     }
 

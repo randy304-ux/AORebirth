@@ -98,6 +98,9 @@ namespace ZoneEngine_New.Core.Mobs
         /// <summary>World XYZ points the NPC walks in a loop when Features contains Wander (used as patrol instead of random roam).</summary>
         public System.Collections.Generic.List<float[]>? PatrolWaypoints { get; set; }
 
+        /// <summary>Dungeon Dogs per-NPC wander (NpcTemplates.json level "Wander"); null uses Gameplay.json.</summary>
+        public ZoneEngine_New.Core.GameData.NpcWanderSpec? Wander { get; set; }
+
         public bool Has(NpcFeature feature) => Features.Contains(feature);
 
         public int MinLevel { get; set; }

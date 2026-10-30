@@ -2122,7 +2122,7 @@
                                                "Id":  287041,
                                                "HighId":  287041,
                                                "Name":  "Nano Crystal (Composite Tradeskill Expertise)",
-                                               "Quality":  1
+                                               "Quality":  25
                                            }
                                        ]
                                    ]
@@ -2209,7 +2209,7 @@
                                                "Id":  223373,
                                                "HighId":  223373,
                                                "Name":  "Nano Crystal (Composite Attribute Boost)",
-                                               "Quality":  1
+                                               "Quality":  25
                                            }
                                        ]
                                    ]
@@ -3871,12 +3871,12 @@
         "Name":  "A queen for the king",
         "QasInstance":  920177,
         "Scope":  "Solo",
-        "Action":  "TargetNpc",
+        "Action":  "FindItem",
         "Summary":  "Bring the Leet King\u0027s gifts to Princess Leet",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "CMVE",
-                          "SpecItem":  null,
+                          "SpecItem":  "RFLW",
                           "WorldItem":  null
                       },
         "Flags":  "None",
@@ -4091,12 +4091,25 @@
                    }
     },
     {
+        "Hash":  "MIL0",
+        "Name":  "Assist Omni-Tek (1/3): Command an Omni-AF Private",
+        "QasInstance":  944004,
+        "Scope":  "Solo",
+        "Action":  "FindItem",
+        "Summary":  "Target an Omni-AF Private and use the OTAF Official Notice by right clicking this item in your inventory.",
+        "Objective":  { "Count":  null, "Npc":  "OIUR", "SpecItem":  "OTNT", "WorldItem":  null },
+        "Flags":  "NoCash",
+        "MissionBit":  719,
+        "NextStep":  "MIL1",
+        "Reward":  { "Hash":  "RMI0", "Credits":  0, "Xp":  0, "Records":  null }
+    },
+    {
         "Hash":  "MIL1",
-        "Name":  "Arrest Henri",
+        "Name":  "Assist Omni-Tek (2/3): Arrest Henri Zure",
         "QasInstance":  920185,
         "Scope":  "Solo",
-        "Action":  "TargetNpc",
-        "Summary":  "Show Milne\u0027s notice to an Omni-AF Private and bring him to Vanguard Henri Zure",
+        "Action":  "FindItem",
+        "Summary":  "Hurry up and bring your Omni-AF Private to Henri Zure\u0027s location.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "VAHE",
@@ -4115,11 +4128,11 @@
     },
     {
         "Hash":  "MIL2",
-        "Name":  "Report the arrest to Milne",
+        "Name":  "Assist Omni-Tek (3/3): Return to Omni-AF Officer Milne",
         "QasInstance":  920186,
         "Scope":  "Solo",
-        "Action":  "TargetNpc",
-        "Summary":  "Tell Omni-AF Officer Milne that Henri was arrested",
+        "Action":  "FindItem",
+        "Summary":  "You sucessfully arrested Henri Zure. Return to Omni-AF Officer Milne to claim your reward.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "OMCN",
@@ -4133,34 +4146,7 @@
                        "Hash":  "RMI2",
                        "Credits":  1320,
                        "Xp":  2416,
-                       "Records":  [
-                                       [
-                                           {
-                                               "Id":  81753,
-                                               "HighId":  81753,
-                                               "Name":  "Low Level Omni-Tek Application Form",
-                                               "Quality":  1
-                                           },
-                                           {
-                                               "Id":  96349,
-                                               "HighId":  96349,
-                                               "Name":  "Omni-Tek Mission Token",
-                                               "Quality":  1
-                                           },
-                                           {
-                                               "Id":  248360,
-                                               "HighId":  248360,
-                                               "Name":  "Omni-Tek Shoulderpad",
-                                               "Quality":  1
-                                           },
-                                           {
-                                               "Id":  248360,
-                                               "HighId":  248360,
-                                               "Name":  "Omni-Tek Shoulderpad",
-                                               "Quality":  1
-                                           }
-                                       ]
-                                   ]
+                       "Records":  [ [ { "Id":  81753, "HighId":  81753, "Name":  "Low Level Omni-Tek Application Form", "Quality":  15 }, { "Id":  96349, "HighId":  96349, "Name":  "Omni-Tek Mission Token", "Quality":  1 }, { "Id":  301068, "HighId":  301068, "Name":  "Omni-Tek Shoulderpad", "Quality":  3 } ] ]
                    }
     },
     {
