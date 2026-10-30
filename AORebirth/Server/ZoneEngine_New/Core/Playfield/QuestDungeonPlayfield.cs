@@ -730,6 +730,10 @@ public sealed class QuestDungeonPlayfield : Playfield
             flags &= ~(Door.OpenFlag | Door.LockedFlag);
             if (placement.IsExit)
                 flags |= Door.OpenFlag;
+            else if (Door.IsClientAutoDoor(templateId))
+            {
+                // Live alien doors all spawn closed and unlocked (capture 2026-10-30): the client opens them itself.
+            }
             else
             {
                 // Same seed and door index as the generator (and its viewer), so both agree on which doors are locked.

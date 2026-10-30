@@ -22,6 +22,16 @@ namespace ZoneEngine_New.Core.Entities
 
         public const int LockedFlag = 0x40;
 
+        /// <summary>
+        /// Live alien ACG (style 382) door, items.dat Door 253517 (Flags 0xC0081003, mesh 247861, StateMachine 1).
+        /// The client opens it on approach and closes it behind you by itself (live capture 2026-10-30 19:15, no
+        /// server packet); a click is only acknowledged (live answers the GenericCmd and changes nothing).
+        /// </summary>
+        public const int AlienAutoDoorTemplate = 253517;
+
+        /// <summary>True for door templates the client opens and closes itself (never toggled or locked by us).</summary>
+        public static bool IsClientAutoDoor(int templateId) => templateId == AlienAutoDoorTemplate;
+
         /// <summary>How close a character must be to open or close a door (units).</summary>
         const float UseRange = 5f;
 
@@ -106,6 +116,10 @@ namespace ZoneEngine_New.Core.Entities
             if (IsLocked || Playfield == null || player.IsDead || !ReferenceEquals(player.Playfield, Playfield)
                 || GetEdgeDistanceTo(player) > UseRange)
                 return false;
+
+            // Alien auto door: live only acknowledges the use; the client animates the door on approach.
+            if (IsClientAutoDoor(TemplateId))
+                return true;
 
             Flags ^= OpenFlag;
             Playfield.GetRequiredService<PlayfieldLocality>().Announce(this, BuildSpawnMessage(), includeSelf: true);
