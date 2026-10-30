@@ -1,0 +1,37 @@
+{
+    "schemaVersion":  1,
+    "recordType":  1000014,
+    "playfieldId":  566,
+    "source":  "scrape-city-20261030",
+    "spawns":  [
+                   {
+                       "districtIndex":  0,
+                       "hash":  0,
+                       "hashText":  "C01X",
+                       "manifestHash":  0,
+                       "minLevel":  1,
+                       "maxLevel":  1,
+                       "respawnChance":  100,
+                       "flags":  1,
+                       "respawnTime":  600,
+                       "version7Extra":  0,
+                       "hasOptionalFlagBlock":  true,
+                       "nativeFlags":  0,
+                       "moreFlags":  0,
+                       "assistanceRadius":  0,
+                       "unknownOptionalU8":  0,
+                       "angle":  0,
+                       "angleW":  1,
+                       "position":  [
+                                        365.59,
+                                        36.74,
+                                        361.42
+                                    ],
+                       "radius":  1,
+                       "additionalPoints":  [
+
+                                            ],
+                       "extensions":  null
+                   }
+               ]
+}
