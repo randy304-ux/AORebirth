@@ -30,6 +30,7 @@ namespace ZoneEngine_New.Core.MessageHandlers
         private readonly IGeneratedMissionDao _retiredMissions;
         private readonly IZoneAdmissionGate _admission;
         private readonly Quests.Dungeons.QuestDungeonService? _dungeons;
+        private readonly IMissionDao? _missions;
 
         public ZoneLoginHandler(
             ICharacterHydrationService hydration,
@@ -37,9 +38,11 @@ namespace ZoneEngine_New.Core.MessageHandlers
             IZoneLogger logger,
             IGeneratedMissionDao retiredMissions,
             IZoneAdmissionGate admission,
-            Quests.Dungeons.QuestDungeonService? dungeons = null)
+            Quests.Dungeons.QuestDungeonService? dungeons = null,
+            IMissionDao? missions = null)
         {
             _dungeons = dungeons;
+            _missions = missions;
             ArgumentNullException.ThrowIfNull(hydration);
             ArgumentNullException.ThrowIfNull(playfieldManager);
             ArgumentNullException.ThrowIfNull(logger);
@@ -162,6 +165,18 @@ namespace ZoneEngine_New.Core.MessageHandlers
                     hydration = WithLoginPosition(hydration, binding.Offer.DestinationPlayfield,
                         new AORebirth.Core.Vector.Vector3(binding.Offer.DestinationX, binding.Offer.DestinationY, binding.Offer.DestinationZ));
                 }
+                else if (Knubot.ArrivalHall.ShouldPlaceNewCharacter(
+                    storedPlayfield, hydration.Character.X, hydration.Character.Z, characterId, _missions))
+                {
+                    // Dungeon Dogs: a new character (start area still Pending, saved on the NewCharacter pad) first
+                    // loads into the Arrival Hall at its far north door.
+                    playfieldAdmission = _playfieldManager.AcquirePlayfield(Knubot.ArrivalHall.PlayfieldId);
+                    playfield = playfieldAdmission.Playfield;
+                    hydration = WithLoginPosition(
+                        hydration, Knubot.ArrivalHall.PlayfieldId, Knubot.ArrivalHall.NorthDoorLanding, Knubot.ArrivalHall.NorthDoorHeading);
+                    _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                        "ZoneLogin new character={0} placed in Arrival Hall {1}", characterId, Knubot.ArrivalHall.PlayfieldId));
+                }
                 else
                 {
                     playfieldAdmission = _playfieldManager.AcquirePlayfield(storedPlayfield);
@@ -189,7 +204,8 @@ namespace ZoneEngine_New.Core.MessageHandlers
         }
 
         /// <summary>The same hydration, placed at <paramref name="position"/> on <paramref name="playfieldId"/>.</summary>
-        static CharacterHydrationResult WithLoginPosition(CharacterHydrationResult hydration, int playfieldId, AORebirth.Core.Vector.Vector3 position)
+        static CharacterHydrationResult WithLoginPosition(CharacterHydrationResult hydration, int playfieldId, AORebirth.Core.Vector.Vector3 position,
+            AORebirth.Core.Vector.Quaternion? heading = null)
         {
             var source = hydration.Character;
             return new CharacterHydrationResult
@@ -198,7 +214,10 @@ namespace ZoneEngine_New.Core.MessageHandlers
                 {
                     Id = source.Id, Name = source.Name, FirstName = source.FirstName, LastName = source.LastName,
                     Playfield = playfieldId, X = position.xf, Y = position.yf, Z = position.zf,
-                    HeadingX = source.HeadingX, HeadingY = source.HeadingY, HeadingZ = source.HeadingZ, HeadingW = source.HeadingW
+                    HeadingX = heading is null ? source.HeadingX : heading.xf,
+                    HeadingY = heading is null ? source.HeadingY : heading.yf,
+                    HeadingZ = heading is null ? source.HeadingZ : heading.zf,
+                    HeadingW = heading is null ? source.HeadingW : heading.wf
                 },
                 Stats = hydration.Stats, Items = hydration.Items, UploadedNanoIds = hydration.UploadedNanoIds
             };

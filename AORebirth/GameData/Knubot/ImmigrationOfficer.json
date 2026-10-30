@@ -1,0 +1,70 @@
+{
+  "Notes": "ICC Immigration Officer, Arrival Hall 4604 (NEOB). Lines are the live text from Randy's scrape 2026-10-30 14:34 ET (dialogs_raw 4604) except 'rubika' and 'jobe', whose answers were not captured (stand-ins). The Rubi-Ka goodbye records the start-area choice ({startarea icc}) and shuttles to the ICC Shuttleport. No Arete option here: the middle south door is the Arete exit (ArrivalHall.cs). Generated with ddogs/tools/Build-ArrivalHall.ps1.",
+  "Npcs": [ "NEOB" ],
+  "Openers": [ { "Say": "hello" } ],
+  "Replies": {
+    "questions": { "Text": "Yes, thank you.  I've got some questions for you, if you've got time.", "Goto": "help" },
+    "lost": { "Text": "I'm not sure where to go from here.", "Goto": "lost" },
+    "immigration": { "Text": "What's Rubi-Ka Immigration?", "Goto": "immigration" },
+    "jobe": { "Text": "What can you tell me of the Jobe Research Program?", "Goto": "jobe" },
+    "rubika": { "Text": "What's it like on Rubi-Ka?", "Goto": "rubika" },
+    "orientation": { "Text": "Orientation and training in what?", "Goto": "orientation" },
+    "go_rk": { "Text": "Wow, sounds exciting! Thanks for the information. Wish me luck!", "If": [ "StartAreaPending" ], "Goto": "go_rk" },
+    "go_rk_again": { "Text": "Wow, sounds exciting! Thanks for the information. Wish me luck!", "If": [ "!StartAreaPending" ], "Goto": "go_rk_again" },
+    "bye": { "Text": "Goodbye.", "Goto": "bye" }
+  },
+  "Lines": {
+    "hello": {
+      "Text": [ "Greetings, newcomer!", "{delay 1}I trust your trip from the Morningstar Space Station was a safe one." ],
+      "Replies": [ "questions", "bye" ]
+    },
+    "help": {
+      "Text": "Absolutely.  That's what I'm here for.",
+      "Replies": [ "lost", "immigration", "jobe", "bye" ]
+    },
+    "lost": {
+      "Text": [
+        "Well, I'm sure you've overheard conversations of the travellers while going through the Arrival Hall.",
+        "{delay 1}And perhaps you've also had a chance to chat with them.",
+        "{delay 1}Some of them have settled down on Rubi-Ka, and others have chosen to join the Jobe Research Program.",
+        "{delay 1}The choice is up to you."
+      ],
+      "Replies": [ "immigration", "rubika", "jobe", "bye" ]
+    },
+    "immigration": {
+      "Text": [
+        "Due to heavy immigration and colonization of Rubi-Ka and the recent Alien attacks, security measures have been increased.",
+        "{delay 1}If you choose to immigrate to Rubi-Ka, you'll be shuttled to the ICC Shuttleport until background checks have been run and you can be granted proper citizenship.",
+        "{delay 1}The ICC Shuttleport is located in the ocean off the southern coast of terraformed Rubi-Ka.",
+        "{delay 1}While you're there, you'll also go through some basic orientation and training."
+      ],
+      "Replies": [ "orientation", "bye" ]
+    },
+    "orientation": {
+      "Text": "You'll be given the opportunity to better familiarize yourself with the basics of Rubi-Ka wildlife, technology, and survival techniques.",
+      "Replies": [ "rubika", "go_rk", "go_rk_again", "bye" ]
+    },
+    "rubika": {
+      "Text": "Hot, dangerous, and full of opportunity. The ICC Shuttleport is the place to learn your way around before you go planetside.",
+      "Replies": [ "immigration", "go_rk", "go_rk_again", "jobe", "bye" ]
+    },
+    "jobe": {
+      "Text": "The Jobe Research Program takes colonists through the Shadowlands door at the west end of the hall. The Jobe Research Scientist over there can tell you more.",
+      "Replies": [ "lost", "immigration", "bye" ]
+    },
+    "go_rk": {
+      "Text": [
+        "Safe travels to you, newcomer!",
+        "{delay 2}May the twin suns of Rubi-Ka always shine on you.{startarea icc}{teleport 4582 934.9 24.8 762.0}{close}"
+      ]
+    },
+    "go_rk_again": {
+      "Text": [
+        "Safe travels to you, newcomer!",
+        "{delay 2}May the twin suns of Rubi-Ka always shine on you.{teleport 4582 934.9 24.8 762.0}{close}"
+      ]
+    },
+    "bye": { "Text": "Safe travels to you, newcomer!{close}" }
+  }
+}
+

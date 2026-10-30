@@ -1001,6 +1001,10 @@
             if (events == null || player.Session == null)
                 return;
 
+            // Arrival Hall (4604): the Arete door and the Shadowlands door/terminal are routed in code.
+            if (ZoneEngine_New.Core.Knubot.ArrivalHall.TryHandleVicinity(playfield, player, pad.DynelInstance))
+                return;
+
             // A door's own vicinity list wins. An exit that only has OnEnter (Palmiero's Office
             // terminal) is baked as the same pad and runs that enter list.
             EventType eventType = events.SpellList.ContainsKey(EventType.OnTargetInVicinity)

@@ -1,0 +1,67 @@
+{
+    "SchemaVersion":  1,
+    "PlayfieldId":  4604,
+    "MailTerminals":  [
+
+                      ],
+    "Npcs":  [
+                 {
+                     "Key":  "ddogs:arrival:4604:historian",
+                     "Provenance":  "live PRK scrape 2026-10-30 14:32 ET, Arrival Hall 4604 (inst 1053617, position/heading/body)",
+                     "ContentNpcIdentity":  "ddogs-arrival-historian",
+                     "PlayfieldId":  4604,
+                     "InstanceId":  2110904617,
+                     "Name":  "Pioneer Historian",
+                     "Position":  [
+                                      183.4,
+                                      1.024,
+                                      175.4
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0.725,
+                                      0,
+                                      0.688
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1135,
+                                   "4":  3,
+                                   "12":  5927,
+                                   "27":  1135,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  50,
+                                   "59":  2,
+                                   "60":  0,
+                                   "64":  40629,
+                                   "89":  1,
+                                   "156":  136,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  26090,
+                                   "360":  103,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  136,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Meshes":  [
+                                    {
+                                        "Position":  0,
+                                        "OverrideTextureId":  0,
+                                        "Id":  40629,
+                                        "Layer":  4
+                                    }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 }
+             ]
+}
