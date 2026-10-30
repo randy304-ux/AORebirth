@@ -360,7 +360,7 @@
         "QasInstance":  920001,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Reef Salamanders",
+        "Summary":  "The ICC Bio-Inspector needs help to cull some of the local wildlife before they hurt the eco-system of the island by overpopulating it.",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "RFSL",
@@ -383,7 +383,7 @@
         "QasInstance":  920002,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Tropical Stalkers",
+        "Summary":  "The ICC Bio-Inspector needs help to cull some of the local wildlife before they hurt the eco-system of the island by overpopulating it.",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "TPSA",
@@ -402,11 +402,11 @@
     },
     {
         "Hash":  "DBC2",
-        "Name":  "Kill 3 Cliff Malles",
+        "Name":  "Kill 3 Cliff Malle",
         "QasInstance":  920003,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Cliff Malles",
+        "Summary":  "The ICC Bio-Inspector needs help to cull some of the local wildlife before they hurt the eco-system of the island by overpopulating it.",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "CIMA",
@@ -457,11 +457,11 @@
     },
     {
         "Hash":  "DBT0",
-        "Name":  "Tag the Salamander leader",
+        "Name":  "Find the salamander leader",
         "QasInstance":  920005,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Tag the Salamander leader",
+        "Summary":  "The ICC Bio-Inspector asked you to travel around the island and mark the location of the leaders of the packs of animals.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "BLMM",
@@ -480,11 +480,11 @@
     },
     {
         "Hash":  "DBT1",
-        "Name":  "Tag the Leet leader",
+        "Name":  "Find the leet leader",
         "QasInstance":  920006,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Tag the Leet leader",
+        "Summary":  "The ICC Bio-Inspector asked you to travel around the island and mark the location of the leaders of the packs of animals.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "BEML",
@@ -503,11 +503,11 @@
     },
     {
         "Hash":  "DBT2",
-        "Name":  "Tag the Malle leader",
+        "Name":  "Find the malle leader",
         "QasInstance":  920007,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Tag the Malle leader",
+        "Summary":  "The ICC Bio-Inspector asked you to travel around the island and mark the location of the leaders of the packs of animals.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "BDML",
@@ -526,11 +526,11 @@
     },
     {
         "Hash":  "DBT3",
-        "Name":  "Tag the Rollerrat leader",
+        "Name":  "Find the rollerrat leader",
         "QasInstance":  920008,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Tag the Rollerrat leader",
+        "Summary":  "The ICC Bio-Inspector asked you to travel around the island and mark the location of the leaders of the packs of animals.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "BSMG",
@@ -549,11 +549,11 @@
     },
     {
         "Hash":  "DBTR",
-        "Name":  "Report the tagging",
+        "Name":  "Return to the ICC Bio-Inspector",
         "QasInstance":  920009,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Report the tagging",
+        "Summary":  "The ICC Bio-Inspector asked you to travel around the island and mark the location of the leaders of the packs of animals.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "ICBI",
@@ -581,11 +581,11 @@
     },
     {
         "Hash":  "DAPR",
-        "Name":  "Bring Adri the three parts",
+        "Name":  "Bring weapon components to Adri",
         "QasInstance":  920010,
         "Scope":  "Solo",
         "Action":  "FindItem",
-        "Summary":  "Bring Adri the three parts",
+        "Summary":  "Adri Afeli dabbles with weapons technology and has found a way to increase the output of some simple weapons. He has uploaded a list of five items he\u0027s looking for. As a reward for your hard work, he will give you a better weapon of your choice. The list he gave you is: Power Supply (Cargo Droid), Compression Chamber (Waste Collector), Bone Plates (Cliff Malle), Stalker Limbs (Tropical Stalker), Rollerrat Intestines (Rollerrat), a basic weapon. If you don\u0027t have a weapon, you can buy one from Antonio Stacklund.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "ADAF",
@@ -596,7 +596,7 @@
         "MissionBit":  612,
         "NextStep":  null,
         "Reward":  {
-                       "Hash":  "RAPR",
+                       "Hash":  null,
                        "Credits":  400,
                        "Xp":  400,
                        "Records":  null
@@ -604,11 +604,11 @@
     },
     {
         "Hash":  "DAD0",
-        "Name":  "Kill 3 Cargo Droids",
+        "Name":  "Disable 3 Cargo Droids",
         "QasInstance":  920011,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Cargo Droids",
+        "Summary":  "Adri Afeli, the freelancer you met close to the tunnel asked you to decommission some of the robots roaming the docks plus two of the robot leaders that have put down territory on the piers.",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "CADR",
@@ -631,7 +631,7 @@
         "QasInstance":  920012,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Waste Collectors",
+        "Summary":  "Adri Afeli, the freelancer you met close to the tunnel asked you to decommission some of the robots roaming the docks plus two of the robot leaders that have put down territory on the piers.",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "WTCO",
@@ -650,11 +650,11 @@
     },
     {
         "Hash":  "DAD2",
-        "Name":  "Disable the Android Leader",
+        "Name":  "Kill the android leader",
         "QasInstance":  920013,
         "Scope":  "Solo",
         "Action":  "KillOne",
-        "Summary":  "Disable the Android Leader",
+        "Summary":  "Adri Afeli, the freelancer you met close to the tunnel asked you to decommission some of the robots roaming the docks plus two of the robot leaders that have put down territory on the piers.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "BDMO",
@@ -673,11 +673,11 @@
     },
     {
         "Hash":  "DAD3",
-        "Name":  "Disable the Junk Bot Leader",
+        "Name":  "Kill the junkbot leader",
         "QasInstance":  920014,
         "Scope":  "Solo",
         "Action":  "KillOne",
-        "Summary":  "Disable the Junk Bot Leader",
+        "Summary":  "Adri Afeli, the freelancer you met close to the tunnel asked you to decommission some of the robots roaming the docks plus two of the robot leaders that have put down territory on the piers.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "BJMR",
@@ -696,11 +696,11 @@
     },
     {
         "Hash":  "DADR",
-        "Name":  "Report to Adri Afeli",
+        "Name":  "Return to Adri Afeli",
         "QasInstance":  920015,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Report to Adri Afeli",
+        "Summary":  "Adri Afeli, the freelancer you met close to the tunnel asked you to decommission some of the robots roaming the docks plus two of the robot leaders that have put down territory on the piers.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "ADAF",
@@ -728,11 +728,11 @@
     },
     {
         "Hash":  "DTB0",
-        "Name":  "Kill 3 Cross-Wired Junkbots",
+        "Name":  "Deactivate the junkbots",
         "QasInstance":  920016,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Cross-Wired Junkbots",
+        "Summary":  "Shuttleport Manager Travis Molen told you to pull the plug on the Cross-Wired Junkbots, as something obviously is malfunctioning. Final reward: Newcomer\u0027s Boots.",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "CRJU",
@@ -751,7 +751,7 @@
     },
     {
         "Hash":  "DTBR",
-        "Name":  "Return to Travis (boots)",
+        "Name":  "Return to Travis Molen for your reward",
         "QasInstance":  920017,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
@@ -783,11 +783,11 @@
     },
     {
         "Hash":  "DTG0",
-        "Name":  "Kill 3 Stowaway Rollerrats",
+        "Name":  "Shuttle Infestation",
         "QasInstance":  920018,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Stowaway Rollerrats",
+        "Summary":  "Shuttleport Manager Travis Molen kindly asked you to remove a few of the annoying rollerrats down at one of the Secondary Landing Pads. Final reward: Newcomer\u0027s Gloves.",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "SORL",
@@ -806,7 +806,7 @@
     },
     {
         "Hash":  "DTGR",
-        "Name":  "Return to Travis (gloves)",
+        "Name":  "Return to Travis Molen for your reward",
         "QasInstance":  920019,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
@@ -838,11 +838,11 @@
     },
     {
         "Hash":  "DTS0",
-        "Name":  "Kill a Shuttle Saboteur",
+        "Name":  "Landing Pad Investigation",
         "QasInstance":  920020,
         "Scope":  "Solo",
         "Action":  "KillOne",
-        "Summary":  "Kill a Shuttle Saboteur",
+        "Summary":  "Shuttleport Manager Travis Molen told you that there are reports of people sabotaging our shuttles, and he wants you to investigate the matter. Any saboteurs found should be terminated. Final reward: Newcomer\u0027s Sleeves",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "LPAK",
@@ -861,7 +861,7 @@
     },
     {
         "Hash":  "DTSR",
-        "Name":  "Return to Travis (sleeves)",
+        "Name":  "Return to Travis Molen for your reward",
         "QasInstance":  920021,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
@@ -893,11 +893,11 @@
     },
     {
         "Hash":  "DTA0",
-        "Name":  "Kill 3 Climbing Salamanders",
+        "Name":  "Salamander clean up",
         "QasInstance":  920022,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Climbing Salamanders",
+        "Summary":  "Shuttleport Manager Travis Molen told you about the increasing problems the salamanders are creating on the landing pads. He asked you to make sure they could cause no further trouble. Final reward: Newcomer\u0027s Pants",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "CBSN",
@@ -916,7 +916,7 @@
     },
     {
         "Hash":  "DTAR",
-        "Name":  "Return to Travis (body)",
+        "Name":  "Return to Travis Molen for your reward",
         "QasInstance":  920023,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
@@ -937,9 +937,9 @@
                        "Records":  [
                                        [
                                            {
-                                               "Id":  248273,
-                                               "HighId":  248273,
-                                               "Name":  "Newcomer\u0027s Body Armor",
+                                               "Id":  248271,
+                                               "HighId":  248271,
+                                               "Name":  "Newcomer\u0027s Pants",
                                                "Quality":  1
                                            }
                                        ]
@@ -948,11 +948,11 @@
     },
     {
         "Hash":  "DTP0",
-        "Name":  "Kill 3 Giant Snakes",
+        "Name":  "Snake in the grass",
         "QasInstance":  920024,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Giant Snakes",
+        "Summary":  "Shuttleport Manager Travis Molen requested that the Giant Snakes should be eliminated, as they might be a source of infection. Final reward: Newcomer\u0027s Body Armor",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "GISK",
@@ -971,7 +971,7 @@
     },
     {
         "Hash":  "DTPR",
-        "Name":  "Return to Travis (pants)",
+        "Name":  "Return to Travis Molen for your reward",
         "QasInstance":  920025,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
@@ -992,9 +992,9 @@
                        "Records":  [
                                        [
                                            {
-                                               "Id":  248271,
-                                               "HighId":  248271,
-                                               "Name":  "Newcomer\u0027s Pants",
+                                               "Id":  248273,
+                                               "HighId":  248273,
+                                               "Name":  "Newcomer\u0027s Body Armor",
                                                "Quality":  1
                                            }
                                        ]
@@ -1049,11 +1049,11 @@
     },
     {
         "Hash":  "DTO0",
-        "Name":  "Get the combat status report",
+        "Name":  "Talk to the Unicorn Squadleader",
         "QasInstance":  920028,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Get the combat status report",
+        "Summary":  "The Shuttleport Manager, Travis Molen, wants you to make sure Unicorn Squadleader Fixx has everything he needs to finish his operation and leave the Shuttleport. You should try to return with a status report of the Unicorn operation.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "OMUI",
@@ -1072,11 +1072,11 @@
     },
     {
         "Hash":  "DTOR",
-        "Name":  "Bring Travis the report",
+        "Name":  "Return to Travis Molen",
         "QasInstance":  920029,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
-        "Summary":  "Bring Travis the report",
+        "Summary":  "Return with the status report to Travis Molen.",
         "Objective":  {
                           "Count":  null,
                           "Npc":  "SHMG",
@@ -1173,11 +1173,11 @@
     },
     {
         "Hash":  "DFX0",
-        "Name":  "Kill 3 Alien Spiders - Zix",
+        "Name":  "The Unicorns - 3 spiders left",
         "QasInstance":  920033,
         "Scope":  "Solo",
         "Action":  "KillMultiple",
-        "Summary":  "Kill 3 Alien Spiders - Zix",
+        "Summary":  "The Unicorn Squadleader wants you to help the soldiers up north by exterminating some alien spiders.",
         "Objective":  {
                           "Count":  3,
                           "Npc":  "ZIXI",
@@ -1196,7 +1196,7 @@
     },
     {
         "Hash":  "DFXR",
-        "Name":  "Report to Squadleader Fixx",
+        "Name":  "Return to the Unicorn Squadleader for a debriefing.",
         "QasInstance":  920034,
         "Scope":  "Solo",
         "Action":  "TargetNpc",
