@@ -5137,5 +5137,78 @@
                        "Xp":  0,
                        "Records":  null
                    }
+    },
+    {
+        "Hash": "SDS0",
+        "Name": "Quelling a SANDSTORM",
+        "QasInstance": 944005,
+        "Scope": "Solo",
+        "Action": "KillMultiple",
+        "Summary": "Field test Remi Gallois's Experimental Hellfyre Rocket Launcher on 3 SANDSTORM Marauders.",
+        "Objective": {
+            "Count": 3,
+            "Npc": "AQMR",
+            "SpecItem": null,
+            "WorldItem": null
+        },
+        "Flags": "NoCash",
+        "MissionBit": null,
+        "NextStep": "SDS1",
+        "Reward": {
+            "Hash": "RSD0",
+            "Credits": 0,
+            "Xp": 0,
+            "Records": null
+        }
+    },
+    {
+        "Hash": "SDS1",
+        "Name": "Quelling a SANDSTORM: return to Remi Gallois",
+        "QasInstance": 944006,
+        "Scope": "Solo",
+        "Action": "TargetNpc",
+        "Summary": "Return to Remi Gallois.",
+        "Objective": {
+            "Count": null,
+            "Npc": "RMGL",
+            "SpecItem": null,
+            "WorldItem": null
+        },
+        "Flags": "NoCash",
+        "MissionBit": 720,
+        "NextStep": null,
+        "Reward": {
+            "Hash": "RSD1",
+            "Credits": 0,
+            "Xp": 0,
+            "Records": [
+                [
+                    {
+                        "Id": 223349,
+                        "HighId": 223349,
+                        "Name": "Nano Crystal (Composite Ranged Expertise)",
+                        "Quality": 25
+                    },
+                    {
+                        "Id": 223361,
+                        "HighId": 223361,
+                        "Name": "Nano Crystal (Composite Melee Expertise)",
+                        "Quality": 25
+                    },
+                    {
+                        "Id": 215265,
+                        "HighId": 215265,
+                        "Name": "Nano Crystal (Composite Physical Special Expertise)",
+                        "Quality": 25
+                    },
+                    {
+                        "Id": 223365,
+                        "HighId": 223365,
+                        "Name": "Nano Crystal (Composite Ranged Special Expertise)",
+                        "Quality": 25
+                    }
+                ]
+            ]
+        }
     }
 ]

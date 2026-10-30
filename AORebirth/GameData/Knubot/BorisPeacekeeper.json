@@ -1,0 +1,88 @@
+{
+    "Notes": "Boris the Peacekeeper (BSTP, 3614x684). Dialog is the live dialog capture 2026-10-30 (RC-PC dialogs_20261030.csv); the \"Who are you?\" answer was not captured and is a STAND-IN.",
+    "Npcs": [
+        "BSTP"
+    ],
+    "Openers": [
+        {
+            "Say": "hello"
+        }
+    ],
+    "Replies": {
+        "who": {
+            "Text": "Who are you?",
+            "Goto": "who"
+        },
+        "noviolence": {
+            "Text": "I haven't seen any violence...",
+            "Goto": "gas"
+        },
+        "what": {
+            "Text": "What is Suppresion Gas?",
+            "Goto": "what"
+        },
+        "values": {
+            "Text": "Tell me more about the different Suppression Gas values.",
+            "Goto": "values"
+        },
+        "low": {
+            "Text": "Are there any areas of low suppression gas around here?",
+            "Goto": "low"
+        },
+        "goodbye": {
+            "Text": "Goodbye",
+            "Goto": "bye"
+        }
+    },
+    "Lines": {
+        "hello": {
+            "Text": [
+                "Violence leads to more violence. Conflict leads to more conflict. It will never end.",
+                "The Peacekeeper slowly laughs to himself.",
+                "Which is a good means of job security."
+            ],
+            "Replies": [
+                "who",
+                "noviolence",
+                "goodbye"
+            ]
+        },
+        "who": {
+            "Text": "[stand-in] Boris. I keep the peace around this landing, when the gas does not do it for me.",
+            "Replies": [
+                "noviolence",
+                "goodbye"
+            ]
+        },
+        "gas": {
+            "Text": "That is because violence is restricted in most areas by Suppression Gas.",
+            "Replies": [
+                "what"
+            ]
+        },
+        "what": {
+            "Text": [
+                "It's what keeps people from randomly assaulting eachother. A good means of control, and creates nice demand for venues for people to get really violent. Higher values of suppression gas keeps you safe, lower values leave you open to attack.  If you take a Suppression Gas reading now, you'll see it's at 75%, this allows for the extermination of creatures and other beastiary on the planet.",
+                "Press F9 to take a reading"
+            ],
+            "Replies": [
+                "values"
+            ]
+        },
+        "values": {
+            "Text": "At 100%, conflict would be impossible. At 75%, you may fight creatures and people that are flagged. At 25% is when things start to get dangerous, and allows people of opposing factions to fight. At 5%, even people of the same side, but not of the same detachment or organization can fight.  And finally, at 0%, that is when anyone is able to combat anyone.  As a safety precaution, it is not possible to assault a person who is much weaker or stronger than you. This, of course, is not the case when facing the various creatures that roam the planet.",
+            "Replies": [
+                "low"
+            ]
+        },
+        "low": {
+            "Text": "Yes, you see that fenced area next to me? The Suppression Gas there is very low, only 5%. Be careful if you're venturing out there alone.",
+            "Replies": [
+                "goodbye"
+            ]
+        },
+        "bye": {
+            "Text": "{close}"
+        }
+    }
+}
