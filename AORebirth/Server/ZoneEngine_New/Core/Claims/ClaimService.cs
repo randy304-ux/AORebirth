@@ -47,9 +47,26 @@ namespace ZoneEngine_New.Core.Claims
         public static string StoreDirectory =>
             Environment.GetEnvironmentVariable("AO_DDOGS_STORE_DIR") ?? @"I:\AO\src\ddogs\store";
 
-        public sealed record CatalogItem(string Key, string Name, string Group, int LowId, int HighId, int Ql);
+        /// <summary>
+        /// One claims.json entry. Unlocked (default true) gates the entry: a locked entry is hidden from every list
+        /// and refused when claimed. UnlockRule (e.g. "achievement:12" or "vetDays:540") is kept for a later gate and
+        /// is not evaluated yet. Amount is the stack size handed out (Instant Grid x20); VetDays, LivePrice and Qty
+        /// are the live store/veteran-reward reference values.
+        /// </summary>
+        public sealed record CatalogItem(string Key, string Name, string Group, int LowId, int HighId, int Ql)
+        {
+            public bool Unlocked { get; init; } = true;
+            public string? UnlockRule { get; init; }
+            public int VetDays { get; init; }
+            public int LivePrice { get; init; }
+            public string? Qty { get; init; }
+            public int Amount { get; init; } = 1;
+        }
 
-        public IReadOnlyList<CatalogItem> LoadCatalog()
+        /// <summary>Unlocked catalog entries only; locked ones are never shown or claimable.</summary>
+        public IReadOnlyList<CatalogItem> LoadCatalog() => LoadCatalog(includeLocked: false);
+
+        public IReadOnlyList<CatalogItem> LoadCatalog(bool includeLocked)
         {
             var list = new List<CatalogItem>();
             try
@@ -57,9 +74,21 @@ namespace ZoneEngine_New.Core.Claims
                 using JsonDocument doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(StoreDirectory, "claims.json")));
                 if (doc.RootElement.TryGetProperty("items", out JsonElement items))
                     foreach (JsonElement it in items.EnumerateArray())
-                        list.Add(new CatalogItem(
+                    {
+                        var entry = new CatalogItem(
                             Str(it, "key"), Str(it, "name"), Str(it, "group"),
-                            Int(it, "lowId"), Int(it, "highId"), Int(it, "ql")));
+                            Int(it, "lowId"), Int(it, "highId"), Int(it, "ql"))
+                        {
+                            Unlocked = !it.TryGetProperty("unlocked", out JsonElement u) || u.ValueKind != JsonValueKind.False,
+                            UnlockRule = it.TryGetProperty("unlockRule", out JsonElement r) && r.ValueKind == JsonValueKind.String ? r.GetString() : null,
+                            VetDays = Int(it, "vetDays"),
+                            LivePrice = Int(it, "livePrice"),
+                            Qty = it.TryGetProperty("qty", out JsonElement q) && q.ValueKind == JsonValueKind.String ? q.GetString() : null,
+                            Amount = Math.Max(1, Int(it, "amount")),
+                        };
+                        if (includeLocked || entry.Unlocked)
+                            list.Add(entry);
+                    }
             }
             catch (Exception ex)
             {
@@ -68,8 +97,17 @@ namespace ZoneEngine_New.Core.Claims
 
             return list;
 
-            static string Str(JsonElement e, string k) => e.TryGetProperty(k, out JsonElement v) ? v.GetString() ?? string.Empty : string.Empty;
-            static int Int(JsonElement e, string k) => e.TryGetProperty(k, out JsonElement v) && v.TryGetInt32(out int i) ? i : 0;
+            static string Str(JsonElement e, string k) => e.TryGetProperty(k, out JsonElement v) && v.ValueKind == JsonValueKind.String ? v.GetString() ?? string.Empty : string.Empty;
+            static int Int(JsonElement e, string k) => e.TryGetProperty(k, out JsonElement v) && v.ValueKind == JsonValueKind.Number && v.TryGetInt32(out int i) ? i : 0;
+        }
+
+        /// <summary>Stack size for a claim row: the catalog entry's amount, 1 for daily/unknown keys.</summary>
+        int AmountFor(string key)
+        {
+            foreach (CatalogItem c in LoadCatalog(includeLocked: true))
+                if (string.Equals(c.Key, key, StringComparison.OrdinalIgnoreCase))
+                    return Math.Max(1, c.Amount);
+            return 1;
         }
 
         /// <summary>The character's claim code for the Store pages; created on first use.</summary>
@@ -114,6 +152,8 @@ namespace ZoneEngine_New.Core.Claims
         /// <summary>Queues a catalog item (once per character). False when already claimed.</summary>
         public bool Queue(int characterId, CatalogItem item, string source)
         {
+            if (!item.Unlocked)
+                return false;
             using var db = new MySqlConnection(_connection);
             db.Open();
             using var cmd = new MySqlCommand(
@@ -240,6 +280,7 @@ namespace ZoneEngine_New.Core.Claims
                 }
 
                 Item item = _items.CreateWithNewInstance(row.Low, high, ql, ItemSource.Other);
+                item.StackCount = AmountFor(row.Key);
                 if (!TryGive(player, item))
                 {
                     using var undo = new MySqlCommand("UPDATE ddogs_claims SET Status=0, DeliveredAt=NULL WHERE Id=@i", db);
@@ -278,6 +319,7 @@ namespace ZoneEngine_New.Core.Claims
             }
 
             Item item = _items.CreateWithNewInstance(row.Low, high, ql, ItemSource.Other);
+            item.StackCount = AmountFor(row.Key);
             if (!TryGive(player, item))
             {
                 using var undo = new MySqlCommand("UPDATE ddogs_claims SET Status=0, DeliveredAt=NULL WHERE Id=@i", db);

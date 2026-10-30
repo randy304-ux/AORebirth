@@ -14,6 +14,8 @@ static class DDogsStore
   static string H(string s) => WebUtility.HtmlEncode(s ?? "");
   static string S(JsonNode n, string k) => n?[k]?.GetValue<string>() ?? "";
   static int I(JsonNode n, string k) { try { return n?[k]?.GetValue<int>() ?? 0; } catch { return 0; } }
+  // claims.json "unlocked": missing or true = claimable; false = hidden and refused (later achievement / vetDays gate via "unlockRule").
+  static bool Unlocked(JsonNode n) { try { return n?["unlocked"]?.GetValue<bool>() ?? true; } catch { return true; } }
 
   static string Page(string title, string body)
   {
@@ -136,6 +138,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
     if (cat?["items"] is JsonArray items)
       foreach (var it in items)
       {
+        if (!Unlocked(it)) continue;
         var g = S(it, "group"); if (g != group) { group = g; sb.Append($"<h2>{H(g)}</h2>"); }
         var key = S(it, "key");
         sb.Append("<div class=\"row\">");
@@ -275,7 +278,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
       JsonNode item = null;
       if (Load("claims.json")?["items"] is JsonArray items)
         item = items.FirstOrDefault(i => string.Equals(S(i, "key"), key, StringComparison.OrdinalIgnoreCase));
-      if (item == null) return Html(await ClaimPage(connStr, code, "That item is not in the Claim Center list.", false));
+      if (item == null || !Unlocked(item)) return Html(await ClaimPage(connStr, code, "That item is not in the Claim Center list.", false));
       bool added = await Insert(connStr, who.CharId, S(item, "key"), I(item, "lowId"), I(item, "highId"), I(item, "ql"), "web");
       log($"claim char={who.CharId} key={S(item, "key")} added={added}");
       return Html(await ClaimPage(connStr, code, added ? $"{S(item, "name")} is on its way to {who.Name}." : "You already claimed that item.", added));
