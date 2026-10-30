@@ -20,9 +20,10 @@
     },
     {
       "Style": 382,
-      "DoorTemplate": 0,
-      "ExitTemplate": 303198,
-      "Source": "No alien door template in items.dat, and the style playfield 382 has no door dynels (Dynels.dat empty). Open office doors in every doorway (19:11 restart) did not clear the solid green doorway fill and looked wrong (Randy 19:33), so interior doorways are open archways again. The exit is the blue mission Exit portal 303198 (mesh 44891, the standard generated-mission exit), placed in the round entrance doorway"
+      "DoorTemplate":  253517,
+      "ExitTemplate":  303198,
+      "OpenChancePercent":  0,
+      "Source":  "Interior doors: live alien ACG door template 253517 (items.dat Door, DynelType 51016, Flags 0xC0081003, Mesh 247861, Can 8, StateMachine 1), matching every interior door Randy captured in live alien ACG 14731349 on 2026-10-30 19:15 (scraper v5.6 doors_20261030_Nazgore_v6.csv). Live doors all spawn closed (no 0x80) and open/close by themselves as you walk through (about 1.3 s, no server packet), so OpenChancePercent is 0. The exit stays the blue mission Exit portal 303198 (mesh 44891) in the round entrance doorway. Before this, doorways were open archways (office doors looked wrong, Randy 2026-10-18 19:33)."
     },
     {
       "Style": 351,
