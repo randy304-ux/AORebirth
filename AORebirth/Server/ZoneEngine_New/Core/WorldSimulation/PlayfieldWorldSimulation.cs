@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Core.WorldSimulation
+namespace ZoneEngine_New.Core.WorldSimulation
 {
     using System;
     using System.Collections.Generic;
@@ -124,6 +124,8 @@
                 ? [.. configuredExits]
                 : gameData.GetExitProxyDoorInstances(playfieldId));
             world.BakeTeleportalTriggers(geometry.Collision?.Teleportals);
+            // Crashed Alien Ship doors: make sure each has a walk-in trigger (the client statels carry no destination).
+            ZoneEngine_New.Core.Knubot.AlienShip.RegisterDoorTriggers(world, playfieldId);
 
             int terrainChunks = surface?.Terrain != null ? geometry.Collision!.Terrain!.Chunks.Count : 0;
             logger.Info(
@@ -297,6 +299,12 @@
                         ReadProxyReturn(player),
                         out ZoneCrossing crossing))
                 {
+                    // Crashed Alien Ship (6553 <-> 8009) walk-through doors, routed in code (live scrape 2026-10-30)
+                    // whatever trigger the door baked to.
+                    if (crossing.Trigger.Kind != ZoneTriggerKind.WallBorder
+                        && ZoneEngine_New.Core.Knubot.AlienShip.TryHandleVicinity(playfield, player, crossing.Trigger.DynelInstance,
+                            (crossing.Trigger.MinX + crossing.Trigger.MaxX) / 2f, (crossing.Trigger.MinZ + crossing.Trigger.MaxZ) / 2f))
+                        continue;
                     if (crossing.Trigger.Kind == ZoneTriggerKind.TargetVicinity)
                         FireTargetVicinity(playfield, player, crossing.Trigger);
                     else if (crossing.Trigger.Kind == ZoneTriggerKind.MissionEntrance)
@@ -1004,6 +1012,7 @@
             // Arrival Hall (4604): the Arete door and the Shadowlands door/terminal are routed in code.
             if (ZoneEngine_New.Core.Knubot.ArrivalHall.TryHandleVicinity(playfield, player, pad.DynelInstance))
                 return;
+
 
             // A door's own vicinity list wins. An exit that only has OnEnter (Palmiero's Office
             // terminal) is baked as the same pad and runs that enter list.

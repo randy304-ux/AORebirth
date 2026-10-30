@@ -3,6 +3,10 @@
     "dedupeRadius":  0.5,
     "hiddenHashes":  [
                          {
+                             "hash":  "SHXT",
+                             "reason":  "Crashed Alien Ship exit talk-to stand-in (8009): the Exit door is a real walk-through door now (AlienShip.cs). 2026-10-30"
+                         },
+                         {
                              "hash":  "BBOC",
                              "reason":  "Arete credit card talk-to stand-in: replaced by the real Bank of Rubi-Ka Credit Card world pickup (PlayfieldContent/6553 Pickups). 2026-10-30"
                          },
