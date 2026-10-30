@@ -185,18 +185,22 @@ public static class KnubotParser
                     break;
 
                 case "spawn":
-                    int spawnCount = 1, quality = 0;
+                    int spawnCount = 1, quality = 0, spawnStack = 1;
                     bool atLevel = words.Length >= 3 && words[2].Equals("level", StringComparison.OrdinalIgnoreCase);
+                    // Optional 4th word: a count of separate items (<= MaxItemCount) or "xN", one item stacked N high
+                    // (Dungeon Dogs: stacked starter meds, e.g. {spawn HNRC 1 x50}).
+                    bool stacked = words.Length == 4 && words[3].Length > 1 && (words[3][0] == 'x' || words[3][0] == 'X');
                     if (words.Length < 3 || words.Length > 4 || !load.GameData.CanResolveItemHash(words[1])
                         || (!atLevel && !KnubotCondition.TryPositive(words[2], out quality))
-                        || (words.Length == 4 && (!KnubotCondition.TryPositive(words[3], out spawnCount) || spawnCount > MaxItemCount)))
+                        || (stacked && (!KnubotCondition.TryPositive(words[3].Substring(1), out spawnStack) || spawnStack > ZoneEngine_New.Core.Inventory.InventoryStacking.MaxStackCount))
+                        || (words.Length == 4 && !stacked && (!KnubotCondition.TryPositive(words[3], out spawnCount) || spawnCount > MaxItemCount)))
                     {
-                        errors.Add("expected {spawn ITEMHASH QL|level [count<=" + MaxItemCount + "]} with a known item hash: {" + body + "}");
+                        errors.Add("expected {spawn ITEMHASH QL|level [count<=" + MaxItemCount + "|xSTACK]} with a known item hash: {" + body + "}");
                         break;
                     }
 
                     // "level": the player's level when the line reaches the tag.
-                    Effect(new KnubotSpawnItem(words[1], atLevel ? null : quality, spawnCount));
+                    Effect(new KnubotSpawnItem(words[1], atLevel ? null : quality, spawnCount, spawnStack));
                     break;
 
                 case "take":

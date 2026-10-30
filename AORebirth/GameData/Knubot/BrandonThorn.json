@@ -286,9 +286,8 @@
                              "Text":  [
                                           "Thank you.  Excellent work!  Here are some first aid kits for the trouble.  If you get more parts, please don\u0027t hesitate to bring them to me.",
                                           "{spawn TALA level}",
-                                          "{spawn BSNR level}",
-                                          "{spawn SFAK level}",
-                                          "{spawn SNKT level}"
+                                          "{spawn HNRC 1 x50}",
+                                          "{spawn HNST 1 x25}"
                                       ],
                              "Replies":  [
                                              "found_other_things",

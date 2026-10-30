@@ -189,8 +189,8 @@ public sealed record KnubotCompleteQuest(string Hash) : KnubotEffect
         => services.Quests.TryComplete(context.Player, Hash, out _);
 }
 
-/// <summary><c>{spawn ITEMHASH QL [count]}</c>: mints the item into the player's inventory.</summary>
-public sealed record KnubotSpawnItem(string Hash, int? Quality, int Count) : KnubotEffect
+/// <summary><c>{spawn ITEMHASH QL [count|xSTACK]}</c>: mints the item into the player's inventory; <c>xSTACK</c> mints one item with that stack count.</summary>
+public sealed record KnubotSpawnItem(string Hash, int? Quality, int Count, int Stack = 1) : KnubotEffect
 {
     /// <summary>The written QL, or the player's level when <see cref="Quality"/> is null (<c>level</c>).</summary>
     int QualityFor(KnubotContext context) => Quality ?? context.Player.Stats.GetOrOne(CharacterStat.Level);
@@ -209,7 +209,11 @@ public sealed record KnubotSpawnItem(string Hash, int? Quality, int Count) : Knu
         for (int i = 0; i < Count; i++)
         {
             if (services.Minter.TryMint(Hash, QualityFor(context), ItemSource.Quest, out Item item))
+            {
+                if (Stack > 1)
+                    item.StackCount = Stack;
                 KnubotItems.Give(context.Player, item, services.Flush);
+            }
         }
     }
 }

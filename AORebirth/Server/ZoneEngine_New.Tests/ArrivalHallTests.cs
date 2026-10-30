@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Tests
+namespace ZoneEngine_New.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -62,13 +62,13 @@
         }
 
         [TestMethod]
-        public void JobePlatformLandingResolves()
+        public void JobeResearchLandingIsInFrontOfDrake()
         {
-            DestinationsCatalog.Instance.ConfigureRoot(Data.Value.RootPath);
-            Assert.IsTrue(PortalDoorLandingResolver.TryResolveMidpointLanding(
-                DestinationsCatalog.Instance, ArrivalHall.JobePlatform, ArrivalHall.JobeDestinationLine, out Vector3 landing, out _));
-            Assert.AreEqual(ArrivalHall.JobeFallbackLanding.xf, landing.xf, 0.2f);
-            Assert.AreEqual(ArrivalHall.JobeFallbackLanding.zf, landing.zf, 0.2f);
+            // SCDK (Scientist Drake Rodriguez) spawn point in Jobe Research 4001.
+            Assert.AreEqual(4001, ArrivalHall.JobeResearch);
+            double dx = ArrivalHall.JobeResearchLanding.xf - 854.5, dz = ArrivalHall.JobeResearchLanding.zf - 958.6;
+            double d = Math.Sqrt(dx * dx + dz * dz);
+            Assert.IsTrue(d > 2.0 && d < 8.0);
         }
 
         [TestMethod]

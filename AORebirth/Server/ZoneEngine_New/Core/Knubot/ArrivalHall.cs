@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Core.Knubot;
+namespace ZoneEngine_New.Core.Knubot;
 
 using System;
 
@@ -19,13 +19,13 @@ using Vector3 = AORebirth.Core.Vector.Vector3;
 /// Pending and who would load in on the NewCharacter.json pad (Arete Landing 6553) is placed in the hall at the far
 /// (north) door instead; LoginEngine is untouched. Two walk-in doors are overridden here: the middle south-wall door
 /// (between the ICC Immigration Officer and the Jobe Research side) goes to Arete Landing and records the arete choice;
-/// the Shadowlands door and the exit terminal next to it go to Jobe Platform. The Immigration Officer's KnuBot handles
+/// the Shadowlands door and the exit terminal next to it go straight to Jobe Research (4001), in front of Scientist Drake Rodriguez. The Immigration Officer's KnuBot handles
 /// Rubi-Ka ({startarea icc} + ICC Shuttleport).
 /// </summary>
 public static class ArrivalHall
 {
     public const int PlayfieldId = 4604;
-    public const int JobePlatform = 4530;
+    public const int JobeResearch = 4001;
 
     /// <summary>Far north door (template 100406) at (213.27, 1.02, 350.10); new characters land just inside it.</summary>
     public const int NorthDoor = unchecked((int)0xC00811FC);
@@ -45,9 +45,12 @@ public static class ArrivalHall
     /// <summary>Yaw 180 degrees (the north door's own placement heading): looking down the hall toward the desks.</summary>
     public static Quaternion NorthDoorHeading => new Quaternion(0, 1, 0, 0);
 
-    /// <summary>Jobe Platform destination line 6, where the other doors into Jobe Platform land.</summary>
-    public const byte JobeDestinationLine = 6;
-    public static readonly Vector3 JobeFallbackLanding = new Vector3(297.1, 199.8, 615.85);
+    /// <summary>
+    /// Jobe Research 4001: about 4 m south of Scientist Drake Rodriguez's spawn point (SCDK at 854.5, 34.8, 958.6),
+    /// where his first talk hands out the Shadowlands start kit. (Live goes via the Arrival Hall Gateway 4561 and a
+    /// paid nano; that scrape came from PRK, so the door goes straight here.)
+    /// </summary>
+    public static readonly Vector3 JobeResearchLanding = new Vector3(854.5, 34.8, 954.6);
 
     /// <summary>NewCharacter.json StartLocation (Arete Landing pad).</summary>
     public const int NewCharacterPlayfield = KnubotStartArea.AretePlayfield;
@@ -116,16 +119,8 @@ public static class ArrivalHall
 
     static void GoToJobe(PlayfieldType source, Player player)
     {
-        Vector3 landing = JobeFallbackLanding;
-        Quaternion? heading = null;
-        if (PortalDoorLandingResolver.TryResolveMidpointLanding(
-                DestinationsCatalog.Instance, JobePlatform, JobeDestinationLine, out Vector3 line, out Quaternion lineHeading))
-        {
-            landing = line;
-            heading = lineHeading;
-        }
+        Transfer(source, player, JobeResearch, JobeResearchLanding, null);
 
-        Transfer(source, player, JobePlatform, landing, heading);
     }
 
     static void Transfer(PlayfieldType source, Player player, int destination, Vector3 landing, Quaternion? heading)

@@ -5128,5 +5128,28 @@
                        "Hash":  "FRTK",
                        "Records":  null
                    }
+    },
+    {
+        "Hash":  "XDGK",
+        "Name":  "Standard issue gear",
+        "QasInstance":  920192,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Scientist Drake Rodriguez handed you the standard issue gear for your mandatory examination.",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "SCDK",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  665,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  null,
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
     }
 ]
