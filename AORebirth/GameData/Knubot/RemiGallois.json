@@ -1,5 +1,5 @@
 {
-    "Notes": "Remi Gallois, stall by Antonio (3434x833). 'Quelling a SANDSTORM' (SDS0 kill 3 SANDSTORM Marauders AQMR -> SDS1 return). Return dialog and the 'Do you sell any weapons?' option are the live dialog capture 2026-10-30 (RC-PC dialogs_20261030.csv); the offer lines and the weapons answer are STAND-INS (not captured). Launcher 295757 (HFRL) handed out and taken back on turn-in. Hand-written by ddogs/tools/Build-ScrapeImportArete (knubot step); Build-NewbieQuests.ps1 would overwrite it.",
+    "Notes": "Remi Gallois, stall by Antonio (3434x833). 'Quelling a SANDSTORM' (SDS0 kill 3 SANDSTORM Marauders AQMR -> SDS1 return). Return dialog and the 'Do you sell any weapons?' option are the live dialog capture 2026-10-30 (RC-PC dialogs_20261030.csv); greeting and offer lines are the live capture 17:25:12-22 (dialogs_raw_20261030.csv, 0x5d70532a, Remi 7B08289A); option labels (ask/how/take) and the weapons answer are still STAND-INS (options not captured). Launcher 295757 (HFRL) handed out and taken back on turn-in. Hand-written by ddogs/tools/Build-ScrapeImportArete (knubot step); Build-NewbieQuests.ps1 would overwrite it.",
     "Npcs": [
         "RMGL"
     ],
@@ -48,11 +48,18 @@
         "goodbye": {
             "Text": "Goodbye",
             "Goto": "bye"
+        },
+        "how": {
+            "Text": "[stand-in] What do I have to do?",
+            "Goto": "pitch"
         }
     },
     "Lines": {
         "hello": {
-            "Text": "[stand-in] Remi Gallois, weapons engineer. Always looking for field testers.",
+            "Text": [
+                "Flashing a killer smile as you approach the young man before you spreads his arms at his side, directing attention to his wares.",
+                "This is a dangerous world, friend - I'd hope you're prepared. That Omni-Tek... yokel over there believes that you can hide from your troubles behind some shiny plasteel. Personally, I prescribe to the idea that the best offense? Is a damn good offense."
+            ],
             "Replies": [
                 "ask",
                 "weapons",
@@ -61,11 +68,12 @@
         },
         "offer": {
             "Text": [
-                "[stand-in] I built an Experimental Hellfyre Rocket Launcher and it needs a live field test. The SANDSTORM Marauders camped east of here, out past the fence, will do nicely.",
-                "{delay 1}[stand-in] Take out three of them with it and come back. The ICC pays the bounty on them."
+                "I have spent some time in the lab working on new designs...",
+                "With a grunt and a loud thud Remi plops a large tube of wicked-looking hardware onto the nearby table.",
+                "I give you: The Hellfyre Rocket Launcher.\n\nStill needs a few additional field tests before I can call it a day, which is where you come in."
             ],
             "Replies": [
-                "take",
+                "how",
                 "later"
             ]
         },
@@ -73,7 +81,8 @@
             "Text": [
                 "{spawn HFRL 25}",
                 "{givequest SDS0}",
-                "{delay 1}[stand-in] It is registered to my ID, so do not lose it.{close}"
+                "With a sharp nod he reaches down and pushes the launcher toward you across the counter-top.",
+                "Good to hear. I've uploaded some basic information on the gangbangers you're going to be taking out including where we think they're hiding out at the moment.{close}"
             ],
             "Fail": "full"
         },
@@ -115,6 +124,13 @@
         },
         "bye": {
             "Text": "{close}"
+        },
+        "pitch": {
+            "Text": "Don't worry, It's easy. There's a group of lowlife gangbangers out there that managed to get ahold of some serious hardware. Someone left some stray mech activation codes laying around somewhere and these a-holes got ahold of it. Been running around acting like little brats ever since.\n\nThe  Hellfyre Rocket Launcher is designed to remove unwanted bipedal mechanized war machines. So, are you in?",
+            "Replies": [
+                "take",
+                "later"
+            ]
         }
     }
 }
