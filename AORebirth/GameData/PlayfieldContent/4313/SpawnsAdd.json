@@ -1,0 +1,62 @@
+{
+    "schemaVersion": 1,
+    "recordType": 1000014,
+    "playfieldId": 4313,
+    "source": "scrape-tg-20261030",
+    "spawns": [
+        {
+            "districtIndex": 0,
+            "hash": 0,
+            "hashText": "DRWT",
+            "manifestHash": 0,
+            "minLevel": 8,
+            "maxLevel": 8,
+            "respawnChance": 100,
+            "flags": 1,
+            "respawnTime": 900,
+            "version7Extra": 0,
+            "hasOptionalFlagBlock": true,
+            "nativeFlags": 0,
+            "moreFlags": 0,
+            "assistanceRadius": 0,
+            "unknownOptionalU8": 0,
+            "angle": 112,
+            "angleW": 1,
+            "position": [
+                380.43,
+                32.41,
+                460.77
+            ],
+            "radius": 1,
+            "additionalPoints": [],
+            "extensions": null
+        },
+        {
+            "districtIndex": 0,
+            "hash": 0,
+            "hashText": "HCNO",
+            "manifestHash": 0,
+            "minLevel": 6,
+            "maxLevel": 6,
+            "respawnChance": 100,
+            "flags": 1,
+            "respawnTime": 900,
+            "version7Extra": 0,
+            "hasOptionalFlagBlock": true,
+            "nativeFlags": 0,
+            "moreFlags": 0,
+            "assistanceRadius": 0,
+            "unknownOptionalU8": 0,
+            "angle": 262,
+            "angleW": 1,
+            "position": [
+                569.0,
+                32.8,
+                253.0
+            ],
+            "radius": 1,
+            "additionalPoints": [],
+            "extensions": null
+        }
+    ]
+}
