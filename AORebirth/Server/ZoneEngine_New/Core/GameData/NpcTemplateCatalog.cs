@@ -79,6 +79,12 @@ namespace ZoneEngine_New.Core.GameData
                     continue;
 
                 Array.Sort(bands, static (left, right) => left.Level.CompareTo(right.Level));
+                // Dungeon Dogs: a live-scraped hash already carries live's Scale (stat 360). Its bands keep the donor
+                // dyna's CampKey (e.g. inferno|Syros), which made DynaModifiers multiply that scale again by 150% x
+                // the modifier's 100-160%: the Rome Park Unicorn Commander went 130 -> 195-312 (Randy 2026-10-30).
+                if (NpcEntryProvenance.IsLiveScrape(pair.Value.ContentProvenance))
+                    foreach (NpcLevelBand band in bands)
+                        band.LiveScraped = true;
                 leaves[hash] = new NpcLeaf(hash, bands);
             }
 
@@ -621,6 +627,8 @@ namespace ZoneEngine_New.Core.GameData
             public NpcLevelBand[]? Templates { get; set; }
 
             public bool SpawnAll { get; set; }
+
+            public NpcEntryProvenance? ContentProvenance { get; set; }
         }
     }
 
@@ -697,6 +705,24 @@ namespace ZoneEngine_New.Core.GameData
         public string? DynaModifier { get; set; }
 
         public NpcContentProvenance? ContentProvenance { get; set; }
+
+        /// <summary>Dungeon Dogs: set at load for live-scraped hashes; never a dyna (no size growth, aura, hardening or Boss Modifier Item).</summary>
+        [JsonIgnore]
+        public bool LiveScraped { get; set; }
+    }
+
+    /// <summary>Dungeon Dogs: hash-level ContentProvenance ("Source": "scrape-city-20261030", "rome-20261029", ...).</summary>
+    public sealed class NpcEntryProvenance
+    {
+        public string? Source { get; set; }
+
+        public bool Guessed { get; set; }
+
+        static readonly System.Text.RegularExpressions.Regex LiveSource =
+            new(@"^[a-z][a-z-]*-20\d{6}$", System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+
+        public static bool IsLiveScrape(NpcEntryProvenance? p)
+            => p != null && !p.Guessed && !string.IsNullOrEmpty(p.Source) && LiveSource.IsMatch(p.Source);
     }
 
     public sealed class NpcLeaf

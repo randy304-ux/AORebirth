@@ -48,6 +48,11 @@ namespace ZoneEngine_New.Core.GameData
 
         public static bool IsDyna(NpcLevelBand band)
         {
+            // Dungeon Dogs: live-scraped NPCs carry live's own Scale, stats and look. The dyna CampKey they inherited from a
+            // donor made them dynas here (size x1.5-2.4, aura, AC/crit hardening, Boss Modifier Item): the Rome Park Unicorn
+            // Commander drew twice live's height (Randy 2026-10-30). Hand-made dynas are unchanged.
+            if (band.LiveScraped)
+                return false;
             if (!string.IsNullOrEmpty(band.DynaModifier))
                 return true;
             string? key = band.ContentProvenance?.CampKey;
