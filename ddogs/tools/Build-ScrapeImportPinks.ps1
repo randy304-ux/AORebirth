@@ -15,7 +15,8 @@ $npath = Join-Path $gd 'NpcTemplates.json'; $nt = RJ $npath
 foreach ($p in @($nt.PSObject.Properties)) { if ("$($p.Value.ContentProvenance.Source)" -eq $tag) { $nt.PSObject.Properties.Remove($p.Name) } }
 $pool = New-Object System.Collections.ArrayList
 foreach ($p in $nt.PSObject.Properties) { if ($p.Value.ContentProvenance.Guessed) { continue }; foreach ($b in @($p.Value.Templates)) { if ($b -and $b.Stats -and $b.Stats.'359') { [void]$pool.Add($b) } } }
-$made = 0; $skipReal = 0
+$made = 0; $skipReal = 0; $friendlyBands = 0
+$friendly = '^(Craig-Or|Or-Mada|The Retainer Of Ergo|Kuir-Afat, The Custodian|Sundance Smith)|\bGal (Jha|Nuir)|\bMord$'
 foreach ($t in $plan.templates) {
   if ($nt.($t.hash)) { $skipReal++; continue }
   $bands = foreach ($b in $t.bands) {
@@ -34,6 +35,8 @@ foreach ($t in $plan.templates) {
     foreach ($k in @('Equipment','ContentProvenance')) { if ($c.PSObject.Properties[$k]) { $c.PSObject.Properties.Remove($k) } }
     $c | Add-Member -Force NoteProperty HasHeadMesh ([int]$b.head -gt 0)
     $feat = @($c.Features | Where-Object { $_ -and $_ -ne 'NoCombat' -and $_ -ne 'NoMove' })
+    # friendly garden / vendor / quest NPCs: same as the existing garden vendors (CAOR/CROU/CIOA/CGOF/CFOS Craig-Or): Features NoCombat + stat 0 = 277352961.
+    if ($b.Name -match $friendly) { $feat = @($feat | Where-Object { $_ -ne 'Wander' }) + 'NoCombat'; $c.Stats | Add-Member -Force NoteProperty '0' 277352961; $script:friendlyBands++ }
     $c | Add-Member -Force NoteProperty Features @($feat | Sort-Object -Unique)
     $c
   }
@@ -41,5 +44,6 @@ foreach ($t in $plan.templates) {
   $made++
 }
 [IO.File]::WriteAllText($npath, ($nt | ConvertTo-Json -Depth 10) + "`n", $u)
-"templates made=$made skipped(existing)=$skipReal unresolved=$(@($plan.unresolved).Count)"
+"friendlyBands=$friendlyBands templates made=$made skipped(existing)=$skipReal unresolved=$(@($plan.unresolved).Count)"
+
 
