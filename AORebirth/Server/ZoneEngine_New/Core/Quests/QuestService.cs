@@ -118,6 +118,24 @@ namespace ZoneEngine_New.Core.Quests
             return false;
         }
 
+        /// <summary>
+        /// Server-side drop of an active quest by hash (Knubot {dropquest HASH}), e.g. the unused side of Drake's
+        /// psychic test. Skips NoDelete and reward-pending quests. False when the player does not hold it active.
+        /// </summary>
+        public bool TryDrop(Player player, string hash)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            if (!GetLog(player).Quests.TryGetValue(hash, out PlayerQuest? quest) || !quest.IsActive || quest.IsRewardPending)
+                return false;
+
+            quest.State = QuestState.Abandoned;
+            Save(player, quest);
+            QuestJournal.Delete(player, quest);
+            _logger.Info(string.Format(CultureInfo.InvariantCulture, "Quest dropped by NPC char={0} quest={1} ({2})",
+                player.Identity.Instance, quest.QuestId, quest.Template.Name));
+            QuestEnded?.Invoke(player, quest);
+            return true;
+        }
         /// <summary>World entry: loads the player's quests and puts every active one in the client journal.</summary>
         public void Restore(Player player)
         {

@@ -1,5 +1,5 @@
 {
-  "Notes": "Live text from Randy's scrape 2026-10-30 16:40-16:47 ET (dialogs_raw). Scientist Drake Rodriguez: SCDK in Jobe Research 4001 (854.5,34.8,958.6; the Arrival Hall Shadowlands door lands in front of him) and SCDR in Nascense Training Ground 4313. First talk (once per character, quest XDGK): the Bracer of Jobe only. The profession heal crystal and the live meds (Health and Nano Recharger x50 / Stim x25) come with the creation kit (StartPackages.json). Live text: intro, Mandatory?!, contract, Carry on, Test of Strength upload. Other tests, the bracer answer, refusal and later greetings were not captured (stand-ins). Base script from Build-NewbieQuests.ps1, patched by ddogs/tools/Build-JobeSL.py.",
+  "Notes": "Live text from Randy's scrape 2026-10-30 16:40-16:47 ET (dialogs_raw). Scientist Drake Rodriguez: SCDK in Jobe Research 4001 (854.5,34.8,958.6; the Arrival Hall Shadowlands door lands in front of him) and SCDR in Nascense Training Ground 4313. First talk (once per character, quest XDGK): the Bracer of Jobe only. The profession heal crystal and the live meds (Health and Nano Recharger x50 / Stim x25) come with the creation kit (StartPackages.json). Live text: intro, Mandatory?!, contract, Carry on, Test of Strength upload. Other tests, the bracer answer, refusal and later greetings were not captured (stand-ins). Base script from Build-NewbieQuests.ps1, patched by ddogs/tools/Build-JobeSL.py. 2026-10-30 19:49-20:20 ET scrape (Build-JobeSLTests.py): live Agility/Sense/Psychic/Intelligence uploads, bracer answer, Brink hand-in text; Test of Psychic gives XDPF+XDPC; psychic report drops the leftover side quest and offers Intelligence (live bug fixed).",
   "Npcs": [
     "SCDR",
     "SCDK"
@@ -67,7 +67,7 @@
         "!HasAnyQuest XDA0,XDA1,XDA2,XDAR",
         "HasCompletedQuest XDSR"
       ],
-      "Goto": "offer_agility"
+      "Goto": "give_agility"
     },
     "take_agility": {
       "Text": "I'll tag them.",
@@ -85,7 +85,7 @@
         "!HasAnyQuest XDN0,XDNR",
         "HasCompletedQuest XDAR"
       ],
-      "Goto": "offer_sense"
+      "Goto": "give_sense"
     },
     "take_sense": {
       "Text": "I'll find one.",
@@ -103,7 +103,7 @@
         "!HasAnyQuest XDI0,XDI1,XDIR",
         "HasCompletedQuest XDPR"
       ],
-      "Goto": "offer_mind"
+      "Goto": "give_mind"
     },
     "take_mind": {
       "Text": "I'll get them through.",
@@ -192,6 +192,29 @@
     "rewards": {
       "Text": "Rewards?",
       "Goto": "rewards"
+    },
+    "ask_psychic": {
+      "Text": "Test of Psychic.",
+      "If": [
+        "!HasCompletedQuest XDPR",
+        "!HasAnyQuest XDPF,XDPC,XDE0,XDER,XDC0,XDCR,XDPR",
+        "HasCompletedQuest XDNR"
+      ],
+      "Goto": "give_psychic"
+    },
+    "where_donna": {
+      "Text": "Where can I find Donna Red?",
+      "If": [
+        "HasCompletedQuest XDBR"
+      ],
+      "Goto": "where_donna"
+    },
+    "where_veronica": {
+      "Text": "Where can I find Veronica Escobar?",
+      "If": [
+        "HasCompletedQuest XDBR"
+      ],
+      "Goto": "where_veronica"
     }
   },
   "Lines": {
@@ -226,9 +249,14 @@
     },
     "give_agility": {
       "Text": [
-        "{spawn QBMS 1}",
-        "{givequest XDA0}",
-        "{delay 1}Good luck. Come back to me when it is done."
+        "{spawn QBMS 1}{givequest XDA0}To measure your agility and stamina we want you to register the location of certain rare species and return with the biomarker sensor for evaluation within given time. I am uploading the details right now.",
+        "{delay 2}{emote}Drake nods his head and lowers his voice.{/emote}",
+        "{delay 1}I am sending the specimen to test two. Track its progress.",
+        "{delay 1}\\nRodriguez out."
+      ],
+      "Fail": "full",
+      "Replies": [
+        "bye"
       ]
     },
     "busy_agility": {
@@ -246,8 +274,13 @@
     },
     "give_sense": {
       "Text": [
-        "{givequest XDN0}",
-        "{delay 1}Good luck. Come back to me when it is done."
+        "To measure your sensitivity in these surroundings we want you to find a shadowleet.",
+        "{delay 1}\\nThe shadowleet is usually in hiding. I would suggest searching for it near the weavers.",
+        "{delay 1}\\nI am uploading the details right now.{givequest XDN0}",
+        "{delay 2}\\nReturn for evaluation when you are done."
+      ],
+      "Replies": [
+        "bye"
       ]
     },
     "busy_sense": {
@@ -268,9 +301,21 @@
     },
     "give_mind": {
       "Text": [
-        "{spawn QSUP 1}",
-        "{givequest XDI0}",
-        "{delay 1}Good luck. Come back to me when it is done."
+        "{spawn QSUP 1}{givequest XDI0}To measure your intelligence we want you to contact one of our fellow scientists working out in the field.",
+        "{delay 1}\\nShe may be hard to find, but that is part of the test.",
+        "{delay 1}\\nShe may be found in a cave. The entrance is guarded, so beware.",
+        "{delay 1}\\nYou are to give her these supplies...",
+        "{delay 2}\\nDetails of your assignment should be uploaded by now.",
+        "{delay 1}\\nReturn here for evaluation when you are done.",
+        "{delay 2}{emote}Drake turns his head away from you and whispers.{/emote}",
+        "{delay 1}The specimen is heading out for a test.",
+        "{delay 1}\\nYes, I have high hopes for this one, but remember... Don't get too attached.",
+        "{delay 1}\\nTrack its progress.",
+        "{delay 1}\\nRodriguez out."
+      ],
+      "Fail": "full",
+      "Replies": [
+        "bye"
       ]
     },
     "busy_mind": {
@@ -297,12 +342,30 @@
     },
     "done_brink": {
       "Text": [
-        "{completequest XDBR}",
-        "An ancient device. There is a civilization under this place. If you want to go further, find Scientist Donna Red or Scientist Veronica Escobar out in Nascence."
+        "{completequest XDBR}What the...",
+        "{delay 1}{emote}Drake lowers his voice.{/emote}",
+        "{delay 1}Hold everything, Donna! You too, Veronica! The specimen found something useful here.",
+        "{delay 1}{emote}He turns back to you.{/emote}",
+        "{delay 1}{name}, what you found here is truly amazing.",
+        "{delay 1}{emote}Drake gently brushes away some dust from the device, revealing ancient symbols.{/emote}",
+        "{delay 1}These symbols clearly indicate the involvement of intellectually advanced beings.",
+        "{delay 1}\\nPossibly an entire civilization!",
+        "{delay 1}{emote}He tries to translate the symbols.{/emote}",
+        "{delay 2}I'm sorry, {name}. I can only make out one word.",
+        "{delay 1}\\nEr...",
+        "{delay 1}...Goh...?",
+        "{delay 2}\\nNo, wait.",
+        "{delay 1}\\nErgo.",
+        "{delay 1}\\nYes, that's it. Whatever that means...",
+        "{delay 1}{emote}Drake reaches into a backpack.{/emote}",
+        "As promised, {name}. Your reward...",
+        "{delay 1}\\nTalk to Donna Red or Veronica Escobar if you want to further aid us in our research.",
+        "{delay 1}{emote}Drake turns around and continues to investigate the strange device. You repeat the word a couple of times. Ergo.... Ergo. Why does it sound so familiar?{/emote}"
       ],
       "Replies": [
-        "more",
-        "nothing"
+        "where_donna",
+        "where_veronica",
+        "bye"
       ]
     },
     "handin_brink": {
@@ -338,7 +401,10 @@
       ]
     },
     "bracer": {
-      "Text": "That bracer records the examination. Wear it while you take the tests. Under level 15 it can also bring you back to me if you are lost.",
+      "Text": [
+        "This bracer was constructed to measure your performance during our examinations. It is extremely important that you wear one throughout your entire trial period here with us in Nascence.",
+        "{delay 1}Right-click the Bracer to get warped back to Drake from anywhere in the training grounds."
+      ],
       "Replies": [
         "more",
         "nothing"
@@ -355,14 +421,16 @@
     },
     "psy_done": {
       "Text": [
-        "{completequest XDPR}",
-        "{spawn QBRJ 1}",
-        "Your mind held. This ring is yours, and a fresh bracer if Celeth-El kept the other one."
+        "{completequest XDPR}{dropquest XDPF}{dropquest XDPC}{dropquest XDE0}{dropquest XDC0}{spawn QBRJ 1}Well done, {name}. Let me have a look at your bracer.",
+        "{delay 1}{emote}Drake seems to register some values from your bracer.{/emote}",
+        "{delay 1}Well done, {name}! ",
+        "{delay 1}\\nAll values are to our satisfaction. Here is your reward, and a fresh bracer in case Celeth-El kept the other one.",
+        "{delay 1}\\nYou may now continue with the other tests."
       ],
       "Fail": "full",
       "Replies": [
-        "more",
-        "nothing"
+        "ask_mind",
+        "bye"
       ]
     },
     "nothing": {
@@ -375,6 +443,7 @@
         "ask_strength",
         "ask_agility",
         "ask_sense",
+        "ask_psychic",
         "ask_mind",
         "ask_brink",
         "helped_el",
@@ -417,12 +486,43 @@
         "ask_strength",
         "ask_agility",
         "ask_sense",
+        "ask_psychic",
         "ask_mind",
         "ask_brink",
         "helped_el",
         "helped_ce",
         "bracer",
         "bye"
+      ]
+    },
+    "give_psychic": {
+      "Text": [
+        "To measure your psychic abilities we want to investigate the consequences of exposing your mind to the unknown.",
+        "{delay 1}\\nTwo encampments have been found. One west and one east of here.",
+        "{delay 1}\\nThey will each present you with a problem, but you should only help one of them.",
+        "{delay 1}\\nI will now upload details to your NCU concerning the first part of this test, which will be to locate the representatives from both sides.{givequest XDPF}{givequest XDPC}",
+        "{delay 2}\\nAdditional details will be uploaded to you when you decide on who to help.",
+        "{delay 1}\\nReturn for evaluation when you are done.",
+        "{delay 1}\\nChoose you path carefully, {name}.",
+        "{delay 2}{emote}Drake lowers his voice.{/emote}",
+        "{delay 1}The specimen is now heading for test four."
+      ],
+      "Replies": [
+        "bye"
+      ]
+    },
+    "where_veronica": {
+      "Text": [
+        "Last I heard she was somewhere in Nascence.",
+        "{delay 1}\\nHead on through Jobe Research and you will find Nascence Frontier.",
+        "{delay 1}\\nThat's where I would look.",
+        "{delay 1}\\nNow if you'll excuse me...{close}"
+      ]
+    },
+    "where_donna": {
+      "Text": [
+        "Donna went out into Nascence. Head on through Jobe Research to Nascence Frontier and ask around.",
+        "{delay 1}\\nNow if you'll excuse me...{close}"
       ]
     }
   },

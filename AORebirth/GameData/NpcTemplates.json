@@ -42633,6 +42633,12 @@
                                                  },
                                        "LootTable":  [
                                                          {
+                                                             "Hash":  "MPRT",
+                                                             "Repeats":  1,
+                                                             "Chance":  100,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
                                                              "Hash":  "CMTR",
                                                              "Repeats":  1,
                                                              "Chance":  40,
@@ -43405,6 +43411,18 @@
                                                      "52":  564
                                                  },
                                        "LootTable":  [
+                                                         {
+                                                             "Hash":  "MPRT",
+                                                             "Repeats":  1,
+                                                             "Chance":  100,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "L02S",
+                                                             "Repeats":  1,
+                                                             "Chance":  30,
+                                                             "LevelMod":  0
+                                                         },
                                                          {
                                                              "Hash":  "CMTR",
                                                              "Repeats":  1,
@@ -44203,6 +44221,30 @@
                                                      "61":  140
                                                  },
                                        "LootTable":  [
+                                                         {
+                                                             "Hash":  "MPRT",
+                                                             "Repeats":  1,
+                                                             "Chance":  100,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "L019",
+                                                             "Repeats":  1,
+                                                             "Chance":  30,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SYEX",
+                                                             "Repeats":  1,
+                                                             "Chance":  15,
+                                                             "LevelMod":  0
+                                                         },
+                                                         {
+                                                             "Hash":  "SYAR",
+                                                             "Repeats":  1,
+                                                             "Chance":  15,
+                                                             "LevelMod":  0
+                                                         },
                                                          {
                                                              "Hash":  "CMTR",
                                                              "Repeats":  1,

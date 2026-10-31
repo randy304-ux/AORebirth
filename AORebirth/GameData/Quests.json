@@ -3141,6 +3141,52 @@
                    }
     },
     {
+        "Hash":  "XDPF",
+        "Name":  "Test of Psychic - The Faithful",
+        "QasInstance":  920195,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Talk to El-Domo, the Forest Ranger. He can be found deep in the forest north-east of the platform.",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "EDTH",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDPF",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
+        "Hash":  "XDPC",
+        "Name":  "Test of Psychic - The Chosen",
+        "QasInstance":  920196,
+        "Scope":  "Solo",
+        "Action":  "TargetNpc",
+        "Summary":  "Talk to Celeth-El, the Crystal Guardian. He can be found deep within the rock formations south-west of the platform.",
+        "Objective":  {
+                          "Count":  null,
+                          "Npc":  "CTTC",
+                          "SpecItem":  null,
+                          "WorldItem":  null
+                      },
+        "Flags":  "NoCash",
+        "MissionBit":  null,
+        "NextStep":  null,
+        "Reward":  {
+                       "Hash":  "RDPC",
+                       "Credits":  0,
+                       "Xp":  0,
+                       "Records":  null
+                   }
+    },
+    {
         "Hash":  "XDE0",
         "Name":  "Guide the Young Silvertail",
         "QasInstance":  920111,

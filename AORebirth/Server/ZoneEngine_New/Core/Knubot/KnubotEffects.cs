@@ -189,6 +189,19 @@ public sealed record KnubotCompleteQuest(string Hash) : KnubotEffect
         => services.Quests.TryComplete(context.Player, Hash, out _);
 }
 
+/// <summary><c>{dropquest HASH}</c>: removes an active quest without reward (no-op when not held).</summary>
+public sealed record KnubotDropQuest(string Hash) : KnubotEffect
+{
+    public override bool Check(KnubotContext context, KnubotPlan plan, KnubotEffectServices services)
+    {
+        if (plan.QuestState(context, Hash) == QuestState.Active)
+            plan.Quests[Hash] = QuestState.Abandoned;
+        return true;
+    }
+
+    public override void Apply(KnubotContext context, KnubotEffectServices services)
+        => services.Quests.TryDrop(context.Player, Hash);
+}
 /// <summary><c>{spawn ITEMHASH QL [count|xSTACK]}</c>: mints the item into the player's inventory; <c>xSTACK</c> mints one item with that stack count.</summary>
 public sealed record KnubotSpawnItem(string Hash, int? Quality, int Count, int Stack = 1) : KnubotEffect
 {
