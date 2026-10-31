@@ -75,11 +75,24 @@ namespace ZoneEngine_New.Core.Bots
                 return;
             }
 
-            if (verb.Equals("cast", StringComparison.OrdinalIgnoreCase) && args.Length > 1
-                && int.TryParse(args[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out int nanoId))
+            if (verb.Equals("cast", StringComparison.OrdinalIgnoreCase) && args.Length > 1)
             {
-                Cast(player, nanoId, announceRefusal: true);
-                return;
+                // An old macro arrives as ONE line: ".buff cast A | /delay 1500 | /say .buff cast B ...".
+                // Only args[1] used to be read, so just the first id was cast. Cast every nano id on the line,
+                // skipping "|", "/delay <ms>" and "/say .buff cast" tokens.
+                var ids = new List<int>();
+                for (int i = 1; i < args.Length; i++)
+                {
+                    if (args[i - 1].Equals("/delay", StringComparison.OrdinalIgnoreCase))
+                        continue;
+                    if (int.TryParse(args[i], NumberStyles.Integer, CultureInfo.InvariantCulture, out int id) && id > 0 && !ids.Contains(id))
+                        ids.Add(id);
+                }
+
+                foreach (int nanoId in ids)
+                    Cast(player, nanoId, announceRefusal: true);
+                if (ids.Count > 0)
+                    return;
             }
 
             OpenMenu(player);
@@ -105,7 +118,7 @@ namespace ZoneEngine_New.Core.Bots
             var body = new StringBuilder();
             body.Append(DiagAoml.Title("Buffbot"));
             body.Append("<br>").Append(DiagAoml.Muted(
-                "One bot for every profession. Click a buff to cast it. Greyed buffs need more free NCU. No charge."));
+                "One bot for every profession. Click a section to open it, then click a buff to cast it. No charge."));
             body.Append("<br>").Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "NCU {0}/{1}", player.UsedNcu, player.MaxNcu)));
             body.Append("<br><br><a href='chatcmd:///say .buff macro'>").Append(DiagAoml.Label("Buffmacro")).Append("</a> ")
                 .Append(DiagAoml.Muted("- creates a macro of current NCU buffs"));
@@ -118,15 +131,49 @@ namespace ZoneEngine_New.Core.Bots
             body.Append("<br><br>");
             if (_catalog.Sections.Count == 0)
                 body.Append(DiagAoml.Muted("No buff names from Buffbot.json matched the item catalog."));
+            // Each section link is a nested text:// window, so clicking it opens that page in the info window
+            // instead of posting a new link into chat. Index windows split to stay under the client blob size.
+            string head = body.ToString();
+            var entries = new List<string>();
             foreach (BuffSection section in _catalog.Sections)
             {
-                body.Append("<br><a href='chatcmd:///say .buff page ").Append(Esc(section.Name)).Append("'>")
-                    .Append(DiagAoml.Label(Esc(section.Name))).Append("</a> ")
-                    .Append(DiagAoml.Muted("(" + section.Lines.Count.ToString(CultureInfo.InvariantCulture) + ")"));
+                List<string> parts = BuildSectionParts(player, section, nested: true);
+                for (int i = 0; i < parts.Count; i++)
+                {
+                    string name = parts.Count == 1
+                        ? section.Name
+                        : string.Format(CultureInfo.InvariantCulture, "{0} {1}/{2}", section.Name, i + 1, parts.Count);
+                    entries.Add("<br>" + NestedLink(parts[i], DiagAoml.Label(Esc(name))));
+                }
             }
 
-            GmCommandFeedback.Send(player.Session!, player, Link(body.ToString(), "Buffbot"));
+            var windows = new List<StringBuilder>();
+            var current = new StringBuilder(head);
+            foreach (string entry in entries)
+            {
+                if (current.Length > head.Length && current.Length + entry.Length > MessageMax)
+                {
+                    windows.Add(current);
+                    current = new StringBuilder(DiagAoml.Title("Buffbot") + "<br>");
+                }
+
+                current.Append(entry);
+            }
+
+            windows.Add(current);
+            for (int i = 0; i < windows.Count; i++)
+                GmCommandFeedback.Send(player.Session!, player, Link(windows[i].ToString(), PageLabel(i, windows.Count)));
         }
+
+        /// <summary>Client chat blob budget for one index window (nested pages included).</summary>
+        const int MessageMax = 7400;
+
+        /// <summary>
+        /// A text:// link whose body is escaped one level so it can sit inside the outer text:// window
+        /// (the client unescapes once per window, like Budabot nested blobs).
+        /// </summary>
+        internal static string NestedLink(string body, string label)
+            => "<a href='text://" + body.Replace("&", "&amp;").Replace("'", "&#39;").Replace("\"", "&quot;").Replace("<", "&lt;").Replace(">", "&gt;") + "'>" + label + "</a>";
 
         public void OpenSection(Player player, string sectionName, int part)
         {
@@ -147,7 +194,7 @@ namespace ZoneEngine_New.Core.Bots
                 return;
             }
 
-            List<string> parts = BuildSectionParts(player, section);
+            List<string> parts = BuildSectionParts(player, section, nested: false);
             int index = Math.Clamp(part, 1, parts.Count) - 1;
             string label = parts.Count == 1
                 ? "Buffbot: " + section.Name
@@ -155,13 +202,14 @@ namespace ZoneEngine_New.Core.Bots
             GmCommandFeedback.Send(player.Session!, player, Link(parts[index], label));
         }
 
-        List<string> BuildSectionParts(Player player, BuffSection section)
+        List<string> BuildSectionParts(Player player, BuffSection section, bool nested)
         {
             int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
             var lines = new List<string>();
             foreach (BuffLine line in section.Lines)
             {
-                _catalog.TryOffer(line, level, FreeNcuFor(player, line), out BuffOffer offer);
+                // No NCU gate (Randy): only the real level requirement greys a line.
+                _catalog.TryOffer(line, level, out BuffOffer offer);
                 var text = new StringBuilder();
                 string bonus = offer.Bonus.Length == 0 ? string.Empty : " [" + offer.Bonus + "]";
                 string ncu = " [NCU: " + offer.Ncu.ToString(CultureInfo.InvariantCulture) + "]";
@@ -174,7 +222,7 @@ namespace ZoneEngine_New.Core.Bots
                 }
                 else
                 {
-                    text.Append(DiagAoml.Muted(Esc(offer.Name + bonus + ncu + " - not enough free NCU")));
+                    text.Append(DiagAoml.Muted(Esc(offer.Name + bonus + ncu + " - requires level " + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture))));
                 }
 
                 lines.Add(text.ToString());
@@ -209,6 +257,12 @@ namespace ZoneEngine_New.Core.Bots
                 body.Append("<br>").Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "NCU {0}/{1}", player.UsedNcu, player.MaxNcu)));
                 foreach (string line in chunks[i])
                     body.Append("<br>").Append(line);
+                if (nested)
+                {
+                    parts.Add(body.ToString());
+                    continue;
+                }
+
                 body.Append("<br><br>");
                 if (i > 0)
                     body.Append(PartLink(section.Name, i, "Back")).Append(" &#160; ");
@@ -240,7 +294,7 @@ namespace ZoneEngine_New.Core.Bots
         bool TryCurrentOffer(Player player, BuffLine line, out BuffOffer offer)
         {
             int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
-            return _catalog.TryOffer(line, level, FreeNcuFor(player, line), out offer) && offer.Available;
+            return _catalog.TryOffer(line, level, out offer) && offer.Available;
         }
 
         void Cast(Player player, int nanoId, bool announceRefusal)
@@ -253,7 +307,7 @@ namespace ZoneEngine_New.Core.Bots
 
             if (!TryCurrentOffer(player, line, out BuffOffer offer))
             {
-                GmCommandFeedback.Send(player.Session!, player, "You do not have enough free NCU for " + line.Name + ".");
+                GmCommandFeedback.Send(player.Session!, player, "You are not high enough level for " + line.Name + " (needs level " + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture) + ").");
                 return;
             }
 
@@ -346,12 +400,12 @@ namespace ZoneEngine_New.Core.Bots
             var parts = new List<string>(offers.Count * 2);
             for (int i = 0; i < offers.Count; i++)
             {
-                if (i > 0)
-                    parts.Add("/delay 1500");
-                parts.Add("/say .buff cast " + offers[i].NanoId.ToString(CultureInfo.InvariantCulture));
+                parts.Add(offers[i].NanoId.ToString(CultureInfo.InvariantCulture));
             }
 
-            return string.Join(" | ", parts);
+            // AO macros do not chain "|" commands; the client sends the whole text as one /say.
+            // One ".buff cast id id id" line casts every buff server-side.
+            return "/say .buff cast " + string.Join(" ", parts);
         }
 
         List<string> Status(Player player)
