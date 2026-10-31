@@ -1,4 +1,80 @@
 {
+  "3846": {
+    "Templates": [
+      {
+        "Name": "ICC Peacekeeper",
+        "Level": 250,
+        "Stats": {
+          "0": 268964353,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 120,
+          "286": 40,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "61": 800,
+          "52": 10000,
+          "54": 250,
+          "33": 0,
+          "359": 26090,
+          "360": 100,
+          "455": 0,
+          "1": 200000,
+          "27": 200000,
+          "4": 1,
+          "64": 40629,
+          "12": 5927
+        },
+        "ContentProvenance": {
+          "Guessed": true,
+          "Confirmed": false,
+          "Donor": "MOOM",
+          "Source": "SL dyna. Donor MOOM. Family is a guess. Y from the nearest client spawn. Respawn 180. Loot 5-7.",
+          "Levels": "250",
+          "CampKey": "inferno|Crete|250|Pazuzu",
+          "StandIn": false,
+          "AppearanceFix": "2026-10-31: ICC uniform + rifle from live SCFU of ICC Shuttle Guard@4582 (ScfuProbe live_decoded.tsv); the 10-30 monster-data fallback had given Food Provider / Clothing Salesman outfits"
+        },
+        "LootTable": [],
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "Textures": [ {"Id": 286229, "Place": 0}, {"Id": 286227, "Place": 1}, {"Id": 286228, "Place": 2}, {"Id": 286226, "Place": 3}, {"Id": 286225, "Place": 4} ],
+        "Meshes": [ {"Id": 265793, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 4}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scrape-city-20261030",
+      "Note": "ICC 655 guard hashpoint 3846 (13 plaza points), restored as ICC Peacekeeper 2026-10-31"
+    }
+  },
   "ACCI": {
     "Templates": [
       {
@@ -3762,39 +3838,15 @@
           "Levels": "250",
           "CampKey": "inferno|Crete|250|Pazuzu",
           "StandIn": false,
-          "AppearanceFix": "2026-10-30: outfit(md:Food Provider) (live SCFU textures/meshes, scraped Scale/MonsterData)"
+          "AppearanceFix": "2026-10-31: ICC uniform + rifle from live SCFU of ICC Shuttle Guard@4582 (ScfuProbe live_decoded.tsv); the 10-30 monster-data fallback had given Food Provider / Clothing Salesman outfits"
         },
         "LootTable": [],
         "Features": [
           "NoCombat",
           "NoMove"
         ],
-        "Textures": [
-          {
-            "Id": 30862,
-            "Place": 1
-          },
-          {
-            "Id": 40903,
-            "Place": 2
-          },
-          {
-            "Id": 30839,
-            "Place": 3
-          },
-          {
-            "Id": 30886,
-            "Place": 4
-          }
-        ],
-        "Meshes": [
-          {
-            "Id": 7777,
-            "Layer": 2,
-            "OverrideTextureId": 0,
-            "Position": 1
-          }
-        ]
+        "Textures": [ {"Id": 286229, "Place": 0}, {"Id": 286227, "Place": 1}, {"Id": 286228, "Place": 2}, {"Id": 286226, "Place": 3}, {"Id": 286225, "Place": 4} ],
+        "Meshes": [ {"Id": 265793, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 4}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
       }
     ],
     "ContentProvenance": {
@@ -6877,32 +6929,15 @@
           "Levels": "250",
           "CampKey": "inferno|Crete|250|Pazuzu",
           "StandIn": false,
-          "AppearanceFix": "2026-10-30: outfit(md:Neutral Clothing Salesman) (live SCFU textures/meshes, scraped Scale/MonsterData)"
+          "AppearanceFix": "2026-10-31: ICC uniform + rifle from live SCFU of ICC Shuttle Guard@4582 (ScfuProbe live_decoded.tsv); the 10-30 monster-data fallback had given Food Provider / Clothing Salesman outfits"
         },
         "LootTable": [],
         "Features": [
           "NoCombat",
           "NoMove"
         ],
-        "Textures": [
-          {
-            "Id": 265346,
-            "Place": 1
-          },
-          {
-            "Id": 248878,
-            "Place": 2
-          },
-          {
-            "Id": 37036,
-            "Place": 3
-          },
-          {
-            "Id": 30886,
-            "Place": 4
-          }
-        ],
-        "Meshes": []
+        "Textures": [ {"Id": 286229, "Place": 0}, {"Id": 286227, "Place": 1}, {"Id": 286228, "Place": 2}, {"Id": 286226, "Place": 3}, {"Id": 286225, "Place": 4} ],
+        "Meshes": [ {"Id": 265793, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 4}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
       }
     ],
     "ContentProvenance": {
@@ -13346,39 +13381,15 @@
           "Levels": "250",
           "CampKey": "inferno|Crete|250|Pazuzu",
           "StandIn": false,
-          "AppearanceFix": "2026-10-30: outfit(md:Food Provider) (live SCFU textures/meshes, scraped Scale/MonsterData)"
+          "AppearanceFix": "2026-10-31: ICC uniform + rifle from live SCFU of ICC Shuttle Guard@4582 (ScfuProbe live_decoded.tsv); the 10-30 monster-data fallback had given Food Provider / Clothing Salesman outfits"
         },
         "LootTable": [],
         "Features": [
           "NoCombat",
           "NoMove"
         ],
-        "Textures": [
-          {
-            "Id": 30862,
-            "Place": 1
-          },
-          {
-            "Id": 40903,
-            "Place": 2
-          },
-          {
-            "Id": 30839,
-            "Place": 3
-          },
-          {
-            "Id": 30886,
-            "Place": 4
-          }
-        ],
-        "Meshes": [
-          {
-            "Id": 7777,
-            "Layer": 2,
-            "OverrideTextureId": 0,
-            "Position": 1
-          }
-        ]
+        "Textures": [ {"Id": 286229, "Place": 0}, {"Id": 286227, "Place": 1}, {"Id": 286228, "Place": 2}, {"Id": 286226, "Place": 3}, {"Id": 286225, "Place": 4} ],
+        "Meshes": [ {"Id": 265793, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 4}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
       }
     ],
     "ContentProvenance": {
