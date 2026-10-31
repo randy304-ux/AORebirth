@@ -5,7 +5,7 @@
 #  Unresolved hashes are listed in the plan's "unresolved" (left pink, nothing invented).
 #  Stats/model: same donor+scraped-stat method as Build-ScrapeImportCities.ps1 (name, level, side, MonsterData, scale, family,
 #  hp, breed, head, mesh, texture from the scrape). Never overwrites an existing template. Templates only: no spawns/loot/skips.
-# Rerunnable: Source 'scrape-pinks-20261031'. Zones in this plan: Inferno 4605, Nascence 4310-4313 (ICC 655 to be added after Randy's live ICC scrape).
+# Rerunnable: Source 'scrape-pinks-20261031'. Zones in this plan: Inferno 4605, Nascence 4310-4313 + ICC 655 (Whozewhatzit live scrape 2026-10-31 02:40-02:52 ET).
 param([string]$GameData = (Join-Path $PSScriptRoot '..\..\AORebirth\GameData'))
 $ErrorActionPreference = 'Stop'
 $u = [Text.UTF8Encoding]::new($false); $gd = [IO.Path]::GetFullPath($GameData); $tag = 'scrape-pinks-20261031'
