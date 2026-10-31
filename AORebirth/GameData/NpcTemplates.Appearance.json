@@ -58,7 +58,7 @@
           "Levels": "250",
           "CampKey": "inferno|Crete|250|Pazuzu",
           "StandIn": false,
-          "AppearanceFix": "2026-10-31: ICC uniform + rifle from live SCFU of ICC Shuttle Guard@4582 (ScfuProbe live_decoded.tsv); the 10-30 monster-data fallback had given Food Provider / Clothing Salesman outfits"
+          "AppearanceFix": "2026-10-31: real ICC Peacekeeper SCFU captured live in Andromeda 655 (Whozewhatzit scrape 02:40-02:52 ET): textures 286225-286229, rifle 265787 tex 286562, body 262556, helmet 286467; replaces the borrowed ICC Shuttle Guard@4582 look"
         },
         "LootTable": [],
         "Features": [
@@ -66,7 +66,7 @@
           "NoMove"
         ],
         "Textures": [ {"Id": 286229, "Place": 0}, {"Id": 286227, "Place": 1}, {"Id": 286228, "Place": 2}, {"Id": 286226, "Place": 3}, {"Id": 286225, "Place": 4} ],
-        "Meshes": [ {"Id": 265793, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 4}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
+        "Meshes": [ {"Id": 265787, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286467, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
       }
     ],
     "ContentProvenance": {
@@ -3838,7 +3838,7 @@
           "Levels": "250",
           "CampKey": "inferno|Crete|250|Pazuzu",
           "StandIn": false,
-          "AppearanceFix": "2026-10-31: ICC uniform + rifle from live SCFU of ICC Shuttle Guard@4582 (ScfuProbe live_decoded.tsv); the 10-30 monster-data fallback had given Food Provider / Clothing Salesman outfits"
+          "AppearanceFix": "2026-10-31: real ICC Peacekeeper SCFU captured live in Andromeda 655 (Whozewhatzit scrape 02:40-02:52 ET): textures 286225-286229, rifle 265787 tex 286562, body 262556, helmet 286467; replaces the borrowed ICC Shuttle Guard@4582 look"
         },
         "LootTable": [],
         "Features": [
@@ -3846,7 +3846,7 @@
           "NoMove"
         ],
         "Textures": [ {"Id": 286229, "Place": 0}, {"Id": 286227, "Place": 1}, {"Id": 286228, "Place": 2}, {"Id": 286226, "Place": 3}, {"Id": 286225, "Place": 4} ],
-        "Meshes": [ {"Id": 265793, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 4}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
+        "Meshes": [ {"Id": 265787, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286467, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
       }
     ],
     "ContentProvenance": {
@@ -6929,7 +6929,7 @@
           "Levels": "250",
           "CampKey": "inferno|Crete|250|Pazuzu",
           "StandIn": false,
-          "AppearanceFix": "2026-10-31: ICC uniform + rifle from live SCFU of ICC Shuttle Guard@4582 (ScfuProbe live_decoded.tsv); the 10-30 monster-data fallback had given Food Provider / Clothing Salesman outfits"
+          "AppearanceFix": "2026-10-31: real ICC Peacekeeper Commander SCFU captured live in Andromeda 655 (Whozewhatzit scrape 02:40-02:52 ET): textures 286225-286229, rifle 265793 tex 286562, body 264698, helmet 286446; replaces the borrowed ICC Shuttle Guard@4582 look"
         },
         "LootTable": [],
         "Features": [
@@ -6937,7 +6937,7 @@
           "NoMove"
         ],
         "Textures": [ {"Id": 286229, "Place": 0}, {"Id": 286227, "Place": 1}, {"Id": 286228, "Place": 2}, {"Id": 286226, "Place": 3}, {"Id": 286225, "Place": 4} ],
-        "Meshes": [ {"Id": 265793, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 4}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
+        "Meshes": [ {"Id": 265793, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 264698, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
       }
     ],
     "ContentProvenance": {
@@ -13381,7 +13381,7 @@
           "Levels": "250",
           "CampKey": "inferno|Crete|250|Pazuzu",
           "StandIn": false,
-          "AppearanceFix": "2026-10-31: ICC uniform + rifle from live SCFU of ICC Shuttle Guard@4582 (ScfuProbe live_decoded.tsv); the 10-30 monster-data fallback had given Food Provider / Clothing Salesman outfits"
+          "AppearanceFix": "2026-10-31: real ICC Peacekeeper SCFU captured live in Andromeda 655 (Whozewhatzit scrape 02:40-02:52 ET): textures 286225-286229, rifle 265787 tex 286562, body 262556, helmet 286467; replaces the borrowed ICC Shuttle Guard@4582 look"
         },
         "LootTable": [],
         "Features": [
@@ -13389,7 +13389,7 @@
           "NoMove"
         ],
         "Textures": [ {"Id": 286229, "Place": 0}, {"Id": 286227, "Place": 1}, {"Id": 286228, "Place": 2}, {"Id": 286226, "Place": 3}, {"Id": 286225, "Place": 4} ],
-        "Meshes": [ {"Id": 265793, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 4}, {"Id": 286446, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
+        "Meshes": [ {"Id": 265787, "Layer": 2, "OverrideTextureId": 286562, "Position": 0}, {"Id": 262556, "Layer": 2, "OverrideTextureId": 0, "Position": 1}, {"Id": 286467, "Layer": 0, "OverrideTextureId": 0, "Position": 3} ]
       }
     ],
     "ContentProvenance": {
