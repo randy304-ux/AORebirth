@@ -11,6 +11,10 @@
                              "reason":  "Arete credit card talk-to stand-in: replaced by the real Bank of Rubi-Ka Credit Card world pickup (PlayfieldContent/6553 Pickups). 2026-10-30"
                          },
                          {
+                             "hash":  "3846",
+                             "reason":  "Big Neutral Control Tower stray: dc139b79 (scrape-city-20261030) put a tower template on the ICC 655 ambient civilian hashpoint 3846 (13 points); live ICC has no towers. Arete 6553 points were already removed. 2026-10-30"
+                         },
+                         {
                              "hash":  "2CIE",
                              "reason":  "ambient city citizen placeholder (Rome/Old Athen/West Athens/Andromeda/Borealis); Randy 2026-10-29"
                          },

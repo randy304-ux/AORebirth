@@ -124,6 +124,9 @@ namespace ZoneEngine_New.Core.Mobs
         /// <summary>SCFU texture overrides keyed by place. Empty omits the texture block.</summary>
         public Dictionary<int, int> Textures { get; set; } = new();
 
+        /// <summary>Dungeon Dogs: template spawn meshes (live SCFU body/armor/weapon meshes for humanoid NPCs).</summary>
+        public List<SmokeLounge.AOtomation.Messaging.GameData.Mesh> SpawnMeshes { get; set; } = new();
+
         /// <summary>Opaque SCFU extended texture override payload copied from template data.</summary>
         public List<TextureOverride> TextureOverrides { get; set; } = new();
 

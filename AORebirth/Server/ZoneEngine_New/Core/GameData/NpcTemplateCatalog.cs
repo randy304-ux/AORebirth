@@ -1,3 +1,4 @@
+using System.Linq;
 namespace ZoneEngine_New.Core.GameData
 {
     using System;
@@ -397,6 +398,14 @@ namespace ZoneEngine_New.Core.GameData
                 Equipment = WithDynaBossItem(CopyPairs(nearest.Equipment), dynaModifier, level),
                 ShopStock = CopyShopStock(nearest.ShopStock),
                 TextureOverrides = new List<TextureOverride>(nearest.TextureOverrides),
+                Textures = (nearest.Textures ?? new List<NpcSpawnTexture>()).GroupBy(x => x.Place).ToDictionary(g => g.Key, g => g.Last().Id),
+                SpawnMeshes = (nearest.Meshes ?? new List<NpcSpawnMesh>()).Select(m => new SmokeLounge.AOtomation.Messaging.GameData.Mesh
+                {
+                    Position = (byte)m.Position,
+                    Id = (uint)m.Id,
+                    OverrideTextureId = m.OverrideTextureId,
+                    Layer = (byte)m.Layer
+                }).ToList(),
                 CorpseFullUpdateTemplate = CopyCorpseFullUpdateTemplate(nearest.CorpseFullUpdateTemplate),
                 KnuBotId = nearest.KnuBotId,
                 ItemTable = CopyLoot(nearest.LootTable),
@@ -624,6 +633,20 @@ namespace ZoneEngine_New.Core.GameData
         public double MaxPauseSeconds { get; set; } = 15;
     }
 
+    public sealed class NpcSpawnTexture
+    {
+        public int Place { get; set; }
+        public int Id { get; set; }
+    }
+
+    public sealed class NpcSpawnMesh
+    {
+        public int Position { get; set; }
+        public int Id { get; set; }
+        public int OverrideTextureId { get; set; }
+        public int Layer { get; set; }
+    }
+
     public sealed class NpcLevelBand
     {
         public string Name { get; set; } = string.Empty;
@@ -650,6 +673,15 @@ namespace ZoneEngine_New.Core.GameData
 
         /// <summary>Fixed shop lines. Empty means the equipped shop item keeps the shared vending table.</summary>
         public List<NpcShopStockLine> ShopStock { get; set; } = new();
+
+        /// <summary>
+        /// Dungeon Dogs: live SCFU texture places (place 0-4: chest, arms, legs, hands, feet) for humanoid NPCs whose
+        /// look comes from the spawn packet rather than worn items. Without them a humanoid body draws untextured.
+        /// </summary>
+        public List<NpcSpawnTexture> Textures { get; set; } = new();
+
+        /// <summary>Dungeon Dogs: live SCFU meshes (body, shoulder pads, back, held weapon); the head comes from stat 64.</summary>
+        public List<NpcSpawnMesh> Meshes { get; set; } = new();
 
         /// <summary>Material texture overrides sent on the spawn packet (SCFU extended textures).</summary>
         public List<TextureOverride> TextureOverrides { get; set; } = new();

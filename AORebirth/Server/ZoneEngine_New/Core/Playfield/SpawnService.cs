@@ -392,6 +392,21 @@ namespace ZoneEngine_New.Core.Playfield
 
                 npc.SetSpawnTexture(entry.Key, entry.Value);
             }
+
+            if (template.SpawnMeshes == null)
+                return;
+            foreach (SmokeLounge.AOtomation.Messaging.GameData.Mesh mesh in template.SpawnMeshes)
+            {
+                if (mesh.Id == 0)
+                    continue;
+                npc.AddSpawnMesh(new SmokeLounge.AOtomation.Messaging.GameData.Mesh
+                {
+                    Position = mesh.Position,
+                    Id = mesh.Id,
+                    OverrideTextureId = mesh.OverrideTextureId,
+                    Layer = mesh.Layer
+                });
+            }
         }
 
         /// <summary>
