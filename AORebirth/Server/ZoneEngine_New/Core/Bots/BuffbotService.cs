@@ -112,45 +112,55 @@ namespace ZoneEngine_New.Core.Bots
 
         public void OpenMenu(Player player) => OpenMenu(player, 0);
 
+        /// <summary>The action links shared by the main window and the lightweight Back window.</summary>
+        static string ActionLinks()
+        {
+            var body = new StringBuilder();
+            body.Append("<br><a href='chatcmd:///say .buff macro'>").Append(DiagAoml.Label("Buffmacro")).Append("</a> ")
+                .Append(DiagAoml.Muted("- creates a macro of current NCU buffs"));
+            body.Append("<br><a href='chatcmd:///say .buff rebuff'>").Append(DiagAoml.Label("Rebuff")).Append("</a> ")
+                .Append(DiagAoml.Muted("- rebuffs current active NCU buffs"));
+            body.Append("<br><a href='chatcmd:///say .buff status'>").Append(DiagAoml.Label("Status")).Append("</a> ")
+                .Append(DiagAoml.Muted("- shows your running buffbot nanos"));
+            return body.ToString();
+        }
+
+        /// <summary>
+        /// Lightweight main for Back links: actions only, no nested profession pages, so nesting stays
+        /// main -> profession -> main and never grows. The full list is the Buffbot link already in chat.
+        /// </summary>
+        static string LiteMain(Player player)
+        {
+            var body = new StringBuilder();
+            body.Append(DiagAoml.Title("Buffbot"));
+            body.Append("<br>").Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "NCU {0}/{1}", player.UsedNcu, player.MaxNcu)));
+            body.Append("<br>").Append(ActionLinks());
+            body.Append("<br><br>").Append(DiagAoml.Muted("To pick another profession, click the Buffbot link in chat again."));
+            return body.ToString();
+        }
+
+        static string BackLink(Player player) => NestedLink(LiteMain(player), DiagAoml.Label("Back to Buffbot"));
+
         public void OpenMenu(Player player, int onlyPage)
         {
             ArgumentNullException.ThrowIfNull(player);
             var body = new StringBuilder();
             body.Append(DiagAoml.Title("Buffbot"));
             body.Append("<br>").Append(DiagAoml.Muted(
-                "One bot for every profession. Click a section to open it, then click a buff to cast it. No charge."));
+                "Click a profession to open its full buff list, then click a buff to cast it. No charge."));
             body.Append("<br>").Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "NCU {0}/{1}", player.UsedNcu, player.MaxNcu)));
-            body.Append("<br><br><a href='chatcmd:///say .buff macro'>").Append(DiagAoml.Label("Buffmacro")).Append("</a> ")
-                .Append(DiagAoml.Muted("- creates a macro of current NCU buffs"));
-            body.Append("<br><a href='chatcmd:///say .buff rebuff'>").Append(DiagAoml.Label("Rebuff")).Append("</a> ")
-                .Append(DiagAoml.Muted("- rebuffs current active NCU buffs"));
-            body.Append("<br><a href='chatcmd:///say .buff help'>").Append(DiagAoml.Label("Help")).Append("</a> ")
-                .Append(DiagAoml.Muted("- displays this window"));
-            body.Append("<br><a href='chatcmd:///say .buff status'>").Append(DiagAoml.Label("Status")).Append("</a> ")
-                .Append(DiagAoml.Muted("- shows your running buffbot nanos"));
+            body.Append("<br>").Append(ActionLinks());
             body.Append("<br><br>");
             if (_catalog.Sections.Count == 0)
                 body.Append(DiagAoml.Muted("No buff names from Buffbot.json matched the item catalog."));
-            // Each section link is a nested text:// window, so clicking it opens that page in the info window
-            // instead of posting a new link into chat. Index windows split to stay under the client blob size.
+            // Each profession link is a nested text:// window holding that profession's FULL list (never split),
+            // so clicking it opens the list in the info window; nothing posts to chat.
             string head = body.ToString();
-            var entries = new List<string>();
-            foreach (BuffSection section in _catalog.Sections)
-            {
-                List<string> parts = BuildSectionParts(player, section, nested: true);
-                for (int i = 0; i < parts.Count; i++)
-                {
-                    string name = parts.Count == 1
-                        ? section.Name
-                        : string.Format(CultureInfo.InvariantCulture, "{0} {1}/{2}", section.Name, i + 1, parts.Count);
-                    entries.Add("<br>" + NestedLink(parts[i], DiagAoml.Label(Esc(name))));
-                }
-            }
-
             var windows = new List<StringBuilder>();
             var current = new StringBuilder(head);
-            foreach (string entry in entries)
+            foreach (BuffSection section in _catalog.Sections)
             {
+                string entry = "<br>" + NestedLink(BuildSectionParts(player, section, nested: true)[0], DiagAoml.Label(Esc(section.Name)));
                 if (current.Length > head.Length && current.Length + entry.Length > MessageMax)
                 {
                     windows.Add(current);
@@ -165,8 +175,12 @@ namespace ZoneEngine_New.Core.Bots
                 GmCommandFeedback.Send(player.Session!, player, Link(windows[i].ToString(), PageLabel(i, windows.Count)));
         }
 
-        /// <summary>Client chat blob budget for one index window (nested pages included).</summary>
-        const int MessageMax = 7400;
+        /// <summary>
+        /// Budget for one main window, nested profession pages included. Zone ChatTextMessage is not bound by the
+        /// chat-server tell limit (~7.5 KB) that live buff bots work under; if the client truncates in game,
+        /// drop this to 7400 and the main window splits by whole professions (still no chat hops inside a list).
+        /// </summary>
+        const int MessageMax = 60000;
 
         /// <summary>
         /// A text:// link whose body is escaped one level so it can sit inside the outer text:// window
@@ -217,8 +231,8 @@ namespace ZoneEngine_New.Core.Bots
                 {
                     text.Append("<a href='chatcmd:///say .buff cast ")
                         .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture))
-                        .Append("'>").Append(DiagAoml.Label(Esc(offer.Name))).Append("</a> ")
-                        .Append(DiagAoml.Muted(Esc(bonus.TrimStart() + ncu)));
+                        .Append("'>").Append(Esc(offer.Name)).Append("</a> ")
+                        .Append(Esc(bonus.TrimStart() + ncu)); // plain text: a font tag per line cost ~8 KB once nested
                 }
                 else
                 {
@@ -233,7 +247,7 @@ namespace ZoneEngine_New.Core.Bots
             int size = 0;
             foreach (string line in lines)
             {
-                if (current.Count > 0 && size + line.Length > PageMax)
+                if (!nested && current.Count > 0 && size + line.Length > PageMax)
                 {
                     chunks.Add(current);
                     current = new List<string>();
@@ -259,6 +273,7 @@ namespace ZoneEngine_New.Core.Bots
                     body.Append("<br>").Append(line);
                 if (nested)
                 {
+                    body.Append("<br><br>").Append(BackLink(player));
                     parts.Add(body.ToString());
                     continue;
                 }
@@ -344,7 +359,7 @@ namespace ZoneEngine_New.Core.Bots
                 .Append(DiagAoml.Label("Create Buffbot macro")).Append("</a>");
             body.Append("<br><br>").Append(DiagAoml.Muted("Macro commands:"));
             body.Append("<br>").Append(DiagAoml.Muted(Esc(macroBody)));
-            body.Append("<br><br><a href='chatcmd:///say .buff menu'>").Append(DiagAoml.Label("Back")).Append("</a>");
+            body.Append("<br><br>").Append(BackLink(player));
             GmCommandFeedback.Send(player.Session!, player, Link(body.ToString(), "Buffmacro"));
         }
 
@@ -437,7 +452,7 @@ namespace ZoneEngine_New.Core.Bots
 
             if (shown == 0)
                 body.Append("<br>").Append(DiagAoml.Muted("No buffbot nanos are running."));
-            body.Append("<br><br><a href='chatcmd:///say .buff menu'>").Append(DiagAoml.Label("Back")).Append("</a>");
+            body.Append("<br><br>").Append(BackLink(player));
             return new List<string> { Link(body.ToString(), "Buff status") };
         }
 
