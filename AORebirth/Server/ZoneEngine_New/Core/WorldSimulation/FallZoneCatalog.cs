@@ -119,21 +119,22 @@ namespace ZoneEngine_New.Core.WorldSimulation
 
             bool hasFixed = false;
             float lx = 0f, ly = 0f, lz = 0f;
-            float? headingDeg = null;
+            bool keepHeading = true;
             if (value.TryGetProperty("landing", out JsonElement landing))
             {
                 lx = landing.GetProperty("x").GetSingle();
                 ly = landing.GetProperty("y").GetSingle();
                 lz = landing.GetProperty("z").GetSingle();
                 hasFixed = true;
-                if (value.TryGetProperty("headingDegrees", out JsonElement hd))
-                    headingDeg = hd.GetSingle();
+                if (value.TryGetProperty("keepPlayerHeading", out JsonElement keep)
+                    && keep.ValueKind is JsonValueKind.False)
+                    keepHeading = false;
             }
 
             if (!hasFixed && destIdx == 0)
                 return false;
 
-            exit = new FallZoneExit(destPf, destIdx, hasFixed, lx, ly, lz, headingDeg);
+            exit = new FallZoneExit(destPf, destIdx, hasFixed, lx, ly, lz, keepHeading);
             return true;
         }
     }
@@ -145,20 +146,8 @@ namespace ZoneEngine_New.Core.WorldSimulation
         float LandingX,
         float LandingY,
         float LandingZ,
-        float? HeadingDegrees)
+        bool KeepPlayerHeading)
     {
         public Vector3 FixedLanding => new(LandingX, LandingY, LandingZ);
-
-        public Quaternion? FixedHeading
-        {
-            get
-            {
-                if (!HeadingDegrees.HasValue)
-                    return null;
-                float yaw = HeadingDegrees.Value * (MathF.PI * 2f / 360f);
-                float half = yaw * 0.5f;
-                return new Quaternion(0, MathF.Sin(half), 0, MathF.Cos(half));
-            }
-        }
     }
 }

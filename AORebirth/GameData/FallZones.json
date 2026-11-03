@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "notes": "Outdoor Shadowlands abyss basins (heightmap Y near 0). Retail fires MID-FALL when character Y drops below ~6 over the pit -- not only on the Y~0 floor. 4310 scrape 2026-11-03 (Randy zonechanges): leave 4310 at 805.965,5.990,1104.943 (~7.5s after ledge 792,31.81,1149) -> arrive 4001 at 826.000,43.810,822.000 heading 338.4 (NOT walk-in door landing 852,34,957). 4311/4312: no scrape yet -- keep destIndex walk-in estimates as TODO.",
+  "notes": "Outdoor Shadowlands abyss basins (heightmap Y near 0). Retail fires MID-FALL when character Y drops through fallEnterMaxY (~6) over abyss terrain -- leave Y may be lower (4310 ~5.99, 4311 ~2.6). Scrape 2026-11-03: 4310 and 4311 both arrive 4001 at 826.0,43.81,822.0 keeping the player's heading (338.4 and 92.2). Not the walk-in door landing 852,34,957. 4312: no scrape -- TODO destIndex 6.",
   "abyssTerrainMax": 0.05,
   "fallEnterMaxY": 6.0,
   "exits": {
     "4310": {
       "destPlayfield": 4001,
       "landing": { "x": 826.0, "y": 43.81, "z": 822.0 },
-      "headingDegrees": 338.4
+      "keepPlayerHeading": true
     },
     "4311": {
-      "TODO": "no live fall scrape; destIndex 7 is walk-in door estimate only",
       "destPlayfield": 4001,
-      "destIndex": 7
+      "landing": { "x": 826.0, "y": 43.81, "z": 822.0 },
+      "keepPlayerHeading": true
     },
     "4312": {
       "TODO": "no live fall scrape; destIndex 6 is walk-in door estimate only",

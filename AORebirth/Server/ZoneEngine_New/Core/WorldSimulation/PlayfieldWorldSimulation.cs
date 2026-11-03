@@ -638,8 +638,9 @@ namespace ZoneEngine_New.Core.WorldSimulation
         /// <summary>
         /// True when the character just fell from solid ground into a heightmap abyss (terrain Y near 0)
         /// on a playfield listed in FallZones.json. Fires mid-fall when character Y drops through
-        /// <c>fallEnterMaxY</c> (~6 on Nascence), not only on the floor. Landing is the scrape-proven
-        /// fixed point when present; otherwise Destinations.dat midpoint for <c>destIndex</c>.
+        /// <c>fallEnterMaxY</c> (~6 on Nascence; leave may be lower, e.g. ~2.6), not only on the floor.
+        /// Fixed landings keep the player's heading (null crossing heading); destIndex falls back to
+        /// Destinations.dat midpoint heading.
         /// </summary>
         bool TryResolveAbyssFall(float previousY, AoVector3 position, out ZoneCrossing crossing)
         {
@@ -656,6 +657,8 @@ namespace ZoneEngine_New.Core.WorldSimulation
             float z = (float)position.z;
             float abyssMax = FallZoneCatalog.Instance.AbyssTerrainMax;
             float enterMaxY = FallZoneCatalog.Instance.FallEnterMaxY;
+            // Cross below fallEnterMaxY while over abyss. A large tick to Y~2.6 still qualifies
+            // when previousY was above the threshold.
             if (y > enterMaxY || previousY <= enterMaxY)
                 return false;
 
@@ -667,7 +670,8 @@ namespace ZoneEngine_New.Core.WorldSimulation
             if (exit.HasFixedLanding)
             {
                 landing = exit.FixedLanding;
-                heading = exit.FixedHeading;
+                // Null heading => TransferToPlayfield keeps facing (4310 h338.4 / 4311 h92.2 matched leave).
+                heading = null;
             }
             else if (!PortalDoorLandingResolver.TryResolveMidpointLanding(
                     _destinations,
@@ -700,7 +704,7 @@ namespace ZoneEngine_New.Core.WorldSimulation
             _logger.Info(
                 string.Format(
                     CultureInfo.InvariantCulture,
-                    "Fall zone abyss character at ({0:R},{1:R},{2:R}) terrainY={3:R} fromY={4:R} to={5} landing=({6:R},{7:R},{8:R}) fixed={9}",
+                    "Fall zone abyss character at ({0:R},{1:R},{2:R}) terrainY={3:R} fromY={4:R} to={5} landing=({6:R},{7:R},{8:R}) fixed={9} keepHeading={10}",
                     x,
                     y,
                     z,
@@ -710,7 +714,8 @@ namespace ZoneEngine_New.Core.WorldSimulation
                     landing.x,
                     landing.y,
                     landing.z,
-                    exit.HasFixedLanding));
+                    exit.HasFixedLanding,
+                    exit.KeepPlayerHeading));
             return true;
         }
 
