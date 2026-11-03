@@ -565,10 +565,11 @@ namespace ZoneEngine_New.Core.Pets
             public bool ArmorStats { get; set; } = true;
 
             /// <summary>
-            /// When true (default), each summon rolls sex then a random breed with a real Breed/Sex/HeadMesh
-            /// template (Atrox males only). When false, use Randy fixed profession breeds from MercRoster.
+            /// When false (default), use Randy fixed profession breeds (MA/Shade/Fixer Opifex; NT/MP Nanomage;
+            /// Keeper/Agent Atrox male-only; Enforcer Atrox male / Solitus female; rest Solitus).
+            /// When true, each summon rolls sex then a random breed with a real template (Atrox males only).
             /// </summary>
-            public bool RandomAppearance { get; set; } = true;
+            public bool RandomAppearance { get; set; } = false;
 
             public Dictionary<string, Profession> Professions { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 

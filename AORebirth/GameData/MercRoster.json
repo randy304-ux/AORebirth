@@ -1,5 +1,5 @@
 {
-  "comment": "Dungeon-unlock merc roster (batch 1). Randy male/female names per profession. Default Mercs.json RandomAppearance=true: each summon rolls sex then a random breed with a real Breed/Sex/HeadMesh template (Atrox males only). RandomAppearance=false uses fixed breeds (MA/Shade/Fixer Opifex; NT/MP Nanomage; male Enforcer/Keeper/Agent Atrox; rest Solitus). Nameplate budget 32 chars including mode tags.",
+  "comment": "Dungeon-unlock merc roster (batch 1). Randy male/female names per profession. Default Mercs.json RandomAppearance=false: fixed breeds — MA/Shade/Fixer=Opifex; NT/MP=Nanomage; Keeper/Agent=Atrox male-only (no female Atrox template); Enforcer=Atrox male / Solitus female; rest=Solitus. Looks use real NpcTemplates Breed/Sex/HeadMesh only. Nameplate budget 32 chars including mode tags.",
   "mercs": [
     {
       "id": "enforcer_subway",

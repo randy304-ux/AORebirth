@@ -145,17 +145,30 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
+        /// True when this profession is Atrox-only and no female Atrox template exists in our data
+        /// (Keeper, Agent). Caller must always use the male name + male Atrox look.
+        /// </summary>
+        public static bool ForcesMaleAppearance(MercDefinition def)
+        {
+            ArgumentNullException.ThrowIfNull(def);
+            // Scanned NpcTemplates.json: Atrox breed=4 has sex 0/1/2/5/6 only — zero sex=3 females.
+            return string.Equals(def.Kind.Key, "keeper", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(def.Kind.Key, "agent", StringComparison.OrdinalIgnoreCase);
+        }
+
+        /// <summary>
         /// Apply Breed/Sex/HeadMesh for a new summon. Mode changes must not call this when the Randy
         /// name is already set — existing Breed/Sex/HeadMesh stay as rolled.
-        /// When <paramref name="randomAppearance"/> is true (default): roll sex first (caller), then a
-        /// random breed with a real template for that sex (Atrox males only).
-        /// When false: Randy fixed profession breeds (MA/Shade/Fixer Opifex; NT/MP Nanomage;
-        /// male Enforcer/Keeper/Agent Atrox; rest Solitus; Atrox females fall back to Solitus).
+        /// Default (<paramref name="randomAppearance"/> false): Randy fixed profession breeds.
+        /// When true: roll a random breed with a real template for the chosen sex (Atrox males only).
+        /// Missing breed/sex templates fall back to Solitus of that sex.
         /// </summary>
         public static void ApplyAppearance(NpcCharacter npc, MercDefinition def, bool female, bool randomAppearance)
         {
             ArgumentNullException.ThrowIfNull(npc);
             ArgumentNullException.ThrowIfNull(def);
+            if (ForcesMaleAppearance(def))
+                female = false;
             AppearanceLook look = randomAppearance
                 ? ResolveRandomLook(female)
                 : ResolveFixedProfessionLook(def, female);
@@ -191,34 +204,44 @@ namespace ZoneEngine_New.Core.Pets
             return heads.Length > 0 ? Pick(heads) : breedPick;
         }
 
+        /// <summary>
+        /// Randy fixed map: MA/Shade/Fixer=Opifex; NT/MP=Nanomage; Keeper/Agent=Atrox male-only;
+        /// Enforcer=Atrox male / Solitus female; everyone else Solitus. Missing combo → Solitus of that sex.
+        /// </summary>
         static AppearanceLook ResolveFixedProfessionLook(MercDefinition def, bool female)
         {
             string key = def.Kind.Key;
-            if (UsesAtroxMale(key, def.Breed))
+
+            // Keeper / Agent: Atrox male only (no female Atrox in data).
+            if (ForcesMaleAppearance(def))
+                return AtroxMaleLook;
+
+            // Enforcer: Atrox male; female name uses Solitus female (unchanged from prior set).
+            if (string.Equals(key, "enforcer", StringComparison.OrdinalIgnoreCase))
                 return female ? Pick(FemaleSolitusLooks) : AtroxMaleLook;
 
             string breed = ResolveFixedBreed(def);
             if (string.Equals(breed, "Opifex", StringComparison.OrdinalIgnoreCase))
-                return female ? Pick(FemaleOpifexLooks) : Pick(MaleOpifexLooks);
+                return female
+                    ? PickOrSolitus(FemaleOpifexLooks, female: true)
+                    : PickOrSolitus(MaleOpifexLooks, female: false);
             if (string.Equals(breed, "Nanomage", StringComparison.OrdinalIgnoreCase))
-                return female ? Pick(FemaleNanomageLooks) : Pick(MaleNanomageLooks);
+                return female
+                    ? PickOrSolitus(FemaleNanomageLooks, female: true)
+                    : PickOrSolitus(MaleNanomageLooks, female: false);
+
             return female ? Pick(FemaleSolitusLooks) : Pick(MaleSolitusLooks);
         }
 
-        static bool UsesAtroxMale(string professionKey, string? breed)
+        static AppearanceLook PickOrSolitus(AppearanceLook[] looks, bool female)
         {
-            if (string.Equals(professionKey, "enforcer", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(professionKey, "keeper", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(professionKey, "agent", StringComparison.OrdinalIgnoreCase))
-                return true;
-            return string.Equals(breed, "Atrox", StringComparison.OrdinalIgnoreCase);
+            if (looks.Length > 0)
+                return Pick(looks);
+            return female ? Pick(FemaleSolitusLooks) : Pick(MaleSolitusLooks);
         }
 
         static string ResolveFixedBreed(MercDefinition def)
         {
-            if (!string.IsNullOrWhiteSpace(def.Breed))
-                return def.Breed.Trim();
-
             string key = def.Kind.Key;
             if (string.Equals(key, "martialartist", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(key, "shade", StringComparison.OrdinalIgnoreCase)
@@ -231,6 +254,8 @@ namespace ZoneEngine_New.Core.Pets
                 || string.Equals(key, "keeper", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(key, "agent", StringComparison.OrdinalIgnoreCase))
                 return "Atrox";
+            if (!string.IsNullOrWhiteSpace(def.Breed))
+                return def.Breed.Trim();
             return "Solitus";
         }
 

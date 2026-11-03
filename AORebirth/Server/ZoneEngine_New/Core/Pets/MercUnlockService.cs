@@ -313,12 +313,17 @@ namespace ZoneEngine_New.Core.Pets
         /// </summary>
         void ApplySummonIdentity(NpcCharacter npc, MercDefinition def, Player owner)
         {
+            // Keeper/Agent: no female Atrox in data → always male name + Atrox male look.
+            bool forceMale = MercNameFormat.ForcesMaleAppearance(def);
             bool? inferred = MercNameFormat.TryInferFemale(npc.Name, def);
-            bool female = inferred ?? (Random.Shared.Next(2) == 1);
+            bool female = forceMale ? false : inferred ?? (Random.Shared.Next(2) == 1);
+
+            // First configure only (template name, not a Randy name yet). Mode changes keep breed/sex.
             if (inferred == null)
             {
                 string root = owner.Playfield?.GetService<IGameData>()?.RootPath ?? string.Empty;
-                bool randomAppearance = root.Length == 0 || Mercs.RandomAppearance(root);
+                // Default RandomAppearance=false → Randy fixed profession breeds.
+                bool randomAppearance = root.Length > 0 && Mercs.RandomAppearance(root);
                 MercNameFormat.ApplyAppearance(npc, def, female, randomAppearance);
             }
 
