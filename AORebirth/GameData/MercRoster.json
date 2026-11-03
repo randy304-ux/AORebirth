@@ -111,13 +111,13 @@
       "nanoStyle": null
     },
     {
-      "id": "nt_sanctum_aoe",
-      "displayName": "TODO-Randy-Name (AOE)",
+      "id": "nt_sanctum",
+      "displayName": "TODO-Randy-Name",
       "professionKey": "nanotechnician",
       "breed": "Nanomage",
       "level": 189,
       "role": "carry",
-      "tags": ["elite", "carry", "DPS", "aoe"],
+      "tags": ["elite", "carry", "DPS"],
       "dungeonName": "Inner Sanctum",
       "dungeonPlayfields": [],
       "dungeonPlayfieldsTodo": "TODO: Inner Sanctum playfield id not found in playfields table by that name",
@@ -125,24 +125,8 @@
       "bossHash": null,
       "bossHashTodo": "TODO: Hezak the Immortal hash not in NpcTemplates yet",
       "unlockGroup": "nt_sanctum",
-      "nanoStyle": "aoe"
-    },
-    {
-      "id": "nt_sanctum_st",
-      "displayName": "TODO-Randy-Name (ST)",
-      "professionKey": "nanotechnician",
-      "breed": "Nanomage",
-      "level": 189,
-      "role": "carry",
-      "tags": ["elite", "carry", "DPS", "st"],
-      "dungeonName": "Inner Sanctum",
-      "dungeonPlayfields": [],
-      "dungeonPlayfieldsTodo": "TODO: Inner Sanctum playfield id not found in playfields table by that name",
-      "bossName": "Hezak the Immortal",
-      "bossHash": null,
-      "bossHashTodo": "TODO: Hezak the Immortal hash not in NpcTemplates yet",
-      "unlockGroup": "nt_sanctum",
-      "nanoStyle": "st"
+      "nanoStyle": null,
+      "notes": "Single NT body; AOE/ST is a per-character mode (.merc preset nt aoe|st), shown in the merc name."
     },
     {
       "id": "shade_camelot",

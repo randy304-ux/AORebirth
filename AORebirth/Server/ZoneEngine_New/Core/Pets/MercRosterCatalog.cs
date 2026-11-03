@@ -110,12 +110,12 @@ namespace ZoneEngine_New.Core.Pets
                     return def;
             }
 
-            // NT style aliases: "nt aoe", "nt st"
-            if (raw.Contains("aoe", StringComparison.OrdinalIgnoreCase))
-                return _byId.TryGetValue("nt_sanctum_aoe", out MercDefinition? aoe) ? aoe : null;
-            if (raw.Contains("st", StringComparison.OrdinalIgnoreCase)
-                && raw.Contains("nt", StringComparison.OrdinalIgnoreCase))
-                return _byId.TryGetValue("nt_sanctum_st", out MercDefinition? st) ? st : null;
+            // NT aliases (single body; mode is separate).
+            if (raw.Equals("nt", StringComparison.OrdinalIgnoreCase)
+                || raw.Contains("nt_sanctum", StringComparison.OrdinalIgnoreCase)
+                || (raw.Contains("nano", StringComparison.OrdinalIgnoreCase)
+                    && raw.Contains("sanctum", StringComparison.OrdinalIgnoreCase)))
+                return _byId.TryGetValue("nt_sanctum", out MercDefinition? nt) ? nt : null;
 
             return null;
         }
