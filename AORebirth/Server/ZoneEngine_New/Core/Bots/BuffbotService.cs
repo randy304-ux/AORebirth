@@ -147,20 +147,35 @@ namespace ZoneEngine_New.Core.Bots
             var body = new StringBuilder();
             body.Append(DiagAoml.Title("Buffbot"));
             body.Append("<br>").Append(DiagAoml.Muted(
-                "Click a profession to open its full buff list, then click a buff to cast it. No charge."));
+                "Click a profession to open its buff list, then click a buff to cast it. No charge."));
             body.Append("<br>").Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "NCU {0}/{1}", player.UsedNcu, player.MaxNcu)));
             body.Append("<br>").Append(ActionLinks());
             body.Append("<br><br>");
             if (_catalog.Sections.Count == 0)
                 body.Append(DiagAoml.Muted("No buff names from Buffbot.json matched the item catalog."));
-            // Each profession link is a nested text:// window holding that profession's FULL list (never split),
-            // so clicking it opens the list in the info window; nothing posts to chat.
+            // Profession links are nested text:// windows (client opens them without posting to chat).
+            // ChatTextMessage sizes its string with Int16, so one blob must stay under ~32 KB; keep the
+            // outer budget at 7400 (same as 4b069b71) and PageMax-split large professions so nested
+            // pages stay Int16-safe after HTML escaping. Commit 210464b7 raised this to 60000 and
+            // packed every full profession into one message — the Int16 size wraps and the window never opens.
             string head = body.ToString();
-            var windows = new List<StringBuilder>();
-            var current = new StringBuilder(head);
+            var entries = new List<string>();
             foreach (BuffSection section in _catalog.Sections)
             {
-                string entry = "<br>" + NestedLink(BuildSectionParts(player, section, nested: true)[0], DiagAoml.Label(Esc(section.Name)));
+                List<string> parts = BuildSectionParts(player, section, nested: true);
+                for (int i = 0; i < parts.Count; i++)
+                {
+                    string name = parts.Count == 1
+                        ? section.Name
+                        : string.Format(CultureInfo.InvariantCulture, "{0} {1}/{2}", section.Name, i + 1, parts.Count);
+                    entries.Add("<br>" + NestedLink(parts[i], DiagAoml.Label(Esc(name))));
+                }
+            }
+
+            var windows = new List<StringBuilder>();
+            var current = new StringBuilder(head);
+            foreach (string entry in entries)
+            {
                 if (current.Length > head.Length && current.Length + entry.Length > MessageMax)
                 {
                     windows.Add(current);
@@ -176,11 +191,11 @@ namespace ZoneEngine_New.Core.Bots
         }
 
         /// <summary>
-        /// Budget for one main window, nested profession pages included. Zone ChatTextMessage is not bound by the
-        /// chat-server tell limit (~7.5 KB) that live buff bots work under; if the client truncates in game,
-        /// drop this to 7400 and the main window splits by whole professions (still no chat hops inside a list).
+        /// Budget for one index ChatText blob including nested profession pages. Must stay well under
+        /// the Int16 string/packet size used by ChatTextMessage (~32767); 7400 matches the last
+        /// known-good nested menu (4b069b71).
         /// </summary>
-        const int MessageMax = 60000;
+        const int MessageMax = 7400;
 
         /// <summary>
         /// A text:// link whose body is escaped one level so it can sit inside the outer text:// window
@@ -247,7 +262,9 @@ namespace ZoneEngine_New.Core.Bots
             int size = 0;
             foreach (string line in lines)
             {
-                if (!nested && current.Count > 0 && size + line.Length > PageMax)
+                // Nested pages are HTML-escaped again inside NestedLink; keep PageMax for both so a
+                // single profession cannot blow the ChatText Int16 size by itself.
+                if (current.Count > 0 && size + line.Length > PageMax)
                 {
                     chunks.Add(current);
                     current = new List<string>();
