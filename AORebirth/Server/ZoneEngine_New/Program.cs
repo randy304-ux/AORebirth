@@ -91,6 +91,13 @@ namespace ZoneEngine_New
                 IGameData gameData = rootServices.GetRequiredService<IGameData>();
                 DestinationsCatalog.Instance.ConfigureRoot(gameData.RootPath);
                 FallZoneCatalog.Instance.ConfigureRoot(gameData.RootPath);
+                logger.Info(
+                    string.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "FallZones loaded exits={0} fallEnterMaxY={1} abyssTerrainMax={2}",
+                        FallZoneCatalog.Instance.ExitCount,
+                        FallZoneCatalog.Instance.FallEnterMaxY,
+                        FallZoneCatalog.Instance.AbyssTerrainMax));
                 LogLocalityStartup();
                 logger.Info(
                     string.Format(

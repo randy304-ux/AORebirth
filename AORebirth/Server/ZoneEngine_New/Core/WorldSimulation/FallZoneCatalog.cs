@@ -43,6 +43,16 @@ namespace ZoneEngine_New.Core.WorldSimulation
             }
         }
 
+        public int ExitCount
+        {
+            get
+            {
+                EnsureLoaded();
+                lock (_sync)
+                    return _exits.Count;
+            }
+        }
+
         public void ConfigureRoot(string gameDataRoot)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(gameDataRoot);
