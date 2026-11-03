@@ -139930,9 +139930,7 @@
                                                                  "CampKey":  "add|Blubbags|51-56",
                                                                  "StandIn":  true
                                                              },
-                                       "LootTable":  [
-
-                                                     ]
+                                       "LootTable":  [ { "Hash":  "AR0003789100037891", "Repeats":  1, "Chance":  100, "LevelMod":  0 } ]
                                    },
                                    {
                                        "Name":  "Yuttos Elysium Geosurvey Dog",
@@ -139985,9 +139983,7 @@
                                                                  "Source":  "team mission boss from TM12",
                                                                  "Donor":  "TM12"
                                                              },
-                                       "LootTable":  [
-
-                                                     ]
+                                       "LootTable":  [ { "Hash":  "AR0003789100037891", "Repeats":  1, "Chance":  100, "LevelMod":  0 } ]
                                    },
                                    {
                                        "Name":  "Yuttos Elysium Geosurvey Dog",
@@ -140045,9 +140041,7 @@
                                                                  "CampKey":  "boss|Tentacle Mutant|70",
                                                                  "StandIn":  false
                                                              },
-                                       "LootTable":  [
-
-                                                     ]
+                                       "LootTable":  [ { "Hash":  "AR0003789100037891", "Repeats":  1, "Chance":  100, "LevelMod":  0 } ]
                                    }
                                ],
                  "ContentProvenance":  {
@@ -152043,9 +152037,7 @@
                                                                  "CampKey":  "boss|Hounds|70",
                                                                  "StandIn":  true
                                                              },
-                                       "LootTable":  [
-
-                                                     ]
+                                       "LootTable":  [ { "Hash":  "AR0003789100037891", "Repeats":  1, "Chance":  100, "LevelMod":  0 } ]
                                    },
                                    {
                                        "Name":  "Yuttos Elysium Geosurvey Dog",
@@ -152103,9 +152095,7 @@
                                                                  "CampKey":  "boss|Tentacle Mutant|70",
                                                                  "StandIn":  false
                                                              },
-                                       "LootTable":  [
-
-                                                     ]
+                                       "LootTable":  [ { "Hash":  "AR0003789100037891", "Repeats":  1, "Chance":  100, "LevelMod":  0 } ]
                                    }
                                ],
                  "ContentProvenance":  {
@@ -164572,7 +164562,7 @@
                                        "Name":  "Yuttos Nascence Geosurvey Dog",
                                        "Level":  10,
                                        "Stats":  {
-                                                     "0":  277352961,
+                                                     "0":  268964353,
                                                      "4":  1,
                                                      "18":  0,
                                                      "21":  0,
@@ -164616,19 +164606,13 @@
                                                      "12":  208966
                                                  },
                                        "HasHeadMesh":  true,
-                                       "Features":  [
-                                                        "NoCombat",
-                                                        "NoMove"
-                                                    ],
                                        "ContentProvenance":  {
                                                                  "Guessed":  true,
                                                                  "Confirmed":  false,
                                                                  "Donor":  "ADAF",
                                                                  "Source":  "Market food stall (Randy). Pink FPBY mapping guessed; no stock"
                                                              },
-                                       "LootTable":  [
-
-                                                     ]
+                                       "LootTable":  [ { "Hash":  "QNCN", "Repeats":  1, "Chance":  100, "LevelMod":  0 } ]
                                    },
                                    {
                                        "Name":  "Yuttos Nascence Geosurvey Dog",
@@ -164655,9 +164639,7 @@
                                                      "27":  612,
                                                      "12":  208966
                                                  },
-                                       "LootTable":  [
-
-                                                     ]
+                                       "LootTable":  [ { "Hash":  "QNCN", "Repeats":  1, "Chance":  100, "LevelMod":  0 } ]
                                    }
                                ],
                  "ContentProvenance":  {
@@ -165166,44 +165148,6 @@
                                                      "455":  252,
                                                      "1":  2025,
                                                      "27":  2025,
-                                                     "12":  208982
-                                                 },
-                                       "LootTable":  [
-
-                                                     ]
-                                   }
-                               ],
-                 "ContentProvenance":  {
-                                           "Guessed":  false,
-                                           "Source":  "scrape-nasc-20261030",
-                                           "Note":  "live PRK scrape (hashpoint)"
-                                       }
-             },
-    "RDGA":  {
-                 "Templates":  [
-                                   {
-                                       "Name":  "Hiathlin",
-                                       "Level":  16,
-                                       "Stats":  {
-                                                     "0":  268964353,
-                                                     "4":  3,
-                                                     "47":  1,
-                                                     "59":  3,
-                                                     "64":  29699,
-                                                     "89":  1,
-                                                     "156":  61,
-                                                     "466":  0,
-                                                     "673":  31,
-                                                     "285":  24,
-                                                     "286":  8,
-                                                     "61":  160,
-                                                     "54":  16,
-                                                     "33":  3,
-                                                     "359":  209196,
-                                                     "360":  97,
-                                                     "455":  189,
-                                                     "1":  670,
-                                                     "27":  670,
                                                      "12":  208982
                                                  },
                                        "LootTable":  [
