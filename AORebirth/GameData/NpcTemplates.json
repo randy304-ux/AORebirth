@@ -132800,6 +132800,68 @@
                                            "Note":  "live PRK scrape (hashpoint)"
                                        }
              },
+    "GAIX":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Garboil Ixi Thrak",
+                                       "Level":  40,
+                                       "Stats":  {
+                                                     "0":  277352961,
+                                                     "4":  1,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "59":  0,
+                                                     "60":  15,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  5,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  24,
+                                                     "286":  8,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "54":  40,
+                                                     "33":  2,
+                                                     "359":  208635,
+                                                     "360":  150,
+                                                     "455":  202,
+                                                     "1":  2320,
+                                                     "27":  2320,
+                                                     "12":  233207
+                                                 },
+                                       "LootTable":  [
+
+                                                     ],
+                                       "Features":  [
+                                                        "NoCombat"
+                                                    ]
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  false,
+                                           "Source":  "retired-capture-ThrakOmniGardenSpawn",
+                                           "Note":  "PF 4677 hash GAIX at 445.24,33.01,522.83 matches capture Garboil Ixi Thrak (MD 208635, scale 150, mesh 233207, HP 2320, L40)"
+                                       }
+             },
     "HYMA":  {
                  "Templates":  [
                                    {
@@ -162121,6 +162183,70 @@
                                            "Guessed":  false,
                                            "Source":  "scrape-sl-20261029",
                                            "Note":  "live PRK scrape (hashpoint)"
+                                       }
+             },
+    "OPPI":  {
+                 "Templates":  [
+                                   {
+                                       "Name":  "Operator Pi-Ixi Thrak",
+                                       "Level":  40,
+                                       "Stats":  {
+                                                     "0":  277352961,
+                                                     "4":  1,
+                                                     "18":  0,
+                                                     "21":  0,
+                                                     "37":  1,
+                                                     "47":  1,
+                                                     "59":  0,
+                                                     "60":  15,
+                                                     "89":  1,
+                                                     "99":  503,
+                                                     "132":  5,
+                                                     "156":  5,
+                                                     "173":  3,
+                                                     "174":  3,
+                                                     "214":  1,
+                                                     "274":  0,
+                                                     "284":  0,
+                                                     "285":  60,
+                                                     "286":  20,
+                                                     "292":  0,
+                                                     "339":  91,
+                                                     "342":  600,
+                                                     "343":  0,
+                                                     "368":  15,
+                                                     "387":  503,
+                                                     "389":  0,
+                                                     "417":  503,
+                                                     "421":  3,
+                                                     "436":  91,
+                                                     "466":  15,
+                                                     "660":  0,
+                                                     "673":  31,
+                                                     "1003":  0,
+                                                     "64":  0,
+                                                     "54":  40,
+                                                     "33":  2,
+                                                     "359":  208640,
+                                                     "360":  200,
+                                                     "455":  202,
+                                                     "1":  2320,
+                                                     "27":  2320,
+                                                     "12":  209541
+                                                 },
+                                       "HasHeadMesh":  false,
+                                       "LootTable":  [
+
+                                                     ],
+                                       "Features":  [
+                                                        "NoCombat"
+                                                    ]
+                                   }
+                               ],
+                 "ContentProvenance":  {
+                                           "Guessed":  false,
+                                           "Source":  "retired-capture-ThrakOmniGardenSpawn",
+                                           "Note":  "PF 4677 hash OPPI at 320.02,25.01,342.41 matches capture Operator Pi-Ixi Thrak (MD 208640, scale 200, mesh 209541, HP 2320, L40)"
                                        }
              },
     "AXDQ":  {
