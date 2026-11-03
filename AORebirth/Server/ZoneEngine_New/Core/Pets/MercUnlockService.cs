@@ -9,7 +9,9 @@ namespace ZoneEngine_New.Core.Pets
 
     using ZoneEngine_New.Core.Data;
     using ZoneEngine_New.Core.Entities;
+    using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
+    using ZoneEngine_New.Core.Nanos;
 
     /// <summary>
     /// Per-character dungeon merc unlock state and summon gate. Reuses <see cref="PetService.HireMerc"/> /
@@ -21,21 +23,29 @@ namespace ZoneEngine_New.Core.Pets
         public const string StateLocked = "locked";
         public const string StateDungeonOnly = "dungeon_only";
         public const string StateUnlocked = "unlocked";
+        public const string NtModeAoe = "aoe";
+        public const string NtModeSt = "st";
+        public const string NtModeSettingKey = "nt_mode";
 
         readonly MercRosterCatalog _roster;
+        readonly MercProfessionNanos _nanos;
         readonly IZoneLogger _logger;
         readonly string _connection;
         readonly ConcurrentDictionary<int, Dictionary<string, MercUnlockState>> _cache = new();
         readonly ConcurrentDictionary<int, HashSet<string>> _summoned = new();
+        readonly ConcurrentDictionary<int, string> _ntModeCache = new();
 
-        public MercUnlockService(MercRosterCatalog roster, IZoneLogger logger)
+        public MercUnlockService(MercRosterCatalog roster, MercProfessionNanos nanos, IZoneLogger logger)
         {
             _roster = roster ?? throw new ArgumentNullException(nameof(roster));
+            _nanos = nanos ?? throw new ArgumentNullException(nameof(nanos));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _connection = MySqlConnectionSettings.GetRequiredConnectionString();
         }
 
         public MercRosterCatalog Roster => _roster;
+
+        public MercProfessionNanos Nanos => _nanos;
 
         public MercUnlockState GetState(Player player, MercDefinition def)
         {
@@ -167,7 +177,6 @@ namespace ZoneEngine_New.Core.Pets
             if (pets == null)
                 return "Mercenaries are not available here.";
 
-            // One body per profession slot. NT AOE/ST replace each other.
             pets.DismissMerc(player, def.Kind);
             ClearSummonedKind(player.Identity.Instance, def.Kind.Key);
 
@@ -175,20 +184,157 @@ namespace ZoneEngine_New.Core.Pets
             if (npc == null)
                 return "Could not summon right now (mercenaries off, or you are dead or zoning).";
 
-            npc.Name = def.DisplayName;
-            // TODO: filter UploadedNanoIds by nanoStyle (aoe/st) once AOE vs ST nano ids are classified.
-            if (!string.IsNullOrEmpty(def.NanoStyle))
-                _logger.Info("Merc " + def.Id + " summoned with nanoStyle=" + def.NanoStyle + " (AOE/ST filter TODO).");
-
             HashSet<string> set = _summoned.GetOrAdd(player.Identity.Instance, _ => new HashSet<string>(StringComparer.OrdinalIgnoreCase));
-            // Drop siblings of the same profession so NT mode is singular.
             set.RemoveWhere(id =>
             {
                 MercDefinition? other = _roster.Find(id);
                 return other != null && other.Kind.Key == def.Kind.Key;
             });
             set.Add(def.Id);
+            ConfigureSummonedMerc(player, npc, def);
             return null;
+        }
+
+        /// <summary>Rename + NT nuke filter after hire/revive.</summary>
+        public void ConfigureSummonedMerc(Player owner, NpcCharacter npc, MercDefinition? def = null)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            ArgumentNullException.ThrowIfNull(npc);
+            Mercs.Kind? kind = Mercs.ByHash(npc.Pet?.Hash);
+            if (kind == null)
+                return;
+
+            def ??= FindSummonedDefinition(owner, kind) ?? _roster.All.FirstOrDefault(d => d.Kind.Key == kind.Key);
+            if (def == null)
+                return;
+
+            if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
+            {
+                string mode = GetNtMode(owner);
+                npc.Name = DisplayNameWithNtMode(def, mode);
+                _nanos.FilterNtNukes(npc.UploadedNanoIds, aoeMode: mode == NtModeAoe);
+                return;
+            }
+
+            npc.Name = def.DisplayName;
+        }
+
+        public MercDefinition? FindSummonedDefinition(Player player, Mercs.Kind kind)
+        {
+            if (!_summoned.TryGetValue(player.Identity.Instance, out HashSet<string>? set))
+                return null;
+            foreach (string id in set)
+            {
+                MercDefinition? def = _roster.Find(id);
+                if (def != null && def.Kind.Key == kind.Key)
+                    return def;
+            }
+
+            return null;
+        }
+
+        public NpcCharacter? FindSummonedNpc(Player player, MercDefinition def)
+        {
+            foreach (NpcCharacter pet in player.OwnedPets.All)
+            {
+                if (pet.Pet == null || pet.IsDead)
+                    continue;
+                if (!string.Equals(pet.Pet.Hash, def.Kind.Hash, StringComparison.OrdinalIgnoreCase))
+                    continue;
+                return pet;
+            }
+
+            return null;
+        }
+
+        public string DisplayNameFor(Player player, MercDefinition def)
+        {
+            if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
+                return DisplayNameWithNtMode(def, GetNtMode(player));
+            return def.DisplayName;
+        }
+
+        public static string DisplayNameWithNtMode(MercDefinition def, string mode)
+            => def.DisplayName + (mode == NtModeAoe ? " (AOE)" : " (ST)");
+
+        public string GetNtMode(Player player)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            int id = player.Identity.Instance;
+            if (_ntModeCache.TryGetValue(id, out string? cached))
+                return cached;
+            string mode = LoadSetting(id, NtModeSettingKey) ?? NtModeAoe;
+            if (!mode.Equals(NtModeSt, StringComparison.OrdinalIgnoreCase))
+                mode = NtModeAoe;
+            else
+                mode = NtModeSt;
+            _ntModeCache[id] = mode;
+            return mode;
+        }
+
+        public string SetNtMode(Player player, string modeText)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            string mode = modeText.Trim().Equals(NtModeSt, StringComparison.OrdinalIgnoreCase) ? NtModeSt : NtModeAoe;
+            SaveSetting(player.Identity.Instance, NtModeSettingKey, mode);
+            _ntModeCache[player.Identity.Instance] = mode;
+
+            MercDefinition? nt = _roster.Find("nt_sanctum");
+            if (nt != null && IsSummoned(player, nt))
+            {
+                NpcCharacter? npc = FindSummonedNpc(player, nt);
+                if (npc != null)
+                {
+                    // Re-upload profession nanos then filter so switching modes restores the other set.
+                    npc.UploadedNanoIds.Clear();
+                    npc.UploadedNanoIds.AddRange(Mercs.TierNanosFor(nt.Kind, Mercs.Tier.Basic));
+                    ConfigureSummonedMerc(player, npc, nt);
+                }
+            }
+
+            return mode;
+        }
+
+        /// <summary>Runs a Keeper aura on the summoned Keeper (one per NanoStrain slot).</summary>
+        public string RunKeeperAura(Player player, string auraType)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            MercDefinition? keeper = _roster.All.FirstOrDefault(d => d.Kind.Key == "keeper");
+            if (keeper == null)
+                return "Keeper roster entry missing.";
+            if (!IsSummoned(player, keeper))
+                return "Summon your Keeper first (.merc summon " + keeper.Id + ").";
+
+            NpcCharacter? npc = FindSummonedNpc(player, keeper);
+            if (npc == null)
+                return "Keeper pet not found.";
+
+            MercProfessionNanos.KeeperAuraOffer? offer = _nanos.BestKeeperAura(auraType, keeper.Level, npc);
+            if (offer == null)
+                return "Unknown Keeper aura type. Try: " + string.Join(", ", _nanos.KeeperAuraTypes());
+            if (!offer.Value.Available)
+                return offer.Value.Name + " needs a higher level (requires "
+                    + offer.Value.RequiredLevel.ToString(System.Globalization.CultureInfo.InvariantCulture) + ").";
+
+            ItemTemplate? template = _nanos.TryGetTemplate(offer.Value.NanoId);
+            if (template == null)
+                return "Aura nano " + offer.Value.NanoId + " is not in the item catalog.";
+
+            NanoSpell spell = NanoSpell.From(template);
+            // One aura per strain slot: drop any running buff on that strain first.
+            if (spell.NanoStrain > 0)
+                npc.RemoveBuffs(buff => buff.NanoStrain == spell.NanoStrain);
+
+            DateTime now = DateTime.UtcNow;
+            BuffApplyDecision decision = npc.TryApplyBuff(spell, npc.Identity, now, out Buff? applied, out _);
+            if (applied == null)
+                return "Could not apply " + offer.Value.Name + " (" + decision + ").";
+
+            if (!npc.UploadedNanoIds.Contains(offer.Value.NanoId))
+                npc.UploadedNanoIds.Add(offer.Value.NanoId);
+
+            return "Keeper aura set to " + offer.Value.Name + " [" + offer.Value.Type + ", strain "
+                + offer.Value.Strain.ToString(System.Globalization.CultureInfo.InvariantCulture) + "].";
         }
 
         public string? Dismiss(Player player, MercDefinition? def)
@@ -214,7 +360,11 @@ namespace ZoneEngine_New.Core.Pets
                 {
                     foreach (NpcCharacter pet in player.OwnedPets.All.ToArray())
                     {
-                        if (pet.Pet == null || !string.Equals(pet.Name, row.DisplayName, StringComparison.OrdinalIgnoreCase))
+                        if (pet.Pet == null)
+                            continue;
+                        string petName = pet.Name ?? string.Empty;
+                        if (!string.Equals(petName, row.DisplayName, StringComparison.OrdinalIgnoreCase)
+                            && !petName.StartsWith(row.DisplayName + " (", StringComparison.OrdinalIgnoreCase))
                             continue;
                         pets.DismissMerc(player, row.Kind);
                         any = true;
@@ -386,6 +536,48 @@ namespace ZoneEngine_New.Core.Pets
             catch (Exception exception)
             {
                 _logger.Warn("character_merc_unlocks delete failed: " + exception.Message);
+            }
+        }
+
+        string? LoadSetting(int characterId, string key)
+        {
+            try
+            {
+                using var db = new MySqlConnection(_connection);
+                db.Open();
+                using var cmd = new MySqlCommand(
+                    "SELECT SettingValue FROM character_merc_settings WHERE CharacterId=@c AND SettingKey=@k LIMIT 1",
+                    db);
+                cmd.Parameters.AddWithValue("@c", characterId);
+                cmd.Parameters.AddWithValue("@k", key);
+                object? value = cmd.ExecuteScalar();
+                return value?.ToString();
+            }
+            catch (Exception exception)
+            {
+                _logger.Warn("character_merc_settings read failed: " + exception.Message);
+                return null;
+            }
+        }
+
+        void SaveSetting(int characterId, string key, string value)
+        {
+            try
+            {
+                using var db = new MySqlConnection(_connection);
+                db.Open();
+                using var cmd = new MySqlCommand(
+                    "INSERT INTO character_merc_settings (CharacterId, SettingKey, SettingValue) VALUES (@c,@k,@v) "
+                    + "ON DUPLICATE KEY UPDATE SettingValue=VALUES(SettingValue), UpdatedAtUtc=CURRENT_TIMESTAMP",
+                    db);
+                cmd.Parameters.AddWithValue("@c", characterId);
+                cmd.Parameters.AddWithValue("@k", key);
+                cmd.Parameters.AddWithValue("@v", value);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception exception)
+            {
+                _logger.Warn("character_merc_settings write failed: " + exception.Message);
             }
         }
     }

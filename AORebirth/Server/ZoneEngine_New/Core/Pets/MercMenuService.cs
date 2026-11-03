@@ -5,9 +5,6 @@ namespace ZoneEngine_New.Core.Pets
     using System.Globalization;
     using System.Text;
 
-    using SmokeLounge.AOtomation.Messaging.GameData;
-
-    using ZoneEngine_New.Core.Bots;
     using ZoneEngine_New.Core.Commands;
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.Nanos;
@@ -22,12 +19,10 @@ namespace ZoneEngine_New.Core.Pets
         const int PageMax = 3400;
 
         readonly MercUnlockService _unlocks;
-        readonly BuffbotCatalog _buffs;
 
-        public MercMenuService(MercUnlockService unlocks, BuffbotCatalog buffs)
+        public MercMenuService(MercUnlockService unlocks)
         {
             _unlocks = unlocks ?? throw new ArgumentNullException(nameof(unlocks));
-            _buffs = buffs ?? throw new ArgumentNullException(nameof(buffs));
         }
 
         public void HandleTell(Player player, string botName, string message)
@@ -139,7 +134,7 @@ namespace ZoneEngine_New.Core.Pets
             string filterKey = string.IsNullOrWhiteSpace(filter) ? FilterAll : filter.Trim();
             var body = new StringBuilder();
             body.Append(DiagAoml.Title("Mercs"));
-            body.Append("<br>").Append(DiagAoml.Muted("Dungeon unlock mercs. Batch 1: menu + summon. Mission NPCs are batch 2."));
+            body.Append("<br>").Append(DiagAoml.Muted("Dungeon unlock mercs. Buff lists come from items.dat (team/other castable)."));
             body.Append("<br>").Append(FilterLinks(filterKey));
             body.Append("<br>").Append(CmdLink(".merc macros", "Macros"));
             body.Append("<br><br>");
@@ -175,13 +170,22 @@ namespace ZoneEngine_New.Core.Pets
         {
             MercUnlockState state = _unlocks.GetState(player, def);
             bool summoned = _unlocks.IsSummoned(player, def);
+            string shown = _unlocks.DisplayNameFor(player, def);
             var sb = new StringBuilder();
-            sb.Append(DiagAoml.Label(Esc(def.DisplayName)));
+            sb.Append(DiagAoml.Label(Esc(shown)));
             sb.Append(' ').Append(DiagAoml.Muted(
                 "L" + def.Level.ToString(CultureInfo.InvariantCulture)
                 + " " + def.Kind.Title
                 + " · " + def.Role
                 + " · " + def.DungeonName));
+
+            if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
+            {
+                string mode = _unlocks.GetNtMode(player).ToUpperInvariant();
+                sb.Append(' ').Append(DiagAoml.Muted("[NT " + mode + "]"));
+                sb.Append(' ').Append(CmdLink(".merc preset nt aoe", "AOE"));
+                sb.Append(' ').Append(CmdLink(".merc preset nt st", "ST"));
+            }
 
             if (state == MercUnlockState.Locked)
             {
@@ -241,7 +245,7 @@ namespace ZoneEngine_New.Core.Pets
         {
             var body = new StringBuilder();
             body.Append(DiagAoml.Title("Merc macros"));
-            body.Append("<br>").Append(DiagAoml.Muted("Copyable commands. Preset handlers that the merc AI cannot do yet are marked TODO."));
+            body.Append("<br>").Append(DiagAoml.Muted("Copyable commands. Keeper aura and NT mode are live; trader/MP presets still TODO."));
             body.Append("<br><br>").Append(DiagAoml.Muted("General"));
             body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc menu")));
             body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc list")));
@@ -249,12 +253,13 @@ namespace ZoneEngine_New.Core.Pets
             body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc dismiss")));
             body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc buffs")));
             body.Append("<br><br>").Append(DiagAoml.Muted("Presets"));
-            body.Append("<br>").Append(CmdLink(".merc preset keeper aura", "Keeper aura picker"));
-            body.Append(' ').Append(DiagAoml.Muted(Esc(".merc preset keeper aura <name>")));
-            body.Append("<br>").Append(CmdLink(".merc preset trader wrangle", "Trader wrangle (largest ST)"));
-            body.Append("<br>").Append(CmdLink(".merc preset trader umbral", "Trader Umbral wrangle"));
-            body.Append("<br>").Append(CmdLink(".merc preset mp composite", "MP composite nano buffs"));
-            body.Append("<br>").Append(CmdLink(".merc preset mp singles", "MP single nano buffs"));
+            body.Append("<br>").Append(CmdLink(".merc preset keeper aura", "Keeper aura list"));
+            foreach (string type in _unlocks.Nanos.KeeperAuraTypes())
+                body.Append("<br>").Append(CmdLink(".merc preset keeper aura " + type, "Keeper " + type));
+            body.Append("<br>").Append(CmdLink(".merc preset trader wrangle", "Trader wrangle (TODO)"));
+            body.Append("<br>").Append(CmdLink(".merc preset trader umbral", "Trader Umbral (TODO)"));
+            body.Append("<br>").Append(CmdLink(".merc preset mp composite", "MP composite (TODO)"));
+            body.Append("<br>").Append(CmdLink(".merc preset mp singles", "MP singles (TODO)"));
             body.Append("<br>").Append(CmdLink(".merc preset nt aoe", "NT mode AOE"));
             body.Append("<br>").Append(CmdLink(".merc preset nt st", "NT mode ST"));
             body.Append("<br><br>").Append(CmdLink(".merc menu", "Back"));
@@ -263,63 +268,56 @@ namespace ZoneEngine_New.Core.Pets
 
         public void OpenMercBuffs(Player player, MercDefinition def)
         {
-            BuffSection? section = FindProfessionSection(def.Kind.Title);
-            var body = new StringBuilder();
-            body.Append(DiagAoml.Title(Esc(def.DisplayName) + " buffs"));
-            body.Append("<br>").Append(DiagAoml.Muted(
-                def.Kind.Title + " L" + def.Level.ToString(CultureInfo.InvariantCulture)
-                + " · NCU " + player.UsedNcu.ToString(CultureInfo.InvariantCulture)
-                + "/" + player.MaxNcu.ToString(CultureInfo.InvariantCulture)));
-            if (!_unlocks.IsSummoned(player, def))
-            {
-                body.Append("<br>").Append(DiagAoml.Muted("This merc is not summoned — showing the profession buff list anyway."));
-            }
+            NpcCharacter? npc = _unlocks.FindSummonedNpc(player, def);
+            IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers = _unlocks.Nanos.BuffsFor(def.Kind, def.Level, npc);
+            string shown = _unlocks.DisplayNameFor(player, def);
 
-            if (section == null)
-            {
-                body.Append("<br><br>").Append(DiagAoml.Muted(
-                    "TODO: no Buffbot.json section for " + def.Kind.Title + " (Keeper/Adventurer/Shade may be missing)."));
-                body.Append("<br><br>").Append(CmdLink(".merc menu", "Back"));
-                SendWindow(player, body.ToString(), def.DisplayName + " buffs");
-                return;
-            }
-
-            List<string> parts = BuildBuffParts(player, def, section);
-            for (int i = 0; i < parts.Count; i++)
-            {
-                string label = parts.Count == 1
-                    ? def.DisplayName + " buffs"
-                    : string.Format(CultureInfo.InvariantCulture, "{0} buffs {1}/{2}", def.DisplayName, i + 1, parts.Count);
-                SendWindow(player, parts[i], label);
-            }
-        }
-
-        List<string> BuildBuffParts(Player player, MercDefinition def, BuffSection section)
-        {
             var lines = new List<string>();
-            foreach (BuffLine line in section.Lines)
+            if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
             {
-                if (!_buffs.TryOffer(line, def.Level, out BuffOffer offer))
-                    continue;
+                string mode = _unlocks.GetNtMode(player).ToUpperInvariant();
+                lines.Add(DiagAoml.Muted("NT nuke mode: " + mode + " — ")
+                    + CmdLink(".merc preset nt aoe", "AOE") + " "
+                    + CmdLink(".merc preset nt st", "ST"));
+            }
+
+            foreach (MercProfessionNanos.MercBuffOffer offer in offers)
+            {
                 var text = new StringBuilder();
-                string bonus = offer.Bonus.Length == 0 ? string.Empty : " [" + offer.Bonus + "]";
                 string ncu = " [NCU: " + offer.Ncu.ToString(CultureInfo.InvariantCulture) + "]";
                 if (offer.Available)
                 {
                     text.Append("<a href='chatcmd:///say .merc cast ")
                         .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture))
                         .Append("'>").Append(Esc(offer.Name)).Append("</a> ")
-                        .Append(Esc(bonus.TrimStart() + ncu));
+                        .Append(Esc(ncu));
                 }
                 else
                 {
-                    text.Append(DiagAoml.Muted(Esc(offer.Name + bonus + ncu
+                    text.Append(DiagAoml.Muted(Esc(offer.Name + ncu
                         + " - merc needs level " + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture))));
                 }
 
                 lines.Add(text.ToString());
             }
 
+            List<string> parts = PackPages(shown + " buffs",
+                def.Kind.Title + " L" + def.Level.ToString(CultureInfo.InvariantCulture)
+                + " · team/other buffs from items.dat · NCU "
+                + player.UsedNcu.ToString(CultureInfo.InvariantCulture) + "/"
+                + player.MaxNcu.ToString(CultureInfo.InvariantCulture),
+                lines);
+            for (int i = 0; i < parts.Count; i++)
+            {
+                string label = parts.Count == 1
+                    ? shown + " buffs"
+                    : string.Format(CultureInfo.InvariantCulture, "{0} buffs {1}/{2}", shown, i + 1, parts.Count);
+                SendWindow(player, parts[i], label);
+            }
+        }
+
+        List<string> PackPages(string title, string subtitle, List<string> lines)
+        {
             var chunks = new List<List<string>>();
             var current = new List<string>();
             int size = 0;
@@ -343,14 +341,12 @@ namespace ZoneEngine_New.Core.Pets
             for (int i = 0; i < chunks.Count; i++)
             {
                 var body = new StringBuilder();
-                body.Append(DiagAoml.Title(Esc(def.DisplayName) + " buffs"));
+                body.Append(DiagAoml.Title(Esc(title)));
                 if (chunks.Count > 1)
                     body.Append(' ').Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "{0}/{1}", i + 1, chunks.Count)));
-                body.Append("<br>").Append(DiagAoml.Muted(
-                    "Limited to this merc's profession and level "
-                    + def.Level.ToString(CultureInfo.InvariantCulture) + "."));
+                body.Append("<br>").Append(DiagAoml.Muted(Esc(subtitle)));
                 if (lines.Count == 0)
-                    body.Append("<br>").Append(DiagAoml.Muted("No matching buffs in Buffbot.json for this level."));
+                    body.Append("<br>").Append(DiagAoml.Muted("No team/other castable buffs found in items.dat for this profession/level."));
                 foreach (string line in chunks[i])
                     body.Append("<br>").Append(line);
                 body.Append("<br><br>").Append(CmdLink(".merc menu", "Back"));
@@ -360,42 +356,42 @@ namespace ZoneEngine_New.Core.Pets
             return parts;
         }
 
-        BuffSection? FindProfessionSection(string title)
-        {
-            foreach (BuffSection section in _buffs.Sections)
-            {
-                if (string.Equals(section.Name, title, StringComparison.OrdinalIgnoreCase))
-                    return section;
-                if (string.Equals(section.Name, "Nano-Technician", StringComparison.OrdinalIgnoreCase)
-                    && title.Contains("Nano", StringComparison.OrdinalIgnoreCase))
-                    return section;
-                if (string.Equals(section.Name, "Metaphysicist", StringComparison.OrdinalIgnoreCase)
-                    && title.Contains("Meta", StringComparison.OrdinalIgnoreCase))
-                    return section;
-            }
-
-            return null;
-        }
-
         void RunPreset(Player player, string preset)
         {
             string key = (preset ?? string.Empty).Trim().ToLowerInvariant();
-            if (key.StartsWith("keeper", StringComparison.Ordinal))
+            if (key == "keeper aura" || key == "keeper" || key.Equals("keeper aura list", StringComparison.Ordinal))
             {
-                // Keeper auras are player .aura today; merc-driven aura AI is not wired.
-                Say(player, "TODO: Keeper merc aura preset — tell the summoned Keeper which aura to run once merc AI supports aura switching. Player .aura still works on you/pets.");
+                OpenKeeperAuraPicker(player);
+                return;
+            }
+
+            if (key.StartsWith("keeper aura ", StringComparison.Ordinal))
+            {
+                string type = key.Substring("keeper aura ".Length).Trim();
+                string result = _unlocks.RunKeeperAura(player, type);
+                Say(player, result);
+                return;
+            }
+
+            if (key.StartsWith("keeper ", StringComparison.Ordinal))
+            {
+                string type = key.Substring("keeper ".Length).Trim();
+                if (type.StartsWith("aura ", StringComparison.Ordinal))
+                    type = type.Substring(5).Trim();
+                string result = _unlocks.RunKeeperAura(player, type);
+                Say(player, result);
                 return;
             }
 
             if (key.StartsWith("trader wrangle", StringComparison.Ordinal) || key == "trader wrangle")
             {
-                Say(player, "TODO: Trader largest single-target wrangle — need verified wrangle nano id at merc level, then cast via merc nano AI.");
+                Say(player, "TODO: Trader largest single-target wrangle — need verified wrangle nano id at merc level.");
                 return;
             }
 
             if (key.StartsWith("trader umbral", StringComparison.Ordinal) || key == "trader umbral")
             {
-                Say(player, "TODO: Trader Umbral wrangle — need verified Umbral wrangle nano id before wiring.");
+                Say(player, "TODO: Trader Umbral wrangle — need verified Umbral wrangle nano id.");
                 return;
             }
 
@@ -413,33 +409,62 @@ namespace ZoneEngine_New.Core.Pets
 
             if (key == "nt aoe" || key.StartsWith("nt aoe", StringComparison.Ordinal))
             {
-                MercDefinition? aoe = _unlocks.Roster.Find("nt_sanctum_aoe");
-                if (aoe == null)
-                {
-                    Say(player, "NT AOE roster entry missing.");
-                    return;
-                }
-
-                string? err = _unlocks.Summon(player, aoe);
-                Say(player, err ?? ("Switched to " + aoe.DisplayName + ". TODO: AOE-only nuke filter on UploadedNanoIds."));
+                string mode = _unlocks.SetNtMode(player, MercUnlockService.NtModeAoe);
+                Say(player, "NT nuke mode set to " + mode.ToUpperInvariant()
+                    + ". Summoned NT name shows (AOE); only AOE nukes stay uploaded.");
                 return;
             }
 
             if (key == "nt st" || key.StartsWith("nt st", StringComparison.Ordinal))
             {
-                MercDefinition? st = _unlocks.Roster.Find("nt_sanctum_st");
-                if (st == null)
-                {
-                    Say(player, "NT ST roster entry missing.");
-                    return;
-                }
-
-                string? err = _unlocks.Summon(player, st);
-                Say(player, err ?? ("Switched to " + st.DisplayName + ". TODO: ST-only nuke filter on UploadedNanoIds."));
+                string mode = _unlocks.SetNtMode(player, MercUnlockService.NtModeSt);
+                Say(player, "NT nuke mode set to " + mode.ToUpperInvariant()
+                    + ". Summoned NT name shows (ST); only single-target nukes stay uploaded.");
                 return;
             }
 
             Say(player, "Unknown preset. See .merc macros.");
+        }
+
+        void OpenKeeperAuraPicker(Player player)
+        {
+            MercDefinition? keeper = null;
+            foreach (MercDefinition def in _unlocks.Roster.All)
+            {
+                if (def.Kind.Key == "keeper")
+                {
+                    keeper = def;
+                    break;
+                }
+            }
+
+            int level = keeper?.Level ?? 149;
+            NpcCharacter? npc = keeper != null ? _unlocks.FindSummonedNpc(player, keeper) : null;
+            var body = new StringBuilder();
+            body.Append(DiagAoml.Title("Keeper auras"));
+            body.Append("<br>").Append(DiagAoml.Muted(
+                "From items.dat. One aura per NanoStrain slot. Highest rank the Keeper level allows."));
+            body.Append("<br>").Append(DiagAoml.Muted(
+                "Types: heal(Ambient/527), nano(Tone/527), damage(Vengeance/529), enervate(529), barrier(528), aao(Imminence/528), courage(900), ward(224)."));
+            foreach (MercProfessionNanos.KeeperAuraOffer offer in _unlocks.Nanos.KeeperAurasFor(level, npc))
+            {
+                body.Append("<br>");
+                if (offer.Available)
+                {
+                    body.Append(CmdLink(".merc preset keeper aura " + offer.Type, offer.Type));
+                    body.Append(' ').Append(DiagAoml.Muted(Esc(offer.Name + " L"
+                        + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture)
+                        + " strain " + offer.Strain.ToString(CultureInfo.InvariantCulture))));
+                }
+                else
+                {
+                    body.Append(DiagAoml.Muted(Esc(offer.Type + ": " + offer.Name
+                        + " (needs L" + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture) + ")")));
+                }
+            }
+
+            body.Append("<br><br>").Append(CmdLink(".merc menu", "Back"));
+            SendWindow(player, body.ToString(), "Keeper auras");
         }
 
         static string CmdLink(string command, string label)

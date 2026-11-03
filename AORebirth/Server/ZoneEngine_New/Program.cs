@@ -330,6 +330,7 @@ namespace ZoneEngine_New
             services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.BattlesuitCommand>();
             services.AddSingleton<IGmCommand, ZoneEngine_New.Core.Commands.BattleStationCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Pets.MercRosterCatalog>();
+            services.AddSingleton<ZoneEngine_New.Core.Pets.MercProfessionNanos>();
             services.AddSingleton<ZoneEngine_New.Core.Pets.MercUnlockService>();
             services.AddSingleton<ZoneEngine_New.Core.Pets.MercMenuService>();
             services.AddSingleton<IGmCommand, MercCommand>();
