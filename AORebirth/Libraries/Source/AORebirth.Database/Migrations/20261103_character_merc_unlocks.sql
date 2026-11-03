@@ -40,7 +40,7 @@ VALUES
 	('doctor_totw','TODO-Randy-Name (Doctor)','doctor',59,'healer','twink,healer','Temple of Three Winds','1931','Aztur the Immortal','AZTR','doctor_totw',NULL,NULL),
 	('bureaucrat_som','TODO-Randy-Name (Bureaucrat)','bureaucrat',50,'crowd control','twink,crowd control','Steps of Madness','1933','Neleb the Deranged','NETH','bureaucrat_som',NULL,NULL),
 	('fixer_biomare','TODO-Randy-Name (Fixer)','fixer',99,'support','twink,support','Biomare / Foreman''s','1941','Lab Director',NULL,'fixer_biomare',NULL,'TODO: Lab Director hash'),
-	('soldier_cyborg','TODO-Randy-Name (Soldier)','soldier',95,'DPS','twink,DPS','Cyborg Barracks','1833','Commander Jocasta',NULL,'soldier_cyborg',NULL,'TODO: Commander Jocasta hash'),
+	('soldier_cyborg','TODO-Randy-Name (Soldier)','soldier',95,'DPS','twink,DPS','Cyborg Barracks','1833','Commander Jocasta','THVI','soldier_cyborg',NULL,'Boss hash THVI from client Spawns.json + Whozewhatzit 2026-11-03 scrape (MonsterData 154698)'),
 	('adventurer_crypt','TODO-Randy-Name (Adventurer)','adventurer',109,'support','elite,support','Crypt of Home','4805','Cerubin the Rejected',NULL,'adventurer_crypt',NULL,'TODO: Cerubin hash'),
 	('keeper_smugglers','TODO-Randy-Name (Keeper)','keeper',149,'support','elite,support','Smuggler''s Den','125,1862','Den Mantis Queen',NULL,'keeper_smugglers',NULL,'TODO: Den Mantis Queen hash'),
 	('nt_sanctum_aoe','TODO-Randy-Name (AOE)','nanotechnician',189,'carry','elite,carry,DPS,aoe','Inner Sanctum','','Hezak the Immortal',NULL,'nt_sanctum','aoe','TODO: Inner Sanctum PF + Hezak hash; shares unlock with ST'),

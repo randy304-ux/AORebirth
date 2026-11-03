@@ -83,12 +83,11 @@
       "dungeonName": "Cyborg Barracks",
       "dungeonPlayfields": [1833],
       "bossName": "Commander Jocasta",
-      "bossHash": null,
+      "bossHash": "THVI",
       "bossMonsterData": 154698,
-      "bossHashTodo": "NPCHash empty in Randy 2026-11-03 live scrape; unlock matches MonsterData 154698 in pf 1833, with BossName fallback",
       "unlockGroup": "soldier_cyborg",
       "nanoStyle": null,
-      "notes": "Dungeon 'Dng: Cyborg Barracks' pf 1833. Entry from Greater Tir County 647 near 3232,25.5,2336 arrives at 103.0,16.6,192.0. End boss Commander Jocasta L90 MonsterData template 154698."
+      "notes": "Dungeon 'Dng: Cyborg Barracks' pf 1833. Entry from Greater Tir County 647 near 3232,25.5,2336 arrives at 103.0,16.6,192.0. End boss Commander Jocasta L90 MonsterData 154698; client Spawns.json hash THVI filled from Whozewhatzit scrape 2026-11-03."
     },
     {
       "id": "adventurer_crypt",
