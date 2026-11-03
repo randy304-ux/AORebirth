@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "notes": "Outdoor Shadowlands abyss basins (heightmap Y near 0). Jumping off a ledge into that pit zones to Destinations.dat — same landings as the walk-in PF doors. Nascence→Jobe Research matches PRK fall-off behavior and Randy's Frontier Bridge ledge (pit between bridge ~Z1100 and Jobe door ~Z965 on pf 4310). Not SurfaceTeleportal door polygons.",
+  "abyssTerrainMax": 0.05,
+  "fallEnterMaxY": 12.0,
+  "exits": {
+    "4310": { "destPlayfield": 4001, "destIndex": 4 },
+    "4311": { "destPlayfield": 4001, "destIndex": 7 },
+    "4312": { "destPlayfield": 4001, "destIndex": 6 }
+  }
+}

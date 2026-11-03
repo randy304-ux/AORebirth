@@ -90,6 +90,7 @@ namespace ZoneEngine_New
                 IZoneLogger logger = rootServices.GetRequiredService<IZoneLogger>();
                 IGameData gameData = rootServices.GetRequiredService<IGameData>();
                 DestinationsCatalog.Instance.ConfigureRoot(gameData.RootPath);
+                FallZoneCatalog.Instance.ConfigureRoot(gameData.RootPath);
                 LogLocalityStartup();
                 logger.Info(
                     string.Format(

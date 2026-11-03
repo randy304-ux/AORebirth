@@ -817,7 +817,9 @@ namespace ZoneEngine_New.Core.Movement
 
         /// <summary>
         /// Falling with nothing at all underneath means the playfield is missing collision, not that the
-        /// character walked off the world. Hold position and say so once.
+        /// character walked off the world. Hold position and say so once. Shadowlands ledge abysses still
+        /// have heightmap Y≈0 underfoot, so HasGeometryBelow finds a floor and falling continues; zoning
+        /// is handled in PlayfieldWorldSimulation via FallZones.json.
         /// </summary>
         void HoldAltitudeOverVoid()
         {

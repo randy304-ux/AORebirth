@@ -284,12 +284,22 @@ namespace ZoneEngine_New.Core.WorldSimulation
                 }
 
                 float fromX = state.HasPrevious ? state.PreviousX : x;
+                float fromY = state.HasPrevious ? state.PreviousY : y;
                 float fromZ = state.HasPrevious ? state.PreviousZ : z;
                 state.PreviousX = x;
+                state.PreviousY = y;
                 state.PreviousZ = z;
                 state.HasPrevious = true;
 
                 _triggers.ClearOverlapOutside(x, y, z, state.Overlapping);
+
+                // Shadowlands ledge drops: heightmap Y≈0 basins under the feet after falling from
+                // higher ground (not walk-in Walls/Surfaces door polygons). See FallZones.json.
+                if (TryResolveAbyssFall(fromY, player.Position, out ZoneCrossing fallCrossing))
+                {
+                    TryTransfer(playfield, player, fallCrossing, now);
+                    continue;
+                }
 
                 if (TryResolveZoneCrossing(
                         fromX,
@@ -623,6 +633,69 @@ namespace ZoneEngine_New.Core.WorldSimulation
                 DungeonExitDoors.LandingDoor(portal.DestDoorInstance, _gameData.GetDungeonExitDoors(portal.DestPlayfieldId)),
                 portal.DoorClearance,
                 out landing, out heading);
+        }
+
+        /// <summary>
+        /// True when the character just fell from solid ground into a heightmap abyss (terrain Y near 0)
+        /// on a playfield listed in FallZones.json. Landing uses the Destinations.dat midpoint for that exit.
+        /// </summary>
+        bool TryResolveAbyssFall(float previousY, AoVector3 position, out ZoneCrossing crossing)
+        {
+            crossing = default;
+            if (!FallZoneCatalog.Instance.TryGetExit(_playfieldId, out FallZoneExit exit))
+                return false;
+
+            TerrainHeightfield? terrain = _geometry.Collision?.Terrain;
+            if (terrain == null)
+                return false;
+
+            float x = (float)position.x;
+            float y = (float)position.y;
+            float z = (float)position.z;
+            float abyssMax = FallZoneCatalog.Instance.AbyssTerrainMax;
+            float enterMaxY = FallZoneCatalog.Instance.FallEnterMaxY;
+            if (y > enterMaxY || previousY <= enterMaxY)
+                return false;
+
+            if (!terrain.TryGetHeight(x, z, out float terrainY) || terrainY > abyssMax)
+                return false;
+
+            if (!PortalDoorLandingResolver.TryResolveMidpointLanding(
+                    _destinations,
+                    exit.DestPlayfieldId,
+                    exit.DestIndex,
+                    out AoVector3 landing,
+                    out AoQuaternion heading))
+            {
+                _logger.Warn(
+                    "Fall zone has no Destinations landing destPf="
+                    + exit.DestPlayfieldId
+                    + " destIdx="
+                    + exit.DestIndex);
+                return false;
+            }
+
+            var trigger = new ZoneTriggerVolume
+            {
+                Kind = ZoneTriggerKind.Teleportal,
+                Id = -1,
+                DestPlayfieldId = exit.DestPlayfieldId,
+                DestIndex = exit.DestIndex,
+                RecordsReturn = false
+            };
+            crossing = new ZoneCrossing(exit.DestPlayfieldId, landing, trigger, heading);
+            _logger.Info(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Fall zone abyss character at ({0:R},{1:R},{2:R}) terrainY={3:R} fromY={4:R} to={5}/{6}",
+                    x,
+                    y,
+                    z,
+                    terrainY,
+                    previousY,
+                    exit.DestPlayfieldId,
+                    exit.DestIndex));
+            return true;
         }
 
         void TryTransfer(PlayfieldType source, Player player, ZoneCrossing crossing, double now)
@@ -1303,6 +1376,8 @@ namespace ZoneEngine_New.Core.WorldSimulation
             public HashSet<int> Overlapping { get; } = new();
 
             public float PreviousX { get; set; }
+
+            public float PreviousY { get; set; }
 
             public float PreviousZ { get; set; }
 
