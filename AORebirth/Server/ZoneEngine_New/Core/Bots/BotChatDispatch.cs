@@ -115,7 +115,7 @@ namespace ZoneEngine_New.Core.Bots
         static readonly string[] MercTellIds =
         [
             "enforcer_subway", "doctor_totw", "bureaucrat_som", "fixer_biomare", "soldier_cyborg",
-            "adventurer_crypt", "keeper_smugglers", "nt_sanctum_aoe", "nt_sanctum_st", "shade_camelot",
+            "adventurer_crypt", "keeper_smugglers", "nt_sanctum", "shade_camelot",
             "ma_camelot", "trader_elysium", "engineer_scheol", "mp_adonis", "agent_penumbra"
         ];
     }

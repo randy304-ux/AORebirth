@@ -85,12 +85,14 @@ namespace ZoneEngine_New.Core.Playfield
             ZoneEngine_New.Core.Quests.Dungeons.QuestDungeonService? questDungeons = null,
             ZoneEngine_New.Core.Knubot.KnubotService? knubot = null,
             ZoneEngine_New.Core.Configuration.GameplaySettings? gameplay = null,
-            ZoneEngine_New.Core.Claims.ClaimService? claims = null)
+            ZoneEngine_New.Core.Claims.ClaimService? claims = null,
+            ZoneEngine_New.Core.Pets.MercUnlockService? mercUnlocks = null)
         {
             QuestDungeons = questDungeons;
             Knubot = knubot;
             Gameplay = gameplay;
             Claims = claims;
+            MercUnlocks = mercUnlocks;
             ArgumentNullException.ThrowIfNull(logger);
             ArgumentNullException.ThrowIfNull(router);
             ArgumentNullException.ThrowIfNull(playerHydrator);
@@ -150,6 +152,9 @@ namespace ZoneEngine_New.Core.Playfield
 
         /// <summary>Root Gameplay.json settings, forwarded into every playfield container.</summary>
         public ZoneEngine_New.Core.Configuration.GameplaySettings? Gameplay { get; }
+
+        /// <summary>Dungeon merc unlock/settings; optional so PetService can rename/filter on revive.</summary>
+        public ZoneEngine_New.Core.Pets.MercUnlockService? MercUnlocks { get; }
 
         public static TimeSpan ResolveLinkDeadTimeout()
         {

@@ -25,6 +25,7 @@ namespace ZoneEngine_New.Core.Pets
         readonly IZoneLogger _logger;
         readonly object _gate = new();
         Dictionary<int, List<NanoRank>>? _byProfession;
+        Dictionary<int, List<NanoRank>>? _nukesByProfession;
         List<KeeperAuraRank>? _keeperAuras;
 
         public MercProfessionNanos(IItemTemplateCatalog items, IZoneLogger logger)
@@ -209,20 +210,75 @@ namespace ZoneEngine_New.Core.Pets
             return nano.IsHostile && (IsAoeNuke(template) || IsSingleTargetNuke(template));
         }
 
-        /// <summary>Filter uploaded merc nanos: keep non-nukes; keep only AOE or only ST nukes.</summary>
-        public void FilterNtNukes(IList<int> uploaded, bool aoeMode)
+        /// <summary>
+        /// Replace hostile nukes on the NT with the highest usable AOE or ST line ranks from items.dat.
+        /// Non-nuke uploaded nanos are kept. Never invents nano ids.
+        /// </summary>
+        public void FilterNtNukes(IList<int> uploaded, bool aoeMode, int level = 0, Character? skillSource = null)
         {
             ArgumentNullException.ThrowIfNull(uploaded);
+            EnsureIndex();
+
+            // Drop existing hostile nukes; keep buffs / utility.
             for (int i = uploaded.Count - 1; i >= 0; i--)
             {
                 if (!_items.TryGet(uploaded[i], out ItemTemplate? template) || template == null)
                     continue;
-                if (!IsHostileNuke(template))
-                    continue;
-                bool aoe = IsAoeNuke(template);
-                if (aoeMode ? !aoe : aoe)
+                if (IsHostileNuke(template))
                     uploaded.RemoveAt(i);
             }
+
+            int useLevel = level > 0
+                ? level
+                : skillSource?.Stats.GetOrOne(CharacterStat.Level) ?? 1;
+            foreach (int nanoId in SelectNukes((int)Profession.Nanotechnician, aoeMode, useLevel, skillSource))
+            {
+                if (!uploaded.Contains(nanoId))
+                    uploaded.Add(nanoId);
+            }
+        }
+
+        IReadOnlyList<int> SelectNukes(int profession, bool aoeMode, int level, Character? skillSource)
+        {
+            if (_nukesByProfession == null || !_nukesByProfession.TryGetValue(profession, out List<NanoRank>? ranks))
+                return [];
+
+            var byLine = new Dictionary<string, List<NanoRank>>(StringComparer.OrdinalIgnoreCase);
+            foreach (NanoRank rank in ranks)
+            {
+                bool aoe = IsAoeNuke(rank.Template);
+                if (aoeMode ? !aoe : aoe)
+                    continue;
+                if (!byLine.TryGetValue(rank.LineKey, out List<NanoRank>? list))
+                {
+                    list = new List<NanoRank>();
+                    byLine[rank.LineKey] = list;
+                }
+
+                list.Add(rank);
+            }
+
+            var ids = new List<int>();
+            foreach ((string _, List<NanoRank> line) in byLine)
+            {
+                line.Sort(CompareRanksDesc);
+                NanoRank? chosen = null;
+                foreach (NanoRank rank in line)
+                {
+                    if (CanUse(rank.Template, profession, level, skillSource))
+                    {
+                        chosen = rank;
+                        break;
+                    }
+                }
+
+                // Fallback to the lowest rank in the line so the merc still has something.
+                chosen ??= line.Count > 0 ? line[line.Count - 1] : null;
+                if (chosen != null)
+                    ids.Add(chosen.Id);
+            }
+
+            return ids;
         }
 
         public static string NormalizeAuraType(string? text)
@@ -259,6 +315,7 @@ namespace ZoneEngine_New.Core.Pets
         void BuildIndex()
         {
             var byProfession = new Dictionary<int, List<NanoRank>>();
+            var nukesByProfession = new Dictionary<int, List<NanoRank>>();
             var keeperAuras = new List<KeeperAuraRank>();
             int scanned = 0;
             foreach (ItemTemplate template in _items.All)
@@ -272,13 +329,9 @@ namespace ZoneEngine_New.Core.Pets
                     continue;
 
                 NanoSpell spell = NanoSpell.From(template);
-                if (TryClassifyKeeperAura(name, spell, out string auraType))
+                if (TryClassifyKeeperAura(name, spell, out string auraType)
+                    && (RequiresProfession(template, (int)Profession.Keeper) || LooksLikeKeeperAura(name)))
                 {
-                    if (!RequiresProfession(template, (int)Profession.Keeper) && !LooksLikeKeeperAura(name))
-                    {
-                        // Still accept when name is a known Keeper aura family found in items.dat.
-                    }
-
                     keeperAuras.Add(new KeeperAuraRank(
                         auraType,
                         template.Id,
@@ -288,12 +341,38 @@ namespace ZoneEngine_New.Core.Pets
                         template));
                 }
 
+                List<int> professions = ProfessionRequirements(template);
+                if (professions.Count == 0)
+                    continue;
+
+                if (IsHostileNuke(template))
+                {
+                    foreach (int profession in professions)
+                    {
+                        if (!nukesByProfession.TryGetValue(profession, out List<NanoRank>? nukeList))
+                        {
+                            nukeList = new List<NanoRank>();
+                            nukesByProfession[profession] = nukeList;
+                        }
+
+                        nukeList.Add(new NanoRank(
+                            template.Id,
+                            name,
+                            LineKey(spell, name),
+                            spell.NanoStrain,
+                            spell.StackingOrder,
+                            template));
+                    }
+
+                    continue;
+                }
+
                 if (spell.IsHostile || !spell.IsBuff)
                     continue;
                 if (!IsTeamOrOtherCastable(template, spell))
                     continue;
 
-                foreach (int profession in ProfessionRequirements(template))
+                foreach (int profession in professions)
                 {
                     if (!byProfession.TryGetValue(profession, out List<NanoRank>? list))
                     {
@@ -312,12 +391,14 @@ namespace ZoneEngine_New.Core.Pets
             }
 
             _byProfession = byProfession;
+            _nukesByProfession = nukesByProfession;
             _keeperAuras = keeperAuras;
             _logger.Info(string.Format(
                 CultureInfo.InvariantCulture,
-                "MercProfessionNanos indexed templates={0} professions={1} keeperAuras={2}",
+                "MercProfessionNanos indexed templates={0} buffProfessions={1} nukeProfessions={2} keeperAuras={3}",
                 scanned,
                 byProfession.Count,
+                nukesByProfession.Count,
                 keeperAuras.Count));
         }
 

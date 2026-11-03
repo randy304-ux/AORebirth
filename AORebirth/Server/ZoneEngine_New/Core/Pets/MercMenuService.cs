@@ -411,7 +411,7 @@ namespace ZoneEngine_New.Core.Pets
             {
                 string mode = _unlocks.SetNtMode(player, MercUnlockService.NtModeAoe);
                 Say(player, "NT nuke mode set to " + mode.ToUpperInvariant()
-                    + ". Summoned NT name shows (AOE); only AOE nukes stay uploaded.");
+                    + ". Name shows (AOE); highest usable AOE nukes from items.dat.");
                 return;
             }
 
@@ -419,7 +419,7 @@ namespace ZoneEngine_New.Core.Pets
             {
                 string mode = _unlocks.SetNtMode(player, MercUnlockService.NtModeSt);
                 Say(player, "NT nuke mode set to " + mode.ToUpperInvariant()
-                    + ". Summoned NT name shows (ST); only single-target nukes stay uploaded.");
+                    + ". Name shows (ST); highest usable single-target nukes from items.dat.");
                 return;
             }
 

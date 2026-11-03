@@ -212,7 +212,11 @@ namespace ZoneEngine_New.Core.Pets
             {
                 string mode = GetNtMode(owner);
                 npc.Name = DisplayNameWithNtMode(def, mode);
-                _nanos.FilterNtNukes(npc.UploadedNanoIds, aoeMode: mode == NtModeAoe);
+                _nanos.FilterNtNukes(
+                    npc.UploadedNanoIds,
+                    aoeMode: mode == NtModeAoe,
+                    level: def.Level,
+                    skillSource: npc);
                 return;
             }
 
@@ -285,7 +289,7 @@ namespace ZoneEngine_New.Core.Pets
                 NpcCharacter? npc = FindSummonedNpc(player, nt);
                 if (npc != null)
                 {
-                    // Re-upload profession nanos then filter so switching modes restores the other set.
+                    // Keep non-nukes from the tier list; FilterNtNukes rebuilds AOE/ST from items.dat.
                     npc.UploadedNanoIds.Clear();
                     npc.UploadedNanoIds.AddRange(Mercs.TierNanosFor(nt.Kind, Mercs.Tier.Basic));
                     ConfigureSummonedMerc(player, npc, nt);

@@ -26,10 +26,11 @@ namespace ChatEngine.BotIntegration
         static readonly string[] MercIds =
         {
             "enforcer_subway", "doctor_totw", "bureaucrat_som", "fixer_biomare", "soldier_cyborg",
-            "adventurer_crypt", "keeper_smugglers", "nt_sanctum_aoe", "nt_sanctum_st", "shade_camelot",
+            "adventurer_crypt", "keeper_smugglers", "nt_sanctum", "shade_camelot",
             "ma_camelot", "trader_elysium", "engineer_scheol", "mp_adonis", "agent_penumbra"
         };
 
+        // Parallel to MercIds (same length). NT mode suffixes resolve separately below.
         static readonly string[] MercDisplayAliases =
         {
             "TODO-Randy-Name (Enforcer)",
@@ -39,8 +40,7 @@ namespace ChatEngine.BotIntegration
             "TODO-Randy-Name (Soldier)",
             "TODO-Randy-Name (Adventurer)",
             "TODO-Randy-Name (Keeper)",
-            "TODO-Randy-Name (AOE)",
-            "TODO-Randy-Name (ST)",
+            "TODO-Randy-Name",
             "TODO-Randy-Name (Shade)",
             "TODO-Randy-Name (Martial Artist)",
             "TODO-Randy-Name (Trader)",
@@ -83,6 +83,20 @@ namespace ChatEngine.BotIntegration
                 {
                     wireId = MercIdBase + (uint)i;
                     return true;
+                }
+            }
+
+            // NT mode-renamed pets: same wire as nt_sanctum.
+            if (string.Equals(displayName, "TODO-Randy-Name (AOE)", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(displayName, "TODO-Randy-Name (ST)", StringComparison.OrdinalIgnoreCase))
+            {
+                for (int i = 0; i < MercIds.Length; i++)
+                {
+                    if (string.Equals(MercIds[i], "nt_sanctum", StringComparison.OrdinalIgnoreCase))
+                    {
+                        wireId = MercIdBase + (uint)i;
+                        return true;
+                    }
                 }
             }
 

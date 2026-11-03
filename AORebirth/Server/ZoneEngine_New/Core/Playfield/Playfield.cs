@@ -851,7 +851,7 @@ namespace ZoneEngine_New.Core.Playfield
             });
             services.AddSingleton<SpawnService>();
             services.AddSingleton<ZoneEngine_New.Core.Ai.ReachMaps>();
-            services.AddSingleton(provider => new Pets.PetService(this, _gameData, _logger));
+            services.AddSingleton(provider => new Pets.PetService(this, _gameData, _logger, _playfieldManager.MercUnlocks));
             services.AddSingleton(_shopDao);
             services.AddSingleton<NpcContentActivationService>();
             services.AddSingleton<ZoneEngine_New.Core.Missions.QuestPropService>();

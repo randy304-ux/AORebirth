@@ -47,12 +47,14 @@ namespace ZoneEngine_New.Core.Pets
         readonly Playfield _playfield;
         readonly IGameData _gameData;
         readonly IZoneLogger _logger;
+        readonly MercUnlockService? _mercUnlocks;
 
-        public PetService(Playfield playfield, IGameData gameData, IZoneLogger logger)
+        public PetService(Playfield playfield, IGameData gameData, IZoneLogger logger, MercUnlockService? mercUnlocks = null)
         {
             _playfield = playfield ?? throw new ArgumentNullException(nameof(playfield));
             _gameData = gameData ?? throw new ArgumentNullException(nameof(gameData));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _mercUnlocks = mercUnlocks;
         }
 
         PetTypeCatalog Types => PetTypeCatalog.For(_gameData.RootPath);
@@ -182,7 +184,11 @@ namespace ZoneEngine_New.Core.Pets
                 SendAddPet(player, pet);
             RefreshOverEquip(pet);
             if (owner is Player mercOwner && Mercs.ByHash(hash) is Mercs.Kind mercPetKind)
+            {
                 EnsureMercPets(pet, Mercs.PowerLevel(pet.Stats.GetOrOne(CharacterStat.Level), Mercs.GetTier(mercOwner, mercPetKind)));
+                // Dungeon merc rename / NT nuke filter after hire or TickMercs revive.
+                _mercUnlocks?.ConfigureSummonedMerc(mercOwner, pet);
+            }
 
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
                 "Summoned pet id={0} hash={1} type={2} level={3} owner={4} expires={5}",
