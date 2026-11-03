@@ -203,7 +203,7 @@ namespace ZoneEngine_New.Core.Pets
             return null;
         }
 
-        /// <summary>Rename + NT nuke filter after hire/revive.</summary>
+        /// <summary>Randy name + sex/appearance + NT/trader/MP filters after hire/revive/mode change.</summary>
         public void ConfigureSummonedMerc(Player owner, NpcCharacter npc, MercDefinition? def = null)
         {
             ArgumentNullException.ThrowIfNull(owner);
@@ -216,10 +216,11 @@ namespace ZoneEngine_New.Core.Pets
             if (def == null)
                 return;
 
+            ApplySummonIdentity(npc, def, owner);
+
             if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
             {
                 string mode = GetNtMode(owner);
-                npc.Name = DisplayNameWithNtMode(def, mode);
                 _nanos.FilterNtNukes(
                     npc.UploadedNanoIds,
                     aoeMode: mode == NtModeAoe,
@@ -230,21 +231,29 @@ namespace ZoneEngine_New.Core.Pets
 
             if (string.Equals(def.Kind.Key, "trader", StringComparison.OrdinalIgnoreCase))
             {
-                string mode = GetTraderMode(owner);
-                npc.Name = DisplayNameWithTraderMode(def, mode);
-                ApplyTraderModeNanos(npc, def, mode);
+                ApplyTraderModeNanos(npc, def, GetTraderMode(owner));
                 return;
             }
 
             if (string.Equals(def.Kind.Key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
             {
-                string mode = GetMpMode(owner);
-                npc.Name = DisplayNameWithMpMode(def, mode);
-                ApplyMpModeNanos(npc, def, mode);
-                return;
+                ApplyMpModeNanos(npc, def, GetMpMode(owner));
             }
+        }
 
-            npc.Name = def.DisplayName;
+        /// <summary>
+        /// Pick sex once per summon body (inferred from an existing Randy name on mode change),
+        /// apply a real merc-template Breed/Sex/HeadMesh, and set the truncated name + mode tag.
+        /// </summary>
+        void ApplySummonIdentity(NpcCharacter npc, MercDefinition def, Player owner)
+        {
+            bool? inferred = MercNameFormat.TryInferFemale(npc.Name, def);
+            bool female = inferred ?? (Random.Shared.Next(2) == 1);
+            if (inferred == null)
+                MercNameFormat.ApplyAppearance(npc, def, female);
+
+            string? modeTag = MercNameFormat.ModeTagFor(def, GetNtMode(owner), GetTraderMode(owner), GetMpMode(owner));
+            npc.Name = MercNameFormat.FormatSummonName(def, female, modeTag);
         }
 
         public MercDefinition? FindSummonedDefinition(Player player, Mercs.Kind kind)
@@ -277,23 +286,37 @@ namespace ZoneEngine_New.Core.Pets
 
         public string DisplayNameFor(Player player, MercDefinition def)
         {
-            if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
-                return DisplayNameWithNtMode(def, GetNtMode(player));
-            if (string.Equals(def.Kind.Key, "trader", StringComparison.OrdinalIgnoreCase))
-                return DisplayNameWithTraderMode(def, GetTraderMode(player));
-            if (string.Equals(def.Kind.Key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
-                return DisplayNameWithMpMode(def, GetMpMode(player));
-            return def.DisplayName;
+            ArgumentNullException.ThrowIfNull(player);
+            ArgumentNullException.ThrowIfNull(def);
+            NpcCharacter? npc = IsSummoned(player, def) ? FindSummonedNpc(player, def) : null;
+            if (npc != null && !string.IsNullOrWhiteSpace(npc.Name))
+                return npc.Name!;
+
+            string? modeTag = MercNameFormat.ModeTagFor(def, GetNtMode(player), GetTraderMode(player), GetMpMode(player));
+            // Unsummoned catalog label (nicks); mode tag only when the profession has one.
+            if (string.IsNullOrWhiteSpace(modeTag))
+                return def.DisplayName;
+            string tagged = def.DisplayName + " (" + modeTag + ")";
+            return tagged.Length <= MercNameFormat.MaxNameChars ? tagged : def.DisplayName;
         }
 
         public static string DisplayNameWithNtMode(MercDefinition def, string mode)
-            => def.DisplayName + (mode == NtModeAoe ? " (AOE)" : " (ST)");
+            => MercNameFormat.FormatSummonName(
+                def,
+                female: false,
+                mode == NtModeSt ? "ST" : "AOE");
 
         public static string DisplayNameWithTraderMode(MercDefinition def, string mode)
-            => def.DisplayName + (mode == TraderModeUmbral ? " (Umbral)" : " (Wrangle)");
+            => MercNameFormat.FormatSummonName(
+                def,
+                female: false,
+                mode == TraderModeUmbral ? "Umbral" : "Wrangle");
 
         public static string DisplayNameWithMpMode(MercDefinition def, string mode)
-            => def.DisplayName + (mode == MpModeSingles ? " (Singles)" : " (Composite)");
+            => MercNameFormat.FormatSummonName(
+                def,
+                female: false,
+                mode == MpModeSingles ? "Singles" : "Composite");
 
         public string GetNtMode(Player player)
         {
@@ -398,7 +421,7 @@ namespace ZoneEngine_New.Core.Pets
             if (npc != null)
             {
                 ApplyTraderModeNanos(npc, trader, mode);
-                npc.Name = DisplayNameWithTraderMode(trader, mode);
+                ApplySummonIdentity(npc, trader, player);
             }
 
             NanoRuntime.TryApplyServiceBuff(player, offer.Value.NanoId, announceRefusal: true, out string detail);
@@ -457,7 +480,7 @@ namespace ZoneEngine_New.Core.Pets
             if (npc != null)
             {
                 ApplyMpModeNanos(npc, mp, mode);
-                npc.Name = DisplayNameWithMpMode(mp, mode);
+                ApplySummonIdentity(npc, mp, player);
             }
 
             int applied = 0;
@@ -584,8 +607,8 @@ namespace ZoneEngine_New.Core.Pets
                         if (pet.Pet == null)
                             continue;
                         string petName = pet.Name ?? string.Empty;
-                        if (!string.Equals(petName, row.DisplayName, StringComparison.OrdinalIgnoreCase)
-                            && !petName.StartsWith(row.DisplayName + " (", StringComparison.OrdinalIgnoreCase))
+                        if (!MercNameFormat.NameMatches(petName, row)
+                            && !string.Equals(pet.Pet.Hash, row.Kind.Hash, StringComparison.OrdinalIgnoreCase))
                             continue;
                         pets.DismissMerc(player, row.Kind);
                         any = true;

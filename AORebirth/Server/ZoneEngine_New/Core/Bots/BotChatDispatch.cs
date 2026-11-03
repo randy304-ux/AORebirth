@@ -99,16 +99,31 @@ namespace ZoneEngine_New.Core.Bots
                 || bot.Equals("Mercbot", StringComparison.OrdinalIgnoreCase)
                 || bot.Equals("MercMenu", StringComparison.OrdinalIgnoreCase))
                 return true;
-            // Roster ids / display-name stubs registered in ChatEngine ServerBots.
-            if (bot.StartsWith("TODO-", StringComparison.OrdinalIgnoreCase))
-                return true;
             foreach (string id in MercTellIds)
             {
                 if (bot.Equals(id, StringComparison.OrdinalIgnoreCase))
                     return true;
             }
 
+            // Randy nicks / full names / mode-tagged nameplates (unique across professions).
+            string core = StripMercModeTag(bot);
+            foreach (string nick in MercNicks)
+            {
+                if (core.Equals(nick, StringComparison.OrdinalIgnoreCase)
+                    || core.StartsWith(nick + " ", StringComparison.OrdinalIgnoreCase)
+                    || core.Contains('"' + nick + '"', StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+
             return false;
+        }
+
+        static string StripMercModeTag(string name)
+        {
+            int open = name.LastIndexOf(" (", StringComparison.Ordinal);
+            if (open > 0 && name.EndsWith(")", StringComparison.Ordinal))
+                return name.Substring(0, open).Trim();
+            return name.Trim();
         }
 
         /// <summary>Keep in sync with ChatEngine ServerBots merc id list and GameData/MercRoster.json.</summary>
@@ -117,6 +132,15 @@ namespace ZoneEngine_New.Core.Bots
             "enforcer_subway", "doctor_totw", "bureaucrat_som", "fixer_biomare", "soldier_cyborg",
             "adventurer_crypt", "keeper_smugglers", "nt_sanctum", "shade_camelot",
             "ma_camelot", "trader_elysium", "engineer_scheol", "mp_adonis", "agent_penumbra"
+        ];
+
+        /// <summary>Unique Randy nicknames — keep in sync with MercRoster.json / ChatEngine ServerBots.</summary>
+        static readonly string[] MercNicks =
+        [
+            "Anvil", "Grit", "Scalpel", "Suture", "Form", "Stamp", "Cipher", "Grid",
+            "Trigger", "Striker", "Wild", "Roam", "Shield", "Virtue", "Flux", "Pulse",
+            "Blade", "Stab", "Fist", "Kick", "Broker", "Margin", "Wrench", "Sprocket",
+            "Ether", "Wisp", "Ghost", "Shadow"
         ];
     }
 }

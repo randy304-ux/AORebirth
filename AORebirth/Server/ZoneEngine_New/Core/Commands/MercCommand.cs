@@ -77,7 +77,7 @@ namespace ZoneEngine_New.Core.Commands
                     }
 
                     string? err = _unlocks.Summon(player, def);
-                    Say(err ?? ("Summoned " + def.DisplayName + " (L" + def.Level + ")."));
+                    Say(err ?? ("Summoned " + _unlocks.DisplayNameFor(player, def) + " (L" + def.Level + ")."));
                     return;
                 }
                 case "dismiss":
@@ -95,8 +95,9 @@ namespace ZoneEngine_New.Core.Commands
                     MercDefinition? def = _unlocks.Roster.Find(rest);
                     if (def != null)
                     {
+                        string shown = _unlocks.DisplayNameFor(player, def);
                         string? err = _unlocks.Dismiss(player, def);
-                        Say(err ?? ("Dismissed " + def.DisplayName + "."));
+                        Say(err ?? ("Dismissed " + shown + "."));
                         return;
                     }
 
@@ -123,8 +124,9 @@ namespace ZoneEngine_New.Core.Commands
                     foreach (MercDefinition def in _unlocks.Roster.All)
                     {
                         MercUnlockState state = _unlocks.GetState(player, def);
+                        string shown = _unlocks.DisplayNameFor(player, def);
                         string mark = _unlocks.IsSummoned(player, def) ? ", summoned" : "";
-                        sb.Append("\n").Append(def.DisplayName)
+                        sb.Append("\n").Append(shown)
                             .Append(" (").Append(def.Id).Append(") L").Append(def.Level)
                             .Append(" ").Append(def.Role)
                             .Append(": ").Append(MercUnlockService.StateLabel(state)).Append(mark);

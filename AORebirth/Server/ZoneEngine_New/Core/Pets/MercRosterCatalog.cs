@@ -55,9 +55,30 @@ namespace ZoneEngine_New.Core.Pets
                         continue;
                     }
 
+                    string maleName = string.IsNullOrWhiteSpace(row.MaleName) ? string.Empty : row.MaleName.Trim();
+                    string femaleName = string.IsNullOrWhiteSpace(row.FemaleName) ? string.Empty : row.FemaleName.Trim();
+                    MercNameFormat.ParseQuotedName(maleName, out string maleNick, out string maleLast);
+                    MercNameFormat.ParseQuotedName(femaleName, out string femaleNick, out string femaleLast);
+
+                    string display;
+                    if (!string.IsNullOrWhiteSpace(row.DisplayName))
+                        display = row.DisplayName.Trim();
+                    else if (maleNick.Length > 0 && femaleNick.Length > 0)
+                        display = maleNick + " / " + femaleNick;
+                    else if (maleName.Length > 0)
+                        display = maleName;
+                    else
+                        display = "TODO-Randy-Name (" + kind.Title + ")";
+
                     var def = new MercDefinition(
                         row.Id.Trim(),
-                        string.IsNullOrWhiteSpace(row.DisplayName) ? "TODO-Randy-Name (" + kind.Title + ")" : row.DisplayName.Trim(),
+                        display,
+                        maleName,
+                        femaleName,
+                        maleNick,
+                        maleLast,
+                        femaleNick,
+                        femaleLast,
                         kind,
                         row.Breed,
                         Math.Clamp(row.Level, 1, 220),
@@ -98,9 +119,13 @@ namespace ZoneEngine_New.Core.Pets
             if (_byId.TryGetValue(raw, out MercDefinition? byId))
                 return byId;
 
+            string core = MercNameFormat.StripModeTag(raw);
             foreach (MercDefinition def in _all)
             {
-                if (string.Equals(def.DisplayName, raw, StringComparison.OrdinalIgnoreCase))
+                if (MercNameFormat.NameMatches(core, def) || MercNameFormat.NameMatches(raw, def))
+                    return def;
+                if (string.Equals(def.DisplayName, raw, StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(def.DisplayName, core, StringComparison.OrdinalIgnoreCase))
                     return def;
                 if (string.Equals(def.Kind.Key, raw, StringComparison.OrdinalIgnoreCase)
                     || string.Equals(def.Kind.Title, raw, StringComparison.OrdinalIgnoreCase))
@@ -149,6 +174,8 @@ namespace ZoneEngine_New.Core.Pets
         {
             public string Id { get; set; } = "";
             public string DisplayName { get; set; } = "";
+            public string? MaleName { get; set; }
+            public string? FemaleName { get; set; }
             public string ProfessionKey { get; set; } = "";
             public string? Breed { get; set; }
             public int Level { get; set; }
@@ -168,6 +195,12 @@ namespace ZoneEngine_New.Core.Pets
     public sealed record MercDefinition(
         string Id,
         string DisplayName,
+        string MaleName,
+        string FemaleName,
+        string MaleNick,
+        string MaleLast,
+        string FemaleNick,
+        string FemaleLast,
         Mercs.Kind Kind,
         string? Breed,
         int Level,
