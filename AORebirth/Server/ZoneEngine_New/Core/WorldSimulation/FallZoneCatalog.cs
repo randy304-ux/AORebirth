@@ -6,7 +6,7 @@ namespace ZoneEngine_New.Core.WorldSimulation
     using System.IO;
     using System.Text.Json;
 
-    using AORebirth.Core.GameData;
+    using AORebirth.Core.Vector;
 
     /// <summary>
     /// Playfields where falling into a heightmap abyss (terrain Y near 0) zones the character.
@@ -22,7 +22,7 @@ namespace ZoneEngine_New.Core.WorldSimulation
         readonly Dictionary<int, FallZoneExit> _exits = new();
         string? _rootPath;
         float _abyssTerrainMax = 0.05f;
-        float _fallEnterMaxY = 12f;
+        float _fallEnterMaxY = 6f;
         bool _loaded;
 
         public float AbyssTerrainMax
@@ -93,12 +93,10 @@ namespace ZoneEngine_New.Core.WorldSimulation
                             || pf <= 0)
                             continue;
 
-                        int destPf = prop.Value.GetProperty("destPlayfield").GetInt32();
-                        byte destIdx = prop.Value.GetProperty("destIndex").GetByte();
-                        if (destPf <= 0 || destIdx == 0)
+                        if (!TryParseExit(prop.Value, out FallZoneExit exit))
                             continue;
 
-                        _exits[pf] = new FallZoneExit(destPf, destIdx);
+                        _exits[pf] = exit;
                     }
                 }
                 catch
@@ -107,7 +105,60 @@ namespace ZoneEngine_New.Core.WorldSimulation
                 }
             }
         }
+
+        static bool TryParseExit(JsonElement value, out FallZoneExit exit)
+        {
+            exit = default;
+            int destPf = value.GetProperty("destPlayfield").GetInt32();
+            if (destPf <= 0)
+                return false;
+
+            byte destIdx = 0;
+            if (value.TryGetProperty("destIndex", out JsonElement destIdxEl))
+                destIdx = destIdxEl.GetByte();
+
+            bool hasFixed = false;
+            float lx = 0f, ly = 0f, lz = 0f;
+            float? headingDeg = null;
+            if (value.TryGetProperty("landing", out JsonElement landing))
+            {
+                lx = landing.GetProperty("x").GetSingle();
+                ly = landing.GetProperty("y").GetSingle();
+                lz = landing.GetProperty("z").GetSingle();
+                hasFixed = true;
+                if (value.TryGetProperty("headingDegrees", out JsonElement hd))
+                    headingDeg = hd.GetSingle();
+            }
+
+            if (!hasFixed && destIdx == 0)
+                return false;
+
+            exit = new FallZoneExit(destPf, destIdx, hasFixed, lx, ly, lz, headingDeg);
+            return true;
+        }
     }
 
-    public readonly record struct FallZoneExit(int DestPlayfieldId, byte DestIndex);
+    public readonly record struct FallZoneExit(
+        int DestPlayfieldId,
+        byte DestIndex,
+        bool HasFixedLanding,
+        float LandingX,
+        float LandingY,
+        float LandingZ,
+        float? HeadingDegrees)
+    {
+        public Vector3 FixedLanding => new(LandingX, LandingY, LandingZ);
+
+        public Quaternion? FixedHeading
+        {
+            get
+            {
+                if (!HeadingDegrees.HasValue)
+                    return null;
+                float yaw = HeadingDegrees.Value * (MathF.PI * 2f / 360f);
+                float half = yaw * 0.5f;
+                return new Quaternion(0, MathF.Sin(half), 0, MathF.Cos(half));
+            }
+        }
+    }
 }

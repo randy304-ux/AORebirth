@@ -637,7 +637,9 @@ namespace ZoneEngine_New.Core.WorldSimulation
 
         /// <summary>
         /// True when the character just fell from solid ground into a heightmap abyss (terrain Y near 0)
-        /// on a playfield listed in FallZones.json. Landing uses the Destinations.dat midpoint for that exit.
+        /// on a playfield listed in FallZones.json. Fires mid-fall when character Y drops through
+        /// <c>fallEnterMaxY</c> (~6 on Nascence), not only on the floor. Landing is the scrape-proven
+        /// fixed point when present; otherwise Destinations.dat midpoint for <c>destIndex</c>.
         /// </summary>
         bool TryResolveAbyssFall(float previousY, AoVector3 position, out ZoneCrossing crossing)
         {
@@ -660,12 +662,19 @@ namespace ZoneEngine_New.Core.WorldSimulation
             if (!terrain.TryGetHeight(x, z, out float terrainY) || terrainY > abyssMax)
                 return false;
 
-            if (!PortalDoorLandingResolver.TryResolveMidpointLanding(
+            AoVector3 landing;
+            AoQuaternion? heading;
+            if (exit.HasFixedLanding)
+            {
+                landing = exit.FixedLanding;
+                heading = exit.FixedHeading;
+            }
+            else if (!PortalDoorLandingResolver.TryResolveMidpointLanding(
                     _destinations,
                     exit.DestPlayfieldId,
                     exit.DestIndex,
-                    out AoVector3 landing,
-                    out AoQuaternion heading))
+                    out landing,
+                    out AoQuaternion midpointHeading))
             {
                 _logger.Warn(
                     "Fall zone has no Destinations landing destPf="
@@ -673,6 +682,10 @@ namespace ZoneEngine_New.Core.WorldSimulation
                     + " destIdx="
                     + exit.DestIndex);
                 return false;
+            }
+            else
+            {
+                heading = midpointHeading;
             }
 
             var trigger = new ZoneTriggerVolume
@@ -687,14 +700,17 @@ namespace ZoneEngine_New.Core.WorldSimulation
             _logger.Info(
                 string.Format(
                     CultureInfo.InvariantCulture,
-                    "Fall zone abyss character at ({0:R},{1:R},{2:R}) terrainY={3:R} fromY={4:R} to={5}/{6}",
+                    "Fall zone abyss character at ({0:R},{1:R},{2:R}) terrainY={3:R} fromY={4:R} to={5} landing=({6:R},{7:R},{8:R}) fixed={9}",
                     x,
                     y,
                     z,
                     terrainY,
                     previousY,
                     exit.DestPlayfieldId,
-                    exit.DestIndex));
+                    landing.x,
+                    landing.y,
+                    landing.z,
+                    exit.HasFixedLanding));
             return true;
         }
 
