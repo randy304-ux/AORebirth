@@ -1,0 +1,9 @@
+// Fixer Grid access hashes from Hack Grid Data Stream nanos / Instant Fixer Grid Conversion.
+// FIGI = Data Receptacle (items.dat 160978). Spawned by 160979/160981 OnUse SpawnItem, Nano Can
+// Instant Fixer Grid Conversion 296805/303393, and Full Data Receptacle Container 275057.
+// QIGR = Quiescent Grid Waveform Template (items.dat 265479). Second SpawnItem on 160979 OnUse
+// (team/waveform path); not the receptacle used on terminal 95350.
+{
+  "FIGI": { "Templates": [ 160978, 160978 ] },
+  "QIGR": { "Templates": [ 265479, 265479 ] }
+}
