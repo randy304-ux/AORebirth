@@ -88,6 +88,7 @@ namespace ZoneEngine_New.Core.Pets
                         row.DungeonPlayfields ?? [],
                         string.IsNullOrWhiteSpace(row.BossName) ? "TODO boss" : row.BossName.Trim(),
                         string.IsNullOrWhiteSpace(row.BossHash) ? null : row.BossHash.Trim(),
+                        row.BossMonsterData is > 0 ? row.BossMonsterData : null,
                         string.IsNullOrWhiteSpace(row.UnlockGroup) ? row.Id.Trim() : row.UnlockGroup.Trim(),
                         string.IsNullOrWhiteSpace(row.NanoStyle) ? null : row.NanoStyle.Trim().ToLowerInvariant(),
                         row.DungeonPlayfieldsTodo,
@@ -186,6 +187,7 @@ namespace ZoneEngine_New.Core.Pets
             public string? DungeonPlayfieldsTodo { get; set; }
             public string BossName { get; set; } = "";
             public string? BossHash { get; set; }
+            public int? BossMonsterData { get; set; }
             public string? BossHashTodo { get; set; }
             public string UnlockGroup { get; set; } = "";
             public string? NanoStyle { get; set; }
@@ -210,6 +212,7 @@ namespace ZoneEngine_New.Core.Pets
         IReadOnlyList<int> DungeonPlayfields,
         string BossName,
         string? BossHash,
+        int? BossMonsterData,
         string UnlockGroup,
         string? NanoStyle,
         string? DungeonPlayfieldsTodo,

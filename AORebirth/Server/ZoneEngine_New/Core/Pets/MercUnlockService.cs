@@ -9,6 +9,7 @@ namespace ZoneEngine_New.Core.Pets
 
     using ZoneEngine_New.Core.Data;
     using ZoneEngine_New.Core.Entities;
+    using ZoneEngine_New.Core.GameData;
     using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Nanos;
@@ -143,6 +144,71 @@ namespace ZoneEngine_New.Core.Pets
             SetState(player, def, MercUnlockState.Unlocked, out _);
         }
 
+        /// <summary>
+        /// Kill-credit unlock: match roster bosses by MonsterData template in a dungeon playfield,
+        /// with BossName fallback when hash/template matching is unreliable (e.g. Commander Jocasta).
+        /// </summary>
+        public void OnNpcKilled(NpcCharacter npc, IReadOnlyList<Player> players)
+        {
+            if (npc == null || players == null || players.Count == 0)
+                return;
+
+            int playfieldId = npc.Playfield?.Identity.Instance ?? 0;
+            int monsterData = npc.Stats.GetOrZero(SmokeLounge.AOtomation.Messaging.GameData.CharacterStat.MonsterData);
+            string name = npc.Name ?? string.Empty;
+
+            foreach (MercDefinition def in _roster.All)
+            {
+                if (!MatchesBossKill(def, playfieldId, monsterData, name))
+                    continue;
+                for (int i = 0; i < players.Count; i++)
+                {
+                    Player player = players[i];
+                    if (player == null || player.IsDead)
+                        continue;
+                    if (GetState(player, def) == MercUnlockState.Unlocked)
+                        continue;
+                    SetState(player, def, MercUnlockState.Unlocked, out _);
+                }
+            }
+        }
+
+        static bool MatchesBossKill(MercDefinition def, int playfieldId, int monsterData, string npcName)
+        {
+            if (def.DungeonPlayfields.Count > 0)
+            {
+                bool inDungeon = false;
+                foreach (int pf in def.DungeonPlayfields)
+                {
+                    if (pf == playfieldId)
+                    {
+                        inDungeon = true;
+                        break;
+                    }
+                }
+
+                if (!inDungeon)
+                    return false;
+            }
+
+            if (def.BossMonsterData is int template && template > 0 && monsterData == template)
+                return true;
+
+            if (!string.IsNullOrWhiteSpace(def.BossHash)
+                && !string.IsNullOrWhiteSpace(npcName)
+                && string.Equals(def.BossHash, npcName, StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            // Name fallback when NPCHash/template binding is missing or unreliable.
+            if (!string.IsNullOrWhiteSpace(def.BossName)
+                && !string.IsNullOrWhiteSpace(npcName)
+                && (string.Equals(npcName, def.BossName, StringComparison.OrdinalIgnoreCase)
+                    || npcName.Contains(def.BossName, StringComparison.OrdinalIgnoreCase)))
+                return true;
+
+            return false;
+        }
+
         public bool CanSummonHere(Player player, MercDefinition def, MercUnlockState state, out string reason)
         {
             reason = string.Empty;
@@ -242,15 +308,19 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
-        /// Pick sex once per summon body (inferred from an existing Randy name on mode change),
-        /// apply a real merc-template Breed/Sex/HeadMesh, and set the truncated name + mode tag.
+        /// Pick sex (+ breed when RandomAppearance) once per summon body. Mode changes keep the
+        /// existing sex/breed/head (inferred from the Randy name already on the body).
         /// </summary>
         void ApplySummonIdentity(NpcCharacter npc, MercDefinition def, Player owner)
         {
             bool? inferred = MercNameFormat.TryInferFemale(npc.Name, def);
             bool female = inferred ?? (Random.Shared.Next(2) == 1);
             if (inferred == null)
-                MercNameFormat.ApplyAppearance(npc, def, female);
+            {
+                string root = owner.Playfield?.GetService<IGameData>()?.RootPath ?? string.Empty;
+                bool randomAppearance = root.Length == 0 || Mercs.RandomAppearance(root);
+                MercNameFormat.ApplyAppearance(npc, def, female, randomAppearance);
+            }
 
             string? modeTag = MercNameFormat.ModeTagFor(def, GetNtMode(owner), GetTraderMode(owner), GetMpMode(owner));
             npc.Name = MercNameFormat.FormatSummonName(def, female, modeTag);

@@ -1,6 +1,7 @@
 namespace ZoneEngine_New.Core.Pets
 {
     using System;
+    using System.Collections.Generic;
 
     using SmokeLounge.AOtomation.Messaging.GameData;
 
@@ -10,17 +11,21 @@ namespace ZoneEngine_New.Core.Pets
     /// Randy merc nameplate formatting and sex/appearance selection.
     /// SCFU names are a length-prefixed byte string (max 254 usable chars). Quotes are fine as ASCII.
     /// Practical nameplate budget is <see cref="MaxNameChars"/> so mode tags still fit.
-    /// Appearance values are copied only from existing merc NPC templates (Breed/Sex/HeadMesh).
+    /// Appearance values are copied only from existing NPC/merc templates (Breed/Sex/HeadMesh).
     /// </summary>
     public static class MercNameFormat
     {
         /// <summary>Practical nameplate budget (SCFU allows up to 254; keep room for mode tags).</summary>
         public const int MaxNameChars = 32;
 
-        // Real merc-template looks (NpcTemplates.json): Breed=4, Sex=59, HeadMesh=64.
+        // Real looks from NpcTemplates.json (Breed=4, Sex=59, HeadMesh=64). Never invent meshes.
         // Male Solitus: MRBU/MRFI 40687, MRMA/MRKE 40689, MRSO/MREG 40694, MRDR/MRTR 40700.
-        // Male Atrox: MREN sex=1 head=40111 (Atrox has no female mesh — never invent one).
         // Female Solitus: MRAG/MRMP/MRSH 40634, MRNT/MRAD 40635.
+        // Male Atrox: MREN sex=1 head=40111 (no Atrox female template exists).
+        // Male Opifex: KLHG breed=2 sex=2 head=40249.
+        // Female Opifex: BTMV/SAOI/SNOL 40209, CNTD 40243.
+        // Male Nanomage: QWJW/C03C 40169, VEAE/C00Z/KELE 40171, OITA/NETH 40173.
+        // Female Nanomage: OBE_ 40137, C036/IVOK/LYOD 40140, C00M 40151, C00L 40172.
         static readonly AppearanceLook[] MaleSolitusLooks =
         [
             new(1, 2, 40687),
@@ -29,12 +34,38 @@ namespace ZoneEngine_New.Core.Pets
             new(1, 2, 40700),
         ];
 
-        static readonly AppearanceLook AtroxMaleLook = new(4, 1, 40111);
-
         static readonly AppearanceLook[] FemaleSolitusLooks =
         [
             new(1, 3, 40634),
             new(1, 3, 40635),
+        ];
+
+        static readonly AppearanceLook AtroxMaleLook = new(4, 1, 40111);
+
+        static readonly AppearanceLook[] MaleOpifexLooks =
+        [
+            new(2, 2, 40249),
+        ];
+
+        static readonly AppearanceLook[] FemaleOpifexLooks =
+        [
+            new(2, 3, 40209),
+            new(2, 3, 40243),
+        ];
+
+        static readonly AppearanceLook[] MaleNanomageLooks =
+        [
+            new(3, 2, 40169),
+            new(3, 2, 40171),
+            new(3, 2, 40173),
+        ];
+
+        static readonly AppearanceLook[] FemaleNanomageLooks =
+        [
+            new(3, 3, 40137),
+            new(3, 3, 40140),
+            new(3, 3, 40151),
+            new(3, 3, 40172),
         ];
 
         public static string FormatSummonName(MercDefinition def, bool female, string? modeTag)
@@ -55,7 +86,6 @@ namespace ZoneEngine_New.Core.Pets
             if (candidate.Length <= MaxNameChars)
                 return candidate;
 
-            // Prefer "Nickname Last" when the full First "Nick" Last + tag is too long.
             string nickLast = string.IsNullOrEmpty(last) ? nick + tag : nick + " " + last + tag;
             if (nickLast.Length <= MaxNameChars)
                 return nickLast;
@@ -114,29 +144,112 @@ namespace ZoneEngine_New.Core.Pets
                 || string.Equals(core, def.Id, StringComparison.OrdinalIgnoreCase);
         }
 
-        public static void ApplyAppearance(NpcCharacter npc, MercDefinition def, bool female)
+        /// <summary>
+        /// Apply Breed/Sex/HeadMesh for a new summon. Mode changes must not call this when the Randy
+        /// name is already set — existing Breed/Sex/HeadMesh stay as rolled.
+        /// When <paramref name="randomAppearance"/> is true (default): roll sex first (caller), then a
+        /// random breed with a real template for that sex (Atrox males only).
+        /// When false: Randy fixed profession breeds (MA/Shade/Fixer Opifex; NT/MP Nanomage;
+        /// male Enforcer/Keeper/Agent Atrox; rest Solitus; Atrox females fall back to Solitus).
+        /// </summary>
+        public static void ApplyAppearance(NpcCharacter npc, MercDefinition def, bool female, bool randomAppearance)
         {
             ArgumentNullException.ThrowIfNull(npc);
             ArgumentNullException.ThrowIfNull(def);
-            AppearanceLook look;
-            if (female)
-            {
-                // Never invent Atrox female — use Solitus female heads from MRAG/MRNT pool.
-                look = FemaleSolitusLooks[Random.Shared.Next(FemaleSolitusLooks.Length)];
-            }
-            else if (string.Equals(def.Breed, "Atrox", StringComparison.OrdinalIgnoreCase))
-            {
-                look = AtroxMaleLook;
-            }
-            else
-            {
-                look = MaleSolitusLooks[Random.Shared.Next(MaleSolitusLooks.Length)];
-            }
-
+            AppearanceLook look = randomAppearance
+                ? ResolveRandomLook(female)
+                : ResolveFixedProfessionLook(def, female);
             npc.Stats.Set(CharacterStat.Breed, look.Breed, StatDetail.Base, dirty: true);
             npc.Stats.Set(CharacterStat.Sex, look.Sex, StatDetail.Base, dirty: true);
             npc.Stats.Set(CharacterStat.HeadMesh, look.HeadMesh, StatDetail.Base, dirty: true);
         }
+
+        static AppearanceLook ResolveRandomLook(bool female)
+        {
+            var pool = new List<AppearanceLook>(8);
+            if (female)
+            {
+                AddBreedIfPresent(pool, FemaleSolitusLooks);
+                AddBreedIfPresent(pool, FemaleOpifexLooks);
+                AddBreedIfPresent(pool, FemaleNanomageLooks);
+                // No female Atrox template in our data — skipped.
+            }
+            else
+            {
+                AddBreedIfPresent(pool, MaleSolitusLooks);
+                AddBreedIfPresent(pool, MaleOpifexLooks);
+                AddBreedIfPresent(pool, MaleNanomageLooks);
+                pool.Add(AtroxMaleLook);
+            }
+
+            if (pool.Count == 0)
+                return female ? FemaleSolitusLooks[0] : MaleSolitusLooks[0];
+
+            // One look per breed in the pool, then pick a head within that breed.
+            AppearanceLook breedPick = pool[Random.Shared.Next(pool.Count)];
+            AppearanceLook[] heads = LooksForBreed(breedPick.Breed, female);
+            return heads.Length > 0 ? Pick(heads) : breedPick;
+        }
+
+        static AppearanceLook ResolveFixedProfessionLook(MercDefinition def, bool female)
+        {
+            string key = def.Kind.Key;
+            if (UsesAtroxMale(key, def.Breed))
+                return female ? Pick(FemaleSolitusLooks) : AtroxMaleLook;
+
+            string breed = ResolveFixedBreed(def);
+            if (string.Equals(breed, "Opifex", StringComparison.OrdinalIgnoreCase))
+                return female ? Pick(FemaleOpifexLooks) : Pick(MaleOpifexLooks);
+            if (string.Equals(breed, "Nanomage", StringComparison.OrdinalIgnoreCase))
+                return female ? Pick(FemaleNanomageLooks) : Pick(MaleNanomageLooks);
+            return female ? Pick(FemaleSolitusLooks) : Pick(MaleSolitusLooks);
+        }
+
+        static bool UsesAtroxMale(string professionKey, string? breed)
+        {
+            if (string.Equals(professionKey, "enforcer", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(professionKey, "keeper", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(professionKey, "agent", StringComparison.OrdinalIgnoreCase))
+                return true;
+            return string.Equals(breed, "Atrox", StringComparison.OrdinalIgnoreCase);
+        }
+
+        static string ResolveFixedBreed(MercDefinition def)
+        {
+            if (!string.IsNullOrWhiteSpace(def.Breed))
+                return def.Breed.Trim();
+
+            string key = def.Kind.Key;
+            if (string.Equals(key, "martialartist", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(key, "shade", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(key, "fixer", StringComparison.OrdinalIgnoreCase))
+                return "Opifex";
+            if (string.Equals(key, "nanotechnician", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
+                return "Nanomage";
+            if (string.Equals(key, "enforcer", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(key, "keeper", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(key, "agent", StringComparison.OrdinalIgnoreCase))
+                return "Atrox";
+            return "Solitus";
+        }
+
+        static void AddBreedIfPresent(List<AppearanceLook> pool, AppearanceLook[] looks)
+        {
+            if (looks.Length > 0)
+                pool.Add(looks[0]);
+        }
+
+        static AppearanceLook[] LooksForBreed(int breed, bool female) => breed switch
+        {
+            2 => female ? FemaleOpifexLooks : MaleOpifexLooks,
+            3 => female ? FemaleNanomageLooks : MaleNanomageLooks,
+            4 => female ? [] : [AtroxMaleLook],
+            _ => female ? FemaleSolitusLooks : MaleSolitusLooks,
+        };
+
+        static AppearanceLook Pick(AppearanceLook[] looks)
+            => looks[Random.Shared.Next(looks.Length)];
 
         public static string StripModeTag(string name)
         {
@@ -187,7 +300,6 @@ namespace ZoneEngine_New.Core.Pets
                     return true;
             }
 
-            // "/tell Anvil" / partial summons: unique nick as a whole word.
             if (!string.IsNullOrWhiteSpace(nick)
                 && core.Contains(nick, StringComparison.OrdinalIgnoreCase)
                 && (core.Equals(nick, StringComparison.OrdinalIgnoreCase)
