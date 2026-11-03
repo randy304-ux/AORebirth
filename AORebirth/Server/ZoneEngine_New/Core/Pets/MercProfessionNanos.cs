@@ -27,6 +27,10 @@ namespace ZoneEngine_New.Core.Pets
         Dictionary<int, List<NanoRank>>? _byProfession;
         Dictionary<int, List<NanoRank>>? _nukesByProfession;
         List<KeeperAuraRank>? _keeperAuras;
+        List<NanoRank>? _stWrangles;
+        List<NanoRank>? _umbralWrangles;
+        Dictionary<string, List<NanoRank>>? _mpCompositeLines;
+        Dictionary<string, List<NanoRank>>? _mpSingleLines;
 
         public MercProfessionNanos(IItemTemplateCatalog items, IZoneLogger logger)
         {
@@ -170,6 +174,124 @@ namespace ZoneEngine_New.Core.Pets
             foreach (KeeperAuraRank rank in _keeperAuras ?? [])
                 set.Add(rank.Type);
             return [.. set];
+        }
+
+        /// <summary>Highest single-target Skill Wrangler (not Team) the merc level allows.</summary>
+        public MercBuffOffer? BestSkillWrangle(int level, Character? skillSource = null)
+        {
+            EnsureIndex();
+            return BestFromLine(_stWrangles, (int)Profession.Trader, level, skillSource);
+        }
+
+        /// <summary>Highest Umbral Wrangler the merc level allows, or null if the family is missing.</summary>
+        public MercBuffOffer? BestUmbralWrangle(int level, Character? skillSource = null)
+        {
+            EnsureIndex();
+            if (_umbralWrangles == null || _umbralWrangles.Count == 0)
+                return null;
+            return BestFromLine(_umbralWrangles, (int)Profession.Trader, level, skillSource);
+        }
+
+        public bool HasUmbralWrangleFamily()
+        {
+            EnsureIndex();
+            return _umbralWrangles != null && _umbralWrangles.Count > 0;
+        }
+
+        public IReadOnlyList<MercBuffOffer> MpCompositesFor(int level, Character? skillSource = null)
+        {
+            EnsureIndex();
+            return BestPerLine(_mpCompositeLines, (int)Profession.Metaphysicist, level, skillSource);
+        }
+
+        public IReadOnlyList<MercBuffOffer> MpSinglesFor(int level, Character? skillSource = null)
+        {
+            EnsureIndex();
+            return BestPerLine(_mpSingleLines, (int)Profession.Metaphysicist, level, skillSource);
+        }
+
+        public IReadOnlyList<string> MpCompositeFamilies()
+        {
+            EnsureIndex();
+            if (_mpCompositeLines == null)
+                return [];
+            var list = new List<string>(_mpCompositeLines.Keys);
+            list.Sort(StringComparer.OrdinalIgnoreCase);
+            return list;
+        }
+
+        public IReadOnlyList<string> MpSingleFamilies()
+        {
+            EnsureIndex();
+            if (_mpSingleLines == null)
+                return [];
+            var list = new List<string>(_mpSingleLines.Keys);
+            list.Sort(StringComparer.OrdinalIgnoreCase);
+            return list;
+        }
+
+        public static bool IsTraderWrangleName(string? name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                return false;
+            string n = name.Trim();
+            return n.StartsWith("Skill Wrangler", StringComparison.OrdinalIgnoreCase)
+                || n.StartsWith("Team Skill Wrangler", StringComparison.OrdinalIgnoreCase)
+                || n.StartsWith("Umbral Wrangler", StringComparison.OrdinalIgnoreCase);
+        }
+
+        public static bool IsMpPresetName(string? name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                return false;
+            return TryClassifyMpComposite(name.Trim(), out _)
+                || TryClassifyMpSingle(name.Trim(), out _);
+        }
+
+        MercBuffOffer? BestFromLine(List<NanoRank>? ranks, int profession, int level, Character? skillSource)
+        {
+            if (ranks == null || ranks.Count == 0)
+                return null;
+            var sorted = new List<NanoRank>(ranks);
+            sorted.Sort(CompareRanksDesc);
+            NanoRank? chosen = null;
+            foreach (NanoRank rank in sorted)
+            {
+                if (CanUse(rank.Template, profession, level, skillSource))
+                {
+                    chosen = rank;
+                    break;
+                }
+            }
+
+            NanoRank pick = chosen ?? sorted[sorted.Count - 1];
+            return new MercBuffOffer(
+                pick.Id,
+                pick.Name,
+                BuffbotCatalog.RequiredLevel(pick.Template),
+                NanoSpell.From(pick.Template).NcuCost,
+                pick.Strain,
+                chosen != null);
+        }
+
+        IReadOnlyList<MercBuffOffer> BestPerLine(
+            Dictionary<string, List<NanoRank>>? lines,
+            int profession,
+            int level,
+            Character? skillSource)
+        {
+            if (lines == null || lines.Count == 0)
+                return [];
+            var offers = new List<MercBuffOffer>();
+            foreach ((string _, List<NanoRank> ranks) in lines)
+            {
+                MercBuffOffer? offer = BestFromLine(ranks, profession, level, skillSource);
+                if (offer != null)
+                    offers.Add(offer.Value);
+            }
+
+            offers.Sort((a, b) => string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase));
+            return offers;
         }
 
         public static bool IsAoeNuke(ItemTemplate template)
@@ -317,6 +439,10 @@ namespace ZoneEngine_New.Core.Pets
             var byProfession = new Dictionary<int, List<NanoRank>>();
             var nukesByProfession = new Dictionary<int, List<NanoRank>>();
             var keeperAuras = new List<KeeperAuraRank>();
+            var stWrangles = new List<NanoRank>();
+            var umbralWrangles = new List<NanoRank>();
+            var mpComposites = new Dictionary<string, List<NanoRank>>(StringComparer.OrdinalIgnoreCase);
+            var mpSingles = new Dictionary<string, List<NanoRank>>(StringComparer.OrdinalIgnoreCase);
             int scanned = 0;
             foreach (ItemTemplate template in _items.All)
             {
@@ -324,8 +450,7 @@ namespace ZoneEngine_New.Core.Pets
                 if (template == null || string.IsNullOrWhiteSpace(template.Name))
                     continue;
                 string name = template.Name.Trim();
-                if (name.StartsWith("Nano Crystal", StringComparison.OrdinalIgnoreCase)
-                    || name.StartsWith("NanoCrystal", StringComparison.OrdinalIgnoreCase))
+                if (IsNonCastableNanoShell(name))
                     continue;
 
                 NanoSpell spell = NanoSpell.From(template);
@@ -340,6 +465,27 @@ namespace ZoneEngine_New.Core.Pets
                         spell.StackingOrder,
                         template));
                 }
+
+                // Trader / MP preset families: index by exact items.dat name patterns (never invent ids).
+                if (TryClassifyTraderWrangle(name, out bool umbral))
+                {
+                    var rank = new NanoRank(
+                        template.Id,
+                        name,
+                        umbral ? "umbral" : "skill_wrangle",
+                        spell.NanoStrain,
+                        spell.StackingOrder,
+                        template);
+                    if (umbral)
+                        umbralWrangles.Add(rank);
+                    else
+                        stWrangles.Add(rank);
+                }
+
+                if (TryClassifyMpComposite(name, out string compositeFamily))
+                    AddPresetLine(mpComposites, compositeFamily, template, spell, name);
+                if (TryClassifyMpSingle(name, out string singleFamily))
+                    AddPresetLine(mpSingles, singleFamily, template, spell, name);
 
                 List<int> professions = ProfessionRequirements(template);
                 if (professions.Count == 0)
@@ -393,13 +539,190 @@ namespace ZoneEngine_New.Core.Pets
             _byProfession = byProfession;
             _nukesByProfession = nukesByProfession;
             _keeperAuras = keeperAuras;
+            _stWrangles = stWrangles;
+            _umbralWrangles = umbralWrangles;
+            _mpCompositeLines = mpComposites;
+            _mpSingleLines = mpSingles;
             _logger.Info(string.Format(
                 CultureInfo.InvariantCulture,
-                "MercProfessionNanos indexed templates={0} buffProfessions={1} nukeProfessions={2} keeperAuras={3}",
+                "MercProfessionNanos indexed templates={0} buffProfessions={1} nukeProfessions={2} keeperAuras={3} stWrangles={4} umbral={5} mpCompositeLines={6} mpSingleLines={7}",
                 scanned,
                 byProfession.Count,
                 nukesByProfession.Count,
-                keeperAuras.Count));
+                keeperAuras.Count,
+                stWrangles.Count,
+                umbralWrangles.Count,
+                mpComposites.Count,
+                mpSingles.Count));
+        }
+
+        static void AddPresetLine(
+            Dictionary<string, List<NanoRank>> map,
+            string family,
+            ItemTemplate template,
+            NanoSpell spell,
+            string name)
+        {
+            if (!map.TryGetValue(family, out List<NanoRank>? list))
+            {
+                list = new List<NanoRank>();
+                map[family] = list;
+            }
+
+            list.Add(new NanoRank(
+                template.Id,
+                name,
+                family,
+                spell.NanoStrain,
+                spell.StackingOrder,
+                template));
+        }
+
+        static bool IsNonCastableNanoShell(string name)
+            => name.StartsWith("Nano Crystal", StringComparison.OrdinalIgnoreCase)
+                || name.StartsWith("NanoCrystal", StringComparison.OrdinalIgnoreCase)
+                || name.StartsWith("Compiled Algorithm", StringComparison.OrdinalIgnoreCase)
+                || name.StartsWith("Instruction Disc", StringComparison.OrdinalIgnoreCase)
+                || name.StartsWith("Programmed Photon Particle Emitter", StringComparison.OrdinalIgnoreCase)
+                || name.StartsWith("Nano Can", StringComparison.OrdinalIgnoreCase);
+
+        /// <summary>Single-target Skill Wrangler only (excludes Team Skill Wrangler).</summary>
+        static bool TryClassifyTraderWrangle(string name, out bool umbral)
+        {
+            umbral = false;
+            if (name.StartsWith("Umbral Wrangler", StringComparison.OrdinalIgnoreCase))
+            {
+                umbral = true;
+                return true;
+            }
+
+            if (name.StartsWith("Team Skill Wrangler", StringComparison.OrdinalIgnoreCase))
+                return false;
+            return name.StartsWith("Skill Wrangler", StringComparison.OrdinalIgnoreCase);
+        }
+
+        static bool TryClassifyMpComposite(string name, out string family)
+        {
+            family = string.Empty;
+            if (name.StartsWith("Composite Mochams", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Mochams";
+                return true;
+            }
+
+            if (name.Equals("Composite Infuse With Knowledge", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("Composite Infuse with Knowledge", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Infuse With Knowledge";
+                return true;
+            }
+
+            if (name.Equals("Composite Mastery", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Mastery";
+                return true;
+            }
+
+            if (name.Equals("Composite Teachings", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Teachings";
+                return true;
+            }
+
+            // Generic composite expertise packages (Buffbot Generic / "and so on").
+            if (name.StartsWith("Composite Attribute Boost", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Attribute Boost";
+                return true;
+            }
+
+            if (name.StartsWith("Composite Nano Expertise", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Nano Expertise";
+                return true;
+            }
+
+            if (name.StartsWith("Composite Utility Expertise", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Utility Expertise";
+                return true;
+            }
+
+            if (name.StartsWith("Composite Tradeskill Expertise", StringComparison.OrdinalIgnoreCase)
+                && !name.Contains("Special", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Tradeskill Expertise";
+                return true;
+            }
+
+            if (name.StartsWith("Composite Martial Prowess Expertise", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Martial Prowess Expertise";
+                return true;
+            }
+
+            if (name.StartsWith("Composite Ranged Special Expertise", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Ranged Special Expertise";
+                return true;
+            }
+
+            if (name.StartsWith("Composite Ranged Expertise", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Ranged Expertise";
+                return true;
+            }
+
+            if (name.StartsWith("Composite Melee Expertise", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Melee Expertise";
+                return true;
+            }
+
+            if (name.StartsWith("Composite Physical Special Expertise", StringComparison.OrdinalIgnoreCase))
+            {
+                family = "Composite Physical Special Expertise";
+                return true;
+            }
+
+            return false;
+        }
+
+        static bool TryClassifyMpSingle(string name, out string family)
+        {
+            family = string.Empty;
+            if (name.StartsWith("Mocham's Gift:", StringComparison.OrdinalIgnoreCase)
+                || name.StartsWith("Mocham\u0027s Gift:", StringComparison.OrdinalIgnoreCase))
+            {
+                family = name;
+                return true;
+            }
+
+            if (name.StartsWith("Infuse With Knowledge:", StringComparison.OrdinalIgnoreCase))
+            {
+                family = name;
+                return true;
+            }
+
+            if (name.Equals("BioMet Mastery", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("MatCrea Mastery", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("SpaceTime Mastery", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("MatMet Mastery", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("PsyMod Mastery", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("Sense Imp Mastery", StringComparison.OrdinalIgnoreCase))
+            {
+                family = name;
+                return true;
+            }
+
+            if (name.StartsWith("Teachings of ", StringComparison.OrdinalIgnoreCase)
+                && !name.StartsWith("Teachings of the Immortal", StringComparison.OrdinalIgnoreCase))
+            {
+                family = name;
+                return true;
+            }
+
+            return false;
         }
 
         static bool LooksLikeKeeperAura(string name)

@@ -187,6 +187,22 @@ namespace ZoneEngine_New.Core.Pets
                 sb.Append(' ').Append(CmdLink(".merc preset nt st", "ST"));
             }
 
+            if (string.Equals(def.Kind.Key, "trader", StringComparison.OrdinalIgnoreCase))
+            {
+                string mode = _unlocks.GetTraderMode(player).ToUpperInvariant();
+                sb.Append(' ').Append(DiagAoml.Muted("[Trader " + mode + "]"));
+                sb.Append(' ').Append(CmdLink(".merc preset trader wrangle", "Wrangle"));
+                sb.Append(' ').Append(CmdLink(".merc preset trader umbral", "Umbral"));
+            }
+
+            if (string.Equals(def.Kind.Key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
+            {
+                string mode = _unlocks.GetMpMode(player).ToUpperInvariant();
+                sb.Append(' ').Append(DiagAoml.Muted("[MP " + mode + "]"));
+                sb.Append(' ').Append(CmdLink(".merc preset mp composite", "Composite"));
+                sb.Append(' ').Append(CmdLink(".merc preset mp singles", "Singles"));
+            }
+
             if (state == MercUnlockState.Locked)
             {
                 sb.Append("<br>").Append(DiagAoml.Muted(
@@ -245,7 +261,12 @@ namespace ZoneEngine_New.Core.Pets
         {
             var body = new StringBuilder();
             body.Append(DiagAoml.Title("Merc macros"));
-            body.Append("<br>").Append(DiagAoml.Muted("Copyable commands. Keeper aura and NT mode are live; trader/MP presets still TODO."));
+            string traderMode = _unlocks.GetTraderMode(player).ToUpperInvariant();
+            string mpMode = _unlocks.GetMpMode(player).ToUpperInvariant();
+            string ntMode = _unlocks.GetNtMode(player).ToUpperInvariant();
+            body.Append("<br>").Append(DiagAoml.Muted(
+                "Modes: NT=" + ntMode + " Trader=" + traderMode + " MP=" + mpMode
+                + ". Presets pick highest items.dat ranks at merc level."));
             body.Append("<br><br>").Append(DiagAoml.Muted("General"));
             body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc menu")));
             body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc list")));
@@ -256,10 +277,10 @@ namespace ZoneEngine_New.Core.Pets
             body.Append("<br>").Append(CmdLink(".merc preset keeper aura", "Keeper aura list"));
             foreach (string type in _unlocks.Nanos.KeeperAuraTypes())
                 body.Append("<br>").Append(CmdLink(".merc preset keeper aura " + type, "Keeper " + type));
-            body.Append("<br>").Append(CmdLink(".merc preset trader wrangle", "Trader wrangle (TODO)"));
-            body.Append("<br>").Append(CmdLink(".merc preset trader umbral", "Trader Umbral (TODO)"));
-            body.Append("<br>").Append(CmdLink(".merc preset mp composite", "MP composite (TODO)"));
-            body.Append("<br>").Append(CmdLink(".merc preset mp singles", "MP singles (TODO)"));
+            body.Append("<br>").Append(CmdLink(".merc preset trader wrangle", "Trader wrangle [" + traderMode + "]"));
+            body.Append("<br>").Append(CmdLink(".merc preset trader umbral", "Trader Umbral"));
+            body.Append("<br>").Append(CmdLink(".merc preset mp composite", "MP composite [" + mpMode + "]"));
+            body.Append("<br>").Append(CmdLink(".merc preset mp singles", "MP singles"));
             body.Append("<br>").Append(CmdLink(".merc preset nt aoe", "NT mode AOE"));
             body.Append("<br>").Append(CmdLink(".merc preset nt st", "NT mode ST"));
             body.Append("<br><br>").Append(CmdLink(".merc menu", "Back"));
@@ -385,25 +406,25 @@ namespace ZoneEngine_New.Core.Pets
 
             if (key.StartsWith("trader wrangle", StringComparison.Ordinal) || key == "trader wrangle")
             {
-                Say(player, "TODO: Trader largest single-target wrangle — need verified wrangle nano id at merc level.");
+                Say(player, _unlocks.RunTraderPreset(player, MercUnlockService.TraderModeWrangle));
                 return;
             }
 
             if (key.StartsWith("trader umbral", StringComparison.Ordinal) || key == "trader umbral")
             {
-                Say(player, "TODO: Trader Umbral wrangle — need verified Umbral wrangle nano id.");
+                Say(player, _unlocks.RunTraderPreset(player, MercUnlockService.TraderModeUmbral));
                 return;
             }
 
             if (key.StartsWith("mp composite", StringComparison.Ordinal) || key == "mp composite")
             {
-                Say(player, "TODO: MP composite nano buffs — need composite nano ids and merc cast-on-owner support.");
+                Say(player, _unlocks.RunMpPreset(player, MercUnlockService.MpModeComposite));
                 return;
             }
 
             if (key.StartsWith("mp singles", StringComparison.Ordinal) || key == "mp singles")
             {
-                Say(player, "TODO: MP single nano buffs — need the single-line nano ids and merc cast-on-owner support.");
+                Say(player, _unlocks.RunMpPreset(player, MercUnlockService.MpModeSingles));
                 return;
             }
 
