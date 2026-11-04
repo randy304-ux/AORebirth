@@ -20,13 +20,10 @@ namespace ZoneEngine_New.Core.Pets
 
     /// <summary>
     /// Live-style merc windows via <see cref="SendBlob"/> / <see cref="BuildOuter"/>
-    /// (ChatTextMessage with one outer <c>href="text://..."</c>).
-    /// Detail/Macros/hire pages open with nested <c>href="text://..."</c> (client-local Info window,
-    /// same as <c>.info</c> topics). Actions (cast/summon/dismiss/preset/filter) stay
-    /// <c>chatcmd:///say .merc ...</c> like buffbot cast links. A ChatText reply to a chatcmd click
-    /// from inside an already-open Info window is shown as a chat link — the client does not
-    /// auto-open another window from that reply. No HTML entity encoding. Stay under
-    /// <see cref="MessageMax"/>.
+    /// (ChatTextMessage with one outer <c>href="text://..."</c> — double quotes).
+    /// Detail/Macros/hire pages use nested <c>href='text://...'</c> (single quotes) with one-level
+    /// HTML escape so they do not terminate the outer double-quoted href. Actions stay
+    /// <c>chatcmd:///say .merc ...</c> (buffbot-style). Stay under <see cref="MessageMax"/>.
     /// </summary>
     public sealed class MercMenuService
     {
@@ -1315,15 +1312,22 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
-        /// Nested <c>text://</c> page inside the outer tell. Client opens it locally (no chat round-trip).
-        /// Body must not contain raw double quotes (would terminate <c>href="text://..."</c>).
+        /// Nested <c>text://</c> page inside the outer tell. Outer uses double-quoted
+        /// <c>href="text://"</c>; nested uses single-quoted <c>href='text://'</c> plus one HTML
+        /// escape level so <c>&lt;</c>/<c>&quot;</c>/<c>&#39;</c> cannot terminate the outer href
+        /// (Budabot / historical Buffbot NestedLink). Client unescapes once when opening.
         /// </summary>
         public static string NestedLink(string body, string label)
         {
             ArgumentNullException.ThrowIfNull(body);
             ArgumentNullException.ThrowIfNull(label);
-            string safe = body.Replace("\"", string.Empty, StringComparison.Ordinal);
-            return "<a href=\"text://" + safe + "\">" + EscText(label) + "</a>";
+            string escaped = body
+                .Replace("&", "&amp;", StringComparison.Ordinal)
+                .Replace("'", "&#39;", StringComparison.Ordinal)
+                .Replace("\"", "&quot;", StringComparison.Ordinal)
+                .Replace("<", "&lt;", StringComparison.Ordinal)
+                .Replace(">", "&gt;", StringComparison.Ordinal);
+            return "<a href='text://" + escaped + "'>" + EscText(label) + "</a>";
         }
 
         static int EstimateWrappedLength(int innerLength) => innerLength + 48;
