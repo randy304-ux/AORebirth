@@ -306,7 +306,7 @@ namespace ZoneEngine_New.Core.Bots
                 && !name.Contains("Composite", StringComparison.OrdinalIgnoreCase)
                 && !name.Contains("L33t", StringComparison.OrdinalIgnoreCase))
                 return true;
-            // Keeper auras: self-cast, pulse to team — not castable onto another player as a buffbot hit.
+            // Keeper auras: self-cast, pulse to team â€” not castable onto another player as a buffbot hit.
             if (name.Contains("Tone of", StringComparison.OrdinalIgnoreCase)
                 || name.Contains("Courage Of The Just", StringComparison.OrdinalIgnoreCase)
                 || name.Contains("Clarion Call", StringComparison.OrdinalIgnoreCase)
@@ -355,7 +355,8 @@ namespace ZoneEngine_New.Core.Bots
                     continue;
                 if (!spell.TryReadInt(0, out int statId) || !spell.TryReadInt(1, out int delta))
                     continue;
-                if (parts.Count == 4)
+                // Cap at 3 modifiers so the full live-style menu stays under the tell budget.
+                if (parts.Count == 3)
                 {
                     parts.Add("...");
                     break;

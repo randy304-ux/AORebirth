@@ -182,8 +182,22 @@ namespace ZoneEngine_New.Core.Bots
 
             if (current.Length > 0)
                 messages.Add(BuildOuter(current.ToString()));
+            LastBuiltMessageCount = messages.Count;
+            LastBuiltMaxMessageLength = 0;
+            for (int i = 0; i < messages.Count; i++)
+            {
+                if (messages[i].Length > LastBuiltMaxMessageLength)
+                    LastBuiltMaxMessageLength = messages[i].Length;
+            }
+
             return messages;
         }
+
+        /// <summary>Set by the last <see cref="BuildMenuMessages"/> call (for deploy/size reports).</summary>
+        public static int LastBuiltMessageCount { get; private set; }
+
+        /// <summary>Longest outer tell from the last <see cref="BuildMenuMessages"/> call.</summary>
+        public static int LastBuiltMaxMessageLength { get; private set; }
 
         /// <summary>Inner blob only (no outer text:// wrapper). Used by tests.</summary>
         internal string BuildMenuBlobForTest(int level, string botName)
@@ -226,30 +240,20 @@ namespace ZoneEngine_New.Core.Bots
         string BuildHeader(string botName)
         {
             var body = new StringBuilder();
-            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorMuted).Append('>');
             body.Append("<font color=").Append(ColorHeader).Append('>')
-                .Append(EscText(botName)).Append(" - Fleet buffs</font>\n");
-            body.Append(TellLink(botName, "Buffmacro", "Buffmacro"))
-                .Append(" - creates a macro of current NCU buffs\n");
-            body.Append(TellLink(botName, "Rebuff", "Rebuff"))
-                .Append(" - rebuffs current active NCU buffs\n");
-            body.Append(TellLink(botName, "Help", "Fleet buffs"))
-                .Append(" - buffs available across the bots\n");
-            body.Append(TellLink(botName, "Mybuffs", "This bot's buffs"))
-                .Append(" - eligible nanos learned by this character\n");
-            body.Append(TellLink(botName, "Status", "Status"))
-                .Append(" - shows your running buffbot nanos\n");
-            body.Append("<font color=").Append(ColorNcu).Append('>')
-                .Append("Regular buffs continue while your team buffs wait for an invite.</font>\n");
+                .Append(EscText(botName)).Append("</font>\n");
+            body.Append(TellLink(botName, "Buffmacro", "Buffmacro")).Append('\n');
+            body.Append(TellLink(botName, "Rebuff", "Rebuff")).Append('\n');
+            body.Append(TellLink(botName, "Status", "Status")).Append('\n');
             return body.ToString();
         }
 
         void AppendSection(StringBuilder body, BuffSection section, int level, string botName)
         {
-            body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
-            body.Append("    <img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN> ");
+            body.Append("\n<img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n<img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN>");
             if (ProfessionIcons.TryGetValue(section.Name, out int icon))
-                body.Append("<img src=tdb://id:GFX_GUI_ICON_PROFESSION_").Append(icon.ToString(CultureInfo.InvariantCulture)).Append("> ");
+                body.Append("<img src=tdb://id:GFX_GUI_ICON_PROFESSION_").Append(icon.ToString(CultureInfo.InvariantCulture)).Append('>');
             body.Append("<font color=").Append(ColorHeader).Append('>')
                 .Append(EscText(section.Name)).Append("</font>\n");
 
@@ -257,7 +261,6 @@ namespace ZoneEngine_New.Core.Bots
             {
                 _catalog.TryOffer(line, level, out BuffOffer offer);
                 bool team = IsTeamBuff(offer.Name);
-                body.Append("    ");
                 if (offer.Available)
                 {
                     body.Append("<a href='chatcmd:///tell ")
@@ -272,20 +275,20 @@ namespace ZoneEngine_New.Core.Bots
                 {
                     body.Append("<font color=").Append(ColorMuted).Append('>')
                         .Append(EscText(offer.Name))
-                        .Append(" - requires level ")
+                        .Append(" (L")
                         .Append(offer.RequiredLevel.ToString(CultureInfo.InvariantCulture))
-                        .Append("</font>");
+                        .Append(")</font>");
                 }
 
                 if (team)
-                    body.Append(" <font color=").Append(ColorTeam).Append(">[Team]</font>");
+                    body.Append("<font color=").Append(ColorTeam).Append(">[Team]</font>");
                 if (!string.IsNullOrEmpty(offer.Bonus))
                 {
-                    body.Append(" <font color=").Append(ColorBonus).Append(">[")
+                    body.Append("<font color=").Append(ColorBonus).Append(">[")
                         .Append(EscText(offer.Bonus)).Append("]</font>");
                 }
 
-                body.Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
+                body.Append("<font color=").Append(ColorNcu).Append(">[NCU:")
                     .Append(offer.Ncu.ToString(CultureInfo.InvariantCulture))
                     .Append("]</font>\n");
             }

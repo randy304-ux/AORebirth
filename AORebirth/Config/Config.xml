@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Config>
   <!-- Ports for the Game Engines -->
   <ListenIP>0.0.0.0</ListenIP>
@@ -41,7 +41,7 @@
   <LogChat>false</LogChat>
   <!-- Server MOTD -->
   <!-- {0} will be replaced with Cellao Name and Version eg Yalm 1.3.2.267 -->
-  <Motd>Welcome to AO Rebirth ({0}). Website: https://ao-rebirth.com | Buffbot: /tell Buffbot | Mercs: .merc menu (not deployed yet — inert until mercs build ships)</Motd>
+  <Motd>Welcome to the Dungeon Dogs AO server! ({0}) <a href="https://dungeondogs.org">https://dungeondogs.org</a> | <a href="chatcmd:///tell Buffbot">Buffbot</a> | <a href="chatcmd:///say .merc menu">Mercs</a></Motd>
   <!-- Choose your SQL Databse Type here, MySql, MsSql, PostgreSQL-->
   <SQLType>MySql</SQLType>
   <!-- Sql Connection Setup Area -->

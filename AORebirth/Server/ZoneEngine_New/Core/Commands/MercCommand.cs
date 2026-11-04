@@ -19,7 +19,7 @@ namespace ZoneEngine_New.Core.Commands
 
         public int RequiredGmLevel => 0;
 
-        public string Usage => ".merc | .merc hire <profession> [basic|elite|champion|twink] | .merc dismiss <profession|all> | .merc call | .merc list";
+        public string Usage => ".merc | .merc menu | .merc hire <profession> [basic|elite|champion|twink] | .merc dismiss <profession|all> | .merc call | .merc list";
 
         public string Topic => "mercs";
 
@@ -41,6 +41,10 @@ namespace ZoneEngine_New.Core.Commands
             string rest = string.Join(' ', context.Args.Skip(1));
             switch (sub)
             {
+                case "menu":
+                    // Motd / welcome link until the mercs-1 MercMenuService window ships.
+                    Say("Merc menu coming soon.");
+                    return;
                 case "hire":
                     string[] hireParts = rest.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                     Mercs.Tier tier = Mercs.Tier.Basic;
