@@ -19,11 +19,18 @@ namespace ZoneEngine_New.Core.Pets
     using CharacterStat = SmokeLounge.AOtomation.Messaging.GameData.CharacterStat;
 
     /// <summary>
-    /// Live-style merc windows via <see cref="SendBlob"/> / <see cref="BuildOuter"/>
-    /// (ChatTextMessage with one outer <c>href="text://..."</c> — double quotes).
-    /// Detail/Macros/hire pages use nested <c>href='text://...'</c> (single quotes) with one-level
-    /// HTML escape so they do not terminate the outer double-quoted href. Actions stay
-    /// <c>chatcmd:///say .merc ...</c> (buffbot-style). Stay under <see cref="MessageMax"/>.
+    /// Live-style merc windows via <see cref="SendBlob"/> / <see cref="BuildOuter"/>.
+    /// <para>
+    /// AOML quote rule (outer vs nested text://) — sources: Nadybot/Tyrbot <c>makeBlob</c>
+    /// (<c>href="text://"</c>), Athena/TSW scripting FAQ nested popups (outer double / inner
+    /// single with raw tags), and this repo's <c>InfoGuide</c> appendix→topic pattern.
+    /// Do not HTML-escape tags inside nested bodies (<c>&amp;lt;</c> shows as raw code on the
+    /// AO client — live fail on d35eaec6). Nested body must contain no raw <c>'</c> or <c>"</c>;
+    /// use unquoted attrs (<c>font color=#DEDE42</c>, <c>href=chatcmd://...</c>).
+    /// </para>
+    /// Detail/Macros/hire/filter pages: nested <c>href='text://...'</c> + raw AOML.
+    /// Cast/summon/dismiss/preset: unquoted <c>chatcmd:///say .merc ...</c>. Stay under
+    /// <see cref="MessageMax"/>.
     /// </summary>
     public sealed class MercMenuService
     {
@@ -413,7 +420,34 @@ namespace ZoneEngine_New.Core.Pets
                         "<font color=" + ColorMuted + ">\n"
                         + "<font color=" + ColorHeader + ">Merc macros</font>\n"
                         + "Preset links.\n",
-                        "Macros"));
+                        "Macros"),
+                    BuildFilterLinksSample(filter));
+
+            /// <summary>Sample filter NestedLinks (trimmed name-list bodies, no further nest).</summary>
+            public static string BuildFilterLinksSample(string activeFilter)
+            {
+                var links = new StringBuilder();
+                foreach (string key in FilterKeys)
+                {
+                    links.Append(' ');
+                    if (string.Equals(activeFilter, key, StringComparison.OrdinalIgnoreCase))
+                    {
+                        links.Append("<font color=").Append(ColorHeader).Append(">[")
+                            .Append(EscText(key)).Append("]</font>");
+                    }
+                    else
+                    {
+                        links.Append(NestedLink(
+                            "<font color=" + ColorMuted + ">\n"
+                            + "<font color=" + ColorHeader + ">Filter: " + EscText(key) + "</font>\n"
+                            + "Matching names (open from main Mercs list).\n"
+                            + "- Sample Merc\n",
+                            key));
+                    }
+                }
+
+                return links.ToString();
+            }
 
             public static string DetailInnerSample(
                 string shown,
@@ -501,9 +535,7 @@ namespace ZoneEngine_New.Core.Pets
                 body.Append("<font color=").Append(ColorHeader).Append(">Buffs</font>\n");
                 foreach ((int nanoId, string name, int ncu) in buffs)
                 {
-                    body.Append("<a href='chatcmd:///say .merc cast ")
-                        .Append(nanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
-                        .Append(EscText(name)).Append("</a>")
+                    body.Append(SayLink("cast " + nanoId.ToString(CultureInfo.InvariantCulture), name))
                         .Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
                         .Append(ncu.ToString(CultureInfo.InvariantCulture)).Append("]</font>\n");
                 }
@@ -514,7 +546,7 @@ namespace ZoneEngine_New.Core.Pets
 
             public static string NestedLink(string body, string label) => MercMenuService.NestedLink(body, label);
 
-            /// <summary>Main menu: nested text:// for hire/detail/Macros; say-commands for dismiss.</summary>
+            /// <summary>Main menu: nested text:// for hire/detail/Macros/filters; say for dismiss.</summary>
             public static string MainWithNestedDetailSample()
             {
                 string hire = HireDetailInnerSample(
@@ -540,7 +572,8 @@ namespace ZoneEngine_New.Core.Pets
                         "<font color=" + ColorMuted + ">\n"
                         + "<font color=" + ColorHeader + ">Merc macros</font>\n"
                         + "Preset links.\n",
-                        "Macros")));
+                        "Macros"),
+                    BuildFilterLinksSample(FilterAll)));
                 body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
                 body.Append("    <img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN> ");
                 body.Append("<font color=").Append(ColorHeader).Append(">Hired contracts</font>\n");
@@ -593,9 +626,7 @@ namespace ZoneEngine_New.Core.Pets
                 body.Append("\n<img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n");
                 foreach ((int nanoId, string name, int ncu) in buffs)
                 {
-                    body.Append("<a href='chatcmd:///say .merc cast ")
-                        .Append(nanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
-                        .Append(EscText(name)).Append("</a>")
+                    body.Append(SayLink("cast " + nanoId.ToString(CultureInfo.InvariantCulture), name))
                         .Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
                         .Append(ncu.ToString(CultureInfo.InvariantCulture)).Append("]</font>\n");
                 }
@@ -911,9 +942,9 @@ namespace ZoneEngine_New.Core.Pets
                 body.Append("    ");
                 if (offer.Available)
                 {
-                    body.Append("<a href='chatcmd:///say .merc cast ")
-                        .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
-                        .Append(EscText(offer.Name)).Append("</a>");
+                    body.Append(SayLink(
+                        "cast " + offer.NanoId.ToString(CultureInfo.InvariantCulture),
+                        offer.Name));
                 }
                 else
                 {
@@ -978,25 +1009,85 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         string BuildMainHeader(Player player, string filter)
-            => BuildMainHeaderStatic(filter, NestedLink(BuildMacrosInner(player), "Macros"));
+            => BuildMainHeaderStatic(
+                filter,
+                NestedLink(BuildMacrosInner(player), "Macros"),
+                BuildFilterLinks(player, filter));
 
-        static string BuildMainHeaderStatic(string filter, string macrosLink)
+        /// <summary>
+        /// Filter keys as nested trimmed name-list windows (not chatcmd). Bodies stay small so the
+        /// repeating main header remains under <see cref="MessageMax"/>; open mercs from the main list.
+        /// </summary>
+        string BuildFilterLinks(Player player, string activeFilter)
         {
+            var links = new StringBuilder();
+            foreach (string key in FilterKeys)
+            {
+                links.Append(' ');
+                if (string.Equals(activeFilter, key, StringComparison.OrdinalIgnoreCase))
+                {
+                    links.Append("<font color=").Append(ColorHeader).Append(">[")
+                        .Append(EscText(key)).Append("]</font>");
+                }
+                else
+                    links.Append(NestedLink(BuildFilterPageInner(player, key), key));
+            }
+
+            return links.ToString();
+        }
+
+        string BuildFilterPageInner(Player player, string filterKey)
+        {
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append(">Filter: ")
+                .Append(EscText(filterKey)).Append("</font>\n");
+            body.Append("Matching names. Use the window Back button, then click a name on Mercs.\n");
+
+            int listed = 0;
+            foreach (Mercs.Kind kind in Mercs.Kinds)
+            {
+                bool contract = PetService.HasContract(player, kind);
+                bool here = player.OwnedPets.All.Any(p => p.Pet != null && !p.IsDead
+                    && string.Equals(p.Pet.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase));
+                if (!contract && !here)
+                    continue;
+                Mercs.Tier tier = Mercs.GetTier(player, kind);
+                if (!PassesHiredFilter(tier, here, filterKey))
+                    continue;
+                body.Append("- ").Append(EscText(kind.Title)).Append(" (hire, ")
+                    .Append(EscText(Mercs.TierName(tier))).Append(")\n");
+                listed++;
+            }
+
+            foreach (MercDefinition def in _unlocks.Roster.All)
+            {
+                if (!PassesAccess(player, def) || !PassesFilter(player, def, filterKey))
+                    continue;
+                string shown = _unlocks.DisplayNameFor(player, def);
+                body.Append("- ").Append(EscText(shown))
+                    .Append(" (").Append(EscText(ContentTierLabel(def)))
+                    .Append(" L").Append(def.Level.ToString(CultureInfo.InvariantCulture)).Append(")\n");
+                listed++;
+            }
+
+            if (listed == 0)
+            {
+                body.Append("<font color=").Append(ColorMuted).Append('>')
+                    .Append("No hired or unlocked mercs match this filter.</font>\n");
+            }
+
+            return body.ToString();
+        }
+
+        static string BuildMainHeaderStatic(string filter, string macrosLink, string filterLinks)
+        {
+            _ = filter;
             var body = new StringBuilder();
             body.Append("<font color=").Append(ColorMuted).Append(">\n");
             body.Append("<font color=").Append(ColorHeader).Append(">Mercs</font>\n");
             body.Append("Hired profession contracts and unlocked dungeon mercs. Click a name for detail.\n");
-            body.Append("Filter:");
-            foreach (string key in FilterKeys)
-            {
-                body.Append(' ');
-                if (string.Equals(filter, key, StringComparison.OrdinalIgnoreCase))
-                    body.Append("<font color=").Append(ColorHeader).Append(">[")
-                        .Append(EscText(key)).Append("]</font>");
-                else
-                    body.Append(SayLink("filter " + key, key));
-            }
-
+            body.Append("Filter:").Append(filterLinks);
             body.Append('\n').Append(macrosLink).Append('\n');
             return body.ToString();
         }
@@ -1279,9 +1370,9 @@ namespace ZoneEngine_New.Core.Pets
             {
                 if (offer.Available)
                 {
-                    body.Append("<a href='chatcmd:///say .merc cast ")
-                        .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
-                        .Append(EscText(offer.Name)).Append("</a>");
+                    body.Append(SayLink(
+                        "cast " + offer.NanoId.ToString(CultureInfo.InvariantCulture),
+                        offer.Name));
                 }
                 else
                 {
@@ -1306,38 +1397,39 @@ namespace ZoneEngine_New.Core.Pets
             if (!inner.EndsWith("</font>\n", StringComparison.Ordinal)
                 && !inner.EndsWith("</font>", StringComparison.Ordinal))
                 inner += "</font>";
-            // Outer tell: double-quoted text://, raw tags (live Async). Inner attrs use single quotes.
-            return "<font color='" + ColorMuted + "'><a href=\"text://" + inner + "\">"
+            // Outer tell: double-quoted text://, raw tags (Nadybot/Tyrbot makeBlob; GetStatsAomlBuilder).
+            return "<font color=" + ColorMuted + "><a href=\"text://" + inner + "\">"
                 + EscText(label) + "</a></font>";
         }
 
         /// <summary>
-        /// Nested <c>text://</c> page inside the outer tell. Outer uses double-quoted
-        /// <c>href="text://"</c>; nested uses single-quoted <c>href='text://'</c> plus one HTML
-        /// escape level so <c>&lt;</c>/<c>&quot;</c>/<c>&#39;</c> cannot terminate the outer href
-        /// (Budabot / historical Buffbot NestedLink). Client unescapes once when opening.
+        /// Nested <c>text://</c> inside the outer tell. Outer is <c>href="text://"</c>; nested is
+        /// <c>href='text://'</c> with <strong>raw</strong> AOML (no <c>&amp;lt;</c> escape — client
+        /// shows escaped tags as code). Body must not contain raw quotes; use unquoted attrs and
+        /// <see cref="SayLink"/>. Sources: TSW/AO scripting FAQ nested popups; InfoGuide appendix.
         /// </summary>
         public static string NestedLink(string body, string label)
         {
             ArgumentNullException.ThrowIfNull(body);
             ArgumentNullException.ThrowIfNull(label);
-            string escaped = body
-                .Replace("&", "&amp;", StringComparison.Ordinal)
-                .Replace("'", "&#39;", StringComparison.Ordinal)
-                .Replace("\"", "&quot;", StringComparison.Ordinal)
-                .Replace("<", "&lt;", StringComparison.Ordinal)
-                .Replace(">", "&gt;", StringComparison.Ordinal);
-            return "<a href='text://" + escaped + "'>" + EscText(label) + "</a>";
+            if (body.IndexOf('\'') >= 0 || body.IndexOf('"') >= 0)
+            {
+                throw new InvalidOperationException(
+                    "Nested text:// body contained a raw quote. Use unquoted attrs / SayLink.");
+            }
+
+            return "<a href='text://" + body + "'>" + EscText(label) + "</a>";
         }
 
         static int EstimateWrappedLength(int innerLength) => innerLength + 48;
 
         /// <summary>
-        /// Zone say-command for actions (cast/summon/dismiss/preset/filter). Same pattern as buffbot
-        /// <c>.buff cast</c>. Do not use these for opening windows — use <see cref="NestedLink"/>.
+        /// Unquoted chatcmd action link (cast/summon/dismiss/preset). Safe inside nested
+        /// <c>href='text://'</c> bodies because it introduces no <c>'</c>/<c>"</c>.
+        /// Do not use for opening windows — use <see cref="NestedLink"/>.
         /// </summary>
         static string SayLink(string command, string label)
-            => "<a href='chatcmd:///say .merc " + command + "'>" + EscText(label) + "</a>";
+            => "<a href=chatcmd:///say .merc " + command + ">" + EscText(label) + "</a>";
 
         /// <summary>
         /// Cast a buffbot-listed nano from the player's summoned merc onto the player (or guest).
