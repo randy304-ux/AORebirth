@@ -28,11 +28,11 @@ namespace ZoneEngine_New.Core.Commands
         public int RequiredGmLevel => 0;
 
         public string Usage =>
-            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc linktest | .merc filter <...> | .merc view <name> | .merc contract <profession> | .merc macros | .merc cast <id> | .merc preset <...> | .merc hire <profession> [tier] | .merc call | .merc setstate <name> <locked|dungeon_only|unlocked>";
+            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc filter <...> | .merc view <name> | .merc contract <profession> | .merc macros | .merc cast <id> | .merc preset <...> | .merc hire <profession> [tier] | .merc call | .merc setstate <name> <locked|dungeon_only|unlocked>";
 
         public string Topic => "mercs";
 
-        public string Summary => "Live-style merc menu (.merc opens ChatText; nested text:// for detail; say-commands for cast/dismiss; .merc linktest for quote variants).";
+        public string Summary => "Flat merc menu (.merc opens one top-level text:// window like buffbot; say-commands for cast/dismiss).";
 
         public void Execute(GmCommandContext context)
         {
@@ -48,9 +48,6 @@ namespace ZoneEngine_New.Core.Commands
                 case "menu":
                 case "help":
                     _menu.OpenMenu(player);
-                    return;
-                case "linktest":
-                    _menu.OpenLinkTest(player);
                     return;
                 case "filter":
                 case "view":

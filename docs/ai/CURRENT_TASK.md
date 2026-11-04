@@ -1,8 +1,6 @@
 # Current Task
 
-Deployed `9d505595` (Randy approved). Merc nested text:// raw AOML + nested filters.
+Deploy flat single-window merc menu (buffbot-style; no nested text://).
 
-Live: zone=533104 chat=529332 login=369336
-Backup: `I:\AO\backups\cellao_codex_clean-20261104-0240-merc-buffbot-icc.sql`
-
-Await Randy live check of nested merc windows / filters / cast.
+Randy: only top-level window links work. Filters dropped from window (`.merc filter`
+from chat still works). Overflow = second tell like buffbot.
