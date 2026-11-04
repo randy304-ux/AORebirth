@@ -28,11 +28,11 @@ namespace ZoneEngine_New.Core.Commands
         public int RequiredGmLevel => 0;
 
         public string Usage =>
-            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc filter <all|basic|twink|elite|summoned> | .merc view <name> | .merc macros | .merc buffs [name] | .merc hire <profession> [tier] | .merc call | .merc setstate <name> <locked|dungeon_only|unlocked>";
+            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc filter <...> | .merc view <name> | .merc contract <profession> | .merc macros | .merc cast <id> | .merc preset <...> | .merc hire <profession> [tier] | .merc call | .merc setstate <name> <locked|dungeon_only|unlocked>";
 
         public string Topic => "mercs";
 
-        public string Summary => "Live-style merc menu (server-opened windows via chatcmd), dungeon summon/dismiss, and profession hire/call.";
+        public string Summary => "Live-style merc menu (say .merc opens ChatText windows; chatcmd:///say .merc for nav).";
 
         public void Execute(GmCommandContext context)
         {
@@ -58,6 +58,10 @@ namespace ZoneEngine_New.Core.Commands
                 case "buffs":
                 case "cast":
                 case "preset":
+                case "contract":
+                case "dismiss":
+                case "call":
+                    // Same menu service path as /tell Merc — opens windows via GmCommandFeedback ChatText.
                     _menu.Execute(player, context.Args);
                     return;
                 case "summon":
@@ -77,45 +81,8 @@ namespace ZoneEngine_New.Core.Commands
 
                     string? err = _unlocks.Summon(player, def);
                     Say(err ?? ("Summoned " + _unlocks.DisplayNameFor(player, def) + " (L" + def.Level + ")."));
-                    return;
-                }
-                case "dismiss":
-                {
-                    if (string.IsNullOrWhiteSpace(rest) || rest.Equals("all", StringComparison.OrdinalIgnoreCase))
-                    {
-                        // Park pets only; contracts and unlocks stay listed for resummon.
-                        string? err = _unlocks.Dismiss(player, null);
-                        if (rest.Equals("all", StringComparison.OrdinalIgnoreCase) && pets != null)
-                            pets.ParkMercs(player);
-                        Say(err ?? "Dismissed.");
-                        return;
-                    }
-
-                    MercDefinition? def = _unlocks.Roster.Find(rest);
-                    if (def != null)
-                    {
-                        string shown = _unlocks.DisplayNameFor(player, def);
-                        string? err = _unlocks.Dismiss(player, def);
-                        Say(err ?? ("Dismissed " + shown + "."));
-                        return;
-                    }
-
-                    // Profession hire: park pet, keep ContractsStat.
-                    if (pets == null)
-                    {
-                        Say("Mercenaries are not available here.");
-                        return;
-                    }
-
-                    if (Mercs.Find(rest) is not { } kind)
-                    {
-                        Say("Usage: .merc dismiss <name|profession|all>");
-                        return;
-                    }
-
-                    Say(pets.ParkMerc(player, kind)
-                        ? "Dismissed " + kind.Title + ". Contract kept - use Call or open the merc to resummon."
-                        : "You have no " + kind.Title + " under contract.");
+                    if (err == null)
+                        _menu.OpenMercDetail(player, def);
                     return;
                 }
                 case "list":
@@ -244,18 +211,6 @@ namespace ZoneEngine_New.Core.Commands
                         : "Could not hire right now (mercenaries off, or you are dead or zoning).");
                     return;
                 }
-                case "call":
-                    if (pets == null)
-                    {
-                        Say("Mercenaries are not available here.");
-                        return;
-                    }
-
-                    player.OwnedPets.MercReviveUtc.Clear();
-                    player.OwnedPets.MercCheckUtc = DateTime.MinValue;
-                    pets.TickMercs(player);
-                    Say("Calling your mercenaries back.");
-                    return;
                 default:
                     // Unknown verb → menu (buffbot-style).
                     _menu.OpenMenu(player);

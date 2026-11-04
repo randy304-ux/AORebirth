@@ -4,15 +4,15 @@
     "Npcs":  [
                  {
                      "Key":  "ddogs:icc:buffbot",
-                     "Provenance":  "Client monster 96056 protocol droid (catMesh 96024). One buffbot for every profession, standing at Randy\u0027s outdoor ICC hub pin 3251.4, 35.1, 823.4. That pin is where Randy was standing, not a measured row of bot characters. White uniforms are not on a hash template.",
+                     "Provenance":  "Client monster 96056 protocol droid (catMesh 96024). One buffbot for every profession. Moved 2026-11-04 to Randy pin x 3211.2, z 858.3, y 35.1 (AO height = Position[1]).",
                      "ContentNpcIdentity":  "ddogs-buffbot",
                      "PlayfieldId":  655,
                      "InstanceId":  2110836806,
                      "Name":  "Buffbot",
                      "Position":  [
-                                      3251.4,
+                                      3211.2,
                                       35.1,
-                                      823.4
+                                      858.3
                                   ],
                      "Rotation":  [
                                       0,
@@ -46,6 +46,80 @@
                                },
                      "Textures":  [
 
+                                  ],
+                     "Meshes":  [
+
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
+                 },
+                 {
+                     "Key":  "ddogs:merc:655:terminal",
+                     "Provenance":  "ddogs merc contract terminal (basic hire). Placed 2026-11-04 at Randy pin x 3211.1, z 873.1, y 35.1 beside Buffbot. Body 279184 = Shipping Manifest Terminal; Knubot MercContracts.json binds ContentNpcIdentity ddogs-merc-terminal.",
+                     "ContentNpcIdentity":  "ddogs-merc-terminal",
+                     "PlayfieldId":  655,
+                     "InstanceId":  2110836742,
+                     "Name":  "Contract Terminal",
+                     "Position":  [
+                                      3211.1,
+                                      35.1,
+                                      873.1
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  277352961,
+                                   "1":  1650,
+                                   "4":  6,
+                                   "27":  1650,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  40,
+                                   "59":  1,
+                                   "60":  0,
+                                   "64":  0,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  279184,
+                                   "360":  100,
+                                   "368":  0,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      {
+                                          "Place":  0,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  1,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  2,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  3,
+                                          "Id":  0
+                                      },
+                                      {
+                                          "Place":  4,
+                                          "Id":  0
+                                      }
                                   ],
                      "Meshes":  [
 

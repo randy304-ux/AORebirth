@@ -167,6 +167,11 @@ namespace ZoneEngine_New.Core.Nanos
             return true;
         }
 
+        /// <summary>
+        /// Team-wide child nano. Player casters hit every teammate (live team-cast).
+        /// Merc/pet casters (Keeper auras) hit the owner and teammates in range of the merc —
+        /// previously NPC casters only self-applied, so merc Keeper auras never reached the team.
+        /// </summary>
         static bool TeamCastNano(
             Character caster,
             ItemSpell spell,
@@ -177,7 +182,16 @@ namespace ZoneEngine_New.Core.Nanos
             if (!spell.TryReadInt(0, out int nanoId) || nanoId <= 0)
                 return false;
 
-            if (caster is not Player player)
+            // Merc/pet Keeper aura: use the owning player as the team root; range is from the merc.
+            Player? player = caster as Player;
+            Character rangeCenter = caster;
+            if (player == null && caster is NpcCharacter { Pet.Owner: Player petOwner })
+            {
+                player = petOwner;
+                rangeCenter = caster;
+            }
+
+            if (player == null)
             {
                 if (!caster.IsDead)
                     NanoRuntime.TryApplyImmediate(caster, caster, nanoId, items, inventory, nowUtc);
@@ -188,10 +202,20 @@ namespace ZoneEngine_New.Core.Nanos
             TeamService? teams = playfield?.GetService<TeamService>();
             PlayfieldManager? manager = playfield?.GetService<PlayfieldManager>();
             TeamSnapshot? team = teams?.GetTeam(player);
+
+            // Always include the aura source (Keeper merc) and the owner when in range / same pf.
+            if (!caster.IsDead && ReferenceEquals(caster.Playfield, playfield))
+                NanoRuntime.TryApplyImmediate(caster, caster, nanoId, items, inventory, nowUtc);
+
             if (team == null || manager == null)
             {
-                if (!player.IsDead)
-                    NanoRuntime.TryApplyImmediate(player, player, nanoId, items, inventory, nowUtc);
+                if (!player.IsDead
+                    && ReferenceEquals(player.Playfield, playfield)
+                    && (ReferenceEquals(caster, player) || rangeCenter.Distance3D(player) <= MercAuraTeamRangeMeters))
+                {
+                    NanoRuntime.TryApplyImmediate(caster, player, nanoId, items, inventory, nowUtc);
+                }
+
                 return true;
             }
 
@@ -199,12 +223,20 @@ namespace ZoneEngine_New.Core.Nanos
             {
                 if (!manager.FindPlayer(team.MemberIds[i], out Player? mate) || mate == null || mate.IsDead)
                     continue;
+                if (!ReferenceEquals(mate.Playfield, playfield))
+                    continue;
+                // Player team-cast: no range gate. Merc aura: must be near the Keeper.
+                if (!ReferenceEquals(caster, player) && rangeCenter.Distance3D(mate) > MercAuraTeamRangeMeters)
+                    continue;
 
-                NanoRuntime.TryApplyImmediate(player, mate, nanoId, items, inventory, nowUtc);
+                NanoRuntime.TryApplyImmediate(caster, mate, nanoId, items, inventory, nowUtc);
             }
 
             return true;
         }
+
+        /// <summary>Keeper merc aura pulse radius (meters) for owner/team recipients.</summary>
+        const double MercAuraTeamRangeMeters = 40.0;
 
         static bool PlayfieldNano(
             Character caster,
