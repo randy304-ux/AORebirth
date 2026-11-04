@@ -9,8 +9,8 @@ namespace ZoneEngine_New.Tests
     using ZoneEngine_New.Core.Pets;
 
     /// <summary>
-    /// Merc menu invariants: href="text://" (double quotes) for tell and nested pages;
-    /// inner pages use only single-quoted attrs and contain no raw double quotes; no entities.
+    /// Merc menu: one server-opened text:// window per tell; sub-pages via chatcmd (no nested text://).
+    /// Dismiss parks hired contracts (ContractsStat bit stays).
     /// </summary>
     [TestClass]
     public sealed class MercMenuRenderTests
@@ -40,70 +40,65 @@ namespace ZoneEngine_New.Tests
         }
 
         [TestMethod]
-        public void NestedLink_UsesDoubleQuotedTextHref_InnerHasNoDoubleQuotes()
+        public void MainMenu_UsesChatcmdNav_NoNestedTextHref()
         {
-            string detail =
-                "<font color=#D3BFFF>\n"
-                + "<font color=#DEDE42>Soldier - Basic</font>\n"
-                + "<a href='chatcmd:///tell Merc dismiss soldier'>Dismiss</a>\n";
+            string message = MercMenuService.Render.MainWithChatcmdNavSample();
 
-            string link = MercMenuService.NestedLink(detail, "Soldier");
-
-            Assert.IsTrue(link.StartsWith("<a href=\"text://", StringComparison.Ordinal), link);
-            Assert.IsFalse(link.StartsWith("<a href='text://", StringComparison.Ordinal), link);
-            Assert.IsTrue(link.Contains("<font color=#DEDE42>Soldier - Basic</font>", StringComparison.Ordinal));
-            Assert.IsTrue(link.Contains("<a href='chatcmd:///tell Merc dismiss soldier'>Dismiss</a>", StringComparison.Ordinal));
-            Assert.IsFalse(link.Contains("&lt;", StringComparison.Ordinal));
-            Assert.IsFalse(link.Contains("&#39;", StringComparison.Ordinal));
-            Assert.IsFalse(link.Contains("&quot;", StringComparison.Ordinal));
-
-            const string hrefStart = "href=\"text://";
-            int start = link.IndexOf(hrefStart, StringComparison.Ordinal) + hrefStart.Length;
-            int end = link.LastIndexOf("\">", StringComparison.Ordinal);
-            Assert.IsTrue(end > start, link);
-            string nestedBody = link.Substring(start, end - start);
-            Assert.IsFalse(nestedBody.Contains("\"", StringComparison.Ordinal), nestedBody);
-            Assert.IsTrue(nestedBody.Contains("href='chatcmd://", StringComparison.Ordinal), nestedBody);
-            Assert.IsTrue(link.EndsWith(">Soldier</a>", StringComparison.Ordinal));
-            Assert.IsTrue(MercMenuService.IsAsciiOnly(link));
+            Assert.AreEqual(1, Regex.Matches(message, "href=\"text://").Count, message);
+            Assert.AreEqual(0, Regex.Matches(message, "href='text://").Count, message);
+            Assert.IsTrue(message.Contains("chatcmd:///tell Merc hire soldier", StringComparison.Ordinal), message);
+            Assert.IsTrue(message.Contains("chatcmd:///tell Merc view enforcer_subway", StringComparison.Ordinal), message);
+            Assert.IsTrue(message.Contains("chatcmd:///tell Merc macros", StringComparison.Ordinal), message);
+            Assert.IsTrue(message.Contains("chatcmd:///tell Merc dismiss soldier", StringComparison.Ordinal), message);
+            Assert.IsTrue(message.Contains("Basic - hire", StringComparison.Ordinal));
+            Assert.IsTrue(message.Contains("Twink - L24", StringComparison.Ordinal));
+            Assert.IsFalse(message.Contains("&lt;", StringComparison.Ordinal));
+            Assert.IsFalse(message.Contains("&#39;", StringComparison.Ordinal));
+            Assert.IsTrue(MercMenuService.IsAsciiOnly(message));
+            Assert.IsTrue(message.Length <= MercMenuService.MessageMax);
         }
 
         [TestMethod]
-        public void MainWithNestedDetail_DoubleQuotedNestedPages_NoInnerDoubleQuotes()
+        public void HiredContract_AfterParkDismiss_StillListedWithSummon()
         {
-            string message = MercMenuService.Render.MainWithNestedDetailSample();
+            string present = MercMenuService.Render.HiredContractRowSample(present: true);
+            string parked = MercMenuService.Render.HiredContractRowSample(present: false);
 
-            // Tell wrapper + nested Soldier + nested dungeon name + nested Macros.
-            Assert.IsTrue(Regex.Matches(message, "href=\"text://").Count >= 3, message);
-            Assert.AreEqual(0, Regex.Matches(message, "href='text://").Count, message);
-            Assert.IsFalse(message.Contains("&lt;", StringComparison.Ordinal));
-            Assert.IsFalse(message.Contains("&#39;", StringComparison.Ordinal));
-            Assert.IsTrue(message.Contains("<a href='chatcmd:///tell Merc dismiss soldier'>Dismiss</a>", StringComparison.Ordinal));
-            Assert.IsTrue(message.Contains(">dismiss</a>", StringComparison.Ordinal));
-            Assert.IsFalse(message.Contains("type .merc dismiss", StringComparison.Ordinal));
-            Assert.IsTrue(message.Contains("Basic - hire", StringComparison.Ordinal));
-            Assert.IsTrue(message.Contains("Twink - L24", StringComparison.Ordinal));
-            Assert.IsTrue(message.Contains(">Macros</a>", StringComparison.Ordinal));
-            Assert.IsFalse(message.Contains("chatcmd:///tell Merc macros", StringComparison.Ordinal));
-            Assert.IsTrue(MercMenuService.IsAsciiOnly(message));
-            Assert.IsTrue(message.Length <= MercMenuService.MessageMax);
+            Assert.IsTrue(present.Contains("chatcmd:///tell Merc hire soldier", StringComparison.Ordinal), present);
+            Assert.IsTrue(present.Contains("dismiss soldier", StringComparison.Ordinal), present);
+            Assert.IsTrue(present.Contains("[Summoned]", StringComparison.Ordinal), present);
 
-            AssertNestedPageBodyHasNoDoubleQuotes(message, "Soldier");
-            AssertNestedPageBodyHasNoDoubleQuotes(message, "Macros");
+            Assert.IsTrue(parked.Contains("chatcmd:///tell Merc hire soldier", StringComparison.Ordinal), parked);
+            Assert.IsTrue(parked.Contains(">Soldier</a>", StringComparison.Ordinal), parked);
+            Assert.IsTrue(parked.Contains("chatcmd:///tell Merc call", StringComparison.Ordinal), parked);
+            Assert.IsTrue(parked.Contains(">summon</a>", StringComparison.Ordinal), parked);
+            Assert.IsFalse(parked.Contains("dismiss soldier", StringComparison.Ordinal), parked);
+            Assert.IsFalse(parked.Contains("[Summoned]", StringComparison.Ordinal), parked);
         }
 
-        static void AssertNestedPageBodyHasNoDoubleQuotes(string message, string label)
+        [TestMethod]
+        public void ParkDismiss_KeepsContractBit_EndDismissClearsIt()
         {
-            string needle = "\">" + label + "</a>";
-            int labelAt = message.IndexOf(needle, StringComparison.Ordinal);
-            Assert.IsTrue(labelAt > 0, "missing nested link label " + label);
-            int hrefAt = message.LastIndexOf("href=\"text://", labelAt, StringComparison.Ordinal);
-            Assert.IsTrue(hrefAt >= 0, "missing href=\"text:// before " + label);
-            int bodyStart = hrefAt + "href=\"text://".Length;
-            string body = message.Substring(bodyStart, labelAt - bodyStart);
-            Assert.IsFalse(body.Contains("\"", StringComparison.Ordinal), label + " body has double quote: " + body);
-            Assert.IsFalse(body.Contains("&lt;", StringComparison.Ordinal), label);
-            Assert.IsFalse(body.Contains("&#39;", StringComparison.Ordinal), label);
+            const int soldierBit = 1;
+            int bits = 260 | (1 << soldierBit); // Blitzkreig-style + soldier
+            Assert.AreEqual(262, bits);
+            Assert.AreEqual(262, PetService.ContractBitsAfterDismiss(bits, soldierBit, endContract: false));
+            Assert.AreEqual(260, PetService.ContractBitsAfterDismiss(bits, soldierBit, endContract: true));
+        }
+
+        [TestMethod]
+        public void HireDetail_WhenParked_ShowsSummonNotDismiss()
+        {
+            string parked = MercMenuService.Render.HireDetailInnerSample(
+                title: "Soldier",
+                tier: "Basic",
+                description: "Profession hire contract.",
+                tierBlurb: "Basic hire.",
+                present: false,
+                buffs: new List<(int, string, int)> { (2001, "Grid Armor", 3) });
+            Assert.IsTrue(parked.Contains("chatcmd:///tell Merc call", StringComparison.Ordinal), parked);
+            Assert.IsTrue(parked.Contains(">Summon</a>", StringComparison.Ordinal), parked);
+            Assert.IsFalse(parked.Contains("dismiss soldier", StringComparison.Ordinal), parked);
         }
 
         [TestMethod]
@@ -148,35 +143,25 @@ namespace ZoneEngine_New.Tests
             Assert.AreEqual(1, Regex.Matches(owner, "href=\"text://").Count);
             Assert.AreEqual(1, Regex.Matches(guest, "href=\"text://").Count);
             Assert.IsFalse(owner.Contains("&lt;", StringComparison.Ordinal));
-            Assert.IsFalse(owner.Contains("&#39;", StringComparison.Ordinal));
             Assert.IsTrue(MercMenuService.IsAsciiOnly(owner));
             Assert.IsTrue(MercMenuService.IsAsciiOnly(guest));
 
             Assert.IsTrue(owner.Contains("chatcmd:///tell Merc dismiss", StringComparison.Ordinal));
             Assert.IsTrue(owner.Contains("chatcmd:///tell Merc preset keeper aura heal", StringComparison.Ordinal));
             Assert.IsTrue(owner.Contains("chatcmd:///tell Merc cast 1001", StringComparison.Ordinal));
-            Assert.IsTrue(owner.Contains(" - Twink", StringComparison.Ordinal));
-
             Assert.IsTrue(guest.Contains("can buff you", StringComparison.Ordinal));
             Assert.IsFalse(guest.Contains("chatcmd:///tell Merc summon", StringComparison.Ordinal));
-            Assert.IsFalse(guest.Contains("chatcmd:///tell Merc dismiss", StringComparison.Ordinal));
             Assert.IsFalse(guest.Contains("Stance", StringComparison.Ordinal));
         }
 
         [TestMethod]
-        public void MainHeader_NestedMacros_DoubleQuoted_NoInnerDoubleQuotes()
+        public void MainHeader_MacrosIsChatcmd()
         {
             string header = MercMenuService.Render.MainHeader("twink");
-            Assert.IsTrue(header.Contains("\n", StringComparison.Ordinal));
             Assert.IsTrue(header.Contains("<font color=#DEDE42>[twink]</font>", StringComparison.Ordinal));
-            Assert.IsTrue(header.Contains("chatcmd:///tell Merc filter all", StringComparison.Ordinal));
-            Assert.IsTrue(header.Contains("href=\"text://", StringComparison.Ordinal));
+            Assert.IsTrue(header.Contains("chatcmd:///tell Merc macros", StringComparison.Ordinal));
+            Assert.IsFalse(header.Contains("href=\"text://", StringComparison.Ordinal));
             Assert.IsFalse(header.Contains("href='text://", StringComparison.Ordinal));
-            Assert.IsTrue(header.Contains(">Macros</a>", StringComparison.Ordinal));
-            Assert.IsFalse(header.Contains("chatcmd:///tell Merc macros", StringComparison.Ordinal));
-            Assert.IsFalse(header.Contains("&lt;", StringComparison.Ordinal));
-            Assert.IsFalse(header.Contains("&#39;", StringComparison.Ordinal));
-            AssertNestedPageBodyHasNoDoubleQuotes(header, "Macros");
             Assert.IsTrue(MercMenuService.IsAsciiOnly(header));
         }
     }

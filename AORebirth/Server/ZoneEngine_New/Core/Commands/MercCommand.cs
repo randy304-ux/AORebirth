@@ -32,7 +32,7 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Topic => "mercs";
 
-        public string Summary => "Live-style merc menu (nested text:// detail pages), dungeon summon/dismiss, and profession hire/call.";
+        public string Summary => "Live-style merc menu (server-opened windows via chatcmd), dungeon summon/dismiss, and profession hire/call.";
 
         public void Execute(GmCommandContext context)
         {
@@ -83,10 +83,10 @@ namespace ZoneEngine_New.Core.Commands
                 {
                     if (string.IsNullOrWhiteSpace(rest) || rest.Equals("all", StringComparison.OrdinalIgnoreCase))
                     {
-                        // Prefer roster dismiss; also clear profession contracts when "all".
+                        // Park pets only; contracts and unlocks stay listed for resummon.
                         string? err = _unlocks.Dismiss(player, null);
                         if (rest.Equals("all", StringComparison.OrdinalIgnoreCase) && pets != null)
-                            pets.DismissMercs(player);
+                            pets.ParkMercs(player);
                         Say(err ?? "Dismissed.");
                         return;
                     }
@@ -100,7 +100,7 @@ namespace ZoneEngine_New.Core.Commands
                         return;
                     }
 
-                    // Legacy profession dismiss.
+                    // Profession hire: park pet, keep ContractsStat.
                     if (pets == null)
                     {
                         Say("Mercenaries are not available here.");
@@ -113,7 +113,9 @@ namespace ZoneEngine_New.Core.Commands
                         return;
                     }
 
-                    Say(pets.DismissMerc(player, kind) ? "Your " + kind.Title + " contract has ended." : "You have no " + kind.Title + " under contract.");
+                    Say(pets.ParkMerc(player, kind)
+                        ? "Dismissed " + kind.Title + ". Contract kept - use Call or open the merc to resummon."
+                        : "You have no " + kind.Title + " under contract.");
                     return;
                 }
                 case "list":

@@ -253,7 +253,7 @@ namespace ZoneEngine_New.Core.Pets
             if (pets == null)
                 return "Mercenaries are not available here.";
 
-            pets.DismissMerc(player, def.Kind);
+            pets.ParkMerc(player, def.Kind);
             ClearSummonedKind(player.Identity.Instance, def.Kind.Key);
 
             NpcCharacter? npc = pets.HireMerc(player, def.Kind, def.Level, Mercs.Tier.Basic);
@@ -658,7 +658,8 @@ namespace ZoneEngine_New.Core.Pets
 
             if (def != null)
             {
-                bool had = pets.DismissMerc(player, def.Kind);
+                // Park only - never clear ContractsStat / unlocks.
+                bool had = pets.ParkMerc(player, def.Kind);
                 if (_summoned.TryGetValue(player.Identity.Instance, out HashSet<string>? set))
                     set.Remove(def.Id);
                 return had ? null : "You have no " + def.DisplayName + " summoned.";
@@ -678,7 +679,7 @@ namespace ZoneEngine_New.Core.Pets
                         if (!MercNameFormat.NameMatches(petName, row)
                             && !string.Equals(pet.Pet.Hash, row.Kind.Hash, StringComparison.OrdinalIgnoreCase))
                             continue;
-                        pets.DismissMerc(player, row.Kind);
+                        pets.ParkMerc(player, row.Kind);
                         any = true;
                     }
                 }
@@ -690,7 +691,7 @@ namespace ZoneEngine_New.Core.Pets
             {
                 MercDefinition? row = _roster.Find(id);
                 if (row != null)
-                    pets.DismissMerc(player, row.Kind);
+                    pets.ParkMerc(player, row.Kind);
             }
 
             active.Clear();

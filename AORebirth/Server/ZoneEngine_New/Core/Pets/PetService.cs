@@ -270,7 +270,36 @@ namespace ZoneEngine_New.Core.Pets
             return merc;
         }
 
-        /// <summary>Ends one merc contract and sends that merc home; false when there was no such contract or merc.</summary>
+        /// <summary>
+        /// Parks one hired merc: despawns the pet but keeps <see cref="Mercs.ContractsStat"/> and tier.
+        /// Sets an infinite revive hold so <see cref="TickMercs"/> does not auto-return until Call/Hire.
+        /// Menu and <c>.merc dismiss</c> use this; knubot <c>{dismissmerc}</c> uses <see cref="DismissMerc"/>.
+        /// </summary>
+        public bool ParkMerc(Player owner, Mercs.Kind kind)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            ArgumentNullException.ThrowIfNull(kind);
+            bool hadContract = HasContract(owner, kind);
+            bool hadPet = false;
+            owner.OwnedPets.Stash.RemoveAll(stash => string.Equals(stash.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase));
+            foreach (NpcCharacter pet in owner.OwnedPets.All.ToArray())
+            {
+                if (pet.Pet != null && string.Equals(pet.Pet.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase))
+                {
+                    Dismiss(pet, "merc dismissed");
+                    hadPet = true;
+                }
+            }
+
+            if (hadContract || hadPet)
+                owner.OwnedPets.MercReviveUtc[kind.Key] = DateTime.MaxValue;
+            return hadContract || hadPet;
+        }
+
+        /// <summary>
+        /// Ends one merc contract (clears the ContractsStat bit and tier) and sends that merc home.
+        /// Knubot <c>{dismissmerc}</c> only. Menu dismiss must use <see cref="ParkMerc"/>.
+        /// </summary>
         public bool DismissMerc(Player owner, Mercs.Kind kind)
         {
             ArgumentNullException.ThrowIfNull(owner);
@@ -290,6 +319,17 @@ namespace ZoneEngine_New.Core.Pets
             }
 
             return had;
+        }
+
+        /// <summary>
+        /// Pure contract-bit helper for tests: park-dismiss must leave bits unchanged;
+        /// end-contract clears the kind bit.
+        /// </summary>
+        public static int ContractBitsAfterDismiss(int bits, int kindBit, bool endContract)
+        {
+            if (kindBit < 0 || kindBit > 30)
+                return bits;
+            return endContract ? bits & ~(1 << kindBit) : bits;
         }
 
         public static bool HasContract(Player owner, Mercs.Kind kind)
@@ -519,7 +559,40 @@ namespace ZoneEngine_New.Core.Pets
             owner.OwnedPets.MercReviveUtc[kind.Key] = DateTime.UtcNow.AddSeconds(seconds);
         }
 
-        /// <summary>Dismisses every merc <paramref name="owner"/> has; returns how many.</summary>
+        /// <summary>
+        /// Parks every merc pet for <paramref name="owner"/> without clearing contracts or tiers.
+        /// Menu / <c>.merc dismiss all</c>. Knubot <c>{dismissmercs}</c> uses <see cref="DismissMercs"/>.
+        /// </summary>
+        public int ParkMercs(Player owner)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            int count = 0;
+            foreach (NpcCharacter pet in owner.OwnedPets.All.ToArray())
+            {
+                if (pet.Pet != null && Mercs.IsMercHash(pet.Pet.Hash))
+                {
+                    if (Mercs.ByHash(pet.Pet.Hash) is Mercs.Kind kind)
+                        owner.OwnedPets.MercReviveUtc[kind.Key] = DateTime.MaxValue;
+                    Dismiss(pet, "merc dismissed");
+                    count++;
+                }
+            }
+
+            owner.OwnedPets.Stash.RemoveAll(stash => Mercs.IsMercHash(stash.Hash));
+            int bits = owner.Stats.GetOrZero(Mercs.ContractsStat, StatDetail.Base);
+            if (bits != 0)
+            {
+                foreach (Mercs.Kind kind in Mercs.Kinds)
+                {
+                    if ((bits & (1 << kind.Bit)) != 0)
+                        owner.OwnedPets.MercReviveUtc[kind.Key] = DateTime.MaxValue;
+                }
+            }
+
+            return count;
+        }
+
+        /// <summary>Ends every merc contract and despawns them (knubot <c>{dismissmercs}</c>).</summary>
         public int DismissMercs(Player owner)
         {
             ArgumentNullException.ThrowIfNull(owner);

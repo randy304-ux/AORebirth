@@ -15,10 +15,11 @@ namespace ZoneEngine_New.Core.Pets
     using CharacterStat = SmokeLounge.AOtomation.Messaging.GameData.CharacterStat;
 
     /// <summary>
-    /// Live-style merc windows: tell wrapper and nested merc/Macros pages all use
-    /// <c>href="text://..."</c> (double quotes) with raw tags; attributes inside a page use single
-    /// quotes only (<c>href='chatcmd://...'</c>, unquoted colors). Nested page bodies must contain
-    /// no raw double quotes. Detail actions stay <c>chatcmd</c>. No HTML entity encoding.
+    /// Live-style merc windows opened server-side via <see cref="SendBlob"/> /
+    /// <see cref="BuildOuter"/> (one <c>href="text://..."</c> per tell). Sub-pages (merc detail,
+    /// hire detail, Macros, filters, pick-one lists) are reached by <c>chatcmd</c> tells that the
+    /// server answers with another window — not by nested <c>text://</c> blobs (those collide with
+    /// the outer double-quoted href and dump markup into chat). No HTML entity encoding.
     /// ChatText sizes its string with Int16 - stay under <see cref="MessageMax"/>.
     /// </summary>
     public sealed class MercMenuService
@@ -163,6 +164,27 @@ namespace ZoneEngine_New.Core.Pets
                 return;
             }
 
+            if (verb.Equals("hire", StringComparison.OrdinalIgnoreCase)
+                || verb.Equals("contract", StringComparison.OrdinalIgnoreCase))
+            {
+                if (args.Length < 2 || Mercs.Find(string.Join(" ", args, 1, args.Length - 1)) is not { } hireKind)
+                {
+                    Say(player, "Unknown hire. Use .merc menu and click a hired contract.");
+                    return;
+                }
+
+                if (!PetService.HasContract(player, hireKind)
+                    && !player.OwnedPets.All.Any(p => p.Pet != null && !p.IsDead
+                        && string.Equals(p.Pet.Hash, hireKind.Hash, StringComparison.OrdinalIgnoreCase)))
+                {
+                    Say(player, "You have no " + hireKind.Title + " contract.");
+                    return;
+                }
+
+                OpenHireDetail(player, hireKind);
+                return;
+            }
+
             if (verb.Equals("macros", StringComparison.OrdinalIgnoreCase)
                 || verb.Equals("macro", StringComparison.OrdinalIgnoreCase))
             {
@@ -228,8 +250,9 @@ namespace ZoneEngine_New.Core.Pets
                     string? err = _unlocks.Dismiss(player, null);
                     PetService? petsAll = player.Playfield?.GetService<PetService>();
                     if (rest.Equals("all", StringComparison.OrdinalIgnoreCase) && petsAll != null)
-                        petsAll.DismissMercs(player);
+                        petsAll.ParkMercs(player);
                     Say(player, err ?? "Dismissed.");
+                    OpenMenu(player);
                     return;
                 }
 
@@ -239,6 +262,7 @@ namespace ZoneEngine_New.Core.Pets
                     string shown = _unlocks.DisplayNameFor(player, def);
                     string? err = _unlocks.Dismiss(player, def);
                     Say(player, err ?? ("Dismissed " + shown + "."));
+                    OpenMenu(player);
                     return;
                 }
 
@@ -251,9 +275,10 @@ namespace ZoneEngine_New.Core.Pets
                         return;
                     }
 
-                    Say(player, pets.DismissMerc(player, kind)
-                        ? "Your " + kind.Title + " contract has ended."
+                    Say(player, pets.ParkMerc(player, kind)
+                        ? "Dismissed " + kind.Title + ". Contract kept - use Call or open the merc to resummon."
                         : "You have no " + kind.Title + " under contract.");
+                    OpenMenu(player);
                     return;
                 }
 
@@ -301,6 +326,16 @@ namespace ZoneEngine_New.Core.Pets
             ArgumentNullException.ThrowIfNull(player);
             ArgumentNullException.ThrowIfNull(def);
             SendBlob(player, BuildOuter(BuildDetailInner(player, def), "Merc"));
+        }
+
+        public void OpenHireDetail(Player player, Mercs.Kind kind)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            ArgumentNullException.ThrowIfNull(kind);
+            Mercs.Tier tier = Mercs.GetTier(player, kind);
+            bool here = player.OwnedPets.All.Any(p => p.Pet != null && !p.IsDead
+                && string.Equals(p.Pet.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase));
+            SendBlob(player, BuildOuter(BuildHireDetailInner(player, kind, tier, here), kind.Title));
         }
 
         public void OpenMacros(Player player)
@@ -365,15 +400,7 @@ namespace ZoneEngine_New.Core.Pets
         public static class Render
         {
             public static string MainHeader(string filter)
-                => BuildMainHeaderStatic(
-                    filter,
-                    NestedLink(
-                        "<font color=" + ColorMuted + ">\n"
-                        + "<font color=" + ColorHeader + ">Merc macros</font>\n"
-                        + "Preset links.\n",
-                        "Macros"));
-
-            public static string NestedLink(string body, string label) => MercMenuService.NestedLink(body, label);
+                => BuildMainHeaderStatic(filter, TellLink("macros", "Macros"));
 
             public static string DetailInnerSample(
                 string shown,
@@ -446,6 +473,7 @@ namespace ZoneEngine_New.Core.Pets
                 string tier,
                 string description,
                 string tierBlurb,
+                bool present,
                 IReadOnlyList<(int NanoId, string Name, int Ncu)> buffs)
             {
                 var body = new StringBuilder();
@@ -455,7 +483,10 @@ namespace ZoneEngine_New.Core.Pets
                 body.Append(EscText(description)).Append('\n');
                 body.Append("<font color=").Append(ColorMuted).Append('>')
                     .Append(EscText(tierBlurb)).Append("</font>\n");
-                body.Append(TellLink("dismiss soldier", "Dismiss")).Append('\n');
+                if (present)
+                    body.Append(TellLink("dismiss soldier", "Dismiss")).Append('\n');
+                else
+                    body.Append(TellLink("call", "Summon")).Append('\n');
                 body.Append("\n<img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n");
                 body.Append("<font color=").Append(ColorHeader).Append(">Buffs</font>\n");
                 foreach ((int nanoId, string name, int ncu) in buffs)
@@ -471,46 +502,40 @@ namespace ZoneEngine_New.Core.Pets
                 return body.ToString();
             }
 
-            public static string MainWithNestedDetailSample()
+            /// <summary>Main menu uses chatcmd navigation only (no nested text://).</summary>
+            public static string MainWithChatcmdNavSample()
             {
-                string detail = DetailInnerSample(
-                    shown: "Brock Anvil Malone",
-                    tier: "Twink",
-                    description: "Unlock from Condemned Subway (Abmouth Supremus).",
-                    tierBlurb: "Twink-tier dungeon merc.",
-                    summoned: true,
-                    canSummon: false,
-                    stances: new List<(string, string)> { ("keeper aura heal", "Aura: heal") },
-                    buffs: new List<(int, string, int, bool)>
-                    {
-                        (1001, "Composite Attribute Boost", 4, true),
-                    });
-                string hire = HireDetailInnerSample(
-                    title: "Soldier",
-                    tier: "Basic",
-                    description: "Profession hire contract. Body tracks your level.",
-                    tierBlurb: "Basic hire: gear and nanos at your level.",
-                    buffs: new List<(int, string, int)> { (2001, "Grid Armor", 3) });
-
                 var body = new StringBuilder();
-                body.Append(BuildMainHeaderStatic(
-                    FilterAll,
-                    NestedLink(
-                        "<font color=" + ColorMuted + ">\n"
-                        + "<font color=" + ColorHeader + ">Merc macros</font>\n",
-                        "Macros")));
+                body.Append(BuildMainHeaderStatic(FilterAll, TellLink("macros", "Macros")));
                 body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
                 body.Append("    <img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN> ");
                 body.Append("<font color=").Append(ColorHeader).Append(">Hired contracts</font>\n");
-                body.Append("    ").Append(NestedLink(hire, "Soldier"));
+                body.Append("    ").Append(TellLink("hire soldier", "Soldier"));
                 body.Append(" <font color=").Append(ColorMuted).Append(">Basic - hire</font>");
                 body.Append(" <font color=").Append(ColorTeam).Append(">[Summoned]</font>");
                 body.Append(' ').Append(TellLink("dismiss soldier", "dismiss")).Append('\n');
                 body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
                 body.Append("    <font color=").Append(ColorHeader).Append(">Enforcer</font>\n");
-                body.Append("    ").Append(NestedLink(detail, "Brock Anvil Malone"));
+                body.Append("    ").Append(TellLink("view enforcer_subway", "Brock Anvil Malone"));
                 body.Append(" <font color=").Append(ColorMuted).Append(">Twink - L24</font>\n");
                 return BuildOuter(body.ToString());
+            }
+
+            /// <summary>Hired row still listed after park-dismiss (contract kept, Summon link).</summary>
+            public static string HiredContractRowSample(bool present)
+            {
+                var row = new StringBuilder();
+                row.Append(TellLink("hire soldier", "Soldier"));
+                row.Append(" <font color=").Append(ColorMuted).Append(">Basic - hire</font>");
+                if (present)
+                {
+                    row.Append(" <font color=").Append(ColorTeam).Append(">[Summoned]</font>");
+                    row.Append(' ').Append(TellLink("dismiss soldier", "dismiss"));
+                }
+                else
+                    row.Append(' ').Append(TellLink("call", "summon"));
+                row.Append('\n');
+                return row.ToString();
             }
 
             public static string GuestBuffsSample(
@@ -652,7 +677,7 @@ namespace ZoneEngine_New.Core.Pets
             string tier = ContentTierLabel(def);
             bool summoned = _unlocks.IsSummoned(player, def);
             var sb = new StringBuilder();
-            sb.Append(NestedLink(BuildDetailInner(player, def), shown));
+            sb.Append(TellLink("view " + def.Id, shown));
             sb.Append(" <font color=").Append(ColorMuted).Append('>')
                 .Append(EscText(tier))
                 .Append(" - L").Append(def.Level.ToString(CultureInfo.InvariantCulture))
@@ -725,7 +750,7 @@ namespace ZoneEngine_New.Core.Pets
             if (present)
                 body.Append(TellLink("dismiss " + kind.Key, "Dismiss")).Append('\n');
             else
-                body.Append(TellLink("call", "Call mercs")).Append('\n');
+                body.Append(TellLink("call", "Summon")).Append('\n');
 
             AppendStanceBlock(body, player, kind);
             AppendBuffBlock(body, player, kind, powerLevel, npc, guestOnly: false);
@@ -896,7 +921,7 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         string BuildMainHeader(Player player, string filter)
-            => BuildMainHeaderStatic(filter, NestedLink(BuildMacrosInner(player), "Macros"));
+            => BuildMainHeaderStatic(filter, TellLink("macros", "Macros"));
 
         static string BuildMainHeaderStatic(string filter, string macrosLink)
         {
@@ -944,13 +969,18 @@ namespace ZoneEngine_New.Core.Pets
 
                 string tierName = Mercs.TierName(tier);
                 var row = new StringBuilder();
-                row.Append(NestedLink(BuildHireDetailInner(player, kind, tier, here), kind.Title));
+                row.Append(TellLink("hire " + kind.Key, kind.Title));
                 row.Append(" <font color=").Append(ColorMuted).Append('>')
                     .Append(EscText(tierName))
                     .Append(" - hire</font>");
                 if (here)
+                {
                     row.Append(" <font color=").Append(ColorTeam).Append(">[Summoned]</font>");
-                row.Append(' ').Append(TellLink("dismiss " + kind.Key, "dismiss")).Append('\n');
+                    row.Append(' ').Append(TellLink("dismiss " + kind.Key, "dismiss"));
+                }
+                else
+                    row.Append(' ').Append(TellLink("call", "summon"));
+                row.Append('\n');
                 rows.Add(row.ToString());
             }
 
@@ -1222,20 +1252,6 @@ namespace ZoneEngine_New.Core.Pets
             // Outer tell: double-quoted text://, raw tags (live Async). Inner attrs use single quotes.
             return "<font color='" + ColorMuted + "'><a href=\"text://" + inner + "\">"
                 + EscText(label) + "</a></font>";
-        }
-
-        /// <summary>
-        /// Nested <c>text://</c> page (merc detail / Macros). Same quoting as a live Async outer page:
-        /// <c>href="text://..."</c> with double quotes; body is raw tags with only single-quoted
-        /// attributes (chatcmd, etc.) and no raw double quotes - otherwise the href ends early.
-        /// </summary>
-        public static string NestedLink(string body, string label)
-        {
-            ArgumentNullException.ThrowIfNull(body);
-            ArgumentNullException.ThrowIfNull(label);
-            // Inner page must not contain " - that would terminate href="text://...".
-            string safe = body.Replace("\"", string.Empty, StringComparison.Ordinal);
-            return "<a href=\"text://" + safe + "\">" + EscText(label) + "</a>";
         }
 
         static int EstimateWrappedLength(int innerLength) => innerLength + 48;
