@@ -148,6 +148,24 @@ namespace ZoneEngine_New.Core.Bots
 
         public IReadOnlyList<string> MissingNames => _missing;
 
+        /// <summary>Profession (or Generic) section by display name, e.g. "Soldier".</summary>
+        public bool TryFindSection(string name, out BuffSection section)
+        {
+            section = null!;
+            if (string.IsNullOrWhiteSpace(name))
+                return false;
+            foreach (BuffSection candidate in _sections)
+            {
+                if (string.Equals(candidate.Name, name, StringComparison.OrdinalIgnoreCase))
+                {
+                    section = candidate;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public int LineCount
         {
             get

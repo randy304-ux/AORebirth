@@ -4,7 +4,7 @@
     "Npcs":  [
                  {
                      "Key":  "ddogs:icc:buffbot",
-                     "Provenance":  "Client monster 96056 protocol droid (catMesh 96024). One buffbot for every profession. Moved 2026-11-04 to Randy pin x 3211.2, z 858.3, y 35.1 (AO height = Position[1]).",
+                     "Provenance":  "Client monster 96056 protocol droid (catMesh 96024). One buffbot for every profession. Authoritative placement x 3211.2, z 858.3, y 35.1 (AO height = Position[1]). Source is PlayfieldContent/655/Npcs.json (not mobspawns). Live must load Built/Debug/ZoneEngine_New/GameData after rebuild — a stale copy there left Buffbot at 3251.4,823.4.",
                      "ContentNpcIdentity":  "ddogs-buffbot",
                      "PlayfieldId":  655,
                      "InstanceId":  2110836806,
@@ -59,7 +59,7 @@
                  },
                  {
                      "Key":  "ddogs:merc:655:terminal",
-                     "Provenance":  "ddogs merc contract terminal (basic hire). Placed 2026-11-04 at Randy pin x 3211.1, z 873.1, y 35.1 beside Buffbot. Body 279184 = Shipping Manifest Terminal; Knubot MercContracts.json binds ContentNpcIdentity ddogs-merc-terminal.",
+                     "Provenance":  "ddogs merc contract terminal (basic hire). Sole ICC HQ terminal at x 3211.1, z 873.1, y 35.1 beside Buffbot (no prior pf-655 terminal to move). Body 279184 = Shipping Manifest Terminal; Knubot MercContracts.json binds ContentNpcIdentity ddogs-merc-terminal. Same GameData copy path as Buffbot.",
                      "ContentNpcIdentity":  "ddogs-merc-terminal",
                      "PlayfieldId":  655,
                      "InstanceId":  2110836742,

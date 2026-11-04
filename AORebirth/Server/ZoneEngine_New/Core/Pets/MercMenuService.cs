@@ -7,20 +7,26 @@ namespace ZoneEngine_New.Core.Pets
     using System.Linq;
     using System.Text;
 
+    using ZoneEngine_New.Core.Bots;
     using ZoneEngine_New.Core.Commands;
+    using ZoneEngine_New.Core.Data;
     using ZoneEngine_New.Core.Entities;
+    using ZoneEngine_New.Core.Inventory;
+    using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Nanos;
     using ZoneEngine_New.Core.Playfield;
 
     using CharacterStat = SmokeLounge.AOtomation.Messaging.GameData.CharacterStat;
 
     /// <summary>
-    /// Live-style merc windows opened server-side via <see cref="SendBlob"/> /
-    /// <see cref="BuildOuter"/> (ChatTextMessage with one <c>href="text://..."</c>). Navigation uses
-    /// <c>chatcmd:///say .merc ...</c> so clicks hit the same zone say-command path as typing
-    /// <c>.merc</c> (GmCommandFeedback ChatText) — not <c>/tell Merc</c>, which replies as a tell
-    /// and prints a clickable link in chat instead of opening the Info window. No nested
-    /// <c>text://</c> blobs. No HTML entity encoding. Stay under <see cref="MessageMax"/>.
+    /// Live-style merc windows via <see cref="SendBlob"/> / <see cref="BuildOuter"/>
+    /// (ChatTextMessage with one outer <c>href="text://..."</c>).
+    /// Detail/Macros/hire pages open with nested <c>href="text://..."</c> (client-local Info window,
+    /// same as <c>.info</c> topics). Actions (cast/summon/dismiss/preset/filter) stay
+    /// <c>chatcmd:///say .merc ...</c> like buffbot cast links. A ChatText reply to a chatcmd click
+    /// from inside an already-open Info window is shown as a chat link — the client does not
+    /// auto-open another window from that reply. No HTML entity encoding. Stay under
+    /// <see cref="MessageMax"/>.
     /// </summary>
     public sealed class MercMenuService
     {
@@ -30,6 +36,7 @@ namespace ZoneEngine_New.Core.Pets
         public static readonly TimeSpan GuestTellCooldown = TimeSpan.FromSeconds(3);
 
         const string ColorHeader = "#DEDE42";
+        const string ColorBonus = "#F07171";
         const string ColorNcu = "#00BDBD";
         const string ColorMuted = "#D3BFFF";
         const string ColorTeam = "#FBFF96";
@@ -67,11 +74,15 @@ namespace ZoneEngine_New.Core.Pets
         ];
 
         readonly MercUnlockService _unlocks;
+        readonly BuffbotCatalog _buffbot;
+        readonly IZoneLogger _logger;
         readonly ConcurrentDictionary<string, DateTime> _guestCooldownUtc = new(StringComparer.Ordinal);
 
-        public MercMenuService(MercUnlockService unlocks)
+        public MercMenuService(MercUnlockService unlocks, BuffbotCatalog buffbot, IZoneLogger logger)
         {
             _unlocks = unlocks ?? throw new ArgumentNullException(nameof(unlocks));
+            _buffbot = buffbot ?? throw new ArgumentNullException(nameof(buffbot));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void HandleTell(Player player, string botName, string message)
@@ -218,8 +229,7 @@ namespace ZoneEngine_New.Core.Pets
                 && int.TryParse(args[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out int nanoId)
                 && nanoId > 0)
             {
-                NanoRuntime.TryApplyServiceBuff(player, nanoId, announceRefusal: true, out string detail);
-                Say(player, detail);
+                CastMercBuff(player, nanoId);
                 return;
             }
 
@@ -400,7 +410,13 @@ namespace ZoneEngine_New.Core.Pets
         public static class Render
         {
             public static string MainHeader(string filter)
-                => BuildMainHeaderStatic(filter, SayLink("macros", "Macros"));
+                => BuildMainHeaderStatic(
+                    filter,
+                    NestedLink(
+                        "<font color=" + ColorMuted + ">\n"
+                        + "<font color=" + ColorHeader + ">Merc macros</font>\n"
+                        + "Preset links.\n",
+                        "Macros"));
 
             public static string DetailInnerSample(
                 string shown,
@@ -499,21 +515,45 @@ namespace ZoneEngine_New.Core.Pets
                 return body.ToString();
             }
 
-            /// <summary>Main menu uses chatcmd navigation only (no nested text://).</summary>
-            public static string MainWithChatcmdNavSample()
+            public static string NestedLink(string body, string label) => MercMenuService.NestedLink(body, label);
+
+            /// <summary>Main menu: nested text:// for hire/detail/Macros; say-commands for dismiss.</summary>
+            public static string MainWithNestedDetailSample()
             {
+                string hire = HireDetailInnerSample(
+                    title: "Soldier",
+                    tier: "Basic",
+                    description: "Profession hire contract.",
+                    tierBlurb: "Basic hire.",
+                    present: true,
+                    buffs: new List<(int, string, int)> { (1001, "Full Automatic Targeting", 4) });
+                string detail = DetailInnerSample(
+                    shown: "Brock Anvil Malone",
+                    tier: "Twink",
+                    description: "Unlock from Subway.",
+                    tierBlurb: "Twink-tier.",
+                    summoned: true,
+                    canSummon: false,
+                    stances: Array.Empty<(string, string)>(),
+                    buffs: new List<(int, string, int, bool)> { (1002, "Team Reflective Field", 4, true) });
                 var body = new StringBuilder();
-                body.Append(BuildMainHeaderStatic(FilterAll, SayLink("macros", "Macros")));
+                body.Append(BuildMainHeaderStatic(
+                    FilterAll,
+                    NestedLink(
+                        "<font color=" + ColorMuted + ">\n"
+                        + "<font color=" + ColorHeader + ">Merc macros</font>\n"
+                        + "Preset links.\n",
+                        "Macros")));
                 body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
                 body.Append("    <img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN> ");
                 body.Append("<font color=").Append(ColorHeader).Append(">Hired contracts</font>\n");
-                body.Append("    ").Append(SayLink("contract soldier", "Soldier"));
+                body.Append("    ").Append(NestedLink(hire, "Soldier"));
                 body.Append(" <font color=").Append(ColorMuted).Append(">Basic - hire</font>");
                 body.Append(" <font color=").Append(ColorTeam).Append(">[Summoned]</font>");
                 body.Append(' ').Append(SayLink("dismiss soldier", "dismiss")).Append('\n');
                 body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
                 body.Append("    <font color=").Append(ColorHeader).Append(">Enforcer</font>\n");
-                body.Append("    ").Append(SayLink("view enforcer_subway", "Brock Anvil Malone"));
+                body.Append("    ").Append(NestedLink(detail, "Brock Anvil Malone"));
                 body.Append(" <font color=").Append(ColorMuted).Append(">Twink - L24</font>\n");
                 return BuildOuter(body.ToString());
             }
@@ -522,7 +562,15 @@ namespace ZoneEngine_New.Core.Pets
             public static string HiredContractRowSample(bool present)
             {
                 var row = new StringBuilder();
-                row.Append(SayLink("contract soldier", "Soldier"));
+                row.Append(NestedLink(
+                    HireDetailInnerSample(
+                        "Soldier",
+                        "Basic",
+                        "Profession hire.",
+                        "Basic.",
+                        present,
+                        new List<(int, string, int)> { (1001, "Full Automatic Targeting", 4) }),
+                    "Soldier"));
                 row.Append(" <font color=").Append(ColorMuted).Append(">Basic - hire</font>");
                 if (present)
                 {
@@ -674,7 +722,7 @@ namespace ZoneEngine_New.Core.Pets
             string tier = ContentTierLabel(def);
             bool summoned = _unlocks.IsSummoned(player, def);
             var sb = new StringBuilder();
-            sb.Append(SayLink("view " + def.Id, shown));
+            sb.Append(NestedLink(BuildDetailInner(player, def), shown));
             sb.Append(" <font color=").Append(ColorMuted).Append('>')
                 .Append(EscText(tier))
                 .Append(" - L").Append(def.Level.ToString(CultureInfo.InvariantCulture))
@@ -840,53 +888,72 @@ namespace ZoneEngine_New.Core.Pets
             NpcCharacter? npc,
             bool guestOnly)
         {
-            IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers =
-                _unlocks.Nanos.BuffsFor(kind, level, npc);
+            _ = level;
+            _ = npc;
             body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
             body.Append("    <font color=").Append(ColorHeader).Append('>')
                 .Append(guestOnly ? "Buffs for you" : "Buffs").Append("</font>\n");
-            if (offers.Count == 0)
+
+            // Copy that profession's buffbot section (same layout/colors/NCU/Team tags).
+            if (!_buffbot.TryFindSection(kind.Title, out BuffSection? section) || section == null)
             {
                 body.Append("    <font color=").Append(ColorMuted).Append('>')
-                    .Append("No team/other castable buffs in items.dat for this profession/level.</font>\n");
+                    .Append("No buffbot section for ").Append(EscText(kind.Title))
+                    .Append(".</font>\n");
                 return;
             }
 
+            int freeNcu = Math.Max(0, player.MaxNcu - player.UsedNcu);
             int listed = 0;
-            foreach (MercProfessionNanos.MercBuffOffer offer in offers)
+            foreach (BuffLine line in section.Lines)
             {
+                _buffbot.TryOffer(line, freeNcu, out BuffOffer offer);
                 if (guestOnly && !offer.Available)
                     continue;
+
                 body.Append("    ");
-                // Always a say-command link so the entry is clickable (grey label when gated).
                 if (offer.Available)
                 {
-                    body.Append(SayLink("cast " + offer.NanoId.ToString(CultureInfo.InvariantCulture), offer.Name));
+                    body.Append("<a href='chatcmd:///say .merc cast ")
+                        .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
+                        .Append(EscText(offer.Name)).Append("</a>");
                 }
                 else
                 {
-                    string gate = offer.RequiredLevel > level
-                        ? offer.Name + " - merc needs level "
-                            + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture)
-                        : offer.Name;
                     body.Append("<font color=").Append(ColorMuted).Append('>')
-                        .Append(SayLink("cast " + offer.NanoId.ToString(CultureInfo.InvariantCulture), gate))
-                        .Append("</font>");
+                        .Append(EscText(offer.Name))
+                        .Append(" (need ")
+                        .Append(offer.Ncu.ToString(CultureInfo.InvariantCulture))
+                        .Append(" NCU)</font>");
                 }
 
-                body.Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
-                    .Append(offer.Ncu.ToString(CultureInfo.InvariantCulture)).Append("]</font>\n");
+                if (IsTeamBuffName(offer.Name))
+                    body.Append("<font color=").Append(ColorTeam).Append(">[Team]</font>");
+                if (!string.IsNullOrEmpty(offer.Bonus))
+                {
+                    body.Append("<font color=").Append(ColorBonus).Append(">[")
+                        .Append(EscText(offer.Bonus)).Append("]</font>");
+                }
+
+                body.Append("<font color=").Append(ColorNcu).Append(">[NCU:")
+                    .Append(offer.Ncu.ToString(CultureInfo.InvariantCulture))
+                    .Append("]</font>\n");
                 listed++;
             }
 
-            if (guestOnly && listed == 0)
+            if (listed == 0)
             {
                 body.Append("    <font color=").Append(ColorMuted).Append('>')
-                    .Append("No available buffs for your level right now.</font>\n");
+                    .Append(guestOnly
+                        ? "No available buffs for your NCU right now."
+                        : "No buffbot lines resolved for this profession.")
+                    .Append("</font>\n");
             }
-
-            _ = player;
         }
+
+        static bool IsTeamBuffName(string name)
+            => name.IndexOf("(Team)", StringComparison.OrdinalIgnoreCase) >= 0
+               || name.IndexOf("[Team]", StringComparison.OrdinalIgnoreCase) >= 0;
 
         string BuildMacrosInner(Player player)
         {
@@ -914,7 +981,7 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         string BuildMainHeader(Player player, string filter)
-            => BuildMainHeaderStatic(filter, SayLink("macros", "Macros"));
+            => BuildMainHeaderStatic(filter, NestedLink(BuildMacrosInner(player), "Macros"));
 
         static string BuildMainHeaderStatic(string filter, string macrosLink)
         {
@@ -962,7 +1029,7 @@ namespace ZoneEngine_New.Core.Pets
 
                 string tierName = Mercs.TierName(tier);
                 var row = new StringBuilder();
-                row.Append(SayLink("contract " + kind.Key, kind.Title));
+                row.Append(NestedLink(BuildHireDetailInner(player, kind, tier, here), kind.Title));
                 row.Append(" <font color=").Append(ColorMuted).Append('>')
                     .Append(EscText(tierName))
                     .Append(" - hire</font>");
@@ -1247,14 +1314,205 @@ namespace ZoneEngine_New.Core.Pets
                 + EscText(label) + "</a></font>";
         }
 
+        /// <summary>
+        /// Nested <c>text://</c> page inside the outer tell. Client opens it locally (no chat round-trip).
+        /// Body must not contain raw double quotes (would terminate <c>href="text://..."</c>).
+        /// </summary>
+        public static string NestedLink(string body, string label)
+        {
+            ArgumentNullException.ThrowIfNull(body);
+            ArgumentNullException.ThrowIfNull(label);
+            string safe = body.Replace("\"", string.Empty, StringComparison.Ordinal);
+            return "<a href=\"text://" + safe + "\">" + EscText(label) + "</a>";
+        }
+
         static int EstimateWrappedLength(int innerLength) => innerLength + 48;
 
         /// <summary>
-        /// Zone say-command link: same path as typing <c>.merc</c> (opens ChatText Info window).
-        /// Do not use <c>/tell Merc</c> — tell replies land in chat as clickable blobs.
+        /// Zone say-command for actions (cast/summon/dismiss/preset/filter). Same pattern as buffbot
+        /// <c>.buff cast</c>. Do not use these for opening windows — use <see cref="NestedLink"/>.
         /// </summary>
         static string SayLink(string command, string label)
             => "<a href='chatcmd:///say .merc " + command + "'>" + EscText(label) + "</a>";
+
+        /// <summary>
+        /// Cast a buffbot-listed nano from the player's summoned merc onto the player (or guest).
+        /// Merc is the caster so TeamCastNano / other-target rules land on the recipient.
+        /// </summary>
+        void CastMercBuff(Player player, int nanoId)
+        {
+            if (!_buffbot.Contains(nanoId) && _unlocks.Nanos.TryGetTemplate(nanoId) == null)
+            {
+                Say(player, "That nano is not on the merc buff list.");
+                _logger.Warn(string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Merc cast refused: unknown nanoId={0} player={1}",
+                    nanoId,
+                    player.Identity.Instance));
+                return;
+            }
+
+            if (!TryResolveMercCaster(player, nanoId, out NpcCharacter? caster, out Player? recipient, out string reason)
+                || caster == null
+                || recipient == null)
+            {
+                Say(player, reason);
+                _logger.Warn(string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Merc cast failed resolve nanoId={0} player={1}: {2}",
+                    nanoId,
+                    player.Identity.Instance,
+                    reason));
+                return;
+            }
+
+            Playfield? playfield = caster.Playfield;
+            if (playfield == null
+                || playfield.GetService<IItemBuilder>() is not IItemBuilder items
+                || playfield.GetService<IInventoryRepository>() is not IInventoryRepository inventory)
+            {
+                Say(player, "Mercenaries are not available here.");
+                _logger.Warn(string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Merc cast missing playfield services nanoId={0} player={1}",
+                    nanoId,
+                    player.Identity.Instance));
+                return;
+            }
+
+            DateTime now = DateTime.UtcNow;
+            bool ok = NanoRuntime.TryApplyImmediate(caster, recipient, nanoId, items, inventory, now);
+            if (!ok)
+            {
+                string detail = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Merc {0} failed to cast nano {1} on {2}.",
+                    caster.Name ?? "merc",
+                    nanoId,
+                    recipient.Name ?? "target");
+                Say(player, detail);
+                _logger.Warn(detail + " casterId=" + caster.Identity.Instance.ToString(CultureInfo.InvariantCulture)
+                    + " recipientId=" + recipient.Identity.Instance.ToString(CultureInfo.InvariantCulture));
+                return;
+            }
+
+            ItemTemplate? template = _unlocks.Nanos.TryGetTemplate(nanoId);
+            string name = template?.Name ?? ("nano " + nanoId.ToString(CultureInfo.InvariantCulture));
+            int ncu = template != null ? NanoSpell.From(template).NcuCost : 0;
+            Say(player, string.Format(
+                CultureInfo.InvariantCulture,
+                "{0} cast {1}. NCU {2}.",
+                caster.Name ?? "Merc",
+                name,
+                ncu));
+            _logger.Info(string.Format(
+                CultureInfo.InvariantCulture,
+                "Merc cast ok nanoId={0} name={1} caster={2} recipient={3}",
+                nanoId,
+                name,
+                caster.Identity.Instance,
+                recipient.Identity.Instance));
+        }
+
+        bool TryResolveMercCaster(
+            Player clicker,
+            int nanoId,
+            out NpcCharacter? caster,
+            out Player? recipient,
+            out string reason)
+        {
+            caster = null;
+            recipient = clicker;
+            reason = "Summon your merc first.";
+
+            Mercs.Kind? kind = KindForBuffNano(nanoId);
+            if (kind != null)
+            {
+                NpcCharacter? own = _unlocks.FindProfessionNpc(clicker, kind);
+                if (own != null)
+                {
+                    caster = own;
+                    recipient = clicker;
+                    reason = string.Empty;
+                    return true;
+                }
+            }
+
+            // Guest: ask a nearby summoned merc of any matching profession.
+            foreach (MercDefinition def in _unlocks.Roster.All)
+            {
+                if (kind != null && !string.Equals(def.Kind.Key, kind.Key, StringComparison.OrdinalIgnoreCase))
+                    continue;
+                if (!TryFindSummonedNearby(clicker, def, out Player? owner, out NpcCharacter? npc)
+                    || owner == null
+                    || npc == null)
+                    continue;
+                if (ReferenceEquals(owner, clicker))
+                {
+                    caster = npc;
+                    recipient = clicker;
+                    reason = string.Empty;
+                    return true;
+                }
+
+                if (!ReferenceEquals(clicker.Playfield, npc.Playfield)
+                    || clicker.Distance3D(npc) > GuestTellRangeMeters)
+                {
+                    reason = "Move closer to " + (npc.Name ?? def.DisplayName) + " to request buffs.";
+                    continue;
+                }
+
+                caster = npc;
+                recipient = clicker;
+                reason = string.Empty;
+                return true;
+            }
+
+            if (kind != null)
+                reason = "Summon your " + kind.Title + " merc first.";
+            return false;
+        }
+
+        Mercs.Kind? KindForBuffNano(int nanoId)
+        {
+            if (_buffbot.TryGetLine(nanoId, out BuffLine line))
+            {
+                foreach (BuffSection section in _buffbot.Sections)
+                {
+                    foreach (BuffLine candidate in section.Lines)
+                    {
+                        if (!ReferenceEquals(candidate, line))
+                            continue;
+                        Mercs.Kind? match = Mercs.Find(section.Name);
+                        if (match != null)
+                            return match;
+                    }
+                }
+            }
+
+            // Fallback: first profession ToUse requirement on the template.
+            ItemTemplate? template = _unlocks.Nanos.TryGetTemplate(nanoId);
+            if (template == null)
+                return null;
+            foreach (ItemAction action in template.Actions)
+            {
+                if (action.ActionType != (int)AORebirth.Enums.ActionType.ToUse)
+                    continue;
+                foreach (ItemRequirement requirement in action.Requirements)
+                {
+                    if (requirement.StatNumber is not (
+                        (int)CharacterStat.Profession or (int)CharacterStat.VisualProfession))
+                        continue;
+                    foreach (Mercs.Kind kind in Mercs.Kinds)
+                    {
+                        if (kind.Profession == requirement.Value)
+                            return kind;
+                    }
+                }
+            }
+
+            return null;
+        }
 
         /// <summary>
         /// Plain text for AOML labels. No HTML entities (nested text:// shows them literally);

@@ -32,7 +32,7 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Topic => "mercs";
 
-        public string Summary => "Live-style merc menu (say .merc opens ChatText windows; chatcmd:///say .merc for nav).";
+        public string Summary => "Live-style merc menu (.merc opens ChatText; nested text:// for detail; say-commands for cast/dismiss).";
 
         public void Execute(GmCommandContext context)
         {

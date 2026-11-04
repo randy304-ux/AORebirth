@@ -9,7 +9,8 @@ namespace ZoneEngine_New.Tests
     using ZoneEngine_New.Core.Pets;
 
     /// <summary>
-    /// Merc menu: ChatText window via BuildOuter; navigation via chatcmd:///say .merc (not /tell).
+    /// Merc menu: outer + nested <c>href="text://"</c> open Info windows client-side;
+    /// cast/dismiss/preset stay <c>chatcmd:///say .merc</c> (buffbot-style actions).
     /// </summary>
     [TestClass]
     public sealed class MercMenuRenderTests
@@ -26,16 +27,43 @@ namespace ZoneEngine_New.Tests
         }
 
         [TestMethod]
-        public void MainMenu_UsesSayCommandNav_NotTell()
+        public void NestedLink_UsesDoubleQuotedTextHref_InnerHasNoDoubleQuotes()
         {
-            string message = MercMenuService.Render.MainWithChatcmdNavSample();
+            string detail =
+                "<font color=#D3BFFF>\n"
+                + "<font color=#DEDE42>Soldier - Basic</font>\n"
+                + "<a href='chatcmd:///say .merc dismiss soldier'>Dismiss</a>\n";
 
-            Assert.AreEqual(1, Regex.Matches(message, "href=\"text://").Count, message);
-            Assert.IsTrue(message.Contains("chatcmd:///say .merc contract soldier", StringComparison.Ordinal), message);
-            Assert.IsTrue(message.Contains("chatcmd:///say .merc view enforcer_subway", StringComparison.Ordinal), message);
-            Assert.IsTrue(message.Contains("chatcmd:///say .merc macros", StringComparison.Ordinal), message);
+            string link = MercMenuService.NestedLink(detail, "Soldier");
+
+            Assert.IsTrue(link.StartsWith("<a href=\"text://", StringComparison.Ordinal), link);
+            Assert.IsFalse(link.StartsWith("<a href='text://", StringComparison.Ordinal), link);
+            Assert.IsTrue(link.Contains("<a href='chatcmd:///say .merc dismiss soldier'>Dismiss</a>", StringComparison.Ordinal));
+            Assert.IsFalse(link.Contains("&lt;", StringComparison.Ordinal));
+
+            const string hrefStart = "href=\"text://";
+            int start = link.IndexOf(hrefStart, StringComparison.Ordinal) + hrefStart.Length;
+            int end = link.LastIndexOf("\">", StringComparison.Ordinal);
+            Assert.IsTrue(end > start, link);
+            string nestedBody = link.Substring(start, end - start);
+            Assert.IsFalse(nestedBody.Contains("\"", StringComparison.Ordinal), nestedBody);
+            Assert.IsTrue(MercMenuService.IsAsciiOnly(link));
+        }
+
+        [TestMethod]
+        public void MainMenu_UsesNestedTextForDetail_SayForDismiss()
+        {
+            string message = MercMenuService.Render.MainWithNestedDetailSample();
+
+            Assert.IsTrue(Regex.Matches(message, "href=\"text://").Count >= 3, message);
+            Assert.AreEqual(0, Regex.Matches(message, "href='text://").Count, message);
             Assert.IsTrue(message.Contains("chatcmd:///say .merc dismiss soldier", StringComparison.Ordinal), message);
+            Assert.IsTrue(message.Contains("chatcmd:///say .merc cast ", StringComparison.Ordinal), message);
             Assert.IsFalse(message.Contains("chatcmd:///tell", StringComparison.Ordinal), message);
+            Assert.IsFalse(message.Contains("chatcmd:///say .merc contract", StringComparison.Ordinal), message);
+            Assert.IsFalse(message.Contains("chatcmd:///say .merc view", StringComparison.Ordinal), message);
+            Assert.IsFalse(message.Contains("chatcmd:///say .merc macros", StringComparison.Ordinal), message);
+            Assert.IsTrue(message.Contains(">Macros</a>", StringComparison.Ordinal), message);
             Assert.IsTrue(MercMenuService.IsAsciiOnly(message));
             Assert.IsTrue(message.Length <= MercMenuService.MessageMax);
         }
@@ -69,7 +97,7 @@ namespace ZoneEngine_New.Tests
         public void HiredContract_AfterParkDismiss_StillListedWithSummon()
         {
             string parked = MercMenuService.Render.HiredContractRowSample(present: false);
-            Assert.IsTrue(parked.Contains("chatcmd:///say .merc contract soldier", StringComparison.Ordinal), parked);
+            Assert.IsTrue(parked.Contains("href=\"text://", StringComparison.Ordinal), parked);
             Assert.IsTrue(parked.Contains("chatcmd:///say .merc call", StringComparison.Ordinal), parked);
             Assert.IsFalse(parked.Contains("chatcmd:///tell", StringComparison.Ordinal), parked);
         }
@@ -90,12 +118,13 @@ namespace ZoneEngine_New.Tests
         }
 
         [TestMethod]
-        public void MainHeader_MacrosIsSayCommand()
+        public void MainHeader_MacrosIsNestedTextNotSay()
         {
             string header = MercMenuService.Render.MainHeader("twink");
-            Assert.IsTrue(header.Contains("chatcmd:///say .merc macros", StringComparison.Ordinal));
+            Assert.IsTrue(header.Contains("href=\"text://", StringComparison.Ordinal), header);
+            Assert.IsTrue(header.Contains(">Macros</a>", StringComparison.Ordinal), header);
+            Assert.IsFalse(header.Contains("chatcmd:///say .merc macros", StringComparison.Ordinal), header);
             Assert.IsFalse(header.Contains("chatcmd:///tell", StringComparison.Ordinal));
-            Assert.IsFalse(header.Contains("href=\"text://", StringComparison.Ordinal));
         }
     }
 }

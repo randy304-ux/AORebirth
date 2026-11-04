@@ -1,22 +1,13 @@
 # Current Task
 
-Integrate mission work from codex/all-mission-objectives at 457f9ad7b into
-Windows/public master, preserving the friendly-item changes already on master.
-Mike authorized the private Linux build/package, normal live installation and
-removal of confirmed unused VPS leftovers. Private operational evidence stays
-outside public commits.
+Stage (no deploy) merc menu + ICC Buffbot/terminal fixes on
+`cursor/merc-buffbot-icc-0049`.
 
-The merge is automatic for runtime, content, project and test sources. Resolve
-only the current-task and project-state documentation conflicts, retaining both
-branches' project history. Preserve the two-file destination catalog, optional
-same-origin nearest-QL fallback, mission objectives/reward integrity, token
-progress and requested 200-percent Find Item world scale. No new gameplay,
-schema, mission algorithms or paused typed-content work is introduced.
+1. Nested `text://` opens merc detail/Macros/hire windows client-side; say-commands
+   remain for cast/summon/dismiss/preset/filter (buffbot-style actions).
+2. Merc detail buff lists copy that profession's Buffbot.json section layout.
+3. Merc casts land from the summoned merc NPC onto the player; failures logged.
+4. ICC HQ Buffbot + Contract Terminal positions in PlayfieldContent/655/Npcs.json;
+   live miss was stale `Built/Debug/ZoneEngine_New/GameData` (not DB).
 
-Validation: approved Windows core build and merge/content inspection; no new
-fixture, unit or regression suites requested. Prior client acceptance and
-remaining coverage gaps are recorded in PROJECT_STATE and mission reports.
-Linux must faithfully derive the pushed public SHA with its existing private
-adaptations. Mike performs live AO client acceptance.
-
-PROVEN: Approved Windows core compilation and git diff --check passed on the merged tree. No automated suites run.
+Deploy only when Randy approves. Local commit only; no push/PR.
