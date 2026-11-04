@@ -12,10 +12,13 @@ namespace ZoneEngine_New.Core.Pets
     using ZoneEngine_New.Core.Nanos;
     using ZoneEngine_New.Core.Playfield;
 
+    using CharacterStat = SmokeLounge.AOtomation.Messaging.GameData.CharacterStat;
+
     /// <summary>
-    /// Live-style merc windows: one <c>text://</c> blob per tell (no nested windows, no HTML-escaped tags),
-    /// matching Buffbot. Main lists unlocked/accessible mercs by profession; detail and guest-buff blobs are
-    /// separate tells. ChatText sizes its string with Int16 — stay under <see cref="MessageMax"/>.
+    /// Live-style merc windows: one outer <c>text://</c> blob per tell. Merc names embed nested
+    /// <c>text://</c> detail pages (Budabot-style one-level HTML escape / quote alternation) so the
+    /// client opens detail without a chat round-trip. Summon/dismiss/stance/buff and filter actions
+    /// stay <c>chatcmd</c>. ChatText sizes its string with Int16 - stay under <see cref="MessageMax"/>.
     /// </summary>
     public sealed class MercMenuService
     {
@@ -216,13 +219,60 @@ namespace ZoneEngine_New.Core.Pets
 
             if (verb.Equals("dismiss", StringComparison.OrdinalIgnoreCase))
             {
-                MercDefinition? def = args.Length > 1
-                    ? _unlocks.Roster.Find(string.Join(" ", args, 1, args.Length - 1))
-                    : null;
-                string? err = _unlocks.Dismiss(player, def);
-                Say(player, err ?? (def == null
-                    ? "Dismissed."
-                    : "Dismissed " + _unlocks.DisplayNameFor(player, def) + "."));
+                string rest = args.Length > 1
+                    ? string.Join(" ", args, 1, args.Length - 1)
+                    : string.Empty;
+                if (rest.Length == 0 || rest.Equals("all", StringComparison.OrdinalIgnoreCase))
+                {
+                    string? err = _unlocks.Dismiss(player, null);
+                    PetService? petsAll = player.Playfield?.GetService<PetService>();
+                    if (rest.Equals("all", StringComparison.OrdinalIgnoreCase) && petsAll != null)
+                        petsAll.DismissMercs(player);
+                    Say(player, err ?? "Dismissed.");
+                    return;
+                }
+
+                MercDefinition? def = _unlocks.Roster.Find(rest);
+                if (def != null)
+                {
+                    string shown = _unlocks.DisplayNameFor(player, def);
+                    string? err = _unlocks.Dismiss(player, def);
+                    Say(player, err ?? ("Dismissed " + shown + "."));
+                    return;
+                }
+
+                if (Mercs.Find(rest) is { } kind)
+                {
+                    PetService? pets = player.Playfield?.GetService<PetService>();
+                    if (pets == null)
+                    {
+                        Say(player, "Mercenaries are not available here.");
+                        return;
+                    }
+
+                    Say(player, pets.DismissMerc(player, kind)
+                        ? "Your " + kind.Title + " contract has ended."
+                        : "You have no " + kind.Title + " under contract.");
+                    return;
+                }
+
+                Say(player, "Unknown merc. Use .merc menu and click dismiss, or .merc dismiss <name|all>.");
+                return;
+            }
+
+            if (verb.Equals("call", StringComparison.OrdinalIgnoreCase))
+            {
+                PetService? pets = player.Playfield?.GetService<PetService>();
+                if (pets == null)
+                {
+                    Say(player, "Mercenaries are not available here.");
+                    return;
+                }
+
+                player.OwnedPets.MercReviveUtc.Clear();
+                player.OwnedPets.MercCheckUtc = DateTime.MinValue;
+                pets.TickMercs(player);
+                Say(player, "Calling your mercenaries back.");
                 return;
             }
 
@@ -265,7 +315,7 @@ namespace ZoneEngine_New.Core.Pets
             string filter = string.IsNullOrWhiteSpace(filterKey) ? FilterAll : filterKey.Trim();
             var sections = new List<(string Name, string Body)>();
 
-            // Profession hire contracts (ContractsStat 10280 / live MR** pets) — not the dungeon unlock table.
+            // Profession hire contracts (ContractsStat 10280 / live MR** pets) - not the dungeon unlock table.
             var hired = new StringBuilder();
             if (AppendHiredContractsSection(hired, player, filter))
                 sections.Add(("Hired", hired.ToString()));
@@ -315,7 +365,9 @@ namespace ZoneEngine_New.Core.Pets
         {
             public static string MainHeader(string filter) => BuildMainHeaderStatic(filter);
 
-            public static string DetailSample(
+            public static string NestedLink(string body, string label) => MercMenuService.NestedLink(body, label);
+
+            public static string DetailInnerSample(
                 string shown,
                 string tier,
                 string description,
@@ -328,12 +380,14 @@ namespace ZoneEngine_New.Core.Pets
                 var body = new StringBuilder();
                 body.Append("<font color=").Append(ColorMuted).Append(">\n");
                 body.Append("<font color=").Append(ColorHeader).Append('>')
-                    .Append(EscText(shown)).Append(" — ").Append(EscText(tier)).Append("</font>\n");
+                    .Append(EscText(shown)).Append(" - ").Append(EscText(tier)).Append("</font>\n");
                 body.Append(EscText(description)).Append('\n');
                 body.Append("<font color=").Append(ColorMuted).Append('>')
                     .Append(EscText(tierBlurb)).Append("</font>\n");
-                body.Append(TellLink("summon " + "sample_id", "Summon")).Append(' ')
-                    .Append(TellLink("dismiss sample_id", "Dismiss")).Append('\n');
+                if (summoned)
+                    body.Append(TellLink("dismiss sample_id", "Dismiss")).Append('\n');
+                else if (canSummon)
+                    body.Append(TellLink("summon sample_id", "Summon")).Append('\n');
                 if (stances.Count > 0)
                 {
                     body.Append("\n<img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n");
@@ -363,9 +417,87 @@ namespace ZoneEngine_New.Core.Pets
                 }
 
                 body.Append('\n').Append(TellLink("menu", "Back to Mercs")).Append('\n');
-                _ = summoned;
-                _ = canSummon;
-                return BuildOuter(body.ToString(), "Merc");
+                return body.ToString();
+            }
+
+            public static string DetailSample(
+                string shown,
+                string tier,
+                string description,
+                string tierBlurb,
+                bool summoned,
+                bool canSummon,
+                IReadOnlyList<(string Type, string Label)> stances,
+                IReadOnlyList<(int NanoId, string Name, int Ncu, bool Available)> buffs)
+                => BuildOuter(
+                    DetailInnerSample(shown, tier, description, tierBlurb, summoned, canSummon, stances, buffs),
+                    "Merc");
+
+            public static string HireDetailInnerSample(
+                string title,
+                string tier,
+                string description,
+                string tierBlurb,
+                IReadOnlyList<(int NanoId, string Name, int Ncu)> buffs)
+            {
+                var body = new StringBuilder();
+                body.Append("<font color=").Append(ColorMuted).Append(">\n");
+                body.Append("<font color=").Append(ColorHeader).Append('>')
+                    .Append(EscText(title)).Append(" - ").Append(EscText(tier)).Append("</font>\n");
+                body.Append(EscText(description)).Append('\n');
+                body.Append("<font color=").Append(ColorMuted).Append('>')
+                    .Append(EscText(tierBlurb)).Append("</font>\n");
+                body.Append(TellLink("dismiss soldier", "Dismiss")).Append('\n');
+                body.Append("\n<img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n");
+                body.Append("<font color=").Append(ColorHeader).Append(">Buffs</font>\n");
+                foreach ((int nanoId, string name, int ncu) in buffs)
+                {
+                    body.Append("<a href='chatcmd:///tell ").Append(BotName).Append(" cast ")
+                        .Append(nanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
+                        .Append(EscText(name)).Append("</a>")
+                        .Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
+                        .Append(ncu.ToString(CultureInfo.InvariantCulture)).Append("]</font>\n");
+                }
+
+                body.Append('\n').Append(TellLink("menu", "Back to Mercs")).Append('\n');
+                return body.ToString();
+            }
+
+            public static string MainWithNestedDetailSample()
+            {
+                string detail = DetailInnerSample(
+                    shown: "Brock Anvil Malone",
+                    tier: "Twink",
+                    description: "Unlock from Condemned Subway (Abmouth Supremus).",
+                    tierBlurb: "Twink-tier dungeon merc.",
+                    summoned: true,
+                    canSummon: false,
+                    stances: new List<(string, string)> { ("keeper aura heal", "Aura: heal") },
+                    buffs: new List<(int, string, int, bool)>
+                    {
+                        (1001, "Composite Attribute Boost", 4, true),
+                    });
+                string hire = HireDetailInnerSample(
+                    title: "Soldier",
+                    tier: "Basic",
+                    description: "Profession hire contract. Body tracks your level.",
+                    tierBlurb: "Basic hire: gear and nanos at your level.",
+                    buffs: new List<(int, string, int)> { (2001, "Grid Armor", 3) });
+
+                var body = new StringBuilder();
+                body.Append(BuildMainHeaderStatic(FilterAll));
+                body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
+                body.Append("    <img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN> ");
+                body.Append("<font color=").Append(ColorHeader).Append(">Hired contracts</font>\n");
+                body.Append("    ").Append(NestedLink(hire, "Soldier"));
+                body.Append(" <font color=").Append(ColorMuted).Append(">Basic - hire</font>");
+                body.Append(" <font color=").Append(ColorTeam).Append(">[Summoned]</font>");
+                body.Append(' ').Append(TellLink("dismiss soldier", "dismiss")).Append('\n');
+                body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
+                body.Append("    <font color=").Append(ColorHeader).Append(">Enforcer</font>\n");
+                body.Append("    ").Append(NestedLink(detail, "Brock Anvil Malone"));
+                body.Append(" <font color=").Append(ColorMuted).Append(">Twink - L24</font>\n");
+                return BuildOuter(body.ToString());
             }
 
             public static string GuestBuffsSample(
@@ -507,13 +639,17 @@ namespace ZoneEngine_New.Core.Pets
             string tier = ContentTierLabel(def);
             bool summoned = _unlocks.IsSummoned(player, def);
             var sb = new StringBuilder();
-            sb.Append(TellLink("view " + def.Id, shown));
+            sb.Append(NestedLink(BuildDetailInner(player, def), shown));
             sb.Append(" <font color=").Append(ColorMuted).Append('>')
                 .Append(EscText(tier))
-                .Append(" · L").Append(def.Level.ToString(CultureInfo.InvariantCulture))
+                .Append(" - L").Append(def.Level.ToString(CultureInfo.InvariantCulture))
                 .Append("</font>");
             if (summoned)
+            {
                 sb.Append(" <font color=").Append(ColorTeam).Append(">[Summoned]</font>");
+                sb.Append(' ').Append(TellLink("dismiss " + def.Id, "dismiss"));
+            }
+
             sb.Append('\n');
             return sb.ToString();
         }
@@ -529,7 +665,7 @@ namespace ZoneEngine_New.Core.Pets
             var body = new StringBuilder();
             body.Append("<font color=").Append(ColorMuted).Append(">\n");
             body.Append("<font color=").Append(ColorHeader).Append('>')
-                .Append(EscText(shown)).Append(" — ").Append(EscText(tier)).Append("</font>\n");
+                .Append(EscText(shown)).Append(" - ").Append(EscText(tier)).Append("</font>\n");
             body.Append(EscText(BuildDescription(def))).Append('\n');
             body.Append("<font color=").Append(ColorMuted).Append('>')
                 .Append(EscText(TierBlurb(tier))).Append("</font>\n");
@@ -542,11 +678,58 @@ namespace ZoneEngine_New.Core.Pets
                 body.Append("<font color=").Append(ColorMuted).Append('>')
                     .Append(EscText(reason)).Append("</font>\n");
 
-            AppendStanceBlock(body, player, def);
-            AppendBuffBlock(body, player, def, npc, guestOnly: false);
+            AppendStanceBlock(body, player, def.Kind);
+            AppendBuffBlock(body, player, def.Kind, def.Level, npc, guestOnly: false);
 
             body.Append('\n').Append(TellLink("menu", "Back to Mercs")).Append('\n');
             return body.ToString();
+        }
+
+        string BuildHireDetailInner(Player player, Mercs.Kind kind, Mercs.Tier tier, bool present)
+        {
+            int ownerLevel = Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level));
+            int powerLevel = Mercs.PowerLevel(ownerLevel, tier);
+            NpcCharacter? npc = null;
+            foreach (NpcCharacter pet in player.OwnedPets.All)
+            {
+                if (pet.Pet != null && !pet.IsDead
+                    && string.Equals(pet.Pet.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase))
+                {
+                    npc = pet;
+                    break;
+                }
+            }
+
+            string tierName = Mercs.TierName(tier);
+            Mercs.Package package = Mercs.PackageFor(tier);
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append('>')
+                .Append(EscText(kind.Title)).Append(" - ").Append(EscText(tierName)).Append("</font>\n");
+            body.Append("Profession hire contract. Body tracks your level (capped 220). Tier twinks gear and nanos.\n");
+            body.Append("<font color=").Append(ColorMuted).Append('>')
+                .Append(EscText(HireTierBlurb(tier, package))).Append("</font>\n");
+            if (present)
+                body.Append(TellLink("dismiss " + kind.Key, "Dismiss")).Append('\n');
+            else
+                body.Append(TellLink("call", "Call mercs")).Append('\n');
+
+            AppendStanceBlock(body, player, kind);
+            AppendBuffBlock(body, player, kind, powerLevel, npc, guestOnly: false);
+
+            body.Append('\n').Append(TellLink("menu", "Back to Mercs")).Append('\n');
+            return body.ToString();
+        }
+
+        static string HireTierBlurb(Mercs.Tier tier, Mercs.Package package)
+        {
+            if (package.IsBasic)
+                return "Basic hire: gear and nanos at your level.";
+            return Mercs.TierName(tier) + " hire: gear QL +" + package.GearQlBonus.ToString(CultureInfo.InvariantCulture)
+                + ", power +" + package.PowerLevelBonus.ToString(CultureInfo.InvariantCulture)
+                + ", health +" + package.HealthAdd.ToString(CultureInfo.InvariantCulture)
+                + ", damage +" + package.DamageAdd.ToString(CultureInfo.InvariantCulture)
+                + ", skill +" + package.SkillAdd.ToString(CultureInfo.InvariantCulture) + ".";
         }
 
         string BuildGuestBuffInner(Player player, MercDefinition def, NpcCharacter npc)
@@ -558,13 +741,13 @@ namespace ZoneEngine_New.Core.Pets
                 .Append(EscText(shown)).Append(" can buff you</font>\n");
             body.Append("<font color=").Append(ColorMuted).Append('>')
                 .Append("Owner-only controls (summon, dismiss, stances, AOE toggles) are hidden.</font>\n");
-            AppendBuffBlock(body, player, def, npc, guestOnly: true);
+            AppendBuffBlock(body, player, def.Kind, def.Level, npc, guestOnly: true);
             return body.ToString();
         }
 
-        void AppendStanceBlock(StringBuilder body, Player player, MercDefinition def)
+        void AppendStanceBlock(StringBuilder body, Player player, Mercs.Kind kind)
         {
-            string key = def.Kind.Key;
+            string key = kind.Key;
             bool any = false;
             void EnsureHeader()
             {
@@ -617,12 +800,13 @@ namespace ZoneEngine_New.Core.Pets
         void AppendBuffBlock(
             StringBuilder body,
             Player player,
-            MercDefinition def,
+            Mercs.Kind kind,
+            int level,
             NpcCharacter? npc,
             bool guestOnly)
         {
             IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers =
-                _unlocks.Nanos.BuffsFor(def.Kind, def.Level, npc);
+                _unlocks.Nanos.BuffsFor(kind, level, npc);
             body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
             body.Append("    <font color=").Append(ColorHeader).Append('>')
                 .Append(guestOnly ? "Buffs for you" : "Buffs").Append("</font>\n");
@@ -741,14 +925,13 @@ namespace ZoneEngine_New.Core.Pets
 
                 string tierName = Mercs.TierName(tier);
                 var row = new StringBuilder();
-                row.Append("<font color=").Append(ColorHeader).Append('>')
-                    .Append(EscText(kind.Title)).Append("</font>");
+                row.Append(NestedLink(BuildHireDetailInner(player, kind, tier, here), kind.Title));
                 row.Append(" <font color=").Append(ColorMuted).Append('>')
                     .Append(EscText(tierName))
-                    .Append(" · hire</font>");
+                    .Append(" - hire</font>");
                 if (here)
                     row.Append(" <font color=").Append(ColorTeam).Append(">[Summoned]</font>");
-                row.Append(" — type .merc dismiss ").Append(EscText(kind.Key)).Append('\n');
+                row.Append(' ').Append(TellLink("dismiss " + kind.Key, "dismiss")).Append('\n');
                 rows.Add(row.ToString());
             }
 
@@ -942,6 +1125,24 @@ namespace ZoneEngine_New.Core.Pets
                 + EscText(label) + "</a></font>";
         }
 
+        /// <summary>
+        /// Nested <c>text://</c> link for embedding a detail page inside the outer tell blob.
+        /// Escapes one HTML level so the client unescapes once when opening the window
+        /// (Budabot / historical Buffbot NestedLink). Outer href uses double quotes; nested uses single.
+        /// </summary>
+        public static string NestedLink(string body, string label)
+        {
+            ArgumentNullException.ThrowIfNull(body);
+            ArgumentNullException.ThrowIfNull(label);
+            string escaped = body
+                .Replace("&", "&amp;", StringComparison.Ordinal)
+                .Replace("'", "&#39;", StringComparison.Ordinal)
+                .Replace("\"", "&quot;", StringComparison.Ordinal)
+                .Replace("<", "&lt;", StringComparison.Ordinal)
+                .Replace(">", "&gt;", StringComparison.Ordinal);
+            return "<a href='text://" + escaped + "'>" + EscText(label) + "</a>";
+        }
+
         static int EstimateWrappedLength(int innerLength) => innerLength + 48;
 
         static string TellLink(string command, string label)
@@ -953,6 +1154,20 @@ namespace ZoneEngine_New.Core.Pets
                 return string.Empty;
             return text.Replace("&", "&amp;", StringComparison.Ordinal)
                 .Replace("'", "&#39;", StringComparison.Ordinal);
+        }
+
+        /// <summary>True when every character is plain ASCII (0x00-0x7F).</summary>
+        public static bool IsAsciiOnly(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return true;
+            foreach (char c in text)
+            {
+                if (c > 0x7F)
+                    return false;
+            }
+
+            return true;
         }
 
         static void SendBlob(Player player, string message)

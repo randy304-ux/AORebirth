@@ -32,7 +32,7 @@ namespace ZoneEngine_New.Core.Commands
 
         public string Topic => "mercs";
 
-        public string Summary => "Live-style merc menu (one text:// blob), dungeon summon/dismiss, and profession hire/call.";
+        public string Summary => "Live-style merc menu (nested text:// detail pages), dungeon summon/dismiss, and profession hire/call.";
 
         public void Execute(GmCommandContext context)
         {
@@ -143,7 +143,7 @@ namespace ZoneEngine_New.Core.Commands
                     }
 
                     if (hired == 0)
-                        sb.Append("\n(none — hire with .merc hire <profession> [tier], or summon a dungeon unlock)");
+                        sb.Append("\n(none - hire with .merc hire <profession> [tier], or summon a dungeon unlock)");
 
                     sb.Append("\n\nDungeon unlocks (.merc menu):");
                     int unlocked = 0;
@@ -169,7 +169,7 @@ namespace ZoneEngine_New.Core.Commands
                     if (unlocked == 0)
                         sb.Append("\n(none unlocked yet)");
                     if (locked > 0)
-                        sb.Append("\n(").Append(locked).Append(" still locked — finish their dungeon bosses)");
+                        sb.Append("\n(").Append(locked).Append(" still locked - finish their dungeon bosses)");
 
                     Say(sb.ToString());
                     return;
