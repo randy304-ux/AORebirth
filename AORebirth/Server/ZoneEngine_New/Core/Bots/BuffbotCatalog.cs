@@ -164,23 +164,24 @@ namespace ZoneEngine_New.Core.Bots
         public bool TryGetLine(int nanoId, out BuffLine line)
             => _byId.TryGetValue(nanoId, out line!);
 
-        /// <summary>Highest rank whose required level is at or below <paramref name="level"/>.</summary>
-        public bool TryOffer(BuffLine line, int level, out BuffOffer offer) => TryOffer(line, level, int.MaxValue, out offer);
-
-        /// <summary>Highest rank the target can take: real level requirement met and NCU cost within <paramref name="freeNcu"/>.</summary>
-        public bool TryOffer(BuffLine line, int level, int freeNcu, out BuffOffer offer)
+        /// <summary>
+        /// Highest QL rank that fits <paramref name="freeNcu"/>. Recipient level/QL never gates
+        /// buffbot offers — only free NCU (cast path still honors real nano target/self rules).
+        /// </summary>
+        public bool TryOffer(BuffLine line, int freeNcu, out BuffOffer offer)
         {
             ArgumentNullException.ThrowIfNull(line);
+            freeNcu = Math.Max(0, freeNcu);
             ItemTemplate? best = null;
-            ItemTemplate? lowest = null;
+            ItemTemplate? highest = null;
             foreach (ItemTemplate template in line.Ranks)
             {
-                lowest ??= template;
-                if (RequiredLevel(template) <= level && NanoSpell.From(template).NcuCost <= freeNcu)
+                highest = template; // ranks are QL-sorted ascending
+                if (NanoSpell.From(template).NcuCost <= freeNcu)
                     best = template;
             }
 
-            ItemTemplate shown = best ?? lowest!;
+            ItemTemplate shown = best ?? highest!;
             NanoSpell spell = NanoSpell.From(shown);
             offer = new BuffOffer(
                 line.Name,
@@ -188,26 +189,32 @@ namespace ZoneEngine_New.Core.Bots
                 shown.Quality,
                 spell.NcuCost,
                 Bonus(shown),
-                best != null,
-                RequiredLevel(lowest!));
+                available: best != null,
+                requiredLevel: 1);
             return best != null;
         }
 
-        public IEnumerable<BuffOffer> Castable(int level)
+        /// <summary>Back-compat overload: level is ignored; only NCU gates availability.</summary>
+        public bool TryOffer(BuffLine line, int level, int freeNcu, out BuffOffer offer)
+        {
+            _ = level;
+            return TryOffer(line, freeNcu, out offer);
+        }
+
+        public IEnumerable<BuffOffer> Castable(int freeNcu)
         {
             foreach (BuffSection section in _sections)
             {
                 foreach (BuffLine line in section.Lines)
                 {
-                    if (TryOffer(line, level, out BuffOffer offer))
+                    if (TryOffer(line, freeNcu, out BuffOffer offer))
                         yield return offer;
                 }
             }
         }
 
         /// <summary>
-        /// Only a real ToUse Level requirement gates a rank. QL is never treated as a level (2026-10-29).
-        /// Stat 54 on the nano's own stat map is NCU, not this check.
+        /// Nano ToUse Level requirement (caster/upload). Not used to gate buffbot recipients.
         /// </summary>
         public static int RequiredLevel(ItemTemplate template)
         {

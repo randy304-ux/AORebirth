@@ -119,47 +119,57 @@ namespace ZoneEngine_New.Core.Commands
                 case "list":
                 case "ls":
                 {
-                    var sb = new StringBuilder("Dungeon mercs (.merc menu for the clickable window):");
+                    // Access = ContractsStat (10280) + live MR** pets, then dungeon unlock rows.
+                    // Do not invent unlocks; locked roster entries are summarized only.
+                    var sb = new StringBuilder("Your mercs (profession contracts / currently summoned):");
+                    int hired = 0;
+                    DateTime now = DateTime.UtcNow;
+                    foreach (Mercs.Kind k in Mercs.Kinds)
+                    {
+                        bool contract = pets != null && PetService.HasContract(player, k);
+                        bool here = player.OwnedPets.All.Any(p => p.Pet != null && !p.IsDead
+                            && string.Equals(p.Pet.Hash, k.Hash, StringComparison.OrdinalIgnoreCase));
+                        if (!contract && !here)
+                            continue;
+                        hired++;
+                        Mercs.Tier tier = Mercs.GetTier(player, k);
+                        string tierLabel = tier != Mercs.Tier.Basic ? " " + Mercs.TierName(tier) : "";
+                        string state = here ? "with you"
+                            : player.OwnedPets.MercReviveUtc.TryGetValue(k.Key, out DateTime due) && due > now
+                                ? "hired, back in " + Math.Ceiling((due - now).TotalSeconds) + "s"
+                                : contract ? "hired, on the way" : "present";
+                        sb.Append("\n").Append(k.Title).Append(tierLabel)
+                            .Append(" (").Append(k.Key).Append("): ").Append(state);
+                    }
+
+                    if (hired == 0)
+                        sb.Append("\n(none — hire with .merc hire <profession> [tier], or summon a dungeon unlock)");
+
+                    sb.Append("\n\nDungeon unlocks (.merc menu):");
+                    int unlocked = 0;
+                    int locked = 0;
                     foreach (MercDefinition def in _unlocks.Roster.All)
                     {
                         MercUnlockState state = _unlocks.GetState(player, def);
+                        if (state == MercUnlockState.Locked)
+                        {
+                            locked++;
+                            continue;
+                        }
+
+                        unlocked++;
                         string shown = _unlocks.DisplayNameFor(player, def);
                         string mark = _unlocks.IsSummoned(player, def) ? ", summoned" : "";
                         sb.Append("\n").Append(shown)
                             .Append(" (").Append(def.Id).Append(") L").Append(def.Level)
                             .Append(" ").Append(def.Role)
                             .Append(": ").Append(MercUnlockService.StateLabel(state)).Append(mark);
-                        if (state == MercUnlockState.Locked)
-                            sb.Append(" — finish ").Append(def.BossName).Append(" in ").Append(def.DungeonName);
                     }
 
-                    sb.Append("\n\nProfession contracts (legacy hire):");
-                    if (pets == null)
-                    {
-                        sb.Append(" (unavailable here)");
-                        Say(sb.ToString());
-                        return;
-                    }
-
-                    DateTime now = DateTime.UtcNow;
-                    foreach (Mercs.Kind k in Mercs.Kinds)
-                    {
-                        string state = "-";
-                        if (PetService.HasContract(player, k))
-                        {
-                            bool here = player.OwnedPets.All.Any(p => p.Pet != null && !p.IsDead
-                                && string.Equals(p.Pet.Hash, k.Hash, StringComparison.OrdinalIgnoreCase));
-                            state = here ? "hired, with you"
-                                : player.OwnedPets.MercReviveUtc.TryGetValue(k.Key, out DateTime due) && due > now
-                                    ? "hired, back in " + Math.Ceiling((due - now).TotalSeconds) + "s"
-                                    : "hired, on the way";
-                        }
-
-                        string tierLabel = PetService.HasContract(player, k) && Mercs.GetTier(player, k) != Mercs.Tier.Basic
-                            ? " " + Mercs.TierName(Mercs.GetTier(player, k))
-                            : "";
-                        sb.Append("\n").Append(k.Title).Append(tierLabel).Append(" (").Append(k.Key).Append("): ").Append(state);
-                    }
+                    if (unlocked == 0)
+                        sb.Append("\n(none unlocked yet)");
+                    if (locked > 0)
+                        sb.Append("\n(").Append(locked).Append(" still locked — finish their dungeon bosses)");
 
                     Say(sb.ToString());
                     return;

@@ -132,8 +132,8 @@ namespace ZoneEngine_New.Core.Bots
                 player,
                 "<font color=" + ColorMuted + ">Retrieving all available buffs. Just a moment.</font>");
 
-            int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
-            IReadOnlyList<string> messages = BuildMenuMessages(level, BotName);
+            int freeNcu = Math.Max(0, player.MaxNcu - player.UsedNcu);
+            IReadOnlyList<string> messages = BuildMenuMessages(freeNcu, BotName);
             foreach (string message in messages)
                 GmCommandFeedback.Send(player.Session!, player, message);
         }
@@ -143,16 +143,16 @@ namespace ZoneEngine_New.Core.Bots
         /// Prefer a single message; if over <see cref="MessageMax"/>, split by whole professions into
         /// additional tells — never nested <c>text://</c> windows.
         /// </summary>
-        public IReadOnlyList<string> BuildMenuMessages(int level, string botName)
+        public IReadOnlyList<string> BuildMenuMessages(int freeNcu, string botName)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(botName);
-            level = Math.Max(1, level);
+            freeNcu = Math.Max(0, freeNcu);
 
             var sections = new List<(string Name, string Body)>();
             foreach (BuffSection section in _catalog.Sections)
             {
                 var body = new StringBuilder();
-                AppendSection(body, section, level, botName);
+                AppendSection(body, section, freeNcu, botName);
                 sections.Add((section.Name, body.ToString()));
             }
 
@@ -200,9 +200,9 @@ namespace ZoneEngine_New.Core.Bots
         public static int LastBuiltMaxMessageLength { get; private set; }
 
         /// <summary>Inner blob only (no outer text:// wrapper). Used by tests.</summary>
-        internal string BuildMenuBlobForTest(int level, string botName)
+        internal string BuildMenuBlobForTest(int freeNcu, string botName)
         {
-            IReadOnlyList<string> messages = BuildMenuMessages(level, botName);
+            IReadOnlyList<string> messages = BuildMenuMessages(freeNcu, botName);
             if (messages.Count == 0)
                 return string.Empty;
             // Unwrap first message's text:// body for assertion helpers.
@@ -250,8 +250,9 @@ namespace ZoneEngine_New.Core.Bots
             return body.ToString();
         }
 
-        void AppendSection(StringBuilder body, BuffSection section, int level, string botName)
+        void AppendSection(StringBuilder body, BuffSection section, int freeNcu, string botName)
         {
+            _ = botName;
             body.Append("\n<img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n<img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN>");
             if (ProfessionIcons.TryGetValue(section.Name, out int icon))
                 body.Append("<img src=tdb://id:GFX_GUI_ICON_PROFESSION_").Append(icon.ToString(CultureInfo.InvariantCulture)).Append('>');
@@ -260,8 +261,10 @@ namespace ZoneEngine_New.Core.Bots
 
             foreach (BuffLine line in section.Lines)
             {
-                _catalog.TryOffer(line, level, out BuffOffer offer);
+                _catalog.TryOffer(line, freeNcu, out BuffOffer offer);
                 bool team = IsTeamBuff(offer.Name);
+                // Link label uses EscText so apostrophes (Dr Hack 'n Quack) cannot break AOML quoting.
+                // Href uses numeric nano id only — never the name.
                 if (offer.Available)
                 {
                     body.Append("<a href='chatcmd:///say .buff cast ")
@@ -274,9 +277,9 @@ namespace ZoneEngine_New.Core.Bots
                 {
                     body.Append("<font color=").Append(ColorMuted).Append('>')
                         .Append(EscText(offer.Name))
-                        .Append(" (L")
-                        .Append(offer.RequiredLevel.ToString(CultureInfo.InvariantCulture))
-                        .Append(")</font>");
+                        .Append(" (need ")
+                        .Append(offer.Ncu.ToString(CultureInfo.InvariantCulture))
+                        .Append(" NCU)</font>");
                 }
 
                 if (team)
@@ -302,23 +305,15 @@ namespace ZoneEngine_New.Core.Bots
 
         void Cast(Player player, int nanoId, bool announceRefusal)
         {
-            if (!_catalog.TryGetLine(nanoId, out BuffLine line))
+            if (!_catalog.TryGetLine(nanoId, out BuffLine _))
             {
                 GmCommandFeedback.Send(player.Session!, player, "That buff is not on the buffbot list.");
                 return;
             }
 
-            if (!TryCurrentOffer(player, line, out BuffOffer offer))
-            {
-                GmCommandFeedback.Send(
-                    player.Session!,
-                    player,
-                    "You are not high enough level for " + line.Name + " (needs level "
-                    + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture) + ").");
-                return;
-            }
-
-            NanoRuntime.TryApplyServiceBuff(player, offer.NanoId, announceRefusal, out string detail);
+            // Apply the clicked nano id as-is. No recipient level/QL gate — NCU / strain / self-only
+            // rules live in NanoRuntime.TryApplyServiceBuff.
+            NanoRuntime.TryApplyServiceBuff(player, nanoId, announceRefusal, out string detail);
             GmCommandFeedback.Send(player.Session!, player, detail);
         }
 
@@ -434,8 +429,8 @@ namespace ZoneEngine_New.Core.Bots
 
         bool TryCurrentOffer(Player player, BuffLine line, out BuffOffer offer)
         {
-            int level = Math.Max(1, player.Stats.GetOrZero(CharacterStat.Level));
-            return _catalog.TryOffer(line, level, out offer) && offer.Available;
+            int freeNcu = Math.Max(0, player.MaxNcu - player.UsedNcu);
+            return _catalog.TryOffer(line, freeNcu, out offer) && offer.Available;
         }
 
         static void Send(Player player, IReadOnlyList<string> lines)

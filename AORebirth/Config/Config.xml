@@ -41,8 +41,9 @@
   <LogChat>false</LogChat>
   <!-- Server MOTD -->
   <!-- {0} will be replaced with Cellao Name and Version eg Yalm 1.3.2.267 -->
-  <!-- AOML must be XML-escaped here or ChatEngine XmlSerializer fails at Motd. -->
-  <Motd>Welcome to the Dungeon Dogs AO server! ({0}) &lt;a href="https://dungeondogs.org"&gt;https://dungeondogs.org&lt;/a&gt; | &lt;a href="chatcmd:///say .buff"&gt;Buffbot&lt;/a&gt; | &lt;a href="chatcmd:///say .merc menu"&gt;Mercs&lt;/a&gt;</Motd>
+  <!-- Motd is MsgAnonymousVicinity text: client does not run chatcmd links from Motd.
+       Keep plain typed commands (Chat virtual Buffbot/Merc tells + zone .buff/.merc). -->
+  <Motd>Welcome to the Dungeon Dogs AO server! ({0}) https://dungeondogs.org | Buffbot: /tell Buffbot or type .buff | Mercs: /tell Merc or type .merc menu</Motd>
   <!-- Choose your SQL Databse Type here, MySql, MsSql, PostgreSQL-->
   <SQLType>MySql</SQLType>
   <!-- Sql Connection Setup Area -->

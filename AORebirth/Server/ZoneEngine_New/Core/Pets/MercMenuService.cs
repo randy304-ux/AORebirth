@@ -4,6 +4,7 @@ namespace ZoneEngine_New.Core.Pets
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Globalization;
+    using System.Linq;
     using System.Text;
 
     using ZoneEngine_New.Core.Commands;
@@ -263,6 +264,12 @@ namespace ZoneEngine_New.Core.Pets
             ArgumentNullException.ThrowIfNull(player);
             string filter = string.IsNullOrWhiteSpace(filterKey) ? FilterAll : filterKey.Trim();
             var sections = new List<(string Name, string Body)>();
+
+            // Profession hire contracts (ContractsStat 10280 / live MR** pets) — not the dungeon unlock table.
+            var hired = new StringBuilder();
+            if (AppendHiredContractsSection(hired, player, filter))
+                sections.Add(("Hired", hired.ToString()));
+
             foreach (Mercs.Kind kind in Mercs.Kinds)
             {
                 var body = new StringBuilder();
@@ -278,7 +285,7 @@ namespace ZoneEngine_New.Core.Pets
                 [
                     BuildOuter(
                         header
-                        + "\n\n<font color=" + ColorMuted + ">No unlocked mercs match this filter.</font>\n")
+                        + "\n\n<font color=" + ColorMuted + ">No hired or unlocked mercs match this filter.</font>\n")
                 ];
             }
 
@@ -693,7 +700,7 @@ namespace ZoneEngine_New.Core.Pets
             var body = new StringBuilder();
             body.Append("<font color=").Append(ColorMuted).Append(">\n");
             body.Append("<font color=").Append(ColorHeader).Append(">Mercs</font>\n");
-            body.Append("Unlocked and accessible dungeon mercs. Click a name for summon, stance, and buffs.\n");
+            body.Append("Hired profession contracts and unlocked dungeon mercs. Click a name for detail.\n");
             body.Append("Filter:");
             foreach (string key in FilterKeys)
             {
@@ -709,8 +716,69 @@ namespace ZoneEngine_New.Core.Pets
             return body.ToString();
         }
 
+        /// <summary>
+        /// Dungeon roster row is accessible when unlocked/dungeon_only, or currently summoned.
+        /// Profession hire access is listed separately via <see cref="AppendHiredContractsSection"/>.
+        /// </summary>
         bool PassesAccess(Player player, MercDefinition def)
-            => _unlocks.GetState(player, def) != MercUnlockState.Locked;
+            => _unlocks.GetState(player, def) != MercUnlockState.Locked
+               || _unlocks.IsSummoned(player, def);
+
+        bool AppendHiredContractsSection(StringBuilder body, Player player, string filter)
+        {
+            var rows = new List<string>();
+            foreach (Mercs.Kind kind in Mercs.Kinds)
+            {
+                bool contract = PetService.HasContract(player, kind);
+                bool here = player.OwnedPets.All.Any(p => p.Pet != null && !p.IsDead
+                    && string.Equals(p.Pet.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase));
+                if (!contract && !here)
+                    continue;
+
+                Mercs.Tier tier = Mercs.GetTier(player, kind);
+                if (!PassesHiredFilter(tier, here, filter))
+                    continue;
+
+                string tierName = Mercs.TierName(tier);
+                var row = new StringBuilder();
+                row.Append("<font color=").Append(ColorHeader).Append('>')
+                    .Append(EscText(kind.Title)).Append("</font>");
+                row.Append(" <font color=").Append(ColorMuted).Append('>')
+                    .Append(EscText(tierName))
+                    .Append(" · hire</font>");
+                if (here)
+                    row.Append(" <font color=").Append(ColorTeam).Append(">[Summoned]</font>");
+                row.Append(" — type .merc dismiss ").Append(EscText(kind.Key)).Append('\n');
+                rows.Add(row.ToString());
+            }
+
+            if (rows.Count == 0)
+                return false;
+
+            body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
+            body.Append("    <img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN> ");
+            body.Append("<font color=").Append(ColorHeader).Append(">Hired contracts</font>\n");
+            foreach (string row in rows)
+                body.Append("    ").Append(row);
+            return true;
+        }
+
+        static bool PassesHiredFilter(Mercs.Tier tier, bool summoned, string filter)
+        {
+            if (string.Equals(filter, FilterAll, StringComparison.OrdinalIgnoreCase))
+                return true;
+            if (string.Equals(filter, FilterSummoned, StringComparison.OrdinalIgnoreCase))
+                return summoned;
+            if (string.Equals(filter, FilterBasic, StringComparison.OrdinalIgnoreCase))
+                return tier == Mercs.Tier.Basic;
+            if (string.Equals(filter, FilterElite, StringComparison.OrdinalIgnoreCase))
+                return tier == Mercs.Tier.Elite;
+            if (string.Equals(filter, FilterChampion, StringComparison.OrdinalIgnoreCase))
+                return tier == Mercs.Tier.Champion;
+            if (string.Equals(filter, FilterTwink, StringComparison.OrdinalIgnoreCase))
+                return tier == Mercs.Tier.Twink;
+            return true;
+        }
 
         bool PassesFilter(Player player, MercDefinition def, string filter)
         {

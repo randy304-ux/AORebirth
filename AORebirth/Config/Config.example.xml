@@ -30,8 +30,8 @@
   </DebugMcp>
   <SqlLog>true</SqlLog>
   <LogChat>false</LogChat>
-  <!-- AOML must be XML-escaped here or ChatEngine XmlSerializer fails at Motd. -->
-  <Motd>Welcome to the Dungeon Dogs AO server! ({0}) &lt;a href="https://dungeondogs.org"&gt;https://dungeondogs.org&lt;/a&gt; | &lt;a href="chatcmd:///say .buff"&gt;Buffbot&lt;/a&gt; | &lt;a href="chatcmd:///say .merc menu"&gt;Mercs&lt;/a&gt;</Motd>
+  <!-- Motd is MsgAnonymousVicinity text: client does not run chatcmd links from Motd. -->
+  <Motd>Welcome to the Dungeon Dogs AO server! ({0}) https://dungeondogs.org | Buffbot: /tell Buffbot or type .buff | Mercs: /tell Merc or type .merc menu</Motd>
   <SQLType>MySql</SQLType>
   <MysqlConnection>Server=localhost;Database=cellao_codex_clean;Uid=cellaodbuser;Pwd=REPLACE_WITH_LOCAL_PASSWORD</MysqlConnection>
   <MsSqlConnection>Data Source=localhost;Inital Catalog=cellao;UserID=cellaodbuser;Password=REPLACE_WITH_LOCAL_PASSWORD;Trusted_Connection=false</MsSqlConnection>
