@@ -30,7 +30,7 @@
   </DebugMcp>
   <SqlLog>true</SqlLog>
   <LogChat>false</LogChat>
-  <Motd>https://ao-rebirth.com</Motd>
+  <Motd>Welcome to AO Rebirth ({0}). Website: https://ao-rebirth.com | Buffbot: /tell Buffbot | Mercs: .merc menu (not deployed yet — inert until mercs build ships)</Motd>
   <SQLType>MySql</SQLType>
   <MysqlConnection>Server=localhost;Database=cellao_codex_clean;Uid=cellaodbuser;Pwd=REPLACE_WITH_LOCAL_PASSWORD</MysqlConnection>
   <MsSqlConnection>Data Source=localhost;Inital Catalog=cellao;UserID=cellaodbuser;Password=REPLACE_WITH_LOCAL_PASSWORD;Trusted_Connection=false</MsSqlConnection>

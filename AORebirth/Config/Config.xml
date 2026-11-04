@@ -41,7 +41,7 @@
   <LogChat>false</LogChat>
   <!-- Server MOTD -->
   <!-- {0} will be replaced with Cellao Name and Version eg Yalm 1.3.2.267 -->
-  <Motd>https://ao-rebirth.com</Motd>
+  <Motd>Welcome to AO Rebirth ({0}). Website: https://ao-rebirth.com | Buffbot: /tell Buffbot | Mercs: .merc menu (not deployed yet — inert until mercs build ships)</Motd>
   <!-- Choose your SQL Databse Type here, MySql, MsSql, PostgreSQL-->
   <SQLType>MySql</SQLType>
   <!-- Sql Connection Setup Area -->
