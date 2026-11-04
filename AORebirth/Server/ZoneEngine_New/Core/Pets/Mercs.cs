@@ -563,10 +563,21 @@ namespace ZoneEngine_New.Core.Pets
             public bool Enabled { get; set; } = true;
             public int ReviveSeconds { get; set; } = 10;
             public bool ArmorStats { get; set; } = true;
+
+            /// <summary>
+            /// When true (default), each summon rolls sex then a random breed with a real Breed/Sex/HeadMesh
+            /// template (Solitus/Opifex/Nanomage both sexes; Atrox males only).
+            /// When false, use Randy fixed profession breeds (MA/Shade/Fixer Opifex; NT/MP Nanomage;
+            /// Enforcer/Keeper/Agent Atrox male / Solitus female; rest Solitus).
+            /// </summary>
+            public bool RandomAppearance { get; set; } = true;
+
             public Dictionary<string, Profession> Professions { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 
             public Profession? For(Kind kind) => Professions.TryGetValue(kind.Key, out Profession? p) ? p : null;
         }
+
+        public static bool RandomAppearance(string gameDataRoot) => Load(gameDataRoot).RandomAppearance;
 
         static readonly ConcurrentDictionary<string, (DateTime Stamp, Catalog Catalog)> Cache = new(StringComparer.OrdinalIgnoreCase);
 

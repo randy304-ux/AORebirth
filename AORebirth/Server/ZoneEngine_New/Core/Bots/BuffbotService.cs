@@ -14,7 +14,7 @@ namespace ZoneEngine_New.Core.Bots
     /// <summary>
     /// One server buffbot. Menu matches live AsyncBuffs: one tell with a single
     /// <c>text://</c> blob listing every profession (no nested windows, no HTML-escaping of tags).
-    /// Clicks are <c>/tell Buffbot cast &lt;nanoId&gt;</c>.
+    /// Clicks are <c>/say .buff cast &lt;nanoId&gt;</c> (zone command; no Chat tell target).
     /// </summary>
     public sealed class BuffbotService
     {

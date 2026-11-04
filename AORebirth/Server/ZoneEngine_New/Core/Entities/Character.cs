@@ -814,7 +814,10 @@
             }
 
             if (players.Count > 0)
+            {
                 quests.OnNpcKilled(npc, players);
+                playfield.GetService<Pets.MercUnlockService>()?.OnNpcKilled(npc, players);
+            }
         }
 
         List<int> CollectPresentQualifiers(Playfield playfield)
