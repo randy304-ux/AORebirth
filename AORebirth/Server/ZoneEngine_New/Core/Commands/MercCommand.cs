@@ -28,11 +28,11 @@ namespace ZoneEngine_New.Core.Commands
         public int RequiredGmLevel => 0;
 
         public string Usage =>
-            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc macros | .merc buffs [name] | .merc hire <profession> [tier] | .merc call | .merc setstate <name> <locked|dungeon_only|unlocked>";
+            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc filter <all|basic|twink|elite|summoned> | .merc view <name> | .merc macros | .merc buffs [name] | .merc hire <profession> [tier] | .merc call | .merc setstate <name> <locked|dungeon_only|unlocked>";
 
         public string Topic => "mercs";
 
-        public string Summary => "Dungeon merc roster menu, summon/dismiss, and profession hire/call.";
+        public string Summary => "Live-style merc menu (one text:// blob), dungeon summon/dismiss, and profession hire/call.";
 
         public void Execute(GmCommandContext context)
         {
@@ -50,12 +50,11 @@ namespace ZoneEngine_New.Core.Commands
                     _menu.OpenMenu(player);
                     return;
                 case "filter":
-                    _menu.Execute(player, context.Args);
-                    return;
+                case "view":
+                case "open":
+                case "detail":
                 case "macros":
                 case "macro":
-                    _menu.OpenMacros(player);
-                    return;
                 case "buffs":
                 case "cast":
                 case "preset":

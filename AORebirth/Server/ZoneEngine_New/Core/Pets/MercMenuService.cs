@@ -1,6 +1,7 @@
 namespace ZoneEngine_New.Core.Pets
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Text;
@@ -8,17 +9,59 @@ namespace ZoneEngine_New.Core.Pets
     using ZoneEngine_New.Core.Commands;
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.Nanos;
+    using ZoneEngine_New.Core.Playfield;
 
     /// <summary>
-    /// Buffbot-style paged nested merc menu (MessageMax 7400 / PageMax 3400).
-    /// ChatTextMessage sizes its string with Int16 — keep the outer budget Int16-safe.
+    /// Live-style merc windows: one <c>text://</c> blob per tell (no nested windows, no HTML-escaped tags),
+    /// matching Buffbot. Main lists unlocked/accessible mercs by profession; detail and guest-buff blobs are
+    /// separate tells. ChatText sizes its string with Int16 — stay under <see cref="MessageMax"/>.
     /// </summary>
     public sealed class MercMenuService
     {
-        const int MessageMax = 7400;
-        const int PageMax = 3400;
+        public const int MessageMax = 32000;
+        public const string BotName = "Merc";
+        public const double GuestTellRangeMeters = 40.0;
+        public static readonly TimeSpan GuestTellCooldown = TimeSpan.FromSeconds(3);
+
+        const string ColorHeader = "#DEDE42";
+        const string ColorNcu = "#00BDBD";
+        const string ColorMuted = "#D3BFFF";
+        const string ColorTeam = "#FBFF96";
+
+        const string FilterAll = "all";
+        const string FilterBasic = "basic";
+        const string FilterTwink = "twink";
+        const string FilterElite = "elite";
+        const string FilterChampion = "champion";
+        const string FilterSummoned = "summoned";
+
+        static readonly Dictionary<string, int> ProfessionIcons = new(StringComparer.OrdinalIgnoreCase)
+        {
+            ["Adventurer"] = 6,
+            ["Agent"] = 5,
+            ["Bureaucrat"] = 8,
+            ["Doctor"] = 10,
+            ["Enforcer"] = 9,
+            ["Engineer"] = 3,
+            ["Fixer"] = 4,
+            ["Keeper"] = 14,
+            ["Martial Artist"] = 2,
+            ["MartialArtist"] = 2,
+            ["Metaphysicist"] = 12,
+            ["Nano-Technician"] = 11,
+            ["NanoTechnician"] = 11,
+            ["Shade"] = 15,
+            ["Soldier"] = 1,
+            ["Trader"] = 7,
+        };
+
+        static readonly string[] FilterKeys =
+        [
+            FilterAll, FilterBasic, FilterTwink, FilterElite, FilterChampion, FilterSummoned
+        ];
 
         readonly MercUnlockService _unlocks;
+        readonly ConcurrentDictionary<string, DateTime> _guestCooldownUtc = new(StringComparer.Ordinal);
 
         public MercMenuService(MercUnlockService unlocks)
         {
@@ -30,15 +73,30 @@ namespace ZoneEngine_New.Core.Pets
             ArgumentNullException.ThrowIfNull(player);
             string trimmed = (message ?? string.Empty).Trim();
             MercDefinition? named = _unlocks.Roster.Find(botName);
-            if (named != null && _unlocks.IsSummoned(player, named))
+
+            // Tell addressed to a specific roster merc (by id / nick / nameplate).
+            if (named != null
+                && !botName.Equals("Merc", StringComparison.OrdinalIgnoreCase)
+                && !botName.Equals("Mercbot", StringComparison.OrdinalIgnoreCase)
+                && !botName.Equals("MercMenu", StringComparison.OrdinalIgnoreCase))
             {
-                if (trimmed.Length == 0)
+                if (_unlocks.IsSummoned(player, named))
                 {
-                    OpenMercBuffs(player, named);
+                    if (trimmed.Length == 0)
+                    {
+                        OpenMercDetail(player, named);
+                        return;
+                    }
+
+                    Execute(player, trimmed.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries));
                     return;
                 }
 
-                Execute(player, trimmed.Split((char[]?)null, StringSplitOptions.RemoveEmptyEntries));
+                // Non-owner: only target-castable buffs when in range.
+                if (TryOpenGuestBuffs(player, named, out string? guestError))
+                    return;
+                if (!string.IsNullOrEmpty(guestError))
+                    Say(player, guestError);
                 return;
             }
 
@@ -47,7 +105,7 @@ namespace ZoneEngine_New.Core.Pets
                 IReadOnlyList<MercDefinition> summoned = _unlocks.SummonedFor(player);
                 if (summoned.Count == 1)
                 {
-                    OpenMercBuffs(player, summoned[0]);
+                    OpenMercDetail(player, summoned[0]);
                     return;
                 }
 
@@ -77,6 +135,29 @@ namespace ZoneEngine_New.Core.Pets
                 return;
             }
 
+            if (verb.Equals("view", StringComparison.OrdinalIgnoreCase)
+                || verb.Equals("open", StringComparison.OrdinalIgnoreCase)
+                || verb.Equals("detail", StringComparison.OrdinalIgnoreCase))
+            {
+                MercDefinition? target = args.Length > 1
+                    ? _unlocks.Roster.Find(string.Join(" ", args, 1, args.Length - 1))
+                    : null;
+                if (target == null)
+                {
+                    Say(player, "Unknown merc. Use .merc menu and click a name.");
+                    return;
+                }
+
+                if (_unlocks.GetState(player, target) == MercUnlockState.Locked)
+                {
+                    Say(player, "You have not unlocked " + _unlocks.DisplayNameFor(player, target) + " yet.");
+                    return;
+                }
+
+                OpenMercDetail(player, target);
+                return;
+            }
+
             if (verb.Equals("macros", StringComparison.OrdinalIgnoreCase)
                 || verb.Equals("macro", StringComparison.OrdinalIgnoreCase))
             {
@@ -98,11 +179,11 @@ namespace ZoneEngine_New.Core.Pets
 
                 if (target == null)
                 {
-                    Say(player, "Summon a dungeon merc first, or use .merc buffs <name>.");
+                    Say(player, "Summon a dungeon merc first, or use .merc view <name>.");
                     return;
                 }
 
-                OpenMercBuffs(player, target);
+                OpenMercDetail(player, target);
                 return;
             }
 
@@ -115,6 +196,35 @@ namespace ZoneEngine_New.Core.Pets
                 return;
             }
 
+            if (verb.Equals("summon", StringComparison.OrdinalIgnoreCase) && args.Length > 1)
+            {
+                MercDefinition? def = _unlocks.Roster.Find(string.Join(" ", args, 1, args.Length - 1));
+                if (def == null)
+                {
+                    Say(player, "Unknown merc. Try .merc menu.");
+                    return;
+                }
+
+                string? err = _unlocks.Summon(player, def);
+                Say(player, err ?? ("Summoned " + _unlocks.DisplayNameFor(player, def)
+                    + " (L" + def.Level.ToString(CultureInfo.InvariantCulture) + ")."));
+                if (err == null)
+                    OpenMercDetail(player, def);
+                return;
+            }
+
+            if (verb.Equals("dismiss", StringComparison.OrdinalIgnoreCase))
+            {
+                MercDefinition? def = args.Length > 1
+                    ? _unlocks.Roster.Find(string.Join(" ", args, 1, args.Length - 1))
+                    : null;
+                string? err = _unlocks.Dismiss(player, def);
+                Say(player, err ?? (def == null
+                    ? "Dismissed."
+                    : "Dismissed " + _unlocks.DisplayNameFor(player, def) + "."));
+                return;
+            }
+
             if (verb.Equals("preset", StringComparison.OrdinalIgnoreCase) && args.Length > 1)
             {
                 RunPreset(player, string.Join(" ", args, 1, args.Length - 1));
@@ -124,258 +234,528 @@ namespace ZoneEngine_New.Core.Pets
             OpenMenu(player, FilterAll);
         }
 
-        const string FilterAll = "all";
-
         public void OpenMenu(Player player) => OpenMenu(player, FilterAll);
 
         public void OpenMenu(Player player, string filter)
         {
             ArgumentNullException.ThrowIfNull(player);
             string filterKey = string.IsNullOrWhiteSpace(filter) ? FilterAll : filter.Trim();
-            var body = new StringBuilder();
-            body.Append(DiagAoml.Title("Mercs"));
-            body.Append("<br>").Append(DiagAoml.Muted("Dungeon unlock mercs. Buff lists come from items.dat (team/other castable)."));
-            body.Append("<br>").Append(FilterLinks(filterKey));
-            body.Append("<br>").Append(CmdLink(".merc macros", "Macros"));
-            body.Append("<br><br>");
+            foreach (string message in BuildMainMessages(player, filterKey))
+                SendBlob(player, message);
+        }
 
-            string head = body.ToString();
-            var windows = new List<StringBuilder>();
-            var current = new StringBuilder(head);
-            int listed = 0;
-            foreach (MercDefinition def in _unlocks.Roster.All)
+        public void OpenMercDetail(Player player, MercDefinition def)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            ArgumentNullException.ThrowIfNull(def);
+            SendBlob(player, BuildOuter(BuildDetailInner(player, def), "Merc"));
+        }
+
+        public void OpenMacros(Player player)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            SendBlob(player, BuildOuter(BuildMacrosInner(player), "Merc macros"));
+        }
+
+        /// <summary>Test/helper: main menu tell payloads for this player and filter.</summary>
+        public IReadOnlyList<string> BuildMainMessages(Player player, string filterKey)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            string filter = string.IsNullOrWhiteSpace(filterKey) ? FilterAll : filterKey.Trim();
+            var sections = new List<(string Name, string Body)>();
+            foreach (Mercs.Kind kind in Mercs.Kinds)
             {
-                if (!PassesFilter(player, def, filterKey))
+                var body = new StringBuilder();
+                if (!AppendProfessionSection(body, player, kind, filter))
                     continue;
-                listed++;
-                string entry = "<br>" + MercRow(player, def);
-                if (current.Length > head.Length && current.Length + entry.Length > MessageMax)
+                sections.Add((kind.Title, body.ToString()));
+            }
+
+            string header = BuildMainHeader(filter);
+            if (sections.Count == 0)
+            {
+                return
+                [
+                    BuildOuter(
+                        header
+                        + "\n\n<font color=" + ColorMuted + ">No unlocked mercs match this filter.</font>\n")
+                ];
+            }
+
+            var messages = new List<string>();
+            var current = new StringBuilder(header);
+            foreach ((string _, string body) in sections)
+            {
+                if (current.Length > header.Length
+                    && EstimateWrappedLength(current.Length + body.Length) > MessageMax)
                 {
-                    windows.Add(current);
-                    current = new StringBuilder(DiagAoml.Title("Mercs") + "<br>" + FilterLinks(filterKey) + "<br><br>");
+                    messages.Add(BuildOuter(current.ToString()));
+                    current.Clear();
+                    current.Append(header);
+                    current.Append("\n\n<font color=").Append(ColorMuted).Append(">(continued)</font>");
                 }
 
-                current.Append(entry);
+                current.Append(body);
             }
 
-            if (listed == 0)
-                current.Append(DiagAoml.Muted("No mercs match this filter."));
-
-            windows.Add(current);
-            for (int i = 0; i < windows.Count; i++)
-                SendWindow(player, windows[i].ToString(), PageLabel("Mercs", i, windows.Count));
+            if (current.Length > 0)
+                messages.Add(BuildOuter(current.ToString()));
+            return messages;
         }
 
-        string MercRow(Player player, MercDefinition def)
+        /// <summary>Pure render helpers for unit tests (no live player / GameData).</summary>
+        public static class Render
         {
-            MercUnlockState state = _unlocks.GetState(player, def);
-            bool summoned = _unlocks.IsSummoned(player, def);
+            public static string MainHeader(string filter) => BuildMainHeaderStatic(filter);
+
+            public static string DetailSample(
+                string shown,
+                string tier,
+                string description,
+                string tierBlurb,
+                bool summoned,
+                bool canSummon,
+                IReadOnlyList<(string Type, string Label)> stances,
+                IReadOnlyList<(int NanoId, string Name, int Ncu, bool Available)> buffs)
+            {
+                var body = new StringBuilder();
+                body.Append("<font color=").Append(ColorMuted).Append(">\n");
+                body.Append("<font color=").Append(ColorHeader).Append('>')
+                    .Append(EscText(shown)).Append(" — ").Append(EscText(tier)).Append("</font>\n");
+                body.Append(EscText(description)).Append('\n');
+                body.Append("<font color=").Append(ColorMuted).Append('>')
+                    .Append(EscText(tierBlurb)).Append("</font>\n");
+                body.Append(TellLink("summon " + "sample_id", "Summon")).Append(' ')
+                    .Append(TellLink("dismiss sample_id", "Dismiss")).Append('\n');
+                if (stances.Count > 0)
+                {
+                    body.Append("\n<img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n");
+                    body.Append("<font color=").Append(ColorHeader).Append(">Stance</font>\n");
+                    foreach ((string type, string label) in stances)
+                        body.Append(TellLink("preset " + type, label)).Append('\n');
+                }
+
+                body.Append("\n<img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n");
+                body.Append("<font color=").Append(ColorHeader).Append(">Buffs</font>\n");
+                foreach ((int nanoId, string name, int ncu, bool available) in buffs)
+                {
+                    if (available)
+                    {
+                        body.Append("<a href='chatcmd:///tell ").Append(BotName).Append(" cast ")
+                            .Append(nanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
+                            .Append(EscText(name)).Append("</a>");
+                    }
+                    else
+                    {
+                        body.Append("<font color=").Append(ColorMuted).Append('>')
+                            .Append(EscText(name)).Append("</font>");
+                    }
+
+                    body.Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
+                        .Append(ncu.ToString(CultureInfo.InvariantCulture)).Append("]</font>\n");
+                }
+
+                body.Append('\n').Append(TellLink("menu", "Back to Mercs")).Append('\n');
+                _ = summoned;
+                _ = canSummon;
+                return BuildOuter(body.ToString(), "Merc");
+            }
+
+            public static string GuestBuffsSample(
+                string mercName,
+                IReadOnlyList<(int NanoId, string Name, int Ncu)> buffs)
+            {
+                var body = new StringBuilder();
+                body.Append("<font color=").Append(ColorMuted).Append(">\n");
+                body.Append("<font color=").Append(ColorHeader).Append('>')
+                    .Append(EscText(mercName)).Append(" can buff you</font>\n");
+                body.Append("<font color=").Append(ColorMuted).Append('>')
+                    .Append("Owner controls (summon, dismiss, stances) are hidden. Same playfield, close range.</font>\n");
+                body.Append("\n<img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n");
+                foreach ((int nanoId, string name, int ncu) in buffs)
+                {
+                    body.Append("<a href='chatcmd:///tell ").Append(BotName).Append(" cast ")
+                        .Append(nanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
+                        .Append(EscText(name)).Append("</a>")
+                        .Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
+                        .Append(ncu.ToString(CultureInfo.InvariantCulture)).Append("]</font>\n");
+                }
+
+                return BuildOuter(body.ToString(), "Merc Buffs");
+            }
+        }
+
+        bool TryOpenGuestBuffs(Player player, MercDefinition def, out string? error)
+        {
+            error = null;
+            if (!TryFindSummonedNearby(player, def, out Player? owner, out NpcCharacter? npc)
+                || owner == null
+                || npc == null)
+            {
+                error = "That merc is not summoned nearby.";
+                return false;
+            }
+
+            if (ReferenceEquals(owner, player))
+            {
+                OpenMercDetail(player, def);
+                return true;
+            }
+
+            if (!ReferenceEquals(player.Playfield, npc.Playfield))
+            {
+                error = "You must be on the same playfield as " + (npc.Name ?? def.DisplayName) + ".";
+                return false;
+            }
+
+            if (player.Distance3D(npc) > GuestTellRangeMeters)
+            {
+                error = "Move closer to " + (npc.Name ?? def.DisplayName) + " to request buffs.";
+                return false;
+            }
+
+            string key = player.Identity.Instance.ToString(CultureInfo.InvariantCulture) + ":" + def.Id;
+            DateTime now = DateTime.UtcNow;
+            if (_guestCooldownUtc.TryGetValue(key, out DateTime last)
+                && now - last < GuestTellCooldown)
+            {
+                error = "Wait a moment before asking that merc again.";
+                return false;
+            }
+
+            _guestCooldownUtc[key] = now;
+            SendBlob(player, BuildOuter(BuildGuestBuffInner(player, def, npc), "Merc Buffs"));
+            return true;
+        }
+
+        bool TryFindSummonedNearby(
+            Player requester,
+            MercDefinition def,
+            out Player? owner,
+            out NpcCharacter? npc)
+        {
+            owner = null;
+            npc = null;
+            Playfield? playfield = requester.Playfield as Playfield;
+            if (playfield == null)
+                return false;
+
+            DynelRegistry registry = playfield.GetRequiredService<DynelRegistry>();
+            foreach (Dynel dynel in registry.Players())
+            {
+                if (dynel is not Player candidate)
+                    continue;
+                if (!_unlocks.IsSummoned(candidate, def))
+                    continue;
+                NpcCharacter? pet = _unlocks.FindSummonedNpc(candidate, def);
+                if (pet == null || pet.IsDead)
+                    continue;
+                if (!ReferenceEquals(pet.Playfield, playfield))
+                    continue;
+                owner = candidate;
+                npc = pet;
+                return true;
+            }
+
+            return false;
+        }
+
+        bool AppendProfessionSection(StringBuilder body, Player player, Mercs.Kind kind, string filter)
+        {
+            var rows = new List<string>();
+            foreach (MercDefinition def in _unlocks.Roster.All)
+            {
+                if (!string.Equals(def.Kind.Key, kind.Key, StringComparison.OrdinalIgnoreCase))
+                    continue;
+                if (!PassesAccess(player, def))
+                    continue;
+                if (!PassesFilter(player, def, filter))
+                    continue;
+                rows.Add(BuildMercListRow(player, def));
+            }
+
+            if (rows.Count == 0)
+                return false;
+
+            body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
+            body.Append("    <img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN> ");
+            if (ProfessionIcons.TryGetValue(kind.Title, out int icon)
+                || ProfessionIcons.TryGetValue(kind.Key, out icon))
+            {
+                body.Append("<img src=tdb://id:GFX_GUI_ICON_PROFESSION_")
+                    .Append(icon.ToString(CultureInfo.InvariantCulture))
+                    .Append("> ");
+            }
+
+            body.Append("<font color=").Append(ColorHeader).Append('>')
+                .Append(EscText(kind.Title)).Append("</font>\n");
+            foreach (string row in rows)
+                body.Append("    ").Append(row);
+            return true;
+        }
+
+        string BuildMercListRow(Player player, MercDefinition def)
+        {
             string shown = _unlocks.DisplayNameFor(player, def);
+            string tier = ContentTierLabel(def);
+            bool summoned = _unlocks.IsSummoned(player, def);
             var sb = new StringBuilder();
-            sb.Append(DiagAoml.Label(Esc(shown)));
-            sb.Append(' ').Append(DiagAoml.Muted(
-                "L" + def.Level.ToString(CultureInfo.InvariantCulture)
-                + " " + def.Kind.Title
-                + " · " + def.Role
-                + " · " + def.DungeonName));
-
-            if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
-            {
-                string mode = _unlocks.GetNtMode(player).ToUpperInvariant();
-                sb.Append(' ').Append(DiagAoml.Muted("[NT " + mode + "]"));
-                sb.Append(' ').Append(CmdLink(".merc preset nt aoe", "AOE"));
-                sb.Append(' ').Append(CmdLink(".merc preset nt st", "ST"));
-            }
-
-            if (string.Equals(def.Kind.Key, "trader", StringComparison.OrdinalIgnoreCase))
-            {
-                string mode = _unlocks.GetTraderMode(player).ToUpperInvariant();
-                sb.Append(' ').Append(DiagAoml.Muted("[Trader " + mode + "]"));
-                sb.Append(' ').Append(CmdLink(".merc preset trader wrangle", "Wrangle"));
-                sb.Append(' ').Append(CmdLink(".merc preset trader umbral", "Umbral"));
-            }
-
-            if (string.Equals(def.Kind.Key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
-            {
-                string mode = _unlocks.GetMpMode(player).ToUpperInvariant();
-                sb.Append(' ').Append(DiagAoml.Muted("[MP " + mode + "]"));
-                sb.Append(' ').Append(CmdLink(".merc preset mp composite", "Composite"));
-                sb.Append(' ').Append(CmdLink(".merc preset mp singles", "Singles"));
-            }
-
-            if (state == MercUnlockState.Locked)
-            {
-                sb.Append("<br>").Append(DiagAoml.Muted(
-                    "finish " + Esc(def.BossName) + " in " + Esc(def.DungeonName)));
-                return sb.ToString();
-            }
-
-            sb.Append("<br>");
+            sb.Append(TellLink("view " + def.Id, shown));
+            sb.Append(" <font color=").Append(ColorMuted).Append('>')
+                .Append(EscText(tier))
+                .Append(" · L").Append(def.Level.ToString(CultureInfo.InvariantCulture))
+                .Append("</font>");
             if (summoned)
-                sb.Append(CmdLink(".merc dismiss " + def.Id, "Dismiss"));
-            else if (_unlocks.CanSummonHere(player, def, state, out _))
-                sb.Append(CmdLink(".merc summon " + def.Id, "Summon"));
-            else
-                sb.Append(DiagAoml.Muted("dungeon_only — enter " + Esc(def.DungeonName) + " to summon"));
-
-            if (state == MercUnlockState.DungeonOnly)
-                sb.Append(' ').Append(DiagAoml.Muted("[dungeon_only]"));
+                sb.Append(" <font color=").Append(ColorTeam).Append(">[Summoned]</font>");
+            sb.Append('\n');
             return sb.ToString();
         }
 
-        static string FilterLinks(string active)
+        string BuildDetailInner(Player player, MercDefinition def)
         {
-            var sb = new StringBuilder();
-            sb.Append(DiagAoml.Muted("Filter:"));
-            foreach (string key in new[]
-                     {
-                         "all", "unlocked", "twink", "elite",
-                         "tank", "healer", "crowd control", "carry", "DPS", "support",
-                         "enforcer", "doctor", "bureaucrat", "fixer", "soldier", "adventurer",
-                         "keeper", "nanotechnician", "shade", "martialartist", "trader",
-                         "engineer", "metaphysicist", "agent",
-                         "subway", "totw", "madness", "biomare", "cyborg", "crypt",
-                         "smuggler", "sanctum", "camelot", "elysium", "scheol", "adonis", "penumbra"
-                     })
+            string shown = _unlocks.DisplayNameFor(player, def);
+            string tier = ContentTierLabel(def);
+            bool summoned = _unlocks.IsSummoned(player, def);
+            MercUnlockState state = _unlocks.GetState(player, def);
+            NpcCharacter? npc = summoned ? _unlocks.FindSummonedNpc(player, def) : null;
+
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append('>')
+                .Append(EscText(shown)).Append(" — ").Append(EscText(tier)).Append("</font>\n");
+            body.Append(EscText(BuildDescription(def))).Append('\n');
+            body.Append("<font color=").Append(ColorMuted).Append('>')
+                .Append(EscText(TierBlurb(tier))).Append("</font>\n");
+
+            if (summoned)
+                body.Append(TellLink("dismiss " + def.Id, "Dismiss")).Append('\n');
+            else if (_unlocks.CanSummonHere(player, def, state, out string reason))
+                body.Append(TellLink("summon " + def.Id, "Summon")).Append('\n');
+            else
+                body.Append("<font color=").Append(ColorMuted).Append('>')
+                    .Append(EscText(reason)).Append("</font>\n");
+
+            AppendStanceBlock(body, player, def);
+            AppendBuffBlock(body, player, def, npc, guestOnly: false);
+
+            body.Append('\n').Append(TellLink("menu", "Back to Mercs")).Append('\n');
+            return body.ToString();
+        }
+
+        string BuildGuestBuffInner(Player player, MercDefinition def, NpcCharacter npc)
+        {
+            string shown = string.IsNullOrWhiteSpace(npc.Name) ? def.DisplayName : npc.Name!;
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append('>')
+                .Append(EscText(shown)).Append(" can buff you</font>\n");
+            body.Append("<font color=").Append(ColorMuted).Append('>')
+                .Append("Owner-only controls (summon, dismiss, stances, AOE toggles) are hidden.</font>\n");
+            AppendBuffBlock(body, player, def, npc, guestOnly: true);
+            return body.ToString();
+        }
+
+        void AppendStanceBlock(StringBuilder body, Player player, MercDefinition def)
+        {
+            string key = def.Kind.Key;
+            bool any = false;
+            void EnsureHeader()
             {
-                sb.Append(' ');
-                if (string.Equals(active, key, StringComparison.OrdinalIgnoreCase))
-                    sb.Append(DiagAoml.Label("[" + key + "]"));
-                else
-                    sb.Append(CmdLink(".merc filter " + key, key));
+                if (any)
+                    return;
+                body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
+                body.Append("    <font color=").Append(ColorHeader).Append(">Stance</font>\n");
+                any = true;
             }
 
-            return sb.ToString();
+            if (string.Equals(key, "keeper", StringComparison.OrdinalIgnoreCase))
+            {
+                EnsureHeader();
+                body.Append("    ").Append(TellLink("preset keeper aura", "Aura list")).Append('\n');
+                foreach (string type in _unlocks.Nanos.KeeperAuraTypes())
+                    body.Append("    ").Append(TellLink("preset keeper aura " + type, "Aura: " + type)).Append('\n');
+            }
+
+            if (string.Equals(key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
+            {
+                EnsureHeader();
+                string mode = _unlocks.GetNtMode(player).ToUpperInvariant();
+                body.Append("    <font color=").Append(ColorMuted).Append(">NT nuke mode: ")
+                    .Append(EscText(mode)).Append("</font>\n");
+                body.Append("    ").Append(TellLink("preset nt aoe", "AOE")).Append(' ')
+                    .Append(TellLink("preset nt st", "Single target")).Append('\n');
+            }
+
+            if (string.Equals(key, "trader", StringComparison.OrdinalIgnoreCase))
+            {
+                EnsureHeader();
+                string mode = _unlocks.GetTraderMode(player).ToUpperInvariant();
+                body.Append("    <font color=").Append(ColorMuted).Append(">Trader mode: ")
+                    .Append(EscText(mode)).Append("</font>\n");
+                body.Append("    ").Append(TellLink("preset trader wrangle", "Wrangle")).Append(' ')
+                    .Append(TellLink("preset trader umbral", "Umbral")).Append('\n');
+            }
+
+            if (string.Equals(key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
+            {
+                EnsureHeader();
+                string mode = _unlocks.GetMpMode(player).ToUpperInvariant();
+                body.Append("    <font color=").Append(ColorMuted).Append(">MP mode: ")
+                    .Append(EscText(mode)).Append("</font>\n");
+                body.Append("    ").Append(TellLink("preset mp composite", "Composite")).Append(' ')
+                    .Append(TellLink("preset mp singles", "Singles")).Append('\n');
+            }
         }
+
+        void AppendBuffBlock(
+            StringBuilder body,
+            Player player,
+            MercDefinition def,
+            NpcCharacter? npc,
+            bool guestOnly)
+        {
+            IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers =
+                _unlocks.Nanos.BuffsFor(def.Kind, def.Level, npc);
+            body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
+            body.Append("    <font color=").Append(ColorHeader).Append('>')
+                .Append(guestOnly ? "Buffs for you" : "Buffs").Append("</font>\n");
+            if (offers.Count == 0)
+            {
+                body.Append("    <font color=").Append(ColorMuted).Append('>')
+                    .Append("No team/other castable buffs in items.dat for this profession/level.</font>\n");
+                return;
+            }
+
+            int listed = 0;
+            foreach (MercProfessionNanos.MercBuffOffer offer in offers)
+            {
+                if (guestOnly && !offer.Available)
+                    continue;
+                body.Append("    ");
+                if (offer.Available)
+                {
+                    body.Append("<a href='chatcmd:///tell ").Append(BotName).Append(" cast ")
+                        .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
+                        .Append(EscText(offer.Name)).Append("</a>");
+                }
+                else
+                {
+                    body.Append("<font color=").Append(ColorMuted).Append('>')
+                        .Append(EscText(offer.Name))
+                        .Append(" - merc needs level ")
+                        .Append(offer.RequiredLevel.ToString(CultureInfo.InvariantCulture))
+                        .Append("</font>");
+                }
+
+                body.Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
+                    .Append(offer.Ncu.ToString(CultureInfo.InvariantCulture)).Append("]</font>\n");
+                listed++;
+            }
+
+            if (guestOnly && listed == 0)
+            {
+                body.Append("    <font color=").Append(ColorMuted).Append('>')
+                    .Append("No available buffs for your level right now.</font>\n");
+            }
+
+            _ = player;
+        }
+
+        string BuildMacrosInner(Player player)
+        {
+            string traderMode = _unlocks.GetTraderMode(player).ToUpperInvariant();
+            string mpMode = _unlocks.GetMpMode(player).ToUpperInvariant();
+            string ntMode = _unlocks.GetNtMode(player).ToUpperInvariant();
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append(">Merc macros</font>\n");
+            body.Append("Modes: NT=").Append(EscText(ntMode))
+                .Append(" Trader=").Append(EscText(traderMode))
+                .Append(" MP=").Append(EscText(mpMode))
+                .Append(". Presets pick highest items.dat ranks at merc level.\n");
+            body.Append('\n').Append(TellLink("menu", "Merc menu")).Append('\n');
+            body.Append(TellLink("preset keeper aura", "Keeper aura list")).Append('\n');
+            foreach (string type in _unlocks.Nanos.KeeperAuraTypes())
+                body.Append(TellLink("preset keeper aura " + type, "Keeper " + type)).Append('\n');
+            body.Append(TellLink("preset trader wrangle", "Trader wrangle")).Append('\n');
+            body.Append(TellLink("preset trader umbral", "Trader Umbral")).Append('\n');
+            body.Append(TellLink("preset mp composite", "MP composite")).Append('\n');
+            body.Append(TellLink("preset mp singles", "MP singles")).Append('\n');
+            body.Append(TellLink("preset nt aoe", "NT AOE")).Append('\n');
+            body.Append(TellLink("preset nt st", "NT ST")).Append('\n');
+            return body.ToString();
+        }
+
+        static string BuildMainHeader(string filter) => BuildMainHeaderStatic(filter);
+
+        static string BuildMainHeaderStatic(string filter)
+        {
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append(">Mercs</font>\n");
+            body.Append("Unlocked and accessible dungeon mercs. Click a name for summon, stance, and buffs.\n");
+            body.Append("Filter:");
+            foreach (string key in FilterKeys)
+            {
+                body.Append(' ');
+                if (string.Equals(filter, key, StringComparison.OrdinalIgnoreCase))
+                    body.Append("<font color=").Append(ColorHeader).Append(">[")
+                        .Append(EscText(key)).Append("]</font>");
+                else
+                    body.Append(TellLink("filter " + key, key));
+            }
+
+            body.Append('\n').Append(TellLink("macros", "Macros")).Append('\n');
+            return body.ToString();
+        }
+
+        bool PassesAccess(Player player, MercDefinition def)
+            => _unlocks.GetState(player, def) != MercUnlockState.Locked;
 
         bool PassesFilter(Player player, MercDefinition def, string filter)
         {
             if (string.Equals(filter, FilterAll, StringComparison.OrdinalIgnoreCase))
                 return true;
-            if (string.Equals(filter, "unlocked", StringComparison.OrdinalIgnoreCase))
-                return _unlocks.GetState(player, def) != MercUnlockState.Locked;
+            if (string.Equals(filter, FilterSummoned, StringComparison.OrdinalIgnoreCase))
+                return _unlocks.IsSummoned(player, def);
+            if (string.Equals(filter, FilterBasic, StringComparison.OrdinalIgnoreCase))
+                return IsBasicContent(def);
+            if (string.Equals(filter, FilterTwink, StringComparison.OrdinalIgnoreCase))
+                return def.HasTag(FilterTwink);
+            if (string.Equals(filter, FilterElite, StringComparison.OrdinalIgnoreCase))
+                return def.HasTag(FilterElite);
+            if (string.Equals(filter, FilterChampion, StringComparison.OrdinalIgnoreCase))
+                return def.HasTag(FilterChampion);
             return def.HasTag(filter);
         }
 
-        public void OpenMacros(Player player)
+        static bool IsBasicContent(MercDefinition def)
+            => !def.HasTag(FilterTwink) && !def.HasTag(FilterElite) && !def.HasTag(FilterChampion);
+
+        static string ContentTierLabel(MercDefinition def)
         {
-            var body = new StringBuilder();
-            body.Append(DiagAoml.Title("Merc macros"));
-            string traderMode = _unlocks.GetTraderMode(player).ToUpperInvariant();
-            string mpMode = _unlocks.GetMpMode(player).ToUpperInvariant();
-            string ntMode = _unlocks.GetNtMode(player).ToUpperInvariant();
-            body.Append("<br>").Append(DiagAoml.Muted(
-                "Modes: NT=" + ntMode + " Trader=" + traderMode + " MP=" + mpMode
-                + ". Presets pick highest items.dat ranks at merc level."));
-            body.Append("<br><br>").Append(DiagAoml.Muted("General"));
-            body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc menu")));
-            body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc list")));
-            body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc summon <name>")));
-            body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc dismiss")));
-            body.Append("<br>").Append(DiagAoml.Muted(Esc(".merc buffs")));
-            body.Append("<br><br>").Append(DiagAoml.Muted("Presets"));
-            body.Append("<br>").Append(CmdLink(".merc preset keeper aura", "Keeper aura list"));
-            foreach (string type in _unlocks.Nanos.KeeperAuraTypes())
-                body.Append("<br>").Append(CmdLink(".merc preset keeper aura " + type, "Keeper " + type));
-            body.Append("<br>").Append(CmdLink(".merc preset trader wrangle", "Trader wrangle [" + traderMode + "]"));
-            body.Append("<br>").Append(CmdLink(".merc preset trader umbral", "Trader Umbral"));
-            body.Append("<br>").Append(CmdLink(".merc preset mp composite", "MP composite [" + mpMode + "]"));
-            body.Append("<br>").Append(CmdLink(".merc preset mp singles", "MP singles"));
-            body.Append("<br>").Append(CmdLink(".merc preset nt aoe", "NT mode AOE"));
-            body.Append("<br>").Append(CmdLink(".merc preset nt st", "NT mode ST"));
-            body.Append("<br><br>").Append(CmdLink(".merc menu", "Back"));
-            SendWindow(player, body.ToString(), "Merc macros");
+            if (def.HasTag(FilterTwink))
+                return "Twink";
+            if (def.HasTag(FilterElite))
+                return "Elite";
+            if (def.HasTag(FilterChampion))
+                return "Champion";
+            if (def.HasTag(FilterBasic))
+                return "Basic";
+            return "Basic";
         }
 
-        public void OpenMercBuffs(Player player, MercDefinition def)
+        static string BuildDescription(MercDefinition def)
+            => "Unlock from " + def.DungeonName + " (" + def.BossName + "). Role: " + def.Role
+               + ". Merc body level " + def.Level.ToString(CultureInfo.InvariantCulture) + ".";
+
+        static string TierBlurb(string tier) => tier switch
         {
-            NpcCharacter? npc = _unlocks.FindSummonedNpc(player, def);
-            IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers = _unlocks.Nanos.BuffsFor(def.Kind, def.Level, npc);
-            string shown = _unlocks.DisplayNameFor(player, def);
-
-            var lines = new List<string>();
-            if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
-            {
-                string mode = _unlocks.GetNtMode(player).ToUpperInvariant();
-                lines.Add(DiagAoml.Muted("NT nuke mode: " + mode + " — ")
-                    + CmdLink(".merc preset nt aoe", "AOE") + " "
-                    + CmdLink(".merc preset nt st", "ST"));
-            }
-
-            foreach (MercProfessionNanos.MercBuffOffer offer in offers)
-            {
-                var text = new StringBuilder();
-                string ncu = " [NCU: " + offer.Ncu.ToString(CultureInfo.InvariantCulture) + "]";
-                if (offer.Available)
-                {
-                    text.Append("<a href='chatcmd:///say .merc cast ")
-                        .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture))
-                        .Append("'>").Append(Esc(offer.Name)).Append("</a> ")
-                        .Append(Esc(ncu));
-                }
-                else
-                {
-                    text.Append(DiagAoml.Muted(Esc(offer.Name + ncu
-                        + " - merc needs level " + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture))));
-                }
-
-                lines.Add(text.ToString());
-            }
-
-            List<string> parts = PackPages(shown + " buffs",
-                def.Kind.Title + " L" + def.Level.ToString(CultureInfo.InvariantCulture)
-                + " · team/other buffs from items.dat · NCU "
-                + player.UsedNcu.ToString(CultureInfo.InvariantCulture) + "/"
-                + player.MaxNcu.ToString(CultureInfo.InvariantCulture),
-                lines);
-            for (int i = 0; i < parts.Count; i++)
-            {
-                string label = parts.Count == 1
-                    ? shown + " buffs"
-                    : string.Format(CultureInfo.InvariantCulture, "{0} buffs {1}/{2}", shown, i + 1, parts.Count);
-                SendWindow(player, parts[i], label);
-            }
-        }
-
-        List<string> PackPages(string title, string subtitle, List<string> lines)
-        {
-            var chunks = new List<List<string>>();
-            var current = new List<string>();
-            int size = 0;
-            foreach (string line in lines)
-            {
-                if (current.Count > 0 && size + line.Length > PageMax)
-                {
-                    chunks.Add(current);
-                    current = new List<string>();
-                    size = 0;
-                }
-
-                current.Add(line);
-                size += line.Length + 4;
-            }
-
-            if (current.Count > 0 || chunks.Count == 0)
-                chunks.Add(current);
-
-            var parts = new List<string>(chunks.Count);
-            for (int i = 0; i < chunks.Count; i++)
-            {
-                var body = new StringBuilder();
-                body.Append(DiagAoml.Title(Esc(title)));
-                if (chunks.Count > 1)
-                    body.Append(' ').Append(DiagAoml.Muted(string.Format(CultureInfo.InvariantCulture, "{0}/{1}", i + 1, chunks.Count)));
-                body.Append("<br>").Append(DiagAoml.Muted(Esc(subtitle)));
-                if (lines.Count == 0)
-                    body.Append("<br>").Append(DiagAoml.Muted("No team/other castable buffs found in items.dat for this profession/level."));
-                foreach (string line in chunks[i])
-                    body.Append("<br>").Append(line);
-                body.Append("<br><br>").Append(CmdLink(".merc menu", "Back"));
-                parts.Add(body.ToString());
-            }
-
-            return parts;
-        }
+            "Twink" => "Twink-tier dungeon merc: high-end buff/combat package for its unlock level.",
+            "Elite" => "Elite-tier dungeon merc: strong mid/high package for its unlock level.",
+            "Champion" => "Champion-tier dungeon merc: heavy combat package for its unlock level.",
+            _ => "Basic-access dungeon merc: standard package for its unlock level."
+        };
 
         void RunPreset(Player player, string preset)
         {
@@ -389,8 +769,7 @@ namespace ZoneEngine_New.Core.Pets
             if (key.StartsWith("keeper aura ", StringComparison.Ordinal))
             {
                 string type = key.Substring("keeper aura ".Length).Trim();
-                string result = _unlocks.RunKeeperAura(player, type);
-                Say(player, result);
+                Say(player, _unlocks.RunKeeperAura(player, type));
                 return;
             }
 
@@ -399,8 +778,7 @@ namespace ZoneEngine_New.Core.Pets
                 string type = key.Substring("keeper ".Length).Trim();
                 if (type.StartsWith("aura ", StringComparison.Ordinal))
                     type = type.Substring(5).Trim();
-                string result = _unlocks.RunKeeperAura(player, type);
-                Say(player, result);
+                Say(player, _unlocks.RunKeeperAura(player, type));
                 return;
             }
 
@@ -462,45 +840,58 @@ namespace ZoneEngine_New.Core.Pets
             int level = keeper?.Level ?? 149;
             NpcCharacter? npc = keeper != null ? _unlocks.FindSummonedNpc(player, keeper) : null;
             var body = new StringBuilder();
-            body.Append(DiagAoml.Title("Keeper auras"));
-            body.Append("<br>").Append(DiagAoml.Muted(
-                "From items.dat. One aura per NanoStrain slot. Highest rank the Keeper level allows."));
-            body.Append("<br>").Append(DiagAoml.Muted(
-                "Types: heal(Ambient/527), nano(Tone/527), damage(Vengeance/529), enervate(529), barrier(528), aao(Imminence/528), courage(900), ward(224)."));
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append(">Keeper auras</font>\n");
+            body.Append("From items.dat. One aura per NanoStrain. Highest rank the Keeper level allows.\n");
             foreach (MercProfessionNanos.KeeperAuraOffer offer in _unlocks.Nanos.KeeperAurasFor(level, npc))
             {
-                body.Append("<br>");
                 if (offer.Available)
                 {
-                    body.Append(CmdLink(".merc preset keeper aura " + offer.Type, offer.Type));
-                    body.Append(' ').Append(DiagAoml.Muted(Esc(offer.Name + " L"
-                        + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture)
-                        + " strain " + offer.Strain.ToString(CultureInfo.InvariantCulture))));
+                    body.Append(TellLink("preset keeper aura " + offer.Type, offer.Type))
+                        .Append(" <font color=").Append(ColorMuted).Append('>')
+                        .Append(EscText(offer.Name + " L" + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture)))
+                        .Append("</font>\n");
                 }
                 else
                 {
-                    body.Append(DiagAoml.Muted(Esc(offer.Type + ": " + offer.Name
-                        + " (needs L" + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture) + ")")));
+                    body.Append("<font color=").Append(ColorMuted).Append('>')
+                        .Append(EscText(offer.Type + ": " + offer.Name
+                            + " (needs L" + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture) + ")"))
+                        .Append("</font>\n");
                 }
             }
 
-            body.Append("<br><br>").Append(CmdLink(".merc menu", "Back"));
-            SendWindow(player, body.ToString(), "Keeper auras");
+            body.Append('\n').Append(TellLink("menu", "Back")).Append('\n');
+            SendBlob(player, BuildOuter(body.ToString(), "Keeper auras"));
         }
 
-        static string CmdLink(string command, string label)
-            => "<a href='chatcmd:///say " + command + "'>" + DiagAoml.Label(Esc(label)) + "</a>";
+        public static string BuildOuter(string inner, string label = "Merc Menu")
+        {
+            if (!inner.EndsWith("</font>\n", StringComparison.Ordinal)
+                && !inner.EndsWith("</font>", StringComparison.Ordinal))
+                inner += "</font>";
+            return "<font color='" + ColorMuted + "'><a href=\"text://" + inner + "\">"
+                + EscText(label) + "</a></font>";
+        }
 
-        static string PageLabel(string title, int index, int count)
-            => count <= 1
-                ? title
-                : string.Format(CultureInfo.InvariantCulture, "{0} ({1}/{2})", title, index + 1, count);
+        static int EstimateWrappedLength(int innerLength) => innerLength + 48;
 
-        static void SendWindow(Player player, string body, string label)
+        static string TellLink(string command, string label)
+            => "<a href='chatcmd:///tell " + BotName + " " + command + "'>" + EscText(label) + "</a>";
+
+        public static string EscText(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+                return string.Empty;
+            return text.Replace("&", "&amp;", StringComparison.Ordinal)
+                .Replace("'", "&#39;", StringComparison.Ordinal);
+        }
+
+        static void SendBlob(Player player, string message)
         {
             if (player.Session == null)
                 return;
-            GmCommandFeedback.Send(player.Session, player, GetStatsAomlBuilder.BuildLink(body, DiagAoml.Title(label)));
+            GmCommandFeedback.Send(player.Session, player, message);
         }
 
         static void Say(Player player, string text)
@@ -508,17 +899,6 @@ namespace ZoneEngine_New.Core.Pets
             if (player.Session == null)
                 return;
             GmCommandFeedback.Send(player.Session, player, text);
-        }
-
-        static string Esc(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return string.Empty;
-            return text.Replace("&", "&amp;", StringComparison.Ordinal)
-                .Replace("<", "&lt;", StringComparison.Ordinal)
-                .Replace(">", "&gt;", StringComparison.Ordinal)
-                .Replace("\"", string.Empty, StringComparison.Ordinal)
-                .Replace("'", string.Empty, StringComparison.Ordinal);
         }
     }
 }
