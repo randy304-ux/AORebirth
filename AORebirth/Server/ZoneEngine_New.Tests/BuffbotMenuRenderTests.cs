@@ -19,10 +19,10 @@ namespace ZoneEngine_New.Tests
             string inner =
                 "<font color=#D3BFFF>\n"
                 + "<font color=#DEDE42>Buffbot - Fleet buffs</font>\n"
-                + "<a href='chatcmd:///tell Buffbot Buffmacro'>Buffmacro</a> - creates a macro\n"
+                + "<a href='chatcmd:///say .buff Buffmacro'>Buffmacro</a>\n"
                 + "\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n"
                 + "    <img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN> <font color=#DEDE42>Generic</font>\n"
-                + "    <a href='chatcmd:///tell Buffbot cast 288774'>Composite Attribute Boost</a>"
+                + "    <a href='chatcmd:///say .buff cast 288774'>Composite Attribute Boost</a>"
                 + " <font color=#F07171>[+12 Attributes]</font> <font color=#00BDBD>[NCU: 4]</font>\n";
 
             string message = BuffbotService.BuildOuter(inner);
@@ -31,7 +31,7 @@ namespace ZoneEngine_New.Tests
             Assert.IsFalse(message.Contains("&lt;", StringComparison.Ordinal));
             Assert.IsFalse(message.Contains("&#39;chatcmd", StringComparison.Ordinal));
             Assert.IsTrue(message.Contains("<font color=#DEDE42>Generic</font>", StringComparison.Ordinal));
-            Assert.IsTrue(message.Contains("chatcmd:///tell Buffbot cast 288774", StringComparison.Ordinal));
+            Assert.IsTrue(message.Contains("chatcmd:///say .buff cast 288774", StringComparison.Ordinal));
             Assert.IsTrue(message.Contains(">Buff Menu</a>", StringComparison.Ordinal));
 
             int first = message.IndexOf("text://", StringComparison.Ordinal);

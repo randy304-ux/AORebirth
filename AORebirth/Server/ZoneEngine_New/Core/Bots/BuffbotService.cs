@@ -243,9 +243,10 @@ namespace ZoneEngine_New.Core.Bots
             body.Append("<font color=").Append(ColorMuted).Append('>');
             body.Append("<font color=").Append(ColorHeader).Append('>')
                 .Append(EscText(botName)).Append("</font>\n");
-            body.Append(TellLink(botName, "Buffmacro", "Buffmacro")).Append('\n');
-            body.Append(TellLink(botName, "Rebuff", "Rebuff")).Append('\n');
-            body.Append(TellLink(botName, "Status", "Status")).Append('\n');
+            // Zone .buff commands — no ChatEngine /tell Buffbot target required.
+            body.Append(BuffCmdLink("Buffmacro", "Buffmacro")).Append('\n');
+            body.Append(BuffCmdLink("Rebuff", "Rebuff")).Append('\n');
+            body.Append(BuffCmdLink("Status", "Status")).Append('\n');
             return body.ToString();
         }
 
@@ -263,9 +264,7 @@ namespace ZoneEngine_New.Core.Bots
                 bool team = IsTeamBuff(offer.Name);
                 if (offer.Available)
                 {
-                    body.Append("<a href='chatcmd:///tell ")
-                        .Append(botName)
-                        .Append(" cast ")
+                    body.Append("<a href='chatcmd:///say .buff cast ")
                         .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture))
                         .Append("'>")
                         .Append(EscText(offer.Name))
@@ -298,8 +297,8 @@ namespace ZoneEngine_New.Core.Bots
             => name.IndexOf("(Team)", StringComparison.OrdinalIgnoreCase) >= 0
                || name.IndexOf("[Team]", StringComparison.OrdinalIgnoreCase) >= 0;
 
-        static string TellLink(string botName, string command, string label)
-            => "<a href='chatcmd:///tell " + botName + " " + command + "'>" + EscText(label) + "</a>";
+        static string BuffCmdLink(string command, string label)
+            => "<a href='chatcmd:///say .buff " + command + "'>" + EscText(label) + "</a>";
 
         void Cast(Player player, int nanoId, bool announceRefusal)
         {
@@ -397,8 +396,8 @@ namespace ZoneEngine_New.Core.Bots
             var parts = new List<string>(offers.Count);
             for (int i = 0; i < offers.Count; i++)
                 parts.Add(offers[i].NanoId.ToString(CultureInfo.InvariantCulture));
-            // Tell-based so the macro works the same as menu clicks.
-            return "/tell " + BotName + " cast " + string.Join(" ", parts);
+            // Same path as menu clicks: zone .buff cast (no Chat tell target needed).
+            return "/say .buff cast " + string.Join(" ", parts);
         }
 
         List<string> Status(Player player)
