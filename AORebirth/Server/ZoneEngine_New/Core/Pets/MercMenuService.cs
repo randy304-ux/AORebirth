@@ -15,11 +15,11 @@ namespace ZoneEngine_New.Core.Pets
     using CharacterStat = SmokeLounge.AOtomation.Messaging.GameData.CharacterStat;
 
     /// <summary>
-    /// Live-style merc windows: one outer <c>text://</c> blob per tell (href with double quotes, raw
-    /// unescaped tags, single-quoted inner attributes - live Async convention). Merc names and Macros
-    /// embed one nested <c>text://</c> page (href with single quotes, still raw tags). Detail actions
-    /// stay <c>chatcmd</c>. No HTML entity encoding - the AO client does not decode &lt;/&#39; in
-    /// nested blobs. ChatText sizes its string with Int16 - stay under <see cref="MessageMax"/>.
+    /// Live-style merc windows: tell wrapper and nested merc/Macros pages all use
+    /// <c>href="text://..."</c> (double quotes) with raw tags; attributes inside a page use single
+    /// quotes only (<c>href='chatcmd://...'</c>, unquoted colors). Nested page bodies must contain
+    /// no raw double quotes. Detail actions stay <c>chatcmd</c>. No HTML entity encoding.
+    /// ChatText sizes its string with Int16 - stay under <see cref="MessageMax"/>.
     /// </summary>
     public sealed class MercMenuService
     {
@@ -1225,17 +1225,17 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
-        /// Nested <c>text://</c> page inside the outer tell blob. Raw tags (no entity encoding);
-        /// single-quoted href so it sits inside the outer double-quoted <c>text://</c>.
-        /// Inner page must use only single-quoted attributes and must not contain raw double quotes.
+        /// Nested <c>text://</c> page (merc detail / Macros). Same quoting as a live Async outer page:
+        /// <c>href="text://..."</c> with double quotes; body is raw tags with only single-quoted
+        /// attributes (chatcmd, etc.) and no raw double quotes - otherwise the href ends early.
         /// </summary>
         public static string NestedLink(string body, string label)
         {
             ArgumentNullException.ThrowIfNull(body);
             ArgumentNullException.ThrowIfNull(label);
-            // Strip any double quotes that would break the outer href="text://...".
+            // Inner page must not contain " - that would terminate href="text://...".
             string safe = body.Replace("\"", string.Empty, StringComparison.Ordinal);
-            return "<a href='text://" + safe + "'>" + EscText(label) + "</a>";
+            return "<a href=\"text://" + safe + "\">" + EscText(label) + "</a>";
         }
 
         static int EstimateWrappedLength(int innerLength) => innerLength + 48;
