@@ -1,10 +1,8 @@
 # Current Task
 
-Deploy Randy-approved merc nested-text:// fix (raw NestedLink + nested filters).
+Deployed `9d505595` (Randy approved). Merc nested text:// raw AOML + nested filters.
 
-Encoding rule: outer `href="text://"`; nested `href='text://'` with **raw** AOML
-(no `&lt;` escape); nested bodies use unquoted attrs / `href=chatcmd://...`.
-Sources: Nadybot/Tyrbot makeBlob; Athena/TSW scripting FAQ nested popups; InfoGuide.
+Live: zone=533104 chat=529332 login=369336
+Backup: `I:\AO\backups\cellao_codex_clean-20261104-0240-merc-buffbot-icc.sql`
 
-Procedure: side-build + MercMenuCheck → local Mike commit → online=0 → DB backup →
-shutdown-file stop → schtasks start → verify :7501/:7012/:7500. No push/PR.
+Await Randy live check of nested merc windows / filters / cast.

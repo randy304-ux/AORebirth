@@ -21,16 +21,14 @@ namespace ZoneEngine_New.Core.Pets
     /// <summary>
     /// Live-style merc windows via <see cref="SendBlob"/> / <see cref="BuildOuter"/>.
     /// <para>
-    /// AOML quote rule (outer vs nested text://) — sources: Nadybot/Tyrbot <c>makeBlob</c>
-    /// (<c>href="text://"</c>), Athena/TSW scripting FAQ nested popups (outer double / inner
-    /// single with raw tags), and this repo's <c>InfoGuide</c> appendix→topic pattern.
-    /// Do not HTML-escape tags inside nested bodies (<c>&amp;lt;</c> shows as raw code on the
-    /// AO client — live fail on d35eaec6). Nested body must contain no raw <c>'</c> or <c>"</c>;
-    /// use unquoted attrs (<c>font color=#DEDE42</c>, <c>href=chatcmd://...</c>).
+    /// AOML quote rule — outer <c>href="text://"</c> (Nadybot/Tyrbot makeBlob); nested
+    /// <c>href='text://'</c> with raw tags (TSW FAQ; InfoGuide). Do not escape tags
+    /// (<c>&amp;lt;</c> shows as code — d35eaec6). Nested bodies: no raw quotes.
+    /// Action links inside nested pages use <see cref="SayLink"/> =
+    /// <c>href=&amp;#39;chatcmd://...&amp;#39;</c> (InfoGuide embedding of Nadybot/Tyrbot
+    /// makeChatcmd single-quoted form). Nested-in-nested merc pages from filters use
+    /// <see cref="NestedLinkDeep"/>. See <c>.merc linktest</c> for A–E live variants.
     /// </para>
-    /// Detail/Macros/hire/filter pages: nested <c>href='text://...'</c> + raw AOML.
-    /// Cast/summon/dismiss/preset: unquoted <c>chatcmd:///say .merc ...</c>. Stay under
-    /// <see cref="MessageMax"/>.
     /// </summary>
     public sealed class MercMenuService
     {
@@ -207,6 +205,12 @@ namespace ZoneEngine_New.Core.Pets
                 return;
             }
 
+            if (verb.Equals("linktest", StringComparison.OrdinalIgnoreCase))
+            {
+                OpenLinkTest(player);
+                return;
+            }
+
             if (verb.Equals("buffs", StringComparison.OrdinalIgnoreCase))
             {
                 MercDefinition? target = args.Length > 1
@@ -358,6 +362,16 @@ namespace ZoneEngine_New.Core.Pets
             SendBlob(player, BuildOuter(BuildMacrosInner(player), "Merc macros"));
         }
 
+        /// <summary>
+        /// Opens one outer window with a nested page of labelled chatcmd / nested-text variants
+        /// for the same harmless action (<c>.merc menu</c>). Randy compares which render as links.
+        /// </summary>
+        public void OpenLinkTest(Player player)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            SendBlob(player, BuildOuter(BuildLinkTestOuterInner(), "Merc linktest"));
+        }
+
         /// <summary>Test/helper: main menu tell payloads for this player and filter.</summary>
         public IReadOnlyList<string> BuildMainMessages(Player player, string filterKey)
         {
@@ -423,9 +437,13 @@ namespace ZoneEngine_New.Core.Pets
                         "Macros"),
                     BuildFilterLinksSample(filter));
 
-            /// <summary>Sample filter NestedLinks (trimmed name-list bodies, no further nest).</summary>
+            /// <summary>Sample filter NestedLinks with NestedLinkDeep merc names.</summary>
             public static string BuildFilterLinksSample(string activeFilter)
             {
+                string sampleDetail =
+                    "<font color=" + ColorMuted + ">\n"
+                    + "<font color=" + ColorHeader + ">Sample Merc - Basic</font>\n"
+                    + SayLink("menu", "Back to Mercs") + "\n";
                 var links = new StringBuilder();
                 foreach (string key in FilterKeys)
                 {
@@ -440,14 +458,18 @@ namespace ZoneEngine_New.Core.Pets
                         links.Append(NestedLink(
                             "<font color=" + ColorMuted + ">\n"
                             + "<font color=" + ColorHeader + ">Filter: " + EscText(key) + "</font>\n"
-                            + "Matching names (open from main Mercs list).\n"
-                            + "- Sample Merc\n",
+                            + NestedLinkDeep(sampleDetail, "Sample Merc") + " (Basic)\n",
                             key));
                     }
                 }
 
                 return links.ToString();
             }
+
+            public static string LinkTestSample() => BuildLinkTestOuterInner();
+
+            public static string NestedLinkDeep(string body, string label)
+                => MercMenuService.NestedLinkDeep(body, label);
 
             public static string DetailInnerSample(
                 string shown,
@@ -1042,7 +1064,7 @@ namespace ZoneEngine_New.Core.Pets
             body.Append("<font color=").Append(ColorMuted).Append(">\n");
             body.Append("<font color=").Append(ColorHeader).Append(">Filter: ")
                 .Append(EscText(filterKey)).Append("</font>\n");
-            body.Append("Matching names. Use the window Back button, then click a name on Mercs.\n");
+            body.Append("Click a name (nested-in-nested detail). Window Back returns here.\n");
 
             int listed = 0;
             foreach (Mercs.Kind kind in Mercs.Kinds)
@@ -1055,8 +1077,9 @@ namespace ZoneEngine_New.Core.Pets
                 Mercs.Tier tier = Mercs.GetTier(player, kind);
                 if (!PassesHiredFilter(tier, here, filterKey))
                     continue;
-                body.Append("- ").Append(EscText(kind.Title)).Append(" (hire, ")
-                    .Append(EscText(Mercs.TierName(tier))).Append(")\n");
+                body.Append(NestedLinkDeep(BuildHireDetailInner(player, kind, tier, here), kind.Title));
+                body.Append(" <font color=").Append(ColorMuted).Append(">(hire, ")
+                    .Append(EscText(Mercs.TierName(tier))).Append(")</font>\n");
                 listed++;
             }
 
@@ -1065,9 +1088,11 @@ namespace ZoneEngine_New.Core.Pets
                 if (!PassesAccess(player, def) || !PassesFilter(player, def, filterKey))
                     continue;
                 string shown = _unlocks.DisplayNameFor(player, def);
-                body.Append("- ").Append(EscText(shown))
-                    .Append(" (").Append(EscText(ContentTierLabel(def)))
-                    .Append(" L").Append(def.Level.ToString(CultureInfo.InvariantCulture)).Append(")\n");
+                body.Append(NestedLinkDeep(BuildDetailInner(player, def), shown));
+                body.Append(" <font color=").Append(ColorMuted).Append(">(")
+                    .Append(EscText(ContentTierLabel(def)))
+                    .Append(" L").Append(def.Level.ToString(CultureInfo.InvariantCulture))
+                    .Append(")</font>\n");
                 listed++;
             }
 
@@ -1077,6 +1102,66 @@ namespace ZoneEngine_New.Core.Pets
                     .Append("No hired or unlocked mercs match this filter.</font>\n");
             }
 
+            return body.ToString();
+        }
+
+        /// <summary>
+        /// Outer linktest page: one NestedLink into the labelled A–E + nested-in-nested panel.
+        /// </summary>
+        static string BuildLinkTestOuterInner()
+        {
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append(">Merc linktest</font>\n");
+            body.Append("Opens one nested page of chatcmd / nested-text variants. All harmless (.merc menu).\n");
+            body.Append(NestedLink(BuildLinkTestNestedInner(), "Open variants")).Append('\n');
+            return body.ToString();
+        }
+
+        /// <summary>
+        /// Nested page body for <c>.merc linktest</c>. No raw quotes. Production uses variant C.
+        /// </summary>
+        static string BuildLinkTestNestedInner()
+        {
+            const string cmd = "chatcmd:///say .merc menu";
+            string deepBody =
+                "<font color=" + ColorMuted + ">\n"
+                + "<font color=" + ColorHeader + ">Nested-in-nested sample</font>\n"
+                + "If this opens formatted, filter→merc NestedLinkDeep works.\n"
+                + "<a href=&#39;" + cmd + "&#39;>C inside deep: menu</a>\n";
+
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append(">Link variants</font>\n");
+            body.Append("Click each. Report which ones are real links (not raw code).\n\n");
+
+            // A) entity-escaped double quotes, tags raw (Nadybot/Tyrbot blob: " → &quot; in content)
+            body.Append("A) href=&amp;quot;chatcmd...&amp;quot; (entity double): ");
+            body.Append("<a href=&quot;").Append(cmd).Append("&quot;>menu</a>\n");
+
+            // B) backslash-escaped quotes need a raw " which terminates outer href="text://".
+            // Cannot ship as a live link inside this nested body; label only.
+            body.Append("B) href=\\&quot;...\\&quot; (backslash): NOT LIVE — raw quote would ");
+            body.Append("break outer href=&quot;text://&quot;. Skipped.\n");
+
+            // C) InfoGuide embedding of Nadybot/Tyrbot makeChatcmd — PRODUCTION
+            body.Append("C) href=&amp;#39;chatcmd...&amp;#39; (entity single, PRODUCTION): ");
+            body.Append("<a href=&#39;").Append(cmd).Append("&#39;>menu</a>\n");
+
+            // D) unquoted with %20 for spaces
+            body.Append("D) href=chatcmd...%20... (percent-encoded spaces): ");
+            body.Append("<a href=chatcmd:///say%20.merc%20menu>menu</a>\n");
+
+            // E) Cite bot source: makeChatcmd emits href='chatcmd://...' (Nadybot Text.php:229,
+            // Tyrbot text.py make_chatcmd). Content apostrophes → &#39;. That raw form is for
+            // blobs inside href="text://". Inside our href='text://' nest, E adapts to C.
+            body.Append("E) Nadybot Text.php makeChatcmd / Tyrbot text.py make_chatcmd: ");
+            body.Append("href=&#39;chatcmd://...&#39; with cmd apostrophes as &amp;#39;. ");
+            body.Append("Raw form needs nest adaptation → same bytes as C. ");
+            body.Append("<a href=&#39;").Append(cmd).Append("&#39;>menu (E=C)</a>\n");
+
+            body.Append("\n<font color=").Append(ColorHeader).Append(">Nested-in-nested</font>\n");
+            body.Append(NestedLinkDeep(deepBody, "Open deep page")).Append('\n');
             return body.ToString();
         }
 
@@ -1404,32 +1489,49 @@ namespace ZoneEngine_New.Core.Pets
 
         /// <summary>
         /// Nested <c>text://</c> inside the outer tell. Outer is <c>href="text://"</c>; nested is
-        /// <c>href='text://'</c> with <strong>raw</strong> AOML (no <c>&amp;lt;</c> escape — client
-        /// shows escaped tags as code). Body must not contain raw quotes; use unquoted attrs and
-        /// <see cref="SayLink"/>. Sources: TSW/AO scripting FAQ nested popups; InfoGuide appendix.
+        /// <c>href='text://'</c> with <strong>raw</strong> AOML (no tag-entity escape). Body must
+        /// not contain raw quotes; use <see cref="SayLink"/> / <see cref="NestedLinkDeep"/>.
         /// </summary>
         public static string NestedLink(string body, string label)
         {
             ArgumentNullException.ThrowIfNull(body);
             ArgumentNullException.ThrowIfNull(label);
+            EnsureNoRawQuotes(body, "NestedLink");
+            return "<a href='text://" + body + "'>" + EscText(label) + "</a>";
+        }
+
+        /// <summary>
+        /// Second-level nested <c>text://</c> for use inside a <see cref="NestedLink"/> body
+        /// (filter → merc detail). Uses <c>href=&amp;#39;text://...&amp;#39;</c> so it does not
+        /// terminate the parent single-quoted nested href (InfoGuide quote-entity pattern).
+        /// </summary>
+        public static string NestedLinkDeep(string body, string label)
+        {
+            ArgumentNullException.ThrowIfNull(body);
+            ArgumentNullException.ThrowIfNull(label);
+            EnsureNoRawQuotes(body, "NestedLinkDeep");
+            return "<a href=&#39;text://" + body + "&#39;>" + EscText(label) + "</a>";
+        }
+
+        static void EnsureNoRawQuotes(string body, string where)
+        {
             if (body.IndexOf('\'') >= 0 || body.IndexOf('"') >= 0)
             {
                 throw new InvalidOperationException(
-                    "Nested text:// body contained a raw quote. Use unquoted attrs / SayLink.");
+                    where + " body contained a raw quote. Use &#39;/&quot; entities or SayLink.");
             }
-
-            return "<a href='text://" + body + "'>" + EscText(label) + "</a>";
         }
 
         static int EstimateWrappedLength(int innerLength) => innerLength + 48;
 
         /// <summary>
-        /// Unquoted chatcmd action link (cast/summon/dismiss/preset). Safe inside nested
-        /// <c>href='text://'</c> bodies because it introduces no <c>'</c>/<c>"</c>.
-        /// Do not use for opening windows — use <see cref="NestedLink"/>.
+        /// Production chatcmd action link (variant C). Nadybot/Tyrbot <c>makeChatcmd</c> emits
+        /// <c>href='chatcmd://...'</c>; InfoGuide embeds that inside nested pages as
+        /// <c>href=&amp;#39;chatcmd://...&amp;#39;</c> so raw quotes never appear in the nested
+        /// <c>text://</c> attribute. Do not use for opening windows — use <see cref="NestedLink"/>.
         /// </summary>
         static string SayLink(string command, string label)
-            => "<a href=chatcmd:///say .merc " + command + ">" + EscText(label) + "</a>";
+            => "<a href=&#39;chatcmd:///say .merc " + command + "&#39;>" + EscText(label) + "</a>";
 
         /// <summary>
         /// Cast a buffbot-listed nano from the player's summoned merc onto the player (or guest).

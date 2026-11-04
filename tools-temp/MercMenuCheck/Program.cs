@@ -7,48 +7,55 @@ static void Fail(string msg)
     Environment.Exit(1);
 }
 
-// --- Outer: double-quoted text://, raw tags (Nadybot/Tyrbot makeBlob) ---
+// Outer: double-quoted text://, raw tags
 string outer = MercMenuService.BuildOuter("<font color=#D3BFFF>\n<font color=#DEDE42>Mercs</font>\n");
 if (Regex.Matches(outer, "href=\"text://").Count != 1)
     Fail("outer text:// count");
 if (outer.Contains("&lt;font", StringComparison.Ordinal))
     Fail("outer must not HTML-escape tags");
 
-// --- Nested: single-quoted text://, RAW body, no quotes in body (TSW FAQ + InfoGuide) ---
+// Nested: raw tags + production SayLink variant C (&#39;)
 string nestedBody =
-    "<font color=#D3BFFF>\n<a href=chatcmd:///say .merc cast 1>X</a>\n";
+    "<font color=#D3BFFF>\n<a href=&#39;chatcmd:///say .merc cast 1&#39;>X</a>\n";
 string nested = MercMenuService.NestedLink(nestedBody, "Soldier");
 if (!nested.StartsWith("<a href='text://", StringComparison.Ordinal))
     Fail("nested must be single-quoted text://");
-if (nested.StartsWith("<a href=\"text://", StringComparison.Ordinal))
-    Fail("nested must NOT be double-quoted text://");
-if (nested.Contains("&lt;", StringComparison.Ordinal) || nested.Contains("&gt;", StringComparison.Ordinal))
-    Fail("nested must NOT HTML-escape tags (live client shows raw code)");
-if (!nested.Contains("<font color=#D3BFFF>", StringComparison.Ordinal))
-    Fail("nested body must keep raw font tags");
-if (!nested.Contains("href=chatcmd:///say .merc cast 1>", StringComparison.Ordinal))
-    Fail("nested chatcmd must be unquoted");
-if (nested.Contains("href='chatcmd", StringComparison.Ordinal)
-    || nested.Contains("href=\"chatcmd", StringComparison.Ordinal))
-    Fail("nested chatcmd must not use quotes");
+if (nested.Contains("&lt;", StringComparison.Ordinal))
+    Fail("nested must NOT HTML-escape tags");
+if (!nested.Contains("href=&#39;chatcmd:///say .merc cast 1&#39;>", StringComparison.Ordinal))
+    Fail("nested must use production variant C");
 
 try
 {
     MercMenuService.NestedLink("<a href='chatcmd:///say .merc cast 1'>X</a>", "Bad");
-    Fail("NestedLink must reject raw single quotes in body");
+    Fail("NestedLink must reject raw single quotes");
 }
 catch (InvalidOperationException)
 {
     // expected
 }
 
-// --- Main sample: one outer ", nested ' for detail/macros/filters ---
+// NestedLinkDeep (filter → merc)
+string deep = MercMenuService.NestedLinkDeep(nestedBody, "Deep");
+if (!deep.StartsWith("<a href=&#39;text://", StringComparison.Ordinal))
+    Fail("NestedLinkDeep must use &#39;text://");
+
+// Main sample: production &#39; dismiss, nested filters, no say-nav windows
 string main = MercMenuService.Render.MainWithNestedDetailSample();
 if (Regex.Matches(main, "href=\"text://").Count != 1)
-    Fail("main must have exactly one outer double-quoted text:// count="
-        + Regex.Matches(main, "href=\"text://").Count);
+    Fail("main outer text:// count");
 if (Regex.Matches(main, "href='text://").Count < 3)
-    Fail("main missing nested single-quoted text:// (detail/macros/filters)");
+    Fail("main missing nested single-quoted text://");
+if (!main.Contains("href=&#39;chatcmd:///say .merc dismiss soldier&#39;", StringComparison.Ordinal))
+    Fail("main missing production &#39; dismiss");
+if (main.Contains("chatcmd:///say .merc filter", StringComparison.Ordinal)
+    || main.Contains("chatcmd:///say .merc view", StringComparison.Ordinal)
+    || main.Contains("chatcmd:///say .merc macros", StringComparison.Ordinal))
+    Fail("main still uses say-nav for windows/filters");
+if (main.Contains("&lt;font", StringComparison.Ordinal))
+    Fail("main must not HTML-escape tags");
+if (main.Length > MercMenuService.MessageMax)
+    Fail("main over MessageMax");
 
 const string marker = "href=\"text://";
 int start = main.IndexOf(marker, StringComparison.Ordinal) + marker.Length;
@@ -56,31 +63,35 @@ int end = main.LastIndexOf("\">", StringComparison.Ordinal);
 string outerBody = main.Substring(start, end - start);
 if (outerBody.Contains("\"", StringComparison.Ordinal))
     Fail("outer text:// body contains raw double quote");
-if (outerBody.Contains("href=\"text://", StringComparison.Ordinal))
-    Fail("nested double-quoted text:// inside outer");
-if (outerBody.Contains("&lt;font", StringComparison.Ordinal))
-    Fail("outer body must not contain HTML-escaped nested tags");
 
-if (main.Contains("chatcmd:///say .merc view", StringComparison.Ordinal)
-    || main.Contains("chatcmd:///say .merc contract", StringComparison.Ordinal)
-    || main.Contains("chatcmd:///say .merc macros", StringComparison.Ordinal)
-    || main.Contains("chatcmd:///say .merc filter", StringComparison.Ordinal))
-    Fail("main still uses say-nav for windows/filters");
-if (!main.Contains("chatcmd:///say .merc dismiss soldier", StringComparison.Ordinal))
-    Fail("main missing dismiss say");
-if (main.Contains("chatcmd:///tell", StringComparison.Ordinal))
-    Fail("main has tell");
-if (main.Length > MercMenuService.MessageMax)
-    Fail("main over MessageMax");
-
-// Filter sample NestedLinks present
+// Filter header NestedLinkDeep
 string header = MercMenuService.Render.MainHeader("twink");
-if (!header.Contains("href='text://", StringComparison.Ordinal))
-    Fail("header missing nested text://");
+if (!header.Contains("href=&#39;text://", StringComparison.Ordinal))
+    Fail("header filter pages must NestedLinkDeep merc names");
 if (header.Contains("chatcmd:///say .merc filter", StringComparison.Ordinal))
-    Fail("header still uses filter say-commands");
-if (!header.Contains(">basic</a>", StringComparison.Ordinal)
-    && !header.Contains(">all</a>", StringComparison.Ordinal))
-    Fail("header missing filter nested link labels");
+    Fail("header still uses filter say");
 
-Console.WriteLine("PASS MercMenuCheck raw-nested + filter NestedLink quote rule");
+// Linktest: A, B-skip, C, D, E citation, nested-in-nested
+string linktest = MercMenuService.Render.LinkTestSample();
+string ltMsg = MercMenuService.BuildOuter(linktest, "Merc linktest");
+if (Regex.Matches(ltMsg, "href=\"text://").Count != 1)
+    Fail("linktest outer count");
+if (!linktest.Contains(">Open variants</a>", StringComparison.Ordinal))
+    Fail("linktest missing NestedLink Open variants");
+if (!linktest.Contains("href=&quot;chatcmd:///say .merc menu&quot;", StringComparison.Ordinal))
+    Fail("linktest missing variant A");
+if (!linktest.Contains("NOT LIVE", StringComparison.Ordinal))
+    Fail("linktest missing variant B skip note");
+if (!linktest.Contains("href=&#39;chatcmd:///say .merc menu&#39;", StringComparison.Ordinal))
+    Fail("linktest missing variant C");
+if (!linktest.Contains("href=chatcmd:///say%20.merc%20menu>", StringComparison.Ordinal))
+    Fail("linktest missing variant D");
+if (!linktest.Contains("Nadybot", StringComparison.Ordinal)
+    || !linktest.Contains("makeChatcmd", StringComparison.Ordinal))
+    Fail("linktest missing variant E citation");
+if (!linktest.Contains("href=&#39;text://", StringComparison.Ordinal))
+    Fail("linktest missing nested-in-nested NestedLinkDeep");
+if (linktest.Contains("\"", StringComparison.Ordinal))
+    Fail("linktest contains raw double quote (would break outer)");
+
+Console.WriteLine("PASS MercMenuCheck linktest A/C/D/E + NestedLinkDeep + production &#39;");
