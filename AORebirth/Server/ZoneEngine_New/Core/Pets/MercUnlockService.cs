@@ -14,6 +14,8 @@ namespace ZoneEngine_New.Core.Pets
     using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Nanos;
 
+    using CharacterStat = SmokeLounge.AOtomation.Messaging.GameData.CharacterStat;
+
     /// <summary>
     /// Per-character dungeon merc unlock state and summon gate. Reuses <see cref="PetService.HireMerc"/> /
     /// <see cref="PetService.DismissMerc"/>; does not replace profession contracts.
@@ -297,13 +299,13 @@ namespace ZoneEngine_New.Core.Pets
 
             if (string.Equals(def.Kind.Key, "trader", StringComparison.OrdinalIgnoreCase))
             {
-                ApplyTraderModeNanos(npc, def, GetTraderMode(owner));
+                ApplyTraderModeNanos(npc, def, GetTraderMode(owner), ProfessionNanoLevel(owner, def.Kind));
                 return;
             }
 
             if (string.Equals(def.Kind.Key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
             {
-                ApplyMpModeNanos(npc, def, GetMpMode(owner));
+                ApplyMpModeNanos(npc, ProfessionNanoLevel(owner, def.Kind), GetMpMode(owner));
             }
         }
 
@@ -345,16 +347,51 @@ namespace ZoneEngine_New.Core.Pets
 
         public NpcCharacter? FindSummonedNpc(Player player, MercDefinition def)
         {
+            ArgumentNullException.ThrowIfNull(def);
+            return FindProfessionNpc(player, def.Kind);
+        }
+
+        /// <summary>
+        /// Live pet for a profession: hired contract (MR** / ContractsStat) or dungeon unlock,
+        /// whichever is currently summoned for that kind hash.
+        /// </summary>
+        public NpcCharacter? FindProfessionNpc(Player player, Mercs.Kind kind)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            ArgumentNullException.ThrowIfNull(kind);
             foreach (NpcCharacter pet in player.OwnedPets.All)
             {
                 if (pet.Pet == null || pet.IsDead)
                     continue;
-                if (!string.Equals(pet.Pet.Hash, def.Kind.Hash, StringComparison.OrdinalIgnoreCase))
+                if (!string.Equals(pet.Pet.Hash, kind.Hash, StringComparison.OrdinalIgnoreCase))
                     continue;
                 return pet;
             }
 
             return null;
+        }
+
+        /// <summary>Nano band level for a profession merc: hire uses tier power level; dungeon uses roster level.</summary>
+        public int ProfessionNanoLevel(Player player, Mercs.Kind kind)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            ArgumentNullException.ThrowIfNull(kind);
+            NpcCharacter? npc = FindProfessionNpc(player, kind);
+            if (npc != null)
+            {
+                int body = Math.Max(1, npc.Stats.GetOrOne(CharacterStat.Level));
+                if (PetService.HasContract(player, kind))
+                    return Mercs.PowerLevel(Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level)), Mercs.GetTier(player, kind));
+                return body;
+            }
+
+            MercDefinition? dungeon = FindSummonedDefinition(player, kind)
+                ?? _roster.All.FirstOrDefault(d => d.Kind.Key == kind.Key);
+            if (dungeon != null)
+                return dungeon.Level;
+            if (PetService.HasContract(player, kind))
+                return Mercs.PowerLevel(Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level)), Mercs.GetTier(player, kind));
+            return Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level));
         }
 
         public string DisplayNameFor(Player player, MercDefinition def)
@@ -413,16 +450,24 @@ namespace ZoneEngine_New.Core.Pets
             SaveSetting(player.Identity.Instance, NtModeSettingKey, mode);
             _ntModeCache[player.Identity.Instance] = mode;
 
-            MercDefinition? nt = _roster.Find("nt_sanctum");
-            if (nt != null && IsSummoned(player, nt))
+            Mercs.Kind? ntKind = Mercs.Find("nanotechnician");
+            NpcCharacter? npc = ntKind != null ? FindProfessionNpc(player, ntKind) : null;
+            if (npc != null && ntKind != null)
             {
-                NpcCharacter? npc = FindSummonedNpc(player, nt);
-                if (npc != null)
-                {
-                    // Keep non-nukes from the tier list; FilterNtNukes rebuilds AOE/ST from items.dat.
-                    npc.UploadedNanoIds.Clear();
-                    npc.UploadedNanoIds.AddRange(Mercs.TierNanosFor(nt.Kind, Mercs.Tier.Basic));
+                MercDefinition? nt = FindSummonedDefinition(player, ntKind)
+                    ?? _roster.All.FirstOrDefault(d => d.Kind.Key == ntKind.Key);
+                // Keep non-nukes from the tier list; FilterNtNukes rebuilds AOE/ST from items.dat.
+                npc.UploadedNanoIds.Clear();
+                npc.UploadedNanoIds.AddRange(Mercs.TierNanosFor(ntKind, Mercs.GetTier(player, ntKind)));
+                if (nt != null)
                     ConfigureSummonedMerc(player, npc, nt);
+                else
+                {
+                    _nanos.FilterNtNukes(
+                        npc.UploadedNanoIds,
+                        aoeMode: mode == NtModeAoe,
+                        level: ProfessionNanoLevel(player, ntKind),
+                        skillSource: npc);
                 }
             }
 
@@ -457,140 +502,92 @@ namespace ZoneEngine_New.Core.Pets
             return mode;
         }
 
+        /// <summary>Persist MP composite/singles preference without casting anything.</summary>
+        public void SetMpModeOnly(Player player, string modeText)
+        {
+            ArgumentNullException.ThrowIfNull(player);
+            string mode = modeText.Trim().Equals(MpModeSingles, StringComparison.OrdinalIgnoreCase)
+                ? MpModeSingles
+                : MpModeComposite;
+            SaveSetting(player.Identity.Instance, MpModeSettingKey, mode);
+            _mpModeCache[player.Identity.Instance] = mode;
+
+            Mercs.Kind? kind = Mercs.Find("metaphysicist");
+            NpcCharacter? npc = kind != null ? FindProfessionNpc(player, kind) : null;
+            MercDefinition? mp = kind != null
+                ? FindSummonedDefinition(player, kind) ?? _roster.All.FirstOrDefault(d => d.Kind.Key == kind.Key)
+                : null;
+            if (npc != null && kind != null)
+            {
+                ApplyMpModeNanos(npc, ProfessionNanoLevel(player, kind), mode);
+                if (mp != null)
+                    ApplySummonIdentity(npc, mp, player);
+            }
+        }
+
         /// <summary>
-        /// Persist trader wrangle mode, upload the chosen wrangle to a summoned Trader, and apply it to the owner.
+        /// Legacy entry: persists trader mode / uploads only. Casting goes through the merc menu pick-one list.
         /// </summary>
         public string RunTraderPreset(Player player, string modeText)
         {
             ArgumentNullException.ThrowIfNull(player);
             bool umbral = modeText.Trim().Equals(TraderModeUmbral, StringComparison.OrdinalIgnoreCase);
             string mode = umbral ? TraderModeUmbral : TraderModeWrangle;
-            MercDefinition? trader = _roster.All.FirstOrDefault(d => d.Kind.Key == "trader");
-            if (trader == null)
-                return "Trader roster entry missing.";
-
-            MercProfessionNanos.MercBuffOffer? offer = umbral
-                ? _nanos.BestUmbralWrangle(trader.Level)
-                : _nanos.BestSkillWrangle(trader.Level);
-
-            if (umbral && !_nanos.HasUmbralWrangleFamily())
-                return "Umbral Wrangler family not found in items.dat — cannot set umbral mode.";
-            if (offer == null)
-                return umbral
-                    ? "Umbral Wrangler family not found in items.dat."
-                    : "Skill Wrangler (single-target) family not found in items.dat.";
-            if (!offer.Value.Available)
-            {
-                return offer.Value.Name + " needs a higher level (requires "
-                    + offer.Value.RequiredLevel.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                    + "; trader merc is L"
-                    + trader.Level.ToString(System.Globalization.CultureInfo.InvariantCulture) + ").";
-            }
-
+            Mercs.Kind? kind = Mercs.Find("trader");
+            if (kind == null)
+                return "Trader profession missing.";
             SaveSetting(player.Identity.Instance, TraderModeSettingKey, mode);
             _traderModeCache[player.Identity.Instance] = mode;
 
-            NpcCharacter? npc = IsSummoned(player, trader) ? FindSummonedNpc(player, trader) : null;
-            if (npc != null)
+            MercDefinition? trader = FindSummonedDefinition(player, kind)
+                ?? _roster.All.FirstOrDefault(d => d.Kind.Key == kind.Key);
+            NpcCharacter? npc = FindProfessionNpc(player, kind);
+            int level = ProfessionNanoLevel(player, kind);
+            if (npc != null && trader != null)
             {
-                ApplyTraderModeNanos(npc, trader, mode);
+                ApplyTraderModeNanos(npc, trader, mode, level);
                 ApplySummonIdentity(npc, trader, player);
             }
 
-            NanoRuntime.TryApplyServiceBuff(player, offer.Value.NanoId, announceRefusal: true, out string detail);
-            return "Trader mode " + mode.ToUpperInvariant() + ": " + offer.Value.Name
-                + " [id " + offer.Value.NanoId.ToString(System.Globalization.CultureInfo.InvariantCulture) + "]. "
-                + detail;
+            return "Trader mode set to " + mode.ToUpperInvariant()
+                + ". Use .merc menu and pick one wrangle from the list to cast.";
         }
 
         /// <summary>
-        /// Persist MP composite/singles mode, upload those nanos to a summoned MP, and apply them to the owner.
+        /// Legacy entry: persists mode and uploads to the merc only. Does not cast a pile of nanos onto
+        /// the player - the merc menu opens a pick-one cast list instead.
         /// </summary>
         public string RunMpPreset(Player player, string modeText)
         {
             ArgumentNullException.ThrowIfNull(player);
             bool singles = modeText.Trim().Equals(MpModeSingles, StringComparison.OrdinalIgnoreCase);
             string mode = singles ? MpModeSingles : MpModeComposite;
-            MercDefinition? mp = _roster.All.FirstOrDefault(d => d.Kind.Key == "metaphysicist");
-            if (mp == null)
-                return "Meta-Physicist roster entry missing.";
-
-            IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers = singles
-                ? _nanos.MpSinglesFor(mp.Level)
-                : _nanos.MpCompositesFor(mp.Level);
-
-            if (offers.Count == 0)
-            {
-                return singles
-                    ? "No MP single nano families (Mocham's Gift / Infuse / Mastery / Teachings) found in items.dat."
-                    : "No MP composite nano families (Composite Attribute / Nano Expertise / Mochams / …) found in items.dat.";
-            }
-
-            var available = new List<MercProfessionNanos.MercBuffOffer>();
-            var blocked = new List<string>();
-            foreach (MercProfessionNanos.MercBuffOffer offer in offers)
-            {
-                if (offer.Available)
-                    available.Add(offer);
-                else
-                    blocked.Add(offer.Name + " needs L"
-                        + offer.RequiredLevel.ToString(System.Globalization.CultureInfo.InvariantCulture));
-            }
-
-            if (available.Count == 0)
-            {
-                return "MP " + mode + " mode: none of the "
-                    + offers.Count.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                    + " family ranks are usable at merc L"
-                    + mp.Level.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                    + ". Examples: " + string.Join("; ", blocked.Take(3));
-            }
-
-            SaveSetting(player.Identity.Instance, MpModeSettingKey, mode);
-            _mpModeCache[player.Identity.Instance] = mode;
-
-            NpcCharacter? npc = IsSummoned(player, mp) ? FindSummonedNpc(player, mp) : null;
-            if (npc != null)
-            {
-                ApplyMpModeNanos(npc, mp, mode);
-                ApplySummonIdentity(npc, mp, player);
-            }
-
-            int applied = 0;
-            foreach (MercProfessionNanos.MercBuffOffer offer in available)
-            {
-                if (NanoRuntime.TryApplyServiceBuff(player, offer.NanoId, announceRefusal: false, out _))
-                    applied++;
-            }
-
-            return "MP mode " + mode.ToUpperInvariant() + ": applied "
-                + applied.ToString(System.Globalization.CultureInfo.InvariantCulture) + "/"
-                + available.Count.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                + " nanos (" + string.Join(", ", available.Select(o => o.Name)) + ")"
-                + (blocked.Count > 0
-                    ? ". Skipped (level): " + string.Join("; ", blocked)
-                    : ".");
+            SetMpModeOnly(player, mode);
+            return "MP mode set to " + mode.ToUpperInvariant()
+                + ". Use .merc menu and pick one nano from the " + (singles ? "singles" : "composites")
+                + " list to cast.";
         }
 
-        void ApplyTraderModeNanos(NpcCharacter npc, MercDefinition def, string mode)
+        void ApplyTraderModeNanos(NpcCharacter npc, MercDefinition def, string mode, int level)
         {
+            _ = def;
             StripUploadedByName(npc, MercProfessionNanos.IsTraderWrangleName);
             bool umbral = mode == TraderModeUmbral;
             MercProfessionNanos.MercBuffOffer? offer = umbral
-                ? _nanos.BestUmbralWrangle(def.Level, npc)
-                : _nanos.BestSkillWrangle(def.Level, npc);
+                ? _nanos.BestUmbralWrangle(level, npc)
+                : _nanos.BestSkillWrangle(level, npc);
             if (offer == null || !offer.Value.Available)
                 return;
             if (!npc.UploadedNanoIds.Contains(offer.Value.NanoId))
                 npc.UploadedNanoIds.Add(offer.Value.NanoId);
         }
 
-        void ApplyMpModeNanos(NpcCharacter npc, MercDefinition def, string mode)
+        void ApplyMpModeNanos(NpcCharacter npc, int level, string mode)
         {
             StripUploadedByName(npc, MercProfessionNanos.IsMpPresetName);
             IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers = mode == MpModeSingles
-                ? _nanos.MpSinglesFor(def.Level, npc)
-                : _nanos.MpCompositesFor(def.Level, npc);
+                ? _nanos.MpSinglesFor(level, npc)
+                : _nanos.MpCompositesFor(level, npc);
             foreach (MercProfessionNanos.MercBuffOffer offer in offers)
             {
                 if (!offer.Available)
@@ -612,21 +609,19 @@ namespace ZoneEngine_New.Core.Pets
             }
         }
 
-        /// <summary>Runs a Keeper aura on the summoned Keeper (one per NanoStrain slot).</summary>
+        /// <summary>Runs a Keeper aura on the summoned Keeper (hire contract or dungeon unlock).</summary>
         public string RunKeeperAura(Player player, string auraType)
         {
             ArgumentNullException.ThrowIfNull(player);
-            MercDefinition? keeper = _roster.All.FirstOrDefault(d => d.Kind.Key == "keeper");
-            if (keeper == null)
-                return "Keeper roster entry missing.";
-            if (!IsSummoned(player, keeper))
-                return "Summon your Keeper first (.merc summon " + keeper.Id + ").";
-
-            NpcCharacter? npc = FindSummonedNpc(player, keeper);
+            Mercs.Kind? kind = Mercs.Find("keeper");
+            if (kind == null)
+                return "Keeper profession missing.";
+            NpcCharacter? npc = FindProfessionNpc(player, kind);
             if (npc == null)
-                return "Keeper pet not found.";
+                return "Summon or hire your Keeper first (.merc summon / .merc hire keeper).";
 
-            MercProfessionNanos.KeeperAuraOffer? offer = _nanos.BestKeeperAura(auraType, keeper.Level, npc);
+            int level = ProfessionNanoLevel(player, kind);
+            MercProfessionNanos.KeeperAuraOffer? offer = _nanos.BestKeeperAura(auraType, level, npc);
             if (offer == null)
                 return "Unknown Keeper aura type. Try: " + string.Join(", ", _nanos.KeeperAuraTypes());
             if (!offer.Value.Available)

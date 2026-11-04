@@ -28,6 +28,7 @@ namespace ZoneEngine_New.Core.Pets
         Dictionary<int, List<NanoRank>>? _nukesByProfession;
         List<KeeperAuraRank>? _keeperAuras;
         List<NanoRank>? _stWrangles;
+        List<NanoRank>? _teamWrangles;
         List<NanoRank>? _umbralWrangles;
         Dictionary<string, List<NanoRank>>? _mpCompositeLines;
         Dictionary<string, List<NanoRank>>? _mpSingleLines;
@@ -183,6 +184,13 @@ namespace ZoneEngine_New.Core.Pets
             return BestFromLine(_stWrangles, (int)Profession.Trader, level, skillSource);
         }
 
+        /// <summary>Highest Team Skill Wrangler the merc level allows.</summary>
+        public MercBuffOffer? BestTeamSkillWrangle(int level, Character? skillSource = null)
+        {
+            EnsureIndex();
+            return BestFromLine(_teamWrangles, (int)Profession.Trader, level, skillSource);
+        }
+
         /// <summary>Highest Umbral Wrangler the merc level allows, or null if the family is missing.</summary>
         public MercBuffOffer? BestUmbralWrangle(int level, Character? skillSource = null)
         {
@@ -190,6 +198,22 @@ namespace ZoneEngine_New.Core.Pets
             if (_umbralWrangles == null || _umbralWrangles.Count == 0)
                 return null;
             return BestFromLine(_umbralWrangles, (int)Profession.Trader, level, skillSource);
+        }
+
+        /// <summary>Skill / Team / Umbral wrangle lines (best rank each) for a pick-one cast list.</summary>
+        public IReadOnlyList<MercBuffOffer> TraderWrangleChoices(int level, Character? skillSource = null)
+        {
+            var list = new List<MercBuffOffer>(3);
+            MercBuffOffer? skill = BestSkillWrangle(level, skillSource);
+            if (skill != null)
+                list.Add(skill.Value);
+            MercBuffOffer? team = BestTeamSkillWrangle(level, skillSource);
+            if (team != null)
+                list.Add(team.Value);
+            MercBuffOffer? umbral = BestUmbralWrangle(level, skillSource);
+            if (umbral != null)
+                list.Add(umbral.Value);
+            return list;
         }
 
         public bool HasUmbralWrangleFamily()
@@ -440,6 +464,7 @@ namespace ZoneEngine_New.Core.Pets
             var nukesByProfession = new Dictionary<int, List<NanoRank>>();
             var keeperAuras = new List<KeeperAuraRank>();
             var stWrangles = new List<NanoRank>();
+            var teamWrangles = new List<NanoRank>();
             var umbralWrangles = new List<NanoRank>();
             var mpComposites = new Dictionary<string, List<NanoRank>>(StringComparer.OrdinalIgnoreCase);
             var mpSingles = new Dictionary<string, List<NanoRank>>(StringComparer.OrdinalIgnoreCase);
@@ -467,17 +492,19 @@ namespace ZoneEngine_New.Core.Pets
                 }
 
                 // Trader / MP preset families: index by exact items.dat name patterns (never invent ids).
-                if (TryClassifyTraderWrangle(name, out bool umbral))
+                if (TryClassifyTraderWrangle(name, out bool umbral, out bool team))
                 {
                     var rank = new NanoRank(
                         template.Id,
                         name,
-                        umbral ? "umbral" : "skill_wrangle",
+                        umbral ? "umbral" : team ? "team_wrangle" : "skill_wrangle",
                         spell.NanoStrain,
                         spell.StackingOrder,
                         template);
                     if (umbral)
                         umbralWrangles.Add(rank);
+                    else if (team)
+                        teamWrangles.Add(rank);
                     else
                         stWrangles.Add(rank);
                 }
@@ -540,17 +567,19 @@ namespace ZoneEngine_New.Core.Pets
             _nukesByProfession = nukesByProfession;
             _keeperAuras = keeperAuras;
             _stWrangles = stWrangles;
+            _teamWrangles = teamWrangles;
             _umbralWrangles = umbralWrangles;
             _mpCompositeLines = mpComposites;
             _mpSingleLines = mpSingles;
             _logger.Info(string.Format(
                 CultureInfo.InvariantCulture,
-                "MercProfessionNanos indexed templates={0} buffProfessions={1} nukeProfessions={2} keeperAuras={3} stWrangles={4} umbral={5} mpCompositeLines={6} mpSingleLines={7}",
+                "MercProfessionNanos indexed templates={0} buffProfessions={1} nukeProfessions={2} keeperAuras={3} stWrangles={4} teamWrangles={5} umbral={6} mpCompositeLines={7} mpSingleLines={8}",
                 scanned,
                 byProfession.Count,
                 nukesByProfession.Count,
                 keeperAuras.Count,
                 stWrangles.Count,
+                teamWrangles.Count,
                 umbralWrangles.Count,
                 mpComposites.Count,
                 mpSingles.Count));
@@ -586,10 +615,11 @@ namespace ZoneEngine_New.Core.Pets
                 || name.StartsWith("Programmed Photon Particle Emitter", StringComparison.OrdinalIgnoreCase)
                 || name.StartsWith("Nano Can", StringComparison.OrdinalIgnoreCase);
 
-        /// <summary>Single-target Skill Wrangler only (excludes Team Skill Wrangler).</summary>
-        static bool TryClassifyTraderWrangle(string name, out bool umbral)
+        /// <summary>Skill Wrangler, Team Skill Wrangler, or Umbral Wrangler.</summary>
+        static bool TryClassifyTraderWrangle(string name, out bool umbral, out bool team)
         {
             umbral = false;
+            team = false;
             if (name.StartsWith("Umbral Wrangler", StringComparison.OrdinalIgnoreCase))
             {
                 umbral = true;
@@ -597,7 +627,11 @@ namespace ZoneEngine_New.Core.Pets
             }
 
             if (name.StartsWith("Team Skill Wrangler", StringComparison.OrdinalIgnoreCase))
-                return false;
+            {
+                team = true;
+                return true;
+            }
+
             return name.StartsWith("Skill Wrangler", StringComparison.OrdinalIgnoreCase);
         }
 

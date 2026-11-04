@@ -15,10 +15,11 @@ namespace ZoneEngine_New.Core.Pets
     using CharacterStat = SmokeLounge.AOtomation.Messaging.GameData.CharacterStat;
 
     /// <summary>
-    /// Live-style merc windows: one outer <c>text://</c> blob per tell. Merc names embed nested
-    /// <c>text://</c> detail pages (Budabot-style one-level HTML escape / quote alternation) so the
-    /// client opens detail without a chat round-trip. Summon/dismiss/stance/buff and filter actions
-    /// stay <c>chatcmd</c>. ChatText sizes its string with Int16 - stay under <see cref="MessageMax"/>.
+    /// Live-style merc windows: one outer <c>text://</c> blob per tell (href with double quotes, raw
+    /// unescaped tags, single-quoted inner attributes - live Async convention). Merc names and Macros
+    /// embed one nested <c>text://</c> page (href with single quotes, still raw tags). Detail actions
+    /// stay <c>chatcmd</c>. No HTML entity encoding - the AO client does not decode &lt;/&#39; in
+    /// nested blobs. ChatText sizes its string with Int16 - stay under <see cref="MessageMax"/>.
     /// </summary>
     public sealed class MercMenuService
     {
@@ -328,7 +329,7 @@ namespace ZoneEngine_New.Core.Pets
                 sections.Add((kind.Title, body.ToString()));
             }
 
-            string header = BuildMainHeader(filter);
+            string header = BuildMainHeader(player, filter);
             if (sections.Count == 0)
             {
                 return
@@ -363,7 +364,14 @@ namespace ZoneEngine_New.Core.Pets
         /// <summary>Pure render helpers for unit tests (no live player / GameData).</summary>
         public static class Render
         {
-            public static string MainHeader(string filter) => BuildMainHeaderStatic(filter);
+            public static string MainHeader(string filter)
+                => BuildMainHeaderStatic(
+                    filter,
+                    NestedLink(
+                        "<font color=" + ColorMuted + ">\n"
+                        + "<font color=" + ColorHeader + ">Merc macros</font>\n"
+                        + "Preset links.\n",
+                        "Macros"));
 
             public static string NestedLink(string body, string label) => MercMenuService.NestedLink(body, label);
 
@@ -485,7 +493,12 @@ namespace ZoneEngine_New.Core.Pets
                     buffs: new List<(int, string, int)> { (2001, "Grid Armor", 3) });
 
                 var body = new StringBuilder();
-                body.Append(BuildMainHeaderStatic(FilterAll));
+                body.Append(BuildMainHeaderStatic(
+                    FilterAll,
+                    NestedLink(
+                        "<font color=" + ColorMuted + ">\n"
+                        + "<font color=" + ColorHeader + ">Merc macros</font>\n",
+                        "Macros")));
                 body.Append("\n    <img src=tdb://id:GFX_GUI_FRIENDLIST_SPLITTER>\n\n");
                 body.Append("    <img src=tdb://id:GFX_GUI_FRIENDLIST_STATUS_GREEN> ");
                 body.Append("<font color=").Append(ColorHeader).Append(">Hired contracts</font>\n");
@@ -832,10 +845,15 @@ namespace ZoneEngine_New.Core.Pets
                 else
                 {
                     body.Append("<font color=").Append(ColorMuted).Append('>')
-                        .Append(EscText(offer.Name))
-                        .Append(" - merc needs level ")
-                        .Append(offer.RequiredLevel.ToString(CultureInfo.InvariantCulture))
-                        .Append("</font>");
+                        .Append(EscText(offer.Name));
+                    // Only mention level when it is the actual gate (not skill/other unavailability).
+                    if (offer.RequiredLevel > level)
+                    {
+                        body.Append(" - merc needs level ")
+                            .Append(offer.RequiredLevel.ToString(CultureInfo.InvariantCulture));
+                    }
+
+                    body.Append("</font>");
                 }
 
                 body.Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
@@ -877,9 +895,10 @@ namespace ZoneEngine_New.Core.Pets
             return body.ToString();
         }
 
-        static string BuildMainHeader(string filter) => BuildMainHeaderStatic(filter);
+        string BuildMainHeader(Player player, string filter)
+            => BuildMainHeaderStatic(filter, NestedLink(BuildMacrosInner(player), "Macros"));
 
-        static string BuildMainHeaderStatic(string filter)
+        static string BuildMainHeaderStatic(string filter, string macrosLink)
         {
             var body = new StringBuilder();
             body.Append("<font color=").Append(ColorMuted).Append(">\n");
@@ -896,7 +915,7 @@ namespace ZoneEngine_New.Core.Pets
                     body.Append(TellLink("filter " + key, key));
             }
 
-            body.Append('\n').Append(TellLink("macros", "Macros")).Append('\n');
+            body.Append('\n').Append(macrosLink).Append('\n');
             return body.ToString();
         }
 
@@ -1033,27 +1052,24 @@ namespace ZoneEngine_New.Core.Pets
                 return;
             }
 
-            if (key.StartsWith("trader wrangle", StringComparison.Ordinal) || key == "trader wrangle")
+            if (key.StartsWith("trader wrangle", StringComparison.Ordinal) || key == "trader wrangle"
+                || key.StartsWith("trader umbral", StringComparison.Ordinal) || key == "trader umbral"
+                || key == "trader")
             {
-                Say(player, _unlocks.RunTraderPreset(player, MercUnlockService.TraderModeWrangle));
-                return;
-            }
-
-            if (key.StartsWith("trader umbral", StringComparison.Ordinal) || key == "trader umbral")
-            {
-                Say(player, _unlocks.RunTraderPreset(player, MercUnlockService.TraderModeUmbral));
+                // Pick-one list: never auto-cast a "best" or every wrangle.
+                OpenTraderWranglePicker(player);
                 return;
             }
 
             if (key.StartsWith("mp composite", StringComparison.Ordinal) || key == "mp composite")
             {
-                Say(player, _unlocks.RunMpPreset(player, MercUnlockService.MpModeComposite));
+                OpenMpOfferPicker(player, MercUnlockService.MpModeComposite);
                 return;
             }
 
             if (key.StartsWith("mp singles", StringComparison.Ordinal) || key == "mp singles")
             {
-                Say(player, _unlocks.RunMpPreset(player, MercUnlockService.MpModeSingles));
+                OpenMpOfferPicker(player, MercUnlockService.MpModeSingles);
                 return;
             }
 
@@ -1078,18 +1094,11 @@ namespace ZoneEngine_New.Core.Pets
 
         void OpenKeeperAuraPicker(Player player)
         {
-            MercDefinition? keeper = null;
-            foreach (MercDefinition def in _unlocks.Roster.All)
-            {
-                if (def.Kind.Key == "keeper")
-                {
-                    keeper = def;
-                    break;
-                }
-            }
-
-            int level = keeper?.Level ?? 149;
-            NpcCharacter? npc = keeper != null ? _unlocks.FindSummonedNpc(player, keeper) : null;
+            Mercs.Kind? kind = Mercs.Find("keeper");
+            NpcCharacter? npc = kind != null ? _unlocks.FindProfessionNpc(player, kind) : null;
+            int level = kind != null
+                ? _unlocks.ProfessionNanoLevel(player, kind)
+                : 149;
             var body = new StringBuilder();
             body.Append("<font color=").Append(ColorMuted).Append(">\n");
             body.Append("<font color=").Append(ColorHeader).Append(">Keeper auras</font>\n");
@@ -1103,11 +1112,17 @@ namespace ZoneEngine_New.Core.Pets
                         .Append(EscText(offer.Name + " L" + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture)))
                         .Append("</font>\n");
                 }
-                else
+                else if (offer.RequiredLevel > level)
                 {
                     body.Append("<font color=").Append(ColorMuted).Append('>')
                         .Append(EscText(offer.Type + ": " + offer.Name
                             + " (needs L" + offer.RequiredLevel.ToString(CultureInfo.InvariantCulture) + ")"))
+                        .Append("</font>\n");
+                }
+                else
+                {
+                    body.Append("<font color=").Append(ColorMuted).Append('>')
+                        .Append(EscText(offer.Type + ": " + offer.Name))
                         .Append("</font>\n");
                 }
             }
@@ -1116,31 +1131,111 @@ namespace ZoneEngine_New.Core.Pets
             SendBlob(player, BuildOuter(body.ToString(), "Keeper auras"));
         }
 
+        /// <summary>
+        /// Pick-one cast list for MP composite or singles families. Never casts every line at once.
+        /// Fresh outer tell (detail is already one nested level deep).
+        /// </summary>
+        void OpenMpOfferPicker(Player player, string modeText)
+        {
+            bool singles = modeText.Trim().Equals(MercUnlockService.MpModeSingles, StringComparison.OrdinalIgnoreCase);
+            string mode = singles ? MercUnlockService.MpModeSingles : MercUnlockService.MpModeComposite;
+            Mercs.Kind? kind = Mercs.Find("metaphysicist");
+            NpcCharacter? npc = kind != null ? _unlocks.FindProfessionNpc(player, kind) : null;
+            int level = kind != null ? _unlocks.ProfessionNanoLevel(player, kind) : Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level));
+            IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers = singles
+                ? _unlocks.Nanos.MpSinglesFor(level, npc)
+                : _unlocks.Nanos.MpCompositesFor(level, npc);
+
+            // Remember preferred mode for merc upload / name tag; casting is always one nano.
+            _unlocks.SetMpModeOnly(player, mode);
+
+            string title = singles ? "MP singles" : "MP composites";
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append('>').Append(title).Append("</font>\n");
+            body.Append("Click one nano to cast it. Each line is a separate family - pick what you want.\n");
+            AppendCastOfferList(body, offers, level);
+            body.Append('\n').Append(TellLink("menu", "Back")).Append('\n');
+            SendBlob(player, BuildOuter(body.ToString(), title));
+        }
+
+        /// <summary>Pick-one cast list for Skill / Team / Umbral wrangles.</summary>
+        void OpenTraderWranglePicker(Player player)
+        {
+            Mercs.Kind? kind = Mercs.Find("trader");
+            NpcCharacter? npc = kind != null ? _unlocks.FindProfessionNpc(player, kind) : null;
+            int level = kind != null ? _unlocks.ProfessionNanoLevel(player, kind) : Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level));
+            IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers = _unlocks.Nanos.TraderWrangleChoices(level, npc);
+
+            var body = new StringBuilder();
+            body.Append("<font color=").Append(ColorMuted).Append(">\n");
+            body.Append("<font color=").Append(ColorHeader).Append(">Trader wrangles</font>\n");
+            body.Append("Click one wrangle to cast it. Skill, Team, and Umbral are separate picks.\n");
+            AppendCastOfferList(body, offers, level);
+            body.Append('\n').Append(TellLink("menu", "Back")).Append('\n');
+            SendBlob(player, BuildOuter(body.ToString(), "Trader wrangles"));
+        }
+
+        void AppendCastOfferList(
+            StringBuilder body,
+            IReadOnlyList<MercProfessionNanos.MercBuffOffer> offers,
+            int level)
+        {
+            if (offers.Count == 0)
+            {
+                body.Append("<font color=").Append(ColorMuted).Append('>')
+                    .Append("No matching nanos in items.dat for this merc level.</font>\n");
+                return;
+            }
+
+            foreach (MercProfessionNanos.MercBuffOffer offer in offers)
+            {
+                if (offer.Available)
+                {
+                    body.Append("<a href='chatcmd:///tell ").Append(BotName).Append(" cast ")
+                        .Append(offer.NanoId.ToString(CultureInfo.InvariantCulture)).Append("'>")
+                        .Append(EscText(offer.Name)).Append("</a>");
+                }
+                else
+                {
+                    body.Append("<font color=").Append(ColorMuted).Append('>')
+                        .Append(EscText(offer.Name));
+                    if (offer.RequiredLevel > level)
+                    {
+                        body.Append(" - merc needs level ")
+                            .Append(offer.RequiredLevel.ToString(CultureInfo.InvariantCulture));
+                    }
+
+                    body.Append("</font>");
+                }
+
+                body.Append(" <font color=").Append(ColorNcu).Append(">[NCU: ")
+                    .Append(offer.Ncu.ToString(CultureInfo.InvariantCulture)).Append("]</font>\n");
+            }
+        }
+
         public static string BuildOuter(string inner, string label = "Merc Menu")
         {
             if (!inner.EndsWith("</font>\n", StringComparison.Ordinal)
                 && !inner.EndsWith("</font>", StringComparison.Ordinal))
                 inner += "</font>";
+            // Outer tell: double-quoted text://, raw tags (live Async). Inner attrs use single quotes.
             return "<font color='" + ColorMuted + "'><a href=\"text://" + inner + "\">"
                 + EscText(label) + "</a></font>";
         }
 
         /// <summary>
-        /// Nested <c>text://</c> link for embedding a detail page inside the outer tell blob.
-        /// Escapes one HTML level so the client unescapes once when opening the window
-        /// (Budabot / historical Buffbot NestedLink). Outer href uses double quotes; nested uses single.
+        /// Nested <c>text://</c> page inside the outer tell blob. Raw tags (no entity encoding);
+        /// single-quoted href so it sits inside the outer double-quoted <c>text://</c>.
+        /// Inner page must use only single-quoted attributes and must not contain raw double quotes.
         /// </summary>
         public static string NestedLink(string body, string label)
         {
             ArgumentNullException.ThrowIfNull(body);
             ArgumentNullException.ThrowIfNull(label);
-            string escaped = body
-                .Replace("&", "&amp;", StringComparison.Ordinal)
-                .Replace("'", "&#39;", StringComparison.Ordinal)
-                .Replace("\"", "&quot;", StringComparison.Ordinal)
-                .Replace("<", "&lt;", StringComparison.Ordinal)
-                .Replace(">", "&gt;", StringComparison.Ordinal);
-            return "<a href='text://" + escaped + "'>" + EscText(label) + "</a>";
+            // Strip any double quotes that would break the outer href="text://...".
+            string safe = body.Replace("\"", string.Empty, StringComparison.Ordinal);
+            return "<a href='text://" + safe + "'>" + EscText(label) + "</a>";
         }
 
         static int EstimateWrappedLength(int innerLength) => innerLength + 48;
@@ -1148,12 +1243,16 @@ namespace ZoneEngine_New.Core.Pets
         static string TellLink(string command, string label)
             => "<a href='chatcmd:///tell " + BotName + " " + command + "'>" + EscText(label) + "</a>";
 
+        /// <summary>
+        /// Plain text for AOML labels. No HTML entities (nested text:// shows them literally);
+        /// strip quotes so attribute delimiters stay intact.
+        /// </summary>
         public static string EscText(string text)
         {
             if (string.IsNullOrEmpty(text))
                 return string.Empty;
-            return text.Replace("&", "&amp;", StringComparison.Ordinal)
-                .Replace("'", "&#39;", StringComparison.Ordinal);
+            return text.Replace("\"", string.Empty, StringComparison.Ordinal)
+                .Replace("'", string.Empty, StringComparison.Ordinal);
         }
 
         /// <summary>True when every character is plain ASCII (0x00-0x7F).</summary>
