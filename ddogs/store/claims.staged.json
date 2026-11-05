@@ -1,4 +1,4 @@
-﻿{
+{
     "note":  "Dungeon Dogs Claim Center items. Each character can claim each item once. Add or remove entries; key must be unique and never reused. ql 0 = the item\u0027s own QL. Edit, save, done (no restart needed). Optional per entry: amount (stack size, default 1), unlocked (false = hidden and refused), unlockRule (later gate, not evaluated yet), livePrice/qty/vetDays (live reference only).",
     "items":  [
                   {
@@ -1452,6 +1452,104 @@
                       "unlocked":  true,
                       "unlockRule":  null,
                       "livePrice":  1750,
+                      "qty":  null,
+                      "vetDays":  null
+                  },
+                  {
+                      "key":  "store-293415",
+                      "name":  "Recall Beacon",
+                      "group":  "Item Store - Convenience",
+                      "lowId":  293415,
+                      "highId":  293415,
+                      "ql":  0,
+                      "amount":  1,
+                      "unlocked":  true,
+                      "unlockRule":  null,
+                      "livePrice":  0,
+                      "qty":  null,
+                      "vetDays":  null
+                  },
+                  {
+                      "key":  "store-268748",
+                      "name":  "Rubi-Ka Recall Beacon",
+                      "group":  "Item Store - Convenience",
+                      "lowId":  268748,
+                      "highId":  268748,
+                      "ql":  0,
+                      "amount":  1,
+                      "unlocked":  true,
+                      "unlockRule":  null,
+                      "livePrice":  0,
+                      "qty":  null,
+                      "vetDays":  null
+                  },
+                  {
+                      "key":  "store-259103",
+                      "name":  "Shadowlands Recall Beacon",
+                      "group":  "Item Store - Convenience",
+                      "lowId":  259103,
+                      "highId":  259103,
+                      "ql":  0,
+                      "amount":  1,
+                      "unlocked":  true,
+                      "unlockRule":  null,
+                      "livePrice":  0,
+                      "qty":  null,
+                      "vetDays":  null
+                  },
+                  {
+                      "key":  "store-301703",
+                      "name":  "Unicorn Recall Beacon",
+                      "group":  "Item Store - Convenience",
+                      "lowId":  301703,
+                      "highId":  301703,
+                      "ql":  0,
+                      "amount":  1,
+                      "unlocked":  true,
+                      "unlockRule":  null,
+                      "livePrice":  0,
+                      "qty":  null,
+                      "vetDays":  null
+                  },
+                  {
+                      "key":  "store-301675",
+                      "name":  "Freelancers Inc Recall Beacon",
+                      "group":  "Item Store - Convenience",
+                      "lowId":  301675,
+                      "highId":  301675,
+                      "ql":  0,
+                      "amount":  1,
+                      "unlocked":  true,
+                      "unlockRule":  null,
+                      "livePrice":  0,
+                      "qty":  null,
+                      "vetDays":  null
+                  },
+                  {
+                      "key":  "store-296465",
+                      "name":  "Insurance Claim Recall Beacon",
+                      "group":  "Item Store - Convenience",
+                      "lowId":  296465,
+                      "highId":  296465,
+                      "ql":  0,
+                      "amount":  1,
+                      "unlocked":  true,
+                      "unlockRule":  null,
+                      "livePrice":  0,
+                      "qty":  null,
+                      "vetDays":  null
+                  },
+                  {
+                      "key":  "store-293411",
+                      "name":  "Instant Grid Conversion Beacon",
+                      "group":  "Item Store - Convenience",
+                      "lowId":  293411,
+                      "highId":  293411,
+                      "ql":  0,
+                      "amount":  1,
+                      "unlocked":  true,
+                      "unlockRule":  null,
+                      "livePrice":  0,
                       "qty":  null,
                       "vetDays":  null
                   }
