@@ -48,6 +48,18 @@ foreach ($t in $plan.templates) {
     $feat = @($c.Features | Where-Object { $_ -and $_ -ne 'NoCombat' -and $_ -ne 'NoMove' -and $_ -ne 'Wander' })
     if ($t.wander) { $feat = @($feat) + 'Wander' }
     $c | Add-Member -Force NoteProperty Features @($feat | Sort-Object -Unique)
+    if ($b.textures) {
+      $tex = @($b.textures | ForEach-Object { [pscustomobject]@{ Id = [int]$_.Id; Place = [int]$_.Place } })
+      if ($tex.Count -gt 0) { $c | Add-Member -Force NoteProperty Textures $tex }
+    }
+    if ($b.meshes) {
+      $msh = @($b.meshes | ForEach-Object { [pscustomobject]@{ Id = [int]$_.Id; Position = [int]$_.Position; OverrideTextureId = [int]$_.OverrideTextureId; Layer = [int]$_.Layer } })
+      if ($msh.Count -gt 0) { $c | Add-Member -Force NoteProperty Meshes $msh }
+    }
+    if ($b.gloves -and -not $c.Equipment) {
+      $eq = @($b.gloves | ForEach-Object { ,[int[]]@([int]$_, [int]$_) })
+      if ($eq.Count -gt 0) { $c | Add-Member -Force NoteProperty Equipment $eq }
+    }
     $c
   }
   if ($t.wander) { $wanderT++ }

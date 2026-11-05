@@ -42,6 +42,18 @@ foreach ($t in $plan.templates) {
     if ($t.friendly) { $feat = @($feat) + 'NoCombat' }
     if ($t.wander) { $feat = @($feat) + 'Wander' } else { $feat = @($feat) + 'NoMove' }
     $c | Add-Member -Force NoteProperty Features @($feat | Sort-Object -Unique)
+    if ($b.textures) {
+      $tex = @($b.textures | ForEach-Object { [pscustomobject]@{ Id = [int]$_.Id; Place = [int]$_.Place } })
+      if ($tex.Count -gt 0) { $c | Add-Member -Force NoteProperty Textures $tex }
+    }
+    if ($b.meshes) {
+      $msh = @($b.meshes | ForEach-Object { [pscustomobject]@{ Id = [int]$_.Id; Position = [int]$_.Position; OverrideTextureId = [int]$_.OverrideTextureId; Layer = [int]$_.Layer } })
+      if ($msh.Count -gt 0) { $c | Add-Member -Force NoteProperty Meshes $msh }
+    }
+    if ($b.gloves -and -not $c.Equipment) {
+      $eq = @($b.gloves | ForEach-Object { ,[int[]]@([int]$_, [int]$_) })
+      if ($eq.Count -gt 0) { $c | Add-Member -Force NoteProperty Equipment $eq }
+    }
     $c
   }
   $ov[$t.hash] = [pscustomobject]@{ Templates = @($bands); ContentProvenance = [pscustomobject]@{ Guessed = $false; Source = $tag; Note = "live scrape cities ($($t.src))$(if($t.wander){'; Wander (seen roaming)'})" } }
