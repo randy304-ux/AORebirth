@@ -112,7 +112,13 @@ namespace ZoneEngine_New.Core.MessageHandlers
                     break;
 
                 case CharacterActionType.InterruptNanoCasting:
-                    NanoRuntime.InterruptCast(player);
+                    // ESC/cancel with no server PendingCast still needs an IN interrupt: immediate
+                    // lands onto this player can stick the client bar without BeginNanoCast.
+                    if (!NanoRuntime.InterruptCast(player))
+                    {
+                        int stuckNanoId = message.Parameter1 > 0 ? message.Parameter1 : message.Parameter2;
+                        NanoRuntime.ForceClearClientCastBar(player, stuckNanoId);
+                    }
                     break;
 
                 case CharacterActionType.RemoveFriendlyNano:

@@ -5,6 +5,7 @@ namespace ZoneEngine_New.Core.Commands
     using System.Text;
 
     using ZoneEngine_New.Core.Entities;
+    using ZoneEngine_New.Core.Nanos;
     using ZoneEngine_New.Core.Pets;
 
     using CharacterStat = SmokeLounge.AOtomation.Messaging.GameData.CharacterStat;
@@ -28,7 +29,7 @@ namespace ZoneEngine_New.Core.Commands
         public int RequiredGmLevel => 0;
 
         public string Usage =>
-            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc filter <...> | .merc view <name> | .merc contract <profession> | .merc macros | .merc cast <id> | .merc preset <...> | .merc hire <profession> [tier] | .merc call | .merc setstate <name> <locked|dungeon_only|unlocked>";
+            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc filter <...> | .merc view <name> | .merc contract <profession> | .merc macros | .merc cast <id> | .merc castclear | .merc preset <...> | .merc hire <profession> [tier] | .merc call | .merc setstate <name> <locked|dungeon_only|unlocked>";
 
         public string Topic => "mercs";
 
@@ -48,6 +49,12 @@ namespace ZoneEngine_New.Core.Commands
                 case "menu":
                 case "help":
                     _menu.OpenMenu(player);
+                    return;
+                case "castclear":
+                case "clearcast":
+                    // Unsticks a client cast bar left by merc immediate buffs (no server PendingCast).
+                    NanoRuntime.ForceClearClientCastBar(player);
+                    Say("Cast bar cleared.");
                     return;
                 case "filter":
                 case "view":

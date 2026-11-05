@@ -397,6 +397,18 @@ namespace ZoneEngine_New.Core.Nanos
         }
 
         /// <summary>
+        /// Clears a client cast bar even when the server has no <see cref="Character.PendingCast"/>.
+        /// Merc menu / cross-character <see cref="TryApplyImmediate"/> can open the recipient's bar
+        /// via CastNanoSpell(Identity=recipient) while FinishNanoCasting only names the source.
+        /// </summary>
+        public static void ForceClearClientCastBar(Character character, int nanoId = 0)
+        {
+            ArgumentNullException.ThrowIfNull(character);
+            character.CancelNanoCast();
+            AnnounceCastInterrupted(character, nanoId);
+        }
+
+        /// <summary>
         /// Lands a nano immediately: no cast bar, recharge, nano spend, or upload check.
         /// Buffs occupy NCU; instant nanos just run their OnUse effects.
         /// </summary>
@@ -455,6 +467,10 @@ namespace ZoneEngine_New.Core.Nanos
 
             AnnounceImmediateLand(source, target, spell.Id);
             AnnounceCastFinished(source, spell.Id);
+            // CastNanoSpell uses Identity=target; Finish about the source alone leaves a player
+            // recipient's cast bar stuck (merc menu buffs, .give buff on another character).
+            if (target is Player && !ReferenceEquals(source, target))
+                Announce(target, CastFinishedMessage(target, spell.Id));
 
             if (!spell.IsBuff)
             {
