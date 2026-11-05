@@ -259,7 +259,7 @@ namespace ZoneEngine_New
                     provider.GetRequiredService<IGameData>().RootPath);
                 var settings = ZoneEngine_New.Core.Configuration.GameplaySettings.Load(path);
                 provider.GetRequiredService<IZoneLogger>().Info(
-                    $"Gameplay config stuckCooldownSeconds={settings.StuckCooldownSeconds} stuckLocation=pf {settings.StuckLocation!.Playfield} ({settings.StuckLocation.X}, {settings.StuckLocation.Y}, {settings.StuckLocation.Z}) xpKillPercentPerLevelDifference={settings.Xp.KillPercentPerLevelDifference} from {path}");
+                    $"Gameplay config stuckCooldownSeconds={settings.StuckCooldownSeconds} stuckLocation=pf {settings.StuckLocation!.Playfield} ({settings.StuckLocation.X}, {settings.StuckLocation.Y}, {settings.StuckLocation.Z}) xpKillPercentPerLevelDifference={settings.Xp.KillPercentPerLevelDifference} mishrollEnabled={settings.Mishroll.Enabled} from {path}");
                 return settings;
             });
             services.AddSingleton<ZoneEngine_New.Core.Characters.StuckService>();
@@ -342,6 +342,8 @@ namespace ZoneEngine_New
             services.AddSingleton<ZoneEngine_New.Core.Pets.MercUnlockService>();
             services.AddSingleton<ZoneEngine_New.Core.Pets.MercMenuService>();
             services.AddSingleton<IGmCommand, MercCommand>();
+            services.AddSingleton<ZoneEngine_New.Core.Missions.MishrollService>();
+            services.AddSingleton<IGmCommand, MishrollCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Raids.InvasionService>();
             services.AddSingleton<ZoneEngine_New.Core.Battlestations.BattleStationService>();
             services.AddSingleton<ZoneEngine_New.Core.Events.HalloweenService>();
