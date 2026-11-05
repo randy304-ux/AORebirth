@@ -35,6 +35,9 @@ namespace ZoneEngine_New.Core.Configuration
         /// <summary>How district-spawned NPCs wander around their spawn point.</summary>
         public GameplayWander Wander { get; init; } = new();
 
+        /// <summary>Optional mishroll (preferred solo RK terminal reward) rules. Default off.</summary>
+        public GameplayMishroll Mishroll { get; init; } = new();
+
         public static string ResolvePath(string gameDataRoot)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(gameDataRoot);
@@ -90,6 +93,65 @@ namespace ZoneEngine_New.Core.Configuration
             if (!double.IsFinite(Wander.MinPauseSeconds) || !double.IsFinite(Wander.MaxPauseSeconds)
                 || Wander.MinPauseSeconds < 0 || Wander.MaxPauseSeconds < Wander.MinPauseSeconds)
                 throw new InvalidDataException(path + ": wander pause seconds must be non-negative with min <= max.");
+            if (Mishroll == null)
+                throw new InvalidDataException(path + ": mishroll section is required (use defaults / enabled false).");
+            Mishroll.Validate(path);
+        }
+    }
+
+    /// <summary>The mishroll section of Gameplay.json (preferred solo RK terminal reward pin + accept fee).</summary>
+    public sealed class GameplayMishroll
+    {
+        /// <summary>Master switch. When false, command / roll override / accept fee stay inert.</summary>
+        public bool Enabled { get; init; }
+
+        /// <summary>Accept-time targeting fee constants for pinned solo RK terminal offers.</summary>
+        public GameplayMishrollTargetingFee TargetingFee { get; init; } = new();
+
+        internal void Validate(string path)
+        {
+            if (TargetingFee == null)
+                throw new InvalidDataException(path + ": mishroll.targetingFee is required.");
+            TargetingFee.Validate(path);
+        }
+    }
+
+    /// <summary>
+    /// QL-scaled mishroll targeting fee: 0 through <see cref="FreeThroughQuality"/>, linear to
+    /// <see cref="FullFeeCredits"/> at <see cref="FullFeeQuality"/>, then capped; B&amp;E discount
+    /// <see cref="BreakAndEntryDiscountPercentPerTen"/>% per 10 effective B&amp;E, capped at
+    /// <see cref="BreakAndEntryDiscountCapPercent"/>%; round half up once. Curve fraction scales the
+    /// handoff curve (0.5 = 50%).
+    /// </summary>
+    public sealed class GameplayMishrollTargetingFee
+    {
+        public int FreeThroughQuality { get; init; } = 25;
+
+        public int FullFeeQuality { get; init; } = 200;
+
+        public int FullFeeCredits { get; init; } = 10000;
+
+        /// <summary>Multiplier on the handoff curve (0.5 = half). Must be finite and &gt; 0.</summary>
+        public double FeeCurveFraction { get; init; } = 0.5;
+
+        public int BreakAndEntryDiscountPercentPerTen { get; init; } = 1;
+
+        public int BreakAndEntryDiscountCapPercent { get; init; } = 50;
+
+        internal void Validate(string path)
+        {
+            if (FreeThroughQuality < 0)
+                throw new InvalidDataException(path + ": mishroll.targetingFee.freeThroughQuality must not be negative.");
+            if (FullFeeQuality <= FreeThroughQuality)
+                throw new InvalidDataException(path + ": mishroll.targetingFee.fullFeeQuality must be greater than freeThroughQuality.");
+            if (FullFeeCredits < 0)
+                throw new InvalidDataException(path + ": mishroll.targetingFee.fullFeeCredits must not be negative.");
+            if (!double.IsFinite(FeeCurveFraction) || FeeCurveFraction <= 0 || FeeCurveFraction > 1)
+                throw new InvalidDataException(path + ": mishroll.targetingFee.feeCurveFraction must be finite in (0, 1].");
+            if (BreakAndEntryDiscountPercentPerTen < 0)
+                throw new InvalidDataException(path + ": mishroll.targetingFee.breakAndEntryDiscountPercentPerTen must not be negative.");
+            if (BreakAndEntryDiscountCapPercent < 0 || BreakAndEntryDiscountCapPercent > 100)
+                throw new InvalidDataException(path + ": mishroll.targetingFee.breakAndEntryDiscountCapPercent must be 0..100.");
         }
     }
 

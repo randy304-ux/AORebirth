@@ -18,7 +18,8 @@ internal static class GeneratedMissionRollService
         int terminalPlayfield, float terminalX, float terminalZ, MissionLocationSide side,
         int clientClockSeconds, int seed, int nonce, Func<int> durableIds,
         MissionDestinationCatalog catalog, int breed, int profession,
-        out IReadOnlyList<MissionPlacementIdentity> selectedEntrances)
+        out IReadOnlyList<MissionPlacementIdentity> selectedEntrances,
+        QuestItemShort? forcedReward = null)
     {
         selectedEntrances = Array.Empty<MissionPlacementIdentity>();
         ArgumentNullException.ThrowIfNull(request);
@@ -71,7 +72,7 @@ internal static class GeneratedMissionRollService
             action.Unknown18 = worldPosition.WorldOffsetX; action.Unknown19 = worldPosition.WorldOffsetZ;
             offer.Quality = quality;
             MissionRewardEvidenceModel.Apply(offer, type, level, request.LevelSlider, quality, sliders, destination.PlayfieldId, random);
-            var reward = MissionRollRewardItems.Select(quality, random);
+            var reward = forcedReward ?? MissionRollRewardItems.Select(quality, random);
             if (offer.ItemRewards?.Length > 0)
             {
                 offer.ItemRewards[0].LowId = reward.LowId;

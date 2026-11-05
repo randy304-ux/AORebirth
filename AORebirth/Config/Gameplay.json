@@ -9,5 +9,16 @@
     "radius": 50,
     "minPauseSeconds": 5,
     "maxPauseSeconds": 20
+  },
+  "mishroll": {
+    "enabled": true,
+    "targetingFee": {
+      "freeThroughQuality": 25,
+      "fullFeeQuality": 200,
+      "fullFeeCredits": 10000,
+      "feeCurveFraction": 0.5,
+      "breakAndEntryDiscountPercentPerTen": 1,
+      "breakAndEntryDiscountCapPercent": 50
+    }
   }
 }

@@ -30,6 +30,11 @@ namespace ZoneEngine_New.Core.Data
                 ? TryAcceptOfferQuest(ownerId, offerType, offerInstance, quest, characterRow, key, nowUtcTicks)
                 : throw new NotSupportedException("The quest store does not support atomic mission source-item acceptance.");
 
+        AcceptOfferQuestResult TryAcceptOfferQuest(int ownerId, int offerType, int offerInstance, GeneratedQuestRow quest,
+            CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, QuestDungeonKeyItemRow? sourceItem, long nowUtcTicks,
+            int targetingFee, int expectedCash)
+            => throw new NotSupportedException("The quest store does not support mishroll targeting-fee acceptance.");
+
         string? TryAddDuplicateKey(int sourceKeyInstanceId, QuestDungeonKeyItemRow copy, int maxKeys, long nowUtcTicks);
 
         /// <summary>NPC-given dungeon quest: quest, owner row and key in one transaction, no terminal offer.</summary>
@@ -92,6 +97,12 @@ namespace ZoneEngine_New.Core.Data
         public bool TryAcceptOfferQuest(int ownerId, int offerType, int offerInstance, GeneratedQuestRow quest,
             CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, QuestDungeonKeyItemRow? sourceItem, long nowUtcTicks)
             => Run(() => _dao.TryAcceptOfferQuest(ownerId, offerType, offerInstance, quest, characterRow, key, sourceItem, nowUtcTicks), _logger);
+
+        public AcceptOfferQuestResult TryAcceptOfferQuest(int ownerId, int offerType, int offerInstance, GeneratedQuestRow quest,
+            CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, QuestDungeonKeyItemRow? sourceItem, long nowUtcTicks,
+            int targetingFee, int expectedCash)
+            => Run(() => _dao.TryAcceptOfferQuest(ownerId, offerType, offerInstance, quest, characterRow, key, sourceItem,
+                nowUtcTicks, targetingFee, expectedCash), _logger);
 
         public bool TryAcceptAuthoredQuest(GeneratedQuestRow quest, CharacterQuestRow characterRow, QuestDungeonKeyItemRow key)
             => Run(() => _dao.TryAcceptAuthoredQuest(quest, characterRow, key), _logger);

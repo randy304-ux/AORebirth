@@ -953,16 +953,37 @@ public sealed class QuestDungeonDestinationTests
         internal readonly List<int> RetiredKeys = [];
         public bool TryAcceptOfferQuest(int ownerId, int offerType, int offerInstance, GeneratedQuestRow quest,
             CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, long nowUtcTicks)
+            => TryAcceptOfferQuest(ownerId, offerType, offerInstance, quest, characterRow, key, null, nowUtcTicks, 0, 0).Status
+                == AcceptOfferQuestStatus.Applied;
+
+        public AcceptOfferQuestResult TryAcceptOfferQuest(int ownerId, int offerType, int offerInstance, GeneratedQuestRow quest,
+            CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, QuestDungeonKeyItemRow? sourceItem, long nowUtcTicks,
+            int targetingFee, int expectedCash)
         {
             AcceptCalls++;
             BeforeAccept?.Invoke();
             Assert.AreEqual(Offer.OwnerId, ownerId);
             Assert.AreEqual(Offer.OfferType, offerType);
             Assert.AreEqual(Offer.OfferInstance, offerInstance);
-            if (Offer.State != GeneratedMissionState.Offered) return false;
+            if (targetingFee < 0) throw new ArgumentOutOfRangeException(nameof(targetingFee));
+            if (targetingFee > 0 && expectedCash < targetingFee)
+                return new AcceptOfferQuestResult
+                {
+                    Status = AcceptOfferQuestStatus.InsufficientCredits,
+                    CashAfter = expectedCash,
+                    TargetingFee = targetingFee
+                };
+            if (Offer.State != GeneratedMissionState.Offered)
+                return new AcceptOfferQuestResult { Status = AcceptOfferQuestStatus.OfferUnavailable, TargetingFee = targetingFee };
             Offer.State = GeneratedMissionState.Active;
             Generated = quest; Character = characterRow; Keys.Add(key); Links.Add(key.InstanceId, quest.QuestId);
-            return true;
+            if (sourceItem != null) Keys.Add(sourceItem);
+            return new AcceptOfferQuestResult
+            {
+                Status = AcceptOfferQuestStatus.Applied,
+                CashAfter = targetingFee > 0 ? expectedCash - targetingFee : expectedCash,
+                TargetingFee = targetingFee
+            };
         }
         public string? TryAddDuplicateKey(int sourceKeyInstanceId, QuestDungeonKeyItemRow copy, int maxKeys, long nowUtcTicks)
         {

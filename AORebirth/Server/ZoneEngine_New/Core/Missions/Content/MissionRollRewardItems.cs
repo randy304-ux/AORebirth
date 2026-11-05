@@ -17,6 +17,79 @@ internal static class MissionRollRewardItems
     {
         if (quality <= 0) throw new ArgumentOutOfRangeException(nameof(quality));
         ArgumentNullException.ThrowIfNull(random);
+        var eligible = Eligible(quality);
+        if (eligible.Length == 0) throw new InvalidOperationException("No configured mission reward covers the requested quality.");
+        var selected = eligible[random.Next(eligible.Length)];
+        return ToReward(selected, quality);
+    }
+
+    /// <summary>True when <paramref name="itemId"/> is a LowId or HighId in the mission reward catalogs (any QL).</summary>
+    internal static bool TryFindCatalogItem(int itemId, out string name, out string reason)
+    {
+        name = string.Empty;
+        reason = string.Empty;
+        if (itemId <= 0)
+        {
+            reason = "Item id must be a positive integer.";
+            return false;
+        }
+
+        Item[] rows;
+        try { rows = Catalog.Value; }
+        catch (Exception exception) when (exception is InvalidDataException or IOException or UnauthorizedAccessException)
+        {
+            reason = "Mission reward catalogs are unavailable.";
+            return false;
+        }
+
+        Item? match = rows.FirstOrDefault(r => r.LowId == itemId || r.HighId == itemId);
+        if (match == null)
+        {
+            reason = "That item is not in the mission reward pool.";
+            return false;
+        }
+
+        name = match.Name;
+        return true;
+    }
+
+    /// <summary>
+    /// Resolves a pinned item to the reward that would be granted at <paramref name="quality"/>,
+    /// or fails when the catalog row is not eligible at that QL (including nano tolerance).
+    /// </summary>
+    internal static bool TryResolve(int itemId, int quality, out QuestItemShort reward, out string reason)
+    {
+        reward = new QuestItemShort();
+        reason = string.Empty;
+        if (itemId <= 0)
+        {
+            reason = "Item id must be a positive integer.";
+            return false;
+        }
+
+        if (quality <= 0)
+        {
+            reason = "Mission quality must be positive.";
+            return false;
+        }
+
+        Item[] eligible = Eligible(quality);
+        Item? match = eligible.FirstOrDefault(r => r.LowId == itemId || r.HighId == itemId);
+        if (match == null)
+        {
+            reason = "That item is not eligible as a mission reward at QL " + quality + ".";
+            return false;
+        }
+
+        reward = ToReward(match, quality);
+        return true;
+    }
+
+    static QuestItemShort ToReward(Item selected, int quality)
+        => new() { LowId = selected.LowId, HighId = selected.HighId, Quality = selected.Fixed ? selected.LowQl : quality };
+
+    static Item[] Eligible(int quality)
+    {
         var rows = Catalog.Value;
         var eligible = rows.Where(r => !r.Fixed && r.LowQl <= quality && quality <= r.HighQl).ToArray();
         if (eligible.Length == 0)
@@ -24,9 +97,8 @@ internal static class MissionRollRewardItems
             int tolerance = MissionRollPolicy.Current.Rewards.NanoQualityTolerance;
             eligible = rows.Where(r => r.Fixed && r.LowQl <= quality + tolerance && r.HighQl >= quality - tolerance).ToArray();
         }
-        if (eligible.Length == 0) throw new InvalidOperationException("No configured mission reward covers the requested quality.");
-        var selected = eligible[random.Next(eligible.Length)];
-        return new() { LowId = selected.LowId, HighId = selected.HighId, Quality = selected.Fixed ? selected.LowQl : quality };
+
+        return eligible;
     }
     static Item[] Load()
     {

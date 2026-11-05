@@ -98,6 +98,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
         readonly Lazy<PlayfieldManager> _playfields;
         readonly IGameData _gameData;
         readonly HashItemMinter? _hashItems;
+        readonly MishrollService? _mishroll;
         readonly IZoneLogger _logger;
 
         readonly ConcurrentDictionary<string, CachedDungeon> _dungeons = new(StringComparer.Ordinal);
@@ -109,7 +110,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
         public QuestDungeonService(ICharacterQuestStore store, QuestService quests, MissionDestinationCatalog entrances,
             DungeonLayoutGenerator layouts, IGeneratedMissionDao offers, IItemBuilder items, IItemInstanceIdAllocator ids,
             InventoryFlushService flush, InventoryActionService inventoryActions, Lazy<PlayfieldManager> playfields,
-            IGameData gameData, IZoneLogger logger, HashItemMinter? hashItems = null)
+            IGameData gameData, IZoneLogger logger, HashItemMinter? hashItems = null, MishrollService? mishroll = null)
         {
             _store = store ?? throw new ArgumentNullException(nameof(store));
             _quests = quests ?? throw new ArgumentNullException(nameof(quests));
@@ -124,6 +125,7 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
             _gameData = gameData ?? throw new ArgumentNullException(nameof(gameData));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _hashItems = hashItems;
+            _mishroll = mishroll;
 
             _quests.QuestEnded += OnQuestEnded;
             _sweep = new Timer(_ => Sweep(), null, SweepInterval, SweepInterval);
@@ -276,12 +278,29 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                         UpdatedAtUtcTicks = now.Ticks
                     };
 
-                    bool accepted;
+                    int targetingFee = ResolveMishrollTargetingFee(player, offer);
+                    int cashBefore = player.Stats.GetOrZero(CharacterStat.Cash, StatDetail.Base);
+                    if (targetingFee > 0 && cashBefore < targetingFee)
+                        return "You need " + targetingFee.ToString(CultureInfo.InvariantCulture)
+                            + " credits for the mishroll targeting fee (have "
+                            + cashBefore.ToString(CultureInfo.InvariantCulture) + ").";
+
+                    AcceptOfferQuestResult accepted;
                     using (ZoneEngine_New.Core.Metrics.TickStallWatch.Enter("mission.accept.commit", player.Identity.Instance))
                         accepted = _store.TryAcceptOfferQuest(player.Identity.Instance, offer.OfferType, offer.OfferInstance, quest,
-                            characterRow, KeyRow(plan.Rows[0], now), sourceItem == null ? null : KeyRow(plan.Rows[1], now), now.Ticks);
-                    if (!accepted)
+                            characterRow, KeyRow(plan.Rows[0], now), sourceItem == null ? null : KeyRow(plan.Rows[1], now), now.Ticks,
+                            targetingFee, cashBefore);
+                    if (accepted.Status == AcceptOfferQuestStatus.InsufficientCredits)
+                        return "You need " + targetingFee.ToString(CultureInfo.InvariantCulture)
+                            + " credits for the mishroll targeting fee.";
+                    if (accepted.Status != AcceptOfferQuestStatus.Applied)
                         return "That mission is no longer offered.";
+
+                    if (targetingFee > 0)
+                    {
+                        player.Stats.Set(CharacterStat.Cash, accepted.CashAfter, StatDetail.Base, dirty: true);
+                        player.FlushDirtyStats();
+                    }
 
                     _dungeons[questId] = new CachedDungeon(parameters, expires.Ticks,
                         parameters.ObjectiveNpc == null ? KillTarget(template) : null,
@@ -295,8 +314,9 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
                     if (parameters.IsTeam)
                         ShareWithTeam(player, questId, template, parametersJson, parameters.EntranceName, now, expires);
                     _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                        "Dungeon quest accepted char={0} quest={1} offer={2}:{3} entrance={4} ({5}) dungeon={6}",
-                        player.Identity.Instance, questId, offer.OfferType, offer.OfferInstance, parameters.EntranceInstance, entrance.DisplayName, dungeonPlayfield));
+                        "Dungeon quest accepted char={0} quest={1} offer={2}:{3} entrance={4} ({5}) dungeon={6} mishrollFee={7} reward={8}/{9} ql={10}",
+                        player.Identity.Instance, questId, offer.OfferType, offer.OfferInstance, parameters.EntranceInstance,
+                        entrance.DisplayName, dungeonPlayfield, targetingFee, offer.RewardLowId, offer.RewardHighId, offer.Quality));
                     return null;
                 }
                 catch (DatabaseCommitOutcomeUnknownException exception)
@@ -1461,6 +1481,27 @@ namespace ZoneEngine_New.Core.Quests.Dungeons
 
         static void SendText(Player player, string text)
             => player.Session?.Send(new ChatTextMessage { Identity = player.Identity, Text = text });
+
+        /// <summary>
+        /// Solo RK terminal offers only: charge when mishroll is enabled, the player still has a pin, and the
+        /// offer reward matches that pin (the roll override applied). Team offers never pay the targeting fee.
+        /// </summary>
+        int ResolveMishrollTargetingFee(Player player, GeneratedMissionOffer offer)
+        {
+            if (_mishroll == null || !_mishroll.IsEnabled || offer.IsTeam == 1)
+                return 0;
+            if (!_mishroll.TryGetPinnedItemId(player.Identity.Instance, out int pin))
+                return 0;
+            if (pin != offer.RewardLowId && pin != offer.RewardHighId)
+                return 0;
+            int breakAndEntry = player.Stats.GetOrZero(CharacterStat.BreakingEntry);
+            int fee = MishrollTargetingFeeCalculator.Compute(offer.Quality, breakAndEntry, _mishroll.Settings.TargetingFee);
+            if (fee > 0)
+                _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                    "Mishroll targeting fee pending char={0} offer={1}:{2} ql={3} pin={4} be={5} fee={6}",
+                    player.Identity.Instance, offer.OfferType, offer.OfferInstance, offer.Quality, pin, breakAndEntry, fee));
+            return fee;
+        }
 
         void Quarantine(Player player, Exception exception)
         {
