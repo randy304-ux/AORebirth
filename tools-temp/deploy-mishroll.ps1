@@ -4,7 +4,8 @@
 # schtasks start, verify Zone 7501 / Chat 7012 / Login 7500. First boot timeout -> 5-min gate + one retry -> else full rollback.
 $ErrorActionPreference = 'Stop'
 $root = 'I:\AO\src'
-$want = '97f99b36'
+# Minimum mishroll feature commit (accept fee + default ON). Tip may be this or a descendant.
+$want = 'fd01ad23'
 $outLog = Join-Path $root 'tools-temp\deploy-mishroll.out.txt'
 $metaPath = Join-Path $root 'tools-temp\deploy-mishroll-meta.txt'
 Set-Content -LiteralPath $outLog -Value '' -Encoding ascii
@@ -26,8 +27,9 @@ $zlog = Join-Path $root 'logs\engines\ZoneEngine_New.out.log'
 $bins = @('ZoneEngine_New.dll', 'ZoneEngine_New.exe', 'ZoneEngine_New.pdb')
 
 $hash = (git -C $root rev-parse --short=8 HEAD).Trim()
-Say "deploy tip=$hash"
-if ($hash -ne $want) { Say "STOP: I:\AO\src HEAD is $hash, expected mishroll commit $want"; exit 3 }
+Say "deploy tip=$hash want=$want"
+git -C $root merge-base --is-ancestor $want HEAD
+if ($LASTEXITCODE -ne 0) { Say "STOP: I:\AO\src HEAD $hash does not contain mishroll commit $want"; exit 3 }
 foreach ($n in $bins) { if (-not (Test-Path (Join-Path $zSrc $n))) { throw "missing $n in $zSrc" } }
 if (-not (Test-Path $cfgSrc)) { throw "missing $cfgSrc" }
 if (-not (Test-Path $sqlFile)) { throw "missing $sqlFile" }
