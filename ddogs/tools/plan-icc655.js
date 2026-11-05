@@ -58,7 +58,16 @@ for(const a of adds){const r=a.rep.row,md=+r.MonsterData,L=+r.Level;let hash=nul
  const ex=(byName[a.name]||[]).find(e=>e.n==1&&+e.b.Stats['359']==md&&+e.b.Level==L);if(ex){hash=ex.h;reuse=true}
  else{const key=[a.name,md,r.Mesh,r.NPCFamily].join('|');if(!templates[key]){templates[key]={hash:newHash(),wander:false,friendly:SIDE(r.Side)!=3,src:`live scrape ${r._f.replace(/^scraped_npcs_|\.csv$/g,'')} inst ${r.Instance}`,bands:{}}}
   const t=templates[key];t.wander=t.wander||a.roam;hash=t.hash;
-  for(const lv of a.rep.lvls)if(!t.bands[lv])t.bands[lv]={Name:a.name,Level:lv,hp:a.rep.hpBy[lv]||0,side:SIDE(r.Side),breed:BREED(r.Breed),md,sc:+r.Scale||100,mesh:+r.Mesh||0,head:+r.HeadMesh||0,tex:+r.MonsterTexture||0,fam:+r.NPCFamily||0}}
+  for(const lv of a.rep.lvls)if(!t.bands[lv]){
+    const band={Name:a.name,Level:lv,hp:a.rep.hpBy[lv]||0,side:SIDE(r.Side),breed:BREED(r.Breed),md,sc:+r.Scale||100,mesh:+r.Mesh||0,head:+r.HeadMesh||0,tex:+r.MonsterTexture||0,fam:+r.NPCFamily||0};
+    // Outfit columns from AO_NPC_Scraper outfit bump (optional; older CSVs omit them).
+    const textures=(r.Textures||'').split(';').filter(Boolean).map(x=>{const [Place,Id]=x.split(':').map(Number);return {Place,Id}}).filter(t=>t.Id>0);
+    const meshes=(r.Meshes||'').split(';').filter(Boolean).map(x=>{const [Position,Id,OverrideTextureId,Layer]=x.split(':').map(Number);return {Position,Id,OverrideTextureId:OverrideTextureId||0,Layer:Layer||0}}).filter(m=>m.Id>0);
+    const gloves=(r.EquipmentGloves||'').split(';').map(Number).filter(n=>n>0);
+    if(textures.length) band.textures=textures;
+    if(meshes.length) band.meshes=meshes;
+    if(gloves.length) band.gloves=gloves;
+    t.bands[lv]=band}}
  spawns.push(a.at?{hash,name:a.name,reuse,lo:Math.min(...a.rep.lvls),hi:Math.max(...a.rep.lvls),x:a.at.x+0.15,y:a.at.y,z:a.at.z,angle:0,posFrom:'client Spawns.json point (+0.15 m X so the SpawnSkips removedPoint of the old point does not also drop it) '+a.at.hash+' (live sighting only in no-Y Oct 29 scrape, '+d2(a.at,a.rep).toFixed(1)+' m away)'}:{hash,name:a.name,reuse,lo:Math.min(...a.rep.lvls),hi:Math.max(...a.rep.lvls),x:+r.X,y:+r.Y,z:+r.Z,angle:Math.round(+r.HeadingDeg||0),posFrom:'live scrape '+r._f+' inst '+r.Instance})}
 // ---- Uncle Pumpkin-Head: live spots in ICC box (Y'd rows only), one pad per live instance position (5 m dedupe)
 const uph=[];for(const i of insts.filter(i=>i.name=='Uncle Pumpkin-Head'&&i.hasY)){if(!uph.some(p=>Math.hypot(p[0]-i.x,p[2]-i.z)<=5))uph.push([+i.x.toFixed(1),+i.y.toFixed(1),+i.z.toFixed(1)])}

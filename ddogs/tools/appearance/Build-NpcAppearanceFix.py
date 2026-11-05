@@ -1,6 +1,7 @@
-import json,collections
+import json,collections,csv,glob,os
 P='tools-temp/ScfuProbe/'
-IMPORT=('scrape-city-20261030','scrape-sl-20261029','scrape-nasc-20261030','rome-20261029','arrival-hall-20261030')
+IMPORT=('scrape-city-20261030','scrape-sl-20261029','scrape-nasc-20261030','rome-20261029','arrival-hall-20261030',
+        'scrape-icc655-20261105','scrape-cities-20261105b','scrape-585-20261105')
 hum=collections.defaultdict(list)
 for l in open(P+'scraped_humanoids.txt',encoding='utf-8-sig'):
     l=l.strip()
@@ -12,13 +13,40 @@ for l in open(P+'live_decoded.tsv',encoding='utf-8'):
          'tex':[{'Place':int(a),'Id':int(b)} for a,b,_ in (x.split(':') for x in p[4].split(';') if x) if int(b)>0],
          'mesh':[{'Position':int(a),'Id':int(b),'OverrideTextureId':int(c),'Layer':int(e)} for a,b,c,e in (x.split(':') for x in p[5].split(';') if x)]}
     live[n].append(rec); livemd[rec['md']].append(rec)
+# Prefer AO_NPC_Scraper CSV outfit columns (Textures/Meshes/EquipmentGloves) when present.
+scrape_dir=os.environ.get('SCRAPE_OUTFIT_DIR','I:/AO/imports/scrape-20261105/extracted/output')
+for path in sorted(glob.glob(os.path.join(scrape_dir,'scraped_npcs_*.csv'))):
+    with open(path,encoding='utf-8-sig',newline='') as f:
+        rdr=csv.DictReader(f)
+        if not rdr.fieldnames or 'Textures' not in rdr.fieldnames: continue
+        for row in rdr:
+            if row.get('Kind') not in (None,'','npc'): continue
+            if row.get('IsNpc') not in (None,'','1'): continue
+            if row.get('IsPet')=='1': continue
+            n=(row.get('Name') or '').strip()
+            if not n: continue
+            tex=[{'Place':int(a),'Id':int(b)} for a,b,*_ in (x.split(':') for x in (row.get('Textures') or '').split(';') if x) if b.isdigit() and int(b)>0]
+            mesh=[]
+            for x in (row.get('Meshes') or '').split(';'):
+                if not x: continue
+                parts=x.split(':')
+                if len(parts)<4: continue
+                a,b,c,e=parts[:4]
+                if b.isdigit() and int(b)>0:
+                    mesh.append({'Position':int(a),'Id':int(b),'OverrideTextureId':int(c or 0),'Layer':int(e or 0)})
+            if not tex and not mesh: continue
+            rec={'name':n,'md':int(row.get('MonsterData') or 0),'scale':int(row.get('Scale') or 100),
+                 'head':int(row.get('HeadMesh') or 0),'tex':tex,'mesh':mesh,'src':'scrape-csv'}
+            live[n].append(rec); livemd[rec['md']].append(rec)
 def outfit(r):
     m=[x for x in r['mesh'] if not (x['Position']==0 and x['Layer']==4)]
     seen=set(); out=[]
     for x in m:
         k=(x['Position'],x['Id'],x['Layer'])
         if k not in seen: seen.add(k); out.append(x)
-    return r['tex'],out
+    # Keep place 0 (hands) — green-hand NPCs are missing it.
+    tex=list(r['tex'])
+    return tex,out
 p='AORebirth/GameData/NpcTemplates.json'
 b=open(p,'rb').read(); bom=b[:3]==b'\xef\xbb\xbf'; d=json.loads(b.decode('utf-8-sig'))
 import glob

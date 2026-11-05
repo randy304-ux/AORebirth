@@ -109,7 +109,16 @@ for(const pf of PFS){
         const key=[a.name,md,r.Mesh,r.NPCFamily].join('|');
         if(!templates[key])templates[key]={hash:newHash(),wander:false,friendly:SIDE(r.Side)!==3,src:`live scrape ${r._f.replace(/^scraped_npcs_|\.csv$/g,'')} inst ${r.Instance}`,bands:{}};
         const t=templates[key];t.wander=t.wander||!!a.roam;hash=t.hash;
-        for(const lv of a.lvls)if(!t.bands[lv])t.bands[lv]={Name:a.name,Level:lv,hp:a.hpBy[lv]||0,side:SIDE(r.Side),breed:BREED(r.Breed),md,sc:+r.Scale||100,mesh:+r.Mesh||0,head:+r.HeadMesh||0,tex:+r.MonsterTexture||0,fam:+r.NPCFamily||0};
+        for(const lv of a.lvls)if(!t.bands[lv]){
+          const band={Name:a.name,Level:lv,hp:a.hpBy[lv]||0,side:SIDE(r.Side),breed:BREED(r.Breed),md,sc:+r.Scale||100,mesh:+r.Mesh||0,head:+r.HeadMesh||0,tex:+r.MonsterTexture||0,fam:+r.NPCFamily||0};
+          const textures=(r.Textures||'').split(';').filter(Boolean).map(x=>{const [Place,Id]=x.split(':').map(Number);return {Place,Id}}).filter(t=>t.Id>0);
+          const meshes=(r.Meshes||'').split(';').filter(Boolean).map(x=>{const [Position,Id,OverrideTextureId,Layer]=x.split(':').map(Number);return {Position,Id,OverrideTextureId:OverrideTextureId||0,Layer:Layer||0}}).filter(m=>m.Id>0);
+          const gloves=(r.EquipmentGloves||'').split(';').map(Number).filter(n=>n>0);
+          if(textures.length) band.textures=textures;
+          if(meshes.length) band.meshes=meshes;
+          if(gloves.length) band.gloves=gloves;
+          t.bands[lv]=band;
+        }
       }
     }
     spawns.push({pf,hash,name:a.name,reuse,lo:Math.min(...a.lvls),hi:Math.max(...a.lvls),x:+r.X,y:+r.Y,z:+r.Z,angle:Math.round(+r.HeadingDeg||0),wander:!!a.roam,
