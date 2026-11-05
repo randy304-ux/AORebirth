@@ -1,0 +1,6364 @@
+{
+ "source": "scrape-cities-20261105b",
+ "generated": "2026-11-05T18:18:50.278Z",
+ "playfields": [
+  800,
+  545,
+  540,
+  566,
+  700,
+  705,
+  710
+ ],
+ "removePoints": [
+  {
+   "playfield": 800,
+   "hash": "LEKA",
+   "position": [
+    613.24567,
+    68.3996,
+    475.4377
+   ],
+   "reason": "Levon Karubian moved to live scrape spot (scrape-cities-20261105b)"
+  }
+ ],
+ "templates": [
+  {
+   "hash": "Q701",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Venditor inst 1002133",
+   "bands": [
+    {
+     "Name": "Unicorn Duty Sergeant",
+     "Level": 220,
+     "hp": 203720,
+     "side": 2,
+     "breed": 1,
+     "md": 257040,
+     "sc": 100,
+     "mesh": 246883,
+     "head": 40696,
+     "tex": 0,
+     "fam": 219
+    }
+   ]
+  },
+  {
+   "hash": "Q702",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Venditor inst 1002147",
+   "bands": [
+    {
+     "Name": "Derek Pofier",
+     "Level": 200,
+     "hp": 1135,
+     "side": 0,
+     "breed": 3,
+     "md": 26159,
+     "sc": 100,
+     "mesh": 17909,
+     "head": 40173,
+     "tex": 0,
+     "fam": 136
+    }
+   ]
+  },
+  {
+   "hash": "Q703",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Venditor inst 1002149",
+   "bands": [
+    {
+     "Name": "Fresh Engineer",
+     "Level": 9,
+     "hp": 205,
+     "side": 0,
+     "breed": 1,
+     "md": 26088,
+     "sc": 94,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 118
+    }
+   ]
+  },
+  {
+   "hash": "Q704",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Venditor inst 1002153",
+   "bands": [
+    {
+     "Name": "Fresh Trader",
+     "Level": 9,
+     "hp": 205,
+     "side": 0,
+     "breed": 1,
+     "md": 26090,
+     "sc": 94,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 118
+    },
+    {
+     "Name": "Fresh Trader",
+     "Level": 10,
+     "hp": 227,
+     "side": 0,
+     "breed": 1,
+     "md": 26090,
+     "sc": 95,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 118
+    }
+   ]
+  },
+  {
+   "hash": "Q705",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Venditor inst 1002154",
+   "bands": [
+    {
+     "Name": "Fresh Bureaucrat",
+     "Level": 9,
+     "hp": 164,
+     "side": 0,
+     "breed": 3,
+     "md": 26143,
+     "sc": 94,
+     "mesh": 23368,
+     "head": 40137,
+     "tex": 0,
+     "fam": 118
+    }
+   ]
+  },
+  {
+   "hash": "Q706",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1002367",
+   "bands": [
+    {
+     "Name": "Omni-Tek Recruitment Officer",
+     "Level": 200,
+     "hp": 36434,
+     "side": 2,
+     "breed": 1,
+     "md": 165190,
+     "sc": 121,
+     "mesh": 5907,
+     "head": 40680,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q707",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1002368",
+   "bands": [
+    {
+     "Name": "Clan Recruiter",
+     "Level": 200,
+     "hp": 36434,
+     "side": 1,
+     "breed": 1,
+     "md": 165210,
+     "sc": 121,
+     "mesh": 5907,
+     "head": 40679,
+     "tex": 0,
+     "fam": 104
+    }
+   ]
+  },
+  {
+   "hash": "Q708",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1002369",
+   "bands": [
+    {
+     "Name": "Peter Roland",
+     "Level": 95,
+     "hp": 6236,
+     "side": 0,
+     "breed": 1,
+     "md": 165187,
+     "sc": 111,
+     "mesh": 17532,
+     "head": 40687,
+     "tex": 0,
+     "fam": 137
+    }
+   ]
+  },
+  {
+   "hash": "Q709",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1002388",
+   "bands": [
+    {
+     "Name": "Fresh Soldier",
+     "Level": 7,
+     "hp": 160,
+     "side": 0,
+     "breed": 4,
+     "md": 26103,
+     "sc": 93,
+     "mesh": 23365,
+     "head": 40103,
+     "tex": 0,
+     "fam": 118
+    },
+    {
+     "Name": "Fresh Soldier",
+     "Level": 9,
+     "hp": 205,
+     "side": 0,
+     "breed": 4,
+     "md": 26103,
+     "sc": 94,
+     "mesh": 23365,
+     "head": 40103,
+     "tex": 0,
+     "fam": 118
+    }
+   ]
+  },
+  {
+   "hash": "Q70A",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1002658",
+   "bands": [
+    {
+     "Name": "Unicorn Squadleader",
+     "Level": 300,
+     "hp": 1400700,
+     "side": 2,
+     "breed": 1,
+     "md": 247041,
+     "sc": 137,
+     "mesh": 247037,
+     "head": 0,
+     "tex": 0,
+     "fam": 219
+    }
+   ]
+  },
+  {
+   "hash": "Q70B",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1002659",
+   "bands": [
+    {
+     "Name": "Unicorn Specialist",
+     "Level": 300,
+     "hp": 1866667,
+     "side": 2,
+     "breed": 1,
+     "md": 163003,
+     "sc": 137,
+     "mesh": 163173,
+     "head": 0,
+     "tex": 0,
+     "fam": 219
+    }
+   ]
+  },
+  {
+   "hash": "Q70C",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1068317",
+   "bands": [
+    {
+     "Name": "Fresh Agent",
+     "Level": 8,
+     "hp": 182,
+     "side": 0,
+     "breed": 2,
+     "md": 26123,
+     "sc": 94,
+     "mesh": 23373,
+     "head": 40214,
+     "tex": 0,
+     "fam": 118
+    }
+   ]
+  },
+  {
+   "hash": "Q70D",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 2064181327",
+   "bands": [
+    {
+     "Name": "Andre Bottle",
+     "Level": 200,
+     "hp": 36434,
+     "side": 0,
+     "breed": 3,
+     "md": 26147,
+     "sc": 105,
+     "mesh": 17905,
+     "head": 223931,
+     "tex": 0,
+     "fam": 0
+    }
+   ]
+  },
+  {
+   "hash": "Q70E",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920691",
+   "bands": [
+    {
+     "Name": "Cyril Doniger",
+     "Level": 2,
+     "hp": 48,
+     "side": 1,
+     "breed": 3,
+     "md": 26159,
+     "sc": 91,
+     "mesh": 17909,
+     "head": 40173,
+     "tex": 0,
+     "fam": 104
+    }
+   ]
+  },
+  {
+   "hash": "Q70F",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920693",
+   "bands": [
+    {
+     "Name": "Vanguard Watcher",
+     "Level": 200,
+     "hp": 72868,
+     "side": 1,
+     "breed": 2,
+     "md": 206794,
+     "sc": 121,
+     "mesh": 17915,
+     "head": 40249,
+     "tex": 0,
+     "fam": 1
+    },
+    {
+     "Name": "Vanguard Watcher",
+     "Level": 250,
+     "hp": 400000,
+     "side": 1,
+     "breed": 2,
+     "md": 206794,
+     "sc": 130,
+     "mesh": 17915,
+     "head": 40249,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q70G",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920700",
+   "bands": [
+    {
+     "Name": "Robert Ryan",
+     "Level": 40,
+     "hp": 1650,
+     "side": 1,
+     "breed": 4,
+     "md": 258663,
+     "sc": 103,
+     "mesh": 23365,
+     "head": 40115,
+     "tex": 0,
+     "fam": 87
+    }
+   ]
+  },
+  {
+   "hash": "Q70H",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920702",
+   "bands": [
+    {
+     "Name": "Mr. Gibs",
+     "Level": 50,
+     "hp": 2266,
+     "side": 1,
+     "breed": 4,
+     "md": 26101,
+     "sc": 105,
+     "mesh": 23366,
+     "head": 40105,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q70I",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920703",
+   "bands": [
+    {
+     "Name": "Maike Ro",
+     "Level": 202,
+     "hp": 240668,
+     "side": 1,
+     "breed": 1,
+     "md": 26076,
+     "sc": 100,
+     "mesh": 17530,
+     "head": 40635,
+     "tex": 0,
+     "fam": 158
+    }
+   ]
+  },
+  {
+   "hash": "Q70J",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920705",
+   "bands": [
+    {
+     "Name": "Annie Kingsglade",
+     "Level": 150,
+     "hp": 13369,
+     "side": 1,
+     "breed": 1,
+     "md": 258661,
+     "sc": 117,
+     "mesh": 17919,
+     "head": 223843,
+     "tex": 0,
+     "fam": 87
+    }
+   ]
+  },
+  {
+   "hash": "Q70K",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920706",
+   "bands": [
+    {
+     "Name": "Tirbo Ratcatcher",
+     "Level": 30,
+     "hp": 51620,
+     "side": 1,
+     "breed": 1,
+     "md": 26092,
+     "sc": 101,
+     "mesh": 5907,
+     "head": 40694,
+     "tex": 0,
+     "fam": 87
+    }
+   ]
+  },
+  {
+   "hash": "Q70L",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920707",
+   "bands": [
+    {
+     "Name": "Graham Simmonds",
+     "Level": 95,
+     "hp": 6236,
+     "side": 0,
+     "breed": 1,
+     "md": 165187,
+     "sc": 111,
+     "mesh": 17532,
+     "head": 40687,
+     "tex": 0,
+     "fam": 137
+    }
+   ]
+  },
+  {
+   "hash": "Q70M",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920709",
+   "bands": [
+    {
+     "Name": "Emma Ye",
+     "Level": 2,
+     "hp": 48,
+     "side": 1,
+     "breed": 2,
+     "md": 26125,
+     "sc": 91,
+     "mesh": 23374,
+     "head": 40215,
+     "tex": 0,
+     "fam": 104
+    }
+   ]
+  },
+  {
+   "hash": "Q70N",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920712",
+   "bands": [
+    {
+     "Name": "Delaine Conmy",
+     "Level": 3,
+     "hp": 70,
+     "side": 1,
+     "breed": 1,
+     "md": 26076,
+     "sc": 92,
+     "mesh": 17530,
+     "head": 40635,
+     "tex": 0,
+     "fam": 104
+    }
+   ]
+  },
+  {
+   "hash": "Q70O",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920715",
+   "bands": [
+    {
+     "Name": "Britteny Kuiper",
+     "Level": 3,
+     "hp": 70,
+     "side": 1,
+     "breed": 3,
+     "md": 26155,
+     "sc": 92,
+     "mesh": 23370,
+     "head": 40138,
+     "tex": 0,
+     "fam": 104
+    }
+   ]
+  },
+  {
+   "hash": "Q70P",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920718",
+   "bands": [
+    {
+     "Name": "Cory Dilox",
+     "Level": 2,
+     "hp": 48,
+     "side": 1,
+     "breed": 2,
+     "md": 26135,
+     "sc": 91,
+     "mesh": 23378,
+     "head": 40271,
+     "tex": 0,
+     "fam": 104
+    }
+   ]
+  },
+  {
+   "hash": "Q70Q",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920721",
+   "bands": [
+    {
+     "Name": "Nestor Magistrale",
+     "Level": 3,
+     "hp": 70,
+     "side": 1,
+     "breed": 4,
+     "md": 26101,
+     "sc": 92,
+     "mesh": 23366,
+     "head": 40105,
+     "tex": 0,
+     "fam": 104
+    }
+   ]
+  },
+  {
+   "hash": "Q70R",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065920724",
+   "bands": [
+    {
+     "Name": "Ken Russi",
+     "Level": 3,
+     "hp": 70,
+     "side": 1,
+     "breed": 1,
+     "md": 26088,
+     "sc": 92,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 104
+    }
+   ]
+  },
+  {
+   "hash": "Q70S",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2066297939",
+   "bands": [
+    {
+     "Name": "Vanguard Commander",
+     "Level": 200,
+     "hp": 72868,
+     "side": 1,
+     "breed": 1,
+     "md": 206792,
+     "sc": 121,
+     "mesh": 17919,
+     "head": 40629,
+     "tex": 0,
+     "fam": 1
+    },
+    {
+     "Name": "Vanguard Commander",
+     "Level": 250,
+     "hp": 400000,
+     "side": 1,
+     "breed": 1,
+     "md": 206792,
+     "sc": 130,
+     "mesh": 17919,
+     "head": 40629,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q70T",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893873",
+   "bands": [
+    {
+     "Name": "Clan Male Prison Guard",
+     "Level": 177,
+     "hp": 17394,
+     "side": 1,
+     "breed": 4,
+     "md": 26097,
+     "sc": 119,
+     "mesh": 5900,
+     "head": 40111,
+     "tex": 0,
+     "fam": 1
+    },
+    {
+     "Name": "Clan Male Prison Guard",
+     "Level": 186,
+     "hp": 18736,
+     "side": 1,
+     "breed": 4,
+     "md": 26097,
+     "sc": 120,
+     "mesh": 5900,
+     "head": 40111,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q70U",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893875",
+   "bands": [
+    {
+     "Name": "Male Blade",
+     "Level": 180,
+     "hp": 17841,
+     "side": 1,
+     "breed": 4,
+     "md": 26097,
+     "sc": 119,
+     "mesh": 5900,
+     "head": 40111,
+     "tex": 0,
+     "fam": 1
+    },
+    {
+     "Name": "Male Blade",
+     "Level": 185,
+     "hp": 18587,
+     "side": 1,
+     "breed": 4,
+     "md": 26097,
+     "sc": 120,
+     "mesh": 5900,
+     "head": 40111,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q70V",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893876",
+   "bands": [
+    {
+     "Name": "Female Blade",
+     "Level": 170,
+     "hp": 16351,
+     "side": 1,
+     "breed": 1,
+     "md": 26090,
+     "sc": 119,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 1
+    },
+    {
+     "Name": "Female Blade",
+     "Level": 198,
+     "hp": 29891,
+     "side": 1,
+     "breed": 1,
+     "md": 26090,
+     "sc": 121,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q70W",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893880",
+   "bands": [
+    {
+     "Name": "Male Watcher",
+     "Level": 102,
+     "hp": 7067,
+     "side": 1,
+     "breed": 2,
+     "md": 26139,
+     "sc": 112,
+     "mesh": 5914,
+     "head": 40249,
+     "tex": 0,
+     "fam": 1
+    },
+    {
+     "Name": "Male Watcher",
+     "Level": 105,
+     "hp": 7422,
+     "side": 1,
+     "breed": 2,
+     "md": 26139,
+     "sc": 112,
+     "mesh": 5914,
+     "head": 40249,
+     "tex": 0,
+     "fam": 1
+    },
+    {
+     "Name": "Male Watcher",
+     "Level": 109,
+     "hp": 7897,
+     "side": 1,
+     "breed": 2,
+     "md": 26139,
+     "sc": 113,
+     "mesh": 5914,
+     "head": 40249,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q70X",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893881",
+   "bands": [
+    {
+     "Name": "Female Watcher",
+     "Level": 102,
+     "hp": 7067,
+     "side": 1,
+     "breed": 1,
+     "md": 26090,
+     "sc": 112,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q70Y",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893883",
+   "bands": [
+    {
+     "Name": "Sirocco",
+     "Level": 99,
+     "hp": 6711,
+     "side": 0,
+     "breed": 1,
+     "md": 40818,
+     "sc": 112,
+     "mesh": 17870,
+     "head": 40696,
+     "tex": 0,
+     "fam": 137
+    }
+   ]
+  },
+  {
+   "hash": "Q70Z",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893884",
+   "bands": [
+    {
+     "Name": "Fresh Clan Doctor",
+     "Level": 7,
+     "hp": 160,
+     "side": 1,
+     "breed": 1,
+     "md": 26092,
+     "sc": 94,
+     "mesh": 5907,
+     "head": 40694,
+     "tex": 0,
+     "fam": 112
+    }
+   ]
+  },
+  {
+   "hash": "Q710",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893886",
+   "bands": [
+    {
+     "Name": "Clan Container Supplier",
+     "Level": 195,
+     "hp": 20077,
+     "side": 1,
+     "breed": 1,
+     "md": 26090,
+     "sc": 120,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q711",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893888",
+   "bands": [
+    {
+     "Name": "Clan Basic Quality Pharmacist",
+     "Level": 183,
+     "hp": 18289,
+     "side": 1,
+     "breed": 1,
+     "md": 26088,
+     "sc": 120,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q712",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893890",
+   "bands": [
+    {
+     "Name": "Clan Tailor",
+     "Level": 181,
+     "hp": 17990,
+     "side": 1,
+     "breed": 2,
+     "md": 26139,
+     "sc": 119,
+     "mesh": 5914,
+     "head": 40249,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q713",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893891",
+   "bands": [
+    {
+     "Name": "Clan Party Mixer",
+     "Level": 186,
+     "hp": 18736,
+     "side": 1,
+     "breed": 1,
+     "md": 26092,
+     "sc": 120,
+     "mesh": 5907,
+     "head": 40694,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q714",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893893",
+   "bands": [
+    {
+     "Name": "Male High Commander",
+     "Level": 200,
+     "hp": 36434,
+     "side": 1,
+     "breed": 1,
+     "md": 26092,
+     "sc": 121,
+     "mesh": 5907,
+     "head": 40694,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q715",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893894",
+   "bands": [
+    {
+     "Name": "Female High Commander",
+     "Level": 199,
+     "hp": 33163,
+     "side": 1,
+     "breed": 1,
+     "md": 26090,
+     "sc": 121,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q716",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893899",
+   "bands": [
+    {
+     "Name": "Vanguard Commander",
+     "Level": 250,
+     "hp": 400000,
+     "side": 1,
+     "breed": 1,
+     "md": 206793,
+     "sc": 130,
+     "mesh": 17870,
+     "head": 40694,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q717",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893907",
+   "bands": [
+    {
+     "Name": "Calista Zazzera",
+     "Level": 197,
+     "hp": 26620,
+     "side": 1,
+     "breed": 2,
+     "md": 274388,
+     "sc": 121,
+     "mesh": 17913,
+     "head": 223881,
+     "tex": 0,
+     "fam": 87
+    }
+   ]
+  },
+  {
+   "hash": "Q718",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893909",
+   "bands": [
+    {
+     "Name": "Captain Cante Hawk",
+     "Level": 220,
+     "hp": 570717,
+     "side": 1,
+     "breed": 1,
+     "md": 267320,
+     "sc": 100,
+     "mesh": 5907,
+     "head": 223828,
+     "tex": 0,
+     "fam": 158
+    }
+   ]
+  },
+  {
+   "hash": "Q719",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893910",
+   "bands": [
+    {
+     "Name": "Eleanor Kiamarli",
+     "Level": 220,
+     "hp": 132419,
+     "side": 1,
+     "breed": 1,
+     "md": 262965,
+     "sc": 125,
+     "mesh": 17919,
+     "head": 40661,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q71A",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893963",
+   "bands": [
+    {
+     "Name": "Fresh Clan Trader",
+     "Level": 10,
+     "hp": 227,
+     "side": 1,
+     "breed": 1,
+     "md": 26092,
+     "sc": 95,
+     "mesh": 5907,
+     "head": 40694,
+     "tex": 0,
+     "fam": 112
+    }
+   ]
+  },
+  {
+   "hash": "Q71B",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065893977",
+   "bands": [
+    {
+     "Name": "Fresh Clan Bureaucrat",
+     "Level": 9,
+     "hp": 164,
+     "side": 1,
+     "breed": 3,
+     "md": 26159,
+     "sc": 95,
+     "mesh": 17909,
+     "head": 40173,
+     "tex": 0,
+     "fam": 112
+    }
+   ]
+  },
+  {
+   "hash": "Q71C",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065894019",
+   "bands": [
+    {
+     "Name": "Arbiter's Herald",
+     "Level": 220,
+     "hp": 101861,
+     "side": 0,
+     "breed": 4,
+     "md": 165194,
+     "sc": 125,
+     "mesh": 5900,
+     "head": 40130,
+     "tex": 0,
+     "fam": 137
+    }
+   ]
+  },
+  {
+   "hash": "Q71D",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065894048",
+   "bands": [
+    {
+     "Name": "Fresh Clan Bodyguard",
+     "Level": 10,
+     "hp": 318,
+     "side": 1,
+     "breed": 4,
+     "md": 26101,
+     "sc": 95,
+     "mesh": 23366,
+     "head": 40105,
+     "tex": 0,
+     "fam": 112
+    }
+   ]
+  },
+  {
+   "hash": "Q71E",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2066171030",
+   "bands": [
+    {
+     "Name": "Clan Food Provider",
+     "Level": 197,
+     "hp": 26620,
+     "side": 1,
+     "breed": 3,
+     "md": 26151,
+     "sc": 121,
+     "mesh": 5921,
+     "head": 40171,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q71F",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2066171453",
+   "bands": [
+    {
+     "Name": "Clan Computer Merchant",
+     "Level": 191,
+     "hp": 19481,
+     "side": 1,
+     "breed": 1,
+     "md": 26088,
+     "sc": 120,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q71G",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2066193184",
+   "bands": [
+    {
+     "Name": "Fresh Clan Agent",
+     "Level": 8,
+     "hp": 183,
+     "side": 1,
+     "breed": 2,
+     "md": 26125,
+     "sc": 94,
+     "mesh": 23374,
+     "head": 40215,
+     "tex": 0,
+     "fam": 112
+    }
+   ]
+  },
+  {
+   "hash": "Q71H",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2066363777",
+   "bands": [
+    {
+     "Name": "Clan Basic Quality Armorer",
+     "Level": 199,
+     "hp": 33163,
+     "side": 1,
+     "breed": 2,
+     "md": 26139,
+     "sc": 121,
+     "mesh": 5914,
+     "head": 40249,
+     "tex": 0,
+     "fam": 1
+    }
+   ]
+  },
+  {
+   "hash": "Q71I",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1000006",
+   "bands": [
+    {
+     "Name": "Unicorn Intelligence Officer",
+     "Level": 250,
+     "hp": 600700,
+     "side": 2,
+     "breed": 1,
+     "md": 257305,
+     "sc": 150,
+     "mesh": 257304,
+     "head": 0,
+     "tex": 0,
+     "fam": 219
+    }
+   ]
+  },
+  {
+   "hash": "Q71J",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261031_Whozewhatzit inst 2063206210",
+   "bands": [
+    {
+     "Name": "Mia Munro",
+     "Level": 203,
+     "hp": 258987,
+     "side": 0,
+     "breed": 2,
+     "md": 267318,
+     "sc": 100,
+     "mesh": 5934,
+     "head": 40218,
+     "tex": 0,
+     "fam": 158
+    }
+   ]
+  },
+  {
+   "hash": "Q71K",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261031_Whozewhatzit inst 2063206202",
+   "bands": [
+    {
+     "Name": "Neutral Clothing Salesman",
+     "Level": 170,
+     "hp": 19620,
+     "side": 0,
+     "breed": 1,
+     "md": 26092,
+     "sc": 105,
+     "mesh": 5907,
+     "head": 223811,
+     "tex": 0,
+     "fam": 0
+    }
+   ]
+  },
+  {
+   "hash": "Q71L",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261031_Whozewhatzit inst 2063206193",
+   "bands": [
+    {
+     "Name": "Newland Militia Guard",
+     "Level": 202,
+     "hp": 55870,
+     "side": 0,
+     "breed": 4,
+     "md": 26097,
+     "sc": 130,
+     "mesh": 5900,
+     "head": 40111,
+     "tex": 0,
+     "fam": 0
+    },
+    {
+     "Name": "Newland Militia Guard",
+     "Level": 210,
+     "hp": 89891,
+     "side": 0,
+     "breed": 4,
+     "md": 26097,
+     "sc": 130,
+     "mesh": 5900,
+     "head": 40111,
+     "tex": 0,
+     "fam": 0
+    },
+    {
+     "Name": "Newland Militia Guard",
+     "Level": 216,
+     "hp": 115408,
+     "side": 0,
+     "breed": 4,
+     "md": 26097,
+     "sc": 130,
+     "mesh": 5900,
+     "head": 40111,
+     "tex": 0,
+     "fam": 0
+    }
+   ]
+  },
+  {
+   "hash": "Q71M",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065969205",
+   "bands": [
+    {
+     "Name": "Omni-Pol Peacekeeper",
+     "Level": 241,
+     "hp": 170559,
+     "side": 2,
+     "breed": 0,
+     "md": 22821,
+     "sc": 129,
+     "mesh": 21715,
+     "head": 0,
+     "tex": 0,
+     "fam": 2
+    },
+    {
+     "Name": "Omni-Pol Peacekeeper",
+     "Level": 246,
+     "hp": 186915,
+     "side": 2,
+     "breed": 0,
+     "md": 22821,
+     "sc": 130,
+     "mesh": 21715,
+     "head": 0,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q71N",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065969207",
+   "bands": [
+    {
+     "Name": "Male Omni-Pol Supreme",
+     "Level": 250,
+     "hp": 200000,
+     "side": 2,
+     "breed": 1,
+     "md": 26092,
+     "sc": 130,
+     "mesh": 5907,
+     "head": 40694,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q71O",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065969212",
+   "bands": [
+    {
+     "Name": "Omni-AF Trooper",
+     "Level": 250,
+     "hp": 200000,
+     "side": 2,
+     "breed": 3,
+     "md": 26151,
+     "sc": 130,
+     "mesh": 5921,
+     "head": 40171,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q71P",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065969233",
+   "bands": [
+    {
+     "Name": "Omni-Pol Elite Guard",
+     "Level": 205,
+     "hp": 79186,
+     "side": 2,
+     "breed": 1,
+     "md": 249667,
+     "sc": 122,
+     "mesh": 5907,
+     "head": 40686,
+     "tex": 0,
+     "fam": 2
+    },
+    {
+     "Name": "Omni-Pol Elite Guard",
+     "Level": 207,
+     "hp": 89000,
+     "side": 2,
+     "breed": 1,
+     "md": 249667,
+     "sc": 123,
+     "mesh": 5907,
+     "head": 40686,
+     "tex": 0,
+     "fam": 2
+    },
+    {
+     "Name": "Omni-Pol Elite Guard",
+     "Level": 210,
+     "hp": 103721,
+     "side": 2,
+     "breed": 1,
+     "md": 249667,
+     "sc": 123,
+     "mesh": 5907,
+     "head": 40686,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q71Q",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065969239",
+   "bands": [
+    {
+     "Name": "Omni-Pol Commissioner Lee",
+     "Level": 225,
+     "hp": 472868,
+     "side": 2,
+     "breed": 4,
+     "md": 262966,
+     "sc": 164,
+     "mesh": 5900,
+     "head": 40108,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q71R",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065969240",
+   "bands": [
+    {
+     "Name": "Seasoned OT Diplomat",
+     "Level": 145,
+     "hp": 10099,
+     "side": 2,
+     "breed": 1,
+     "md": 26092,
+     "sc": 117,
+     "mesh": 5907,
+     "head": 40694,
+     "tex": 0,
+     "fam": 108
+    }
+   ]
+  },
+  {
+   "hash": "Q71S",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065969243",
+   "bands": [
+    {
+     "Name": "Master OT Techno-Architect",
+     "Level": 182,
+     "hp": 18139,
+     "side": 2,
+     "breed": 3,
+     "md": 26147,
+     "sc": 119,
+     "mesh": 17905,
+     "head": 40172,
+     "tex": 0,
+     "fam": 102
+    }
+   ]
+  },
+  {
+   "hash": "Q71T",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065969244",
+   "bands": [
+    {
+     "Name": "Seasoned OT Bureaucrat",
+     "Level": 136,
+     "hp": 11282,
+     "side": 2,
+     "breed": 3,
+     "md": 26143,
+     "sc": 116,
+     "mesh": 23368,
+     "head": 40137,
+     "tex": 0,
+     "fam": 108
+    }
+   ]
+  },
+  {
+   "hash": "Q71U",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1008693",
+   "bands": [
+    {
+     "Name": "OT Basic Quality Pharmacist",
+     "Level": 178,
+     "hp": 17543,
+     "side": 2,
+     "breed": 1,
+     "md": 26088,
+     "sc": 119,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 2
+    },
+    {
+     "Name": "OT Basic Quality Pharmacist",
+     "Level": 191,
+     "hp": 19481,
+     "side": 2,
+     "breed": 1,
+     "md": 26088,
+     "sc": 120,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q71V",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065626657",
+   "bands": [
+    {
+     "Name": "City Administrator - Rex Chapman",
+     "Level": 196,
+     "hp": 46697,
+     "side": 2,
+     "breed": 1,
+     "md": 26086,
+     "sc": 121,
+     "mesh": 17867,
+     "head": 40688,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q71W",
+   "wander": true,
+   "friendly": true,
+   "src": "live scrape 20261029 inst 1008737",
+   "bands": [
+    {
+     "Name": "Channeled Force Arbiter",
+     "Level": 212,
+     "hp": 76652,
+     "side": 0,
+     "breed": 3,
+     "md": 252176,
+     "sc": 90,
+     "mesh": 17901,
+     "head": 40169,
+     "tex": 0,
+     "fam": 137
+    }
+   ]
+  },
+  {
+   "hash": "Q71X",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261030_Nazgore inst 2063749821",
+   "bands": [
+    {
+     "Name": "OT Bronto Chef",
+     "Level": 183,
+     "hp": 18289,
+     "side": 2,
+     "breed": 1,
+     "md": 26090,
+     "sc": 120,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q71Y",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261030_Nazgore inst 2063749827",
+   "bands": [
+    {
+     "Name": "Female Corporal",
+     "Level": 110,
+     "hp": 8015,
+     "side": 2,
+     "breed": 1,
+     "md": 26090,
+     "sc": 113,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q71Z",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261102_Whozewhatzit inst 2065626706",
+   "bands": [
+    {
+     "Name": "Eliseo Ye",
+     "Level": 2,
+     "hp": 48,
+     "side": 2,
+     "breed": 2,
+     "md": 26135,
+     "sc": 91,
+     "mesh": 23378,
+     "head": 40271,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q720",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2066176040",
+   "bands": [
+    {
+     "Name": "Chauncey Varela",
+     "Level": 9,
+     "hp": 205,
+     "side": 2,
+     "breed": 4,
+     "md": 26097,
+     "sc": 95,
+     "mesh": 5900,
+     "head": 40111,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q721",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2066176321",
+   "bands": [
+    {
+     "Name": "Wade Rouse",
+     "Level": 7,
+     "hp": 160,
+     "side": 2,
+     "breed": 1,
+     "md": 26092,
+     "sc": 94,
+     "mesh": 5907,
+     "head": 40694,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q722",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2066176549",
+   "bands": [
+    {
+     "Name": "Kristyn Brigges",
+     "Level": 7,
+     "hp": 160,
+     "side": 2,
+     "breed": 1,
+     "md": 26090,
+     "sc": 94,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q723",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261030_Nazgore inst 2063204801",
+   "bands": [
+    {
+     "Name": "Female Lieutenant",
+     "Level": 151,
+     "hp": 13518,
+     "side": 2,
+     "breed": 1,
+     "md": 26076,
+     "sc": 117,
+     "mesh": 17530,
+     "head": 40635,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q724",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261030_Nazgore inst 2064756075",
+   "bands": [
+    {
+     "Name": "Male Lieutenant",
+     "Level": 151,
+     "hp": 13518,
+     "side": 2,
+     "breed": 1,
+     "md": 26088,
+     "sc": 117,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 2
+    },
+    {
+     "Name": "Male Lieutenant",
+     "Level": 155,
+     "hp": 14114,
+     "side": 2,
+     "breed": 1,
+     "md": 26088,
+     "sc": 117,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 2
+    },
+    {
+     "Name": "Male Lieutenant",
+     "Level": 159,
+     "hp": 14711,
+     "side": 2,
+     "breed": 1,
+     "md": 26088,
+     "sc": 118,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q725",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261030_Nazgore inst 2065098864",
+   "bands": [
+    {
+     "Name": "Male Guard",
+     "Level": 90,
+     "hp": 5643,
+     "side": 2,
+     "breed": 2,
+     "md": 26139,
+     "sc": 110,
+     "mesh": 5914,
+     "head": 40249,
+     "tex": 0,
+     "fam": 2
+    },
+    {
+     "Name": "Male Guard",
+     "Level": 97,
+     "hp": 6474,
+     "side": 2,
+     "breed": 2,
+     "md": 26139,
+     "sc": 111,
+     "mesh": 5914,
+     "head": 40249,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q726",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261102_Whozewhatzit inst 2065909795",
+   "bands": [
+    {
+     "Name": "Lieutenant Antonio Neal",
+     "Level": 220,
+     "hp": 122232,
+     "side": 2,
+     "breed": 1,
+     "md": 26092,
+     "sc": 125,
+     "mesh": 5907,
+     "head": 223809,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q727",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065909799",
+   "bands": [
+    {
+     "Name": "Female Guard",
+     "Level": 108,
+     "hp": 7778,
+     "side": 2,
+     "breed": 1,
+     "md": 26090,
+     "sc": 113,
+     "mesh": 5927,
+     "head": 40629,
+     "tex": 0,
+     "fam": 2
+    }
+   ]
+  },
+  {
+   "hash": "Q728",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065909819",
+   "bands": [
+    {
+     "Name": "Sylvester Guiney",
+     "Level": 2,
+     "hp": 48,
+     "side": 2,
+     "breed": 1,
+     "md": 26088,
+     "sc": 91,
+     "mesh": 17534,
+     "head": 40687,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q729",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065909821",
+   "bands": [
+    {
+     "Name": "Glen Brumble",
+     "Level": 9,
+     "hp": 205,
+     "side": 2,
+     "breed": 4,
+     "md": 26097,
+     "sc": 95,
+     "mesh": 5900,
+     "head": 40111,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q72A",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261101_Whozewhatzit inst 2065909823",
+   "bands": [
+    {
+     "Name": "Pasquale Seaman",
+     "Level": 3,
+     "hp": 70,
+     "side": 2,
+     "breed": 3,
+     "md": 26159,
+     "sc": 92,
+     "mesh": 17909,
+     "head": 40173,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  },
+  {
+   "hash": "Q72B",
+   "wander": false,
+   "friendly": true,
+   "src": "live scrape 20261103_Whozewhatzit inst 2065909830",
+   "bands": [
+    {
+     "Name": "Elza Laurence",
+     "Level": 3,
+     "hp": 70,
+     "side": 2,
+     "breed": 3,
+     "md": 26155,
+     "sc": 92,
+     "mesh": 23370,
+     "head": 40138,
+     "tex": 0,
+     "fam": 105
+    }
+   ]
+  }
+ ],
+ "spawnsByPf": {
+  "540": [
+   {
+    "pf": 540,
+    "hash": "Q70T",
+    "name": "Clan Male Prison Guard",
+    "reuse": false,
+    "lo": 186,
+    "hi": 186,
+    "x": 464.253,
+    "y": 8.01,
+    "z": 223.76,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893873"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70T",
+    "name": "Clan Male Prison Guard",
+    "reuse": false,
+    "lo": 177,
+    "hi": 177,
+    "x": 452.108,
+    "y": 8.01,
+    "z": 224.543,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893874"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70U",
+    "name": "Male Blade",
+    "reuse": false,
+    "lo": 180,
+    "hi": 180,
+    "x": 487.449,
+    "y": 8.595,
+    "z": 411.897,
+    "angle": 340,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893875"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70V",
+    "name": "Female Blade",
+    "reuse": false,
+    "lo": 170,
+    "hi": 170,
+    "x": 488.007,
+    "y": 8.221,
+    "z": 415.911,
+    "angle": 224,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893876"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70W",
+    "name": "Male Watcher",
+    "reuse": false,
+    "lo": 102,
+    "hi": 102,
+    "x": 553.449,
+    "y": 8.01,
+    "z": 390.638,
+    "angle": 92,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893880"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70X",
+    "name": "Female Watcher",
+    "reuse": false,
+    "lo": 102,
+    "hi": 102,
+    "x": 560.708,
+    "y": 8.01,
+    "z": 350.717,
+    "angle": 211,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893881"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70Y",
+    "name": "Sirocco",
+    "reuse": false,
+    "lo": 99,
+    "hi": 99,
+    "x": 282.125,
+    "y": 8.01,
+    "z": 207.395,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893883"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70Z",
+    "name": "Fresh Clan Doctor",
+    "reuse": false,
+    "lo": 7,
+    "hi": 7,
+    "x": 296.495,
+    "y": 8.01,
+    "z": 337.635,
+    "angle": 271,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893884"
+   },
+   {
+    "pf": 540,
+    "hash": "Q710",
+    "name": "Clan Container Supplier",
+    "reuse": false,
+    "lo": 195,
+    "hi": 195,
+    "x": 553.65,
+    "y": 8.01,
+    "z": 385.84,
+    "angle": 335,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893886"
+   },
+   {
+    "pf": 540,
+    "hash": "Q711",
+    "name": "Clan Basic Quality Pharmacist",
+    "reuse": false,
+    "lo": 183,
+    "hi": 183,
+    "x": 553.463,
+    "y": 8.01,
+    "z": 269.569,
+    "angle": 269,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893888"
+   },
+   {
+    "pf": 540,
+    "hash": "Q712",
+    "name": "Clan Tailor",
+    "reuse": false,
+    "lo": 181,
+    "hi": 181,
+    "x": 553.625,
+    "y": 8.01,
+    "z": 352.508,
+    "angle": 231,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893890"
+   },
+   {
+    "pf": 540,
+    "hash": "Q713",
+    "name": "Clan Party Mixer",
+    "reuse": false,
+    "lo": 186,
+    "hi": 186,
+    "x": 511.412,
+    "y": 8.01,
+    "z": 292.747,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893891"
+   },
+   {
+    "pf": 540,
+    "hash": "Q714",
+    "name": "Male High Commander",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 273.945,
+    "y": 8.135,
+    "z": 415.933,
+    "angle": 356,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893893"
+   },
+   {
+    "pf": 540,
+    "hash": "Q715",
+    "name": "Female High Commander",
+    "reuse": false,
+    "lo": 199,
+    "hi": 199,
+    "x": 240.466,
+    "y": 8.135,
+    "z": 401.803,
+    "angle": 249,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893894"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 546.243,
+    "y": 8.01,
+    "z": 370.785,
+    "angle": 174,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893895"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70S",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 416.07,
+    "y": 8.01,
+    "z": 230.128,
+    "angle": 165,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893897"
+   },
+   {
+    "pf": 540,
+    "hash": "Q716",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 317.996,
+    "y": 8.01,
+    "z": 395.176,
+    "angle": 216,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893899"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 431.004,
+    "y": 8.01,
+    "z": 549.043,
+    "angle": 283,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893901"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 317.181,
+    "y": 8.01,
+    "z": 397.543,
+    "angle": 203,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893904"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 319.948,
+    "y": 8.01,
+    "z": 391.402,
+    "angle": 78,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893905"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 339.493,
+    "y": 8.01,
+    "z": 417.282,
+    "angle": 39,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893906"
+   },
+   {
+    "pf": 540,
+    "hash": "Q717",
+    "name": "Calista Zazzera",
+    "reuse": false,
+    "lo": 197,
+    "hi": 197,
+    "x": 439.771,
+    "y": 8.01,
+    "z": 304.574,
+    "angle": 6,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893907"
+   },
+   {
+    "pf": 540,
+    "hash": "Q718",
+    "name": "Captain Cante Hawk",
+    "reuse": false,
+    "lo": 220,
+    "hi": 220,
+    "x": 487.623,
+    "y": 8.01,
+    "z": 286.115,
+    "angle": 313,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893909"
+   },
+   {
+    "pf": 540,
+    "hash": "Q719",
+    "name": "Eleanor Kiamarli",
+    "reuse": false,
+    "lo": 220,
+    "hi": 220,
+    "x": 445.399,
+    "y": 15.01,
+    "z": 394.318,
+    "angle": 215,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893910"
+   },
+   {
+    "pf": 540,
+    "hash": "Q71A",
+    "name": "Fresh Clan Trader",
+    "reuse": false,
+    "lo": 10,
+    "hi": 10,
+    "x": 543.971,
+    "y": 8.01,
+    "z": 295.486,
+    "angle": 124,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893963"
+   },
+   {
+    "pf": 540,
+    "hash": "Q71B",
+    "name": "Fresh Clan Bureaucrat",
+    "reuse": false,
+    "lo": 9,
+    "hi": 9,
+    "x": 299.417,
+    "y": 8.334,
+    "z": 313.113,
+    "angle": 180,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065893977"
+   },
+   {
+    "pf": 540,
+    "hash": "Q71C",
+    "name": "Arbiter's Herald",
+    "reuse": false,
+    "lo": 220,
+    "hi": 220,
+    "x": 523.573,
+    "y": 8.01,
+    "z": 576.636,
+    "angle": 180,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065894019"
+   },
+   {
+    "pf": 540,
+    "hash": "Q71D",
+    "name": "Fresh Clan Bodyguard",
+    "reuse": false,
+    "lo": 10,
+    "hi": 10,
+    "x": 275.483,
+    "y": 8.135,
+    "z": 334.913,
+    "angle": 74,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065894048"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 416.411,
+    "y": 8.01,
+    "z": 229.08,
+    "angle": 212,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066115883"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 409.685,
+    "y": 8.01,
+    "z": 224.349,
+    "angle": 223,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066115904"
+   },
+   {
+    "pf": 540,
+    "hash": "Q71E",
+    "name": "Clan Food Provider",
+    "reuse": false,
+    "lo": 197,
+    "hi": 197,
+    "x": 523.905,
+    "y": 8.01,
+    "z": 382.515,
+    "angle": 358,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066171030"
+   },
+   {
+    "pf": 540,
+    "hash": "Q71F",
+    "name": "Clan Computer Merchant",
+    "reuse": false,
+    "lo": 191,
+    "hi": 191,
+    "x": 533.456,
+    "y": 8.01,
+    "z": 386.84,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066171453"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70W",
+    "name": "Male Watcher",
+    "reuse": false,
+    "lo": 105,
+    "hi": 105,
+    "x": 286.901,
+    "y": 8.01,
+    "z": 373.133,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066193017"
+   },
+   {
+    "pf": 540,
+    "hash": "Q71G",
+    "name": "Fresh Clan Agent",
+    "reuse": false,
+    "lo": 8,
+    "hi": 8,
+    "x": 523.28,
+    "y": 8.01,
+    "z": 329.039,
+    "angle": 279,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066193184"
+   },
+   {
+    "pf": 540,
+    "hash": "Q71H",
+    "name": "Clan Basic Quality Armorer",
+    "reuse": false,
+    "lo": 199,
+    "hi": 199,
+    "x": 523.991,
+    "y": 8.01,
+    "z": 473.235,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066363777"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70W",
+    "name": "Male Watcher",
+    "reuse": false,
+    "lo": 109,
+    "hi": 109,
+    "x": 310.459,
+    "y": 8.01,
+    "z": 389.661,
+    "angle": 93,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066382503"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70U",
+    "name": "Male Blade",
+    "reuse": false,
+    "lo": 185,
+    "hi": 185,
+    "x": 587.659,
+    "y": 8.01,
+    "z": 387.287,
+    "angle": 268,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066382509"
+   },
+   {
+    "pf": 540,
+    "hash": "Q70V",
+    "name": "Female Blade",
+    "reuse": false,
+    "lo": 198,
+    "hi": 198,
+    "x": 587.692,
+    "y": 8.01,
+    "z": 400.133,
+    "angle": 268,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066382510"
+   }
+  ],
+  "545": [
+   {
+    "pf": 545,
+    "hash": "Q70E",
+    "name": "Cyril Doniger",
+    "reuse": false,
+    "lo": 2,
+    "hi": 2,
+    "x": 345.312,
+    "y": 11.81,
+    "z": 470.401,
+    "angle": 117,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920691"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 413.124,
+    "y": 0.01,
+    "z": 354.788,
+    "angle": 177,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920693"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 489.865,
+    "y": 15.41,
+    "z": 447.047,
+    "angle": 129,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920695"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 419.842,
+    "y": 0.057,
+    "z": 339.086,
+    "angle": 340,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920698"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 317.261,
+    "y": 0.01,
+    "z": 407.265,
+    "angle": 263,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920699"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70G",
+    "name": "Robert Ryan",
+    "reuse": false,
+    "lo": 40,
+    "hi": 40,
+    "x": 450.927,
+    "y": 2.61,
+    "z": 392.032,
+    "angle": 198,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920700"
+   },
+   {
+    "pf": 545,
+    "hash": "WRYS",
+    "name": "Warden Ystanes",
+    "reuse": true,
+    "lo": 177,
+    "hi": 177,
+    "x": 386.17,
+    "y": 11.81,
+    "z": 462.437,
+    "angle": 213,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920701"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70H",
+    "name": "Mr. Gibs",
+    "reuse": false,
+    "lo": 50,
+    "hi": 50,
+    "x": 554.883,
+    "y": 22.41,
+    "z": 568.948,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920702"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70I",
+    "name": "Maike Ro",
+    "reuse": false,
+    "lo": 202,
+    "hi": 202,
+    "x": 475.515,
+    "y": 7.61,
+    "z": 410.884,
+    "angle": 249,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920703"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70J",
+    "name": "Annie Kingsglade",
+    "reuse": false,
+    "lo": 150,
+    "hi": 150,
+    "x": 395.233,
+    "y": 0.21,
+    "z": 340.9,
+    "angle": 121,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920705"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70K",
+    "name": "Tirbo Ratcatcher",
+    "reuse": false,
+    "lo": 30,
+    "hi": 30,
+    "x": 325.78,
+    "y": 0.61,
+    "z": 358.083,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920706"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70L",
+    "name": "Graham Simmonds",
+    "reuse": false,
+    "lo": 95,
+    "hi": 95,
+    "x": 394,
+    "y": 0.21,
+    "z": 345,
+    "angle": 180,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920707"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70M",
+    "name": "Emma Ye",
+    "reuse": false,
+    "lo": 2,
+    "hi": 2,
+    "x": 394.454,
+    "y": 5.21,
+    "z": 421.38,
+    "angle": 155,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920709"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70N",
+    "name": "Delaine Conmy",
+    "reuse": false,
+    "lo": 3,
+    "hi": 3,
+    "x": 470.361,
+    "y": 3.79,
+    "z": 396.916,
+    "angle": 141,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920712"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70O",
+    "name": "Britteny Kuiper",
+    "reuse": false,
+    "lo": 3,
+    "hi": 3,
+    "x": 553.836,
+    "y": 22.41,
+    "z": 554.876,
+    "angle": 122,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920715"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70P",
+    "name": "Cory Dilox",
+    "reuse": false,
+    "lo": 2,
+    "hi": 2,
+    "x": 479.08,
+    "y": 23.193,
+    "z": 550.103,
+    "angle": 283,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920718"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70Q",
+    "name": "Nestor Magistrale",
+    "reuse": false,
+    "lo": 3,
+    "hi": 3,
+    "x": 397.683,
+    "y": 0.579,
+    "z": 393.052,
+    "angle": 249,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920721"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70R",
+    "name": "Ken Russi",
+    "reuse": false,
+    "lo": 3,
+    "hi": 3,
+    "x": 354.464,
+    "y": 0.01,
+    "z": 402.33,
+    "angle": 354,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065920724"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70S",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 416.677,
+    "y": 15.881,
+    "z": 444.456,
+    "angle": 271,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066297939"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 448.439,
+    "y": 15.41,
+    "z": 438.534,
+    "angle": 75,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066297940"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 487.576,
+    "y": 2.16,
+    "z": 354.787,
+    "angle": 159,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066297942"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 402.617,
+    "y": 13.074,
+    "z": 449.096,
+    "angle": 105,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066297943"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70S",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 380.137,
+    "y": 11.81,
+    "z": 461.584,
+    "angle": 118,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066375820"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 388.26,
+    "y": 11.81,
+    "z": 457.765,
+    "angle": 3,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066375823"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70S",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 457.582,
+    "y": 15.41,
+    "z": 443.672,
+    "angle": 205,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066375832"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 370.141,
+    "y": 11.81,
+    "z": 466.307,
+    "angle": 274,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376148"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70S",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 380.956,
+    "y": 0.01,
+    "z": 394.995,
+    "angle": 109,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066375841"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 352.45,
+    "y": 11.81,
+    "z": 473.18,
+    "angle": 138,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376153"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 420.726,
+    "y": 0.608,
+    "z": 358.855,
+    "angle": 104,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066375853"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 399.068,
+    "y": 0.054,
+    "z": 364.857,
+    "angle": 200,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066375855"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 490.543,
+    "y": 3.139,
+    "z": 346.254,
+    "angle": 237,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066375864"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70S",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 357.432,
+    "y": 11.81,
+    "z": 472.576,
+    "angle": 197,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376295"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70S",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 362.45,
+    "y": 11.81,
+    "z": 470.379,
+    "angle": 178,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376151"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 356.144,
+    "y": 11.81,
+    "z": 472.107,
+    "angle": 136,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066375976"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70S",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 360.996,
+    "y": 11.81,
+    "z": 464.495,
+    "angle": 295,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376160"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 373.637,
+    "y": 11.81,
+    "z": 463.391,
+    "angle": 262,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376165"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 368.915,
+    "y": 11.81,
+    "z": 468.897,
+    "angle": 158,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376119"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 364.524,
+    "y": 11.81,
+    "z": 470.112,
+    "angle": 213,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376133"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70S",
+    "name": "Vanguard Commander",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 358.231,
+    "y": 11.81,
+    "z": 465.749,
+    "angle": 121,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376138"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 359.179,
+    "y": 11.81,
+    "z": 474.19,
+    "angle": 249,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376290"
+   },
+   {
+    "pf": 545,
+    "hash": "Q70F",
+    "name": "Vanguard Watcher",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 360.062,
+    "y": 11.81,
+    "z": 470.152,
+    "angle": 130,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066376296"
+   }
+  ],
+  "566": [
+   {
+    "pf": 566,
+    "hash": "Q71I",
+    "name": "Unicorn Intelligence Officer",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 382.734,
+    "y": 27.627,
+    "z": 304.318,
+    "angle": 282,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1000006"
+   },
+   {
+    "pf": 566,
+    "hash": "Q71J",
+    "name": "Mia Munro",
+    "reuse": false,
+    "lo": 203,
+    "hi": 203,
+    "x": 452.91,
+    "y": 25.01,
+    "z": 331.653,
+    "angle": 94,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261031_Whozewhatzit.csv inst 2063206210"
+   },
+   {
+    "pf": 566,
+    "hash": "Q608",
+    "name": "Zyvania Bagh",
+    "reuse": true,
+    "lo": 75,
+    "hi": 75,
+    "x": 259.687,
+    "y": 32.41,
+    "z": 310.603,
+    "angle": 156,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1000032"
+   },
+   {
+    "pf": 566,
+    "hash": "Q71K",
+    "name": "Neutral Clothing Salesman",
+    "reuse": false,
+    "lo": 170,
+    "hi": 170,
+    "x": 281.562,
+    "y": 32.41,
+    "z": 309.036,
+    "angle": 343,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261031_Whozewhatzit.csv inst 2063206202"
+   },
+   {
+    "pf": 566,
+    "hash": "Q71L",
+    "name": "Newland Militia Guard",
+    "reuse": false,
+    "lo": 202,
+    "hi": 202,
+    "x": 345.508,
+    "y": 32.487,
+    "z": 319.306,
+    "angle": 194,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261031_Whozewhatzit.csv inst 2063206193"
+   },
+   {
+    "pf": 566,
+    "hash": "FAKL",
+    "name": "Farno Kilharha",
+    "reuse": true,
+    "lo": 163,
+    "hi": 163,
+    "x": 431.574,
+    "y": 25.01,
+    "z": 309.897,
+    "angle": 84,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261031_Whozewhatzit.csv inst 2063206201"
+   },
+   {
+    "pf": 566,
+    "hash": "Q71L",
+    "name": "Newland Militia Guard",
+    "reuse": false,
+    "lo": 216,
+    "hi": 216,
+    "x": 305.922,
+    "y": 32.41,
+    "z": 320.743,
+    "angle": 325,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261031_Whozewhatzit.csv inst 2063443148"
+   },
+   {
+    "pf": 566,
+    "hash": "Q71L",
+    "name": "Newland Militia Guard",
+    "reuse": false,
+    "lo": 210,
+    "hi": 210,
+    "x": 277.264,
+    "y": 32.41,
+    "z": 317.113,
+    "angle": 172,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261031_Whozewhatzit.csv inst 2063443151"
+   }
+  ],
+  "700": [
+   {
+    "pf": 700,
+    "hash": "Q71M",
+    "name": "Omni-Pol Peacekeeper",
+    "reuse": false,
+    "lo": 241,
+    "hi": 241,
+    "x": 619.397,
+    "y": 16.61,
+    "z": 395.584,
+    "angle": 1,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969205"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71M",
+    "name": "Omni-Pol Peacekeeper",
+    "reuse": false,
+    "lo": 246,
+    "hi": 246,
+    "x": 519.869,
+    "y": 20.395,
+    "z": 420.269,
+    "angle": 235,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969206"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71N",
+    "name": "Male Omni-Pol Supreme",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 639.396,
+    "y": 16.61,
+    "z": 485.756,
+    "angle": 6,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969207"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71N",
+    "name": "Male Omni-Pol Supreme",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 556.037,
+    "y": 22.627,
+    "z": 425.79,
+    "angle": 65,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969208"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71N",
+    "name": "Male Omni-Pol Supreme",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 538.349,
+    "y": 16.56,
+    "z": 422.699,
+    "angle": 124,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969210"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71N",
+    "name": "Male Omni-Pol Supreme",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 639.407,
+    "y": 16.61,
+    "z": 482.201,
+    "angle": 14,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969211"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71O",
+    "name": "Omni-AF Trooper",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 521.699,
+    "y": 20.395,
+    "z": 425.017,
+    "angle": 341,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969212"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71O",
+    "name": "Omni-AF Trooper",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 520.643,
+    "y": 20.395,
+    "z": 413.562,
+    "angle": 333,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969213"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71N",
+    "name": "Male Omni-Pol Supreme",
+    "reuse": false,
+    "lo": 250,
+    "hi": 250,
+    "x": 574.087,
+    "y": 16.41,
+    "z": 468.049,
+    "angle": 5,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969220"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71P",
+    "name": "Omni-Pol Elite Guard",
+    "reuse": false,
+    "lo": 210,
+    "hi": 210,
+    "x": 574.692,
+    "y": 16.41,
+    "z": 461.644,
+    "angle": 90,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969233"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71P",
+    "name": "Omni-Pol Elite Guard",
+    "reuse": false,
+    "lo": 207,
+    "hi": 207,
+    "x": 621.926,
+    "y": 28.395,
+    "z": 461.606,
+    "angle": 90,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969234"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71P",
+    "name": "Omni-Pol Elite Guard",
+    "reuse": false,
+    "lo": 205,
+    "hi": 205,
+    "x": 590.876,
+    "y": 40.426,
+    "z": 466.687,
+    "angle": 235,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969235"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71P",
+    "name": "Omni-Pol Elite Guard",
+    "reuse": false,
+    "lo": 205,
+    "hi": 205,
+    "x": 619.276,
+    "y": 40.426,
+    "z": 468.349,
+    "angle": 104,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969236"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71Q",
+    "name": "Omni-Pol Commissioner Lee",
+    "reuse": false,
+    "lo": 225,
+    "hi": 225,
+    "x": 603.852,
+    "y": 16.61,
+    "z": 396.717,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969239"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71R",
+    "name": "Seasoned OT Diplomat",
+    "reuse": false,
+    "lo": 145,
+    "hi": 145,
+    "x": 639.114,
+    "y": 16.61,
+    "z": 456.387,
+    "angle": 202,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969240"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71S",
+    "name": "Master OT Techno-Architect",
+    "reuse": false,
+    "lo": 182,
+    "hi": 182,
+    "x": 536.317,
+    "y": 16.41,
+    "z": 457.525,
+    "angle": 115,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969243"
+   },
+   {
+    "pf": 700,
+    "hash": "Q71T",
+    "name": "Seasoned OT Bureaucrat",
+    "reuse": false,
+    "lo": 136,
+    "hi": 136,
+    "x": 536.775,
+    "y": 16.589,
+    "z": 423.703,
+    "angle": 122,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065969244"
+   }
+  ],
+  "705": [
+   {
+    "pf": 705,
+    "hash": "Q71U",
+    "name": "OT Basic Quality Pharmacist",
+    "reuse": false,
+    "lo": 178,
+    "hi": 178,
+    "x": 977.383,
+    "y": 20.21,
+    "z": 545.198,
+    "angle": 241,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1008693"
+   },
+   {
+    "pf": 705,
+    "hash": "Q71V",
+    "name": "City Administrator - Rex Chapman",
+    "reuse": false,
+    "lo": 196,
+    "hi": 196,
+    "x": 905.828,
+    "y": 16.41,
+    "z": 522.022,
+    "angle": 270,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065626657"
+   },
+   {
+    "pf": 705,
+    "hash": "Q71W",
+    "name": "Channeled Force Arbiter",
+    "reuse": false,
+    "lo": 212,
+    "hi": 212,
+    "x": 598.671,
+    "y": 16.41,
+    "z": 350.108,
+    "angle": 38,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1008737"
+   },
+   {
+    "pf": 705,
+    "hash": "C00W",
+    "name": "OT Citizen - Young Solitus Female",
+    "reuse": true,
+    "lo": 2,
+    "hi": 2,
+    "x": 934.629,
+    "y": 16.41,
+    "z": 356.768,
+    "angle": 217,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1008748"
+   },
+   {
+    "pf": 705,
+    "hash": "JRES",
+    "name": "OT Citizen - Adult Atrox Male",
+    "reuse": true,
+    "lo": 10,
+    "hi": 10,
+    "x": 587.011,
+    "y": 16.41,
+    "z": 321.632,
+    "angle": 260,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1008751"
+   },
+   {
+    "pf": 705,
+    "hash": "Q71X",
+    "name": "OT Bronto Chef",
+    "reuse": false,
+    "lo": 183,
+    "hi": 183,
+    "x": 937.542,
+    "y": 16.41,
+    "z": 504.563,
+    "angle": 85,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261030_Nazgore.csv inst 2063749821"
+   },
+   {
+    "pf": 705,
+    "hash": "Q71Y",
+    "name": "Female Corporal",
+    "reuse": false,
+    "lo": 110,
+    "hi": 110,
+    "x": 912.453,
+    "y": 16.41,
+    "z": 467.905,
+    "angle": 186,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261030_Nazgore.csv inst 2063749827"
+   },
+   {
+    "pf": 705,
+    "hash": "ONUR",
+    "name": "Omni-AF Urban Trooper",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 586.753,
+    "y": 16.41,
+    "z": 335.93,
+    "angle": 207,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 2063749851"
+   },
+   {
+    "pf": 705,
+    "hash": "ONUR",
+    "name": "Omni-AF Urban Trooper",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 587.507,
+    "y": 16.41,
+    "z": 327.652,
+    "angle": 221,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 2063749852"
+   },
+   {
+    "pf": 705,
+    "hash": "ONUR",
+    "name": "Omni-AF Urban Trooper",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 906.692,
+    "y": 16.41,
+    "z": 465.288,
+    "angle": 78,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261030_Nazgore.csv inst 2063749856"
+   },
+   {
+    "pf": 705,
+    "hash": "Q71W",
+    "name": "Channeled Force Arbiter",
+    "reuse": false,
+    "lo": 212,
+    "hi": 212,
+    "x": 566.687,
+    "y": 16.41,
+    "z": 326.783,
+    "angle": 181,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 2063749870"
+   },
+   {
+    "pf": 705,
+    "hash": "OMUA",
+    "name": "Omni-AF Urban Trooper",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 880.891,
+    "y": 16.41,
+    "z": 456.599,
+    "angle": 196,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065626640"
+   },
+   {
+    "pf": 705,
+    "hash": "ONUR",
+    "name": "Omni-AF Urban Trooper",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 904.006,
+    "y": 16.41,
+    "z": 482.583,
+    "angle": 13,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065626651"
+   },
+   {
+    "pf": 705,
+    "hash": "ONUR",
+    "name": "Omni-AF Urban Trooper",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 908.042,
+    "y": 16.41,
+    "z": 491.165,
+    "angle": 140,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065626652"
+   },
+   {
+    "pf": 705,
+    "hash": "ONUR",
+    "name": "Omni-AF Urban Trooper",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 902.703,
+    "y": 16.41,
+    "z": 454.92,
+    "angle": 327,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065626654"
+   },
+   {
+    "pf": 705,
+    "hash": "Q71W",
+    "name": "Channeled Force Arbiter",
+    "reuse": false,
+    "lo": 212,
+    "hi": 212,
+    "x": 567.278,
+    "y": 16.41,
+    "z": 349.969,
+    "angle": 270,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065626666"
+   },
+   {
+    "pf": 705,
+    "hash": "Q71Z",
+    "name": "Eliseo Ye",
+    "reuse": false,
+    "lo": 2,
+    "hi": 2,
+    "x": 942.41,
+    "y": 16.41,
+    "z": 476.695,
+    "angle": 325,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261102_Whozewhatzit.csv inst 2065626706"
+   },
+   {
+    "pf": 705,
+    "hash": "Q720",
+    "name": "Chauncey Varela",
+    "reuse": false,
+    "lo": 9,
+    "hi": 9,
+    "x": 730.582,
+    "y": 16.626,
+    "z": 440.016,
+    "angle": 262,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066176040"
+   },
+   {
+    "pf": 705,
+    "hash": "Q721",
+    "name": "Wade Rouse",
+    "reuse": false,
+    "lo": 7,
+    "hi": 7,
+    "x": 748.843,
+    "y": 16.41,
+    "z": 442.483,
+    "angle": 163,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066176321"
+   },
+   {
+    "pf": 705,
+    "hash": "Q722",
+    "name": "Kristyn Brigges",
+    "reuse": false,
+    "lo": 7,
+    "hi": 7,
+    "x": 715.314,
+    "y": 16.41,
+    "z": 409.843,
+    "angle": 284,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2066176549"
+   }
+  ],
+  "710": [
+   {
+    "pf": 710,
+    "hash": "RXKL",
+    "name": "Unicorn Commander",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 367.68,
+    "y": 17.01,
+    "z": 388.48,
+    "angle": 261,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1013215"
+   },
+   {
+    "pf": 710,
+    "hash": "Q71U",
+    "name": "OT Basic Quality Pharmacist",
+    "reuse": false,
+    "lo": 191,
+    "hi": 191,
+    "x": 416.021,
+    "y": 17.01,
+    "z": 405.423,
+    "angle": 229,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065909782"
+   },
+   {
+    "pf": 710,
+    "hash": "AUPU",
+    "name": "OT Citizen - Young Solitus Male",
+    "reuse": true,
+    "lo": 2,
+    "hi": 2,
+    "x": 515.167,
+    "y": 11.01,
+    "z": 342.109,
+    "angle": 149,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1013249"
+   },
+   {
+    "pf": 710,
+    "hash": "JRES",
+    "name": "OT Citizen - Adult Atrox Male",
+    "reuse": true,
+    "lo": 10,
+    "hi": 10,
+    "x": 427.307,
+    "y": 17.01,
+    "z": 338.333,
+    "angle": 95,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1013253"
+   },
+   {
+    "pf": 710,
+    "hash": "C010",
+    "name": "Battle Mechdog",
+    "reuse": true,
+    "lo": 42,
+    "hi": 42,
+    "x": 516.741,
+    "y": 11.01,
+    "z": 306.927,
+    "angle": 239,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1013261"
+   },
+   {
+    "pf": 710,
+    "hash": "RXKL",
+    "name": "Unicorn Commander",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 410,
+    "y": 5.01,
+    "z": 570,
+    "angle": 89,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1013273"
+   },
+   {
+    "pf": 710,
+    "hash": "KELE",
+    "name": "Rookie OT Attache",
+    "reuse": true,
+    "lo": 34,
+    "hi": 34,
+    "x": 446.651,
+    "y": 17.01,
+    "z": 391.97,
+    "angle": 302,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1020427"
+   },
+   {
+    "pf": 710,
+    "hash": "Q723",
+    "name": "Female Lieutenant",
+    "reuse": false,
+    "lo": 151,
+    "hi": 151,
+    "x": 359.569,
+    "y": 17.01,
+    "z": 384.58,
+    "angle": 59,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261030_Nazgore.csv inst 2063204801"
+   },
+   {
+    "pf": 710,
+    "hash": "Q724",
+    "name": "Male Lieutenant",
+    "reuse": false,
+    "lo": 151,
+    "hi": 151,
+    "x": 364.012,
+    "y": 17.305,
+    "z": 379.259,
+    "angle": 97,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261030_Nazgore.csv inst 2064756075"
+   },
+   {
+    "pf": 710,
+    "hash": "Q725",
+    "name": "Male Guard",
+    "reuse": false,
+    "lo": 97,
+    "hi": 97,
+    "x": 364.011,
+    "y": 17.305,
+    "z": 379.296,
+    "angle": 91,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261030_Nazgore.csv inst 2065098864"
+   },
+   {
+    "pf": 710,
+    "hash": "RXKL",
+    "name": "Unicorn Commander",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 371.901,
+    "y": 17.01,
+    "z": 354.587,
+    "angle": 324,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261102_Whozewhatzit.csv inst 2065909768"
+   },
+   {
+    "pf": 710,
+    "hash": "OMUA",
+    "name": "Omni-AF Urban Trooper",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 353.857,
+    "y": 17.01,
+    "z": 372.464,
+    "angle": 265,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261102_Whozewhatzit.csv inst 2065909776"
+   },
+   {
+    "pf": 710,
+    "hash": "Q726",
+    "name": "Lieutenant Antonio Neal",
+    "reuse": false,
+    "lo": 220,
+    "hi": 220,
+    "x": 410.678,
+    "y": 17.01,
+    "z": 394.065,
+    "angle": 255,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261102_Whozewhatzit.csv inst 2065909795"
+   },
+   {
+    "pf": 710,
+    "hash": "Q725",
+    "name": "Male Guard",
+    "reuse": false,
+    "lo": 90,
+    "hi": 90,
+    "x": 508.49,
+    "y": 11.01,
+    "z": 372.478,
+    "angle": 95,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065909798"
+   },
+   {
+    "pf": 710,
+    "hash": "Q727",
+    "name": "Female Guard",
+    "reuse": false,
+    "lo": 108,
+    "hi": 108,
+    "x": 415.4,
+    "y": 17.01,
+    "z": 362.082,
+    "angle": 255,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065909799"
+   },
+   {
+    "pf": 710,
+    "hash": "Q724",
+    "name": "Male Lieutenant",
+    "reuse": false,
+    "lo": 159,
+    "hi": 159,
+    "x": 387.666,
+    "y": 5.01,
+    "z": 569.465,
+    "angle": 299,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065909802"
+   },
+   {
+    "pf": 710,
+    "hash": "Q724",
+    "name": "Male Lieutenant",
+    "reuse": false,
+    "lo": 155,
+    "hi": 155,
+    "x": 346.252,
+    "y": 14.01,
+    "z": 465.701,
+    "angle": 7,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065909803"
+   },
+   {
+    "pf": 710,
+    "hash": "OMUA",
+    "name": "Omni-AF Urban Trooper",
+    "reuse": true,
+    "lo": 250,
+    "hi": 250,
+    "x": 229.827,
+    "y": 5.01,
+    "z": 382.67,
+    "angle": 185,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065909808"
+   },
+   {
+    "pf": 710,
+    "hash": "Q728",
+    "name": "Sylvester Guiney",
+    "reuse": false,
+    "lo": 2,
+    "hi": 2,
+    "x": 365.917,
+    "y": 11.01,
+    "z": 489.2,
+    "angle": 0,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065909819"
+   },
+   {
+    "pf": 710,
+    "hash": "Q729",
+    "name": "Glen Brumble",
+    "reuse": false,
+    "lo": 9,
+    "hi": 9,
+    "x": 268.576,
+    "y": 8.164,
+    "z": 478.087,
+    "angle": 221,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065909821"
+   },
+   {
+    "pf": 710,
+    "hash": "Q72A",
+    "name": "Pasquale Seaman",
+    "reuse": false,
+    "lo": 3,
+    "hi": 3,
+    "x": 519.847,
+    "y": 11.01,
+    "z": 399.595,
+    "angle": 251,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261101_Whozewhatzit.csv inst 2065909823"
+   },
+   {
+    "pf": 710,
+    "hash": "Q72B",
+    "name": "Elza Laurence",
+    "reuse": false,
+    "lo": 3,
+    "hi": 3,
+    "x": 293.384,
+    "y": 11.01,
+    "z": 437.859,
+    "angle": 335,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Whozewhatzit.csv inst 2065909830"
+   }
+  ],
+  "800": [
+   {
+    "pf": 800,
+    "hash": "Q701",
+    "name": "Unicorn Duty Sergeant",
+    "reuse": false,
+    "lo": 220,
+    "hi": 220,
+    "x": 626.481,
+    "y": 66.81,
+    "z": 726.86,
+    "angle": 142,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Venditor.csv inst 1002133"
+   },
+   {
+    "pf": 800,
+    "hash": "Q702",
+    "name": "Derek Pofier",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 651.2,
+    "y": 66.81,
+    "z": 631.4,
+    "angle": 163,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261103_Venditor.csv inst 1002147"
+   },
+   {
+    "pf": 800,
+    "hash": "Q703",
+    "name": "Fresh Engineer",
+    "reuse": false,
+    "lo": 9,
+    "hi": 9,
+    "x": 771.119,
+    "y": 24.01,
+    "z": 702.161,
+    "angle": 315,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Venditor.csv inst 1002149"
+   },
+   {
+    "pf": 800,
+    "hash": "Q704",
+    "name": "Fresh Trader",
+    "reuse": false,
+    "lo": 9,
+    "hi": 9,
+    "x": 684.588,
+    "y": 54.126,
+    "z": 753.562,
+    "angle": 217,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Venditor.csv inst 1002153"
+   },
+   {
+    "pf": 800,
+    "hash": "Q705",
+    "name": "Fresh Bureaucrat",
+    "reuse": false,
+    "lo": 9,
+    "hi": 9,
+    "x": 729.575,
+    "y": 31.841,
+    "z": 747.836,
+    "angle": 303,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Venditor.csv inst 1002154"
+   },
+   {
+    "pf": 800,
+    "hash": "Q706",
+    "name": "Omni-Tek Recruitment Officer",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 669.985,
+    "y": 72.81,
+    "z": 555.395,
+    "angle": 344,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1002367"
+   },
+   {
+    "pf": 800,
+    "hash": "Q707",
+    "name": "Clan Recruiter",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 676.548,
+    "y": 72.81,
+    "z": 473.405,
+    "angle": 316,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1002368"
+   },
+   {
+    "pf": 800,
+    "hash": "Q708",
+    "name": "Peter Roland",
+    "reuse": false,
+    "lo": 95,
+    "hi": 95,
+    "x": 691.082,
+    "y": 72.81,
+    "z": 479.592,
+    "angle": 122,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1002369"
+   },
+   {
+    "pf": 800,
+    "hash": "Q709",
+    "name": "Fresh Soldier",
+    "reuse": false,
+    "lo": 7,
+    "hi": 7,
+    "x": 733.513,
+    "y": 30.513,
+    "z": 743.158,
+    "angle": 346,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1002388"
+   },
+   {
+    "pf": 800,
+    "hash": "Q704",
+    "name": "Fresh Trader",
+    "reuse": false,
+    "lo": 10,
+    "hi": 10,
+    "x": 618.285,
+    "y": 66.81,
+    "z": 686.191,
+    "angle": 74,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1002392"
+   },
+   {
+    "pf": 800,
+    "hash": "Q70A",
+    "name": "Unicorn Squadleader",
+    "reuse": false,
+    "lo": 300,
+    "hi": 300,
+    "x": 329.321,
+    "y": 92.74,
+    "z": 381.859,
+    "angle": 115,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1002658"
+   },
+   {
+    "pf": 800,
+    "hash": "Q70B",
+    "name": "Unicorn Specialist",
+    "reuse": false,
+    "lo": 300,
+    "hi": 300,
+    "x": 345.888,
+    "y": 92.969,
+    "z": 395.376,
+    "angle": 269,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1002659"
+   },
+   {
+    "pf": 800,
+    "hash": "Q70B",
+    "name": "Unicorn Specialist",
+    "reuse": false,
+    "lo": 300,
+    "hi": 300,
+    "x": 326.525,
+    "y": 89.894,
+    "z": 362.286,
+    "angle": 269,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1002660"
+   },
+   {
+    "pf": 800,
+    "hash": "Q70C",
+    "name": "Fresh Agent",
+    "reuse": false,
+    "lo": 8,
+    "hi": 8,
+    "x": 652.691,
+    "y": 72.81,
+    "z": 549.678,
+    "angle": 164,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 1068317"
+   },
+   {
+    "pf": 800,
+    "hash": "Q709",
+    "name": "Fresh Soldier",
+    "reuse": false,
+    "lo": 9,
+    "hi": 9,
+    "x": 681.989,
+    "y": 66.81,
+    "z": 678.108,
+    "angle": 16,
+    "wander": true,
+    "posFrom": "live scrape scraped_npcs_20261103_Venditor.csv inst 1284666"
+   },
+   {
+    "pf": 800,
+    "hash": "C01B",
+    "name": "Careless Citizen",
+    "reuse": true,
+    "lo": 50,
+    "hi": 50,
+    "x": 679.427,
+    "y": 66.81,
+    "z": 689.054,
+    "angle": 73,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 2064181307"
+   },
+   {
+    "pf": 800,
+    "hash": "LEKA",
+    "name": "Levon Karubian",
+    "reuse": true,
+    "lo": 177,
+    "hi": 177,
+    "x": 666.541,
+    "y": 66.81,
+    "z": 596.695,
+    "angle": 16,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 2064181326"
+   },
+   {
+    "pf": 800,
+    "hash": "Q70D",
+    "name": "Andre Bottle",
+    "reuse": false,
+    "lo": 200,
+    "hi": 200,
+    "x": 698.353,
+    "y": 66.81,
+    "z": 703.702,
+    "angle": 320,
+    "wander": false,
+    "posFrom": "live scrape scraped_npcs_20261029.csv inst 2064181327"
+   }
+  ]
+ },
+ "skipped": [
+  {
+   "pf": 800,
+   "name": "Male Prison Guard",
+   "why": "dedupe within 3 m",
+   "x": 681.081,
+   "z": 714.013,
+   "kept": "679.0,714.7"
+  },
+  {
+   "pf": 800,
+   "name": "Male Guard",
+   "why": "dedupe within 3 m",
+   "x": 677.512,
+   "z": 648.903,
+   "kept": "677.5,648.9"
+  },
+  {
+   "pf": 800,
+   "name": "Male Guard",
+   "why": "dedupe within 3 m",
+   "x": 741.441,
+   "z": 702.786,
+   "kept": "741.4,702.8"
+  },
+  {
+   "pf": 800,
+   "name": "Ina Charlotta Kern",
+   "why": "dedupe within 3 m",
+   "x": 651.901,
+   "z": 652.239,
+   "kept": "651.9,652.2"
+  },
+  {
+   "pf": 800,
+   "name": "Unicorn Duty Sergeant",
+   "why": "dedupe within 3 m",
+   "x": 626.481,
+   "z": 726.86,
+   "kept": "626.5,726.9"
+  },
+  {
+   "pf": 800,
+   "name": "Sotto \"Trousers\" Mahoney",
+   "why": "dedupe within 3 m",
+   "x": 701.9,
+   "z": 700.4,
+   "kept": "701.9,700.4"
+  },
+  {
+   "pf": 800,
+   "name": "Derek Pofier",
+   "why": "dedupe within 3 m",
+   "x": 651.2,
+   "z": 631.4,
+   "kept": "651.2,631.4"
+  },
+  {
+   "pf": 705,
+   "name": "Female Lieutenant",
+   "why": "dedupe within 3 m",
+   "x": 978.478,
+   "z": 514.574,
+   "kept": "980.0,512.0"
+  },
+  {
+   "pf": 710,
+   "name": "Unicorn Commander",
+   "why": "dedupe within 3 m",
+   "x": 375.74,
+   "z": 350.183,
+   "kept": "375.7,350.2"
+  },
+  {
+   "pf": 710,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 350.894,
+   "z": 388.932,
+   "kept": "350.9,388.9"
+  },
+  {
+   "pf": 710,
+   "name": "OT Container Supplier",
+   "why": "dedupe within 3 m",
+   "x": 388.112,
+   "z": 342.394,
+   "kept": "388.1,342.4"
+  },
+  {
+   "pf": 710,
+   "name": "OT Basic Quality Armorer",
+   "why": "dedupe within 3 m",
+   "x": 386.982,
+   "z": 357.61,
+   "kept": "387.0,357.6"
+  },
+  {
+   "pf": 566,
+   "name": "Male Prison Guard",
+   "why": "dedupe within 3 m",
+   "x": 405.343,
+   "z": 365.842,
+   "kept": "405.3,365.8"
+  },
+  {
+   "pf": 566,
+   "name": "Male Prison Guard",
+   "why": "dedupe within 3 m",
+   "x": 401.064,
+   "z": 366.725,
+   "kept": "401.1,366.7"
+  },
+  {
+   "pf": 566,
+   "name": "Food Provider",
+   "why": "dedupe within 3 m",
+   "x": 454.767,
+   "z": 348.418,
+   "kept": "454.8,348.4"
+  },
+  {
+   "pf": 566,
+   "name": "Food Provider",
+   "why": "dedupe within 3 m",
+   "x": 451.473,
+   "z": 329.292,
+   "kept": "451.5,329.3"
+  },
+  {
+   "pf": 566,
+   "name": "Good Time Party Mixer",
+   "why": "dedupe within 3 m",
+   "x": 461.83,
+   "z": 349.819,
+   "kept": "461.8,349.8"
+  },
+  {
+   "pf": 566,
+   "name": "Furniture Merchant",
+   "why": "dedupe within 3 m",
+   "x": 461.746,
+   "z": 300.112,
+   "kept": "461.7,300.1"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 238.918,
+   "z": 301.587,
+   "kept": "238.9,301.6"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 241.522,
+   "z": 313.311,
+   "kept": "241.5,313.3"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 321.347,
+   "z": 297.823,
+   "kept": "321.3,297.8"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 279.271,
+   "z": 295.817,
+   "kept": "279.3,295.8"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 451.716,
+   "z": 321.6,
+   "kept": "451.7,321.6"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 447.806,
+   "z": 318.187,
+   "kept": "447.8,318.2"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 464.006,
+   "z": 288.123,
+   "kept": "464.0,288.1"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 467.892,
+   "z": 329.613,
+   "kept": "467.9,329.6"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 341.831,
+   "z": 353.529,
+   "kept": "341.8,353.5"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 348.153,
+   "z": 350.278,
+   "kept": "348.2,350.3"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 309.549,
+   "z": 321.602,
+   "kept": "309.5,321.6"
+  },
+  {
+   "pf": 566,
+   "name": "Neutral Clothing Salesman",
+   "why": "dedupe within 3 m",
+   "x": 281.562,
+   "z": 309.036,
+   "kept": "281.6,309.0"
+  },
+  {
+   "pf": 566,
+   "name": "Peacekeeper Coursey",
+   "why": "dedupe within 3 m",
+   "x": 447.661,
+   "z": 281.852,
+   "kept": "447.7,281.9"
+  },
+  {
+   "pf": 566,
+   "name": "Warden Ystanes",
+   "why": "dedupe within 3 m",
+   "x": 402.854,
+   "z": 362.107,
+   "kept": "402.9,362.1"
+  },
+  {
+   "pf": 566,
+   "name": "Ofoz",
+   "why": "dedupe within 3 m",
+   "x": 262.162,
+   "z": 321.16,
+   "kept": "262.2,321.2"
+  },
+  {
+   "pf": 566,
+   "name": "Sprysi D'Lere",
+   "why": "dedupe within 3 m",
+   "x": 412.006,
+   "z": 308.36,
+   "kept": "412.0,308.4"
+  },
+  {
+   "pf": 566,
+   "name": "Mia Munro",
+   "why": "dedupe within 3 m",
+   "x": 452.91,
+   "z": 331.653,
+   "kept": "452.9,331.7"
+  },
+  {
+   "pf": 566,
+   "name": "Newland Militia Guard",
+   "why": "dedupe within 3 m",
+   "x": 301.872,
+   "z": 328.244,
+   "kept": "301.9,328.2"
+  },
+  {
+   "pf": 705,
+   "name": "Unicorn Squadleader",
+   "why": "dedupe within 3 m",
+   "x": 879.409,
+   "z": 470.408,
+   "kept": "879.4,470.4"
+  },
+  {
+   "pf": 705,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 884.763,
+   "z": 465.341,
+   "kept": "884.8,465.3"
+  },
+  {
+   "pf": 705,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 549.749,
+   "z": 362.276,
+   "kept": "549.7,362.3"
+  },
+  {
+   "pf": 705,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 884.75,
+   "z": 475.618,
+   "kept": "884.8,475.6"
+  },
+  {
+   "pf": 705,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 890.145,
+   "z": 462.567,
+   "kept": "890.1,462.6"
+  },
+  {
+   "pf": 705,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 911.773,
+   "z": 442.227,
+   "kept": "911.8,442.2"
+  },
+  {
+   "pf": 800,
+   "name": "Unicorn Duty Sergeant",
+   "why": "dedupe within 3 m",
+   "x": 627.106,
+   "z": 726.391,
+   "kept": "626.5,726.9"
+  },
+  {
+   "pf": 800,
+   "name": "Ina Charlotta Kern",
+   "why": "dedupe within 3 m",
+   "x": 651.901,
+   "z": 652.239,
+   "kept": "651.9,652.2"
+  },
+  {
+   "pf": 800,
+   "name": "Male Prison Guard",
+   "why": "dedupe within 3 m",
+   "x": 680.299,
+   "z": 713.952,
+   "kept": "679.0,714.7"
+  },
+  {
+   "pf": 705,
+   "name": "OT Bronto Chef",
+   "why": "dedupe within 3 m",
+   "x": 880.042,
+   "z": 498.297,
+   "kept": "880.0,498.3"
+  },
+  {
+   "pf": 705,
+   "name": "Female Lieutenant",
+   "why": "dedupe within 3 m",
+   "x": 979.788,
+   "z": 511.156,
+   "kept": "979.8,511.2"
+  },
+  {
+   "pf": 705,
+   "name": "Male Lieutenant",
+   "why": "dedupe within 3 m",
+   "x": 980.16,
+   "z": 503.809,
+   "kept": "980.2,503.8"
+  },
+  {
+   "pf": 705,
+   "name": "Female Lieutenant",
+   "why": "dedupe within 3 m",
+   "x": 978.219,
+   "z": 502.186,
+   "kept": "978.2,502.2"
+  },
+  {
+   "pf": 705,
+   "name": "Unicorn Squadleader",
+   "why": "dedupe within 3 m",
+   "x": 879.647,
+   "z": 470.219,
+   "kept": "879.6,470.2"
+  },
+  {
+   "pf": 705,
+   "name": "Unicorn Squadleader",
+   "why": "dedupe within 3 m",
+   "x": 970.818,
+   "z": 510.545,
+   "kept": "970.8,510.5"
+  },
+  {
+   "pf": 705,
+   "name": "Unicorn Squadleader",
+   "why": "dedupe within 3 m",
+   "x": 955.673,
+   "z": 539.886,
+   "kept": "955.7,539.9"
+  },
+  {
+   "pf": 705,
+   "name": "Unicorn Specialist",
+   "why": "dedupe within 3 m",
+   "x": 901.917,
+   "z": 529.016,
+   "kept": "901.9,529.0"
+  },
+  {
+   "pf": 705,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 888.45,
+   "z": 496.044,
+   "kept": "888.5,496.0"
+  },
+  {
+   "pf": 705,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 578.302,
+   "z": 327.891,
+   "kept": "578.3,327.9"
+  },
+  {
+   "pf": 705,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 591.093,
+   "z": 329.918,
+   "kept": "591.1,329.9"
+  },
+  {
+   "pf": 705,
+   "name": "City Administrator - Rex Chapman",
+   "why": "dedupe within 3 m",
+   "x": 905.828,
+   "z": 522.022,
+   "kept": "905.8,522.0"
+  },
+  {
+   "pf": 710,
+   "name": "Male Lieutenant",
+   "why": "dedupe within 3 m",
+   "x": 413.346,
+   "z": 373.116,
+   "kept": "413.3,373.1"
+  },
+  {
+   "pf": 710,
+   "name": "Female Lieutenant",
+   "why": "dedupe within 3 m",
+   "x": 395.245,
+   "z": 391.024,
+   "kept": "395.2,391.0"
+  },
+  {
+   "pf": 710,
+   "name": "Unicorn Commander",
+   "why": "dedupe within 3 m",
+   "x": 384.561,
+   "z": 395.383,
+   "kept": "384.6,395.4"
+  },
+  {
+   "pf": 710,
+   "name": "Unicorn Squadleader",
+   "why": "dedupe within 3 m",
+   "x": 420.328,
+   "z": 364.654,
+   "kept": "420.3,364.7"
+  },
+  {
+   "pf": 710,
+   "name": "Unicorn Squadleader",
+   "why": "dedupe within 3 m",
+   "x": 455.065,
+   "z": 394.807,
+   "kept": "455.1,394.8"
+  },
+  {
+   "pf": 710,
+   "name": "Unicorn Specialist",
+   "why": "dedupe within 3 m",
+   "x": 405.231,
+   "z": 535.191,
+   "kept": "405.2,535.2"
+  },
+  {
+   "pf": 710,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 386.68,
+   "z": 376.508,
+   "kept": "386.7,376.5"
+  },
+  {
+   "pf": 710,
+   "name": "Omni-AF Urban Trooper",
+   "why": "dedupe within 3 m",
+   "x": 351.493,
+   "z": 389.026,
+   "kept": "351.5,389.0"
+  },
+  {
+   "pf": 710,
+   "name": "Unicorn Specialist",
+   "why": "dedupe within 3 m",
+   "x": 365.709,
+   "z": 388.173,
+   "kept": "365.7,388.2"
+  },
+  {
+   "pf": 710,
+   "name": "Unicorn Specialist",
+   "why": "dedupe within 3 m",
+   "x": 364.983,
+   "z": 385.412,
+   "kept": "365.7,388.2"
+  },
+  {
+   "pf": 710,
+   "name": "OT Basic Quality Pharmacist",
+   "why": "dedupe within 3 m",
+   "x": 416.021,
+   "z": 405.423,
+   "kept": "416.0,405.4"
+  },
+  {
+   "pf": 710,
+   "name": "OT Computer Merchant",
+   "why": "dedupe within 3 m",
+   "x": 428.675,
+   "z": 390.113,
+   "kept": "428.7,390.1"
+  },
+  {
+   "pf": 710,
+   "name": "OT Container Supplier",
+   "why": "dedupe within 3 m",
+   "x": 387.832,
+   "z": 343.16,
+   "kept": "387.8,343.2"
+  },
+  {
+   "pf": 710,
+   "name": "OT Basic Quality Armorer",
+   "why": "dedupe within 3 m",
+   "x": 387.065,
+   "z": 356.346,
+   "kept": "387.1,356.3"
+  },
+  {
+   "pf": 710,
+   "name": "OT Party Mixer",
+   "why": "dedupe within 3 m",
+   "x": 398.283,
+   "z": 414.454,
+   "kept": "398.3,414.5"
+  },
+  {
+   "pf": 710,
+   "name": "OT Food Provider",
+   "why": "dedupe within 3 m",
+   "x": 514.18,
+   "z": 365.411,
+   "kept": "514.2,365.4"
+  },
+  {
+   "pf": 710,
+   "name": "OT Food Provider",
+   "why": "dedupe within 3 m",
+   "x": 413.262,
+   "z": 352.291,
+   "kept": "413.3,352.3"
+  },
+  {
+   "pf": 710,
+   "name": "OT Bartender",
+   "why": "dedupe within 3 m",
+   "x": 481.216,
+   "z": 368.679,
+   "kept": "481.2,368.7"
+  },
+  {
+   "pf": 710,
+   "name": "OT Bronto Chef",
+   "why": "dedupe within 3 m",
+   "x": 512.38,
+   "z": 396.52,
+   "kept": "512.4,396.5"
+  },
+  {
+   "pf": 710,
+   "name": "Paolo Turin",
+   "why": "dedupe within 3 m",
+   "x": 409.318,
+   "z": 542.741,
+   "kept": "409.3,542.7"
+  },
+  {
+   "pf": 710,
+   "name": "Female Guard",
+   "why": "dedupe within 3 m",
+   "x": 578.533,
+   "z": 391.006,
+   "kept": "578.5,391.0"
+  },
+  {
+   "pf": 710,
+   "name": "Female Guard",
+   "why": "dedupe within 3 m",
+   "x": 578.677,
+   "z": 373.003,
+   "kept": "578.7,373.0"
+  },
+  {
+   "pf": 710,
+   "name": "Unicorn Specialist",
+   "why": "dedupe within 3 m",
+   "x": 360.363,
+   "z": 574.495,
+   "kept": "360.4,574.5"
+  },
+  {
+   "pf": 710,
+   "name": "Unicorn Specialist",
+   "why": "dedupe within 3 m",
+   "x": 439.88,
+   "z": 575.677,
+   "kept": "439.9,575.7"
+  },
+  {
+   "pf": 700,
+   "name": "Male Omni-Pol Supreme",
+   "why": "dedupe within 3 m",
+   "x": 639.49,
+   "z": 481.716,
+   "kept": "639.4,482.2"
+  },
+  {
+   "pf": 700,
+   "name": "Male Omni-Pol Supreme",
+   "why": "dedupe within 3 m",
+   "x": 639.399,
+   "z": 486.912,
+   "kept": "639.4,485.8"
+  },
+  {
+   "pf": 700,
+   "name": "Male Omni-Pol Supreme",
+   "why": "dedupe within 3 m",
+   "x": 639.407,
+   "z": 482.183,
+   "kept": "639.4,482.2"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Commander",
+   "why": "dedupe within 3 m",
+   "x": 357.049,
+   "z": 472.687,
+   "kept": "357.0,472.7"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Watcher",
+   "why": "dedupe within 3 m",
+   "x": 374.001,
+   "z": 460.885,
+   "kept": "374.0,460.9"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Watcher",
+   "why": "dedupe within 3 m",
+   "x": 370.141,
+   "z": 466.307,
+   "kept": "370.1,466.3"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Commander",
+   "why": "dedupe within 3 m",
+   "x": 362.45,
+   "z": 470.379,
+   "kept": "362.4,470.4"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Watcher",
+   "why": "dedupe within 3 m",
+   "x": 352.45,
+   "z": 473.18,
+   "kept": "352.4,473.2"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Watcher",
+   "why": "dedupe within 3 m",
+   "x": 374.159,
+   "z": 460.663,
+   "kept": "374.2,460.7"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Commander",
+   "why": "dedupe within 3 m",
+   "x": 360.996,
+   "z": 464.495,
+   "kept": "361.0,464.5"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Watcher",
+   "why": "dedupe within 3 m",
+   "x": 373.637,
+   "z": 463.391,
+   "kept": "373.6,463.4"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Commander",
+   "why": "dedupe within 3 m",
+   "x": 357.065,
+   "z": 471.527,
+   "kept": "357.1,471.5"
+  },
+  {
+   "pf": 545,
+   "name": "Vanguard Commander",
+   "why": "dedupe within 3 m",
+   "x": 357.432,
+   "z": 472.576,
+   "kept": "357.4,472.6"
+  },
+  {
+   "pf": 800,
+   "name": "Levon Karubian",
+   "why": "Levon old/non-target sighting; moved via SpawnSkips+SpawnsAdd",
+   "x": 613.246,
+   "z": 475.438
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 744.628,
+   "z": 577.646,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 797.972,
+   "z": 634.829,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Grecko",
+   "why": "critter same-name server point within 200 m",
+   "x": 781.799,
+   "z": 734.439,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Contagious Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 737.473,
+   "z": 751.431,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 775.68,
+   "z": 759.04,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 790.456,
+   "z": 594.76,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 775.68,
+   "z": 759.04,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Tiny Stalker",
+   "why": "critter same-name server point within 200 m",
+   "x": 792.067,
+   "z": 759.545,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 748.088,
+   "z": 335.776,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 702.433,
+   "z": 234.648,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 715.138,
+   "z": 307.294,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 806.84,
+   "z": 420.251,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 799.932,
+   "z": 355.026,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 796.26,
+   "z": 395.049,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 743.578,
+   "z": 383.096,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 694.168,
+   "z": 249.218,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 735.901,
+   "z": 363.318,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Viviparous Lizard",
+   "why": "critter same-name server point within 200 m",
+   "x": 769.24,
+   "z": 535.065,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 782.044,
+   "z": 455.094,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 820.111,
+   "z": 456.264,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 826.834,
+   "z": 497.347,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 828.491,
+   "z": 317.113,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 698.792,
+   "z": 351.529,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 773.874,
+   "z": 501.363,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 860.472,
+   "z": 296.076,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 713.766,
+   "z": 348.642,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 823.54,
+   "z": 383.584,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 770.154,
+   "z": 472.117,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 798.388,
+   "z": 503.77,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 823.94,
+   "z": 442.379,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 744.529,
+   "z": 332.412,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 728.584,
+   "z": 258.828,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 765.704,
+   "z": 486.557,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 844.358,
+   "z": 370.379,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 770.463,
+   "z": 344.95,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 830.325,
+   "z": 374.26,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 826.549,
+   "z": 492.165,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 554.286,
+   "z": 774.435,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 622.645,
+   "z": 787.191,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 827.04,
+   "z": 733.571,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 632.82,
+   "z": 805.911,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 827.424,
+   "z": 666.729,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 827.637,
+   "z": 610.84,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 784.04,
+   "z": 733.663,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 832.381,
+   "z": 563.396,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 588.251,
+   "z": 779.302,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Eleet",
+   "why": "critter same-name server point within 200 m",
+   "x": 686.822,
+   "z": 774.245,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Grecko",
+   "why": "critter same-name server point within 200 m",
+   "x": 795.805,
+   "z": 631.078,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Grecko",
+   "why": "critter same-name server point within 200 m",
+   "x": 830.312,
+   "z": 688.416,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Grecko",
+   "why": "critter same-name server point within 200 m",
+   "x": 562.636,
+   "z": 785.606,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Grecko",
+   "why": "critter same-name server point within 200 m",
+   "x": 771.27,
+   "z": 727.434,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Grecko",
+   "why": "critter same-name server point within 200 m",
+   "x": 703.246,
+   "z": 797.176,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Grecko",
+   "why": "critter same-name server point within 200 m",
+   "x": 768.983,
+   "z": 575.489,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Grecko",
+   "why": "critter same-name server point within 200 m",
+   "x": 660.292,
+   "z": 795.821,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Contagious Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 770.462,
+   "z": 730.154,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Contagious Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 764.53,
+   "z": 736.456,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Contagious Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 620.667,
+   "z": 811.932,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Contagious Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 784.451,
+   "z": 779.207,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Contagious Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 588.763,
+   "z": 822.281,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 854.086,
+   "z": 590.96,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 800.928,
+   "z": 757.792,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 574.832,
+   "z": 799.601,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 613.351,
+   "z": 817.847,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 798.78,
+   "z": 679.693,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 730.736,
+   "z": 791.069,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 802.307,
+   "z": 698.705,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Tiny Stalker",
+   "why": "critter same-name server point within 200 m",
+   "x": 836.934,
+   "z": 744.522,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Tiny Stalker",
+   "why": "critter same-name server point within 200 m",
+   "x": 658.835,
+   "z": 796.955,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Tiny Stalker",
+   "why": "critter same-name server point within 200 m",
+   "x": 665.699,
+   "z": 797.456,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Tiny Stalker",
+   "why": "critter same-name server point within 200 m",
+   "x": 858.291,
+   "z": 591.165,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Tiny Stalker",
+   "why": "critter same-name server point within 200 m",
+   "x": 748.172,
+   "z": 754.317,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Tiny Stalker",
+   "why": "critter same-name server point within 200 m",
+   "x": 634.938,
+   "z": 794.292,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 538.237,
+   "z": 689.271,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Claw-C22",
+   "why": "critter same-name server point within 200 m",
+   "x": 284.244,
+   "z": 280.688,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Claw-C22",
+   "why": "critter same-name server point within 200 m",
+   "x": 301.598,
+   "z": 279.651,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Claw-C22",
+   "why": "critter same-name server point within 200 m",
+   "x": 274.371,
+   "z": 379.989,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Claw-C22",
+   "why": "critter same-name server point within 200 m",
+   "x": 248.384,
+   "z": 403.41,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Claw-C22",
+   "why": "critter same-name server point within 200 m",
+   "x": 265.89,
+   "z": 245.897,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Claw-C22",
+   "why": "critter same-name server point within 200 m",
+   "x": 306.016,
+   "z": 422,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Eye-Q93",
+   "why": "critter same-name server point within 200 m",
+   "x": 285.538,
+   "z": 399.082,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Eye-Q93",
+   "why": "critter same-name server point within 200 m",
+   "x": 227.428,
+   "z": 243.14,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Eye-Q93",
+   "why": "critter same-name server point within 200 m",
+   "x": 243.76,
+   "z": 315.764,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Eye-Q93",
+   "why": "critter same-name server point within 200 m",
+   "x": 292.578,
+   "z": 401.259,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Eye-Q93",
+   "why": "critter same-name server point within 200 m",
+   "x": 269.907,
+   "z": 373.386,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Eye-Q93",
+   "why": "critter same-name server point within 200 m",
+   "x": 258.1,
+   "z": 376.938,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rejected Eye-Q93",
+   "why": "critter same-name server point within 200 m",
+   "x": 274.975,
+   "z": 315.407,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Rejected Eye-Q93",
+   "why": "critter same-name server point within 200 m",
+   "x": 230.947,
+   "z": 278.914,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 432.71,
+   "z": 327.576,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 243.111,
+   "z": 399.321,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 286.532,
+   "z": 393.384,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 230.345,
+   "z": 247.338,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 273.664,
+   "z": 381.465,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 252.703,
+   "z": 413.165,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 250.805,
+   "z": 362.271,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 226.765,
+   "z": 241.45,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 291.061,
+   "z": 408.415,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 302.662,
+   "z": 265.044,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Tac-V85",
+   "why": "critter same-name server point within 200 m",
+   "x": 427.113,
+   "z": 352.755,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Tac-V85",
+   "why": "critter same-name server point within 200 m",
+   "x": 283.222,
+   "z": 428.154,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Tac-V85",
+   "why": "critter same-name server point within 200 m",
+   "x": 231.694,
+   "z": 278.032,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Tac-V85",
+   "why": "critter same-name server point within 200 m",
+   "x": 255.438,
+   "z": 322.243,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Tac-V85",
+   "why": "critter same-name server point within 200 m",
+   "x": 229.307,
+   "z": 242.941,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Failed Tac-V85",
+   "why": "critter same-name server point within 200 m",
+   "x": 428.733,
+   "z": 403.757,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Pebble Blubbag",
+   "why": "critter same-name server point within 200 m",
+   "x": 280.858,
+   "z": 471.956,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Pebble Blubbag",
+   "why": "critter same-name server point within 200 m",
+   "x": 341.355,
+   "z": 399.175,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Pebble Blubbag",
+   "why": "critter same-name server point within 200 m",
+   "x": 320.311,
+   "z": 444.645,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Pebble Blubbag",
+   "why": "critter same-name server point within 200 m",
+   "x": 354.945,
+   "z": 411.643,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Pebble Blubbag",
+   "why": "critter same-name server point within 200 m",
+   "x": 369.482,
+   "z": 418.285,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Pebble Blubbag",
+   "why": "critter same-name server point within 200 m",
+   "x": 355.372,
+   "z": 304.505,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Pebble Blubbag",
+   "why": "critter same-name server point within 200 m",
+   "x": 372.555,
+   "z": 211.433,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Pebble Blubbag",
+   "why": "critter same-name server point within 200 m",
+   "x": 248.038,
+   "z": 331.244,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Pebble Blubbag",
+   "why": "critter same-name server point within 200 m",
+   "x": 246.562,
+   "z": 337.537,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 416.96,
+   "z": 378.888,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 255.774,
+   "z": 329.745,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 278.948,
+   "z": 432.486,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 294.796,
+   "z": 408.513,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 306.02,
+   "z": 430.798,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 244.8,
+   "z": 350.224,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 371.576,
+   "z": 207.602,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Robust Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 309.985,
+   "z": 281.98,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Robust Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 339.306,
+   "z": 485.353,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Robust Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 179.222,
+   "z": 515.619,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Robust Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 248.381,
+   "z": 329.235,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Robust Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 449.374,
+   "z": 262.636,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Robust Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 308.807,
+   "z": 280.117,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Robust Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 284.634,
+   "z": 427.128,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Robust Chirop",
+   "why": "critter same-name server point within 200 m",
+   "x": 364.694,
+   "z": 203.397,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 379.532,
+   "z": 211.9,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 393.964,
+   "z": 220.825,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 303.996,
+   "z": 178.075,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 452.504,
+   "z": 436.696,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 246.468,
+   "z": 332.341,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 428.674,
+   "z": 302.63,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 294.175,
+   "z": 409.098,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 373.327,
+   "z": 226.8,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 400.461,
+   "z": 230.982,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Blight Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 256.797,
+   "z": 449.285,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chiffchaff Reet",
+   "why": "critter same-name server point within 200 m",
+   "x": 428.537,
+   "z": 306.634,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chiffchaff Reet",
+   "why": "critter same-name server point within 200 m",
+   "x": 288.603,
+   "z": 316.9,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chiffchaff Reet",
+   "why": "critter same-name server point within 200 m",
+   "x": 384.165,
+   "z": 235.421,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chiffchaff Reet",
+   "why": "critter same-name server point within 200 m",
+   "x": 296.379,
+   "z": 189.501,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Chiffchaff Reet",
+   "why": "critter same-name server point within 200 m",
+   "x": 374.274,
+   "z": 231.145,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet of Paradise",
+   "why": "critter same-name server point within 200 m",
+   "x": 800.704,
+   "z": 357.166,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Reet Warbler",
+   "why": "critter same-name server point within 200 m",
+   "x": 657.619,
+   "z": 799.106,
+   "kind": "critter"
+  },
+  {
+   "pf": 800,
+   "name": "Contagious Rollerrat",
+   "why": "critter same-name server point within 200 m",
+   "x": 788.373,
+   "z": 592.561,
+   "kind": "critter"
+  },
+  {
+   "pf": 566,
+   "name": "Target Drone (25000 AC)",
+   "why": "critter same-name server point within 200 m",
+   "x": 365.593,
+   "z": 361.42,
+   "kind": "critter"
+  },
+  {
+   "pf": 705,
+   "name": "34-I Helper",
+   "why": "critter same-name server point within 200 m",
+   "x": 977.561,
+   "z": 385.168,
+   "kind": "critter"
+  },
+  {
+   "pf": 705,
+   "name": "34-II Handyman",
+   "why": "critter same-name server point within 200 m",
+   "x": 640.429,
+   "z": 442.723,
+   "kind": "critter"
+  },
+  {
+   "pf": 705,
+   "name": "Probe 2000-1",
+   "why": "critter same-name server point within 200 m",
+   "x": 803.821,
+   "z": 399.041,
+   "kind": "critter"
+  },
+  {
+   "pf": 705,
+   "name": "Probe 4000-1",
+   "why": "critter same-name server point within 200 m",
+   "x": 805.124,
+   "z": 630.315,
+   "kind": "critter"
+  },
+  {
+   "pf": 705,
+   "name": "Probe 5000-1",
+   "why": "critter same-name server point within 200 m",
+   "x": 642.941,
+   "z": 505.025,
+   "kind": "critter"
+  },
+  {
+   "pf": 705,
+   "name": "Probe 4000-1",
+   "why": "critter same-name server point within 200 m",
+   "x": 521.583,
+   "z": 350.23,
+   "kind": "critter"
+  },
+  {
+   "pf": 705,
+   "name": "Probe 4000-1",
+   "why": "critter same-name server point within 200 m",
+   "x": 503.17,
+   "z": 333.774,
+   "kind": "critter"
+  },
+  {
+   "pf": 710,
+   "name": "A-500 Soldier",
+   "why": "critter same-name server point within 200 m",
+   "x": 546.301,
+   "z": 498.84,
+   "kind": "critter"
+  },
+  {
+   "pf": 710,
+   "name": "A-1000 Soldier",
+   "why": "critter same-name server point within 200 m",
+   "x": 455.252,
+   "z": 252.604,
+   "kind": "critter"
+  }
+ ],
+ "counts": {
+  "540": {
+   "liveNamed": 39,
+   "added": 38,
+   "addedReuse": 0
+  },
+  "545": {
+   "liveNamed": 41,
+   "added": 41,
+   "addedReuse": 1
+  },
+  "566": {
+   "liveNamed": 34,
+   "added": 8,
+   "addedReuse": 2
+  },
+  "700": {
+   "liveNamed": 17,
+   "added": 17,
+   "addedReuse": 0
+  },
+  "705": {
+   "liveNamed": 68,
+   "added": 20,
+   "addedReuse": 9
+  },
+  "710": {
+   "liveNamed": 78,
+   "added": 22,
+   "addedReuse": 9
+  },
+  "800": {
+   "liveNamed": 36,
+   "added": 18,
+   "addedReuse": 2
+  },
+  "newTemplates": 83,
+  "skipped": 95,
+  "critterSkipped": 155,
+  "removePoints": 1,
+  "must800": 4,
+  "levonLive": {
+   "x": 666.541,
+   "y": 66.81,
+   "z": 596.695
+  }
+ }
+}
