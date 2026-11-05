@@ -99,13 +99,13 @@ namespace ZoneEngine_New.Core.Configuration
         }
     }
 
-    /// <summary>The mishroll section of Gameplay.json (preferred solo RK terminal reward pin + future accept fee).</summary>
+    /// <summary>The mishroll section of Gameplay.json (preferred solo RK terminal reward pin + accept fee).</summary>
     public sealed class GameplayMishroll
     {
-        /// <summary>Master switch. Default false — command and later gameplay hooks stay inert.</summary>
+        /// <summary>Master switch. When false, command / roll override / accept fee stay inert.</summary>
         public bool Enabled { get; init; }
 
-        /// <summary>Accept-time targeting fee constants (not charged until a later mishroll stage).</summary>
+        /// <summary>Accept-time targeting fee constants for pinned solo RK terminal offers.</summary>
         public GameplayMishrollTargetingFee TargetingFee { get; init; } = new();
 
         internal void Validate(string path)

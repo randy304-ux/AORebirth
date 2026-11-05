@@ -8,7 +8,7 @@ namespace ZoneEngine_New.Core.Commands
 
     /// <summary>
     /// <c>.mishroll</c>: pin or clear a preferred solo Rubi-Ka terminal mission reward item.
-    /// Roll override and accept-time targeting fee are later stages; this command only stores the pin.
+    /// Solo rolls use the pin when eligible; accepting a matching offer charges the QL-scaled targeting fee.
     /// </summary>
     public sealed class MishrollCommand : IGmCommand
     {
@@ -45,7 +45,7 @@ namespace ZoneEngine_New.Core.Commands
             {
                 if (_mishroll.TryGetPinnedItemId(characterId, out int pinned))
                     Say("Mishroll pin: item " + pinned.ToString(CultureInfo.InvariantCulture)
-                        + ". Solo RK terminal offers will use it when the roll override is deployed; .mishroll clear removes it.");
+                        + ". Solo RK terminal rolls use this reward; accepting charges a QL-scaled targeting fee. .mishroll clear removes it.");
                 else
                     Say("No mishroll pin. Usage: .mishroll <itemId> | .mishroll clear");
                 return;

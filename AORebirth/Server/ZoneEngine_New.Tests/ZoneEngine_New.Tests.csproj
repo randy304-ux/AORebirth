@@ -66,4 +66,8 @@
     <Compile Include="TradeskillTests.cs" />
     <Compile Include="KnubotTradeTests.cs" />
   </ItemGroup>
+  <ItemGroup Condition="'$(MishrollFeeFocusedTests)' == 'true'">
+    <Compile Remove="@(Compile)" />
+    <Compile Include="MishrollTargetingFeeCalculatorTests.cs" />
+  </ItemGroup>
 </Project>

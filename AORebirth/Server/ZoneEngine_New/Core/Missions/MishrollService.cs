@@ -12,7 +12,7 @@ namespace ZoneEngine_New.Core.Missions
 
     /// <summary>
     /// Per-character preferred solo RK terminal reward pin for <c>.mishroll</c>.
-    /// Persistence only in this stage; roll override and accept fee come later.
+    /// Validates pins against the mission reward pool; roll override and accept fee consume this pin.
     /// </summary>
     public sealed class MishrollService
     {
@@ -61,9 +61,14 @@ namespace ZoneEngine_New.Core.Missions
                 return "Mishroll pin is unavailable.";
             if (itemId <= 0)
                 return "Usage: .mishroll <itemId> | .mishroll clear";
+            if (!MissionRollRewardItems.TryFindCatalogItem(itemId, out string name, out string reason))
+                return reason;
             if (!Upsert(characterId, itemId))
                 return "Could not save your mishroll pin (database unavailable).";
             _cache[characterId] = itemId;
+            _logger.Info("Mishroll pin set char=" + characterId.ToString(CultureInfo.InvariantCulture)
+                + " item=" + itemId.ToString(CultureInfo.InvariantCulture)
+                + (string.IsNullOrEmpty(name) ? string.Empty : (" name=" + name)));
             return null;
         }
 

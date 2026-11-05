@@ -53,6 +53,24 @@ namespace AORebirth.Database.Domain.Quests
         public long UpdatedAtUtcTicks { get; set; }
     }
 
+    /// <summary>Result of claiming a terminal offer as a generated quest (optionally with a mishroll targeting fee).</summary>
+    public enum AcceptOfferQuestStatus
+    {
+        Applied = 1,
+        OfferUnavailable = 2,
+        InsufficientCredits = 3
+    }
+
+    /// <summary>Outcome of <see cref="MySqlCharacterQuestDao.TryAcceptOfferQuest"/> including cash after an optional targeting fee.</summary>
+    public sealed class AcceptOfferQuestResult
+    {
+        public AcceptOfferQuestStatus Status { get; set; }
+
+        public int CashAfter { get; set; }
+
+        public int TargetingFee { get; set; }
+    }
+
     /// <summary>An accepted mission item row; keys additionally receive a <c>questdungeonkeys</c> link.</summary>
     public sealed class QuestDungeonKeyItemRow
     {
@@ -230,15 +248,28 @@ namespace AORebirth.Database.Domain.Quests
         /// </summary>
         public bool TryAcceptOfferQuest(int ownerId, int offerType, int offerInstance, GeneratedQuestRow quest,
             CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, long nowUtcTicks)
-            => TryAcceptOfferQuest(ownerId, offerType, offerInstance, quest, characterRow, key, null, nowUtcTicks);
+            => TryAcceptOfferQuest(ownerId, offerType, offerInstance, quest, characterRow, key, null, nowUtcTicks, 0, 0).Status
+                == AcceptOfferQuestStatus.Applied;
 
         /// <summary>The supplied mission tool, when present, is granted in the same transaction as acceptance and the key.</summary>
         public bool TryAcceptOfferQuest(int ownerId, int offerType, int offerInstance, GeneratedQuestRow quest,
             CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, QuestDungeonKeyItemRow sourceItem, long nowUtcTicks)
+            => TryAcceptOfferQuest(ownerId, offerType, offerInstance, quest, characterRow, key, sourceItem, nowUtcTicks, 0, 0).Status
+                == AcceptOfferQuestStatus.Applied;
+
+        /// <summary>
+        /// Claims the offer, inserts the quest/key (and optional tool), and optionally debits a mishroll targeting fee
+        /// in the same transaction. Fee debit is keyed by offer identity so a retry never double-charges.
+        /// </summary>
+        public AcceptOfferQuestResult TryAcceptOfferQuest(int ownerId, int offerType, int offerInstance, GeneratedQuestRow quest,
+            CharacterQuestRow characterRow, QuestDungeonKeyItemRow key, QuestDungeonKeyItemRow sourceItem, long nowUtcTicks,
+            int targetingFee, int expectedCash)
         {
             if (quest == null) throw new ArgumentNullException(nameof(quest));
             if (characterRow == null) throw new ArgumentNullException(nameof(characterRow));
             if (key == null) throw new ArgumentNullException(nameof(key));
+            if (targetingFee < 0) throw new ArgumentOutOfRangeException(nameof(targetingFee));
+            if (expectedCash < 0) throw new ArgumentOutOfRangeException(nameof(expectedCash));
             if (sourceItem != null)
             {
                 ValidateAcceptedQuestItem(key, ownerId);
@@ -249,18 +280,76 @@ namespace AORebirth.Database.Domain.Quests
 
             return Transaction((c, t) =>
             {
+                const int characterType = 50000;
+                const int cashStatId = 61;
+                int cash = expectedCash;
+                if (targetingFee > 0)
+                {
+                    // Lock the owner row and cash before claiming so a failed fee never leaves a claimed offer.
+                    using (IDbCommand ownerLock = Prepare(c, t, "SELECT Id FROM characters WHERE Id=@Owner FOR UPDATE",
+                        new object[] { "@Owner", ownerId }))
+                    {
+                        if (ownerLock.ExecuteScalar() == null)
+                            return new AcceptOfferQuestResult { Status = AcceptOfferQuestStatus.OfferUnavailable };
+                    }
+
+                    using (IDbCommand cashCmd = Prepare(c, t,
+                        "SELECT StatValue FROM stats WHERE Type=@Type AND Instance=@Owner AND StatId=@Stat FOR UPDATE",
+                        new object[] { "@Type", characterType, "@Owner", ownerId, "@Stat", cashStatId }))
+                    {
+                        object value = cashCmd.ExecuteScalar();
+                        cash = value == null || value == DBNull.Value
+                            ? 0
+                            : Convert.ToInt32(value, System.Globalization.CultureInfo.InvariantCulture);
+                    }
+
+                    if (cash < targetingFee)
+                        return new AcceptOfferQuestResult
+                        {
+                            Status = AcceptOfferQuestStatus.InsufficientCredits,
+                            CashAfter = cash,
+                            TargetingFee = targetingFee
+                        };
+                }
+
                 // Offered = 1, Active = 2 (GeneratedMissionState). The state guard makes a second accept a no-op.
                 if (Execute(c, t, "UPDATE generatedmissionoffers SET State=2,Version=Version+1 "
                         + "WHERE OwnerId=@Owner AND OfferType=@Type AND OfferInstance=@Instance AND State=1 AND ExpiresAtUtcTicks>@Now",
                         "@Owner", ownerId, "@Type", offerType, "@Instance", offerInstance, "@Now", nowUtcTicks) != 1)
-                    return false;
+                    return new AcceptOfferQuestResult { Status = AcceptOfferQuestStatus.OfferUnavailable, CashAfter = cash };
 
                 InsertGenerated(c, t, quest);
                 InsertCharacterQuest(c, t, characterRow);
                 InsertKey(c, t, key, quest.QuestId);
                 if (sourceItem != null)
                     InsertQuestItem(c, t, sourceItem);
-                return true;
+
+                if (targetingFee > 0)
+                {
+                    int after = checked(cash - targetingFee);
+                    Execute(c, t,
+                        "INSERT INTO stats (Type,Instance,StatId,StatValue) VALUES (@Type,@Owner,@Stat,@Value) "
+                        + "ON DUPLICATE KEY UPDATE StatValue=@Value",
+                        "@Type", characterType, "@Owner", ownerId, "@Stat", cashStatId, "@Value", after);
+                    // Unique (CharacterId, QuestId, RewardKey) makes a double debit impossible even if claim raced.
+                    string questKey = "mishroll-offer:" + offerType.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                        + ":" + offerInstance.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    Execute(c, t,
+                        "INSERT INTO missionrewardledger (CharacterId,QuestId,RewardKey,RewardType,Status,Attempts,EffectReference,AppliedAtUtcTicks,CreatedAtUtcTicks,UpdatedAtUtcTicks,Version) "
+                        + "VALUES (@Owner,@Quest,@RewardKey,@RewardType,3,1,@Effect,@Now,@Now,@Now,1)",
+                        "@Owner", ownerId, "@Quest", questKey, "@RewardKey", "targeting-fee",
+                        "@RewardType", "MishrollTargetingFee",
+                        "@Effect", "fee=" + targetingFee.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                        "@Now", nowUtcTicks);
+                    cash = after;
+                }
+
+                return new AcceptOfferQuestResult
+                {
+                    Status = AcceptOfferQuestStatus.Applied,
+                    CashAfter = cash,
+                    TargetingFee = targetingFee
+                };
             });
         }
 

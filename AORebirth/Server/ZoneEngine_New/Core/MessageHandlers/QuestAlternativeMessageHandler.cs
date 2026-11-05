@@ -19,8 +19,15 @@ namespace ZoneEngine_New.Core.MessageHandlers
         private readonly IGeneratedMissionDao _dao;
         private readonly GeneratedMissionService _missions;
         private readonly MissionDestinationCatalog _destinations;
-        public QuestAlternativeMessageHandler(IGeneratedMissionDao dao, GeneratedMissionService missions, MissionDestinationCatalog destinations)
-        { _dao = dao; _missions = missions; _destinations = destinations; }
+        private readonly MishrollService _mishroll;
+        public QuestAlternativeMessageHandler(IGeneratedMissionDao dao, GeneratedMissionService missions,
+            MissionDestinationCatalog destinations, MishrollService mishroll)
+        {
+            _dao = dao;
+            _missions = missions;
+            _destinations = destinations;
+            _mishroll = mishroll;
+        }
         public Type MessageBodyType => typeof(QuestAlternativeMessage);
         public void Handle(MessageBody body, IZoneSession session) => Handle((QuestAlternativeMessage)body, session);
 
@@ -63,6 +70,24 @@ namespace ZoneEngine_New.Core.MessageHandlers
                 QuestAlternativeMessage response;
                 IReadOnlyList<MissionPlacementIdentity> selectedEntrances;
                 GeneratedMissionOfferBatch batch;
+                bool teamRoll = IsTeamRoll(playfield, player);
+                QuestItemShort? forcedReward = null;
+                if (!teamRoll && _mishroll.IsEnabled
+                    && _mishroll.TryGetPinnedItemId(player.Identity.Instance, out int pin)
+                    && MissionRollRewardItems.TryResolve(pin, quality, out QuestItemShort resolved, out string resolveReason))
+                {
+                    forcedReward = resolved;
+                    player.Logger.Info(FormattableString.Invariant(
+                        $"Mishroll roll override char={player.Identity.Instance} pin={pin} ql={quality} reward={resolved.LowId}/{resolved.HighId}@{resolved.Quality}"));
+                }
+                else if (!teamRoll && _mishroll.IsEnabled
+                    && _mishroll.TryGetPinnedItemId(player.Identity.Instance, out int pinned)
+                    && !MissionRollRewardItems.TryResolve(pinned, quality, out _, out string why))
+                {
+                    player.Logger.Info(FormattableString.Invariant(
+                        $"Mishroll pin skipped at roll char={player.Identity.Instance} pin={pinned} ql={quality} reason={why}"));
+                }
+
                 using (ZoneEngine_New.Core.Metrics.TickStallWatch.Enter("mission.roll.generate", player.Identity.Instance))
                 {
                     try
@@ -72,7 +97,7 @@ namespace ZoneEngine_New.Core.MessageHandlers
                             side,
                             GeneratedMissionWire.ClientClock(synchronizedUtc, now), seed, nonce,
                             () => next < checked(first + 5) ? next++ : throw new InvalidOperationException("Mission identity reservation exhausted."),
-                            _destinations, breed, profession, out selectedEntrances);
+                            _destinations, breed, profession, out selectedEntrances, forcedReward);
                     }
                     catch (NotSupportedException)
                     {
@@ -83,7 +108,7 @@ namespace ZoneEngine_New.Core.MessageHandlers
                         MissionRollPolicy.Current.Fee(level), seed, nonce, now, selectedEntrances);
                 }
                 // Rolled in a team of two or more: team missions (multi-floor dungeon with a boss), as on retail.
-                if (IsTeamRoll(playfield, player))
+                if (teamRoll)
                 {
                     foreach (var rolled in batch.Offers)
                         rolled.IsTeam = 1;
