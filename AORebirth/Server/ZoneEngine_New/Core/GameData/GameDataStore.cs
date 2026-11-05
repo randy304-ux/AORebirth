@@ -994,6 +994,27 @@ namespace ZoneEngine_New.Core.GameData
                     throw new InvalidDataException("Playfield add-on spawns could not be read: " + addPath + ": " + exception.Message);
                 }
             }
+            // Extra add-on files (PlayfieldContent/{id}/SpawnsAdd.<tag>.json, same schema), appended in name order, so one
+            // import script can add points without taking over SpawnsAdd.json owned by another. 2026-11-05 ICC 655 fix.
+            string addDir = Path.GetDirectoryName(addPath) ?? string.Empty;
+            if (Directory.Exists(addDir))
+            {
+                string[] extraFiles = Directory.GetFiles(addDir, "SpawnsAdd.*.json");
+                Array.Sort(extraFiles, StringComparer.OrdinalIgnoreCase);
+                foreach (string extraPath in extraFiles)
+                {
+                    try
+                    {
+                        PlayfieldSpawnsData? more = JsonSerializer.Deserialize<PlayfieldSpawnsData>(File.ReadAllText(extraPath), SpawnsJsonOptions);
+                        if (more?.Spawns is { Length: > 0 })
+                            data.Spawns = [.. data.Spawns, .. more.Spawns];
+                    }
+                    catch (JsonException exception)
+                    {
+                        throw new InvalidDataException("Playfield add-on spawns could not be read: " + extraPath + ": " + exception.Message);
+                    }
+                }
+            }
 
             return data;
         }
