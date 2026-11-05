@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using MySqlConnector;
+// JsonValueKind is used when resolving daily randomItemIds pools.
 
 // Dungeon Dogs in-game Info window (vgtp://uwg.store.icc-rk), Claim Center and Daily Reward pages.
 // The client patch routes uwg.store.icc-rk / uwg.daily.icc-rk to this service. Content comes from
@@ -157,6 +158,73 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
     return null;
   }
 
+  // Resolve random pools + qualityMode against the character before insert. Amount stays in daily.json;
+  // ClaimService re-reads it from the same DayOfYear slot when delivering. QL is clamped to the
+  // items.dat family range (qlMin/qlMax) so a L200 player does not get a QL200 on a QL1-5 hoverboard.
+  static async Task<(int Low, int High, int Ql, string Name)> ResolveDaily(string connStr, int charId, JsonNode reward)
+  {
+    int low = I(reward, "lowId");
+    int high = I(reward, "highId");
+    int qlMin = reward?["qlMin"] != null ? I(reward, "qlMin") : 0;
+    int qlMax = reward?["qlMax"] != null ? I(reward, "qlMax") : 0;
+    if (reward?["randomItems"] is JsonArray typed && typed.Count > 0)
+    {
+      var pick = typed[Random.Shared.Next(typed.Count)];
+      low = I(pick, "lowId");
+      high = I(pick, "highId");
+      if (pick?["qlMin"] != null) qlMin = I(pick, "qlMin");
+      if (pick?["qlMax"] != null) qlMax = I(pick, "qlMax");
+    }
+    else if (reward?["randomItemIds"] is JsonArray pool && pool.Count > 0)
+    {
+      var ids = new List<int>();
+      foreach (var n in pool)
+        if (n != null && n.GetValueKind() == JsonValueKind.Number) ids.Add(n.GetValue<int>());
+      if (ids.Count > 0)
+      {
+        low = ids[Random.Shared.Next(ids.Count)];
+        high = low;
+      }
+    }
+    if (high <= 0) high = low;
+    int ql = I(reward, "ql");
+    string mode = S(reward, "qualityMode");
+    if (string.Equals(mode, "characterLevel", StringComparison.OrdinalIgnoreCase)
+        || string.Equals(mode, "characterLevelPlusMinus", StringComparison.OrdinalIgnoreCase)
+        || string.Equals(mode, "professionVendorNano", StringComparison.OrdinalIgnoreCase))
+    {
+      int level = await CharacterLevel(connStr, charId);
+      if (level > 0) ql = level;
+      if (string.Equals(mode, "characterLevelPlusMinus", StringComparison.OrdinalIgnoreCase) && level > 0)
+      {
+        int delta = I(reward, "qualityDelta");
+        if (delta <= 0) delta = 5;
+        ql = Math.Max(1, level + Random.Shared.Next(-delta, delta + 1));
+      }
+    }
+    if (qlMin > 0 || qlMax > 0)
+    {
+      if (qlMax <= 0) qlMax = 500;
+      if (qlMin <= 0) qlMin = 1;
+      if (ql <= 0) ql = qlMin;
+      if (ql < qlMin) ql = qlMin;
+      if (ql > qlMax) ql = qlMax;
+    }
+    if (ql < 0) ql = 0;
+    return (low, high, ql, S(reward, "name"));
+  }
+
+  static async Task<int> CharacterLevel(string connStr, int charId)
+  {
+    await using var db = new MySqlConnection(connStr); await db.OpenAsync();
+    await using var c = new MySqlCommand("SELECT StatValue FROM stats WHERE Instance=@c AND Type=50000 AND StatId=54 LIMIT 1", db);
+    c.Parameters.AddWithValue("@c", charId);
+    var v = await c.ExecuteScalarAsync();
+    return v == null || v is DBNull ? 0 : Convert.ToInt32(v);
+  }
+
+  // Plain ordered list fallback (visual 7x4 grid deferred). Marks today's slot and any
+  // reward indices already hit by this character's daily-yyyy-MM-dd claim keys.
   static async Task<string> DailyPage(string connStr, string code, string msg, bool ok)
   {
     var who = await Lookup(connStr, code);
@@ -164,15 +232,45 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
       return Page("Daily Reward", "<h1>Daily Reward</h1>" + CodeForm("/daily", code, Msg(string.IsNullOrWhiteSpace(code) ? msg : "That claim code was not found.", false)));
     var reward = TodaysReward(out var dayKey);
     var claimed = await Claimed(connStr, who.CharId);
+    bool claimedToday = claimed.Contains(dayKey);
+    var rewards = Load("daily.json")?["rewards"] as JsonArray;
+    int count = rewards?.Count ?? 0;
+    int todayIdx = count > 0 ? DateTime.Now.Date.DayOfYear % count : -1;
+    var claimedIdx = new HashSet<int>();
+    if (count > 0)
+      foreach (var key in claimed)
+        if (key.StartsWith("daily-", StringComparison.OrdinalIgnoreCase)
+            && key.Length >= 16
+            && DateTime.TryParse(key.AsSpan(6), out var when))
+          claimedIdx.Add(when.DayOfYear % count);
+
     var sb = new StringBuilder($"<h1>Daily Reward</h1><div class=\"sub\">For <b>{H(who.Name)}</b> &middot; {DateTime.Now:dddd, MMM d}</div><div class=\"nav\"><a href=\"/store\">&laquo; Back to Info</a> &nbsp; <a href=\"/claim?code={H(code)}\">Claim Center</a></div>{Msg(msg, ok)}");
-    if (reward == null) sb.Append("<p>No daily reward is set up today.</p>");
-    else
+    if (reward == null || count == 0)
     {
-      sb.Append($"<div class=\"row\">");
-      if (claimed.Contains(dayKey)) sb.Append("<span class=\"done\">Claimed today</span>");
-      else sb.Append($"<form method=\"post\" action=\"/daily\"><input type=\"hidden\" name=\"code\" value=\"{H(code)}\"><input type=\"submit\" value=\"Claim\"></form>");
-      sb.Append($"Today: {H(S(reward, "name"))}</div><p>Come back tomorrow for the next one.</p>");
+      sb.Append("<p>No daily reward is set up today.</p>");
+      return Page("Daily Reward", sb.ToString());
     }
+
+    sb.Append("<div class=\"row\">");
+    if (claimedToday) sb.Append("<span class=\"done\">Claimed today</span>");
+    else sb.Append($"<form method=\"post\" action=\"/daily\"><input type=\"hidden\" name=\"code\" value=\"{H(code)}\"><input type=\"submit\" value=\"Claim today's reward\"></form>");
+    sb.Append($"Today: {H(S(reward, "name"))}</div>");
+
+    sb.Append("<h2>Reward list</h2><div class=\"sub\">In rotation order. One claim per calendar day.</div>");
+    for (int i = 0; i < count; i++)
+    {
+      var entry = rewards[i];
+      string name = S(entry, "name");
+      int amt = I(entry, "amount");
+      string label = amt > 1 ? $"{name} x{amt}" : name;
+      string mark;
+      if (i == todayIdx && claimedToday) mark = "<span class=\"done\">today / claimed</span>";
+      else if (i == todayIdx) mark = "<span class=\"ok\">today</span>";
+      else if (claimedIdx.Contains(i)) mark = "<span class=\"done\">claimed</span>";
+      else mark = "";
+      sb.Append($"<div class=\"row\">{mark}Day {i + 1}. {H(label)}</div>");
+    }
+    sb.Append("<p class=\"sub\">Come back tomorrow for the next one.</p>");
     return Page("Daily Reward", sb.ToString());
   }
 
@@ -310,9 +408,11 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
       if (who == null) return Html(await DailyPage(connStr, code, null, false));
       var reward = TodaysReward(out var dayKey);
       if (reward == null) return Html(await DailyPage(connStr, code, null, false));
-      bool added = await Insert(connStr, who.CharId, dayKey, I(reward, "lowId"), I(reward, "highId"), I(reward, "ql"), "daily");
-      log($"daily char={who.CharId} key={dayKey} added={added}");
-      return Html(await DailyPage(connStr, code, added ? $"{S(reward, "name")} is on its way to {who.Name}." : "Already claimed today.", added));
+      var resolved = await ResolveDaily(connStr, who.CharId, reward);
+      bool added = await Insert(connStr, who.CharId, dayKey, resolved.Low, resolved.High, resolved.Ql, "daily");
+      log($"daily char={who.CharId} key={dayKey} item={resolved.Low} ql={resolved.Ql} added={added}");
+      string label = string.IsNullOrWhiteSpace(resolved.Name) ? S(reward, "name") : resolved.Name;
+      return Html(await DailyPage(connStr, code, added ? $"{label} is on its way to {who.Name}." : "Already claimed today.", added));
     });
   }
 }

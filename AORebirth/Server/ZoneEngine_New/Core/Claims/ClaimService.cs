@@ -101,12 +101,41 @@ namespace ZoneEngine_New.Core.Claims
             static int Int(JsonElement e, string k) => e.TryGetProperty(k, out JsonElement v) && v.ValueKind == JsonValueKind.Number && v.TryGetInt32(out int i) ? i : 0;
         }
 
-        /// <summary>Stack size for a claim row: the catalog entry's amount, 1 for daily/unknown keys.</summary>
+        /// <summary>
+        /// Stack size for a claim row: claims.json amount, else daily.json amount for daily-yyyy-MM-dd keys
+        /// (same DayOfYear slot as the account-api TodaysReward picker), else 1.
+        /// </summary>
         int AmountFor(string key)
         {
             foreach (CatalogItem c in LoadCatalog(includeLocked: true))
                 if (string.Equals(c.Key, key, StringComparison.OrdinalIgnoreCase))
                     return Math.Max(1, c.Amount);
+
+            if (!string.IsNullOrEmpty(key)
+                && key.StartsWith("daily-", StringComparison.OrdinalIgnoreCase)
+                && key.Length >= 16
+                && DateTime.TryParse(key.AsSpan(6), CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out DateTime day))
+            {
+                try
+                {
+                    using JsonDocument doc = JsonDocument.Parse(File.ReadAllText(Path.Combine(StoreDirectory, "daily.json")));
+                    if (doc.RootElement.TryGetProperty("rewards", out JsonElement rewards)
+                        && rewards.ValueKind == JsonValueKind.Array
+                        && rewards.GetArrayLength() > 0)
+                    {
+                        JsonElement reward = rewards[day.DayOfYear % rewards.GetArrayLength()];
+                        if (reward.TryGetProperty("amount", out JsonElement amount)
+                            && amount.ValueKind == JsonValueKind.Number
+                            && amount.TryGetInt32(out int n))
+                            return Math.Max(1, n);
+                    }
+                }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or JsonException)
+                {
+                    _logger.Warn("Daily amount lookup failed for " + key + ": " + ex.Message);
+                }
+            }
+
             return 1;
         }
 

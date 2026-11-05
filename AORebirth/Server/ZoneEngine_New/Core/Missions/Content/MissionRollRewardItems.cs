@@ -11,7 +11,8 @@ using ZoneEngine.Core.Missions;
 /// <summary>Queryable reward rows from packaged item content, with roll eligibility supplied by policy.</summary>
 internal static class MissionRollRewardItems
 {
-    sealed record Item(int LowId, int HighId, int LowQl, int HighQl, string Name, bool Fixed);
+    /// <summary>Catalog is the RollPolicy file name (Clusters / Implants / Nanos / …) used for equal-weight category picks.</summary>
+    sealed record Item(int LowId, int HighId, int LowQl, int HighQl, string Name, bool Fixed, string Catalog);
     static readonly Lazy<Item[]> Catalog = new(Load);
     internal static QuestItemShort Select(int quality, Random random)
     {
@@ -19,7 +20,10 @@ internal static class MissionRollRewardItems
         ArgumentNullException.ThrowIfNull(random);
         var eligible = Eligible(quality);
         if (eligible.Length == 0) throw new InvalidOperationException("No configured mission reward covers the requested quality.");
-        var selected = eligible[random.Next(eligible.Length)];
+        // Equal weight per catalog file so implants (~8k rows) cannot drown out nanos/armor/weapons.
+        var groups = eligible.GroupBy(r => r.Catalog, StringComparer.OrdinalIgnoreCase).Where(g => g.Any()).ToArray();
+        var group = groups[random.Next(groups.Length)].ToArray();
+        var selected = group[random.Next(group.Length)];
         return ToReward(selected, quality);
     }
 
@@ -88,18 +92,19 @@ internal static class MissionRollRewardItems
     static QuestItemShort ToReward(Item selected, int quality)
         => new() { LowId = selected.LowId, HighId = selected.HighId, Quality = selected.Fixed ? selected.LowQl : quality };
 
+    /// <summary>
+    /// Variable-QL rows in band, plus fixed-quality (nano) rows within NanoQualityTolerance.
+    /// Nanos used to be fallback-only, so any implant match blocked them from ever rolling.
+    /// </summary>
     static Item[] Eligible(int quality)
     {
         var rows = Catalog.Value;
-        var eligible = rows.Where(r => !r.Fixed && r.LowQl <= quality && quality <= r.HighQl).ToArray();
-        if (eligible.Length == 0)
-        {
-            int tolerance = MissionRollPolicy.Current.Rewards.NanoQualityTolerance;
-            eligible = rows.Where(r => r.Fixed && r.LowQl <= quality + tolerance && r.HighQl >= quality - tolerance).ToArray();
-        }
-
-        return eligible;
+        var variable = rows.Where(r => !r.Fixed && r.LowQl <= quality && quality <= r.HighQl);
+        int tolerance = MissionRollPolicy.Current.Rewards.NanoQualityTolerance;
+        var fixedOk = rows.Where(r => r.Fixed && r.LowQl <= quality + tolerance && r.HighQl >= quality - tolerance);
+        return variable.Concat(fixedOk).ToArray();
     }
+
     static Item[] Load()
     {
         var policy = MissionRollPolicy.Current.Rewards;
@@ -123,7 +128,7 @@ internal static class MissionRollRewardItems
                 if (low <= 0 || MissionRareLootCatalog.IsRareLootTemplate(low)
                     || policy.ExcludedNameFragments.Any(fragment => name.Contains(fragment, StringComparison.OrdinalIgnoreCase))
                     || file.FixedQuality && (min != max || !fixedFamilies.Add((low, high)))) continue;
-                rows.Add(new(low, high > 0 ? high : low, min, max > 0 ? max : min, name, file.FixedQuality));
+                rows.Add(new(low, high > 0 ? high : low, min, max > 0 ? max : min, name, file.FixedQuality, file.File));
             }
         }
         if (rows.Count == 0) throw new InvalidDataException("Mission reward content has no eligible rows.");
