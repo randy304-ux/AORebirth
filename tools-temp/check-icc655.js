@@ -1,0 +1,11 @@
+﻿const fs=require('fs'),p=require('path');const GD=process.argv[2];const rd=f=>JSON.parse(fs.readFileSync(p.join(GD,f),'utf8').replace(/^\uFEFF/,''));
+const files=['Halloween.json','SpawnSkips.json','NpcTemplates.ICC655.json','PlayfieldContent/655/SpawnsAdd.icc655.json'];const j={};for(const f of files)j[f]=rd(f);
+const nt=rd('NpcTemplates.json');for(const f of fs.readdirSync(GD).filter(f=>/^NpcTemplates\..+\.json$/.test(f)&&f!='NpcTemplates.ICC655.json'))Object.assign(nt,rd(f));
+const ov=j['NpcTemplates.ICC655.json'];const coll=Object.keys(ov).filter(k=>nt[k]);Object.assign(nt,ov);
+const sp=j['PlayfieldContent/655/SpawnsAdd.icc655.json'].spawns;const bad=sp.filter(s=>!nt[s.hashText]);const y0=sp.filter(s=>!s.position[1]);
+const hidden=new Set(j['SpawnSkips.json'].hiddenHashes.map(h=>h.hash||h));const hid=sp.filter(s=>hidden.has(s.hashText));
+const near=[];const keep=[[3211.2,858.3],[3211.1,873.1]];for(const s of sp)for(const k of keep)if(Math.hypot(s.position[0]-k[0],s.position[2]-k[1])<2)near.push(s.hashText);
+const lvl=sp.filter(s=>{const t=nt[s.hashText];return !t.Templates||!t.Templates.some(b=>b.Level>=s.minLevel&&b.Level<=s.maxLevel)});
+const uph=j['Halloween.json'].Outdoor.find(o=>o.Key=='uph-icc').Pads.length;
+const rm=j['SpawnSkips.json'].removedPoints.filter(r=>String(r.reason).includes('scrape-icc655-20261105')).length;
+console.log(JSON.stringify({jsonOk:true,overlayHashes:Object.keys(ov).length,collisions:coll,addPoints:sp.length,unresolvedHash:bad.map(s=>s.hashText),zeroY:y0.length,hiddenHashUsed:hid.length,onBuffbotOrTerminal:near,bandLevelOutsideRange:lvl.map(s=>s.hashText),uphPads:uph,removedPointsTag:rm}));

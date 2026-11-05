@@ -1028,26 +1028,555 @@
                                            ],
                               "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
                           },
-                          {"playfield": 6553, "hash": "3846", "position": [3420.9395, 9.46229, 811.6199], "reason": "scrape-arete-20261030: live civilian Douglass Guynes stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3459.9556, 9.764013, 801.8841], "reason": "scrape-arete-20261030: live civilian Suzie Mirabelli stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3436.1877, 9.49749, 887.36176], "reason": "scrape-arete-20261030: live civilian Ryan Daken stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3472.1748, 9.363698, 851.72], "reason": "scrape-arete-20261030: live civilian Britni Annunziata stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3437.9019, 9.363636, 834.58075], "reason": "scrape-arete-20261030: live civilian Pamela Borroel stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3438.5054, 9.363636, 846.9214], "reason": "scrape-arete-20261030: live civilian Myrtle Phare stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3465.0232, 9.363636, 849.86786], "reason": "scrape-arete-20261030: live civilian Jeanne Strimple stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3405.2678, 9.363636, 834.66266], "reason": "scrape-arete-20261030: live civilian Chauncey Varela stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3439.942, 9.3636265, 860.5515], "reason": "scrape-arete-20261030: live civilian Effie Depaolo stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3470.6606, 9.363636, 831.8837], "reason": "scrape-arete-20261030: live civilian Milford Heiliger stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3470.9226, 9.363636, 858.4875], "reason": "scrape-arete-20261030: live civilian Mohamed Reineman stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3463.8252, 9.363636, 858.8295], "reason": "scrape-arete-20261030: live civilian Sadye Washko stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3441.1724, 9.363636, 860.754], "reason": "scrape-arete-20261030: live civilian Herschel Musco stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "3846", "position": [3429.2158, 9.49988, 800.09937], "reason": "scrape-arete-20261030: live civilian Lashaunda Cratty stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"},
-                          {"playfield": 6553, "hash": "CMDI", "position": [4032.5232, 0.24356711, 667.7076], "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"},
-                          {"playfield": 6553, "hash": "CMDI", "position": [4058.233, 0.3996004, 678.1939], "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"},
-                          {"playfield": 6553, "hash": "CMDI", "position": [4032.7603, 0.6561838, 676.9679], "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"},
-                          {"playfield": 6553, "hash": "CMDI", "position": [4054.3843, 2.7282076, 650.5932], "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"},
-                          {"playfield": 6553, "hash": "CMDI", "position": [4104.6396, 0.7377962, 713.5413], "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"},
-                          {"playfield": 6553, "hash": "CMDI", "position": [4103.5894, 6.1800666, 657.683], "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"},
-                          {"playfield": 6553, "hash": "CMDI", "position": [4040.219, 1.0684938, 696.5665], "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"}
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3420.9395,
+                                               9.46229,
+                                               811.6199
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Douglass Guynes stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3459.9556,
+                                               9.764013,
+                                               801.8841
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Suzie Mirabelli stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3436.1877,
+                                               9.49749,
+                                               887.36176
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Ryan Daken stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3472.1748,
+                                               9.363698,
+                                               851.72
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Britni Annunziata stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3437.9019,
+                                               9.363636,
+                                               834.58075
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Pamela Borroel stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3438.5054,
+                                               9.363636,
+                                               846.9214
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Myrtle Phare stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3465.0232,
+                                               9.363636,
+                                               849.86786
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Jeanne Strimple stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3405.2678,
+                                               9.363636,
+                                               834.66266
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Chauncey Varela stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3439.942,
+                                               9.3636265,
+                                               860.5515
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Effie Depaolo stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3470.6606,
+                                               9.363636,
+                                               831.8837
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Milford Heiliger stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3470.9226,
+                                               9.363636,
+                                               858.4875
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Mohamed Reineman stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3463.8252,
+                                               9.363636,
+                                               858.8295
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Sadye Washko stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3441.1724,
+                                               9.363636,
+                                               860.754
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Herschel Musco stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "3846",
+                              "position":  [
+                                               3429.2158,
+                                               9.49988,
+                                               800.09937
+                                           ],
+                              "reason":  "scrape-arete-20261030: live civilian Lashaunda Cratty stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "CMDI",
+                              "position":  [
+                                               4032.5232,
+                                               0.24356711,
+                                               667.7076
+                                           ],
+                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "CMDI",
+                              "position":  [
+                                               4058.233,
+                                               0.3996004,
+                                               678.1939
+                                           ],
+                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "CMDI",
+                              "position":  [
+                                               4032.7603,
+                                               0.6561838,
+                                               676.9679
+                                           ],
+                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "CMDI",
+                              "position":  [
+                                               4054.3843,
+                                               2.7282076,
+                                               650.5932
+                                           ],
+                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "CMDI",
+                              "position":  [
+                                               4104.6396,
+                                               0.7377962,
+                                               713.5413
+                                           ],
+                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "CMDI",
+                              "position":  [
+                                               4103.5894,
+                                               6.1800666,
+                                               657.683
+                                           ],
+                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+                          },
+                          {
+                              "playfield":  6553,
+                              "hash":  "CMDI",
+                              "position":  [
+                                               4040.219,
+                                               1.0684938,
+                                               696.5665
+                                           ],
+                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3145.0098,
+                                               35.499603,
+                                               963.2869
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3260.8604,
+                                               35.499603,
+                                               904.3118
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3290.6494,
+                                               35.499603,
+                                               884.6131
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3293.1943,
+                                               35.499603,
+                                               846.01465
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3272.3496,
+                                               35.499603,
+                                               820.2318
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3227.1973,
+                                               35.499603,
+                                               831.45465
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3168.2444,
+                                               35.499603,
+                                               905.4153
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3225.3528,
+                                               35.499603,
+                                               908.1711
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3260.6572,
+                                               35.499603,
+                                               831.7664
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3175.9858,
+                                               35.500008,
+                                               915.2009
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3220.6128,
+                                               35.499603,
+                                               928.3059
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "FPBY",
+                              "position":  [
+                                               3185.2622,
+                                               35.179367,
+                                               966.3107
+                                           ],
+                              "reason":  "Food Provider replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "01V1",
+                              "position":  [
+                                               3145.4253,
+                                               35.499603,
+                                               795.839
+                                           ],
+                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "01V1",
+                              "position":  [
+                                               3164.297,
+                                               35.499603,
+                                               784.46124
+                                           ],
+                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "01V1",
+                              "position":  [
+                                               3174.2158,
+                                               35.499603,
+                                               772.6129
+                                           ],
+                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "01V1",
+                              "position":  [
+                                               3185.7148,
+                                               35.499603,
+                                               834.4891
+                                           ],
+                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "01V1",
+                              "position":  [
+                                               3150.4434,
+                                               35.499603,
+                                               829.684
+                                           ],
+                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "01V1",
+                              "position":  [
+                                               3174.4854,
+                                               35.499603,
+                                               795.7489
+                                           ],
+                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "01V1",
+                              "position":  [
+                                               3206.9421,
+                                               35.499603,
+                                               775.7012
+                                           ],
+                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ABGU",
+                              "position":  [
+                                               3244.0098,
+                                               36,
+                                               939.70355
+                                           ],
+                              "reason":  "ICC Arbiter Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ABGU",
+                              "position":  [
+                                               3247.3667,
+                                               35.75936,
+                                               939.78
+                                           ],
+                              "reason":  "ICC Arbiter Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ICFM",
+                              "position":  [
+                                               3210.035,
+                                               35.49973,
+                                               928.8715
+                                           ],
+                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ICPA",
+                              "position":  [
+                                               3233.3835,
+                                               35.499603,
+                                               898.6942
+                                           ],
+                              "reason":  "Male Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ICFM",
+                              "position":  [
+                                               3350.1936,
+                                               35.499603,
+                                               870.04596
+                                           ],
+                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ICFM",
+                              "position":  [
+                                               3350.296,
+                                               35.499603,
+                                               862.20325
+                                           ],
+                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ICFM",
+                              "position":  [
+                                               3206.4988,
+                                               35.49985,
+                                               802.1018
+                                           ],
+                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ICFM",
+                              "position":  [
+                                               3290.1582,
+                                               35.499603,
+                                               826.3241
+                                           ],
+                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ICFM",
+                              "position":  [
+                                               3333.8977,
+                                               35.499603,
+                                               945.98804
+                                           ],
+                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ICFM",
+                              "position":  [
+                                               3333.8203,
+                                               37.195152,
+                                               900.9465
+                                           ],
+                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "PPCD",
+                              "position":  [
+                                               3277.3618,
+                                               36.728603,
+                                               921.89606
+                                           ],
+                              "reason":  "Peacekeeper Constad 1 replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ZYBA",
+                              "position":  [
+                                               3158.1406,
+                                               35.499603,
+                                               899.1041
+                                           ],
+                              "reason":  "Zyvania Bagh replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3205.8596,
+                                               35.499603,
+                                               853.0229
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "3846",
+                              "position":  [
+                                               3226.5874,
+                                               35.499603,
+                                               847.137
+                                           ],
+                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          },
+                          {
+                              "playfield":  655,
+                              "hash":  "ICPA",
+                              "position":  [
+                                               3214.8733,
+                                               35.500114,
+                                               876.63684
+                                           ],
+                              "reason":  "Male Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
+                          }
                       ]
 }
