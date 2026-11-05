@@ -1,0 +1,21 @@
+PASS claims.staged parse items=118 new_vs_live=85 locked=0
+PASS Pack of Beacons 303444 present unlocked=True
+NOTE no standalone 'Recall Beacon' SKU in staged (live store uses Pack of Beacons)
+PASS ClaimService+Store unlocked fields present
+PASS alien ship door 253517 present on tip
+PASS zbuild-store ZoneEngine + account-api dlls present
+NOT_IN_STAGED 293417 Recall Beacon (real id in itemnames.xml)
+NOT_IN_STAGED 293415 Recall Beacon (real id in itemnames.xml)
+NOT_IN_STAGED 268748 Rubi-Ka Recall Beacon (real id in itemnames.xml)
+NOT_IN_STAGED 259103 Shadowlands Recall Beacon (real id in itemnames.xml)
+NOT_IN_STAGED 301703 Unicorn Recall Beacon (real id in itemnames.xml)
+NOT_IN_STAGED 301675 Freelancers Inc Recall Beacon (real id in itemnames.xml)
+NOT_IN_STAGED 296465 Insurance Claim Recall Beacon (real id in itemnames.xml)
+NOT_IN_STAGED 293411 Instant Grid Conversion Beacon (real id in itemnames.xml)
+PASS deploy-store has I:\AO\backups
+PASS deploy-store has schtasks /Run /TN
+PASS deploy-store has 7501
+PASS deploy-store has 7012
+PASS deploy-store has 7500
+PASS deploy-store has claims.staged.json
+PASS deploy-store has shutdown
