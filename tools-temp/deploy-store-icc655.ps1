@@ -5,7 +5,7 @@ $ErrorActionPreference = 'Stop'
 $root = 'I:\AO\src'; $want = 'e1986150'
 $outLog = Join-Path $root 'tools-temp\deploy-store-icc655.out.txt'; $metaPath = Join-Path $root 'tools-temp\deploy-store-icc655-meta.txt'
 Set-Content -LiteralPath $outLog -Value '' -Encoding ascii
-function Say([string]$m) { $l = '{0} {1}' -f (Get-Date -Format 'HH:mm:ss'), $m; Write-Output $l; Add-Content -LiteralPath $outLog -Value $l }
+function Say([string]$m) { $l = '{0} {1}' -f (Get-Date -Format 'HH:mm:ss'), $m; Write-Host $l; Add-Content -LiteralPath $outLog -Value $l }
 $mysql = 'I:\AO\mysql\server\bin\mysql.exe'; $mysqldump = 'I:\AO\mysql\server\bin\mysqldump.exe'
 $cnf = 'I:\AO\secrets\aorebirth-client.cnf'; $db = 'cellao_codex_clean'
 function Q([string]$sql) { (& $mysql --defaults-extra-file=$cnf -P 33070 -h 127.0.0.1 -N -e $sql $db | Out-String).Trim() }
@@ -77,7 +77,7 @@ function Boot-Once {
   $script:zLogLen = if (Test-Path $zlog) { (Get-Item $zlog).Length } else { 0 }
   Say 'start engines: schtasks /run /tn "\DungeonDogs\AO Dungeon Dogs Engines"'
   $st = schtasks /run /tn '\DungeonDogs\AO Dungeon Dogs Engines' 2>&1 | Out-String; Say ("schtasks: {0}" -f $st.Trim())
-  $deadline = (Get-Date).AddSeconds(240); $up = $false; $script:fresh = ''
+  $deadline = (Get-Date).AddSeconds(600); $up = $false; $script:fresh = ''
   while ((Get-Date) -lt $deadline) {
     if (Test-Path $zlog) {
       $fs = [IO.File]::Open($zlog, 'Open', 'Read', 'ReadWrite')
@@ -105,7 +105,7 @@ function Rollback([string]$why) {
   cmd /c ("`"{0}`" --defaults-extra-file={1} -P 33070 -h 127.0.0.1 {2} < `"{3}`"" -f $mysql, $cnf, $db, $backup)
   Say "db restore exit=$LASTEXITCODE"
   Say 'rollback: waiting 5-min boot gate'; Start-Sleep 300
-  $ok = Boot-Once; Say "rollback boot ok=$ok"
+  $ok = [bool]((Boot-Once) | Select-Object -Last 1); Say "rollback boot ok=$ok"
   "rollback=$why`nrollback_boot_ok=$ok`ndb_backup=$backup`nwhen=$(Get-Date -Format o)" | Set-Content -LiteralPath $metaPath -Encoding ascii
   exit 5
 }
@@ -134,12 +134,12 @@ try {
 
 $online = Q 'SELECT COUNT(*) FROM characters WHERE Online=1'
 if ($online -ne '0') { Rollback "online=$online before start" }
-$ok = Boot-Once
+$ok = [bool]((Boot-Once) | Select-Object -Last 1)
 if (-not $ok) {
   Say 'first boot did not come up; stopping, 5-min gate, retry once'
   try { Stop-Engines } catch { Say "stop: $_" }
   Start-Sleep 300
-  $ok = Boot-Once
+  $ok = [bool]((Boot-Once) | Select-Object -Last 1)
 }
 if (-not $ok) { Rollback 'engines did not come up after retry' }
 $p7501 = Listen 7501; $p7012 = Listen 7012; $p7500 = Listen 7500; $p8098 = Listen 8098
