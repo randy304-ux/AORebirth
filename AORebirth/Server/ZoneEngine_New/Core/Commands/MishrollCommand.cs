@@ -11,6 +11,7 @@ namespace ZoneEngine_New.Core.Commands
     /// <summary>
     /// <c>.mishroll</c>: pin or clear a preferred solo Rubi-Ka terminal mission reward item.
     /// Solo rolls use the pin when eligible; accepting a matching offer charges the QL-scaled targeting fee.
+    /// Accepts an item id, or a case-insensitive partial reward/nano name.
     /// </summary>
     public sealed class MishrollCommand : IGmCommand
     {
@@ -23,12 +24,12 @@ namespace ZoneEngine_New.Core.Commands
 
         public int RequiredGmLevel => 0;
 
-        public string Usage => ".mishroll | .mishroll <itemId> | .mishroll clear";
+        public string Usage => ".mishroll | .mishroll <itemId|name> | .mishroll clear";
 
         public string Topic => "player";
 
         public string Summary =>
-            "Pin a preferred solo RK terminal mission reward (item id). Clear with .mishroll clear. Disabled unless Gameplay.json mishroll.enabled is true.";
+            "Pin a preferred solo RK terminal mission reward (item id or name). Clear with .mishroll clear. Disabled unless Gameplay.json mishroll.enabled is true.";
 
         public void Execute(GmCommandContext context)
         {
@@ -49,25 +50,26 @@ namespace ZoneEngine_New.Core.Commands
                     Say("Mishroll pin: item " + pinned.ToString(CultureInfo.InvariantCulture)
                         + ". Solo RK terminal rolls use this reward; accepting charges a QL-scaled targeting fee. .mishroll clear removes it.");
                 else
-                    Say("No mishroll pin. Usage: .mishroll <itemId> | .mishroll clear");
+                    Say("No mishroll pin. Usage: .mishroll <itemId|name> | .mishroll clear");
                 return;
             }
 
             string arg0 = context.Args[0];
-            if (string.Equals(arg0, "clear", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(arg0, "off", StringComparison.OrdinalIgnoreCase)
-                || string.Equals(arg0, "none", StringComparison.OrdinalIgnoreCase))
+            if (context.Args.Length == 1
+                && (string.Equals(arg0, "clear", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(arg0, "off", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(arg0, "none", StringComparison.OrdinalIgnoreCase)))
             {
                 string? clearError = _mishroll.TryClear(characterId);
                 Say(clearError ?? "Mishroll pin cleared.");
                 return;
             }
 
-            if (context.Args.Length != 1
-                || !int.TryParse(arg0, NumberStyles.Integer, CultureInfo.InvariantCulture, out int itemId)
-                || itemId <= 0)
+            string argument = string.Join(' ', context.Args);
+            string? resolveError = _mishroll.TryResolvePinArgument(argument, out int itemId, out _);
+            if (resolveError != null)
             {
-                Say("Usage: .mishroll <itemId> | .mishroll clear");
+                Say(resolveError);
                 return;
             }
 

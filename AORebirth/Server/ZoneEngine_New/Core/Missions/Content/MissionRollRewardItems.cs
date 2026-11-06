@@ -104,6 +104,59 @@ internal static class MissionRollRewardItems
         return true;
     }
 
+    /// <summary>One catalog hit for partial-name mishroll lookup (LowId + display name).</summary>
+    internal readonly record struct CatalogNameMatch(int ItemId, string Name);
+
+    /// <summary>
+    /// Case-insensitive substring match against reward catalog names. Exact matches sort first, then
+    /// shorter names, then alphabetical. Used by <c>.mishroll &lt;name&gt;</c>.
+    /// </summary>
+    internal static bool TryFindCatalogItemsByPartialName(string query, out IReadOnlyList<CatalogNameMatch> matches,
+        out string reason)
+    {
+        matches = [];
+        reason = string.Empty;
+        if (string.IsNullOrWhiteSpace(query))
+        {
+            reason = "Item name is required.";
+            return false;
+        }
+
+        if (!TryGetRows(out Item[] rows, out reason))
+            return false;
+
+        string needle = query.Trim();
+        var found = new List<CatalogNameMatch>();
+        var seen = new HashSet<int>();
+        foreach (Item row in rows)
+        {
+            if (row.Name.IndexOf(needle, StringComparison.OrdinalIgnoreCase) < 0)
+                continue;
+            if (!seen.Add(row.LowId))
+                continue;
+            found.Add(new CatalogNameMatch(row.LowId, row.Name));
+        }
+
+        if (found.Count == 0)
+        {
+            // Nano programs are not catalog rows; allow "Mongo Slam" → crystal via template name remap later.
+            reason = "No mission reward matches '" + needle + "'.";
+            return false;
+        }
+
+        found.Sort((a, b) =>
+        {
+            bool aExact = string.Equals(a.Name, needle, StringComparison.OrdinalIgnoreCase);
+            bool bExact = string.Equals(b.Name, needle, StringComparison.OrdinalIgnoreCase);
+            if (aExact != bExact)
+                return aExact ? -1 : 1;
+            int byLen = a.Name.Length.CompareTo(b.Name.Length);
+            return byLen != 0 ? byLen : string.Compare(a.Name, b.Name, StringComparison.OrdinalIgnoreCase);
+        });
+        matches = found;
+        return true;
+    }
+
     /// <summary>
     /// Resolves a pinned item to the reward that would be granted at <paramref name="quality"/>,
     /// or fails when the catalog row is not eligible at that QL (including nano tolerance).

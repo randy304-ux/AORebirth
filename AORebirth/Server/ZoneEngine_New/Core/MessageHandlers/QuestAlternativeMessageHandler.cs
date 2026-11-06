@@ -119,7 +119,7 @@ namespace ZoneEngine_New.Core.MessageHandlers
                 if (result.Status == GeneratedMissionResultStatus.Applied)
                 {
                     session.Send(response);
-                    Feedback(session, player, FormatRollCostMessage(player, batch.Fee, quality, teamRoll, forcedReward));
+                    Feedback(session, player, FormatRollCostMessage(player, batch, quality, teamRoll, forcedReward));
                 }
                 else if (!player.IsPersistenceQuarantined)
                     Feedback(session, player, "The mission roll was not committed. No new offers were issued.");
@@ -141,23 +141,51 @@ namespace ZoneEngine_New.Core.MessageHandlers
             => session.Send(new ChatTextMessage { Identity = player.Identity, Text = text });
 
         /// <summary>
-        /// Chat line after a successful Request Mission: roll fee charged now, plus mishroll
-        /// targeting fee preview when the pin overrode this roll (charged on accept).
+        /// Chat line after a successful Request Mission: roll fee charged now; while a mishroll pin is
+        /// active, whether that pin appeared in this roll set, a QL-band warning when the pin's catalog
+        /// QL sits outside the current terminal difficulty, and the targeting-fee preview when the pin
+        /// overrode this roll (charged on accept).
         /// </summary>
-        string FormatRollCostMessage(Player player, int rollFee, int quality, bool teamRoll, QuestItemShort? forcedReward)
+        string FormatRollCostMessage(Player player, GeneratedMissionOfferBatch batch, int quality, bool teamRoll,
+            QuestItemShort? forcedReward)
         {
             string roll = "Mission roll cost: "
-                + rollFee.ToString(System.Globalization.CultureInfo.InvariantCulture) + " credits.";
-            if (teamRoll || forcedReward == null || !_mishroll.IsEnabled)
+                + batch.Fee.ToString(System.Globalization.CultureInfo.InvariantCulture) + " credits.";
+            if (!_mishroll.IsEnabled || !_mishroll.TryGetPinnedItemId(player.Identity.Instance, out int pin))
+                return roll;
+
+            bool pinInRoll = forcedReward != null || OfferBatchContainsPin(batch, pin);
+            roll += pinInRoll
+                ? " Mishroll pin appeared in this roll set."
+                : " Mishroll pin did not appear in this roll set.";
+
+            int level = player.Stats.Get(CharacterStat.Level);
+            string? qlWarning = MishrollService.FormatQualityBandWarning(pin, knownName: null, level, quality);
+            if (!string.IsNullOrEmpty(qlWarning))
+                roll += " " + qlWarning;
+
+            // Targeting fee is charged on accept when this solo roll's reward is the pin (override or natural hit).
+            if (teamRoll || !pinInRoll)
                 return roll;
 
             int breakAndEntry = player.Stats.GetOrZero(CharacterStat.BreakingEntry);
             int targeting = MishrollTargetingFeeCalculator.Compute(
                 quality, breakAndEntry, _mishroll.Settings.TargetingFee);
             if (targeting <= 0)
-                return roll + " Mishroll pin applied (no targeting fee at this QL).";
+                return roll + " Mishroll targeting fee on accept: none at this QL.";
             return roll + " Mishroll targeting fee on accept: "
                 + targeting.ToString(System.Globalization.CultureInfo.InvariantCulture) + " credits.";
+        }
+
+        static bool OfferBatchContainsPin(GeneratedMissionOfferBatch batch, int pin)
+        {
+            foreach (var offer in batch.Offers)
+            {
+                if (offer.RewardLowId == pin || offer.RewardHighId == pin)
+                    return true;
+            }
+
+            return false;
         }
 
         /// <summary>

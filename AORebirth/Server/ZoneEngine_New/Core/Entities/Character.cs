@@ -2232,6 +2232,9 @@
                 // Value = nano id among this character's uploaded nanos (a nano crystal's ToUse: HasNotFormula).
                 Operator.HasFormula => UploadedNanoIds.Contains(value),
                 Operator.HasNotFormula => !UploadedNanoIds.Contains(value),
+                // Retail/Legacy: FlyingAllowed is a playfield gate that always passes here. Flight itself is
+                // granted by CanFly / IsVehicle on the morph, not by this operator (hoverboards, Phasefront).
+                Operator.FlyingAllowed => true,
                 (Operator)MissionRequirements.HasFreeNcuFor => HasRoomInNcuFor(value),
                 _ => null
             };
