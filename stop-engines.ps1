@@ -306,6 +306,12 @@ function Wait-EnginePrestartState {
             elseif ($joined -match 'ownership=CLEAR' -or $joined -match 'prestart-clear' -or $joined -match 'PASS - selected engine is absent') {
                 $probeExit = 0
             }
+            elseif ($joined -match 'probe-timeout label=netstat') {
+                # Under S4U/schtasks, netstat can time out even when ports are fine. Treat as unknown.
+                Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] prestart-probe netstat-timeout engine={0} treating=unknown-skip" -f $EngineName)
+                $probeOutput | ForEach-Object { Write-Host $_ }
+                return -1
+            }
             elseif ($null -eq $probeExit) {
                 $probeExit = 1
             }

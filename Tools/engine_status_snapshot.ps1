@@ -3,7 +3,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$OutFile,
     [Parameter(Mandatory = $true)][string]$Images,
-    [int]$TimeoutMs = 8000
+    [int]$TimeoutMs = 12000
 )
 
 $ErrorActionPreference = 'Continue'
@@ -74,7 +74,11 @@ foreach ($image in @($Images -split ',' | ForEach-Object { $_.Trim() } | Where-O
     }
 }
 
-$net = Invoke-TimedCmd -CommandLine 'netstat -ano' -Label 'netstat'
+$net = $null
+for ($netAttempt = 1; $netAttempt -le 2; $netAttempt++) {
+    $net = Invoke-TimedCmd -CommandLine 'netstat -ano' -Label ("netstat_$netAttempt")
+    if ($null -ne $net) { break }
+}
 if ($null -eq $net) {
     $lines.Add('TIMEOUT|netstat|')
 }

@@ -363,11 +363,11 @@
             'powershell.exe -NoProfile -ExecutionPolicy Bypass -File "' + helper + '"'
             + ' -OutFile "' + outPath + '"'
             + ' -Images "' + engineImages.join(",") + '"'
-            + ' -TimeoutMs 5000';
+            + ' -TimeoutMs 12000';
         shell.Run(psCmd, 0, false);
 
-        // images * (tasklist budget + margin) + netstat budget + powershell startup
-        var budgetMs = (engineImages.length * 7000) + 12000;
+        // images * (tasklist budget + margin) + netstat retries + powershell startup
+        var budgetMs = (engineImages.length * 14000) + 30000;
         var deadline = (new Date()).getTime() + budgetMs;
         var output = "";
         var finished = false;
