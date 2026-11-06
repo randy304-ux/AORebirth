@@ -33,6 +33,9 @@ namespace AORebirth.Core.GameData
 
         public const string ItemTemplatesFileName = "ItemTemplates.json";
 
+        /// <summary>Per-item loot mint stack overrides (e.g. SL book chapters as stack of 6).</summary>
+        public const string LootStackOverridesFileName = "LootStackOverrides.json";
+
         public const string VendingMachinesFileName = "VendingMachines.json";
 
         public const string StartPackagesFileName = "StartPackages.json";

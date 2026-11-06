@@ -1,0 +1,66 @@
+{
+    "schemaVersion":  1,
+    "recordType":  1000014,
+    "playfieldId":  687,
+    "source":  "scrape-gilnote-20261106",
+    "spawns":  [
+                   {
+                       "districtIndex":  0,
+                       "hash":  0,
+                       "hashText":  "WGHW",
+                       "manifestHash":  0,
+                       "minLevel":  140,
+                       "maxLevel":  140,
+                       "respawnChance":  100,
+                       "flags":  1,
+                       "respawnTime":  600,
+                       "version7Extra":  0,
+                       "hasOptionalFlagBlock":  true,
+                       "nativeFlags":  0,
+                       "moreFlags":  0,
+                       "assistanceRadius":  0,
+                       "unknownOptionalU8":  0,
+                       "angle":  0,
+                       "angleW":  1,
+                       "position":  [
+                                        2666.8,
+                                        72.4,
+                                        1564.1
+                                    ],
+                       "radius":  1,
+                       "additionalPoints":  [
+
+                                            ],
+                       "extensions":  null
+                   },
+                   {
+                       "districtIndex":  0,
+                       "hash":  0,
+                       "hashText":  "SGIL",
+                       "manifestHash":  0,
+                       "minLevel":  140,
+                       "maxLevel":  140,
+                       "respawnChance":  100,
+                       "flags":  1,
+                       "respawnTime":  600,
+                       "version7Extra":  0,
+                       "hasOptionalFlagBlock":  true,
+                       "nativeFlags":  0,
+                       "moreFlags":  0,
+                       "assistanceRadius":  0,
+                       "unknownOptionalU8":  0,
+                       "angle":  324,
+                       "angleW":  1,
+                       "position":  [
+                                        2686.991,
+                                        73.715,
+                                        1530.466
+                                    ],
+                       "radius":  1,
+                       "additionalPoints":  [
+
+                                            ],
+                       "extensions":  null
+                   }
+               ]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "source": "scrape-gilnote-20261106",
+  "note": "SL specialization book chapter/part drops mint as a stack of 6; drop chance unchanged (NpcTemplates LootTable Chance/Repeats untouched).",
+  "overrides": [
+    { "lowId": 226266, "highId": 226266, "stackCount": 6, "name": "Kanel's Story - First Edition" },
+    { "lowId": 226267, "highId": 226267, "stackCount": 6, "name": "Kanel's Story - Second Edition" },
+    { "lowId": 226268, "highId": 226268, "stackCount": 6, "name": "Kanel's Story - Third Edition" },
+    { "lowId": 226269, "highId": 226269, "stackCount": 6, "name": "Kanel's Story - Fourth Edition" },
+
+    { "lowId": 226252, "highId": 226252, "stackCount": 6, "name": "The Mariner's Father - Chapter 1" },
+    { "lowId": 226253, "highId": 226253, "stackCount": 6, "name": "The Mariner's Father - Chapter 2" },
+    { "lowId": 226254, "highId": 226254, "stackCount": 6, "name": "The Mariner's Father - Chapter 3" },
+    { "lowId": 226255, "highId": 226255, "stackCount": 6, "name": "The Mariner's Father - Chapter 4" },
+
+    { "lowId": 226256, "highId": 226256, "stackCount": 6, "name": "The Girl that Saw it All - Chapter 1" },
+    { "lowId": 226257, "highId": 226257, "stackCount": 6, "name": "The Girl that Saw it All - Chapter 2" },
+    { "lowId": 226258, "highId": 226258, "stackCount": 6, "name": "The Girl that Saw it All - Chapter 3" },
+    { "lowId": 226259, "highId": 226259, "stackCount": 6, "name": "The Girl that Saw it All - Chapter 4" },
+
+    { "lowId": 226271, "highId": 226271, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume One" },
+    { "lowId": 226275, "highId": 226275, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume Two" },
+    { "lowId": 226280, "highId": 226280, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume Three" },
+    { "lowId": 226285, "highId": 226285, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume Four" },
+    { "lowId": 226286, "highId": 226286, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume Five" }
+  ]
+}

@@ -9,6 +9,7 @@ namespace ZoneEngine_New.Core.Entities
     using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
 
     using ZoneEngine_New.Core.Data;
+    using ZoneEngine_New.Core.GameData;
     using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Mobs;
     using ZoneEngine_New.Core.Playfield;
@@ -81,7 +82,11 @@ namespace ZoneEngine_New.Core.Entities
             for (int slot = 0; slot < rolled.Count; slot++)
             {
                 (int lowId, int highId, int quality) = rolled[slot];
-                if (!Loot.Add(slot, minter.CreateWithNewInstance(lowId, highId, quality, ItemSource.Loot)))
+                Item item = minter.CreateWithNewInstance(lowId, highId, quality, ItemSource.Loot);
+                // Data-driven stack after a successful roll (LootStackOverrides.json); Chance/Repeats unchanged.
+                if (LootStackOverrides.TryGetStack(lowId, out int stack))
+                    item.StackCount = stack;
+                if (!Loot.Add(slot, item))
                     return;
             }
         }
