@@ -193,33 +193,49 @@ function Get-AORebirthEngineProcesses {
     $relativeEnginePath = Join-Path "AORebirth\Built\Debug" ([string]$Engine.File)
     $pathSuffix = [System.IO.Path]::DirectorySeparatorChar + $relativeEnginePath
     $image = [System.IO.Path]::GetFileName([string]$Engine.File)
+    $procIds = @()
 
     Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] begin-identify engine={0} via timed tasklist" -f $Engine.Name)
-    $raw = Invoke-TimedCmdCapture -CommandLine ('tasklist /FO CSV /NH /FI "IMAGENAME eq {0}"' -f $image) -TimeoutMs 10000 -Label ("tasklist:$image")
+    $raw = Invoke-TimedCmdCapture -CommandLine ('tasklist /FO CSV /NH /FI "IMAGENAME eq {0}"' -f $image) -TimeoutMs 5000 -Label ("tasklist:$image")
     if ($null -eq $raw) {
-        Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] skip engine={0} reason=tasklist-timeout-or-unknown" -f $Engine.Name)
-        return @()
+        # Filtered tasklist hangs on this host for some images; fall back to Get-Process -Name (not WMI).
+        Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] tasklist-timeout engine={0}; fallback Get-Process -Name" -f $Engine.Name)
+        try {
+            $procIds = @(Get-Process -Name $Engine.Name -ErrorAction SilentlyContinue | ForEach-Object { [int]$_.Id })
+        }
+        catch {
+            $procIds = @()
+        }
+    }
+    else {
+        foreach ($line in @($raw -split "`r?`n")) {
+            if ($line -notmatch '^"([^"]+)","(\d+)"') { continue }
+            if ($Matches[1] -ine $image) { continue }
+            $procIds += [int]$Matches[2]
+        }
     }
 
-    $found = New-Object System.Collections.Generic.List[object]
-    foreach ($line in @($raw -split "`r?`n")) {
-        if ($line -notmatch '^"([^"]+)","(\d+)"') { continue }
-        $listedName = $Matches[1]
-        $procId = [int]$Matches[2]
-        if ($listedName -ine $image) { continue }
-
+    $found = @()
+    foreach ($procId in $procIds) {
         Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] path-probe engine={0} pid={1}" -f $Engine.Name, $procId)
-        $pathRaw = Invoke-TimedCmdCapture -CommandLine (
-            'powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "try { (Get-Process -Id {0} -ErrorAction Stop).Path } catch {{ }}"' -f $procId
-        ) -TimeoutMs 10000 -Label ("path:${image}:${procId}")
+        $candidatePath = $null
+        try {
+            $proc = Get-Process -Id $procId -ErrorAction Stop
+            if ($proc.Path) {
+                $candidatePath = [System.IO.Path]::GetFullPath([string]$proc.Path)
+            }
+        }
+        catch {
+            Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] skip engine={0} pid={1} reason=checkout-path-unknown" -f $Engine.Name, $procId)
+            continue
+        }
 
-        if ($null -eq $pathRaw -or [string]::IsNullOrWhiteSpace($pathRaw.Trim())) {
+        if ([string]::IsNullOrWhiteSpace($candidatePath)) {
             Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] skip engine={0} pid={1} reason=checkout-path-unknown" -f $Engine.Name, $procId)
             continue
         }
 
         try {
-            $candidatePath = [System.IO.Path]::GetFullPath($pathRaw.Trim())
             if ([System.IO.Path]::GetFileNameWithoutExtension($candidatePath) -ine $Engine.Name) { continue }
             if (-not $candidatePath.EndsWith($pathSuffix, [System.StringComparison]::OrdinalIgnoreCase)) { continue }
 
@@ -230,13 +246,13 @@ function Get-AORebirthEngineProcesses {
             $proc = Get-Process -Id $procId -ErrorAction SilentlyContinue
             if (-not $proc) { continue }
 
-            $found.Add([pscustomobject]@{
+            $found += [pscustomobject]@{
                 Process = $proc
                 Path = $candidatePath
                 CheckoutRoot = $checkoutRoot
                 ShutdownFile = Join-Path $checkoutRoot "logs\engines\$($Engine.Name).shutdown"
                 IsCurrentCheckout = $checkoutRoot -ieq [System.IO.Path]::GetFullPath($root)
-            })
+            }
         }
         catch {
             Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] skip engine={0} pid={1} reason=path-parse-error" -f $Engine.Name, $procId)
@@ -244,6 +260,9 @@ function Get-AORebirthEngineProcesses {
     }
 
     Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] end-identify engine={0} matches={1}" -f $Engine.Name, $found.Count)
+    if ($null -eq $found -or $found.Count -eq 0) {
+        return @()
+    }
     return @($found)
 }
 
@@ -265,17 +284,34 @@ function Wait-EnginePrestartState {
         $tmp = Join-Path $env:TEMP ("ao-prestart-{0}-{1}.txt" -f $EngineName, [guid]::NewGuid().ToString('n'))
         $err = "$tmp.err"
         try {
-            $argLine = '//nologo "{0}" --config "{1}" --engine-dir "{2}" --prestart {3}' -f $statusProbe, $configPath, $engineDir, $EngineName
-            $p = Start-Process -FilePath $cscript -ArgumentList $argLine -NoNewWindow -PassThru `
-                -RedirectStandardOutput $tmp -RedirectStandardError $err
+            $p = Start-Process -FilePath $cscript -ArgumentList @(
+                '//nologo', $statusProbe,
+                '--config', $configPath,
+                '--engine-dir', $engineDir,
+                '--prestart', $EngineName
+            ) -NoNewWindow -PassThru -RedirectStandardOutput $tmp -RedirectStandardError $err
             # Probe itself uses ~10s tasklist/netstat budgets; allow ~45s wall clock for a full pass.
             if (-not $p.WaitForExit(45000)) {
                 try { $p.Kill() } catch { }
                 Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] prestart-probe timeout engine={0} treating=unknown-skip" -f $EngineName)
                 return -1
             }
-            $probeExit = $p.ExitCode
             $probeOutput = @(Get-Content -LiteralPath $tmp -ErrorAction SilentlyContinue)
+            # cscript ExitCode is sometimes null under redirected Start-Process; infer from probe text.
+            $probeExit = $p.ExitCode
+            $joined = ($probeOutput -join "`n")
+            if ($joined -match 'ALREADY_RUNNING') {
+                $probeExit = 3
+            }
+            elseif ($joined -match 'ownership=CLEAR' -or $joined -match 'prestart-clear' -or $joined -match 'PASS - selected engine is absent') {
+                $probeExit = 0
+            }
+            elseif ($null -eq $probeExit) {
+                $probeExit = 1
+            }
+            else {
+                $probeExit = [int]$probeExit
+            }
         }
         finally {
             Remove-Item -LiteralPath $tmp, $err -Force -ErrorAction SilentlyContinue

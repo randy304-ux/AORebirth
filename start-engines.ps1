@@ -89,9 +89,16 @@ function Invoke-EngineStatusProbe {
             Write-Host ("[{0}] [AORebirth Status] probe-timeout after={1}ms args={2}" -f (Get-Date -Format 'HH:mm:ss.fff'), $TimeoutMs, ($Arguments -join ' '))
             return 2
         }
+        $probeLines = @(Get-Content -LiteralPath $tmp -ErrorAction SilentlyContinue)
         $probeExit = $p.ExitCode
+        $joined = ($probeLines -join "`n")
+        if ($joined -match 'ALREADY_RUNNING') { $probeExit = 3 }
+        elseif ($joined -match 'ownership=CLEAR' -or $joined -match 'prestart-clear' -or $joined -match 'PASS - selected engine is absent') { $probeExit = 0 }
+        elseif ($joined -match '\[AORebirth Status\] PASS') { $probeExit = 0 }
+        elseif ($null -eq $probeExit) { $probeExit = 1 }
+        else { $probeExit = [int]$probeExit }
         if (-not $Quiet) {
-            foreach ($line in @(Get-Content -LiteralPath $tmp -ErrorAction SilentlyContinue)) {
+            foreach ($line in $probeLines) {
                 Write-Host $line
             }
         }
