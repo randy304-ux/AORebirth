@@ -1,12 +1,15 @@
 # Current Task
 
-## Active: pf 585 scrape pilot STAGED (not deployed)
+## Active: pf 685 Galway County scrape pilot STAGED (not deployed)
 
-Branch `cursor/scrape-pilot-585-220f`. Tag `scrape-585-20261105`.
+Branch `cursor/galway-685-scrape-2d46`. Tag `scrape-galway685-20261106`.
+Stacks on staged tip `845841b3` (beacons) / `f06d9b00` (wraith/claims).
 
-- SpawnsAdd: 233 mobs / 0 vendors / 0 static
-- Templates: 75 new Pxxx; pinks unresolved 38; collisions flagged 3
-- Deploy script ready, not run: `tools-temp\deploy-scrape-585.ps1`
-- Offline checks PASS; ZoneEngine_New build PASS (`tools-temp\zbuild-scrape585`)
+- Review: `I:\AO\imports\scrape-20261106-review\685\` (`missing.csv`; `wrong.csv` empty)
+- Sightings in: 1747 → spawn points added: 1218 (363 reuse existing hash)
+- New templates: 63 (P02A–P040) in `NpcTemplates.Galway685.json`
+- Wrong fixed: 0; collisions flagged: 3 names (Nighthowler, Ryan Daken, Adan Denk)
+- Deploy script ready, not run: `tools-temp\deploy-scrape-galway685.ps1`
+- ZoneEngine_New build: `tools-temp\zbuild-galway685`
 
 No DB writes, no engine restart, no GitHub push for this pilot.
