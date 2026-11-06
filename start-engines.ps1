@@ -109,6 +109,33 @@ function Invoke-EngineStatusProbe {
     }
 }
 
+function Get-NetstatListening {
+    param([int]$TimeoutMs = 12000)
+
+    $tmp = Join-Path $env:TEMP ("ao-ns-start-{0}.txt" -f [guid]::NewGuid().ToString('n'))
+    $err = "$tmp.err"
+    try {
+        $p = Start-Process -FilePath 'cmd.exe' -ArgumentList @('/d', '/c', 'netstat -ano') -NoNewWindow -PassThru `
+            -RedirectStandardOutput $tmp -RedirectStandardError $err
+        if (-not $p.WaitForExit($TimeoutMs)) {
+            try { $p.Kill() } catch { }
+            Write-Host ("[{0}] netstat ownership probe timed out after {1}ms" -f (Get-Date -Format 'HH:mm:ss.fff'), $TimeoutMs)
+            return @()
+        }
+        $all = Get-Content -LiteralPath $tmp -Raw -ErrorAction SilentlyContinue
+        $rows = @()
+        foreach ($line in @($all -split "`r?`n")) {
+            if ($line -notmatch 'LISTENING') { continue }
+            if ($line -notmatch ':(\d+)\s+\S+\s+LISTENING\s+(\d+)\s*$') { continue }
+            $rows += [pscustomobject]@{ LocalPort = [int]$Matches[1]; OwningProcess = [int]$Matches[2] }
+        }
+        return $rows
+    }
+    finally {
+        Remove-Item -LiteralPath $tmp, $err -Force -ErrorAction SilentlyContinue
+    }
+}
+
 function Wait-EngineOwnership {
     param(
         [Parameter(Mandatory = $true)]
@@ -132,15 +159,20 @@ function Wait-EngineOwnership {
             return $false
         }
 
-        # WMI-free status probe for all engines (including Zone). Get-NetTCPConnection hangs here.
-        $probeExit = Invoke-EngineStatusProbe -Arguments @(
-            "--engine-required",
-            $EngineName,
-            "--expect-pid",
-            "$EngineName=$($Process.Id)"
-        ) -Quiet
-        if ($probeExit -eq 0) {
-            return $true
+        # Direct timed netstat — JS probe netstat often times out under the S4U schtasks session.
+        $listeners = @(Get-NetstatListening -TimeoutMs 12000)
+        if ($listeners.Count -gt 0) {
+            $ownsEveryPort = $true
+            foreach ($port in $Ports) {
+                $owned = @($listeners | Where-Object { $_.LocalPort -eq $port -and $_.OwningProcess -eq $Process.Id })
+                if ($owned.Count -eq 0) {
+                    $ownsEveryPort = $false
+                    break
+                }
+            }
+            if ($ownsEveryPort) {
+                return $true
+            }
         }
 
         Start-Sleep -Milliseconds 500
