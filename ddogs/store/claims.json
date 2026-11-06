@@ -151,7 +151,9 @@
                       "group":  "Armor \u0026 Costume Sets",
                       "lowId":  296236,
                       "highId":  296236,
-                      "ql":  0
+                      "ql":  0,
+                      "amount":  1,
+                      "unlocked":  true
                   },
                   {
                       "key":  "item-295728",
@@ -263,7 +265,9 @@
                       "group":  "Veteran Rewards",
                       "lowId":  268698,
                       "highId":  268698,
-                      "ql":  0
+                      "ql":  0,
+                      "amount":  1,
+                      "unlocked":  true
                   },
                   {
                       "key":  "vet-303489",
@@ -1424,48 +1428,6 @@
                       "unlocked":  true,
                       "unlockRule":  null,
                       "livePrice":  600,
-                      "qty":  null,
-                      "vetDays":  null
-                  },
-                  {
-                      "key":  "store-262430",
-                      "name":  "Personal Mechanized Vehicle",
-                      "group":  "Item Store - Vehicles",
-                      "lowId":  262437,
-                      "highId":  262437,
-                      "ql":  0,
-                      "amount":  1,
-                      "unlocked":  true,
-                      "unlockRule":  null,
-                      "livePrice":  1400,
-                      "qty":  null,
-                      "vetDays":  null
-                  },
-                  {
-                      "key":  "store-287335",
-                      "name":  "PMV - Obsidian Edition",
-                      "group":  "Item Store - Vehicles",
-                      "lowId":  287222,
-                      "highId":  287222,
-                      "ql":  0,
-                      "amount":  1,
-                      "unlocked":  true,
-                      "unlockRule":  null,
-                      "livePrice":  1750,
-                      "qty":  null,
-                      "vetDays":  null
-                  },
-                  {
-                      "key":  "store-293415",
-                      "name":  "Recall Beacon",
-                      "group":  "Item Store - Convenience",
-                      "lowId":  293415,
-                      "highId":  293415,
-                      "ql":  0,
-                      "amount":  1,
-                      "unlocked":  false,
-                      "unlockRule":  null,
-                      "livePrice":  0,
                       "qty":  null,
                       "vetDays":  null
                   },

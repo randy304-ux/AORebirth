@@ -234,8 +234,10 @@ namespace ZoneEngine_New.Core.Entities
             int id = requirement.Value;
             return (Operator)requirement.Operator switch
             {
-                Operator.HasPerk => TrainedPerks.Contains(id),
-                Operator.HasNotPerk => !TrainedPerks.Contains(id),
+                // Order Vehicle Enter-items gate on these research perks; treat them as met even if a path
+                // somehow skipped LoadTrainedPerks injection.
+                Operator.HasPerk => TrainedPerks.Contains(id) || IsFreeVehicleResearchPerk(id),
+                Operator.HasNotPerk => !(TrainedPerks.Contains(id) || IsFreeVehicleResearchPerk(id)),
                 Operator.IsPerkLocked => PerkLocks.IsLocked(id, DateTime.UtcNow),
                 Operator.IsPerkUnlocked => !PerkLocks.IsLocked(id, DateTime.UtcNow),
                 Operator.IsPetOverEquipped => OwnedPets.All.Any(pet => pet.Pet?.IsOverEquipped == true),
@@ -407,11 +409,36 @@ namespace ZoneEngine_New.Core.Entities
         /// </summary>
         public IReadOnlyList<ItemTemplate> PerkTemplates => _perkTemplates;
 
+        /// <summary>
+        /// Base Lost-Eden Order Vehicle research perk ids (Perks.json). Injected on every login so every character
+        /// can order Personal Mechanized Vehicle, Anti-Personnel Turret, Anti-Vehicular Battery, Mechanized Scout,
+        /// Mechanized Assault, and PMV Obsidian without researching those lines. Not persisted.
+        /// </summary>
+        static readonly int[] FreeVehicleResearchPerkIds =
+        [
+            3000, // Personal Mechanized Vehicle
+            3030, // Anti-Personnel Turret
+            3060, // Anti-Vehicular Battery
+            3090, // Mechanized Scout Vehicle
+            3120, // Mechanized Assault Vehicle
+            3218, // PMV Obsidian Edition
+        ];
+
+        static bool IsFreeVehicleResearchPerk(int perkId)
+        {
+            foreach (int id in FreeVehicleResearchPerkIds)
+                if (id == perkId)
+                    return true;
+            return false;
+        }
+
         /// <summary>Login: the stored perks become the trained set and their templates are built.</summary>
         public void LoadTrainedPerks(IEnumerable<int> perkIds)
         {
             ArgumentNullException.ThrowIfNull(perkIds);
             TrainedPerks.Restore(perkIds);
+            foreach (int perkId in FreeVehicleResearchPerkIds)
+                TrainedPerks.Add(perkId);
             RebasePerkTemplates();
         }
 
