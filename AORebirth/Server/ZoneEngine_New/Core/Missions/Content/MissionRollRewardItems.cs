@@ -2,6 +2,7 @@ namespace ZoneEngine_New.Core.Missions;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -38,15 +39,10 @@ internal static class MissionRollRewardItems
             return false;
         }
 
-        Item[] rows;
-        try { rows = Catalog.Value; }
-        catch (Exception exception) when (exception is InvalidDataException or IOException or UnauthorizedAccessException)
-        {
-            reason = "Mission reward catalogs are unavailable.";
+        if (!TryGetRows(out Item[] rows, out reason))
             return false;
-        }
 
-        Item? match = rows.FirstOrDefault(r => r.LowId == itemId || r.HighId == itemId);
+        Item? match = FindById(rows, itemId);
         if (match == null)
         {
             reason = "That item is not in the mission reward pool.";
@@ -58,8 +54,39 @@ internal static class MissionRollRewardItems
     }
 
     /// <summary>
+    /// Finds a catalog row by exact reward name (e.g. <c>Nano Crystal (Mongo Slam!)</c>).
+    /// Used to remap nano-program ids to their crystal reward ids.
+    /// </summary>
+    internal static bool TryFindCatalogItemByName(string itemName, out int itemId, out string name, out string reason)
+    {
+        itemId = 0;
+        name = string.Empty;
+        reason = string.Empty;
+        if (string.IsNullOrWhiteSpace(itemName))
+        {
+            reason = "Item name is required.";
+            return false;
+        }
+
+        if (!TryGetRows(out Item[] rows, out reason))
+            return false;
+
+        Item? match = rows.FirstOrDefault(r => string.Equals(r.Name, itemName, StringComparison.OrdinalIgnoreCase));
+        if (match == null)
+        {
+            reason = "That item is not in the mission reward pool.";
+            return false;
+        }
+
+        itemId = match.LowId;
+        name = match.Name;
+        return true;
+    }
+
+    /// <summary>
     /// Resolves a pinned item to the reward that would be granted at <paramref name="quality"/>,
     /// or fails when the catalog row is not eligible at that QL (including nano tolerance).
+    /// Accepts either LowId or HighId.
     /// </summary>
     internal static bool TryResolve(int itemId, int quality, out QuestItemShort reward, out string reason)
     {
@@ -77,17 +104,95 @@ internal static class MissionRollRewardItems
             return false;
         }
 
+        if (!TryGetRows(out Item[] rows, out reason))
+            return false;
+
+        Item? catalogMatch = FindById(rows, itemId);
+        if (catalogMatch == null)
+        {
+            reason = "That item is not in the mission reward pool.";
+            return false;
+        }
+
         Item[] eligible = Eligible(quality);
         Item? match = eligible.FirstOrDefault(r => r.LowId == itemId || r.HighId == itemId);
         if (match == null)
         {
-            reason = "That item is not eligible as a mission reward at QL " + quality + ".";
+            reason = FormatIneligibleQualityReason(catalogMatch, quality);
             return false;
         }
 
         reward = ToReward(match, quality);
         return true;
     }
+
+    internal static string FormatNotInPoolReason(int itemId, string? knownName)
+    {
+        if (string.IsNullOrWhiteSpace(knownName))
+            return "That item is not in the mission reward pool.";
+
+        string crystalName = "Nano Crystal (" + knownName + ")";
+        if (TryFindCatalogItemByName(crystalName, out int crystalId, out string matchedName, out _))
+        {
+            return "Id " + itemId.ToString(CultureInfo.InvariantCulture)
+                + " is " + knownName
+                + " (nano program), not a mission reward. Use the crystal id "
+                + crystalId.ToString(CultureInfo.InvariantCulture)
+                + " for " + matchedName + ".";
+        }
+
+        return "Id " + itemId.ToString(CultureInfo.InvariantCulture)
+            + " is " + knownName
+            + ", which is not in the mission reward pool (XML Data/MissionRewards catalogs).";
+    }
+
+    static string FormatIneligibleQualityReason(Item row, int quality)
+    {
+        string ids = row.LowId == row.HighId
+            ? row.LowId.ToString(CultureInfo.InvariantCulture)
+            : row.LowId.ToString(CultureInfo.InvariantCulture) + "/" + row.HighId.ToString(CultureInfo.InvariantCulture);
+        string band = row.LowQl == row.HighQl
+            ? "QL " + row.LowQl.ToString(CultureInfo.InvariantCulture)
+            : "QL " + row.LowQl.ToString(CultureInfo.InvariantCulture) + "-" + row.HighQl.ToString(CultureInfo.InvariantCulture);
+
+        if (row.Fixed)
+        {
+            int tolerance = MissionRollPolicy.Current.Rewards.NanoQualityTolerance;
+            int minMission = Math.Max(1, row.LowQl - tolerance);
+            int maxMission = row.HighQl + tolerance;
+            return row.Name + " (" + ids + ") is in the pool at " + band
+                + ", but only rolls when mission QL is "
+                + minMission.ToString(CultureInfo.InvariantCulture) + "-"
+                + maxMission.ToString(CultureInfo.InvariantCulture)
+                + " (nano tolerance ±"
+                + tolerance.ToString(CultureInfo.InvariantCulture)
+                + "). Mission QL is "
+                + quality.ToString(CultureInfo.InvariantCulture) + ".";
+        }
+
+        return row.Name + " (" + ids + ") is in the pool at " + band
+            + ", which does not cover mission QL "
+            + quality.ToString(CultureInfo.InvariantCulture) + ".";
+    }
+
+    static bool TryGetRows(out Item[] rows, out string reason)
+    {
+        rows = [];
+        reason = string.Empty;
+        try
+        {
+            rows = Catalog.Value;
+            return true;
+        }
+        catch (Exception exception) when (exception is InvalidDataException or IOException or UnauthorizedAccessException)
+        {
+            reason = "Mission reward catalogs are unavailable.";
+            return false;
+        }
+    }
+
+    static Item? FindById(Item[] rows, int itemId)
+        => rows.FirstOrDefault(r => r.LowId == itemId || r.HighId == itemId);
 
     static QuestItemShort ToReward(Item selected, int quality)
         => new() { LowId = selected.LowId, HighId = selected.HighId, Quality = selected.Fixed ? selected.LowQl : quality };

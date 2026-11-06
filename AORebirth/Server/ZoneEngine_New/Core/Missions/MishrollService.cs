@@ -8,6 +8,7 @@ namespace ZoneEngine_New.Core.Missions
 
     using ZoneEngine_New.Core.Configuration;
     using ZoneEngine_New.Core.Data;
+    using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
 
     /// <summary>
@@ -18,13 +19,15 @@ namespace ZoneEngine_New.Core.Missions
     {
         readonly GameplaySettings _settings;
         readonly IZoneLogger _logger;
+        readonly IItemTemplateCatalog _items;
         readonly string _connection;
         readonly ConcurrentDictionary<int, int?> _cache = new();
 
-        public MishrollService(GameplaySettings settings, IZoneLogger logger)
+        public MishrollService(GameplaySettings settings, IZoneLogger logger, IItemTemplateCatalog items)
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _items = items ?? throw new ArgumentNullException(nameof(items));
             _connection = MySqlConnectionSettings.GetRequiredConnectionString();
         }
 
@@ -61,15 +64,28 @@ namespace ZoneEngine_New.Core.Missions
                 return "Mishroll pin is unavailable.";
             if (itemId <= 0)
                 return "Usage: .mishroll <itemId> | .mishroll clear";
-            if (!MissionRollRewardItems.TryFindCatalogItem(itemId, out string name, out string reason))
-                return reason;
+
+            string name;
+            string? remapNote = null;
+            if (!MissionRollRewardItems.TryFindCatalogItem(itemId, out name, out string reason))
+            {
+                if (!TryRemapToCatalogReward(itemId, out int remappedId, out name, out string remapReason))
+                    return remapReason;
+                itemId = remappedId;
+                remapNote = " Remapped from your id to reward id "
+                    + itemId.ToString(CultureInfo.InvariantCulture) + ".";
+            }
+
             if (!Upsert(characterId, itemId))
                 return "Could not save your mishroll pin (database unavailable).";
             _cache[characterId] = itemId;
             _logger.Info("Mishroll pin set char=" + characterId.ToString(CultureInfo.InvariantCulture)
                 + " item=" + itemId.ToString(CultureInfo.InvariantCulture)
                 + (string.IsNullOrEmpty(name) ? string.Empty : (" name=" + name)));
-            return null;
+            return string.IsNullOrEmpty(remapNote) ? null : ("Mishroll pin set to item "
+                + itemId.ToString(CultureInfo.InvariantCulture)
+                + (string.IsNullOrEmpty(name) ? string.Empty : (" (" + name + ")"))
+                + "." + remapNote);
         }
 
         public string? TryClear(int characterId)
@@ -85,6 +101,28 @@ namespace ZoneEngine_New.Core.Missions
         }
 
         public void Invalidate(int characterId) => _cache.TryRemove(characterId, out _);
+
+        bool TryRemapToCatalogReward(int itemId, out int remappedId, out string name, out string reason)
+        {
+            remappedId = 0;
+            name = string.Empty;
+            reason = string.Empty;
+
+            if (!_items.TryGet(itemId, out ItemTemplate template) || string.IsNullOrWhiteSpace(template.Name))
+            {
+                reason = "That item is not in the mission reward pool.";
+                return false;
+            }
+
+            // Nano programs are not reward rows; their crystals are (Nano Crystal (Name)).
+            string crystalName = "Nano Crystal (" + template.Name + ")";
+            if (MissionRollRewardItems.TryFindCatalogItemByName(crystalName, out remappedId, out name, out _))
+                return true;
+
+            // Also accept pinning by either end of a LowId/HighId pair already covered by TryFindCatalogItem.
+            reason = MissionRollRewardItems.FormatNotInPoolReason(itemId, template.Name);
+            return false;
+        }
 
         int? Load(int characterId)
         {
