@@ -166,7 +166,7 @@ function Get-ProcessesByExecutablePath {
         $procId = [int]$Matches[2]
         $pathRaw = Invoke-TimedCmdCapture -CommandLine (
             'powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "try { (Get-Process -Id {0} -ErrorAction Stop).Path } catch {{ }}"' -f $procId
-        ) -TimeoutMs 10000 -Label ("path:$image:$procId")
+        ) -TimeoutMs 10000 -Label ("path:${image}:${procId}")
         if ([string]::IsNullOrWhiteSpace($pathRaw)) { continue }
         try {
             $candidatePath = [System.IO.Path]::GetFullPath($pathRaw.Trim())
@@ -211,7 +211,7 @@ function Get-AORebirthEngineProcesses {
         Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] path-probe engine={0} pid={1}" -f $Engine.Name, $procId)
         $pathRaw = Invoke-TimedCmdCapture -CommandLine (
             'powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "try { (Get-Process -Id {0} -ErrorAction Stop).Path } catch {{ }}"' -f $procId
-        ) -TimeoutMs 10000 -Label ("path:$image:$procId")
+        ) -TimeoutMs 10000 -Label ("path:${image}:${procId}")
 
         if ($null -eq $pathRaw -or [string]::IsNullOrWhiteSpace($pathRaw.Trim())) {
             Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] skip engine={0} pid={1} reason=checkout-path-unknown" -f $Engine.Name, $procId)
