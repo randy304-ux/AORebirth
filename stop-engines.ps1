@@ -113,6 +113,40 @@ function Stop-EngineProcess {
     }
 }
 
+function Write-AcwLog {
+    param([Parameter(Mandatory = $true)][string]$Message)
+    Write-Host ("[{0}] {1}" -f (Get-Date -Format 'HH:mm:ss.fff'), $Message)
+}
+
+# Child cmd with hard timeout. Returns stdout text, or $null on timeout/failure (treated as unknown).
+function Invoke-TimedCmdCapture {
+    param(
+        [Parameter(Mandatory = $true)][string]$CommandLine,
+        [int]$TimeoutMs = 10000,
+        [string]$Label = 'cmd'
+    )
+
+    $tmp = Join-Path $env:TEMP ("ao-acw-{0}-{1}.txt" -f $Label.Replace(':','_'), [guid]::NewGuid().ToString('n'))
+    $err = "$tmp.err"
+    try {
+        $p = Start-Process -FilePath 'cmd.exe' -ArgumentList @('/d', '/c', $CommandLine) -NoNewWindow -PassThru `
+            -RedirectStandardOutput $tmp -RedirectStandardError $err
+        if (-not $p.WaitForExit($TimeoutMs)) {
+            try { $p.Kill() } catch { }
+            Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] probe-timeout label={0} after={1}ms treating=unknown" -f $Label, $TimeoutMs)
+            return $null
+        }
+        return (Get-Content -LiteralPath $tmp -Raw -ErrorAction SilentlyContinue)
+    }
+    catch {
+        Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] probe-error label={0} err={1}" -f $Label, $_.Exception.Message)
+        return $null
+    }
+    finally {
+        Remove-Item -LiteralPath $tmp, $err -Force -ErrorAction SilentlyContinue
+    }
+}
+
 function Get-ProcessesByExecutablePath {
     param(
         [Parameter(Mandatory = $true)]
@@ -120,18 +154,30 @@ function Get-ProcessesByExecutablePath {
     )
 
     $normalizedExpectedPath = [System.IO.Path]::GetFullPath($ExpectedPath)
-    @(
-        foreach ($candidate in @(Get-Process -ErrorAction SilentlyContinue)) {
-            try {
-                $candidatePath = [System.IO.Path]::GetFullPath($candidate.Path)
-                if ($candidatePath -ieq $normalizedExpectedPath) {
-                    $candidate
-                }
-            }
-            catch {
+    $image = [System.IO.Path]::GetFileName($normalizedExpectedPath)
+    $raw = Invoke-TimedCmdCapture -CommandLine ('tasklist /FO CSV /NH /FI "IMAGENAME eq {0}"' -f $image) -TimeoutMs 10000 -Label ("tasklist:$image")
+    if ($null -eq $raw) {
+        return @()
+    }
+
+    $matches = New-Object System.Collections.Generic.List[object]
+    foreach ($line in @($raw -split "`r?`n")) {
+        if ($line -notmatch '^"([^"]+)","(\d+)"') { continue }
+        $procId = [int]$Matches[2]
+        $pathRaw = Invoke-TimedCmdCapture -CommandLine (
+            'powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "try { (Get-Process -Id {0} -ErrorAction Stop).Path } catch {{ }}"' -f $procId
+        ) -TimeoutMs 10000 -Label ("path:$image:$procId")
+        if ([string]::IsNullOrWhiteSpace($pathRaw)) { continue }
+        try {
+            $candidatePath = [System.IO.Path]::GetFullPath($pathRaw.Trim())
+            if ($candidatePath -ieq $normalizedExpectedPath) {
+                $proc = Get-Process -Id $procId -ErrorAction SilentlyContinue
+                if ($proc) { $matches.Add($proc) }
             }
         }
-    )
+        catch { }
+    }
+    return @($matches)
 }
 
 function Get-AORebirthEngineProcesses {
@@ -146,39 +192,59 @@ function Get-AORebirthEngineProcesses {
 
     $relativeEnginePath = Join-Path "AORebirth\Built\Debug" ([string]$Engine.File)
     $pathSuffix = [System.IO.Path]::DirectorySeparatorChar + $relativeEnginePath
+    $image = [System.IO.Path]::GetFileName([string]$Engine.File)
 
-    @(
-        foreach ($candidate in @(Get-Process -ErrorAction SilentlyContinue)) {
-            try {
-                $candidatePath = [System.IO.Path]::GetFullPath($candidate.Path)
-                if ($candidate.ProcessName -ine $Engine.Name) {
-                    continue
-                }
-                if ([System.IO.Path]::GetFileNameWithoutExtension($candidatePath) -ine $Engine.Name) {
-                    continue
-                }
-                if (-not $candidatePath.EndsWith($pathSuffix, [System.StringComparison]::OrdinalIgnoreCase)) {
-                    continue
-                }
+    Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] begin-identify engine={0} via timed tasklist" -f $Engine.Name)
+    $raw = Invoke-TimedCmdCapture -CommandLine ('tasklist /FO CSV /NH /FI "IMAGENAME eq {0}"' -f $image) -TimeoutMs 10000 -Label ("tasklist:$image")
+    if ($null -eq $raw) {
+        Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] skip engine={0} reason=tasklist-timeout-or-unknown" -f $Engine.Name)
+        return @()
+    }
 
-                $checkoutRootText = $candidatePath.Substring(0, $candidatePath.Length - $pathSuffix.Length)
-                if ([string]::IsNullOrWhiteSpace($checkoutRootText)) {
-                    continue
-                }
+    $found = New-Object System.Collections.Generic.List[object]
+    foreach ($line in @($raw -split "`r?`n")) {
+        if ($line -notmatch '^"([^"]+)","(\d+)"') { continue }
+        $listedName = $Matches[1]
+        $procId = [int]$Matches[2]
+        if ($listedName -ine $image) { continue }
 
-                $checkoutRoot = [System.IO.Path]::GetFullPath($checkoutRootText)
-                [pscustomobject]@{
-                    Process = $candidate
-                    Path = $candidatePath
-                    CheckoutRoot = $checkoutRoot
-                    ShutdownFile = Join-Path $checkoutRoot "logs\engines\$($Engine.Name).shutdown"
-                    IsCurrentCheckout = $checkoutRoot -ieq [System.IO.Path]::GetFullPath($root)
-                }
-            }
-            catch {
-            }
+        Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] path-probe engine={0} pid={1}" -f $Engine.Name, $procId)
+        $pathRaw = Invoke-TimedCmdCapture -CommandLine (
+            'powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "try { (Get-Process -Id {0} -ErrorAction Stop).Path } catch {{ }}"' -f $procId
+        ) -TimeoutMs 10000 -Label ("path:$image:$procId")
+
+        if ($null -eq $pathRaw -or [string]::IsNullOrWhiteSpace($pathRaw.Trim())) {
+            Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] skip engine={0} pid={1} reason=checkout-path-unknown" -f $Engine.Name, $procId)
+            continue
         }
-    )
+
+        try {
+            $candidatePath = [System.IO.Path]::GetFullPath($pathRaw.Trim())
+            if ([System.IO.Path]::GetFileNameWithoutExtension($candidatePath) -ine $Engine.Name) { continue }
+            if (-not $candidatePath.EndsWith($pathSuffix, [System.StringComparison]::OrdinalIgnoreCase)) { continue }
+
+            $checkoutRootText = $candidatePath.Substring(0, $candidatePath.Length - $pathSuffix.Length)
+            if ([string]::IsNullOrWhiteSpace($checkoutRootText)) { continue }
+
+            $checkoutRoot = [System.IO.Path]::GetFullPath($checkoutRootText)
+            $proc = Get-Process -Id $procId -ErrorAction SilentlyContinue
+            if (-not $proc) { continue }
+
+            $found.Add([pscustomobject]@{
+                Process = $proc
+                Path = $candidatePath
+                CheckoutRoot = $checkoutRoot
+                ShutdownFile = Join-Path $checkoutRoot "logs\engines\$($Engine.Name).shutdown"
+                IsCurrentCheckout = $checkoutRoot -ieq [System.IO.Path]::GetFullPath($root)
+            })
+        }
+        catch {
+            Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] skip engine={0} pid={1} reason=path-parse-error" -f $Engine.Name, $procId)
+        }
+    }
+
+    Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] end-identify engine={0} matches={1}" -f $Engine.Name, $found.Count)
+    return @($found)
 }
 
 function Wait-EnginePrestartState {
@@ -195,13 +261,32 @@ function Wait-EnginePrestartState {
     $probeOutput = @()
     $probeExit = 1
     do {
-        $probeOutput = @(& $cscript //nologo $statusProbe --config $configPath --engine-dir $engineDir --prestart $EngineName 2>&1)
-        $probeExit = $LASTEXITCODE
+        Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] prestart-probe begin engine={0}" -f $EngineName)
+        $tmp = Join-Path $env:TEMP ("ao-prestart-{0}-{1}.txt" -f $EngineName, [guid]::NewGuid().ToString('n'))
+        $err = "$tmp.err"
+        try {
+            $argLine = '//nologo "{0}" --config "{1}" --engine-dir "{2}" --prestart {3}' -f $statusProbe, $configPath, $engineDir, $EngineName
+            $p = Start-Process -FilePath $cscript -ArgumentList $argLine -NoNewWindow -PassThru `
+                -RedirectStandardOutput $tmp -RedirectStandardError $err
+            # Probe itself uses ~10s tasklist/netstat budgets; allow ~45s wall clock for a full pass.
+            if (-not $p.WaitForExit(45000)) {
+                try { $p.Kill() } catch { }
+                Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] prestart-probe timeout engine={0} treating=unknown-skip" -f $EngineName)
+                return -1
+            }
+            $probeExit = $p.ExitCode
+            $probeOutput = @(Get-Content -LiteralPath $tmp -ErrorAction SilentlyContinue)
+        }
+        finally {
+            Remove-Item -LiteralPath $tmp, $err -Force -ErrorAction SilentlyContinue
+        }
+
+        Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] prestart-probe end engine={0} exit={1}" -f $EngineName, $probeExit)
         if ($probeExit -eq 0 -or ($AllowCurrentCheckoutOwner -and $probeExit -eq 3)) {
             $probeOutput | ForEach-Object { Write-Host $_ }
             return $probeExit
         }
-
+        # Unknown/timeout from soft probes inside cscript still returns quickly; mismatch retries until deadline.
         Start-Sleep -Milliseconds 500
     } while ((Get-Date) -lt $deadline)
 
@@ -211,13 +296,14 @@ function Wait-EnginePrestartState {
 
 foreach ($engine in @($engines | Where-Object { $coreEngineNames -contains $_.Name })) {
     foreach ($identified in @(Get-AORebirthEngineProcesses -Engine $engine)) {
-        Write-Host ("[ACTIVE_CHECKOUT_WINS] identified engine={0} pid={1} checkout={2} path={3}" -f `
+        Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] identified engine={0} pid={1} checkout={2} path={3}" -f `
             $engine.Name, $identified.Process.Id, $identified.CheckoutRoot, $identified.Path)
 
         if ($IdentifyOnly) {
             continue
         }
         if ($StaleCheckoutsOnly -and $identified.IsCurrentCheckout) {
+            Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] keep current-checkout engine={0} pid={1}" -f $engine.Name, $identified.Process.Id)
             continue
         }
 
@@ -239,13 +325,17 @@ foreach ($engine in @($engines | Where-Object { $coreEngineNames -contains $_.Na
 }
 
 if ($IdentifyOnly) {
-    Write-Host "ACTIVE_CHECKOUT_WINS identification complete; no process was stopped."
+    Write-AcwLog "ACTIVE_CHECKOUT_WINS identification complete; no process was stopped."
     return
 }
 
 if ($StaleCheckoutsOnly) {
     foreach ($engine in @($engines | Where-Object { $coreEngineNames -contains $_.Name })) {
         $prestartExit = Wait-EnginePrestartState -EngineName $engine.Name -AllowCurrentCheckoutOwner
+        if ($prestartExit -eq -1) {
+            Write-AcwLog ("[ACTIVE_CHECKOUT_WINS] skip prestart-verify engine={0} reason=probe-timeout" -f $engine.Name)
+            continue
+        }
         if ($prestartExit -ne 0 -and $prestartExit -ne 3) {
             Write-Warning "$($engine.Name) pre-start state remains unsafe; an unknown or unverified owner was not killed."
             $failed = $true
@@ -256,7 +346,7 @@ if ($StaleCheckoutsOnly) {
         Write-Error "AO Rebirth stale-checkout cleanup did not reach a verified safe state."
     }
 
-    Write-Host "AO Rebirth stale-checkout cleanup complete."
+    Write-AcwLog "AO Rebirth stale-checkout cleanup complete."
     return
 }
 

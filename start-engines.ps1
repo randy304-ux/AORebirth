@@ -73,23 +73,33 @@ function Invoke-EngineStatusProbe {
         [Parameter(Mandatory = $true)]
         [string[]]$Arguments,
 
-        [switch]$Quiet
+        [switch]$Quiet,
+
+        [int]$TimeoutMs = 45000
     )
 
-    $probeArguments = @("--config", $configPath, "--engine-dir", $engineDir) + $Arguments
-    if ($Quiet) {
-        & $cscript //nologo $statusProbe @probeArguments *> $null
-        $probeExit = $LASTEXITCODE
-    }
-    else {
-        $probeOutput = @(& $cscript //nologo $statusProbe @probeArguments)
-        $probeExit = $LASTEXITCODE
-        foreach ($line in $probeOutput) {
-            Write-Host $line
+    $probeArguments = @("//nologo", $statusProbe, "--config", $configPath, "--engine-dir", $engineDir) + $Arguments
+    $tmp = Join-Path $env:TEMP ("ao-start-probe-{0}.txt" -f [guid]::NewGuid().ToString('n'))
+    $err = "$tmp.err"
+    try {
+        $p = Start-Process -FilePath $cscript -ArgumentList $probeArguments -NoNewWindow -PassThru `
+            -RedirectStandardOutput $tmp -RedirectStandardError $err
+        if (-not $p.WaitForExit($TimeoutMs)) {
+            try { $p.Kill() } catch { }
+            Write-Host ("[{0}] [AORebirth Status] probe-timeout after={1}ms args={2}" -f (Get-Date -Format 'HH:mm:ss.fff'), $TimeoutMs, ($Arguments -join ' '))
+            return 2
         }
+        $probeExit = $p.ExitCode
+        if (-not $Quiet) {
+            foreach ($line in @(Get-Content -LiteralPath $tmp -ErrorAction SilentlyContinue)) {
+                Write-Host $line
+            }
+        }
+        return $probeExit
     }
-
-    return $probeExit
+    finally {
+        Remove-Item -LiteralPath $tmp, $err -Force -ErrorAction SilentlyContinue
+    }
 }
 
 function Wait-EngineOwnership {
@@ -115,33 +125,15 @@ function Wait-EngineOwnership {
             return $false
         }
 
-        if ($EngineName -eq "ZoneEngine_New") {
-            $ownsEveryPort = $true
-            foreach ($port in $Ports) {
-                $ownedListeners = @(
-                    Get-NetTCPConnection -State Listen -LocalPort $port -ErrorAction SilentlyContinue |
-                        Where-Object { $_.OwningProcess -eq $Process.Id }
-                )
-                if ($ownedListeners.Count -eq 0) {
-                    $ownsEveryPort = $false
-                    break
-                }
-            }
-
-            if ($ownsEveryPort) {
-                return $true
-            }
-        }
-        else {
-            $probeExit = Invoke-EngineStatusProbe -Arguments @(
-                "--engine-required",
-                $EngineName,
-                "--expect-pid",
-                "$EngineName=$($Process.Id)"
-            ) -Quiet
-            if ($probeExit -eq 0) {
-                return $true
-            }
+        # WMI-free status probe for all engines (including Zone). Get-NetTCPConnection hangs here.
+        $probeExit = Invoke-EngineStatusProbe -Arguments @(
+            "--engine-required",
+            $EngineName,
+            "--expect-pid",
+            "$EngineName=$($Process.Id)"
+        ) -Quiet
+        if ($probeExit -eq 0) {
+            return $true
         }
 
         Start-Sleep -Milliseconds 500
@@ -237,18 +229,35 @@ function Get-ProcessesByExecutablePath {
     )
 
     $normalizedExpectedPath = [System.IO.Path]::GetFullPath($ExpectedPath)
-    @(
-        foreach ($candidate in @(Get-Process -ErrorAction SilentlyContinue)) {
+    $image = [System.IO.Path]::GetFileName($normalizedExpectedPath)
+    $tmp = Join-Path $env:TEMP ("ao-start-tl-{0}.txt" -f [guid]::NewGuid().ToString('n'))
+    $matches = New-Object System.Collections.Generic.List[object]
+    try {
+        $p = Start-Process -FilePath 'cmd.exe' -ArgumentList @('/d', '/c', ('tasklist /FO CSV /NH /FI "IMAGENAME eq {0}"' -f $image)) `
+            -NoNewWindow -PassThru -RedirectStandardOutput $tmp -RedirectStandardError "$tmp.err"
+        if (-not $p.WaitForExit(10000)) {
+            try { $p.Kill() } catch { }
+            Write-Host ("[{0}] tasklist timeout for {1}; treating as absent" -f (Get-Date -Format 'HH:mm:ss.fff'), $image)
+            return @()
+        }
+        foreach ($line in @(Get-Content -LiteralPath $tmp -ErrorAction SilentlyContinue)) {
+            if ($line -notmatch '^"([^"]+)","(\d+)"') { continue }
+            $procId = [int]$Matches[2]
             try {
-                $candidatePath = [System.IO.Path]::GetFullPath($candidate.Path)
-                if ($candidatePath -ieq $normalizedExpectedPath) {
-                    $candidate
+                $proc = Get-Process -Id $procId -ErrorAction Stop
+                $candidatePath = $null
+                try { if ($proc.Path) { $candidatePath = [System.IO.Path]::GetFullPath($proc.Path) } } catch { }
+                if ($candidatePath -and $candidatePath -ieq $normalizedExpectedPath) {
+                    $matches.Add($proc)
                 }
             }
-            catch {
-            }
+            catch { }
         }
-    )
+    }
+    finally {
+        Remove-Item -LiteralPath $tmp, "$tmp.err" -Force -ErrorAction SilentlyContinue
+    }
+    return @($matches)
 }
 
 $configuration = New-Object System.Xml.XmlDocument
@@ -293,8 +302,9 @@ if ($ValidateSchemaOnly) {
     return
 }
 
-Write-Host "[ACTIVE_CHECKOUT_WINS] Removing positively identified AORebirth core engines from stale checkouts before startup..."
+Write-Host ("[{0}] [ACTIVE_CHECKOUT_WINS] Removing positively identified AORebirth core engines from stale checkouts before startup..." -f (Get-Date -Format 'HH:mm:ss.fff'))
 & (Join-Path $root "stop-engines.ps1") -CoreOnly -StaleCheckoutsOnly
+Write-Host ("[{0}] [ACTIVE_CHECKOUT_WINS] stale-checkout cleanup returned; continuing startup" -f (Get-Date -Format 'HH:mm:ss.fff'))
 
 $windowStyle = if ($Visible) { "Normal" } else { "Hidden" }
 

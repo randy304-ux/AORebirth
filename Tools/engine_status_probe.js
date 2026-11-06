@@ -279,57 +279,156 @@
         return definitions;
     }
 
-    function captureWindowsSnapshot() {
+    // WMI-free snapshot: timed Get-Process helper + netstat.
+    // Replaces Win32_Process / MSFT_NetTCPConnection WbemScripting queries that hang when WMI is unhealthy.
+    // Redirect command output to a temp file so WScript.Shell.Exec cannot deadlock on a full stdout pipe.
+    function runCmdCaptureToFile(commandLine, timeoutMs) {
+        var shell = new ActiveXObject("WScript.Shell");
+        var fso = getFileSystem();
+        var outPath = fso.BuildPath(
+            shell.ExpandEnvironmentStrings("%TEMP%"),
+            "ao-probe-" + (new Date()).getTime() + "-" + Math.floor(Math.random() * 100000) + ".txt");
+        var exec = shell.Exec('cmd.exe /d /c ' + commandLine + ' > "' + outPath + '" 2>nul');
+        var deadline = (new Date()).getTime() + timeoutMs;
+        while (exec.Status === 0) {
+            if ((new Date()).getTime() > deadline) {
+                try {
+                    shell.Run('cmd.exe /d /c taskkill /PID ' + exec.ProcessID + ' /T /F', 0, true);
+                }
+                catch (killError) {
+                }
+                try { if (fso.FileExists(outPath)) { fso.DeleteFile(outPath, true); } } catch (e1) {}
+                throw new Error("timed out after " + timeoutMs + "ms: " + commandLine);
+            }
+            WScript.Sleep(100);
+        }
+        try { exec.StdOut.ReadAll(); } catch (e3) {}
+        try { exec.StdErr.ReadAll(); } catch (e4) {}
+        var output = "";
+        try {
+            if (fso.FileExists(outPath)) {
+                var file = fso.OpenTextFile(outPath, 1);
+                if (!file.AtEndOfStream) {
+                    output = file.ReadAll();
+                }
+                file.Close();
+                fso.DeleteFile(outPath, true);
+            }
+        }
+        catch (readError) {
+            output = "";
+        }
+        return output;
+    }
+
+    // Soft-timed external probe: on timeout/failure return empty string (caller treats as unknown).
+    function runCmdCaptureSoft(commandLine, timeoutMs, label) {
+        try {
+            return runCmdCaptureToFile(commandLine, timeoutMs);
+        }
+        catch (timedOut) {
+            WScript.Echo("[AORebirth Status] probe-timeout label=" + label + " after=" + timeoutMs + "ms treating=unknown");
+            return "";
+        }
+    }
+
+    function imagesForSnapshot(definitions, options) {
+        var selected = selectedDefinitions(definitions, options);
+        var images = [];
+        var index;
+        for (index = 0; index < selected.length; index++) {
+            images.push(selected[index].executable);
+        }
+        return images;
+    }
+
+    // Path is intentionally omitted (null). Checkout path identity is handled by stop-engines.ps1.
+    // Snapshot work runs in Tools/engine_status_snapshot.ps1 with Start-Process hard timeouts,
+    // because filtered `tasklist /FI` can hang forever under WScript.Shell.Exec/taskkill.
+    function captureWindowsSnapshot(definitions, options) {
         var snapshot = { processes: [], listeners: [] };
-        var locator;
-        var processService;
-        var tcpService;
+        var engineImages = imagesForSnapshot(definitions, options);
+        var shell = new ActiveXObject("WScript.Shell");
+        var fso = getFileSystem();
+        var outPath = fso.BuildPath(
+            shell.ExpandEnvironmentStrings("%TEMP%"),
+            "ao-ess-" + (new Date()).getTime() + "-" + Math.floor(Math.random() * 100000) + ".txt");
+        var helper = fso.BuildPath(
+            fso.GetParentFolderName(WScript.ScriptFullName),
+            "engine_status_snapshot.ps1");
 
-        try {
-            locator = new ActiveXObject("WbemScripting.SWbemLocator");
-            processService = locator.ConnectServer(".", "root\\cimv2");
-            var processRows = new Enumerator(
-                processService.ExecQuery(
-                    "SELECT ProcessId, Name, ExecutablePath FROM Win32_Process",
-                    "WQL",
-                    48));
+        WScript.Echo("[AORebirth Status] snapshot-begin images=" + engineImages.join(","));
 
-            for (; !processRows.atEnd(); processRows.moveNext()) {
-                var processRow = processRows.item();
-                var executablePath = processRow.ExecutablePath;
+        var psCmd =
+            'powershell.exe -NoProfile -ExecutionPolicy Bypass -File "' + helper + '"'
+            + ' -OutFile "' + outPath + '"'
+            + ' -Images "' + engineImages.join(",") + '"'
+            + ' -TimeoutMs 5000';
+        shell.Run(psCmd, 0, false);
+
+        // images * (tasklist budget + margin) + netstat budget + powershell startup
+        var budgetMs = (engineImages.length * 7000) + 12000;
+        var deadline = (new Date()).getTime() + budgetMs;
+        var output = "";
+        var finished = false;
+        while ((new Date()).getTime() < deadline) {
+            if (fso.FileExists(outPath)) {
+                try {
+                    var file = fso.OpenTextFile(outPath, 1);
+                    if (!file.AtEndOfStream) {
+                        output = file.ReadAll();
+                    }
+                    file.Close();
+                    if (/\bDONE\s*$/m.test(output) || output.indexOf("\nDONE") >= 0 || output.indexOf("\r\nDONE") >= 0) {
+                        finished = true;
+                        break;
+                    }
+                }
+                catch (readPartial) {
+                }
+            }
+            WScript.Sleep(200);
+        }
+
+        try { if (fso.FileExists(outPath)) { fso.DeleteFile(outPath, true); } } catch (delErr) { }
+
+        if (!finished) {
+            WScript.Echo("[AORebirth Status] probe-timeout label=engine_status_snapshot after=" + budgetMs + "ms treating=unknown");
+            return snapshot;
+        }
+
+        var lines = String(output).split(/\r?\n/);
+        var lineIndex;
+        for (lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+            var line = trim(lines[lineIndex]);
+            if (line.length === 0 || line === "DONE") {
+                continue;
+            }
+            var parts = line.split("|");
+            if (parts.length < 2) {
+                continue;
+            }
+            if (parts[0] === "TIMEOUT") {
+                WScript.Echo("[AORebirth Status] probe-timeout label=" + parts[1] + (parts.length > 2 ? (":" + parts[2]) : "") + " treating=unknown");
+                continue;
+            }
+            if (parts[0] === "PROC" && parts.length >= 3) {
                 snapshot.processes.push({
-                    pid: Number(processRow.ProcessId),
-                    name: String(processRow.Name),
-                    path: executablePath === null || typeof executablePath === "undefined"
-                        ? null
-                        : String(executablePath)
+                    pid: parseInt(parts[1], 10),
+                    name: parts[2],
+                    path: null
                 });
+                continue;
             }
-        }
-        catch (processError) {
-            throw new Error("Windows process ownership query failed.");
-        }
-
-        try {
-            tcpService = locator.ConnectServer(".", "root\\StandardCimv2");
-            var listenerRows = new Enumerator(
-                tcpService.ExecQuery(
-                    "SELECT LocalPort, OwningProcess FROM MSFT_NetTCPConnection WHERE State = 2",
-                    "WQL",
-                    48));
-
-            for (; !listenerRows.atEnd(); listenerRows.moveNext()) {
-                var listenerRow = listenerRows.item();
+            if (parts[0] === "LISTEN" && parts.length >= 3) {
                 snapshot.listeners.push({
-                    port: Number(listenerRow.LocalPort),
-                    pid: Number(listenerRow.OwningProcess)
+                    port: Number(parts[1]),
+                    pid: Number(parts[2])
                 });
             }
         }
-        catch (listenerError) {
-            throw new Error("Windows TCP listener ownership query failed.");
-        }
 
+        WScript.Echo("[AORebirth Status] snapshot-end processes=" + snapshot.processes.length + " listeners=" + snapshot.listeners.length);
         return snapshot;
     }
 
@@ -497,6 +596,10 @@
             }
 
             var engineReasons = [];
+            var singleExactPidOverride = null;
+            var expectedPid = hasExpectedPid(options, definition.key)
+                ? options.expectedPids[definition.key]
+                : null;
             if (named.length === 0) {
                 addReason(engineReasons, "expected-process-absent");
             }
@@ -507,29 +610,41 @@
                         unavailablePath = true;
                     }
                 }
-                addReason(
-                    engineReasons,
-                    unavailablePath ? "process-path-unavailable" : "unexpected-executable-path");
+                // Soft-accept path-unavailable when expect-pid names a matching image (S4U / timed-out path).
+                var softPathOk = false;
+                if (unavailablePath && expectedPid !== null) {
+                    var softProc = findProcessByPid(named, expectedPid);
+                    if (softProc !== null
+                        && String(softProc.name).toLowerCase() === definition.executable.toLowerCase()) {
+                        softPathOk = true;
+                        singleExactPidOverride = expectedPid;
+                    }
+                }
+                if (!softPathOk) {
+                    addReason(
+                        engineReasons,
+                        unavailablePath ? "process-path-unavailable" : "unexpected-executable-path");
+                }
             }
             else if (exact.length > 1) {
                 addReason(engineReasons, "multiple-expected-processes");
             }
 
-            var expectedPid = hasExpectedPid(options, definition.key)
-                ? options.expectedPids[definition.key]
-                : null;
             if (expectedPid !== null) {
                 var requestedProcess = findProcessByPid(snapshot.processes, expectedPid);
                 if (requestedProcess === null) {
                     addReason(engineReasons, "expected-pid-absent");
                 }
-                else if (String(requestedProcess.name).toLowerCase() !== definition.executable.toLowerCase()
-                    || normalizePath(requestedProcess.path) !== definition.normalizedExpectedPath) {
+                else if (String(requestedProcess.name).toLowerCase() !== definition.executable.toLowerCase()) {
+                    addReason(engineReasons, "expected-pid-executable-mismatch");
+                }
+                else if (normalizePath(requestedProcess.path) !== null
+                    && normalizePath(requestedProcess.path) !== definition.normalizedExpectedPath) {
                     addReason(engineReasons, "expected-pid-executable-mismatch");
                 }
             }
 
-            var singleExactPid = exact.length === 1 ? exact[0].pid : null;
+            var singleExactPid = exact.length === 1 ? exact[0].pid : singleExactPidOverride;
             if (expectedPid !== null && singleExactPid !== null && singleExactPid !== expectedPid) {
                 addReason(engineReasons, "expected-pid-mismatch");
             }
@@ -558,7 +673,10 @@
                 record.listenerProcess = String(owner.name);
                 var ownerPath = normalizePath(owner.path);
                 if (ownerPath === null) {
-                    addReason(record.reasons, "listener-path-unavailable");
+                    if (String(owner.name).toLowerCase() !== definition.executable.toLowerCase()) {
+                        addReason(record.reasons, "wrong-process-owner");
+                    }
+                    // else: name matches, path timed out/unreadable — accept for ownership.
                 }
                 else if (String(owner.name).toLowerCase() !== definition.executable.toLowerCase()) {
                     addReason(record.reasons, "wrong-process-owner");
@@ -658,6 +776,51 @@
                 });
             }
             return { exitCode: 0, result: clearResult, state: "CLEAR" };
+        }
+
+        // Path probes may time out under S4U / hung Get-Process.Path. If every required
+        // port is owned by a tasklist-named engine PID, accept already-running without path.
+        var namedPids = [];
+        var namedIndex;
+        for (namedIndex = 0; namedIndex < named.length; namedIndex++) {
+            addUnique(namedPids, named[namedIndex].pid);
+        }
+        function pidInList(list, pid) {
+            var i;
+            for (i = 0; i < list.length; i++) {
+                if (list[i] === pid) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        var portsOwnedByNamed = namedPids.length > 0;
+        for (portIndex = 0; portIndex < definition.ports.length; portIndex++) {
+            var listenerPids = listenerPidsForPort(snapshot.listeners, definition.ports[portIndex]);
+            if (listenerPids.length !== 1 || !pidInList(namedPids, listenerPids[0])) {
+                portsOwnedByNamed = false;
+                break;
+            }
+        }
+        if (portsOwnedByNamed) {
+            var namePortResult = { ok: true, lines: [] };
+            for (portIndex = 0; portIndex < definition.ports.length; portIndex++) {
+                var owned = listenerPidsForPort(snapshot.listeners, definition.ports[portIndex]);
+                namePortResult.lines.push({
+                    definition: definition,
+                    processPids: namedPids,
+                    port: definition.ports[portIndex],
+                    listenerPids: owned,
+                    listenerProcess: definition.executable,
+                    ownership: "PASS",
+                    reasons: ["verified-by-name-port"]
+                });
+            }
+            return {
+                exitCode: EXIT_ALREADY_RUNNING,
+                result: namePortResult,
+                state: "ALREADY_RUNNING"
+            };
         }
 
         var ownershipResult = evaluate(definitions, snapshot, options);
@@ -1062,7 +1225,7 @@
 
         var ports = loadConfigurationPorts(options.configPath);
         var definitions = createDefinitions(options.engineDirectory, ports);
-        var snapshot = captureWindowsSnapshot();
+        var snapshot = captureWindowsSnapshot(definitions, options);
 
         if (options.mode === "prestart") {
             var prestart = evaluatePrestart(definitions, snapshot, options);
