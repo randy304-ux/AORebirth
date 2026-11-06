@@ -952,9 +952,13 @@ namespace ZoneEngine_New.Core.Playfield
         /// </summary>
         void TryRestorePostSpawnContent(Player player)
         {
+            // Zone-transfer pets: summon after ActivatePlayerVisibility so SCFU reaches the
+            // reconnecting client for every merc, not only the first formation slot.
+            Pets.PetService pets = _playfield.GetRequiredService<Pets.PetService>();
+            pets.RestoreAfterTransfer(player);
             // The client lists its pets once it has zoned in (or reconnected).
             if (player.OwnedPets.Count > 0)
-                _playfield.GetRequiredService<Pets.PetService>().AnnounceOwnedPets(player);
+                pets.AnnounceOwnedPets(player);
 
             try
             {
@@ -1226,7 +1230,10 @@ namespace ZoneEngine_New.Core.Playfield
             player.Logger = _logger;
             _registry.Register(player);
             _playfield.GetRequiredService<PlayfieldLocality>().RegisterDynel(player);
-            _playfield.GetRequiredService<Pets.PetService>().RestoreAfterTransfer(player);
+            // Pets stay stashed until the owner finishes zone reconnect / visibility activation
+            // (see TryRestorePostSpawnContent). Spawning them here — while Session is about to
+            // Unbind and the client has no locality recipient — left later formation mercs in
+            // the pet window (AddPet) but without a world SCFU until the next outdoor zone.
             player.SaveState.MarkDirty();
             // The next trigger sample has to start at this landing. Keeping the position from
             // the last visit draws a segment through the pad they left by, which zones them back.

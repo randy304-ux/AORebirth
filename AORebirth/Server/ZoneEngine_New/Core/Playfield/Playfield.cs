@@ -569,8 +569,15 @@ namespace ZoneEngine_New.Core.Playfield
             player.Motor.Warp(origin, heading);
         }
 
-        internal void RefreshReturnedTransfer(Player player) =>
+        internal void RefreshReturnedTransfer(Player player)
+        {
             GetRequiredService<PlayfieldLocality>().ActivatePlayerVisibility(player);
+            // Same deferred pet restore as zone-reconnect (ArriveFromTransfer no longer restores).
+            Pets.PetService pets = GetRequiredService<Pets.PetService>();
+            pets.RestoreAfterTransfer(player);
+            if (player.OwnedPets.Count > 0)
+                pets.AnnounceOwnedPets(player);
+        }
 
         internal void AbandonDetachedTransfer(Player player, IZoneSession oldSession)
         {

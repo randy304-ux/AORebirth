@@ -56,7 +56,11 @@ namespace ZoneEngine_New.Core.Missions
             return true;
         }
 
-        public string? TryPin(int characterId, int itemId)
+        /// <summary>
+        /// Pins <paramref name="itemId"/> for <paramref name="characterId"/>. Returns an error, or a success
+        /// chat line (always non-null on success) that may include a QL-band warning for the player's level.
+        /// </summary>
+        public string? TryPin(int characterId, int itemId, int characterLevel = 0)
         {
             if (!IsEnabled)
                 return "Mishroll is disabled on this server.";
@@ -82,10 +86,58 @@ namespace ZoneEngine_New.Core.Missions
             _logger.Info("Mishroll pin set char=" + characterId.ToString(CultureInfo.InvariantCulture)
                 + " item=" + itemId.ToString(CultureInfo.InvariantCulture)
                 + (string.IsNullOrEmpty(name) ? string.Empty : (" name=" + name)));
-            return string.IsNullOrEmpty(remapNote) ? null : ("Mishroll pin set to item "
-                + itemId.ToString(CultureInfo.InvariantCulture)
-                + (string.IsNullOrEmpty(name) ? string.Empty : (" (" + name + ")"))
-                + "." + remapNote);
+
+            string label = string.IsNullOrEmpty(name)
+                ? ("item " + itemId.ToString(CultureInfo.InvariantCulture))
+                : name;
+            string message = "Mishroll pin set to " + label
+                + " (" + itemId.ToString(CultureInfo.InvariantCulture) + ").";
+            if (!string.IsNullOrEmpty(remapNote))
+                message += remapNote;
+
+            string? qlWarning = FormatQualityBandWarning(itemId, name, characterLevel);
+            if (!string.IsNullOrEmpty(qlWarning))
+                message += " " + qlWarning;
+            return message;
+        }
+
+        /// <summary>
+        /// When the pinned reward's catalog QL sits outside the player's achievable mission QL band
+        /// (terminal difficulty detents at their level), warn them to change difficulty.
+        /// </summary>
+        public static string? FormatQualityBandWarning(int itemId, string? knownName, int characterLevel)
+        {
+            if (characterLevel <= 0)
+                return null;
+            if (!MissionRollRewardItems.TryGetCatalogQuality(itemId, out string name, out int lowQl, out int highQl, out bool fixedQuality))
+                return null;
+            if (string.IsNullOrEmpty(knownName))
+                knownName = name;
+            if (!ZoneEngine.Core.Missions.MissionLevelRuntime.TryGetQualityRange(characterLevel, out int rangeMin, out int rangeMax))
+                return null;
+
+            // Item is rollable when the mission QL overlaps the catalog band (nanos: ±tolerance).
+            int itemMin = lowQl;
+            int itemMax = highQl;
+            if (fixedQuality)
+            {
+                int tolerance = MissionRollPolicy.Current.Rewards.NanoQualityTolerance;
+                itemMin = Math.Max(1, lowQl - tolerance);
+                itemMax = highQl + tolerance;
+            }
+
+            if (itemMax >= rangeMin && itemMin <= rangeMax)
+                return null;
+
+            int displayQl = fixedQuality || lowQl == highQl ? lowQl : lowQl;
+            string displayName = string.IsNullOrEmpty(knownName) ? ("item " + itemId.ToString(CultureInfo.InvariantCulture)) : knownName;
+            string hint = itemMax < rangeMin
+                ? "so set difficulty lower to roll it."
+                : "so set difficulty higher to roll it.";
+            return displayName + " is QL " + displayQl.ToString(CultureInfo.InvariantCulture)
+                + "; your current mission QL range is "
+                + rangeMin.ToString(CultureInfo.InvariantCulture) + "-"
+                + rangeMax.ToString(CultureInfo.InvariantCulture) + ", " + hint;
         }
 
         public string? TryClear(int characterId)

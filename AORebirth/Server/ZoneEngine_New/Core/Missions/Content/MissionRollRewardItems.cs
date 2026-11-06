@@ -54,6 +54,27 @@ internal static class MissionRollRewardItems
     }
 
     /// <summary>
+    /// Catalog QL band for a pin warning: fixed nanos use their single QL; variable rows use LowQl-HighQl.
+    /// </summary>
+    internal static bool TryGetCatalogQuality(int itemId, out string name, out int lowQl, out int highQl, out bool fixedQuality)
+    {
+        name = string.Empty;
+        lowQl = 0;
+        highQl = 0;
+        fixedQuality = false;
+        if (itemId <= 0 || !TryGetRows(out Item[] rows, out _))
+            return false;
+        Item? match = FindById(rows, itemId);
+        if (match == null)
+            return false;
+        name = match.Name;
+        lowQl = match.LowQl;
+        highQl = match.HighQl;
+        fixedQuality = match.Fixed;
+        return true;
+    }
+
+    /// <summary>
     /// Finds a catalog row by exact reward name (e.g. <c>Nano Crystal (Mongo Slam!)</c>).
     /// Used to remap nano-program ids to their crystal reward ids.
     /// </summary>

@@ -97,11 +97,21 @@ namespace ZoneEngine_New.Core.Pets
                 controller.Order(mode);
 
             int index = owner.OwnedPets.Count;
-            Vector3 at = _playfield.SnapNpcSpawn(PetFormation.PointFor(owner, index));
-            // A formation spot with no floor under it (behind a dungeon wall, past a ledge) would leave the pet
-            // in the void at the owner's height; it starts on the owner's own floor instead.
-            if (!_playfield.TrySnapFeetToFloor(at, out _) && _playfield.TrySnapFeetToFloor(owner.Position, out Vector3 ownerFloor))
-                at = ownerFloor;
+            Vector3 formation = PetFormation.PointFor(owner, index);
+            Vector3 at = _playfield.SnapNpcSpawn(formation);
+            // Formation offsets in tight dungeon rooms often "snap" onto a lower deck or into a wall.
+            // Prefer the owner's floor when the formation spot has no floor, or lands more than 1 m
+            // off the owner's height (same rule as TeleportWithinPlayfield pet lifts).
+            if (!_playfield.TrySnapFeetToFloor(at, out Vector3 floored)
+                || Math.Abs(floored.y - owner.Position.y) > 1.0)
+            {
+                if (_playfield.TrySnapFeetToFloor(owner.Position, out Vector3 ownerFloor))
+                    at = ownerFloor;
+                else
+                    at = new Vector3(owner.Position.x, owner.Position.y, owner.Position.z);
+            }
+            else
+                at = floored;
             NpcCharacter pet = _playfield.GetRequiredService<SpawnService>().SpawnMob(
                 template,
                 at,

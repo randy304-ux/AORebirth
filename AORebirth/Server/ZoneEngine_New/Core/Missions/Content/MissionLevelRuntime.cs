@@ -28,6 +28,26 @@ internal static class MissionLevelRuntime
         => TryGetMissionQuality(level, wire, out int quality) ? quality
             : throw new InvalidOperationException("Mission level content is unavailable or the difficulty is invalid.");
 
+    /// <summary>
+    /// Lowest and highest mission QL the character can roll at <paramref name="level"/> across every
+    /// terminal difficulty detent (Q0..Q10). Used by <c>.mishroll</c> pin warnings.
+    /// </summary>
+    internal static bool TryGetQualityRange(int level, out int minQuality, out int maxQuality)
+    {
+        minQuality = 0;
+        maxQuality = 0;
+        try
+        {
+            (minQuality, maxQuality) = Current.Value.QualityRange(level);
+            return minQuality > 0 && maxQuality >= minQuality;
+        }
+        catch (Exception error) when (error is IOException or InvalidDataException or UnauthorizedAccessException
+            or FormatException or OverflowException or ArgumentOutOfRangeException)
+        {
+            return false;
+        }
+    }
+
     internal static int ClampCharacterLevel(int level) => Current.Value.Clamp(level);
 
     internal static int GetTokenReward(int level)
@@ -87,6 +107,20 @@ internal sealed class MissionLevelData
     internal int Quality(int level, int wire)
         => MissionLevelRuntime.TryDecodeDifficultySlider(wire, out _) ? Row(level)[wire]
             : throw new ArgumentOutOfRangeException(nameof(wire));
+    internal (int Min, int Max) QualityRange(int level)
+    {
+        int[] row = Row(level);
+        // row[0] = character level; row[1..11] = Q0..Q10; row[^1] = tokens.
+        int min = row[1];
+        int max = row[1];
+        for (int i = 2; i <= MissionLevelRuntime.SliderPositions; i++)
+        {
+            if (row[i] < min) min = row[i];
+            if (row[i] > max) max = row[i];
+        }
+
+        return (min, max);
+    }
     internal int Tokens(int level) => Row(level)[^1];
 }
 

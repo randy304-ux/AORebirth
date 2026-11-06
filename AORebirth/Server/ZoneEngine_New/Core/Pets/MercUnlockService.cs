@@ -271,7 +271,11 @@ namespace ZoneEngine_New.Core.Pets
             return null;
         }
 
-        /// <summary>Randy name + sex/appearance + NT/trader/MP filters after hire/revive/mode change.</summary>
+        /// <summary>
+        /// Name + sex/appearance + NT/trader/MP filters after hire/revive/mode change.
+        /// Twink roster names only for dungeon-unlock bodies and Twink-tier hires; Basic hired
+        /// mercs get a plain single name from <see cref="MercBasicNames"/>.
+        /// </summary>
         public void ConfigureSummonedMerc(Player owner, NpcCharacter npc, MercDefinition? def = null)
         {
             ArgumentNullException.ThrowIfNull(owner);
@@ -280,33 +284,46 @@ namespace ZoneEngine_New.Core.Pets
             if (kind == null)
                 return;
 
-            def ??= FindSummonedDefinition(owner, kind) ?? _roster.All.FirstOrDefault(d => d.Kind.Key == kind.Key);
-            if (def == null)
-                return;
+            MercDefinition? unlocked = def ?? FindSummonedDefinition(owner, kind);
+            Mercs.Tier tier = Mercs.GetTier(owner, kind);
 
-            ApplySummonIdentity(npc, def, owner);
+            MercDefinition? rosterDef = unlocked;
+            if (rosterDef == null && tier == Mercs.Tier.Twink)
+            {
+                rosterDef = _roster.All.FirstOrDefault(d => d.Kind.Key == kind.Key && d.HasTag("twink"))
+                    ?? _roster.All.FirstOrDefault(d => d.Kind.Key == kind.Key);
+            }
 
-            if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
+            // Dungeon-unlock bodies and Twink-tier hires keep the Randy roster names.
+            // Basic / Elite / Champion hired contracts get plain single names.
+            if (unlocked != null || (tier == Mercs.Tier.Twink && rosterDef != null))
+                ApplySummonIdentity(npc, rosterDef!, owner);
+            else
+                ApplyBasicHireIdentity(npc, kind, owner);
+
+            MercDefinition? nanoDef = unlocked ?? rosterDef;
+            int nanoLevel = nanoDef?.Level ?? ProfessionNanoLevel(owner, kind);
+
+            if (string.Equals(kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
             {
                 string mode = GetNtMode(owner);
                 _nanos.FilterNtNukes(
                     npc.UploadedNanoIds,
                     aoeMode: mode == NtModeAoe,
-                    level: def.Level,
+                    level: nanoLevel,
                     skillSource: npc);
                 return;
             }
 
-            if (string.Equals(def.Kind.Key, "trader", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(kind.Key, "trader", StringComparison.OrdinalIgnoreCase))
             {
-                ApplyTraderModeNanos(npc, def, GetTraderMode(owner), ProfessionNanoLevel(owner, def.Kind));
+                if (nanoDef != null)
+                    ApplyTraderModeNanos(npc, nanoDef, GetTraderMode(owner), ProfessionNanoLevel(owner, kind));
                 return;
             }
 
-            if (string.Equals(def.Kind.Key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
-            {
-                ApplyMpModeNanos(npc, ProfessionNanoLevel(owner, def.Kind), GetMpMode(owner));
-            }
+            if (string.Equals(kind.Key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
+                ApplyMpModeNanos(npc, ProfessionNanoLevel(owner, kind), GetMpMode(owner));
         }
 
         /// <summary>
@@ -329,6 +346,25 @@ namespace ZoneEngine_New.Core.Pets
 
             string? modeTag = MercNameFormat.ModeTagFor(def, GetNtMode(owner), GetTraderMode(owner), GetMpMode(owner));
             npc.Name = MercNameFormat.FormatSummonName(def, female, modeTag);
+        }
+
+        /// <summary>Basic hired merc: plain single name, not the Twink roster list.</summary>
+        void ApplyBasicHireIdentity(NpcCharacter npc, Mercs.Kind kind, Player owner)
+        {
+            string? current = npc.Name;
+            string core = string.IsNullOrWhiteSpace(current) ? string.Empty : MercNameFormat.StripModeTag(current);
+            bool? inferred = MercBasicNames.TryInferFemale(core);
+            bool female = inferred ?? (Random.Shared.Next(2) == 1);
+            if (inferred == null)
+            {
+                string root = owner.Playfield?.GetService<IGameData>()?.RootPath ?? string.Empty;
+                bool randomAppearance = root.Length == 0 || Mercs.RandomAppearance(root);
+                MercNameFormat.ApplyAppearance(npc, kind, female, randomAppearance);
+            }
+
+            string? modeTag = MercNameFormat.ModeTagForKind(kind, GetNtMode(owner), GetTraderMode(owner), GetMpMode(owner));
+            string baseName = inferred != null ? core : MercBasicNames.Pick(female);
+            npc.Name = MercNameFormat.FormatPlainName(baseName, modeTag);
         }
 
         public MercDefinition? FindSummonedDefinition(Player player, Mercs.Kind kind)

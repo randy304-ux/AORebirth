@@ -99,16 +99,31 @@ namespace ZoneEngine_New.Core.Pets
                 : nickOnly.Substring(0, MaxNameChars);
         }
 
+        /// <summary>Basic hired merc nameplate: one given name plus optional mode tag.</summary>
+        public static string FormatPlainName(string givenName, string? modeTag)
+        {
+            string nick = string.IsNullOrWhiteSpace(givenName) ? "Merc" : givenName.Trim();
+            string tag = string.IsNullOrWhiteSpace(modeTag) ? string.Empty : " (" + modeTag.Trim() + ")";
+            string candidate = nick + tag;
+            return candidate.Length <= MaxNameChars ? candidate : candidate.Substring(0, MaxNameChars);
+        }
+
         public static string? ModeTagFor(MercDefinition def, string ntMode, string traderMode, string mpMode)
         {
             ArgumentNullException.ThrowIfNull(def);
-            if (string.Equals(def.Kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
+            return ModeTagForKind(def.Kind, ntMode, traderMode, mpMode);
+        }
+
+        public static string? ModeTagForKind(Mercs.Kind kind, string ntMode, string traderMode, string mpMode)
+        {
+            ArgumentNullException.ThrowIfNull(kind);
+            if (string.Equals(kind.Key, "nanotechnician", StringComparison.OrdinalIgnoreCase))
                 return string.Equals(ntMode, MercUnlockService.NtModeSt, StringComparison.OrdinalIgnoreCase) ? "ST" : "AOE";
-            if (string.Equals(def.Kind.Key, "trader", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(kind.Key, "trader", StringComparison.OrdinalIgnoreCase))
                 return string.Equals(traderMode, MercUnlockService.TraderModeUmbral, StringComparison.OrdinalIgnoreCase)
                     ? "Umbral"
                     : "Wrangle";
-            if (string.Equals(def.Kind.Key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(kind.Key, "metaphysicist", StringComparison.OrdinalIgnoreCase))
                 return string.Equals(mpMode, MercUnlockService.MpModeSingles, StringComparison.OrdinalIgnoreCase)
                     ? "Singles"
                     : "Composite";
@@ -158,6 +173,22 @@ namespace ZoneEngine_New.Core.Pets
             AppearanceLook look = randomAppearance
                 ? ResolveRandomLook(female)
                 : ResolveFixedProfessionLook(def, female);
+            ApplyLook(npc, look);
+        }
+
+        /// <summary>Basic hired merc appearance (no roster def): random or fixed-by-profession look.</summary>
+        public static void ApplyAppearance(NpcCharacter npc, Mercs.Kind kind, bool female, bool randomAppearance)
+        {
+            ArgumentNullException.ThrowIfNull(npc);
+            ArgumentNullException.ThrowIfNull(kind);
+            AppearanceLook look = randomAppearance
+                ? ResolveRandomLook(female)
+                : ResolveFixedProfessionLook(kind, female, breedOverride: null);
+            ApplyLook(npc, look);
+        }
+
+        static void ApplyLook(NpcCharacter npc, AppearanceLook look)
+        {
             npc.Stats.Set(CharacterStat.Breed, look.Breed, StatDetail.Base, dirty: true);
             npc.Stats.Set(CharacterStat.Sex, look.Sex, StatDetail.Base, dirty: true);
             npc.Stats.Set(CharacterStat.HeadMesh, look.HeadMesh, StatDetail.Base, dirty: true);
@@ -196,8 +227,11 @@ namespace ZoneEngine_New.Core.Pets
         /// Missing combo → Solitus of that sex. No female Atrox template in our data.
         /// </summary>
         static AppearanceLook ResolveFixedProfessionLook(MercDefinition def, bool female)
+            => ResolveFixedProfessionLook(def.Kind, female, def.Breed);
+
+        static AppearanceLook ResolveFixedProfessionLook(Mercs.Kind kind, bool female, string? breedOverride)
         {
-            string key = def.Kind.Key;
+            string key = kind.Key;
 
             // Enforcer / Keeper / Agent: Atrox male, Solitus female (same pattern).
             if (string.Equals(key, "enforcer", StringComparison.OrdinalIgnoreCase)
@@ -205,7 +239,7 @@ namespace ZoneEngine_New.Core.Pets
                 || string.Equals(key, "agent", StringComparison.OrdinalIgnoreCase))
                 return female ? Pick(FemaleSolitusLooks) : AtroxMaleLook;
 
-            string breed = ResolveFixedBreed(def);
+            string breed = ResolveFixedBreed(kind, breedOverride);
             if (string.Equals(breed, "Opifex", StringComparison.OrdinalIgnoreCase))
                 return female
                     ? PickOrSolitus(FemaleOpifexLooks, female: true)
@@ -225,9 +259,9 @@ namespace ZoneEngine_New.Core.Pets
             return female ? Pick(FemaleSolitusLooks) : Pick(MaleSolitusLooks);
         }
 
-        static string ResolveFixedBreed(MercDefinition def)
+        static string ResolveFixedBreed(Mercs.Kind kind, string? breedOverride)
         {
-            string key = def.Kind.Key;
+            string key = kind.Key;
             if (string.Equals(key, "martialartist", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(key, "shade", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(key, "fixer", StringComparison.OrdinalIgnoreCase))
@@ -239,8 +273,8 @@ namespace ZoneEngine_New.Core.Pets
                 || string.Equals(key, "keeper", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(key, "agent", StringComparison.OrdinalIgnoreCase))
                 return "Atrox";
-            if (!string.IsNullOrWhiteSpace(def.Breed))
-                return def.Breed.Trim();
+            if (!string.IsNullOrWhiteSpace(breedOverride))
+                return breedOverride.Trim();
             return "Solitus";
         }
 

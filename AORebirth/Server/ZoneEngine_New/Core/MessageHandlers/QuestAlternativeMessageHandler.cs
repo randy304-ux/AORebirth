@@ -117,7 +117,10 @@ namespace ZoneEngine_New.Core.MessageHandlers
                 var result = _missions.PublishOffers(player, batch);
                 committing.Dispose();
                 if (result.Status == GeneratedMissionResultStatus.Applied)
+                {
                     session.Send(response);
+                    Feedback(session, player, FormatRollCostMessage(player, batch.Fee, quality, teamRoll, forcedReward));
+                }
                 else if (!player.IsPersistenceQuarantined)
                     Feedback(session, player, "The mission roll was not committed. No new offers were issued.");
             }
@@ -136,6 +139,26 @@ namespace ZoneEngine_New.Core.MessageHandlers
 
         private static void Feedback(IZoneSession session, Player player, string text)
             => session.Send(new ChatTextMessage { Identity = player.Identity, Text = text });
+
+        /// <summary>
+        /// Chat line after a successful Request Mission: roll fee charged now, plus mishroll
+        /// targeting fee preview when the pin overrode this roll (charged on accept).
+        /// </summary>
+        string FormatRollCostMessage(Player player, int rollFee, int quality, bool teamRoll, QuestItemShort? forcedReward)
+        {
+            string roll = "Mission roll cost: "
+                + rollFee.ToString(System.Globalization.CultureInfo.InvariantCulture) + " credits.";
+            if (teamRoll || forcedReward == null || !_mishroll.IsEnabled)
+                return roll;
+
+            int breakAndEntry = player.Stats.GetOrZero(CharacterStat.BreakingEntry);
+            int targeting = MishrollTargetingFeeCalculator.Compute(
+                quality, breakAndEntry, _mishroll.Settings.TargetingFee);
+            if (targeting <= 0)
+                return roll + " Mishroll pin applied (no targeting fee at this QL).";
+            return roll + " Mishroll targeting fee on accept: "
+                + targeting.ToString(System.Globalization.CultureInfo.InvariantCulture) + " credits.";
+        }
 
         /// <summary>
         /// Team membership for mission rolls: TeamService first, then NumberOfTeamMembers

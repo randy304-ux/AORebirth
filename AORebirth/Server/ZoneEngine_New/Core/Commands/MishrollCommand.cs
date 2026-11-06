@@ -3,6 +3,8 @@ namespace ZoneEngine_New.Core.Commands
     using System;
     using System.Globalization;
 
+    using SmokeLounge.AOtomation.Messaging.GameData;
+
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.Missions;
 
@@ -69,8 +71,9 @@ namespace ZoneEngine_New.Core.Commands
                 return;
             }
 
-            string? pinError = _mishroll.TryPin(characterId, itemId);
-            Say(pinError ?? ("Mishroll pin set to item " + itemId.ToString(CultureInfo.InvariantCulture) + "."));
+            int level = player.Stats.Get(CharacterStat.Level);
+            string? pinFeedback = _mishroll.TryPin(characterId, itemId, level);
+            Say(pinFeedback ?? ("Mishroll pin set to item " + itemId.ToString(CultureInfo.InvariantCulture) + "."));
         }
     }
 }
