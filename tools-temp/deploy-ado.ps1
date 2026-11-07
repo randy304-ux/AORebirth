@@ -76,12 +76,10 @@ $zShutdown = Join-Path $root 'logs\engines\ZoneEngine_New.shutdown'
 $cShutdown = Join-Path $root 'logs\engines\ChatEngine.shutdown'
 $lShutdown = Join-Path $root 'logs\engines\LoginEngine.shutdown'
 $zExe = Join-Path $zDest 'ZoneEngine_New.exe'
-$hash = (git -C $root rev-parse --short HEAD).Trim()
-$hhmm = Get-Date -Format 'HHmm'
-# Prefer the already-taken GO backup if present from the aborted first attempt
-$preferredBackup = 'I:\AO\backups\cellao_codex_clean-20261106-2047-ado-rk.sql'
-$backup = if (Test-Path $preferredBackup) { $preferredBackup } else { "I:\AO\backups\cellao_codex_clean-20261106-$hhmm-ado-rk.sql" }
-$rollbackDir = Join-Path $root 'tools-temp\rb-ado-rk'
+$hash = (git -C $root rev-parse --short=8 HEAD).Trim()
+$stamp = Get-Date -Format 'yyyyMMdd-HHmm'
+$backup = "I:\AO\backups\cellao_codex_clean-$stamp-rkfix-$hash.sql"
+$rollbackDir = Join-Path $root 'tools-temp\rb-rkfix'
 
 $stageFiles = New-Object System.Collections.Generic.List[string]
 foreach ($f in @(
@@ -127,16 +125,12 @@ Say ("online={0}" -f $online)
 if ($online -ne '0') { Say 'ABORT online!=0'; exit 2 }
 
 if (-not (Test-Path 'I:\AO\backups')) { New-Item -ItemType Directory 'I:\AO\backups' | Out-Null }
-if ($backup -eq $preferredBackup -and (Test-Path $preferredBackup) -and ((Get-Item $preferredBackup).Length -gt 1000000)) {
-  Say ("reuse DB backup -> {0} bytes={1}" -f $backup, (Get-Item $preferredBackup).Length)
-} else {
-  Say ("backup DB -> {0}" -f $backup)
-  & $mysqldump --defaults-extra-file=$cnf -P 33070 -h 127.0.0.1 --single-transaction --no-tablespaces --result-file=$backup $db
-  if ($LASTEXITCODE -ne 0) { throw "mysqldump $LASTEXITCODE" }
-  $blen = (Get-Item -LiteralPath $backup).Length
-  Say ("backup bytes={0}" -f $blen)
-  if ($blen -lt 1000000) { throw 'backup too small' }
-}
+Say ("backup DB -> {0}" -f $backup)
+& $mysqldump --defaults-extra-file=$cnf -P 33070 -h 127.0.0.1 --single-transaction --no-tablespaces --result-file=$backup $db
+if ($LASTEXITCODE -ne 0) { throw "mysqldump $LASTEXITCODE" }
+$blen = (Get-Item -LiteralPath $backup).Length
+Say ("backup bytes={0}" -f $blen)
+if ($blen -lt 1000000) { throw 'backup too small' }
 
 if (-not (Test-Path $rollbackDir)) {
   New-Item -ItemType Directory -Force $rollbackDir | Out-Null
@@ -229,6 +223,19 @@ Say ("live Reck SpawnsAdd count={0}" -f @($sa.spawns).Count)
 $apiBefore = NetListenPid 8098
 Say ("api8098 before restart pid={0}" -f $apiBefore)
 if ($apiBefore -eq 0) { Say 'WARN account API not listening on 8098 before restart' }
+
+# Clear stale shutdown markers left by Stop-ViaShutdown so boot does not immediately stop.
+foreach ($sf in @($zShutdown, $cShutdown, $lShutdown)) {
+  if (Test-Path -LiteralPath $sf) {
+    Remove-Item -LiteralPath $sf -Force
+    Say ("cleared shutdown marker {0}" -f $sf)
+  }
+}
+
+# Startup gate: AO MySQL must be listening on 33070 (never treat 3306 as the gate).
+$mysqlAo = NetListenPid 33070
+Say ("mysql33070 pid={0}" -f $mysqlAo)
+if ($mysqlAo -eq 0) { throw 'STOP: MySQL on 33070 not listening - refuse boot' }
 
 $bootStart = Get-Date
 Say 'start engines via DungeonDogs schtask'
