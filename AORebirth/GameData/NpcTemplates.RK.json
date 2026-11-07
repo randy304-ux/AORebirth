@@ -307690,14 +307690,14 @@
                 "Name": "M.A.G.S.",
                 "Level": 200,
                 "Stats": {
-                    "0": 277352961,
+                    "0": 268964353,
                     "1": 145735,
                     "4": 1,
                     "12": 21715,
                     "18": 0,
                     "21": 0,
                     "27": 145735,
-                    "33": 2,
+                    "33": 3,
                     "37": 1,
                     "47": 1,
                     "54": 200,
@@ -307733,12 +307733,18 @@
                     "673": 31,
                     "1003": 0
                 },
-                "Features": [
-                    "NoCombat",
-                    "NoMove"
-                ],
+                "Features": [],
                 "HasHeadMesh": false,
-                "LootTable": []
+                "LootTable": [
+                    {
+                        "Hash": "DYB7",
+                        "Repeats": 1,
+                        "Chance": 100,
+                        "LevelMod": 25,
+                        "CountMin": 5,
+                        "CountMax": 7
+                    }
+                ]
             }
         ],
         "ContentProvenance": {

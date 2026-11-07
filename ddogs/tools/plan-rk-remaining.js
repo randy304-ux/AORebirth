@@ -12,7 +12,11 @@ const NEAR = 12, CLUSTER = 3;
 const SKIP_LIVE = new Set([685, 585, 655]); // already imported / reconciliation hold
 const SKIP_ADONIS = new Set([4872, 4873, 4213, 4625, 4626]);
 const CITY_PF = new Set([540, 545, 566, 567, 700, 705, 710, 730, 735, 740, 800, 950, 954, 1902, 4376, 7001]);
-const SIDE = s => ({ Neutral: 0, Clan: 1, Omni: 2, OmniTek: 2, 'Omni-Tek': 2, Monster: 3 }[s] ?? 3);
+// Breed=Monster wins over a wrong Side string (M.A.G.S. scraped as OmniTek + Monster breed).
+const SIDE = (s, breed) => {
+  if (String(breed || '') === 'Monster' || String(breed || '') === 'HumanMonster') return 3;
+  return ({ Neutral: 0, Clan: 1, Omni: 2, OmniTek: 2, 'Omni-Tek': 2, Monster: 3 }[s] ?? 3);
+};
 const BREED = b => ({ Solitus: 1, Opifex: 2, Nanomage: 3, Atrox: 4, Monster: 0, HumanMonster: 0 }[b] ?? 0);
 const GUARD_PULL = /^(Male Captain|Female Captain|Patrol mechdog|Waste collector|Simple Missile Turret|SAM Battery|Control Tower|Guardian Conductor|Massive Cannon|Guard\b|Trooper\b)/i;
 const TEMP_CITY = /^(Control Tower|SAM Battery|Guardian Conductor|Massive Cannon Turret)\b/i;
@@ -228,7 +232,7 @@ function pushSight(r, src, pfForced) {
     level: +r.Level || 1, hp: +r.MaxHealth || 0,
     md: +r.MonsterData, sc: +r.Scale || 100, mesh: +r.Mesh || 0,
     head: +r.HeadMesh || 0, tex: +r.MonsterTexture || 0, fam: +r.NPCFamily || 0,
-    side: SIDE(r.Side), breed: BREED(r.Breed),
+    side: SIDE(r.Side, r.Breed), breed: BREED(r.Breed),
     textures: r.Textures || '', meshes: r.Meshes || '',
     review_flags: r.review_flags || ''
   });

@@ -12,7 +12,7 @@ Branch `cursor/rk-desert-dyna-loot-15f4`. Tag `scrape-rk-20261106`.
 - Empty RK loot → DYB1–8 / CMTR/CMHK/OFAB (Galway trash baseline; CMHK = Health/Nano stims, not NanoCrystal programs)
 - Pinks/Guessed never count as present; Spawns.json suppress (gitignored — **deploy-ado now copies them**)
 - Textures/Meshes from richest scrape sighting (Omni Special Forces / SANDSTORM shoulders restored)
-- M.A.G.S. WPPN MD 22821 / mesh 21715 / scale 303
+- M.A.G.S. WPPN MD 22821 / mesh 21715 / scale 303 / side **3** (scrape Side=OmniTek was wrong; Breed=Monster) + DYB7 loot
 - Elliot Fairlane look + Knubot; buff **{givenano 293685}** from dialogs_raw SetNanoDuration (2h)
 - Placeholder `* Dyna` still **31–33** guide markers without 1:1 scrape rename (Lizards Dyna etc.)
 
