@@ -1,16 +1,18 @@
 # Current Task
 
-## Active: Adonis full scrape import STAGED (not deployed)
+## Active: Adonis + remaining Rubi-Ka scrape STAGED (not deployed)
 
-Branch `cursor/gil-note-drop-0f04` (+ local Adonis commit). Tag `scrape-adonis-20261106`.
-Stacks on staged tip `b7b2d9a4` (Gil Notes / Joker's Glyph stack-of-6).
+Branch `cursor/gil-note-drop-0f04`. Tags `scrape-adonis-20261106` + `scrape-rk-20261106`.
+Stacks on Gil Notes / Joker's Glyph stack-of-6 + Adonis Phase 1.
 
-- Source: `I:\AO\imports\scrape-20261106-ado\`
-- SpawnsAdd: 4872=671, 4873=580, 4213=88, 4625=32, 4626=38
-- Templates: `NpcTemplates.Adonis.json` (296); loot `ItemTemplates.Adonis.json` (150)
-- Vendors: 7 provisional Yuttos in `PlayfieldContent/4872/Npcs.json` (unresolved typed join)
-- Eradicus template+loot only (Joker's Glyph 227905); gen dungeon IDs not hostable as SpawnsAdd
-- Deploy script ready, not run: `tools-temp\deploy-ado.ps1`
-- ZoneEngine_New build: `tools-temp\zbuild-ado`
+### Phase 1 Adonis
+- SpawnsAdd: 4872=671, 4873=580, 4213=88, 4625=32, 4626=38 + vendors
 
-No DB writes, no engine restart, no GitHub push for this import.
+### Phase 2 Rubi-Ka remaining
+- SpawnsAdd.rk: ~29.9k points / ~50 zones; templates 1603; pink fills 1033
+- Skipped live: Galway 685, Aegean 585, ICC 655
+- Reck confirmed loot on Abandoned Hope / Skawt / Huzzum / 73-Omega (+ Skawt trash 303059)
+- Deploy (ado+rk, not run): `tools-temp\deploy-ado.ps1`
+- ZoneEngine build: `tools-temp\zbuild-ado`
+
+No DB writes, no engine restart, no GitHub push.

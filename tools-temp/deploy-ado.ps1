@@ -1,7 +1,8 @@
-# Deploy Adonis full scrape import (SpawnsAdd.adonis + NpcTemplates.Adonis + ItemTemplates.Adonis + 4872 vendors).
+# Deploy Adonis + remaining Rubi-Ka scrape import (Phase 1+2).
 # DO NOT RUN until Mike authorizes.
+# Stages: NpcTemplates/ItemTemplates Adonis+RK overlays, SpawnsAdd.adonis/rk, 4872 vendors.
 # House rules: online=0, DB backup to I:\AO\backups, boot age >=5m, shutdown-file stop, schtasks start.
-# Stages GameData only (no schema migration). Uses timed tasklist/netstat only — no WMI/CIM.
+# Uses timed tasklist/netstat only — no WMI/CIM. No schema migration.
 $ErrorActionPreference = 'Stop'
 $outLog = 'I:\AO\src\tools-temp\deploy-ado.out.txt'
 $metaPath = 'I:\AO\src\tools-temp\deploy-ado-meta.txt'
@@ -21,7 +22,8 @@ function Q([string]$sql) {
 }
 
 $root = 'I:\AO\src'
-$tag = 'scrape-adonis-20261106'
+$tagAdo = 'scrape-adonis-20261106'
+$tagRk = 'scrape-rk-20261106'
 $gdSrc = Join-Path $root 'AORebirth\GameData'
 $zSrc = Join-Path $root 'tools-temp\zbuild-ado'
 $zDest = Join-Path $root 'AORebirth\Built\Debug\ZoneEngine_New'
@@ -32,30 +34,38 @@ $cShutdown = Join-Path $root 'logs\engines\ChatEngine.shutdown'
 $zExe = Join-Path $zDest 'ZoneEngine_New.exe'
 $hash = (git -C $root rev-parse --short HEAD).Trim()
 $stamp = Get-Date -Format 'yyyyMMdd-HHmm'
-$backup = "I:\AO\backups\$db-$stamp-scrape-adonis.sql"
-$rollbackDir = "I:\AO\backups\gamedata-rollback-adonis-$stamp"
+$backup = "I:\AO\backups\$db-$stamp-scrape-ado-rk.sql"
+$rollbackDir = "I:\AO\backups\gamedata-rollback-ado-rk-$stamp"
 
-$stageFiles = @(
+$stageFiles = New-Object System.Collections.Generic.List[string]
+foreach ($f in @(
   'NpcTemplates.Adonis.json',
   'ItemTemplates.Adonis.json',
-  'PlayfieldContent\4872\SpawnsAdd.adonis.json',
+  'NpcTemplates.RK.json',
+  'ItemTemplates.RK.json',
   'PlayfieldContent\4872\Npcs.json',
+  'PlayfieldContent\4872\SpawnsAdd.adonis.json',
   'PlayfieldContent\4873\SpawnsAdd.adonis.json',
   'PlayfieldContent\4213\SpawnsAdd.adonis.json',
   'PlayfieldContent\4625\SpawnsAdd.adonis.json',
   'PlayfieldContent\4626\SpawnsAdd.adonis.json'
-)
+)) { [void]$stageFiles.Add($f) }
+
+Get-ChildItem -LiteralPath (Join-Path $gdSrc 'PlayfieldContent') -Recurse -Filter 'SpawnsAdd.rk.json' | ForEach-Object {
+  $rel = $_.FullName.Substring($gdSrc.Length).TrimStart('\')
+  [void]$stageFiles.Add($rel)
+}
 
 foreach ($f in $stageFiles) {
   $src = Join-Path $gdSrc $f
-  if (-not (Test-Path $src)) { throw "missing $src - run Build-ScrapeImportAdonis.ps1 first" }
+  if (-not (Test-Path $src)) { throw "missing $src - run Build-ScrapeImportAdonis/RK first" }
 }
 if (-not (Test-Path $zExe)) { throw "missing $zExe - build first" }
 foreach ($n in @('ZoneEngine_New.dll', 'ZoneEngine_New.exe')) {
   if (-not (Test-Path (Join-Path $zSrc $n))) { throw "missing $n in $zSrc - rebuild to tools-temp\zbuild-ado" }
 }
 
-Say ("deploy tip={0} tag={1}" -f $hash, $tag)
+Say ("deploy tip={0} ado={1} rk={2} files={3}" -f $hash, $tagAdo, $tagRk, $stageFiles.Count)
 
 $online = Q 'SELECT COUNT(*) FROM characters WHERE Online=1'
 Say ("online={0}" -f $online)
@@ -69,7 +79,6 @@ $blen = (Get-Item -LiteralPath $backup).Length
 Say ("backup bytes={0}" -f $blen)
 if ($blen -lt 1000000) { throw 'backup too small' }
 
-# Rollback snapshot of live GameData files we will replace (pre-copy)
 New-Item -ItemType Directory -Force $rollbackDir | Out-Null
 foreach ($f in $stageFiles) {
   $live = Join-Path $zDestGd $f
@@ -82,7 +91,6 @@ foreach ($f in $stageFiles) {
 }
 Say ("rollback GameData snapshot -> {0}" -f $rollbackDir)
 
-# Process identity via tasklist only (no WMI/CIM)
 function Get-PidByImage([string]$image) {
   $lines = @(cmd /d /c "tasklist /FI `"IMAGENAME eq $image`" /FO CSV /NH" 2>$null)
   foreach ($line in $lines) {
@@ -140,11 +148,11 @@ foreach ($n in @('ZoneEngine_New.dll', 'ZoneEngine_New.exe', 'ZoneEngine_New.pdb
   if (Test-Path $b) { Copy-Item -LiteralPath $b -Destination (Join-Path $zDest $n) -Force }
 }
 
-$liveSa = Join-Path $zDestGd 'PlayfieldContent\4872\SpawnsAdd.adonis.json'
-if (-not (Test-Path $liveSa)) { throw "live SpawnsAdd missing after copy: $liveSa" }
+$liveSa = Join-Path $zDestGd 'PlayfieldContent\750\SpawnsAdd.rk.json'
+if (-not (Test-Path $liveSa)) { throw "live Reck SpawnsAdd missing after copy: $liveSa" }
 $sa = Get-Content -LiteralPath $liveSa -Raw | ConvertFrom-Json
-if ($sa.source -ne $tag) { throw "bad SpawnsAdd source $($sa.source)" }
-Say ("live 4872 SpawnsAdd count={0}" -f @($sa.spawns).Count)
+if ($sa.source -ne $tagRk) { throw "bad SpawnsAdd source $($sa.source)" }
+Say ("live Reck SpawnsAdd count={0}" -f @($sa.spawns).Count)
 
 Say 'start ZoneEngine_New + ChatEngine via schtasks'
 schtasks /Run /TN 'AORebirth\ZoneEngine_New' | Out-Null
@@ -161,8 +169,10 @@ Say ("post-start zone={0} chat={1} login={2}" -f $zone2, $chat2, (Get-PidByImage
   "tip=$hash"
   "db_backup=$backup"
   "rollback_gamedata=$rollbackDir"
-  "tag=$tag"
+  "tag_ado=$tagAdo"
+  "tag_rk=$tagRk"
+  "stage_files=$($stageFiles.Count)"
   "when=$(Get-Date -Format o)"
 ) | Set-Content -LiteralPath $metaPath -Encoding ascii
 Say ("meta {0}" -f $metaPath)
-Say 'DONE deploy scrape-adonis (Mike: live-verify Adonis zones) — script was authorized to run'
+Say 'DONE deploy ado+rk scrape (Mike: live-verify) — script was authorized to run'

@@ -1,0 +1,66 @@
+{
+    "schemaVersion":  1,
+    "recordType":  1000014,
+    "playfieldId":  2062,
+    "source":  "scrape-rk-20261106",
+    "spawns":  [
+                   {
+                       "districtIndex":  0,
+                       "hash":  0,
+                       "hashText":  "K0X7",
+                       "manifestHash":  0,
+                       "minLevel":  199,
+                       "maxLevel":  199,
+                       "respawnChance":  100,
+                       "flags":  1,
+                       "respawnTime":  600,
+                       "version7Extra":  0,
+                       "hasOptionalFlagBlock":  true,
+                       "nativeFlags":  0,
+                       "moreFlags":  0,
+                       "assistanceRadius":  0,
+                       "unknownOptionalU8":  0,
+                       "angle":  0,
+                       "angleW":  1,
+                       "position":  [
+                                        195.151,
+                                        5.01,
+                                        188.852
+                                    ],
+                       "radius":  1,
+                       "additionalPoints":  [
+
+                                            ],
+                       "extensions":  null
+                   },
+                   {
+                       "districtIndex":  0,
+                       "hash":  0,
+                       "hashText":  "K0X7",
+                       "manifestHash":  0,
+                       "minLevel":  199,
+                       "maxLevel":  199,
+                       "respawnChance":  100,
+                       "flags":  1,
+                       "respawnTime":  600,
+                       "version7Extra":  0,
+                       "hasOptionalFlagBlock":  true,
+                       "nativeFlags":  0,
+                       "moreFlags":  0,
+                       "assistanceRadius":  0,
+                       "unknownOptionalU8":  0,
+                       "angle":  352,
+                       "angleW":  1,
+                       "position":  [
+                                        196.984,
+                                        5.01,
+                                        192.99
+                                    ],
+                       "radius":  1,
+                       "additionalPoints":  [
+
+                                            ],
+                       "extensions":  null
+                   }
+               ]
+}
