@@ -1,15 +1,16 @@
 # Current Task
 
-## Active: pf 685 Galway County scrape pilot STAGED (not deployed)
+## Active: Adonis full scrape import STAGED (not deployed)
 
-Branch `cursor/galway-685-scrape-2d46`. Tag `scrape-galway685-20261106`.
-Stacks on staged tip `845841b3` (beacons) / `f06d9b00` (wraith/claims).
+Branch `cursor/gil-note-drop-0f04` (+ local Adonis commit). Tag `scrape-adonis-20261106`.
+Stacks on staged tip `b7b2d9a4` (Gil Notes / Joker's Glyph stack-of-6).
 
-- Review: `I:\AO\imports\scrape-20261106-review\685\` (`missing.csv`; `wrong.csv` empty)
-- Sightings in: 1747 → spawn points added: 1218 (363 reuse existing hash)
-- New templates: 63 (P02A–P040) in `NpcTemplates.Galway685.json`
-- Wrong fixed: 0; collisions flagged: 3 names (Nighthowler, Ryan Daken, Adan Denk)
-- Deploy script ready, not run: `tools-temp\deploy-scrape-galway685.ps1`
-- ZoneEngine_New build: `tools-temp\zbuild-galway685`
+- Source: `I:\AO\imports\scrape-20261106-ado\`
+- SpawnsAdd: 4872=671, 4873=580, 4213=88, 4625=32, 4626=38
+- Templates: `NpcTemplates.Adonis.json` (296); loot `ItemTemplates.Adonis.json` (150)
+- Vendors: 7 provisional Yuttos in `PlayfieldContent/4872/Npcs.json` (unresolved typed join)
+- Eradicus template+loot only (Joker's Glyph 227905); gen dungeon IDs not hostable as SpawnsAdd
+- Deploy script ready, not run: `tools-temp\deploy-ado.ps1`
+- ZoneEngine_New build: `tools-temp\zbuild-ado`
 
-No DB writes, no engine restart, no GitHub push for this pilot.
+No DB writes, no engine restart, no GitHub push for this import.
