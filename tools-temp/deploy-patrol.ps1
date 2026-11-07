@@ -235,11 +235,30 @@ if ($LASTEXITCODE -ne 0 -and $schOut -notmatch 'SUCCESS') {
   throw "schtasks failed: $schOut"
 }
 
-# Timed listen checks (7501 zone, 7012 chat, 7500 login, 8098 api)
+# Timed listen checks (7501 zone, 7012 chat, 7500 login, 8098 api).
+# Zone=0 early in boot is normal (Chat/Login start first). Only treat as crash if
+# Zone was observed running then exited, or is still absent after the full deadline.
 $listenOk = $false
 $zone2 = 0; $chat2 = 0; $login2 = 0; $api2 = 0
 $p7501 = 0; $p7012 = 0; $p7500 = 0; $p8098 = 0
-$deadline = (Get-Date).AddSeconds(180)
+$zoneEverUp = $false
+$deadline = (Get-Date).AddSeconds(240)
+function Restore-PatrolRollback {
+  Say 'rolling back bins+GameData from rb-patrol'
+  foreach ($n in @('ZoneEngine_New.dll', 'ZoneEngine_New.exe', 'ZoneEngine_New.pdb')) {
+    $rb = Join-Path $rollbackDir "_bins\$n"
+    if (Test-Path $rb) { Copy-Item -LiteralPath $rb -Destination (Join-Path $zDest $n) -Force }
+  }
+  foreach ($f in $stageFiles) {
+    $rb = Join-Path $rollbackDir $f
+    if (Test-Path $rb) {
+      $dst = Join-Path $zDestGd $f
+      $dstDir = Split-Path $dst -Parent
+      if (-not (Test-Path $dstDir)) { New-Item -ItemType Directory $dstDir | Out-Null }
+      Copy-Item -LiteralPath $rb -Destination $dst -Force
+    }
+  }
+}
 while ((Get-Date) -lt $deadline) {
   Start-Sleep 10
   $zone2 = TaskPid 'ZoneEngine_New.exe'
@@ -251,22 +270,10 @@ while ((Get-Date) -lt $deadline) {
   $p8098 = NetListenPid 8098
   $api2 = $p8098
   Say ("boot-poll zone={0} chat={1} login={2} listen 7501={3} 7012={4} 7500={5} 8098={6}" -f $zone2,$chat2,$login2,$p7501,$p7012,$p7500,$p8098)
-  if ($zone2 -eq 0) {
-    Say 'ZoneEngine exited during boot — rolling back bins+GameData from rb-patrol'
-    foreach ($n in @('ZoneEngine_New.dll', 'ZoneEngine_New.exe', 'ZoneEngine_New.pdb')) {
-      $rb = Join-Path $rollbackDir "_bins\$n"
-      if (Test-Path $rb) { Copy-Item -LiteralPath $rb -Destination (Join-Path $zDest $n) -Force }
-    }
-    foreach ($f in $stageFiles) {
-      $rb = Join-Path $rollbackDir $f
-      if (Test-Path $rb) {
-        $dst = Join-Path $zDestGd $f
-        $dstDir = Split-Path $dst -Parent
-        if (-not (Test-Path $dstDir)) { New-Item -ItemType Directory $dstDir | Out-Null }
-        Copy-Item -LiteralPath $rb -Destination $dst -Force
-      }
-    }
-    throw 'ZoneEngine crash — rollback files restored; engines NOT auto-restarted'
+  if ($zone2 -ne 0) { $zoneEverUp = $true }
+  elseif ($zoneEverUp) {
+    Restore-PatrolRollback
+    throw 'ZoneEngine crash after start — rollback files restored; engines NOT auto-restarted'
   }
   if ($p7501 -ne 0 -and $p7012 -ne 0 -and $p7500 -ne 0 -and $p8098 -ne 0) {
     $listenOk = $true
@@ -274,7 +281,13 @@ while ((Get-Date) -lt $deadline) {
   }
 }
 
-if (-not $listenOk) { throw 'ports not all listening within 180s' }
+if (-not $listenOk) {
+  if (-not $zoneEverUp) {
+    Restore-PatrolRollback
+    throw 'ZoneEngine never started within 240s — rollback files restored; engines NOT auto-restarted'
+  }
+  throw 'ports not all listening within 240s'
+}
 
 # Confirm watchdog still disabled
 $dwQ2 = & schtasks.exe /Query /TN '\Docker API Watchdog' /FO LIST 2>&1 | Out-String
