@@ -1,6 +1,8 @@
-# Deploy Adonis + Rubi-Ka scrape fix batch (tip after 9ded57ac review fixes).
-# Includes: NpcTemplates.RK (loot/HP/meshes/M.A.G.S./Elliot look), SpawnsAdd.rk,
-# gitignored Playfields/*/Spawns.json pink suppress, Knubot/ElliotFairlane.json ({givenano 293685}),
+# Deploy Adonis + Rubi-Ka scrape fix batch (tip after three-gap close).
+# Includes: NpcTemplates.RK (loot+NNC nano crystals, historical pink fills, D00F rename),
+# ItemTemplates.RK (NNC1-8 NanoCrystal pools from MissionRewards ItemDb_Nanos),
+# SpawnsAdd.rk, gitignored Playfields/*/Spawns.json pink suppress,
+# Knubot/ElliotFairlane.json ({givenano 293685}),
 # ZoneEngine_New from tools-temp\zbuild-ado (Knubot givenano support).
 # Do NOT run until Mike authorizes GO. No WMI/CIM. No schema migration.
 # Engines start ONLY via: schtasks /run /tn "\DungeonDogs\AO Dungeon Dogs Engines"
