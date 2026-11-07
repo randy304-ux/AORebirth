@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "source": "scrape-gilnote-20261106",
-  "note": "SL specialization book chapter/part drops mint as a stack of 6; drop chance unchanged (NpcTemplates LootTable Chance/Repeats untouched).",
+  "note": "Listed loot items mint as a stack of 6 after a successful roll; drop chance unchanged (NpcTemplates LootTable Chance/Repeats untouched).",
   "overrides": [
     { "lowId": 226266, "highId": 226266, "stackCount": 6, "name": "Kanel's Story - First Edition" },
     { "lowId": 226267, "highId": 226267, "stackCount": 6, "name": "Kanel's Story - Second Edition" },
@@ -22,6 +22,8 @@
     { "lowId": 226275, "highId": 226275, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume Two" },
     { "lowId": 226280, "highId": 226280, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume Three" },
     { "lowId": 226285, "highId": 226285, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume Four" },
-    { "lowId": 226286, "highId": 226286, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume Five" }
+    { "lowId": 226286, "highId": 226286, "stackCount": 6, "name": "Afirce's World Catalogue of Books - Volume Five" },
+
+    { "lowId": 227905, "highId": 227905, "stackCount": 6, "name": "Joker's Glyph" }
   ]
 }
