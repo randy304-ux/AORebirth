@@ -1,18 +1,23 @@
 # Current Task
 
-## Active: Adonis + remaining Rubi-Ka scrape STAGED (not deployed)
+## Active: RK scrape fix batch STAGED (not deployed)
 
-Branch `cursor/gil-note-drop-0f04`. Tags `scrape-adonis-20261106` + `scrape-rk-20261106`.
-Stacks on Gil Notes / Joker's Glyph stack-of-6 + Adonis Phase 1.
+Branch `cursor/rk-desert-dyna-loot-15f4`. Tag `scrape-rk-20261106`.
 
-### Phase 1 Adonis
-- SpawnsAdd: 4872=671, 4873=580, 4213=88, 4625=32, 4626=38 + vendors
+### Included fixes
+- Empty RK loot → DYB1–8 for named dynas; CMTR/CMHK/OFAB for trash
+- Pinks/Guessed never count as “already present” for 12 m skip; pink fills overwrite Guessed
+- Suppress pink Spawns.json points within 12 m of SpawnsAdd.rk or scrape sightings
+- Textures/Meshes from scrape wired into RK templates (Elliot outfit, etc.)
+- M.A.G.S. (WPPN) pink/Rollerrat donor → scrape MD 22821 / mesh 21715 / scale 303 / HP 145735
+- Elliot Fairlane Knubot + textures; buff nano ID **unknown** (not invented)
+- Desert dual guide-dyna suppress (via pink/Guessed suppress)
 
-### Phase 2 Rubi-Ka remaining
-- SpawnsAdd.rk: ~29.9k points / ~50 zones; templates 1603; pink fills 1033
-- Skipped live: Galway 685, Aegean 585, ICC 655
-- Reck confirmed loot on Abandoned Hope / Skawt / Huzzum / 73-Omega (+ Skawt trash 303059)
-- Deploy (ado+rk, not run): `tools-temp\deploy-ado.ps1`
-- ZoneEngine build: `tools-temp\zbuild-ado`
+### Validation (`ddogs/tools/Validate-RkScrapeImport.js`)
+- Template vs scrape MD/mesh/scale/name/tex mismatches: **0**
+- Pinks with scraped real mob nearby: **0**
+- Dialog gaps on RK templates: **4** (Robin Raag, Arbiter Vincenzo Palmiero, Adeline Guerra, Omni Clothing Salesman)
+- Guards compared bad: **0**
 
-No DB writes, no engine restart, no GitHub push.
+### Do not deploy
+Mike accepts / live-verifies before deploy.

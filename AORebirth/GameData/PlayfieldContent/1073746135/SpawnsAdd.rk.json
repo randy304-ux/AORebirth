@@ -1,0 +1,62 @@
+{
+    "schemaVersion": 1,
+    "recordType": 1000014,
+    "playfieldId": 1073746135,
+    "source": "scrape-rk-20261106",
+    "spawns": [
+        {
+            "districtIndex": 0,
+            "hash": 0,
+            "hashText": "K0YW",
+            "manifestHash": 0,
+            "minLevel": 45,
+            "maxLevel": 45,
+            "respawnChance": 100,
+            "flags": 1,
+            "respawnTime": 600,
+            "version7Extra": 0,
+            "hasOptionalFlagBlock": true,
+            "nativeFlags": 0,
+            "moreFlags": 0,
+            "assistanceRadius": 0,
+            "unknownOptionalU8": 0,
+            "angle": 190,
+            "angleW": 1,
+            "position": [
+                1655.581,
+                52.006,
+                202.914
+            ],
+            "radius": 1,
+            "additionalPoints": [],
+            "extensions": null
+        },
+        {
+            "districtIndex": 0,
+            "hash": 0,
+            "hashText": "K0YX",
+            "manifestHash": 0,
+            "minLevel": 45,
+            "maxLevel": 45,
+            "respawnChance": 100,
+            "flags": 1,
+            "respawnTime": 600,
+            "version7Extra": 0,
+            "hasOptionalFlagBlock": true,
+            "nativeFlags": 0,
+            "moreFlags": 0,
+            "assistanceRadius": 0,
+            "unknownOptionalU8": 0,
+            "angle": 0,
+            "angleW": 1,
+            "position": [
+                1654.094,
+                52.006,
+                230.594
+            ],
+            "radius": 1,
+            "additionalPoints": [],
+            "extensions": null
+        }
+    ]
+}

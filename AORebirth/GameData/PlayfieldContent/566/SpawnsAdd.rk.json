@@ -1,95 +1,62 @@
 {
-    "schemaVersion":  1,
-    "recordType":  1000014,
-    "playfieldId":  566,
-    "source":  "scrape-rk-20261106",
-    "spawns":  [
-                   {
-                       "districtIndex":  0,
-                       "hash":  0,
-                       "hashText":  "FAKL",
-                       "manifestHash":  0,
-                       "minLevel":  163,
-                       "maxLevel":  163,
-                       "respawnChance":  100,
-                       "flags":  1,
-                       "respawnTime":  600,
-                       "version7Extra":  0,
-                       "hasOptionalFlagBlock":  true,
-                       "nativeFlags":  0,
-                       "moreFlags":  0,
-                       "assistanceRadius":  0,
-                       "unknownOptionalU8":  0,
-                       "angle":  88,
-                       "angleW":  1,
-                       "position":  [
-                                        369.916,
-                                        29.378,
-                                        299.644
-                                    ],
-                       "radius":  1,
-                       "additionalPoints":  [
-
-                                            ],
-                       "extensions":  null
-                   },
-                   {
-                       "districtIndex":  0,
-                       "hash":  0,
-                       "hashText":  "SDDL",
-                       "manifestHash":  0,
-                       "minLevel":  196,
-                       "maxLevel":  196,
-                       "respawnChance":  100,
-                       "flags":  1,
-                       "respawnTime":  600,
-                       "version7Extra":  0,
-                       "hasOptionalFlagBlock":  true,
-                       "nativeFlags":  0,
-                       "moreFlags":  0,
-                       "assistanceRadius":  0,
-                       "unknownOptionalU8":  0,
-                       "angle":  199,
-                       "angleW":  1,
-                       "position":  [
-                                        412.006,
-                                        25.379,
-                                        308.36
-                                    ],
-                       "radius":  1,
-                       "additionalPoints":  [
-
-                                            ],
-                       "extensions":  null
-                   },
-                   {
-                       "districtIndex":  0,
-                       "hash":  0,
-                       "hashText":  "K08U",
-                       "manifestHash":  0,
-                       "minLevel":  220,
-                       "maxLevel":  220,
-                       "respawnChance":  100,
-                       "flags":  1,
-                       "respawnTime":  600,
-                       "version7Extra":  0,
-                       "hasOptionalFlagBlock":  true,
-                       "nativeFlags":  0,
-                       "moreFlags":  0,
-                       "assistanceRadius":  0,
-                       "unknownOptionalU8":  0,
-                       "angle":  0,
-                       "angleW":  1,
-                       "position":  [
-                                        346.054,
-                                        32.41,
-                                        284.731
-                                    ],
-                       "radius":  1,
-                       "additionalPoints":  [
-
-                                            ],
-                       "extensions":  null
-                   }
-               ]
+    "schemaVersion": 1,
+    "recordType": 1000014,
+    "playfieldId": 566,
+    "source": "scrape-rk-20261106",
+    "spawns": [
+        {
+            "districtIndex": 0,
+            "hash": 0,
+            "hashText": "FAKL",
+            "manifestHash": 0,
+            "minLevel": 163,
+            "maxLevel": 163,
+            "respawnChance": 100,
+            "flags": 1,
+            "respawnTime": 600,
+            "version7Extra": 0,
+            "hasOptionalFlagBlock": true,
+            "nativeFlags": 0,
+            "moreFlags": 0,
+            "assistanceRadius": 0,
+            "unknownOptionalU8": 0,
+            "angle": 88,
+            "angleW": 1,
+            "position": [
+                369.916,
+                29.378,
+                299.644
+            ],
+            "radius": 1,
+            "additionalPoints": [],
+            "extensions": null
+        },
+        {
+            "districtIndex": 0,
+            "hash": 0,
+            "hashText": "K090",
+            "manifestHash": 0,
+            "minLevel": 220,
+            "maxLevel": 220,
+            "respawnChance": 100,
+            "flags": 1,
+            "respawnTime": 600,
+            "version7Extra": 0,
+            "hasOptionalFlagBlock": true,
+            "nativeFlags": 0,
+            "moreFlags": 0,
+            "assistanceRadius": 0,
+            "unknownOptionalU8": 0,
+            "angle": 0,
+            "angleW": 1,
+            "position": [
+                346.054,
+                32.41,
+                284.731
+            ],
+            "radius": 1,
+            "additionalPoints": [],
+            "extensions": null
+        }
+    ]
 }

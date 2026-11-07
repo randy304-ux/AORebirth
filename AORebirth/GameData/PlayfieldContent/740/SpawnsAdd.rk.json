@@ -1,37 +1,35 @@
 {
-    "schemaVersion":  1,
-    "recordType":  1000014,
-    "playfieldId":  740,
-    "source":  "scrape-rk-20261106",
-    "spawns":  [
-                   {
-                       "districtIndex":  0,
-                       "hash":  0,
-                       "hashText":  "K0Q0",
-                       "manifestHash":  0,
-                       "minLevel":  57,
-                       "maxLevel":  57,
-                       "respawnChance":  100,
-                       "flags":  1,
-                       "respawnTime":  600,
-                       "version7Extra":  0,
-                       "hasOptionalFlagBlock":  true,
-                       "nativeFlags":  0,
-                       "moreFlags":  0,
-                       "assistanceRadius":  0,
-                       "unknownOptionalU8":  0,
-                       "angle":  209,
-                       "angleW":  1,
-                       "position":  [
-                                        319.323,
-                                        17.41,
-                                        326.628
-                                    ],
-                       "radius":  1,
-                       "additionalPoints":  [
-
-                                            ],
-                       "extensions":  null
-                   }
-               ]
+    "schemaVersion": 1,
+    "recordType": 1000014,
+    "playfieldId": 740,
+    "source": "scrape-rk-20261106",
+    "spawns": [
+        {
+            "districtIndex": 0,
+            "hash": 0,
+            "hashText": "K0QD",
+            "manifestHash": 0,
+            "minLevel": 57,
+            "maxLevel": 57,
+            "respawnChance": 100,
+            "flags": 1,
+            "respawnTime": 600,
+            "version7Extra": 0,
+            "hasOptionalFlagBlock": true,
+            "nativeFlags": 0,
+            "moreFlags": 0,
+            "assistanceRadius": 0,
+            "unknownOptionalU8": 0,
+            "angle": 209,
+            "angleW": 1,
+            "position": [
+                319.323,
+                17.41,
+                326.628
+            ],
+            "radius": 1,
+            "additionalPoints": [],
+            "extensions": null
+        }
+    ]
 }

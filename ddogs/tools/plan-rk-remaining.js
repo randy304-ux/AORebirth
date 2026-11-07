@@ -104,6 +104,19 @@ const namesOf = h => leaves(h).flatMap(([, t]) => (t.Templates || []).filter(x =
 const skips = fs.existsSync(path.join(GD, 'SpawnSkips.json')) ? rd(path.join(GD, 'SpawnSkips.json')) : { hiddenHashes: [] };
 const hidden = new Set((skips.hiddenHashes || []).map(h => typeof h === 'string' ? h : h.hash));
 
+/** Pink / guessed stand-ins must NEVER count as "already present" for the 12 m skip. */
+function isPinkLike(hash, templated) {
+  if (!templated) return true; // missing template -> AAAA pink fallback
+  const t = nt[hash];
+  if (!t || !t.Templates) return true;
+  const prov = t.ContentProvenance || {};
+  if (prov.Guessed || prov.StandIn) return true;
+  const band = t.Templates[0];
+  const bp = (band && band.ContentProvenance) || {};
+  if (bp.Guessed || bp.StandIn) return true;
+  return false;
+}
+
 function loadServer(pf) {
   const srv = [];
   function addSp(file, src) {
@@ -114,9 +127,10 @@ function loadServer(pf) {
     for (const s of doc.spawns || []) {
       const h = s.hashText || '';
       if (hidden.has(h)) continue;
+      const templated = !!(nt[h] && nt[h].Templates);
       srv.push({
         src, hash: h, x: s.position[0], y: s.position[1], z: s.position[2],
-        names: namesOf(h), templated: !!(nt[h] && nt[h].Templates)
+        names: namesOf(h), templated, pinkLike: isPinkLike(h, templated)
       });
     }
   }
@@ -322,6 +336,7 @@ function ensureTemplate(a, hashOpt) {
     t.bands[lv] = {
       Name: a.name, Level: lv, hp: a.hpBy[lv] || 0, side: a.side, breed: a.breed,
       md: a.md, sc: a.sc, mesh: a.mesh, head: a.head, tex: a.tex, fam: a.fam,
+      textures: a.textures || '', meshes: a.meshes || '',
       guard: a.side !== 3, city: CITY_PF.has(a.pf)
     };
   }
@@ -331,43 +346,33 @@ function ensureTemplate(a, hashOpt) {
 for (const a of pts.sort((x, y) => x.pf - y.pf || x.name.localeCompare(y.name) || x.x - y.x)) {
   if (!serverCache[a.pf]) serverCache[a.pf] = loadServer(a.pf);
   const srv = serverCache[a.pf];
-  const near = srv.find(s => d2(s, a) <= NEAR);
-  if (near) {
-    if (near.templated) {
-      dropped.nearExistingSpawn++;
-      alreadyPresent.push({ pf: a.pf, name: a.name, why: `templated ${near.hash}`, x: a.x, z: a.z });
-      continue;
-    }
-    if (near.hash && near.hash.length === 4 && !nt[near.hash]) {
-      const claimed = pinkClaimed.get(near.hash);
-      if (claimed && (claimed.name !== a.name || claimed.md !== a.md)) {
-        // fall through SpawnsAdd
-      } else {
-        dropped.nearExistingSpawn++;
-        const ru = reuseHash(a.name, a.md, a.lvls);
-        if (ru && ru.collision) {
-          if (!flaggedNames.has(a.name)) {
-            flaggedNames.add(a.name);
-            collisions.push({ kind: 'name-md', name: a.name, scrapeMd: a.md, existing: ru.existing.join(',') });
-          }
-          dropped.nameMdCollision++;
-          continue;
-        }
-        if (typeof ru === 'string') {
-          alreadyPresent.push({ pf: a.pf, name: a.name, why: `pink ${near.hash} reuse ${ru}`, x: a.x, z: a.z });
-          continue;
-        }
-        if (!claimed) pinkClaimed.set(near.hash, { name: a.name, md: a.md });
-        ensureTemplate(a, near.hash);
-        pinkFills.push({ pf: a.pf, hash: near.hash, name: a.name });
-        alreadyPresent.push({ pf: a.pf, name: a.name, why: `pink fill ${near.hash}`, x: a.x, z: a.z });
-        continue;
-      }
+  // Pinks never count as present. If a pink sits on the scrape, fill/overwrite it even when
+  // another real spawn is also within 12 m (otherwise the pink remains forever).
+  const nearReal = srv.find(s => d2(s, a) <= NEAR && !s.pinkLike);
+  const nearPink = srv.find(s => d2(s, a) <= NEAR && s.pinkLike);
+  if (nearPink && nearPink.hash && nearPink.hash.length === 4) {
+    const claimed = pinkClaimed.get(nearPink.hash);
+    if (claimed && (claimed.name !== a.name || claimed.md !== a.md)) {
+      // Contested pink hash: fall through to SpawnsAdd with a new/reused hash.
     } else {
-      dropped.nearExistingSpawn++;
-      alreadyPresent.push({ pf: a.pf, name: a.name, why: `spawn ${near.hash || '?'}`, x: a.x, z: a.z });
+      const ru = reuseHash(a.name, a.md, a.lvls);
+      // Name/md collision on a pink still fills the pink with scrape stats (overwrite Guessed).
+      if (ru && ru.collision) {
+        if (!flaggedNames.has(a.name)) {
+          flaggedNames.add(a.name);
+          collisions.push({ kind: 'name-md', name: a.name, scrapeMd: a.md, existing: ru.existing.join(',') });
+        }
+      }
+      if (!claimed) pinkClaimed.set(nearPink.hash, { name: a.name, md: a.md });
+      ensureTemplate(a, nearPink.hash);
+      pinkFills.push({ pf: a.pf, hash: nearPink.hash, name: a.name });
       continue;
     }
+  }
+  if (nearReal) {
+    dropped.nearExistingSpawn++;
+    alreadyPresent.push({ pf: a.pf, name: a.name, why: `templated ${nearReal.hash}`, x: a.x, z: a.z });
+    continue;
   }
 
   const ru = reuseHash(a.name, a.md, a.lvls);
@@ -376,6 +381,17 @@ for (const a of pts.sort((x, y) => x.pf - y.pf || x.name.localeCompare(y.name) |
     if (!flaggedNames.has(a.name)) {
       flaggedNames.add(a.name);
       collisions.push({ kind: 'name-md', name: a.name, scrapeMd: a.md, existing: ru.existing.join(',') });
+    }
+    // Last chance: overwrite the nearest pink even on name/md collision (Guessed wrong MD).
+    const pinkHit = srv.filter(s => s.pinkLike && d2(s, a) <= NEAR).sort((x, y) => d2(x, a) - d2(y, a))[0];
+    if (pinkHit && pinkHit.hash && pinkHit.hash.length === 4) {
+      const claimed = pinkClaimed.get(pinkHit.hash);
+      if (!claimed || (claimed.name === a.name && claimed.md === a.md)) {
+        if (!claimed) pinkClaimed.set(pinkHit.hash, { name: a.name, md: a.md });
+        ensureTemplate(a, pinkHit.hash);
+        pinkFills.push({ pf: a.pf, hash: pinkHit.hash, name: a.name });
+        continue;
+      }
     }
     dropped.nameMdCollision++;
     skipped.push({ name: a.name, pf: a.pf, why: 'name/md collision', x: a.x, z: a.z });

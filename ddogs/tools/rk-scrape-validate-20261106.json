@@ -1,0 +1,192 @@
+{
+  "tag": "scrape-rk-20261106",
+  "comparedBands": 4643,
+  "mismatches": {
+    "nameMismatch": 0,
+    "mdMismatch": 0,
+    "meshMismatch": 0,
+    "scaleMismatch": 0,
+    "texMismatch": 0
+  },
+  "mismatchSamples": [],
+  "pinksWithScrapeNearby": 0,
+  "pinkSamples": [],
+  "dialogNamesInScrape": 40,
+  "dialogGapsOnRkTemplates": 4,
+  "dialogGapSamples": [
+    {
+      "name": "Arbiter Vincenzo Palmiero",
+      "hash": "ARVI"
+    },
+    {
+      "name": "Adeline Guerra [Freelancers Inc.]",
+      "hash": "FLIC"
+    },
+    {
+      "name": "Robin Raag",
+      "hash": "K00S"
+    },
+    {
+      "name": "Omni Clothing Salesman",
+      "hash": "CGSS"
+    }
+  ],
+  "guardsCompared": 23,
+  "guardsBad": 0,
+  "guardSamples": [],
+  "spotChecks": [
+    {
+      "name": "M.A.G.S.",
+      "hash": "WPPN",
+      "fillPink": true,
+      "pf": 750,
+      "scrape": {
+        "md": 22821,
+        "mesh": 21715,
+        "sc": 303,
+        "tex": ""
+      },
+      "server": {
+        "md": 22821,
+        "mesh": 21715,
+        "sc": 303,
+        "tex": "",
+        "pinkLike": false
+      }
+    },
+    {
+      "name": "Elliot Fairlane",
+      "hash": "K0SJ",
+      "fillPink": false,
+      "pf": 710,
+      "scrape": {
+        "md": 26097,
+        "mesh": 5900,
+        "sc": 110,
+        "tex": "0:206966;1:206963;2:206965;3:206964;4:206968"
+      },
+      "server": {
+        "md": 26097,
+        "mesh": 5900,
+        "sc": 110,
+        "tex": "0:206966;1:206963;2:206965;3:206964;4:206968",
+        "pinkLike": false
+      }
+    },
+    {
+      "name": "Sharpclaw the Bearded Grila Monster",
+      "hash": "K08A",
+      "fillPink": false,
+      "pf": 565,
+      "scrape": {
+        "md": 22794,
+        "mesh": 22773,
+        "sc": 131,
+        "tex": ""
+      },
+      "server": {
+        "md": 22794,
+        "mesh": 22773,
+        "sc": 131,
+        "tex": "",
+        "pinkLike": false
+      }
+    },
+    {
+      "name": "Scurrytail the Troubled",
+      "hash": "K087",
+      "fillPink": false,
+      "pf": 565,
+      "scrape": {
+        "md": 17655,
+        "mesh": 15222,
+        "sc": 134,
+        "tex": ""
+      },
+      "server": {
+        "md": 17655,
+        "mesh": 15222,
+        "sc": 134,
+        "tex": "",
+        "pinkLike": false
+      }
+    },
+    {
+      "name": "Warchief Skawt",
+      "hash": "K0YY",
+      "fillPink": false,
+      "pf": 750,
+      "scrape": {
+        "md": 17653,
+        "mesh": 15224,
+        "sc": 166,
+        "tex": ""
+      },
+      "server": {
+        "md": 17653,
+        "mesh": 15224,
+        "sc": 166,
+        "tex": "",
+        "pinkLike": false
+      }
+    },
+    {
+      "name": "Abandoned Hope",
+      "hash": "AAHO",
+      "fillPink": true,
+      "pf": 750,
+      "scrape": {
+        "md": 260513,
+        "mesh": 260512,
+        "sc": 314,
+        "tex": ""
+      },
+      "server": {
+        "md": 260513,
+        "mesh": 260512,
+        "sc": 314,
+        "tex": "",
+        "pinkLike": false
+      }
+    },
+    {
+      "name": "Prime Evolution Huzzum",
+      "hash": "PREU",
+      "fillPink": true,
+      "pf": 750,
+      "scrape": {
+        "md": 42981,
+        "mesh": 42952,
+        "sc": 114,
+        "tex": ""
+      },
+      "server": {
+        "md": 42981,
+        "mesh": 42952,
+        "sc": 114,
+        "tex": "",
+        "pinkLike": false
+      }
+    }
+  ],
+  "planCounts": {
+    "sightingsIn": 50817,
+    "instances": 32929,
+    "afterCluster": 32292,
+    "spawnPointsAdded": 30112,
+    "spawnReuse": 5185,
+    "newTemplates": 1840,
+    "pinkFills": 1444,
+    "lootMobs": 8,
+    "collisions": 52,
+    "heldBack": 316,
+    "alreadyPresent": 229
+  },
+  "perZoneReck": {
+    "name": "The Reck",
+    "spawns": 724,
+    "pinkFills": 234,
+    "templates": 79,
+    "alreadyPresent": 7
+  }
+}

@@ -51,10 +51,54 @@ foreach ($m in @($plan.loot.PSObject.Properties)) {
   $lootByName[$m.Name] = @(foreach ($e in @($m.Value)) { ItemRow $e })
 }
 
-$ov = [ordered]@{}; $made = 0; $lootRows = 0; $wanderT = 0
+function Parse-Textures([string]$s) {
+  if ([string]::IsNullOrWhiteSpace($s)) { return @() }
+  $out = New-Object System.Collections.Generic.List[object]
+  foreach ($tok in ($s -split ';')) {
+    if ([string]::IsNullOrWhiteSpace($tok)) { continue }
+    $p = $tok.Split(':')
+    if ($p.Length -lt 2) { continue }
+    $place = 0; $id = 0
+    if (-not [int]::TryParse($p[0], [ref]$place)) { continue }
+    if (-not [int]::TryParse($p[1], [ref]$id)) { continue }
+    if ($id -le 0) { continue }
+    [void]$out.Add([pscustomobject]@{ Id = $id; Place = $place })
+  }
+  ,$out.ToArray()
+}
+function Parse-Meshes([string]$s) {
+  if ([string]::IsNullOrWhiteSpace($s)) { return @() }
+  $out = New-Object System.Collections.Generic.List[object]
+  foreach ($tok in ($s -split ';')) {
+    if ([string]::IsNullOrWhiteSpace($tok)) { continue }
+    $p = $tok.Split(':')
+    if ($p.Length -lt 4) { continue }
+    $pos = 0; $id = 0; $ovr = 0; $layer = 0
+    if (-not [int]::TryParse($p[0], [ref]$pos)) { continue }
+    if (-not [int]::TryParse($p[1], [ref]$id)) { continue }
+    if (-not [int]::TryParse($p[2], [ref]$ovr)) { continue }
+    if (-not [int]::TryParse($p[3], [ref]$layer)) { continue }
+    if ($id -le 0) { continue }
+    [void]$out.Add([pscustomobject]@{ Id = $id; Position = $pos; OverrideTextureId = $ovr; Layer = $layer })
+  }
+  ,$out.ToArray()
+}
+function Test-PinkLikeProv($tp) {
+  if (-not $tp -or -not $tp.Templates) { return $true }
+  $prov = $tp.ContentProvenance
+  if ($prov -and ($prov.Guessed -or $prov.StandIn)) { return $true }
+  $b = @($tp.Templates)[0]
+  if ($b -and $b.ContentProvenance -and ($b.ContentProvenance.Guessed -or $b.ContentProvenance.StandIn)) { return $true }
+  return $false
+}
+
+$ov = [ordered]@{}; $made = 0; $lootRows = 0; $wanderT = 0; $pinkOverwrites = 0
 foreach ($t in @($plan.templates)) {
-  if ($nt.($t.hash) -and $nt.($t.hash).Templates -and -not $t.fillPink) { continue }
-  if ($nt.($t.hash) -and $nt.($t.hash).Templates -and $t.fillPink) { continue }
+  $existing = $nt.($t.hash)
+  if ($existing -and $existing.Templates -and -not $t.fillPink) { continue }
+  # fillPink may overwrite Guessed/StandIn/missing pink hashes; never clobber a real template.
+  if ($t.fillPink -and $existing -and $existing.Templates -and -not (Test-PinkLikeProv $existing)) { continue }
+  if ($t.fillPink -and $existing -and $existing.Templates -and (Test-PinkLikeProv $existing)) { $pinkOverwrites++ }
   $bands = foreach ($b in @($t.bands)) {
     $L = [int]$b.Level
     $d = $pool | Sort-Object { [math]::Abs([int]$_.Level - $L) } | Select-Object -First 1
@@ -69,11 +113,32 @@ foreach ($t in @($plan.templates)) {
     $isMonster = ([int]$b.side -eq 3)
     if ($b.guard -and -not $isMonster) { $set['0'] = 277352961 } else { $set['0'] = 268964353 }
     foreach ($k in $set.Keys) { $c.Stats | Add-Member -Force NoteProperty $k $set[$k] }
-    $loot = @($lootByName[$b.Name] | Where-Object { $_ }); $lootRows += $loot.Count
+    $loot = @($lootByName[$b.Name] | Where-Object { $_ })
+    # No v6.1 scraped loot: use existing server tables only (no invented IDs).
+    # Named dyna bosses -> DYB1..8 (Build-DynaLoot bands). Ordinary monsters -> CMTR/CMHK/OFAB.
+    if ($loot.Count -eq 0 -and $isMonster) {
+      $nm = [string]$b.Name
+      $isNamedDyna = ($nm -match '\bthe\b') -and ($nm -notmatch '^(The Ring|Ring Ticket)|Ticket Salesman') -and ($L -ge 1) -and ($L -le 275)
+      if ($isNamedDyna) {
+        $dyb = $(if ($L -le 15) { 'DYB1' } elseif ($L -le 35) { 'DYB2' } elseif ($L -le 55) { 'DYB3' } elseif ($L -le 85) { 'DYB4' } elseif ($L -le 120) { 'DYB5' } elseif ($L -le 160) { 'DYB6' } elseif ($L -le 200) { 'DYB7' } else { 'DYB8' })
+        $loot = @([pscustomobject]@{ Hash = $dyb; Repeats = 1; Chance = 100; LevelMod = 25; CountMin = 5; CountMax = 7 })
+      } else {
+        $loot = @(
+          [pscustomobject]@{ Hash = 'CMTR'; Repeats = 1; Chance = 50; LevelMod = 20 }
+          [pscustomobject]@{ Hash = 'CMHK'; Repeats = 1; Chance = 12; LevelMod = 20 }
+          [pscustomobject]@{ Hash = 'OFAB'; Repeats = 1; Chance = 1; LevelMod = 0 }
+        )
+      }
+    }
+    $lootRows += $loot.Count
     $c | Add-Member -Force NoteProperty LootTable $loot
     foreach ($k in @('Equipment', 'ContentProvenance', 'Textures', 'Meshes')) {
       if ($c.PSObject.Properties[$k]) { $c.PSObject.Properties.Remove($k) }
     }
+    $tex = Parse-Textures ([string]$b.textures)
+    $msh = Parse-Meshes ([string]$b.meshes)
+    if (@($tex).Count -gt 0) { $c | Add-Member -Force NoteProperty Textures @($tex) }
+    if (@($msh).Count -gt 0) { $c | Add-Member -Force NoteProperty Meshes @($msh) }
     $c | Add-Member -Force NoteProperty HasHeadMesh ([int]$b.head -gt 0)
     $feat = @($c.Features | Where-Object { $_ -and $_ -ne 'NoCombat' -and $_ -ne 'NoMove' -and $_ -ne 'Wander' })
     if (-not $isMonster) { $feat = @($feat) + 'NoCombat' }
@@ -152,4 +217,5 @@ $summary = [ordered]@{
   lootRowsNew = $lootRows; lootRowsExisting = $exRows; wander = $wanderT
 }
 [IO.File]::WriteAllText((Join-Path $PSScriptRoot 'scrape_import_rk_20261106.build.json'), ($summary | ConvertTo-Json) + "`n", $u)
-"templates=$made spawns=$nsp reuse=$reuse pinkFills=$($summary.pinkFills) lootItems=$($itemHash.Count) lootRowsNew=$lootRows lootRowsExisting=$exRows wander=$wanderT"
+$summary.pinkOverwrites = $pinkOverwrites
+"templates=$made spawns=$nsp reuse=$reuse pinkFills=$($summary.pinkFills) pinkOverwrites=$pinkOverwrites lootItems=$($itemHash.Count) lootRowsNew=$lootRows lootRowsExisting=$exRows wander=$wanderT"
