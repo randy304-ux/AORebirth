@@ -10,7 +10,7 @@ using ZoneEngine_New.Core.Inventory;
 /// <summary>
 /// Turns line text into ordered pieces and effects. Tags:
 /// text <c>{name}</c> <c>{npc}</c> <c>{itemref LOW HIGH QL}</c> <c>{emote}…{/emote}</c> <c>{delay SECONDS}</c>;
-/// effects (applied when the text reaches them) <c>{givequest HASH}</c> <c>{givedungeon HASH}</c> <c>{completequest HASH}</c> <c>{dropquest HASH}</c> <c>{spawn ITEMHASH QL|level [count]}</c> <c>{take ITEMHASH}</c> <c>{shop}</c> <c>{opentrade}</c> <c>{buffmenu}</c> <c>{teleport PF X Y Z}</c>; flow <c>{goto LINE}</c> <c>{close [SECONDS]}</c>.
+/// effects (applied when the text reaches them) <c>{givequest HASH}</c> <c>{givedungeon HASH}</c> <c>{completequest HASH}</c> <c>{dropquest HASH}</c> <c>{spawn ITEMHASH QL|level [count]}</c> <c>{take ITEMHASH}</c> <c>{shop}</c> <c>{opentrade}</c> <c>{buffmenu}</c> <c>{givenano ID}</c> <c>{teleport PF X Y Z}</c>; flow <c>{goto LINE}</c> <c>{close [SECONDS]}</c>.
 /// <c>{{</c> and <c>}}</c> write literal braces. Reply text allows only the text tags without delay.
 /// </summary>
 public static class KnubotParser
@@ -295,6 +295,18 @@ public static class KnubotParser
                 case "buffmenu":
                     Expect(words, 1, 1, body, errors);
                     Effect(new KnubotOpenBuffMenu());
+                    break;
+
+                case "givenano":
+                    if (words.Length != 2
+                        || !int.TryParse(words[1], NumberStyles.Integer, CultureInfo.InvariantCulture, out int nanoId)
+                        || nanoId <= 0)
+                    {
+                        errors.Add("expected {givenano ID}: {" + body + "}");
+                        break;
+                    }
+
+                    Effect(new KnubotGiveNano(nanoId));
                     break;
 
                 case "goto":

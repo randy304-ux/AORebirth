@@ -1,15 +1,73 @@
 {
   "tag": "scrape-rk-20261106",
+  "validatorMode": "raw-scrape+older+plan",
+  "scrapeRowsLoaded": 195441,
+  "olderScrapeFiles": 26,
   "comparedBands": 4643,
+  "noRawSighting": 7,
   "mismatches": {
     "nameMismatch": 0,
     "mdMismatch": 0,
     "meshMismatch": 0,
     "scaleMismatch": 0,
-    "texMismatch": 0
+    "hpMismatch": 0,
+    "texMismatch": 0,
+    "meshesMismatch": 0
   },
-  "mismatchSamples": [],
+  "mismatchSamples": [
+    {
+      "hash": "K003",
+      "level": 123,
+      "name": "Den Adamant Hound",
+      "issues": [
+        "rawHpVariance plan 19114 raw 19226"
+      ],
+      "raw": true,
+      "informational": true
+    },
+    {
+      "hash": "DEPR",
+      "level": 123,
+      "name": "Den Adamant Hound",
+      "issues": [
+        "rawHpVariance plan 19114 raw 19226"
+      ],
+      "raw": true,
+      "informational": true
+    },
+    {
+      "hash": "K007",
+      "level": 110,
+      "name": "Den Mantis Burrower",
+      "issues": [
+        "rawHpVariance plan 16030 raw 16286"
+      ],
+      "raw": true,
+      "informational": true
+    },
+    {
+      "hash": "CL15",
+      "level": 110,
+      "name": "Den Mantis Burrower",
+      "issues": [
+        "rawHpVariance plan 16030 raw 16286"
+      ],
+      "raw": true,
+      "informational": true
+    },
+    {
+      "hash": "DAMT",
+      "level": 110,
+      "name": "Den Mantis Burrower",
+      "issues": [
+        "rawHpVariance plan 16030 raw 16286"
+      ],
+      "raw": true,
+      "informational": true
+    }
+  ],
   "pinksWithScrapeNearby": 0,
+  "pinksWithAnyHistoricalScrapeNearby": 392,
   "pinkSamples": [],
   "dialogNamesInScrape": 40,
   "dialogGapsOnRkTemplates": 4,
@@ -31,9 +89,77 @@
       "hash": "CGSS"
     }
   ],
-  "guardsCompared": 23,
+  "guardsCompared": 51,
   "guardsBad": 0,
   "guardSamples": [],
+  "placeholderDynaSpawns": 31,
+  "placeholderDynaNames": [
+    [
+      "Blubbags Dyna",
+      6
+    ],
+    [
+      "Spiders Dyna",
+      4
+    ],
+    [
+      "Hammerbeasts Dyna",
+      3
+    ],
+    [
+      "Snakes Dyna",
+      3
+    ],
+    [
+      "Hounds Dyna",
+      2
+    ],
+    [
+      "Rhinomen Dyna",
+      2
+    ],
+    [
+      "Manteze Dyna",
+      2
+    ],
+    [
+      "Biofreaks Dyna",
+      1
+    ],
+    [
+      "Rollerrats Dyna",
+      1
+    ],
+    [
+      "Clawfingers Dyna",
+      1
+    ],
+    [
+      "Scorpiods Dyna",
+      1
+    ],
+    [
+      "Salamanders Dyna",
+      1
+    ],
+    [
+      "Mantis Dyna",
+      1
+    ],
+    [
+      "Sand Demon Dyna",
+      1
+    ],
+    [
+      "Lizards Dyna",
+      1
+    ],
+    [
+      "Pit Lizards Dyna",
+      1
+    ]
+  ],
+  "elliotFairlaneGivenano293685": true,
   "spotChecks": [
     {
       "name": "M.A.G.S.",
@@ -44,13 +170,18 @@
         "md": 22821,
         "mesh": 21715,
         "sc": 303,
-        "tex": ""
+        "hp": 145735,
+        "tex": "",
+        "meshes": ""
       },
       "server": {
         "md": 22821,
         "mesh": 21715,
         "sc": 303,
+        "hp": 145735,
+        "max": 145735,
         "tex": "",
+        "meshes": "",
         "pinkLike": false
       }
     },
@@ -63,13 +194,18 @@
         "md": 26097,
         "mesh": 5900,
         "sc": 110,
-        "tex": "0:206966;1:206963;2:206965;3:206964;4:206968"
+        "hp": 43720,
+        "tex": "0:206966;1:206963;2:206965;3:206964;4:206968",
+        "meshes": "0:40111:0:4"
       },
       "server": {
         "md": 26097,
         "mesh": 5900,
         "sc": 110,
+        "hp": 43720,
+        "max": 43720,
         "tex": "0:206966;1:206963;2:206965;3:206964;4:206968",
+        "meshes": "0:40111:0:4",
         "pinkLike": false
       }
     },
@@ -82,13 +218,18 @@
         "md": 22794,
         "mesh": 22773,
         "sc": 131,
-        "tex": ""
+        "hp": 3611,
+        "tex": "",
+        "meshes": ""
       },
       "server": {
         "md": 22794,
         "mesh": 22773,
         "sc": 131,
+        "hp": 3611,
+        "max": 3611,
         "tex": "",
+        "meshes": "",
         "pinkLike": false
       }
     },
@@ -101,13 +242,18 @@
         "md": 17655,
         "mesh": 15222,
         "sc": 134,
-        "tex": ""
+        "hp": 17664,
+        "tex": "",
+        "meshes": ""
       },
       "server": {
         "md": 17655,
         "mesh": 15222,
         "sc": 134,
+        "hp": 17664,
+        "max": 17664,
         "tex": "",
+        "meshes": "",
         "pinkLike": false
       }
     },
@@ -120,13 +266,18 @@
         "md": 17653,
         "mesh": 15224,
         "sc": 166,
-        "tex": ""
+        "hp": 31008,
+        "tex": "",
+        "meshes": "0:302973:0:0"
       },
       "server": {
         "md": 17653,
         "mesh": 15224,
         "sc": 166,
+        "hp": 31008,
+        "max": 31008,
         "tex": "",
+        "meshes": "0:302973:0:0",
         "pinkLike": false
       }
     },
@@ -139,13 +290,18 @@
         "md": 260513,
         "mesh": 260512,
         "sc": 314,
-        "tex": ""
+        "hp": 591085,
+        "tex": "",
+        "meshes": ""
       },
       "server": {
         "md": 260513,
         "mesh": 260512,
         "sc": 314,
+        "hp": 591085,
+        "max": 591085,
         "tex": "",
+        "meshes": "",
         "pinkLike": false
       }
     },
@@ -158,13 +314,42 @@
         "md": 42981,
         "mesh": 42952,
         "sc": 114,
-        "tex": ""
+        "hp": 13801,
+        "tex": "",
+        "meshes": ""
       },
       "server": {
         "md": 42981,
         "mesh": 42952,
         "sc": 114,
+        "hp": 13801,
+        "max": 13801,
         "tex": "",
+        "meshes": "",
+        "pinkLike": false
+      }
+    },
+    {
+      "name": "Omni Special Forces",
+      "hash": "OOSF",
+      "fillPink": true,
+      "pf": 750,
+      "scrape": {
+        "md": 26092,
+        "mesh": 5907,
+        "sc": 117,
+        "hp": 26888,
+        "tex": "0:15806;1:204160;2:15807;3:15808;4:15805",
+        "meshes": "0:20106:0:2;0:40694:0:4;1:209529:0:2;3:11499:206969:0;4:11499:206969:0;5:11507:206969:0"
+      },
+      "server": {
+        "md": 26092,
+        "mesh": 5907,
+        "sc": 117,
+        "hp": 26888,
+        "max": 26888,
+        "tex": "0:15806;1:204160;2:15807;3:15808;4:15805",
+        "meshes": "0:20106:0:2;0:40694:0:4;1:209529:0:2;3:11499:206969:0;4:11499:206969:0;5:11507:206969:0",
         "pinkLike": false
       }
     }

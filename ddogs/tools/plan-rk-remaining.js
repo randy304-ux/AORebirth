@@ -289,12 +289,24 @@ for (const [, rs] of byInst) {
   const hpBy = {};
   for (const r of rs) hpBy[r.level] = r.hp || 0;
   const roam = !calm && rs.some(r => d2(r, { x, z }) > 5);
+  // Prefer the sighting with the richest Meshes/Textures (shoulder pads live in mesh pos 3/4).
+  // Last-pos collapse used to drop Omni Special Forces / SANDSTORM shoulder meshes.
+  let look = last;
+  let lookScore = -1;
+  for (const r of rs) {
+    const parts = String(r.meshes || '').split(';').filter(Boolean);
+    const score = parts.length * 10 + (parts.some((p) => p.startsWith('3:') || p.startsWith('4:')) ? 1000 : 0) + String(r.textures || '').length;
+    if (score > lookScore) {
+      lookScore = score;
+      look = r;
+    }
+  }
   const L = last;
   instances.push({
     pf: L.pf, inst: L.inst, name: L.name, src: L.src, roam, calm,
     x, y, z, heading: L.heading, lvls, hpBy,
     md: L.md, sc: L.sc, mesh: L.mesh, head: L.head, tex: L.tex, fam: L.fam,
-    side: L.side, breed: L.breed, textures: L.textures, meshes: L.meshes
+    side: L.side, breed: L.breed, textures: look.textures, meshes: look.meshes
   });
 }
 
@@ -309,6 +321,15 @@ for (const i of instances) {
   hit.calm = hit.calm || i.calm;
   for (const lv of i.lvls) if (!hit.lvls.includes(lv)) hit.lvls.push(lv);
   Object.assign(hit.hpBy, i.hpBy);
+  // Keep richest appearance across clustered sightings.
+  const parts = String(i.meshes || '').split(';').filter(Boolean);
+  const score = parts.length * 10 + (parts.some((p) => p.startsWith('3:') || p.startsWith('4:')) ? 1000 : 0) + String(i.textures || '').length;
+  const hitParts = String(hit.meshes || '').split(';').filter(Boolean);
+  const hitScore = hitParts.length * 10 + (hitParts.some((p) => p.startsWith('3:') || p.startsWith('4:')) ? 1000 : 0) + String(hit.textures || '').length;
+  if (score > hitScore) {
+    hit.meshes = i.meshes;
+    hit.textures = i.textures;
+  }
 }
 
 const serverCache = {};

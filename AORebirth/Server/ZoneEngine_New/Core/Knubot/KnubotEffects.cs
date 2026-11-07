@@ -8,14 +8,17 @@ using AORebirth.Enums;
 using SmokeLounge.AOtomation.Messaging.GameData;
 using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
 
+using ZoneEngine_New.Core.Data;
 using ZoneEngine_New.Core.Entities;
 using ZoneEngine_New.Core.Events;
 using ZoneEngine_New.Core.Inventory;
+using ZoneEngine_New.Core.Nanos;
 using ZoneEngine_New.Core.Quests;
 using ZoneEngine_New.Core.Trade;
 
 /// <summary>Services a line's effects are applied through.</summary>
 public sealed class KnubotEffectServices(QuestService quests, HashItemMinter minter, InventoryFlushService flush, TradeService trades,
+    IItemBuilder items, IInventoryRepository inventory,
     Lazy<ZoneEngine_New.Core.Playfield.PlayfieldManager>? playfields = null, AORebirth.Interfaces.Persistence.Missions.IMissionDao? missions = null,
     ZoneEngine_New.Core.Bots.BuffbotService? buffs = null, ZoneEngine_New.Core.Cities.OrgCityService? cities = null)
 {
@@ -30,6 +33,8 @@ public sealed class KnubotEffectServices(QuestService quests, HashItemMinter min
     public HashItemMinter Minter { get; } = minter;
     public InventoryFlushService Flush { get; } = flush;
     public TradeService Trades { get; } = trades;
+    public IItemBuilder Items { get; } = items;
+    public IInventoryRepository Inventory { get; } = inventory;
 }
 
 /// <summary>What a line's effects would do, built before anything is applied.</summary>
@@ -269,6 +274,26 @@ public sealed record KnubotOpenBuffMenu : KnubotEffect
         if ((services.Buffs ?? context.Player.Playfield?.GetService<ZoneEngine_New.Core.Bots.BuffbotService>()) is { } buffs)
             buffs.OpenMenu(context.Player);
     }
+}
+
+/// <summary>
+/// <c>{givenano ID}</c>: uploads nano program <paramref name="NanoId"/> onto the player (same path as GM .give buff).
+/// Used by Elliot Fairlane's wrist reward (scrape SetNanoDuration nano 293685, 2h).
+/// </summary>
+public sealed record KnubotGiveNano(int NanoId) : KnubotEffect
+{
+    public override bool Check(KnubotContext context, KnubotPlan plan, KnubotEffectServices services)
+        => NanoId > 0 && !context.Player.IsDead;
+
+    public override void Apply(KnubotContext context, KnubotEffectServices services)
+        => NanoRuntime.TryApplyImmediate(
+            context.Npc,
+            context.Player,
+            NanoId,
+            services.Items,
+            services.Inventory,
+            DateTime.UtcNow,
+            gmApply: true);
 }
 
 /// <summary><c>{opentrade}</c>: opens the NPC's Give Item window for the script's Trades.</summary>
