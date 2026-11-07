@@ -1,5 +1,6 @@
 namespace ZoneEngine_New.Core.Ai
 {
+    using System;
     using System.Collections.Generic;
 
     using GroveGames.BehaviourTree.Nodes;
@@ -150,8 +151,13 @@ namespace ZoneEngine_New.Core.Ai
 
     sealed class PatrolNode : BehaviourNode
     {
+        const double MinPauseSeconds = 2;
+        const double MaxPauseSeconds = 6;
+
         readonly NpcBrain _brain;
         int _index;
+        bool _pausing;
+        DateTime _pauseUntilUtc;
 
         public PatrolNode(NpcBrain brain)
             : base("patrol")
@@ -166,23 +172,62 @@ namespace ZoneEngine_New.Core.Ai
             if (points.Count == 0)
                 return _nodeState = NodeState.Failure;
 
-            if (_index >= points.Count)
-                _index = 0;
+            if (_index < 0 || _index >= points.Count)
+                _index = NearestIndex(points);
+
+            if (_pausing)
+            {
+                if (DateTime.UtcNow < _pauseUntilUtc)
+                    return _nodeState = NodeState.Running;
+                _pausing = false;
+                _index = (_index + 1) % points.Count;
+            }
 
             Vector3 dest = points[_index];
             if (NpcAiRules.IsNearby(_brain.Npc.Position, dest, NpcAiRules.ArriveHomeMeters))
             {
-                _index = (_index + 1) % points.Count;
-                dest = points[_index];
+                _brain.StopPathing();
+                _pausing = true;
+                _pauseUntilUtc = DateTime.UtcNow.AddSeconds(
+                    MinPauseSeconds + Random.Shared.NextDouble() * (MaxPauseSeconds - MinPauseSeconds));
+                return _nodeState = NodeState.Running;
             }
 
+            if (_brain.Npc.Motor.State != Movement.MovementState.Walk)
+                _brain.Npc.Motor.ApplyAction(Movement.MovementAction.SwitchToWalk);
             _brain.PathTo(dest);
             return _nodeState = NodeState.Running;
         }
 
         public override void Reset()
         {
-            _index = 0;
+            // After leash/combat, resume from the nearest recorded point rather than restarting the loop.
+            _pausing = false;
+            _pauseUntilUtc = default;
+            _index = NearestIndex(_brain.PatrolWaypoints);
+        }
+
+        int NearestIndex(IReadOnlyList<Vector3> points)
+        {
+            if (points.Count == 0)
+                return 0;
+            Vector3 here = _brain.Npc.Position;
+            int best = 0;
+            double bestDist = double.MaxValue;
+            for (int i = 0; i < points.Count; i++)
+            {
+                double dx = here.x - points[i].x;
+                double dy = here.y - points[i].y;
+                double dz = here.z - points[i].z;
+                double d = dx * dx + dy * dy + dz * dz;
+                if (d < bestDist)
+                {
+                    bestDist = d;
+                    best = i;
+                }
+            }
+
+            return best;
         }
     }
 

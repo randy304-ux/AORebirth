@@ -64,6 +64,12 @@ namespace AORebirth.Core.GameData
         public PlayfieldRotationSpawnPoint[] AdditionalPoints { get; set; }
 
         public PlayfieldHashSpawnExtensionBlock Extensions { get; set; }
+
+        /// <summary>
+        /// Optional world XYZ loop the NPC walks when this point spawns. Prefer this over template
+        /// <c>PatrolWaypoints</c> so one hash can have different routes per camp.
+        /// </summary>
+        public float[][] PatrolWaypoints { get; set; }
     }
 
     public sealed class PlayfieldRotationSpawnPoint

@@ -1,13 +1,17 @@
 # Current Task
 
-## Active: RK scrape fix batch STAGED (not deployed) — three gaps closed
+## Active: NPC patrol import (GO deploy)
 
-Branch `cursor/rk-desert-dyna-loot-15f4`. Tag `scrape-rk-20261106`.
+Branch `cursor/rk-desert-dyna-loot-15f4`. Tip base `1cd4db32` + prior local `c66703c1`.
 
-### Three gaps (this tip)
-1. **Nano crystals**: NNC1–8 from MissionRewards `ItemDb_Nanos.json` in `ItemTemplates.RK.json`; Chance **10** / LevelMod 20 on all CMTR/CMHK/OFAB default combat tables (3072 bands).
-2. **Placeholder `* Dyna`**: 1 renamed (D00F → Cleantalon the Voracious Mornitor); 0 duplicates removed; **32** left (no matching named-dyna scrape at MD+≤30 m) — listed in `tools-temp/rk-close-three-gaps.report.json`.
-3. **Historical pinks**: **170** hashes / ~**363** spawns replaced from older scrapes; **30** left (26 city-humanoid outfit + ~4 guide-placeholder dynas near historical scrapes). Today pinks still **0**. Galway Shire guard-pull: 0 hits.
+### What
+- Wired existing `PatrolNode` for spawn-entry `patrolWaypoints` (walk speed, 2–6 s pauses, resume nearest after leash).
+- Matched `I:\AO\imports\gpt-moves-20261107-r2\patrols.json` to installed spawns (15 m XZ, same name/PF).
+- Validation PASS (200/200 scraped spot-check; synthetic Y within 10 m).
+- Build: `tools-temp\zbuild-patrol`. Deploy script: `tools-temp\deploy-patrol.ps1`.
+
+### Counts
+Matched **3508** / unmatched **850** / skipped synthetic **0**. Newland Desert: 518 matched, 35 unmatched.
 
 ### Deploy
-`tools-temp/deploy-ado.ps1` updated. **Do not run** until Mike GO.
+Randy authorized GO after validation+build. MySQL 33070. Rollback `tools-temp\rb-patrol`.

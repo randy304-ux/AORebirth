@@ -908,16 +908,22 @@ namespace ZoneEngine_New.Core.Playfield
                         out int monsterData)
                     && _gameData.TryGetMonsterFeatures(monsterData, out int features)
                     && MonsterBodyFeatures.IsImmobile(features);
-                if (templates[i].PatrolWaypoints is { Count: > 0 } pts && !immobile)
+                // Spawn-entry routes win over template routes so one hash can patrol differently per camp.
+                float[][]? patrolPts = null;
+                if (point.Source.PatrolWaypoints is { Length: > 0 } spawnPts && !immobile)
+                    patrolPts = spawnPts;
+                else if (templates[i].PatrolWaypoints is { Count: > 0 } tmplPts && !immobile)
+                    patrolPts = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(tmplPts, p => (float[])p.Clone()));
+                if (patrolPts is { Length: > 0 })
                 {
-                    // Named patrol (e.g. Ran-Roth-Or): walk the recorded waypoints in a loop.
-                    Vector3 home = new Vector3(pts[0][0], pts[0].Length > 1 ? pts[0][1] : position.y, pts[0].Length > 2 ? pts[0][2] : position.z);
+                    // Named patrol: walk the recorded waypoints in a loop at walk speed (pauses in PatrolNode).
+                    Vector3 home = new Vector3(patrolPts[0][0], patrolPts[0].Length > 1 ? patrolPts[0][1] : position.y, patrolPts[0].Length > 2 ? patrolPts[0][2] : position.z);
                     position = home;
-                    float[][] copy = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(pts, p => (float[])p.Clone()));
+                    float[][] copy = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(patrolPts, p => (float[])p.Clone()));
                     configure = npc =>
                     {
                         if (npc.Brain == null) return;
-                        npc.Brain.EnableWander(home, 0.01f, 5, 20);  // sets Home for leash; radius too small to stroll
+                        npc.Brain.EnableWander(home, 0.01f, 2, 6);  // sets Home for leash; radius too small to stroll
                         npc.Brain.PatrolEnabled = true;
                         npc.Brain.PatrolWaypoints = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(copy, p => new Vector3(p[0], p.Length > 1 ? p[1] : home.y, p.Length > 2 ? p[2] : home.z)));
                     };

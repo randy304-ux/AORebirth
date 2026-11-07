@@ -417,8 +417,25 @@ namespace ZoneEngine_New.Core.GameData
                 ItemTable = CopyLoot(nearest.LootTable),
                 DynaModifier = dynaModifier,
                 BossTriggers = nearest.BossTriggers ?? new List<NpcBossTrigger>(),
-                Wander = nearest.Wander
+                Wander = nearest.Wander,
+                PatrolWaypoints = CopyPatrolWaypoints(nearest.PatrolWaypoints)
             };
+        }
+
+        static List<float[]>? CopyPatrolWaypoints(List<float[]>? source)
+        {
+            if (source == null || source.Count == 0)
+                return null;
+            var copy = new List<float[]>(source.Count);
+            for (int i = 0; i < source.Count; i++)
+            {
+                float[]? pt = source[i];
+                if (pt == null || pt.Length < 2)
+                    continue;
+                copy.Add((float[])pt.Clone());
+            }
+
+            return copy.Count == 0 ? null : copy;
         }
 
         /// <summary>
@@ -674,6 +691,9 @@ namespace ZoneEngine_New.Core.GameData
 
         /// <summary>Dungeon Dogs: per-NPC wander from live trails (home, radius, pause); overrides Gameplay.json Wander.</summary>
         public NpcWanderSpec? Wander { get; set; }
+
+        /// <summary>Optional world XYZ loop walked in order when this template spawns (overridden by spawn-entry waypoints).</summary>
+        public List<float[]>? PatrolWaypoints { get; set; }
 
         public int KnuBotId { get; set; }
 
