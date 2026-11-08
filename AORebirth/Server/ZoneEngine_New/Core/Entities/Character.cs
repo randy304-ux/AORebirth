@@ -3249,6 +3249,13 @@
                 overrideTextureId = resolvedOverrideTextureId;
             }
 
+            // Item Shouldermesh/BackMesh arg0 is sometimes a sentinel 1/2 (Bastion, Hiisi, ICC
+            // Peacekeeper pads), not a texture id. Live SCFU uses OverrideTextureId 0 for those
+            // meshes (e.g. 3:286446:0:0). Emitting 1/2 makes the client look up texture 1/2 → pink.
+            // Real overrides (Heavy Tank Armor 11571, etc.) stay as-is.
+            if (overrideTextureId is 1 or 2)
+                overrideTextureId = 0;
+
             mesh = new Mesh
             {
                 Position = (byte)position,

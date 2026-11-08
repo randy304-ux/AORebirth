@@ -1,268 +1,206 @@
 {
-    "SchemaVersion":  1,
-    "PlayfieldId":  7001,
-    "Npcs":  [
-                 {
-                     "Key":  "ddogs:palmiero:ralph",
-                     "Provenance":  "Guessed. RALPH, the bureaucrat droid behind the reception desk in Palmiero\u0027s Office. Mesh is client monster 96056, the protocol droid also used by Buffbot (the old 297023 was a cleaner bot). Stands on the official hash ASDM point 191.66, 1.41, 197.02 facing 270, which was the pink placeholder behind the desk; ASDM is removed from Spawns.json.",
-                     "ContentNpcIdentity":  "ddogs-ralph",
-                     "PlayfieldId":  7001,
-                     "InstanceId":  2110836805,
-                     "Name":  "RALPH",
-                     "Position":  [
-                                      191.66,
-                                      1.41,
-                                      197.02
-                                  ],
-                     "Rotation":  [
-                                      0,
-                                      0.7071068,
-                                      0,
-                                      -0.7071068
-                                  ],
-                     "Stats":  {
-                                   "0":  277352961,
-                                   "1":  200,
-                                   "4":  1,
-                                   "27":  200,
-                                   "33":  0,
-                                   "47":  1,
-                                   "54":  20,
-                                   "59":  2,
-                                   "60":  0,
-                                   "64":  0,
-                                   "89":  1,
-                                   "156":  0,
-                                   "173":  3,
-                                   "174":  3,
-                                   "359":  96056,
-                                   "360":  100,
-                                   "368":  0,
-                                   "389":  0,
-                                   "455":  0,
-                                   "466":  0,
-                                   "660":  0,
-                                   "673":  31
-                               },
-                     "Textures":  [
-
-                                  ],
-                     "Meshes":  [
-
-                                ],
-                     "Passive":  true,
-                     "Attackable":  false,
-                     "TickLiving":  true,
-                     "Presentation":  {
-
-                                      }
-                 },
-                 {
-                     "Key":  "ddogs:palmiero:arbiter",
-                     "Provenance":  "Capture 20260719-155043 at hash ARVC 229.3, 1.4, 198.0: MonsterData 26092, head 40694, scale 100, level 220, family 3, health 203721, flags 277615105. The ARVC hash point is gated on the inactive quest_pvp event so it never spawned; this content NPC replaces it and ARVC is removed from Spawns.json.",
-                     "ContentNpcIdentity":  "ddogs-palmiero",
-                     "PlayfieldId":  7001,
-                     "InstanceId":  2110836807,
-                     "Name":  "Arbiter Vincenzo Palmiero",
-                     "Position":  [
-                                      229.30428,
-                                      1.4096794,
-                                      198.0373
-                                  ],
-                     "Rotation":  [
-                                      0,
-                                      0,
-                                      0,
-                                      1
-                                  ],
-                     "Stats":  {
-                                   "0":  277615105,
-                                   "1":  203721,
-                                   "4":  1,
-                                   "27":  203721,
-                                   "33":  0,
-                                   "47":  1,
-                                   "54":  220,
-                                   "59":  2,
-                                   "60":  0,
-                                   "64":  40694,
-                                   "89":  1,
-                                   "156":  0,
-                                   "173":  3,
-                                   "174":  3,
-                                   "359":  26092,
-                                   "360":  100,
-                                   "368":  0,
-                                   "389":  0,
-                                   "455":  3,
-                                   "466":  0,
-                                   "660":  0,
-                                   "673":  31
-                               },
-                     "Textures":  [
-
-                                  ],
-                     "Meshes":  [
-
-                                ],
-                     "Passive":  true,
-                     "Attackable":  false,
-                     "TickLiving":  true,
-                     "Presentation":  {
-
-                                      }
-                 },
-                 {
-                     "Key":  "ddogs:scrapecity:7001:321136956",
-                     "Provenance":  "live PRK scrape 2026-10-29 (position + stock, vending machine mesh 272327); body cloned from 4311 YUPH",
-                     "ContentNpcIdentity":  "SimpleChar:7B5E0006",
-                     "PlayfieldId":  7001,
-                     "InstanceId":  2069757958,
-                     "Name":  "ICC Reward Terminal",
-                     "Position":  [
-                                      186.956,
-                                      1.21,
-                                      201.395
-                                  ],
-                     "Rotation":  [
-                                      0,
-                                      1.0,
-                                      0,
-                                      -0.002
-                                  ],
-                     "Stats":  {
-                                   "0":  277352961,
-                                   "1":  60000,
-                                   "4":  1,
-                                   "18":  0,
-                                   "21":  0,
-                                   "27":  60000,
-                                   "33":  0,
-                                   "37":  1,
-                                   "47":  1,
-                                   "54":  50,
-                                   "59":  0,
-                                   "60":  15,
-                                   "89":  1,
-                                   "99":  503,
-                                   "132":  5,
-                                   "156":  5,
-                                   "173":  3,
-                                   "174":  3,
-                                   "214":  1,
-                                   "274":  0,
-                                   "284":  0,
-                                   "285":  75,
-                                   "286":  25,
-                                   "292":  0,
-                                   "339":  91,
-                                   "342":  600,
-                                   "343":  0,
-                                   "359":  22802,
-                                   "360":  250,
-                                   "368":  15,
-                                   "387":  503,
-                                   "389":  0,
-                                   "417":  503,
-                                   "421":  3,
-                                   "436":  91,
-                                   "455":  0,
-                                   "466":  15,
-                                   "660":  0,
-                                   "673":  31,
-                                   "1003":  0,
-                                   "64":  0
-                               },
-                     "Passive":  true,
-                     "Attackable":  false,
-                     "TickLiving":  false,
-                     "Vendor":  {
-                                    "InstanceId":  332857350,
-                                    "TemplateId":  99634,
-                                    "Stock":  [
-                                                  {
-                                                      "Slot":  0,
-                                                      "LowId":  303231,
-                                                      "HighId":  303231,
-                                                      "Quality":  198
-                                                  },
-                                                  {
-                                                      "Slot":  1,
-                                                      "LowId":  303236,
-                                                      "HighId":  303236,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  2,
-                                                      "LowId":  303225,
-                                                      "HighId":  303225,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  3,
-                                                      "LowId":  303227,
-                                                      "HighId":  303227,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  4,
-                                                      "LowId":  303233,
-                                                      "HighId":  303233,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  5,
-                                                      "LowId":  303219,
-                                                      "HighId":  303219,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  6,
-                                                      "LowId":  303220,
-                                                      "HighId":  303220,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  7,
-                                                      "LowId":  303222,
-                                                      "HighId":  303222,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  8,
-                                                      "LowId":  303221,
-                                                      "HighId":  303221,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  9,
-                                                      "LowId":  303234,
-                                                      "HighId":  303234,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  10,
-                                                      "LowId":  303232,
-                                                      "HighId":  303232,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  11,
-                                                      "LowId":  303228,
-                                                      "HighId":  303228,
-                                                      "Quality":  1
-                                                  },
-                                                  {
-                                                      "Slot":  12,
-                                                      "LowId":  303223,
-                                                      "HighId":  303223,
-                                                      "Quality":  1
-                                                  }
-                                              ]
-                                }
-                 }
-             ],
-    "StandaloneShops":  [
-
-                        ]
+    "SchemaVersion": 1,
+    "PlayfieldId": 7001,
+    "Npcs": [
+        {
+            "Key": "ddogs:palmiero:ralph",
+            "Provenance": "Guessed. RALPH, the bureaucrat droid behind the reception desk in Palmiero's Office. Mesh is client monster 96056, the protocol droid also used by Buffbot (the old 297023 was a cleaner bot). Stands on the official hash ASDM point 191.66, 1.41, 197.02 facing 270, which was the pink placeholder behind the desk; ASDM is removed from Spawns.json.",
+            "ContentNpcIdentity": "ddogs-ralph",
+            "PlayfieldId": 7001,
+            "InstanceId": 2110836805,
+            "Name": "RALPH",
+            "Position": [
+                191.66,
+                1.41,
+                197.02
+            ],
+            "Rotation": [
+                0,
+                0.7071068,
+                0,
+                -0.7071068
+            ],
+            "Stats": {
+                "0": 277352961,
+                "1": 200,
+                "4": 1,
+                "27": 200,
+                "33": 0,
+                "47": 1,
+                "54": 20,
+                "59": 2,
+                "60": 0,
+                "64": 0,
+                "89": 1,
+                "156": 0,
+                "173": 3,
+                "174": 3,
+                "359": 96056,
+                "360": 100,
+                "368": 0,
+                "389": 0,
+                "455": 0,
+                "466": 0,
+                "660": 0,
+                "673": 31
+            },
+            "Textures": [],
+            "Meshes": [],
+            "Passive": true,
+            "Attackable": false,
+            "TickLiving": true,
+            "Presentation": {}
+        },
+        {
+            "Key": "ddogs:palmiero:arbiter",
+            "Provenance": "Capture 20260719-155043 at hash ARVC 229.3, 1.4, 198.0: MonsterData 26092, head 40694, scale 100, level 220, family 3, health 203721, flags 277615105. The ARVC hash point is gated on the inactive quest_pvp event so it never spawned; this content NPC replaces it and ARVC is removed from Spawns.json.",
+            "ContentNpcIdentity": "ddogs-palmiero",
+            "PlayfieldId": 7001,
+            "InstanceId": 2110836807,
+            "Name": "Arbiter Vincenzo Palmiero",
+            "Position": [
+                229.30428,
+                1.4096794,
+                198.0373
+            ],
+            "Rotation": [
+                0,
+                0,
+                0,
+                1
+            ],
+            "Stats": {
+                "0": 277615105,
+                "1": 203721,
+                "4": 1,
+                "27": 203721,
+                "33": 0,
+                "47": 1,
+                "54": 220,
+                "59": 2,
+                "60": 0,
+                "64": 40694,
+                "89": 1,
+                "156": 0,
+                "173": 3,
+                "174": 3,
+                "359": 26092,
+                "360": 100,
+                "368": 0,
+                "389": 0,
+                "455": 3,
+                "466": 0,
+                "660": 0,
+                "673": 31
+            },
+            "Textures": [],
+            "Meshes": [],
+            "Passive": true,
+            "Attackable": false,
+            "TickLiving": true,
+            "Presentation": {}
+        }
+    ],
+    "StandaloneShops": [
+        {
+            "Key": "ddogs:vm:7001:321159440",
+            "Provenance": "2026-11-08: converted from YUPH-body SimpleChar; live VendingMachine mesh 272327 template 303217; stock kept; gpt-moves-20261107-r2/srcdata/scraped_npcs_20261106_Whozewhatzit.csv",
+            "PlayfieldId": 7001,
+            "Position": [
+                186.956,
+                1.21,
+                201.395
+            ],
+            "Rotation": [
+                0,
+                1,
+                0,
+                0.002
+            ],
+            "Vendor": {
+                "InstanceId": 321159440,
+                "TemplateId": 303217,
+                "Stock": [
+                    {
+                        "Slot": 0,
+                        "LowId": 303231,
+                        "HighId": 303231,
+                        "Quality": 198
+                    },
+                    {
+                        "Slot": 1,
+                        "LowId": 303236,
+                        "HighId": 303236,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 2,
+                        "LowId": 303225,
+                        "HighId": 303225,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 3,
+                        "LowId": 303227,
+                        "HighId": 303227,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 4,
+                        "LowId": 303233,
+                        "HighId": 303233,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 5,
+                        "LowId": 303219,
+                        "HighId": 303219,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 6,
+                        "LowId": 303220,
+                        "HighId": 303220,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 7,
+                        "LowId": 303222,
+                        "HighId": 303222,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 8,
+                        "LowId": 303221,
+                        "HighId": 303221,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 9,
+                        "LowId": 303234,
+                        "HighId": 303234,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 10,
+                        "LowId": 303232,
+                        "HighId": 303232,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 11,
+                        "LowId": 303228,
+                        "HighId": 303228,
+                        "Quality": 1
+                    },
+                    {
+                        "Slot": 12,
+                        "LowId": 303223,
+                        "HighId": 303223,
+                        "Quality": 1
+                    }
+                ]
+            }
+        }
+    ]
 }

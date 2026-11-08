@@ -133,6 +133,29 @@ namespace ZoneEngine_New.Tests
         }
 
         [TestMethod]
+        public void Shouldermesh_sentinel_override_texture_1_or_2_is_sent_as_zero()
+        {
+            // Bastion/Hiisi/Peacekeeper pads store arg0=1|2 (not a texture id). Live SCFU uses 0.
+            Player player = TestWorld.CreatePlayer(10);
+            player.Inventory.Armor.Add(20, MeshItem(FunctionType.Shouldermesh, meshId: 286446, overrideTextureId: 2));
+            player.Rebase();
+            Mesh pad = player.Meshes.Single(m => m.Position == 3);
+            Assert.AreEqual(286446u, pad.Id);
+            Assert.AreEqual(0, pad.OverrideTextureId);
+            Assert.AreEqual((byte)MeshLayer.Equipment, pad.Layer);
+
+            player = TestWorld.CreatePlayer(11);
+            player.Inventory.Armor.Add(20, MeshItem(FunctionType.Shouldermesh, meshId: 291844, overrideTextureId: 1));
+            player.Rebase();
+            Assert.AreEqual(0, player.Meshes.Single(m => m.Position == 3).OverrideTextureId);
+
+            player = TestWorld.CreatePlayer(12);
+            player.Inventory.Armor.Add(ArmorBack, MeshItem(FunctionType.BackMesh, meshId: 777, overrideTextureId: 11571));
+            player.Rebase();
+            Assert.AreEqual(11571, player.Meshes.Single().OverrideTextureId);
+        }
+
+        [TestMethod]
         public void Npc_wears_its_single_inventory_for_textures()
         {
             NpcCharacter npc = CreateNpc(7);
