@@ -24,6 +24,10 @@ function isPinkLike(hash) {
   if (!t || !t.Templates) return true;
   const prov = t.ContentProvenance || {};
   if (prov.Guessed || prov.StandIn) return true;
+  // Hash-level scrape/proven content wins: leftover band Guessed donor tags must not
+  // mark ordinary city NPCs pink (ICC 655 wipe 2026-11-06).
+  if (Object.prototype.hasOwnProperty.call(prov, 'Guessed') && prov.Guessed === false)
+    return false;
   const b = t.Templates[0];
   const bp = (b && b.ContentProvenance) || {};
   return !!(bp.Guessed || bp.StandIn);

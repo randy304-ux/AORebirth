@@ -3218,13 +3218,17 @@
             {
                 layer = MeshLayer.Helmet;
             }
-            else if (spell.Is(FunctionType.Mesh)
-                || spell.Is(FunctionType.BackMesh)
-                || spell.Is(FunctionType.Shouldermesh))
+            else if (spell.Is(FunctionType.Mesh))
             {
-                // Body, back and shoulder pieces go on layer 0, listed ahead of the base mesh they cover (live
+                // Body pieces go on layer 0, listed ahead of the base mesh they cover (live
                 // AppearanceUpdate, capture 2026-10-06T18:44:27Z).
                 layer = MeshLayer.Head;
+            }
+            else if (spell.Is(FunctionType.BackMesh) || spell.Is(FunctionType.Shouldermesh))
+            {
+                // Back and shoulder pads use equipment layer 4 (legacy MeshLayers.GetLayer; worn-look
+                // unit test). Layer 0 left pads untextured/pink on the client.
+                layer = MeshLayer.Equipment;
             }
             else
             {
