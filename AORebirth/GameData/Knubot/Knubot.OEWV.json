@@ -1,0 +1,545 @@
+{
+  "Npcs": [
+    "OEWV"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey2o_trade": {
+      "Text": "Hand in: Return the Eye of the Prophetess",
+      "Goto": "ey2o_trade",
+      "If": [
+        "HasQuest EY2O",
+        "has EK0C 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2o_supply0": {
+      "Text": "Collect missing proof for EY2O",
+      "Goto": "ey2o_supply0",
+      "If": [
+        "HasQuest EY2O",
+        "!has EK0C 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2n_offer": {
+      "Text": "Overcome your fears",
+      "Goto": "ey2n_description",
+      "If": [
+        "!HasAnyQuest EY2N,EY2O",
+        "!quest EY2N done",
+        "!quest EY2O done",
+        "!minlevel 151"
+      ],
+      "Source": "filler"
+    },
+    "ey2n_accept": {
+      "Text": "Accept: Overcome your fears",
+      "Goto": "ey2n_start",
+      "If": [
+        "!HasAnyQuest EY2N,EY2O",
+        "!quest EY2N done",
+        "!quest EY2O done",
+        "!minlevel 151"
+      ],
+      "Source": "filler"
+    },
+    "ey2n_progress": {
+      "Text": "Overcome your fears: progress",
+      "Goto": "ey2n_progress",
+      "If": [
+        "HasAnyQuest EY2N,EY2O"
+      ],
+      "Source": "filler"
+    },
+    "ey2p_offer": {
+      "Text": "Challenge: Bean Sidhe",
+      "Goto": "ey2p_description",
+      "If": [
+        "!HasAnyQuest EY2P",
+        "!quest EY2P done",
+        "!quest EY2P done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2p_accept": {
+      "Text": "Accept: Challenge: Bean Sidhe",
+      "Goto": "ey2p_start",
+      "If": [
+        "!HasAnyQuest EY2P",
+        "!quest EY2P done",
+        "!quest EY2P done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2p_progress": {
+      "Text": "Challenge: Bean Sidhe: progress",
+      "Goto": "ey2p_progress",
+      "If": [
+        "HasAnyQuest EY2P"
+      ],
+      "Source": "filler"
+    },
+    "ey2q_offer": {
+      "Text": "Challenge: Emissary of Annwn",
+      "Goto": "ey2q_description",
+      "If": [
+        "!HasAnyQuest EY2Q",
+        "!quest EY2Q done",
+        "!quest EY2Q done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2q_accept": {
+      "Text": "Accept: Challenge: Emissary of Annwn",
+      "Goto": "ey2q_start",
+      "If": [
+        "!HasAnyQuest EY2Q",
+        "!quest EY2Q done",
+        "!quest EY2Q done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2q_progress": {
+      "Text": "Challenge: Emissary of Annwn: progress",
+      "Goto": "ey2q_progress",
+      "If": [
+        "HasAnyQuest EY2Q"
+      ],
+      "Source": "filler"
+    },
+    "ey2r_offer": {
+      "Text": "Challenge: Arawn",
+      "Goto": "ey2r_description",
+      "If": [
+        "!HasAnyQuest EY2R",
+        "!quest EY2R done",
+        "!quest EY2R done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2r_accept": {
+      "Text": "Accept: Challenge: Arawn",
+      "Goto": "ey2r_start",
+      "If": [
+        "!HasAnyQuest EY2R",
+        "!quest EY2R done",
+        "!quest EY2R done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2r_progress": {
+      "Text": "Challenge: Arawn: progress",
+      "Goto": "ey2r_progress",
+      "If": [
+        "HasAnyQuest EY2R"
+      ],
+      "Source": "filler"
+    },
+    "ey2s_offer": {
+      "Text": "Challenge: Mare",
+      "Goto": "ey2s_description",
+      "If": [
+        "!HasAnyQuest EY2S",
+        "!quest EY2S done",
+        "!quest EY2S done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2s_accept": {
+      "Text": "Accept: Challenge: Mare",
+      "Goto": "ey2s_start",
+      "If": [
+        "!HasAnyQuest EY2S",
+        "!quest EY2S done",
+        "!quest EY2S done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2s_progress": {
+      "Text": "Challenge: Mare: progress",
+      "Goto": "ey2s_progress",
+      "If": [
+        "HasAnyQuest EY2S"
+      ],
+      "Source": "filler"
+    },
+    "ey2t_offer": {
+      "Text": "Challenge: Herne",
+      "Goto": "ey2t_description",
+      "If": [
+        "!HasAnyQuest EY2T",
+        "!quest EY2T done",
+        "!quest EY2T done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2t_accept": {
+      "Text": "Accept: Challenge: Herne",
+      "Goto": "ey2t_start",
+      "If": [
+        "!HasAnyQuest EY2T",
+        "!quest EY2T done",
+        "!quest EY2T done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2t_progress": {
+      "Text": "Challenge: Herne: progress",
+      "Goto": "ey2t_progress",
+      "If": [
+        "HasAnyQuest EY2T"
+      ],
+      "Source": "filler"
+    },
+    "ey2u_offer": {
+      "Text": "Challenge: Slaugh",
+      "Goto": "ey2u_description",
+      "If": [
+        "!HasAnyQuest EY2U",
+        "!quest EY2U done",
+        "!quest EY2U done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2u_accept": {
+      "Text": "Accept: Challenge: Slaugh",
+      "Goto": "ey2u_start",
+      "If": [
+        "!HasAnyQuest EY2U",
+        "!quest EY2U done",
+        "!quest EY2U done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2u_progress": {
+      "Text": "Challenge: Slaugh: progress",
+      "Goto": "ey2u_progress",
+      "If": [
+        "HasAnyQuest EY2U"
+      ],
+      "Source": "filler"
+    },
+    "ey2v_offer": {
+      "Text": "Challenge: Blood of Acheron",
+      "Goto": "ey2v_description",
+      "If": [
+        "!HasAnyQuest EY2V",
+        "!quest EY2V done",
+        "!quest EY2V done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2v_accept": {
+      "Text": "Accept: Challenge: Blood of Acheron",
+      "Goto": "ey2v_start",
+      "If": [
+        "!HasAnyQuest EY2V",
+        "!quest EY2V done",
+        "!quest EY2V done",
+        "!minlevel 220"
+      ],
+      "Source": "filler"
+    },
+    "ey2v_progress": {
+      "Text": "Challenge: Blood of Acheron: progress",
+      "Goto": "ey2v_progress",
+      "If": [
+        "HasAnyQuest EY2V"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey2o_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2o_done": {
+      "Text": "{completequest EY2O}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2o_supply0": {
+      "Text": "{spawn EK0C 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2n_description": {
+      "Text": "Defeat the Prophetess and return her eye for a Ring of Computing and XP Reward item. RingQL unverified; first displayedQL100 variant used.",
+      "Replies": [
+        "ey2n_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2n_start": {
+      "Text": "{givequest EY2N}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2n_progress": {
+      "Text": "Defeat the Prophetess and return her eye for a Ring of Computing and XP Reward item. RingQL unverified; first displayedQL100 variant used.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2p_description": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "ey2p_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2p_start": {
+      "Text": "{givequest EY2P}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2p_progress": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2q_description": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "ey2q_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2q_start": {
+      "Text": "{givequest EY2Q}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2q_progress": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2r_description": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "ey2r_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2r_start": {
+      "Text": "{givequest EY2R}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2r_progress": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2s_description": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "ey2s_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2s_start": {
+      "Text": "{givequest EY2S}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2s_progress": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2t_description": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "ey2t_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2t_start": {
+      "Text": "{givequest EY2T}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2t_progress": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2u_description": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "ey2u_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2u_start": {
+      "Text": "{givequest EY2U}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2u_progress": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2v_description": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "ey2v_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2v_start": {
+      "Text": "{givequest EY2V}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2v_progress": {
+      "Text": "Defeat this boss. This one-time fallback has no invented daily-XP formula. Published eligibility ceiling is uncertain; under220 fallback used.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey2o_trade",
+        "ey2o_supply0",
+        "ey2n_offer",
+        "ey2n_progress",
+        "ey2p_offer",
+        "ey2p_progress",
+        "ey2q_offer",
+        "ey2q_progress",
+        "ey2r_offer",
+        "ey2r_progress",
+        "ey2s_offer",
+        "ey2s_progress",
+        "ey2t_offer",
+        "ey2t_progress",
+        "ey2u_offer",
+        "ey2u_progress",
+        "ey2v_offer",
+        "ey2v_progress",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey2o": {
+      "If": [
+        "HasQuest EY2O"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0C",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey2o_done"
+    }
+  }
+}

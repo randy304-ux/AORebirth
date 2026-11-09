@@ -1,0 +1,71 @@
+{
+  "Npcs": [
+    "DEEE"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey90_trade": {
+      "Text": "Hand in: Enel approvals: Devoted Enel Thar-Ilad",
+      "Goto": "ey90_trade",
+      "If": [
+        "HasQuest EY90",
+        "has EK0J 1"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey90_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey90_done": {
+      "Text": "{completequest EY90}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey90_trade",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey90": {
+      "If": [
+        "HasQuest EY90"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0J",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey90_done"
+    }
+  }
+}

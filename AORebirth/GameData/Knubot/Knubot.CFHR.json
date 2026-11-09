@@ -1,0 +1,144 @@
+{
+  "Npcs": [
+    "CFHR"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey00_offer": {
+      "Text": "A Devouring Challenge",
+      "Goto": "ey00_description",
+      "If": [
+        "!HasAnyQuest EY00,EY03",
+        "!quest EY00 done",
+        "!quest EY03 done"
+      ],
+      "Source": "filler"
+    },
+    "ey00_accept": {
+      "Text": "Accept: A Devouring Challenge",
+      "Goto": "ey00_start",
+      "If": [
+        "!HasAnyQuest EY00,EY03",
+        "!quest EY00 done",
+        "!quest EY03 done"
+      ],
+      "Source": "filler"
+    },
+    "ey00_progress": {
+      "Text": "A Devouring Challenge: progress",
+      "Goto": "ey00_progress",
+      "If": [
+        "HasAnyQuest EY00,EY03"
+      ],
+      "Source": "filler"
+    },
+    "ey01_offer": {
+      "Text": "Northern delivery",
+      "Goto": "ey01_description",
+      "If": [
+        "!HasAnyQuest EY01",
+        "!quest EY01 done",
+        "!quest EY01 done",
+        "quest EY03 done"
+      ],
+      "Source": "filler"
+    },
+    "ey01_accept": {
+      "Text": "Accept: Northern delivery",
+      "Goto": "ey01_start",
+      "If": [
+        "!HasAnyQuest EY01",
+        "!quest EY01 done",
+        "!quest EY01 done",
+        "quest EY03 done"
+      ],
+      "Source": "filler"
+    },
+    "ey01_progress": {
+      "Text": "Northern delivery: progress",
+      "Goto": "ey01_progress",
+      "If": [
+        "HasAnyQuest EY01"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey00_description": {
+      "Text": "Kill three Devourers of Life, then report back for 50,000XP and 50,000credits.",
+      "Replies": [
+        "ey00_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey00_start": {
+      "Text": "{givequest EY00}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey00_progress": {
+      "Text": "Kill three Devourers of Life, then report back for 50,000XP and 50,000credits.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey01_description": {
+      "Text": "Visit One Who Wins Over Mind at the Melting Pot for 20,000XP and 20,000credits. Device handover is replaced with targeting.",
+      "Replies": [
+        "ey01_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey01_start": {
+      "Text": "{givequest EY01}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey01_progress": {
+      "Text": "Visit One Who Wins Over Mind at the Melting Pot for 20,000XP and 20,000credits. Device handover is replaced with targeting.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey00_offer",
+        "ey00_progress",
+        "ey01_offer",
+        "ey01_progress",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {}
+}

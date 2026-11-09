@@ -1,0 +1,71 @@
+{
+  "Npcs": [
+    "VIJO"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey81_trade": {
+      "Text": "Hand in: Shere approvals: Visionist Jorr-Dom Shere",
+      "Goto": "ey81_trade",
+      "If": [
+        "HasQuest EY81",
+        "has EK0J 1"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey81_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey81_done": {
+      "Text": "{completequest EY81}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey81_trade",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey81": {
+      "If": [
+        "HasQuest EY81"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0J",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey81_done"
+    }
+  }
+}

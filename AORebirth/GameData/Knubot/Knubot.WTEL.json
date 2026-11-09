@@ -1,0 +1,71 @@
+{
+  "Npcs": [
+    "WTEL"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey95_trade": {
+      "Text": "Hand in: Enel approvals: Watcher Enel Ulma-Thar",
+      "Goto": "ey95_trade",
+      "If": [
+        "HasQuest EY95",
+        "has EK0J 1"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey95_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey95_done": {
+      "Text": "{completequest EY95}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey95_trade",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey95": {
+      "If": [
+        "HasQuest EY95"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0J",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey95_done"
+    }
+  }
+}

@@ -1,0 +1,349 @@
+{
+  "Npcs": [
+    "TOOW"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey1h_offer": {
+      "Text": "Looting Mortiigs (waived hunt)",
+      "Goto": "ey1h_description",
+      "If": [
+        "!HasAnyQuest EY1H",
+        "!quest EY1H done",
+        "!quest EY1H done"
+      ],
+      "Source": "filler"
+    },
+    "ey1h_accept": {
+      "Text": "Accept: Looting Mortiigs (waived hunt)",
+      "Goto": "ey1h_start",
+      "If": [
+        "!HasAnyQuest EY1H",
+        "!quest EY1H done",
+        "!quest EY1H done"
+      ],
+      "Source": "filler"
+    },
+    "ey1h_progress": {
+      "Text": "Looting Mortiigs (waived hunt): progress",
+      "Goto": "ey1h_progress",
+      "If": [
+        "HasAnyQuest EY1H"
+      ],
+      "Source": "filler"
+    },
+    "ey2w_offer": {
+      "Text": "Bluetooth Harvest (waived harvest)",
+      "Goto": "ey2w_description",
+      "If": [
+        "!HasAnyQuest EY2W",
+        "!quest EY2W done",
+        "!quest EY2W done",
+        "!has EK0D"
+      ],
+      "Source": "filler"
+    },
+    "ey2w_accept": {
+      "Text": "Accept: Bluetooth Harvest (waived harvest)",
+      "Goto": "ey2w_start",
+      "If": [
+        "!HasAnyQuest EY2W",
+        "!quest EY2W done",
+        "!quest EY2W done",
+        "!has EK0D"
+      ],
+      "Source": "filler"
+    },
+    "ey2w_progress": {
+      "Text": "Bluetooth Harvest (waived harvest): progress",
+      "Goto": "ey2w_progress",
+      "If": [
+        "HasAnyQuest EY2W"
+      ],
+      "Source": "filler"
+    },
+    "ey30_trade": {
+      "Text": "Hand in: Deliver Sleeping Medicine",
+      "Goto": "ey30_trade",
+      "If": [
+        "HasQuest EY30",
+        "has EK0F 1"
+      ],
+      "Source": "filler"
+    },
+    "ey32_trade": {
+      "Text": "Hand in: Return the Huge Diamond on a Stick",
+      "Goto": "ey32_trade",
+      "If": [
+        "HasQuest EY32",
+        "has EK0G 1"
+      ],
+      "Source": "filler"
+    },
+    "ey32_supply0": {
+      "Text": "Collect missing proof for EY32",
+      "Goto": "ey32_supply0",
+      "If": [
+        "HasQuest EY32",
+        "!has EK0G 1"
+      ],
+      "Source": "filler"
+    },
+    "ey31_offer": {
+      "Text": "Mortiig Chieftain (waived hunt)",
+      "Goto": "ey31_description",
+      "If": [
+        "!HasAnyQuest EY31,EY32",
+        "!quest EY31 done",
+        "!quest EY32 done"
+      ],
+      "Source": "filler"
+    },
+    "ey31_accept": {
+      "Text": "Accept: Mortiig Chieftain (waived hunt)",
+      "Goto": "ey31_start",
+      "If": [
+        "!HasAnyQuest EY31,EY32",
+        "!quest EY31 done",
+        "!quest EY32 done"
+      ],
+      "Source": "filler"
+    },
+    "ey31_progress": {
+      "Text": "Mortiig Chieftain (waived hunt): progress",
+      "Goto": "ey31_progress",
+      "If": [
+        "HasAnyQuest EY31,EY32"
+      ],
+      "Source": "filler"
+    },
+    "ey73_offer": {
+      "Text": "Seek a challenge",
+      "Goto": "ey73_description",
+      "If": [
+        "!HasAnyQuest EY73",
+        "!quest EY73 done",
+        "!quest EY73 done"
+      ],
+      "Source": "filler"
+    },
+    "ey73_accept": {
+      "Text": "Accept: Seek a challenge",
+      "Goto": "ey73_start",
+      "If": [
+        "!HasAnyQuest EY73",
+        "!quest EY73 done",
+        "!quest EY73 done"
+      ],
+      "Source": "filler"
+    },
+    "ey73_progress": {
+      "Text": "Seek a challenge: progress",
+      "Goto": "ey73_progress",
+      "If": [
+        "HasAnyQuest EY73"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey1h_description": {
+      "Text": "This fallback waives the unavailable Looting Mortiig hunt. Report here for the documented 30,000XP and100,000credits; editor review required.",
+      "Replies": [
+        "ey1h_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1h_start": {
+      "Text": "{givequest EY1H}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1h_progress": {
+      "Text": "This fallback waives the unavailable Looting Mortiig hunt. Report here for the documented 30,000XP and100,000credits; editor review required.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2w_description": {
+      "Text": "This fallback waives the unsupported five-fungi harvest and bag trade; report here for chapter1 and25,000XP/credits. Existing chapter possession blocks acceptance.",
+      "Replies": [
+        "ey2w_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2w_start": {
+      "Text": "{givequest EY2W}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2w_progress": {
+      "Text": "This fallback waives the unsupported five-fungi harvest and bag trade; report here for chapter1 and25,000XP/credits. Existing chapter possession blocks acceptance.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey30_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey30_done": {
+      "Text": "{completequest EY30}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey32_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey32_done": {
+      "Text": "{completequest EY32}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey32_supply0": {
+      "Text": "{spawn EK0G 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey31_description": {
+      "Text": "Unavailable boss combat is explicitly waived. Report here and hand in the supplied proof for150,000XP and500,000credits. Shade-only Bloodlust needs verified profession mapping andQL endpoints.",
+      "Replies": [
+        "ey31_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey31_start": {
+      "Text": "{givequest EY31}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey31_progress": {
+      "Text": "Unavailable boss combat is explicitly waived. Report here and hand in the supplied proof for150,000XP and500,000credits. Shade-only Bloodlust needs verified profession mapping andQL endpoints.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey73_description": {
+      "Text": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+      "Replies": [
+        "ey73_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey73_start": {
+      "Text": "{givequest EY73}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey73_progress": {
+      "Text": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey1h_offer",
+        "ey1h_progress",
+        "ey2w_offer",
+        "ey2w_progress",
+        "ey30_trade",
+        "ey32_trade",
+        "ey32_supply0",
+        "ey31_offer",
+        "ey31_progress",
+        "ey73_offer",
+        "ey73_progress",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey30": {
+      "If": [
+        "HasQuest EY30"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0F",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey30_done"
+    },
+    "ey32": {
+      "If": [
+        "HasQuest EY32"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0G",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey32_done"
+    }
+  }
+}

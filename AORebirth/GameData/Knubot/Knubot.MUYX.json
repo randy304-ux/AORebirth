@@ -1,0 +1,108 @@
+{
+  "Npcs": [
+    "MUYX"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey04_offer": {
+      "Text": "Predator Scanning",
+      "Goto": "ey04_description",
+      "If": [
+        "!HasAnyQuest EY04,EY05,EY06,EY07,EY02",
+        "!quest EY04 done",
+        "!quest EY02 done"
+      ],
+      "Source": "filler"
+    },
+    "ey04_accept": {
+      "Text": "Accept: Predator Scanning",
+      "Goto": "ey04_start",
+      "If": [
+        "!HasAnyQuest EY04,EY05,EY06,EY07,EY02",
+        "!quest EY04 done",
+        "!quest EY02 done"
+      ],
+      "Source": "filler"
+    },
+    "ey04_progress": {
+      "Text": "Predator Scanning: progress",
+      "Goto": "ey04_progress",
+      "If": [
+        "HasAnyQuest EY04,EY05,EY06,EY07,EY02"
+      ],
+      "Source": "filler"
+    },
+    "scan_report": {
+      "Text": "All three available predators are scanned.",
+      "Goto": "scan_report",
+      "If": [
+        "quest EY04 done",
+        "quest EY05 done",
+        "quest EY06 done",
+        "!HasAnyQuest EY07,EY02",
+        "!quest EY02 done"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey04_description": {
+      "Text": "Target Limping, Pained and Howling Predators in any order, then report to me. Wounded Predator/scanner hand-in are explicit fallbacks. Reward: chapter2,20,000XP,20,000credits; daily bonus awaits integration.",
+      "Replies": [
+        "ey04_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey04_start": {
+      "Text": "{givequest EY04}{givequest EY05}{givequest EY06}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey04_progress": {
+      "Text": "Target Limping, Pained and Howling Predators in any order, then report to me. Wounded Predator/scanner hand-in are explicit fallbacks. Reward: chapter2,20,000XP,20,000credits; daily bonus awaits integration.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "scan_report": {
+      "Text": "{givequest EY07}Target me to acknowledge the unavailable fourth scan, then target me again for the final report.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey04_offer",
+        "ey04_progress",
+        "scan_report",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {}
+}

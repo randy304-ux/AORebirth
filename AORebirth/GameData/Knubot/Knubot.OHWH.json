@@ -1,0 +1,590 @@
+{
+  "Npcs": [
+    "OHWH"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey27_trade": {
+      "Text": "Hand in: Return the frozen artifacts",
+      "Goto": "ey27_trade",
+      "If": [
+        "HasQuest EY27",
+        "has EK05 1",
+        "has EK06 1"
+      ],
+      "Source": "filler"
+    },
+    "ey27_supply0": {
+      "Text": "Collect missing proof for EY27",
+      "Goto": "ey27_supply0",
+      "If": [
+        "HasQuest EY27",
+        "!has EK05 1"
+      ],
+      "Source": "filler"
+    },
+    "ey27_supply1": {
+      "Text": "Collect missing proof for EY27",
+      "Goto": "ey27_supply1",
+      "If": [
+        "HasQuest EY27",
+        "!has EK06 1"
+      ],
+      "Source": "filler"
+    },
+    "ey25_offer": {
+      "Text": "Frozen Artifacts",
+      "Goto": "ey25_description",
+      "If": [
+        "!HasAnyQuest EY25,EY26,EY27",
+        "!quest EY25 done",
+        "!quest EY27 done"
+      ],
+      "Source": "filler"
+    },
+    "ey25_accept": {
+      "Text": "Accept: Frozen Artifacts",
+      "Goto": "ey25_start",
+      "If": [
+        "!HasAnyQuest EY25,EY26,EY27",
+        "!quest EY25 done",
+        "!quest EY27 done"
+      ],
+      "Source": "filler"
+    },
+    "ey25_progress": {
+      "Text": "Frozen Artifacts: progress",
+      "Goto": "ey25_progress",
+      "If": [
+        "HasAnyQuest EY25,EY26,EY27"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_trade": {
+      "Text": "Hand in: Return all four rafter roots",
+      "Goto": "ey2c_trade",
+      "If": [
+        "HasQuest EY2C",
+        "has EK07 1",
+        "has EK08 1",
+        "has EK09 1",
+        "has EK0A 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_supply0": {
+      "Text": "Collect missing proof for EY2C",
+      "Goto": "ey2c_supply0",
+      "If": [
+        "HasQuest EY2C",
+        "!has EK07 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_supply1": {
+      "Text": "Collect missing proof for EY2C",
+      "Goto": "ey2c_supply1",
+      "If": [
+        "HasQuest EY2C",
+        "!has EK08 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_supply2": {
+      "Text": "Collect missing proof for EY2C",
+      "Goto": "ey2c_supply2",
+      "If": [
+        "HasQuest EY2C",
+        "!has EK09 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_supply3": {
+      "Text": "Collect missing proof for EY2C",
+      "Goto": "ey2c_supply3",
+      "If": [
+        "HasQuest EY2C",
+        "!has EK0A 1"
+      ],
+      "Source": "filler"
+    },
+    "ey28_offer": {
+      "Text": "Rafter Root Samples",
+      "Goto": "ey28_description",
+      "If": [
+        "!HasAnyQuest EY28,EY29,EY2A,EY2B,EY2C",
+        "!quest EY28 done",
+        "!quest EY2C done"
+      ],
+      "Source": "filler"
+    },
+    "ey28_accept": {
+      "Text": "Accept: Rafter Root Samples",
+      "Goto": "ey28_start",
+      "If": [
+        "!HasAnyQuest EY28,EY29,EY2A,EY2B,EY2C",
+        "!quest EY28 done",
+        "!quest EY2C done"
+      ],
+      "Source": "filler"
+    },
+    "ey28_progress": {
+      "Text": "Rafter Root Samples: progress",
+      "Goto": "ey28_progress",
+      "If": [
+        "HasAnyQuest EY28,EY29,EY2A,EY2B,EY2C"
+      ],
+      "Source": "filler"
+    },
+    "roots_ready": {
+      "Text": "All four rafter hunts are finished.",
+      "Goto": "roots_ready",
+      "If": [
+        "quest EY28 done",
+        "quest EY29 done",
+        "quest EY2A done",
+        "quest EY2B done",
+        "!HasQuest EY2C",
+        "!quest EY2C done"
+      ],
+      "Source": "filler"
+    },
+    "ey2m_trade": {
+      "Text": "Hand in: Return the Hiathlin Soulcatcher",
+      "Goto": "ey2m_trade",
+      "If": [
+        "HasQuest EY2M",
+        "has EK0B 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2m_supply0": {
+      "Text": "Collect missing proof for EY2M",
+      "Goto": "ey2m_supply0",
+      "If": [
+        "HasQuest EY2M",
+        "!has EK0B 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2d_offer": {
+      "Text": "Soul Feeding",
+      "Goto": "ey2d_description",
+      "If": [
+        "!HasAnyQuest EY2D,EY2E,EY2F,EY2G,EY2H,EY2I,EY2J,EY2K,EY2L,EY2M",
+        "!quest EY2D done",
+        "!quest EY2M done"
+      ],
+      "Source": "filler"
+    },
+    "ey2d_accept": {
+      "Text": "Accept: Soul Feeding",
+      "Goto": "ey2d_start",
+      "If": [
+        "!HasAnyQuest EY2D,EY2E,EY2F,EY2G,EY2H,EY2I,EY2J,EY2K,EY2L,EY2M",
+        "!quest EY2D done",
+        "!quest EY2M done"
+      ],
+      "Source": "filler"
+    },
+    "ey2d_progress": {
+      "Text": "Soul Feeding: progress",
+      "Goto": "ey2d_progress",
+      "If": [
+        "HasAnyQuest EY2D,EY2E,EY2F,EY2G,EY2H,EY2I,EY2J,EY2K,EY2L,EY2M"
+      ],
+      "Source": "filler"
+    },
+    "ey71_offer": {
+      "Text": "Excaliburs End (waived visit)",
+      "Goto": "ey71_description",
+      "If": [
+        "!HasAnyQuest EY71",
+        "!quest EY71 done",
+        "!quest EY71 done"
+      ],
+      "Source": "filler"
+    },
+    "ey71_accept": {
+      "Text": "Accept: Excaliburs End (waived visit)",
+      "Goto": "ey71_start",
+      "If": [
+        "!HasAnyQuest EY71",
+        "!quest EY71 done",
+        "!quest EY71 done"
+      ],
+      "Source": "filler"
+    },
+    "ey71_progress": {
+      "Text": "Excaliburs End (waived visit): progress",
+      "Goto": "ey71_progress",
+      "If": [
+        "HasAnyQuest EY71"
+      ],
+      "Source": "filler"
+    },
+    "ey72_offer": {
+      "Text": "Find Ergo",
+      "Goto": "ey72_description",
+      "If": [
+        "!HasAnyQuest EY72",
+        "!quest EY72 done",
+        "!quest EY72 done"
+      ],
+      "Source": "filler"
+    },
+    "ey72_accept": {
+      "Text": "Accept: Find Ergo",
+      "Goto": "ey72_start",
+      "If": [
+        "!HasAnyQuest EY72",
+        "!quest EY72 done",
+        "!quest EY72 done"
+      ],
+      "Source": "filler"
+    },
+    "ey72_progress": {
+      "Text": "Find Ergo: progress",
+      "Goto": "ey72_progress",
+      "If": [
+        "HasAnyQuest EY72"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey27_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey27_done": {
+      "Text": "{completequest EY27}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey27_supply0": {
+      "Text": "{spawn EK05 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey27_supply1": {
+      "Text": "{spawn EK06 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey25_description": {
+      "Text": "Kill five Shiver Spiders, then five Icy Shadows; return both artifacts for100,000XP,250,000credits and Sable Sleeves. Exact rewardQL is unverified; displayedQL100 variant used.",
+      "Replies": [
+        "ey25_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey25_start": {
+      "Text": "{givequest EY25}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey25_progress": {
+      "Text": "Kill five Shiver Spiders, then five Icy Shadows; return both artifacts for100,000XP,250,000credits and Sable Sleeves. Exact rewardQL is unverified; displayedQL100 variant used.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_done": {
+      "Text": "{completequest EY2C}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_supply0": {
+      "Text": "{spawn EK07 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_supply1": {
+      "Text": "{spawn EK08 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_supply2": {
+      "Text": "{spawn EK09 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2c_supply3": {
+      "Text": "{spawn EK0A 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey28_description": {
+      "Text": "Complete four kills of each of the four rafter species, then return all distinct samples for80,000XP,200,000credits and a Staff of Pelias. RewardQL is unverified.",
+      "Replies": [
+        "ey28_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey28_start": {
+      "Text": "{givequest EY28}{givequest EY29}{givequest EY2A}{givequest EY2B}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey28_progress": {
+      "Text": "Complete four kills of each of the four rafter species, then return all distinct samples for80,000XP,200,000credits and a Staff of Pelias. RewardQL is unverified.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "roots_ready": {
+      "Text": "{givequest EY2C}Collect missing samples and trade all four together.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2m_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2m_done": {
+      "Text": "{completequest EY2M}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2m_supply0": {
+      "Text": "{spawn EK0B 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2d_description": {
+      "Text": "Follow the ordered hunts in your journal, then return the Soulcatcher. The initial missing Cagey target is explicitly waived; later counts follow the guide. Known fixed rewards preserved; Wrath of Zeus rewardQL unverified.",
+      "Replies": [
+        "ey2d_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2d_start": {
+      "Text": "{givequest EY2D}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2d_progress": {
+      "Text": "Follow the ordered hunts in your journal, then return the Soulcatcher. The initial missing Cagey target is explicitly waived; later counts follow the guide. Known fixed rewards preserved; Wrath of Zeus rewardQL unverified.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey71_description": {
+      "Text": "Target the named recipient. Sword dynel/use is missing; this explicitly waives the expedition at the giver.",
+      "Replies": [
+        "ey71_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey71_start": {
+      "Text": "{givequest EY71}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey71_progress": {
+      "Text": "Target the named recipient. Sword dynel/use is missing; this explicitly waives the expedition at the giver.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey72_description": {
+      "Text": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+      "Replies": [
+        "ey72_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey72_start": {
+      "Text": "{givequest EY72}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey72_progress": {
+      "Text": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey27_trade",
+        "ey27_supply0",
+        "ey27_supply1",
+        "ey25_offer",
+        "ey25_progress",
+        "ey2c_trade",
+        "ey2c_supply0",
+        "ey2c_supply1",
+        "ey2c_supply2",
+        "ey2c_supply3",
+        "ey28_offer",
+        "ey28_progress",
+        "roots_ready",
+        "ey2m_trade",
+        "ey2m_supply0",
+        "ey2d_offer",
+        "ey2d_progress",
+        "ey71_offer",
+        "ey71_progress",
+        "ey72_offer",
+        "ey72_progress",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey27": {
+      "If": [
+        "HasQuest EY27"
+      ],
+      "Items": [
+        {
+          "Hash": "EK05",
+          "Count": 1
+        },
+        {
+          "Hash": "EK06",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey27_done"
+    },
+    "ey2c": {
+      "If": [
+        "HasQuest EY2C"
+      ],
+      "Items": [
+        {
+          "Hash": "EK07",
+          "Count": 1
+        },
+        {
+          "Hash": "EK08",
+          "Count": 1
+        },
+        {
+          "Hash": "EK09",
+          "Count": 1
+        },
+        {
+          "Hash": "EK0A",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey2c_done"
+    },
+    "ey2m": {
+      "If": [
+        "HasQuest EY2M"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0B",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey2m_done"
+    }
+  }
+}

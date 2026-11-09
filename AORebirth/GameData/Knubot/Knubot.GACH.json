@@ -1,0 +1,109 @@
+{
+  "Npcs": [
+    "GACH"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey88_trade": {
+      "Text": "Hand in: Shere approvals: Garboil Chi Shere",
+      "Goto": "ey88_trade",
+      "If": [
+        "HasQuest EY88",
+        "has EK0J 1"
+      ],
+      "Source": "filler"
+    },
+    "ey4u_trade": {
+      "Text": "Hand in: Return the Shere tracking device",
+      "Goto": "ey4u_trade",
+      "If": [
+        "HasQuest EY4U",
+        "has EK0K 1"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey88_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey88_done": {
+      "Text": "{completequest EY88}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4u_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4u_done": {
+      "Text": "{completequest EY4U}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey88_trade",
+        "ey4u_trade",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey88": {
+      "If": [
+        "HasQuest EY88"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0J",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey88_done"
+    },
+    "ey4u": {
+      "If": [
+        "HasQuest EY4U"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0K",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey4u_done"
+    }
+  }
+}

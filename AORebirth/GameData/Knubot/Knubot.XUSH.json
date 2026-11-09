@@ -1,0 +1,251 @@
+{
+  "Npcs": [
+    "XUSH"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey82_trade": {
+      "Text": "Hand in: Shere approvals: Hypnagogic Xum-Ixi Shere",
+      "Goto": "ey82_trade",
+      "If": [
+        "HasQuest EY82",
+        "has EK0J 1"
+      ],
+      "Source": "filler"
+    },
+    "xum_interview": {
+      "Text": "Request an audience.",
+      "Goto": "xum_0",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "filler"
+    },
+    "xum_answer_0": {
+      "Text": "I apologize for disturbing you, Xum-Ixi.",
+      "Goto": "xum_1",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "randy-guide",
+      "Ref": "ref/shere-guide-steps.csv#step=4"
+    },
+    "xum_answer_1": {
+      "Text": "May I speak with you?",
+      "Goto": "xum_2",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "randy-guide",
+      "Ref": "ref/shere-guide-steps.csv#step=4"
+    },
+    "xum_answer_2": {
+      "Text": "I am {name}.",
+      "Goto": "xum_3",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "filler"
+    },
+    "xum_answer_3": {
+      "Text": "Prophet Nar Shere sent me.",
+      "Goto": "xum_4",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "randy-guide",
+      "Ref": "ref/shere-guide-steps.csv#step=4"
+    },
+    "xum_answer_4": {
+      "Text": "You know what I need, why are we wasting time?",
+      "Goto": "xum_5",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "randy-guide",
+      "Ref": "ref/shere-guide-steps.csv#step=4"
+    },
+    "xum_answer_5": {
+      "Text": "There is still a need to learn from the past...",
+      "Goto": "xum_6",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "randy-guide",
+      "Ref": "ref/shere-guide-steps.csv#step=4"
+    },
+    "xum_answer_6": {
+      "Text": "...to make sure we do not fail in our search...",
+      "Goto": "xum_7",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "randy-guide",
+      "Ref": "ref/shere-guide-steps.csv#step=4"
+    },
+    "xum_answer_7": {
+      "Text": "Divinity.",
+      "Goto": "xum_authorized",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "randy-guide",
+      "Ref": "ref/shere-guide-steps.csv#step=4"
+    },
+    "xum_wrong": {
+      "Text": "I will not answer that.",
+      "Goto": "close",
+      "If": [
+        "quest EY89 done",
+        "!HasQuest EY82",
+        "!quest EY82 done"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey82_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey82_done": {
+      "Text": "{completequest EY82}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "xum_0": {
+      "Text": "Continue the conversation politely.",
+      "Replies": [
+        "xum_answer_0",
+        "xum_wrong"
+      ],
+      "Source": "filler"
+    },
+    "xum_1": {
+      "Text": "Continue the conversation politely.",
+      "Replies": [
+        "xum_answer_1",
+        "xum_wrong"
+      ],
+      "Source": "filler"
+    },
+    "xum_2": {
+      "Text": "Continue the conversation politely.",
+      "Replies": [
+        "xum_answer_2",
+        "xum_wrong"
+      ],
+      "Source": "filler"
+    },
+    "xum_3": {
+      "Text": "Continue the conversation politely.",
+      "Replies": [
+        "xum_answer_3",
+        "xum_wrong"
+      ],
+      "Source": "filler"
+    },
+    "xum_4": {
+      "Text": "Continue the conversation politely.",
+      "Replies": [
+        "xum_answer_4",
+        "xum_wrong"
+      ],
+      "Source": "filler"
+    },
+    "xum_5": {
+      "Text": "Continue the conversation politely.",
+      "Replies": [
+        "xum_answer_5",
+        "xum_wrong"
+      ],
+      "Source": "filler"
+    },
+    "xum_6": {
+      "Text": "Continue the conversation politely.",
+      "Replies": [
+        "xum_answer_6",
+        "xum_wrong"
+      ],
+      "Source": "filler"
+    },
+    "xum_7": {
+      "Text": "Continue the conversation politely.",
+      "Replies": [
+        "xum_answer_7",
+        "xum_wrong"
+      ],
+      "Source": "filler"
+    },
+    "xum_authorized": {
+      "Text": "{givequest EY82}You may now present the letter.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey82_trade",
+        "xum_interview",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey82": {
+      "If": [
+        "HasQuest EY82"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0J",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey82_done"
+    }
+  }
+}

@@ -1,0 +1,491 @@
+{
+  "Npcs": [
+    "JJTM"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey64_trade": {
+      "Text": "Hand in: Return four body parts to Ergo",
+      "Goto": "ey64_trade",
+      "If": [
+        "HasQuest EY64",
+        "has EK0O 1",
+        "has EK0P 1",
+        "has EK0Q 1",
+        "has EK0R 1"
+      ],
+      "Source": "filler"
+    },
+    "ey64_supply0": {
+      "Text": "Collect missing proof for EY64",
+      "Goto": "ey64_supply0",
+      "If": [
+        "HasQuest EY64",
+        "!has EK0O 1"
+      ],
+      "Source": "filler"
+    },
+    "ey64_supply1": {
+      "Text": "Collect missing proof for EY64",
+      "Goto": "ey64_supply1",
+      "If": [
+        "HasQuest EY64",
+        "!has EK0P 1"
+      ],
+      "Source": "filler"
+    },
+    "ey64_supply2": {
+      "Text": "Collect missing proof for EY64",
+      "Goto": "ey64_supply2",
+      "If": [
+        "HasQuest EY64",
+        "!has EK0Q 1"
+      ],
+      "Source": "filler"
+    },
+    "ey64_supply3": {
+      "Text": "Collect missing proof for EY64",
+      "Goto": "ey64_supply3",
+      "If": [
+        "HasQuest EY64",
+        "!has EK0R 1"
+      ],
+      "Source": "filler"
+    },
+    "ey65_trade": {
+      "Text": "Hand in: Present the Mark of the Challenger",
+      "Goto": "ey65_trade",
+      "If": [
+        "HasQuest EY65",
+        "has EK0S 1"
+      ],
+      "Source": "filler"
+    },
+    "ring_225753": {
+      "Text": "Exchange Insipid Ring for the Artillery Unit",
+      "Goto": "ring_225753",
+      "If": [
+        "HasQuest EY68",
+        "has EK0T",
+        "has EK0S",
+        "has INAR"
+      ],
+      "Source": "filler"
+    },
+    "ring_225758": {
+      "Text": "Exchange Insipid Ring for the Control Unit",
+      "Goto": "ring_225758",
+      "If": [
+        "HasQuest EY68",
+        "has EK0T",
+        "has EK0S",
+        "has INCO"
+      ],
+      "Source": "filler"
+    },
+    "ring_223998": {
+      "Text": "Exchange Insipid Ring for the Extermination Unit",
+      "Goto": "ring_223998",
+      "If": [
+        "HasQuest EY68",
+        "has EK0T",
+        "has EK0S",
+        "has INEX"
+      ],
+      "Source": "filler"
+    },
+    "ring_225760": {
+      "Text": "Exchange Insipid Ring for the Infantry Unit",
+      "Goto": "ring_225760",
+      "If": [
+        "HasQuest EY68",
+        "has EK0T",
+        "has EK0S",
+        "has ININ"
+      ],
+      "Source": "filler"
+    },
+    "ring_225759": {
+      "Text": "Exchange Insipid Ring for the Support Unit",
+      "Goto": "ring_225759",
+      "If": [
+        "HasQuest EY68",
+        "has EK0T",
+        "has EK0S",
+        "has INSU"
+      ],
+      "Source": "filler"
+    },
+    "ey60_offer": {
+      "Text": "Elysium Trial of Passage (fallback)",
+      "Goto": "ey60_description",
+      "If": [
+        "!HasAnyQuest EY60,EY61,EY62,EY63,EY64,EY65,EY66,EY67,EY68",
+        "!quest EY60 done",
+        "!quest EY68 done"
+      ],
+      "Source": "filler"
+    },
+    "ey60_accept": {
+      "Text": "Accept: Elysium Trial of Passage (fallback)",
+      "Goto": "ey60_start",
+      "If": [
+        "!HasAnyQuest EY60,EY61,EY62,EY63,EY64,EY65,EY66,EY67,EY68",
+        "!quest EY60 done",
+        "!quest EY68 done"
+      ],
+      "Source": "filler"
+    },
+    "ey60_progress": {
+      "Text": "Elysium Trial of Passage (fallback): progress",
+      "Goto": "ey60_progress",
+      "If": [
+        "HasAnyQuest EY60,EY61,EY62,EY63,EY64,EY65,EY66,EY67,EY68"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey64_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey64_done": {
+      "Text": "{completequest EY64}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey64_supply0": {
+      "Text": "{spawn EK0O 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey64_supply1": {
+      "Text": "{spawn EK0P 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey64_supply2": {
+      "Text": "{spawn EK0Q 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey64_supply3": {
+      "Text": "{spawn EK0R 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey65_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey65_done": {
+      "Text": "{completequest EY65}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_225753": {
+      "Text": "Place the tooth, Mark and the old ring in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_225753_done": {
+      "Text": "{completequest EY68}{spawn EK0U 1}Your replacement ring is ready.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_225758": {
+      "Text": "Place the tooth, Mark and the old ring in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_225758_done": {
+      "Text": "{completequest EY68}{spawn EK0V 1}Your replacement ring is ready.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_223998": {
+      "Text": "Place the tooth, Mark and the old ring in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_223998_done": {
+      "Text": "{completequest EY68}{spawn EK0W 1}Your replacement ring is ready.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_225760": {
+      "Text": "Place the tooth, Mark and the old ring in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_225760_done": {
+      "Text": "{completequest EY68}{spawn EK0X 1}Your replacement ring is ready.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_225759": {
+      "Text": "Place the tooth, Mark and the old ring in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ring_225759_done": {
+      "Text": "{completequest EY68}{spawn EK0Y 1}Your replacement ring is ready.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey60_description": {
+      "Text": "Defeat the four existing Lost specimens, return the body parts, present the Mark, then report the waived Challenger trial. Trade tooth,Mark and old ring for the same-unit Caliginous Ring. Spawn waves/dungeon combat are not reproduced; XP is unverified.",
+      "Replies": [
+        "ey60_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey60_start": {
+      "Text": "{givequest EY60}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey60_progress": {
+      "Text": "Defeat the four existing Lost specimens, return the body parts, present the Mark, then report the waived Challenger trial. Trade tooth,Mark and old ring for the same-unit Caliginous Ring. Spawn waves/dungeon combat are not reproduced; XP is unverified.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey64_trade",
+        "ey64_supply0",
+        "ey64_supply1",
+        "ey64_supply2",
+        "ey64_supply3",
+        "ey65_trade",
+        "ring_225753",
+        "ring_225758",
+        "ring_223998",
+        "ring_225760",
+        "ring_225759",
+        "ey60_offer",
+        "ey60_progress",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey64": {
+      "If": [
+        "HasQuest EY64"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0O",
+          "Count": 1
+        },
+        {
+          "Hash": "EK0P",
+          "Count": 1
+        },
+        {
+          "Hash": "EK0Q",
+          "Count": 1
+        },
+        {
+          "Hash": "EK0R",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey64_done"
+    },
+    "ey65": {
+      "If": [
+        "HasQuest EY65"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0S",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey65_done"
+    },
+    "ring_225753": {
+      "If": [
+        "HasQuest EY68"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0T",
+          "Count": 1
+        },
+        {
+          "Hash": "EK0S",
+          "Count": 1
+        },
+        {
+          "Hash": "INAR",
+          "Count": 1
+        }
+      ],
+      "Goto": "ring_225753_done"
+    },
+    "ring_225758": {
+      "If": [
+        "HasQuest EY68"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0T",
+          "Count": 1
+        },
+        {
+          "Hash": "EK0S",
+          "Count": 1
+        },
+        {
+          "Hash": "INCO",
+          "Count": 1
+        }
+      ],
+      "Goto": "ring_225758_done"
+    },
+    "ring_223998": {
+      "If": [
+        "HasQuest EY68"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0T",
+          "Count": 1
+        },
+        {
+          "Hash": "EK0S",
+          "Count": 1
+        },
+        {
+          "Hash": "INEX",
+          "Count": 1
+        }
+      ],
+      "Goto": "ring_223998_done"
+    },
+    "ring_225760": {
+      "If": [
+        "HasQuest EY68"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0T",
+          "Count": 1
+        },
+        {
+          "Hash": "EK0S",
+          "Count": 1
+        },
+        {
+          "Hash": "ININ",
+          "Count": 1
+        }
+      ],
+      "Goto": "ring_225760_done"
+    },
+    "ring_225759": {
+      "If": [
+        "HasQuest EY68"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0T",
+          "Count": 1
+        },
+        {
+          "Hash": "EK0S",
+          "Count": 1
+        },
+        {
+          "Hash": "INSU",
+          "Count": 1
+        }
+      ],
+      "Goto": "ring_225759_done"
+    }
+  }
+}

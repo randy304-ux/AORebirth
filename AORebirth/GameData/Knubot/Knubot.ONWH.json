@@ -1,0 +1,476 @@
+{
+  "Npcs": [
+    "ONWH"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey12_trade": {
+      "Text": "Hand in: Summer memories: return essence",
+      "Goto": "ey12_trade",
+      "If": [
+        "HasQuest EY12",
+        "has EK00 1"
+      ],
+      "Source": "filler"
+    },
+    "ey12_supply0": {
+      "Text": "Collect missing proof for EY12",
+      "Goto": "ey12_supply0",
+      "If": [
+        "HasQuest EY12",
+        "!has EK00 1"
+      ],
+      "Source": "filler"
+    },
+    "ey10_offer": {
+      "Text": "Summer memories",
+      "Goto": "ey10_description",
+      "If": [
+        "!HasAnyQuest EY10,EY11,EY12",
+        "!quest EY10 done",
+        "!quest EY12 done"
+      ],
+      "Source": "filler"
+    },
+    "ey10_accept": {
+      "Text": "Accept: Summer memories",
+      "Goto": "ey10_start",
+      "If": [
+        "!HasAnyQuest EY10,EY11,EY12",
+        "!quest EY10 done",
+        "!quest EY12 done"
+      ],
+      "Source": "filler"
+    },
+    "ey10_progress": {
+      "Text": "Summer memories: progress",
+      "Goto": "ey10_progress",
+      "If": [
+        "HasAnyQuest EY10,EY11,EY12"
+      ],
+      "Source": "filler"
+    },
+    "ey15_trade": {
+      "Text": "Hand in: Winter memories: return essence",
+      "Goto": "ey15_trade",
+      "If": [
+        "HasQuest EY15",
+        "has EK01 1"
+      ],
+      "Source": "filler"
+    },
+    "ey15_supply0": {
+      "Text": "Collect missing proof for EY15",
+      "Goto": "ey15_supply0",
+      "If": [
+        "HasQuest EY15",
+        "!has EK01 1"
+      ],
+      "Source": "filler"
+    },
+    "ey13_offer": {
+      "Text": "Winter memories",
+      "Goto": "ey13_description",
+      "If": [
+        "!HasAnyQuest EY13,EY14,EY15",
+        "!quest EY13 done",
+        "!quest EY15 done"
+      ],
+      "Source": "filler"
+    },
+    "ey13_accept": {
+      "Text": "Accept: Winter memories",
+      "Goto": "ey13_start",
+      "If": [
+        "!HasAnyQuest EY13,EY14,EY15",
+        "!quest EY13 done",
+        "!quest EY15 done"
+      ],
+      "Source": "filler"
+    },
+    "ey13_progress": {
+      "Text": "Winter memories: progress",
+      "Goto": "ey13_progress",
+      "If": [
+        "HasAnyQuest EY13,EY14,EY15"
+      ],
+      "Source": "filler"
+    },
+    "ey18_trade": {
+      "Text": "Hand in: Autumn memories: return essence",
+      "Goto": "ey18_trade",
+      "If": [
+        "HasQuest EY18",
+        "has EK02 1"
+      ],
+      "Source": "filler"
+    },
+    "ey18_supply0": {
+      "Text": "Collect missing proof for EY18",
+      "Goto": "ey18_supply0",
+      "If": [
+        "HasQuest EY18",
+        "!has EK02 1"
+      ],
+      "Source": "filler"
+    },
+    "ey16_offer": {
+      "Text": "Autumn memories",
+      "Goto": "ey16_description",
+      "If": [
+        "!HasAnyQuest EY16,EY17,EY18",
+        "!quest EY16 done",
+        "!quest EY18 done"
+      ],
+      "Source": "filler"
+    },
+    "ey16_accept": {
+      "Text": "Accept: Autumn memories",
+      "Goto": "ey16_start",
+      "If": [
+        "!HasAnyQuest EY16,EY17,EY18",
+        "!quest EY16 done",
+        "!quest EY18 done"
+      ],
+      "Source": "filler"
+    },
+    "ey16_progress": {
+      "Text": "Autumn memories: progress",
+      "Goto": "ey16_progress",
+      "If": [
+        "HasAnyQuest EY16,EY17,EY18"
+      ],
+      "Source": "filler"
+    },
+    "ey74_offer": {
+      "Text": "Find the Enel quest giver",
+      "Goto": "ey74_description",
+      "If": [
+        "!HasAnyQuest EY74",
+        "!quest EY74 done",
+        "!quest EY74 done"
+      ],
+      "Source": "filler"
+    },
+    "ey74_accept": {
+      "Text": "Accept: Find the Enel quest giver",
+      "Goto": "ey74_start",
+      "If": [
+        "!HasAnyQuest EY74",
+        "!quest EY74 done",
+        "!quest EY74 done"
+      ],
+      "Source": "filler"
+    },
+    "ey74_progress": {
+      "Text": "Find the Enel quest giver: progress",
+      "Goto": "ey74_progress",
+      "If": [
+        "HasAnyQuest EY74"
+      ],
+      "Source": "filler"
+    },
+    "ey75_offer": {
+      "Text": "Find the Shere quest giver",
+      "Goto": "ey75_description",
+      "If": [
+        "!HasAnyQuest EY75",
+        "!quest EY75 done",
+        "!quest EY75 done"
+      ],
+      "Source": "filler"
+    },
+    "ey75_accept": {
+      "Text": "Accept: Find the Shere quest giver",
+      "Goto": "ey75_start",
+      "If": [
+        "!HasAnyQuest EY75",
+        "!quest EY75 done",
+        "!quest EY75 done"
+      ],
+      "Source": "filler"
+    },
+    "ey75_progress": {
+      "Text": "Find the Shere quest giver: progress",
+      "Goto": "ey75_progress",
+      "If": [
+        "HasAnyQuest EY75"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey12_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey12_done": {
+      "Text": "{completequest EY12}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey12_supply0": {
+      "Text": "{spawn EK00 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey10_description": {
+      "Text": "Complete the listed hunts (missing populations use explicit report-back waivers), then trade the essence for five healing/utility items.",
+      "Replies": [
+        "ey10_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey10_start": {
+      "Text": "{givequest EY10}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey10_progress": {
+      "Text": "Complete the listed hunts (missing populations use explicit report-back waivers), then trade the essence for five healing/utility items.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey15_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey15_done": {
+      "Text": "{completequest EY15}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey15_supply0": {
+      "Text": "{spawn EK01 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey13_description": {
+      "Text": "Complete the listed hunts (missing populations use explicit report-back waivers), then trade the essence for five healing/utility items.",
+      "Replies": [
+        "ey13_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey13_start": {
+      "Text": "{givequest EY13}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey13_progress": {
+      "Text": "Complete the listed hunts (missing populations use explicit report-back waivers), then trade the essence for five healing/utility items.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey18_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey18_done": {
+      "Text": "{completequest EY18}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey18_supply0": {
+      "Text": "{spawn EK02 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey16_description": {
+      "Text": "Complete the listed hunts (missing populations use explicit report-back waivers), then trade the essence for five healing/utility items.",
+      "Replies": [
+        "ey16_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey16_start": {
+      "Text": "{givequest EY16}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey16_progress": {
+      "Text": "Complete the listed hunts (missing populations use explicit report-back waivers), then trade the essence for five healing/utility items.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey74_description": {
+      "Text": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+      "Replies": [
+        "ey74_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey74_start": {
+      "Text": "{givequest EY74}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey74_progress": {
+      "Text": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey75_description": {
+      "Text": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+      "Replies": [
+        "ey75_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey75_start": {
+      "Text": "{givequest EY75}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey75_progress": {
+      "Text": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey12_trade",
+        "ey12_supply0",
+        "ey10_offer",
+        "ey10_progress",
+        "ey15_trade",
+        "ey15_supply0",
+        "ey13_offer",
+        "ey13_progress",
+        "ey18_trade",
+        "ey18_supply0",
+        "ey16_offer",
+        "ey16_progress",
+        "ey74_offer",
+        "ey74_progress",
+        "ey75_offer",
+        "ey75_progress",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey12": {
+      "If": [
+        "HasQuest EY12"
+      ],
+      "Items": [
+        {
+          "Hash": "EK00",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey12_done"
+    },
+    "ey15": {
+      "If": [
+        "HasQuest EY15"
+      ],
+      "Items": [
+        {
+          "Hash": "EK01",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey15_done"
+    },
+    "ey18": {
+      "If": [
+        "HasQuest EY18"
+      ],
+      "Items": [
+        {
+          "Hash": "EK02",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey18_done"
+    }
+  }
+}

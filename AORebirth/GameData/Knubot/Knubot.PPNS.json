@@ -1,0 +1,221 @@
+{
+  "Npcs": [
+    "PPNS"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey87_trade": {
+      "Text": "Hand in: Shere approvals: Prophet Nar Shere",
+      "Goto": "ey87_trade",
+      "If": [
+        "HasQuest EY87",
+        "has EK0J 1"
+      ],
+      "Source": "filler"
+    },
+    "ey80_offer": {
+      "Text": "Shere Garden Key",
+      "Goto": "ey80_description",
+      "If": [
+        "!HasAnyQuest EY80,EY81,EY82,EY83,EY84,EY85,EY86,EY87,EY88,EY89,EY4L,EY4M,EY4N,EY4O,EY4P,EY4Q,EY4R,EY4S,EY4T,EY4U",
+        "!quest EY80 done",
+        "!quest EY4U done"
+      ],
+      "Source": "filler"
+    },
+    "ey80_accept": {
+      "Text": "Accept: Shere Garden Key",
+      "Goto": "ey80_start",
+      "If": [
+        "!HasAnyQuest EY80,EY81,EY82,EY83,EY84,EY85,EY86,EY87,EY88,EY89,EY4L,EY4M,EY4N,EY4O,EY4P,EY4Q,EY4R,EY4S,EY4T,EY4U",
+        "!quest EY80 done",
+        "!quest EY4U done"
+      ],
+      "Source": "filler"
+    },
+    "ey80_progress": {
+      "Text": "Shere Garden Key: progress",
+      "Goto": "ey80_progress",
+      "If": [
+        "HasAnyQuest EY80,EY81,EY82,EY83,EY84,EY85,EY86,EY87,EY88,EY89,EY4L,EY4M,EY4N,EY4O,EY4P,EY4Q,EY4R,EY4S,EY4T,EY4U"
+      ],
+      "Source": "filler"
+    },
+    "ey55_trade": {
+      "Text": "Hand in: Deliver the Briefing",
+      "Goto": "ey55_trade",
+      "If": [
+        "HasQuest EY55",
+        "has EK0L 1"
+      ],
+      "Source": "filler"
+    },
+    "ey4v_offer": {
+      "Text": "Shere Sanctuary Key",
+      "Goto": "ey4v_description",
+      "If": [
+        "!HasAnyQuest EY4V,EY4W,EY4X,EY4Y,EY4Z,EY50,EY51,EY52,EY53,EY54,EY55",
+        "!quest EY4V done",
+        "!quest EY55 done",
+        "has EK0N"
+      ],
+      "Source": "filler"
+    },
+    "ey4v_accept": {
+      "Text": "Accept: Shere Sanctuary Key",
+      "Goto": "ey4v_start",
+      "If": [
+        "!HasAnyQuest EY4V,EY4W,EY4X,EY4Y,EY4Z,EY50,EY51,EY52,EY53,EY54,EY55",
+        "!quest EY4V done",
+        "!quest EY55 done",
+        "has EK0N"
+      ],
+      "Source": "filler"
+    },
+    "ey4v_progress": {
+      "Text": "Shere Sanctuary Key: progress",
+      "Goto": "ey4v_progress",
+      "If": [
+        "HasAnyQuest EY4V,EY4W,EY4X,EY4Y,EY4Z,EY50,EY51,EY52,EY53,EY54,EY55"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey87_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey87_done": {
+      "Text": "{completequest EY87}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey80_description": {
+      "Text": "Carry the Sealed Letter through the required followers. Xum-Ixi requires the supplied eight-answer sequence. Garboil exchanges the letter for a tracking device, then requests nine targets in order.",
+      "Replies": [
+        "ey80_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey80_start": {
+      "Text": "{spawn EK0J 1}{givequest EY80}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey80_progress": {
+      "Text": "Carry the Sealed Letter through the required followers. Xum-Ixi requires the supplied eight-answer sequence. Garboil exchanges the letter for a tracking device, then requests nine targets in order.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey55_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey55_done": {
+      "Text": "{completequest EY55}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4v_description": {
+      "Text": "With the garden key in your inventory, follow the nine named kills in order, then report back and hand in the Briefing.",
+      "Replies": [
+        "ey4v_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4v_start": {
+      "Text": "{givequest EY4V}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4v_progress": {
+      "Text": "With the garden key in your inventory, follow the nine named kills in order, then report back and hand in the Briefing.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey87_trade",
+        "ey80_offer",
+        "ey80_progress",
+        "ey55_trade",
+        "ey4v_offer",
+        "ey4v_progress",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey87": {
+      "If": [
+        "HasQuest EY87"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0J",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey87_done"
+    },
+    "ey55": {
+      "If": [
+        "HasQuest EY55"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0L",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey55_done"
+    }
+  }
+}

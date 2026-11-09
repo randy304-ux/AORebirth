@@ -1,0 +1,166 @@
+{
+  "Npcs": [
+    "ECEE"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey97_trade": {
+      "Text": "Hand in: Return Enel approval letter",
+      "Goto": "ey97_trade",
+      "If": [
+        "HasQuest EY97",
+        "has EK0J 1"
+      ],
+      "Source": "filler"
+    },
+    "ey4k_trade": {
+      "Text": "Hand in: Deliver the Briefing",
+      "Goto": "ey4k_trade",
+      "If": [
+        "HasQuest EY4K",
+        "has EK0L 1"
+      ],
+      "Source": "filler"
+    },
+    "ey4a_offer": {
+      "Text": "Enel Sanctuary Key",
+      "Goto": "ey4a_description",
+      "If": [
+        "!HasAnyQuest EY4A,EY4B,EY4C,EY4D,EY4E,EY4F,EY4G,EY4H,EY4I,EY4J,EY4K",
+        "!quest EY4A done",
+        "!quest EY4K done",
+        "has EK0M"
+      ],
+      "Source": "filler"
+    },
+    "ey4a_accept": {
+      "Text": "Accept: Enel Sanctuary Key",
+      "Goto": "ey4a_start",
+      "If": [
+        "!HasAnyQuest EY4A,EY4B,EY4C,EY4D,EY4E,EY4F,EY4G,EY4H,EY4I,EY4J,EY4K",
+        "!quest EY4A done",
+        "!quest EY4K done",
+        "has EK0M"
+      ],
+      "Source": "filler"
+    },
+    "ey4a_progress": {
+      "Text": "Enel Sanctuary Key: progress",
+      "Goto": "ey4a_progress",
+      "If": [
+        "HasAnyQuest EY4A,EY4B,EY4C,EY4D,EY4E,EY4F,EY4G,EY4H,EY4I,EY4J,EY4K"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey97_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey97_done": {
+      "Text": "{completequest EY97}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4k_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4k_done": {
+      "Text": "{completequest EY4K}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4a_description": {
+      "Text": "With the garden key in your inventory, follow the nine named kills in order, then report back and hand in the Briefing.",
+      "Replies": [
+        "ey4a_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4a_start": {
+      "Text": "{givequest EY4A}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey4a_progress": {
+      "Text": "With the garden key in your inventory, follow the nine named kills in order, then report back and hand in the Briefing.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey97_trade",
+        "ey4k_trade",
+        "ey4a_offer",
+        "ey4a_progress",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey97": {
+      "If": [
+        "HasQuest EY97"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0J",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey97_done"
+    },
+    "ey4k": {
+      "If": [
+        "HasQuest EY4K"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0L",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey4k_done"
+    }
+  }
+}

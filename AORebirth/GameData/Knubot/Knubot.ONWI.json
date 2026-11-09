@@ -1,0 +1,207 @@
+{
+  "Npcs": [
+    "ONWI"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey2z_trade": {
+      "Text": "Hand in: Deliver Red Hat Spores",
+      "Goto": "ey2z_trade",
+      "If": [
+        "HasQuest EY2Z",
+        "has EK0E 1"
+      ],
+      "Source": "filler"
+    },
+    "ey33_trade": {
+      "Text": "Hand in: Searching for Truth (harvest fallback)",
+      "Goto": "ey33_trade",
+      "If": [
+        "HasQuest EY33",
+        "has EK0H 5",
+        "has EK0I 1"
+      ],
+      "Source": "filler"
+    },
+    "ey33_supply0": {
+      "Text": "Collect missing proof for EY33",
+      "Goto": "ey33_supply0",
+      "If": [
+        "HasQuest EY33",
+        "!has EK0H 5"
+      ],
+      "Source": "filler"
+    },
+    "ey33_supply1": {
+      "Text": "Collect missing proof for EY33",
+      "Goto": "ey33_supply1",
+      "If": [
+        "HasQuest EY33",
+        "!has EK0I 1"
+      ],
+      "Source": "filler"
+    },
+    "ey33_offer": {
+      "Text": "Searching for Truth (supplied plants)",
+      "Goto": "ey33_description",
+      "If": [
+        "!HasAnyQuest EY33",
+        "!quest EY33 done",
+        "!quest EY33 done",
+        "!has L01Q"
+      ],
+      "Source": "filler"
+    },
+    "ey33_accept": {
+      "Text": "Accept: Searching for Truth (supplied plants)",
+      "Goto": "ey33_start",
+      "If": [
+        "!HasAnyQuest EY33",
+        "!quest EY33 done",
+        "!quest EY33 done",
+        "!has L01Q"
+      ],
+      "Source": "filler"
+    },
+    "ey33_progress": {
+      "Text": "Searching for Truth (supplied plants): progress",
+      "Goto": "ey33_progress",
+      "If": [
+        "HasAnyQuest EY33"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey2z_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2z_done": {
+      "Text": "{completequest EY2Z}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey33_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey33_done": {
+      "Text": "{completequest EY33}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey33_supply0": {
+      "Text": "{spawn EK0H 1 5}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey33_supply1": {
+      "Text": "{spawn EK0I 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey33_description": {
+      "Text": "Harvesting is unsupported in this fallback. Collect supplied plants and knife, then hand both in for chapter3,20,000XP,50,000credits and a Mini-XP Reward.",
+      "Replies": [
+        "ey33_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey33_start": {
+      "Text": "{givequest EY33}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey33_progress": {
+      "Text": "Harvesting is unsupported in this fallback. Collect supplied plants and knife, then hand both in for chapter3,20,000XP,50,000credits and a Mini-XP Reward.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey2z_trade",
+        "ey33_trade",
+        "ey33_supply0",
+        "ey33_supply1",
+        "ey33_offer",
+        "ey33_progress",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey2z": {
+      "If": [
+        "HasQuest EY2Z"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0E",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey2z_done"
+    },
+    "ey33": {
+      "If": [
+        "HasQuest EY33"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0H",
+          "Count": 5
+        },
+        {
+          "Hash": "EK0I",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey33_done"
+    }
+  }
+}

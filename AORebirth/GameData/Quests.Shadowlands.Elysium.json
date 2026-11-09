@@ -1,0 +1,3508 @@
+[
+  {
+    "Hash": "EY00",
+    "Name": "A Devouring Challenge",
+    "Summary": "Kill three Devourers of Life near Port7, then return to Elmo.",
+    "Scope": "Solo",
+    "QasInstance": 951000,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "DVOF",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY03",
+    "Reward": {
+      "Hash": "ER00",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY03",
+    "Name": "Report the Devouring Challenge",
+    "Summary": "Target Guard Elmo Fitz after the three kills to receive 50,000XP and 50,000credits.",
+    "Scope": "Solo",
+    "QasInstance": 951003,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "CFHR",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER03",
+      "Xp": 50000,
+      "Credits": 50000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY01",
+    "Name": "Delivery to the Melting Pot",
+    "Summary": "Report to One Who Wins Over Mind. Fallback: device ID is unknown, so this delivery uses a target objective without an invented item.",
+    "Scope": "Solo",
+    "QasInstance": 951001,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "TOOW",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER01",
+      "Xp": 20000,
+      "Credits": 20000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY04",
+    "Name": "Predator scan: Limping Predator",
+    "Summary": "Target this predator to register a scan. Any-order fallback; original scanner sequence is unverified.",
+    "Scope": "Solo",
+    "QasInstance": 951004,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "LIPR",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER04",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY05",
+    "Name": "Predator scan: Pained Predator",
+    "Summary": "Target this predator to register a scan. Any-order fallback; original scanner sequence is unverified.",
+    "Scope": "Solo",
+    "QasInstance": 951005,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PIPE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER05",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY06",
+    "Name": "Predator scan: Howling Predator",
+    "Summary": "Target this predator to register a scan. Any-order fallback; original scanner sequence is unverified.",
+    "Scope": "Solo",
+    "QasInstance": 951006,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "HOPE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER06",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY07",
+    "Name": "Report missing predator scan",
+    "Summary": "After the three available predators, report to Ulf. The missing Wounded Predator is waived explicitly in this fallback.",
+    "Scope": "Solo",
+    "QasInstance": 951007,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "MUYX",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY02",
+    "Reward": {
+      "Hash": "ER07",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY02",
+    "Name": "Return the predator survey",
+    "Summary": "Target Ulf to finish the survey. Scanner identity is unverified, so no invented scanner is consumed.",
+    "Scope": "Solo",
+    "QasInstance": 951002,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "MUYX",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER02",
+      "Xp": 20000,
+      "Credits": 20000,
+      "Records": [
+        [
+          {
+            "Id": 226257,
+            "HighId": 226257,
+            "Name": "The Girl that Saw it All - Chapter 2",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY10",
+    "Name": "Summer memories: hunt",
+    "Summary": "Kill 4 Fissure Hiathlin.",
+    "Scope": "Solo",
+    "QasInstance": 951036,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "FSCL",
+      "Count": 4,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY11",
+    "Reward": {
+      "Hash": "ER10",
+      "Xp": 0,
+      "Credits": 10000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY11",
+    "Name": "Summer memories: unavailable hunt fallback",
+    "Summary": "Fallback: report to One Who Gives Light to waive this missing hunt. Ossuz has no verified template.",
+    "Scope": "Solo",
+    "QasInstance": 951037,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "ONWH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY12",
+    "Reward": {
+      "Hash": "ER11",
+      "Xp": 0,
+      "Credits": 10000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY12",
+    "Name": "Summer memories: return essence",
+    "Summary": "Return the essence through the Give Item window; giver supplies it only after the preceding objectives.",
+    "Scope": "Solo",
+    "QasInstance": 951038,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ONWH",
+      "Count": null,
+      "SpecItem": "EK00",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER12",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 231389,
+            "HighId": 231389,
+            "Name": "Life Lichen",
+            "Quality": 1,
+            "Count": 5
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY13",
+    "Name": "Winter memories: unavailable hunt fallback",
+    "Summary": "Fallback: report to One Who Gives Light to waive this missing hunt. The supplied Hiathlin HIAT exists only in Nascence; no verified Elysium population.",
+    "Scope": "Solo",
+    "QasInstance": 951039,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "ONWH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY14",
+    "Reward": {
+      "Hash": "ER13",
+      "Xp": 0,
+      "Credits": 10000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY14",
+    "Name": "Winter memories: hunt",
+    "Summary": "Kill 1 Athlar.",
+    "Scope": "Solo",
+    "QasInstance": 951040,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "RKEX",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY15",
+    "Reward": {
+      "Hash": "ER14",
+      "Xp": 0,
+      "Credits": 10000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY15",
+    "Name": "Winter memories: return essence",
+    "Summary": "Return the essence through the Give Item window; giver supplies it only after the preceding objectives.",
+    "Scope": "Solo",
+    "QasInstance": 951041,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ONWH",
+      "Count": null,
+      "SpecItem": "EK01",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER15",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 231391,
+            "HighId": 231391,
+            "Name": "Notum Slug",
+            "Quality": 1,
+            "Count": 5
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY16",
+    "Name": "Autumn memories: unavailable hunt fallback",
+    "Summary": "Fallback: report to One Who Gives Light to waive this missing hunt. Drowsy Arcorash template and numeric count are unverified.",
+    "Scope": "Solo",
+    "QasInstance": 951042,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "ONWH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY17",
+    "Reward": {
+      "Hash": "ER16",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY17",
+    "Name": "Autumn memories: hunt",
+    "Summary": "Kill 1 Tdecin.",
+    "Scope": "Solo",
+    "QasInstance": 951043,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "NSMX",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY18",
+    "Reward": {
+      "Hash": "ER17",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY18",
+    "Name": "Autumn memories: return essence",
+    "Summary": "Return the essence through the Give Item window; giver supplies it only after the preceding objectives.",
+    "Scope": "Solo",
+    "QasInstance": 951044,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ONWH",
+      "Count": null,
+      "SpecItem": "EK02",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER18",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 231394,
+            "HighId": 231394,
+            "Name": "Power Bug",
+            "Quality": 1,
+            "Count": 5
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY19",
+    "Name": "Deliver Sphagnum Moss",
+    "Summary": "Deliver Sphagnum Moss to The One Loved by the Sun. One Who Has Achieved Glory is absent; acquisition/offer requires that NPC integration.",
+    "Scope": "Solo",
+    "QasInstance": 951045,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "TEOL",
+      "Count": null,
+      "SpecItem": "EK03",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER19",
+      "Xp": 25000,
+      "Credits": 20000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1A",
+    "Name": "Glory hunt: Bony Spinetooth",
+    "Summary": "Kill 3 Bony Spinetooth. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Scope": "Solo",
+    "QasInstance": 951046,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "Q01Z",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY1B",
+    "Reward": {
+      "Hash": "ER1A",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1B",
+    "Name": "Glory hunt: Kolaana-Behn",
+    "Summary": "Kill 3 Kolaana-Behn. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Scope": "Solo",
+    "QasInstance": 951047,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "YTLA",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1B",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1D",
+    "Name": "Glory hunt: Somphos Brunee",
+    "Summary": "Kill 5 Somphos Brunee. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Scope": "Solo",
+    "QasInstance": 951049,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "Q026",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY1E",
+    "Reward": {
+      "Hash": "ER1D",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1E",
+    "Name": "Glory hunt: Somphos Gulee",
+    "Summary": "Kill 3 Somphos Gulee. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Scope": "Solo",
+    "QasInstance": 951050,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "SMGL",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY1F",
+    "Reward": {
+      "Hash": "ER1E",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1F",
+    "Name": "Glory hunt: Somphos Grainee",
+    "Summary": "Kill 1 Somphos Grainee. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Scope": "Solo",
+    "QasInstance": 951051,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "Q029",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1F",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1H",
+    "Name": "Drive away Looting Mortiigs (fallback)",
+    "Summary": "Looting Mortiig has no verified template. Report to the giver to waive this five-kill objective in the explicit fallback.",
+    "Scope": "Solo",
+    "QasInstance": 951053,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "TOOW",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1H",
+      "Xp": 30000,
+      "Credits": 100000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1I",
+    "Name": "Drive Away Shell Eremites",
+    "Summary": "Kill five Shell Eremites.",
+    "Scope": "Solo",
+    "QasInstance": 951054,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "SHER",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1I",
+      "Xp": 30000,
+      "Credits": 100000,
+      "Records": [
+        [
+          {
+            "Id": 286991,
+            "HighId": 286991,
+            "Name": "Mini-XP Reward",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY1J",
+    "Name": "Diving for Pearls: Coiling Eremite",
+    "Summary": "Defeat this named Eremite; all three independent objectives are required before the pearl hand-in.",
+    "Scope": "Solo",
+    "QasInstance": 951055,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "COER",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1J",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1L",
+    "Name": "Diving for Pearls: Bending Eremite",
+    "Summary": "Defeat this named Eremite; all three independent objectives are required before the pearl hand-in.",
+    "Scope": "Solo",
+    "QasInstance": 951057,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "BEER",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1L",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1M",
+    "Name": "Diving for Pearls: unavailable target",
+    "Summary": "Report fallback for Swirling Eremite. SWER is spelled Swriling in supplied data and remains an unverified candidate, not silently equated.",
+    "Scope": "Solo",
+    "QasInstance": 951058,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "TEOL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1M",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY1K",
+    "Name": "Deliver the Pearl of the Endless Sea",
+    "Summary": "After all three objectives, return the pearl.",
+    "Scope": "Solo",
+    "QasInstance": 951056,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "TEOL",
+      "Count": null,
+      "SpecItem": "EK04",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1K",
+      "Xp": 200000,
+      "Credits": 250000,
+      "Records": [
+        [
+          {
+            "Id": 238916,
+            "HighId": 238916,
+            "Name": "Silver Spider Knuckledusters",
+            "Quality": 1,
+            "Count": 1
+          },
+          {
+            "Id": 286988,
+            "HighId": 286988,
+            "Name": "XP Reward",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY20",
+    "Name": "Medicine: Stalking Slayer hides",
+    "Summary": "Kill five Stalking Slayers. Shades of Grey has no verified receiver template; this chain must remain unavailable until integration.",
+    "Scope": "Solo",
+    "QasInstance": 951072,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "Q01S",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER20",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY25",
+    "Name": "Frozen artifacts: Shiver Spider",
+    "Summary": "Kill five of this target, then continue the artifact hunt.",
+    "Scope": "Solo",
+    "QasInstance": 951077,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "Q02O",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY26",
+    "Reward": {
+      "Hash": "ER25",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY26",
+    "Name": "Frozen artifacts: Icy Shadow",
+    "Summary": "Kill five of this target, then continue the artifact hunt.",
+    "Scope": "Solo",
+    "QasInstance": 951078,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "ICSH",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY27",
+    "Reward": {
+      "Hash": "ER26",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY27",
+    "Name": "Return the frozen artifacts",
+    "Summary": "Trade both Frozen Shiver Spider Bone and Frozen Goblet of Frost Breath.",
+    "Scope": "Solo",
+    "QasInstance": 951079,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "OHWH",
+      "Count": null,
+      "SpecItem": "EK05",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER27",
+      "Xp": 100000,
+      "Credits": 250000,
+      "Records": [
+        [
+          {
+            "Id": 238918,
+            "HighId": 238918,
+            "Name": "Sable Sleeves of Fantasies",
+            "Quality": 100,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY28",
+    "Name": "Root sample: Flux Rafter",
+    "Summary": "Kill four of this rafter. Complete all four independent root hunts before returning the samples.",
+    "Scope": "Solo",
+    "QasInstance": 951080,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "FLRA",
+      "Count": 4,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER28",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY29",
+    "Name": "Root sample: Coral Rafter",
+    "Summary": "Kill four of this rafter. Complete all four independent root hunts before returning the samples.",
+    "Scope": "Solo",
+    "QasInstance": 951081,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "CRRA",
+      "Count": 4,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER29",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2A",
+    "Name": "Root sample: Mire Rafter",
+    "Summary": "Kill four of this rafter. Complete all four independent root hunts before returning the samples.",
+    "Scope": "Solo",
+    "QasInstance": 951082,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "MEGO",
+      "Count": 4,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2A",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2B",
+    "Name": "Root sample: Crystal Rafter",
+    "Summary": "Kill four of this rafter. Complete all four independent root hunts before returning the samples.",
+    "Scope": "Solo",
+    "QasInstance": 951083,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "FRGO",
+      "Count": 4,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2B",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2C",
+    "Name": "Return all four rafter roots",
+    "Summary": "Trade all four distinct rafter root samples.",
+    "Scope": "Solo",
+    "QasInstance": 951084,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "OHWH",
+      "Count": null,
+      "SpecItem": "EK07",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2C",
+      "Xp": 80000,
+      "Credits": 200000,
+      "Records": [
+        [
+          {
+            "Id": 245627,
+            "HighId": 245627,
+            "Name": "Staff of Pelias",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY2D",
+    "Name": "Soul Feeding: missing-target report",
+    "Summary": "Fallback: report to OHWH to waive ten Cagey Hoathlin kills. CAHO/Cagey Hoathlan remains a spelling candidate, not a verified identity.",
+    "Scope": "Solo",
+    "QasInstance": 951085,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "OHWH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2E",
+    "Reward": {
+      "Hash": "ER2D",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2E",
+    "Name": "Soul Feeding: Fissure Hiathlin",
+    "Summary": "Kill 10 Fissure Hiathlin in sequence.",
+    "Scope": "Solo",
+    "QasInstance": 951086,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "FSCL",
+      "Count": 10,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2F",
+    "Reward": {
+      "Hash": "ER2E",
+      "Xp": 60000,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2F",
+    "Name": "Soul Feeding: Malah-Behn",
+    "Summary": "Kill 5 Malah-Behn in sequence.",
+    "Scope": "Solo",
+    "QasInstance": 951087,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "DDKN",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2G",
+    "Reward": {
+      "Hash": "ER2F",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2G",
+    "Name": "Soul Feeding: Hoathlan",
+    "Summary": "Kill 3 Hoathlan in sequence.",
+    "Scope": "Solo",
+    "QasInstance": 951088,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "HOAT",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2H",
+    "Reward": {
+      "Hash": "ER2G",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2H",
+    "Name": "Soul Feeding: Brisk Hoathlan",
+    "Summary": "Kill 3 Brisk Hoathlan in sequence.",
+    "Scope": "Solo",
+    "QasInstance": 951089,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "BRHO",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2I",
+    "Reward": {
+      "Hash": "ER2H",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2I",
+    "Name": "Soul Feeding: Malah-Ana",
+    "Summary": "Kill 2 Malah-Ana in sequence.",
+    "Scope": "Solo",
+    "QasInstance": 951090,
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "MPCG",
+      "Count": 2,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2J",
+    "Reward": {
+      "Hash": "ER2I",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2J",
+    "Name": "Soul Feeding: Malah",
+    "Summary": "Kill 1 Malah in sequence.",
+    "Scope": "Solo",
+    "QasInstance": 951091,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "HFQK",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2K",
+    "Reward": {
+      "Hash": "ER2J",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2K",
+    "Name": "Soul Feeding: Malah-Dren",
+    "Summary": "Kill 1 Malah-Dren in sequence.",
+    "Scope": "Solo",
+    "QasInstance": 951092,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "MCBM",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2L",
+    "Reward": {
+      "Hash": "ER2K",
+      "Xp": 60000,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2L",
+    "Name": "Soul Feeding: Hiathlin Lookout",
+    "Summary": "Kill 1 Hiathlin Lookout in sequence.",
+    "Scope": "Solo",
+    "QasInstance": 951093,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "HHLU",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2M",
+    "Reward": {
+      "Hash": "ER2L",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2M",
+    "Name": "Return the Hiathlin Soulcatcher",
+    "Summary": "Return the Soulcatcher after completing the ordered chain.",
+    "Scope": "Solo",
+    "QasInstance": 951094,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "OHWH",
+      "Count": null,
+      "SpecItem": "EK0B",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2M",
+      "Xp": 380000,
+      "Credits": 1000000,
+      "Records": [
+        [
+          {
+            "Id": 233236,
+            "HighId": 233236,
+            "Name": "Wrath of Zeus",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY2N",
+    "Name": "Overcome your fears",
+    "Summary": "Defeat Malah-Fama Prophetess.",
+    "Scope": "Solo",
+    "QasInstance": 951095,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "Q00W",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2O",
+    "Reward": {
+      "Hash": "ER2N",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2O",
+    "Name": "Return the Eye of the Prophetess",
+    "Summary": "Give the eye to One Who Overcomes Enemies.",
+    "Scope": "Solo",
+    "QasInstance": 951096,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "OEWV",
+      "Count": null,
+      "SpecItem": "EK0C",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2O",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 238910,
+            "HighId": 238910,
+            "Name": "Ring of Computing",
+            "Quality": 100,
+            "Count": 1
+          },
+          {
+            "Id": 286988,
+            "HighId": 286988,
+            "Name": "XP Reward",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY2P",
+    "Name": "Catacomb challenge: Bean Sidhe",
+    "Summary": "Defeat this catacomb boss. No timer; daily-equivalent scaling awaits authoritative handler.",
+    "Scope": "Solo",
+    "QasInstance": 951097,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "BASD",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2P",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2Q",
+    "Name": "Catacomb challenge: Emissary of Annwn",
+    "Summary": "Defeat this catacomb boss. No timer; daily-equivalent scaling awaits authoritative handler.",
+    "Scope": "Solo",
+    "QasInstance": 951098,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "EMOF",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2Q",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2R",
+    "Name": "Catacomb challenge: Arawn",
+    "Summary": "Defeat this catacomb boss. No timer; daily-equivalent scaling awaits authoritative handler.",
+    "Scope": "Solo",
+    "QasInstance": 951099,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "IQZG",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2R",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2S",
+    "Name": "Catacomb challenge: Mare",
+    "Summary": "Defeat this catacomb boss. No timer; daily-equivalent scaling awaits authoritative handler.",
+    "Scope": "Solo",
+    "QasInstance": 951100,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "DOEC",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2S",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2T",
+    "Name": "Catacomb challenge: Herne",
+    "Summary": "Defeat this catacomb boss. No timer; daily-equivalent scaling awaits authoritative handler.",
+    "Scope": "Solo",
+    "QasInstance": 951101,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "JBYY",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2T",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2U",
+    "Name": "Catacomb challenge: Slaugh",
+    "Summary": "Defeat this catacomb boss. No timer; daily-equivalent scaling awaits authoritative handler.",
+    "Scope": "Solo",
+    "QasInstance": 951102,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "SLAU",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2U",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2V",
+    "Name": "Catacomb challenge: Blood of Acheron",
+    "Summary": "Defeat this catacomb boss. No timer; daily-equivalent scaling awaits authoritative handler.",
+    "Scope": "Solo",
+    "QasInstance": 951103,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "SOOO",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2V",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2W",
+    "Name": "Bluetooth Harvest (fallback)",
+    "Summary": "Report to the giver to waive the unsupported fungal harvest. Sample ID259760 remains only a candidate; no counterfeit sample trade.",
+    "Scope": "Solo",
+    "QasInstance": 951104,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "TOOW",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER2W",
+      "Xp": 25000,
+      "Credits": 25000,
+      "Records": [
+        [
+          {
+            "Id": 226256,
+            "HighId": 226256,
+            "Name": "The Girl that Saw it All - Chapter 1",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY2Z",
+    "Name": "Deliver Red Hat Spores",
+    "Summary": "Trade spores only after the missing Glory stages are integrated. Receipt grants Red Hat Mixture for the next delivery.",
+    "Scope": "Solo",
+    "QasInstance": 951107,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ONWI",
+      "Count": null,
+      "SpecItem": "EK0E",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY30",
+    "Reward": {
+      "Hash": "ER2Z",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 259778,
+            "HighId": 259778,
+            "Name": "Red Hat Mixture",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY30",
+    "Name": "Deliver Sleeping Medicine",
+    "Summary": "Trade Red Hat Mixture, the item explicitly received in the guide before the Sleeping Draught dialogue. RewardQL for Defender of Troy remains unverified.",
+    "Scope": "Solo",
+    "QasInstance": 951108,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "TOOW",
+      "Count": null,
+      "SpecItem": "EK0F",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER30",
+      "Xp": 25000,
+      "Credits": 25000,
+      "Records": [
+        [
+          {
+            "Id": 233244,
+            "HighId": 233244,
+            "Name": "Defender of Troy",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY31",
+    "Name": "Mortiig Chieftain report fallback",
+    "Summary": "Mortiig Chieftain template missing; target giver to waive combat.",
+    "Scope": "Solo",
+    "QasInstance": 951109,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "TOOW",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY32",
+    "Reward": {
+      "Hash": "ER31",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY32",
+    "Name": "Return the Huge Diamond on a Stick",
+    "Summary": "Return the diamond after the waived boss step. ShadeQL120 Bloodlust bonus is a separate integration dependency, not granted to other professions.",
+    "Scope": "Solo",
+    "QasInstance": 951110,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "TOOW",
+      "Count": null,
+      "SpecItem": "EK0G",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER32",
+      "Xp": 150000,
+      "Credits": 500000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY33",
+    "Name": "Searching for Truth (harvest fallback)",
+    "Summary": "Return five Adenium rutilus plants and the Gamma pruning knife. Plant-use/damage mechanics replaced by giver supplies while this final stage is active.",
+    "Scope": "Solo",
+    "QasInstance": 951111,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ONWI",
+      "Count": null,
+      "SpecItem": "EK0H",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER33",
+      "Xp": 20000,
+      "Credits": 50000,
+      "Records": [
+        [
+          {
+            "Id": 226258,
+            "HighId": 226258,
+            "Name": "The Girl that Saw it All - Chapter 3",
+            "Quality": 1,
+            "Count": 1
+          },
+          {
+            "Id": 286991,
+            "HighId": 286991,
+            "Name": "Mini-XP Reward",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY80",
+    "Name": "Shere approvals: Follower Man-Wox Shere",
+    "Summary": "Present the Sealed Letter in route order. The letter is returned for the next recipient.",
+    "Scope": "Solo",
+    "QasInstance": 951288,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "FL1M",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY81",
+    "Reward": {
+      "Hash": "ER80",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY81",
+    "Name": "Shere approvals: Visionist Jorr-Dom Shere",
+    "Summary": "Present the Sealed Letter in route order. The letter is returned for the next recipient.",
+    "Scope": "Solo",
+    "QasInstance": 951289,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "VIJO",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY89",
+    "Reward": {
+      "Hash": "ER81",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY82",
+    "Name": "Shere approvals: Hypnagogic Xum-Ixi Shere",
+    "Summary": "Present the Sealed Letter in route order. The letter is returned for the next recipient.",
+    "Scope": "Solo",
+    "QasInstance": 951290,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "XUSH",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY83",
+    "Reward": {
+      "Hash": "ER82",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY83",
+    "Name": "Shere approvals: Follower Yutt-Ixi Shere",
+    "Summary": "Present the Sealed Letter in route order. The letter is returned for the next recipient.",
+    "Scope": "Solo",
+    "QasInstance": 951291,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "FLYI",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY84",
+    "Reward": {
+      "Hash": "ER83",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY84",
+    "Name": "Shere approvals: Visionist Dom-Xum Shere",
+    "Summary": "Present the Sealed Letter in route order. The letter is returned for the next recipient.",
+    "Scope": "Solo",
+    "QasInstance": 951292,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "VIDO",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY85",
+    "Reward": {
+      "Hash": "ER84",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY85",
+    "Name": "Shere approvals: Fortuitous Jorr-Fes Shere",
+    "Summary": "Present the Sealed Letter in route order. The letter is returned for the next recipient.",
+    "Scope": "Solo",
+    "QasInstance": 951293,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "FOJO",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY86",
+    "Reward": {
+      "Hash": "ER85",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY86",
+    "Name": "Shere approvals: Ardent Pi Shere",
+    "Summary": "Present the Sealed Letter in route order. The letter is returned for the next recipient.",
+    "Scope": "Solo",
+    "QasInstance": 951294,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ADPI",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY87",
+    "Reward": {
+      "Hash": "ER86",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY87",
+    "Name": "Shere approvals: Prophet Nar Shere",
+    "Summary": "Present the Sealed Letter in route order. The letter is returned for the next recipient.",
+    "Scope": "Solo",
+    "QasInstance": 951295,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "PPNS",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY88",
+    "Reward": {
+      "Hash": "ER87",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY88",
+    "Name": "Shere approvals: Garboil Chi Shere",
+    "Summary": "Present the Sealed Letter in route order. The letter is exchanged for an Ancient Tracking Device.",
+    "Scope": "Solo",
+    "QasInstance": 951296,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "GACH",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4L",
+    "Reward": {
+      "Hash": "ER88",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 217041,
+            "HighId": 217041,
+            "Name": "Ancient Tracking Device",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY89",
+    "Name": "Request an audience with Xum-Ixi",
+    "Summary": "Target Xum-Ixi, then complete the eight polite dialogue choices before the letter trade becomes active.",
+    "Scope": "Solo",
+    "QasInstance": 951297,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "XUSH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER89",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY40",
+    "Name": "Garden survey: Fortuitous Jorr-Fes Shere",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951144,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FOJO",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY41",
+    "Reward": {
+      "Hash": "ER40",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY41",
+    "Name": "Garden survey: Hypnagogic Wox-Xum Shere",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951145,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "HYWO",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY42",
+    "Reward": {
+      "Hash": "ER41",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY42",
+    "Name": "Garden survey: Follower Chi-Nar Shere",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951146,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FOCH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY43",
+    "Reward": {
+      "Hash": "ER42",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY43",
+    "Name": "Garden survey: Fortuitous Hes-Man Shere",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951147,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FRHE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY44",
+    "Reward": {
+      "Hash": "ER43",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY44",
+    "Name": "Garden survey: Hypnagogic Ixi-Bhotaar Shere",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951148,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "HYIX",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY45",
+    "Reward": {
+      "Hash": "ER44",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY45",
+    "Name": "Garden survey: Visionist Dom-Xum Shere",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951149,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "VIDO",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY46",
+    "Reward": {
+      "Hash": "ER45",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY46",
+    "Name": "Garden survey: Follower Yutt-Ixi Shere",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951150,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FLYI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY47",
+    "Reward": {
+      "Hash": "ER46",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY47",
+    "Name": "Garden survey: Fortuitous Pi-Zul Shere",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951151,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FOPI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY48",
+    "Reward": {
+      "Hash": "ER47",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY48",
+    "Name": "Garden survey: Follower Man-Wox Shere",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951152,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FL1M",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER48",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4L",
+    "Name": "Garden survey: Watcher Enel Ulma-Thar",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951165,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "WTEL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4M",
+    "Reward": {
+      "Hash": "ER4L",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4M",
+    "Name": "Garden survey: Sipius Enel Lux-Mara",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951166,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "SUEL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4N",
+    "Reward": {
+      "Hash": "ER4M",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4N",
+    "Name": "Garden survey: Devoted Enel Ilad-Ulma",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951167,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DVEI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4O",
+    "Reward": {
+      "Hash": "ER4N",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4O",
+    "Name": "Garden survey: Watcher Enel Hume-Yeol",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951168,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "WAEL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4P",
+    "Reward": {
+      "Hash": "ER4O",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4P",
+    "Name": "Garden survey: Sipius Enel Gil-Gil",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951169,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "SIEE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4Q",
+    "Reward": {
+      "Hash": "ER4P",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4Q",
+    "Name": "Garden survey: Diviner Enel Thar-Thar",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951170,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DIEN",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4R",
+    "Reward": {
+      "Hash": "ER4Q",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4R",
+    "Name": "Garden survey: Devoted Enel Cama-Lux",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951171,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DOEL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4S",
+    "Reward": {
+      "Hash": "ER4R",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4S",
+    "Name": "Garden survey: Watcher Enel Mara-Cama",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951172,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "WTEE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4T",
+    "Reward": {
+      "Hash": "ER4S",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4T",
+    "Name": "Garden survey: Devoted Enel Thar-Ilad",
+    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Scope": "Solo",
+    "QasInstance": 951173,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DEEE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4U",
+    "Reward": {
+      "Hash": "ER4T",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4U",
+    "Name": "Return the Shere tracking device",
+    "Summary": "Return the Ancient Tracking Device after all nine targets.",
+    "Scope": "Solo",
+    "QasInstance": 951174,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "GACH",
+      "Count": null,
+      "SpecItem": "EK0K",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER4U",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 226993,
+            "HighId": 226993,
+            "Name": "The Key to the Garden of Shere",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY90",
+    "Name": "Enel approvals: Devoted Enel Thar-Ilad",
+    "Summary": "Present and retain the Sealed Letter in route order. This route has missing downstream NPCs and is not exposed as a playable offer.",
+    "Scope": "Solo",
+    "QasInstance": 951324,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "DEEE",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY91",
+    "Reward": {
+      "Hash": "ER90",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY91",
+    "Name": "Enel approvals: Diviner Enel Wei-Nuir",
+    "Summary": "Present and retain the Sealed Letter in route order. This route has missing downstream NPCs and is not exposed as a playable offer.",
+    "Scope": "Solo",
+    "QasInstance": 951325,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "EWWN",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY92",
+    "Reward": {
+      "Hash": "ER91",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY92",
+    "Name": "Enel approvals: Sipius Enel Mara-Ilad",
+    "Summary": "Present and retain the Sealed Letter in route order. This route has missing downstream NPCs and is not exposed as a playable offer.",
+    "Scope": "Solo",
+    "QasInstance": 951326,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SIEM",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY93",
+    "Reward": {
+      "Hash": "ER92",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY93",
+    "Name": "Enel approvals: Devoted Enel Cama-Lux",
+    "Summary": "Present and retain the Sealed Letter in route order. This route has missing downstream NPCs and is not exposed as a playable offer.",
+    "Scope": "Solo",
+    "QasInstance": 951327,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "DOEL",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY94",
+    "Reward": {
+      "Hash": "ER93",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY94",
+    "Name": "Enel approvals: Diviner Enel Thar-Thar",
+    "Summary": "Present and retain the Sealed Letter in route order. This route has missing downstream NPCs and is not exposed as a playable offer.",
+    "Scope": "Solo",
+    "QasInstance": 951328,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "DIEN",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY95",
+    "Reward": {
+      "Hash": "ER94",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY95",
+    "Name": "Enel approvals: Watcher Enel Ulma-Thar",
+    "Summary": "Present and retain the Sealed Letter in route order. This route has missing downstream NPCs and is not exposed as a playable offer.",
+    "Scope": "Solo",
+    "QasInstance": 951329,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "WTEL",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER95",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY97",
+    "Name": "Return Enel approval letter",
+    "Summary": "Return after the missing Acolyte approval. Receiver Forrester must then be integrated before the tagging route is offered.",
+    "Scope": "Solo",
+    "QasInstance": 951331,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ECEE",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER97",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY4A",
+    "Name": "Sanctuary hunt: Fortuitous Jorr-Fes Shere",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951154,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "FOJO",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4B",
+    "Reward": {
+      "Hash": "ER4A",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4B",
+    "Name": "Sanctuary hunt: Hypnagogic Wox-Xum Shere",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951155,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "HYWO",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4C",
+    "Reward": {
+      "Hash": "ER4B",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4C",
+    "Name": "Sanctuary hunt: Follower Chi-Nar Shere",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951156,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "FOCH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4D",
+    "Reward": {
+      "Hash": "ER4C",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4D",
+    "Name": "Sanctuary hunt: Fortuitous Hes-Man Shere",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951157,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "FRHE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4E",
+    "Reward": {
+      "Hash": "ER4D",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4E",
+    "Name": "Sanctuary hunt: Hypnagogic Ixi-Bhotaar Shere",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951158,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "HYIX",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4F",
+    "Reward": {
+      "Hash": "ER4E",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4F",
+    "Name": "Sanctuary hunt: Visionist Dom-Xum Shere",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951159,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "VIDO",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4G",
+    "Reward": {
+      "Hash": "ER4F",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4G",
+    "Name": "Sanctuary hunt: Follower Yutt-Ixi Shere",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951160,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "FLYI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4H",
+    "Reward": {
+      "Hash": "ER4G",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4H",
+    "Name": "Sanctuary hunt: Fortuitous Pi-Zul Shere",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951161,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "FOPI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4I",
+    "Reward": {
+      "Hash": "ER4H",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4I",
+    "Name": "Sanctuary hunt: Follower Man-Wox Shere",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951162,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "FL1M",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4J",
+    "Reward": {
+      "Hash": "ER4I",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4J",
+    "Name": "Report the sanctuary hunt",
+    "Summary": "Return to the giver after the final kill. Fallback: obtain Briefing as a one-time stage reward instead of corpse loot.",
+    "Scope": "Solo",
+    "QasInstance": 951163,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "ECEE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4K",
+    "Reward": {
+      "Hash": "ER4J",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 222956,
+            "HighId": 222956,
+            "Name": "Briefing",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY4K",
+    "Name": "Deliver the Briefing",
+    "Summary": "Trade the Briefing for the sanctuary key. Unverified scaled XP/credits are not guessed.",
+    "Scope": "Solo",
+    "QasInstance": 951164,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ECEE",
+      "Count": null,
+      "SpecItem": "EK0L",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER4K",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 229059,
+            "HighId": 229059,
+            "Name": "The Key to Enel's Sanctuary",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY4V",
+    "Name": "Sanctuary hunt: Watcher Enel Ulma-Thar",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951175,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "WTEL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4W",
+    "Reward": {
+      "Hash": "ER4V",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4W",
+    "Name": "Sanctuary hunt: Sipius Enel Lux-Mara",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951176,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "SUEL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4X",
+    "Reward": {
+      "Hash": "ER4W",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4X",
+    "Name": "Sanctuary hunt: Devoted Enel Ilad-Ulma",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951177,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "DVEI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4Y",
+    "Reward": {
+      "Hash": "ER4X",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4Y",
+    "Name": "Sanctuary hunt: Watcher Enel Hume-Yeol",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951178,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "WAEL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY4Z",
+    "Reward": {
+      "Hash": "ER4Y",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY4Z",
+    "Name": "Sanctuary hunt: Sipius Enel Gil-Gil",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951179,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "SIEE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY50",
+    "Reward": {
+      "Hash": "ER4Z",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY50",
+    "Name": "Sanctuary hunt: Diviner Enel Thar-Thar",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951180,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "DIEN",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY51",
+    "Reward": {
+      "Hash": "ER50",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY51",
+    "Name": "Sanctuary hunt: Devoted Enel Cama-Lux",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951181,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "DOEL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY52",
+    "Reward": {
+      "Hash": "ER51",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY52",
+    "Name": "Sanctuary hunt: Watcher Enel Mara-Cama",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951182,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "WTEE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY53",
+    "Reward": {
+      "Hash": "ER52",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY53",
+    "Name": "Sanctuary hunt: Devoted Enel Thar-Ilad",
+    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Scope": "Solo",
+    "QasInstance": 951183,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "DEEE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY54",
+    "Reward": {
+      "Hash": "ER53",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY54",
+    "Name": "Report the sanctuary hunt",
+    "Summary": "Return to the giver after the final kill. Fallback: obtain Briefing as a one-time stage reward instead of corpse loot.",
+    "Scope": "Solo",
+    "QasInstance": 951184,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PPNS",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY55",
+    "Reward": {
+      "Hash": "ER54",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 222956,
+            "HighId": 222956,
+            "Name": "Briefing",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY55",
+    "Name": "Deliver the Briefing",
+    "Summary": "Trade the Briefing for the sanctuary key. Unverified scaled XP/credits are not guessed.",
+    "Scope": "Solo",
+    "QasInstance": 951185,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "PPNS",
+      "Count": null,
+      "SpecItem": "EK0L",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER55",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 229062,
+            "HighId": 229062,
+            "Name": "The Key to Shere's Sanctuary",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY60",
+    "Name": "Trial collection: Lost Mortiig",
+    "Summary": "Fallback: defeat the existing Lost specimen once. The successive spawned variants and three fragile guards are not simulated.",
+    "Scope": "Solo",
+    "QasInstance": 951216,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "LTMI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY61",
+    "Reward": {
+      "Hash": "ER60",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY61",
+    "Name": "Trial collection: Lost Eremite",
+    "Summary": "Fallback: defeat the existing Lost specimen once. The successive spawned variants and three fragile guards are not simulated.",
+    "Scope": "Solo",
+    "QasInstance": 951217,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "LSEE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY62",
+    "Reward": {
+      "Hash": "ER61",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY62",
+    "Name": "Trial collection: Lost Hiathlin",
+    "Summary": "Fallback: defeat the existing Lost specimen once. The successive spawned variants and three fragile guards are not simulated.",
+    "Scope": "Solo",
+    "QasInstance": 951218,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "LSHI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY63",
+    "Reward": {
+      "Hash": "ER62",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY63",
+    "Name": "Trial collection: Lost Imp",
+    "Summary": "Fallback: defeat the existing Lost specimen once. The successive spawned variants and three fragile guards are not simulated.",
+    "Scope": "Solo",
+    "QasInstance": 951219,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "LSIM",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY64",
+    "Reward": {
+      "Hash": "ER63",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY64",
+    "Name": "Return four body parts to Ergo",
+    "Summary": "After the four Lost-specimen objectives, collect the fallback body parts from Ergo and hand all four in together.",
+    "Scope": "Solo",
+    "QasInstance": 951220,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "JJTM",
+      "Count": null,
+      "SpecItem": "EK0O",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY65",
+    "Reward": {
+      "Hash": "ER64",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 236655,
+            "HighId": 236655,
+            "Name": "Mark of the Challenger",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY65",
+    "Name": "Present the Mark of the Challenger",
+    "Summary": "Present the Mark; it is returned as the stage reward. No invented mission-dungeon spawn or portal destination.",
+    "Scope": "Solo",
+    "QasInstance": 951221,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "JJTM",
+      "Count": null,
+      "SpecItem": "EK0S",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY66",
+    "Reward": {
+      "Hash": "ER65",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 236655,
+            "HighId": 236655,
+            "Name": "Mark of the Challenger",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY66",
+    "Name": "Challenger trial: explicit waiver",
+    "Summary": "Challenger template and dungeon binding are absent. Target Ergo to waive the combat trial in this easier fallback.",
+    "Scope": "Solo",
+    "QasInstance": 951222,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "JJTM",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY67",
+    "Reward": {
+      "Hash": "ER66",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY67",
+    "Name": "Collect the trial tooth",
+    "Summary": "Target Ergo after the waived trial to obtain one Challengers Tooth as a stage reward.",
+    "Scope": "Solo",
+    "QasInstance": 951223,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "JJTM",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY68",
+    "Reward": {
+      "Hash": "ER67",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 234601,
+            "HighId": 234601,
+            "Name": "Challengers Tooth",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY68",
+    "Name": "Return tooth, mark and old ring",
+    "Summary": "Hand in the tooth, Mark and your old Insipid Ring. Fallback preserves the unit of the old ring rather than guessing profession-number mapping.",
+    "Scope": "Solo",
+    "QasInstance": 951224,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "JJTM",
+      "Count": null,
+      "SpecItem": "EK0T",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER68",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY71",
+    "Name": "Excaliburs End (waived visit)",
+    "Summary": "Target the named recipient. Sword dynel/use is missing; this explicitly waives the expedition at the giver.",
+    "Scope": "Solo",
+    "QasInstance": 951253,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "OHWH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER71",
+      "Xp": 20000,
+      "Credits": 50000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY72",
+    "Name": "Find Ergo",
+    "Summary": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+    "Scope": "Solo",
+    "QasInstance": 951254,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "JJTM",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER72",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY73",
+    "Name": "Seek a challenge",
+    "Summary": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+    "Scope": "Solo",
+    "QasInstance": 951255,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "OEWV",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER73",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY74",
+    "Name": "Find the Enel quest giver",
+    "Summary": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+    "Scope": "Solo",
+    "QasInstance": 951256,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "ECEE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER74",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY75",
+    "Name": "Find the Shere quest giver",
+    "Summary": "Target the named recipient. No unverified reward or faction eligibility is invented.",
+    "Scope": "Solo",
+    "QasInstance": 951257,
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PPNS",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER75",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  }
+]

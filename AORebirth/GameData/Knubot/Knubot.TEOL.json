@@ -1,0 +1,258 @@
+{
+  "Npcs": [
+    "TEOL"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "ey19_trade": {
+      "Text": "Hand in: Deliver Sphagnum Moss",
+      "Goto": "ey19_trade",
+      "If": [
+        "HasQuest EY19",
+        "has EK03 1"
+      ],
+      "Source": "filler"
+    },
+    "ey1i_offer": {
+      "Text": "Drive Away Shell Eremites",
+      "Goto": "ey1i_description",
+      "If": [
+        "!HasAnyQuest EY1I",
+        "!quest EY1I done",
+        "!quest EY1I done"
+      ],
+      "Source": "filler"
+    },
+    "ey1i_accept": {
+      "Text": "Accept: Drive Away Shell Eremites",
+      "Goto": "ey1i_start",
+      "If": [
+        "!HasAnyQuest EY1I",
+        "!quest EY1I done",
+        "!quest EY1I done"
+      ],
+      "Source": "filler"
+    },
+    "ey1i_progress": {
+      "Text": "Drive Away Shell Eremites: progress",
+      "Goto": "ey1i_progress",
+      "If": [
+        "HasAnyQuest EY1I"
+      ],
+      "Source": "filler"
+    },
+    "ey1k_trade": {
+      "Text": "Hand in: Deliver the Pearl of the Endless Sea",
+      "Goto": "ey1k_trade",
+      "If": [
+        "HasQuest EY1K",
+        "has EK04 1"
+      ],
+      "Source": "filler"
+    },
+    "ey1k_supply0": {
+      "Text": "Collect missing proof for EY1K",
+      "Goto": "ey1k_supply0",
+      "If": [
+        "HasQuest EY1K",
+        "!has EK04 1"
+      ],
+      "Source": "filler"
+    },
+    "ey1j_offer": {
+      "Text": "Diving for Pearls",
+      "Goto": "ey1j_description",
+      "If": [
+        "!HasAnyQuest EY1J,EY1L,EY1M,EY1K",
+        "!quest EY1J done",
+        "!quest EY1K done"
+      ],
+      "Source": "filler"
+    },
+    "ey1j_accept": {
+      "Text": "Accept: Diving for Pearls",
+      "Goto": "ey1j_start",
+      "If": [
+        "!HasAnyQuest EY1J,EY1L,EY1M,EY1K",
+        "!quest EY1J done",
+        "!quest EY1K done"
+      ],
+      "Source": "filler"
+    },
+    "ey1j_progress": {
+      "Text": "Diving for Pearls: progress",
+      "Goto": "ey1j_progress",
+      "If": [
+        "HasAnyQuest EY1J,EY1L,EY1M,EY1K"
+      ],
+      "Source": "filler"
+    },
+    "pearls_ready": {
+      "Text": "All pearl objectives are finished.",
+      "Goto": "pearls_ready",
+      "If": [
+        "quest EY1J done",
+        "quest EY1L done",
+        "quest EY1M done",
+        "!HasQuest EY1K",
+        "!quest EY1K done"
+      ],
+      "Source": "filler"
+    },
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "ey19_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey19_done": {
+      "Text": "{completequest EY19}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1i_description": {
+      "Text": "Kill five Shell Eremites for30,000XP,100,000credits and one Mini-XP Reward item.",
+      "Replies": [
+        "ey1i_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1i_start": {
+      "Text": "{givequest EY1I}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1i_progress": {
+      "Text": "Kill five Shell Eremites for30,000XP,100,000credits and one Mini-XP Reward item.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1k_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1k_done": {
+      "Text": "{completequest EY1K}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1k_supply0": {
+      "Text": "{spawn EK04 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1j_description": {
+      "Text": "Defeat Coiling and Bending Eremites, report the unavailable third target, then return a pearl for the documented rewards.",
+      "Replies": [
+        "ey1j_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1j_start": {
+      "Text": "{givequest EY1J}{givequest EY1L}{givequest EY1M}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1j_progress": {
+      "Text": "Defeat Coiling and Bending Eremites, report the unavailable third target, then return a pearl for the documented rewards.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "pearls_ready": {
+      "Text": "{givequest EY1K}You can now collect and hand in the pearl.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey19_trade",
+        "ey1i_offer",
+        "ey1i_progress",
+        "ey1k_trade",
+        "ey1k_supply0",
+        "ey1j_offer",
+        "ey1j_progress",
+        "pearls_ready",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey19": {
+      "If": [
+        "HasQuest EY19"
+      ],
+      "Items": [
+        {
+          "Hash": "EK03",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey19_done"
+    },
+    "ey1k": {
+      "If": [
+        "HasQuest EY1K"
+      ],
+      "Items": [
+        {
+          "Hash": "EK04",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey1k_done"
+    }
+  }
+}
