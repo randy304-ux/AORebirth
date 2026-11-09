@@ -1,0 +1,410 @@
+[
+  {
+    "Name": "The Mariner's Father: combine 1+2",
+    "Source": [
+      226253
+    ],
+    "Target": [
+      226252
+    ],
+    "Result": [
+      226260,
+      226260
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Mariner's Father: combine 1+2",
+    "Source": [
+      226252
+    ],
+    "Target": [
+      226253
+    ],
+    "Result": [
+      226260,
+      226260
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Mariner's Father: combine (1-2)+3",
+    "Source": [
+      226254
+    ],
+    "Target": [
+      226260
+    ],
+    "Result": [
+      226261,
+      226261
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Mariner's Father: combine (1-2)+3",
+    "Source": [
+      226260
+    ],
+    "Target": [
+      226254
+    ],
+    "Result": [
+      226261,
+      226261
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Mariner's Father: combine (1-3)+4",
+    "Source": [
+      226255
+    ],
+    "Target": [
+      226261
+    ],
+    "Result": [
+      226262,
+      226262
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Mariner's Father: combine (1-3)+4",
+    "Source": [
+      226261
+    ],
+    "Target": [
+      226255
+    ],
+    "Result": [
+      226262,
+      226262
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Girl that Saw it All: combine 1+2",
+    "Source": [
+      226257
+    ],
+    "Target": [
+      226256
+    ],
+    "Result": [
+      226263,
+      226263
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Girl that Saw it All: combine 1+2",
+    "Source": [
+      226256
+    ],
+    "Target": [
+      226257
+    ],
+    "Result": [
+      226263,
+      226263
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Girl that Saw it All: combine (1-2)+3",
+    "Source": [
+      226258
+    ],
+    "Target": [
+      226263
+    ],
+    "Result": [
+      226264,
+      226264
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Girl that Saw it All: combine (1-2)+3",
+    "Source": [
+      226263
+    ],
+    "Target": [
+      226258
+    ],
+    "Result": [
+      226264,
+      226264
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Girl that Saw it All: combine (1-3)+4",
+    "Source": [
+      226259
+    ],
+    "Target": [
+      226264
+    ],
+    "Result": [
+      226265,
+      226265
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "The Girl that Saw it All: combine (1-3)+4",
+    "Source": [
+      226264
+    ],
+    "Target": [
+      226259
+    ],
+    "Result": [
+      226265,
+      226265
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Kanel's Story: combine 1+2",
+    "Source": [
+      226267
+    ],
+    "Target": [
+      226266
+    ],
+    "Result": [
+      301008,
+      301008
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Kanel's Story: combine 1+2",
+    "Source": [
+      226266
+    ],
+    "Target": [
+      226267
+    ],
+    "Result": [
+      301008,
+      301008
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Kanel's Story: combine (1-2)+3",
+    "Source": [
+      226268
+    ],
+    "Target": [
+      301008
+    ],
+    "Result": [
+      301007,
+      301007
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Kanel's Story: combine (1-2)+3",
+    "Source": [
+      301008
+    ],
+    "Target": [
+      226268
+    ],
+    "Result": [
+      301007,
+      301007
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Kanel's Story: combine (1-3)+4",
+    "Source": [
+      226269
+    ],
+    "Target": [
+      301007
+    ],
+    "Result": [
+      301006,
+      301006
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Kanel's Story: combine (1-3)+4",
+    "Source": [
+      301007
+    ],
+    "Target": [
+      226269
+    ],
+    "Result": [
+      301006,
+      301006
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Afirce's World Catalogue: combine 1+2",
+    "Source": [
+      226275
+    ],
+    "Target": [
+      226271
+    ],
+    "Result": [
+      301019,
+      301019
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Afirce's World Catalogue: combine 1+2",
+    "Source": [
+      226271
+    ],
+    "Target": [
+      226275
+    ],
+    "Result": [
+      301019,
+      301019
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Afirce's World Catalogue: combine (1-2)+3",
+    "Source": [
+      226280
+    ],
+    "Target": [
+      301019
+    ],
+    "Result": [
+      301018,
+      301018
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Afirce's World Catalogue: combine (1-2)+3",
+    "Source": [
+      301019
+    ],
+    "Target": [
+      226280
+    ],
+    "Result": [
+      301018,
+      301018
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Afirce's World Catalogue: combine (1-3)+4",
+    "Source": [
+      226285
+    ],
+    "Target": [
+      301018
+    ],
+    "Result": [
+      301017,
+      301017
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  },
+  {
+    "Name": "Afirce's World Catalogue: combine (1-3)+4",
+    "Source": [
+      301018
+    ],
+    "Target": [
+      226285
+    ],
+    "Result": [
+      301017,
+      301017
+    ],
+    "Skills": [],
+    "DeleteSource": true,
+    "DeleteTarget": true,
+    "MinSourcePct": 0
+  }
+]

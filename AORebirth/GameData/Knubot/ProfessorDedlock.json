@@ -1,0 +1,461 @@
+{
+  "Npcs": [
+    "DEDL"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasAnyQuest NA2J,NA2K"
+      ],
+      "Say": "hunt_busy"
+    },
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "sp1c": {
+      "Text": "I want my first specialization (Clan).",
+      "Goto": "offer_clan",
+      "Source": "filler",
+      "If": [
+        "!HasAnyQuest NA2J,NA2K",
+        "!has NQ02"
+      ],
+      "Requirements": [
+        {
+          "Stat": "54",
+          "Operator": "LessThan",
+          "Value": 52
+        },
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        },
+        {
+          "Stat": "33",
+          "Operator": "EqualTo",
+          "Value": 1
+        }
+      ]
+    },
+    "sp1o": {
+      "Text": "I want my first specialization (Omni).",
+      "Goto": "offer_omni",
+      "Source": "filler",
+      "If": [
+        "!HasAnyQuest NA2J,NA2K",
+        "!has NQ02"
+      ],
+      "Requirements": [
+        {
+          "Stat": "54",
+          "Operator": "LessThan",
+          "Value": 52
+        },
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        },
+        {
+          "Stat": "33",
+          "Operator": "EqualTo",
+          "Value": 2
+        }
+      ]
+    },
+    "sp1n": {
+      "Text": "I want my first specialization (Neutral).",
+      "Goto": "offer_neutral",
+      "Source": "filler",
+      "If": [
+        "!HasAnyQuest NA2J,NA2K",
+        "!has NQ02"
+      ],
+      "Requirements": [
+        {
+          "Stat": "54",
+          "Operator": "LessThan",
+          "Value": 52
+        },
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        },
+        {
+          "Stat": "33",
+          "Operator": "EqualTo",
+          "Value": 0
+        }
+      ]
+    },
+    "take_tempt": {
+      "Text": "I'll hunt the Tempterus.",
+      "Goto": "give_clan",
+      "Source": "filler",
+      "If": [
+        "!HasAnyQuest NA2J,NA2K",
+        "!has NQ02"
+      ],
+      "Requirements": [
+        {
+          "Stat": "54",
+          "Operator": "LessThan",
+          "Value": 52
+        },
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        },
+        {
+          "Stat": "33",
+          "Operator": "EqualTo",
+          "Value": 1
+        }
+      ]
+    },
+    "take_hai": {
+      "Text": "I'll hunt the Hai-Tempterus.",
+      "Goto": "give_omni",
+      "Source": "filler",
+      "If": [
+        "!HasAnyQuest NA2J,NA2K",
+        "!has NQ02"
+      ],
+      "Requirements": [
+        {
+          "Stat": "54",
+          "Operator": "LessThan",
+          "Value": 52
+        },
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        },
+        {
+          "Stat": "33",
+          "Operator": "EqualTo",
+          "Value": 2
+        }
+      ]
+    },
+    "take_tempt_n": {
+      "Text": "I'll hunt the Tempterus.",
+      "Goto": "give_clan",
+      "Source": "filler",
+      "If": [
+        "!HasAnyQuest NA2J,NA2K",
+        "!has NQ02"
+      ],
+      "Requirements": [
+        {
+          "Stat": "54",
+          "Operator": "LessThan",
+          "Value": 52
+        },
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        },
+        {
+          "Stat": "33",
+          "Operator": "EqualTo",
+          "Value": 0
+        }
+      ]
+    },
+    "take_hai_n": {
+      "Text": "I'll hunt the Hai-Tempterus.",
+      "Goto": "give_omni",
+      "Source": "filler",
+      "If": [
+        "!HasAnyQuest NA2J,NA2K",
+        "!has NQ02"
+      ],
+      "Requirements": [
+        {
+          "Stat": "54",
+          "Operator": "LessThan",
+          "Value": 52
+        },
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        },
+        {
+          "Stat": "33",
+          "Operator": "EqualTo",
+          "Value": 0
+        }
+      ]
+    },
+    "t1": {
+      "Text": "I have The Mariner's Father.",
+      "Goto": "give_t1",
+      "Source": "filler",
+      "If": [
+        "has NQ02"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        }
+      ]
+    },
+    "t2": {
+      "Text": "I have The Girl that Saw it All.",
+      "Goto": "give_t2",
+      "Source": "filler",
+      "If": [
+        "has NB08"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 1
+        }
+      ]
+    },
+    "t3": {
+      "Text": "I have Kanel's Story.",
+      "Goto": "give_t3",
+      "Source": "filler",
+      "If": [
+        "has NB0C"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 2
+        }
+      ]
+    },
+    "t4": {
+      "Text": "I have Afirce's World Catalogue of Books.",
+      "Goto": "give_t4",
+      "Source": "filler",
+      "If": [
+        "has NB13"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 3
+        }
+      ]
+    },
+    "about": {
+      "Text": "Tell me about the specialization books.",
+      "Goto": "about",
+      "Source": "filler"
+    },
+    "later": {
+      "Text": "Maybe later.",
+      "Goto": "later",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "bye",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": [
+        "Welcome to the Institute of Professional Specialization.",
+        "{delay 1}\\nI record specialization book hand-ins. What can I do for you?"
+      ],
+      "Source": "filler",
+      "Replies": [
+        "sp1c",
+        "sp1o",
+        "sp1n",
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "about",
+        "bye"
+      ]
+    },
+    "offer_clan": {
+      "Text": "Clan applicants hunt Tempterus at Papageno's Paradise in Nascence Frontier (650,1275). Thirty kills; Hai-Tempterus do not count. The Mariner's Father is waiting in your inventory when you are done. Bring it back to me.",
+      "Source": "filler",
+      "Replies": [
+        "take_tempt",
+        "later"
+      ]
+    },
+    "offer_omni": {
+      "Text": "Omni applicants hunt Hai-Tempterus at Papagena's Paradise in Nascence Frontier (950,1270). Thirty kills; Tempterus do not count. The Mariner's Father is waiting in your inventory when you are done. Bring it back to me.",
+      "Source": "filler",
+      "Replies": [
+        "take_hai",
+        "later"
+      ]
+    },
+    "offer_neutral": {
+      "Text": "Neutral applicants may choose: thirty Tempterus at Papageno's Paradise (650,1275) or thirty Hai-Tempterus at Papagena's Paradise (950,1270), both in Nascence Frontier. The Mariner's Father is waiting in your inventory when you are done.",
+      "Source": "filler",
+      "Replies": [
+        "take_tempt_n",
+        "take_hai_n",
+        "later"
+      ]
+    },
+    "give_clan": {
+      "Text": "{givequest NA2J}The hunt is in your journal.{close}",
+      "Source": "filler"
+    },
+    "give_omni": {
+      "Text": "{givequest NA2K}The hunt is in your journal.{close}",
+      "Source": "filler"
+    },
+    "hunt_busy": {
+      "Text": "Keep at it. Thirty kills; the book appears in your inventory on the last one. Tempterus for Clan, Hai-Tempterus for Omni.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "about": {
+      "Text": "A specialization book is four parts: collect the chapters (or editions, or volumes) and combine them in order 1, 2, 3, 4. Hand the finished book to me, in order: The Mariner's Father, The Girl that Saw it All, Kanel's Story, then Afirce's World Catalogue of Books.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "give_t1": {
+      "Text": "Put the book in the trade window.{givequest NA2M}{opentrade}",
+      "Source": "filler"
+    },
+    "done_t1": {
+      "Text": "{completequest NA2M}Excellent work. Specialization 1 is yours.{close}",
+      "Source": "filler"
+    },
+    "give_t2": {
+      "Text": "Put the book in the trade window.{givequest NA2N}{opentrade}",
+      "Source": "filler"
+    },
+    "done_t2": {
+      "Text": "{completequest NA2N}Excellent work. Specialization 2 is yours.{close}",
+      "Source": "filler"
+    },
+    "give_t3": {
+      "Text": "Put the book in the trade window.{givequest NA2O}{opentrade}",
+      "Source": "filler"
+    },
+    "done_t3": {
+      "Text": "{completequest NA2O}Excellent work. Specialization 3 is yours.{close}",
+      "Source": "filler"
+    },
+    "give_t4": {
+      "Text": "Put the book in the trade window.{givequest NA2P}{opentrade}",
+      "Source": "filler"
+    },
+    "done_t4": {
+      "Text": "{completequest NA2P}Excellent work. Specialization 4 is yours.{close}",
+      "Source": "filler"
+    },
+    "later": {
+      "Text": "As you wish.{close}",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.{close}",
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "t1_trade": {
+      "If": [
+        "HasQuest NA2M"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        }
+      ],
+      "Items": [
+        {
+          "Hash": "NQ02",
+          "Count": 1
+        }
+      ],
+      "Goto": "done_t1"
+    },
+    "t2_trade": {
+      "If": [
+        "HasQuest NA2N"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 1
+        }
+      ],
+      "Items": [
+        {
+          "Hash": "NB08",
+          "Count": 1
+        }
+      ],
+      "Goto": "done_t2"
+    },
+    "t3_trade": {
+      "If": [
+        "HasQuest NA2O"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 2
+        }
+      ],
+      "Items": [
+        {
+          "Hash": "NB0C",
+          "Count": 1
+        }
+      ],
+      "Goto": "done_t3"
+    },
+    "t4_trade": {
+      "If": [
+        "HasQuest NA2P"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 3
+        }
+      ],
+      "Items": [
+        {
+          "Hash": "NB13",
+          "Count": 1
+        }
+      ],
+      "Goto": "done_t4"
+    }
+  },
+  "Notes": "Professor Dedlock (DEDL), IPS Interior PF 4575. Real captured: appearance/position only; NO dialogue captured, every line is filler (Source=filler)."
+}

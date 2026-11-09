@@ -1,5 +1,5 @@
 {
-  "Notes": "Live text from Randy's scrape 2026-10-30 16:40-16:47 ET (dialogs_raw). Scientist Drake Rodriguez: SCDK in Jobe Research 4001 (854.5,34.8,958.6; the Arrival Hall Shadowlands door lands in front of him) and SCDR in Nascense Training Ground 4313. First talk (once per character, quest XDGK): the Bracer of Jobe only. The profession heal crystal and the live meds (Health and Nano Recharger x50 / Stim x25) come with the creation kit (StartPackages.json). Live text: intro, Mandatory?!, contract, Carry on, Test of Strength upload. Other tests, the bracer answer, refusal and later greetings were not captured (stand-ins). Base script from Build-NewbieQuests.ps1, patched by ddogs/tools/Build-JobeSL.py. 2026-10-30 19:49-20:20 ET scrape (Build-JobeSLTests.py): live Agility/Sense/Psychic/Intelligence uploads, bracer answer, Brink hand-in text; Test of Psychic gives XDPF+XDPC; psychic report drops the leftover side quest and offers Intelligence (live bug fixed).",
+  "Notes": "Live text from Randy's scrape 2026-10-30 16:40-16:47 ET (dialogs_raw). Scientist Drake Rodriguez: SCDK in Jobe Research 4001 (854.5,34.8,958.6; the Arrival Hall Shadowlands door lands in front of him) and SCDR in Nascense Training Ground 4313. First talk (once per character, quest XDGK): the Bracer of Jobe only. The profession heal crystal and the live meds (Health and Nano Recharger x50 / Stim x25) come with the creation kit (StartPackages.json). Live text: intro, Mandatory?!, contract, Carry on, Test of Strength upload. Other tests, the bracer answer, refusal and later greetings were not captured (stand-ins). Base script from Build-NewbieQuests.ps1, patched by ddogs/tools/Build-JobeSL.py. 2026-10-30 19:49-20:20 ET scrape (Build-JobeSLTests.py): live Agility/Sense/Psychic/Intelligence uploads, bracer answer, Brink hand-in text; Test of Psychic gives XDPF+XDPC; psychic report drops the leftover side quest and offers Intelligence (live bug fixed). | 20261109: rewards/hello lines replaced with captured dialogue (dialogs_20261030_Nazgore). GPT NA08-NA0A not wired: it duplicates live XDBR (Heckler of Evolution -> 6 Delicate Metal Devices -> Smart Backpack).",
   "Npcs": [
     "SCDR",
     "SCDK"
@@ -437,7 +437,10 @@
       "Text": "The tests are done. Nascence is through the way you came, when you are ready.{close}"
     },
     "hello": {
-      "Text": "\\nAre you ready?",
+      "Text": [
+        "Hello again, {name}.",
+        "{delay 1}\\nAre you ready for your mandatory tests?"
+      ],
       "Replies": [
         "mandatory",
         "ask_strength",
@@ -471,7 +474,10 @@
       ]
     },
     "rewards": {
-      "Text": "\\nEvery test you pass is paid for, in credits and in equipment. The bracer will see to it that nothing goes unrecorded.",
+      "Text": [
+        "{emote}Drake smiles invitingly then continues.{/emote}",
+        "{delay 1}Of course! Consider it a small compensation."
+      ],
       "Replies": [
         "carry_on",
         "bye"

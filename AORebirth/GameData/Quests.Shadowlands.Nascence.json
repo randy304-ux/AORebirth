@@ -1,0 +1,1257 @@
+[
+  {
+    "Hash": "NA10",
+    "Name": "Disease survey: Cripplers",
+    "Summary": "Kill ten Cripplers of Growth in Nascence Wilds. This stage counts the standard CIOG population; other template variants do not count.",
+    "QasInstance": 950036,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "CIOG",
+      "Count": 10,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA11",
+    "Reward": {
+      "Hash": "NR10",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA11",
+    "Name": "Disease survey: Croakers",
+    "Summary": "Kill ten Croakers of Night in Nascence Wilds. This stage counts the standard CEON population. Then return to Avatar Urga-Pi Thrak.",
+    "QasInstance": 950037,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "CEON",
+      "Count": 10,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA12",
+    "Reward": {
+      "Hash": "NR11",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA12",
+    "Name": "Deliver the disease sample",
+    "Summary": "Ask Avatar Urga-Pi Thrak for the sample unit after both hunts, then give it back through the Give Item window for QL 25 Smuggler's Armor Gloves.",
+    "QasInstance": 950038,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "AVUR",
+      "Count": null,
+      "SpecItem": "NQ00",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR12",
+      "Xp": 54000,
+      "Credits": 2000,
+      "Records": [
+        [
+          {
+            "Id": 227024,
+            "HighId": 227024,
+            "Name": "Smuggler's Armor Gloves",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA18",
+    "Name": "Population survey: Hatchlings",
+    "Summary": "Kill ten Spinetooth Hatchlings in Nascence Swamp. This stage counts the standard SIHA population.",
+    "QasInstance": 950044,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "SIHA",
+      "Count": 10,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA19",
+    "Reward": {
+      "Hash": "NR18",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA19",
+    "Name": "Population survey: Malah-Anas",
+    "Summary": "Kill ten Malah-Anas in Nascence Swamp. This stage counts the standard XAIY population. Then return to Seeker Aban Kald-Nuir.",
+    "QasInstance": 950045,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "XAIY",
+      "Count": 10,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA1A",
+    "Reward": {
+      "Hash": "NR19",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1A",
+    "Name": "Deliver the population sensor",
+    "Summary": "Ask Seeker Aban Kald-Nuir for the sensor after both hunts, then give it back through the Give Item window for QL 25 Smuggler's Armor Gloves.",
+    "QasInstance": 950046,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SEAB",
+      "Count": null,
+      "SpecItem": "NQ01",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1A",
+      "Xp": 54000,
+      "Credits": 2000,
+      "Records": [
+        [
+          {
+            "Id": 227024,
+            "HighId": 227024,
+            "Name": "Smuggler's Armor Gloves",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA1E",
+    "Name": "Chapter 1: Craig-Or",
+    "Summary": "Kill 5 Craig-Or. The next objective then starts.",
+    "QasInstance": 950050,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "RAIG",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA1F",
+    "Reward": {
+      "Hash": "NR1E",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1F",
+    "Name": "Chapter 1: Follower Gulu-Man Thrak",
+    "Summary": "Kill Follower Gulu-Man Thrak (Nascense Wilds 211,1023). Receive The Mariner's Father - Chapter 1.",
+    "QasInstance": 950051,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "FOGL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1F",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226252,
+            "HighId": 226252,
+            "Name": "The Mariner's Father - Chapter 1",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA1G",
+    "Name": "Chapter 2: Calan-Cur",
+    "Summary": "Kill 5 Calan-Cur. The next objective then starts.",
+    "QasInstance": 950052,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "ALAN",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA1H",
+    "Reward": {
+      "Hash": "NR1G",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1H",
+    "Name": "Chapter 2: Fortuitous Chi Chi Thrak",
+    "Summary": "Kill 1 Fortuitous Chi-Chi Thrak. Receive The Mariner's Father - Chapter 2.",
+    "QasInstance": 950053,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "FOCI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1H",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226253,
+            "HighId": 226253,
+            "Name": "The Mariner's Father - Chapter 2",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA1I",
+    "Name": "Chapter 3: Sun-Len",
+    "Summary": "Kill 5 Sun-Len (Nascense Wilds). The next objective then starts.",
+    "QasInstance": 950054,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "PLNZ",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA1J",
+    "Reward": {
+      "Hash": "NR1I",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1J",
+    "Name": "Chapter 3: Fortuitous Orma-Yutt Thrak",
+    "Summary": "Kill Fortuitous Orma-Yutt Thrak (Nascense Wilds 276,828). Receive The Mariner's Father - Chapter 3.",
+    "QasInstance": 950055,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "FOOM",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1J",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226254,
+            "HighId": 226254,
+            "Name": "The Mariner's Father - Chapter 3",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA1K",
+    "Name": "Chapter 4: Barad-Or",
+    "Summary": "Kill 3 Barad-Or. The next objective then starts.",
+    "QasInstance": 950056,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "ARAD",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA1L",
+    "Reward": {
+      "Hash": "NR1K",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1L",
+    "Name": "Chapter 4: Hypnagogic Man-Dom Thrak",
+    "Summary": "Kill 1 Hypnagogic Man-Dom Thrak. Receive The Mariner's Father - Chapter 4.",
+    "QasInstance": 950057,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "HPMA",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1L",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226255,
+            "HighId": 226255,
+            "Name": "The Mariner's Father - Chapter 4",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA1M",
+    "Name": "Chapter 1: Len-Dosa",
+    "Summary": "Kill 5 Len-Dosa. The next objective then starts.",
+    "QasInstance": 950058,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "SLYA",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA1N",
+    "Reward": {
+      "Hash": "NR1M",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1N",
+    "Name": "Chapter 1: Watcher Aban Wei-Nuir",
+    "Summary": "Kill 1 Watcher Aban Wei-Nuir. Receive The Mariner's Father - Chapter 1.",
+    "QasInstance": 950059,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "WAAA",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1N",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226252,
+            "HighId": 226252,
+            "Name": "The Mariner's Father - Chapter 1",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA1O",
+    "Name": "Chapter 2: Cur-Beat",
+    "Summary": "Kill 5 Cur-Beat. The next objective then starts.",
+    "QasInstance": 950060,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "PIDR",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA1P",
+    "Reward": {
+      "Hash": "NR1O",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1P",
+    "Name": "Chapter 2: Devoted Aban Path-Duna",
+    "Summary": "Kill 1 Devoted Aban Path-Duna. Receive The Mariner's Father - Chapter 2.",
+    "QasInstance": 950061,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "DEAB",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1P",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226253,
+            "HighId": 226253,
+            "Name": "The Mariner's Father - Chapter 2",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA1Q",
+    "Name": "Chapter 3: Or-Farat",
+    "Summary": "Kill 5 Or-Farat (Nascense Swamp). The next objective then starts.",
+    "QasInstance": 950062,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "PYGC",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA1R",
+    "Reward": {
+      "Hash": "NR1Q",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1R",
+    "Name": "Chapter 3: Sipius Aban Lux-Nuir",
+    "Summary": "Kill 1 Sipius Aban Lux-Nuir. Receive The Mariner's Father - Chapter 3.",
+    "QasInstance": 950063,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "SIAN",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1R",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226254,
+            "HighId": 226254,
+            "Name": "The Mariner's Father - Chapter 3",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA1S",
+    "Name": "Chapter 4: Or-Jerad",
+    "Summary": "Kill 3 Or-Jerad. The next objective then starts.",
+    "QasInstance": 950064,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "QEFS",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA1T",
+    "Reward": {
+      "Hash": "NR1S",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1T",
+    "Name": "Chapter 4: Diviner Aban Hume-Ocra",
+    "Summary": "Kill Diviner Aban Hume-Ocra (Nascense Swamp 1893,686). Receive The Mariner's Father - Chapter 4.",
+    "QasInstance": 950065,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "DIAB",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1T",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226255,
+            "HighId": 226255,
+            "Name": "The Mariner's Father - Chapter 4",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA2J",
+    "Name": "Dedlock: Spec 1 book hunt (Clan) - 30 Tempterus",
+    "Summary": "Kill 30 Tempterus at Papageno's Paradise (Nascence Frontier 650,1275). Hai-Tempterus do not count. The Mariner's Father is added to your inventory.",
+    "QasInstance": 950091,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "EMPT",
+      "Count": 30,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR2J",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226262,
+            "HighId": 226262,
+            "Name": "The Mariner's Father",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA2K",
+    "Name": "Dedlock: Spec 1 book hunt (Omni) - 30 Hai-Tempterus",
+    "Summary": "Kill 30 Hai-Tempterus at Papagena's Paradise (Nascence Frontier 950,1270). Tempterus do not count. The Mariner's Father is added to your inventory.",
+    "QasInstance": 950092,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "TEMP",
+      "Count": 30,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR2K",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 226262,
+            "HighId": 226262,
+            "Name": "The Mariner's Father",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA1X",
+    "Name": "Datadisc: Spinetooth Hatchlings",
+    "Summary": "Show the datadisc from a Stalking Predator or Predator Striker, then kill ten Spinetooth Hatchlings in Nascence Swamp.",
+    "QasInstance": 950069,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "SIHA",
+      "Count": 10,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR1X",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA1Z",
+    "Name": "Datadisc 5: Remur-Nefer",
+    "Summary": "Kill Remur-Nefer, then return to Avatar Urga-Pi Thrak for the proof hand-in.",
+    "QasInstance": 950071,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "N02D",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA20",
+    "Reward": {
+      "Hash": "NR1Z",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA20",
+    "Name": "Datadisc 5: deliver proof",
+    "Summary": "After the hunt, ask Avatar Urga-Pi Thrak for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950072,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "AVUR",
+      "Count": null,
+      "SpecItem": "NQ04",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR20",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 235444,
+            "HighId": 235444,
+            "Name": "Neglectful Right Arm Symbiant, Artillery Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA21",
+    "Name": "Datadisc 6: Takheperu",
+    "Summary": "Kill Takheperu, then return to Avatar Urga-Pi Thrak for the proof hand-in.",
+    "QasInstance": 950073,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "TAKH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA22",
+    "Reward": {
+      "Hash": "NR21",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA22",
+    "Name": "Datadisc 6: deliver proof",
+    "Summary": "After the hunt, ask Avatar Urga-Pi Thrak for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950074,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "AVUR",
+      "Count": null,
+      "SpecItem": "NQ04",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR22",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 236302,
+            "HighId": 236302,
+            "Name": "Neglectful Brain Symbiant, Control Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA23",
+    "Name": "Datadisc 7: Nesbaneb",
+    "Summary": "Kill Nesbaneb, then return to Avatar Urga-Pi Thrak for the proof hand-in.",
+    "QasInstance": 950075,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "NESB",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA24",
+    "Reward": {
+      "Hash": "NR23",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA24",
+    "Name": "Datadisc 7: deliver proof",
+    "Summary": "After the hunt, ask Avatar Urga-Pi Thrak for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950076,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "AVUR",
+      "Count": null,
+      "SpecItem": "NQ04",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR24",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 235853,
+            "HighId": 235853,
+            "Name": "Neglectful Brain Symbiant, Extermination Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA25",
+    "Name": "Datadisc 8: Mesut-Ra",
+    "Summary": "Kill Mesut-Ra, then return to Avatar Urga-Pi Thrak for the proof hand-in.",
+    "QasInstance": 950077,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "ESUT",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA26",
+    "Reward": {
+      "Hash": "NR25",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA26",
+    "Name": "Datadisc 8: deliver proof",
+    "Summary": "After the hunt, ask Avatar Urga-Pi Thrak for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950078,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "AVUR",
+      "Count": null,
+      "SpecItem": "NQ04",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR26",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 235636,
+            "HighId": 235636,
+            "Name": "Neglectful Brain Symbiant, Infantry Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA27",
+    "Name": "Datadisc 9: Remur-Nefer",
+    "Summary": "Kill Remur-Nefer, then return to Avatar Urga-Pi Thrak for the proof hand-in.",
+    "QasInstance": 950079,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "N02D",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA28",
+    "Reward": {
+      "Hash": "NR27",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA28",
+    "Name": "Datadisc 9: deliver proof",
+    "Summary": "After the hunt, ask Avatar Urga-Pi Thrak for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950080,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "AVUR",
+      "Count": null,
+      "SpecItem": "NQ04",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR28",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 236077,
+            "HighId": 236077,
+            "Name": "Neglectful Brain Symbiant, Support Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA29",
+    "Name": "Datadisc 10: Saliwata",
+    "Summary": "Kill Saliwata, then return to Seeker Aban Kald-Nuir for the proof hand-in.",
+    "QasInstance": 950081,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "ALIW",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA2A",
+    "Reward": {
+      "Hash": "NR29",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA2A",
+    "Name": "Datadisc 10: deliver proof",
+    "Summary": "After the hunt, ask Seeker Aban Kald-Nuir for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950082,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SEAB",
+      "Count": null,
+      "SpecItem": "NQ0A",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR2A",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 235444,
+            "HighId": 235444,
+            "Name": "Neglectful Right Arm Symbiant, Artillery Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA2B",
+    "Name": "Datadisc 11: Narunkt",
+    "Summary": "Kill Narunkt, then return to Seeker Aban Kald-Nuir for the proof hand-in.",
+    "QasInstance": 950083,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "QUQR",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA2C",
+    "Reward": {
+      "Hash": "NR2B",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA2C",
+    "Name": "Datadisc 11: deliver proof",
+    "Summary": "After the hunt, ask Seeker Aban Kald-Nuir for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950084,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SEAB",
+      "Count": null,
+      "SpecItem": "NQ0C",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR2C",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 236302,
+            "HighId": 236302,
+            "Name": "Neglectful Brain Symbiant, Control Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA2D",
+    "Name": "Datadisc 12: Kumpari",
+    "Summary": "Kill Kumpari, then return to Seeker Aban Kald-Nuir for the proof hand-in.",
+    "QasInstance": 950085,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "KUMP",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA2E",
+    "Reward": {
+      "Hash": "NR2D",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA2E",
+    "Name": "Datadisc 12: deliver proof",
+    "Summary": "After the hunt, ask Seeker Aban Kald-Nuir for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950086,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SEAB",
+      "Count": null,
+      "SpecItem": "NQ0E",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR2E",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 235853,
+            "HighId": 235853,
+            "Name": "Neglectful Brain Symbiant, Extermination Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA2F",
+    "Name": "Datadisc 13: Sashuqa",
+    "Summary": "Kill Sashuqa, then return to Seeker Aban Kald-Nuir for the proof hand-in.",
+    "QasInstance": 950087,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "ASHU",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA2G",
+    "Reward": {
+      "Hash": "NR2F",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA2G",
+    "Name": "Datadisc 13: deliver proof",
+    "Summary": "After the hunt, ask Seeker Aban Kald-Nuir for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950088,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SEAB",
+      "Count": null,
+      "SpecItem": "NQ0G",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR2G",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 235636,
+            "HighId": 235636,
+            "Name": "Neglectful Brain Symbiant, Infantry Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "NA2H",
+    "Name": "Datadisc 14: Narunkt",
+    "Summary": "Kill Narunkt, then return to Seeker Aban Kald-Nuir for the proof hand-in.",
+    "QasInstance": 950089,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "QUQR",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": "NA2I",
+    "Reward": {
+      "Hash": "NR2H",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "NA2I",
+    "Name": "Datadisc 14: deliver proof",
+    "Summary": "After the hunt, ask Seeker Aban Kald-Nuir for the proof item and give it back to receive the specified QL25 symbiant.",
+    "QasInstance": 950090,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SEAB",
+      "Count": null,
+      "SpecItem": "NQ0I",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR2I",
+      "Credits": 2000,
+      "Xp": 54000,
+      "Records": [
+        [
+          {
+            "Id": 236077,
+            "HighId": 236077,
+            "Name": "Neglectful Brain Symbiant, Support Unit Aban",
+            "Quality": 25,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  }
+]

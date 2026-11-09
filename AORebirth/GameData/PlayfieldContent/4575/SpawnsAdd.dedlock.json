@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "recordType": "spawns-add",
+  "playfieldId": 4575,
+  "ContentProvenance": {
+    "Source": "scraped_npcs_20261029.csv",
+    "Mode": "additive",
+    "Captured": "2026-10-29"
+  },
+  "spawns": [
+    {
+      "hashText": "DEDL",
+      "position": [
+        182.534,
+        6.735,
+        170.697
+      ],
+      "minLevel": 150,
+      "maxLevel": 150,
+      "angle": 0,
+      "respawnDelaySeconds": 120
+    }
+  ]
+}

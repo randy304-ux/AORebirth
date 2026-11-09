@@ -1,0 +1,834 @@
+{
+  "Npcs": [
+    "AVUR"
+  ],
+  "Openers": [
+    {
+      "Say": "v2_hub"
+    }
+  ],
+  "Replies": {
+    "n1_na10_accept": {
+      "Text": "Accept the disease survey.",
+      "Source": "filler",
+      "If": [
+        "!HasAnyQuest NA10,NA11,NA12",
+        "!quest NA12 done"
+      ],
+      "Goto": "n1_na10_accept"
+    },
+    "n1_na10_trade": {
+      "Text": "I have the item.",
+      "Source": "filler",
+      "If": [
+        "HasQuest NA12",
+        "has NQ00"
+      ],
+      "Goto": "n1_na10_trade"
+    },
+    "n1_na10_bye": {
+      "Text": "Goodbye.",
+      "Source": "filler",
+      "Goto": "close"
+    },
+    "n1_na10_supply": {
+      "Text": "Please give me the survey item.",
+      "Source": "filler",
+      "If": [
+        "HasQuest NA12",
+        "!has NQ00"
+      ],
+      "Goto": "n1_na10_supply"
+    },
+    "v2_na1m_ask": {
+      "Text": "Chapter 1 hunt",
+      "Source": "filler",
+      "Goto": "v2_na1m_offer",
+      "If": [
+        "!HasAnyQuest NA1M,NA1N",
+        "!quest NA1N done",
+        "quest NA12 done"
+      ]
+    },
+    "v2_na1m_accept": {
+      "Text": "I will do that.",
+      "Source": "filler",
+      "Goto": "v2_na1m_accept",
+      "If": [
+        "!HasAnyQuest NA1M,NA1N",
+        "!quest NA1N done",
+        "quest NA12 done"
+      ]
+    },
+    "v2_na1m_progress": {
+      "Text": "Chapter 1 hunt: progress",
+      "Source": "filler",
+      "Goto": "v2_na1m_progress",
+      "If": [
+        "HasAnyQuest NA1M,NA1N"
+      ]
+    },
+    "v2_na1o_ask": {
+      "Text": "Chapter 2 hunt",
+      "Source": "filler",
+      "Goto": "v2_na1o_offer",
+      "If": [
+        "!HasAnyQuest NA1O,NA1P",
+        "!quest NA1P done",
+        "quest NA12 done"
+      ]
+    },
+    "v2_na1o_accept": {
+      "Text": "I will do that.",
+      "Source": "filler",
+      "Goto": "v2_na1o_accept",
+      "If": [
+        "!HasAnyQuest NA1O,NA1P",
+        "!quest NA1P done",
+        "quest NA12 done"
+      ]
+    },
+    "v2_na1o_progress": {
+      "Text": "Chapter 2 hunt: progress",
+      "Source": "filler",
+      "Goto": "v2_na1o_progress",
+      "If": [
+        "HasAnyQuest NA1O,NA1P"
+      ]
+    },
+    "v2_na1q_ask": {
+      "Text": "Chapter 3 hunt",
+      "Source": "filler",
+      "Goto": "v2_na1q_offer",
+      "If": [
+        "!HasAnyQuest NA1Q,NA1R",
+        "!quest NA1R done",
+        "quest NA12 done"
+      ]
+    },
+    "v2_na1q_accept": {
+      "Text": "I will do that.",
+      "Source": "filler",
+      "Goto": "v2_na1q_accept",
+      "If": [
+        "!HasAnyQuest NA1Q,NA1R",
+        "!quest NA1R done",
+        "quest NA12 done"
+      ]
+    },
+    "v2_na1q_progress": {
+      "Text": "Chapter 3 hunt: progress",
+      "Source": "filler",
+      "Goto": "v2_na1q_progress",
+      "If": [
+        "HasAnyQuest NA1Q,NA1R"
+      ]
+    },
+    "v2_na1s_ask": {
+      "Text": "Chapter 4 hunt",
+      "Source": "filler",
+      "Goto": "v2_na1s_offer",
+      "If": [
+        "!HasAnyQuest NA1S,NA1T",
+        "!quest NA1T done",
+        "quest NA12 done"
+      ]
+    },
+    "v2_na1s_accept": {
+      "Text": "I will do that.",
+      "Source": "filler",
+      "Goto": "v2_na1s_accept",
+      "If": [
+        "!HasAnyQuest NA1S,NA1T",
+        "!quest NA1T done",
+        "quest NA12 done"
+      ]
+    },
+    "v2_na1s_progress": {
+      "Text": "Chapter 4 hunt: progress",
+      "Source": "filler",
+      "Goto": "v2_na1s_progress",
+      "If": [
+        "HasAnyQuest NA1S,NA1T"
+      ]
+    },
+    "v2_na1z_ask": {
+      "Text": "Datadisc 5: Remur-Nefer",
+      "Source": "filler",
+      "Goto": "v2_na1z_offer",
+      "If": [
+        "!HasAnyQuest NA1Z,NA20",
+        "!quest NA20 done",
+        "has NQ05"
+      ]
+    },
+    "v2_na1z_accept": {
+      "Text": "I will do that.",
+      "Source": "filler",
+      "Goto": "v2_na1z_accept",
+      "If": [
+        "!HasAnyQuest NA1Z,NA20",
+        "!quest NA20 done",
+        "has NQ05"
+      ]
+    },
+    "v2_na1z_progress": {
+      "Text": "Datadisc 5: Remur-Nefer: progress",
+      "Source": "filler",
+      "Goto": "v2_na1z_progress",
+      "If": [
+        "HasAnyQuest NA1Z,NA20"
+      ]
+    },
+    "v2_na1z_supply": {
+      "Text": "Datadisc 5: Remur-Nefer: collect proof",
+      "Source": "filler",
+      "Goto": "v2_na1z_supply",
+      "If": [
+        "HasQuest NA20",
+        "!has NQ04"
+      ]
+    },
+    "v2_na1z_trade": {
+      "Text": "Datadisc 5: Remur-Nefer: hand in proof",
+      "Source": "filler",
+      "Goto": "v2_na1z_trade",
+      "If": [
+        "HasQuest NA20",
+        "has NQ04"
+      ]
+    },
+    "v2_na21_ask": {
+      "Text": "Datadisc 6: Takheperu",
+      "Source": "filler",
+      "Goto": "v2_na21_offer",
+      "If": [
+        "!HasAnyQuest NA21,NA22",
+        "!quest NA22 done",
+        "has NQ06"
+      ]
+    },
+    "v2_na21_accept": {
+      "Text": "I will do that.",
+      "Source": "filler",
+      "Goto": "v2_na21_accept",
+      "If": [
+        "!HasAnyQuest NA21,NA22",
+        "!quest NA22 done",
+        "has NQ06"
+      ]
+    },
+    "v2_na21_progress": {
+      "Text": "Datadisc 6: Takheperu: progress",
+      "Source": "filler",
+      "Goto": "v2_na21_progress",
+      "If": [
+        "HasAnyQuest NA21,NA22"
+      ]
+    },
+    "v2_na21_supply": {
+      "Text": "Datadisc 6: Takheperu: collect proof",
+      "Source": "filler",
+      "Goto": "v2_na21_supply",
+      "If": [
+        "HasQuest NA22",
+        "!has NQ04"
+      ]
+    },
+    "v2_na21_trade": {
+      "Text": "Datadisc 6: Takheperu: hand in proof",
+      "Source": "filler",
+      "Goto": "v2_na21_trade",
+      "If": [
+        "HasQuest NA22",
+        "has NQ04"
+      ]
+    },
+    "v2_na23_ask": {
+      "Text": "Datadisc 7: Nesbaneb",
+      "Source": "filler",
+      "Goto": "v2_na23_offer",
+      "If": [
+        "!HasAnyQuest NA23,NA24",
+        "!quest NA24 done",
+        "has NQ07"
+      ]
+    },
+    "v2_na23_accept": {
+      "Text": "I will do that.",
+      "Source": "filler",
+      "Goto": "v2_na23_accept",
+      "If": [
+        "!HasAnyQuest NA23,NA24",
+        "!quest NA24 done",
+        "has NQ07"
+      ]
+    },
+    "v2_na23_progress": {
+      "Text": "Datadisc 7: Nesbaneb: progress",
+      "Source": "filler",
+      "Goto": "v2_na23_progress",
+      "If": [
+        "HasAnyQuest NA23,NA24"
+      ]
+    },
+    "v2_na23_supply": {
+      "Text": "Datadisc 7: Nesbaneb: collect proof",
+      "Source": "filler",
+      "Goto": "v2_na23_supply",
+      "If": [
+        "HasQuest NA24",
+        "!has NQ04"
+      ]
+    },
+    "v2_na23_trade": {
+      "Text": "Datadisc 7: Nesbaneb: hand in proof",
+      "Source": "filler",
+      "Goto": "v2_na23_trade",
+      "If": [
+        "HasQuest NA24",
+        "has NQ04"
+      ]
+    },
+    "v2_na25_ask": {
+      "Text": "Datadisc 8: Mesut-Ra",
+      "Source": "filler",
+      "Goto": "v2_na25_offer",
+      "If": [
+        "!HasAnyQuest NA25,NA26",
+        "!quest NA26 done",
+        "has NQ08"
+      ]
+    },
+    "v2_na25_accept": {
+      "Text": "I will do that.",
+      "Source": "filler",
+      "Goto": "v2_na25_accept",
+      "If": [
+        "!HasAnyQuest NA25,NA26",
+        "!quest NA26 done",
+        "has NQ08"
+      ]
+    },
+    "v2_na25_progress": {
+      "Text": "Datadisc 8: Mesut-Ra: progress",
+      "Source": "filler",
+      "Goto": "v2_na25_progress",
+      "If": [
+        "HasAnyQuest NA25,NA26"
+      ]
+    },
+    "v2_na25_supply": {
+      "Text": "Datadisc 8: Mesut-Ra: collect proof",
+      "Source": "filler",
+      "Goto": "v2_na25_supply",
+      "If": [
+        "HasQuest NA26",
+        "!has NQ04"
+      ]
+    },
+    "v2_na25_trade": {
+      "Text": "Datadisc 8: Mesut-Ra: hand in proof",
+      "Source": "filler",
+      "Goto": "v2_na25_trade",
+      "If": [
+        "HasQuest NA26",
+        "has NQ04"
+      ]
+    },
+    "v2_na27_ask": {
+      "Text": "Datadisc 9: Remur-Nefer",
+      "Source": "filler",
+      "Goto": "v2_na27_offer",
+      "If": [
+        "!HasAnyQuest NA27,NA28",
+        "!quest NA28 done",
+        "has NQ09"
+      ]
+    },
+    "v2_na27_accept": {
+      "Text": "I will do that.",
+      "Source": "filler",
+      "Goto": "v2_na27_accept",
+      "If": [
+        "!HasAnyQuest NA27,NA28",
+        "!quest NA28 done",
+        "has NQ09"
+      ]
+    },
+    "v2_na27_progress": {
+      "Text": "Datadisc 9: Remur-Nefer: progress",
+      "Source": "filler",
+      "Goto": "v2_na27_progress",
+      "If": [
+        "HasAnyQuest NA27,NA28"
+      ]
+    },
+    "v2_na27_supply": {
+      "Text": "Datadisc 9: Remur-Nefer: collect proof",
+      "Source": "filler",
+      "Goto": "v2_na27_supply",
+      "If": [
+        "HasQuest NA28",
+        "!has NQ04"
+      ]
+    },
+    "v2_na27_trade": {
+      "Text": "Datadisc 9: Remur-Nefer: hand in proof",
+      "Source": "filler",
+      "Goto": "v2_na27_trade",
+      "If": [
+        "HasQuest NA28",
+        "has NQ04"
+      ]
+    },
+    "v2_menu": {
+      "Text": "Show the available tasks.",
+      "Goto": "v2_hub",
+      "Source": "filler"
+    },
+    "v2_bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "n1_na10_offer": {
+      "Text": "Kill ten Cripplers of Growth, then ten Croakers of Night in Nascence Wilds. Return with the survey completed to receive QL 25 Smuggler's Armor Gloves.",
+      "Source": "filler",
+      "Replies": [
+        "n1_na10_accept",
+        "n1_na10_bye"
+      ]
+    },
+    "n1_na10_accept": {
+      "Text": "{givequest NA10}The task is in your journal.{close}",
+      "Source": "filler"
+    },
+    "n1_na10_busy": {
+      "Text": "Please finish the task in your journal.",
+      "Source": "filler",
+      "Replies": [
+        "n1_na10_bye"
+      ]
+    },
+    "n1_na10_supply": {
+      "Text": "{spawn NQ00 1}Here is the survey item. Give it to me through the Give Item window.",
+      "Source": "filler",
+      "Replies": [
+        "n1_na10_trade",
+        "n1_na10_bye"
+      ]
+    },
+    "n1_na10_return": {
+      "Text": "Your survey is complete. Hand over the item to receive your reward.",
+      "Source": "filler",
+      "Replies": [
+        "n1_na10_supply",
+        "n1_na10_trade",
+        "n1_na10_bye"
+      ]
+    },
+    "n1_na10_trade": {
+      "Text": "Put the item in the Give Item window.{opentrade}",
+      "Source": "filler"
+    },
+    "n1_na10_done": {
+      "Text": "{completequest NA12}Thank you. Your reward is ready.{close}",
+      "Source": "filler"
+    },
+    "v2_na1m_offer": {
+      "Text": "Kill 5 Len-Dosa. The next objective then starts. Kill 1 Watcher Aban Wei-Nuir. Receive The Mariner's Father - Chapter 1.",
+      "Source": "filler",
+      "Replies": [
+        "v2_na1m_accept",
+        "v2_bye"
+      ]
+    },
+    "v2_na1m_accept": {
+      "Text": "{givequest NA1M}The task is in your journal.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na1m_progress": {
+      "Text": "Kill 5 Len-Dosa. The next objective then starts. Kill 1 Watcher Aban Wei-Nuir. Receive The Mariner's Father - Chapter 1.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na1o_offer": {
+      "Text": "Kill 5 Cur-Beat. The next objective then starts. Kill 1 Devoted Aban Path-Duna. Receive The Mariner's Father - Chapter 2.",
+      "Source": "filler",
+      "Replies": [
+        "v2_na1o_accept",
+        "v2_bye"
+      ]
+    },
+    "v2_na1o_accept": {
+      "Text": "{givequest NA1O}The task is in your journal.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na1o_progress": {
+      "Text": "Kill 5 Cur-Beat. The next objective then starts. Kill 1 Devoted Aban Path-Duna. Receive The Mariner's Father - Chapter 2.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na1q_offer": {
+      "Text": "Kill 5 Or-Farat. The next objective then starts. Kill 1 Sipius Aban Lux-Nuir. Receive The Mariner's Father - Chapter 3.",
+      "Source": "filler",
+      "Replies": [
+        "v2_na1q_accept",
+        "v2_bye"
+      ]
+    },
+    "v2_na1q_accept": {
+      "Text": "{givequest NA1Q}The task is in your journal.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na1q_progress": {
+      "Text": "Kill 5 Or-Farat. The next objective then starts. Kill 1 Sipius Aban Lux-Nuir. Receive The Mariner's Father - Chapter 3.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na1s_offer": {
+      "Text": "Kill 3 Or-Jerad. The next objective then starts: kill Diviner Aban Hume-Ocra (Nascense Swamp 1893,686). Receive The Mariner's Father - Chapter 4.",
+      "Source": "filler",
+      "Replies": [
+        "v2_na1s_accept",
+        "v2_bye"
+      ]
+    },
+    "v2_na1s_accept": {
+      "Text": "{givequest NA1S}The task is in your journal.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na1s_progress": {
+      "Text": "Kill 3 Or-Jerad. The next objective then starts: kill Diviner Aban Hume-Ocra (Nascense Swamp 1893,686). Receive The Mariner's Father - Chapter 4.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na1z_offer": {
+      "Text": "Show the correct datadisc, kill Remur-Nefer, then return for the proof hand-in. Reward: Neglectful Right Arm Symbiant, Artillery Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_na1z_accept",
+        "v2_bye"
+      ]
+    },
+    "v2_na1z_accept": {
+      "Text": "{givequest NA1Z}The task is in your journal.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na1z_progress": {
+      "Text": "Show the correct datadisc, kill Remur-Nefer, then return for the proof hand-in. Reward: Neglectful Right Arm Symbiant, Artillery Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na1z_supply": {
+      "Text": "{spawn NQ04 1}Here is the proof for your completed hunt. Give it to me through the Give Item window.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na1z_trade": {
+      "Text": "Place the proof in the Give Item window.{opentrade}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na1z_done": {
+      "Text": "{completequest NA20}Thank you. Your reward is ready.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na21_offer": {
+      "Text": "Show the correct datadisc, kill Takheperu, then return for the proof hand-in. Reward: Neglectful Brain Symbiant, Control Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_na21_accept",
+        "v2_bye"
+      ]
+    },
+    "v2_na21_accept": {
+      "Text": "{givequest NA21}The task is in your journal.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na21_progress": {
+      "Text": "Show the correct datadisc, kill Takheperu, then return for the proof hand-in. Reward: Neglectful Brain Symbiant, Control Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na21_supply": {
+      "Text": "{spawn NQ04 1}Here is the proof for your completed hunt. Give it to me through the Give Item window.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na21_trade": {
+      "Text": "Place the proof in the Give Item window.{opentrade}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na21_done": {
+      "Text": "{completequest NA22}Thank you. Your reward is ready.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na23_offer": {
+      "Text": "Show the correct datadisc, kill Nesbaneb, then return for the proof hand-in. Reward: Neglectful Brain Symbiant, Extermination Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_na23_accept",
+        "v2_bye"
+      ]
+    },
+    "v2_na23_accept": {
+      "Text": "{givequest NA23}The task is in your journal.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na23_progress": {
+      "Text": "Show the correct datadisc, kill Nesbaneb, then return for the proof hand-in. Reward: Neglectful Brain Symbiant, Extermination Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na23_supply": {
+      "Text": "{spawn NQ04 1}Here is the proof for your completed hunt. Give it to me through the Give Item window.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na23_trade": {
+      "Text": "Place the proof in the Give Item window.{opentrade}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na23_done": {
+      "Text": "{completequest NA24}Thank you. Your reward is ready.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na25_offer": {
+      "Text": "Show the correct datadisc, kill Mesut-Ra, then return for the proof hand-in. Reward: Neglectful Brain Symbiant, Infantry Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_na25_accept",
+        "v2_bye"
+      ]
+    },
+    "v2_na25_accept": {
+      "Text": "{givequest NA25}The task is in your journal.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na25_progress": {
+      "Text": "Show the correct datadisc, kill Mesut-Ra, then return for the proof hand-in. Reward: Neglectful Brain Symbiant, Infantry Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na25_supply": {
+      "Text": "{spawn NQ04 1}Here is the proof for your completed hunt. Give it to me through the Give Item window.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na25_trade": {
+      "Text": "Place the proof in the Give Item window.{opentrade}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na25_done": {
+      "Text": "{completequest NA26}Thank you. Your reward is ready.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na27_offer": {
+      "Text": "Show the correct datadisc, kill Remur-Nefer, then return for the proof hand-in. Reward: Neglectful Brain Symbiant, Support Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_na27_accept",
+        "v2_bye"
+      ]
+    },
+    "v2_na27_accept": {
+      "Text": "{givequest NA27}The task is in your journal.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na27_progress": {
+      "Text": "Show the correct datadisc, kill Remur-Nefer, then return for the proof hand-in. Reward: Neglectful Brain Symbiant, Support Unit Aban, QL25.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na27_supply": {
+      "Text": "{spawn NQ04 1}Here is the proof for your completed hunt. Give it to me through the Give Item window.",
+      "Source": "filler",
+      "Replies": [
+        "v2_menu",
+        "v2_bye"
+      ]
+    },
+    "v2_na27_trade": {
+      "Text": "Place the proof in the Give Item window.{opentrade}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_na27_done": {
+      "Text": "{completequest NA28}Thank you. Your reward is ready.{close}",
+      "Source": "filler",
+      "Replies": []
+    },
+    "v2_hub": {
+      "Text": "Choose a task or hand in proof for a completed hunt.",
+      "Replies": [
+        "n1_na10_trade",
+        "n1_na10_supply",
+        "v2_na1m_ask",
+        "v2_na1m_progress",
+        "v2_na1o_ask",
+        "v2_na1o_progress",
+        "v2_na1q_ask",
+        "v2_na1q_progress",
+        "v2_na1s_ask",
+        "v2_na1s_progress",
+        "v2_na1z_ask",
+        "v2_na1z_progress",
+        "v2_na1z_supply",
+        "v2_na1z_trade",
+        "v2_na21_ask",
+        "v2_na21_progress",
+        "v2_na21_supply",
+        "v2_na21_trade",
+        "v2_na23_ask",
+        "v2_na23_progress",
+        "v2_na23_supply",
+        "v2_na23_trade",
+        "v2_na25_ask",
+        "v2_na25_progress",
+        "v2_na25_supply",
+        "v2_na25_trade",
+        "v2_na27_ask",
+        "v2_na27_progress",
+        "v2_na27_supply",
+        "v2_na27_trade",
+        "n1_na10_accept",
+        "v2_bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "n1_na10_turnin": {
+      "If": [
+        "HasQuest NA12"
+      ],
+      "Items": [
+        {
+          "Hash": "NQ00",
+          "Count": 1
+        }
+      ],
+      "Goto": "n1_na10_done"
+    },
+    "v2_na1z_trade": {
+      "If": [
+        "HasQuest NA20"
+      ],
+      "Items": [
+        {
+          "Hash": "NQ04",
+          "Count": 1
+        }
+      ],
+      "Goto": "v2_na1z_done"
+    },
+    "v2_na21_trade": {
+      "If": [
+        "HasQuest NA22"
+      ],
+      "Items": [
+        {
+          "Hash": "NQ04",
+          "Count": 1
+        }
+      ],
+      "Goto": "v2_na21_done"
+    },
+    "v2_na23_trade": {
+      "If": [
+        "HasQuest NA24"
+      ],
+      "Items": [
+        {
+          "Hash": "NQ04",
+          "Count": 1
+        }
+      ],
+      "Goto": "v2_na23_done"
+    },
+    "v2_na25_trade": {
+      "If": [
+        "HasQuest NA26"
+      ],
+      "Items": [
+        {
+          "Hash": "NQ04",
+          "Count": 1
+        }
+      ],
+      "Goto": "v2_na25_done"
+    },
+    "v2_na27_trade": {
+      "If": [
+        "HasQuest NA28"
+      ],
+      "Items": [
+        {
+          "Hash": "NQ04",
+          "Count": 1
+        }
+      ],
+      "Goto": "v2_na27_done"
+    }
+  },
+  "Notes": "Cumulative N1-N4 neutral filler. Preserve source tags. ADD files must be merged, never installed with overlapping bindings. Shared menu exposes every conditional task/hand-in. | final merge 20261109: restored hunt targets (FOGL/PLNZ/FOOM/PYGC/DIAB); chapter hunts gated behind intro survey (quest NA12 done)."
+}

@@ -1,0 +1,705 @@
+[
+  {
+    "Hash": "NE01",
+    "Name": "Elite: Amatsu",
+    "QasInstance": 950094,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Amatsu in the Adonis Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "CGDQ",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 980280,
+      "Credits": 19000,
+      "Hash": "NR01",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 4
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 100
+      }
+    }
+  },
+  {
+    "Hash": "NE02",
+    "Name": "Elite: Ekibiogami",
+    "QasInstance": 950095,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Ekibiogami in the Adonis Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "D02L",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 980280,
+      "Credits": 19000,
+      "Hash": "NR02",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 4
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 100
+      }
+    }
+  },
+  {
+    "Hash": "NE03",
+    "Name": "Elite: Hisa-Me",
+    "QasInstance": 950096,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Hisa-Me in the Adonis Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "XNJB",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 980280,
+      "Credits": 19000,
+      "Hash": "NR03",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 4
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 100
+      }
+    }
+  },
+  {
+    "Hash": "NE04",
+    "Name": "Elite: Iki-Ryo",
+    "QasInstance": 950097,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Iki-Ryo in the Adonis Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "D02N",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 980280,
+      "Credits": 19000,
+      "Hash": "NR04",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 4
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 100
+      }
+    }
+  },
+  {
+    "Hash": "NE05",
+    "Name": "Elite: Emissary of Yomi",
+    "QasInstance": 950098,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat the Emissary of Yomi in the Adonis Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "EMOO",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 980280,
+      "Credits": 19000,
+      "Hash": "NR05",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 4
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 100
+      }
+    }
+  },
+  {
+    "Hash": "NE06",
+    "Name": "Elite: Sursunabu",
+    "QasInstance": 950099,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Sursunabu in the Penumbra Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "P01N",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 2599920,
+      "Credits": 20700,
+      "Hash": "NR06",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 6
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 150
+      }
+    }
+  },
+  {
+    "Hash": "NE07",
+    "Name": "Elite: Ershkigal",
+    "QasInstance": 950100,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Ershkigal in the Penumbra Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "P01S",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 2599920,
+      "Credits": 20700,
+      "Hash": "NR07",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 6
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 150
+      }
+    }
+  },
+  {
+    "Hash": "NE08",
+    "Name": "Elite: Humbada",
+    "QasInstance": 950101,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Humbada in the Penumbra Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "P01T",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 2599920,
+      "Credits": 20700,
+      "Hash": "NR08",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 6
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 150
+      }
+    }
+  },
+  {
+    "Hash": "NE09",
+    "Name": "Elite: Edimmu",
+    "QasInstance": 950102,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Edimmu in the Penumbra Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "P01U",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 2599920,
+      "Credits": 20700,
+      "Hash": "NR09",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 6
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 150
+      }
+    }
+  },
+  {
+    "Hash": "NE0A",
+    "Name": "Elite: Emissary of Arallu",
+    "QasInstance": 950103,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat the Emissary of Arallu in the Penumbra Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "P01W",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 2599920,
+      "Credits": 20700,
+      "Hash": "NR0A",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 6
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 150
+      }
+    }
+  },
+  {
+    "Hash": "NE0B",
+    "Name": "Elite: Kur",
+    "QasInstance": 950104,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Kur in the Penumbra Catacombs.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "P01Y",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 2599920,
+      "Credits": 20700,
+      "Hash": "NR0B",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 6
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 150
+      }
+    }
+  },
+  {
+    "Hash": "NE0C",
+    "Name": "Elite: Alappaa",
+    "QasInstance": 950105,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat Alappaa.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "ACSX",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 2599920,
+      "Credits": 20700,
+      "Hash": "NR0C",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 6
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 150
+      }
+    }
+  },
+  {
+    "Hash": "NE0D",
+    "Name": "Elite: The Night Heart",
+    "QasInstance": 950106,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat The Night Heart in Pandemonium.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "THNI",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 3888240,
+      "Credits": 21700,
+      "Hash": "NR0D",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 8
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 200
+      }
+    }
+  },
+  {
+    "Hash": "NE0E",
+    "Name": "Elite: Zodiac",
+    "QasInstance": 950107,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat a Zodiac in Pandemonium.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "TMSE",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 3888240,
+      "Credits": 21700,
+      "Hash": "NR0E",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 8
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 200
+      }
+    }
+  },
+  {
+    "Hash": "NE0F",
+    "Name": "Elite: The Beast",
+    "QasInstance": 950108,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Defeat The Beast in Pandemonium.",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "THBA",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 3888240,
+      "Credits": 21700,
+      "Hash": "NR0F",
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 8
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 200
+      }
+    }
+  },
+  {
+    "Hash": "NA2M",
+    "Name": "Specialization 1: The Mariner's Father",
+    "QasInstance": 950109,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Hand the completed book to Professor Dedlock.",
+    "Objective": {
+      "SpecItem": "NQ02",
+      "WorldItem": null,
+      "Npc": "DEDL",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 0,
+      "Credits": 0,
+      "Hash": "NR2M",
+      "Records": null,
+      "Stats": {
+        "182": 1
+      }
+    }
+  },
+  {
+    "Hash": "NA2N",
+    "Name": "Specialization 2: The Girl that Saw it All",
+    "QasInstance": 950110,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Hand the completed book to Professor Dedlock.",
+    "Objective": {
+      "SpecItem": "NB08",
+      "WorldItem": null,
+      "Npc": "DEDL",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 0,
+      "Credits": 0,
+      "Hash": "NR2N",
+      "Records": null,
+      "Stats": {
+        "182": 1
+      }
+    }
+  },
+  {
+    "Hash": "NA2O",
+    "Name": "Specialization 3: Kanel's Story",
+    "QasInstance": 950111,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Hand the completed book to Professor Dedlock.",
+    "Objective": {
+      "SpecItem": "NB0C",
+      "WorldItem": null,
+      "Npc": "DEDL",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 0,
+      "Credits": 0,
+      "Hash": "NR2O",
+      "Records": null,
+      "Stats": {
+        "182": 1
+      }
+    }
+  },
+  {
+    "Hash": "NA2P",
+    "Name": "Specialization 4: Afirce's World Catalogue of Books",
+    "QasInstance": 950112,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Hand the completed book to Professor Dedlock.",
+    "Objective": {
+      "SpecItem": "NB13",
+      "WorldItem": null,
+      "Npc": "DEDL",
+      "Count": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 0,
+      "Credits": 0,
+      "Hash": "NR2P",
+      "Records": null,
+      "Stats": {
+        "182": 1
+      }
+    }
+  },
+  {
+    "Hash": "NA2L",
+    "Name": "Elite: Lord of the Void",
+    "Summary": "Defeat the Lord of the Void in Nascense Wilds (388,1864).",
+    "QasInstance": 950093,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "LFOH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "NR2L",
+      "Credits": 21700,
+      "Xp": 3888240,
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 8
+          }
+        ]
+      ],
+      "Stats": {
+        "669": 200
+      }
+    }
+  },
+  {
+    "Hash": "NELT",
+    "Name": "Freelancers Inc. Elite Contract (daily)",
+    "QasInstance": 950113,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Freelancers Inc. elite contract (catalog roll entry; DailyMissionService assigns the rolled NE** contract).",
+    "Objective": {
+      "SpecItem": null,
+      "WorldItem": null,
+      "Npc": "CGDQ",
+      "Count": null
+    },
+    "Flags": "NoCash",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Xp": 0,
+      "Credits": 0,
+      "Hash": "FRTK",
+      "Records": null
+    }
+  }
+]

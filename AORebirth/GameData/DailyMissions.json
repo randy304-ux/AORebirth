@@ -182,6 +182,97 @@
                          "Track":  "PvPTarasque",
                          "MaxPerWindow":  1,
                          "WaypointText":  "Avalon near Camelot Castle (~2092x3822). Kill the Tarasque stand-in."
+                     },
+                     {
+                         "Hash": "NELT",
+                         "Name": "Elite Daily (Shadowlands, Jozef Swia)",
+                         "Status": "Live",
+                         "Track": "",
+                         "MaxPerWindow": 1,
+                         "WaypointText": "Defeat the assigned boss. The reward is paid on the kill.",
+                         "Roll": [
+                             {
+                                 "MinLevel": 180,
+                                 "MaxLevel": 200,
+                                 "QuestHash": "NE01"
+                             },
+                             {
+                                 "MinLevel": 180,
+                                 "MaxLevel": 200,
+                                 "QuestHash": "NE02"
+                             },
+                             {
+                                 "MinLevel": 180,
+                                 "MaxLevel": 200,
+                                 "QuestHash": "NE03"
+                             },
+                             {
+                                 "MinLevel": 180,
+                                 "MaxLevel": 200,
+                                 "QuestHash": "NE04"
+                             },
+                             {
+                                 "MinLevel": 180,
+                                 "MaxLevel": 200,
+                                 "QuestHash": "NE05"
+                             },
+                             {
+                                 "MinLevel": 201,
+                                 "MaxLevel": 214,
+                                 "QuestHash": "NE06"
+                             },
+                             {
+                                 "MinLevel": 201,
+                                 "MaxLevel": 214,
+                                 "QuestHash": "NE07"
+                             },
+                             {
+                                 "MinLevel": 201,
+                                 "MaxLevel": 214,
+                                 "QuestHash": "NE08"
+                             },
+                             {
+                                 "MinLevel": 201,
+                                 "MaxLevel": 214,
+                                 "QuestHash": "NE09"
+                             },
+                             {
+                                 "MinLevel": 201,
+                                 "MaxLevel": 214,
+                                 "QuestHash": "NE0A"
+                             },
+                             {
+                                 "MinLevel": 201,
+                                 "MaxLevel": 214,
+                                 "QuestHash": "NE0B"
+                             },
+                             {
+                                 "MinLevel": 201,
+                                 "MaxLevel": 214,
+                                 "QuestHash": "NE0C"
+                             },
+                             {
+                                 "MinLevel": 215,
+                                 "MaxLevel": 220,
+                                 "QuestHash": "NE0D"
+                             },
+                             {
+                                 "MinLevel": 215,
+                                 "MaxLevel": 220,
+                                 "QuestHash": "NE0E"
+                             },
+                             {
+                                 "MinLevel": 215,
+                                 "MaxLevel": 220,
+                                 "QuestHash": "NE0F"
+                             },
+                             {
+                                 "MinLevel": 215,
+                                 "MaxLevel": 220,
+                                 "QuestHash": "NA2L"
+                             }
+                         ],
+                         "Note": "Empty Track: DailyMissionService records no lockout, so this is repeatable (Randy: skip the 18h lockout)."
                      }
                  ],
     "Deferred":  [

@@ -1,0 +1,67 @@
+{
+  "Npcs": [
+    "JOIS"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasAnyQuest NE01,NE02,NE03,NE04,NE05,NE06,NE07,NE08,NE09,NE0A,NE0B,NE0C,NE0D,NE0E,NE0F,NA2L"
+      ],
+      "Say": "busy"
+    },
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "ask": {
+      "Text": "I am ready for an elite contract.",
+      "Goto": "give",
+      "If": [
+        "minlevel 180"
+      ],
+      "Source": "filler"
+    },
+    "ask_low": {
+      "Text": "I am ready for an elite contract.",
+      "Goto": "low",
+      "If": [
+        "!minlevel 180"
+      ],
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Elite contracts pay well and ask a lot. Ready for one?",
+      "Replies": [
+        "ask",
+        "ask_low",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give": {
+      "Text": "{givedaily NELT}Your contract is logged. Defeat the target and the reward is paid on the kill.{close}",
+      "Source": "filler"
+    },
+    "low": {
+      "Text": "I have no contract for your level yet. Elite work starts at level 180 here.{close}",
+      "Source": "filler"
+    },
+    "busy": {
+      "Text": "You already hold an elite contract. Finish it first.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {},
+  "Notes": "Jozef Swia (JOIS) elite daily NELT (GameData/DailyMissions.json, empty Track = no lockout, repeatable). All lines filler."
+}
