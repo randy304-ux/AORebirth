@@ -164,6 +164,9 @@ namespace ZoneEngine_New.Core.Pets
                         DressMerc(npc, mercKind, nanoLevel, gearQl, owner.Stats.GetOrZero(CharacterStat.Side, StatDetail.Base), tier);
                         if (gearQl != petLevel)
                             npc.RaiseCombatWeaponQuality(gearQl, _logger);
+                        // Template Min/MaxDamage own NPC hit numbers; weapon QL only sets skill type. Scale those
+                        // stats (and fill combat skills) from merc level before any tier flat adds.
+                        ApplyMercCombatScaling(npc, mercKind);
                         ApplyMercTier(npc, tier);
                         if (tier != Mercs.Tier.Basic)
                         {
@@ -423,6 +426,34 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
+        /// Level-scaled MinDamage/MaxDamage and combat skills from Mercs.json <c>DamageScale</c>.
+        /// NPC swings ignore weapon QL for the numeric hit (template Min/Max override); without this, a L220
+        /// Keeper stays near the weak Build-Mercs curve (~110-330) with zero weapon skills (AR≈0).
+        /// </summary>
+        void ApplyMercCombatScaling(NpcCharacter npc, Mercs.Kind kind)
+        {
+            int level = Mercs.BodyLevel(npc.Stats.GetOrOne(CharacterStat.Level));
+            float scale = Mercs.DamageScale(_gameData.RootPath);
+            int minDamage = Mercs.ScaledMinDamage(level, kind, scale);
+            int maxDamage = Mercs.ScaledMaxDamage(level, kind, scale);
+            npc.Stats.Set(CharacterStat.MinDamage, minDamage, StatDetail.Base, dirty: true);
+            npc.Stats.Set(CharacterStat.MaxDamage, maxDamage, StatDetail.Base, dirty: true);
+
+            int skill = Mercs.CombatSkillBudget(level);
+            foreach (CharacterStat stat in MercCombatSkills)
+            {
+                int current = npc.Stats.GetOrZero(stat, StatDetail.Base);
+                if (current < skill)
+                    npc.Stats.Set(stat, skill, StatDetail.Base, dirty: true);
+            }
+
+            npc.Rebase();
+            _logger.Info(string.Format(CultureInfo.InvariantCulture,
+                "Merc combat scale hash={0} level={1} scale={2} min={3} max={4} skill={5}",
+                kind.Hash, level, scale, minDamage, maxDamage, skill));
+        }
+
+        /// <summary>
         /// Flat health, damage, ability, AC, and skill adds. The swing itself is the monster weapon, re-minted at
         /// the gear QL before this runs. Basic adds nothing.
         /// </summary>
@@ -441,6 +472,22 @@ namespace ZoneEngine_New.Core.Pets
             if (max > 0)
                 npc.Stats.Set(CharacterStat.Health, max);
         }
+
+        /// <summary>Weapon and special skills filled by <see cref="ApplyMercCombatScaling"/> so AR tracks level.</summary>
+        static readonly CharacterStat[] MercCombatSkills =
+        [
+            CharacterStat.MartialArts, CharacterStat.MultiMelee, CharacterStat._1hBlunt,
+            CharacterStat._1hEdged, CharacterStat.MeleeEnergy, CharacterStat.Skill2hEdged,
+            CharacterStat.Piercing, CharacterStat._2hBlunt, CharacterStat.SharpObject,
+            CharacterStat.Grenade, CharacterStat.HeavyWeapons, CharacterStat.Bow,
+            CharacterStat.Pistol, CharacterStat.Rifle, CharacterStat.MGSMG,
+            CharacterStat.Shotgun, CharacterStat.AssaultRifle,
+            CharacterStat.RangedEnergy, CharacterStat.MultiRanged,
+            CharacterStat.Brawl, CharacterStat.Dimach, CharacterStat.SneakAttack,
+            CharacterStat.FastAttack, CharacterStat.Burst,
+            CharacterStat.FlingShot, CharacterStat.AimedShot, CharacterStat.FullAuto,
+            CharacterStat.MeleeInit, CharacterStat.RangedInit, CharacterStat.PhysicalInit
+        ];
 
         /// <summary>Abilities, weapon and nano skills, and AC. Not level, side, or run speed (the owner already sets that).</summary>
         static readonly CharacterStat[] TwinkSkills =

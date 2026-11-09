@@ -22,6 +22,8 @@ namespace ZoneEngine_New.Core.Pets
     /// so a level 20 still walks with a level 20. The tier twinks that body: higher-QL gear and a higher-QL
     /// monster weapon, a fixed stat and skill package, merc pets and nano bands taken from a higher level,
     /// and (where the nano is a two-id QL pair) casts resolved at the gear QL.
+    /// Auto-attack damage uses NPC template MinDamage/MaxDamage (not weapon QL). Tune overall merc punch with
+    /// <see cref="Catalog.DamageScale"/> in Mercs.json; PetService applies it at summon time with combat skills.
     /// </summary>
     public static class Mercs
     {
@@ -30,6 +32,15 @@ namespace ZoneEngine_New.Core.Pets
 
         /// <summary>Two bits per profession: 0 basic, 1 elite, 2 champion, 3 twink. 10281-10283 are aura unlocks.</summary>
         public const CharacterStat TierStat = (CharacterStat)10284;
+
+        /// <summary>
+        /// Default <see cref="Catalog.DamageScale"/> when Mercs.json omits it. 1.0 = Build-Mercs template numbers
+        /// (level×0.5 / level×1.5 × role) with no skill fill — too weak at high level. 3.0 is the live default.
+        /// </summary>
+        public const float DefaultDamageScale = 3f;
+
+        /// <summary>Weapon-skill points per merc level so attack rating tracks body level (hit chance + damage mult).</summary>
+        public const int CombatSkillPerLevel = 5;
 
         public enum Tier
         {
@@ -80,6 +91,65 @@ namespace ZoneEngine_New.Core.Pets
 
         /// <summary>The merc's displayed level: the owner's level, never above 220. A level 1000 GM still tops out here.</summary>
         public static int BodyLevel(int ownerLevel) => Math.Clamp(ownerLevel, 1, 220);
+
+        /// <summary>
+        /// Profession damage role (same coefficients as ddogs/tools/Build-Mercs.ps1). Tanks and supports sit
+        /// below pure DPS so a Keeper/Enforcer hits less than a Soldier/Shade/NT at the same level.
+        /// </summary>
+        public static float DamageRole(Kind kind) => kind.Key switch
+        {
+            "enforcer" => 0.9f,
+            "soldier" => 1.3f,
+            "keeper" => 1.0f,
+            "doctor" => 0.6f,
+            "adventurer" => 1.0f,
+            "agent" => 1.3f,
+            "bureaucrat" => 0.9f,
+            "engineer" => 1.1f,
+            "fixer" => 1.1f,
+            "martialartist" => 1.2f,
+            "metaphysicist" => 1.0f,
+            "nanotechnician" => 1.4f,
+            "shade" => 1.4f,
+            "trader" => 0.9f,
+            _ => 1.0f
+        };
+
+        /// <summary>Mercs.json <c>DamageScale</c>, clamped. Missing/invalid → <see cref="DefaultDamageScale"/>.</summary>
+        public static float DamageScale(string gameDataRoot)
+        {
+            float scale = Load(gameDataRoot).DamageScale;
+            if (float.IsNaN(scale) || float.IsInfinity(scale) || scale <= 0f)
+                return DefaultDamageScale;
+            return Math.Clamp(scale, 0.1f, 20f);
+        }
+
+        /// <summary>
+        /// Template-style min damage after <paramref name="scale"/>, divided by the expected AR multiplier from
+        /// <see cref="CombatSkillPerLevel"/> so the final swing lands near level×0.5×role×scale (before target AC).
+        /// </summary>
+        public static int ScaledMinDamage(int bodyLevel, Kind kind, float scale)
+        {
+            int level = BodyLevel(bodyLevel);
+            float role = DamageRole(kind);
+            float expectedMult = 1f + (level * CombatSkillPerLevel / 400f);
+            int value = (int)Math.Round(level * 0.5 * role * scale / expectedMult, MidpointRounding.AwayFromZero);
+            return Math.Max(1, value);
+        }
+
+        /// <summary>Same as <see cref="ScaledMinDamage"/> for max (level×1.5×role×scale before AC).</summary>
+        public static int ScaledMaxDamage(int bodyLevel, Kind kind, float scale)
+        {
+            int level = BodyLevel(bodyLevel);
+            float role = DamageRole(kind);
+            float expectedMult = 1f + (level * CombatSkillPerLevel / 400f);
+            int value = (int)Math.Round(level * 1.5 * role * scale / expectedMult, MidpointRounding.AwayFromZero);
+            return Math.Max(ScaledMinDamage(level, kind, scale) + 1, value);
+        }
+
+        /// <summary>Combat skill budget written onto the merc body (level × <see cref="CombatSkillPerLevel"/>).</summary>
+        public static int CombatSkillBudget(int bodyLevel)
+            => Math.Max(1, BodyLevel(bodyLevel) * CombatSkillPerLevel);
 
         /// <summary>QL of the twinked gear and the monster weapon. Basic stays at the body level.</summary>
         public static int GearQuality(int ownerLevel, Tier tier)
@@ -571,6 +641,12 @@ namespace ZoneEngine_New.Core.Pets
             /// Enforcer/Keeper/Agent Atrox male / Solitus female; rest Solitus).
             /// </summary>
             public bool RandomAppearance { get; set; } = true;
+
+            /// <summary>
+            /// Single tuning knob for merc auto-attack damage. Multiplies the Build-Mercs level×role template
+            /// curve (effective hit ≈ level×0.5×role×scale … level×1.5×role×scale before target AC). Default 3.
+            /// </summary>
+            public float DamageScale { get; set; } = DefaultDamageScale;
 
             public Dictionary<string, Profession> Professions { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 
