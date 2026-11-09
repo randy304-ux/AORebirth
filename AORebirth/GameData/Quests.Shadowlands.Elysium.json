@@ -1572,7 +1572,7 @@
   {
     "Hash": "EY33",
     "Name": "Searching for Truth (harvest fallback)",
-    "Summary": "Return five Adenium rutilus plants and the Gamma pruning knife. Plant-use/damage mechanics replaced by giver supplies while this final stage is active.",
+    "Summary": "Return five Adenium rutilus plants (south of One With a Graceful Neck, near the heckler spawn at 930x690, Elysium East) and the Gamma pruning knife to One With a Graceful Neck (Elysium East 1003.8x1052.7). Reward: The Girl that Saw it All Chapters 3 and 4, 20k XP, 50k credits, Mini-XP Reward.",
     "Scope": "Solo",
     "QasInstance": 951111,
     "Action": "FindItem",
@@ -1595,6 +1595,13 @@
             "Id": 226258,
             "HighId": 226258,
             "Name": "The Girl that Saw it All - Chapter 3",
+            "Quality": 1,
+            "Count": 1
+          },
+          {
+            "Id": 226259,
+            "HighId": 226259,
+            "Name": "The Girl that Saw it All - Chapter 4",
             "Quality": 1,
             "Count": 1
           },

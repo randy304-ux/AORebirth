@@ -166,13 +166,13 @@
       "Source": "filler"
     },
     "ey33_description": {
-      "Text": "Harvesting is unsupported in this fallback. Collect supplied plants and knife, then hand both in for chapter3,20,000XP,50,000credits and a Mini-XP Reward.",
+      "Text": "Pick 5 red Adenium rutilus plants with the Gamma pruning knife (south of here, near the heckler spawning point at 930x690) and trade the plants and the knife to me. Reward: 20k XP, 50k credits, a Mini-XP Reward and The Girl that Saw it All - Chapters 3 and 4.",
       "Replies": [
         "ey33_accept",
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "ey33_start": {
       "Text": "{givequest EY33}The assignment is in your journal.{close}",
@@ -183,12 +183,12 @@
       "Source": "filler"
     },
     "ey33_progress": {
-      "Text": "Harvesting is unsupported in this fallback. Collect supplied plants and knife, then hand both in for chapter3,20,000XP,50,000credits and a Mini-XP Reward.",
+      "Text": "Pick 5 red Adenium rutilus plants with the Gamma pruning knife (south of here, near the heckler spawning point at 930x690) and trade the plants and the knife to me. Reward: 20k XP, 50k credits, a Mini-XP Reward and The Girl that Saw it All - Chapters 3 and 4.",
       "Replies": [
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "hub": {
       "Text": "Choose a task or report your progress.",
