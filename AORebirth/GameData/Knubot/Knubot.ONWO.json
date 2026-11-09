@@ -1,0 +1,468 @@
+{
+  "Npcs": [
+    "ONWO"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "ey19_offer": {
+      "Text": "Tinker Tower delivery",
+      "Goto": "ey19_description",
+      "If": [
+        "!HasAnyQuest EY19",
+        "!quest EY19 done",
+        "!quest EY19 done"
+      ],
+      "Source": "filler"
+    },
+    "ey19_accept": {
+      "Text": "Accept: Tinker Tower delivery",
+      "Goto": "ey19_start",
+      "If": [
+        "!HasAnyQuest EY19",
+        "!quest EY19 done",
+        "!quest EY19 done"
+      ],
+      "Source": "filler"
+    },
+    "ey19_progress": {
+      "Text": "Tinker Tower delivery: progress",
+      "Goto": "ey19_progress",
+      "If": [
+        "HasAnyQuest EY19"
+      ],
+      "Source": "filler"
+    },
+    "ey1a_offer": {
+      "Text": "Swamps extermination",
+      "Goto": "ey1a_description",
+      "If": [
+        "!HasAnyQuest EY1A,EY1B,EY1C",
+        "!quest EY1A done",
+        "!quest EY1C done"
+      ],
+      "Source": "filler"
+    },
+    "ey1a_accept": {
+      "Text": "Accept: Swamps extermination",
+      "Goto": "ey1a_start",
+      "If": [
+        "!HasAnyQuest EY1A,EY1B,EY1C",
+        "!quest EY1A done",
+        "!quest EY1C done"
+      ],
+      "Source": "filler"
+    },
+    "ey1a_progress": {
+      "Text": "Swamps extermination: progress",
+      "Goto": "ey1a_progress",
+      "If": [
+        "HasAnyQuest EY1A,EY1B,EY1C"
+      ],
+      "Source": "filler"
+    },
+    "ey1d_offer": {
+      "Text": "Somphos horn",
+      "Goto": "ey1d_description",
+      "If": [
+        "!HasAnyQuest EY1D,EY1E,EY1F,EY1G",
+        "!quest EY1D done",
+        "!quest EY1G done"
+      ],
+      "Source": "filler"
+    },
+    "ey1d_accept": {
+      "Text": "Accept: Somphos horn",
+      "Goto": "ey1d_start",
+      "If": [
+        "!HasAnyQuest EY1D,EY1E,EY1F,EY1G",
+        "!quest EY1D done",
+        "!quest EY1G done"
+      ],
+      "Source": "filler"
+    },
+    "ey1d_progress": {
+      "Text": "Somphos horn: progress",
+      "Goto": "ey1d_progress",
+      "If": [
+        "HasAnyQuest EY1D,EY1E,EY1F,EY1G"
+      ],
+      "Source": "filler"
+    },
+    "ey1c_trade": {
+      "Text": "Hand in: Return the claw and fur",
+      "Goto": "ey1c_trade",
+      "If": [
+        "HasQuest EY1C",
+        "has EK0Z 1",
+        "has EK10 1"
+      ],
+      "Source": "filler"
+    },
+    "ey1c_supply0": {
+      "Text": "Collect missing proof for EY1C",
+      "Goto": "ey1c_supply0",
+      "If": [
+        "HasQuest EY1C",
+        "!has EK0Z 1"
+      ],
+      "Source": "filler"
+    },
+    "ey1c_supply1": {
+      "Text": "Collect missing proof for EY1C",
+      "Goto": "ey1c_supply1",
+      "If": [
+        "HasQuest EY1C",
+        "!has EK10 1"
+      ],
+      "Source": "filler"
+    },
+    "ey1g_trade": {
+      "Text": "Hand in: Return the Somphos Horn",
+      "Goto": "ey1g_trade",
+      "If": [
+        "HasQuest EY1G",
+        "has EK11 1"
+      ],
+      "Source": "filler"
+    },
+    "ey1g_supply0": {
+      "Text": "Collect missing proof for EY1G",
+      "Goto": "ey1g_supply0",
+      "If": [
+        "HasQuest EY1G",
+        "!has EK11 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2x_trade": {
+      "Text": "Hand in: Show the Resource Request",
+      "Goto": "ey2x_trade",
+      "If": [
+        "HasQuest EY2X",
+        "has EK15 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2x_supply0": {
+      "Text": "Collect missing proof for EY2X",
+      "Goto": "ey2x_supply0",
+      "If": [
+        "HasQuest EY2X",
+        "!has EK15 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2y_trade": {
+      "Text": "Hand in: Red Hat samples and sample bag",
+      "Goto": "ey2y_trade",
+      "If": [
+        "HasQuest EY2Y",
+        "has EK16 5",
+        "has EK17 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2y_supply0": {
+      "Text": "Collect missing proof for EY2Y",
+      "Goto": "ey2y_supply0",
+      "If": [
+        "HasQuest EY2Y",
+        "!has EK16 5"
+      ],
+      "Source": "filler"
+    },
+    "ey2y_supply1": {
+      "Text": "Collect missing proof for EY2Y",
+      "Goto": "ey2y_supply1",
+      "If": [
+        "HasQuest EY2Y",
+        "!has EK17 1"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey19_offer",
+        "ey19_progress",
+        "ey1a_offer",
+        "ey1a_progress",
+        "ey1d_offer",
+        "ey1d_progress",
+        "ey1c_trade",
+        "ey1c_supply0",
+        "ey1c_supply1",
+        "ey1g_trade",
+        "ey1g_supply0",
+        "ey2x_trade",
+        "ey2x_supply0",
+        "ey2y_trade",
+        "ey2y_supply0",
+        "ey2y_supply1",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey19_description": {
+      "Text": "Give the Sphagnum Moss to The One Loved By The Sun (Elysium North, 275x1010, first level up the tower).",
+      "Replies": [
+        "ey19_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey19_start": {
+      "Text": "{spawn EK03 1 1}{givequest EY19}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey19_progress": {
+      "Text": "Give the Sphagnum Moss to The One Loved By The Sun (Elysium North, 275x1010, first level up the tower).",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey1a_description": {
+      "Text": "Kill 3 Bony Spinetooths (Archbile 355x1600) and 3 Kolaana-Behns (945x900, south of Sabre's Cradle), then trade me the Bony Spinetooth Claw and the Patch of Kolaana-Behn fur.",
+      "Replies": [
+        "ey1a_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey1a_start": {
+      "Text": "{givequest EY1A}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1a_progress": {
+      "Text": "Kill 3 Bony Spinetooths (Archbile 355x1600) and 3 Kolaana-Behns (945x900, south of Sabre's Cradle), then trade me the Bony Spinetooth Claw and the Patch of Kolaana-Behn fur.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey1d_description": {
+      "Text": "Kill 5 Somphos Brunees (clusters at 800x1180, 600x775, 600x700), 3 Somphos Gulees (Archbile, around 400x1600) and 1 Somphos Grainee a little further south, which yields the Somphos Horn. Bring me the horn.",
+      "Replies": [
+        "ey1d_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey1d_start": {
+      "Text": "{givequest EY1D}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1d_progress": {
+      "Text": "Kill 5 Somphos Brunees (clusters at 800x1180, 600x775, 600x700), 3 Somphos Gulees (Archbile, around 400x1600) and 1 Somphos Grainee a little further south, which yields the Somphos Horn. Bring me the horn.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey1c_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1c_done": {
+      "Text": "{completequest EY1C}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1c_supply0": {
+      "Text": "{spawn EK0Z 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1c_supply1": {
+      "Text": "{spawn EK10 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1g_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1g_done": {
+      "Text": "{completequest EY1G}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey1g_supply0": {
+      "Text": "{spawn EK11 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2x_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2x_done": {
+      "Text": "{completequest EY2X}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2x_supply0": {
+      "Text": "{spawn EK15 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2y_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2y_done": {
+      "Text": "{completequest EY2Y}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2y_supply0": {
+      "Text": "{spawn EK16 1 5}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2y_supply1": {
+      "Text": "{spawn EK17 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey1c": {
+      "If": [
+        "HasQuest EY1C"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0Z",
+          "Count": 1
+        },
+        {
+          "Hash": "EK10",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey1c_done"
+    },
+    "ey1g": {
+      "If": [
+        "HasQuest EY1G"
+      ],
+      "Items": [
+        {
+          "Hash": "EK11",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey1g_done"
+    },
+    "ey2x": {
+      "If": [
+        "HasQuest EY2X"
+      ],
+      "Items": [
+        {
+          "Hash": "EK15",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey2x_done"
+    },
+    "ey2y": {
+      "If": [
+        "HasQuest EY2Y"
+      ],
+      "Items": [
+        {
+          "Hash": "EK16",
+          "Count": 5
+        },
+        {
+          "Hash": "EK17",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey2y_done"
+    }
+  }
+}

@@ -27,7 +27,7 @@
       "Source": "filler"
     },
     "ey4a_offer": {
-      "Text": "Enel Sanctuary Key",
+      "Text": "I have the Key to Enel's Garden, showing my dedication. Do you require my assistance?",
       "Goto": "ey4a_description",
       "If": [
         "!HasAnyQuest EY4A,EY4B,EY4C,EY4D,EY4E,EY4F,EY4G,EY4H,EY4I,EY4J,EY4K",
@@ -35,7 +35,7 @@
         "!quest EY4K done",
         "has EK0M"
       ],
-      "Source": "filler"
+      "Source": "guide"
     },
     "ey4a_accept": {
       "Text": "Accept: Enel Sanctuary Key",
@@ -65,6 +65,47 @@
       "Text": "Goodbye.",
       "Goto": "close",
       "Source": "filler"
+    },
+    "ey90_offer": {
+      "Text": "Enel Garden Key",
+      "Goto": "ey90_description",
+      "If": [
+        "!HasAnyQuest EY90,EY91,EY92,EY93,EY94,EY95,EY96,EY97,EY98,EY40,EY41,EY42,EY43,EY44,EY45,EY46,EY47,EY48,EY49",
+        "!quest EY90 done",
+        "!quest EY49 done",
+        "!has EK0M"
+      ],
+      "Source": "filler"
+    },
+    "ey90_accept": {
+      "Text": "Accept: Enel Garden Key",
+      "Goto": "ey90_start",
+      "If": [
+        "!HasAnyQuest EY90,EY91,EY92,EY93,EY94,EY95,EY96,EY97,EY98,EY40,EY41,EY42,EY43,EY44,EY45,EY46,EY47,EY48,EY49",
+        "!quest EY90 done",
+        "!quest EY49 done",
+        "!has EK0M"
+      ],
+      "Source": "filler"
+    },
+    "ey90_progress": {
+      "Text": "Enel Garden Key: progress",
+      "Goto": "ey90_progress",
+      "If": [
+        "HasAnyQuest EY90,EY91,EY92,EY93,EY94,EY95,EY96,EY97,EY98,EY40,EY41,EY42,EY43,EY44,EY45,EY46,EY47,EY48,EY49"
+      ],
+      "Source": "filler"
+    },
+    "ey4a_offer_aurea": {
+      "Text": "I spoke to Forrester Enel Aban and he mentioned someone called Aurea?",
+      "Goto": "ey4a_description",
+      "If": [
+        "!HasAnyQuest EY4A,EY4B,EY4C,EY4D,EY4E,EY4F,EY4G,EY4H,EY4I,EY4J,EY4K",
+        "!quest EY4A done",
+        "!quest EY4K done",
+        "has EK0M"
+      ],
+      "Source": "guide"
     }
   },
   "Lines": {
@@ -101,13 +142,13 @@
       "Source": "filler"
     },
     "ey4a_description": {
-      "Text": "With the garden key in your inventory, follow the nine named kills in order, then report back and hand in the Briefing.",
+      "Text": "Kill the named Unredeemed in order: Fortuitous Jorr-Fes, Hypnagogic Wox-Xum and Follower Chi-Nar Shere (Remnans), Fortuitous Hes-Man, Hypnagogic Ixi-Bhotaar, Visionist Dom-Xum and Follower Yutt-Ixi Shere (Stormshelter), then Fortuitous Pi-Zul and Follower Man-Wox Shere (Nero). Loot the Briefing from Follower Man-Wox Shere and bring it back to me.",
       "Replies": [
         "ey4a_accept",
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "ey4a_start": {
       "Text": "{givequest EY4A}The assignment is in your journal.{close}",
@@ -118,12 +159,12 @@
       "Source": "filler"
     },
     "ey4a_progress": {
-      "Text": "With the garden key in your inventory, follow the nine named kills in order, then report back and hand in the Briefing.",
+      "Text": "Kill the named Unredeemed in order: Fortuitous Jorr-Fes, Hypnagogic Wox-Xum and Follower Chi-Nar Shere (Remnans), Fortuitous Hes-Man, Hypnagogic Ixi-Bhotaar, Visionist Dom-Xum and Follower Yutt-Ixi Shere (Stormshelter), then Fortuitous Pi-Zul and Follower Man-Wox Shere (Nero). Loot the Briefing from Follower Man-Wox Shere and bring it back to me.",
       "Replies": [
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "hub": {
       "Text": "Choose a task or report your progress.",
@@ -132,9 +173,37 @@
         "ey4k_trade",
         "ey4a_offer",
         "ey4a_progress",
+        "ey90_offer",
+        "ey90_progress",
+        "ey4a_offer_aurea",
         "bye"
       ],
       "Source": "filler"
+    },
+    "ey90_description": {
+      "Text": "Take this Sealed Letter and show it to each of the Enel in the order your journal gives. Keep the letter until the end. Bring it back to me when you are done.",
+      "Replies": [
+        "ey90_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey90_start": {
+      "Text": "{spawn EK0J 1}{givequest EY90}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey90_progress": {
+      "Text": "Take this Sealed Letter and show it to each of the Enel in the order your journal gives. Keep the letter until the end. Bring it back to me when you are done.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
     }
   },
   "Trades": {

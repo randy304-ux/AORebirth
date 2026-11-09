@@ -1,0 +1,110 @@
+{
+  "Npcs": [
+    "FOEN",
+    "FREN"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "ey98_trade": {
+      "Text": "Hand in: Forrester Enel Aban: Sealed Letter",
+      "Goto": "ey98_trade",
+      "If": [
+        "HasQuest EY98",
+        "has EK0J 1"
+      ],
+      "Source": "filler"
+    },
+    "ey49_trade": {
+      "Text": "Hand in: Return the tracking device",
+      "Goto": "ey49_trade",
+      "If": [
+        "HasQuest EY49",
+        "has EK0K 1"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey98_trade",
+        "ey49_trade",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey98_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey98_done": {
+      "Text": "{completequest EY98}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey49_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey49_done": {
+      "Text": "{completequest EY49}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey98": {
+      "If": [
+        "HasQuest EY98"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0J",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey98_done"
+    },
+    "ey49": {
+      "If": [
+        "HasQuest EY49"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0K",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey49_done"
+    }
+  }
+}

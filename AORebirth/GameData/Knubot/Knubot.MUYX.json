@@ -9,14 +9,14 @@
   ],
   "Replies": {
     "ey04_offer": {
-      "Text": "Predator Scanning",
+      "Text": "Can I help the scientists?",
       "Goto": "ey04_description",
       "If": [
         "!HasAnyQuest EY04,EY05,EY06,EY07,EY02",
         "!quest EY04 done",
         "!quest EY02 done"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "ey04_accept": {
       "Text": "Accept: Predator Scanning",
@@ -37,16 +37,17 @@
       "Source": "filler"
     },
     "scan_report": {
-      "Text": "All three available predators are scanned.",
+      "Text": "I have scanned the Predators.",
       "Goto": "scan_report",
       "If": [
         "quest EY04 done",
         "quest EY05 done",
         "quest EY06 done",
-        "!HasAnyQuest EY07,EY02",
+        "quest EY07 done",
+        "!HasQuest EY02",
         "!quest EY02 done"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "menu": {
       "Text": "Show available tasks.",
@@ -61,16 +62,16 @@
   },
   "Lines": {
     "ey04_description": {
-      "Text": "Target Limping, Pained and Howling Predators in any order, then report to me. Wounded Predator/scanner hand-in are explicit fallbacks. Reward: chapter2,20,000XP,20,000credits; daily bonus awaits integration.",
+      "Text": "Tag the Predators (Elysium West, 760x950) with your scanner, in order. Then come back and tell me you have scanned them. Reward: Specialization 2 (The Girl that Saw it All) Chapter 2, 20k XP and 20k credits. The mission has a 7 day timer in retail (not enforced here).",
       "Replies": [
         "ey04_accept",
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "ey04_start": {
-      "Text": "{givequest EY04}{givequest EY05}{givequest EY06}The assignment is in your journal.{close}",
+      "Text": "{givequest EY04}{givequest EY05}{givequest EY06}{givequest EY07}The assignment is in your journal.{close}",
       "Replies": [
         "menu",
         "bye"
@@ -78,15 +79,15 @@
       "Source": "filler"
     },
     "ey04_progress": {
-      "Text": "Target Limping, Pained and Howling Predators in any order, then report to me. Wounded Predator/scanner hand-in are explicit fallbacks. Reward: chapter2,20,000XP,20,000credits; daily bonus awaits integration.",
+      "Text": "Tag the Predators (Elysium West, 760x950) with your scanner, in order. Then come back and tell me you have scanned them. Reward: Specialization 2 (The Girl that Saw it All) Chapter 2, 20k XP and 20k credits. The mission has a 7 day timer in retail (not enforced here).",
       "Replies": [
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "scan_report": {
-      "Text": "{givequest EY07}Target me to acknowledge the unavailable fourth scan, then target me again for the final report.",
+      "Text": "{givequest EY02}Well done. Target me once more to hand in the scan.",
       "Replies": [
         "menu",
         "bye"

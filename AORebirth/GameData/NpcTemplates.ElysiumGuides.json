@@ -1,0 +1,497 @@
+{
+  "ONWO": {
+    "Hash": "ONWO",
+    "ContentProvenance": {
+      "Guessed": true,
+      "Source": "ao-universe guides 2026-11-09 (resolve-client-hash)"
+    },
+    "Templates": [
+      {
+        "Name": "One Who Has Achieved Glory",
+        "Level": 80,
+        "Stats": {
+          "0": 268964353,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 18,
+          "286": 6,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "64": 0,
+          "61": 120,
+          "52": 3200,
+          "54": 80,
+          "33": 0,
+          "359": 22802,
+          "360": 250,
+          "455": 200,
+          "1": 5733,
+          "27": 5733,
+          "12": 21499
+        },
+        "ContentProvenance": {
+          "Guessed": true,
+          "Confirmed": false,
+          "Donor": "OHWH",
+          "Source": "Client pink point ONWO (PF 4541, L80, 6.5 units from guide coords 440x990). Name/location from AO-Universe guide one-who-has-achieved-glory. Appearance is a copy of the OHWH Yuttos look (no scrape exists).",
+          "StandIn": true,
+          "Hash": "ONWO"
+        },
+        "LootTable": []
+      }
+    ]
+  },
+  "SGOR": {
+    "Hash": "SGOR",
+    "ContentProvenance": {
+      "Guessed": true,
+      "Source": "ao-universe guides 2026-11-09 (resolve-client-hash)"
+    },
+    "Templates": [
+      {
+        "Name": "Shades of Grey",
+        "Level": 80,
+        "Stats": {
+          "0": 268964353,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 18,
+          "286": 6,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "64": 0,
+          "61": 120,
+          "52": 3200,
+          "54": 80,
+          "33": 0,
+          "359": 22802,
+          "360": 250,
+          "455": 200,
+          "1": 5733,
+          "27": 5733,
+          "12": 21499
+        },
+        "ContentProvenance": {
+          "Guessed": true,
+          "Confirmed": false,
+          "Donor": "OHWH",
+          "Source": "Client pink point SGOR (PF 4540, L80, 3.2 units from guide coords 1672x624). Name/location from AO-Universe guide one-who-has-taken-vow-of-truth. Appearance is a copy of the OHWH look (no scrape exists).",
+          "StandIn": true,
+          "Hash": "SGOR"
+        },
+        "LootTable": []
+      }
+    ]
+  },
+  "ACEN": {
+    "Hash": "ACEN",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "ao-universe guides 2026-11-09 (resolve-client-hash)"
+    },
+    "Templates": [
+      {
+        "Name": "Acolyte Enel Wei",
+        "Level": 70,
+        "Stats": {
+          "0": 277352961,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 128,
+          "286": 42,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 70,
+          "33": 1,
+          "359": 214067,
+          "360": 140,
+          "455": 201,
+          "1": 4822,
+          "27": 4822,
+          "12": 214000,
+          "64": 0
+        },
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Source": "scrape_npcs_20261029.csv: 6 rows named Acolyte Enel Wei, PF 4541, L70, MonsterData 214067, Mesh 214000, Scale 140, Flags 277352961, Family 201, HP 4822, side Clan. Client pink point ACEN is 3.9 units from guide coords 489x1393.",
+          "Hash": "ACEN"
+        },
+        "LootTable": []
+      }
+    ]
+  },
+  "FOEN": {
+    "Hash": "FOEN",
+    "ContentProvenance": {
+      "Guessed": true,
+      "Source": "ao-universe guides 2026-11-09 (resolve-client-hash)"
+    },
+    "Templates": [
+      {
+        "Name": "Forrester Enel Aban",
+        "Level": 70,
+        "Stats": {
+          "0": 268964353,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 128,
+          "286": 42,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 70,
+          "33": 1,
+          "359": 214078,
+          "360": 140,
+          "455": 201,
+          "1": 4822,
+          "27": 4822,
+          "12": 213990
+        },
+        "ContentProvenance": {
+          "Guessed": true,
+          "Confirmed": false,
+          "Donor": "ECEE",
+          "Source": "Client pink point FOEN (PF 4678, L70, 1.6 units from guide coords 370.9x414.0). Name/location from AO-Universe guide enel-garden-key-quest. Appearance is a copy of ECEE (Enel look); no scrape exists.",
+          "StandIn": true,
+          "Hash": "FOEN"
+        },
+        "LootTable": []
+      }
+    ]
+  },
+  "FREN": {
+    "Hash": "FREN",
+    "ContentProvenance": {
+      "Guessed": true,
+      "Source": "ao-universe guides 2026-11-09 (resolve-client-hash)"
+    },
+    "Templates": [
+      {
+        "Name": "Forrester Enel Aban",
+        "Level": 70,
+        "Stats": {
+          "0": 268964353,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 128,
+          "286": 42,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 70,
+          "33": 1,
+          "359": 214078,
+          "360": 140,
+          "455": 201,
+          "1": 4822,
+          "27": 4822,
+          "12": 213990
+        },
+        "ContentProvenance": {
+          "Guessed": true,
+          "Confirmed": false,
+          "Donor": "ECEE",
+          "Source": "Client pink point FREN (PF 4679, L70, 1.6 units from guide coords 370.9x414.0). Name/location from AO-Universe guide enel-garden-key-quest. Appearance is a copy of ECEE (Enel look); no scrape exists.",
+          "StandIn": true,
+          "Hash": "FREN"
+        },
+        "LootTable": []
+      }
+    ]
+  },
+  "SASY": {
+    "Hash": "SASY",
+    "ContentProvenance": {
+      "Guessed": true,
+      "Source": "ao-universe guides 2026-11-09 (resolve-client-hash)"
+    },
+    "Templates": [
+      {
+        "Name": "Stalking Slayer",
+        "Level": 64,
+        "Stats": {
+          "0": 268964353,
+          "4": 1,
+          "47": 1,
+          "59": 2,
+          "64": 40695,
+          "89": 1,
+          "156": 34,
+          "466": 0,
+          "673": 31,
+          "285": 96,
+          "286": 48,
+          "61": 640,
+          "54": 64,
+          "33": 3,
+          "359": 209029,
+          "360": 100,
+          "455": 181,
+          "1": 4276,
+          "27": 4276,
+          "12": 208940
+        },
+        "BossTriggers": [
+          {
+            "On": "FirstAggro",
+            "Pct": 0,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "JUJU",
+                "Count": 3,
+                "Radius": 4,
+                "Level": 45
+              }
+            ]
+          },
+          {
+            "On": "HealthBelow",
+            "Pct": 50,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "JUJU",
+                "Count": 3,
+                "Radius": 4,
+                "Level": 45
+              }
+            ]
+          }
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": true,
+          "Confirmed": false,
+          "Donor": "Q01S",
+          "Source": "Client pink hash SASY: 16 spawn points L60/61 NE of Shades of Grey in PF 4540, matching guide one-who-has-taken-vow-of-truth (5 Stalking Slayers NE of Shades, ~L60). Identity inferred from guide location + level; stats cloned from scraped Q01S Stalking Slayer.",
+          "Hash": "SASY"
+        }
+      }
+    ]
+  },
+  "WOPR": {
+    "Hash": "WOPR",
+    "ContentProvenance": {
+      "Guessed": true,
+      "Source": "ao-universe guide guard---ulf-reinhart (resolve-client-hash)"
+    },
+    "Templates": [
+      {
+        "Name": "Wounded Predator",
+        "Level": 75,
+        "Stats": {
+          "0": 268964353,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 67,
+          "286": 23,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 75,
+          "33": 3,
+          "359": 209029,
+          "360": 150,
+          "455": 207,
+          "1": 21108,
+          "27": 21108,
+          "12": 208940
+        },
+        "HasHeadMesh": true,
+        "LootTable": [
+          {
+            "Hash": "L007",
+            "Repeats": 1,
+            "Chance": 50,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L008",
+            "Repeats": 1,
+            "Chance": 50,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L001",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L009",
+            "Repeats": 1,
+            "Chance": 50,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L006",
+            "Repeats": 1,
+            "Chance": 50,
+            "LevelMod": 0
+          }
+        ],
+        "ContentProvenance": {
+          "Guessed": true,
+          "Confirmed": false,
+          "Donor": "LIPR",
+          "Source": "Client pink hash WOPR: 1 spawn point (PF 4541, L75) at 743x963, inside the Limping/Pained/Howling Predator cluster the Ulf Reinhart guide gives at 760x950. Name inferred from the hash pattern (LIPR/PIPE/HOPE/WOPR); stats cloned from LIPR.",
+          "Hash": "WOPR"
+        }
+      }
+    ]
+  }
+}

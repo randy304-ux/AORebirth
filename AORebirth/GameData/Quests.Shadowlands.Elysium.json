@@ -71,7 +71,7 @@
   {
     "Hash": "EY04",
     "Name": "Predator scan: Limping Predator",
-    "Summary": "Target this predator to register a scan. Any-order fallback; original scanner sequence is unverified.",
+    "Summary": "Tag the Limping Predator with your scanner (Elysium West, 760x950). Tag each predator, then return to Guard - Ulf Reinhart.",
     "Scope": "Solo",
     "QasInstance": 951004,
     "Action": "TargetNpc",
@@ -94,7 +94,7 @@
   {
     "Hash": "EY05",
     "Name": "Predator scan: Pained Predator",
-    "Summary": "Target this predator to register a scan. Any-order fallback; original scanner sequence is unverified.",
+    "Summary": "Tag the Pained Predator with your scanner (Elysium West, 760x950). Tag each predator, then return to Guard - Ulf Reinhart.",
     "Scope": "Solo",
     "QasInstance": 951005,
     "Action": "TargetNpc",
@@ -117,7 +117,7 @@
   {
     "Hash": "EY06",
     "Name": "Predator scan: Howling Predator",
-    "Summary": "Target this predator to register a scan. Any-order fallback; original scanner sequence is unverified.",
+    "Summary": "Tag the Howling Predator with your scanner (Elysium West, 760x950). Tag each predator, then return to Guard - Ulf Reinhart.",
     "Scope": "Solo",
     "QasInstance": 951006,
     "Action": "TargetNpc",
@@ -139,20 +139,20 @@
   },
   {
     "Hash": "EY07",
-    "Name": "Report missing predator scan",
-    "Summary": "After the three available predators, report to Ulf. The missing Wounded Predator is waived explicitly in this fallback.",
+    "Name": "Predator scan: Wounded Predator",
+    "Summary": "Tag the Wounded Predator with your scanner (Elysium West, 760x950). Tag each predator, then return to Guard - Ulf Reinhart.",
     "Scope": "Solo",
     "QasInstance": 951007,
     "Action": "TargetNpc",
     "Objective": {
-      "Npc": "MUYX",
+      "Npc": "WOPR",
       "Count": null,
       "SpecItem": null,
       "WorldItem": null
     },
     "Flags": "None",
     "MissionBit": null,
-    "NextStep": "EY02",
+    "NextStep": null,
     "Reward": {
       "Hash": "ER07",
       "Xp": 0,
@@ -163,7 +163,7 @@
   {
     "Hash": "EY02",
     "Name": "Return the predator survey",
-    "Summary": "Target Ulf to finish the survey. Scanner identity is unverified, so no invented scanner is consumed.",
+    "Summary": "Tell Guard - Ulf Reinhart (Elysium North, 1467.4x1319.2, bottom of the bridge from Port 5) that you have scanned the Predators. Reward: Specialization 2 (The Girl that Saw it All) Chapter 2, 20k XP, 20k credits.",
     "Scope": "Solo",
     "QasInstance": 951002,
     "Action": "TargetNpc",
@@ -433,7 +433,7 @@
   {
     "Hash": "EY19",
     "Name": "Deliver Sphagnum Moss",
-    "Summary": "Deliver Sphagnum Moss to The One Loved by the Sun. One Who Has Achieved Glory is absent; acquisition/offer requires that NPC integration.",
+    "Summary": "Give the Sphagnum Moss to The One Loved By The Sun (Elysium North, 275x1010, first level up the tower).",
     "Scope": "Solo",
     "QasInstance": 951045,
     "Action": "FindItem",
@@ -456,7 +456,7 @@
   {
     "Hash": "EY1A",
     "Name": "Glory hunt: Bony Spinetooth",
-    "Summary": "Kill 3 Bony Spinetooth. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Summary": "Kill 3 Bony Spinetooths (Archbile, 355x1600); one drops a Bony Spinetooth Claw.",
     "Scope": "Solo",
     "QasInstance": 951046,
     "Action": "KillMultiple",
@@ -479,7 +479,7 @@
   {
     "Hash": "EY1B",
     "Name": "Glory hunt: Kolaana-Behn",
-    "Summary": "Kill 3 Kolaana-Behn. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Summary": "Kill 3 Kolaana-Behns (945x900, south of Sabre's Cradle); one drops a Patch of Kolaana-Behn fur.",
     "Scope": "Solo",
     "QasInstance": 951047,
     "Action": "KillMultiple",
@@ -491,7 +491,7 @@
     },
     "Flags": "None",
     "MissionBit": null,
-    "NextStep": null,
+    "NextStep": "EY1C",
     "Reward": {
       "Hash": "ER1B",
       "Xp": 0,
@@ -502,7 +502,7 @@
   {
     "Hash": "EY1D",
     "Name": "Glory hunt: Somphos Brunee",
-    "Summary": "Kill 5 Somphos Brunee. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Summary": "Kill 5 Somphos Brunees (clusters at 800x1180, 600x775 and 600x700, around level 65).",
     "Scope": "Solo",
     "QasInstance": 951049,
     "Action": "KillMultiple",
@@ -525,7 +525,7 @@
   {
     "Hash": "EY1E",
     "Name": "Glory hunt: Somphos Gulee",
-    "Summary": "Kill 3 Somphos Gulee. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Summary": "Kill 3 Somphos Gulees (Archbile, around 400x1600).",
     "Scope": "Solo",
     "QasInstance": 951050,
     "Action": "KillMultiple",
@@ -548,7 +548,7 @@
   {
     "Hash": "EY1F",
     "Name": "Glory hunt: Somphos Grainee",
-    "Summary": "Kill 1 Somphos Grainee. Missing giver/receiver prevents final reward integration; do not expose this incomplete chain to players.",
+    "Summary": "Kill 1 Somphos Grainee, a little further south; it yields the Somphos Horn.",
     "Scope": "Solo",
     "QasInstance": 951051,
     "Action": "KillOne",
@@ -560,7 +560,7 @@
     },
     "Flags": "None",
     "MissionBit": null,
-    "NextStep": null,
+    "NextStep": "EY1G",
     "Reward": {
       "Hash": "ER1F",
       "Xp": 0,
@@ -736,19 +736,19 @@
   {
     "Hash": "EY20",
     "Name": "Medicine: Stalking Slayer hides",
-    "Summary": "Kill five Stalking Slayers. Shades of Grey has no verified receiver template; this chain must remain unavailable until integration.",
+    "Summary": "Kill 5 Stalking Slayers, north-east of Shades of Grey (Elysium South, level 60 area). Skins are handed in to Shades of Grey.",
     "Scope": "Solo",
     "QasInstance": 951072,
     "Action": "KillMultiple",
     "Objective": {
-      "Npc": "Q01S",
+      "Npc": "SASY",
       "Count": 5,
       "SpecItem": null,
       "WorldItem": null
     },
     "Flags": "None",
     "MissionBit": null,
-    "NextStep": null,
+    "NextStep": "EY21",
     "Reward": {
       "Hash": "ER20",
       "Xp": 0,
@@ -759,7 +759,7 @@
   {
     "Hash": "EY25",
     "Name": "Frozen artifacts: Shiver Spider",
-    "Summary": "Kill five of this target, then continue the artifact hunt.",
+    "Summary": "Kill 5 Shiver Spiders (about 440x700, between Whispervale and Stormshelter); one drops a Frozen Bone.",
     "Scope": "Solo",
     "QasInstance": 951077,
     "Action": "KillMultiple",
@@ -782,7 +782,7 @@
   {
     "Hash": "EY26",
     "Name": "Frozen artifacts: Icy Shadow",
-    "Summary": "Kill five of this target, then continue the artifact hunt.",
+    "Summary": "Kill 5 Icy Shadows (790x1200, river mouth); one drops a Frozen Goblet.",
     "Scope": "Solo",
     "QasInstance": 951078,
     "Action": "KillMultiple",
@@ -962,14 +962,14 @@
   },
   {
     "Hash": "EY2D",
-    "Name": "Soul Feeding: missing-target report",
-    "Summary": "Fallback: report to OHWH to waive ten Cagey Hoathlin kills. CAHO/Cagey Hoathlan remains a spelling candidate, not a verified identity.",
+    "Name": "Soul Feeding: Cagey Hoathlan",
+    "Summary": "Kill 10 Cagey Hoathlins in sequence (guide spelling; client template is Cagey Hoathlan).",
     "Scope": "Solo",
     "QasInstance": 951085,
-    "Action": "TargetNpc",
+    "Action": "KillMultiple",
     "Objective": {
-      "Npc": "OHWH",
-      "Count": null,
+      "Npc": "CAHO",
+      "Count": 10,
       "SpecItem": null,
       "WorldItem": null
     },
@@ -986,7 +986,7 @@
   {
     "Hash": "EY2E",
     "Name": "Soul Feeding: Fissure Hiathlin",
-    "Summary": "Kill 10 Fissure Hiathlin in sequence.",
+    "Summary": "Kill 10 Fissure Hiathlins (500x1500).",
     "Scope": "Solo",
     "QasInstance": 951086,
     "Action": "KillMultiple",
@@ -1009,7 +1009,7 @@
   {
     "Hash": "EY2F",
     "Name": "Soul Feeding: Malah-Behn",
-    "Summary": "Kill 5 Malah-Behn in sequence.",
+    "Summary": "Kill 5 Malah-Behns (920x870).",
     "Scope": "Solo",
     "QasInstance": 951087,
     "Action": "KillMultiple",
@@ -1460,7 +1460,7 @@
   {
     "Hash": "EY2Z",
     "Name": "Deliver Red Hat Spores",
-    "Summary": "Trade spores only after the missing Glory stages are integrated. Receipt grants Red Hat Mixture for the next delivery.",
+    "Summary": "Deliver the Red Hat Spores to One with a Graceful Neck (portal at 530x970 returns to Elysium East). He gives you a Red Hat Mixture.",
     "Scope": "Solo",
     "QasInstance": 951107,
     "Action": "FindItem",
@@ -1932,7 +1932,7 @@
   {
     "Hash": "EY40",
     "Name": "Garden survey: Fortuitous Jorr-Fes Shere",
-    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Summary": "Target this Unredeemed NPC with the Ancient Tracking Device in your inventory, in the order given. Location: Remnans, Elysium North 1588x721.",
     "Scope": "Solo",
     "QasInstance": 951144,
     "Action": "TargetNpc",
@@ -1955,7 +1955,7 @@
   {
     "Hash": "EY41",
     "Name": "Garden survey: Hypnagogic Wox-Xum Shere",
-    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Summary": "Target this Unredeemed NPC with the Ancient Tracking Device in your inventory, in the order given. Location: Remnans, Elysium North 1588x721.",
     "Scope": "Solo",
     "QasInstance": 951145,
     "Action": "TargetNpc",
@@ -1978,7 +1978,7 @@
   {
     "Hash": "EY42",
     "Name": "Garden survey: Follower Chi-Nar Shere",
-    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Summary": "Target this Unredeemed NPC with the Ancient Tracking Device in your inventory, in the order given. Location: Remnans, Elysium North 1588x721.",
     "Scope": "Solo",
     "QasInstance": 951146,
     "Action": "TargetNpc",
@@ -2001,7 +2001,7 @@
   {
     "Hash": "EY43",
     "Name": "Garden survey: Fortuitous Hes-Man Shere",
-    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Summary": "Target this Unredeemed NPC with the Ancient Tracking Device in your inventory, in the order given. Location: Stormshelter, Elysium East 737x566.",
     "Scope": "Solo",
     "QasInstance": 951147,
     "Action": "TargetNpc",
@@ -2024,7 +2024,7 @@
   {
     "Hash": "EY44",
     "Name": "Garden survey: Hypnagogic Ixi-Bhotaar Shere",
-    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Summary": "Target this Unredeemed NPC with the Ancient Tracking Device in your inventory, in the order given. Location: Stormshelter, Elysium East 737x566.",
     "Scope": "Solo",
     "QasInstance": 951148,
     "Action": "TargetNpc",
@@ -2047,7 +2047,7 @@
   {
     "Hash": "EY45",
     "Name": "Garden survey: Visionist Dom-Xum Shere",
-    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Summary": "Target this Unredeemed NPC with the Ancient Tracking Device in your inventory, in the order given. Location: Stormshelter, Elysium East 737x566.",
     "Scope": "Solo",
     "QasInstance": 951149,
     "Action": "TargetNpc",
@@ -2070,7 +2070,7 @@
   {
     "Hash": "EY46",
     "Name": "Garden survey: Follower Yutt-Ixi Shere",
-    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Summary": "Target this Unredeemed NPC with the Ancient Tracking Device in your inventory, in the order given. Location: Stormshelter, Elysium East 737x566.",
     "Scope": "Solo",
     "QasInstance": 951150,
     "Action": "TargetNpc",
@@ -2093,7 +2093,7 @@
   {
     "Hash": "EY47",
     "Name": "Garden survey: Fortuitous Pi-Zul Shere",
-    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Summary": "Target this Unredeemed NPC with the Ancient Tracking Device in your inventory, in the order given. Location: Elysium North 899x418.",
     "Scope": "Solo",
     "QasInstance": 951151,
     "Action": "TargetNpc",
@@ -2116,7 +2116,7 @@
   {
     "Hash": "EY48",
     "Name": "Garden survey: Follower Man-Wox Shere",
-    "Summary": "Target this NPC in the prescribed order. Keep the Ancient Tracking Device in inventory; use-on-target is replaced by TargetNpc.",
+    "Summary": "Target this Unredeemed NPC with the Ancient Tracking Device in your inventory, in the order given. Location: Elysium North 899x418.",
     "Scope": "Solo",
     "QasInstance": 951152,
     "Action": "TargetNpc",
@@ -2128,7 +2128,7 @@
     },
     "Flags": "None",
     "MissionBit": null,
-    "NextStep": null,
+    "NextStep": "EY49",
     "Reward": {
       "Hash": "ER48",
       "Xp": 0,
@@ -2556,7 +2556,7 @@
     },
     "Flags": "None",
     "MissionBit": null,
-    "NextStep": null,
+    "NextStep": "EY96",
     "Reward": {
       "Hash": "ER95",
       "Xp": 0,
@@ -2577,7 +2577,7 @@
   {
     "Hash": "EY97",
     "Name": "Return Enel approval letter",
-    "Summary": "Return after the missing Acolyte approval. Receiver Forrester must then be integrated before the tagging route is offered.",
+    "Summary": "Return to Ecclesiast Enel Gill in the central temple at Utopolis; he gives the letter back and sends you to the Enel Garden.",
     "Scope": "Solo",
     "QasInstance": 951331,
     "Action": "FindItem",
@@ -2589,7 +2589,7 @@
     },
     "Flags": "None",
     "MissionBit": null,
-    "NextStep": null,
+    "NextStep": "EY98",
     "Reward": {
       "Hash": "ER97",
       "Xp": 0,
@@ -2610,7 +2610,7 @@
   {
     "Hash": "EY4A",
     "Name": "Sanctuary hunt: Fortuitous Jorr-Fes Shere",
-    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Summary": "Kill Fortuitous Jorr-Fes Shere (level 70). Location: Elysium North - 1594.9x719.3.",
     "Scope": "Solo",
     "QasInstance": 951154,
     "Action": "KillOne",
@@ -2633,7 +2633,7 @@
   {
     "Hash": "EY4B",
     "Name": "Sanctuary hunt: Hypnagogic Wox-Xum Shere",
-    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Summary": "Kill Hypnagogic Wox-Xum Shere (level 70). Location: Elysium North - 1591.9x720.5.",
     "Scope": "Solo",
     "QasInstance": 951155,
     "Action": "KillOne",
@@ -2656,7 +2656,7 @@
   {
     "Hash": "EY4C",
     "Name": "Sanctuary hunt: Follower Chi-Nar Shere",
-    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Summary": "Kill Follower Chi-Nar Shere (level 70). Location: Elysium North - 1595.8x722.0.",
     "Scope": "Solo",
     "QasInstance": 951156,
     "Action": "KillOne",
@@ -2679,7 +2679,7 @@
   {
     "Hash": "EY4D",
     "Name": "Sanctuary hunt: Fortuitous Hes-Man Shere",
-    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Summary": "Kill Fortuitous Hes-Man Shere (level 70). Location: Elysium East - 708.1x575.3.",
     "Scope": "Solo",
     "QasInstance": 951157,
     "Action": "KillOne",
@@ -2702,7 +2702,7 @@
   {
     "Hash": "EY4E",
     "Name": "Sanctuary hunt: Hypnagogic Ixi-Bhotaar Shere",
-    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Summary": "Kill Hypnagogic Ixi-Bhotaar Shere (level 70). Location: Elysium East - 68.2x564.1 (as printed in the guide).",
     "Scope": "Solo",
     "QasInstance": 951158,
     "Action": "KillOne",
@@ -2725,7 +2725,7 @@
   {
     "Hash": "EY4F",
     "Name": "Sanctuary hunt: Visionist Dom-Xum Shere",
-    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Summary": "Kill Visionist Dom-Xum Shere (level 70). Location: Elysium East - 699.5x557.4.",
     "Scope": "Solo",
     "QasInstance": 951159,
     "Action": "KillOne",
@@ -2748,7 +2748,7 @@
   {
     "Hash": "EY4G",
     "Name": "Sanctuary hunt: Follower Yutt-Ixi Shere",
-    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Summary": "Kill Follower Yutt-Ixi Shere (level 70). Location: Elysium East - 697.2x560.1.",
     "Scope": "Solo",
     "QasInstance": 951160,
     "Action": "KillOne",
@@ -2771,7 +2771,7 @@
   {
     "Hash": "EY4H",
     "Name": "Sanctuary hunt: Fortuitous Pi-Zul Shere",
-    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Summary": "Kill Fortuitous Pi-Zul Shere (level 70). Location: Elysium North - 910.8x399.1.",
     "Scope": "Solo",
     "QasInstance": 951161,
     "Action": "KillOne",
@@ -2794,7 +2794,7 @@
   {
     "Hash": "EY4I",
     "Name": "Sanctuary hunt: Follower Man-Wox Shere",
-    "Summary": "Kill this named target in order; continue to the next journal objective.",
+    "Summary": "Kill Follower Man-Wox Shere (level 70). Location: Elysium North - 925.3x925.3 (as printed in the guide); loot the NODROP UNIQUE Briefing.",
     "Scope": "Solo",
     "QasInstance": 951162,
     "Action": "KillOne",
@@ -2817,7 +2817,7 @@
   {
     "Hash": "EY4J",
     "Name": "Report the sanctuary hunt",
-    "Summary": "Return to the giver after the final kill. Fallback: obtain Briefing as a one-time stage reward instead of corpse loot.",
+    "Summary": "Tell Ecclesiast Enel Gil (825x815) the task is complete, but that you are worried about the Briefing that outlines an Unredeemed attack on the Redeemed.",
     "Scope": "Solo",
     "QasInstance": 951163,
     "Action": "TargetNpc",
@@ -3503,6 +3503,329 @@
       "Xp": 0,
       "Credits": 0,
       "Records": null
+    }
+  },
+  {
+    "Hash": "EY1C",
+    "Name": "Return the claw and fur",
+    "Summary": "Return the Bony Spinetooth Claw and the Patch of Kolaana-Behn fur to One Who Has Achieved Glory (Archbile, Elysium West 440x990).",
+    "Scope": "Solo",
+    "QasInstance": 951048,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ONWO",
+      "Count": null,
+      "SpecItem": "EK0Z",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1C",
+      "Xp": 100000,
+      "Credits": 250000,
+      "Records": [
+        [
+          {
+            "Id": 238912,
+            "HighId": 238912,
+            "Name": "Eye of the Evening Star",
+            "Quality": 100,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY1G",
+    "Name": "Return the Somphos Horn",
+    "Summary": "Return the Somphos Horn to One Who Has Achieved Glory (Archbile, Elysium West 440x990).",
+    "Scope": "Solo",
+    "QasInstance": 951052,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ONWO",
+      "Count": null,
+      "SpecItem": "EK11",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER1G",
+      "Xp": 300000,
+      "Credits": 500000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY21",
+    "Name": "Medicine: hand in the Stalking Slayer hides",
+    "Summary": "Give the Stalking Slayer hides to Shades of Grey (Elysium South, 1672x624).",
+    "Scope": "Solo",
+    "QasInstance": 951073,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SGOR",
+      "Count": null,
+      "SpecItem": "EK12",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY22",
+    "Reward": {
+      "Hash": "ER21",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY22",
+    "Name": "Medicine: Rafter tear gland",
+    "Summary": "Jump off the cliff behind Shades of Grey and kill a Shore Rafter (level 80) for a Rafter Tear Gland.",
+    "Scope": "Solo",
+    "QasInstance": 951074,
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "CORF",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY23",
+    "Reward": {
+      "Hash": "ER22",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY23",
+    "Name": "Medicine: give Shades of Grey the tear gland",
+    "Summary": "Give the Rafter Tear Gland to Shades of Grey (Elysium South, 1672x624).",
+    "Scope": "Solo",
+    "QasInstance": 951075,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SGOR",
+      "Count": null,
+      "SpecItem": "EK13",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY24",
+    "Reward": {
+      "Hash": "ER23",
+      "Xp": 20000,
+      "Credits": 250000,
+      "Records": [
+        [
+          {
+            "Id": 238914,
+            "HighId": 238914,
+            "Name": "Ring of Divine Teardrops",
+            "Quality": 100,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY24",
+    "Name": "Deliver the Ancient Text",
+    "Summary": "Give the Ancient Text to Shades of Grey (Elysium South, 1672x624).",
+    "Scope": "Solo",
+    "QasInstance": 951076,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "SGOR",
+      "Count": null,
+      "SpecItem": "EK14",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER24",
+      "Xp": 25000,
+      "Credits": 20000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "EY2X",
+    "Name": "Sleeping Medicine: show the Resource Request",
+    "Summary": "Show the Resource Request to One Who Has Achieved Glory (near the portal at 1060x900, Archbile, Elysium West).",
+    "Scope": "Solo",
+    "QasInstance": 951105,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ONWO",
+      "Count": null,
+      "SpecItem": "EK15",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2Y",
+    "Reward": {
+      "Hash": "ER2X",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 259700,
+            "HighId": 259700,
+            "Name": "Fungus Sample Bag",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY2Y",
+    "Name": "Sleeping Medicine: Red Hat samples",
+    "Summary": "Collect 5 Red Hat Mushroom samples north of One Who Has Achieved Glory (wildlife level ~80) and trade him the samples and the bag.",
+    "Scope": "Solo",
+    "QasInstance": 951106,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ONWO",
+      "Count": null,
+      "SpecItem": "EK16",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY2Z",
+    "Reward": {
+      "Hash": "ER2Y",
+      "Xp": 25000,
+      "Credits": 50000,
+      "Records": [
+        [
+          {
+            "Id": 259775,
+            "HighId": 259775,
+            "Name": "Red Hat Spores",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY96",
+    "Name": "Enel approvals: Acolyte Enel Wei",
+    "Summary": "Show the Sealed Letter to Acolyte Enel Wei (Elysium West 489x1393, he walks a blue-mushroom path between Archbile and West of Elysium).",
+    "Scope": "Solo",
+    "QasInstance": 951330,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "ACEN",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY97",
+    "Reward": {
+      "Hash": "ER96",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 214792,
+            "HighId": 214792,
+            "Name": "Sealed Letter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY98",
+    "Name": "Forrester Enel Aban",
+    "Summary": "Show the Sealed Letter to Forrester Enel Aban in the Enel Garden (370.9x414.0, just outside the pool). He gives you the Ancient Tracking Device.",
+    "Scope": "Solo",
+    "QasInstance": 951332,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "FOEN",
+      "Count": null,
+      "SpecItem": "EK0J",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "EY40",
+    "Reward": {
+      "Hash": "ER98",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 217041,
+            "HighId": 217041,
+            "Name": "Ancient Tracking Device",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "EY49",
+    "Name": "Return the tracking device",
+    "Summary": "Give the Ancient Tracking Device back to Forrester Enel Aban (Enel Garden, 370.9x414.0) for the Key to the Garden of Enel.",
+    "Scope": "Solo",
+    "QasInstance": 951153,
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "FOEN",
+      "Count": null,
+      "SpecItem": "EK0K",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "ER49",
+      "Xp": 0,
+      "Credits": 0,
+      "Records": [
+        [
+          {
+            "Id": 226987,
+            "HighId": 226987,
+            "Name": "The Key to the Garden of Enel",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
     }
   }
 ]

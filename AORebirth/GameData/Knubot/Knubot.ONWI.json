@@ -84,6 +84,36 @@
       "Text": "Goodbye.",
       "Goto": "close",
       "Source": "filler"
+    },
+    "ey2x_offer": {
+      "Text": "Sleeping Draught",
+      "Goto": "ey2x_description",
+      "If": [
+        "!HasAnyQuest EY2X,EY2Y,EY2Z,EY30",
+        "!quest EY2X done",
+        "!quest EY30 done",
+        "!has EK15 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2x_accept": {
+      "Text": "Accept: Sleeping Draught",
+      "Goto": "ey2x_start",
+      "If": [
+        "!HasAnyQuest EY2X,EY2Y,EY2Z,EY30",
+        "!quest EY2X done",
+        "!quest EY30 done",
+        "!has EK15 1"
+      ],
+      "Source": "filler"
+    },
+    "ey2x_progress": {
+      "Text": "Sleeping Draught: progress",
+      "Goto": "ey2x_progress",
+      "If": [
+        "HasAnyQuest EY2X,EY2Y,EY2Z,EY30"
+      ],
+      "Source": "filler"
     }
   },
   "Lines": {
@@ -169,9 +199,36 @@
         "ey33_supply1",
         "ey33_offer",
         "ey33_progress",
+        "ey2x_offer",
+        "ey2x_progress",
         "bye"
       ],
       "Source": "filler"
+    },
+    "ey2x_description": {
+      "Text": "Take this Resource Request to One Who Has Achieved Glory (portal at 1060x900 near the bridge; he supplies the Red Hat spores), then bring the spores back to me.",
+      "Replies": [
+        "ey2x_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey2x_start": {
+      "Text": "{spawn EK15 1 1}{givequest EY2X}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey2x_progress": {
+      "Text": "Take this Resource Request to One Who Has Achieved Glory (portal at 1060x900 near the bridge; he supplies the Red Hat spores), then bring the spores back to me.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
     }
   },
   "Trades": {

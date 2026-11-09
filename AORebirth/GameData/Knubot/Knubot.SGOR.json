@@ -1,0 +1,258 @@
+{
+  "Npcs": [
+    "SGOR"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "ey20_offer": {
+      "Text": "Medicine for the Ancient Text",
+      "Goto": "ey20_description",
+      "If": [
+        "!HasAnyQuest EY20,EY21,EY22,EY23,EY24",
+        "!quest EY20 done",
+        "!quest EY24 done",
+        "has EK14 1"
+      ],
+      "Source": "filler"
+    },
+    "ey20_accept": {
+      "Text": "Accept: Medicine for the Ancient Text",
+      "Goto": "ey20_start",
+      "If": [
+        "!HasAnyQuest EY20,EY21,EY22,EY23,EY24",
+        "!quest EY20 done",
+        "!quest EY24 done",
+        "has EK14 1"
+      ],
+      "Source": "filler"
+    },
+    "ey20_progress": {
+      "Text": "Medicine for the Ancient Text: progress",
+      "Goto": "ey20_progress",
+      "If": [
+        "HasAnyQuest EY20,EY21,EY22,EY23,EY24"
+      ],
+      "Source": "filler"
+    },
+    "ey21_trade": {
+      "Text": "Hand in: Stalking Slayer hides",
+      "Goto": "ey21_trade",
+      "If": [
+        "HasQuest EY21",
+        "has EK12 1"
+      ],
+      "Source": "filler"
+    },
+    "ey21_supply0": {
+      "Text": "Collect missing proof for EY21",
+      "Goto": "ey21_supply0",
+      "If": [
+        "HasQuest EY21",
+        "!has EK12 1"
+      ],
+      "Source": "filler"
+    },
+    "ey23_trade": {
+      "Text": "Hand in: Rafter Tear Gland",
+      "Goto": "ey23_trade",
+      "If": [
+        "HasQuest EY23",
+        "has EK13 1"
+      ],
+      "Source": "filler"
+    },
+    "ey23_supply0": {
+      "Text": "Collect missing proof for EY23",
+      "Goto": "ey23_supply0",
+      "If": [
+        "HasQuest EY23",
+        "!has EK13 1"
+      ],
+      "Source": "filler"
+    },
+    "ey24_trade": {
+      "Text": "Hand in: Ancient Text",
+      "Goto": "ey24_trade",
+      "If": [
+        "HasQuest EY24",
+        "has EK14 1"
+      ],
+      "Source": "filler"
+    },
+    "ey24_supply0": {
+      "Text": "Collect missing proof for EY24",
+      "Goto": "ey24_supply0",
+      "If": [
+        "HasQuest EY24",
+        "!has EK14 1"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey20_offer",
+        "ey20_progress",
+        "ey21_trade",
+        "ey21_supply0",
+        "ey23_trade",
+        "ey23_supply0",
+        "ey24_trade",
+        "ey24_supply0",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey20_description": {
+      "Text": "Kill 5 Stalking Slayers north-east of here (about level 60) and bring me their skins. Then I want a Rafter tear gland: jump off the cliff behind me, the rafters there are about level 80.",
+      "Replies": [
+        "ey20_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey20_start": {
+      "Text": "{givequest EY20}The assignment is in your journal.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey20_progress": {
+      "Text": "Kill 5 Stalking Slayers north-east of here (about level 60) and bring me their skins. Then I want a Rafter tear gland: jump off the cliff behind me, the rafters there are about level 80.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey21_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey21_done": {
+      "Text": "{completequest EY21}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey21_supply0": {
+      "Text": "{spawn EK12 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey23_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey23_done": {
+      "Text": "{completequest EY23}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey23_supply0": {
+      "Text": "{spawn EK13 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey24_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey24_done": {
+      "Text": "{completequest EY24}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey24_supply0": {
+      "Text": "{spawn EK14 1 1}Here is the proof for this completed task.",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey21": {
+      "If": [
+        "HasQuest EY21"
+      ],
+      "Items": [
+        {
+          "Hash": "EK12",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey21_done"
+    },
+    "ey23": {
+      "If": [
+        "HasQuest EY23"
+      ],
+      "Items": [
+        {
+          "Hash": "EK13",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey23_done"
+    },
+    "ey24": {
+      "If": [
+        "HasQuest EY24"
+      ],
+      "Items": [
+        {
+          "Hash": "EK14",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey24_done"
+    }
+  }
+}

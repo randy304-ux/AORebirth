@@ -1,0 +1,71 @@
+{
+  "Npcs": [
+    "ACEN"
+  ],
+  "Openers": [
+    {
+      "Say": "hub"
+    }
+  ],
+  "Replies": {
+    "menu": {
+      "Text": "Show available tasks.",
+      "Goto": "hub",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "ey96_trade": {
+      "Text": "Hand in: Enel approvals: Acolyte Enel Wei",
+      "Goto": "ey96_trade",
+      "If": [
+        "HasQuest EY96",
+        "has EK0J 1"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hub": {
+      "Text": "Choose a task or report your progress.",
+      "Replies": [
+        "ey96_trade",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey96_trade": {
+      "Text": "Place the requested items in the Give Item window.{opentrade}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey96_done": {
+      "Text": "{completequest EY96}The hand-in is complete.{close}",
+      "Replies": [
+        "menu",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "ey96": {
+      "If": [
+        "HasQuest EY96"
+      ],
+      "Items": [
+        {
+          "Hash": "EK0J",
+          "Count": 1
+        }
+      ],
+      "Goto": "ey96_done"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "recordType": 1000014,
+  "playfieldId": 4544,
+  "source": "scrape_npcs_20261101_Whozewhatzit.csv (Guard - Ulf Reinhart, 1 rows, PF 4544)",
+  "spawns": [
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "MUYX",
+      "manifestHash": 0,
+      "minLevel": 200,
+      "maxLevel": 200,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 158,
+      "angleW": 1,
+      "position": [
+        1467.34,
+        3.658,
+        1319.263
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    }
+  ]
+}

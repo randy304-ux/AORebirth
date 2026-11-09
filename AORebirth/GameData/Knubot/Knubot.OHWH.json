@@ -264,6 +264,28 @@
       "Text": "Goodbye.",
       "Goto": "close",
       "Source": "filler"
+    },
+    "ey24_offer": {
+      "Text": "Deliver an Ancient Text",
+      "Goto": "ey24_description",
+      "If": [
+        "!HasAnyQuest EY20,EY21,EY22,EY23,EY24",
+        "!quest EY20 done",
+        "!quest EY24 done",
+        "!has EK14 1"
+      ],
+      "Source": "filler"
+    },
+    "ey24_accept": {
+      "Text": "Accept: Deliver an Ancient Text",
+      "Goto": "ey24_start",
+      "If": [
+        "!HasAnyQuest EY20,EY21,EY22,EY23,EY24",
+        "!quest EY20 done",
+        "!quest EY24 done",
+        "!has EK14 1"
+      ],
+      "Source": "filler"
     }
   },
   "Lines": {
@@ -300,13 +322,13 @@
       "Source": "filler"
     },
     "ey25_description": {
-      "Text": "Kill five Shiver Spiders, then five Icy Shadows; return both artifacts for100,000XP,250,000credits and Sable Sleeves. Exact rewardQL is unverified; displayedQL100 variant used.",
+      "Text": "Kill 5 Shiver Spiders (about 440x700, between Whispervale and Stormshelter) for a Frozen Bone and 5 Icy Shadows (790x1200, river mouth) for a Frozen Goblet. Trade me both for Sable Sleeves of Fantasies, 100,000 XP and 250,000 credits.",
       "Replies": [
         "ey25_accept",
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "ey25_start": {
       "Text": "{givequest EY25}The assignment is in your journal.{close}",
@@ -317,12 +339,12 @@
       "Source": "filler"
     },
     "ey25_progress": {
-      "Text": "Kill five Shiver Spiders, then five Icy Shadows; return both artifacts for100,000XP,250,000credits and Sable Sleeves. Exact rewardQL is unverified; displayedQL100 variant used.",
+      "Text": "Kill 5 Shiver Spiders (about 440x700, between Whispervale and Stormshelter) for a Frozen Bone and 5 Icy Shadows (790x1200, river mouth) for a Frozen Goblet. Trade me both for Sable Sleeves of Fantasies, 100,000 XP and 250,000 credits.",
       "Replies": [
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "ey2c_trade": {
       "Text": "Place the requested items in the Give Item window.{opentrade}",
@@ -373,13 +395,13 @@
       "Source": "filler"
     },
     "ey28_description": {
-      "Text": "Complete four kills of each of the four rafter species, then return all distinct samples for80,000XP,200,000credits and a Staff of Pelias. RewardQL is unverified.",
+      "Text": "Kill four of each of the four rafter types (about level 60) and trade me the four root samples for the Staff of Pelias, 80,000 XP and 200,000 credits.",
       "Replies": [
         "ey28_accept",
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "ey28_start": {
       "Text": "{givequest EY28}{givequest EY29}{givequest EY2A}{givequest EY2B}The assignment is in your journal.{close}",
@@ -390,12 +412,12 @@
       "Source": "filler"
     },
     "ey28_progress": {
-      "Text": "Complete four kills of each of the four rafter species, then return all distinct samples for80,000XP,200,000credits and a Staff of Pelias. RewardQL is unverified.",
+      "Text": "Kill four of each of the four rafter types (about level 60) and trade me the four root samples for the Staff of Pelias, 80,000 XP and 200,000 credits.",
       "Replies": [
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "roots_ready": {
       "Text": "{givequest EY2C}Collect missing samples and trade all four together.",
@@ -430,13 +452,13 @@
       "Source": "filler"
     },
     "ey2d_description": {
-      "Text": "Follow the ordered hunts in your journal, then return the Soulcatcher. The initial missing Cagey target is explicitly waived; later counts follow the guide. Known fixed rewards preserved; Wrath of Zeus rewardQL unverified.",
+      "Text": "Kill, in order: 10 Cagey Hoathlins, 10 Fissure Hiathlins (500x1500), 5 Malah-Behns (920x870), 3 Hoathlans, 3 Brisk Hoathlans, 2 Malah-Ana, 1 Malah, 1 Malah-Dren and 1 Hiathlin Lookout for the Soulcatcher. Return it for Wrath of Zeus, 380,000 XP and 1,000,000 credits.",
       "Replies": [
         "ey2d_accept",
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "ey2d_start": {
       "Text": "{givequest EY2D}The assignment is in your journal.{close}",
@@ -447,12 +469,12 @@
       "Source": "filler"
     },
     "ey2d_progress": {
-      "Text": "Follow the ordered hunts in your journal, then return the Soulcatcher. The initial missing Cagey target is explicitly waived; later counts follow the guide. Known fixed rewards preserved; Wrath of Zeus rewardQL unverified.",
+      "Text": "Kill, in order: 10 Cagey Hoathlins, 10 Fissure Hiathlins (500x1500), 5 Malah-Behns (920x870), 3 Hoathlans, 3 Brisk Hoathlans, 2 Malah-Ana, 1 Malah, 1 Malah-Dren and 1 Hiathlin Lookout for the Soulcatcher. Return it for Wrath of Zeus, 380,000 XP and 1,000,000 credits.",
       "Replies": [
         "menu",
         "bye"
       ],
-      "Source": "filler"
+      "Source": "guide-summary"
     },
     "ey71_description": {
       "Text": "Target the named recipient. Sword dynel/use is missing; this explicitly waives the expedition at the giver.",
@@ -528,6 +550,24 @@
         "ey71_progress",
         "ey72_offer",
         "ey72_progress",
+        "ey24_offer",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "ey24_description": {
+      "Text": "Deliver this Ancient Text to Shades of Grey (Elysium South, 1672x624).",
+      "Replies": [
+        "ey24_accept",
+        "menu",
+        "bye"
+      ],
+      "Source": "guide-summary"
+    },
+    "ey24_start": {
+      "Text": "{spawn EK14 1 1}The Ancient Text is in your inventory. Take it to Shades of Grey.{close}",
+      "Replies": [
+        "menu",
         "bye"
       ],
       "Source": "filler"
