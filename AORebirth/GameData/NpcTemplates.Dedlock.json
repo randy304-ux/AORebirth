@@ -1,5 +1,5 @@
 {
-  "DEDL": {
+  "PFDD": {
     "Templates": [
       {
         "Name": "Professor Dedlock",
@@ -57,7 +57,8 @@
     "ContentProvenance": {
       "Guessed": false,
       "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071661",
-      "Note": "Real scrape: L150 HP 13369 Neutral Nanomage MonsterData 226383 Scale 117 Mesh 17909 HeadMesh 40191 NPCFamily 158. Stats dict follows the SCDK scrape-city template layout; captured flags 268440064, template uses the standard talk-NPC flags 277352961."
-    }
+      "Note": "Real scrape: L150 HP 13369 Neutral Nanomage MonsterData 226383 Scale 117 Mesh 17909 HeadMesh 40191 NPCFamily 158. Stats dict follows the SCDK scrape-city template layout; captured flags 268440064, template uses the standard talk-NPC flags 277352961. Re-keyed from DEDL to the client's own spawn hash PFDD (Playfields/4575/Spawns.json hash 1346782276 at 182.534/7.05/170.697) so the client point resolves; the duplicate SpawnsAdd.dedlock.json is removed. No Textures/Meshes were captured for Dedlock in any scrape (20261029 predates those columns); only MonsterData/Scale/Mesh/HeadMesh/NPCFamily exist."
+    },
+    "Hash": "PFDD"
   }
 }

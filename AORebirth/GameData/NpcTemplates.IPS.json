@@ -1,0 +1,7546 @@
+{
+  "MMOF": {
+    "Hash": "MMOF",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071647; spawn point MMOF pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9048 pf 4575 (66 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Doctor of IPS (inst 2067000860); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Doctor of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26092,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 1,
+          "64": 40694,
+          "12": 5907
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 28755,
+            "HighId": 28755,
+            "Quality": 43
+          },
+          {
+            "LowId": 42423,
+            "HighId": 42423,
+            "Quality": 4
+          },
+          {
+            "LowId": 43975,
+            "HighId": 43975,
+            "Quality": 14
+          },
+          {
+            "LowId": 43995,
+            "HighId": 43995,
+            "Quality": 47
+          },
+          {
+            "LowId": 43961,
+            "HighId": 43961,
+            "Quality": 47
+          },
+          {
+            "LowId": 44198,
+            "HighId": 44198,
+            "Quality": 33
+          },
+          {
+            "LowId": 43962,
+            "HighId": 43962,
+            "Quality": 17
+          },
+          {
+            "LowId": 43938,
+            "HighId": 43938,
+            "Quality": 40
+          },
+          {
+            "LowId": 43949,
+            "HighId": 43949,
+            "Quality": 40
+          },
+          {
+            "LowId": 42412,
+            "HighId": 42412,
+            "Quality": 1
+          },
+          {
+            "LowId": 43950,
+            "HighId": 43950,
+            "Quality": 33
+          },
+          {
+            "LowId": 97455,
+            "HighId": 97455,
+            "Quality": 50
+          },
+          {
+            "LowId": 82011,
+            "HighId": 82011,
+            "Quality": 37
+          },
+          {
+            "LowId": 44195,
+            "HighId": 44195,
+            "Quality": 17
+          },
+          {
+            "LowId": 95749,
+            "HighId": 95749,
+            "Quality": 17
+          },
+          {
+            "LowId": 44201,
+            "HighId": 44201,
+            "Quality": 47
+          },
+          {
+            "LowId": 43960,
+            "HighId": 43960,
+            "Quality": 1
+          },
+          {
+            "LowId": 97458,
+            "HighId": 97458,
+            "Quality": 30
+          },
+          {
+            "LowId": 43939,
+            "HighId": 43939,
+            "Quality": 20
+          },
+          {
+            "LowId": 43993,
+            "HighId": 43993,
+            "Quality": 10
+          },
+          {
+            "LowId": 44204,
+            "HighId": 44204,
+            "Quality": 20
+          },
+          {
+            "LowId": 43985,
+            "HighId": 43985,
+            "Quality": 50
+          },
+          {
+            "LowId": 44004,
+            "HighId": 44004,
+            "Quality": 33
+          },
+          {
+            "LowId": 99589,
+            "HighId": 99589,
+            "Quality": 7
+          },
+          {
+            "LowId": 44205,
+            "HighId": 44205,
+            "Quality": 4
+          },
+          {
+            "LowId": 43957,
+            "HighId": 43957,
+            "Quality": 4
+          },
+          {
+            "LowId": 43941,
+            "HighId": 43941,
+            "Quality": 40
+          },
+          {
+            "LowId": 43976,
+            "HighId": 43976,
+            "Quality": 50
+          },
+          {
+            "LowId": 44193,
+            "HighId": 44193,
+            "Quality": 40
+          },
+          {
+            "LowId": 97464,
+            "HighId": 97464,
+            "Quality": 43
+          },
+          {
+            "LowId": 42420,
+            "HighId": 42420,
+            "Quality": 40
+          },
+          {
+            "LowId": 43999,
+            "HighId": 43999,
+            "Quality": 37
+          },
+          {
+            "LowId": 42418,
+            "HighId": 42418,
+            "Quality": 7
+          },
+          {
+            "LowId": 43981,
+            "HighId": 43981,
+            "Quality": 10
+          },
+          {
+            "LowId": 95742,
+            "HighId": 95742,
+            "Quality": 33
+          },
+          {
+            "LowId": 44185,
+            "HighId": 44185,
+            "Quality": 14
+          },
+          {
+            "LowId": 43954,
+            "HighId": 43954,
+            "Quality": 27
+          },
+          {
+            "LowId": 43963,
+            "HighId": 43963,
+            "Quality": 24
+          },
+          {
+            "LowId": 99595,
+            "HighId": 99595,
+            "Quality": 43
+          },
+          {
+            "LowId": 97459,
+            "HighId": 97459,
+            "Quality": 4
+          },
+          {
+            "LowId": 28754,
+            "HighId": 28754,
+            "Quality": 27
+          },
+          {
+            "LowId": 42416,
+            "HighId": 42416,
+            "Quality": 14
+          },
+          {
+            "LowId": 44188,
+            "HighId": 44188,
+            "Quality": 30
+          },
+          {
+            "LowId": 44189,
+            "HighId": 44189,
+            "Quality": 7
+          },
+          {
+            "LowId": 43942,
+            "HighId": 43942,
+            "Quality": 27
+          },
+          {
+            "LowId": 44203,
+            "HighId": 44203,
+            "Quality": 37
+          },
+          {
+            "LowId": 43955,
+            "HighId": 43955,
+            "Quality": 33
+          },
+          {
+            "LowId": 95748,
+            "HighId": 95748,
+            "Quality": 27
+          },
+          {
+            "LowId": 28789,
+            "HighId": 28789,
+            "Quality": 30
+          },
+          {
+            "LowId": 28787,
+            "HighId": 28787,
+            "Quality": 33
+          },
+          {
+            "LowId": 28785,
+            "HighId": 28785,
+            "Quality": 37
+          },
+          {
+            "LowId": 28780,
+            "HighId": 28780,
+            "Quality": 7
+          },
+          {
+            "LowId": 28771,
+            "HighId": 28771,
+            "Quality": 37
+          },
+          {
+            "LowId": 28770,
+            "HighId": 28770,
+            "Quality": 14
+          },
+          {
+            "LowId": 28767,
+            "HighId": 28767,
+            "Quality": 7
+          },
+          {
+            "LowId": 28753,
+            "HighId": 28753,
+            "Quality": 24
+          },
+          {
+            "LowId": 27805,
+            "HighId": 27805,
+            "Quality": 24
+          },
+          {
+            "LowId": 97449,
+            "HighId": 97449,
+            "Quality": 14
+          },
+          {
+            "LowId": 43978,
+            "HighId": 43978,
+            "Quality": 4
+          },
+          {
+            "LowId": 44186,
+            "HighId": 44186,
+            "Quality": 10
+          },
+          {
+            "LowId": 95747,
+            "HighId": 95747,
+            "Quality": 10
+          },
+          {
+            "LowId": 43930,
+            "HighId": 43930,
+            "Quality": 20
+          },
+          {
+            "LowId": 99594,
+            "HighId": 99594,
+            "Quality": 17
+          },
+          {
+            "LowId": 43987,
+            "HighId": 43987,
+            "Quality": 30
+          },
+          {
+            "LowId": 99590,
+            "HighId": 99590,
+            "Quality": 30
+          },
+          {
+            "LowId": 95746,
+            "HighId": 95746,
+            "Quality": 47
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214654,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40694,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214715,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MIOI": {
+    "Hash": "MIOI",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071648; spawn point MIOI pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9050 pf 4575 (73 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Trader of IPS (inst 2067000854); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Trader of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26143,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 3,
+          "64": 40137,
+          "12": 23368
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 235272,
+            "HighId": 235272,
+            "Quality": 25
+          },
+          {
+            "LowId": 203785,
+            "HighId": 203785,
+            "Quality": 40
+          },
+          {
+            "LowId": 142773,
+            "HighId": 142773,
+            "Quality": 4
+          },
+          {
+            "LowId": 142777,
+            "HighId": 142777,
+            "Quality": 17
+          },
+          {
+            "LowId": 142774,
+            "HighId": 142774,
+            "Quality": 34
+          },
+          {
+            "LowId": 142772,
+            "HighId": 142772,
+            "Quality": 50
+          },
+          {
+            "LowId": 121348,
+            "HighId": 121348,
+            "Quality": 18
+          },
+          {
+            "LowId": 78416,
+            "HighId": 78416,
+            "Quality": 4
+          },
+          {
+            "LowId": 118259,
+            "HighId": 118259,
+            "Quality": 37
+          },
+          {
+            "LowId": 121509,
+            "HighId": 121509,
+            "Quality": 41
+          },
+          {
+            "LowId": 78426,
+            "HighId": 78426,
+            "Quality": 50
+          },
+          {
+            "LowId": 85894,
+            "HighId": 85894,
+            "Quality": 4
+          },
+          {
+            "LowId": 85895,
+            "HighId": 85895,
+            "Quality": 14
+          },
+          {
+            "LowId": 78422,
+            "HighId": 78422,
+            "Quality": 24
+          },
+          {
+            "LowId": 85880,
+            "HighId": 85880,
+            "Quality": 50
+          },
+          {
+            "LowId": 100453,
+            "HighId": 100453,
+            "Quality": 47
+          },
+          {
+            "LowId": 29103,
+            "HighId": 29103,
+            "Quality": 33
+          },
+          {
+            "LowId": 118254,
+            "HighId": 118254,
+            "Quality": 44
+          },
+          {
+            "LowId": 30790,
+            "HighId": 30790,
+            "Quality": 14
+          },
+          {
+            "LowId": 30266,
+            "HighId": 30266,
+            "Quality": 24
+          },
+          {
+            "LowId": 30771,
+            "HighId": 30771,
+            "Quality": 20
+          },
+          {
+            "LowId": 29102,
+            "HighId": 29102,
+            "Quality": 33
+          },
+          {
+            "LowId": 30758,
+            "HighId": 30758,
+            "Quality": 27
+          },
+          {
+            "LowId": 30759,
+            "HighId": 30759,
+            "Quality": 30
+          },
+          {
+            "LowId": 30804,
+            "HighId": 30804,
+            "Quality": 24
+          },
+          {
+            "LowId": 121518,
+            "HighId": 121518,
+            "Quality": 4
+          },
+          {
+            "LowId": 56260,
+            "HighId": 56260,
+            "Quality": 37
+          },
+          {
+            "LowId": 118257,
+            "HighId": 118257,
+            "Quality": 8
+          },
+          {
+            "LowId": 99623,
+            "HighId": 99623,
+            "Quality": 7
+          },
+          {
+            "LowId": 121515,
+            "HighId": 121515,
+            "Quality": 11
+          },
+          {
+            "LowId": 85875,
+            "HighId": 85875,
+            "Quality": 30
+          },
+          {
+            "LowId": 121519,
+            "HighId": 121519,
+            "Quality": 17
+          },
+          {
+            "LowId": 99629,
+            "HighId": 99629,
+            "Quality": 40
+          },
+          {
+            "LowId": 56259,
+            "HighId": 56259,
+            "Quality": 1
+          },
+          {
+            "LowId": 121370,
+            "HighId": 121370,
+            "Quality": 41
+          },
+          {
+            "LowId": 85877,
+            "HighId": 85877,
+            "Quality": 40
+          },
+          {
+            "LowId": 85898,
+            "HighId": 85898,
+            "Quality": 33
+          },
+          {
+            "LowId": 78423,
+            "HighId": 78423,
+            "Quality": 33
+          },
+          {
+            "LowId": 100452,
+            "HighId": 100452,
+            "Quality": 20
+          },
+          {
+            "LowId": 56266,
+            "HighId": 56266,
+            "Quality": 14
+          },
+          {
+            "LowId": 85896,
+            "HighId": 85896,
+            "Quality": 24
+          },
+          {
+            "LowId": 99619,
+            "HighId": 99619,
+            "Quality": 33
+          },
+          {
+            "LowId": 99628,
+            "HighId": 99628,
+            "Quality": 50
+          },
+          {
+            "LowId": 30781,
+            "HighId": 30781,
+            "Quality": 10
+          },
+          {
+            "LowId": 78420,
+            "HighId": 78420,
+            "Quality": 17
+          },
+          {
+            "LowId": 85900,
+            "HighId": 85900,
+            "Quality": 43
+          },
+          {
+            "LowId": 81929,
+            "HighId": 81929,
+            "Quality": 30
+          },
+          {
+            "LowId": 78418,
+            "HighId": 78418,
+            "Quality": 10
+          },
+          {
+            "LowId": 78427,
+            "HighId": 78427,
+            "Quality": 40
+          },
+          {
+            "LowId": 118251,
+            "HighId": 118251,
+            "Quality": 14
+          },
+          {
+            "LowId": 85873,
+            "HighId": 85873,
+            "Quality": 10
+          },
+          {
+            "LowId": 118250,
+            "HighId": 118250,
+            "Quality": 21
+          },
+          {
+            "LowId": 121510,
+            "HighId": 121510,
+            "Quality": 47
+          },
+          {
+            "LowId": 99618,
+            "HighId": 99618,
+            "Quality": 17
+          },
+          {
+            "LowId": 78425,
+            "HighId": 78425,
+            "Quality": 47
+          },
+          {
+            "LowId": 78421,
+            "HighId": 78421,
+            "Quality": 20
+          },
+          {
+            "LowId": 30764,
+            "HighId": 30764,
+            "Quality": 7
+          },
+          {
+            "LowId": 121511,
+            "HighId": 121511,
+            "Quality": 27
+          },
+          {
+            "LowId": 78419,
+            "HighId": 78419,
+            "Quality": 7
+          },
+          {
+            "LowId": 121366,
+            "HighId": 121366,
+            "Quality": 21
+          },
+          {
+            "LowId": 85874,
+            "HighId": 85874,
+            "Quality": 20
+          },
+          {
+            "LowId": 30799,
+            "HighId": 30799,
+            "Quality": 24
+          },
+          {
+            "LowId": 78424,
+            "HighId": 78424,
+            "Quality": 30
+          },
+          {
+            "LowId": 121367,
+            "HighId": 121367,
+            "Quality": 14
+          },
+          {
+            "LowId": 121351,
+            "HighId": 121351,
+            "Quality": 27
+          },
+          {
+            "LowId": 121520,
+            "HighId": 121520,
+            "Quality": 34
+          },
+          {
+            "LowId": 99622,
+            "HighId": 99622,
+            "Quality": 24
+          },
+          {
+            "LowId": 121360,
+            "HighId": 121360,
+            "Quality": 8
+          },
+          {
+            "LowId": 121375,
+            "HighId": 121375,
+            "Quality": 34
+          },
+          {
+            "LowId": 100454,
+            "HighId": 100454,
+            "Quality": 33
+          },
+          {
+            "LowId": 121359,
+            "HighId": 121359,
+            "Quality": 47
+          },
+          {
+            "LowId": 121353,
+            "HighId": 121353,
+            "Quality": 37
+          },
+          {
+            "LowId": 118255,
+            "HighId": 118255,
+            "Quality": 31
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214631,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40137,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214688,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MBOI": {
+    "Hash": "MBOI",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071649; spawn point MBOI pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9052 pf 4575 (34 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "NOT captured; MonsterData/Mesh/HeadMesh only (4577 sibling differs)"
+    },
+    "Templates": [
+      {
+        "Name": "Adventurer of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26092,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 1,
+          "64": 40694,
+          "12": 5907
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 161504,
+            "HighId": 161504,
+            "Quality": 1
+          },
+          {
+            "LowId": 163389,
+            "HighId": 163389,
+            "Quality": 24
+          },
+          {
+            "LowId": 161162,
+            "HighId": 161162,
+            "Quality": 40
+          },
+          {
+            "LowId": 161675,
+            "HighId": 161675,
+            "Quality": 30
+          },
+          {
+            "LowId": 55863,
+            "HighId": 55863,
+            "Quality": 1
+          },
+          {
+            "LowId": 28744,
+            "HighId": 28744,
+            "Quality": 33
+          },
+          {
+            "LowId": 82838,
+            "HighId": 82838,
+            "Quality": 20
+          },
+          {
+            "LowId": 28751,
+            "HighId": 28751,
+            "Quality": 4
+          },
+          {
+            "LowId": 55841,
+            "HighId": 55841,
+            "Quality": 30
+          },
+          {
+            "LowId": 38531,
+            "HighId": 38531,
+            "Quality": 24
+          },
+          {
+            "LowId": 55843,
+            "HighId": 55843,
+            "Quality": 37
+          },
+          {
+            "LowId": 75369,
+            "HighId": 75369,
+            "Quality": 20
+          },
+          {
+            "LowId": 55840,
+            "HighId": 55840,
+            "Quality": 17
+          },
+          {
+            "LowId": 85131,
+            "HighId": 85131,
+            "Quality": 40
+          },
+          {
+            "LowId": 82082,
+            "HighId": 82082,
+            "Quality": 7
+          },
+          {
+            "LowId": 82839,
+            "HighId": 82839,
+            "Quality": 24
+          },
+          {
+            "LowId": 82841,
+            "HighId": 82841,
+            "Quality": 30
+          },
+          {
+            "LowId": 26245,
+            "HighId": 26245,
+            "Quality": 43
+          },
+          {
+            "LowId": 82087,
+            "HighId": 82087,
+            "Quality": 43
+          },
+          {
+            "LowId": 82078,
+            "HighId": 82078,
+            "Quality": 17
+          },
+          {
+            "LowId": 55844,
+            "HighId": 55844,
+            "Quality": 47
+          },
+          {
+            "LowId": 55842,
+            "HighId": 55842,
+            "Quality": 24
+          },
+          {
+            "LowId": 55838,
+            "HighId": 55838,
+            "Quality": 7
+          },
+          {
+            "LowId": 82080,
+            "HighId": 82080,
+            "Quality": 27
+          },
+          {
+            "LowId": 75370,
+            "HighId": 75370,
+            "Quality": 43
+          },
+          {
+            "LowId": 82077,
+            "HighId": 82077,
+            "Quality": 33
+          },
+          {
+            "LowId": 85145,
+            "HighId": 85145,
+            "Quality": 47
+          },
+          {
+            "LowId": 28752,
+            "HighId": 28752,
+            "Quality": 10
+          },
+          {
+            "LowId": 75368,
+            "HighId": 75368,
+            "Quality": 4
+          },
+          {
+            "LowId": 136690,
+            "HighId": 136690,
+            "Quality": 14
+          },
+          {
+            "LowId": 136692,
+            "HighId": 136692,
+            "Quality": 41
+          },
+          {
+            "LowId": 136699,
+            "HighId": 136699,
+            "Quality": 34
+          },
+          {
+            "LowId": 136701,
+            "HighId": 136701,
+            "Quality": 21
+          },
+          {
+            "LowId": 136707,
+            "HighId": 136707,
+            "Quality": 50
+          }
+        ]
+      }
+    ]
+  },
+  "MBOF": {
+    "Hash": "MBOF",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071650; spawn point MBOF pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9054 pf 4575 (34 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Agent of IPS (inst 2067000857); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Agent of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26137,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 2,
+          "64": 40209,
+          "12": 5934
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 160900,
+            "HighId": 160900,
+            "Quality": 17
+          },
+          {
+            "LowId": 160821,
+            "HighId": 160821,
+            "Quality": 53
+          },
+          {
+            "LowId": 160788,
+            "HighId": 160788,
+            "Quality": 40
+          },
+          {
+            "LowId": 160704,
+            "HighId": 160704,
+            "Quality": 24
+          },
+          {
+            "LowId": 81956,
+            "HighId": 81956,
+            "Quality": 14
+          },
+          {
+            "LowId": 56241,
+            "HighId": 56241,
+            "Quality": 17
+          },
+          {
+            "LowId": 81950,
+            "HighId": 81950,
+            "Quality": 47
+          },
+          {
+            "LowId": 81899,
+            "HighId": 81899,
+            "Quality": 10
+          },
+          {
+            "LowId": 56238,
+            "HighId": 56238,
+            "Quality": 1
+          },
+          {
+            "LowId": 32077,
+            "HighId": 32077,
+            "Quality": 37
+          },
+          {
+            "LowId": 81952,
+            "HighId": 81952,
+            "Quality": 4
+          },
+          {
+            "LowId": 32074,
+            "HighId": 32074,
+            "Quality": 30
+          },
+          {
+            "LowId": 32073,
+            "HighId": 32073,
+            "Quality": 33
+          },
+          {
+            "LowId": 32082,
+            "HighId": 32082,
+            "Quality": 10
+          },
+          {
+            "LowId": 85322,
+            "HighId": 85322,
+            "Quality": 27
+          },
+          {
+            "LowId": 32071,
+            "HighId": 32071,
+            "Quality": 17
+          },
+          {
+            "LowId": 81897,
+            "HighId": 81897,
+            "Quality": 24
+          },
+          {
+            "LowId": 32079,
+            "HighId": 32079,
+            "Quality": 14
+          },
+          {
+            "LowId": 82807,
+            "HighId": 82807,
+            "Quality": 14
+          },
+          {
+            "LowId": 56240,
+            "HighId": 56240,
+            "Quality": 47
+          },
+          {
+            "LowId": 32078,
+            "HighId": 32078,
+            "Quality": 40
+          },
+          {
+            "LowId": 32081,
+            "HighId": 32081,
+            "Quality": 27
+          },
+          {
+            "LowId": 81953,
+            "HighId": 81953,
+            "Quality": 27
+          },
+          {
+            "LowId": 81902,
+            "HighId": 81902,
+            "Quality": 40
+          },
+          {
+            "LowId": 32080,
+            "HighId": 32080,
+            "Quality": 24
+          },
+          {
+            "LowId": 81957,
+            "HighId": 81957,
+            "Quality": 40
+          },
+          {
+            "LowId": 56239,
+            "HighId": 56239,
+            "Quality": 33
+          },
+          {
+            "LowId": 82808,
+            "HighId": 82808,
+            "Quality": 37
+          },
+          {
+            "LowId": 32105,
+            "HighId": 32105,
+            "Quality": 43
+          },
+          {
+            "LowId": 32103,
+            "HighId": 32103,
+            "Quality": 20
+          },
+          {
+            "LowId": 26207,
+            "HighId": 26207,
+            "Quality": 27
+          },
+          {
+            "LowId": 32075,
+            "HighId": 32075,
+            "Quality": 20
+          },
+          {
+            "LowId": 32076,
+            "HighId": 32076,
+            "Quality": 14
+          },
+          {
+            "LowId": 32100,
+            "HighId": 32100,
+            "Quality": 40
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214550,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40209,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214599,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MEOI": {
+    "Hash": "MEOI",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071651; spawn point MEOI pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9056 pf 4575 (65 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Bureaucrat of IPS (inst 2067000858); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Bureaucrat of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26137,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 2,
+          "64": 40209,
+          "12": 5934
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 230373,
+            "HighId": 230373,
+            "Quality": 30
+          },
+          {
+            "LowId": 229962,
+            "HighId": 229962,
+            "Quality": 142
+          },
+          {
+            "LowId": 205288,
+            "HighId": 205288,
+            "Quality": 30
+          },
+          {
+            "LowId": 203959,
+            "HighId": 203959,
+            "Quality": 42
+          },
+          {
+            "LowId": 203949,
+            "HighId": 203949,
+            "Quality": 36
+          },
+          {
+            "LowId": 203851,
+            "HighId": 203851,
+            "Quality": 36
+          },
+          {
+            "LowId": 203836,
+            "HighId": 203836,
+            "Quality": 49
+          },
+          {
+            "LowId": 203833,
+            "HighId": 203833,
+            "Quality": 24
+          },
+          {
+            "LowId": 203658,
+            "HighId": 203658,
+            "Quality": 22
+          },
+          {
+            "LowId": 82193,
+            "HighId": 82193,
+            "Quality": 40
+          },
+          {
+            "LowId": 56005,
+            "HighId": 56005,
+            "Quality": 24
+          },
+          {
+            "LowId": 82006,
+            "HighId": 82006,
+            "Quality": 4
+          },
+          {
+            "LowId": 46465,
+            "HighId": 46465,
+            "Quality": 47
+          },
+          {
+            "LowId": 46447,
+            "HighId": 46447,
+            "Quality": 10
+          },
+          {
+            "LowId": 29202,
+            "HighId": 29202,
+            "Quality": 37
+          },
+          {
+            "LowId": 30128,
+            "HighId": 30128,
+            "Quality": 50
+          },
+          {
+            "LowId": 82812,
+            "HighId": 82812,
+            "Quality": 30
+          },
+          {
+            "LowId": 30122,
+            "HighId": 30122,
+            "Quality": 14
+          },
+          {
+            "LowId": 30113,
+            "HighId": 30113,
+            "Quality": 37
+          },
+          {
+            "LowId": 30102,
+            "HighId": 30102,
+            "Quality": 43
+          },
+          {
+            "LowId": 85319,
+            "HighId": 85319,
+            "Quality": 37
+          },
+          {
+            "LowId": 99212,
+            "HighId": 99212,
+            "Quality": 20
+          },
+          {
+            "LowId": 99221,
+            "HighId": 99221,
+            "Quality": 47
+          },
+          {
+            "LowId": 30138,
+            "HighId": 30138,
+            "Quality": 43
+          },
+          {
+            "LowId": 30110,
+            "HighId": 30110,
+            "Quality": 10
+          },
+          {
+            "LowId": 46438,
+            "HighId": 46438,
+            "Quality": 4
+          },
+          {
+            "LowId": 46466,
+            "HighId": 46466,
+            "Quality": 27
+          },
+          {
+            "LowId": 78446,
+            "HighId": 78446,
+            "Quality": 10
+          },
+          {
+            "LowId": 46427,
+            "HighId": 46427,
+            "Quality": 17
+          },
+          {
+            "LowId": 46475,
+            "HighId": 46475,
+            "Quality": 20
+          },
+          {
+            "LowId": 56004,
+            "HighId": 56004,
+            "Quality": 33
+          },
+          {
+            "LowId": 46454,
+            "HighId": 46454,
+            "Quality": 14
+          },
+          {
+            "LowId": 46462,
+            "HighId": 46462,
+            "Quality": 7
+          },
+          {
+            "LowId": 99217,
+            "HighId": 99217,
+            "Quality": 27
+          },
+          {
+            "LowId": 46419,
+            "HighId": 46419,
+            "Quality": 20
+          },
+          {
+            "LowId": 82187,
+            "HighId": 82187,
+            "Quality": 27
+          },
+          {
+            "LowId": 82816,
+            "HighId": 82816,
+            "Quality": 4
+          },
+          {
+            "LowId": 82003,
+            "HighId": 82003,
+            "Quality": 20
+          },
+          {
+            "LowId": 82817,
+            "HighId": 82817,
+            "Quality": 7
+          },
+          {
+            "LowId": 46442,
+            "HighId": 46442,
+            "Quality": 40
+          },
+          {
+            "LowId": 56003,
+            "HighId": 56003,
+            "Quality": 4
+          },
+          {
+            "LowId": 82188,
+            "HighId": 82188,
+            "Quality": 10
+          },
+          {
+            "LowId": 82005,
+            "HighId": 82005,
+            "Quality": 43
+          },
+          {
+            "LowId": 99214,
+            "HighId": 99214,
+            "Quality": 40
+          },
+          {
+            "LowId": 46433,
+            "HighId": 46433,
+            "Quality": 33
+          },
+          {
+            "LowId": 46413,
+            "HighId": 46413,
+            "Quality": 7
+          },
+          {
+            "LowId": 82820,
+            "HighId": 82820,
+            "Quality": 50
+          },
+          {
+            "LowId": 46425,
+            "HighId": 46425,
+            "Quality": 30
+          },
+          {
+            "LowId": 30101,
+            "HighId": 30101,
+            "Quality": 27
+          },
+          {
+            "LowId": 46468,
+            "HighId": 46468,
+            "Quality": 14
+          },
+          {
+            "LowId": 46473,
+            "HighId": 46473,
+            "Quality": 37
+          },
+          {
+            "LowId": 46430,
+            "HighId": 46430,
+            "Quality": 1
+          },
+          {
+            "LowId": 46449,
+            "HighId": 46449,
+            "Quality": 43
+          },
+          {
+            "LowId": 99226,
+            "HighId": 99226,
+            "Quality": 33
+          },
+          {
+            "LowId": 121143,
+            "HighId": 121143,
+            "Quality": 37
+          },
+          {
+            "LowId": 85320,
+            "HighId": 85320,
+            "Quality": 14
+          },
+          {
+            "LowId": 46451,
+            "HighId": 46451,
+            "Quality": 27
+          },
+          {
+            "LowId": 82811,
+            "HighId": 82811,
+            "Quality": 17
+          },
+          {
+            "LowId": 56006,
+            "HighId": 56006,
+            "Quality": 47
+          },
+          {
+            "LowId": 46435,
+            "HighId": 46435,
+            "Quality": 17
+          },
+          {
+            "LowId": 90453,
+            "HighId": 90453,
+            "Quality": 17
+          },
+          {
+            "LowId": 46444,
+            "HighId": 46444,
+            "Quality": 24
+          },
+          {
+            "LowId": 46424,
+            "HighId": 46424,
+            "Quality": 50
+          },
+          {
+            "LowId": 46417,
+            "HighId": 46417,
+            "Quality": 37
+          },
+          {
+            "LowId": 46456,
+            "HighId": 46456,
+            "Quality": 1
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214550,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40209,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214599,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MBOP": {
+    "Hash": "MBOP",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071652; spawn point MBOP pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9058 pf 4575 (32 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Enforcer of IPS (inst 2067000856); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Enforcer of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26074,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 1,
+          "64": 40691,
+          "12": 17532
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 203214,
+            "HighId": 203214,
+            "Quality": 20
+          },
+          {
+            "LowId": 202869,
+            "HighId": 202869,
+            "Quality": 35
+          },
+          {
+            "LowId": 202871,
+            "HighId": 202871,
+            "Quality": 10
+          },
+          {
+            "LowId": 202849,
+            "HighId": 202849,
+            "Quality": 8
+          },
+          {
+            "LowId": 202829,
+            "HighId": 202829,
+            "Quality": 30
+          },
+          {
+            "LowId": 202827,
+            "HighId": 202827,
+            "Quality": 8
+          },
+          {
+            "LowId": 202740,
+            "HighId": 202740,
+            "Quality": 30
+          },
+          {
+            "LowId": 202724,
+            "HighId": 202724,
+            "Quality": 8
+          },
+          {
+            "LowId": 95731,
+            "HighId": 95731,
+            "Quality": 24
+          },
+          {
+            "LowId": 29804,
+            "HighId": 29804,
+            "Quality": 27
+          },
+          {
+            "LowId": 49821,
+            "HighId": 49821,
+            "Quality": 4
+          },
+          {
+            "LowId": 55757,
+            "HighId": 55757,
+            "Quality": 47
+          },
+          {
+            "LowId": 100264,
+            "HighId": 100264,
+            "Quality": 30
+          },
+          {
+            "LowId": 49819,
+            "HighId": 49819,
+            "Quality": 33
+          },
+          {
+            "LowId": 49813,
+            "HighId": 49813,
+            "Quality": 24
+          },
+          {
+            "LowId": 49827,
+            "HighId": 49827,
+            "Quality": 40
+          },
+          {
+            "LowId": 100263,
+            "HighId": 100263,
+            "Quality": 50
+          },
+          {
+            "LowId": 100223,
+            "HighId": 100223,
+            "Quality": 7
+          },
+          {
+            "LowId": 55761,
+            "HighId": 55761,
+            "Quality": 10
+          },
+          {
+            "LowId": 55759,
+            "HighId": 55759,
+            "Quality": 20
+          },
+          {
+            "LowId": 95729,
+            "HighId": 95729,
+            "Quality": 4
+          },
+          {
+            "LowId": 55760,
+            "HighId": 55760,
+            "Quality": 37
+          },
+          {
+            "LowId": 100202,
+            "HighId": 100202,
+            "Quality": 17
+          },
+          {
+            "LowId": 55762,
+            "HighId": 55762,
+            "Quality": 4
+          },
+          {
+            "LowId": 29806,
+            "HighId": 29806,
+            "Quality": 30
+          },
+          {
+            "LowId": 118117,
+            "HighId": 118117,
+            "Quality": 37
+          },
+          {
+            "LowId": 100224,
+            "HighId": 100224,
+            "Quality": 27
+          },
+          {
+            "LowId": 49823,
+            "HighId": 49823,
+            "Quality": 14
+          },
+          {
+            "LowId": 95737,
+            "HighId": 95737,
+            "Quality": 33
+          },
+          {
+            "LowId": 95732,
+            "HighId": 95732,
+            "Quality": 43
+          },
+          {
+            "LowId": 121151,
+            "HighId": 121151,
+            "Quality": 37
+          },
+          {
+            "LowId": 95728,
+            "HighId": 95728,
+            "Quality": 14
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214654,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40691,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214715,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MFON": {
+    "Hash": "MFON",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071653; spawn point MFON pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9060 pf 4575 (46 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Engineer of IPS (inst 2067000861); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Engineer of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26074,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 4,
+          "64": 40691,
+          "12": 17532
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 233101,
+            "HighId": 233101,
+            "Quality": 28
+          },
+          {
+            "LowId": 205232,
+            "HighId": 205232,
+            "Quality": 37
+          },
+          {
+            "LowId": 205230,
+            "HighId": 205230,
+            "Quality": 15
+          },
+          {
+            "LowId": 203872,
+            "HighId": 203872,
+            "Quality": 40
+          },
+          {
+            "LowId": 203870,
+            "HighId": 203870,
+            "Quality": 14
+          },
+          {
+            "LowId": 70587,
+            "HighId": 70587,
+            "Quality": 43
+          },
+          {
+            "LowId": 70581,
+            "HighId": 70581,
+            "Quality": 14
+          },
+          {
+            "LowId": 46009,
+            "HighId": 46009,
+            "Quality": 37
+          },
+          {
+            "LowId": 70577,
+            "HighId": 70577,
+            "Quality": 4
+          },
+          {
+            "LowId": 70583,
+            "HighId": 70583,
+            "Quality": 33
+          },
+          {
+            "LowId": 46082,
+            "HighId": 46082,
+            "Quality": 14
+          },
+          {
+            "LowId": 46019,
+            "HighId": 46019,
+            "Quality": 17
+          },
+          {
+            "LowId": 46063,
+            "HighId": 46063,
+            "Quality": 20
+          },
+          {
+            "LowId": 46040,
+            "HighId": 46040,
+            "Quality": 14
+          },
+          {
+            "LowId": 46053,
+            "HighId": 46053,
+            "Quality": 4
+          },
+          {
+            "LowId": 46059,
+            "HighId": 46059,
+            "Quality": 4
+          },
+          {
+            "LowId": 70586,
+            "HighId": 70586,
+            "Quality": 37
+          },
+          {
+            "LowId": 46064,
+            "HighId": 46064,
+            "Quality": 47
+          },
+          {
+            "LowId": 29844,
+            "HighId": 29844,
+            "Quality": 10
+          },
+          {
+            "LowId": 55776,
+            "HighId": 55776,
+            "Quality": 37
+          },
+          {
+            "LowId": 46058,
+            "HighId": 46058,
+            "Quality": 24
+          },
+          {
+            "LowId": 55775,
+            "HighId": 55775,
+            "Quality": 24
+          },
+          {
+            "LowId": 46045,
+            "HighId": 46045,
+            "Quality": 4
+          },
+          {
+            "LowId": 46010,
+            "HighId": 46010,
+            "Quality": 10
+          },
+          {
+            "LowId": 46073,
+            "HighId": 46073,
+            "Quality": 33
+          },
+          {
+            "LowId": 46074,
+            "HighId": 46074,
+            "Quality": 7
+          },
+          {
+            "LowId": 46081,
+            "HighId": 46081,
+            "Quality": 40
+          },
+          {
+            "LowId": 70426,
+            "HighId": 70426,
+            "Quality": 30
+          },
+          {
+            "LowId": 46033,
+            "HighId": 46033,
+            "Quality": 20
+          },
+          {
+            "LowId": 46076,
+            "HighId": 46076,
+            "Quality": 7
+          },
+          {
+            "LowId": 46075,
+            "HighId": 46075,
+            "Quality": 30
+          },
+          {
+            "LowId": 70582,
+            "HighId": 70582,
+            "Quality": 7
+          },
+          {
+            "LowId": 46039,
+            "HighId": 46039,
+            "Quality": 40
+          },
+          {
+            "LowId": 46034,
+            "HighId": 46034,
+            "Quality": 1
+          },
+          {
+            "LowId": 29862,
+            "HighId": 29862,
+            "Quality": 7
+          },
+          {
+            "LowId": 46068,
+            "HighId": 46068,
+            "Quality": 27
+          },
+          {
+            "LowId": 46035,
+            "HighId": 46035,
+            "Quality": 50
+          },
+          {
+            "LowId": 46052,
+            "HighId": 46052,
+            "Quality": 24
+          },
+          {
+            "LowId": 70585,
+            "HighId": 70585,
+            "Quality": 20
+          },
+          {
+            "LowId": 70572,
+            "HighId": 70572,
+            "Quality": 50
+          },
+          {
+            "LowId": 29858,
+            "HighId": 29858,
+            "Quality": 40
+          },
+          {
+            "LowId": 29195,
+            "HighId": 29195,
+            "Quality": 20
+          },
+          {
+            "LowId": 70584,
+            "HighId": 70584,
+            "Quality": 27
+          },
+          {
+            "LowId": 29823,
+            "HighId": 29823,
+            "Quality": 1
+          },
+          {
+            "LowId": 46018,
+            "HighId": 46018,
+            "Quality": 43
+          },
+          {
+            "LowId": 29838,
+            "HighId": 29838,
+            "Quality": 37
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214487,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40691,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214524,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MOOP": {
+    "Hash": "MOOP",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071654; spawn point MOOP pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9062 pf 4575 (38 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Fixer of IPS (inst 2067000862); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Fixer of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26125,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 2,
+          "64": 40215,
+          "12": 23374
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 234081,
+            "HighId": 234081,
+            "Quality": 25
+          },
+          {
+            "LowId": 224404,
+            "HighId": 224404,
+            "Quality": 25
+          },
+          {
+            "LowId": 203977,
+            "HighId": 203977,
+            "Quality": 21
+          },
+          {
+            "LowId": 203594,
+            "HighId": 203594,
+            "Quality": 10
+          },
+          {
+            "LowId": 162719,
+            "HighId": 162719,
+            "Quality": 37
+          },
+          {
+            "LowId": 162717,
+            "HighId": 162717,
+            "Quality": 24
+          },
+          {
+            "LowId": 162715,
+            "HighId": 162715,
+            "Quality": 7
+          },
+          {
+            "LowId": 162996,
+            "HighId": 162996,
+            "Quality": 20
+          },
+          {
+            "LowId": 163080,
+            "HighId": 163080,
+            "Quality": 40
+          },
+          {
+            "LowId": 162598,
+            "HighId": 162598,
+            "Quality": 27
+          },
+          {
+            "LowId": 162602,
+            "HighId": 162602,
+            "Quality": 14
+          },
+          {
+            "LowId": 162485,
+            "HighId": 162485,
+            "Quality": 33
+          },
+          {
+            "LowId": 162497,
+            "HighId": 162497,
+            "Quality": 14
+          },
+          {
+            "LowId": 142721,
+            "HighId": 142721,
+            "Quality": 47
+          },
+          {
+            "LowId": 31423,
+            "HighId": 31423,
+            "Quality": 20
+          },
+          {
+            "LowId": 56251,
+            "HighId": 56251,
+            "Quality": 27
+          },
+          {
+            "LowId": 93140,
+            "HighId": 93140,
+            "Quality": 17
+          },
+          {
+            "LowId": 82806,
+            "HighId": 82806,
+            "Quality": 20
+          },
+          {
+            "LowId": 85274,
+            "HighId": 85274,
+            "Quality": 33
+          },
+          {
+            "LowId": 85279,
+            "HighId": 85279,
+            "Quality": 7
+          },
+          {
+            "LowId": 93138,
+            "HighId": 93138,
+            "Quality": 43
+          },
+          {
+            "LowId": 82802,
+            "HighId": 82802,
+            "Quality": 10
+          },
+          {
+            "LowId": 85282,
+            "HighId": 85282,
+            "Quality": 17
+          },
+          {
+            "LowId": 56250,
+            "HighId": 56250,
+            "Quality": 4
+          },
+          {
+            "LowId": 82801,
+            "HighId": 82801,
+            "Quality": 37
+          },
+          {
+            "LowId": 85277,
+            "HighId": 85277,
+            "Quality": 43
+          },
+          {
+            "LowId": 85273,
+            "HighId": 85273,
+            "Quality": 4
+          },
+          {
+            "LowId": 85270,
+            "HighId": 85270,
+            "Quality": 30
+          },
+          {
+            "LowId": 81893,
+            "HighId": 81893,
+            "Quality": 43
+          },
+          {
+            "LowId": 85267,
+            "HighId": 85267,
+            "Quality": 47
+          },
+          {
+            "LowId": 85264,
+            "HighId": 85264,
+            "Quality": 20
+          },
+          {
+            "LowId": 93136,
+            "HighId": 93136,
+            "Quality": 30
+          },
+          {
+            "LowId": 31436,
+            "HighId": 31436,
+            "Quality": 1
+          },
+          {
+            "LowId": 82800,
+            "HighId": 82800,
+            "Quality": 4
+          },
+          {
+            "LowId": 81892,
+            "HighId": 81892,
+            "Quality": 10
+          },
+          {
+            "LowId": 31422,
+            "HighId": 31422,
+            "Quality": 27
+          },
+          {
+            "LowId": 31420,
+            "HighId": 31420,
+            "Quality": 14
+          },
+          {
+            "LowId": 56252,
+            "HighId": 56252,
+            "Quality": 14
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214550,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40215,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214599,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MROS": {
+    "Hash": "MROS",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071655; spawn point MROS pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9064 pf 4575 (14 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Keeper of IPS (inst 2067000863); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Keeper of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26103,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 4,
+          "64": 40103,
+          "12": 23365
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 211165,
+            "HighId": 211165,
+            "Quality": 40
+          },
+          {
+            "LowId": 210708,
+            "HighId": 210708,
+            "Quality": 41
+          },
+          {
+            "LowId": 210672,
+            "HighId": 210672,
+            "Quality": 31
+          },
+          {
+            "LowId": 210614,
+            "HighId": 210614,
+            "Quality": 35
+          },
+          {
+            "LowId": 210612,
+            "HighId": 210612,
+            "Quality": 8
+          },
+          {
+            "LowId": 210592,
+            "HighId": 210592,
+            "Quality": 24
+          },
+          {
+            "LowId": 210590,
+            "HighId": 210590,
+            "Quality": 2
+          },
+          {
+            "LowId": 210531,
+            "HighId": 210531,
+            "Quality": 26
+          },
+          {
+            "LowId": 210529,
+            "HighId": 210529,
+            "Quality": 1
+          },
+          {
+            "LowId": 210485,
+            "HighId": 210485,
+            "Quality": 20
+          },
+          {
+            "LowId": 210322,
+            "HighId": 210322,
+            "Quality": 14
+          },
+          {
+            "LowId": 210312,
+            "HighId": 210312,
+            "Quality": 27
+          },
+          {
+            "LowId": 210302,
+            "HighId": 210302,
+            "Quality": 48
+          },
+          {
+            "LowId": 210300,
+            "HighId": 210300,
+            "Quality": 20
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214487,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40103,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214524,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MFOS": {
+    "Hash": "MFOS",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071656; spawn point MFOS pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9066 pf 4575 (34 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Martial Artist of IPS (inst 2067000864); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Martial Artist of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26097,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 4,
+          "64": 40111,
+          "12": 5900
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 81849,
+            "HighId": 81849,
+            "Quality": 37
+          },
+          {
+            "LowId": 82070,
+            "HighId": 82070,
+            "Quality": 20
+          },
+          {
+            "LowId": 81839,
+            "HighId": 81839,
+            "Quality": 27
+          },
+          {
+            "LowId": 75354,
+            "HighId": 75354,
+            "Quality": 1
+          },
+          {
+            "LowId": 81838,
+            "HighId": 81838,
+            "Quality": 40
+          },
+          {
+            "LowId": 75356,
+            "HighId": 75356,
+            "Quality": 33
+          },
+          {
+            "LowId": 82072,
+            "HighId": 82072,
+            "Quality": 43
+          },
+          {
+            "LowId": 81847,
+            "HighId": 81847,
+            "Quality": 20
+          },
+          {
+            "LowId": 75355,
+            "HighId": 75355,
+            "Quality": 14
+          },
+          {
+            "LowId": 82066,
+            "HighId": 82066,
+            "Quality": 40
+          },
+          {
+            "LowId": 28956,
+            "HighId": 28956,
+            "Quality": 24
+          },
+          {
+            "LowId": 28952,
+            "HighId": 28952,
+            "Quality": 4
+          },
+          {
+            "LowId": 28950,
+            "HighId": 28950,
+            "Quality": 20
+          },
+          {
+            "LowId": 28946,
+            "HighId": 28946,
+            "Quality": 50
+          },
+          {
+            "LowId": 28945,
+            "HighId": 28945,
+            "Quality": 17
+          },
+          {
+            "LowId": 28943,
+            "HighId": 28943,
+            "Quality": 4
+          },
+          {
+            "LowId": 28937,
+            "HighId": 28937,
+            "Quality": 50
+          },
+          {
+            "LowId": 28939,
+            "HighId": 28939,
+            "Quality": 27
+          },
+          {
+            "LowId": 28938,
+            "HighId": 28938,
+            "Quality": 14
+          },
+          {
+            "LowId": 28936,
+            "HighId": 28936,
+            "Quality": 7
+          },
+          {
+            "LowId": 28935,
+            "HighId": 28935,
+            "Quality": 27
+          },
+          {
+            "LowId": 28934,
+            "HighId": 28934,
+            "Quality": 14
+          },
+          {
+            "LowId": 28932,
+            "HighId": 28932,
+            "Quality": 7
+          },
+          {
+            "LowId": 28923,
+            "HighId": 28923,
+            "Quality": 37
+          },
+          {
+            "LowId": 28921,
+            "HighId": 28921,
+            "Quality": 33
+          },
+          {
+            "LowId": 81846,
+            "HighId": 81846,
+            "Quality": 47
+          },
+          {
+            "LowId": 75357,
+            "HighId": 75357,
+            "Quality": 43
+          },
+          {
+            "LowId": 75353,
+            "HighId": 75353,
+            "Quality": 7
+          },
+          {
+            "LowId": 28917,
+            "HighId": 28917,
+            "Quality": 24
+          },
+          {
+            "LowId": 95532,
+            "HighId": 95532,
+            "Quality": 30
+          },
+          {
+            "LowId": 82071,
+            "HighId": 82071,
+            "Quality": 10
+          },
+          {
+            "LowId": 81848,
+            "HighId": 81848,
+            "Quality": 10
+          },
+          {
+            "LowId": 82065,
+            "HighId": 82065,
+            "Quality": 17
+          },
+          {
+            "LowId": 43382,
+            "HighId": 43382,
+            "Quality": 1
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214487,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40111,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214524,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MFOP": {
+    "Hash": "MFOP",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071657; spawn point MFOP pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9068 pf 4575 (46 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Meta-Physicist of IPS (inst 2067000866); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Meta-Physicist of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26149,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 3,
+          "64": 40151,
+          "12": 5941
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 205198,
+            "HighId": 205198,
+            "Quality": 16
+          },
+          {
+            "LowId": 205196,
+            "HighId": 205196,
+            "Quality": 34
+          },
+          {
+            "LowId": 151777,
+            "HighId": 151777,
+            "Quality": 21
+          },
+          {
+            "LowId": 151776,
+            "HighId": 151776,
+            "Quality": 24
+          },
+          {
+            "LowId": 151775,
+            "HighId": 151775,
+            "Quality": 17
+          },
+          {
+            "LowId": 151779,
+            "HighId": 151779,
+            "Quality": 21
+          },
+          {
+            "LowId": 151778,
+            "HighId": 151778,
+            "Quality": 21
+          },
+          {
+            "LowId": 151780,
+            "HighId": 151780,
+            "Quality": 18
+          },
+          {
+            "LowId": 125770,
+            "HighId": 125770,
+            "Quality": 17
+          },
+          {
+            "LowId": 125748,
+            "HighId": 125748,
+            "Quality": 37
+          },
+          {
+            "LowId": 125751,
+            "HighId": 125751,
+            "Quality": 17
+          },
+          {
+            "LowId": 29395,
+            "HighId": 29395,
+            "Quality": 37
+          },
+          {
+            "LowId": 43782,
+            "HighId": 43782,
+            "Quality": 40
+          },
+          {
+            "LowId": 116826,
+            "HighId": 116826,
+            "Quality": 41
+          },
+          {
+            "LowId": 43786,
+            "HighId": 43786,
+            "Quality": 27
+          },
+          {
+            "LowId": 43771,
+            "HighId": 43771,
+            "Quality": 24
+          },
+          {
+            "LowId": 95536,
+            "HighId": 95536,
+            "Quality": 14
+          },
+          {
+            "LowId": 43780,
+            "HighId": 43780,
+            "Quality": 14
+          },
+          {
+            "LowId": 99133,
+            "HighId": 99133,
+            "Quality": 7
+          },
+          {
+            "LowId": 43776,
+            "HighId": 43776,
+            "Quality": 4
+          },
+          {
+            "LowId": 43774,
+            "HighId": 43774,
+            "Quality": 47
+          },
+          {
+            "LowId": 95537,
+            "HighId": 95537,
+            "Quality": 47
+          },
+          {
+            "LowId": 43781,
+            "HighId": 43781,
+            "Quality": 17
+          },
+          {
+            "LowId": 43772,
+            "HighId": 43772,
+            "Quality": 50
+          },
+          {
+            "LowId": 99139,
+            "HighId": 99139,
+            "Quality": 14
+          },
+          {
+            "LowId": 43794,
+            "HighId": 43794,
+            "Quality": 20
+          },
+          {
+            "LowId": 43765,
+            "HighId": 43765,
+            "Quality": 10
+          },
+          {
+            "LowId": 99138,
+            "HighId": 99138,
+            "Quality": 30
+          },
+          {
+            "LowId": 43795,
+            "HighId": 43795,
+            "Quality": 4
+          },
+          {
+            "LowId": 29392,
+            "HighId": 29392,
+            "Quality": 40
+          },
+          {
+            "LowId": 29412,
+            "HighId": 29412,
+            "Quality": 43
+          },
+          {
+            "LowId": 29192,
+            "HighId": 29192,
+            "Quality": 10
+          },
+          {
+            "LowId": 29409,
+            "HighId": 29409,
+            "Quality": 47
+          },
+          {
+            "LowId": 29393,
+            "HighId": 29393,
+            "Quality": 50
+          },
+          {
+            "LowId": 29391,
+            "HighId": 29391,
+            "Quality": 43
+          },
+          {
+            "LowId": 29372,
+            "HighId": 29372,
+            "Quality": 37
+          },
+          {
+            "LowId": 29369,
+            "HighId": 29369,
+            "Quality": 50
+          },
+          {
+            "LowId": 116824,
+            "HighId": 116824,
+            "Quality": 21
+          },
+          {
+            "LowId": 43784,
+            "HighId": 43784,
+            "Quality": 1
+          },
+          {
+            "LowId": 43767,
+            "HighId": 43767,
+            "Quality": 30
+          },
+          {
+            "LowId": 43777,
+            "HighId": 43777,
+            "Quality": 37
+          },
+          {
+            "LowId": 43922,
+            "HighId": 43922,
+            "Quality": 33
+          },
+          {
+            "LowId": 95418,
+            "HighId": 95418,
+            "Quality": 24
+          },
+          {
+            "LowId": 43789,
+            "HighId": 43789,
+            "Quality": 7
+          },
+          {
+            "LowId": 43769,
+            "HighId": 43769,
+            "Quality": 7
+          },
+          {
+            "LowId": 99137,
+            "HighId": 99137,
+            "Quality": 40
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214631,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40151,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214688,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MSON": {
+    "Hash": "MSON",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071658; spawn point MSON pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9070 pf 4575 (75 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Nano-Technician of IPS (inst 2067000865); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Nano-Technician of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26151,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 3,
+          "64": 40171,
+          "12": 5921
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 45996,
+            "HighId": 45996,
+            "Quality": 33
+          },
+          {
+            "LowId": 45397,
+            "HighId": 45397,
+            "Quality": 24
+          },
+          {
+            "LowId": 45965,
+            "HighId": 45965,
+            "Quality": 1
+          },
+          {
+            "LowId": 56178,
+            "HighId": 56178,
+            "Quality": 14
+          },
+          {
+            "LowId": 45400,
+            "HighId": 45400,
+            "Quality": 30
+          },
+          {
+            "LowId": 45398,
+            "HighId": 45398,
+            "Quality": 24
+          },
+          {
+            "LowId": 90409,
+            "HighId": 90409,
+            "Quality": 1
+          },
+          {
+            "LowId": 100447,
+            "HighId": 100447,
+            "Quality": 30
+          },
+          {
+            "LowId": 95452,
+            "HighId": 95452,
+            "Quality": 4
+          },
+          {
+            "LowId": 45971,
+            "HighId": 45971,
+            "Quality": 40
+          },
+          {
+            "LowId": 83975,
+            "HighId": 83975,
+            "Quality": 4
+          },
+          {
+            "LowId": 45395,
+            "HighId": 45395,
+            "Quality": 47
+          },
+          {
+            "LowId": 28798,
+            "HighId": 28798,
+            "Quality": 33
+          },
+          {
+            "LowId": 45371,
+            "HighId": 45371,
+            "Quality": 37
+          },
+          {
+            "LowId": 95453,
+            "HighId": 95453,
+            "Quality": 20
+          },
+          {
+            "LowId": 28825,
+            "HighId": 28825,
+            "Quality": 47
+          },
+          {
+            "LowId": 45362,
+            "HighId": 45362,
+            "Quality": 50
+          },
+          {
+            "LowId": 83965,
+            "HighId": 83965,
+            "Quality": 37
+          },
+          {
+            "LowId": 42548,
+            "HighId": 42548,
+            "Quality": 10
+          },
+          {
+            "LowId": 45956,
+            "HighId": 45956,
+            "Quality": 7
+          },
+          {
+            "LowId": 45366,
+            "HighId": 45366,
+            "Quality": 30
+          },
+          {
+            "LowId": 45327,
+            "HighId": 45327,
+            "Quality": 33
+          },
+          {
+            "LowId": 45944,
+            "HighId": 45944,
+            "Quality": 1
+          },
+          {
+            "LowId": 28805,
+            "HighId": 28805,
+            "Quality": 4
+          },
+          {
+            "LowId": 90410,
+            "HighId": 90410,
+            "Quality": 40
+          },
+          {
+            "LowId": 83982,
+            "HighId": 83982,
+            "Quality": 47
+          },
+          {
+            "LowId": 45372,
+            "HighId": 45372,
+            "Quality": 50
+          },
+          {
+            "LowId": 95421,
+            "HighId": 95421,
+            "Quality": 33
+          },
+          {
+            "LowId": 45951,
+            "HighId": 45951,
+            "Quality": 24
+          },
+          {
+            "LowId": 45973,
+            "HighId": 45973,
+            "Quality": 14
+          },
+          {
+            "LowId": 46007,
+            "HighId": 46007,
+            "Quality": 24
+          },
+          {
+            "LowId": 45969,
+            "HighId": 45969,
+            "Quality": 14
+          },
+          {
+            "LowId": 95427,
+            "HighId": 95427,
+            "Quality": 10
+          },
+          {
+            "LowId": 42544,
+            "HighId": 42544,
+            "Quality": 20
+          },
+          {
+            "LowId": 45947,
+            "HighId": 45947,
+            "Quality": 24
+          },
+          {
+            "LowId": 45994,
+            "HighId": 45994,
+            "Quality": 7
+          },
+          {
+            "LowId": 42546,
+            "HighId": 42546,
+            "Quality": 17
+          },
+          {
+            "LowId": 28836,
+            "HighId": 28836,
+            "Quality": 14
+          },
+          {
+            "LowId": 28834,
+            "HighId": 28834,
+            "Quality": 4
+          },
+          {
+            "LowId": 28830,
+            "HighId": 28830,
+            "Quality": 37
+          },
+          {
+            "LowId": 28833,
+            "HighId": 28833,
+            "Quality": 30
+          },
+          {
+            "LowId": 28831,
+            "HighId": 28831,
+            "Quality": 50
+          },
+          {
+            "LowId": 28814,
+            "HighId": 28814,
+            "Quality": 14
+          },
+          {
+            "LowId": 28810,
+            "HighId": 28810,
+            "Quality": 27
+          },
+          {
+            "LowId": 28802,
+            "HighId": 28802,
+            "Quality": 50
+          },
+          {
+            "LowId": 28804,
+            "HighId": 28804,
+            "Quality": 10
+          },
+          {
+            "LowId": 28811,
+            "HighId": 28811,
+            "Quality": 7
+          },
+          {
+            "LowId": 28795,
+            "HighId": 28795,
+            "Quality": 33
+          },
+          {
+            "LowId": 45952,
+            "HighId": 45952,
+            "Quality": 37
+          },
+          {
+            "LowId": 45396,
+            "HighId": 45396,
+            "Quality": 24
+          },
+          {
+            "LowId": 45394,
+            "HighId": 45394,
+            "Quality": 40
+          },
+          {
+            "LowId": 83978,
+            "HighId": 83978,
+            "Quality": 27
+          },
+          {
+            "LowId": 95422,
+            "HighId": 95422,
+            "Quality": 47
+          },
+          {
+            "LowId": 45963,
+            "HighId": 45963,
+            "Quality": 37
+          },
+          {
+            "LowId": 45990,
+            "HighId": 45990,
+            "Quality": 4
+          },
+          {
+            "LowId": 45983,
+            "HighId": 45983,
+            "Quality": 43
+          },
+          {
+            "LowId": 45966,
+            "HighId": 45966,
+            "Quality": 10
+          },
+          {
+            "LowId": 95454,
+            "HighId": 95454,
+            "Quality": 40
+          },
+          {
+            "LowId": 46002,
+            "HighId": 46002,
+            "Quality": 50
+          },
+          {
+            "LowId": 83968,
+            "HighId": 83968,
+            "Quality": 20
+          },
+          {
+            "LowId": 45972,
+            "HighId": 45972,
+            "Quality": 47
+          },
+          {
+            "LowId": 45987,
+            "HighId": 45987,
+            "Quality": 20
+          },
+          {
+            "LowId": 45336,
+            "HighId": 45336,
+            "Quality": 43
+          },
+          {
+            "LowId": 45946,
+            "HighId": 45946,
+            "Quality": 40
+          },
+          {
+            "LowId": 42547,
+            "HighId": 42547,
+            "Quality": 7
+          },
+          {
+            "LowId": 45961,
+            "HighId": 45961,
+            "Quality": 17
+          },
+          {
+            "LowId": 45399,
+            "HighId": 45399,
+            "Quality": 27
+          },
+          {
+            "LowId": 83984,
+            "HighId": 83984,
+            "Quality": 7
+          },
+          {
+            "LowId": 90407,
+            "HighId": 90407,
+            "Quality": 17
+          },
+          {
+            "LowId": 45945,
+            "HighId": 45945,
+            "Quality": 27
+          },
+          {
+            "LowId": 45369,
+            "HighId": 45369,
+            "Quality": 43
+          },
+          {
+            "LowId": 42545,
+            "HighId": 42545,
+            "Quality": 17
+          },
+          {
+            "LowId": 56177,
+            "HighId": 56177,
+            "Quality": 40
+          },
+          {
+            "LowId": 45998,
+            "HighId": 45998,
+            "Quality": 30
+          },
+          {
+            "LowId": 42111,
+            "HighId": 42111,
+            "Quality": 1
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214654,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40171,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214715,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MFOI": {
+    "Hash": "MFOI",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071659; spawn point MFOI pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9072 pf 4575 (11 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Shade of IPS (inst 2067000867); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Shade of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 26159,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 3,
+          "64": 40173,
+          "12": 17909
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 211153,
+            "HighId": 211153,
+            "Quality": 19
+          },
+          {
+            "LowId": 211151,
+            "HighId": 211151,
+            "Quality": 49
+          },
+          {
+            "LowId": 210807,
+            "HighId": 210807,
+            "Quality": 44
+          },
+          {
+            "LowId": 210805,
+            "HighId": 210805,
+            "Quality": 14
+          },
+          {
+            "LowId": 210788,
+            "HighId": 210788,
+            "Quality": 22
+          },
+          {
+            "LowId": 210747,
+            "HighId": 210747,
+            "Quality": 36
+          },
+          {
+            "LowId": 210735,
+            "HighId": 210735,
+            "Quality": 29
+          },
+          {
+            "LowId": 210733,
+            "HighId": 210733,
+            "Quality": 5
+          },
+          {
+            "LowId": 210388,
+            "HighId": 210388,
+            "Quality": 21
+          },
+          {
+            "LowId": 210356,
+            "HighId": 210356,
+            "Quality": 17
+          },
+          {
+            "LowId": 210354,
+            "HighId": 210354,
+            "Quality": 4
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214654,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40173,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214715,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MEOD": {
+    "Hash": "MEOD",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071660; spawn point MEOD pf 4575 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 9074 pf 4575 (40 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes copied from the PF 4577 Soldier of IPS (inst 2067000859); MonsterData/Mesh/HeadMesh/Breed identical (Scale differs: own Scale kept) to this NPC. Basic-wing meshes themselves were not captured."
+    },
+    "Templates": [
+      {
+        "Name": "Soldier of IPS",
+        "Level": 40,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 40,
+          "33": 0,
+          "359": 159085,
+          "360": 103,
+          "455": 158,
+          "1": 32984,
+          "27": 32984,
+          "4": 4,
+          "64": 40105,
+          "12": 23366
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 233036,
+            "HighId": 233036,
+            "Quality": 5
+          },
+          {
+            "LowId": 233017,
+            "HighId": 233017,
+            "Quality": 45
+          },
+          {
+            "LowId": 233015,
+            "HighId": 233015,
+            "Quality": 32
+          },
+          {
+            "LowId": 233013,
+            "HighId": 233013,
+            "Quality": 18
+          },
+          {
+            "LowId": 203150,
+            "HighId": 203150,
+            "Quality": 31
+          },
+          {
+            "LowId": 203134,
+            "HighId": 203134,
+            "Quality": 38
+          },
+          {
+            "LowId": 203136,
+            "HighId": 203136,
+            "Quality": 33
+          },
+          {
+            "LowId": 203124,
+            "HighId": 203124,
+            "Quality": 36
+          },
+          {
+            "LowId": 203122,
+            "HighId": 203122,
+            "Quality": 30
+          },
+          {
+            "LowId": 70384,
+            "HighId": 70384,
+            "Quality": 37
+          },
+          {
+            "LowId": 70389,
+            "HighId": 70389,
+            "Quality": 30
+          },
+          {
+            "LowId": 100229,
+            "HighId": 100229,
+            "Quality": 30
+          },
+          {
+            "LowId": 70397,
+            "HighId": 70397,
+            "Quality": 14
+          },
+          {
+            "LowId": 29362,
+            "HighId": 29362,
+            "Quality": 37
+          },
+          {
+            "LowId": 75419,
+            "HighId": 75419,
+            "Quality": 37
+          },
+          {
+            "LowId": 70385,
+            "HighId": 70385,
+            "Quality": 50
+          },
+          {
+            "LowId": 70401,
+            "HighId": 70401,
+            "Quality": 1
+          },
+          {
+            "LowId": 29360,
+            "HighId": 29360,
+            "Quality": 17
+          },
+          {
+            "LowId": 29359,
+            "HighId": 29359,
+            "Quality": 43
+          },
+          {
+            "LowId": 29358,
+            "HighId": 29358,
+            "Quality": 24
+          },
+          {
+            "LowId": 29333,
+            "HighId": 29333,
+            "Quality": 27
+          },
+          {
+            "LowId": 29332,
+            "HighId": 29332,
+            "Quality": 50
+          },
+          {
+            "LowId": 70403,
+            "HighId": 70403,
+            "Quality": 7
+          },
+          {
+            "LowId": 70413,
+            "HighId": 70413,
+            "Quality": 47
+          },
+          {
+            "LowId": 75415,
+            "HighId": 75415,
+            "Quality": 4
+          },
+          {
+            "LowId": 75418,
+            "HighId": 75418,
+            "Quality": 50
+          },
+          {
+            "LowId": 29337,
+            "HighId": 29337,
+            "Quality": 40
+          },
+          {
+            "LowId": 75417,
+            "HighId": 75417,
+            "Quality": 20
+          },
+          {
+            "LowId": 70390,
+            "HighId": 70390,
+            "Quality": 24
+          },
+          {
+            "LowId": 70411,
+            "HighId": 70411,
+            "Quality": 10
+          },
+          {
+            "LowId": 29340,
+            "HighId": 29340,
+            "Quality": 4
+          },
+          {
+            "LowId": 70398,
+            "HighId": 70398,
+            "Quality": 17
+          },
+          {
+            "LowId": 75416,
+            "HighId": 75416,
+            "Quality": 14
+          },
+          {
+            "LowId": 70412,
+            "HighId": 70412,
+            "Quality": 27
+          },
+          {
+            "LowId": 70383,
+            "HighId": 70383,
+            "Quality": 33
+          },
+          {
+            "LowId": 29356,
+            "HighId": 29356,
+            "Quality": 17
+          },
+          {
+            "LowId": 29338,
+            "HighId": 29338,
+            "Quality": 7
+          },
+          {
+            "LowId": 95723,
+            "HighId": 95723,
+            "Quality": 33
+          },
+          {
+            "LowId": 95727,
+            "HighId": 95727,
+            "Quality": 17
+          },
+          {
+            "LowId": 100228,
+            "HighId": 100228,
+            "Quality": 14
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214487,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40105,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214524,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MION": {
+    "Hash": "MION",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000854; spawn point MION pf 4577 matched by position (d=0.22)",
+      "ShopSource": "shop_items VendingMachine 321491889 pf 4577 (46 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Trader of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26143,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 3,
+          "64": 40137,
+          "12": 23368
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 78434,
+            "HighId": 78434,
+            "Quality": 103
+          },
+          {
+            "LowId": 142776,
+            "HighId": 142776,
+            "Quality": 97
+          },
+          {
+            "LowId": 30766,
+            "HighId": 30766,
+            "Quality": 96
+          },
+          {
+            "LowId": 85899,
+            "HighId": 85899,
+            "Quality": 80
+          },
+          {
+            "LowId": 56262,
+            "HighId": 56262,
+            "Quality": 109
+          },
+          {
+            "LowId": 85888,
+            "HighId": 85888,
+            "Quality": 113
+          },
+          {
+            "LowId": 85887,
+            "HighId": 85887,
+            "Quality": 93
+          },
+          {
+            "LowId": 91395,
+            "HighId": 91395,
+            "Quality": 113
+          },
+          {
+            "LowId": 91390,
+            "HighId": 91390,
+            "Quality": 93
+          },
+          {
+            "LowId": 99630,
+            "HighId": 99630,
+            "Quality": 99
+          },
+          {
+            "LowId": 121516,
+            "HighId": 121516,
+            "Quality": 97
+          },
+          {
+            "LowId": 100451,
+            "HighId": 100451,
+            "Quality": 106
+          },
+          {
+            "LowId": 78433,
+            "HighId": 78433,
+            "Quality": 113
+          },
+          {
+            "LowId": 99626,
+            "HighId": 99626,
+            "Quality": 80
+          },
+          {
+            "LowId": 78432,
+            "HighId": 78432,
+            "Quality": 86
+          },
+          {
+            "LowId": 30773,
+            "HighId": 30773,
+            "Quality": 90
+          },
+          {
+            "LowId": 30775,
+            "HighId": 30775,
+            "Quality": 80
+          },
+          {
+            "LowId": 30776,
+            "HighId": 30776,
+            "Quality": 80
+          },
+          {
+            "LowId": 30777,
+            "HighId": 30777,
+            "Quality": 83
+          },
+          {
+            "LowId": 30778,
+            "HighId": 30778,
+            "Quality": 86
+          },
+          {
+            "LowId": 30779,
+            "HighId": 30779,
+            "Quality": 86
+          },
+          {
+            "LowId": 30782,
+            "HighId": 30782,
+            "Quality": 116
+          },
+          {
+            "LowId": 78430,
+            "HighId": 78430,
+            "Quality": 80
+          },
+          {
+            "LowId": 118249,
+            "HighId": 118249,
+            "Quality": 100
+          },
+          {
+            "LowId": 78431,
+            "HighId": 78431,
+            "Quality": 93
+          },
+          {
+            "LowId": 121514,
+            "HighId": 121514,
+            "Quality": 116
+          },
+          {
+            "LowId": 142743,
+            "HighId": 142743,
+            "Quality": 100
+          },
+          {
+            "LowId": 85879,
+            "HighId": 85879,
+            "Quality": 103
+          },
+          {
+            "LowId": 121508,
+            "HighId": 121508,
+            "Quality": 87
+          },
+          {
+            "LowId": 82243,
+            "HighId": 82243,
+            "Quality": 83
+          },
+          {
+            "LowId": 118247,
+            "HighId": 118247,
+            "Quality": 87
+          },
+          {
+            "LowId": 85878,
+            "HighId": 85878,
+            "Quality": 86
+          },
+          {
+            "LowId": 92197,
+            "HighId": 92197,
+            "Quality": 106
+          },
+          {
+            "LowId": 92189,
+            "HighId": 92189,
+            "Quality": 90
+          },
+          {
+            "LowId": 30798,
+            "HighId": 30798,
+            "Quality": 80
+          },
+          {
+            "LowId": 91378,
+            "HighId": 91378,
+            "Quality": 103
+          },
+          {
+            "LowId": 91381,
+            "HighId": 91381,
+            "Quality": 86
+          },
+          {
+            "LowId": 121374,
+            "HighId": 121374,
+            "Quality": 113
+          },
+          {
+            "LowId": 121368,
+            "HighId": 121368,
+            "Quality": 97
+          },
+          {
+            "LowId": 121376,
+            "HighId": 121376,
+            "Quality": 84
+          },
+          {
+            "LowId": 121352,
+            "HighId": 121352,
+            "Quality": 107
+          },
+          {
+            "LowId": 121361,
+            "HighId": 121361,
+            "Quality": 93
+          },
+          {
+            "LowId": 92185,
+            "HighId": 92185,
+            "Quality": 119
+          },
+          {
+            "LowId": 92182,
+            "HighId": 92182,
+            "Quality": 96
+          },
+          {
+            "LowId": 235278,
+            "HighId": 235278,
+            "Quality": 105
+          },
+          {
+            "LowId": 235280,
+            "HighId": 235280,
+            "Quality": 127
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214631,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40137,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214688,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MNOP": {
+    "Hash": "MNOP",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000855; spawn point MNOP pf 4577 matched by position (d=0.18)",
+      "ShopSource": "shop_items VendingMachine 321491890 pf 4577 (20 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Adventurer of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26137,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 2,
+          "64": 40209,
+          "12": 5934
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 55849,
+            "HighId": 55849,
+            "Quality": 83
+          },
+          {
+            "LowId": 136705,
+            "HighId": 136705,
+            "Quality": 83
+          },
+          {
+            "LowId": 302215,
+            "HighId": 302215,
+            "Quality": 125
+          },
+          {
+            "LowId": 82089,
+            "HighId": 82089,
+            "Quality": 86
+          },
+          {
+            "LowId": 302241,
+            "HighId": 302241,
+            "Quality": 125
+          },
+          {
+            "LowId": 302415,
+            "HighId": 302415,
+            "Quality": 125
+          },
+          {
+            "LowId": 302221,
+            "HighId": 302221,
+            "Quality": 125
+          },
+          {
+            "LowId": 75372,
+            "HighId": 75372,
+            "Quality": 96
+          },
+          {
+            "LowId": 85142,
+            "HighId": 85142,
+            "Quality": 83
+          },
+          {
+            "LowId": 55848,
+            "HighId": 55848,
+            "Quality": 90
+          },
+          {
+            "LowId": 302233,
+            "HighId": 302233,
+            "Quality": 125
+          },
+          {
+            "LowId": 55850,
+            "HighId": 55850,
+            "Quality": 109
+          },
+          {
+            "LowId": 136695,
+            "HighId": 136695,
+            "Quality": 90
+          },
+          {
+            "LowId": 55851,
+            "HighId": 55851,
+            "Quality": 99
+          },
+          {
+            "LowId": 82083,
+            "HighId": 82083,
+            "Quality": 93
+          },
+          {
+            "LowId": 28745,
+            "HighId": 28745,
+            "Quality": 113
+          },
+          {
+            "LowId": 55852,
+            "HighId": 55852,
+            "Quality": 116
+          },
+          {
+            "LowId": 136694,
+            "HighId": 136694,
+            "Quality": 107
+          },
+          {
+            "LowId": 136691,
+            "HighId": 136691,
+            "Quality": 116
+          },
+          {
+            "LowId": 82079,
+            "HighId": 82079,
+            "Quality": 116
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214550,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40209,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214599,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MPOR": {
+    "Hash": "MPOR",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000856; spawn point MPOR pf 4577 matched by position (d=0.01)",
+      "ShopSource": "shop_items VendingMachine 321491891 pf 4577 (11 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Enforcer of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26074,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 1,
+          "64": 40691,
+          "12": 17532
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 55755,
+            "HighId": 55755,
+            "Quality": 83
+          },
+          {
+            "LowId": 49828,
+            "HighId": 49828,
+            "Quality": 119
+          },
+          {
+            "LowId": 100262,
+            "HighId": 100262,
+            "Quality": 80
+          },
+          {
+            "LowId": 49820,
+            "HighId": 49820,
+            "Quality": 103
+          },
+          {
+            "LowId": 118120,
+            "HighId": 118120,
+            "Quality": 120
+          },
+          {
+            "LowId": 118119,
+            "HighId": 118119,
+            "Quality": 90
+          },
+          {
+            "LowId": 55754,
+            "HighId": 55754,
+            "Quality": 106
+          },
+          {
+            "LowId": 49814,
+            "HighId": 49814,
+            "Quality": 90
+          },
+          {
+            "LowId": 95730,
+            "HighId": 95730,
+            "Quality": 93
+          },
+          {
+            "LowId": 29811,
+            "HighId": 29811,
+            "Quality": 113
+          },
+          {
+            "LowId": 100222,
+            "HighId": 100222,
+            "Quality": 116
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214654,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40691,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214715,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MPOO": {
+    "Hash": "MPOO",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000857; spawn point MPOO pf 4577 matched by position (d=0.18)",
+      "ShopSource": "shop_items VendingMachine 321491892 pf 4577 (21 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Agent of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26137,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 2,
+          "64": 40209,
+          "12": 5934
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 117250,
+            "HighId": 117250,
+            "Quality": 86
+          },
+          {
+            "LowId": 117251,
+            "HighId": 117251,
+            "Quality": 109
+          },
+          {
+            "LowId": 117252,
+            "HighId": 117252,
+            "Quality": 103
+          },
+          {
+            "LowId": 117248,
+            "HighId": 117248,
+            "Quality": 90
+          },
+          {
+            "LowId": 117249,
+            "HighId": 117249,
+            "Quality": 96
+          },
+          {
+            "LowId": 117244,
+            "HighId": 117244,
+            "Quality": 83
+          },
+          {
+            "LowId": 117245,
+            "HighId": 117245,
+            "Quality": 113
+          },
+          {
+            "LowId": 117246,
+            "HighId": 117246,
+            "Quality": 119
+          },
+          {
+            "LowId": 117242,
+            "HighId": 117242,
+            "Quality": 80
+          },
+          {
+            "LowId": 117243,
+            "HighId": 117243,
+            "Quality": 99
+          },
+          {
+            "LowId": 81900,
+            "HighId": 81900,
+            "Quality": 106
+          },
+          {
+            "LowId": 85324,
+            "HighId": 85324,
+            "Quality": 109
+          },
+          {
+            "LowId": 82809,
+            "HighId": 82809,
+            "Quality": 90
+          },
+          {
+            "LowId": 81958,
+            "HighId": 81958,
+            "Quality": 116
+          },
+          {
+            "LowId": 56246,
+            "HighId": 56246,
+            "Quality": 83
+          },
+          {
+            "LowId": 81954,
+            "HighId": 81954,
+            "Quality": 93
+          },
+          {
+            "LowId": 81898,
+            "HighId": 81898,
+            "Quality": 80
+          },
+          {
+            "LowId": 81951,
+            "HighId": 81951,
+            "Quality": 83
+          },
+          {
+            "LowId": 56244,
+            "HighId": 56244,
+            "Quality": 99
+          },
+          {
+            "LowId": 56245,
+            "HighId": 56245,
+            "Quality": 119
+          },
+          {
+            "LowId": 32101,
+            "HighId": 32101,
+            "Quality": 96
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214550,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40209,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214599,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MPOT": {
+    "Hash": "MPOT",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000858; spawn point MPOT pf 4577 matched by position (d=0.04)",
+      "ShopSource": "shop_items VendingMachine 321491893 pf 4577 (32 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Bureaucrat of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26137,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 2,
+          "64": 40209,
+          "12": 5934
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 46471,
+            "HighId": 46471,
+            "Quality": 80
+          },
+          {
+            "LowId": 46461,
+            "HighId": 46461,
+            "Quality": 109
+          },
+          {
+            "LowId": 46455,
+            "HighId": 46455,
+            "Quality": 96
+          },
+          {
+            "LowId": 90451,
+            "HighId": 90451,
+            "Quality": 99
+          },
+          {
+            "LowId": 99225,
+            "HighId": 99225,
+            "Quality": 109
+          },
+          {
+            "LowId": 205436,
+            "HighId": 205436,
+            "Quality": 119
+          },
+          {
+            "LowId": 121148,
+            "HighId": 121148,
+            "Quality": 110
+          },
+          {
+            "LowId": 100444,
+            "HighId": 100444,
+            "Quality": 103
+          },
+          {
+            "LowId": 100461,
+            "HighId": 100461,
+            "Quality": 80
+          },
+          {
+            "LowId": 46458,
+            "HighId": 46458,
+            "Quality": 90
+          },
+          {
+            "LowId": 46440,
+            "HighId": 46440,
+            "Quality": 86
+          },
+          {
+            "LowId": 46446,
+            "HighId": 46446,
+            "Quality": 119
+          },
+          {
+            "LowId": 46437,
+            "HighId": 46437,
+            "Quality": 106
+          },
+          {
+            "LowId": 205296,
+            "HighId": 205296,
+            "Quality": 110
+          },
+          {
+            "LowId": 82819,
+            "HighId": 82819,
+            "Quality": 80
+          },
+          {
+            "LowId": 56009,
+            "HighId": 56009,
+            "Quality": 99
+          },
+          {
+            "LowId": 82818,
+            "HighId": 82818,
+            "Quality": 106
+          },
+          {
+            "LowId": 56007,
+            "HighId": 56007,
+            "Quality": 80
+          },
+          {
+            "LowId": 99220,
+            "HighId": 99220,
+            "Quality": 86
+          },
+          {
+            "LowId": 99216,
+            "HighId": 99216,
+            "Quality": 96
+          },
+          {
+            "LowId": 46429,
+            "HighId": 46429,
+            "Quality": 99
+          },
+          {
+            "LowId": 56010,
+            "HighId": 56010,
+            "Quality": 116
+          },
+          {
+            "LowId": 30140,
+            "HighId": 30140,
+            "Quality": 90
+          },
+          {
+            "LowId": 30135,
+            "HighId": 30135,
+            "Quality": 116
+          },
+          {
+            "LowId": 30136,
+            "HighId": 30136,
+            "Quality": 109
+          },
+          {
+            "LowId": 82186,
+            "HighId": 82186,
+            "Quality": 93
+          },
+          {
+            "LowId": 78445,
+            "HighId": 78445,
+            "Quality": 93
+          },
+          {
+            "LowId": 46415,
+            "HighId": 46415,
+            "Quality": 83
+          },
+          {
+            "LowId": 46421,
+            "HighId": 46421,
+            "Quality": 113
+          },
+          {
+            "LowId": 229965,
+            "HighId": 229965,
+            "Quality": 100
+          },
+          {
+            "LowId": 30143,
+            "HighId": 30143,
+            "Quality": 90
+          },
+          {
+            "LowId": 95386,
+            "HighId": 95386,
+            "Quality": 83
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214550,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40209,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214599,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MPOD": {
+    "Hash": "MPOD",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000859; spawn point MPOD pf 4577 matched by position (d=0.08)",
+      "ShopSource": "shop_items VendingMachine 321491894 pf 4577 (14 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Soldier of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 159085,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 4,
+          "64": 40105,
+          "12": 23366
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 75421,
+            "HighId": 75421,
+            "Quality": 119
+          },
+          {
+            "LowId": 29330,
+            "HighId": 29330,
+            "Quality": 90
+          },
+          {
+            "LowId": 29334,
+            "HighId": 29334,
+            "Quality": 106
+          },
+          {
+            "LowId": 233044,
+            "HighId": 233044,
+            "Quality": 106
+          },
+          {
+            "LowId": 70400,
+            "HighId": 70400,
+            "Quality": 119
+          },
+          {
+            "LowId": 70399,
+            "HighId": 70399,
+            "Quality": 113
+          },
+          {
+            "LowId": 70405,
+            "HighId": 70405,
+            "Quality": 99
+          },
+          {
+            "LowId": 70402,
+            "HighId": 70402,
+            "Quality": 96
+          },
+          {
+            "LowId": 70406,
+            "HighId": 70406,
+            "Quality": 83
+          },
+          {
+            "LowId": 75422,
+            "HighId": 75422,
+            "Quality": 99
+          },
+          {
+            "LowId": 75420,
+            "HighId": 75420,
+            "Quality": 83
+          },
+          {
+            "LowId": 29366,
+            "HighId": 29366,
+            "Quality": 113
+          },
+          {
+            "LowId": 70416,
+            "HighId": 70416,
+            "Quality": 86
+          },
+          {
+            "LowId": 70417,
+            "HighId": 70417,
+            "Quality": 106
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214487,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40105,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214524,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MROI": {
+    "Hash": "MROI",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000860; spawn point MROI pf 4577 matched by position (d=0.19)",
+      "ShopSource": "shop_items VendingMachine 321491895 pf 4577 (36 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Doctor of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26092,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 1,
+          "64": 40694,
+          "12": 5907
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 44210,
+            "HighId": 44210,
+            "Quality": 80
+          },
+          {
+            "LowId": 44179,
+            "HighId": 44179,
+            "Quality": 93
+          },
+          {
+            "LowId": 28757,
+            "HighId": 28757,
+            "Quality": 93
+          },
+          {
+            "LowId": 43996,
+            "HighId": 43996,
+            "Quality": 86
+          },
+          {
+            "LowId": 42410,
+            "HighId": 42410,
+            "Quality": 96
+          },
+          {
+            "LowId": 28761,
+            "HighId": 28761,
+            "Quality": 90
+          },
+          {
+            "LowId": 28762,
+            "HighId": 28762,
+            "Quality": 116
+          },
+          {
+            "LowId": 44183,
+            "HighId": 44183,
+            "Quality": 106
+          },
+          {
+            "LowId": 44002,
+            "HighId": 44002,
+            "Quality": 106
+          },
+          {
+            "LowId": 43986,
+            "HighId": 43986,
+            "Quality": 86
+          },
+          {
+            "LowId": 142745,
+            "HighId": 142745,
+            "Quality": 80
+          },
+          {
+            "LowId": 28773,
+            "HighId": 28773,
+            "Quality": 80
+          },
+          {
+            "LowId": 43979,
+            "HighId": 43979,
+            "Quality": 103
+          },
+          {
+            "LowId": 43980,
+            "HighId": 43980,
+            "Quality": 80
+          },
+          {
+            "LowId": 82010,
+            "HighId": 82010,
+            "Quality": 116
+          },
+          {
+            "LowId": 43983,
+            "HighId": 43983,
+            "Quality": 109
+          },
+          {
+            "LowId": 43967,
+            "HighId": 43967,
+            "Quality": 93
+          },
+          {
+            "LowId": 43973,
+            "HighId": 43973,
+            "Quality": 116
+          },
+          {
+            "LowId": 28782,
+            "HighId": 28782,
+            "Quality": 90
+          },
+          {
+            "LowId": 42415,
+            "HighId": 42415,
+            "Quality": 83
+          },
+          {
+            "LowId": 43964,
+            "HighId": 43964,
+            "Quality": 109
+          },
+          {
+            "LowId": 95745,
+            "HighId": 95745,
+            "Quality": 93
+          },
+          {
+            "LowId": 44190,
+            "HighId": 44190,
+            "Quality": 119
+          },
+          {
+            "LowId": 44192,
+            "HighId": 44192,
+            "Quality": 99
+          },
+          {
+            "LowId": 43953,
+            "HighId": 43953,
+            "Quality": 93
+          },
+          {
+            "LowId": 43936,
+            "HighId": 43936,
+            "Quality": 93
+          },
+          {
+            "LowId": 44208,
+            "HighId": 44208,
+            "Quality": 86
+          },
+          {
+            "LowId": 43943,
+            "HighId": 43943,
+            "Quality": 96
+          },
+          {
+            "LowId": 28788,
+            "HighId": 28788,
+            "Quality": 119
+          },
+          {
+            "LowId": 97452,
+            "HighId": 97452,
+            "Quality": 83
+          },
+          {
+            "LowId": 43924,
+            "HighId": 43924,
+            "Quality": 80
+          },
+          {
+            "LowId": 43925,
+            "HighId": 43925,
+            "Quality": 86
+          },
+          {
+            "LowId": 43931,
+            "HighId": 43931,
+            "Quality": 113
+          },
+          {
+            "LowId": 97447,
+            "HighId": 97447,
+            "Quality": 90
+          },
+          {
+            "LowId": 43934,
+            "HighId": 43934,
+            "Quality": 83
+          },
+          {
+            "LowId": 43935,
+            "HighId": 43935,
+            "Quality": 113
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214654,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40694,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214715,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MNOD": {
+    "Hash": "MNOD",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000861; spawn point MNOD pf 4577 matched by position (d=0.01)",
+      "ShopSource": "shop_items VendingMachine 321491896 pf 4577 (24 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Engineer of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26074,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 4,
+          "64": 40691,
+          "12": 17532
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 46069,
+            "HighId": 46069,
+            "Quality": 80
+          },
+          {
+            "LowId": 46070,
+            "HighId": 46070,
+            "Quality": 116
+          },
+          {
+            "LowId": 70589,
+            "HighId": 70589,
+            "Quality": 119
+          },
+          {
+            "LowId": 70580,
+            "HighId": 70580,
+            "Quality": 109
+          },
+          {
+            "LowId": 205240,
+            "HighId": 205240,
+            "Quality": 117
+          },
+          {
+            "LowId": 46078,
+            "HighId": 46078,
+            "Quality": 103
+          },
+          {
+            "LowId": 81923,
+            "HighId": 81923,
+            "Quality": 99
+          },
+          {
+            "LowId": 70574,
+            "HighId": 70574,
+            "Quality": 83
+          },
+          {
+            "LowId": 55779,
+            "HighId": 55779,
+            "Quality": 113
+          },
+          {
+            "LowId": 46065,
+            "HighId": 46065,
+            "Quality": 90
+          },
+          {
+            "LowId": 46047,
+            "HighId": 46047,
+            "Quality": 99
+          },
+          {
+            "LowId": 46051,
+            "HighId": 46051,
+            "Quality": 109
+          },
+          {
+            "LowId": 46055,
+            "HighId": 46055,
+            "Quality": 96
+          },
+          {
+            "LowId": 46061,
+            "HighId": 46061,
+            "Quality": 93
+          },
+          {
+            "LowId": 70422,
+            "HighId": 70422,
+            "Quality": 96
+          },
+          {
+            "LowId": 46036,
+            "HighId": 46036,
+            "Quality": 90
+          },
+          {
+            "LowId": 46041,
+            "HighId": 46041,
+            "Quality": 83
+          },
+          {
+            "LowId": 46042,
+            "HighId": 46042,
+            "Quality": 119
+          },
+          {
+            "LowId": 29853,
+            "HighId": 29853,
+            "Quality": 93
+          },
+          {
+            "LowId": 46020,
+            "HighId": 46020,
+            "Quality": 86
+          },
+          {
+            "LowId": 70578,
+            "HighId": 70578,
+            "Quality": 103
+          },
+          {
+            "LowId": 70579,
+            "HighId": 70579,
+            "Quality": 96
+          },
+          {
+            "LowId": 70576,
+            "HighId": 70576,
+            "Quality": 86
+          },
+          {
+            "LowId": 46012,
+            "HighId": 46012,
+            "Quality": 113
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214487,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40691,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214524,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MDON": {
+    "Hash": "MDON",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000862; spawn point MDON pf 4577 matched by position (d=0.19)",
+      "ShopSource": "shop_items VendingMachine 321491897 pf 4577 (14 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Fixer of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26125,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 2,
+          "64": 40215,
+          "12": 23374
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 85271,
+            "HighId": 85271,
+            "Quality": 103
+          },
+          {
+            "LowId": 81895,
+            "HighId": 81895,
+            "Quality": 106
+          },
+          {
+            "LowId": 31415,
+            "HighId": 31415,
+            "Quality": 116
+          },
+          {
+            "LowId": 56253,
+            "HighId": 56253,
+            "Quality": 90
+          },
+          {
+            "LowId": 82804,
+            "HighId": 82804,
+            "Quality": 103
+          },
+          {
+            "LowId": 85266,
+            "HighId": 85266,
+            "Quality": 119
+          },
+          {
+            "LowId": 93139,
+            "HighId": 93139,
+            "Quality": 83
+          },
+          {
+            "LowId": 31449,
+            "HighId": 31449,
+            "Quality": 90
+          },
+          {
+            "LowId": 31427,
+            "HighId": 31427,
+            "Quality": 83
+          },
+          {
+            "LowId": 81891,
+            "HighId": 81891,
+            "Quality": 80
+          },
+          {
+            "LowId": 93134,
+            "HighId": 93134,
+            "Quality": 113
+          },
+          {
+            "LowId": 85280,
+            "HighId": 85280,
+            "Quality": 119
+          },
+          {
+            "LowId": 239358,
+            "HighId": 239358,
+            "Quality": 120
+          },
+          {
+            "LowId": 85276,
+            "HighId": 85276,
+            "Quality": 96
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214550,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40215,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214599,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MPON": {
+    "Hash": "MPON",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000863; spawn point MPON pf 4577 matched by position (d=0.17)",
+      "ShopSource": "shop_items VendingMachine 321491898 pf 4577 (8 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Keeper of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26103,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 4,
+          "64": 40103,
+          "12": 23365
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 211161,
+            "HighId": 211161,
+            "Quality": 116
+          },
+          {
+            "LowId": 210694,
+            "HighId": 210694,
+            "Quality": 105
+          },
+          {
+            "LowId": 210712,
+            "HighId": 210712,
+            "Quality": 109
+          },
+          {
+            "LowId": 210491,
+            "HighId": 210491,
+            "Quality": 124
+          },
+          {
+            "LowId": 210316,
+            "HighId": 210316,
+            "Quality": 112
+          },
+          {
+            "LowId": 210678,
+            "HighId": 210678,
+            "Quality": 118
+          },
+          {
+            "LowId": 210306,
+            "HighId": 210306,
+            "Quality": 119
+          },
+          {
+            "LowId": 210618,
+            "HighId": 210618,
+            "Quality": 115
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214487,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40103,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214524,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MPOS": {
+    "Hash": "MPOS",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000864; spawn point MPOS pf 4577 matched by position (d=0.24)",
+      "ShopSource": "shop_items VendingMachine 321491899 pf 4577 (13 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Martial Artist of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26097,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 4,
+          "64": 40111,
+          "12": 5900
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 100221,
+            "HighId": 100221,
+            "Quality": 86
+          },
+          {
+            "LowId": 28926,
+            "HighId": 28926,
+            "Quality": 96
+          },
+          {
+            "LowId": 81843,
+            "HighId": 81843,
+            "Quality": 86
+          },
+          {
+            "LowId": 81842,
+            "HighId": 81842,
+            "Quality": 106
+          },
+          {
+            "LowId": 28929,
+            "HighId": 28929,
+            "Quality": 83
+          },
+          {
+            "LowId": 82075,
+            "HighId": 82075,
+            "Quality": 99
+          },
+          {
+            "LowId": 75359,
+            "HighId": 75359,
+            "Quality": 86
+          },
+          {
+            "LowId": 82069,
+            "HighId": 82069,
+            "Quality": 106
+          },
+          {
+            "LowId": 75363,
+            "HighId": 75363,
+            "Quality": 99
+          },
+          {
+            "LowId": 81835,
+            "HighId": 81835,
+            "Quality": 93
+          },
+          {
+            "LowId": 81834,
+            "HighId": 81834,
+            "Quality": 113
+          },
+          {
+            "LowId": 75361,
+            "HighId": 75361,
+            "Quality": 109
+          },
+          {
+            "LowId": 95538,
+            "HighId": 95538,
+            "Quality": 90
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214487,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40111,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214524,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MRON": {
+    "Hash": "MRON",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000865; spawn point MRON pf 4577 matched by position (d=0.07)",
+      "ShopSource": "shop_items VendingMachine 321491900 pf 4577 (53 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Nano-Technician of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26151,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 3,
+          "64": 40171,
+          "12": 5921
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 118113,
+            "HighId": 118113,
+            "Quality": 107
+          },
+          {
+            "LowId": 56174,
+            "HighId": 56174,
+            "Quality": 106
+          },
+          {
+            "LowId": 46003,
+            "HighId": 46003,
+            "Quality": 113
+          },
+          {
+            "LowId": 46004,
+            "HighId": 46004,
+            "Quality": 96
+          },
+          {
+            "LowId": 28796,
+            "HighId": 28796,
+            "Quality": 109
+          },
+          {
+            "LowId": 45389,
+            "HighId": 45389,
+            "Quality": 119
+          },
+          {
+            "LowId": 46006,
+            "HighId": 46006,
+            "Quality": 86
+          },
+          {
+            "LowId": 46008,
+            "HighId": 46008,
+            "Quality": 93
+          },
+          {
+            "LowId": 45392,
+            "HighId": 45392,
+            "Quality": 93
+          },
+          {
+            "LowId": 45376,
+            "HighId": 45376,
+            "Quality": 103
+          },
+          {
+            "LowId": 45999,
+            "HighId": 45999,
+            "Quality": 99
+          },
+          {
+            "LowId": 83983,
+            "HighId": 83983,
+            "Quality": 96
+          },
+          {
+            "LowId": 45383,
+            "HighId": 45383,
+            "Quality": 103
+          },
+          {
+            "LowId": 46001,
+            "HighId": 46001,
+            "Quality": 103
+          },
+          {
+            "LowId": 28806,
+            "HighId": 28806,
+            "Quality": 90
+          },
+          {
+            "LowId": 45984,
+            "HighId": 45984,
+            "Quality": 86
+          },
+          {
+            "LowId": 45985,
+            "HighId": 45985,
+            "Quality": 103
+          },
+          {
+            "LowId": 45386,
+            "HighId": 45386,
+            "Quality": 106
+          },
+          {
+            "LowId": 45986,
+            "HighId": 45986,
+            "Quality": 109
+          },
+          {
+            "LowId": 90411,
+            "HighId": 90411,
+            "Quality": 80
+          },
+          {
+            "LowId": 45365,
+            "HighId": 45365,
+            "Quality": 113
+          },
+          {
+            "LowId": 45367,
+            "HighId": 45367,
+            "Quality": 90
+          },
+          {
+            "LowId": 45368,
+            "HighId": 45368,
+            "Quality": 116
+          },
+          {
+            "LowId": 45975,
+            "HighId": 45975,
+            "Quality": 90
+          },
+          {
+            "LowId": 28812,
+            "HighId": 28812,
+            "Quality": 96
+          },
+          {
+            "LowId": 28813,
+            "HighId": 28813,
+            "Quality": 83
+          },
+          {
+            "LowId": 45977,
+            "HighId": 45977,
+            "Quality": 103
+          },
+          {
+            "LowId": 45978,
+            "HighId": 45978,
+            "Quality": 119
+          },
+          {
+            "LowId": 45967,
+            "HighId": 45967,
+            "Quality": 83
+          },
+          {
+            "LowId": 118123,
+            "HighId": 118123,
+            "Quality": 80
+          },
+          {
+            "LowId": 45363,
+            "HighId": 45363,
+            "Quality": 109
+          },
+          {
+            "LowId": 83977,
+            "HighId": 83977,
+            "Quality": 86
+          },
+          {
+            "LowId": 28824,
+            "HighId": 28824,
+            "Quality": 80
+          },
+          {
+            "LowId": 45959,
+            "HighId": 45959,
+            "Quality": 83
+          },
+          {
+            "LowId": 83967,
+            "HighId": 83967,
+            "Quality": 109
+          },
+          {
+            "LowId": 45353,
+            "HighId": 45353,
+            "Quality": 103
+          },
+          {
+            "LowId": 45962,
+            "HighId": 45962,
+            "Quality": 116
+          },
+          {
+            "LowId": 45341,
+            "HighId": 45341,
+            "Quality": 96
+          },
+          {
+            "LowId": 45343,
+            "HighId": 45343,
+            "Quality": 90
+          },
+          {
+            "LowId": 45957,
+            "HighId": 45957,
+            "Quality": 83
+          },
+          {
+            "LowId": 45344,
+            "HighId": 45344,
+            "Quality": 83
+          },
+          {
+            "LowId": 45345,
+            "HighId": 45345,
+            "Quality": 96
+          },
+          {
+            "LowId": 83974,
+            "HighId": 83974,
+            "Quality": 119
+          },
+          {
+            "LowId": 28835,
+            "HighId": 28835,
+            "Quality": 99
+          },
+          {
+            "LowId": 70630,
+            "HighId": 70630,
+            "Quality": 80
+          },
+          {
+            "LowId": 28839,
+            "HighId": 28839,
+            "Quality": 93
+          },
+          {
+            "LowId": 90408,
+            "HighId": 90408,
+            "Quality": 99
+          },
+          {
+            "LowId": 95455,
+            "HighId": 95455,
+            "Quality": 93
+          },
+          {
+            "LowId": 45334,
+            "HighId": 45334,
+            "Quality": 116
+          },
+          {
+            "LowId": 45955,
+            "HighId": 45955,
+            "Quality": 109
+          },
+          {
+            "LowId": 45337,
+            "HighId": 45337,
+            "Quality": 119
+          },
+          {
+            "LowId": 45339,
+            "HighId": 45339,
+            "Quality": 86
+          },
+          {
+            "LowId": 28842,
+            "HighId": 28842,
+            "Quality": 113
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214654,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40171,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214715,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MIOS": {
+    "Hash": "MIOS",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000866; spawn point MIOS pf 4577 matched by position (d=0.07)",
+      "ShopSource": "shop_items VendingMachine 321491901 pf 4577 (15 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Meta-Physicist of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26149,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 3,
+          "64": 40151,
+          "12": 5941
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 29424,
+            "HighId": 29424,
+            "Quality": 93
+          },
+          {
+            "LowId": 125752,
+            "HighId": 125752,
+            "Quality": 113
+          },
+          {
+            "LowId": 125749,
+            "HighId": 125749,
+            "Quality": 87
+          },
+          {
+            "LowId": 116831,
+            "HighId": 116831,
+            "Quality": 87
+          },
+          {
+            "LowId": 125771,
+            "HighId": 125771,
+            "Quality": 116
+          },
+          {
+            "LowId": 95428,
+            "HighId": 95428,
+            "Quality": 90
+          },
+          {
+            "LowId": 205186,
+            "HighId": 205186,
+            "Quality": 115
+          },
+          {
+            "LowId": 95535,
+            "HighId": 95535,
+            "Quality": 90
+          },
+          {
+            "LowId": 116827,
+            "HighId": 116827,
+            "Quality": 113
+          },
+          {
+            "LowId": 125767,
+            "HighId": 125767,
+            "Quality": 87
+          },
+          {
+            "LowId": 99136,
+            "HighId": 99136,
+            "Quality": 93
+          },
+          {
+            "LowId": 99134,
+            "HighId": 99134,
+            "Quality": 116
+          },
+          {
+            "LowId": 43779,
+            "HighId": 43779,
+            "Quality": 113
+          },
+          {
+            "LowId": 43763,
+            "HighId": 43763,
+            "Quality": 106
+          },
+          {
+            "LowId": 120500,
+            "HighId": 120500,
+            "Quality": 103
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214631,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40151,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214688,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  },
+  "MIOE": {
+    "Hash": "MIOE",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261106_Whozewhatzit.csv pf 4577 IPS Interior - Superior inst 2067000867; spawn point MIOE pf 4577 matched by position (d=0.00)",
+      "ShopSource": "shop_items VendingMachine 321491902 pf 4577 (3 lines); vendor<->shop pairing proven by profession requirement on the nano crystals sold",
+      "Appearance": "Textures/Meshes captured on this NPC"
+    },
+    "Templates": [
+      {
+        "Name": "Shade of IPS",
+        "Level": 150,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "54": 150,
+          "33": 0,
+          "359": 26159,
+          "360": 117,
+          "455": 158,
+          "1": 267371,
+          "27": 267371,
+          "4": 3,
+          "64": 40173,
+          "12": 17909
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "ShopStock": [
+          {
+            "LowId": 210792,
+            "HighId": 210792,
+            "Quality": 108
+          },
+          {
+            "LowId": 210739,
+            "HighId": 210739,
+            "Quality": 106
+          },
+          {
+            "LowId": 211147,
+            "HighId": 211147,
+            "Quality": 122
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214654,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40173,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214715,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ]
+      }
+    ]
+  }
+}
