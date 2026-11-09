@@ -2217,12 +2217,14 @@
         /// <summary>
         /// Requirement leaves a stat value cannot answer, read from this character's NCU: HasRunningNano /
         /// HasNotRunningNano (Value = nano id) and HasRunningNanoLine / HasNotRunningNanoLine (Value = nano line,
-        /// matched against the running buff's strain). Null leaves every other leaf to the stat comparison.
+        /// matched against the running buff's strain); IsSkillLocked / IsSkillUnlocked (Value = skill/stat id under
+        /// LockSkill). Null leaves every other leaf to the stat comparison.
         /// </summary>
         public virtual bool? ResolveRequirement(ItemRequirement requirement)
         {
             ArgumentNullException.ThrowIfNull(requirement);
             int value = requirement.Value;
+            DateTime nowUtc = DateTime.UtcNow;
             return (Operator)requirement.Operator switch
             {
                 Operator.HasRunningNano => _buffs.Any(buff => buff.Id == value),
@@ -2232,6 +2234,9 @@
                 // Value = nano id among this character's uploaded nanos (a nano crystal's ToUse: HasNotFormula).
                 Operator.HasFormula => UploadedNanoIds.Contains(value),
                 Operator.HasNotFormula => !UploadedNanoIds.Contains(value),
+                // Value = skill/stat id under LockSkill (recall beacons: Not(IsSkillLocked) on ToUse).
+                Operator.IsSkillLocked => SkillLocks.IsLocked(value, nowUtc),
+                Operator.IsSkillUnlocked => !SkillLocks.IsLocked(value, nowUtc),
                 // Retail/Legacy: FlyingAllowed is a playfield gate that always passes here. Flight itself is
                 // granted by CanFly / IsVehicle on the morph, not by this operator (hoverboards, Phasefront).
                 Operator.FlyingAllowed => true,

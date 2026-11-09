@@ -256,6 +256,18 @@ namespace AORebirth.Enums
         IsPerkUnlocked = 97,
 
         /// <summary>
+        /// Value = skill/stat id still under a LockSkill cooldown (AOSharp UseCriteriaOperator;
+        /// Shadowlands Recall Beacon ToUse uses Not(IsSkillLocked) with value 2).
+        /// </summary>
+        IsSkillLocked = 123,
+
+        /// <summary>
+        /// Value = skill/stat id that is not under a LockSkill cooldown. Beacon OnUse gates
+        /// LockSkill/Teleport on this and SystemText on Not(IsSkillUnlocked).
+        /// </summary>
+        IsSkillUnlocked = 124,
+
+        /// <summary>
         /// </summary>
         IsPet = 77,
 

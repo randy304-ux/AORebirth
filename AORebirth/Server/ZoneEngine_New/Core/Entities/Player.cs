@@ -240,6 +240,9 @@ namespace ZoneEngine_New.Core.Entities
                 Operator.HasNotPerk => !(TrainedPerks.Contains(id) || IsFreeVehicleResearchPerk(id)),
                 Operator.IsPerkLocked => PerkLocks.IsLocked(id, DateTime.UtcNow),
                 Operator.IsPerkUnlocked => !PerkLocks.IsLocked(id, DateTime.UtcNow),
+                // SkillLocks (not PerkLocks): recall-beacon ToUse/OnUse ops 123/124. Value = skill/stat id.
+                Operator.IsSkillLocked => SkillLocks.IsLocked(id, DateTime.UtcNow),
+                Operator.IsSkillUnlocked => !SkillLocks.IsLocked(id, DateTime.UtcNow),
                 Operator.IsPetOverEquipped => OwnedPets.All.Any(pet => pet.Pet?.IsOverEquipped == true),
                 // Value is the item id. Social clothing is never equipped for these (PlayerInventory.IsEquipped).
                 Operator.HasWornItem => Inventory.IsEquipped(id, wieldedOnly: false),

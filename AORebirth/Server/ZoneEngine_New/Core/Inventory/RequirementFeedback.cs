@@ -68,6 +68,8 @@ namespace ZoneEngine_New.Core.Inventory
                 Operator.HasNotPerk => "must not have perk " + Named(requirement.Value),
                 Operator.IsPerkLocked => Named(requirement.Value) + " must be on cooldown",
                 Operator.IsPerkUnlocked => Named(requirement.Value) + " is on cooldown",
+                Operator.IsSkillLocked => ((CharacterStat)requirement.Value) + " must be on cooldown",
+                Operator.IsSkillUnlocked => ((CharacterStat)requirement.Value) + " is on cooldown",
                 Operator.HasRunningNano => "needs " + Named(requirement.Value) + " running",
                 Operator.HasNotRunningNano => Named(requirement.Value) + " must not be running",
                 Operator.HasRunningNanoLine => "needs a nano of line " + line + " running",
