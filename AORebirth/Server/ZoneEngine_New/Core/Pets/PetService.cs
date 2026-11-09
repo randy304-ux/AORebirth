@@ -428,14 +428,15 @@ namespace ZoneEngine_New.Core.Pets
         /// <summary>
         /// Level-scaled MinDamage/MaxDamage and combat skills from Mercs.json <c>DamageScale</c>.
         /// NPC swings ignore weapon QL for the numeric hit (template Min/Max override); without this, a L220
-        /// Keeper stays near the weak Build-Mercs curve (~110-330) with zero weapon skills (AR≈0).
+        /// Keeper stays near the weak Build-Mercs curve (~110-330) with zero weapon skills (ARâ‰ˆ0).
         /// </summary>
         void ApplyMercCombatScaling(NpcCharacter npc, Mercs.Kind kind)
         {
             int level = Mercs.BodyLevel(npc.Stats.GetOrOne(CharacterStat.Level));
+            Mercs.Catalog catalog = Mercs.Load(_gameData.RootPath);
             float scale = Mercs.DamageScale(_gameData.RootPath);
-            int minDamage = Mercs.ScaledMinDamage(level, kind, scale);
-            int maxDamage = Mercs.ScaledMaxDamage(level, kind, scale);
+            int minDamage = Mercs.ScaledMinDamage(level, kind, scale, catalog);
+            int maxDamage = Mercs.ScaledMaxDamage(level, kind, scale, catalog);
             npc.Stats.Set(CharacterStat.MinDamage, minDamage, StatDetail.Base, dirty: true);
             npc.Stats.Set(CharacterStat.MaxDamage, maxDamage, StatDetail.Base, dirty: true);
 

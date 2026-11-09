@@ -137,8 +137,8 @@ $enforcerNanos = @(@{ MinLevel = 1; Nanos = @(82210, 211753, 261239, 227152) })
 # Fixer SMG/pistol, Engi grenade, Doc/Crat/MP/NT pistol, Trader shotgun. Low-QL items with a WeaponMesh; QL scales with body.
 $weapons = @{ enforcer = 129026; soldier = 124348; keeper = 154905; doctor = 157636; adventurer = 163582; agent = 161126; bureaucrat = 123742
   engineer = 124836; fixer = 247228; martialartist = 267258; metaphysicist = 254612; nanotechnician = 123742; shade = 160125; trader = 124241 }
-# DamageScale: single knob for merc auto-attack punch (PetService ApplyMercCombatScaling). Default 3.0.
-$catalog = [ordered]@{ Enabled = $true; ReviveSeconds = 10; ArmorStats = $true; RandomAppearance = $true; DamageScale = 3.0; Professions = [ordered]@{} }
+# DamageScale: single knob for merc auto-attack punch (PetService ApplyMercCombatScaling). Default 1.0 (L220 DPS ~7000 / support ~3000 / mid ~4500).
+$catalog = [ordered]@{ Enabled = $true; ReviveSeconds = 10; ArmorStats = $true; RandomAppearance = $true; DamageScale = 1.0; Professions = [ordered]@{} }
 $report = @()
 foreach ($p in $profs) {
   $key, $hash, $title, $armorName = $p[0], $p[1], $p[2], $p[3]

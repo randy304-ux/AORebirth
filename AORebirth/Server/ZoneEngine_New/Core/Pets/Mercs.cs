@@ -34,10 +34,17 @@ namespace ZoneEngine_New.Core.Pets
         public const CharacterStat TierStat = (CharacterStat)10284;
 
         /// <summary>
-        /// Default <see cref="Catalog.DamageScale"/> when Mercs.json omits it. 1.0 = Build-Mercs template numbers
-        /// (level×0.5 / level×1.5 × role) with no skill fill — too weak at high level. 3.0 is the live default.
+        /// Default <see cref="Catalog.DamageScale"/> when Mercs.json omits it.
+        /// 1.0 is calibrated so L220 DPS (role 1.0) lands ~7000 max before target AC;
+        /// mid-tier ~4500 and support ~3000 via DamageRoles / built-in roles.
         /// </summary>
-        public const float DefaultDamageScale = 3f;
+        public const float DefaultDamageScale = 1f;
+
+        /// <summary>Landed max (before AC) at level 220 for role 1.0 when DamageScale is 1.</summary>
+        public const float TargetMaxAt220 = 7000f;
+
+        /// <summary>Landed/template min as a fraction of max (average hit ~72% of max).</summary>
+        public const float MinMaxRatio = 0.45f;
 
         /// <summary>Weapon-skill points per merc level so attack rating tracks body level (hit chance + damage mult).</summary>
         public const int CombatSkillPerLevel = 5;
@@ -93,61 +100,85 @@ namespace ZoneEngine_New.Core.Pets
         public static int BodyLevel(int ownerLevel) => Math.Clamp(ownerLevel, 1, 220);
 
         /// <summary>
-        /// Profession damage role (same coefficients as ddogs/tools/Build-Mercs.ps1). Tanks and supports sit
-        /// below pure DPS so a Keeper/Enforcer hits less than a Soldier/Shade/NT at the same level.
+        /// Profession damage role relative to DPS=1.0 (L220 max ~7000 before AC at DamageScale 1).
+        /// Prefers Mercs.json DamageRoles; otherwise built-in DPS / mid / support bands.
         /// </summary>
-        public static float DamageRole(Kind kind) => kind.Key switch
-        {
-            "enforcer" => 0.9f,
-            "soldier" => 1.3f,
-            "keeper" => 1.0f,
-            "doctor" => 0.6f,
-            "adventurer" => 1.0f,
-            "agent" => 1.3f,
-            "bureaucrat" => 0.9f,
-            "engineer" => 1.1f,
-            "fixer" => 1.1f,
-            "martialartist" => 1.2f,
-            "metaphysicist" => 1.0f,
-            "nanotechnician" => 1.4f,
-            "shade" => 1.4f,
-            "trader" => 0.9f,
-            _ => 1.0f
-        };
+        public static float DamageRole(Kind kind) => DamageRole(kind, catalog: null);
 
-        /// <summary>Mercs.json <c>DamageScale</c>, clamped. Missing/invalid → <see cref="DefaultDamageScale"/>.</summary>
+        /// <summary>Same as <see cref="DamageRole(Kind)"/> using an already-loaded catalog when available.</summary>
+        public static float DamageRole(Kind kind, Catalog? catalog)
+        {
+            if (catalog?.DamageRoles != null
+                && catalog.DamageRoles.TryGetValue(kind.Key, out float configured)
+                && !float.IsNaN(configured) && !float.IsInfinity(configured) && configured > 0f)
+            {
+                return Math.Clamp(configured, 0.05f, 5f);
+            }
+
+            return kind.Key switch
+            {
+                // DPS ~7000 max at L220
+                "soldier" or "agent" or "shade" or "nanotechnician" or "martialartist" or "keeper" => 1.0f,
+                // Mid / tank-hybrid ~4500
+                "enforcer" => 4500f / TargetMaxAt220,
+                // Support ~3000
+                "doctor" or "bureaucrat" or "trader" or "metaphysicist" or "adventurer"
+                    or "engineer" or "fixer" => 3000f / TargetMaxAt220,
+                _ => 1.0f
+            };
+        }
+
+        /// <summary>Mercs.json <c>DamageScale</c>, clamped. Missing/invalid -> <see cref="DefaultDamageScale"/>.</summary>
         public static float DamageScale(string gameDataRoot)
         {
             float scale = Load(gameDataRoot).DamageScale;
             if (float.IsNaN(scale) || float.IsInfinity(scale) || scale <= 0f)
                 return DefaultDamageScale;
-            return Math.Clamp(scale, 0.1f, 20f);
+            return Math.Clamp(scale, 0.1f, 50f);
         }
 
         /// <summary>
-        /// Template-style min damage after <paramref name="scale"/>, divided by the expected AR multiplier from
-        /// <see cref="CombatSkillPerLevel"/> so the final swing lands near level×0.5×role×scale (before target AC).
+        /// Expected auto-attack damage multiplier from <see cref="CombatSkillPerLevel"/> (matches DamageCalculator AR curve).
         /// </summary>
-        public static int ScaledMinDamage(int bodyLevel, Kind kind, float scale)
+        public static float ExpectedAttackMultiplier(int bodyLevel)
+        {
+            int ar = CombatSkillBudget(bodyLevel);
+            if (ar < 1000)
+                return 1f + ar / 400f;
+            return 3.5f + (ar - 1000) * 0.3f / 400f;
+        }
+
+        /// <summary>
+        /// Target landed max before AC: (level/220) * TargetMaxAt220 * role * scale.
+        /// Template Min/Max divide out <see cref="ExpectedAttackMultiplier"/> so the swing lands on that curve.
+        /// </summary>
+        public static float TargetLandedMax(int bodyLevel, Kind kind, float scale, Catalog? catalog = null)
         {
             int level = BodyLevel(bodyLevel);
-            float role = DamageRole(kind);
-            float expectedMult = 1f + (level * CombatSkillPerLevel / 400f);
-            int value = (int)Math.Round(level * 0.5 * role * scale / expectedMult, MidpointRounding.AwayFromZero);
+            float role = DamageRole(kind, catalog);
+            return (level / 220f) * TargetMaxAt220 * role * scale;
+        }
+
+        /// <summary>Template-style min damage so the final swing lands near 45% of the role max (before AC).</summary>
+        public static int ScaledMinDamage(int bodyLevel, Kind kind, float scale, Catalog? catalog = null)
+        {
+            float landedMax = TargetLandedMax(bodyLevel, kind, scale, catalog);
+            float landedMin = landedMax * MinMaxRatio;
+            float mult = ExpectedAttackMultiplier(bodyLevel);
+            int value = (int)Math.Round(landedMin / mult, MidpointRounding.AwayFromZero);
             return Math.Max(1, value);
         }
 
-        /// <summary>Same as <see cref="ScaledMinDamage"/> for max (level×1.5×role×scale before AC).</summary>
-        public static int ScaledMaxDamage(int bodyLevel, Kind kind, float scale)
+        /// <summary>Template-style max damage so the final swing lands near the role max (before AC).</summary>
+        public static int ScaledMaxDamage(int bodyLevel, Kind kind, float scale, Catalog? catalog = null)
         {
-            int level = BodyLevel(bodyLevel);
-            float role = DamageRole(kind);
-            float expectedMult = 1f + (level * CombatSkillPerLevel / 400f);
-            int value = (int)Math.Round(level * 1.5 * role * scale / expectedMult, MidpointRounding.AwayFromZero);
-            return Math.Max(ScaledMinDamage(level, kind, scale) + 1, value);
+            float landedMax = TargetLandedMax(bodyLevel, kind, scale, catalog);
+            float mult = ExpectedAttackMultiplier(bodyLevel);
+            int value = (int)Math.Round(landedMax / mult, MidpointRounding.AwayFromZero);
+            return Math.Max(ScaledMinDamage(bodyLevel, kind, scale, catalog) + 1, value);
         }
 
-        /// <summary>Combat skill budget written onto the merc body (level × <see cref="CombatSkillPerLevel"/>).</summary>
+        /// <summary>Combat skill budget written onto the merc body (level * <see cref="CombatSkillPerLevel"/>).</summary>
         public static int CombatSkillBudget(int bodyLevel)
             => Math.Max(1, BodyLevel(bodyLevel) * CombatSkillPerLevel);
 
@@ -643,10 +674,16 @@ namespace ZoneEngine_New.Core.Pets
             public bool RandomAppearance { get; set; } = true;
 
             /// <summary>
-            /// Single tuning knob for merc auto-attack damage. Multiplies the Build-Mercs level×role template
-            /// curve (effective hit ≈ level×0.5×role×scale … level×1.5×role×scale before target AC). Default 3.
+            /// Single tuning knob for merc auto-attack damage. At 1.0, L220 DPS (role 1.0) lands ~7000 max
+            /// before target AC; mid ~4500 and support ~3000 via DamageRoles. Raise/lower to retune everyone.
             /// </summary>
             public float DamageScale { get; set; } = DefaultDamageScale;
+
+            /// <summary>
+            /// Optional per-profession damage role multipliers (relative to DPS=1.0 -> TargetMaxAt220).
+            /// Missing keys fall back to built-in DPS / mid / support bands.
+            /// </summary>
+            public Dictionary<string, float> DamageRoles { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 
             public Dictionary<string, Profession> Professions { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 

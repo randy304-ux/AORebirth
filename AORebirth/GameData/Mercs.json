@@ -3,7 +3,7 @@
     "ReviveSeconds":  10,
     "ArmorStats":  true,
     "RandomAppearance":  true,
-    "DamageScale":  3.0,
+    "DamageScale":  1,
     "Professions":  {
                         "enforcer":  {
                                          "Heals":  false,
@@ -2795,5 +2795,21 @@
                                        "Pet":  null,
                                        "Pets":  null
                                    }
+                    },
+    "DamageRoles":  {
+                        "soldier":  1,
+                        "agent":  1,
+                        "shade":  1,
+                        "nanotechnician":  1,
+                        "martialartist":  1,
+                        "keeper":  1,
+                        "enforcer":  0.6429,
+                        "doctor":  0.4286,
+                        "bureaucrat":  0.4286,
+                        "trader":  0.4286,
+                        "metaphysicist":  0.4286,
+                        "adventurer":  0.4286,
+                        "engineer":  0.4286,
+                        "fixer":  0.4286
                     }
 }
