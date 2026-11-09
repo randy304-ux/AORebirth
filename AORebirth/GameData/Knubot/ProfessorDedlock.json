@@ -346,12 +346,20 @@
       "Text": "{completequest NA2M}Excellent work. Specialization 1 is yours.{close}",
       "Source": "filler"
     },
+    "done_t1_nt": {
+      "Text": "{completequest NA2M}{spawn NDK1 1}Excellent work. Specialization 1 is yours. As a Nano-Technician you also receive an Unattuned Basic Cyberdeck. Use it to attune it to your breed and gender; it can be equipped from level 50.{close}",
+      "Source": "filler"
+    },
     "give_t2": {
       "Text": "Put the book in the trade window.{givequest NA2N}{opentrade}",
       "Source": "filler"
     },
     "done_t2": {
       "Text": "{completequest NA2N}Excellent work. Specialization 2 is yours.{close}",
+      "Source": "filler"
+    },
+    "done_t2_nt": {
+      "Text": "{completequest NA2N}{spawn NDK2 1}Excellent work. Specialization 2 is yours. As a Nano-Technician you also receive an Unattuned Augmented Cyberdeck. Use it to attune it to your breed and gender; it can be equipped from level 100.{close}",
       "Source": "filler"
     },
     "give_t3": {
@@ -362,12 +370,20 @@
       "Text": "{completequest NA2O}Excellent work. Specialization 3 is yours.{close}",
       "Source": "filler"
     },
+    "done_t3_nt": {
+      "Text": "{completequest NA2O}{spawn NDK3 1}Excellent work. Specialization 3 is yours. As a Nano-Technician you also receive an Unattuned Jobe-chipped Cyberdeck. Use it to attune it to your breed and gender; it can be equipped from level 150.{close}",
+      "Source": "filler"
+    },
     "give_t4": {
       "Text": "Put the book in the trade window.{givequest NA2P}{opentrade}",
       "Source": "filler"
     },
     "done_t4": {
       "Text": "{completequest NA2P}Excellent work. Specialization 4 is yours.{close}",
+      "Source": "filler"
+    },
+    "done_t4_nt": {
+      "Text": "{completequest NA2P}{spawn NDK4 1}Excellent work. Specialization 4 is yours. As a Nano-Technician you also receive an Unattuned Izgimmer-modified Cyberdeck. Use it to attune it to your breed and gender; it can be equipped from level 200.{close}",
       "Source": "filler"
     },
     "later": {
@@ -380,9 +396,30 @@
     }
   },
   "Trades": {
+    "t1_trade_nt": {
+      "If": [
+        "HasQuest NA2M",
+        "prof 11"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 0
+        }
+      ],
+      "Items": [
+        {
+          "Hash": "NQ02",
+          "Count": 1
+        }
+      ],
+      "Goto": "done_t1_nt"
+    },
     "t1_trade": {
       "If": [
-        "HasQuest NA2M"
+        "HasQuest NA2M",
+        "!prof 11"
       ],
       "Requirements": [
         {
@@ -399,9 +436,30 @@
       ],
       "Goto": "done_t1"
     },
+    "t2_trade_nt": {
+      "If": [
+        "HasQuest NA2N",
+        "prof 11"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 1
+        }
+      ],
+      "Items": [
+        {
+          "Hash": "NB08",
+          "Count": 1
+        }
+      ],
+      "Goto": "done_t2_nt"
+    },
     "t2_trade": {
       "If": [
-        "HasQuest NA2N"
+        "HasQuest NA2N",
+        "!prof 11"
       ],
       "Requirements": [
         {
@@ -418,9 +476,30 @@
       ],
       "Goto": "done_t2"
     },
+    "t3_trade_nt": {
+      "If": [
+        "HasQuest NA2O",
+        "prof 11"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 3
+        }
+      ],
+      "Items": [
+        {
+          "Hash": "NB0C",
+          "Count": 1
+        }
+      ],
+      "Goto": "done_t3_nt"
+    },
     "t3_trade": {
       "If": [
-        "HasQuest NA2O"
+        "HasQuest NA2O",
+        "!prof 11"
       ],
       "Requirements": [
         {
@@ -437,9 +516,30 @@
       ],
       "Goto": "done_t3"
     },
+    "t4_trade_nt": {
+      "If": [
+        "HasQuest NA2P",
+        "prof 11"
+      ],
+      "Requirements": [
+        {
+          "Stat": "182",
+          "Operator": "EqualTo",
+          "Value": 7
+        }
+      ],
+      "Items": [
+        {
+          "Hash": "NB13",
+          "Count": 1
+        }
+      ],
+      "Goto": "done_t4_nt"
+    },
     "t4_trade": {
       "If": [
-        "HasQuest NA2P"
+        "HasQuest NA2P",
+        "!prof 11"
       ],
       "Requirements": [
         {

@@ -1,24 +1,35 @@
 {
   "schemaVersion": 1,
-  "recordType": "spawns-add",
+  "recordType": 1000014,
   "playfieldId": 4575,
-  "ContentProvenance": {
-    "Source": "scraped_npcs_20261029.csv",
-    "Mode": "additive",
-    "Captured": "2026-10-29"
-  },
+  "source": "scraped_npcs_20261029.csv (Professor Dedlock, additive)",
   "spawns": [
     {
+      "districtIndex": 0,
+      "hash": 0,
       "hashText": "DEDL",
+      "manifestHash": 0,
+      "minLevel": 150,
+      "maxLevel": 150,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 85,
+      "angleW": 1,
       "position": [
         182.534,
         6.735,
         170.697
       ],
-      "minLevel": 150,
-      "maxLevel": 150,
-      "angle": 0,
-      "respawnDelaySeconds": 120
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
     }
   ]
 }
