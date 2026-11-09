@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "recordType": "spawns-add",
+  "playfieldId": 4328,
+  "ContentProvenance": {
+    "Source": "pande-collector-20261109",
+    "Mode": "additive",
+    "Captured": "2026-11-09"
+  },
+  "spawns": [
+    {
+      "hashText": "PD01",
+      "position": [
+        114,
+        46.425,
+        42
+      ],
+      "minLevel": 1,
+      "maxLevel": 1,
+      "angle": 247,
+      "respawnDelaySeconds": 120
+    }
+  ]
+}

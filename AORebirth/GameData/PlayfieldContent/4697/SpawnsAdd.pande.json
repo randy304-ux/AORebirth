@@ -1,0 +1,700 @@
+{
+  "schemaVersion": 1,
+  "recordType": "spawns-add",
+  "playfieldId": 4697,
+  "ContentProvenance": {
+    "Source": "pande-collector-20261109",
+    "Mode": "additive",
+    "Captured": "2026-11-09"
+  },
+  "spawns": [
+    {
+      "hashText": "JGLG",
+      "position": [
+        420.75,
+        33.489,
+        365.895
+      ],
+      "minLevel": 244,
+      "maxLevel": 244,
+      "angle": 321,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "ORAD",
+      "position": [
+        424.077,
+        33.816,
+        360.325
+      ],
+      "minLevel": 230,
+      "maxLevel": 230,
+      "angle": 322,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "VOEK",
+      "position": [
+        419.638,
+        33.507,
+        361.734
+      ],
+      "minLevel": 220,
+      "maxLevel": 220,
+      "angle": 188,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "VOEL",
+      "position": [
+        514.417,
+        32.497,
+        376.712
+      ],
+      "minLevel": 220,
+      "maxLevel": 220,
+      "angle": 308,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "RVOX",
+      "position": [
+        516.209,
+        33.01,
+        370.437
+      ],
+      "minLevel": 244,
+      "maxLevel": 244,
+      "angle": 154,
+      "respawnDelaySeconds": 120,
+      "patrolWaypoints": [
+        [
+          506.188,
+          32.695,
+          369.243
+        ],
+        [
+          506.963,
+          32.779,
+          369.367
+        ],
+        [
+          505.205,
+          32.591,
+          369.122
+        ],
+        [
+          503.333,
+          32.499,
+          368.861
+        ],
+        [
+          501.475,
+          32.569,
+          368.601
+        ],
+        [
+          499.152,
+          32.581,
+          368.226
+        ],
+        [
+          497.314,
+          32.492,
+          367.86
+        ],
+        [
+          495.474,
+          32.39,
+          367.493
+        ],
+        [
+          493.625,
+          32.445,
+          367.124
+        ]
+      ],
+      "ContentProvenance": {
+        "Source": "pande-collector-20261109",
+        "Patrol": "captured-movement"
+      }
+    },
+    {
+      "hashText": "HNUA",
+      "position": [
+        512.94,
+        25.01,
+        345.793
+      ],
+      "minLevel": 220,
+      "maxLevel": 220,
+      "angle": 142,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "TCNZ",
+      "position": [
+        518.357,
+        25.01,
+        346.497
+      ],
+      "minLevel": 250,
+      "maxLevel": 250,
+      "angle": 199,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "RQDL",
+      "position": [
+        516.021,
+        25.01,
+        341.842
+      ],
+      "minLevel": 255,
+      "maxLevel": 255,
+      "angle": 142,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "D01N",
+      "position": [
+        472.101,
+        33.21,
+        479.989
+      ],
+      "minLevel": 248,
+      "maxLevel": 248,
+      "angle": 169,
+      "respawnDelaySeconds": 120,
+      "patrolWaypoints": [
+        [
+          472.256,
+          33.185,
+          479.463
+        ],
+        [
+          472.659,
+          33.077,
+          477.305
+        ],
+        [
+          474.266,
+          33.054,
+          476.855
+        ],
+        [
+          476.134,
+          33.042,
+          476.72
+        ],
+        [
+          478.018,
+          33.01,
+          476.585
+        ],
+        [
+          479.887,
+          33.01,
+          476.452
+        ],
+        [
+          481.771,
+          33.01,
+          476.317
+        ],
+        [
+          483.641,
+          33.01,
+          476.186
+        ],
+        [
+          485.525,
+          33.01,
+          476.053
+        ],
+        [
+          487.394,
+          33.01,
+          475.922
+        ],
+        [
+          488.852,
+          33.01,
+          476.306
+        ],
+        [
+          488.988,
+          33.01,
+          478.123
+        ]
+      ],
+      "ContentProvenance": {
+        "Source": "pande-collector-20261109",
+        "Patrol": "captured-movement"
+      }
+    },
+    {
+      "hashText": "RAIG",
+      "position": [
+        585.127,
+        25.01,
+        405.529
+      ],
+      "minLevel": 220,
+      "maxLevel": 220,
+      "angle": 252,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "SCOI",
+      "position": [
+        636.751,
+        17.01,
+        387.229
+      ],
+      "minLevel": 230,
+      "maxLevel": 230,
+      "angle": 303,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "PD02",
+      "position": [
+        483.189,
+        33.01,
+        284.988
+      ],
+      "minLevel": 220,
+      "maxLevel": 220,
+      "angle": 90,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "D01N",
+      "position": [
+        453.991,
+        33.01,
+        479.849
+      ],
+      "minLevel": 248,
+      "maxLevel": 248,
+      "angle": 192,
+      "respawnDelaySeconds": 120,
+      "patrolWaypoints": [
+        [
+          453.885,
+          33.01,
+          479.346
+        ],
+        [
+          453.114,
+          33.01,
+          475.792
+        ],
+        [
+          451.524,
+          33.01,
+          475.449
+        ],
+        [
+          447.764,
+          33.01,
+          475.492
+        ],
+        [
+          444.003,
+          33.01,
+          475.538
+        ],
+        [
+          440.242,
+          33.01,
+          475.584
+        ],
+        [
+          438.103,
+          33.01,
+          475.938
+        ],
+        [
+          437.42,
+          33.01,
+          479.576
+        ],
+        [
+          453.955,
+          33.01,
+          479.75
+        ],
+        [
+          453.136,
+          33.01,
+          475.966
+        ],
+        [
+          451.504,
+          33.01,
+          475.637
+        ],
+        [
+          447.74,
+          33.01,
+          475.628
+        ]
+      ],
+      "ContentProvenance": {
+        "Source": "pande-collector-20261109",
+        "Patrol": "captured-movement"
+      }
+    },
+    {
+      "hashText": "RVOX",
+      "position": [
+        425.225,
+        34.063,
+        370.956
+      ],
+      "minLevel": 244,
+      "maxLevel": 244,
+      "angle": 310,
+      "respawnDelaySeconds": 120,
+      "patrolWaypoints": [
+        [
+          439.719,
+          33.437,
+          360.205
+        ],
+        [
+          438.093,
+          33.561,
+          361.056
+        ],
+        [
+          436.437,
+          33.687,
+          361.92
+        ],
+        [
+          434.734,
+          33.83,
+          363.086
+        ],
+        [
+          433.279,
+          33.991,
+          364.264
+        ]
+      ],
+      "ContentProvenance": {
+        "Source": "pande-collector-20261109",
+        "Patrol": "captured-movement"
+      }
+    },
+    {
+      "hashText": "ZDGY",
+      "position": [
+        415.804,
+        33.401,
+        344.67
+      ],
+      "minLevel": 229,
+      "maxLevel": 229,
+      "angle": 283,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "PD03",
+      "position": [
+        517.559,
+        33.214,
+        496.049
+      ],
+      "minLevel": 240,
+      "maxLevel": 240,
+      "angle": 269,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "RVOX",
+      "position": [
+        467.114,
+        40.885,
+        368.622
+      ],
+      "minLevel": 244,
+      "maxLevel": 244,
+      "angle": 10,
+      "respawnDelaySeconds": 120,
+      "patrolWaypoints": [
+        [
+          466.821,
+          40.885,
+          369.218
+        ],
+        [
+          465.694,
+          39.985,
+          377.506
+        ],
+        [
+          463.78,
+          39.356,
+          365.581
+        ],
+        [
+          478.541,
+          33.51,
+          360.978
+        ],
+        [
+          492.698,
+          32.463,
+          366.833
+        ],
+        [
+          506.997,
+          32.782,
+          369.368
+        ],
+        [
+          493.339,
+          32.453,
+          367.061
+        ],
+        [
+          478.908,
+          33.421,
+          360.633
+        ],
+        [
+          462.916,
+          38.783,
+          365.204
+        ],
+        [
+          464.633,
+          39.985,
+          378.092
+        ],
+        [
+          467.117,
+          40.885,
+          368.569
+        ],
+        [
+          454.808,
+          34.348,
+          361.519
+        ]
+      ],
+      "ContentProvenance": {
+        "Source": "pande-collector-20261109",
+        "Patrol": "captured-movement"
+      }
+    },
+    {
+      "hashText": "RAIG",
+      "position": [
+        545.262,
+        25.01,
+        393.271
+      ],
+      "minLevel": 220,
+      "maxLevel": 220,
+      "angle": 359,
+      "respawnDelaySeconds": 120,
+      "patrolWaypoints": [
+        [
+          545.261,
+          25.01,
+          393.349
+        ],
+        [
+          545.24,
+          25.01,
+          395.052
+        ],
+        [
+          545.217,
+          25.01,
+          396.939
+        ],
+        [
+          545.194,
+          25.01,
+          398.812
+        ],
+        [
+          545.171,
+          25.01,
+          400.7
+        ],
+        [
+          545.15,
+          25.01,
+          402.573
+        ]
+      ],
+      "ContentProvenance": {
+        "Source": "pande-collector-20261109",
+        "Patrol": "captured-movement"
+      }
+    },
+    {
+      "hashText": "RAIG",
+      "position": [
+        546.662,
+        25.01,
+        430.923
+      ],
+      "minLevel": 220,
+      "maxLevel": 220,
+      "angle": 4,
+      "respawnDelaySeconds": 120,
+      "patrolWaypoints": [
+        [
+          546.662,
+          25.01,
+          430.933
+        ],
+        [
+          546.763,
+          25.01,
+          432.474
+        ],
+        [
+          546.885,
+          25.01,
+          434.342
+        ],
+        [
+          547.008,
+          25.01,
+          436.226
+        ],
+        [
+          547.13,
+          25.01,
+          438.095
+        ],
+        [
+          545.583,
+          25.01,
+          371.876
+        ],
+        [
+          545.511,
+          25.01,
+          375.632
+        ],
+        [
+          545.476,
+          25.01,
+          377.52
+        ],
+        [
+          545.442,
+          25.01,
+          379.393
+        ],
+        [
+          545.402,
+          25.01,
+          381.622
+        ],
+        [
+          545.379,
+          25.01,
+          383.495
+        ],
+        [
+          545.356,
+          25.01,
+          385.383
+        ]
+      ],
+      "ContentProvenance": {
+        "Source": "pande-collector-20261109",
+        "Patrol": "captured-movement"
+      }
+    },
+    {
+      "hashText": "P00G",
+      "position": [
+        558.026,
+        17.01,
+        302.069
+      ],
+      "minLevel": 246,
+      "maxLevel": 246,
+      "angle": 3,
+      "respawnDelaySeconds": 120,
+      "patrolWaypoints": [
+        [
+          558.038,
+          17.01,
+          302.319
+        ],
+        [
+          557.991,
+          17.01,
+          301.355
+        ],
+        [
+          557.899,
+          17.01,
+          299.467
+        ],
+        [
+          557.715,
+          17.01,
+          295.706
+        ],
+        [
+          557.531,
+          17.01,
+          291.945
+        ],
+        [
+          557.44,
+          17.01,
+          290.072
+        ],
+        [
+          557.256,
+          17.01,
+          286.311
+        ],
+        [
+          557.164,
+          17.01,
+          284.423
+        ],
+        [
+          557.635,
+          17.01,
+          293.961
+        ],
+        [
+          557.819,
+          17.01,
+          297.722
+        ],
+        [
+          557.911,
+          17.01,
+          299.61
+        ],
+        [
+          558.083,
+          17.01,
+          303.258
+        ]
+      ],
+      "ContentProvenance": {
+        "Source": "pande-collector-20261109",
+        "Patrol": "captured-movement"
+      }
+    }
+  ]
+}

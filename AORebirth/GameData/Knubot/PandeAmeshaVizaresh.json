@@ -1,0 +1,39 @@
+{
+  "Notes": "Amesha Vizaresh (PD01), Pandemonium Caina 4328: gauntlet info ghost (L1/25 HP, NoCombat). Lines from live capture dialogs_20261109_Cattywompus.",
+  "Npcs": [
+    "PD01"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "when": {
+      "Text": "How long until the Gauntlet opens up again?",
+      "Goto": "when"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "The apparition before you glares as you approach, its beak-like mouth somehow turning downward into a rather dire frown. It speaks, after a moment, its voice low and rumbling. Yes.... what do you want?",
+      "Replies": [
+        "when",
+        "bye"
+      ]
+    },
+    "when": {
+      "Text": "The ghostly creature sighs with resignation. It will be roughly six of your hours before I return to life... if there is nothing else, then I ask that you leave me be.",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}"
+    }
+  }
+}

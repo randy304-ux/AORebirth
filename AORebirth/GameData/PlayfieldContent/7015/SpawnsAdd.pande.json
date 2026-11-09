@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "recordType": "spawns-add",
+  "playfieldId": 7015,
+  "ContentProvenance": {
+    "Source": "pande-collector-20261109",
+    "Mode": "additive",
+    "Captured": "2026-11-09"
+  },
+  "spawns": [
+    {
+      "hashText": "PD04",
+      "position": [
+        600,
+        8.635,
+        683
+      ],
+      "minLevel": 250,
+      "maxLevel": 250,
+      "angle": 0,
+      "respawnDelaySeconds": 120
+    },
+    {
+      "hashText": "PD05",
+      "position": [
+        100,
+        17.885,
+        49
+      ],
+      "minLevel": 300,
+      "maxLevel": 300,
+      "angle": 324,
+      "respawnDelaySeconds": 120
+    }
+  ]
+}
