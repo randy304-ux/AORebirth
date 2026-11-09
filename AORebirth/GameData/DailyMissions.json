@@ -1,12 +1,12 @@
 {
-    "_comment":  "Reusable outdoor/daily mission catalog. Knubot {givedaily HASH}. Lock-outs via DailyLockoutService (18h).",
+    "_comment":  "Reusable outdoor/daily mission catalog. Knubot {givedaily HASH}. No 18h lock-outs: every Live mission has an empty Track (Randy), so DailyMissionService records no lock-out and each daily is repeatable.",
     "Missions":  [
                      {
                          "Hash":  "KTCM",
                          "Name":  "Killing the Competition",
                          "QuestHash":  "KTCM",
                          "Status":  "Live",
-                         "Track":  "PvPNotum",
+                         "Track":  "",
                          "MaxPerWindow":  1,
                          "Playfield":  791,
                          "Pads":  [
@@ -48,7 +48,7 @@
                          "Hash":  "AGRK",
                          "Name":  "Agency Handler (Rubi-Ka daily)",
                          "Status":  "Live",
-                         "Track":  "FreelancersInc",
+                         "Track":  "",
                          "MaxPerWindow":  1,
                          "WaypointText":  "Complete the rolled Agency contract, then return to the Agency Handler.",
                          "Roll":  [
@@ -83,7 +83,7 @@
                          "Hash":  "AGEL",
                          "Name":  "Senior Agency Handler (Elite daily)",
                          "Status":  "Live",
-                         "Track":  "FreelancersIncElite",
+                         "Track":  "",
                          "MaxPerWindow":  1,
                          "WaypointText":  "Elite stand-in contracts (Pumpkinhead wave) until dungeon catalogs land.",
                          "Roll":  [
@@ -133,18 +133,18 @@
                          "Hash":  "AGAX",
                          "Name":  "Alien Agency Handler (AXP daily)",
                          "Status":  "Live",
-                         "Track":  "FreelancersIncAlien",
+                         "Track":  "",
                          "MaxPerWindow":  1,
                          "WaypointText":  "Alien Agency contract (existing AI missions).",
                          "Roll":  [
                                       {
-                                          "MinLevel":  1,
-                                          "MaxLevel":  74,
+                                          "MinLevel":  25,
+                                          "MaxLevel":  49,
                                           "QuestHash":  "AIWP"
                                       },
                                       {
                                           "MinLevel":  75,
-                                          "MaxLevel":  99,
+                                          "MaxLevel":  100,
                                           "QuestHash":  "AIBG"
                                       },
                                       {
@@ -163,23 +163,23 @@
                                           "QuestHash":  "AIPD"
                                       }
                                   ],
-                         "Note":  "Reuses existing Alien Invasion quests; 18h Alien Agency lock-out."
+                         "Note":  "Reuses existing Alien Invasion quests with Randy level gates (AIWP 25-49, AIBG 75-100, AILP 75-99, AICC all, AIPD 200-220). Empty Track = no lock-out. Missions with no source data are listed in alien-pande-fixes-20261109/GAPS.md."
                      },
                      {
                          "Hash":  "PVBS",
                          "Name":  "Battlestation (UBSL tip)",
                          "QuestHash":  "PVBS",
                          "Status":  "Live",
-                         "Track":  "PvPBattlestation",
+                         "Track":  "",
                          "MaxPerWindow":  3,
-                         "WaypointText":  "Queue a Battle Station. Daily updates when either side hits 425 points (up to 3 per 18h)."
+                         "WaypointText":  "Queue a Battle Station. Daily updates when either side hits 425 points ."
                      },
                      {
                          "Hash":  "PVTA",
                          "Name":  "Tarasque",
                          "QuestHash":  "PVTA",
                          "Status":  "Live",
-                         "Track":  "PvPTarasque",
+                         "Track":  "",
                          "MaxPerWindow":  1,
                          "WaypointText":  "Avalon near Camelot Castle (~2092x3822). Kill the Tarasque stand-in."
                      },

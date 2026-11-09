@@ -8,11 +8,11 @@
   },
   "Lines": {
     "hello": {
-      "Text": "Freelancers Inc. Mission Agency. Sign the contract at the desk, then speak to the Handler for Rubi-Ka dailies, the Senior Handler for elite work, or the Alien Handler for AXP contracts. Each desk locks eighteen hours.",
+      "Text": "Freelancers Inc. Mission Agency. Sign the contract at the desk, then speak to the Handler for Rubi-Ka dailies, the Senior Handler for elite work, or the Alien Handler for AXP contracts. There is no waiting period between contracts.",
       "Replies": [ "work", "bye" ]
     },
     "work": {
-      "Text": "I stamp the paperwork. The Handlers issue the actual missions. Eighteen-hour lock-out per track once you finish.",
+      "Text": "I stamp the paperwork. The Handlers issue the actual missions. No lock-out between contracts.",
       "Replies": [ "bye" ]
     },
     "bye": { "Text": "{close}" }

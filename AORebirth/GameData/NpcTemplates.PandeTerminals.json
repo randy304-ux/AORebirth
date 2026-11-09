@@ -1,0 +1,356 @@
+{
+  "CNC1": {
+    "Hash": "CNC1",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped terminal rows pf 7015 \"Wall Hacks!\" (66 captured; client Spawns.json hash CNC1 matched by position, every point within 4 units)",
+      "Note": "Static non-combat stand-in so the pink client point resolves with the captured name and mesh (Mesh 200988, scraped flags -2146958847). Terminal behaviour/dialogue and exact body visuals were not captured; no Knubot script."
+    },
+    "Templates": [
+      {
+        "Name": "Wall Hacks!",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "33": 0,
+          "4": 0,
+          "12": 200988,
+          "54": 1,
+          "1": 1,
+          "27": 1,
+          "360": 100
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": false,
+        "LootTable": []
+      }
+    ]
+  },
+  "AFOE": {
+    "Hash": "AFOE",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped terminal rows pf 7015 \"Altar of the Ice\" (1 captured; client Spawns.json hash AFOE matched by position, every point within 4 units)",
+      "Note": "Static non-combat stand-in so the pink client point resolves with the captured name and mesh (Mesh 200988, scraped flags -2146958847). Terminal behaviour/dialogue and exact body visuals were not captured; no Knubot script."
+    },
+    "Templates": [
+      {
+        "Name": "Altar of the Ice",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "33": 0,
+          "4": 0,
+          "12": 200988,
+          "54": 1,
+          "1": 1,
+          "27": 1,
+          "360": 100
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": false,
+        "LootTable": []
+      }
+    ]
+  },
+  "AOOH": {
+    "Hash": "AOOH",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped terminal rows pf 7015 \"Altar of the Flame\" (1 captured; client Spawns.json hash AOOH matched by position, every point within 4 units)",
+      "Note": "Static non-combat stand-in so the pink client point resolves with the captured name and mesh (Mesh 200988, scraped flags -2146958847). Terminal behaviour/dialogue and exact body visuals were not captured; no Knubot script."
+    },
+    "Templates": [
+      {
+        "Name": "Altar of the Flame",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "33": 0,
+          "4": 0,
+          "12": 200988,
+          "54": 1,
+          "1": 1,
+          "27": 1,
+          "360": 100
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": false,
+        "LootTable": []
+      }
+    ]
+  },
+  "BZML": {
+    "Hash": "BZML",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped terminal rows pf 7015 \"Sphere of Fire\" (1 captured; client Spawns.json hash BZML matched by position, every point within 4 units)",
+      "Note": "Static non-combat stand-in so the pink client point resolves with the captured name and mesh (Mesh 200988, scraped flags -2146958847). Terminal behaviour/dialogue and exact body visuals were not captured; no Knubot script."
+    },
+    "Templates": [
+      {
+        "Name": "Sphere of Fire",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "33": 0,
+          "4": 0,
+          "12": 200988,
+          "54": 1,
+          "1": 1,
+          "27": 1,
+          "360": 100
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": false,
+        "LootTable": []
+      }
+    ]
+  },
+  "RGQB": {
+    "Hash": "RGQB",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped terminal rows pf 7015 \"Sphere of Ice\" (5 captured; client Spawns.json hash RGQB matched by position, every point within 4 units)",
+      "Note": "Static non-combat stand-in so the pink client point resolves with the captured name and mesh (Mesh 200988, scraped flags -2146958847). Terminal behaviour/dialogue and exact body visuals were not captured; no Knubot script."
+    },
+    "Templates": [
+      {
+        "Name": "Sphere of Ice",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "33": 0,
+          "4": 0,
+          "12": 200988,
+          "54": 1,
+          "1": 1,
+          "27": 1,
+          "360": 100
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": false,
+        "LootTable": []
+      }
+    ]
+  },
+  "TPPN": {
+    "Hash": "TPPN",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped terminal rows pf 4391 \"The Punishment Sphere Jr.\" (42 captured; client Spawns.json hash TPPN matched by position, every point within 4 units)",
+      "Note": "Static non-combat stand-in so the pink client point resolves with the captured name and mesh (Mesh 200989, scraped flags -2146958847). Terminal behaviour/dialogue and exact body visuals were not captured; no Knubot script."
+    },
+    "Templates": [
+      {
+        "Name": "The Punishment Sphere Jr.",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "18": 0,
+          "21": 0,
+          "37": 1,
+          "47": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0,
+          "33": 0,
+          "4": 0,
+          "12": 200989,
+          "54": 1,
+          "1": 1,
+          "27": 1,
+          "360": 100
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": false,
+        "LootTable": []
+      }
+    ]
+  }
+}

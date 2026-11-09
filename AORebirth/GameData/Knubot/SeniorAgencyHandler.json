@@ -1,5 +1,5 @@
 {
-  "Notes": "Senior Agency Handler — elite daily stand-in (Pumpkinhead waves until dungeon catalogs exist). Track FreelancersIncElite, 18h.",
+  "Notes": "Senior Agency Handler — elite daily stand-in (Pumpkinhead waves until dungeon catalogs exist). Track emptied (no lock-out).",
   "Npcs": [ "AGSR", "ddogs-agency-senior" ],
   "Openers": [ { "Say": "hello" } ],
   "Replies": {
@@ -8,7 +8,7 @@
   },
   "Lines": {
     "hello": {
-      "Text": "Senior Agency Handler. Elite work — dungeon wave catalogs are still thin, so today you get Pumpkinhead cull contracts. Separate eighteen-hour lock-out from the regular desk.",
+      "Text": "Senior Agency Handler. Elite work — dungeon wave catalogs are still thin, so today you get Pumpkinhead cull contracts. No lock-out.",
       "Replies": [ "daily", "bye" ]
     },
     "daily": {

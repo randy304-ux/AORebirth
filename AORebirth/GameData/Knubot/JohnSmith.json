@@ -17,11 +17,11 @@
       "Replies": [ "jobs", "done", "bye" ]
     },
     "jobs": {
-      "Text": "Four cards: Battlestation tip (up to three per eighteen hours), Tarasque, illegal notum miners, or reclaiming land-control towers. Pick one.",
+      "Text": "Four cards: Battlestation tip, Tarasque, illegal notum miners, or reclaiming land-control towers. Pick one.",
       "Replies": [ "bs", "tara", "miners", "land", "bye" ]
     },
     "bs": {
-      "Text": "Queue the Battle Station. When either side hits four-twenty-five while you are in the match, the daily pays. You can clear it up to three times per eighteen hours.{givedaily PVBS}",
+      "Text": "Queue the Battle Station. When either side hits four-twenty-five while you are in the match, the daily pays. There is no daily cap.{givedaily PVBS}",
       "Replies": [ "bye" ]
     },
     "tara": {

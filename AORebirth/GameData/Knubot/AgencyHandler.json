@@ -1,5 +1,5 @@
 {
-  "Notes": "Agency Handler — Rubi-Ka Freelancers Inc. daily. Roll table AGRK; token 303237; 18h lock-out. Kill contracts auto-pay on last kill.",
+  "Notes": "Agency Handler — Rubi-Ka Freelancers Inc. daily. Roll table AGRK; token 303237; no lock-out. Kill contracts auto-pay on last kill.",
   "Npcs": [ "AGHN", "ddogs-agency-handler" ],
   "Openers": [ { "Say": "hello" } ],
   "Replies": {
@@ -8,11 +8,11 @@
   },
   "Lines": {
     "hello": {
-      "Text": "Agency Handler. Rubi-Ka contracts pay Freelancers Inc. Tokens. One roll per eighteen hours — the contract pays out when you finish the kills.",
+      "Text": "Agency Handler. Rubi-Ka contracts pay Freelancers Inc. Tokens. Take a contract any time — the contract pays out when you finish the kills.",
       "Replies": [ "daily", "bye" ]
     },
     "daily": {
-      "Text": "Here is your contract. Come back after the lock-out for another.{givedaily AGRK}",
+      "Text": "Here is your contract. Come back for another whenever you like.{givedaily AGRK}",
       "Replies": [ "bye" ]
     },
     "bye": { "Text": "{close}" }
