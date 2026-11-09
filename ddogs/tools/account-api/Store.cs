@@ -17,6 +17,8 @@ static class DDogsStore
   static int I(JsonNode n, string k) { try { return n?[k]?.GetValue<int>() ?? 0; } catch { return 0; } }
   // claims.json "unlocked": missing or true = claimable; false = hidden and refused (later achievement / vetDays gate via "unlockRule").
   static bool Unlocked(JsonNode n) { try { return n?["unlocked"]?.GetValue<bool>() ?? true; } catch { return true; } }
+  // claims.json "repeatable": true = consumable that can be claimed again after delivery (Status=1 row reset to pending).
+  static bool Repeatable(JsonNode n) { try { return n?["repeatable"]?.GetValue<bool>() ?? false; } catch { return false; } }
 
   static string Page(string title, string body)
   {
@@ -102,18 +104,54 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
 
   static async Task<HashSet<string>> Claimed(string connStr, int charId)
   {
+    // Keys that should show as Claimed / refuse a new click.
+    // Pending (Status=0) always blocks. Delivered (Status=1) blocks only non-repeatable catalog keys.
+    var repeatable = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+    if (Load("claims.json")?["items"] is JsonArray cat)
+      foreach (var it in cat)
+        if (Repeatable(it)) repeatable.Add(S(it, "key"));
+
     var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
     await using var db = new MySqlConnection(connStr); await db.OpenAsync();
-    await using var c = new MySqlCommand("SELECT ItemKey FROM ddogs_claims WHERE CharId=@id", db);
+    await using var c = new MySqlCommand("SELECT ItemKey, Status FROM ddogs_claims WHERE CharId=@id", db);
     c.Parameters.AddWithValue("@id", charId);
     await using var r = await c.ExecuteReaderAsync();
-    while (await r.ReadAsync()) set.Add(r.GetString(0));
+    while (await r.ReadAsync())
+    {
+      string key = r.GetString(0);
+      int status = r.GetInt32(1);
+      if (status == 0 || !repeatable.Contains(key))
+        set.Add(key);
+    }
     return set;
   }
 
-  static async Task<bool> Insert(string connStr, int charId, string key, int low, int high, int ql, string source)
+  static async Task<bool> Insert(string connStr, int charId, string key, int low, int high, int ql, string source, bool repeatable)
   {
     await using var db = new MySqlConnection(connStr); await db.OpenAsync();
+    if (repeatable)
+    {
+      object statusObj;
+      await using (var get = new MySqlCommand("SELECT Status FROM ddogs_claims WHERE CharId=@c AND ItemKey=@k", db))
+      {
+        get.Parameters.AddWithValue("@c", charId); get.Parameters.AddWithValue("@k", key);
+        statusObj = await get.ExecuteScalarAsync();
+      }
+      if (statusObj != null && statusObj != DBNull.Value)
+      {
+        int status = Convert.ToInt32(statusObj);
+        if (status == 0) return false;
+        if (status == 1)
+        {
+          await using var reset = new MySqlCommand(
+            "UPDATE ddogs_claims SET Status=0, DeliveredAt=NULL, LowId=@l, HighId=@h, Quality=@q, Source=@s, CreatedAt=NOW() WHERE CharId=@c AND ItemKey=@k AND Status=1", db);
+          reset.Parameters.AddWithValue("@c", charId); reset.Parameters.AddWithValue("@k", key);
+          reset.Parameters.AddWithValue("@l", low); reset.Parameters.AddWithValue("@h", high > 0 ? high : low);
+          reset.Parameters.AddWithValue("@q", ql); reset.Parameters.AddWithValue("@s", source);
+          return await reset.ExecuteNonQueryAsync() == 1;
+        }
+      }
+    }
     await using var c = new MySqlCommand("INSERT IGNORE INTO ddogs_claims (CharId,ItemKey,LowId,HighId,Quality,Source,Status) VALUES (@c,@k,@l,@h,@q,@s,0)", db);
     c.Parameters.AddWithValue("@c", charId); c.Parameters.AddWithValue("@k", key); c.Parameters.AddWithValue("@l", low);
     c.Parameters.AddWithValue("@h", high > 0 ? high : low); c.Parameters.AddWithValue("@q", ql); c.Parameters.AddWithValue("@s", source);
@@ -133,7 +171,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
     if (who == null)
       return Page("Claim Center", "<h1>Claim Center</h1>" + CodeForm("/claim", code, Msg(string.IsNullOrWhiteSpace(code) ? msg : "That claim code was not found.", false)));
     var claimed = await Claimed(connStr, who.CharId);
-    var sb = new StringBuilder($"<h1>Claim Center</h1><div class=\"sub\">Claiming for <b>{H(who.Name)}</b>. Each item can be claimed once per character.</div><div class=\"nav\"><a href=\"/store\">&laquo; Back to Info</a> &nbsp; <a href=\"/daily?code={H(code)}\">Daily Reward</a></div>{Msg(msg, ok)}");
+    var sb = new StringBuilder($"<h1>Claim Center</h1><div class=\"sub\">Claiming for <b>{H(who.Name)}</b>. Most items once per character; consumables marked repeatable can be claimed again after delivery.</div><div class=\"nav\"><a href=\"/store\">&laquo; Back to Info</a> &nbsp; <a href=\"/daily?code={H(code)}\">Daily Reward</a></div>{Msg(msg, ok)}");
     var cat = Load("claims.json");
     string group = null;
     if (cat?["items"] is JsonArray items)
@@ -377,9 +415,9 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
       if (Load("claims.json")?["items"] is JsonArray items)
         item = items.FirstOrDefault(i => string.Equals(S(i, "key"), key, StringComparison.OrdinalIgnoreCase));
       if (item == null || !Unlocked(item)) return Html(await ClaimPage(connStr, code, "That item is not in the Claim Center list.", false));
-      bool added = await Insert(connStr, who.CharId, S(item, "key"), I(item, "lowId"), I(item, "highId"), I(item, "ql"), "web");
+      bool added = await Insert(connStr, who.CharId, S(item, "key"), I(item, "lowId"), I(item, "highId"), I(item, "ql"), "web", Repeatable(item));
       log($"claim char={who.CharId} key={S(item, "key")} added={added}");
-      return Html(await ClaimPage(connStr, code, added ? $"{S(item, "name")} is on its way to {who.Name}." : "You already claimed that item.", added));
+      return Html(await ClaimPage(connStr, code, added ? $"{S(item, "name")} is on its way to {who.Name}." : (Repeatable(item) ? "That item is already waiting at a mail terminal. Take it first, then claim again." : "You already claimed that item."), added));
     });
 
     app.MapGet("/battlesuits", async (HttpContext c) => {
@@ -409,7 +447,7 @@ input[type=text]{{background:#0a2224;color:#e6fffc;border:1px solid #2a7a74;padd
       var reward = TodaysReward(out var dayKey);
       if (reward == null) return Html(await DailyPage(connStr, code, null, false));
       var resolved = await ResolveDaily(connStr, who.CharId, reward);
-      bool added = await Insert(connStr, who.CharId, dayKey, resolved.Low, resolved.High, resolved.Ql, "daily");
+      bool added = await Insert(connStr, who.CharId, dayKey, resolved.Low, resolved.High, resolved.Ql, "daily", false);
       log($"daily char={who.CharId} key={dayKey} item={resolved.Low} ql={resolved.Ql} added={added}");
       string label = string.IsNullOrWhiteSpace(resolved.Name) ? S(reward, "name") : resolved.Name;
       return Html(await DailyPage(connStr, code, added ? $"{label} is on its way to {who.Name}." : "Already claimed today.", added));

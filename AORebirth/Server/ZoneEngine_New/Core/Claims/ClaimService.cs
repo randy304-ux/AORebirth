@@ -51,7 +51,8 @@ namespace ZoneEngine_New.Core.Claims
         /// One claims.json entry. Unlocked (default true) gates the entry: a locked entry is hidden from every list
         /// and refused when claimed. UnlockRule (e.g. "achievement:12" or "vetDays:540") is kept for a later gate and
         /// is not evaluated yet. Amount is the stack size handed out (Instant Grid x20); VetDays, LivePrice and Qty
-        /// are the live store/veteran-reward reference values.
+        /// are the live store/veteran-reward reference values. Repeatable (default false) lets consumables be claimed
+        /// again after the previous delivery (Status=1 row is reset to pending); non-repeatable stays once per character.
         /// </summary>
         public sealed record CatalogItem(string Key, string Name, string Group, int LowId, int HighId, int Ql)
         {
@@ -61,6 +62,7 @@ namespace ZoneEngine_New.Core.Claims
             public int LivePrice { get; init; }
             public string? Qty { get; init; }
             public int Amount { get; init; } = 1;
+            public bool Repeatable { get; init; }
         }
 
         /// <summary>Unlocked catalog entries only; locked ones are never shown or claimable.</summary>
@@ -85,6 +87,7 @@ namespace ZoneEngine_New.Core.Claims
                             LivePrice = Int(it, "livePrice"),
                             Qty = it.TryGetProperty("qty", out JsonElement q) && q.ValueKind == JsonValueKind.String ? q.GetString() : null,
                             Amount = Math.Max(1, Int(it, "amount")),
+                            Repeatable = it.TryGetProperty("repeatable", out JsonElement rp) && rp.ValueKind == JsonValueKind.True,
                         };
                         if (includeLocked || entry.Unlocked)
                             list.Add(entry);
@@ -167,24 +170,72 @@ namespace ZoneEngine_New.Core.Claims
 
         public HashSet<string> ClaimedKeys(int characterId)
         {
+            var repeatable = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (CatalogItem c in LoadCatalog(includeLocked: true))
+            {
+                if (c.Repeatable)
+                    repeatable.Add(c.Key);
+            }
+
             var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             using var db = new MySqlConnection(_connection);
             db.Open();
-            using var cmd = new MySqlCommand("SELECT ItemKey FROM ddogs_claims WHERE CharId=@c", db);
+            // Status 0 = pending (blocks re-claim for everyone). Status 1 = delivered: blocks only non-repeatable keys.
+            using var cmd = new MySqlCommand("SELECT ItemKey, Status FROM ddogs_claims WHERE CharId=@c", db);
             cmd.Parameters.AddWithValue("@c", characterId);
             using MySqlDataReader r = cmd.ExecuteReader();
             while (r.Read())
-                set.Add(r.GetString(0));
+            {
+                string key = r.GetString(0);
+                int status = r.GetInt32(1);
+                if (status == 0 || !repeatable.Contains(key))
+                    set.Add(key);
+            }
+
             return set;
         }
 
-        /// <summary>Queues a catalog item (once per character). False when already claimed.</summary>
+        /// <summary>
+        /// Queues a catalog item. Non-repeatable: once per character (INSERT IGNORE on CharId+ItemKey).
+        /// Repeatable consumables: refuse while Status=0 (pending); after delivery (Status=1) reset the row to pending.
+        /// </summary>
         public bool Queue(int characterId, CatalogItem item, string source)
         {
             if (!item.Unlocked)
                 return false;
             using var db = new MySqlConnection(_connection);
             db.Open();
+
+            if (item.Repeatable)
+            {
+                int? status = null;
+                using (var get = new MySqlCommand("SELECT Status FROM ddogs_claims WHERE CharId=@c AND ItemKey=@k", db))
+                {
+                    get.Parameters.AddWithValue("@c", characterId);
+                    get.Parameters.AddWithValue("@k", item.Key);
+                    object? scalar = get.ExecuteScalar();
+                    if (scalar != null && scalar != DBNull.Value)
+                        status = Convert.ToInt32(scalar, CultureInfo.InvariantCulture);
+                }
+
+                if (status == 0)
+                    return false;
+
+                if (status == 1)
+                {
+                    using var reset = new MySqlCommand(
+                        "UPDATE ddogs_claims SET Status=0, DeliveredAt=NULL, LowId=@l, HighId=@h, Quality=@q, Source=@s, CreatedAt=NOW() WHERE CharId=@c AND ItemKey=@k AND Status=1",
+                        db);
+                    reset.Parameters.AddWithValue("@c", characterId);
+                    reset.Parameters.AddWithValue("@k", item.Key);
+                    reset.Parameters.AddWithValue("@l", item.LowId);
+                    reset.Parameters.AddWithValue("@h", item.HighId > 0 ? item.HighId : item.LowId);
+                    reset.Parameters.AddWithValue("@q", item.Ql);
+                    reset.Parameters.AddWithValue("@s", source);
+                    return reset.ExecuteNonQuery() == 1;
+                }
+            }
+
             using var cmd = new MySqlCommand(
                 "INSERT IGNORE INTO ddogs_claims (CharId,ItemKey,LowId,HighId,Quality,Source,Status) VALUES (@c,@k,@l,@h,@q,@s,0)", db);
             cmd.Parameters.AddWithValue("@c", characterId);

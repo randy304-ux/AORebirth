@@ -1,5 +1,5 @@
 {
-    "note":  "Dungeon Dogs Claim Center items. Each character can claim each item once. Add or remove entries; key must be unique and never reused. ql 0 = the item\u0027s own QL. Edit, save, done (no restart needed). Optional per entry: amount (stack size, default 1), unlocked (false = hidden and refused), unlockRule (later gate, not evaluated yet), livePrice/qty/vetDays (live reference only).",
+    "note":  "Dungeon Dogs Claim Center items. Most items can be claimed once per character. Entries with repeatable=true (consumable packages like tokens, IP resets, faction packs) can be claimed again after the previous claim is delivered. Add or remove entries; key must be unique and never reused. ql 0 = the item\u0027s own QL. Edit, save, done (no restart needed for catalog-only edits). Optional per entry: amount (stack size, default 1), unlocked (false = hidden and refused), unlockRule (later gate, not evaluated yet), repeatable (true = claim again after delivery), livePrice/qty/vetDays (live reference only).",
     "items":  [
                   {
                       "key":  "item-306119",
@@ -202,6 +202,30 @@
                       "lowId":  206161,
                       "highId":  206161,
                       "ql":  0
+                  },
+                  {
+                      "name":  "Gift Wrapped Clothing Pack: Costume Assortment #1",
+                      "highId":  270418,
+                      "lowId":  270418,
+                      "ql":  0,
+                      "key":  "item-270418",
+                      "group":  "Armor \u0026 Costume Sets"
+                  },
+                  {
+                      "name":  "Gift Wrapped Clothing Pack: Costume Assortment #2",
+                      "highId":  270419,
+                      "lowId":  270419,
+                      "ql":  0,
+                      "key":  "item-270419",
+                      "group":  "Armor \u0026 Costume Sets"
+                  },
+                  {
+                      "name":  "Gift Wrapped Clothing Pack: Costume Assortment #3",
+                      "highId":  270420,
+                      "lowId":  270420,
+                      "ql":  0,
+                      "key":  "item-270420",
+                      "group":  "Armor \u0026 Costume Sets"
                   },
                   {
                       "key":  "item-259382",
@@ -841,7 +865,8 @@
                       "unlockRule":  null,
                       "livePrice":  720,
                       "qty":  "1/5/10",
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-294600",
@@ -855,7 +880,8 @@
                       "unlockRule":  null,
                       "livePrice":  960,
                       "qty":  "1/10/20",
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-302296",
@@ -869,7 +895,8 @@
                       "unlockRule":  null,
                       "livePrice":  1500,
                       "qty":  null,
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-294598",
@@ -883,7 +910,8 @@
                       "unlockRule":  null,
                       "livePrice":  180,
                       "qty":  "1/5/10",
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-297274",
@@ -897,7 +925,8 @@
                       "unlockRule":  null,
                       "livePrice":  1550,
                       "qty":  null,
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-296065",
@@ -939,7 +968,8 @@
                       "unlockRule":  null,
                       "livePrice":  840,
                       "qty":  null,
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-300528",
@@ -967,7 +997,8 @@
                       "unlockRule":  null,
                       "livePrice":  300,
                       "qty":  null,
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-296318",
@@ -981,7 +1012,8 @@
                       "unlockRule":  null,
                       "livePrice":  2700,
                       "qty":  null,
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-293640",
@@ -1135,7 +1167,8 @@
                       "unlockRule":  null,
                       "livePrice":  600,
                       "qty":  null,
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-297144",
@@ -1149,7 +1182,8 @@
                       "unlockRule":  null,
                       "livePrice":  600,
                       "qty":  null,
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-296961",
@@ -1163,7 +1197,8 @@
                       "unlockRule":  null,
                       "livePrice":  600,
                       "qty":  null,
-                      "vetDays":  null
+                      "vetDays":  null,
+                      "repeatable":  true
                   },
                   {
                       "key":  "store-296484",

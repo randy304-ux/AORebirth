@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Core.Commands
+namespace ZoneEngine_New.Core.Commands
 {
     using System;
     using System.Collections.Concurrent;
@@ -77,7 +77,9 @@
 
                 if (!_claims.Queue(id, item, "chat"))
                 {
-                    Say("You already claimed " + item.Name + ".");
+                    Say(item.Repeatable
+                        ? item.Name + " is already waiting at a mail terminal. Take it first, then claim again."
+                        : "You already claimed " + item.Name + ".");
                     return;
                 }
 
