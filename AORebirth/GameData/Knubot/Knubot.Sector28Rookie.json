@@ -1,5 +1,5 @@
 {
-  "Notes": "Rookie Alien Hunter (S8RH), Sector 28 PF 4366. Lines from dialogs_20261109_Cattywompus (21:11:54-21:13:23 ET, same path repeated 21:19:53-21:21:04). StartTrade after the 2 million credit demand is authored as {opentrade}; the knubot cannot verify that 1 million credits were actually traded. Escort start, fence disable, second payment at camp, and the Unicorn Security mission gate are not authored. Source=capture unless noted.",
+  "Notes": "Rookie Alien Hunter (S8RH), Sector 28 PF 4366. Lines from dialogs_20261109_Cattywompus (21:11:54-21:13:23 ET, same path repeated 21:19:53-21:21:04). The 2 million credit demand is captured text only; the {opentrade} trade window was removed from the tell line because the script has no Trades section, so the 1 million credit payment is not modelled. Escort start, fence disable, second payment at camp, and the Unicorn Security mission gate are not authored. Source=capture unless noted.",
   "Npcs": [
     "S8RH"
   ],
@@ -56,7 +56,7 @@
       ]
     },
     "tell": {
-      "Text": "Sure I can, for let's say, 2 million credits!  One now, and one when I'm safely back to camp.  And don't try anything stupid, you'll need my assistance through the gates, or you're gonna be biting the dust before you can say open sesame!{opentrade}",
+      "Text": "Sure I can, for let's say, 2 million credits!  One now, and one when I'm safely back to camp.  And don't try anything stupid, you'll need my assistance through the gates, or you're gonna be biting the dust before you can say open sesame!",
       "Source": "capture",
       "Replies": [
         "nowtell",
