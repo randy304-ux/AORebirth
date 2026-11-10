@@ -1,5 +1,5 @@
 {
-  "Notes": "Unicorn Field Engineer in Sector 35. Dialog captured 2026-11-10 14:54:49-14:55:02 ET. Towers and the accumulator are standing spawns (no knubot spawn-npc hook); they are already in the field rather than appearing on 'We're ready, Sir.'",
+  "Notes": "Unicorn Field Engineer in Sector 35. Dialog captured 2026-11-10 14:54:49-14:55:02 ET. 'We're ready, Sir.' runs {spawngroup S35E}: towers and the Energy Accumulator spawn at once, then the scraped defense waves, then Field Marshal Cha'Khaz at +10:13 and Field Support Cha'Khaz at +11:33. The encounter despawns and can be started again if the accumulator (or all three towers) die, or after a 60-minute timeout, or 3 minutes after both bosses are dead. Standing at zone-in are only the Engineer, the Zone Exit, and normal canyon trash.",
   "Npcs": [
     "S5FE"
   ],
@@ -59,7 +59,7 @@
       ]
     },
     "ready": {
-      "Text": "Good.  Now keep those aliens at bay! ",
+      "Text": "Good.  Now keep those aliens at bay!{spawngroup S35E}",
       "Source": "captured",
       "Replies": [
         "bye"

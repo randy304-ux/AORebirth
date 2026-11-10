@@ -1,0 +1,719 @@
+{
+  "S35E": {
+    "Name": "Sector 35 field repair",
+    "Playfield": 4367,
+    "ResetTimeoutSeconds": 3600,
+    "SuccessDespawnSeconds": 180,
+    "FailIfDead": [
+      "S5EA"
+    ],
+    "FailIfAllDead": [
+      [
+        "S5TA",
+        "S5TG",
+        "S5TD"
+      ]
+    ],
+    "SuccessIfDead": [
+      "S5FM",
+      "S5FS"
+    ],
+    "Stages": [
+      {
+        "DelaySeconds": 0,
+        "Spawns": [
+          {
+            "hashText": "S5TA",
+            "position": [
+              204,
+              1.01,
+              445
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S5EA",
+            "position": [
+              185,
+              1.01,
+              442
+            ],
+            "angle": 306,
+            "minLevel": 400
+          },
+          {
+            "hashText": "S5TG",
+            "position": [
+              177,
+              1.01,
+              426
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S5TD",
+            "position": [
+              175,
+              1.01,
+              458
+            ],
+            "angle": 306,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 31,
+        "Spawns": [
+          {
+            "hashText": "S50E",
+            "position": [
+              250,
+              2.071,
+              446
+            ],
+            "angle": 306,
+            "minLevel": 220
+          },
+          {
+            "hashText": "S50E",
+            "position": [
+              250,
+              1.997,
+              450
+            ],
+            "angle": 306,
+            "minLevel": 220
+          },
+          {
+            "hashText": "S50E",
+            "position": [
+              250,
+              1.744,
+              455
+            ],
+            "angle": 306,
+            "minLevel": 220
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 76,
+        "Spawns": [
+          {
+            "hashText": "S504",
+            "position": [
+              250,
+              1.926,
+              452
+            ],
+            "angle": 306,
+            "minLevel": 220
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 79,
+        "Spawns": [
+          {
+            "hashText": "S50E",
+            "position": [
+              158,
+              3.166,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 220
+          },
+          {
+            "hashText": "S511",
+            "position": [
+              152.32,
+              3.432,
+              391.969
+            ],
+            "angle": 67,
+            "minLevel": 220
+          },
+          {
+            "hashText": "S504",
+            "position": [
+              156,
+              3.36,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 220
+          },
+          {
+            "hashText": "S50E",
+            "position": [
+              154,
+              3.472,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 220
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 121,
+        "Spawns": [
+          {
+            "hashText": "S507",
+            "position": [
+              158,
+              1.01,
+              490
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S507",
+            "position": [
+              154,
+              1.01,
+              490
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S507",
+            "position": [
+              150,
+              1.01,
+              498
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S50A",
+            "position": [
+              150,
+              1.01,
+              490
+            ],
+            "angle": 306,
+            "minLevel": 240
+          },
+          {
+            "hashText": "S50A",
+            "position": [
+              160,
+              1.588,
+              498
+            ],
+            "angle": 306,
+            "minLevel": 240
+          },
+          {
+            "hashText": "S507",
+            "position": [
+              158,
+              1.376,
+              498
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S507",
+            "position": [
+              154,
+              1.163,
+              498
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S50A",
+            "position": [
+              146,
+              1.01,
+              494
+            ],
+            "angle": 306,
+            "minLevel": 240
+          },
+          {
+            "hashText": "S507",
+            "position": [
+              150,
+              1.01,
+              494
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S507",
+            "position": [
+              156,
+              1.037,
+              494
+            ],
+            "angle": 306,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 213,
+        "Spawns": [
+          {
+            "hashText": "S507",
+            "position": [
+              206.186,
+              1.01,
+              446.924
+            ],
+            "angle": 229,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S50A",
+            "position": [
+              213.617,
+              1.01,
+              446.505
+            ],
+            "angle": 261,
+            "minLevel": 240
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 248,
+        "Spawns": [
+          {
+            "hashText": "S503",
+            "position": [
+              238.87,
+              1.01,
+              448.575
+            ],
+            "angle": 265,
+            "minLevel": 240
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 258,
+        "Spawns": [
+          {
+            "hashText": "S512",
+            "position": [
+              155,
+              3.416,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 240
+          },
+          {
+            "hashText": "S512",
+            "position": [
+              148.187,
+              4.351,
+              385.055
+            ],
+            "angle": 236,
+            "minLevel": 240
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 266,
+        "Spawns": [
+          {
+            "hashText": "S510",
+            "position": [
+              165.797,
+              1.01,
+              473.322
+            ],
+            "angle": 144,
+            "minLevel": 240
+          },
+          {
+            "hashText": "S510",
+            "position": [
+              165.906,
+              1.01,
+              479.099
+            ],
+            "angle": 156,
+            "minLevel": 240
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 267,
+        "Spawns": [
+          {
+            "hashText": "S510",
+            "position": [
+              163.264,
+              1.01,
+              479.014
+            ],
+            "angle": 146,
+            "minLevel": 240
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 269,
+        "Spawns": [
+          {
+            "hashText": "S508",
+            "position": [
+              160.838,
+              1.01,
+              479.226
+            ],
+            "angle": 144,
+            "minLevel": 240
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 280,
+        "Spawns": [
+          {
+            "hashText": "S501",
+            "position": [
+              157,
+              1.13,
+              494
+            ],
+            "angle": 306,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 307,
+        "Spawns": [
+          {
+            "hashText": "S506",
+            "position": [
+              158.741,
+              1.467,
+              400.422
+            ],
+            "angle": 33,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S506",
+            "position": [
+              164.606,
+              1.612,
+              400.137
+            ],
+            "angle": 27,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 310,
+        "Spawns": [
+          {
+            "hashText": "S501",
+            "position": [
+              239.932,
+              1.01,
+              448.939
+            ],
+            "angle": 265,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 312,
+        "Spawns": [
+          {
+            "hashText": "S506",
+            "position": [
+              160,
+              3.438,
+              387
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S500",
+            "position": [
+              156,
+              3.36,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S506",
+            "position": [
+              154.452,
+              3.866,
+              387.783
+            ],
+            "angle": 30,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S506",
+            "position": [
+              152,
+              3.566,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S500",
+            "position": [
+              160,
+              2.971,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 353,
+        "Spawns": [
+          {
+            "hashText": "S502",
+            "position": [
+              167.917,
+              1.01,
+              470.292
+            ],
+            "angle": 144,
+            "minLevel": 220
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 355,
+        "Spawns": [
+          {
+            "hashText": "S502",
+            "position": [
+              161.736,
+              1.01,
+              478.085
+            ],
+            "angle": 144,
+            "minLevel": 220
+          },
+          {
+            "hashText": "S513",
+            "position": [
+              239.053,
+              1.01,
+              448.992
+            ],
+            "angle": 265,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 358,
+        "Spawns": [
+          {
+            "hashText": "S502",
+            "position": [
+              151.413,
+              1.01,
+              495.952
+            ],
+            "angle": 145,
+            "minLevel": 220
+          },
+          {
+            "hashText": "S502",
+            "position": [
+              155.068,
+              1.01,
+              490.531
+            ],
+            "angle": 146,
+            "minLevel": 220
+          },
+          {
+            "hashText": "S502",
+            "position": [
+              147,
+              1.01,
+              498
+            ],
+            "angle": 306,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 372,
+        "Spawns": [
+          {
+            "hashText": "S513",
+            "position": [
+              249.161,
+              1.859,
+              449.916
+            ],
+            "angle": 264,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 406,
+        "Spawns": [
+          {
+            "hashText": "S504",
+            "position": [
+              160,
+              1.559,
+              400
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S504",
+            "position": [
+              155,
+              1.527,
+              400
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S504",
+            "position": [
+              150,
+              2.075,
+              400
+            ],
+            "angle": 306,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 413,
+        "Spawns": [
+          {
+            "hashText": "S501",
+            "position": [
+              160,
+              2.971,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S501",
+            "position": [
+              154.655,
+              2.147,
+              397.691
+            ],
+            "angle": 35,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S501",
+            "position": [
+              165,
+              3.092,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S501",
+            "position": [
+              155.072,
+              3.395,
+              391.118
+            ],
+            "angle": 31,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S501",
+            "position": [
+              150,
+              3.651,
+              391
+            ],
+            "angle": 306,
+            "minLevel": 250
+          },
+          {
+            "hashText": "S501",
+            "position": [
+              154.657,
+              3.841,
+              387.914
+            ],
+            "angle": 186,
+            "minLevel": 250
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 613,
+        "Spawns": [
+          {
+            "hashText": "S5FM",
+            "position": [
+              114,
+              1.01,
+              436
+            ],
+            "angle": 306,
+            "minLevel": 300
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 693,
+        "Spawns": [
+          {
+            "hashText": "S5FS",
+            "position": [
+              242.263,
+              1.019,
+              424.842
+            ],
+            "angle": 350,
+            "minLevel": 300
+          }
+        ]
+      }
+    ]
+  }
+}

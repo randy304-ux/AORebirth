@@ -86,6 +86,7 @@ namespace ZoneEngine_New.Core.GameData
             EnsureRootExists();
             RespawnContent = RespawnContentCatalog.Load(RootPath);
             RkRecallContent = RkRecallContentCatalog.Load(RootPath);
+            SpawnGroups = ZoneEngine_New.Core.Playfield.SpawnGroupCatalog.Load(RootPath);
             LoadNpcTemplates();
             LoadMonsterWeapons();
             LoadHashItems();
@@ -100,6 +101,8 @@ namespace ZoneEngine_New.Core.GameData
         public RespawnContentCatalog RespawnContent { get; }
 
         public RkRecallContentCatalog RkRecallContent { get; }
+
+        public ZoneEngine_New.Core.Playfield.SpawnGroupCatalog SpawnGroups { get; }
 
         public string PlayfieldsPath { get; }
 

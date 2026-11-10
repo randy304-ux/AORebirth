@@ -736,6 +736,8 @@ namespace ZoneEngine_New.Core.Playfield
                 ZoneEngine_New.Core.Battlestations.BattleStationClock.Tick(this, deltaTime);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("halloween");
                 ZoneEngine_New.Core.Events.HalloweenClock.Tick(this, deltaTime);
+                ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("spawngroup");
+                SpawnGroupClock.Tick(this, deltaTime);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("checkpoint");
                 foreach (Player player in new System.Collections.Generic.List<Player>(_dynelRegistry.PlayerEntities()))
                 {
@@ -857,6 +859,7 @@ namespace ZoneEngine_New.Core.Playfield
                 return locality;
             });
             services.AddSingleton<SpawnService>();
+            services.AddSingleton<SpawnGroupService>();
             services.AddSingleton<ZoneEngine_New.Core.Ai.ReachMaps>();
             services.AddSingleton(provider => new Pets.PetService(this, _gameData, _logger, _playfieldManager.MercUnlocks));
             services.AddSingleton(_shopDao);
