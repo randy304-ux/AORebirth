@@ -30,16 +30,6 @@
     "removedPoints":  [
                           {
                               "playfield":  127,
-                              "hash":  "FLFE",
-                              "position":  [
-                                               96.70002,
-                                               116.101685,
-                                               296.2
-                                           ],
-                              "reason":  "Condemned Subway entrance Filth Flea: client spawn at the top of Entrance Stairs; its wander comes within about 21 m of the zone-in landing and aggros on entry. Re-added farther down the stairs in PlayfieldContent/127/SpawnsAdd.subway-entrance.json, on the same floor as the mid-stair Filth Flea. 2026-11-10"
-                          },
-                          {
-                              "playfield":  127,
                               "hash":  "BQWR",
                               "position":  [
                                                254.10004,
