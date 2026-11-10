@@ -79,19 +79,20 @@
         "w2",
         "w13",
         "w1",
+        "w14",
         "bye"
       ],
       "Source": "filler"
     },
     "give_tem": {
-      "Text": "Will of the Tempestuous. One Who Remembers The Past is at Piercing Tundra, 1602 by 2858. {spawn L015 1}{completequest AO33}",
+      "Text": "Will of the Tempestuous. One Who Remembers The Past is at Piercing Tundra, 1602 by 2858. {spawn AK0C 1}{completequest AO33}",
       "Replies": [
         "bye"
       ],
       "Source": "filler"
     },
     "give_uns": {
-      "Text": "Will of the Unshakable. One Who Remembers The Past is at Piercing Tundra, 1602 by 2858. {spawn L01H 1}{completequest AO33}",
+      "Text": "Will of the Unshakable. One Who Remembers The Past is at Piercing Tundra, 1602 by 2858. {spawn AK0B 1}{completequest AO33}",
       "Replies": [
         "bye"
       ],
@@ -221,6 +222,14 @@
       "If": [
         "prof 11"
       ]
+    },
+    "w14": {
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
+      "If": [
+        "prof 14"
+      ],
+      "Source": "public-guide"
     }
   },
   "Trades": {
