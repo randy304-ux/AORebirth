@@ -60,6 +60,13 @@ namespace ZoneEngine_New.Core.Quests
 
         public QuestObjective Objective { get; set; } = new();
 
+        /// <summary>
+        /// Optional journal compass marker for this stage. Omitted or Playfield 0 keeps today's empty marker.
+        /// QuestJournal sends it as IdentityType.Playfield2 (40016) plus Position, the same encoding generated
+        /// missions use when the entrance has no special WorldPos type.
+        /// </summary>
+        public QuestWaypoint? Waypoint { get; set; }
+
         /// <summary>Comma list of NoXp, NoCash, Failed, NoDelete, or "None".</summary>
         public string Flags { get; set; } = "None";
 
@@ -137,5 +144,20 @@ namespace ZoneEngine_New.Core.Quests
 
         /// <summary>Stack size of the granted item (rechargers x50 etc.); 1 = single item.</summary>
         public int Count { get; set; } = 1;
+    }
+
+    /// <summary>Playfield and local coordinates for a template-quest journal waypoint.</summary>
+    public sealed class QuestWaypoint
+    {
+        public int Playfield { get; set; }
+
+        public float X { get; set; }
+
+        public float Y { get; set; }
+
+        public float Z { get; set; }
+
+        /// <summary>True when this waypoint should be written to the journal packet.</summary>
+        public bool IsSet => Playfield != 0;
     }
 }

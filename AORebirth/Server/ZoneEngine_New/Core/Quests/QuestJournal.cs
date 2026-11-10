@@ -233,14 +233,18 @@ namespace ZoneEngine_New.Core.Quests
                 // Retail's four bytes here are the big-endian Unix time the quest expires.
                 UnknownHash1 = BigEndianChars(expiresOnClient),
                 UnknownId7 = new Identity { Type = (IdentityType)layout.SlotType, Instance = 0x18000000 | slot },
-                // Waypoint: the dungeon entrance's playfield and position, with the entrance building's template pair.
+                // Waypoint: generated missions keep the dungeon-entrance encoding byte for byte (DestinationType +
+                // entrance playfield and position, plus the entrance building template pair). Template quests with an
+                // optional Waypoint use IdentityType.Playfield2 (40016) plus Position, which is the same encoding
+                // generated missions use when the entrance has no special WorldPos type. Stages without a Waypoint
+                // still send an empty Identity and a null Position (serialised as 0,0,0), as before.
                 PlayfieldId = dungeon == null
-                    ? new Identity()
+                    ? TemplateWaypointId(template)
                     : new Identity { Type = (IdentityType)dungeon.DestinationType, Instance = dungeon.EntrancePlayfield },
                 Unknown10 = dungeon?.BuildingLowId ?? 0,
                 Unknown11 = dungeon?.BuildingHighId ?? 0,
                 Position = dungeon == null
-                    ? null
+                    ? TemplateWaypointPosition(template)
                     : new SmokeLounge.AOtomation.Messaging.GameData.Vector3(dungeon.EntranceX, dungeon.EntranceY, dungeon.EntranceZ)
             };
         }
@@ -308,5 +312,19 @@ namespace ZoneEngine_New.Core.Quests
             => text.Length == 0 ? text : char.ToUpperInvariant(text[0]) + text[1..];
 
         static Identity Copy(Identity value) => new() { Type = value.Type, Instance = value.Instance };
+        /// <summary>
+        /// Compass marker for a template quest: Playfield2 / 40016 and the waypoint coordinates, or an empty
+        /// Identity when Waypoint is omitted (today's journal packet).
+        /// </summary>
+        internal static Identity TemplateWaypointId(QuestTemplate template)
+            => template.Waypoint is { IsSet: true } wp
+                ? new Identity { Type = IdentityType.Playfield2, Instance = wp.Playfield }
+                : new Identity();
+
+        /// <summary>Position for a template quest waypoint, or null when omitted (today's journal packet).</summary>
+        internal static SmokeLounge.AOtomation.Messaging.GameData.Vector3? TemplateWaypointPosition(QuestTemplate template)
+            => template.Waypoint is { IsSet: true } wp
+                ? new SmokeLounge.AOtomation.Messaging.GameData.Vector3(wp.X, wp.Y, wp.Z)
+                : null;
     }
 }
