@@ -24,22 +24,31 @@
   ],
   "Lines": {
     "offer": {
-      "Text": "Wanderer. One Who Greets Wanderers waits in the Area, near 126 by 129. I can set you on that path.",
+      "Text": "Hello young one. Welcome to Adonis.",
       "Replies": [
-        "yes",
+        "who",
+        "start",
+        "bye"
+      ],
+      "Source": "capture"
+    },
+    "whoami": {
+      "Text": "I am One Who Points the Way. One Who Greets Wanderers waits in the Adonis Hallway, near 126 by 129. I can set you on that path.",
+      "Replies": [
+        "start",
         "bye"
       ],
       "Source": "filler"
     },
     "accept": {
-      "Text": "Go to One Who Greets Wanderers, then return along the Xan trail. {givequest AO00}",
+      "Text": "Go to One Who Greets Wanderers in the Adonis Hallway, then return along the Xan trail. {givequest AO00}",
       "Replies": [
         "bye"
       ],
       "Source": "filler"
     },
     "progress": {
-      "Text": "One Who Greets Wanderers still waits in the Area.",
+      "Text": "One Who Greets Wanderers still waits in the Adonis Hallway.",
       "Replies": [
         "bye"
       ],
@@ -54,15 +63,20 @@
     }
   },
   "Replies": {
-    "yes": {
+    "who": {
+      "Text": "Who are you?",
+      "Goto": "whoami",
+      "Source": "capture"
+    },
+    "start": {
       "Text": "I will help.",
       "Goto": "accept",
       "Source": "filler"
     },
     "bye": {
-      "Text": "I will go.",
+      "Text": "Goodbye",
       "Goto": "close",
-      "Source": "filler"
+      "Source": "capture"
     }
   }
 }

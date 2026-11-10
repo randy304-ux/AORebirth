@@ -191,19 +191,19 @@
     "Templates": [
       {
         "Name": "Muddy Dryad",
-        "Level": 170,
+        "Level": 200,
         "Stats": {
           "0": 268964353,
-          "1": 48077,
+          "1": 209091,
           "4": 6,
           "12": 208950,
           "18": 0,
           "21": 0,
-          "27": 48077,
+          "27": 209091,
           "33": 3,
           "37": 1,
           "47": 1,
-          "54": 170,
+          "54": 200,
           "59": 4,
           "60": 15,
           "61": 1700,
@@ -224,7 +224,7 @@
           "342": 600,
           "343": 0,
           "359": 209082,
-          "360": 90,
+          "360": 400,
           "368": 15,
           "387": 503,
           "389": 0,
@@ -239,8 +239,21 @@
         },
         "LootTable": [],
         "HasHeadMesh": false,
-        "Features": [
-          "Wander"
+        "Features": [],
+        "BossTriggers": [
+          {
+            "On": "FirstAggro",
+            "Pct": 0,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "TNTL",
+                "Count": 6,
+                "Radius": 10,
+                "Level": 200
+              }
+            ]
+          }
         ]
       },
       {
@@ -405,9 +418,9 @@
       }
     ],
     "ContentProvenance": {
-      "source": "adonis-xan-standin-20261110",
+      "source": "scrape-adonis-20261110-Whozewhatzit",
       "donor": "D03M",
-      "note": "Look cloned from donor; do not invent mesh/stats"
+      "note": "Appearance confirmed by 2026-11-10 10:32:11 scrape in Adonis City 4872 at 1689.284, 81.485, 1852.989 heading 287.5. L200, MaxHealth 209091, Scale 400, Mesh 208950, MonsterData 209082, Flags 268964353, NPCFamily 207. Remaining unscraped stats kept from D03M Brisk Dryad donor. Features cleared (no Wander) so the boss stays on the dry platform. BossTriggers FirstAggro SpawnAdds TNTL x6 radius 10 from the 10:34:57 tentacle scrape (6 unique instances, 3 pads ~8-10m). Warp/pull-back is not modelled: BossTriggers only supports SpawnAdds, and a tight leash would reset the fight instead of pulling the player."
     }
   },
   "D03Y": {
@@ -865,5 +878,67 @@
       "source": "adonis-xan-killfix-20261110",
       "note": "Overlay of D04J: removed NoCombat/NoMove so Adonis kill stages can complete. Looks/stats unchanged. Other Den-Losa/El-Kael keys left as in NpcTemplates.Adonis.json."
     }
+  },
+  "TNTL": {
+    "ContentProvenance": {
+      "source": "scrape-adonis-20261110-Whozewhatzit",
+      "donor": "D07M",
+      "note": "Tentacle adds seen 2026-11-10 10:34:57 during the Muddy Dryad fight, PF 4872. Six unique instances (2067750051-056) at three pads: 1679.000,79.964,1853.000; 1698.000,79.967,1852.000; 1690.000,79.967,1845.000. L200, MaxHealth 12194, Mesh 45795, MonsterData 268203, Scale 500, Flags 269095425, NPCFamily 207, heading 255.3. Look cloned from D07M Slotherian Magna L149 (same mesh 45795); scraped identity/health/scale/flags/monsterdata overlaid. Not a world spawn — only BossTriggers SpawnAdds."
+    },
+    "Templates": [
+      {
+        "Name": "Tentacle",
+        "Level": 200,
+        "Stats": {
+          "0": 269095425,
+          "1": 12194,
+          "4": 1,
+          "12": 45795,
+          "18": 0,
+          "21": 0,
+          "27": 12194,
+          "33": 3,
+          "37": 1,
+          "47": 1,
+          "52": 1200,
+          "54": 200,
+          "59": 0,
+          "60": 15,
+          "61": 120,
+          "64": 40637,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 18,
+          "286": 6,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 268203,
+          "360": 500,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 210,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "HasHeadMesh": false,
+        "Features": []
+      }
+    ]
   }
 }

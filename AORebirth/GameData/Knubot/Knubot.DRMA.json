@@ -112,7 +112,7 @@
       "Source": "filler"
     },
     "dryad": {
-      "Text": "A Muddy Dryad keeps tissue on a water platform. End it, then return.",
+      "Text": "A Muddy Dryad keeps tissue on a land platform over the water, near 1689 by 1853 in Adonis City. End it, then return.",
       "Replies": [
         "bye"
       ],
@@ -140,116 +140,116 @@
       "Source": "filler"
     },
     "adv0": {
-      "Text": "The Passionate, then.",
-      "Goto": "give_pas",
+      "Source": "public-guide",
+      "Text": "The Prudent, then.",
+      "Goto": "give_pru",
       "If": [
         "prof 0"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv8": {
-      "Text": "The Passionate, then.",
-      "Goto": "give_pas",
+      "Source": "public-guide",
+      "Text": "The Prudent, then.",
+      "Goto": "give_pru",
       "If": [
         "prof 8"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv1": {
-      "Text": "The Passionate, then.",
-      "Goto": "give_pas",
+      "Source": "public-guide",
+      "Text": "The Impetuous, then.",
+      "Goto": "give_imp",
       "If": [
         "prof 1"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv13": {
-      "Text": "The Passionate, then.",
-      "Goto": "give_pas",
+      "Source": "public-guide",
+      "Text": "The Benign, then.",
+      "Goto": "give_ben",
       "If": [
         "prof 13"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv2": {
+      "Source": "public-guide",
       "Text": "The Industrious, then.",
       "Goto": "give_ind",
       "If": [
         "prof 2"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv3": {
-      "Text": "The Industrious, then.",
-      "Goto": "give_ind",
+      "Source": "public-guide",
+      "Text": "The Impetuous, then.",
+      "Goto": "give_imp",
       "If": [
         "prof 3"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv9": {
+      "Source": "public-guide",
       "Text": "The Benign, then.",
       "Goto": "give_ben",
       "If": [
         "prof 9"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv7": {
-      "Text": "The Benign, then.",
-      "Goto": "give_ben",
+      "Source": "public-guide",
+      "Text": "The Passionate, then.",
+      "Goto": "give_pas",
       "If": [
         "prof 7"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv4": {
+      "Source": "public-guide",
       "Text": "The Impetuous, then.",
       "Goto": "give_imp",
       "If": [
         "prof 4"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv14": {
-      "Text": "The Impetuous, then.",
-      "Goto": "give_imp",
+      "Source": "public-guide",
+      "Text": "The Passionate, then.",
+      "Goto": "give_pas",
       "If": [
         "prof 14"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv10": {
-      "Text": "The Prudent, then.",
-      "Goto": "give_pru",
+      "Source": "public-guide",
+      "Text": "The Benign, then.",
+      "Goto": "give_ben",
       "If": [
         "prof 10"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv11": {
-      "Text": "The Prudent, then.",
-      "Goto": "give_pru",
+      "Source": "public-guide",
+      "Text": "The Passionate, then.",
+      "Goto": "give_pas",
       "If": [
         "prof 11"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv5": {
+      "Source": "public-guide",
       "Text": "The Prudent, then.",
       "Goto": "give_pru",
       "If": [
         "prof 5"
-      ],
-      "Source": "filler"
+      ]
     },
     "adv6": {
-      "Text": "The Prudent, then.",
-      "Goto": "give_pru",
+      "Source": "public-guide",
+      "Text": "The Industrious, then.",
+      "Goto": "give_ind",
       "If": [
         "prof 6"
-      ],
-      "Source": "filler"
+      ]
     }
   }
 }

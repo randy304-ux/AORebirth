@@ -1,0 +1,67 @@
+{
+  "Npcs": [
+    "CSJR"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "minlevel 160",
+        "!has AK08"
+      ],
+      "Say": "skip_offer"
+    },
+    {
+      "If": [
+        "minlevel 160",
+        "has AK08"
+      ],
+      "Say": "already"
+    },
+    {
+      "Say": "too_low"
+    }
+  ],
+  "Lines": {
+    "skip_offer": {
+      "Text": "You have the strength to leave Adonis now. If you wish to skip the trial, I will award the Rimy Ring and the Hyper-Radiation Protection Skin and Glasses.",
+      "Replies": [
+        "skip_yes",
+        "bye"
+      ],
+      "Source": "public-guide"
+    },
+    "skip_give": {
+      "Text": "Then take the Rimy Ring, and these. They will serve you in Penumbra. {spawn AK08 1}{spawn AK09 1}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "public-guide"
+    },
+    "already": {
+      "Text": "You already carry the Rimy Ring. The way to Penumbra is open.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "too_low": {
+      "Text": "Return when you are at least level 160 if you wish to skip the Adonis trial.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "public-guide"
+    }
+  },
+  "Replies": {
+    "skip_yes": {
+      "Text": "I want to skip the trial.",
+      "Goto": "skip_give",
+      "Source": "public-guide"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

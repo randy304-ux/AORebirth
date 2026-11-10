@@ -43,7 +43,7 @@
       "Source": "filler"
     },
     "mix_done": {
-      "Text": "The mixture will do. Take this Yuttos Modified NCU, and this scanner. Mark three Hecklers â€” Elements, Harmony, Dreams â€” and the Dormant Golem, then return. {completequest AO28}{spawn AK04 1}",
+      "Text": "The mixture will do. Take this Yuttos Modified NCU, and this scanner. Mark a Heckler of Elements, a Heckler of Harmony, a Heckler of Dreams, and the Dormant Golem, then return. {completequest AO28}{spawn AK04 1}",
       "Replies": [
         "bye"
       ],
@@ -66,20 +66,19 @@
     "will": {
       "Text": "The markings will do. Take the Will that matches your path.",
       "Replies": [
+        "w5",
+        "w9",
+        "w3",
+        "w11",
+        "w6",
+        "w4",
+        "w7",
+        "w10",
         "w0",
         "w8",
-        "w1",
-        "w13",
         "w2",
-        "w3",
-        "w4",
-        "w5",
-        "w6",
-        "w14",
-        "w7",
-        "w9",
-        "w10",
-        "w11",
+        "w13",
+        "w1",
         "bye"
       ],
       "Source": "filler"
@@ -120,116 +119,108 @@
       "Source": "filler"
     },
     "w0": {
+      "Source": "public-guide",
       "Text": "Tempestuous.",
       "Goto": "give_tem",
       "If": [
         "prof 0"
-      ],
-      "Source": "filler"
+      ]
     },
     "w8": {
-      "Text": "Tempestuous.",
-      "Goto": "give_tem",
+      "Source": "public-guide",
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
       "If": [
         "prof 8"
-      ],
-      "Source": "filler"
+      ]
     },
     "w1": {
-      "Text": "Tempestuous.",
-      "Goto": "give_tem",
+      "Source": "public-guide",
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
       "If": [
         "prof 1"
-      ],
-      "Source": "filler"
+      ]
     },
     "w13": {
-      "Text": "Tempestuous.",
-      "Goto": "give_tem",
+      "Source": "public-guide",
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
       "If": [
         "prof 13"
-      ],
-      "Source": "filler"
+      ]
     },
     "w2": {
+      "Source": "public-guide",
       "Text": "Unshakable.",
       "Goto": "give_uns",
       "If": [
         "prof 2"
-      ],
-      "Source": "filler"
+      ]
     },
     "w3": {
-      "Text": "Unshakable.",
-      "Goto": "give_uns",
-      "If": [
-        "prof 3"
-      ],
-      "Source": "filler"
-    },
-    "w4": {
-      "Text": "Unshakable.",
-      "Goto": "give_uns",
-      "If": [
-        "prof 4"
-      ],
-      "Source": "filler"
-    },
-    "w5": {
-      "Text": "Unshakable.",
-      "Goto": "give_uns",
-      "If": [
-        "prof 5"
-      ],
-      "Source": "filler"
-    },
-    "w6": {
-      "Text": "Unshakable.",
-      "Goto": "give_uns",
-      "If": [
-        "prof 6"
-      ],
-      "Source": "filler"
-    },
-    "w14": {
-      "Text": "Unshakable.",
-      "Goto": "give_uns",
-      "If": [
-        "prof 14"
-      ],
-      "Source": "filler"
-    },
-    "w7": {
+      "Source": "public-guide",
       "Text": "Reposeful.",
       "Goto": "give_rep",
       "If": [
+        "prof 3"
+      ]
+    },
+    "w4": {
+      "Source": "public-guide",
+      "Text": "Tempestuous.",
+      "Goto": "give_tem",
+      "If": [
+        "prof 4"
+      ]
+    },
+    "w5": {
+      "Source": "public-guide",
+      "Text": "Reposeful.",
+      "Goto": "give_rep",
+      "If": [
+        "prof 5"
+      ]
+    },
+    "w6": {
+      "Source": "public-guide",
+      "Text": "Reposeful.",
+      "Goto": "give_rep",
+      "If": [
+        "prof 6"
+      ]
+    },
+    "w7": {
+      "Source": "public-guide",
+      "Text": "Tempestuous.",
+      "Goto": "give_tem",
+      "If": [
         "prof 7"
-      ],
-      "Source": "filler"
+      ]
     },
     "w9": {
+      "Source": "public-guide",
       "Text": "Reposeful.",
       "Goto": "give_rep",
       "If": [
         "prof 9"
-      ],
-      "Source": "filler"
+      ]
     },
     "w10": {
-      "Text": "Reposeful.",
-      "Goto": "give_rep",
+      "Source": "public-guide",
+      "Text": "Tempestuous.",
+      "Goto": "give_tem",
       "If": [
         "prof 10"
-      ],
-      "Source": "filler"
+      ]
     },
     "w11": {
+      "Source": "public-guide",
       "Text": "Reposeful.",
       "Goto": "give_rep",
       "If": [
         "prof 11"
-      ],
-      "Source": "filler"
+      ]
     }
   },
   "Trades": {
