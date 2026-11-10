@@ -1,0 +1,40 @@
+{
+  "Notes": "Enter the Unicorn Ship terminal at Unicorn Outpost (PF 4364). Click/talk stand-in: teleports into Alien Scoutship PF 6111 at the captured zone-in. Source: zonechanges 2026-11-10 14:21:52 ET.",
+  "Npcs": [
+    "B1EN"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "enter": {
+      "Text": "Enter the Unicorn Ship",
+      "Goto": "enter",
+      "Source": "captured (terminal name)"
+    },
+    "stay": {
+      "Text": "Stay here.",
+      "Goto": "stay",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "A Unicorn shuttle pad. It will take you to an alien scout ship.",
+      "Source": "filler",
+      "Replies": [
+        "enter",
+        "stay"
+      ]
+    },
+    "enter": {
+      "Text": "{teleport 6111 216.137 6.045 22.323}{close}",
+      "Source": "captured (zone-in)"
+    },
+    "stay": {
+      "Text": "{close}"
+    }
+  }
+}

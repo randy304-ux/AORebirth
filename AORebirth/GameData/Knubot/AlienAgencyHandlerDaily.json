@@ -1,5 +1,5 @@
 {
-  "Notes": "Alien Agency Handler (Rome Blue, hash AGAX). 2026-11-10: dialog captured through 'If you say so.'. Requires the Freelancers Inc. contract (quest AGCT, signed with the Automated Agency Receptionist). Solo -> {givedaily AGAX} (existing roll AIWP/AIBG/AILP/AICC/AIPD, Track empty = no 18-hour lock-out, Randy). The 'with friends' branch has no team mission data, so it says so. The Unicorn Outpost shuttle script AlienAgencyHandler.json is a different NPC and is unchanged.",
+  "Notes": "Alien Agency Handler (Rome Blue, hash AGAX). 2026-11-10: dialog captured through 'If you say so.' and the Place the Bomb turn-in ('Back already?' / 'Mission complete' / 'Thank you very much for your service...'). Requires the Freelancers Inc. contract (quest AGCT). Solo -> {givedaily AGAX} (roll AIWP/AIBG/AILP/AICC/AIPD/AIPB, Track empty = no 18-hour lock-out). Return step AIPR is completed only by Mission complete (its TargetNpc points at unused hash AIPZ so targeting the Handler does not auto-reward). The 'with friends' branch has no team mission data.",
   "Npcs": [
     "AGAX",
     "ddogs-agency-alien"
@@ -13,7 +13,13 @@
     },
     {
       "If": [
-        "HasAnyQuest AIWP,AIBG,AILP,AICC,AIPD"
+        "HasQuest AIPR"
+      ],
+      "Say": "back"
+    },
+    {
+      "If": [
+        "HasAnyQuest AIWP,AIBG,AILP,AICC,AIPD,AIPB"
       ],
       "Say": "assigned"
     },
@@ -35,6 +41,16 @@
     "friends": {
       "Text": "I want to face the aliens with my friends",
       "Goto": "friends",
+      "Source": "captured"
+    },
+    "complete": {
+      "Text": "Mission complete",
+      "Goto": "complete",
+      "Source": "captured"
+    },
+    "eighteen": {
+      "Text": "You have me confused with someone else if you think I have completed an assignment the past 18 hours.",
+      "Goto": "eighteen",
       "Source": "captured"
     },
     "bye": {
@@ -63,6 +79,16 @@
       "Text": "{player}, status - assigned. Finish your current alien mission first.",
       "Source": "ours",
       "Replies": [
+        "eighteen",
+        "bye"
+      ]
+    },
+    "back": {
+      "Text": "Back already?",
+      "Source": "captured",
+      "Replies": [
+        "complete",
+        "eighteen",
         "bye"
       ]
     },
@@ -87,6 +113,21 @@
       "Source": "ours (no team mission data captured)",
       "Replies": [
         "alone",
+        "bye"
+      ]
+    },
+    "complete": {
+      "Text": "Thank you very much for your service. Here is your reward and don't forget to come back again tomorrow.{completequest AIPR}{completequest AIPB}{completequest AIWP}{completequest AIBG}{completequest AILP}{completequest AICC}{completequest AIPD}",
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "eighteen": {
+      "Text": "There is no waiting period on these alien missions. If you are unassigned, ask me for another one.",
+      "Source": "ours",
+      "Replies": [
+        "daily",
         "bye"
       ]
     },

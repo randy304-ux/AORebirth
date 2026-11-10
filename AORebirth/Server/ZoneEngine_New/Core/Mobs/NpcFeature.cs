@@ -17,5 +17,12 @@ namespace ZoneEngine_New.Core.Mobs
         /// no XP or loot. Used by Ofab hub Training Dummy (PUBG) on playfield 6007.
         /// </summary>
         Immortal,
+
+        /// <summary>
+        /// Players and their pets cannot target or damage this NPC, including area attacks.
+        /// Other NPCs can still attack it when Attackable is true. Used by Sector 35
+        /// Unicorn Service Towers and the Unicorn Energy Accumulator.
+        /// </summary>
+        PlayerUntargetable,
     }
 }

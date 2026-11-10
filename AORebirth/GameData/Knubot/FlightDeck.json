@@ -1,0 +1,30 @@
+{
+  "Notes": "Flight Deck terminal on the Alien Scoutship. Place the Bomb stand-in: targeting this NPC completes quest AIPB (bomb kit item was never captured). No talk tree required for TargetNpc, but a short confirm is provided.",
+  "Npcs": [
+    "B1FD"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "ok": {
+      "Text": "Leave the deck.",
+      "Goto": "ok",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "The flight deck. This is where the bomb kit is used.",
+      "Source": "filler",
+      "Replies": [
+        "ok"
+      ]
+    },
+    "ok": {
+      "Text": "{close}"
+    }
+  }
+}

@@ -1,0 +1,6209 @@
+{
+  "schemaVersion": 1,
+  "recordType": 1000014,
+  "playfieldId": 4367,
+  "source": "scrape-alien-b1-20261110-Cattywompus",
+  "spawns": [
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50A",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 125,
+      "angleW": 1,
+      "position": [
+        455.316,
+        1.063,
+        96.043
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50A",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 248,
+      "angleW": 1,
+      "position": [
+        458.21,
+        1.04,
+        98.569
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 159,
+      "angleW": 1,
+      "position": [
+        466.208,
+        1.083,
+        103.209
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 14,
+      "angleW": 1,
+      "position": [
+        475.199,
+        1.277,
+        113.375
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S512",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 125,
+      "angleW": 1,
+      "position": [
+        476.152,
+        1.889,
+        85.517
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S512",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 47,
+      "angleW": 1,
+      "position": [
+        479.565,
+        1.889,
+        87.408
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S506",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 200,
+      "angleW": 1,
+      "position": [
+        483.931,
+        1.045,
+        102.478
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S516",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 224,
+      "angleW": 1,
+      "position": [
+        484.955,
+        2.073,
+        87.321
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S5ZX",
+      "manifestHash": 0,
+      "minLevel": 1,
+      "maxLevel": 1,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 10,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 0,
+      "angleW": 1,
+      "position": [
+        521.373,
+        4.181,
+        58.739
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S515",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 187,
+      "angleW": 1,
+      "position": [
+        478.824,
+        1.156,
+        119.929
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S509",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 255,
+      "angleW": 1,
+      "position": [
+        408.942,
+        2.43,
+        100.038
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S516",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 84,
+      "angleW": 1,
+      "position": [
+        433.65,
+        1.05,
+        95.132
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S511",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 108,
+      "angleW": 1,
+      "position": [
+        416.995,
+        2.168,
+        93.493
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 159,
+      "angleW": 1,
+      "position": [
+        418.197,
+        1.689,
+        100.702
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 159,
+      "angleW": 1,
+      "position": [
+        438.798,
+        1.314,
+        100.672
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S512",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 67,
+      "angleW": 1,
+      "position": [
+        412.264,
+        3.524,
+        90.799
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S512",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 307,
+      "angleW": 1,
+      "position": [
+        437.082,
+        1.159,
+        92.841
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50D",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 178,
+      "angleW": 1,
+      "position": [
+        485.336,
+        1.083,
+        153.57
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S515",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 144,
+      "angleW": 1,
+      "position": [
+        489.247,
+        1.053,
+        149.286
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S506",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 200,
+      "angleW": 1,
+      "position": [
+        488.505,
+        1.034,
+        142.726
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 159,
+      "angleW": 1,
+      "position": [
+        482.988,
+        1.418,
+        144.34
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 182,
+      "angleW": 1,
+      "position": [
+        500.805,
+        1.515,
+        159.897
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50D",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 359,
+      "angleW": 1,
+      "position": [
+        493.446,
+        1.01,
+        177.237
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S515",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 217,
+      "angleW": 1,
+      "position": [
+        483.909,
+        1.094,
+        194.822
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S505",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 152,
+      "angleW": 1,
+      "position": [
+        488.638,
+        1.01,
+        198.384
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50D",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 186,
+      "angleW": 1,
+      "position": [
+        493.37,
+        1.01,
+        199.204
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 181,
+      "angleW": 1,
+      "position": [
+        495.269,
+        1.01,
+        222.795
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S511",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 217,
+      "angleW": 1,
+      "position": [
+        501.208,
+        1.25,
+        205.369
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S509",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 188,
+      "angleW": 1,
+      "position": [
+        497.731,
+        1.03,
+        213.413
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S506",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 200,
+      "angleW": 1,
+      "position": [
+        483.959,
+        1.01,
+        276.472
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S505",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 212,
+      "angleW": 1,
+      "position": [
+        475.03,
+        1.021,
+        279.923
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 241,
+      "angleW": 1,
+      "position": [
+        466.894,
+        1.66,
+        279.39
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 159,
+      "angleW": 1,
+      "position": [
+        476.425,
+        1.11,
+        269.809
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S511",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 268,
+      "angleW": 1,
+      "position": [
+        451.308,
+        1.127,
+        319.431
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S511",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 217,
+      "angleW": 1,
+      "position": [
+        463.111,
+        1.661,
+        286.619
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S509",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 188,
+      "angleW": 1,
+      "position": [
+        474.295,
+        1.03,
+        289.745
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50B",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 308,
+      "angleW": 1,
+      "position": [
+        413.829,
+        2.281,
+        294.104
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 102,
+      "angleW": 1,
+      "position": [
+        413.652,
+        1.766,
+        308.599
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50B",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 301,
+      "angleW": 1,
+      "position": [
+        400.578,
+        1.047,
+        308.883
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50F",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 134,
+      "angleW": 1,
+      "position": [
+        410.864,
+        1.299,
+        316.728
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S513",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 102,
+      "angleW": 1,
+      "position": [
+        423.775,
+        1.529,
+        315.295
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 184,
+      "angleW": 1,
+      "position": [
+        460.782,
+        1.01,
+        357.999
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S513",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 280,
+      "angleW": 1,
+      "position": [
+        463.523,
+        1.01,
+        323.921
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 241,
+      "angleW": 1,
+      "position": [
+        401.809,
+        1.01,
+        322.965
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 290,
+      "angleW": 1,
+      "position": [
+        377.803,
+        1.01,
+        310.611
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50F",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 228,
+      "angleW": 1,
+      "position": [
+        325.846,
+        1.796,
+        311.092
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S514",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 148,
+      "angleW": 1,
+      "position": [
+        325.177,
+        1.991,
+        359.344
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 219,
+      "angleW": 1,
+      "position": [
+        330.937,
+        1.033,
+        307.025
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50F",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 107,
+      "angleW": 1,
+      "position": [
+        353.064,
+        2.751,
+        326.874
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50C",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 332,
+      "angleW": 1,
+      "position": [
+        281.659,
+        1.817,
+        326.319
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 340,
+      "angleW": 1,
+      "position": [
+        306.48,
+        1.01,
+        293.543
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S513",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 241,
+      "angleW": 1,
+      "position": [
+        310.572,
+        1.951,
+        305.19
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S509",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 142,
+      "angleW": 1,
+      "position": [
+        313.676,
+        1.089,
+        259.036
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 166,
+      "angleW": 1,
+      "position": [
+        313.154,
+        1.426,
+        283.243
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50F",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 185,
+      "angleW": 1,
+      "position": [
+        312.649,
+        1.018,
+        247.646
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 184,
+      "angleW": 1,
+      "position": [
+        316.795,
+        1.187,
+        246.655
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 166,
+      "angleW": 1,
+      "position": [
+        316.024,
+        1.168,
+        300.031
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S512",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 254,
+      "angleW": 1,
+      "position": [
+        512.63,
+        2.841,
+        59.058
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S512",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 73,
+      "angleW": 1,
+      "position": [
+        475.747,
+        1.146,
+        110.907
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            479.994,
+            1.889,
+            87.878
+          ],
+          "angle": 48,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            481.284,
+            1.983,
+            89.07
+          ],
+          "angle": 47,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            482.657,
+            2.092,
+            90.343
+          ],
+          "angle": 47,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            483.601,
+            2.153,
+            92.226
+          ],
+          "angle": 23,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            484.347,
+            2.109,
+            93.958
+          ],
+          "angle": 23,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            485.087,
+            2.128,
+            95.675
+          ],
+          "angle": 23,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            485.83,
+            2.098,
+            97.401
+          ],
+          "angle": 23,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            486.746,
+            1.621,
+            99.938
+          ],
+          "angle": 351,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            486.186,
+            1.357,
+            101.717
+          ],
+          "angle": 341,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            485.564,
+            1.212,
+            103.484
+          ],
+          "angle": 341,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            484.937,
+            1.14,
+            105.266
+          ],
+          "angle": 341,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            484.199,
+            1.072,
+            107.0
+          ],
+          "angle": 322,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S516",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 224,
+      "angleW": 1,
+      "position": [
+        487.692,
+        2.595,
+        88.2
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50D",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 174,
+      "angleW": 1,
+      "position": [
+        492.666,
+        1.01,
+        190.451
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50D",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 178,
+      "angleW": 1,
+      "position": [
+        493.68,
+        1.01,
+        203.447
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S505",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 212,
+      "angleW": 1,
+      "position": [
+        484.643,
+        1.049,
+        206.33
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 180,
+      "angleW": 1,
+      "position": [
+        495.455,
+        1.01,
+        198.918
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S511",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 275,
+      "angleW": 1,
+      "position": [
+        464.687,
+        1.016,
+        319.498
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50B",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 318,
+      "angleW": 1,
+      "position": [
+        410.529,
+        2.307,
+        296.973
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 168,
+      "angleW": 1,
+      "position": [
+        461.642,
+        1.01,
+        353.065
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S513",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 263,
+      "angleW": 1,
+      "position": [
+        457.814,
+        1.01,
+        324.028
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 103,
+      "angleW": 1,
+      "position": [
+        361.801,
+        1.149,
+        315.477
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 117,
+      "angleW": 1,
+      "position": [
+        465.106,
+        1.04,
+        384.876
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50B",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 217,
+      "angleW": 1,
+      "position": [
+        490.25,
+        1.166,
+        437.252
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 166,
+      "angleW": 1,
+      "position": [
+        462.904,
+        1.027,
+        431.529
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S505",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 168,
+      "angleW": 1,
+      "position": [
+        478.038,
+        1.022,
+        427.795
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S509",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 188,
+      "angleW": 1,
+      "position": [
+        467.189,
+        1.744,
+        442.234
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50F",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 201,
+      "angleW": 1,
+      "position": [
+        502.509,
+        2.032,
+        472.184
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50F",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 228,
+      "angleW": 1,
+      "position": [
+        475.973,
+        2.884,
+        450.644
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S511",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 217,
+      "angleW": 1,
+      "position": [
+        488.509,
+        1.55,
+        450.179
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 108,
+      "angleW": 1,
+      "position": [
+        491.081,
+        1.383,
+        507.036
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S509",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 280,
+      "angleW": 1,
+      "position": [
+        492.999,
+        1.893,
+        497.981
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 166,
+      "angleW": 1,
+      "position": [
+        436.274,
+        2.241,
+        490.503
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50B",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 217,
+      "angleW": 1,
+      "position": [
+        449.471,
+        3.135,
+        502.111
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50F",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 228,
+      "angleW": 1,
+      "position": [
+        437.457,
+        3.257,
+        503.641
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S513",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 241,
+      "angleW": 1,
+      "position": [
+        423.386,
+        1.887,
+        499.838
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 219,
+      "angleW": 1,
+      "position": [
+        439.384,
+        1.922,
+        516.02
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S514",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 94,
+      "angleW": 1,
+      "position": [
+        405.262,
+        1.01,
+        515.243
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S509",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 91,
+      "angleW": 1,
+      "position": [
+        380.771,
+        1.037,
+        510.845
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S514",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 91,
+      "angleW": 1,
+      "position": [
+        325.879,
+        1.014,
+        507.655
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S508",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 59,
+      "angleW": 1,
+      "position": [
+        330.075,
+        1.638,
+        500.696
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50C",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 65,
+      "angleW": 1,
+      "position": [
+        317.179,
+        1.067,
+        495.961
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S508",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 255,
+      "angleW": 1,
+      "position": [
+        314.759,
+        1.053,
+        505.887
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S504",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 204,
+      "angleW": 1,
+      "position": [
+        253.213,
+        1.992,
+        360.008
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50C",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 323,
+      "angleW": 1,
+      "position": [
+        291.891,
+        3.482,
+        389.714
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S510",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 130,
+      "angleW": 1,
+      "position": [
+        259.566,
+        1.685,
+        364.184
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S508",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 151,
+      "angleW": 1,
+      "position": [
+        305.408,
+        1.458,
+        391.754
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50C",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 166,
+      "angleW": 1,
+      "position": [
+        317.813,
+        1.027,
+        394.06
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S510",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 130,
+      "angleW": 1,
+      "position": [
+        307.743,
+        2.687,
+        379.478
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S514",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 91,
+      "angleW": 1,
+      "position": [
+        315.413,
+        2.661,
+        367.343
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S508",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 121,
+      "angleW": 1,
+      "position": [
+        311.805,
+        1.723,
+        386.033
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S5FE",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 10,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 30,
+      "angleW": 1,
+      "position": [
+        183.993,
+        1.01,
+        440.016
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50C",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 166,
+      "angleW": 1,
+      "position": [
+        258.652,
+        2.421,
+        357.673
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50C",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 334,
+      "angleW": 1,
+      "position": [
+        266.307,
+        2.782,
+        341.42
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S514",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 91,
+      "angleW": 1,
+      "position": [
+        266.616,
+        2.938,
+        359.821
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S514",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 188,
+      "angleW": 1,
+      "position": [
+        334.327,
+        1.461,
+        333.499
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S504",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 204,
+      "angleW": 1,
+      "position": [
+        328.427,
+        1.121,
+        378.54
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50F",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 286,
+      "angleW": 1,
+      "position": [
+        359.849,
+        2.176,
+        324.82
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        316.028,
+        2.736,
+        309.421
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S513",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 241,
+      "angleW": 1,
+      "position": [
+        311.45,
+        2.6,
+        308.156
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S517",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 0,
+      "angleW": 1,
+      "position": [
+        317.019,
+        1.702,
+        240.075
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S5TA",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        204.0,
+        1.01,
+        445.0
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S5EA",
+      "manifestHash": 0,
+      "minLevel": 400,
+      "maxLevel": 400,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        185.0,
+        1.01,
+        442.0
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S5TG",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        177.0,
+        1.01,
+        426.0
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S5TD",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        175.0,
+        1.01,
+        458.0
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        250.0,
+        2.071,
+        446.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            239.298,
+            1.01,
+            445.678
+          ],
+          "angle": 268,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            225.745,
+            1.01,
+            445.271
+          ],
+          "angle": 268,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            211.792,
+            1.01,
+            445.784
+          ],
+          "angle": 276,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        250.0,
+        1.997,
+        450.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            228.69,
+            1.01,
+            447.913
+          ],
+          "angle": 264,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            213.977,
+            1.01,
+            446.584
+          ],
+          "angle": 268,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        250.0,
+        1.744,
+        455.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            232.893,
+            1.01,
+            452.087
+          ],
+          "angle": 260,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            218.726,
+            1.01,
+            448.394
+          ],
+          "angle": 253,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S504",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        250.0,
+        1.926,
+        452.0
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        158.0,
+        3.166,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S511",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 67,
+      "angleW": 1,
+      "position": [
+        152.32,
+        3.432,
+        391.969
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            153.772,
+            3.23,
+            392.575
+          ],
+          "angle": 67,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            155.802,
+            2.853,
+            393.867
+          ],
+          "angle": 64,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            156.307,
+            2.585,
+            394.982
+          ],
+          "angle": 11,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            156.459,
+            2.416,
+            395.784
+          ],
+          "angle": 11,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S504",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        156.0,
+        3.36,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            156.353,
+            3.159,
+            392.146
+          ],
+          "angle": 17,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            156.639,
+            2.943,
+            393.071
+          ],
+          "angle": 17,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50E",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        154.0,
+        3.472,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        158.0,
+        1.01,
+        490.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            163.901,
+            1.01,
+            480.525
+          ],
+          "angle": 148,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            167.694,
+            1.01,
+            474.73
+          ],
+          "angle": 144,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            170.164,
+            1.01,
+            471.34
+          ],
+          "angle": 144,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        154.0,
+        1.01,
+        490.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            158.025,
+            1.01,
+            484.451
+          ],
+          "angle": 144,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            166.439,
+            1.01,
+            472.851
+          ],
+          "angle": 144,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            171.224,
+            1.01,
+            467.78
+          ],
+          "angle": 118,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            171.818,
+            1.01,
+            467.471
+          ],
+          "angle": 118,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        150.0,
+        1.01,
+        498.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            151.389,
+            1.01,
+            495.958
+          ],
+          "angle": 146,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            159.191,
+            1.01,
+            484.49
+          ],
+          "angle": 146,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            166.206,
+            1.01,
+            476.109
+          ],
+          "angle": 132,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            174.62,
+            1.01,
+            468.444
+          ],
+          "angle": 132,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            174.715,
+            1.01,
+            470.63
+          ],
+          "angle": 348,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            172.728,
+            1.01,
+            476.627
+          ],
+          "angle": 320,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            171.75,
+            1.01,
+            477.64
+          ],
+          "angle": 313,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50A",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        150.0,
+        1.01,
+        490.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            156.953,
+            1.01,
+            481.445
+          ],
+          "angle": 141,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            167.176,
+            1.01,
+            468.866
+          ],
+          "angle": 141,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            169.815,
+            1.01,
+            465.619
+          ],
+          "angle": 141,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50A",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        160.0,
+        1.588,
+        498.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            162.644,
+            1.263,
+            492.357
+          ],
+          "angle": 155,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            167.096,
+            1.01,
+            482.856
+          ],
+          "angle": 155,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        158.0,
+        1.376,
+        498.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            163.876,
+            1.01,
+            487.183
+          ],
+          "angle": 152,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            170.758,
+            1.01,
+            474.515
+          ],
+          "angle": 152,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            172.745,
+            1.01,
+            468.385
+          ],
+          "angle": 188,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            172.653,
+            1.01,
+            467.727
+          ],
+          "angle": 188,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        154.0,
+        1.163,
+        498.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            155.288,
+            1.048,
+            495.893
+          ],
+          "angle": 149,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            162.519,
+            1.01,
+            484.057
+          ],
+          "angle": 149,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            166.081,
+            1.01,
+            478.275
+          ],
+          "angle": 148,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            166.913,
+            1.01,
+            476.951
+          ],
+          "angle": 148,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50A",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        146.0,
+        1.01,
+        494.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            146.089,
+            1.01,
+            492.364
+          ],
+          "angle": 176,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        150.0,
+        1.01,
+        494.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            152.358,
+            1.01,
+            490.774
+          ],
+          "angle": 144,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            153.196,
+            1.01,
+            489.628
+          ],
+          "angle": 144,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        156.0,
+        1.037,
+        494.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            159.522,
+            1.01,
+            488.178
+          ],
+          "angle": 225,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            157.112,
+            1.01,
+            485.772
+          ],
+          "angle": 225,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S507",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 229,
+      "angleW": 1,
+      "position": [
+        206.186,
+        1.01,
+        446.924
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S50A",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 261,
+      "angleW": 1,
+      "position": [
+        213.617,
+        1.01,
+        446.505
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S503",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 265,
+      "angleW": 1,
+      "position": [
+        238.87,
+        1.01,
+        448.575
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            229.79,
+            1.01,
+            447.82
+          ],
+          "angle": 265,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            214.976,
+            1.01,
+            446.391
+          ],
+          "angle": 233,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            209.296,
+            1.01,
+            442.169
+          ],
+          "angle": 233,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S512",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        155.0,
+        3.416,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            155.923,
+            3.115,
+            392.545
+          ],
+          "angle": 31,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            162.885,
+            1.01,
+            404.203
+          ],
+          "angle": 31,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S512",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 236,
+      "angleW": 1,
+      "position": [
+        148.187,
+        4.351,
+        385.055
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            145.481,
+            4.587,
+            384.318
+          ],
+          "angle": 273,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            143.802,
+            4.681,
+            385.067
+          ],
+          "angle": 299,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            142.676,
+            4.747,
+            386.497
+          ],
+          "angle": 335,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            142.005,
+            4.73,
+            388.226
+          ],
+          "angle": 341,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            142.656,
+            4.384,
+            390.719
+          ],
+          "angle": 25,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            144.171,
+            4.141,
+            391.304
+          ],
+          "angle": 70,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            149.038,
+            3.405,
+            393.35
+          ],
+          "angle": 49,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S510",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 144,
+      "angleW": 1,
+      "position": [
+        165.797,
+        1.01,
+        473.322
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            172.967,
+            1.01,
+            463.302
+          ],
+          "angle": 144,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            175.521,
+            1.01,
+            459.733
+          ],
+          "angle": 197,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S510",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 146,
+      "angleW": 1,
+      "position": [
+        163.264,
+        1.01,
+        479.014
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            163.996,
+            1.01,
+            477.945
+          ],
+          "angle": 146,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            169.499,
+            1.01,
+            465.542
+          ],
+          "angle": 173,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            169.879,
+            1.01,
+            462.238
+          ],
+          "angle": 130,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S510",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 156,
+      "angleW": 1,
+      "position": [
+        165.906,
+        1.01,
+        479.099
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            168.542,
+            1.01,
+            473.082
+          ],
+          "angle": 156,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            172.414,
+            1.01,
+            463.998
+          ],
+          "angle": 181,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            172.138,
+            1.01,
+            450.362
+          ],
+          "angle": 181,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            172.095,
+            1.01,
+            448.278
+          ],
+          "angle": 334,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S508",
+      "manifestHash": 0,
+      "minLevel": 240,
+      "maxLevel": 240,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 144,
+      "angleW": 1,
+      "position": [
+        160.838,
+        1.01,
+        479.226
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            163.566,
+            1.01,
+            475.723
+          ],
+          "angle": 131,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            170.141,
+            1.01,
+            469.964
+          ],
+          "angle": 131,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            167.746,
+            1.01,
+            464.805
+          ],
+          "angle": 219,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            164.738,
+            1.01,
+            461.051
+          ],
+          "angle": 161,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S501",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        157.0,
+        1.13,
+        494.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            166.186,
+            1.01,
+            478.669
+          ],
+          "angle": 149,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            171.446,
+            1.01,
+            469.54
+          ],
+          "angle": 188,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            170.551,
+            1.01,
+            463.116
+          ],
+          "angle": 188,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            170.517,
+            1.01,
+            462.437
+          ],
+          "angle": 152,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S506",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 33,
+      "angleW": 1,
+      "position": [
+        158.741,
+        1.467,
+        400.422
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            166.353,
+            1.01,
+            412.109
+          ],
+          "angle": 33,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            174.466,
+            1.01,
+            424.296
+          ],
+          "angle": 34,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            174.755,
+            1.01,
+            424.726
+          ],
+          "angle": 60,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S501",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 265,
+      "angleW": 1,
+      "position": [
+        239.932,
+        1.01,
+        448.939
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            230.756,
+            1.01,
+            448.133
+          ],
+          "angle": 265,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            220.39,
+            1.01,
+            447.257
+          ],
+          "angle": 268,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            213.637,
+            1.01,
+            446.995
+          ],
+          "angle": 268,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            213.052,
+            1.01,
+            446.946
+          ],
+          "angle": 175,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S506",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 27,
+      "angleW": 1,
+      "position": [
+        164.606,
+        1.612,
+        400.137
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            168.738,
+            1.01,
+            408.352
+          ],
+          "angle": 27,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            172.19,
+            1.01,
+            415.217
+          ],
+          "angle": 20,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S506",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        160.0,
+        3.438,
+        387.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            165.632,
+            1.797,
+            398.95
+          ],
+          "angle": 25,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            166.54,
+            1.464,
+            400.878
+          ],
+          "angle": 25,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S500",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        156.0,
+        3.36,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            155.966,
+            3.707,
+            388.52
+          ],
+          "angle": 181,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            156.04,
+            3.959,
+            386.615
+          ],
+          "angle": 170,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            156.81,
+            4.053,
+            384.865
+          ],
+          "angle": 137,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            158.127,
+            3.908,
+            383.513
+          ],
+          "angle": 135,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            159.489,
+            3.705,
+            382.221
+          ],
+          "angle": 130,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            160.122,
+            3.193,
+            389.423
+          ],
+          "angle": 2,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            160.438,
+            1.472,
+            400.626
+          ],
+          "angle": 2,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S506",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 30,
+      "angleW": 1,
+      "position": [
+        154.452,
+        3.866,
+        387.783
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            156.636,
+            3.22,
+            391.563
+          ],
+          "angle": 30,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            164.688,
+            1.01,
+            405.502
+          ],
+          "angle": 30,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            171.627,
+            1.01,
+            417.876
+          ],
+          "angle": 27,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S506",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        152.0,
+        3.566,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            155.749,
+            2.257,
+            396.726
+          ],
+          "angle": 33,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            164.639,
+            1.01,
+            410.302
+          ],
+          "angle": 33,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            165.679,
+            1.01,
+            411.891
+          ],
+          "angle": 33,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S500",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        160.0,
+        2.971,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            162.328,
+            3.173,
+            390.085
+          ],
+          "angle": 113,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            167.571,
+            1.531,
+            400.338
+          ],
+          "angle": 27,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            168.789,
+            1.212,
+            402.757
+          ],
+          "angle": 27,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S502",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 144,
+      "angleW": 1,
+      "position": [
+        167.917,
+        1.01,
+        470.292
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            172.591,
+            1.01,
+            463.791
+          ],
+          "angle": 144,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S502",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 144,
+      "angleW": 1,
+      "position": [
+        161.736,
+        1.01,
+        478.085
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            160.705,
+            1.01,
+            479.478
+          ],
+          "angle": 144,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            168.688,
+            1.01,
+            467.063
+          ],
+          "angle": 149,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            169.012,
+            1.01,
+            466.515
+          ],
+          "angle": 149,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S513",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 265,
+      "angleW": 1,
+      "position": [
+        239.053,
+        1.01,
+        448.992
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            228.687,
+            1.01,
+            448.037
+          ],
+          "angle": 265,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            218.106,
+            1.01,
+            448.056
+          ],
+          "angle": 278,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            207.708,
+            1.01,
+            449.618
+          ],
+          "angle": 278,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S502",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 145,
+      "angleW": 1,
+      "position": [
+        151.413,
+        1.01,
+        495.952
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            153.492,
+            1.01,
+            492.939
+          ],
+          "angle": 145,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            162.471,
+            1.01,
+            479.923
+          ],
+          "angle": 145,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            168.819,
+            1.01,
+            467.433
+          ],
+          "angle": 168,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S502",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 220,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 146,
+      "angleW": 1,
+      "position": [
+        155.068,
+        1.01,
+        490.531
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            157.073,
+            1.01,
+            487.576
+          ],
+          "angle": 146,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            165.94,
+            1.01,
+            474.507
+          ],
+          "angle": 146,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            174.682,
+            1.01,
+            461.623
+          ],
+          "angle": 146,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            175.069,
+            1.01,
+            461.052
+          ],
+          "angle": 146,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S513",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 264,
+      "angleW": 1,
+      "position": [
+        249.161,
+        1.859,
+        449.916
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            236.056,
+            1.01,
+            448.606
+          ],
+          "angle": 264,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            222.76,
+            1.01,
+            447.328
+          ],
+          "angle": 294,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            211.9,
+            1.01,
+            452.085
+          ],
+          "angle": 294,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S504",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        160.0,
+        1.559,
+        400.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            160.362,
+            1.412,
+            401.07
+          ],
+          "angle": 19,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            165.146,
+            1.01,
+            415.209
+          ],
+          "angle": 19,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            165.369,
+            1.01,
+            415.777
+          ],
+          "angle": 283,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S504",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        155.0,
+        1.527,
+        400.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            164.364,
+            1.01,
+            412.731
+          ],
+          "angle": 36,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            173.445,
+            1.01,
+            425.077
+          ],
+          "angle": 36,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            171.678,
+            1.01,
+            423.504
+          ],
+          "angle": 205,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            171.409,
+            1.01,
+            422.931
+          ],
+          "angle": 205,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S504",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        150.0,
+        2.075,
+        400.0
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S501",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        160.0,
+        2.971,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            165.217,
+            1.416,
+            401.319
+          ],
+          "angle": 27,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            170.535,
+            1.01,
+            411.838
+          ],
+          "angle": 27,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            173.908,
+            1.01,
+            418.511
+          ],
+          "angle": 27,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S501",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 35,
+      "angleW": 1,
+      "position": [
+        154.655,
+        2.147,
+        397.691
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            156.985,
+            1.342,
+            401.039
+          ],
+          "angle": 35,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            165.121,
+            1.01,
+            412.734
+          ],
+          "angle": 35,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S501",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        165.0,
+        3.092,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            165.456,
+            2.905,
+            392.259
+          ],
+          "angle": 18,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            168.831,
+            1.249,
+            402.466
+          ],
+          "angle": 18,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            172.53,
+            1.01,
+            413.654
+          ],
+          "angle": 18,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            174.171,
+            1.01,
+            418.62
+          ],
+          "angle": 18,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S501",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 31,
+      "angleW": 1,
+      "position": [
+        155.072,
+        3.395,
+        391.118
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            157.163,
+            2.591,
+            394.543
+          ],
+          "angle": 31,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            162.417,
+            1.043,
+            403.787
+          ],
+          "angle": 7,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            163.214,
+            1.01,
+            409.937
+          ],
+          "angle": 7,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S501",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        150.0,
+        3.651,
+        391.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            154.868,
+            2.525,
+            395.733
+          ],
+          "angle": 46,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S501",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 186,
+      "angleW": 1,
+      "position": [
+        154.657,
+        3.841,
+        387.914
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            154.546,
+            4.05,
+            386.353
+          ],
+          "angle": 179,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            154.595,
+            4.298,
+            384.485
+          ],
+          "angle": 178,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            154.522,
+            4.235,
+            384.977
+          ],
+          "angle": 356,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            153.95,
+            3.284,
+            392.264
+          ],
+          "angle": 356,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            154.723,
+            3.184,
+            392.538
+          ],
+          "angle": 36,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            157.338,
+            2.314,
+            396.176
+          ],
+          "angle": 36,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S502",
+      "manifestHash": 0,
+      "minLevel": 250,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        147.0,
+        1.01,
+        498.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            148.358,
+            1.01,
+            496.694
+          ],
+          "angle": 131,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            149.597,
+            1.01,
+            495.594
+          ],
+          "angle": 137,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S5FM",
+      "manifestHash": 0,
+      "minLevel": 300,
+      "maxLevel": 300,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 306,
+      "angleW": 1,
+      "position": [
+        114.0,
+        1.01,
+        436.0
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            115.359,
+            1.011,
+            436.147
+          ],
+          "angle": 84,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            116.61,
+            1.029,
+            436.282
+          ],
+          "angle": 117,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "S5FS",
+      "manifestHash": 0,
+      "minLevel": 300,
+      "maxLevel": 300,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 350,
+      "angleW": 1,
+      "position": [
+        242.263,
+        1.019,
+        424.842
+      ],
+      "radius": 1,
+      "additionalPoints": [
+        {
+          "position": [
+            243.039,
+            2.548,
+            416.144
+          ],
+          "angle": 296,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            241.534,
+            2.558,
+            416.892
+          ],
+          "angle": 296,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            239.737,
+            1.01,
+            417.478
+          ],
+          "angle": 297,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            238.062,
+            1.01,
+            418.321
+          ],
+          "angle": 297,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            236.374,
+            1.01,
+            419.171
+          ],
+          "angle": 297,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            234.699,
+            1.01,
+            420.014
+          ],
+          "angle": 297,
+          "radius": 1,
+          "angleW": 1
+        },
+        {
+          "position": [
+            240.852,
+            1.014,
+            424.175
+          ],
+          "angle": 56,
+          "radius": 1,
+          "angleW": 1
+        }
+      ],
+      "extensions": null
+    }
+  ]
+}

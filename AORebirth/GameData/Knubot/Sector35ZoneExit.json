@@ -1,0 +1,40 @@
+{
+  "Notes": "Sector 35 Zone Exit. Talk/click stand-in teleports to the captured Unicorn Outpost lower-level landing (4368 199, 0.26, 242). Source: zonechanges 2026-11-10 15:11:46 ET.",
+  "Npcs": [
+    "S5ZX"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "leave": {
+      "Text": "Leave Sector 35.",
+      "Goto": "leave",
+      "Source": "filler"
+    },
+    "stay": {
+      "Text": "Stay.",
+      "Goto": "stay",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "The way back to Unicorn Outpost.",
+      "Source": "filler",
+      "Replies": [
+        "leave",
+        "stay"
+      ]
+    },
+    "leave": {
+      "Text": "{teleport 4368 199.000 0.260 242.000}{close}",
+      "Source": "captured (zone-out)"
+    },
+    "stay": {
+      "Text": "{close}"
+    }
+  }
+}

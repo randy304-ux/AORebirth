@@ -7,6 +7,7 @@ namespace ZoneEngine_New.Core.Helpers
 
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.Inventory;
+    using ZoneEngine_New.Core.Mobs;
     using ZoneEngine_New.Core.Nanos;
 
     /// <summary>
@@ -48,6 +49,14 @@ namespace ZoneEngine_New.Core.Helpers
             Character attackerSide = attacker is NpcCharacter { PetOwner: Character attackerOwner } ? attackerOwner : attacker;
             Character targetSide = target is NpcCharacter { PetOwner: Character targetOwner } ? targetOwner : target;
             if (ReferenceEquals(attackerSide, targetSide))
+                return false;
+
+            // Allied structures (Sector 35 towers / accumulator): aliens may damage them,
+            // players and their pets may not, including AoE (NanoCastFunctions uses CanAttack).
+            if (target is NpcCharacter untargetable
+                && untargetable.MobTemplate != null
+                && untargetable.MobTemplate.Has(NpcFeature.PlayerUntargetable)
+                && attackerSide is Player)
                 return false;
 
             // A player's pet only fights players (or their pets) its owner could fight.

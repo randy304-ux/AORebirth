@@ -1,0 +1,72 @@
+{
+  "Notes": "Unicorn Field Engineer in Sector 35. Dialog captured 2026-11-10 14:54:49-14:55:02 ET. Towers and the accumulator are standing spawns (no knubot spawn-npc hook); they are already in the field rather than appearing on 'We're ready, Sir.'",
+  "Npcs": [
+    "S5FE"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "assist": {
+      "Text": "We were told to assist you, Sir.",
+      "Goto": "assist",
+      "Source": "captured"
+    },
+    "what": {
+      "Text": "Ok, what should we do to help out then?",
+      "Goto": "what",
+      "Source": "captured"
+    },
+    "ready": {
+      "Text": "We're ready, Sir.",
+      "Goto": "ready",
+      "Source": "captured"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Finally you are here! ",
+      "Source": "captured",
+      "Replies": [
+        "assist",
+        "bye"
+      ]
+    },
+    "assist": {
+      "Text": "Wonderful!  You see, our ship was never meant for close combat.  I think we were shot down by aliens, and they keep attacking us, making it impossible for me to start the repair process. ",
+      "Source": "captured",
+      "Replies": [
+        "what",
+        "bye"
+      ]
+    },
+    "what": {
+      "Text": [
+        "I will deploy my last set of service towers.  Your job will be to protect them from the aliens.  I'll be inside the ship monitoring the repair process making sure it goes well.  Once the ship is repaired I'll take us all out of here! ",
+        " Now, are you ready for this task, or will I have to explain it again? "
+      ],
+      "Source": "captured",
+      "Replies": [
+        "ready",
+        "bye"
+      ]
+    },
+    "ready": {
+      "Text": "Good.  Now keep those aliens at bay! ",
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}"
+    }
+  }
+}

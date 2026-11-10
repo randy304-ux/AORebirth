@@ -1,0 +1,143 @@
+{
+  "Notes": "Unicorn Security Administrator (existing template UCCM) at Unicorn Outpost. Battlefield authorization path captured 2026-11-10 14:26:48-14:27:03 ET, including the Sector 35 briefing. 'Tell me about this area', 'Tell me about the Unicorn Company', Data Core and Invasion Plan answers were not captured (filler / gap). Data Core (258292) and Kyr'Ozch Helmet (257706) drop from the Sector 35 Cha'Khaz pair, but the turn-in reward was never recorded.",
+  "Npcs": [
+    "UCCM"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "auth": {
+      "Text": "I would like authorization to enter the battlefield!",
+      "Goto": "auth",
+      "Source": "captured"
+    },
+    "area": {
+      "Text": "Tell me about this area.",
+      "Goto": "area",
+      "Source": "captured"
+    },
+    "company": {
+      "Text": "Tell me about the Unicorn Company.",
+      "Goto": "company",
+      "Source": "captured"
+    },
+    "core": {
+      "Text": "I found this Kyr'Ozch Data Core in one of the sectors, Sir.",
+      "Goto": "core",
+      "Source": "captured"
+    },
+    "plan": {
+      "Text": "I found this Invasion Plan in Sector 42.",
+      "Goto": "plan",
+      "Source": "captured"
+    },
+    "s28": {
+      "Text": "Sector 28: Get information from the alien hunter and terminate the Kyr'Ozch Embalmer.",
+      "Goto": "s28",
+      "Source": "captured"
+    },
+    "s35": {
+      "Text": "Sector 35: Assist the Unicorn Field Engineer.",
+      "Goto": "s35",
+      "Source": "captured"
+    },
+    "s13": {
+      "Text": "Sector 13: Destroy the aliens before they build a base.",
+      "Goto": "s13",
+      "Source": "captured"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Yes?  This better be important!",
+      "Source": "captured",
+      "Replies": [
+        "auth",
+        "area",
+        "company",
+        "core",
+        "plan",
+        "bye"
+      ]
+    },
+    "auth": {
+      "Text": [
+        "More troopers?  Excellent!",
+        " So, which task do you consider your team to be best fit for? "
+      ],
+      "Source": "captured",
+      "Replies": [
+        "s28",
+        "s35",
+        "s13",
+        "bye"
+      ]
+    },
+    "s35": {
+      "Text": "One of the Unicorn ships crashed out in the canyon.  The Unicorn Field Engineer needs assistance with holding off the aliens while he repairs the ship in order to get it and the crew out of there. {givequest S35A}",
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "s28": {
+      "Text": "Sector 28 is already available from the Unicorn Outpost. I have no further briefing captured for that assignment.",
+      "Source": "filler",
+      "Replies": [
+        "s35",
+        "s13",
+        "bye"
+      ]
+    },
+    "s13": {
+      "Text": "Sector 13 is already available from the Unicorn Outpost. I have no further briefing captured for that assignment.",
+      "Source": "filler",
+      "Replies": [
+        "s35",
+        "s28",
+        "bye"
+      ]
+    },
+    "area": {
+      "Text": "I don't have that briefing on file.",
+      "Source": "filler",
+      "Replies": [
+        "auth",
+        "bye"
+      ]
+    },
+    "company": {
+      "Text": "I don't have that briefing on file.",
+      "Source": "filler",
+      "Replies": [
+        "auth",
+        "bye"
+      ]
+    },
+    "core": {
+      "Text": "I cannot process that Data Core yet. The reward for turning one in was never captured.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "plan": {
+      "Text": "I cannot process an Invasion Plan yet. That turn-in was never captured.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}"
+    }
+  }
+}

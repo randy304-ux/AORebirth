@@ -25,7 +25,7 @@
       "Hash": "RIWP",
       "Credits": 5000,
       "Xp": 15000,
-      "AlienXpPercent": 25,
+      "AlienXpPercent": 5,
       "Records": [
         [
           {
@@ -65,7 +65,7 @@
       "Hash": "RIBG",
       "Credits": 20000,
       "Xp": 60000,
-      "AlienXpPercent": 25,
+      "AlienXpPercent": 5,
       "Records": [
         [
           {
@@ -105,7 +105,7 @@
       "Hash": "RICC",
       "Credits": 15000,
       "Xp": 40000,
-      "AlienXpPercent": 25,
+      "AlienXpPercent": 5,
       "Records": [
         [
           {
@@ -145,7 +145,7 @@
       "Hash": "RILP",
       "Credits": 15000,
       "Xp": 50000,
-      "AlienXpPercent": 25,
+      "AlienXpPercent": 5,
       "Records": [
         [
           {
@@ -185,7 +185,7 @@
       "Hash": "RIPD",
       "Credits": 60000,
       "Xp": 400000,
-      "AlienXpPercent": 25,
+      "AlienXpPercent": 5,
       "Records": [
         [
           {
@@ -345,6 +345,166 @@
       "Hash": "RGCT",
       "Credits": 0,
       "Xp": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "AIPB",
+    "Name": "Place the Bomb",
+    "QasInstance": 944201,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Summary": "Place the Bomb\n\nThe Kyr'Ozch are constantly surrounding the Goliath-class battlestations in orbit around Rubi-Ka.\n\nYou're commissioned to board an alien scout ship and blow it up.\nThe Unicorn Outpost offers a free of charge shuttle transport that will take you to the scout ship.\n\nUse the bomb kit on flight deck; you will then have one minute to exit the ship before the bomb goes off.",
+    "Objective": {
+      "Count": null,
+      "Npc": "B1FD",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 6111,
+      "X": 217.064,
+      "Y": 13.021,
+      "Z": 167.123
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AIPR",
+    "Reward": {
+      "Hash": "RIPB",
+      "Credits": 0,
+      "Xp": 0,
+      "AlienXpPercent": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "AIPR",
+    "Name": "Return to the Alien Agency Handler",
+    "QasInstance": 944202,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Summary": "Return to the Alien Agency Handler\n\nYou have completed your assignment. Please return to the Alien Agency Handler to receive a reward.",
+    "Objective": {
+      "Count": null,
+      "Npc": "AIPZ",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 7011,
+      "X": 134.17,
+      "Y": 2.04,
+      "Z": 88.52
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "RIPR",
+      "Credits": 0,
+      "Xp": 0,
+      "AlienXpPercent": 5,
+      "Records": [
+        [
+          {
+            "Id": 303237,
+            "HighId": 303237,
+            "Name": "Freelancers Inc. Token",
+            "Quality": 1,
+            "Count": 17
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "S35A",
+    "Name": "Unicorn Field Authorization",
+    "QasInstance": 944203,
+    "Scope": "Team",
+    "Action": "TargetNpc",
+    "Summary": "Unicorn Field Authorization.\n\nAccess level: 2\n\nMission: Remove the alien threat in sector 35.\nFind the crashed Unicorn ship and assist the Unicorn Field Engineer getting his ship flying again.\n\nReturn any captured alien data to the Unicorn Security Administrator.\n\nTime to complete: 5 hours.",
+    "Objective": {
+      "Count": null,
+      "Npc": "S5FE",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4367,
+      "X": 183.993,
+      "Y": 1.01,
+      "Z": 440.016
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "S35B",
+    "Reward": {
+      "Hash": "R35A",
+      "Credits": 0,
+      "Xp": 0,
+      "AlienXpPercent": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "S35B",
+    "Name": "Unicorn Field Authorization",
+    "QasInstance": 944204,
+    "Scope": "Team",
+    "Action": "KillOne",
+    "Summary": "Defeat Field Marshal  - Cha'Khaz in Sector 35, then return any captured alien data to the Unicorn Security Administrator.",
+    "Objective": {
+      "Count": null,
+      "Npc": "S5FM",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4367,
+      "X": 114,
+      "Y": 1.01,
+      "Z": 436
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "S35C",
+    "Reward": {
+      "Hash": "R35B",
+      "Credits": 0,
+      "Xp": 0,
+      "AlienXpPercent": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "S35C",
+    "Name": "Unicorn Field Authorization",
+    "QasInstance": 944205,
+    "Scope": "Team",
+    "Action": "TargetNpc",
+    "Summary": "Return to the Unicorn Security Administrator at Unicorn Outpost. (Data Core and helmet turn-in lines were not captured.)",
+    "Objective": {
+      "Count": null,
+      "Npc": "UCCM",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4364,
+      "X": 144,
+      "Y": 101.26096,
+      "Z": 177
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "R35C",
+      "Credits": 0,
+      "Xp": 0,
+      "AlienXpPercent": 0,
       "Records": null
     }
   }

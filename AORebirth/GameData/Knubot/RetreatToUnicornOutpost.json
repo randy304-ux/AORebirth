@@ -1,0 +1,40 @@
+{
+  "Notes": "Retreat to Unicorn Outpost terminal on the Alien Scoutship (PF 6111). Teleports to the captured exit landing in PF 4364 (63, 101.295, 84). Source: zonechanges 2026-11-10 14:26:01 ET.",
+  "Npcs": [
+    "B1RT"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "leave": {
+      "Text": "Retreat to Unicorn Outpost",
+      "Goto": "leave",
+      "Source": "captured (terminal name)"
+    },
+    "stay": {
+      "Text": "Stay on the ship.",
+      "Goto": "stay",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "The retreat pad hums. It will take you back to Unicorn Outpost.",
+      "Source": "filler",
+      "Replies": [
+        "leave",
+        "stay"
+      ]
+    },
+    "leave": {
+      "Text": "{teleport 4364 63.000 101.295 84.000}{close}",
+      "Source": "captured (zone-out)"
+    },
+    "stay": {
+      "Text": "{close}"
+    }
+  }
+}

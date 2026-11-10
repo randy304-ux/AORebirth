@@ -1,0 +1,211 @@
+{
+  "B1AM": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Assault Medic",
+        "Level": 231,
+        "Health": 80859,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251776,
+        "Scale": 50,
+        "Mesh": 247383,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6111,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 14:21-14:26 ET"
+    },
+    "Hash": "B1AM"
+  },
+  "B1BG": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Brigade General",
+        "Level": 231,
+        "Health": 110901,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 256462,
+        "Scale": 127,
+        "Mesh": 254291,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6111,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 14:21-14:26 ET"
+    },
+    "Hash": "B1BG"
+  },
+  "B1EN": {
+    "Templates": [
+      {
+        "Name": "Enter the Unicorn Ship",
+        "Level": 1,
+        "Health": 1,
+        "Side": 1,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 258035,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": -2146826751,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4364,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 14:21 ET"
+    },
+    "Hash": "B1EN"
+  },
+  "B1FD": {
+    "Templates": [
+      {
+        "Name": "Flight Deck",
+        "Level": 1,
+        "Health": 1,
+        "Side": 1,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 200990,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": 277352961,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6111,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 14:21-14:26 ET"
+    },
+    "Hash": "B1FD"
+  },
+  "B1RT": {
+    "Templates": [
+      {
+        "Name": "Retreat to Unicorn Outpost",
+        "Level": 1,
+        "Health": 1,
+        "Side": 1,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 287461,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": -2145905663,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6111,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 14:21-14:26 ET"
+    },
+    "Hash": "B1RT"
+  },
+  "B1SC": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Scout",
+        "Level": 231,
+        "Health": 55450,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251785,
+        "Scale": 100,
+        "Mesh": 246942,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6111,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 14:21-14:26 ET"
+    },
+    "Hash": "B1SC"
+  },
+  "B1SP": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Specialist",
+        "Level": 231,
+        "Health": 40430,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251778,
+        "Scale": 50,
+        "Mesh": 247383,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6111,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 14:21-14:26 ET"
+    },
+    "Hash": "B1SP"
+  },
+  "B1TC": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Technician",
+        "Level": 231,
+        "Health": 90967,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251785,
+        "Scale": 90,
+        "Mesh": 246942,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6111,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 14:21-14:26 ET"
+    },
+    "Hash": "B1TC"
+  }
+}
