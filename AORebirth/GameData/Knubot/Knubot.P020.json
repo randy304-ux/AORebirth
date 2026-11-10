@@ -1,0 +1,82 @@
+{
+  "Npcs": [
+    "P020"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK1A active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "quest XK1B active"
+      ],
+      "Say": "point_jar"
+    },
+    {
+      "If": [
+        "quest XK1C active",
+        "has PK0K"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest XK1C active"
+      ],
+      "Say": "need_jar"
+    },
+    {
+      "If": [
+        "quest XK1C done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "The jar sits in the open beside me. Take it and bring it back. {completequest XK1A}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "point_jar": {
+      "Text": "The Fine Quality Jar is on the ground right here. Take it.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "That is the jar. Take this Tattered Book: 1001 Survival Tips...And More! Carry it back to Danny Sawyer at 2510 by 915. {take PK0K}{completequest XK1C}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "need_jar": {
+      "Text": "I still need A Fine Quality Jar from the stand beside me.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Danny Sawyer is at 2510 by 915.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

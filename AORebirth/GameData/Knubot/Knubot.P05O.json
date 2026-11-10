@@ -1,0 +1,291 @@
+{
+  "Npcs": [
+    "P05O"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK1E active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "quest XK1F active"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest XK1G active"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest XK1G done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "Alappaa is through the entrance behind me. A team is wise. Find the Old Man just inside and see that he is accounted for, then return. The rest of that instance is still being opened. {completequest XK1E}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "The Old Man stands just inside Alappaa. Speak with him, then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "The Old Man is seen. Take the gift that matches your path.",
+      "Replies": [
+        "b0",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b13",
+        "b14"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "The Penumbra Xan trail ends here. The volumes you carry are Afirce's World Catalogue, one through four.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_sol": {
+      "Text": "Nano Crystal (Composite Heavy Artillery). The Penumbra Xan trail ends here. {spawn PK0Y 182}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_ma": {
+      "Text": "Nano Crystal (Fists of the Winter Flame). The Penumbra Xan trail ends here. {spawn PK0U 185}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_eng": {
+      "Text": "Nano Crystal (Boosted Tendons). The Penumbra Xan trail ends here. {spawn PK0R 183}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_fix": {
+      "Text": "Nano Crystal (Program Override). The Penumbra Xan trail ends here. {spawn PK0S 187}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_agt": {
+      "Text": "Nano Crystal (Dead Cold). The Penumbra Xan trail ends here. {spawn PK0N 170}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_adv": {
+      "Text": "Nano Crystal (Sharp Scales). The Penumbra Xan trail ends here. {spawn PK0M 175}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_trd": {
+      "Text": "Nano Crystal (Grand Theft Humidity). The Penumbra Xan trail ends here. {spawn PK0Z 189}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_crat": {
+      "Text": "Nano Crystal (Carlita Desposito). The Penumbra Xan trail ends here. {spawn PK0O 175}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_enf": {
+      "Text": "Nano Crystal (Ice Burn). The Penumbra Xan trail ends here. {spawn PK0Q 184}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_doc": {
+      "Text": "Nano Crystal (Team-Enhanced Deathless Blessing). The Penumbra Xan trail ends here. {spawn PK0P 191}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_nt": {
+      "Text": "Nano Crystal (Freezing Lancets). The Penumbra Xan trail ends here. {spawn PK0W 197}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_mp": {
+      "Text": "Nano Crystal (Summoning of Yidira). The Penumbra Xan trail ends here. {spawn PK0V 203}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_kep": {
+      "Text": "Blade of Khione. The Penumbra Xan trail ends here. {spawn PK0T 1}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_shd": {
+      "Text": "Sharl's Cybernetic Tattoo. The Penumbra Xan trail ends here. {spawn PK0X 200}{completequest XK1G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "b0": {
+      "Text": "That one.",
+      "Goto": "give_sol",
+      "If": [
+        "prof 0"
+      ],
+      "Source": "filler"
+    },
+    "b1": {
+      "Text": "That one.",
+      "Goto": "give_ma",
+      "If": [
+        "prof 1"
+      ],
+      "Source": "filler"
+    },
+    "b2": {
+      "Text": "That one.",
+      "Goto": "give_eng",
+      "If": [
+        "prof 2"
+      ],
+      "Source": "filler"
+    },
+    "b3": {
+      "Text": "That one.",
+      "Goto": "give_fix",
+      "If": [
+        "prof 3"
+      ],
+      "Source": "filler"
+    },
+    "b4": {
+      "Text": "That one.",
+      "Goto": "give_agt",
+      "If": [
+        "prof 4"
+      ],
+      "Source": "filler"
+    },
+    "b5": {
+      "Text": "That one.",
+      "Goto": "give_adv",
+      "If": [
+        "prof 5"
+      ],
+      "Source": "filler"
+    },
+    "b6": {
+      "Text": "That one.",
+      "Goto": "give_trd",
+      "If": [
+        "prof 6"
+      ],
+      "Source": "filler"
+    },
+    "b7": {
+      "Text": "That one.",
+      "Goto": "give_crat",
+      "If": [
+        "prof 7"
+      ],
+      "Source": "filler"
+    },
+    "b8": {
+      "Text": "That one.",
+      "Goto": "give_enf",
+      "If": [
+        "prof 8"
+      ],
+      "Source": "filler"
+    },
+    "b9": {
+      "Text": "That one.",
+      "Goto": "give_doc",
+      "If": [
+        "prof 9"
+      ],
+      "Source": "filler"
+    },
+    "b10": {
+      "Text": "That one.",
+      "Goto": "give_nt",
+      "If": [
+        "prof 10"
+      ],
+      "Source": "filler"
+    },
+    "b11": {
+      "Text": "That one.",
+      "Goto": "give_mp",
+      "If": [
+        "prof 11"
+      ],
+      "Source": "filler"
+    },
+    "b13": {
+      "Text": "That one.",
+      "Goto": "give_kep",
+      "If": [
+        "prof 13"
+      ],
+      "Source": "filler"
+    },
+    "b14": {
+      "Text": "That one.",
+      "Goto": "give_shd",
+      "If": [
+        "prof 14"
+      ],
+      "Source": "filler"
+    }
+  }
+}

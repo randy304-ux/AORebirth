@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "P028"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK10 active"
+      ],
+      "Say": "hello"
+    },
+    {
+      "If": [
+        "quest XK11 active"
+      ],
+      "Say": "fight"
+    },
+    {
+      "If": [
+        "quest XK11 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "hello": {
+      "Text": "What do you want?",
+      "Replies": [
+        "map",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "refuse": {
+      "Text": "Pete sent you for my map? Then you're done talking. {completequest XK10}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "fight": {
+      "Text": "I already told you. Come on, then.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "He's got nothing more to say.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "map": {
+      "Text": "Shivering Pete sent me to get your map.",
+      "Goto": "refuse",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

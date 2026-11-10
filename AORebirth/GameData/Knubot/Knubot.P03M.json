@@ -1,0 +1,42 @@
+{
+  "Npcs": [
+    "P03M"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK0I active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "quest XK0I done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "The path is walked. Ruminating Strife keeps the Pipe records at 782 by 1145. {completequest XK0I}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Ruminating Strife is at 782 by 1145.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

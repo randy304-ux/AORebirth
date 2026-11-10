@@ -1,0 +1,120 @@
+{
+  "Npcs": [
+    "P049"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK0J active"
+      ],
+      "Say": "brief_parser"
+    },
+    {
+      "If": [
+        "HasAnyQuest XK0K,XK0L,XK0M"
+      ],
+      "Say": "progress_tags"
+    },
+    {
+      "If": [
+        "quest XK0N active"
+      ],
+      "Say": "turnin_vol1"
+    },
+    {
+      "If": [
+        "quest XK0O active"
+      ],
+      "Say": "brief_arbiter"
+    },
+    {
+      "If": [
+        "quest XK0P active"
+      ],
+      "Say": "turnin_vol2"
+    },
+    {
+      "If": [
+        "quest XK0Q active"
+      ],
+      "Say": "brief_tapio"
+    },
+    {
+      "If": [
+        "quest XK0R active"
+      ],
+      "Say": "turnin_vol3"
+    },
+    {
+      "If": [
+        "quest XK0R done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief_parser": {
+      "Text": "Take this Chemical Data Parser. Enter The Pipe and mark a Hiisi Medicine Man, a Hiisi Charmer, and a Hiisi Runner, then return. {completequest XK0J}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress_tags": {
+      "Text": "Medicine Man, Charmer, and Runner. Then we speak of Volume One.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin_vol1": {
+      "Text": "The first marks are enough. Take Afirce's World Catalogue of Books - Volume One. Now mark the Hiisi Arbiter in The Pipe, 1853 by 1108. {completequest XK0N}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "brief_arbiter": {
+      "Text": "The Hiisi Arbiter is in The Pipe, 1853 by 1108.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin_vol2": {
+      "Text": "The Arbiter is noted. Take Volume Two. Tapiolainen waits deeper in The Pipe, 1951 by 1159. Return when it falls. {completequest XK0P}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "brief_tapio": {
+      "Text": "Tapiolainen, 1951 by 1159 in The Pipe.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin_vol3": {
+      "Text": "The Pipe is quieter. Take Volume Three. One Whose Mind Is Riddled stands in the Forest, 1531 by 1882. {completequest XK0R}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "One Whose Mind Is Riddled is in the Forest, 1531 by 1882.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

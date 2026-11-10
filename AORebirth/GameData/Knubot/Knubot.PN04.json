@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "PN04"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK05 active"
+      ],
+      "Say": "offer_active"
+    },
+    {
+      "If": [
+        "HasAnyQuest XK06,XK07"
+      ],
+      "Say": "offer_repeat"
+    }
+  ],
+  "Lines": {
+    "offer_active": {
+      "Text": "Environmental Test Unit 3 is running today's ice measure.",
+      "Replies": [
+        "ask",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "offer_repeat": {
+      "Text": "Environmental Test Unit 3 can repeat today's ice measure.",
+      "Replies": [
+        "ask_repeat",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "thickness": {
+      "Text": "Today's ice thickness is 89.75. Remember that number for Founding Glacier Five. {completequest XK05}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "thickness_repeat": {
+      "Text": "Today's ice thickness is 89.75.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "ask": {
+      "Text": "What is today's ice thickness?",
+      "Goto": "thickness",
+      "Source": "filler"
+    },
+    "ask_repeat": {
+      "Text": "What is today's ice thickness?",
+      "Goto": "thickness_repeat",
+      "Source": "filler"
+    }
+  }
+}

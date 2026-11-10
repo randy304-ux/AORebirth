@@ -1,0 +1,1455 @@
+[
+  {
+    "Hash": "XK00",
+    "Name": "Xan Civilization: Seek Founding Glacier Five",
+    "Summary": "Talk to Founding Glacier Five on the Adonis-to-Penumbra portal island in Penumbra Valley (1854 x 92).",
+    "QasInstance": 953000,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN00",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK01",
+    "Reward": {
+      "Hash": "XT00",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK01",
+    "Name": "Xan Civilization: Cull 5 Tundra Leets",
+    "Summary": "Kill 5 Tundra Leets (PN01) concealed on the portal island. When the fifth dies, a Bundle Of Leet Tails (269671) is awarded into inventory.",
+    "QasInstance": 953001,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "PN01",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK02",
+    "Reward": {
+      "Hash": "XT01",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 269671,
+            "HighId": 269671,
+            "Name": "Bundle Of Leet Tails",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK02",
+    "Name": "Xan Civilization: Tails to Founding Glacier Five",
+    "Summary": "Return the Bundle Of Leet Tails to Founding Glacier Five for a Yuttos Filter.",
+    "QasInstance": 953002,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "PN00",
+      "Count": null,
+      "SpecItem": "PK00",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK03",
+    "Reward": {
+      "Hash": "XT02",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 269884,
+            "HighId": 269884,
+            "Name": "Yuttos Filter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK03",
+    "Name": "Xan Civilization: Environmental Test Unit 1",
+    "Summary": "Talk to Environmental Test Unit 1 (Valley 1786 x 155) and ask for today's ice thickness (fixed reading 96.312 until a per-player random hook exists).",
+    "QasInstance": 953003,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN02",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK04",
+    "Reward": {
+      "Hash": "XT03",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK04",
+    "Name": "Xan Civilization: Environmental Test Unit 2",
+    "Summary": "Talk to Environmental Test Unit 2 (Valley 1882 x 284) and ask for today's ice thickness (fixed reading 104.32).",
+    "QasInstance": 953004,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN03",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK05",
+    "Reward": {
+      "Hash": "XT04",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK05",
+    "Name": "Xan Civilization: Environmental Test Unit 3",
+    "Summary": "Talk to Environmental Test Unit 3 (Valley 2161 x 345) and ask for today's ice thickness (fixed reading 89.75).",
+    "QasInstance": 953005,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN04",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK06",
+    "Reward": {
+      "Hash": "XT05",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK06",
+    "Name": "Xan Civilization: Environmental Test Unit 4",
+    "Summary": "Talk to Environmental Test Unit 4 (Valley 2168 x 756) and ask for today's ice thickness (fixed reading 111.64).",
+    "QasInstance": 953006,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN05",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK07",
+    "Reward": {
+      "Hash": "XT06",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK07",
+    "Name": "Xan Civilization: Report the Test Sum",
+    "Summary": "Return to Founding Glacier Five and answer a multiple-choice question for each unit's ice thickness. A wrong answer does not complete the step (re-check the units if needed). This step is a FindItem action so targeting Glacier does not auto-complete and skip the quiz; the knubot completes it after all four correct answers. Awards an Incomplete Permafrost Melting Tool and Yutto Field Glasses.",
+    "QasInstance": 953007,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "PN00",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK08",
+    "Reward": {
+      "Hash": "XT07",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 269804,
+            "HighId": 269804,
+            "Name": "Incomplete Permafrost Melting Tool",
+            "Quality": 250,
+            "Count": 1
+          },
+          {
+            "Id": 269381,
+            "HighId": 269381,
+            "Name": "Yutto Field Glasses",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK08",
+    "Name": "Xan Civilization: Seek One Who Tinkers With Gadgets",
+    "Summary": "Talk to One Who Tinkers With Gadgets in Penumbra Forest (1433 x 566).",
+    "QasInstance": 953008,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P05J",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK09",
+    "Reward": {
+      "Hash": "XT08",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK09",
+    "Name": "Xan Civilization: Hunt Disturbed Vortexoids",
+    "Summary": "Kill Disturbed Vortexoids northwest of Tinkers (around 1220 x 700) until you have a Primary and a Secondary Infrared Filter. Placeholder 50% loot until a scrape lands.",
+    "QasInstance": 953009,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "P05A",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0A",
+    "Reward": {
+      "Hash": "XT09",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0A",
+    "Name": "Xan Civilization: Filters to One Who Tinkers With Gadgets",
+    "Summary": "Return both Infrared Filters to One Who Tinkers With Gadgets for a Permafrost Battery and repaired field glasses.",
+    "QasInstance": 953010,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "P05J",
+      "Count": null,
+      "SpecItem": "PK03",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0B",
+    "Reward": {
+      "Hash": "XT0A",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 269809,
+            "HighId": 269809,
+            "Name": "Permafrost Battery",
+            "Quality": 250,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0B",
+    "Name": "Xan Civilization: Seek One Who Lights The Way",
+    "Summary": "Talk to One Who Lights The Way in Penumbra Forest (1241 x 916) for Permafrost Powered Tubes. (Tradeskill later: Incomplete Tool + Tubes = Inactive; Inactive + Battery = Melting Tool, CompLit 1250 — not wired in this pass.)",
+    "QasInstance": 953011,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P057",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0C",
+    "Reward": {
+      "Hash": "XT0B",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 269810,
+            "HighId": 269810,
+            "Name": "Permafrost Powered Tubes",
+            "Quality": 250,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0C",
+    "Name": "Xan Civilization: Dirty-Snow Path Marker 1",
+    "Summary": "Target Dirty-Snow Path Marker 1, the first TargetNpc stand-in on the path north of Lights the Way, under the Pipe.",
+    "QasInstance": 953012,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN07",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0D",
+    "Reward": {
+      "Hash": "XT0C",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0D",
+    "Name": "Xan Civilization: Dirty-Snow Path Marker 2",
+    "Summary": "Target Dirty-Snow Path Marker 2, continuing north on the dirty-snow path.",
+    "QasInstance": 953013,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN08",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0E",
+    "Reward": {
+      "Hash": "XT0D",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0E",
+    "Name": "Xan Civilization: Dirty-Snow Path Marker 3",
+    "Summary": "Target Dirty-Snow Path Marker 3 on the dirty-snow path.",
+    "QasInstance": 953014,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN09",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0F",
+    "Reward": {
+      "Hash": "XT0E",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0F",
+    "Name": "Xan Civilization: Dirty-Snow Path Marker 4",
+    "Summary": "Target Dirty-Snow Path Marker 4 on the dirty-snow path.",
+    "QasInstance": 953015,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0A",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0G",
+    "Reward": {
+      "Hash": "XT0F",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0G",
+    "Name": "Xan Civilization: Dirty-Snow Path Marker 5",
+    "Summary": "Target Dirty-Snow Path Marker 5 on the dirty-snow path.",
+    "QasInstance": 953016,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0B",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0H",
+    "Reward": {
+      "Hash": "XT0G",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0H",
+    "Name": "Xan Civilization: Dirty-Snow Path Marker 6",
+    "Summary": "Target Dirty-Snow Path Marker 6, the last stand-in before One Who Walks The Night.",
+    "QasInstance": 953017,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0C",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0I",
+    "Reward": {
+      "Hash": "XT0H",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0I",
+    "Name": "Xan Civilization: Seek One Who Walks The Night",
+    "Summary": "Talk to One Who Walks The Night in Penumbra Forest (887 x 1781).",
+    "QasInstance": 953018,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P03M",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0J",
+    "Reward": {
+      "Hash": "XT0I",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0J",
+    "Name": "Xan Civilization: Seek Ruminating Strife",
+    "Summary": "Talk to Ruminating Strife in Penumbra Forest (782 x 1145) for a Chemical Data Parser, then enter The Pipe (Hollows 4322).",
+    "QasInstance": 953019,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P049",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0K",
+    "Reward": {
+      "Hash": "XT0J",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 269383,
+            "HighId": 269383,
+            "Name": "Chemical Data Parser",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0K",
+    "Name": "Xan Civilization: Tag a Hiisi Medicine Man",
+    "Summary": "Target a Hiisi Medicine Man in The Pipe (Hollows 4322).",
+    "QasInstance": 953020,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P04M",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0L",
+    "Reward": {
+      "Hash": "XT0K",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0L",
+    "Name": "Xan Civilization: Tag a Hiisi Charmer",
+    "Summary": "Target a Hiisi Charmer in The Pipe.",
+    "QasInstance": 953021,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P04L",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0M",
+    "Reward": {
+      "Hash": "XT0L",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0M",
+    "Name": "Xan Civilization: Tag a Hiisi Runner",
+    "Summary": "Target a Hiisi Runner in The Pipe.",
+    "QasInstance": 953022,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P047",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0N",
+    "Reward": {
+      "Hash": "XT0M",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0N",
+    "Name": "Xan Civilization: Volume One from Ruminating Strife",
+    "Summary": "Return to Ruminating Strife for Afirce's World Catalogue of Books - Volume One.",
+    "QasInstance": 953023,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P049",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0O",
+    "Reward": {
+      "Hash": "XT0N",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 226271,
+            "HighId": 226271,
+            "Name": "Afirce's World Catalogue of Books - Volume One",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0O",
+    "Name": "Xan Civilization: Tag the Hiisi Arbiter",
+    "Summary": "Target the Hiisi Arbiter in The Pipe (Hollows 1853 x 1108).",
+    "QasInstance": 953024,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P04Q",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0P",
+    "Reward": {
+      "Hash": "XT0O",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0P",
+    "Name": "Xan Civilization: Volume Two from Ruminating Strife",
+    "Summary": "Return to Ruminating Strife for Volume Two.",
+    "QasInstance": 953025,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P049",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0Q",
+    "Reward": {
+      "Hash": "XT0P",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 226275,
+            "HighId": 226275,
+            "Name": "Afirce's World Catalogue of Books - Volume Two",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0Q",
+    "Name": "Xan Civilization: Defeat Tapiolainen",
+    "Summary": "Kill Tapiolainen in The Pipe (Hollows 1951 x 1159).",
+    "QasInstance": 953026,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "P04Y",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0R",
+    "Reward": {
+      "Hash": "XT0Q",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0R",
+    "Name": "Xan Civilization: Volume Three from Ruminating Strife",
+    "Summary": "Return to Ruminating Strife for Volume Three, then seek One Whose Mind Is Riddled.",
+    "QasInstance": 953027,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P049",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0S",
+    "Reward": {
+      "Hash": "XT0R",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 226280,
+            "HighId": 226280,
+            "Name": "Afirce's World Catalogue of Books - Volume Three",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0S",
+    "Name": "Xan Civilization: Seek One Whose Mind Is Riddled",
+    "Summary": "Talk to One Whose Mind Is Riddled in Penumbra Forest (1531 x 1882).",
+    "QasInstance": 953028,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P037",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0T",
+    "Reward": {
+      "Hash": "XT0S",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0T",
+    "Name": "Xan Civilization: Memorial Caretaker 1",
+    "Summary": "Target Memorial Caretaker 1 in Penumbra Valley (2926 x 2026).",
+    "QasInstance": 953029,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0F",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0U",
+    "Reward": {
+      "Hash": "XT0T",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0U",
+    "Name": "Xan Civilization: Memorial Caretaker 2",
+    "Summary": "Target Memorial Caretaker 2 in Penumbra Valley (2532 x 1596).",
+    "QasInstance": 953030,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0G",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0V",
+    "Reward": {
+      "Hash": "XT0U",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0V",
+    "Name": "Xan Civilization: Memorial Caretaker 3",
+    "Summary": "Target Memorial Caretaker 3 in Penumbra Valley (2568 x 464).",
+    "QasInstance": 953031,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0H",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0W",
+    "Reward": {
+      "Hash": "XT0V",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0W",
+    "Name": "Xan Civilization: Memorial Caretaker 4",
+    "Summary": "Target Memorial Caretaker 4 in Penumbra Forest (809 x 1395).",
+    "QasInstance": 953032,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0I",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0X",
+    "Reward": {
+      "Hash": "XT0W",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0X",
+    "Name": "Xan Civilization: Memorial Caretaker 5",
+    "Summary": "Target Memorial Caretaker 5 in Penumbra Forest (828 x 2244).",
+    "QasInstance": 953033,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0J",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0Y",
+    "Reward": {
+      "Hash": "XT0X",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0Y",
+    "Name": "Xan Civilization: Volume Four from One Whose Mind Is Riddled",
+    "Summary": "Return to One Whose Mind Is Riddled for Volume Four, then seek Shivering Pete. Volume Five is unused. Combining volumes for Dedlock / Spec 4 is out of scope.",
+    "QasInstance": 953034,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P037",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK0Z",
+    "Reward": {
+      "Hash": "XT0Y",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 226285,
+            "HighId": 226285,
+            "Name": "Afirce's World Catalogue of Books - Volume Four",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK0Z",
+    "Name": "Xan Civilization: Seek Shivering Pete",
+    "Summary": "Talk to Shivering Pete in Penumbra Valley (2320 x 1218).",
+    "QasInstance": 953035,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P02J",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK10",
+    "Reward": {
+      "Hash": "XT0Z",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK10",
+    "Name": "Xan Civilization: Speak to Two-Time Maloney",
+    "Summary": "Tell Two-Time Maloney (Valley 2312 x 1984) that Shivering Pete sent you for his map. He then attacks. No warp or death turret; he is a tougher-than-normal L199.",
+    "QasInstance": 953036,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P028",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK11",
+    "Reward": {
+      "Hash": "XT10",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK11",
+    "Name": "Xan Civilization: Defeat Two-Time Maloney",
+    "Summary": "Kill Two-Time Maloney. A Ripped Note is awarded on the kill.",
+    "QasInstance": 953037,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "P028",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK12",
+    "Reward": {
+      "Hash": "XT11",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 269385,
+            "HighId": 269385,
+            "Name": "Ripped Note",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK12",
+    "Name": "Xan Civilization: Note to Shivering Pete",
+    "Summary": "Return the Ripped Note to Shivering Pete for the other half and a Shovel X-6000.",
+    "QasInstance": 953038,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "P02J",
+      "Count": null,
+      "SpecItem": "PK0F",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK13",
+    "Reward": {
+      "Hash": "XT12",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 269386,
+            "HighId": 269386,
+            "Name": "Ripped Note",
+            "Quality": 1,
+            "Count": 1
+          },
+          {
+            "Id": 269492,
+            "HighId": 269492,
+            "Name": "Shovel X-6000",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK13",
+    "Name": "Xan Civilization: Use the Shovel at 2446 x 1609",
+    "Summary": "Target the Turned Snow stand-in in Penumbra Valley (2446 x 1609) to recover a Tube Container.",
+    "QasInstance": 953039,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0D",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK14",
+    "Reward": {
+      "Hash": "XT13",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 269397,
+            "HighId": 269397,
+            "Name": "Tube Container",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK14",
+    "Name": "Xan Civilization: Tube to Shivering Pete",
+    "Summary": "Return the Tube Container to Shivering Pete for Finely Refined Notum and Codex Divello, then seek Danny Sawyer.",
+    "QasInstance": 953040,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "P02J",
+      "Count": null,
+      "SpecItem": "PK0I",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK15",
+    "Reward": {
+      "Hash": "XT14",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 227643,
+            "HighId": 227643,
+            "Name": "Finely Refined Notum",
+            "Quality": 220,
+            "Count": 1
+          },
+          {
+            "Id": 269827,
+            "HighId": 269827,
+            "Name": "Codex Divello",
+            "Quality": 250,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK15",
+    "Name": "Xan Civilization: Seek Danny Sawyer",
+    "Summary": "Talk to Danny Sawyer in Penumbra Valley (2510 x 915).",
+    "QasInstance": 953041,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN06",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK16",
+    "Reward": {
+      "Hash": "XT15",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK16",
+    "Name": "Xan Civilization: Cull 5 White Dryads",
+    "Summary": "Kill 5 White Dryads at the Forest pond (around 1614 x 1799).",
+    "QasInstance": 953042,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "P03K",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK17",
+    "Reward": {
+      "Hash": "XT16",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK17",
+    "Name": "Xan Civilization: Cull 4 Demons of Water",
+    "Summary": "Kill 4 Demons of Water at the Forest pond.",
+    "QasInstance": 953043,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "P00Y",
+      "Count": 4,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK18",
+    "Reward": {
+      "Hash": "XT17",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK18",
+    "Name": "Xan Civilization: Cull 3 Frost Demons",
+    "Summary": "Kill 3 Frost Demons at the Forest pond.",
+    "QasInstance": 953044,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "P03N",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK19",
+    "Reward": {
+      "Hash": "XT18",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK19",
+    "Name": "Xan Civilization: Return to Danny Sawyer",
+    "Summary": "Return to Danny Sawyer after the pond culls.",
+    "QasInstance": 953045,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN06",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1A",
+    "Reward": {
+      "Hash": "XT19",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1A",
+    "Name": "Xan Civilization: Seek Follower Wox-Yutt Van",
+    "Summary": "Talk to Follower Wox-Yutt Van in Penumbra Valley (3381 x 1625). Clan-side Cama Zean-Mara is not offered.",
+    "QasInstance": 953046,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P020",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1B",
+    "Reward": {
+      "Hash": "XT1A",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1B",
+    "Name": "Xan Civilization: A Fine Quality Jar",
+    "Summary": "Take A Fine Quality Jar from the open-land stand-in next to Follower Wox-Yutt Van. The quest-only dungeon is not used (same approach as Car-Mea).",
+    "QasInstance": 953047,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "PN0E",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1C",
+    "Reward": {
+      "Hash": "XT1B",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 269449,
+            "HighId": 269449,
+            "Name": "A Fine Quality Jar",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1C",
+    "Name": "Xan Civilization: Jar to Follower Wox-Yutt Van",
+    "Summary": "Return the jar to Follower Wox-Yutt Van for Tattered Book: 1001 Survival Tips...And More!",
+    "QasInstance": 953048,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "P020",
+      "Count": null,
+      "SpecItem": "PK0K",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1D",
+    "Reward": {
+      "Hash": "XT1C",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 269437,
+            "HighId": 269437,
+            "Name": "Tattered Book: 1001 Survival Tips...And More!",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1D",
+    "Name": "Xan Civilization: Book to Danny Sawyer",
+    "Summary": "Return the Tattered Book to Danny Sawyer, then seek Anticipating Six.",
+    "QasInstance": 953049,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "PN06",
+      "Count": null,
+      "SpecItem": "PK0L",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1E",
+    "Reward": {
+      "Hash": "XT1D",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1E",
+    "Name": "Xan Civilization: Seek Anticipating Six",
+    "Summary": "Talk to Anticipating Six in Penumbra Forest (1201 x 502), near the Alappaa entrance. The live team-required check is not modelled yet.",
+    "QasInstance": 953050,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P05O",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1F",
+    "Reward": {
+      "Hash": "XT1E",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1F",
+    "Name": "Xan Civilization: Confirm the Old Man in Alappaa",
+    "Summary": "Enter Alappaa (4336) and talk to the Old Man. This is a temporary hook: Molokh, the Ice Obelisk, Novictum Blight, and the Sheila escort are not built in this pass.",
+    "QasInstance": 953051,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P06R",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1G",
+    "Reward": {
+      "Hash": "XT1F",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1G",
+    "Name": "Xan Civilization: Profession Reward from Anticipating Six",
+    "Summary": "Return to Anticipating Six for a profession-specific nano crystal or item.",
+    "QasInstance": 953052,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P05O",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "XT1G",
+      "Xp": 400000,
+      "Credits": 20000,
+      "Records": null,
+      "Stats": null
+    }
+  }
+]

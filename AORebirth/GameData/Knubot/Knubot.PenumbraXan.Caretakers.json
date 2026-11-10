@@ -1,0 +1,98 @@
+{
+  "Npcs": [
+    "PN0F",
+    "PN0G",
+    "PN0H",
+    "PN0I",
+    "PN0J"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK0T active"
+      ],
+      "Say": "XK0T"
+    },
+    {
+      "If": [
+        "quest XK0U active"
+      ],
+      "Say": "XK0U"
+    },
+    {
+      "If": [
+        "quest XK0V active"
+      ],
+      "Say": "XK0V"
+    },
+    {
+      "If": [
+        "quest XK0W active"
+      ],
+      "Say": "XK0W"
+    },
+    {
+      "If": [
+        "quest XK0X active"
+      ],
+      "Say": "XK0X"
+    },
+    {
+      "If": [
+        "quest XK0X done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "XK0T": {
+      "Text": "Memorial Caretaker 1 notes your presence. {completequest XK0T}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "XK0U": {
+      "Text": "Memorial Caretaker 2 notes your presence. {completequest XK0U}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "XK0V": {
+      "Text": "Memorial Caretaker 3 notes your presence. {completequest XK0V}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "XK0W": {
+      "Text": "Memorial Caretaker 4 notes your presence. {completequest XK0W}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "XK0X": {
+      "Text": "Memorial Caretaker 5 notes your presence. Return to One Whose Mind Is Riddled. {completequest XK0X}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "This caretaker has already been marked.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

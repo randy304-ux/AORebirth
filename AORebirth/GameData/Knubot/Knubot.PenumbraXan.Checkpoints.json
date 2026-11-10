@@ -1,0 +1,112 @@
+{
+  "Npcs": [
+    "PN07",
+    "PN08",
+    "PN09",
+    "PN0A",
+    "PN0B",
+    "PN0C"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK0C active"
+      ],
+      "Say": "m1"
+    },
+    {
+      "If": [
+        "quest XK0D active"
+      ],
+      "Say": "m2"
+    },
+    {
+      "If": [
+        "quest XK0E active"
+      ],
+      "Say": "m3"
+    },
+    {
+      "If": [
+        "quest XK0F active"
+      ],
+      "Say": "m4"
+    },
+    {
+      "If": [
+        "quest XK0G active"
+      ],
+      "Say": "m5"
+    },
+    {
+      "If": [
+        "quest XK0H active"
+      ],
+      "Say": "m6"
+    },
+    {
+      "If": [
+        "quest XK0H done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "m1": {
+      "Text": "You mark this stretch of the dirty-snow path. Continue north. {completequest XK0C}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "m2": {
+      "Text": "You mark this stretch of the dirty-snow path. Continue north. {completequest XK0D}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "m3": {
+      "Text": "You mark this stretch of the dirty-snow path. Continue north. {completequest XK0E}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "m4": {
+      "Text": "You mark this stretch of the dirty-snow path. Continue north. {completequest XK0F}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "m5": {
+      "Text": "You mark this stretch of the dirty-snow path. Continue north. {completequest XK0G}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "m6": {
+      "Text": "You mark this stretch of the dirty-snow path. One Who Walks The Night is close, 887 by 1781. {completequest XK0H}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "This mark is already noted.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "Npcs": [
+    "P057"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK0B active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "HasAnyQuest XK0C,XK0D,XK0E,XK0F,XK0G,XK0H"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest XK0B done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "Take these Permafrost Powered Tubes. Follow the dirty-snow path north. Six marks wait along it; the first sits under the Pipe. One Who Walks The Night is at the far end, 887 by 1781. {completequest XK0B}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "North on the dirty-snow path. Mark each stretch. One Who Walks The Night waits at 887 by 1781.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "One Who Walks The Night is at 887 by 1781.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

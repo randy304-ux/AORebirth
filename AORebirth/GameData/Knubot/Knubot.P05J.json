@@ -1,0 +1,83 @@
+{
+  "Npcs": [
+    "P05J"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK08 active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "quest XK09 active"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest XK0A active",
+        "has PK03",
+        "has PK04"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest XK0A active"
+      ],
+      "Say": "need_filters"
+    },
+    {
+      "If": [
+        "quest XK0A done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "The field glasses are cracked. Disturbed Vortexoids northwest of here, around 1220 by 700, carry Primary and Secondary Infrared Filters. Bring both. {completequest XK08}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "Primary and Secondary Infrared Filters, from the Disturbed Vortexoids northwest of this tent.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "The filters will sit. The glasses are repaired, and here is a Permafrost Battery. Carry the tubes and the battery to the melting tool when your Computer Literacy is ready. One Who Lights The Way stands at 1241 by 916. {take PK03}{take PK04}{completequest XK0A}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "need_filters": {
+      "Text": "I still need a Primary Infrared Filter and a Secondary Infrared Filter.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "One Who Lights The Way is at 1241 by 916.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

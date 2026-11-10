@@ -1,0 +1,122 @@
+{
+  "Npcs": [
+    "P02J"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK0Z active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "HasAnyQuest XK10,XK11"
+      ],
+      "Say": "progress_maloney"
+    },
+    {
+      "If": [
+        "quest XK12 active",
+        "has PK0F"
+      ],
+      "Say": "turnin_note"
+    },
+    {
+      "If": [
+        "quest XK12 active"
+      ],
+      "Say": "need_note"
+    },
+    {
+      "If": [
+        "quest XK13 active"
+      ],
+      "Say": "brief_shovel"
+    },
+    {
+      "If": [
+        "quest XK14 active",
+        "has PK0I"
+      ],
+      "Say": "turnin_tube"
+    },
+    {
+      "If": [
+        "quest XK14 active"
+      ],
+      "Say": "need_tube"
+    },
+    {
+      "If": [
+        "quest XK14 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "Two-Time Maloney has a map I need, 2312 by 1984. Tell him I sent you, then put him down and bring me what he carries. {completequest XK0Z}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress_maloney": {
+      "Text": "Tell Two-Time Maloney that I sent you for his map, then finish him. He is at 2312 by 1984.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin_note": {
+      "Text": "The other half is here, and this Shovel X-6000. Dig at 2446 by 1609 in the Valley. The turned snow is marked. {take PK0F}{completequest XK12}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "need_note": {
+      "Text": "I still need the Ripped Note from Two-Time Maloney.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "brief_shovel": {
+      "Text": "The shovel goes in at 2446 by 1609. Bring back whatever comes up.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin_tube": {
+      "Text": "The tube will do. Take this Finely Refined Notum and the Codex Divello. Danny Sawyer is south of here, 2510 by 915. {take PK0I}{completequest XK14}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "need_tube": {
+      "Text": "I still need the Tube Container from 2446 by 1609.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Danny Sawyer is at 2510 by 915.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

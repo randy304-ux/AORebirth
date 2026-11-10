@@ -1,0 +1,42 @@
+{
+  "Npcs": [
+    "PN0D"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK13 active"
+      ],
+      "Say": "dig"
+    },
+    {
+      "If": [
+        "quest XK13 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "dig": {
+      "Text": "The shovel bites, and a Tube Container comes free. Return it to Shivering Pete. {completequest XK13}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "The ground here is already turned.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

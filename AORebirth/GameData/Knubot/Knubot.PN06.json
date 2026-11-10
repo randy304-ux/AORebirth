@@ -1,0 +1,108 @@
+{
+  "Npcs": [
+    "PN06"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK15 active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "HasAnyQuest XK16,XK17,XK18"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest XK19 active"
+      ],
+      "Say": "turnin_kills"
+    },
+    {
+      "If": [
+        "quest XK1A active"
+      ],
+      "Say": "send_wox"
+    },
+    {
+      "If": [
+        "quest XK1D active",
+        "has PK0L"
+      ],
+      "Say": "turnin_book"
+    },
+    {
+      "If": [
+        "quest XK1D active"
+      ],
+      "Say": "need_book"
+    },
+    {
+      "If": [
+        "quest XK1D done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "White Dryads, Demons of Water, and Frost Demons still gather at the Forest pond, 1614 by 1799. Bring me five, four, and three. {completequest XK15}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "Five White Dryads, four Demons of Water, three Frost Demons, at 1614 by 1799.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin_kills": {
+      "Text": "That's the count. Follower Wox-Yutt Van keeps a jar I need. He is in the Valley, 3381 by 1625. The Redeemed cave path is not offered here. {completequest XK19}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "send_wox": {
+      "Text": "Follower Wox-Yutt Van, 3381 by 1625 in the Valley.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin_book": {
+      "Text": "1001 Survival Tips. That will do. Anticipating Six stands near the Alappaa entrance in the Forest, 1201 by 502. Go in a team if you can. {take PK0L}{completequest XK1D}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "need_book": {
+      "Text": "I still need the Tattered Book from Follower Wox-Yutt Van.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Anticipating Six is at 1201 by 502, by the Alappaa entrance.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

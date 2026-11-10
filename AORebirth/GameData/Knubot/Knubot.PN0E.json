@@ -1,0 +1,42 @@
+{
+  "Npcs": [
+    "PN0E"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK1B active"
+      ],
+      "Say": "take"
+    },
+    {
+      "If": [
+        "quest XK1B done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "take": {
+      "Text": "A Fine Quality Jar comes free of the snow. Hand it to Follower Wox-Yutt Van. {completequest XK1B}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "The jar is already taken.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "Npcs": [
+    "P06R"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK1F active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "quest XK1F done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "I am still here. The corridor beyond holds more than I can ask of you today. Return to Anticipating Six outside. {completequest XK1F}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Anticipating Six is outside, at the entrance.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

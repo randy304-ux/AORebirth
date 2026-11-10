@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "P037"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK0S active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "HasAnyQuest XK0T,XK0U,XK0V,XK0W,XK0X"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest XK0Y active"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest XK0Y done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "Five Memorial Caretakers keep the names. Target each of them, in the Valley and the Forest, then return. {completequest XK0S}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "All five Memorial Caretakers must be targeted. Then I will have Volume Four.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "The names are marked. Take Volume Four. Shivering Pete waits in the Valley, 2320 by 1218. {completequest XK0Y}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Shivering Pete is in the Valley, 2320 by 1218.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

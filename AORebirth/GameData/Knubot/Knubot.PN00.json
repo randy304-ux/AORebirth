@@ -1,0 +1,254 @@
+{
+  "Npcs": [
+    "PN00"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK00 none"
+      ],
+      "Say": "start"
+    },
+    {
+      "If": [
+        "quest XK00 active"
+      ],
+      "Say": "brief_leets"
+    },
+    {
+      "If": [
+        "HasAnyQuest XK01"
+      ],
+      "Say": "progress_leets"
+    },
+    {
+      "If": [
+        "quest XK02 active",
+        "has PK00"
+      ],
+      "Say": "turnin_tails"
+    },
+    {
+      "If": [
+        "quest XK02 active"
+      ],
+      "Say": "need_tails"
+    },
+    {
+      "If": [
+        "HasAnyQuest XK03,XK04,XK05,XK06"
+      ],
+      "Say": "brief_units"
+    },
+    {
+      "If": [
+        "quest XK07 active"
+      ],
+      "Say": "turnin_sum"
+    },
+    {
+      "If": [
+        "quest XK07 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "start": {
+      "Text": "I am Founding Glacier Five. The ice records a Xan trail through Penumbra. Cull five Tundra Leets hidden on this island. Their tails will come to you. {givequest XK00}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "brief_leets": {
+      "Text": "Five Tundra Leets, here on the island. The tails will appear when the fifth falls.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress_leets": {
+      "Text": "The Tundra Leets still hide in the snow around this island.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin_tails": {
+      "Text": "The tails will serve. Take this Yuttos Filter. Four Environmental Test Units stand from here toward the valley. Speak to each, remember the number each one reports, then return and give me the sum. {take PK00}{completequest XK02}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "need_tails": {
+      "Text": "I still need the Bundle Of Leet Tails from five Tundra Leets.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "brief_units": {
+      "Text": "Four Environmental Test Units stand from here toward the valley. Ask each one for today's ice thickness, remember the number, then return. I will ask you what each unit reported. The first is close, at 1786 by 155.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin_sum": {
+      "Text": "The measures are in. What did Environmental Test Unit 1 report for today's ice thickness?",
+      "Replies": [
+        "u1c",
+        "u1w0",
+        "u1w1",
+        "u1w2"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "One Who Tinkers With Gadgets is in the Forest, 1433 by 566.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "q2": {
+      "Text": "And Environmental Test Unit 2?",
+      "Replies": [
+        "u2c",
+        "u2w0",
+        "u2w1",
+        "u2w2"
+      ],
+      "Source": "filler"
+    },
+    "q3": {
+      "Text": "And Environmental Test Unit 3?",
+      "Replies": [
+        "u3c",
+        "u3w0",
+        "u3w1",
+        "u3w2"
+      ],
+      "Source": "filler"
+    },
+    "q4": {
+      "Text": "And Environmental Test Unit 4?",
+      "Replies": [
+        "u4c",
+        "u4w0",
+        "u4w1",
+        "u4w2"
+      ],
+      "Source": "filler"
+    },
+    "pass": {
+      "Text": "Those are the readings. Take the Incomplete Permafrost Melting Tool and these Yutto Field Glasses. One Who Tinkers With Gadgets is in the Forest, 1433 by 566. The glasses will need new filters. {completequest XK07}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "wrong": {
+      "Text": "That is not what that unit reported. I cannot continue until the numbers are right. Ask the units again if you need to, then come back and answer correctly.",
+      "Replies": [
+        "retry",
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "retry": {
+      "Text": "Let me try the numbers again.",
+      "Goto": "turnin_sum",
+      "Source": "filler"
+    },
+    "u1c": {
+      "Text": "96.312",
+      "Goto": "q2",
+      "Source": "filler"
+    },
+    "u1w0": {
+      "Text": "88.140",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u1w1": {
+      "Text": "101.07",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u1w2": {
+      "Text": "72.905",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u2c": {
+      "Text": "104.32",
+      "Goto": "q3",
+      "Source": "filler"
+    },
+    "u2w0": {
+      "Text": "96.312",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u2w1": {
+      "Text": "99.180",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u2w2": {
+      "Text": "117.44",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u3c": {
+      "Text": "89.75",
+      "Goto": "q4",
+      "Source": "filler"
+    },
+    "u3w0": {
+      "Text": "84.20",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u3w1": {
+      "Text": "104.32",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u3w2": {
+      "Text": "93.08",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u4c": {
+      "Text": "111.64",
+      "Goto": "pass",
+      "Source": "filler"
+    },
+    "u4w0": {
+      "Text": "108.00",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u4w1": {
+      "Text": "96.312",
+      "Goto": "wrong",
+      "Source": "filler"
+    },
+    "u4w2": {
+      "Text": "121.9",
+      "Goto": "wrong",
+      "Source": "filler"
+    }
+  }
+}
