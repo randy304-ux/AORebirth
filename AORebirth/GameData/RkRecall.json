@@ -1,0 +1,8 @@
+{
+  "SchemaVersion": 1,
+  "Notes": "Rubi-Ka Recall Beacon (item 268748) landing. Official items.dat teleports are side-specific: Clan to Tir (playfield 640 at 381, 9, 550), Neutral to Newland City (566 at 481, 29, 339), Omni to Omni-1 Entertainment (705 at 421, 17, 339). items.dat is not in git, so the engine applies this override on use. Midpoint between ICC HQ Buffbot (3211.2, 35.1, 858.3) and Contract Terminal (3211.1, 35.1, 873.1) from PlayfieldContent/655/Npcs.json, same floor, 7.4 m from each and clear of nearby KELE/AUPU props. Heading is yaw 90 deg (east, +X) into the hall toward Uncle Bazzit / Alien Agency Handler at about 3250, 823.",
+  "ItemIds": [268748],
+  "PlayfieldId": 655,
+  "Position": [3211.15, 35.1, 865.7],
+  "Heading": [0, 0.70710677, 0, 0.70710677]
+}

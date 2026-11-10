@@ -29,6 +29,8 @@ namespace ZoneEngine_New.Core.GameData
 
         RespawnContentCatalog RespawnContent => RespawnContentCatalog.Load(RootPath);
 
+        RkRecallContentCatalog RkRecallContent => RkRecallContentCatalog.Load(RootPath);
+
         int MobTemplateCount { get; }
 
         int HashTemplateCount { get; }

@@ -107,7 +107,7 @@ namespace ZoneEngine_New.Core.Inventory
                 case FunctionType.PlayfieldNano:
                     return NanoCastFunctions.TryExecute(target, source, spell, items, inventoryRepository);
                 case FunctionType.Teleport:
-                    return target is Player teleportPlayer && Teleport(teleportPlayer, spell);
+                    return target is Player teleportPlayer && Teleport(teleportPlayer, spell, templateId);
                 case FunctionType.LineTeleport:
                     return target is Player linePlayer && LineTeleport(linePlayer, spell);
                 case FunctionType.TeleportProxy:
@@ -882,7 +882,7 @@ namespace ZoneEngine_New.Core.Inventory
         /// (e.g. 258912 Entrance to Hangar), like LineTeleport's intrazone lift.
         /// One-way: it clears any stored proxy return door.
         /// </summary>
-        static bool Teleport(Player player, ItemSpell spell)
+        static bool Teleport(Player player, ItemSpell spell, int templateId)
         {
             if (player.Session == null || player.Playfield == null)
                 return false;
@@ -894,6 +894,20 @@ namespace ZoneEngine_New.Core.Inventory
                 return false;
 
             Playfield source = player.Playfield;
+            float fx = x;
+            float fy = y;
+            float fz = z;
+            Quaternion? recallHeading = null;
+            RkRecallContentCatalog rkRecall = source.GetRequiredService<IGameData>().RkRecallContent;
+            if (rkRecall.AppliesTo(templateId)
+                && rkRecall.TryGetLanding(out int recallPlayfieldId, out Vector3 recallLanding, out recallHeading))
+            {
+                fx = recallLanding.xf;
+                fy = recallLanding.yf;
+                fz = recallLanding.zf;
+                playfieldId = recallPlayfieldId;
+            }
+
             bool samePlayfield = playfieldId == 0 || playfieldId == source.Identity.Instance;
             if (!samePlayfield)
             {
@@ -914,11 +928,11 @@ namespace ZoneEngine_New.Core.Inventory
 
             if (samePlayfield)
             {
-                Vector3 local = source.SnapFeetToFloor(new Vector3(x, y, z));
+                Vector3 local = source.SnapFeetToFloor(new Vector3(fx, fy, fz));
                 if (playfieldId == 0)
                     FinishIntrazoneLineTeleport(player, source, local, source.Identity.Instance);
                 else
-                    FinishSamePlayfieldMove(player, source, local, heading: null);
+                    FinishSamePlayfieldMove(player, source, local, heading: recallHeading);
                 return true;
             }
 
@@ -927,7 +941,11 @@ namespace ZoneEngine_New.Core.Inventory
             {
                 if (!ReferenceEquals(player.Playfield, source) || player.Session is not { } session)
                     return;
-                session.TransferToPlayfield(destination, destination.SnapFeetToFloor(new Vector3(x, y, z)));
+                Vector3 landing = destination.SnapFeetToFloor(new Vector3(fx, fy, fz));
+                if (recallHeading != null)
+                    session.TransferToPlayfield(destination, landing, recallHeading);
+                else
+                    session.TransferToPlayfield(destination, landing);
             });
         }
 

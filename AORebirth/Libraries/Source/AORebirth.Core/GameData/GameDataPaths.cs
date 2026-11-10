@@ -53,6 +53,8 @@ namespace AORebirth.Core.GameData
 
         public const string RespawnFileName = "Respawn.json";
 
+        public const string RkRecallFileName = "RkRecall.json";
+
         public const string XpFileName = "Xp.json";
 
         public const string NewCharacterFileName = "NewCharacter.json";
