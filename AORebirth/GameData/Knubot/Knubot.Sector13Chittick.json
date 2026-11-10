@@ -1,0 +1,56 @@
+{
+  "Notes": "Unicorn Recon Agent Chittick (S3CH), Sector 13 PF 4365. Lines from dialogs_20261109_Cattywompus captured 21:02:51–21:02:58 ET. Player chose option 1 (assistance). The live homing-beacon Unicorn cavalry spawn is not authored here (engine has no supported {spawn-npc} hook for this encounter). Uncaptured option replies are source=filler.",
+  "Npcs": [
+    "S3CH"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "refuse": {
+      "Text": "We don't need any help!",
+      "Goto": "refuse"
+    },
+    "help": {
+      "Text": "Some assistance would be welcome!",
+      "Goto": "help"
+    },
+    "facing": {
+      "Text": "What do you know of what we're facing?",
+      "Goto": "facing"
+    },
+    "bye": {
+      "Text": "Goodbye.",
+      "Goto": "bye"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Facing fierce resistance from the alien scum, are we? A good thing we have more Unicorns in the area to assist you.",
+      "Source": "capture",
+      "Replies": [
+        "refuse",
+        "help",
+        "facing",
+        "bye"
+      ]
+    },
+    "help": {
+      "Text": "Thought as much. Just a second and I'll get hold of the cavalry. The Unicorn Recon Agent activates a homing beacon. Shouldn't be long now. Good luck!",
+      "Source": "capture"
+    },
+    "refuse": {
+      "Text": "Suit yourself. We'll be here if you change your mind.",
+      "Source": "filler"
+    },
+    "facing": {
+      "Text": "The aliens have dug in throughout this sector. Their genesplicer is the one running the operation — take him down and the rest should break.",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "{close}"
+    }
+  }
+}

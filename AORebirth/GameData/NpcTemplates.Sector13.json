@@ -1,0 +1,1333 @@
+{
+  "S30B": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ilari'Sinuh",
+        "Level": 250,
+        "Health": 60000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251783,
+        "Scale": 130,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254670,
+            "HighId": 254671,
+            "MinQl": 192,
+            "MaxQl": 192,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Hammer"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30B"
+  },
+  "S30F": {
+    "Templates": [
+      {
+        "Name": "Ensign - Jaax'Sinuh",
+        "Level": 250,
+        "Health": 60000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251782,
+        "Scale": 130,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 248815,
+            "HighId": 248815,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Inactive Nano Input Hood"
+          },
+          {
+            "LowId": 254490,
+            "HighId": 254491,
+            "MinQl": 244,
+            "MaxQl": 244,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Carbine"
+          },
+          {
+            "LowId": 254672,
+            "HighId": 254673,
+            "MinQl": 212,
+            "MaxQl": 212,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Hammer"
+          },
+          {
+            "LowId": 254716,
+            "HighId": 254716,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Rapier"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30F"
+  },
+  "S30C": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ilari'Uri",
+        "Level": 250,
+        "Health": 120000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253897,
+        "Scale": 130,
+        "Mesh": 253409,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247764,
+            "HighId": 254804,
+            "MinQl": 208,
+            "MaxQl": 208,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 254520,
+            "HighId": 254520,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Submachine Gun"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30C"
+  },
+  "S30G": {
+    "Templates": [
+      {
+        "Name": "Ensign - Jaax'Uri",
+        "Level": 250,
+        "Health": 120000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253649,
+        "Scale": 130,
+        "Mesh": 254422,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254651,
+            "HighId": 254652,
+            "MinQl": 216,
+            "MaxQl": 216,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Machine Pistol"
+          },
+          {
+            "LowId": 254728,
+            "HighId": 254729,
+            "MinQl": 219,
+            "MaxQl": 247,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Sledgehammer"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30G"
+  },
+  "S30J": {
+    "Templates": [
+      {
+        "Name": "Ensign - Rimah'Uri",
+        "Level": 250,
+        "Health": 120000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253897,
+        "Scale": 130,
+        "Mesh": 253409,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254469,
+            "HighId": 254470,
+            "MinQl": 255,
+            "MaxQl": 255,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Rifle"
+          },
+          {
+            "LowId": 254728,
+            "HighId": 254729,
+            "MinQl": 258,
+            "MaxQl": 258,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Sledgehammer"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30J"
+  },
+  "S307": {
+    "Templates": [
+      {
+        "Name": "Ensign - Cha'Sinuh",
+        "Level": 250,
+        "Health": 60000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251781,
+        "Scale": 130,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254777,
+            "HighId": 254778,
+            "MinQl": 215,
+            "MaxQl": 215,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Spear"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S307"
+  },
+  "S308": {
+    "Templates": [
+      {
+        "Name": "Ensign - Cha'Uri",
+        "Level": 250,
+        "Health": 120000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253893,
+        "Scale": 130,
+        "Mesh": 253409,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S308"
+  },
+  "S30M": {
+    "Templates": [
+      {
+        "Name": "Ensign - Xoch'Uri",
+        "Level": 250,
+        "Health": 120000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253649,
+        "Scale": 130,
+        "Mesh": 254422,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254616,
+            "HighId": 254617,
+            "MinQl": 235,
+            "MaxQl": 235,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Pistol"
+          },
+          {
+            "LowId": 254686,
+            "HighId": 254687,
+            "MinQl": 226,
+            "MaxQl": 226,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Axe"
+          },
+          {
+            "LowId": 254740,
+            "HighId": 254741,
+            "MinQl": 188,
+            "MaxQl": 188,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Sword"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30M"
+  },
+  "S3ZX": {
+    "Templates": [
+      {
+        "Name": "Zone Exit",
+        "Level": 1,
+        "Health": 1,
+        "Side": 0,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 258035,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": 2148139521,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S3ZX"
+  },
+  "S306": {
+    "Templates": [
+      {
+        "Name": "Ensign - Cha'Nakthi",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251779,
+        "Scale": 130,
+        "Mesh": 247383,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S306"
+  },
+  "S302": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ankari'Heru",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254008,
+        "Scale": 130,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254684,
+            "HighId": 254685,
+            "MinQl": 198,
+            "MaxQl": 198,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Axe"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S302"
+  },
+  "S30A": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ilari'Nakthi",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251778,
+        "Scale": 130,
+        "Mesh": 247383,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254651,
+            "HighId": 254652,
+            "MinQl": 218,
+            "MaxQl": 218,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Machine Pistol"
+          },
+          {
+            "LowId": 254777,
+            "HighId": 254778,
+            "MinQl": 233,
+            "MaxQl": 233,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Spear"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30A"
+  },
+  "S30E": {
+    "Templates": [
+      {
+        "Name": "Ensign - Jaax'Nakthi",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251776,
+        "Scale": 130,
+        "Mesh": 247383,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247764,
+            "HighId": 254804,
+            "MinQl": 270,
+            "MaxQl": 270,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 254714,
+            "HighId": 254715,
+            "MinQl": 205,
+            "MaxQl": 205,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Rapier"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30E"
+  },
+  "S304": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ankari'Uri",
+        "Level": 250,
+        "Health": 120000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253899,
+        "Scale": 130,
+        "Mesh": 253409,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S304"
+  },
+  "S30L": {
+    "Templates": [
+      {
+        "Name": "Ensign - Xoch'Nakthi",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251776,
+        "Scale": 130,
+        "Mesh": 247383,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30L"
+  },
+  "S30K": {
+    "Templates": [
+      {
+        "Name": "Ensign - Xoch'Heru",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254002,
+        "Scale": 130,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30K"
+  },
+  "S30I": {
+    "Templates": [
+      {
+        "Name": "Ensign - Rimah'Nakthi",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251778,
+        "Scale": 130,
+        "Mesh": 247383,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254467,
+            "HighId": 254468,
+            "MinQl": 195,
+            "MaxQl": 195,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Rifle"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30I"
+  },
+  "S30D": {
+    "Templates": [
+      {
+        "Name": "Ensign - Jaax'Heru",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254002,
+        "Scale": 130,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247764,
+            "HighId": 254804,
+            "MinQl": 235,
+            "MaxQl": 235,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 254777,
+            "HighId": 254778,
+            "MinQl": 254,
+            "MaxQl": 254,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Spear"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30D"
+  },
+  "S30H": {
+    "Templates": [
+      {
+        "Name": "Ensign - Rimah'Heru",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254006,
+        "Scale": 130,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254777,
+            "HighId": 254778,
+            "MinQl": 207,
+            "MaxQl": 207,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Spear"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30H"
+  },
+  "S305": {
+    "Templates": [
+      {
+        "Name": "Ensign - Cha'Heru",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254003,
+        "Scale": 130,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254581,
+            "HighId": 254582,
+            "MinQl": 251,
+            "MaxQl": 251,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Shotgun"
+          },
+          {
+            "LowId": 254714,
+            "HighId": 254715,
+            "MinQl": 289,
+            "MaxQl": 289,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Rapier"
+          },
+          {
+            "LowId": 254756,
+            "HighId": 254757,
+            "MinQl": 273,
+            "MaxQl": 273,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Sword"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S305"
+  },
+  "S309": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ilari'Heru",
+        "Level": 250,
+        "Health": 180000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254006,
+        "Scale": 130,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247764,
+            "HighId": 254804,
+            "MinQl": 217,
+            "MaxQl": 217,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 254595,
+            "HighId": 254596,
+            "MinQl": 265,
+            "MaxQl": 265,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Crossbow"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S309"
+  },
+  "S303": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ankari'Sinuh",
+        "Level": 250,
+        "Health": 60000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 256464,
+        "Scale": 182,
+        "Mesh": 254291,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S303"
+  },
+  "S3CH": {
+    "Templates": [
+      {
+        "Name": "Unicorn Recon Agent Chittick",
+        "Level": 220,
+        "Health": 203721,
+        "Side": 2,
+        "Breed": 1,
+        "MonsterData": 257305,
+        "Scale": 175,
+        "Mesh": 257304,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 219,
+        "Flags": 277352961,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S3CH"
+  },
+  "S300": {
+    "Templates": [
+      {
+        "Name": "Advance Sentry - Jaax'Uri",
+        "Level": 250,
+        "Health": 240000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 256463,
+        "Scale": 182,
+        "Mesh": 253655,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247104,
+            "HighId": 247105,
+            "MinQl": 246,
+            "MaxQl": 246,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 248517,
+            "HighId": 248517,
+            "MinQl": 200,
+            "MaxQl": 200,
+            "Chance": 100,
+            "Name": "Viral Weapon Upgrade"
+          },
+          {
+            "LowId": 249648,
+            "HighId": 249648,
+            "MinQl": 100,
+            "MaxQl": 100,
+            "Chance": 100,
+            "Name": "Cooled Energy Core"
+          },
+          {
+            "LowId": 253256,
+            "HighId": 253257,
+            "MinQl": 293,
+            "MaxQl": 293,
+            "Chance": 100,
+            "Name": "Power of the Muscle"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S300"
+  },
+  "S301": {
+    "Templates": [
+      {
+        "Name": "Advance Sentry - Rimah'Uri",
+        "Level": 250,
+        "Health": 240000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 256026,
+        "Scale": 182,
+        "Mesh": 253655,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247102,
+            "HighId": 247103,
+            "MinQl": 203,
+            "MaxQl": 203,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 248517,
+            "HighId": 248517,
+            "MinQl": 200,
+            "MaxQl": 200,
+            "Chance": 100,
+            "Name": "Viral Weapon Upgrade"
+          },
+          {
+            "LowId": 249647,
+            "HighId": 249647,
+            "MinQl": 100,
+            "MaxQl": 100,
+            "Chance": 100,
+            "Name": "Heated Energy Core"
+          },
+          {
+            "LowId": 249648,
+            "HighId": 249648,
+            "MinQl": 100,
+            "MaxQl": 100,
+            "Chance": 100,
+            "Name": "Cooled Energy Core"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S301"
+  },
+  "S30Q": {
+    "Templates": [
+      {
+        "Name": "Support Sentry - Ilari'Uri",
+        "Level": 230,
+        "Health": 134574,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253922,
+        "Scale": 127,
+        "Mesh": 253415,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30Q"
+  },
+  "S3LF": {
+    "Templates": [
+      {
+        "Name": "Alien Laser Fence",
+        "Level": 1,
+        "Health": 1,
+        "Side": 0,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 256784,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": 4851201,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S3LF"
+  },
+  "S30N": {
+    "Templates": [
+      {
+        "Name": "Security Patrol - Ankari'Sinuh",
+        "Level": 250,
+        "Health": 60000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 256464,
+        "Scale": 182,
+        "Mesh": 254291,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30N"
+  },
+  "S30P": {
+    "Templates": [
+      {
+        "Name": "Security Supervisor - Ankari'Sinuh",
+        "Level": 240,
+        "Health": 52742,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 256464,
+        "Scale": 180,
+        "Mesh": 254291,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30P"
+  },
+  "S3US": {
+    "Templates": [
+      {
+        "Name": "Unicorn Squadleader",
+        "Level": 220,
+        "Health": 203721,
+        "Side": 2,
+        "Breed": 1,
+        "MonsterData": 247041,
+        "Scale": 125,
+        "Mesh": 247037,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 219,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S3US"
+  },
+  "S3UT": {
+    "Templates": [
+      {
+        "Name": "Unicorn Trooper",
+        "Level": 220,
+        "Health": 81839,
+        "Side": 2,
+        "Breed": 1,
+        "MonsterData": 247041,
+        "Scale": 125,
+        "Mesh": 247037,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 219,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S3UT"
+  },
+  "S30O": {
+    "Templates": [
+      {
+        "Name": "Security Sergeant 'Uri",
+        "Level": 240,
+        "Health": 158224,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254304,
+        "Scale": 180,
+        "Mesh": 254301,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S30O"
+  },
+  "S3BT": {
+    "Templates": [
+      {
+        "Name": "Biological Transceiver",
+        "Level": 1,
+        "Health": 1,
+        "Side": 0,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 254280,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S3BT"
+  },
+  "S3CK": {
+    "Templates": [
+      {
+        "Name": "Master Genesplicer - Cha'Khaz",
+        "Level": 300,
+        "Health": 6533334,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 257313,
+        "Scale": 192,
+        "Mesh": 257312,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 257529,
+            "HighId": 257529,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Battlesuit Audio Processor"
+          },
+          {
+            "LowId": 257531,
+            "HighId": 257531,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Rank Identification"
+          },
+          {
+            "LowId": 257533,
+            "HighId": 257533,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Video Processing Unit"
+          },
+          {
+            "LowId": 257706,
+            "HighId": 257706,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Helmet"
+          },
+          {
+            "LowId": 257960,
+            "HighId": 257960,
+            "MinQl": 250,
+            "MaxQl": 250,
+            "Chance": 100,
+            "Name": "Action Probability Estimator"
+          },
+          {
+            "LowId": 257962,
+            "HighId": 257962,
+            "MinQl": 250,
+            "MaxQl": 250,
+            "Chance": 100,
+            "Name": "Dynamic Gas Redistribution Valves"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 258296,
+            "HighId": 258296,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Data Core"
+          },
+          {
+            "LowId": 275909,
+            "HighId": 275909,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Gelatinous Lump"
+          },
+          {
+            "LowId": 275916,
+            "HighId": 275916,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Biotech Matrix"
+          },
+          {
+            "LowId": 287127,
+            "HighId": 287127,
+            "MinQl": 200,
+            "MaxQl": 200,
+            "Chance": 100,
+            "Name": "Nanite Reconstruction ToilerBots - Betula Pendula"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S3CK"
+  },
+  "S3AV": {
+    "Templates": [
+      {
+        "Name": "Alien Vector",
+        "Level": 250,
+        "Health": 60000,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 247728,
+        "Scale": 260,
+        "Mesh": 31774,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268980737
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S3AV"
+  },
+  "S3AL": {
+    "Templates": [
+      {
+        "Name": "Alien Larvae",
+        "Level": 250,
+        "Health": 60000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253588,
+        "Scale": 100,
+        "Mesh": 253423,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4365,
+      "scrape": "dialogs/npcs/loot/moves_20261109_Cattywompus",
+      "captured": "2026-11-09 20:28-21:08 ET"
+    },
+    "Hash": "S3AL"
+  }
+}
