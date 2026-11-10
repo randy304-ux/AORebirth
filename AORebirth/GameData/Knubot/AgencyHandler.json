@@ -1,20 +1,69 @@
 {
-  "Notes": "Agency Handler — Rubi-Ka Freelancers Inc. daily. Roll table AGRK; token 303237; no lock-out. Kill contracts auto-pay on last kill.",
-  "Npcs": [ "AGHN", "ddogs-agency-handler" ],
-  "Openers": [ { "Say": "hello" } ],
+  "Notes": "Agency Handler (Rome Blue, hash AGHN). 2026-11-10: greeting + options captured (dialogs_20261110_Cattywompus.csv); the captured 18-hour complaint option now answers 'no waiting'. Daily stays {givedaily AGRK}, Track empty = no lock-out (Randy). Answer text for the complaint option was not captured (ours).",
+  "Npcs": [
+    "AGHN",
+    "ddogs-agency-handler"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasAnyQuest AG01,AG02,AG03,AG04,AG05"
+      ],
+      "Say": "assigned"
+    },
+    {
+      "Say": "hello"
+    }
+  ],
   "Replies": {
-    "daily": { "Text": "Give me today's Agency contract.", "Goto": "daily" },
-    "bye": { "Text": "Goodbye", "Goto": "bye" }
+    "daily": {
+      "Text": "Give me today's Agency contract.",
+      "Goto": "daily"
+    },
+    "complaint": {
+      "Text": "I think you might have done something wrong. You tell me that I have completed an assignment the past 18 hours, but that is not true.",
+      "Goto": "nolock",
+      "Source": "captured"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
   },
   "Lines": {
     "hello": {
-      "Text": "Agency Handler. Rubi-Ka contracts pay Freelancers Inc. Tokens. Take a contract any time — the contract pays out when you finish the kills.",
-      "Replies": [ "daily", "bye" ]
+      "Text": "{player}, status - unassigned. What can I do for you?",
+      "Source": "captured",
+      "Replies": [
+        "daily",
+        "complaint",
+        "bye"
+      ]
+    },
+    "assigned": {
+      "Text": "{player}, status - assigned. You can only get one mission at a time.",
+      "Replies": [
+        "complaint",
+        "bye"
+      ]
+    },
+    "nolock": {
+      "Text": "There is no 18-hour waiting period here. Finish your current contract and you can take another straight away.",
+      "Source": "ours",
+      "Replies": [
+        "daily",
+        "bye"
+      ]
     },
     "daily": {
       "Text": "Here is your contract. Come back for another whenever you like.{givedaily AGRK}",
-      "Replies": [ "bye" ]
+      "Replies": [
+        "bye"
+      ]
     },
-    "bye": { "Text": "{close}" }
+    "bye": {
+      "Text": "{close}"
+    }
   }
 }

@@ -6,11 +6,18 @@
         "Level": 150,
         "Stats": {
           "0": 277352961,
+          "1": 13369,
+          "4": 3,
+          "12": 17909,
           "18": 0,
           "21": 0,
+          "27": 13369,
+          "33": 0,
           "37": 1,
           "47": 1,
+          "54": 150,
           "60": 0,
+          "64": 40191,
           "89": 1,
           "99": 503,
           "132": 5,
@@ -26,38 +33,67 @@
           "339": 91,
           "342": 600,
           "343": 0,
+          "359": 226383,
+          "360": 117,
           "368": 15,
           "387": 503,
           "389": 0,
           "417": 503,
           "421": 3,
           "436": 91,
+          "455": 158,
           "466": 15,
           "660": 0,
           "673": 31,
-          "1003": 0,
-          "54": 150,
-          "33": 0,
-          "359": 226383,
-          "360": 117,
-          "455": 158,
-          "1": 13369,
-          "27": 13369,
-          "4": 3,
-          "64": 40191,
-          "12": 17909
+          "1003": 0
         },
         "Features": [
           "NoCombat"
         ],
         "HasHeadMesh": true,
-        "LootTable": []
+        "LootTable": [],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 99764
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 9424
+          },
+          {
+            "Place": 3,
+            "Id": 14049
+          },
+          {
+            "Place": 4,
+            "Id": 22626
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 204955,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          },
+          {
+            "Position": 0,
+            "Id": 40191,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ]
       }
     ],
     "ContentProvenance": {
       "Guessed": false,
       "Source": "scraped_npcs_20261029.csv pf 4575 IPS Interior - Basic inst 1071661",
-      "Note": "Real scrape: L150 HP 13369 Neutral Nanomage MonsterData 226383 Scale 117 Mesh 17909 HeadMesh 40191 NPCFamily 158. Stats dict follows the SCDK scrape-city template layout; captured flags 268440064, template uses the standard talk-NPC flags 277352961. Re-keyed from DEDL to the client's own spawn hash PFDD (Playfields/4575/Spawns.json hash 1346782276 at 182.534/7.05/170.697) so the client point resolves; the duplicate SpawnsAdd.dedlock.json is removed. No Textures/Meshes were captured for Dedlock in any scrape (20261029 predates those columns); only MonsterData/Scale/Mesh/HeadMesh/NPCFamily exist."
+      "Note": "Outfit (Textures/Meshes) captured on this NPC in scraped_npcs_20261110_Cattywompus.csv inst 2067857751 pf 4575 (2026-11-10). Earlier note said no outfit had been captured; that is now fixed. Dialogue lines in Knubot/ProfessorDedlock.json: greeting + two options captured 2026-11-10, hand-in/quest lines still filler."
     },
     "Hash": "PFDD"
   }

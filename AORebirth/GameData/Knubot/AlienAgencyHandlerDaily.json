@@ -1,20 +1,97 @@
 {
-  "Notes": "Stand-in Alien Agency Handler at Rome Blue / Old Athen desks. Wraps existing AI** quests with {givedaily AGAX} with no lock-out (empty Track). Unicorn Outpost script AlienAgencyHandler.json remains for shuttle lines.",
-  "Npcs": [ "AGAX", "ddogs-agency-alien" ],
-  "Openers": [ { "Say": "hello" } ],
+  "Notes": "Alien Agency Handler (Rome Blue, hash AGAX). 2026-11-10: dialog captured through 'If you say so.'. Requires the Freelancers Inc. contract (quest AGCT, signed with the Automated Agency Receptionist). Solo -> {givedaily AGAX} (existing roll AIWP/AIBG/AILP/AICC/AIPD, Track empty = no 18-hour lock-out, Randy). The 'with friends' branch has no team mission data, so it says so. The Unicorn Outpost shuttle script AlienAgencyHandler.json is a different NPC and is unchanged.",
+  "Npcs": [
+    "AGAX",
+    "ddogs-agency-alien"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "!HasCompletedQuest AGCT"
+      ],
+      "Say": "need_contract"
+    },
+    {
+      "If": [
+        "HasAnyQuest AIWP,AIBG,AILP,AICC,AIPD"
+      ],
+      "Say": "assigned"
+    },
+    {
+      "Say": "hello"
+    }
+  ],
   "Replies": {
-    "daily": { "Text": "Alien Agency contract.", "Goto": "daily" },
-    "bye": { "Text": "Goodbye", "Goto": "bye" }
+    "daily": {
+      "Text": "Could I get an Alien Daily Mission?",
+      "Goto": "choose",
+      "Source": "captured"
+    },
+    "alone": {
+      "Text": "I want to face the aliens alone",
+      "Goto": "alone",
+      "Source": "captured"
+    },
+    "friends": {
+      "Text": "I want to face the aliens with my friends",
+      "Goto": "friends",
+      "Source": "captured"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
   },
   "Lines": {
     "hello": {
-      "Text": "Alien Agency Handler. AXP contracts against the Kyr'Ozch — no waiting between contracts. Shuttles still run from the Unicorn Outpost desk.",
-      "Replies": [ "daily", "bye" ]
+      "Text": "{player}, unassigned. Would you like an alien mission?",
+      "Source": "captured",
+      "Replies": [
+        "daily",
+        "bye"
+      ]
     },
-    "daily": {
-      "Text": "Alien contract issued.{givedaily AGAX}",
-      "Replies": [ "bye" ]
+    "need_contract": {
+      "Text": "You are not on file with Freelancers Inc. Sign the contract with the Automated Agency Receptionist first, then come back.",
+      "Source": "ours",
+      "Replies": [
+        "bye"
+      ]
     },
-    "bye": { "Text": "{close}" }
+    "assigned": {
+      "Text": "{player}, status - assigned. Finish your current alien mission first.",
+      "Source": "ours",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "choose": {
+      "Text": "Sure thing. Do you want to face the aliens alone or do you want to bring your friends with you? You know, they can be rather tough to handle on your own.",
+      "Source": "captured",
+      "Replies": [
+        "alone",
+        "friends",
+        "bye"
+      ]
+    },
+    "alone": {
+      "Text": "If you say so.{givedaily AGAX}",
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "friends": {
+      "Text": "Team missions are not available yet. Take a solo alien mission instead.",
+      "Source": "ours (no team mission data captured)",
+      "Replies": [
+        "alone",
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}"
+    }
   }
 }

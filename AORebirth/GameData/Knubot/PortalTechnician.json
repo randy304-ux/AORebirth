@@ -1,0 +1,70 @@
+{
+  "Notes": "Portal Technician (hash POTN, PF 4532 Jobe Market), the Elysium/Shadowlands portal nano seller. 2026-11-10 capture: opening, 'how do I use this portal', price answer. FREE version: the 10.000 credit fee and the {opentrade} payment step are removed; the nano is meant to be given directly. THE NANO ID WAS NOT CAPTURED (the trade was never completed), so the 'give' line has NO {givenano ID} yet - add it once the id is known. Answers to 'What is this place?' and 'What is Jobe Research?' were not captured and are omitted.",
+  "Npcs": [
+    "POTN"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "use": {
+      "Text": "I'm geared to go! How do I use this portal?",
+      "Goto": "howto",
+      "Source": "captured"
+    },
+    "price": {
+      "Text": "What is the price tag on this nano?",
+      "Goto": "price",
+      "Source": "captured"
+    },
+    "charge": {
+      "Text": "Charge me up.",
+      "Goto": "give",
+      "Source": "ours"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Hello and welcome! Step right this way and you will be on your way to the Shadowlands in no time.",
+      "Source": "captured",
+      "Replies": [
+        "use",
+        "bye"
+      ]
+    },
+    "howto": {
+      "Text": [
+        "It is very simple, first I run a nano on you that will charge your body so the Shadowlands portal will function on you. Then you just walk into the swirling vortex out here on the ramp.",
+        "{delay 1}\\nYou will then materialize in Elysium in the Shadowlands."
+      ],
+      "Source": "captured, with the 'pay a modest fee' clause removed (free)",
+      "Replies": [
+        "price",
+        "charge",
+        "bye"
+      ]
+    },
+    "price": {
+      "Text": "The revised agreement between Omni-Tek and the board of directors of JAME has waived the passage fee for you. There is no charge.",
+      "Source": "ours (replaces the captured '10.000 credits' line)",
+      "Replies": [
+        "charge",
+        "bye"
+      ]
+    },
+    "give": {
+      "Text": "There, all charged. No charge to you. Walk into the swirling vortex out here on the ramp.{close}",
+      "Source": "ours - NEEDS {givenano ID}"
+    },
+    "bye": {
+      "Text": "{close}"
+    }
+  }
+}
