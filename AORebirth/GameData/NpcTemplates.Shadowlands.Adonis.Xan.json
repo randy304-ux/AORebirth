@@ -420,7 +420,8 @@
     "ContentProvenance": {
       "source": "scrape-adonis-20261110-Whozewhatzit",
       "donor": "D03M",
-      "note": "Appearance confirmed by 2026-11-10 10:32:11 scrape in Adonis City 4872 at 1689.284, 81.485, 1852.989 heading 287.5. L200, MaxHealth 209091, Scale 400, Mesh 208950, MonsterData 209082, Flags 268964353, NPCFamily 207. Remaining unscraped stats kept from D03M Brisk Dryad donor. Features cleared (no Wander) so the boss stays on the dry platform. BossTriggers FirstAggro SpawnAdds TNTL x6 radius 10 from the 10:34:57 tentacle scrape (6 unique instances, 3 pads ~8-10m). Warp/pull-back is not modelled: BossTriggers only supports SpawnAdds, and a tight leash would reset the fight instead of pulling the player."
+      "note": "Appearance confirmed by 2026-11-10 10:32:11 scrape in Adonis City 4872 at 1689.284, 81.485, 1852.989 heading 287.5. L200, MaxHealth 209091, Scale 400, Mesh 208950, MonsterData 209082, Flags 268964353, NPCFamily 207. Remaining unscraped stats kept from D03M Brisk Dryad donor. Features cleared (no Wander) so the boss stays on the dry platform. BossTriggers FirstAggro SpawnAdds TNTL x6 radius 10 from the 10:34:57 tentacle scrape (6 unique instances, 3 pads ~8-10m). Warp/pull-back is not modelled: BossTriggers only supports SpawnAdds, and a tight leash would reset the fight instead of pulling the player. Randy confirmed 2026-11-10: no corpse loot on live; the kill only updates the Xan Civilization stage (AO24 KillOne MUDR). LootTable stays empty; no fallback drops.",
+      "loot": "none-on-live-20261110"
     }
   },
   "D03Y": {
