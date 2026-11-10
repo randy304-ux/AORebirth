@@ -1,0 +1,74 @@
+{
+  "Notes": "Rookie Alien Hunter (S8RH), Sector 28 PF 4366. Lines from dialogs_20261109_Cattywompus (21:11:54-21:13:23 ET, same path repeated 21:19:53-21:21:04). StartTrade after the 2 million credit demand is authored as {opentrade}; the knubot cannot verify that 1 million credits were actually traded. Escort start, fence disable, second payment at camp, and the Unicorn Security mission gate are not authored. Source=capture unless noted.",
+  "Npcs": [
+    "S8RH"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "yeah": {
+      "Text": "Uhm, yeah!",
+      "Goto": "yeah"
+    },
+    "where": {
+      "Text": "Our instructions said that you would tell us where the Kyr'Ozch Embalmer is lurking.  You had reported seeing the alien around here, is that correct?",
+      "Goto": "where"
+    },
+    "tell": {
+      "Text": "Can you tell us where you saw him?",
+      "Goto": "tell"
+    },
+    "nowtell": {
+      "Text": "Now can you tell us where you saw him?",
+      "Goto": "coming"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Heya dudes. Have you come to my rescue?",
+      "Source": "capture",
+      "Replies": [
+        "yeah",
+        "bye"
+      ]
+    },
+    "yeah": {
+      "Text": "That's cool, was beginning to worry they wouldn't send anyone you know.  But hey, good thing the aliens didn't scare you guys off.  So, are we ready to get going then?",
+      "Source": "capture",
+      "Replies": [
+        "where",
+        "bye"
+      ]
+    },
+    "where": {
+      "Text": "Yeah, I saw the big guy.  Don't think he saw me though.  I'm pretty good at hiding behind enemy lines.",
+      "Source": "capture",
+      "Replies": [
+        "tell",
+        "bye"
+      ]
+    },
+    "tell": {
+      "Text": "Sure I can, for let's say, 2 million credits!  One now, and one when I'm safely back to camp.  And don't try anything stupid, you'll need my assistance through the gates, or you're gonna be biting the dust before you can say open sesame!{opentrade}",
+      "Source": "capture",
+      "Replies": [
+        "nowtell",
+        "bye"
+      ]
+    },
+    "coming": {
+      "Text": "That's better. Hah, don't even try pulling the wool over my eyes.  I'll give you that information and then what?  You leave me here to die, and you get to be the hero and get all the money to yourself, huh? Nope, I'm coming with you!",
+      "Source": "capture"
+    },
+    "bye": {
+      "Text": "{close}"
+    }
+  }
+}
