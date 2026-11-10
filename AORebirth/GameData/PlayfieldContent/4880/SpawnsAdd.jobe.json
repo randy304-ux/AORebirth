@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "recordType": 1000014,
+  "playfieldId": 4880,
+  "source": "jobe-scientists-20261110",
+  "spawns": [
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "JN00",
+      "manifestHash": 0,
+      "minLevel": 1,
+      "maxLevel": 1,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 0,
+      "angleW": 1,
+      "position": [
+        1178,
+        123,
+        110
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    },
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "JN02",
+      "manifestHash": 0,
+      "minLevel": 1,
+      "maxLevel": 1,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 600,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 0,
+      "angleW": 1,
+      "position": [
+        1160,
+        123,
+        90
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    }
+  ]
+}

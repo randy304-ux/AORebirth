@@ -1,0 +1,173 @@
+{
+  "Npcs": [
+    "DRJO"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest JS00 none"
+      ],
+      "Say": "start"
+    },
+    {
+      "If": [
+        "quest JS00 active"
+      ],
+      "Say": "s0"
+    },
+    {
+      "If": [
+        "quest JS04 active",
+        "has JK00"
+      ],
+      "Say": "s1"
+    },
+    {
+      "If": [
+        "quest JS04 active"
+      ],
+      "Say": "s1_need"
+    },
+    {
+      "If": [
+        "quest JS05 active"
+      ],
+      "Say": "s2"
+    },
+    {
+      "If": [
+        "quest JS06 active",
+        "has JK01"
+      ],
+      "Say": "s3"
+    },
+    {
+      "If": [
+        "quest JS06 active"
+      ],
+      "Say": "s3_need"
+    },
+    {
+      "If": [
+        "quest JS50 active",
+        "has JK0Q"
+      ],
+      "Say": "s4"
+    },
+    {
+      "If": [
+        "quest JS50 active"
+      ],
+      "Say": "s4_need"
+    },
+    {
+      "If": [
+        "quest JS52 active",
+        "has JK0R"
+      ],
+      "Say": "s5"
+    },
+    {
+      "If": [
+        "quest JS52 active"
+      ],
+      "Say": "s5_need"
+    },
+    {
+      "Say": "idle"
+    }
+  ],
+  "Lines": {
+    "start": {
+      "Text": "Have you read the latest Jobe Scientist? Beits north of here limp, graze and fight in ways that tell me about the Xan. Observe a Limping Beit, then a regular one, then bring me bones. {givequest JS00}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s0": {
+      "Text": "Observe a Limping Beit first, then a regular Beit, north of here.{completequest JS00}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1": {
+      "Text": "Good bones. Now I need older ones: Old Beit Bones. They lie nearby. {take JK00}{completequest JS04}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1_need": {
+      "Text": "Kill three Aggressive Beits and bring me their bones.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s2": {
+      "Text": "The Old Beit Bones are close by. Pick them up.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s3": {
+      "Text": "These confirm it. Technologist Frank Jobin at the Notum Battery Tree will want your help. {take JK01}{completequest JS06}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s3_need": {
+      "Text": "Bring me the Old Beit Bones.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s4": {
+      "Text": "A scan of Yuttos carvings! My bone theory was wrong. I feel tired; bring me a Nucleus of Crusty Eremite. {take JK0Q}{completequest JS50}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s4_need": {
+      "Text": "Dr. Hestiya has a scan for me.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s5": {
+      "Text": "Thank you. Frank Jobin has one last job for you. {take JK0R}{completequest JS52}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s5_need": {
+      "Text": "Crusty Eremites near the Court carry the nucleus.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "idle": {
+      "Text": "The Beits north of here have more to teach.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

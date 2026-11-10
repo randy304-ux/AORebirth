@@ -1712,8 +1712,8 @@
   },
   {
     "Hash": "XK1F",
-    "Name": "Xan Civilization: Confirm the Old Man in Alappaa",
-    "Summary": "Enter Alappaa (4336) and talk to the Old Man. This is a temporary hook: Molokh, the Ice Obelisk, Novictum Blight, and the Sheila escort are not built in this pass.",
+    "Name": "Xan Civilization: Speak with the Old Man in Alappaa",
+    "Summary": "Enter Alappaa (4336) and talk to the Old Man. He will send you into the ice corridor: Malah-Efewels, Predator Rogues, Spinetooths, Cascading Molokh, the Ice Obelisk, Novictum Blight, and Sheila Marlene.",
     "QasInstance": 953051,
     "Scope": "Solo",
     "Action": "TargetNpc",
@@ -1731,7 +1731,7 @@
     },
     "Flags": "None",
     "MissionBit": null,
-    "NextStep": "XK1G",
+    "NextStep": "XK1H",
     "Reward": {
       "Hash": "XT1F",
       "Xp": 80000,
@@ -1766,6 +1766,316 @@
       "Hash": "XT1G",
       "Xp": 400000,
       "Credits": 20000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1H",
+    "Name": "Xan Civilization: Cull 3 Malah-Efewels",
+    "Summary": "Kill 3 Malah-Efewels in the Alappaa ice corridor.",
+    "QasInstance": 953053,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "P06S",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 297.19,
+      "Y": 33.084,
+      "Z": 156.834
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1I",
+    "Reward": {
+      "Hash": "XT1H",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1I",
+    "Name": "Xan Civilization: Cull 3 Predator Rogues",
+    "Summary": "Kill 3 Predator Rogues in the Alappaa ice corridor.",
+    "QasInstance": 953054,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "P06T",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 319.936,
+      "Y": 31.085,
+      "Z": 188.459
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1J",
+    "Reward": {
+      "Hash": "XT1I",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1J",
+    "Name": "Xan Civilization: Cull 3 Frozen Spinetooths",
+    "Summary": "Kill 3 Frozen Spinetooths in the Alappaa ice corridor.",
+    "QasInstance": 953055,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "P06V",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 386.485,
+      "Y": 33.309,
+      "Z": 178.556
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1K",
+    "Reward": {
+      "Hash": "XT1J",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1K",
+    "Name": "Xan Civilization: Cull 3 Glacial Spinetooths",
+    "Summary": "Kill 3 Glacial Spinetooths in the Alappaa ice corridor.",
+    "QasInstance": 953056,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "P06W",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 428.84,
+      "Y": 31.085,
+      "Z": 223.974
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1L",
+    "Reward": {
+      "Hash": "XT1K",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1L",
+    "Name": "Xan Civilization: Defeat Cascading Molokh",
+    "Summary": "Kill Cascading Molokh in Alappaa. The Bane of Ice (269992) should drop so it can be used on the Pulsating Ice Obelisk.",
+    "QasInstance": 953057,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "P06Y",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 271.399,
+      "Y": 33.743,
+      "Z": 418.194
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1M",
+    "Reward": {
+      "Hash": "XT1L",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 269992,
+            "HighId": 269992,
+            "Name": "Bane of Ice",
+            "Quality": 250,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1M",
+    "Name": "Xan Civilization: Use the Bane of Ice on the Obelisk",
+    "Summary": "Target the Pulsating Ice Obelisk with the Bane of Ice. The live 'use item on obelisk' mechanic is not wired; targeting the Obelisk completes this step.",
+    "QasInstance": 953058,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P071",
+      "Count": null,
+      "SpecItem": "PA00",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 218,
+      "Y": 31.095,
+      "Z": 264
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1N",
+    "Reward": {
+      "Hash": "XT1M",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1N",
+    "Name": "Xan Civilization: Destroy the Novictum Blight",
+    "Summary": "Kill the Novictum Blight that appears at the Obelisk.",
+    "QasInstance": 953059,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "P073",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 218,
+      "Y": 31.095,
+      "Z": 269
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1O",
+    "Reward": {
+      "Hash": "XT1N",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1O",
+    "Name": "Xan Civilization: Speak with Sheila Marlene",
+    "Summary": "Talk to Sheila Marlene at the Obelisk. The live escort cannot be wired without a real escort-item AOID, so the next step is to meet her at the Old Man rather than walking her back as a follower.",
+    "QasInstance": 953060,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P074",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 217,
+      "Y": 31.998,
+      "Z": 264
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1P",
+    "Reward": {
+      "Hash": "XT1O",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1P",
+    "Name": "Xan Civilization: Meet Sheila at the Old Man",
+    "Summary": "Go back to the Old Man at the Alappaa entrance (escort fallback: no follower, no ambush scripting; corridor mobs already stand along the path).",
+    "QasInstance": 953061,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "P06R",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 249.302,
+      "Y": 34.523,
+      "Z": 142.239
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1Q",
+    "Reward": {
+      "Hash": "XT1P",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "XK1Q",
+    "Name": "Xan Civilization: Defeat Reprogrammed Mezzorash",
+    "Summary": "Kill Reprogrammed Mezzorash beside the Old Man, then return to Anticipating Six outside Alappaa for the profession reward.",
+    "QasInstance": 953062,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "P076",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4336,
+      "X": 253.155,
+      "Y": 34.554,
+      "Z": 146.632
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "XK1G",
+    "Reward": {
+      "Hash": "XT1Q",
+      "Xp": 300000,
+      "Credits": 15000,
       "Records": null,
       "Stats": null
     }

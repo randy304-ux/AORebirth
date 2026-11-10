@@ -4,6 +4,21 @@
   ],
   "Openers": [
     {
+      "If": [
+        "quest JS26 active",
+        "has JK0F",
+        "has JK0G",
+        "has JK0H"
+      ],
+      "Say": "js26_turnin"
+    },
+    {
+      "If": [
+        "quest JS26 active"
+      ],
+      "Say": "js26_need"
+    },
+    {
       "Say": "hub"
     }
   ],
@@ -100,6 +115,20 @@
         "ey04_offer",
         "ey04_progress",
         "scan_report",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "js26_turnin": {
+      "Text": "Dr. Darnell's samples. Here is your Delivery Confirmation. {take JK0F}{take JK0G}{take JK0H}{completequest JS26}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "js26_need": {
+      "Text": "I need all three Tagged DNA samples: shadow, girder and spider.",
+      "Replies": [
         "bye"
       ],
       "Source": "filler"

@@ -1,0 +1,93 @@
+{
+  "Npcs": [
+    "FMQQ"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest JS14 active"
+      ],
+      "Say": "s0"
+    },
+    {
+      "If": [
+        "quest JS16 active",
+        "has JK0B"
+      ],
+      "Say": "s1"
+    },
+    {
+      "If": [
+        "quest JS16 active"
+      ],
+      "Say": "s1_need"
+    },
+    {
+      "If": [
+        "quest JS19 active",
+        "has JK0D"
+      ],
+      "Say": "s2"
+    },
+    {
+      "If": [
+        "quest JS19 active"
+      ],
+      "Say": "s2_need"
+    },
+    {
+      "Say": "idle"
+    }
+  ],
+  "Lines": {
+    "s0": {
+      "Text": "Bring me a holy book: the Word of Ocra. Or-Moda Torka near the temples carries it.{completequest JS14}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1": {
+      "Text": "Take this Hadron Recording Device. Record Diviner Ocra Path-Yeol and Fortuitous Dom-Nar Roch. {take JK0B}{spawn JK0D 1}{completequest JS16}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1_need": {
+      "Text": "I need the Word of Ocra.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s2": {
+      "Text": "Fascinating recordings. Dr. Darnell in Twilight Basin will want you next. {take JK0D}{completequest JS19}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s2_need": {
+      "Text": "Bring the recording device back.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "idle": {
+      "Text": "Xan grammar is a lifetime's work.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

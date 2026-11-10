@@ -1,0 +1,707 @@
+{
+  "P06S": {
+    "Templates": [
+      {
+        "Name": "Malah-Efewel",
+        "Level": 190,
+        "Stats": {
+          "0": 277352961,
+          "1": 52493,
+          "4": 6,
+          "12": 209046,
+          "18": 0,
+          "21": 0,
+          "27": 52493,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "52": 7600,
+          "54": 190,
+          "59": 5,
+          "60": 15,
+          "61": 60,
+          "64": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 9,
+          "286": 3,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 209245,
+          "360": 100,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 187,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "HasHeadMesh": false,
+        "Features": []
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "pen-20261108",
+      "Note": "Penumbra/Alappaa live scrape; stats donor band stripped of appearance; Textures/Meshes from scrape only when present"
+    }
+  },
+  "P06T": {
+    "Templates": [
+      {
+        "Name": "Predator Rogue",
+        "Level": 199,
+        "Stats": {
+          "0": 277352961,
+          "1": 36257,
+          "4": 4,
+          "12": 208940,
+          "18": 0,
+          "21": 0,
+          "27": 36257,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 199,
+          "59": 0,
+          "60": 15,
+          "61": 2000,
+          "64": 40111,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 300,
+          "286": 100,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 209050,
+          "360": 100,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 187,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [
+          {
+            "Hash": "L03P",
+            "Repeats": 1,
+            "Chance": 10,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03Q",
+            "Repeats": 1,
+            "Chance": 30,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03R",
+            "Repeats": 1,
+            "Chance": 10,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03S",
+            "Repeats": 1,
+            "Chance": 10,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03T",
+            "Repeats": 1,
+            "Chance": 30,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03U",
+            "Repeats": 1,
+            "Chance": 10,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03V",
+            "Repeats": 1,
+            "Chance": 10,
+            "LevelMod": 0
+          }
+        ],
+        "HasHeadMesh": false,
+        "Features": []
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "pen-20261108",
+      "Note": "Penumbra/Alappaa live scrape; stats donor band stripped of appearance; Textures/Meshes from scrape only when present"
+    }
+  },
+  "P06V": {
+    "Templates": [
+      {
+        "Name": "Frozen Spinetooth",
+        "Level": 210,
+        "Stats": {
+          "0": 277352961,
+          "1": 96582,
+          "4": 1,
+          "12": 302574,
+          "18": 0,
+          "21": 0,
+          "27": 96582,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "52": 8400,
+          "54": 210,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 3,
+          "286": 1,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 226557,
+          "360": 60,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 2,
+          "436": 91,
+          "455": 187,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [
+          {
+            "Hash": "L03T",
+            "Repeats": 1,
+            "Chance": 22,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03S",
+            "Repeats": 1,
+            "Chance": 56,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03P",
+            "Repeats": 1,
+            "Chance": 11,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03V",
+            "Repeats": 1,
+            "Chance": 22,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03R",
+            "Repeats": 1,
+            "Chance": 11,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03Q",
+            "Repeats": 1,
+            "Chance": 11,
+            "LevelMod": 0
+          }
+        ],
+        "HasHeadMesh": false,
+        "Features": []
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "pen-20261108",
+      "Note": "Penumbra/Alappaa live scrape; stats donor band stripped of appearance; Textures/Meshes from scrape only when present"
+    }
+  },
+  "P06W": {
+    "Templates": [
+      {
+        "Name": "Glacial Spinetooth",
+        "Level": 186,
+        "Stats": {
+          "0": 277352961,
+          "1": 23430,
+          "4": 1,
+          "12": 302574,
+          "18": 0,
+          "21": 0,
+          "27": 23430,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "52": 7400,
+          "54": 186,
+          "59": 0,
+          "60": 15,
+          "64": 40629,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 3,
+          "286": 1,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 233173,
+          "360": 130,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 2,
+          "436": 91,
+          "455": 187,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [
+          {
+            "Hash": "L03S",
+            "Repeats": 1,
+            "Chance": 57,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03Q",
+            "Repeats": 1,
+            "Chance": 43,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03V",
+            "Repeats": 1,
+            "Chance": 29,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03R",
+            "Repeats": 1,
+            "Chance": 14,
+            "LevelMod": 0
+          }
+        ],
+        "HasHeadMesh": false,
+        "Features": []
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "pen-20261108",
+      "Note": "Penumbra/Alappaa live scrape; stats donor band stripped of appearance; Textures/Meshes from scrape only when present"
+    }
+  },
+  "P06Y": {
+    "Templates": [
+      {
+        "Name": "Cascading Molokh",
+        "Level": 220,
+        "Stats": {
+          "0": 277352961,
+          "1": 175546,
+          "12": 214452,
+          "27": 175546,
+          "33": 0,
+          "54": 220,
+          "64": 40627,
+          "359": 214623,
+          "360": 50,
+          "455": 209,
+          "673": 31
+        },
+        "Features": [],
+        "HasHeadMesh": false,
+        "LootTable": [
+          {
+            "Hash": "L03X",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03Y",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03Z",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PA00",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "pen-20261108",
+      "Note": "Penumbra/Alappaa live scrape; stats donor band stripped of appearance; Textures/Meshes from scrape only when present"
+    }
+  },
+  "P070": {
+    "Templates": [
+      {
+        "Name": "Molokh Spawn",
+        "Level": 210,
+        "Stats": {
+          "0": 277352961,
+          "1": 692,
+          "4": 1,
+          "12": 214472,
+          "18": 0,
+          "21": 0,
+          "27": 692,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "52": 8400,
+          "54": 210,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 3,
+          "286": 1,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 214479,
+          "360": 20,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 2,
+          "436": 91,
+          "455": 174,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "HasHeadMesh": false,
+        "Features": []
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "pen-20261108",
+      "Note": "Penumbra/Alappaa live scrape; stats donor band stripped of appearance; Textures/Meshes from scrape only when present"
+    }
+  },
+  "P073": {
+    "Templates": [
+      {
+        "Name": "Novictum Blight",
+        "Level": 225,
+        "Stats": {
+          "0": 277352961,
+          "1": 304432,
+          "4": 1,
+          "12": 216837,
+          "18": 0,
+          "21": 0,
+          "27": 304432,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 225,
+          "59": 3,
+          "60": 6,
+          "64": 40635,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 330,
+          "286": 110,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 216869,
+          "360": 100,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 187,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [
+          {
+            "Hash": "L040",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03Z",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ],
+        "HasHeadMesh": false,
+        "Features": []
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "pen-20261108",
+      "Note": "Penumbra/Alappaa live scrape; stats donor band stripped of appearance; Textures/Meshes from scrape only when present"
+    }
+  },
+  "P076": {
+    "Templates": [
+      {
+        "Name": "Reprogrammed Mezzorash",
+        "Level": 230,
+        "Stats": {
+          "0": 277352961,
+          "1": 345546,
+          "4": 1,
+          "12": 209547,
+          "18": 0,
+          "21": 0,
+          "27": 345546,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "52": 9400,
+          "54": 230,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 15,
+          "286": 5,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 208904,
+          "360": 150,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 187,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [
+          {
+            "Hash": "L03T",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L03P",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L041",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L042",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L043",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L044",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L045",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L046",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ],
+        "Features": [],
+        "HasHeadMesh": false
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "pen-20261108",
+      "Note": "Penumbra/Alappaa live scrape; stats donor band stripped of appearance; Textures/Meshes from scrape only when present"
+    }
+  },
+  "P075": {
+    "Templates": [
+      {
+        "Name": "Unnatural Ice",
+        "Level": 200,
+        "Stats": {
+          "0": 277352961,
+          "1": 200386,
+          "4": 1,
+          "12": 269391,
+          "18": 0,
+          "21": 0,
+          "27": 200386,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 200,
+          "59": 0,
+          "60": 15,
+          "64": 40656,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 300,
+          "286": 100,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 269727,
+          "360": 200,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 228,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [],
+        "HasHeadMesh": false,
+        "LootTable": []
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "pen-20261108",
+      "Note": "Penumbra/Alappaa live scrape; stats donor band stripped of appearance; Textures/Meshes from scrape only when present"
+    }
+  }
+}

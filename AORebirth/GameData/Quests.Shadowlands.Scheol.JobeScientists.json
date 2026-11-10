@@ -1,0 +1,1920 @@
+[
+  {
+    "Hash": "JS00",
+    "Name": "Jobe Scientists: Speak with Dr. Jones",
+    "Summary": "Talk to Dr. Jones - Physical Anthropologist in Upper Scheol (1179 x 92). Retail starts the Beit observe and Aggressive Beit kills in parallel; this line is sequential.",
+    "QasInstance": 954000,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DRJO",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1178.8638,
+      "Y": 123.399605,
+      "Z": 95.05269
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS01",
+    "Reward": {
+      "Hash": "JT00",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS01",
+    "Name": "Jobe Scientists: Observe a Limping Beit",
+    "Summary": "Target a Limping Beit just north of Dr. Jones, before a regular Beit.",
+    "QasInstance": 954001,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "LIBT",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1116.8126,
+      "Y": 49.606647,
+      "Z": 401.79697
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS02",
+    "Reward": {
+      "Hash": "JT01",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS02",
+    "Name": "Jobe Scientists: Observe a Beit",
+    "Summary": "Target a regular Beit north of Dr. Jones (after the Limping Beit).",
+    "QasInstance": 954002,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FWKB",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1169.7,
+      "Y": 49.3,
+      "Z": 260
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS03",
+    "Reward": {
+      "Hash": "JT02",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS03",
+    "Name": "Jobe Scientists: Cull 3 Aggressive Beits",
+    "Summary": "Kill 3 Aggressive Beits north of Dr. Jones. Beit Bones (263641) are awarded when the third dies (retail spawned bones on each kill).",
+    "QasInstance": 954003,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "AGBI",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1101.2047,
+      "Y": 51.28696,
+      "Z": 443.77692
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS04",
+    "Reward": {
+      "Hash": "JT03",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 263641,
+            "HighId": 263641,
+            "Name": "Beit Bones",
+            "Quality": 1,
+            "Count": 3
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS04",
+    "Name": "Jobe Scientists: Beit Bones to Dr. Jones",
+    "Summary": "Return the Beit Bones to Dr. Jones.",
+    "QasInstance": 954004,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "DRJO",
+      "Count": null,
+      "SpecItem": "JK00",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1178.8638,
+      "Y": 123.399605,
+      "Z": 95.05269
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS05",
+    "Reward": {
+      "Hash": "JT04",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS05",
+    "Name": "Jobe Scientists: Recover Old Beit Bones",
+    "Summary": "Pick up Old Beit Bones from the open-world stand-in near Dr. Jones. Retail places this in The Plunge (Facility Entrance), which is a quest-only dungeon, so the stand-in is in the open. Donor look is the scraped Urn.",
+    "QasInstance": 954005,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "JN00",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1178,
+      "Y": 123,
+      "Z": 110
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS06",
+    "Reward": {
+      "Hash": "JT05",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": [
+        [
+          {
+            "Id": 263642,
+            "HighId": 263642,
+            "Name": "Old Beit Bones",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS06",
+    "Name": "Jobe Scientists: Old Beit Bones to Dr. Jones",
+    "Summary": "Trade the Old Beit Bones to Dr. Jones. He will send you to Technologist Frank Jobin at the Notum Battery Tree (1065 x 1814).",
+    "QasInstance": 954006,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "DRJO",
+      "Count": null,
+      "SpecItem": "JK01",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1178.8638,
+      "Y": 123.399605,
+      "Z": 95.05269
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS07",
+    "Reward": {
+      "Hash": "JT06",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS07",
+    "Name": "Jobe Scientists: Speak with Technologist Frank Jobin",
+    "Summary": "Talk to Technologist Frank Jobin in Upper Scheol (1065 x 1814).",
+    "QasInstance": 954007,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "TEFA",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1065.1273,
+      "Y": 61.253414,
+      "Z": 1814.6177
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS08",
+    "Reward": {
+      "Hash": "JT07",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS08",
+    "Name": "Jobe Scientists: A Crystal Filled by the Source",
+    "Summary": "Trade Frank a Crystal Filled by the Source (229603, any QL). This line does not spawn the crystal; you must already have one. Frank then gives two Prepared Notum Crystals.",
+    "QasInstance": 954008,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "TEFA",
+      "Count": null,
+      "SpecItem": "JK02",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1065.1273,
+      "Y": 61.253414,
+      "Z": 1814.6177
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS09",
+    "Reward": {
+      "Hash": "JT08",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 265665,
+            "HighId": 265665,
+            "Name": "Prepared Notum Crystal with 'Immature Voidling'",
+            "Quality": 100,
+            "Count": 1
+          },
+          {
+            "Id": 265666,
+            "HighId": 265666,
+            "Name": "Prepared Notum Crystal with 'Adolescent Voidling'",
+            "Quality": 150,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS09",
+    "Name": "Jobe Scientists: Use the Crystals at the Incarnators",
+    "Summary": "Retail: click each Prepared Notum Crystal on the western Incarnator (900 x 820) then the eastern Incarnator (1520 x 1270) to spawn and kill Immature and Adolescent Voidling pocket bosses. Those pocket-boss spawns are not wired (no voidling spawns, shared Incarnator hash JHBL). Return to Frank after visiting the incarnators; targeting Frank completes this step. He sends you to Dr. Hestiya with an Ancient device.",
+    "QasInstance": 954009,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "TEFA",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 900.0261,
+      "Y": 111,
+      "Z": 819.9
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS10",
+    "Reward": {
+      "Hash": "JT09",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 263858,
+            "HighId": 263858,
+            "Name": "Ancient device",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS10",
+    "Name": "Jobe Scientists: Deliver the Ancient Device to Dr. Hestiya",
+    "Summary": "Talk to Dr. Hestiya in the malah camp in Upper Scheol (805 x 605). She identifies the Ancient Novictum Refiner and returns it, and hands you a Space-Time Extraction Device. LOOK GAP: Hestiya's live hash is UOPE, but she was not in the Whozewhatzit scrapes, so she has no NpcTemplate yet and may not appear until scraped.",
+    "QasInstance": 954010,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS11",
+    "Reward": {
+      "Hash": "JT0A",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS11",
+    "Name": "Jobe Scientists: Extracted Xan Notum Crystals",
+    "Summary": "Retail: use the Space-Time Extraction Device on jars south of Hestiya and near the western incarnator to extract Cracked, Deformed, or Pristine Xan Notum Crystals. The jars were not scraped, so Hestiya's dialogue spawns one of each as a fallback. Return the Cracked Xan Notum Crystal to her first.",
+    "QasInstance": 954011,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": "JK08",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS12",
+    "Reward": {
+      "Hash": "JT0B",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS12",
+    "Name": "Jobe Scientists: Deformed Xan Notum Crystal to Dr. Hestiya",
+    "Summary": "Hand Dr. Hestiya the Deformed Xan Notum Crystal.",
+    "QasInstance": 954012,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": "JK09",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS13",
+    "Reward": {
+      "Hash": "JT0C",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS13",
+    "Name": "Jobe Scientists: Pristine Xan Notum Crystal to Dr. Hestiya",
+    "Summary": "Hand Dr. Hestiya the Pristine Xan Notum Crystal. She sends you to Dr. Curry in Lower Scheol (1090 x 1145).",
+    "QasInstance": 954013,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": "JK0A",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS14",
+    "Reward": {
+      "Hash": "JT0D",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS14",
+    "Name": "Jobe Scientists: Speak with Dr. Curry",
+    "Summary": "Talk to Dr.Curry - Linguistic Anthropologist in Lower Scheol (1088 x 1140).",
+    "QasInstance": 954014,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FMQQ",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 1088.2397,
+      "Y": 210.3996,
+      "Z": 1139.8173
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS15",
+    "Reward": {
+      "Hash": "JT0E",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS15",
+    "Name": "Jobe Scientists: Word of Ocra from Or-Moda Torka",
+    "Summary": "Kill Or-Moda Torka (Redeemed/Clan) outside the temples in Upper Scheol (about 651 x 293). The clan-side Coma-Eltah Wen path is skipped. Awards Word of Ocra and Ancient Insignia of Ocra.",
+    "QasInstance": 954015,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "OMTK",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 651.2764,
+      "Y": 58.973286,
+      "Z": 293.5093
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS16",
+    "Reward": {
+      "Hash": "JT0F",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 263878,
+            "HighId": 263878,
+            "Name": "Word of Ocra",
+            "Quality": 1,
+            "Count": 1
+          },
+          {
+            "Id": 264070,
+            "HighId": 264070,
+            "Name": "Ancient Insignia of Ocra",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS16",
+    "Name": "Jobe Scientists: Word of Ocra to Dr. Curry",
+    "Summary": "Trade the Word of Ocra to Dr. Curry. He gives you a Hadron Recording Device.",
+    "QasInstance": 954016,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "FMQQ",
+      "Count": null,
+      "SpecItem": "JK0B",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 1088.2397,
+      "Y": 210.3996,
+      "Z": 1139.8173
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS17",
+    "Reward": {
+      "Hash": "JT0G",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS17",
+    "Name": "Jobe Scientists: Record Diviner Ocra Path-Yeol",
+    "Summary": "Retail: right-click the Hadron Recording Device on Diviner Ocra Path-Yeol at 930 x 1540. The use-item-on-NPC mechanic is not wired; targeting the Diviner completes this step.",
+    "QasInstance": 954017,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DNOC",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 930.4103,
+      "Y": 160.42763,
+      "Z": 1542.6095
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS18",
+    "Reward": {
+      "Hash": "JT0H",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS18",
+    "Name": "Jobe Scientists: Record Fortuitous Dom-Nar Roch",
+    "Summary": "Target Fortuitous Dom-Nar Roch in Upper Scheol (1582 x 1784) to finish the recording (same use-item fallback as the Diviner).",
+    "QasInstance": 954018,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FRDM",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1582.3298,
+      "Y": 70.4,
+      "Z": 1783.2487
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS19",
+    "Reward": {
+      "Hash": "JT0I",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS19",
+    "Name": "Jobe Scientists: Recording Device to Dr. Curry",
+    "Summary": "Return the Hadron Recording Device to Dr. Curry. He sends you to Dr. Darnell in Twilight Basin (310 x 1110).",
+    "QasInstance": 954019,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "FMQQ",
+      "Count": null,
+      "SpecItem": "JK0D",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 1088.2397,
+      "Y": 210.3996,
+      "Z": 1139.8173
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS20",
+    "Reward": {
+      "Hash": "JT0J",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS20",
+    "Name": "Jobe Scientists: Speak with Dr. Darnell",
+    "Summary": "Talk to Dr. Darnell in Lower Scheol (305 x 1111), next to Leading Blossom. LOOK GAP: Darnell's live hash is KLHV, but she was not in the scrapes, so she has no NpcTemplate yet. Leading Blossom (LEBL) is also unscraped.",
+    "QasInstance": 954020,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "KLHV",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 304.92123,
+      "Y": 184.01598,
+      "Z": 1110.8964
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS21",
+    "Reward": {
+      "Hash": "JT0K",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS21",
+    "Name": "Jobe Scientists: Recover a Spun Pygmaeus Platter",
+    "Summary": "Pick up the Spun Pygmaeus Platter from the open-world stand-in near Dr. Darnell. Retail places this in The Uncharted Entrance, a quest-only dungeon. Donor look is the scraped Urn.",
+    "QasInstance": 954021,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "JN01",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 290,
+      "Y": 184,
+      "Z": 1110
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS22",
+    "Reward": {
+      "Hash": "JT0L",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": [
+        [
+          {
+            "Id": 263901,
+            "HighId": 263901,
+            "Name": "Spun Pygmaeus Platter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS22",
+    "Name": "Jobe Scientists: Platter to Dr. Darnell",
+    "Summary": "Trade the Spun Pygmaeus Platter to Dr. Darnell.",
+    "QasInstance": 954022,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "KLHV",
+      "Count": null,
+      "SpecItem": "JK0E",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 304.92123,
+      "Y": 184.01598,
+      "Z": 1110.8964
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS23",
+    "Reward": {
+      "Hash": "JT0M",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS23",
+    "Name": "Jobe Scientists: Tagged Shadow DNA",
+    "Summary": "Kill a Toxic Shadow in Lower Scheol (about 695 x 1176) and take the Tagged Shadow DNA.",
+    "QasInstance": 954023,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "TXSH",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 695.1879,
+      "Y": 172.23137,
+      "Z": 1176.0542
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS24",
+    "Reward": {
+      "Hash": "JT0N",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 263912,
+            "HighId": 263912,
+            "Name": "Tagged Shadow DNA",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS24",
+    "Name": "Jobe Scientists: Tagged Girder DNA",
+    "Summary": "Kill a Girder Runt in Lower Scheol (about 655 x 1185) and take the Tagged Girder DNA.",
+    "QasInstance": 954024,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "GIRU",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 655.4225,
+      "Y": 139.6046,
+      "Z": 1184.8829
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS25",
+    "Reward": {
+      "Hash": "JT0O",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 263902,
+            "HighId": 263902,
+            "Name": "Tagged Girder DNA",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS25",
+    "Name": "Jobe Scientists: Tagged Spider DNA",
+    "Summary": "Kill a Mutant Granite Spider in Lower Scheol (about 698 x 1273) and take the Tagged Spider DNA.",
+    "QasInstance": 954025,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "MUGR",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 698.0196,
+      "Y": 132.00127,
+      "Z": 1272.9764
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS26",
+    "Reward": {
+      "Hash": "JT0P",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 263911,
+            "HighId": 263911,
+            "Name": "Tagged Spider DNA",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS26",
+    "Name": "Jobe Scientists: DNA Samples to Guard Ulf Reinhart",
+    "Summary": "Deliver the three Tagged DNA samples to Guard Ulf Reinhart in Elysium North, Port 5 (1467 x 1319). He gives a Delivery Confirmation.",
+    "QasInstance": 954026,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "MUYX",
+      "Count": null,
+      "SpecItem": "JK0F",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4544,
+      "X": 1467.34,
+      "Y": 3.658,
+      "Z": 1319.263
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS27",
+    "Reward": {
+      "Hash": "JT0Q",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 263915,
+            "HighId": 263915,
+            "Name": "Delivery Confirmation",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS27",
+    "Name": "Jobe Scientists: Delivery Confirmation to Dr. Darnell",
+    "Summary": "Return the Delivery Confirmation to Dr. Darnell. She gives you the Jobe Research Symbolism Reference Library for Dr. Hestiya.",
+    "QasInstance": 954027,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "KLHV",
+      "Count": null,
+      "SpecItem": "JK0I",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 304.92123,
+      "Y": 184.01598,
+      "Z": 1110.8964
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS28",
+    "Reward": {
+      "Hash": "JT0R",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 263917,
+            "HighId": 263917,
+            "Name": "Jobe Research Symbolism Reference Library",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS28",
+    "Name": "Jobe Scientists: Profession Reward from Dr. Hestiya",
+    "Summary": "Deliver the Jobe Research Symbolism Reference Library to Dr. Hestiya. She gives the profession-specific reward from the AO-Universe guide (Adonis XP scale for the stage).",
+    "QasInstance": 954028,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": "JK0J",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS29",
+    "Reward": {
+      "Hash": "JT0S",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS29",
+    "Name": "Jobe Scientists: Cull Passive Aggressive Spirits",
+    "Summary": "Kill 3 Passive Aggressive Spirits near 1255 x 1770 in Lower Scheol and recover a Cracked Xan Burial Stone.",
+    "QasInstance": 954029,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "PAAG",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 1251.2511,
+      "Y": 251.71439,
+      "Z": 1773.1388
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS30",
+    "Reward": {
+      "Hash": "JT0T",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 264066,
+            "HighId": 264066,
+            "Name": "Cracked Xan Burial Stone",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS30",
+    "Name": "Jobe Scientists: Burial Stone to Dr. Hestiya",
+    "Summary": "Show the Cracked Xan Burial Stone to Dr. Hestiya. She returns it and sends you to Dr. Darnell.",
+    "QasInstance": 954030,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": "JK0K",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS31",
+    "Reward": {
+      "Hash": "JT0U",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS31",
+    "Name": "Jobe Scientists: Burial Stone to Dr. Darnell",
+    "Summary": "Bring the Cracked Xan Burial Stone to Dr. Darnell.",
+    "QasInstance": 954031,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "KLHV",
+      "Count": null,
+      "SpecItem": "JK0K",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 304.92123,
+      "Y": 184.01598,
+      "Z": 1110.8964
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS32",
+    "Reward": {
+      "Hash": "JT0V",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS32",
+    "Name": "Jobe Scientists: Ancient Insignia of Ocra to Dr. Darnell",
+    "Summary": "Hand Dr. Darnell the Ancient Insignia of Ocra (already awarded from Or-Moda Torka). She sends you to tag garden statues and speak with Conserver Ocra Jha-Ilad in the Ocra garden. The clan/Roch garden path is skipped.",
+    "QasInstance": 954032,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "KLHV",
+      "Count": null,
+      "SpecItem": "JK0C",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 304.92123,
+      "Y": 184.01598,
+      "Z": 1110.8964
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS33",
+    "Reward": {
+      "Hash": "JT0W",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS33",
+    "Name": "Jobe Scientists: Tag an Ocra Statue",
+    "Summary": "Target an Ocra Statue. Retail wants the garden statues clicked in order; garden statue hashes in 4682 were not scraped, so this uses the live world Ocra Statue (OCST) in Upper Scheol.",
+    "QasInstance": 954033,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "OCST",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1091.5742,
+      "Y": 214.39998,
+      "Z": 1318.5033
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS34",
+    "Reward": {
+      "Hash": "JT0X",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS34",
+    "Name": "Jobe Scientists: Tag a Roch Statue",
+    "Summary": "Target a Roch Statue in the open (live world hash ROST). Same garden-statue gap as the Ocra step.",
+    "QasInstance": 954034,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "ROST",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1543,
+      "Y": 113.4,
+      "Z": 1913.9817
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS35",
+    "Reward": {
+      "Hash": "JT0Y",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS35",
+    "Name": "Jobe Scientists: Speak with Conserver Ocra Jha-Ilad",
+    "Summary": "Talk to Conserver Ocra Jha-Ilad in the Ocra garden (4682, 362 x 264). The template is imported from the Upper Scheol world scrape of the same hash.",
+    "QasInstance": 954035,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "COOC",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4682,
+      "X": 361.80856,
+      "Y": 80.8,
+      "Z": 263.9143
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS36",
+    "Reward": {
+      "Hash": "JT0Z",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS36",
+    "Name": "Jobe Scientists: Report the Gardens to Dr. Darnell",
+    "Summary": "Tell Dr. Darnell you visited the Ocra garden. She sends you back to Dr. Hestiya about a ritual artifact.",
+    "QasInstance": 954036,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "KLHV",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 304.92123,
+      "Y": 184.01598,
+      "Z": 1110.8964
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS37",
+    "Reward": {
+      "Hash": "JT10",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS37",
+    "Name": "Jobe Scientists: Ritual Artifact from Dr. Hestiya",
+    "Summary": "Talk to Dr. Hestiya about the ritual scepter.",
+    "QasInstance": 954037,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS38",
+    "Reward": {
+      "Hash": "JT11",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS38",
+    "Name": "Jobe Scientists: Recover the Xan Ritual Scepter",
+    "Summary": "Pick up the Xan Ritual Scepter from the open-world stand-in near Dr. Jones. Retail places this in The Plunge. Donor look is the scraped Urn.",
+    "QasInstance": 954038,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "JN02",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1160,
+      "Y": 123,
+      "Z": 90
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS39",
+    "Reward": {
+      "Hash": "JT12",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": [
+        [
+          {
+            "Id": 265357,
+            "HighId": 265357,
+            "Name": "Xan Ritual Scepter",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS39",
+    "Name": "Jobe Scientists: Scepter to Dr. Hestiya",
+    "Summary": "Trade the Xan Ritual Scepter to Dr. Hestiya so she can identify it. She sends you to the Moss Covered Altar.",
+    "QasInstance": 954039,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": "JK0L",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS40",
+    "Reward": {
+      "Hash": "JT13",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS40",
+    "Name": "Jobe Scientists: Defeat the Great Mother",
+    "Summary": "Retail: use the scepter on the Moss Covered Altar in a Malah camp to spawn the Great Mother. She already stands at the altar (1323 x 1334), so this step is a KillOne of the Great Mother. The scepter-use spawn is not wired.",
+    "QasInstance": 954040,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "GRMO",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 1323.2633,
+      "Y": 121.7152,
+      "Z": 1334.3523
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS41",
+    "Reward": {
+      "Hash": "JT14",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS41",
+    "Name": "Jobe Scientists: Return the Scepter to Dr. Hestiya",
+    "Summary": "Show Dr. Hestiya the scepter is still intact. She sends it to Dr. Darnell.",
+    "QasInstance": 954041,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": "JK0L",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS42",
+    "Reward": {
+      "Hash": "JT15",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS42",
+    "Name": "Jobe Scientists: Scepter to Dr. Darnell",
+    "Summary": "Deliver the Xan Ritual Scepter to Dr. Darnell for a Consanguineal Embryo of Annwn'Guinee (239835).",
+    "QasInstance": 954042,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "KLHV",
+      "Count": null,
+      "SpecItem": "JK0L",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 304.92123,
+      "Y": 184.01598,
+      "Z": 1110.8964
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS43",
+    "Reward": {
+      "Hash": "JT16",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 239835,
+            "HighId": 239835,
+            "Name": "Consanguineal Embryo of Annwn'Guinee",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS43",
+    "Name": "Jobe Scientists: Cull 3 Canine Mongrels",
+    "Summary": "Kill 3 Canine Mongrels in Lower Scheol (about 875 x 1285). The Corpse of a Canine Mongrel is awarded when the third dies.",
+    "QasInstance": 954043,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "JQYD",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 843.2297,
+      "Y": 139.60135,
+      "Z": 1297.5182
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS44",
+    "Reward": {
+      "Hash": "JT17",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 265515,
+            "HighId": 265515,
+            "Name": "The Corpse of a Canine Mongrel",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS44",
+    "Name": "Jobe Scientists: Mongrel Corpse to Dr. Darnell",
+    "Summary": "Return the Corpse of a Canine Mongrel to Dr. Darnell. She sends you to the urns at 955 x 440.",
+    "QasInstance": 954044,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "KLHV",
+      "Count": null,
+      "SpecItem": "JK0N",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 304.92123,
+      "Y": 184.01598,
+      "Z": 1110.8964
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS45",
+    "Reward": {
+      "Hash": "JT18",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS45",
+    "Name": "Jobe Scientists: Recover a Broken Xan Prayer Urn",
+    "Summary": "Target the Urn at the foot of the rocky hill in Upper Scheol (957 x 449). A Broken Xan Prayer Urn is awarded.",
+    "QasInstance": 954045,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "URNJ",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 957.54395,
+      "Y": 90.86143,
+      "Z": 449.0657
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS46",
+    "Reward": {
+      "Hash": "JT19",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": [
+        [
+          {
+            "Id": 265352,
+            "HighId": 265352,
+            "Name": "Broken Xan Prayer Urn",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS46",
+    "Name": "Jobe Scientists: Urn to Dr. Hestiya",
+    "Summary": "Show the Broken Xan Prayer Urn to Dr. Hestiya. She sends you to Vanward Four.",
+    "QasInstance": 954046,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": "JK0O",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS47",
+    "Reward": {
+      "Hash": "JT1A",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS47",
+    "Name": "Jobe Scientists: Vanward Four Fixes the Urn",
+    "Summary": "Take the Broken Xan Prayer Urn to Vanward Four in Lower Scheol (1108 x 1362). He gives you a Xan Funeral Urn.",
+    "QasInstance": 954047,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "VAFO",
+      "Count": null,
+      "SpecItem": "JK0O",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 1108.4476,
+      "Y": 174.65887,
+      "Z": 1362.872
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS48",
+    "Reward": {
+      "Hash": "JT1B",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 226016,
+            "HighId": 226017,
+            "Name": "Xan Funeral Urn",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS48",
+    "Name": "Jobe Scientists: Funeral Urn to Dr. Darnell",
+    "Summary": "Deliver the Xan Funeral Urn to Dr. Darnell. She hints that Dr. Hestiya still has work.",
+    "QasInstance": 954048,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "KLHV",
+      "Count": null,
+      "SpecItem": "JK0P",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 304.92123,
+      "Y": 184.01598,
+      "Z": 1110.8964
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS49",
+    "Reward": {
+      "Hash": "JT1C",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS49",
+    "Name": "Jobe Scientists: Scan of Yuttos Wall Carvings",
+    "Summary": "Talk to Dr. Hestiya. She gives you a Scan of Yuttos Wall Carvings to take to Dr. Jones.",
+    "QasInstance": 954049,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "UOPE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 809.8942,
+      "Y": 142.52373,
+      "Z": 615.1282
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS50",
+    "Reward": {
+      "Hash": "JT1D",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": [
+        [
+          {
+            "Id": 264007,
+            "HighId": 264007,
+            "Name": "Scan of Yuttos Wall Carvings",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS50",
+    "Name": "Jobe Scientists: Scan to Dr. Jones",
+    "Summary": "Deliver the Scan of Yuttos Wall Carvings to Dr. Jones. He sends you for a Nucleus of Crusty Eremite.",
+    "QasInstance": 954050,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "DRJO",
+      "Count": null,
+      "SpecItem": "JK0Q",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1178.8638,
+      "Y": 123.399605,
+      "Z": 95.05269
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS51",
+    "Reward": {
+      "Hash": "JT1E",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS51",
+    "Name": "Jobe Scientists: Nucleus of Crusty Eremite",
+    "Summary": "Kill a Crusty Eremite near 833 x 225 in Upper Scheol and recover a Nucleus of Crusty Eremite.",
+    "QasInstance": 954051,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "ELLM",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 787.71185,
+      "Y": 61.466846,
+      "Z": 292.3877
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS52",
+    "Reward": {
+      "Hash": "JT1F",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 264006,
+            "HighId": 264006,
+            "Name": "Nucleus of Crusty Eremite",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS52",
+    "Name": "Jobe Scientists: Nucleus to Dr. Jones",
+    "Summary": "Return the Nucleus of Crusty Eremite to Dr. Jones. He sends you back to Frank.",
+    "QasInstance": 954052,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "DRJO",
+      "Count": null,
+      "SpecItem": "JK0R",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1178.8638,
+      "Y": 123.399605,
+      "Z": 95.05269
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS53",
+    "Reward": {
+      "Hash": "JT1G",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS53",
+    "Name": "Jobe Scientists: Frank's Last Task",
+    "Summary": "Talk to Technologist Frank Jobin about the Xan technology stolen by Thieving Spirits.",
+    "QasInstance": 954053,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "TEFA",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1065.1273,
+      "Y": 61.253414,
+      "Z": 1814.6177
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS54",
+    "Reward": {
+      "Hash": "JT1H",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS54",
+    "Name": "Jobe Scientists: Cull Thieving Spirits",
+    "Summary": "Kill 3 Thieving Spirits around the Ergo cave in Lower Scheol (about 1348 x 1760). Awards Igneous Rock Machine Component, Advanced Alloy Fuse, and Crystallized Notum Circuitry.",
+    "QasInstance": 954054,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "THSP",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4881,
+      "X": 1348.5679,
+      "Y": 253.44617,
+      "Z": 1760.2377
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "JS55",
+    "Reward": {
+      "Hash": "JT1I",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": [
+        [
+          {
+            "Id": 265361,
+            "HighId": 265361,
+            "Name": "Igneous Rock Machine Component",
+            "Quality": 1,
+            "Count": 1
+          },
+          {
+            "Id": 265664,
+            "HighId": 265664,
+            "Name": "Advanced Alloy Fuse",
+            "Quality": 1,
+            "Count": 1
+          },
+          {
+            "Id": 265663,
+            "HighId": 265663,
+            "Name": "Crystallized Notum Circuitry",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "JS55",
+    "Name": "Jobe Scientists: Xan Technology to Frank",
+    "Summary": "Return the three stolen Xan components to Technologist Frank Jobin for a ql 150 Ring of Computing (238910).",
+    "QasInstance": 954055,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "TEFA",
+      "Count": null,
+      "SpecItem": "JK0S",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4880,
+      "X": 1065.1273,
+      "Y": 61.253414,
+      "Z": 1814.6177
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "JT1J",
+      "Xp": 400000,
+      "Credits": 20000,
+      "Records": [
+        [
+          {
+            "Id": 238910,
+            "HighId": 238911,
+            "Name": "Ring of Computing",
+            "Quality": 150,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  }
+]

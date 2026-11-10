@@ -11,21 +11,73 @@
     },
     {
       "If": [
-        "quest XK1F done"
+        "HasAnyQuest XK1H,XK1I,XK1J,XK1K,XK1L,XK1M,XK1N,XK1O"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest XK1P active"
+      ],
+      "Say": "arrival"
+    },
+    {
+      "If": [
+        "quest XK1Q active"
+      ],
+      "Say": "mezz"
+    },
+    {
+      "If": [
+        "quest XK1G active"
+      ],
+      "Say": "gosix"
+    },
+    {
+      "If": [
+        "quest XK1G done"
       ],
       "Say": "after"
     }
   ],
   "Lines": {
     "brief": {
-      "Text": "I am still here. The corridor beyond holds more than I can ask of you today. Return to Anticipating Six outside. {completequest XK1F}",
+      "Text": "The corridor ahead is not quiet. Cull the Malah-Efewels, the Predator Rogues, then the Frozen and Glacial Spinetooths. Cascading Molokh holds a Bane of Ice. Use that bane on the Pulsating Ice Obelisk, destroy the Novictum Blight, and speak with Sheila Marlene. {completequest XK1F}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "Keep to the ice corridor. When Sheila is free, come back to me here.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "arrival": {
+      "Text": "Sheila is accounted for, even if she could not walk as a follower. Reprogrammed Mezzorash stands beside me. Strike it down, then return to Anticipating Six outside. {completequest XK1P}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "mezz": {
+      "Text": "Reprogrammed Mezzorash is here. Finish it, then go back to Anticipating Six.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "gosix": {
+      "Text": "Anticipating Six is outside, at the entrance.",
       "Replies": [
         "bye"
       ],
       "Source": "filler"
     },
     "after": {
-      "Text": "Anticipating Six is outside, at the entrance.",
+      "Text": "Anticipating Six already gave you what this place can give.",
       "Replies": [
         "bye"
       ],

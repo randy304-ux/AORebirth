@@ -1,0 +1,241 @@
+{
+  "Npcs": [
+    "KLHV"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest JS20 active"
+      ],
+      "Say": "s0"
+    },
+    {
+      "If": [
+        "quest JS22 active",
+        "has JK0E"
+      ],
+      "Say": "s1"
+    },
+    {
+      "If": [
+        "quest JS22 active"
+      ],
+      "Say": "s1_need"
+    },
+    {
+      "If": [
+        "quest JS27 active",
+        "has JK0I"
+      ],
+      "Say": "s2"
+    },
+    {
+      "If": [
+        "quest JS27 active"
+      ],
+      "Say": "s2_need"
+    },
+    {
+      "If": [
+        "quest JS31 active",
+        "has JK0K"
+      ],
+      "Say": "s3"
+    },
+    {
+      "If": [
+        "quest JS31 active"
+      ],
+      "Say": "s3_need"
+    },
+    {
+      "If": [
+        "quest JS32 active",
+        "has JK0C"
+      ],
+      "Say": "s4"
+    },
+    {
+      "If": [
+        "quest JS32 active"
+      ],
+      "Say": "s4_need"
+    },
+    {
+      "If": [
+        "quest JS36 active"
+      ],
+      "Say": "s5"
+    },
+    {
+      "If": [
+        "quest JS42 active",
+        "has JK0L"
+      ],
+      "Say": "s6"
+    },
+    {
+      "If": [
+        "quest JS42 active"
+      ],
+      "Say": "s6_need"
+    },
+    {
+      "If": [
+        "quest JS44 active",
+        "has JK0N"
+      ],
+      "Say": "s7"
+    },
+    {
+      "If": [
+        "quest JS44 active"
+      ],
+      "Say": "s7_need"
+    },
+    {
+      "If": [
+        "quest JS48 active",
+        "has JK0P"
+      ],
+      "Say": "s8"
+    },
+    {
+      "If": [
+        "quest JS48 active"
+      ],
+      "Say": "s8_need"
+    },
+    {
+      "Say": "idle"
+    }
+  ],
+  "Lines": {
+    "s0": {
+      "Text": "Looking for a job? Bring me a Spun Pygmaeus Platter, then DNA samples for Ulf Reinhart.{completequest JS20}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1": {
+      "Text": "A fine platter. Now: Toxic Shadow, Girder Runt and Mutant Granite Spider DNA, delivered to Guard Ulf Reinhart in Elysium. {take JK0E}{completequest JS22}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1_need": {
+      "Text": "Bring the Spun Pygmaeus Platter.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s2": {
+      "Text": "Confirmed. Take this library to Dr. Hestiya. {take JK0I}{completequest JS27}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s2_need": {
+      "Text": "Bring me Ulf Reinhart's Delivery Confirmation.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s3": {
+      "Text": "The stone tells us about their beliefs. Now bring me an Ancient Insignia of Ocra. {take JK0K}{completequest JS31}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s3_need": {
+      "Text": "Bring the burial stone from Dr. Hestiya.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s4": {
+      "Text": "Good. Tag an Ocra Statue and a Roch Statue, then talk to Conserver Ocra Jha-Ilad in the Ocra garden. {take JK0C}{completequest JS32}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s4_need": {
+      "Text": "Bring the Ancient Insignia of Ocra.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s5": {
+      "Text": "You visited the garden. Dr. Hestiya is looking for ritual artifacts.{completequest JS36}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s6": {
+      "Text": "It works. Take this embryo. {take JK0L}{completequest JS42}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s6_need": {
+      "Text": "Bring the scepter.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s7": {
+      "Text": "Thank you. Look for an Urn at the foot of the rocky hill near 955 x 440. {take JK0N}{completequest JS44}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s7_need": {
+      "Text": "Kill three Canine Mongrels.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s8": {
+      "Text": "A Xan Funeral Urn. Dr. Hestiya may have more work for you. {take JK0P}{completequest JS48}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s8_need": {
+      "Text": "Bring the Xan Funeral Urn from Vanward Four.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "idle": {
+      "Text": "The Yuttos carve what they remember.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

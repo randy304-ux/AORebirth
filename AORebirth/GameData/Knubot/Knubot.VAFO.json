@@ -1,0 +1,53 @@
+{
+  "Npcs": [
+    "VAFO"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest JS47 active",
+        "has JK0O"
+      ],
+      "Say": "s0"
+    },
+    {
+      "If": [
+        "quest JS47 active"
+      ],
+      "Say": "s0_need"
+    },
+    {
+      "Say": "idle"
+    }
+  ],
+  "Lines": {
+    "s0": {
+      "Text": "This I can mend. A Xan Funeral Urn. Take it to the scientist. {take JK0O}{completequest JS47}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s0_need": {
+      "Text": "You carry nothing broken.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "idle": {
+      "Text": "One who mends listens.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

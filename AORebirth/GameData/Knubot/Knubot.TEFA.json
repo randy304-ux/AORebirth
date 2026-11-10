@@ -1,0 +1,121 @@
+{
+  "Npcs": [
+    "TEFA"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest JS07 active"
+      ],
+      "Say": "s0"
+    },
+    {
+      "If": [
+        "quest JS08 active",
+        "has JK02"
+      ],
+      "Say": "s1"
+    },
+    {
+      "If": [
+        "quest JS08 active"
+      ],
+      "Say": "s1_need"
+    },
+    {
+      "If": [
+        "quest JS09 active"
+      ],
+      "Say": "s2"
+    },
+    {
+      "If": [
+        "quest JS53 active"
+      ],
+      "Say": "s3"
+    },
+    {
+      "If": [
+        "quest JS55 active",
+        "has JK0S",
+        "has JK0T",
+        "has JK0U"
+      ],
+      "Say": "s4"
+    },
+    {
+      "If": [
+        "quest JS55 active"
+      ],
+      "Say": "s4_need"
+    },
+    {
+      "Say": "idle"
+    }
+  ],
+  "Lines": {
+    "s0": {
+      "Text": "This Notum Battery Tree feeds on crystals. Bring me a Crystal Filled by the Source.{completequest JS07}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1": {
+      "Text": "Perfect. Take these two Prepared Notum Crystals to the Incarnators: west first, then east. {take JK02}{completequest JS08}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1_need": {
+      "Text": "I need a Crystal Filled by the Source, any quality.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s2": {
+      "Text": "The Incarnators answer the crystals. Take this Ancient device to Dr. Hestiya in the malah camp.{completequest JS09}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s3": {
+      "Text": "Thieving Spirits near the Ergo cave keep stealing my Xan technology. Bring back the three pieces.{completequest JS53}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s4": {
+      "Text": "All three pieces. This Ring of Computing is yours. {take JK0S}{take JK0T}{take JK0U}{completequest JS55}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s4_need": {
+      "Text": "I need the Igneous Rock Machine Component, Advanced Alloy Fuse and Crystallized Notum Circuitry.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "idle": {
+      "Text": "The Notum Battery Tree hums today.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

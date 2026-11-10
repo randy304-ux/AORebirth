@@ -1,0 +1,491 @@
+{
+  "Npcs": [
+    "UOPE"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest JS28 active",
+        "has JK0J"
+      ],
+      "Say": "prof"
+    },
+    {
+      "If": [
+        "quest JS10 active"
+      ],
+      "Say": "s0"
+    },
+    {
+      "If": [
+        "quest JS11 active",
+        "has JK08"
+      ],
+      "Say": "s1"
+    },
+    {
+      "If": [
+        "quest JS11 active"
+      ],
+      "Say": "s1_need"
+    },
+    {
+      "If": [
+        "quest JS12 active",
+        "has JK09"
+      ],
+      "Say": "s2"
+    },
+    {
+      "If": [
+        "quest JS12 active"
+      ],
+      "Say": "s2_need"
+    },
+    {
+      "If": [
+        "quest JS13 active",
+        "has JK0A"
+      ],
+      "Say": "s3"
+    },
+    {
+      "If": [
+        "quest JS13 active"
+      ],
+      "Say": "s3_need"
+    },
+    {
+      "If": [
+        "quest JS30 active",
+        "has JK0K"
+      ],
+      "Say": "s4"
+    },
+    {
+      "If": [
+        "quest JS30 active"
+      ],
+      "Say": "s4_need"
+    },
+    {
+      "If": [
+        "quest JS37 active"
+      ],
+      "Say": "s5"
+    },
+    {
+      "If": [
+        "quest JS39 active",
+        "has JK0L"
+      ],
+      "Say": "s6"
+    },
+    {
+      "If": [
+        "quest JS39 active"
+      ],
+      "Say": "s6_need"
+    },
+    {
+      "If": [
+        "quest JS41 active",
+        "has JK0L"
+      ],
+      "Say": "s7"
+    },
+    {
+      "If": [
+        "quest JS41 active"
+      ],
+      "Say": "s7_need"
+    },
+    {
+      "If": [
+        "quest JS46 active",
+        "has JK0O"
+      ],
+      "Say": "s8"
+    },
+    {
+      "If": [
+        "quest JS46 active"
+      ],
+      "Say": "s8_need"
+    },
+    {
+      "If": [
+        "quest JS49 active"
+      ],
+      "Say": "s9"
+    },
+    {
+      "Say": "idle"
+    }
+  ],
+  "Lines": {
+    "s0": {
+      "Text": "An Ancient Novictum Refiner. Keep it. I need Xan nanocrystals: take this Space-Time Extraction Device. The jars here are not responding, so take these samples and hand them to me one by one.{take JK05}{spawn JK06 1}{spawn JK07 1}{spawn JK08 1}{spawn JK09 1}{spawn JK0A 1}{completequest JS10}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1": {
+      "Text": "Cracked, but useful. {take JK08}{completequest JS11}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s1_need": {
+      "Text": "Hand me the Cracked Xan Notum Crystal.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s2": {
+      "Text": "Deformed. Good. {take JK09}{completequest JS12}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s2_need": {
+      "Text": "Hand me the Deformed Xan Notum Crystal.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s3": {
+      "Text": "Pristine. Dr. Curry in the Halls of Scheol studies their language. Go to him. {take JK0A}{completequest JS13}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s3_need": {
+      "Text": "Hand me the Pristine Xan Notum Crystal.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s4": {
+      "Text": "A burial stone. Take it to Dr. Darnell. {take JK0K}{spawn JK0K 1}{completequest JS30}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s4_need": {
+      "Text": "Passive Aggressive Spirits near 1255 x 1770 carry the stones.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s5": {
+      "Text": "There is a scepter, a ritual artifact. It is close to Dr. Jones. Bring it.{completequest JS37}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s6": {
+      "Text": "A Xan Ritual Scepter. Find out if it works: the Moss Covered Altar in the Halls of Scheol, where the Great Mother waits. {take JK0L}{spawn JK0L 1}{completequest JS39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s6_need": {
+      "Text": "Bring me the scepter.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s7": {
+      "Text": "Intact. Bring it to Dr. Darnell. {take JK0L}{spawn JK0L 1}{completequest JS41}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s7_need": {
+      "Text": "Show me the scepter.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s8": {
+      "Text": "A Broken Xan Prayer Urn. Vanward Four in Lower Scheol may know how to fix it. {take JK0O}{spawn JK0O 1}{completequest JS46}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s8_need": {
+      "Text": "Bring me an Urn from the foot of the rocky hill.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "s9": {
+      "Text": "Take this Scan of Yuttos Wall Carvings to Dr. Jones.{completequest JS49}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "idle": {
+      "Text": "The malahs around me are calmer than they look.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "prof": {
+      "Text": "The library! Choose the gift for your path.",
+      "Replies": [
+        "p0",
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "p6",
+        "p7",
+        "p8",
+        "p9",
+        "p10",
+        "p11",
+        "p13",
+        "p14"
+      ],
+      "Source": "filler"
+    },
+    "give0": {
+      "Text": "Deflection Amplifier. {take JK0J}{spawn JK1C 10}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give1": {
+      "Text": "Nano Crystal (Kyudo). {take JK0J}{spawn JK18 126}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give2": {
+      "Text": "Nano Crystal (Lesser Miniaturization). {take JK0J}{spawn JK15 125}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give3": {
+      "Text": "Nano Crystal (Minor NCU Crash). {take JK0J}{spawn JK16 126}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give4": {
+      "Text": "Nano Crystal (Lesser Predator). {take JK0J}{spawn JK11 126}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give5": {
+      "Text": "Nano Crystal (Learning by Doing (Team)). {take JK0J}{spawn JK10 60}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give6": {
+      "Text": "Nano Crystal (Minor Nanobot Defense). {take JK0J}{spawn JK1D 126}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give7": {
+      "Text": "Nano Crystal (Skilled Gunslinger). {take JK0J}{spawn JK12 126}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give8": {
+      "Text": "Ephemeral Annoyance. {take JK0J}{spawn JK14 120}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give9": {
+      "Text": "Nano Crystal (Simple Viral Agent). {take JK0J}{spawn JK13 126}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give10": {
+      "Text": "Nano Crystal (Nanobot Shelter). {take JK0J}{spawn JK1A 126}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give11": {
+      "Text": "Mesmerizing Staff of Francois. {take JK0J}{spawn JK19 205}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give13": {
+      "Text": "Shield of the Honorable Warrior. {take JK0J}{spawn JK17 125}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give14": {
+      "Text": "Necklace of Alacrity. {take JK0J}{spawn JK1B 150}{completequest JS28}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "p0": {
+      "Text": "Deflection Amplifier",
+      "Goto": "give0",
+      "If": [
+        "prof 0"
+      ],
+      "Source": "filler"
+    },
+    "p1": {
+      "Text": "Nano Crystal (Kyudo)",
+      "Goto": "give1",
+      "If": [
+        "prof 1"
+      ],
+      "Source": "filler"
+    },
+    "p2": {
+      "Text": "Nano Crystal (Lesser Miniaturization)",
+      "Goto": "give2",
+      "If": [
+        "prof 2"
+      ],
+      "Source": "filler"
+    },
+    "p3": {
+      "Text": "Nano Crystal (Minor NCU Crash)",
+      "Goto": "give3",
+      "If": [
+        "prof 3"
+      ],
+      "Source": "filler"
+    },
+    "p4": {
+      "Text": "Nano Crystal (Lesser Predator)",
+      "Goto": "give4",
+      "If": [
+        "prof 4"
+      ],
+      "Source": "filler"
+    },
+    "p5": {
+      "Text": "Nano Crystal (Learning by Doing (Team))",
+      "Goto": "give5",
+      "If": [
+        "prof 5"
+      ],
+      "Source": "filler"
+    },
+    "p6": {
+      "Text": "Nano Crystal (Minor Nanobot Defense)",
+      "Goto": "give6",
+      "If": [
+        "prof 6"
+      ],
+      "Source": "filler"
+    },
+    "p7": {
+      "Text": "Nano Crystal (Skilled Gunslinger)",
+      "Goto": "give7",
+      "If": [
+        "prof 7"
+      ],
+      "Source": "filler"
+    },
+    "p8": {
+      "Text": "Ephemeral Annoyance",
+      "Goto": "give8",
+      "If": [
+        "prof 8"
+      ],
+      "Source": "filler"
+    },
+    "p9": {
+      "Text": "Nano Crystal (Simple Viral Agent)",
+      "Goto": "give9",
+      "If": [
+        "prof 9"
+      ],
+      "Source": "filler"
+    },
+    "p10": {
+      "Text": "Nano Crystal (Nanobot Shelter)",
+      "Goto": "give10",
+      "If": [
+        "prof 10"
+      ],
+      "Source": "filler"
+    },
+    "p11": {
+      "Text": "Mesmerizing Staff of Francois",
+      "Goto": "give11",
+      "If": [
+        "prof 11"
+      ],
+      "Source": "filler"
+    },
+    "p13": {
+      "Text": "Shield of the Honorable Warrior",
+      "Goto": "give13",
+      "If": [
+        "prof 13"
+      ],
+      "Source": "filler"
+    },
+    "p14": {
+      "Text": "Necklace of Alacrity",
+      "Goto": "give14",
+      "If": [
+        "prof 14"
+      ],
+      "Source": "filler"
+    }
+  }
+}

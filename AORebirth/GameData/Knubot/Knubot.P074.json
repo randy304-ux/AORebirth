@@ -1,0 +1,55 @@
+{
+  "Npcs": [
+    "P074"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest XK1O active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "quest XK1P active"
+      ],
+      "Say": "goold"
+    },
+    {
+      "If": [
+        "quest XK1Q active"
+      ],
+      "Say": "mezz"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "I would have walked with you. This engine has no escort item I can take, so meet me at the Old Man by the entrance. The corridor already has its ambushes standing in place. {completequest XK1O}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "goold": {
+      "Text": "The Old Man is at the entrance. I will see you there.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "mezz": {
+      "Text": "Reprogrammed Mezzorash is with the Old Man. End it.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}
