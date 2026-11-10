@@ -41,6 +41,14 @@ namespace ZoneEngine_New.Core.Helpers
             if (IsInRestrictedGas(target))
                 return false;
 
+            // Sector 42 laser fences (ContactDamage + NoCombat): the prop may still
+            // hurt a player who walks into it. Moderate damage is applied by ContactDamageClock.
+            if (attacker is NpcCharacter contactSrc
+                && contactSrc.MobTemplate != null
+                && contactSrc.MobTemplate.Has(NpcFeature.ContactDamage)
+                && target is Player)
+                return true;
+
             // A NoCombat NPC does not attack, and neither does anyone whose fighting a buff restricts.
             if (attacker is NpcCharacter { Attackable: false } || attacker.CombatRestricted)
                 return false;

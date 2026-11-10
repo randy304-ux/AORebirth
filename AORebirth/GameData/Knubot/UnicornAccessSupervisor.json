@@ -1,0 +1,99 @@
+{
+  "Notes": "Unicorn Access Supervisor at the Sector 42 gates in Unicorn Outpost (PF 4364). Dialog captured 2026-11-10 15:29:12-15:29:32 ET. The 3 Kyr'Ozch Data Core trade that produces a Decrypted Kyr'Ozch Data Core was not captured on this run (the Supervisor already asked for the decrypted core). 'What are the rules again?' and 'I don't have one' were not opened; those replies are filler. No Unicorn Authorization nano was captured; the quest itself is the access record. Entry into Sector 42 is the existing playfield portal. The Supervisor opened a StartTrade window in the scrape; {opentrade} is omitted because the Decrypted Core item id was not captured.",
+  "Npcs": [
+    "UNAC"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "auth": {
+      "Text": "I would like authorization to enter sector 42 please.",
+      "Goto": "askcore",
+      "Source": "captured"
+    },
+    "rules": {
+      "Text": "What are the rules again?",
+      "Goto": "rules",
+      "Source": "captured (option only)"
+    },
+    "have": {
+      "Text": "Here you are.",
+      "Goto": "trade",
+      "Source": "captured"
+    },
+    "dont": {
+      "Text": "I don't have one.",
+      "Goto": "dont",
+      "Source": "captured (option only)"
+    },
+    "accepted": {
+      "Text": "Ok.  I accepted the mission.  Please give me access to Sector 42.",
+      "Goto": "grant",
+      "Source": "captured"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Greetings civilian.",
+      "Source": "captured",
+      "Replies": [
+        "auth",
+        "rules",
+        "bye"
+      ]
+    },
+    "askcore": {
+      "Text": " Please show me your Decrypted Kyr'Ozch Data Core.",
+      "Source": "captured",
+      "Replies": [
+        "have",
+        "dont",
+        "bye"
+      ]
+    },
+    "trade": {
+      "Text": " Give it here.",
+      "Source": "captured (StartTrade window was opened in the scrape, but {opentrade} was omitted because the Decrypted Kyr'Ozch Data Core item id was not captured and a Trades section cannot be authored)",
+      "Goto": "accept"
+    },
+    "accept": {
+      "Text": "Accept the mission, then I will grant you access.",
+      "Source": "captured",
+      "Replies": [
+        "accepted",
+        "bye"
+      ]
+    },
+    "grant": {
+      "Text": "Good luck citizen!{givequest S42Q}{close}",
+      "Source": "captured"
+    },
+    "rules": {
+      "Text": "You need a Decrypted Kyr'Ozch Data Core and you must accept the mission. Follow this conversation all the way through, including goodbye, or you will not be authorized.",
+      "Source": "filler",
+      "Replies": [
+        "auth",
+        "bye"
+      ]
+    },
+    "dont": {
+      "Text": "Then I cannot grant you access. Come back when you have a Decrypted Kyr'Ozch Data Core.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "captured"
+    }
+  }
+}

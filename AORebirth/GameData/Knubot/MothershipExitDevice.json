@@ -1,0 +1,41 @@
+{
+  "Notes": "Exit Device on deck 520 of the Alien Mothership, next to the Master of PsyMod. Returns to the Unicorn Outpost shuttle area at the captured exit point 2026-11-10 15:28:41 ET.",
+  "Npcs": [
+    "AMEX"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "leave": {
+      "Text": "Leave the mothership.",
+      "Goto": "leave",
+      "Source": "filler"
+    },
+    "stay": {
+      "Text": "Stay here.",
+      "Goto": "stay",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "An exit device on the command deck.",
+      "Source": "filler",
+      "Replies": [
+        "leave",
+        "stay"
+      ]
+    },
+    "leave": {
+      "Text": "{teleport 4364 64.500 100.685 184.083}{close}",
+      "Source": "captured (zone-out 15:28:41 ET)"
+    },
+    "stay": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  }
+}

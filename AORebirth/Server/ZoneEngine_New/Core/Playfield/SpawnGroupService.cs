@@ -52,6 +52,8 @@ public sealed class SpawnGroupService
 
     public void Tick(double deltaTime)
     {
+        MaybeAutoStart();
+
         RunningGroup? running;
         lock (_sync)
             running = _running;
@@ -81,6 +83,8 @@ public sealed class SpawnGroupService
                 continue;
             SpawnGroupStage stage = running.Definition.Stages[i];
             if (elapsed + 0.001 < stage.DelaySeconds)
+                continue;
+            if (stage.WaitUntilAllDead is { Length: > 0 } waitHashes && !AllDeadOnPlayfield(waitHashes))
                 continue;
 
             running.SpawnedStages.Add(i);
@@ -140,7 +144,7 @@ public sealed class SpawnGroupService
     }
 
     // Death goes through SpawnService.DespawnNpc, which clears Playfield.
-    static bool IsAlive(NpcCharacter npc) => npc.Playfield != null;
+    static bool IsAlive(NpcCharacter npc) => npc.Playfield != null && !npc.IsDead;
 
     static bool HasFailed(RunningGroup running)
     {
@@ -198,6 +202,69 @@ public sealed class SpawnGroupService
                 return true;
         }
         return false;
+    }
+
+
+    void MaybeAutoStart()
+    {
+        lock (_sync)
+        {
+            if (_running != null)
+                return;
+        }
+
+        foreach (SpawnGroupDefinition group in _gameData.SpawnGroups.All)
+        {
+            if (group == null || !group.AutoStart)
+                continue;
+            if (group.Playfield != 0 && group.Playfield != _playfield.Identity.Instance)
+                continue;
+
+            // Re-arm only when any WaitUntilAllDead hashes on the first stage are currently alive,
+            // so bosses do not immediately respawn while the standing towers are still down.
+            SpawnGroupStage? first = group.Stages is { Length: > 0 } ? group.Stages[0] : null;
+            if (first?.WaitUntilAllDead is { Length: > 0 } hashes && !AllAliveOnPlayfield(hashes))
+                continue;
+
+            if (TryStart(group.Id))
+                return;
+        }
+    }
+
+    bool AllDeadOnPlayfield(string[] hashes)
+    {
+        HashSet<string> live = LiveHashesOnPlayfield();
+        foreach (string hash in hashes)
+        {
+            if (live.Contains(hash))
+                return false;
+        }
+        return hashes.Length > 0;
+    }
+
+    bool AllAliveOnPlayfield(string[] hashes)
+    {
+        HashSet<string> live = LiveHashesOnPlayfield();
+        foreach (string hash in hashes)
+        {
+            if (!live.Contains(hash))
+                return false;
+        }
+        return hashes.Length > 0;
+    }
+
+    HashSet<string> LiveHashesOnPlayfield()
+    {
+        var live = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        DynelRegistry? registry = _playfield.GetService<DynelRegistry>();
+        if (registry == null)
+            return live;
+        foreach (Dynel dynel in registry.Dynels())
+        {
+            if (dynel is NpcCharacter npc && IsAlive(npc) && !string.IsNullOrEmpty(npc.SpawnHash))
+                live.Add(npc.SpawnHash);
+        }
+        return live;
     }
 
     void Reset(string reason)

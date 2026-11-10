@@ -1,0 +1,44 @@
+{
+  "Notes": "Biological Transceivers in Sector 42 (hash BLTN, 3 extract + 3 added from the scrape). No use packet was captured; this is a short filler inspect line. The Alien Bio-Transmission Encoder nano was not captured as a usable action.",
+  "Npcs": [
+    "BLTN"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "look": {
+      "Text": "Inspect the transceiver.",
+      "Goto": "look",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Leave it.",
+      "Goto": "bye",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "A biological transceiver, humming with alien signal traffic.",
+      "Source": "filler",
+      "Replies": [
+        "look",
+        "bye"
+      ]
+    },
+    "look": {
+      "Text": "The casing is sealed. Whatever this is broadcasting, you cannot tune it from here.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  }
+}

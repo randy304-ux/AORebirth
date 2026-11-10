@@ -52,6 +52,8 @@ public sealed class SpawnGroupCatalog
 
     public int Count => _groups.Count;
 
+    public IEnumerable<SpawnGroupDefinition> All => _groups.Values;
+
     public bool TryGet(string id, out SpawnGroupDefinition group)
     {
         if (string.IsNullOrWhiteSpace(id))
@@ -71,6 +73,9 @@ public sealed class SpawnGroupDefinition
     public string? Name { get; set; }
 
     public int Playfield { get; set; }
+
+    /// <summary>Start this group when the playfield loads, and re-arm after reset once any WaitUntilAllDead hashes are alive again.</summary>
+    public bool AutoStart { get; set; }
 
     /// <summary>Seconds from start until the encounter is despawned and can be run again.</summary>
     public int ResetTimeoutSeconds { get; set; } = 3600;
@@ -93,6 +98,13 @@ public sealed class SpawnGroupDefinition
 public sealed class SpawnGroupStage
 {
     public double DelaySeconds { get; set; }
+
+    /// <summary>
+    /// Do not spawn this stage until every hash has no living NPC on the playfield
+    /// (scanned via DynelRegistry.Dynels, not only group-live NPCs). Used by Sector 42
+    /// first-cycle bosses, which wait for the three standing signal towers to die.
+    /// </summary>
+    public string[] WaitUntilAllDead { get; set; } = Array.Empty<string>();
 
     public SpawnGroupEntry[] Spawns { get; set; } = Array.Empty<SpawnGroupEntry>();
 }

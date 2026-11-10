@@ -738,6 +738,8 @@ namespace ZoneEngine_New.Core.Playfield
                 ZoneEngine_New.Core.Events.HalloweenClock.Tick(this, deltaTime);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("spawngroup");
                 SpawnGroupClock.Tick(this, deltaTime);
+                ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("contactdamage");
+                ContactDamageClock.Tick(this, deltaTime);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("checkpoint");
                 foreach (Player player in new System.Collections.Generic.List<Player>(_dynelRegistry.PlayerEntities()))
                 {

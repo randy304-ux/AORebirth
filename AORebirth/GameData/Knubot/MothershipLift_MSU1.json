@@ -1,0 +1,41 @@
+{
+  "Notes": "Mothership Button (up) (MSU1). Destination inferred from deck order (8/136/264/392/520) and up/down/boss labels; the scrape did not capture a use animation, so this is talk-and-teleport. Destination is the arrival pad on the target deck.",
+  "Npcs": [
+    "MSU1"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "use": {
+      "Text": "Use the lift (up to the next deck).",
+      "Goto": "go",
+      "Source": "filler"
+    },
+    "stay": {
+      "Text": "Stay here.",
+      "Goto": "stay",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "A lift platform on the alien mothership.",
+      "Source": "filler",
+      "Replies": [
+        "use",
+        "stay"
+      ]
+    },
+    "go": {
+      "Text": "{teleport 386 25.010 136.010 185.300}{close}",
+      "Source": "filler"
+    },
+    "stay": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  }
+}

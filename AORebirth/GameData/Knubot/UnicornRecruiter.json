@@ -1,0 +1,80 @@
+{
+  "Notes": "Unicorn Recruiter in Unicorn Outpost (PF 4364, hash UIRC, native spawn). Dialog captured 2026-11-10 15:14:04-15:14:35 ET, including the option 'I want the mission Unicorns are too chicken to take.' That path gives the Alien Mothership infiltrate quest. Other assignment options were not taken.",
+  "Npcs": [
+    "UIRC"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "visit": {
+      "Text": "I want to visit the alien mothership!",
+      "Goto": "sure",
+      "Source": "captured"
+    },
+    "easy": {
+      "Text": "Take it easy on us.  We want to come back in one piece.",
+      "Goto": "easy",
+      "Source": "captured (option only)"
+    },
+    "handle": {
+      "Text": "We can handle our business.",
+      "Goto": "handle",
+      "Source": "captured (option only)"
+    },
+    "chicken": {
+      "Text": "I want the mission Unicorns are too chicken to take.",
+      "Goto": "chicken",
+      "Source": "captured"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "The Unicorn soldier turns to you and nods slowly. Hello.",
+      "Source": "captured",
+      "Replies": [
+        "visit",
+        "bye"
+      ]
+    },
+    "sure": {
+      "Text": "And you're sure that's such a good idea? He looks you up and down as if to assess your potential. Fine, you can go. Most people come down from these operations alive. Perhaps you and your team will be fortunate. He runs a scanner over you and waits for it to sound off a loud beep.  What kind of assignment is your team up for?",
+      "Source": "captured",
+      "Replies": [
+        "easy",
+        "handle",
+        "chicken",
+        "bye"
+      ]
+    },
+    "chicken": {
+      "Text": "I have something special for you suicidal types. You think you can see the Unicorn grinning in his helmet...but it might have been a trick of the light.. Enter the shuttle through the gates there and you'll be knee-deep in green trouble within minutes.  Good luck! You are going to need it.{givequest AMMQ}{close}",
+      "Source": "captured"
+    },
+    "easy": {
+      "Text": "A standard assignment, then. Enter the shuttle through the gates when you are ready.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "handle": {
+      "Text": "Confidence is good. Enter the shuttle through the gates when you are ready.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "captured"
+    }
+  }
+}

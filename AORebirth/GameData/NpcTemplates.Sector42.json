@@ -1,0 +1,1735 @@
+{
+  "UOST": {
+    "Templates": [
+      {
+        "Name": "Stock Supervisor Fabio",
+        "Level": 220,
+        "Health": 203721,
+        "Side": 1,
+        "Breed": 0,
+        "MonsterData": 26092,
+        "Scale": 125,
+        "Mesh": 5907,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 219,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "UOST"
+  },
+  "ALLS": {
+    "Templates": [
+      {
+        "Name": "Alien Laser Fence",
+        "Level": 1,
+        "Health": 1,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 256784,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": 4851201,
+        "Features": [
+          "NoCombat",
+          "ContactDamage"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "ALLS"
+  },
+  "BLTN": {
+    "Templates": [
+      {
+        "Name": "Biological Transceiver",
+        "Level": 1,
+        "Health": 1,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 254280,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": 0,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "BLTN"
+  },
+  "AICW": {
+    "Templates": [
+      {
+        "Name": "Alien Claw",
+        "Level": 1,
+        "Health": 1,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 285743,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": 12801,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "AICW"
+  },
+  "S42E": {
+    "Templates": [
+      {
+        "Name": "East Alien Signal Tower",
+        "Level": 300,
+        "Health": 4666667,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 260034,
+        "Scale": 137,
+        "Mesh": 260031,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 269357569
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42E"
+  },
+  "S42N": {
+    "Templates": [
+      {
+        "Name": "North Alien Signal Tower",
+        "Level": 300,
+        "Health": 4666667,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 260034,
+        "Scale": 137,
+        "Mesh": 260031,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 269357569
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42N"
+  },
+  "S42W": {
+    "Templates": [
+      {
+        "Name": "West Alien Signal Tower",
+        "Level": 300,
+        "Health": 4666667,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 260034,
+        "Scale": 137,
+        "Mesh": 260031,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 269357569
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42W"
+  },
+  "S42M": {
+    "Templates": [
+      {
+        "Name": "Field Marshal  - Cha'Khaz",
+        "Level": 300,
+        "Health": 4666667,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 257313,
+        "Scale": 274,
+        "Mesh": 257312,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 287128,
+            "HighId": 287128,
+            "MinQl": 200,
+            "MaxQl": 200,
+            "Chance": 100,
+            "Name": "Nanite Reconstruction ToilerBots - Thuja Plicata"
+          },
+          {
+            "LowId": 257961,
+            "HighId": 257961,
+            "MinQl": 250,
+            "MaxQl": 250,
+            "Chance": 100,
+            "Name": "Energy Redistribution Unit"
+          },
+          {
+            "LowId": 257964,
+            "HighId": 257964,
+            "MinQl": 250,
+            "MaxQl": 250,
+            "Chance": 100,
+            "Name": "Visible Light Remodulation Device"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42M"
+  },
+  "S42S": {
+    "Templates": [
+      {
+        "Name": "Field Support  - Cha'Khaz",
+        "Level": 300,
+        "Health": 3733334,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 257313,
+        "Scale": 274,
+        "Mesh": 257312,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 287128,
+            "HighId": 287128,
+            "MinQl": 200,
+            "MaxQl": 200,
+            "Chance": 100,
+            "Name": "Nanite Reconstruction ToilerBots - Thuja Plicata"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42S"
+  },
+  "S42G": {
+    "Templates": [
+      {
+        "Name": "Master Genesplicer - Cha'Khaz",
+        "Level": 300,
+        "Health": 6533334,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 257313,
+        "Scale": 192,
+        "Mesh": 257312,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 257962,
+            "HighId": 257962,
+            "MinQl": 250,
+            "MaxQl": 250,
+            "Chance": 100,
+            "Name": "Dynamic Gas Redistribution Valves"
+          },
+          {
+            "LowId": 257960,
+            "HighId": 257960,
+            "MinQl": 250,
+            "MaxQl": 250,
+            "Chance": 100,
+            "Name": "Action Probability Estimator"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42G"
+  },
+  "S42P": {
+    "Templates": [
+      {
+        "Name": "Proto-Embalmer - Cha'Khaz",
+        "Level": 300,
+        "Health": 6533334,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 257313,
+        "Scale": 192,
+        "Mesh": 257312,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 257959,
+            "HighId": 257959,
+            "MinQl": 250,
+            "MaxQl": 250,
+            "Chance": 100,
+            "Name": "Inertial Adjustment Processing Unit"
+          },
+          {
+            "LowId": 257963,
+            "HighId": 257963,
+            "MinQl": 250,
+            "MaxQl": 250,
+            "Chance": 100,
+            "Name": "Notum Amplification Coil"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42P"
+  },
+  "S42H": {
+    "Templates": [
+      {
+        "Name": "Signal Hacker",
+        "Level": 300,
+        "Health": 234000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254304,
+        "Scale": 192,
+        "Mesh": 254301,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247099,
+            "HighId": 247099,
+            "MinQl": 100,
+            "MaxQl": 100,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Atomic Re-Structuralizing Tool"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42H"
+  },
+  "S42V": {
+    "Templates": [
+      {
+        "Name": "Alien Vector",
+        "Level": 250,
+        "Health": 100000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 247728,
+        "Scale": 260,
+        "Mesh": 31774,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268980737
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42V"
+  },
+  "S42L": {
+    "Templates": [
+      {
+        "Name": "Alien Larvae",
+        "Level": 250,
+        "Health": 60000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253588,
+        "Scale": 100,
+        "Mesh": 253423,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42L"
+  },
+  "S42C": {
+    "Templates": [
+      {
+        "Name": "Alien Coccoon",
+        "Level": 250,
+        "Health": 40000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 257283,
+        "Scale": 130,
+        "Mesh": 257279,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 58,
+        "Flags": 269373953
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42C"
+  },
+  "S42A": {
+    "Templates": [
+      {
+        "Name": "Alien Heavy Patroller",
+        "Level": 280,
+        "Health": 1080000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 248109,
+        "Scale": 67,
+        "Mesh": 247255,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42A"
+  },
+  "S42D": {
+    "Templates": [
+      {
+        "Name": "Drone Harvester - Jaax'Sinuh",
+        "Level": 250,
+        "Health": 200000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 256462,
+        "Scale": 182,
+        "Mesh": 254291,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42D"
+  },
+  "S42R": {
+    "Templates": [
+      {
+        "Name": "Drone Reaper - Jaax'Sinuh",
+        "Level": 240,
+        "Health": 234202,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 256462,
+        "Scale": 206,
+        "Mesh": 254291,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42R"
+  },
+  "S42J": {
+    "Templates": [
+      {
+        "Name": "Reaper - Jaax'Sinuh",
+        "Level": 230,
+        "Health": 188403,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 260280,
+        "Scale": 203,
+        "Mesh": 260278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42J"
+  },
+  "S42F": {
+    "Templates": [
+      {
+        "Name": "Fresh Recruit - Cha'Heru",
+        "Level": 229,
+        "Health": 134271,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254003,
+        "Scale": 20,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42F"
+  },
+  "S42JS": {
+    "Templates": [
+      {
+        "Name": "Ensign - Jaax'Sinuh",
+        "Level": 274,
+        "Health": 72800,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251782,
+        "Scale": 134,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247764,
+            "HighId": 254804,
+            "MinQl": 242,
+            "MaxQl": 260,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 254520,
+            "HighId": 254520,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Submachine Gun"
+          },
+          {
+            "LowId": 257531,
+            "HighId": 257531,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Rank Identification"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 254686,
+            "HighId": 254687,
+            "MinQl": 267,
+            "MaxQl": 267,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Axe"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42JS"
+  },
+  "S42J2": {
+    "Templates": [
+      {
+        "Name": "Ensign - Jaax'Sinuh",
+        "Level": 274,
+        "Health": 72800,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251782,
+        "Scale": 134,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247764,
+            "HighId": 254804,
+            "MinQl": 242,
+            "MaxQl": 260,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 254520,
+            "HighId": 254520,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Submachine Gun"
+          },
+          {
+            "LowId": 257531,
+            "HighId": 257531,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Rank Identification"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 254686,
+            "HighId": 254687,
+            "MinQl": 267,
+            "MaxQl": 267,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Axe"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42J2"
+  },
+  "S42J3": {
+    "Templates": [
+      {
+        "Name": "Ensign - Jaax'Sinuh",
+        "Level": 274,
+        "Health": 72800,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251782,
+        "Scale": 134,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 247764,
+            "HighId": 254804,
+            "MinQl": 242,
+            "MaxQl": 260,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 254520,
+            "HighId": 254520,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Submachine Gun"
+          },
+          {
+            "LowId": 257531,
+            "HighId": 257531,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Rank Identification"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 254686,
+            "HighId": 254687,
+            "MinQl": 267,
+            "MaxQl": 267,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Axe"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42J3"
+  },
+  "S42JU": {
+    "Templates": [
+      {
+        "Name": "Ensign - Jaax'Uri",
+        "Level": 263,
+        "Health": 133867,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253649,
+        "Scale": 132,
+        "Mesh": 254422,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 288662,
+            "HighId": 288663,
+            "MinQl": 226,
+            "MaxQl": 226,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Nunchacko"
+          },
+          {
+            "LowId": 254518,
+            "HighId": 254519,
+            "MinQl": 258,
+            "MaxQl": 258,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Submachine Gun"
+          },
+          {
+            "LowId": 254492,
+            "HighId": 254492,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Carbine"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42JU"
+  },
+  "S42JH": {
+    "Templates": [
+      {
+        "Name": "Ensign - Jaax'Heru",
+        "Level": 263,
+        "Health": 200800,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254002,
+        "Scale": 132,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 257529,
+            "HighId": 257529,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Battlesuit Audio Processor"
+          },
+          {
+            "LowId": 257531,
+            "HighId": 257531,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Rank Identification"
+          },
+          {
+            "LowId": 254702,
+            "HighId": 254702,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Hammer"
+          },
+          {
+            "LowId": 254546,
+            "HighId": 254547,
+            "MinQl": 274,
+            "MaxQl": 274,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Carbine"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42JH"
+  },
+  "S42IU": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ilari'Uri",
+        "Level": 262,
+        "Health": 132800,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253897,
+        "Scale": 132,
+        "Mesh": 253409,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254672,
+            "HighId": 254673,
+            "MinQl": 228,
+            "MaxQl": 228,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Hammer"
+          },
+          {
+            "LowId": 254616,
+            "HighId": 254617,
+            "MinQl": 213,
+            "MaxQl": 213,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Pistol"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 254581,
+            "HighId": 254582,
+            "MinQl": 213,
+            "MaxQl": 213,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Shotgun"
+          },
+          {
+            "LowId": 254546,
+            "HighId": 254547,
+            "MinQl": 289,
+            "MaxQl": 289,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Carbine"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42IU"
+  },
+  "S42IH": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ilari'Heru",
+        "Level": 271,
+        "Health": 213600,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254006,
+        "Scale": 133,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 248815,
+            "HighId": 248815,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Inactive Nano Input Hood"
+          },
+          {
+            "LowId": 257529,
+            "HighId": 257529,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Battlesuit Audio Processor"
+          },
+          {
+            "LowId": 254637,
+            "HighId": 254638,
+            "MinQl": 257,
+            "MaxQl": 257,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Pistol"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42IH"
+  },
+  "S42IS": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ilari'Sinuh",
+        "Level": 275,
+        "Health": 73334,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251783,
+        "Scale": 134,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254686,
+            "HighId": 254687,
+            "MinQl": 209,
+            "MaxQl": 209,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Axe"
+          },
+          {
+            "LowId": 257533,
+            "HighId": 257533,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Video Processing Unit"
+          },
+          {
+            "LowId": 254546,
+            "HighId": 254547,
+            "MinQl": 216,
+            "MaxQl": 216,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Carbine"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42IS"
+  },
+  "S42RU": {
+    "Templates": [
+      {
+        "Name": "Ensign - Rimah'Uri",
+        "Level": 263,
+        "Health": 133867,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253897,
+        "Scale": 132,
+        "Mesh": 253409,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 257531,
+            "HighId": 257531,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Rank Identification"
+          },
+          {
+            "LowId": 254616,
+            "HighId": 254617,
+            "MinQl": 276,
+            "MaxQl": 276,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Pistol"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42RU"
+  },
+  "S42RS": {
+    "Templates": [
+      {
+        "Name": "Ensign - Rimah'Sinuh",
+        "Level": 258,
+        "Health": 64267,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251783,
+        "Scale": 132,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254775,
+            "HighId": 254776,
+            "MinQl": 194,
+            "MaxQl": 194,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Spear"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 254730,
+            "HighId": 254730,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Sledgehammer"
+          },
+          {
+            "LowId": 254674,
+            "HighId": 254674,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Hammer"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42RS"
+  },
+  "S42RH": {
+    "Templates": [
+      {
+        "Name": "Ensign - Rimah'Heru",
+        "Level": 274,
+        "Health": 218400,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254006,
+        "Scale": 134,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 247764,
+            "HighId": 254804,
+            "MinQl": 296,
+            "MaxQl": 296,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 254756,
+            "HighId": 254757,
+            "MinQl": 206,
+            "MaxQl": 206,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Sword"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42RH"
+  },
+  "S42XH": {
+    "Templates": [
+      {
+        "Name": "Ensign - Xoch'Heru",
+        "Level": 261,
+        "Health": 197600,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254002,
+        "Scale": 132,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254651,
+            "HighId": 254652,
+            "MinQl": 259,
+            "MaxQl": 259,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Machine Pistol"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42XH"
+  },
+  "S42XU": {
+    "Templates": [
+      {
+        "Name": "Ensign - Xoch'Uri",
+        "Level": 266,
+        "Health": 137067,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253649,
+        "Scale": 133,
+        "Mesh": 254422,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254567,
+            "HighId": 254568,
+            "MinQl": 260,
+            "MaxQl": 260,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Grenade Gun"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 254471,
+            "HighId": 254471,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Rifle"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42XU"
+  },
+  "S42XS": {
+    "Templates": [
+      {
+        "Name": "Ensign - Xoch'Sinuh",
+        "Level": 270,
+        "Health": 70667,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251782,
+        "Scale": 133,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42XS"
+  },
+  "S42CS": {
+    "Templates": [
+      {
+        "Name": "Ensign - Cha'Sinuh",
+        "Level": 271,
+        "Health": 71200,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251781,
+        "Scale": 133,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 248815,
+            "HighId": 248815,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Inactive Nano Input Hood"
+          },
+          {
+            "LowId": 254714,
+            "HighId": 254715,
+            "MinQl": 228,
+            "MaxQl": 228,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Rapier"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42CS"
+  },
+  "S42CU": {
+    "Templates": [
+      {
+        "Name": "Ensign - Cha'Uri",
+        "Level": 275,
+        "Health": 146667,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253893,
+        "Scale": 134,
+        "Mesh": 253409,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254672,
+            "HighId": 254673,
+            "MinQl": 212,
+            "MaxQl": 212,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Hammer"
+          },
+          {
+            "LowId": 288662,
+            "HighId": 288663,
+            "MinQl": 236,
+            "MaxQl": 236,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Nunchacko"
+          },
+          {
+            "LowId": 247764,
+            "HighId": 254804,
+            "MinQl": 220,
+            "MaxQl": 220,
+            "Chance": 100,
+            "Name": "Solid Clump of Kyr'Ozch Bio-Material"
+          },
+          {
+            "LowId": 254637,
+            "HighId": 254638,
+            "MinQl": 212,
+            "MaxQl": 212,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Pistol"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42CU"
+  },
+  "S42CH": {
+    "Templates": [
+      {
+        "Name": "Ensign - Cha'Heru",
+        "Level": 264,
+        "Health": 202400,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254003,
+        "Scale": 132,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254567,
+            "HighId": 254568,
+            "MinQl": 269,
+            "MaxQl": 269,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Grenade Gun"
+          },
+          {
+            "LowId": 254518,
+            "HighId": 254519,
+            "MinQl": 285,
+            "MaxQl": 285,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Submachine Gun"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42CH"
+  },
+  "S42AU": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ankari'Uri",
+        "Level": 263,
+        "Health": 133867,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253899,
+        "Scale": 132,
+        "Mesh": 253409,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254728,
+            "HighId": 254729,
+            "MinQl": 258,
+            "MaxQl": 258,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Sledgehammer"
+          },
+          {
+            "LowId": 254686,
+            "HighId": 254687,
+            "MinQl": 251,
+            "MaxQl": 251,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Axe"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": ""
+          },
+          {
+            "LowId": 254758,
+            "HighId": 254758,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Sword"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42AU"
+  },
+  "S42AH": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ankari'Heru",
+        "Level": 268,
+        "Health": 208800,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 254008,
+        "Scale": 133,
+        "Mesh": 253416,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 257529,
+            "HighId": 257529,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Battlesuit Audio Processor"
+          },
+          {
+            "LowId": 257968,
+            "HighId": 257968,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Hacker ICE-Breaker Source"
+          },
+          {
+            "LowId": 254756,
+            "HighId": 254757,
+            "MinQl": 290,
+            "MaxQl": 290,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Sword"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42AH"
+  },
+  "UVMV": {
+    "Templates": [
+      {
+        "Name": "Ensign - Ankari'Sinuh",
+        "Level": 258,
+        "Health": 64267,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251784,
+        "Scale": 132,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "Loot": [
+          {
+            "LowId": 254581,
+            "HighId": 254582,
+            "MinQl": 241,
+            "MaxQl": 241,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Shotgun"
+          },
+          {
+            "LowId": 254744,
+            "HighId": 254744,
+            "MinQl": 300,
+            "MaxQl": 300,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Energy Sword"
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "UVMV"
+  },
+  "S42X": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Ensign",
+        "Level": 255,
+        "Health": 70000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251782,
+        "Scale": 100,
+        "Mesh": 247278,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "captured": "2026-11-10 15:29-16:19 ET"
+    },
+    "Hash": "S42X"
+  }
+}

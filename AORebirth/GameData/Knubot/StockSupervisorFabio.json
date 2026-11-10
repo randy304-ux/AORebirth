@@ -1,0 +1,44 @@
+{
+  "Notes": "Stock Supervisor Fabio just inside Sector 42 (PF 4370). Dialog captured 2026-11-10 15:34:59-15:35:06 ET.",
+  "Npcs": [
+    "UOST"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "shoot": {
+      "Text": "The Access Supervisor told us to shoot you if you were not at your post...",
+      "Goto": "post",
+      "Source": "captured"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "I hope you got access to be here...dangerous in here.",
+      "Source": "captured",
+      "Replies": [
+        "shoot",
+        "bye"
+      ]
+    },
+    "post": {
+      "Text": "Clearly I AM at my post...See!  You have nothing on me.",
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "captured"
+    }
+  }
+}

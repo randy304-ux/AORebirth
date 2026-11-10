@@ -715,5 +715,70 @@
         ]
       }
     ]
+  },
+  "S42B": {
+    "Name": "Sector 42 first-cycle mini-bosses",
+    "Playfield": 4370,
+    "AutoStart": true,
+    "ResetTimeoutSeconds": 7200,
+    "SuccessDespawnSeconds": 180,
+    "SuccessIfDead": [
+      "S42M",
+      "S42S",
+      "S42G",
+      "S42P"
+    ],
+    "Stages": [
+      {
+        "DelaySeconds": 0,
+        "WaitUntilAllDead": [
+          "S42E",
+          "S42N",
+          "S42W"
+        ],
+        "Spawns": [
+          {
+            "hashText": "S42S",
+            "Position": [
+              605,
+              10.01,
+              247
+            ],
+            "Angle": 272,
+            "MinLevel": 300
+          },
+          {
+            "hashText": "S42M",
+            "Position": [
+              657.967,
+              10.01,
+              357.212
+            ],
+            "Angle": 198,
+            "MinLevel": 300
+          },
+          {
+            "hashText": "S42G",
+            "Position": [
+              523.324,
+              10.01,
+              646.993
+            ],
+            "Angle": 117,
+            "MinLevel": 300
+          },
+          {
+            "hashText": "S42P",
+            "Position": [
+              161.352,
+              10.434,
+              560.892
+            ],
+            "Angle": 350,
+            "MinLevel": 300
+          }
+        ]
+      }
+    ]
   }
 }

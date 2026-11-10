@@ -1,0 +1,65 @@
+{
+  "Notes": "Shuttle gate in Unicorn Outpost at the captured mothership zone-in (about 65.36, 101.15, 181.69). No named gate dynel was in the scrape; this is a talk-and-teleport terminal. Teleports to Alien Mothership PF 386 at the captured arrive point if the player has the infiltrate quest. The Mission key item packet was not captured; the quest is the key.",
+  "Npcs": [
+    "AMSG"
+  ],
+  "Openers": [
+    {
+      "Say": "hello",
+      "If": [
+        "HasQuest AMMQ"
+      ]
+    },
+    {
+      "Say": "denied",
+      "If": [
+        "!HasQuest AMMQ"
+      ]
+    }
+  ],
+  "Replies": {
+    "enter": {
+      "Text": "Enter the mothership.",
+      "Goto": "enter",
+      "Source": "filler"
+    },
+    "stay": {
+      "Text": "Stay here.",
+      "Goto": "stay",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "The Unicorn shuttle gate to the alien mothership.",
+      "Source": "filler",
+      "If": [
+        "HasQuest AMMQ"
+      ],
+      "Replies": [
+        "enter",
+        "stay"
+      ]
+    },
+    "enter": {
+      "Text": "{teleport 386 298.199 8.255 85.010}{close}",
+      "Source": "captured (zone-in 15:14:40 ET)",
+      "If": [
+        "HasQuest AMMQ"
+      ]
+    },
+    "stay": {
+      "Text": "{close}"
+    },
+    "denied": {
+      "Text": "The gate is locked. Talk to the Unicorn Recruiter about visiting the alien mothership first.",
+      "Source": "filler",
+      "If": [
+        "!HasQuest AMMQ"
+      ],
+      "Replies": [
+        "stay"
+      ]
+    }
+  }
+}

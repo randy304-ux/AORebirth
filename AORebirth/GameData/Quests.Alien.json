@@ -507,5 +507,101 @@
       "AlienXpPercent": 0,
       "Records": null
     }
+  },
+  {
+    "Hash": "S42Q",
+    "Name": "Sector 42 Authorization",
+    "QasInstance": 944210,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Summary": "You have been authorized to enter Sector 42. Report to Stock Supervisor Fabio just inside the sector.",
+    "Objective": {
+      "Count": 1,
+      "Npc": "UOST",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4370,
+      "X": 479,
+      "Y": 10.062,
+      "Z": 62
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "R42Q",
+      "Credits": 50000,
+      "Xp": 0,
+      "AlienXpPercent": 0,
+      "Records": []
+    },
+    "ContentProvenance": {
+      "source": "capture+guide",
+      "note": "Authorization journal packet was not in the scrape tells; this summary is written from the Access Supervisor conversation and the AO-Universe guide. The 3-core Decrypted Core recipe and Unicorn Authorization / Recall Beacon nanos were not captured."
+    }
+  },
+  {
+    "Hash": "AMMQ",
+    "Name": "Infiltrate the alien ships!",
+    "QasInstance": 944211,
+    "Scope": "Team",
+    "Action": "TargetNpc",
+    "Summary": "Infiltrate the alien ships! Enter the shuttle through the gates at Unicorn Outpost.",
+    "Objective": {
+      "Count": 1,
+      "Npc": "AMSG",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 4364,
+      "X": 65.356,
+      "Y": 101.145,
+      "Z": 181.689
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AMMP",
+    "Reward": null,
+    "ContentProvenance": {
+      "source": "capture",
+      "note": "Journal title taken from the request; the exact journal packet was not in the scrape tells. The Mission key item packet was not captured; this quest is the key. Shuttle use also completes this step."
+    }
+  },
+  {
+    "Hash": "AMMP",
+    "Name": "Infiltrate the alien ships!",
+    "QasInstance": 944212,
+    "Scope": "Team",
+    "Action": "KillOne",
+    "Summary": "Infiltrate the alien ships! Find and defeat the Master of PsyMod on the command deck.",
+    "Objective": {
+      "Count": 1,
+      "Npc": "AMPM",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 386,
+      "X": 150.9,
+      "Y": 520.01,
+      "Z": 166.6
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "RAMM",
+      "Credits": 100000,
+      "Xp": 0,
+      "AlienXpPercent": 0,
+      "Records": []
+    },
+    "ContentProvenance": {
+      "source": "capture",
+      "note": "Only the Master of PsyMod was captured on this run. Other Masters and the General are gaps and are not invented as objectives."
+    }
   }
 ]

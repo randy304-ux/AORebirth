@@ -24,5 +24,12 @@ namespace ZoneEngine_New.Core.Mobs
         /// Unicorn Service Towers and the Unicorn Energy Accumulator.
         /// </summary>
         PlayerUntargetable,
+
+        /// <summary>
+        /// Standing prop that hurts players who walk into it, with moderate damage
+        /// (see ContactDamageClock). Used by Sector 42 Alien Laser Fences. Does not
+        /// instakill. The prop itself is usually also NoCombat.
+        /// </summary>
+        ContactDamage,
     }
 }
