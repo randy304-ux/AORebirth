@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "OWGW"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO00 active"
+      ],
+      "Say": "greet"
+    },
+    {
+      "If": [
+        "quest AO01 active"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest AO02 active"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest AO02 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "greet": {
+      "Text": "You found me. Stingers hunt this basin. Cull three, then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "Three Stingers, then we will speak of insignias.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "The Stingers are down. Take the Insignia of Gilthar and the Insignia of Dalja, and seek Fourth Watch Down at the Pool, 1918 by 519. {completequest AO02}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Fourth Watch Down is at the Pool.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

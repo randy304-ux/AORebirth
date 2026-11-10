@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "JATU"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO26 active"
+      ],
+      "Say": "leaves"
+    },
+    {
+      "If": [
+        "quest AO27 active"
+      ],
+      "Say": "molokh"
+    },
+    {
+      "If": [
+        "quest AO28 active"
+      ],
+      "Say": "mix"
+    },
+    {
+      "If": [
+        "quest AO28 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "leaves": {
+      "Text": "Take these Leaves Of Tanacetum Parthenium. A Molokh still has the ambergris I need. Kill one and return; I will finish the mixture. {spawn AK01 1}{completequest AO26}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "molokh": {
+      "Text": "The Molokh still lives. Bring that problem to an end, then come back.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "mix": {
+      "Text": "The ambergris and leaves will do. Take this Soothing Mixture to One Who Gives Warnings at the Hourglass, 2544 by 980. {spawn AK03 1}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "One Who Gives Warnings is at the Hourglass.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

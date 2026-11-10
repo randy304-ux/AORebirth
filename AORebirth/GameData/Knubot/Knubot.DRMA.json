@@ -1,0 +1,255 @@
+{
+  "Npcs": [
+    "DRMA"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO20 active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "HasAnyQuest AO21,AO22"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest AO23 active"
+      ],
+      "Say": "advent"
+    },
+    {
+      "If": [
+        "quest AO24 active"
+      ],
+      "Say": "dryad"
+    },
+    {
+      "If": [
+        "quest AO25 active"
+      ],
+      "Say": "tissue"
+    },
+    {
+      "If": [
+        "quest AO25 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "The water still keeps samples. Cull five Sizzling Synaptids, mark a Lone Shark, and cull five Aegis Blorrgs, then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "Synaptids, a Lone Shark, and Aegis Blorrgs. Then I can spare an Advent.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "advent": {
+      "Text": "The samples will do. Take the Advent that matches your path.",
+      "Replies": [
+        "adv0",
+        "adv8",
+        "adv1",
+        "adv13",
+        "adv2",
+        "adv3",
+        "adv9",
+        "adv7",
+        "adv4",
+        "adv14",
+        "adv10",
+        "adv11",
+        "adv5",
+        "adv6",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_pas": {
+      "Text": "Advent of the Passionate. {spawn L013 1}{completequest AO23}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_ind": {
+      "Text": "Advent of the Industrious. {spawn L00A 1}{completequest AO23}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_ben": {
+      "Text": "Advent of the Benign. {spawn L00J 1}{completequest AO23}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_imp": {
+      "Text": "Advent of the Impetuous. {spawn L01K 1}{completequest AO23}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_pru": {
+      "Text": "Advent of the Prudent. {spawn AK05 1}{completequest AO23}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "dryad": {
+      "Text": "A Muddy Dryad keeps tissue on a water platform. End it, then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "tissue": {
+      "Text": "This will stand for the Dryad Tissue Sample. Jackson Turnfloat is southwest of One Who Gives Warnings, near 2544 by 980. {spawn AK00 1}{completequest AO25}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Jackson Turnfloat is southwest of the Hourglass.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "adv0": {
+      "Text": "The Passionate, then.",
+      "Goto": "give_pas",
+      "If": [
+        "prof 0"
+      ],
+      "Source": "filler"
+    },
+    "adv8": {
+      "Text": "The Passionate, then.",
+      "Goto": "give_pas",
+      "If": [
+        "prof 8"
+      ],
+      "Source": "filler"
+    },
+    "adv1": {
+      "Text": "The Passionate, then.",
+      "Goto": "give_pas",
+      "If": [
+        "prof 1"
+      ],
+      "Source": "filler"
+    },
+    "adv13": {
+      "Text": "The Passionate, then.",
+      "Goto": "give_pas",
+      "If": [
+        "prof 13"
+      ],
+      "Source": "filler"
+    },
+    "adv2": {
+      "Text": "The Industrious, then.",
+      "Goto": "give_ind",
+      "If": [
+        "prof 2"
+      ],
+      "Source": "filler"
+    },
+    "adv3": {
+      "Text": "The Industrious, then.",
+      "Goto": "give_ind",
+      "If": [
+        "prof 3"
+      ],
+      "Source": "filler"
+    },
+    "adv9": {
+      "Text": "The Benign, then.",
+      "Goto": "give_ben",
+      "If": [
+        "prof 9"
+      ],
+      "Source": "filler"
+    },
+    "adv7": {
+      "Text": "The Benign, then.",
+      "Goto": "give_ben",
+      "If": [
+        "prof 7"
+      ],
+      "Source": "filler"
+    },
+    "adv4": {
+      "Text": "The Impetuous, then.",
+      "Goto": "give_imp",
+      "If": [
+        "prof 4"
+      ],
+      "Source": "filler"
+    },
+    "adv14": {
+      "Text": "The Impetuous, then.",
+      "Goto": "give_imp",
+      "If": [
+        "prof 14"
+      ],
+      "Source": "filler"
+    },
+    "adv10": {
+      "Text": "The Prudent, then.",
+      "Goto": "give_pru",
+      "If": [
+        "prof 10"
+      ],
+      "Source": "filler"
+    },
+    "adv11": {
+      "Text": "The Prudent, then.",
+      "Goto": "give_pru",
+      "If": [
+        "prof 11"
+      ],
+      "Source": "filler"
+    },
+    "adv5": {
+      "Text": "The Prudent, then.",
+      "Goto": "give_pru",
+      "If": [
+        "prof 5"
+      ],
+      "Source": "filler"
+    },
+    "adv6": {
+      "Text": "The Prudent, then.",
+      "Goto": "give_pru",
+      "If": [
+        "prof 6"
+      ],
+      "Source": "filler"
+    }
+  }
+}

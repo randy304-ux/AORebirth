@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "DRAL"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO16 active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "HasAnyQuest AO17,AO18"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest AO19 active"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest AO19 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "The ruins still keep their watch. Destroy the Ruins Guardian, the Defender, and the Protector, then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "Guardian, Defender, Protector. Then the embryo.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "The ruins are quiet enough. Take the Consanguineal Embryo of Yomi'Arallu. Dr. Marko Steffensen is at the Sacellum, 1916 by 2592. {completequest AO19}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Steffensen is at the Sacellum.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

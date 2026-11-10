@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "OHWM"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO34 active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "HasAnyQuest AO35,AO36"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest AO37 active"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest AO37 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "The peninsula still has a count for you. Cull four Numb Eremites, four Brisk Dryads, and four Malah-Dor, then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "Eremites, Brisk Dryads, and Malah-Dor. Then we will speak of the tower.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "The count is enough. Tower Keeper Tagnat is near the Vortex. Mourning Calamity Five waits at 1925 by 1108. {completequest AO37}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Tagnat, then Mourning Calamity Five at the Vortex.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "D05K"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO08 active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "HasAnyQuest AO09,AO10"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest AO11 active"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest AO11 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "The Unredeemed will test you. Cull five Den-Losa, five El-Kael, and Car-Mea the Custodian in the temple. Then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "Den-Losa, El-Kael, and Car-Mea. Then we speak of the Second Edition.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "The temple is quieter. Take Kanel's Story - Second Edition. Scott Free waits near 1634 by 568. {completequest AO11}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Scott Free has the next pages.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "OWPT"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO00 none"
+      ],
+      "Say": "offer"
+    },
+    {
+      "If": [
+        "quest AO00 active"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest AO00 done"
+      ],
+      "Say": "done"
+    }
+  ],
+  "Lines": {
+    "offer": {
+      "Text": "Wanderer. One Who Greets Wanderers waits in the Area, near 126 by 129. I can set you on that path.",
+      "Replies": [
+        "yes",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "accept": {
+      "Text": "Go to One Who Greets Wanderers, then return along the Xan trail. {givequest AO00}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "One Who Greets Wanderers still waits in the Area.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "done": {
+      "Text": "You have started. Follow the Xan path.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "yes": {
+      "Text": "I will help.",
+      "Goto": "accept",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

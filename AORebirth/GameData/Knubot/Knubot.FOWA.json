@@ -1,0 +1,68 @@
+{
+  "Npcs": [
+    "FOWA"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO03 active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "HasAnyQuest AO04,AO05,AO06"
+      ],
+      "Say": "progress"
+    },
+    {
+      "If": [
+        "quest AO07 active"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest AO07 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "Target four spirit kinds: Voluminous, Slinking, Magnanimous, and Cascading. Then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "progress": {
+      "Text": "The four spirit kinds still need to be marked.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "The watches are noted. Take Kanel's Story - First Edition. Carry it to Operator Xum-Nar Dal at Watcher's Keep, 1324 by 2392. The Redeemed Gala-Hume path is not offered here. {completequest AO07}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Xum-Nar Dal is at Watcher's Keep.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}

@@ -1,0 +1,279 @@
+{
+  "Npcs": [
+    "MICI"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO38 active"
+      ],
+      "Say": "brief"
+    },
+    {
+      "If": [
+        "quest AO39 active"
+      ],
+      "Say": "turnin"
+    },
+    {
+      "If": [
+        "quest AO39 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "brief": {
+      "Text": "Tower Keeper Tagnat still holds the tower. End him, then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "turnin": {
+      "Text": "Tagnat is done. Take the Syndicate Brain that matches your path. This is the end of the Adonis Xan trail I can offer.",
+      "Replies": [
+        "b0",
+        "b8",
+        "b1",
+        "b13",
+        "b2",
+        "b3",
+        "b4",
+        "b14",
+        "b7",
+        "b9",
+        "b10",
+        "b11",
+        "b5",
+        "b6",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "The Adonis Xan trail ends here. Dedlock will want the completed book, not from me.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_grunt": {
+      "Text": "Syndicate Brain Symbiant of the Grunt. {spawn AK22 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_thug": {
+      "Text": "Syndicate Brain Symbiant of the Thug. {spawn AK14 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_bal": {
+      "Text": "Syndicate Brain Symbiant of the Balanced. {spawn AK18 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_pro": {
+      "Text": "Syndicate Brain Symbiant of the Protector. {spawn AK17 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_con": {
+      "Text": "Syndicate Brain Symbiant of the Constructor. {spawn AK15 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_mes": {
+      "Text": "Syndicate Brain Symbiant of the Messenger. {spawn AK16 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_dev": {
+      "Text": "Syndicate Brain Symbiant of the Devious. {spawn AK11 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_gui": {
+      "Text": "Syndicate Brain Spirit of Guile. {spawn AK21 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_lea": {
+      "Text": "Syndicate Brain Symbiant of the Leader. {spawn AK12 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_hea": {
+      "Text": "Syndicate Brain Symbiant of the Healer. {spawn AK13 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_not": {
+      "Text": "Syndicate Brain Symbiant of the Notum Lord. {spawn AK20 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_enl": {
+      "Text": "Syndicate Brain Symbiant of the Enlightened. {spawn AK19 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_exp": {
+      "Text": "Syndicate Brain Symbiant of the Explorer. {spawn AK10 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_sal": {
+      "Text": "Syndicate Brain Symbiant of the Salesman. {spawn AK23 1}{completequest AO39}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "b0": {
+      "Text": "That one.",
+      "Goto": "give_grunt",
+      "If": [
+        "prof 0"
+      ],
+      "Source": "filler"
+    },
+    "b8": {
+      "Text": "That one.",
+      "Goto": "give_thug",
+      "If": [
+        "prof 8"
+      ],
+      "Source": "filler"
+    },
+    "b1": {
+      "Text": "That one.",
+      "Goto": "give_bal",
+      "If": [
+        "prof 1"
+      ],
+      "Source": "filler"
+    },
+    "b13": {
+      "Text": "That one.",
+      "Goto": "give_pro",
+      "If": [
+        "prof 13"
+      ],
+      "Source": "filler"
+    },
+    "b2": {
+      "Text": "That one.",
+      "Goto": "give_con",
+      "If": [
+        "prof 2"
+      ],
+      "Source": "filler"
+    },
+    "b3": {
+      "Text": "That one.",
+      "Goto": "give_mes",
+      "If": [
+        "prof 3"
+      ],
+      "Source": "filler"
+    },
+    "b4": {
+      "Text": "That one.",
+      "Goto": "give_dev",
+      "If": [
+        "prof 4"
+      ],
+      "Source": "filler"
+    },
+    "b14": {
+      "Text": "That one.",
+      "Goto": "give_gui",
+      "If": [
+        "prof 14"
+      ],
+      "Source": "filler"
+    },
+    "b7": {
+      "Text": "That one.",
+      "Goto": "give_lea",
+      "If": [
+        "prof 7"
+      ],
+      "Source": "filler"
+    },
+    "b9": {
+      "Text": "That one.",
+      "Goto": "give_hea",
+      "If": [
+        "prof 9"
+      ],
+      "Source": "filler"
+    },
+    "b10": {
+      "Text": "That one.",
+      "Goto": "give_not",
+      "If": [
+        "prof 10"
+      ],
+      "Source": "filler"
+    },
+    "b11": {
+      "Text": "That one.",
+      "Goto": "give_enl",
+      "If": [
+        "prof 11"
+      ],
+      "Source": "filler"
+    },
+    "b5": {
+      "Text": "That one.",
+      "Goto": "give_exp",
+      "If": [
+        "prof 5"
+      ],
+      "Source": "filler"
+    },
+    "b6": {
+      "Text": "That one.",
+      "Goto": "give_sal",
+      "If": [
+        "prof 6"
+      ],
+      "Source": "filler"
+    }
+  }
+}

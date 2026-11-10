@@ -1,0 +1,1039 @@
+[
+  {
+    "Hash": "AO00",
+    "Name": "Xan Civilization: Seek One Who Greets Wanderers",
+    "Summary": "Talk to One Who Greets Wanderers in Adonis (guide: Area 126 x 129).",
+    "QasInstance": 952000,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "OWGW",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO01",
+    "Reward": {
+      "Hash": "AH00",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO01",
+    "Name": "Xan Civilization: Cull 3 Stingers",
+    "Summary": "Kill 3 Stingers (D07N) for One Who Greets Wanderers.",
+    "QasInstance": 952001,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "D07N",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO02",
+    "Reward": {
+      "Hash": "AH01",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO02",
+    "Name": "Xan Civilization: Return to One Who Greets Wanderers",
+    "Summary": "Return to One Who Greets Wanderers for the Insignia of Gilthar and the Insignia of Dalja.",
+    "QasInstance": 952002,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "OWGW",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO03",
+    "Reward": {
+      "Hash": "AH02",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 214880,
+            "HighId": 214880,
+            "Name": "Insignia of Gilthar",
+            "Quality": 1,
+            "Count": 1
+          },
+          {
+            "Id": 214881,
+            "HighId": 214881,
+            "Name": "Insignia of Dalja",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO03",
+    "Name": "Xan Civilization: Target a Voluminous Spirit",
+    "Summary": "Target a Voluminous Spirit in Adonis for Fourth Watch Down.",
+    "QasInstance": 952003,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D06G",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO04",
+    "Reward": {
+      "Hash": "AH03",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO04",
+    "Name": "Xan Civilization: Target a Slinking Spirit",
+    "Summary": "Target a Slinking Spirit in Adonis for Fourth Watch Down.",
+    "QasInstance": 952004,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D01H",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO05",
+    "Reward": {
+      "Hash": "AH04",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO05",
+    "Name": "Xan Civilization: Target a Magnanimous Spirit",
+    "Summary": "Target a Magnanimous Spirit in Adonis for Fourth Watch Down.",
+    "QasInstance": 952005,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D00V",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO06",
+    "Reward": {
+      "Hash": "AH05",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO06",
+    "Name": "Xan Civilization: Target a Cascading Spirit",
+    "Summary": "Target a Cascading Spirit for Fourth Watch Down. Only a low-level template (Q02Y L64) exists; a stand-in spawn is placed near the Pool.",
+    "QasInstance": 952006,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "Q02Y",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO07",
+    "Reward": {
+      "Hash": "AH06",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO07",
+    "Name": "Xan Civilization: First Edition from Fourth Watch Down",
+    "Summary": "Return to Fourth Watch Down at the Pool for Kanel's Story - First Edition. Omni path continues with Operator Xum-Nar Dal (Clan Gala-Hume branch skipped).",
+    "QasInstance": 952007,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "FOWA",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO08",
+    "Reward": {
+      "Hash": "AH07",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 226266,
+            "HighId": 226266,
+            "Name": "Kanel's Story - First Edition",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO08",
+    "Name": "Xan Civilization: Cull 5 Den-Losa",
+    "Summary": "Kill 5 Den-Losa for Operator Xum-Nar Dal.",
+    "QasInstance": 952008,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "D03Y",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO09",
+    "Reward": {
+      "Hash": "AH08",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO09",
+    "Name": "Xan Civilization: Cull 5 El-Kael",
+    "Summary": "Kill 5 El-Kael for Operator Xum-Nar Dal.",
+    "QasInstance": 952009,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "D04J",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO10",
+    "Reward": {
+      "Hash": "AH09",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO10",
+    "Name": "Xan Civilization: Defeat Car-Mea the Custodian",
+    "Summary": "Kill Car-Mea the Custodian (Unredeemed Temple) for Operator Xum-Nar Dal.",
+    "QasInstance": 952010,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "CMEA",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO11",
+    "Reward": {
+      "Hash": "AH10",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO11",
+    "Name": "Xan Civilization: Second Edition from Xum-Nar Dal",
+    "Summary": "Return to Operator Xum-Nar Dal at Watcher's Keep for Kanel's Story - Second Edition.",
+    "QasInstance": 952011,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D05K",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO12",
+    "Reward": {
+      "Hash": "AH11",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 226267,
+            "HighId": 226267,
+            "Name": "Kanel's Story - Second Edition",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO12",
+    "Name": "Xan Civilization: Cull 3 Scintillated Spirits",
+    "Summary": "Kill 3 Scintillated Spirits. Recollection shards are not corpse-dropped; Scott Free awards the Third Edition on return.",
+    "QasInstance": 952012,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "D05R",
+      "Count": 3,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO13",
+    "Reward": {
+      "Hash": "AH12",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO13",
+    "Name": "Xan Civilization: Third Edition from Scott Free",
+    "Summary": "Return to Scott Free for Kanel's Story - Third Edition (shard hand-in fallback).",
+    "QasInstance": 952013,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D05S",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO14",
+    "Reward": {
+      "Hash": "AH13",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 226268,
+            "HighId": 226268,
+            "Name": "Kanel's Story - Third Edition",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO14",
+    "Name": "Xan Civilization: Defeat Amok Baraton",
+    "Summary": "Kill Amok Baraton.",
+    "QasInstance": 952014,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "D03J",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO15",
+    "Reward": {
+      "Hash": "AH14",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO15",
+    "Name": "Xan Civilization: Fourth Edition from Scott Free",
+    "Summary": "Return to Scott Free for Kanel's Story - Fourth Edition.",
+    "QasInstance": 952015,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D05S",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO16",
+    "Reward": {
+      "Hash": "AH15",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 226269,
+            "HighId": 226269,
+            "Name": "Kanel's Story - Fourth Edition",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO16",
+    "Name": "Xan Civilization: Defeat the Ruins Guardian",
+    "Summary": "Kill the Ruins Guardian for Dr. Aleksander Koumas.",
+    "QasInstance": 952016,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "D05P",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO17",
+    "Reward": {
+      "Hash": "AH16",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO17",
+    "Name": "Xan Civilization: Defeat the Ruins Defender",
+    "Summary": "Kill the Ruins Defender for Dr. Aleksander Koumas.",
+    "QasInstance": 952017,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "D05O",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO18",
+    "Reward": {
+      "Hash": "AH17",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO18",
+    "Name": "Xan Civilization: Defeat the Ruins Protector",
+    "Summary": "Kill the Ruins Protector for Dr. Aleksander Koumas.",
+    "QasInstance": 952018,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "D05Q",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO19",
+    "Reward": {
+      "Hash": "AH18",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO19",
+    "Name": "Xan Civilization: Embryo from Dr. Koumas",
+    "Summary": "Return to Dr. Aleksander Koumas at the Dig for the Consanguineal Embryo of Yomi'Arallu.",
+    "QasInstance": 952019,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DRAL",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO20",
+    "Reward": {
+      "Hash": "AH19",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 239836,
+            "HighId": 239836,
+            "Name": "Consanguineal Embryo of Yomi'Arallu",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO20",
+    "Name": "Xan Civilization: Cull 5 Sizzling Synaptids",
+    "Summary": "Kill 5 Sizzling Synaptids for Dr. Marko Steffensen.",
+    "QasInstance": 952020,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "D07K",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO21",
+    "Reward": {
+      "Hash": "AH20",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO21",
+    "Name": "Xan Civilization: Target a Lone Shark",
+    "Summary": "Target a Lone Shark for Dr. Marko Steffensen.",
+    "QasInstance": 952021,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D07D",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO22",
+    "Reward": {
+      "Hash": "AH21",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO22",
+    "Name": "Xan Civilization: Cull 5 Aegis Blorrgs",
+    "Summary": "Kill 5 Aegis Blorrgs. Blorrg parts are not corpse-dropped; Steffensen awards the Advent on return.",
+    "QasInstance": 952022,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "D06R",
+      "Count": 5,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO23",
+    "Reward": {
+      "Hash": "AH22",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO23",
+    "Name": "Xan Civilization: Advent from Dr. Steffensen",
+    "Summary": "Return to Dr. Marko Steffensen at the Sacellum for a profession-specific Advent.",
+    "QasInstance": 952023,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DRMA",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO24",
+    "Reward": {
+      "Hash": "AH23",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO24",
+    "Name": "Xan Civilization: Defeat the Muddy Dryad",
+    "Summary": "Kill the Muddy Dryad. Tissue is not corpse-dropped; Steffensen completes the step on return.",
+    "QasInstance": 952024,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "MUDR",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO25",
+    "Reward": {
+      "Hash": "AH24",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO25",
+    "Name": "Xan Civilization: Return Dryad Tissue to Steffensen",
+    "Summary": "Return to Dr. Marko Steffensen after the Muddy Dryad (tissue fallback).",
+    "QasInstance": 952025,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DRMA",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO26",
+    "Reward": {
+      "Hash": "AH25",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO26",
+    "Name": "Xan Civilization: Collect Leaves from Jackson Turnfloat",
+    "Summary": "Talk to Jackson Turnfloat southwest of One Who Gives Warnings for Leaves Of Tanacetum Parthenium.",
+    "QasInstance": 952026,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "JATU",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO27",
+    "Reward": {
+      "Hash": "AH26",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO27",
+    "Name": "Xan Civilization: Defeat a Molokh",
+    "Summary": "Kill a Molokh. Ambergris is not corpse-dropped; Jackson prepares the Soothing Mixture on return.",
+    "QasInstance": 952027,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "D05G",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO28",
+    "Reward": {
+      "Hash": "AH27",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO28",
+    "Name": "Xan Civilization: Deliver the Soothing Mixture",
+    "Summary": "Hand the Soothing Mixture to One Who Gives Warnings for a Yuttos Modified NCU. Mixture combine is a fallback spawn, not UseItemOnItem.",
+    "QasInstance": 952028,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Objective": {
+      "Npc": "OWWV",
+      "Count": null,
+      "SpecItem": "AK03",
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO29",
+    "Reward": {
+      "Hash": "AH28",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": [
+        [
+          {
+            "Id": 238921,
+            "HighId": 238921,
+            "Name": "Yuttos Modified NCU",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ],
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO29",
+    "Name": "Xan Civilization: Scan a Heckler of Elements",
+    "Summary": "Target a Heckler of Elements (scanner use is not a supported objective; targeting is the fallback).",
+    "QasInstance": 952029,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D04Q",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO30",
+    "Reward": {
+      "Hash": "AH29",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO30",
+    "Name": "Xan Civilization: Scan a Heckler of Harmony",
+    "Summary": "Target a Heckler of Harmony (scanner fallback).",
+    "QasInstance": 952030,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D04R",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO31",
+    "Reward": {
+      "Hash": "AH30",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO31",
+    "Name": "Xan Civilization: Scan a Heckler of Dreams",
+    "Summary": "Target a Heckler of Dreams (scanner fallback).",
+    "QasInstance": 952031,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "D04P",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO32",
+    "Reward": {
+      "Hash": "AH31",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO32",
+    "Name": "Xan Civilization: Scan the Dormant Golem",
+    "Summary": "Target the Dormant Golem (scanner fallback).",
+    "QasInstance": 952032,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "DOGE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO33",
+    "Reward": {
+      "Hash": "AH32",
+      "Xp": 80000,
+      "Credits": 5000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO33",
+    "Name": "Xan Civilization: Will from One Who Gives Warnings",
+    "Summary": "Return to One Who Gives Warnings for a profession-specific Will.",
+    "QasInstance": 952033,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "OWWV",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO34",
+    "Reward": {
+      "Hash": "AH33",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO34",
+    "Name": "Xan Civilization: Cull 4 Numb Eremites",
+    "Summary": "Kill 4 Numb Eremites for One Who Remembers The Past.",
+    "QasInstance": 952034,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "D05J",
+      "Count": 4,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO35",
+    "Reward": {
+      "Hash": "AH34",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO35",
+    "Name": "Xan Civilization: Cull 4 Brisk Dryads",
+    "Summary": "Kill 4 Brisk Dryads for One Who Remembers The Past.",
+    "QasInstance": 952035,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "D03M",
+      "Count": 4,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO36",
+    "Reward": {
+      "Hash": "AH35",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO36",
+    "Name": "Xan Civilization: Cull 4 Malah-Dor",
+    "Summary": "Kill 4 Malah-Dor for One Who Remembers The Past.",
+    "QasInstance": 952036,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Objective": {
+      "Npc": "D04X",
+      "Count": 4,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO37",
+    "Reward": {
+      "Hash": "AH36",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO37",
+    "Name": "Xan Civilization: Return to One Who Remembers The Past",
+    "Summary": "Return to One Who Remembers The Past at Piercing Tundra.",
+    "QasInstance": 952037,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "OHWM",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO38",
+    "Reward": {
+      "Hash": "AH37",
+      "Xp": 300000,
+      "Credits": 15000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO38",
+    "Name": "Xan Civilization: Defeat Tower Keeper Tagnat",
+    "Summary": "Kill Tower Keeper Tagnat.",
+    "QasInstance": 952038,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Objective": {
+      "Npc": "TRKE",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AO39",
+    "Reward": {
+      "Hash": "AH38",
+      "Xp": 120000,
+      "Credits": 8000,
+      "Records": null,
+      "Stats": null
+    }
+  },
+  {
+    "Hash": "AO39",
+    "Name": "Xan Civilization: Syndicate Brain from Mourning Calamity Five",
+    "Summary": "Return to Mourning Calamity Five at the Vortex for a profession-specific Syndicate Brain.",
+    "QasInstance": 952039,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Objective": {
+      "Npc": "MICI",
+      "Count": null,
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "AH39",
+      "Xp": 400000,
+      "Credits": 20000,
+      "Records": null,
+      "Stats": null
+    }
+  }
+]

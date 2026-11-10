@@ -1,0 +1,249 @@
+{
+  "Npcs": [
+    "OWWV"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO28 active"
+      ],
+      "Say": "needmix"
+    },
+    {
+      "If": [
+        "quest AO29 active"
+      ],
+      "Say": "scanbrief"
+    },
+    {
+      "If": [
+        "HasAnyQuest AO30,AO31,AO32"
+      ],
+      "Say": "scanprog"
+    },
+    {
+      "If": [
+        "quest AO33 active"
+      ],
+      "Say": "will"
+    },
+    {
+      "If": [
+        "quest AO33 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "needmix": {
+      "Text": "If that is the Soothing Mixture, hand it over. {opentrade}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "mix_done": {
+      "Text": "The mixture will do. Take this Yuttos Modified NCU, and this scanner. Mark three Hecklers â€” Elements, Harmony, Dreams â€” and the Dormant Golem, then return. {completequest AO28}{spawn AK04 1}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "scanbrief": {
+      "Text": "Target a Heckler of Elements, a Heckler of Harmony, a Heckler of Dreams, and the Dormant Golem. The scanner is a reminder only; marking them is enough for now.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "scanprog": {
+      "Text": "The Hecklers and the Dormant Golem still need to be marked.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "will": {
+      "Text": "The markings will do. Take the Will that matches your path.",
+      "Replies": [
+        "w0",
+        "w8",
+        "w1",
+        "w13",
+        "w2",
+        "w3",
+        "w4",
+        "w5",
+        "w6",
+        "w14",
+        "w7",
+        "w9",
+        "w10",
+        "w11",
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_tem": {
+      "Text": "Will of the Tempestuous. One Who Remembers The Past is at Piercing Tundra, 1602 by 2858. {spawn L015 1}{completequest AO33}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_uns": {
+      "Text": "Will of the Unshakable. One Who Remembers The Past is at Piercing Tundra, 1602 by 2858. {spawn L01H 1}{completequest AO33}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "give_rep": {
+      "Text": "Will of the Reposeful. One Who Remembers The Past is at Piercing Tundra, 1602 by 2858. {spawn AK06 1}{completequest AO33}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "One Who Remembers The Past is at Piercing Tundra.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    },
+    "w0": {
+      "Text": "Tempestuous.",
+      "Goto": "give_tem",
+      "If": [
+        "prof 0"
+      ],
+      "Source": "filler"
+    },
+    "w8": {
+      "Text": "Tempestuous.",
+      "Goto": "give_tem",
+      "If": [
+        "prof 8"
+      ],
+      "Source": "filler"
+    },
+    "w1": {
+      "Text": "Tempestuous.",
+      "Goto": "give_tem",
+      "If": [
+        "prof 1"
+      ],
+      "Source": "filler"
+    },
+    "w13": {
+      "Text": "Tempestuous.",
+      "Goto": "give_tem",
+      "If": [
+        "prof 13"
+      ],
+      "Source": "filler"
+    },
+    "w2": {
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
+      "If": [
+        "prof 2"
+      ],
+      "Source": "filler"
+    },
+    "w3": {
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
+      "If": [
+        "prof 3"
+      ],
+      "Source": "filler"
+    },
+    "w4": {
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
+      "If": [
+        "prof 4"
+      ],
+      "Source": "filler"
+    },
+    "w5": {
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
+      "If": [
+        "prof 5"
+      ],
+      "Source": "filler"
+    },
+    "w6": {
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
+      "If": [
+        "prof 6"
+      ],
+      "Source": "filler"
+    },
+    "w14": {
+      "Text": "Unshakable.",
+      "Goto": "give_uns",
+      "If": [
+        "prof 14"
+      ],
+      "Source": "filler"
+    },
+    "w7": {
+      "Text": "Reposeful.",
+      "Goto": "give_rep",
+      "If": [
+        "prof 7"
+      ],
+      "Source": "filler"
+    },
+    "w9": {
+      "Text": "Reposeful.",
+      "Goto": "give_rep",
+      "If": [
+        "prof 9"
+      ],
+      "Source": "filler"
+    },
+    "w10": {
+      "Text": "Reposeful.",
+      "Goto": "give_rep",
+      "If": [
+        "prof 10"
+      ],
+      "Source": "filler"
+    },
+    "w11": {
+      "Text": "Reposeful.",
+      "Goto": "give_rep",
+      "If": [
+        "prof 11"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "mixture": {
+      "If": [
+        "quest AO28 active"
+      ],
+      "Items": [
+        {
+          "Hash": "AK03",
+          "Count": 1
+        }
+      ],
+      "Goto": "mix_done"
+    }
+  }
+}

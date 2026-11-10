@@ -1,0 +1,81 @@
+{
+  "Npcs": [
+    "D05S"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "quest AO12 active"
+      ],
+      "Say": "shards"
+    },
+    {
+      "If": [
+        "quest AO13 active"
+      ],
+      "Say": "third"
+    },
+    {
+      "If": [
+        "quest AO14 active"
+      ],
+      "Say": "amok"
+    },
+    {
+      "If": [
+        "quest AO15 active"
+      ],
+      "Say": "fourth"
+    },
+    {
+      "If": [
+        "quest AO15 done"
+      ],
+      "Say": "after"
+    }
+  ],
+  "Lines": {
+    "shards": {
+      "Text": "The recollection shards should fall from Scintillated Spirits. Cull three of them and return; I will see the Third Edition into your hands.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "third": {
+      "Text": "That will stand for the shards. Take Kanel's Story - Third Edition. Amok Baraton is next. {completequest AO13}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "amok": {
+      "Text": "Amok Baraton still walks. End him, then return.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "fourth": {
+      "Text": "Amok is done. Take Kanel's Story - Fourth Edition. Dr. Aleksander Koumas is at the Dig, 1429 by 625. {completequest AO15}",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    },
+    "after": {
+      "Text": "Koumas is at the Dig.",
+      "Replies": [
+        "bye"
+      ],
+      "Source": "filler"
+    }
+  },
+  "Replies": {
+    "bye": {
+      "Text": "I will go.",
+      "Goto": "close",
+      "Source": "filler"
+    }
+  }
+}
