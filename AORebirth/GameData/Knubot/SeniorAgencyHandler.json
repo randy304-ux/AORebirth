@@ -1,20 +1,77 @@
 {
-  "Notes": "Senior Agency Handler — elite daily stand-in (Pumpkinhead waves until dungeon catalogs exist). Track emptied (no lock-out).",
-  "Npcs": [ "AGSR", "ddogs-agency-senior" ],
-  "Openers": [ { "Say": "hello" } ],
+  "Notes": "Senior Agency Handler (Rome Blue, hash AGSR). 2026-11-10: greeting 'status - assigned' + the two captured options. Elite daily stays {givedaily AGEL}, Track empty = no lock-out (Randy). Answers to the two captured questions were not captured (ours). Elite waves are still Pumpkinhead stand-ins.",
+  "Npcs": [
+    "AGSR",
+    "ddogs-agency-senior"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasAnyQuest AE01,AE02,AE03"
+      ],
+      "Say": "assigned"
+    },
+    {
+      "Say": "hello"
+    }
+  ],
   "Replies": {
-    "daily": { "Text": "Elite contract.", "Goto": "daily" },
-    "bye": { "Text": "Goodbye", "Goto": "bye" }
+    "when": {
+      "Text": "When can I get an elite assignment?",
+      "Goto": "nolock",
+      "Source": "captured"
+    },
+    "complaint": {
+      "Text": "You must be doing something wrong! I haven't completed any elite assignments for 18 hours!",
+      "Goto": "nolock",
+      "Source": "captured"
+    },
+    "daily": {
+      "Text": "Elite contract.",
+      "Goto": "daily"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
   },
   "Lines": {
     "hello": {
-      "Text": "Senior Agency Handler. Elite work — dungeon wave catalogs are still thin, so today you get Pumpkinhead cull contracts. No lock-out.",
-      "Replies": [ "daily", "bye" ]
+      "Text": "{player}, status - unassigned. Elite assignments are available.",
+      "Source": "ours (mirrors the captured 'assigned' line)",
+      "Replies": [
+        "daily",
+        "when",
+        "complaint",
+        "bye"
+      ]
+    },
+    "assigned": {
+      "Text": "{player}, status - assigned. You can only get one mission at a time.",
+      "Source": "captured",
+      "Replies": [
+        "when",
+        "complaint",
+        "bye"
+      ]
+    },
+    "nolock": {
+      "Text": "There is no waiting period for elite assignments here. Finish your current one and you can take another straight away.",
+      "Source": "ours",
+      "Replies": [
+        "daily",
+        "bye"
+      ]
     },
     "daily": {
       "Text": "Elite contract issued. Pay on completion.{givedaily AGEL}",
-      "Replies": [ "bye" ]
+      "Replies": [
+        "bye"
+      ]
     },
-    "bye": { "Text": "{close}" }
+    "bye": {
+      "Text": "{close}"
+    }
   }
 }

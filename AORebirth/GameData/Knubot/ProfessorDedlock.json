@@ -269,25 +269,26 @@
     "bye": {
       "Text": "Goodbye.",
       "Goto": "bye",
-      "Source": "filler"
+      "Source": "captured option 'Goodbye'"
+    },
+    "give": {
+      "Text": "I have something to give you.",
+      "Goto": "give_menu",
+      "Source": "captured"
+    },
+    "cyber": {
+      "Text": "Hi, I heard that you hand out cyberdecks?",
+      "Goto": "deal",
+      "Source": "captured"
     }
   },
   "Lines": {
     "hello": {
-      "Text": [
-        "Welcome to the Institute of Professional Specialization.",
-        "{delay 1}\\nI record specialization book hand-ins. What can I do for you?"
-      ],
-      "Source": "filler",
+      "Text": "This person seems to have been studying you for a while before you entered conversation with him. A large badge on his chest reads: \"Professor Jo Dedlock, JAME\"",
+      "Source": "captured",
       "Replies": [
-        "sp1c",
-        "sp1o",
-        "sp1n",
-        "t1",
-        "t2",
-        "t3",
-        "t4",
-        "about",
+        "give",
+        "cyber",
         "bye"
       ]
     },
@@ -391,8 +392,31 @@
       "Source": "filler"
     },
     "bye": {
-      "Text": "Goodbye.{close}",
-      "Source": "filler"
+      "Text": "Good luck!{close}",
+      "Source": "captured close text"
+    },
+    "give_menu": {
+      "Text": "Put the book in the trade window.",
+      "Source": "filler",
+      "Replies": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "about",
+        "bye"
+      ]
+    },
+    "deal": {
+      "Text": "Yes, yes - you can help me, and I will give you a generous reward. That is what you want, right? Yes, fine - I assure you we will both greatly benefit from this... deal.",
+      "Source": "captured",
+      "Replies": [
+        "sp1c",
+        "sp1o",
+        "sp1n",
+        "about",
+        "later"
+      ]
     }
   },
   "Trades": {
@@ -557,5 +581,5 @@
       "Goto": "done_t4"
     }
   },
-  "Notes": "Professor Dedlock (hash PFDD = the client spawn hash), IPS Interior PF 4575. Real captured: appearance/position only; NO dialogue captured, every line is filler (Source=filler)."
+  "Notes": "Professor Dedlock (hash PFDD = the client spawn hash), IPS Interior PF 4575. 2026-11-10 capture (dialogs_20261110_Cattywompus.csv): opening narration, the three options (give / cyberdecks / Goodbye), the 'deal' line and the closing 'Good luck!' are real (Source=captured). Specialization hunt and hand-in lines are still filler. Which captured option leads to the 'deal' line is inferred."
 }

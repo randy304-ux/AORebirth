@@ -1,20 +1,79 @@
 {
-  "Notes": "Freelancers Inc. Agency Receptionist (Rome Blue / Old Athen). Points players to Handler / Senior / Alien desks. Stand-in.",
-  "Npcs": [ "AGRC", "ddogs-agency-receptionist" ],
-  "Openers": [ { "Say": "hello" } ],
+  "Notes": "Automated Agency Receptionist (Rome Blue, hash AGRC). 2026-11-10: greeting/scan/identity lines captured (for a character already on file). Signing wires quest AGCT 'Freelancers Inc. Contract' (given and completed here) which the Alien Agency Handler requires. The 'unsigned' lines and the answer to 'I have some questions' were NOT captured (ours).",
+  "Npcs": [
+    "AGRC",
+    "ddogs-agency-receptionist"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasCompletedQuest AGCT"
+      ],
+      "Say": "hello"
+    },
+    {
+      "Say": "hello_new"
+    }
+  ],
   "Replies": {
-    "work": { "Text": "I need Agency work.", "Goto": "work" },
-    "bye": { "Text": "Goodbye", "Goto": "bye" }
+    "questions": {
+      "Text": "I have some questions.",
+      "Goto": "questions",
+      "Source": "captured"
+    },
+    "sign": {
+      "Text": "I'll sign the contract.",
+      "Goto": "signed"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
   },
   "Lines": {
     "hello": {
-      "Text": "Freelancers Inc. Mission Agency. Sign the contract at the desk, then speak to the Handler for Rubi-Ka dailies, the Senior Handler for elite work, or the Alien Handler for AXP contracts. There is no waiting period between contracts.",
-      "Replies": [ "work", "bye" ]
+      "Text": [
+        "Greetings, and welcome to the Freelancers Incorporated Mission Agency, Omni-Tek division.",
+        "{delay 1}\\nScanning.",
+        "{delay 1}\\nIdentity confirmed, {player}. Your status as a freelance agent is already on file. Do you require any assistance?"
+      ],
+      "Source": "captured",
+      "Replies": [
+        "questions",
+        "bye"
+      ]
     },
-    "work": {
-      "Text": "I stamp the paperwork. The Handlers issue the actual missions. No lock-out between contracts.",
-      "Replies": [ "bye" ]
+    "hello_new": {
+      "Text": [
+        "Greetings, and welcome to the Freelancers Incorporated Mission Agency, Omni-Tek division.",
+        "{delay 1}\\nScanning.",
+        "{delay 1}\\nIdentity confirmed, {player}. No freelance agent record is on file. Please sign the Freelancers Incorporated contract to receive assignments."
+      ],
+      "Source": "first two captured, third ours",
+      "Replies": [
+        "sign",
+        "questions",
+        "bye"
+      ]
     },
-    "bye": { "Text": "{close}" }
+    "signed": {
+      "Text": "{givequest AGCT}{completequest AGCT}Contract filed. You may now take assignments from the Agency Handler, the Senior Agency Handler and the Alien Agency Handler.",
+      "Source": "ours",
+      "Replies": [
+        "questions",
+        "bye"
+      ]
+    },
+    "questions": {
+      "Text": "The Agency Handler issues Rubi-Ka assignments, the Senior Agency Handler issues elite assignments, and the Alien Agency Handler issues alien missions. There is no waiting period between assignments.",
+      "Source": "ours (answer not captured)",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}"
+    }
   }
 }

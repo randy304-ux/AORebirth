@@ -1,0 +1,403 @@
+{
+  "ECOF": {
+    "Templates": [
+      {
+        "Name": "Exchange Officer of IPS",
+        "Level": 100,
+        "Stats": {
+          "0": 277369345,
+          "1": 38243,
+          "4": 1,
+          "12": 5907,
+          "27": 38243,
+          "33": 0,
+          "54": 100,
+          "64": 40694,
+          "359": 26092,
+          "360": 112,
+          "455": 158,
+          "673": 31
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 213851
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 213708
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 214654,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40694,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 5,
+            "Id": 214715,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-10-30: outfit(md:Neutral Clothing Salesman) (live SCFU textures/meshes, scraped Scale/MonsterData)"
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scrape-city-20261030",
+      "Note": "live PRK scrape (hashpoint, pf 4531)",
+      "AppearanceFix": "2026-11-10: outfit/Scale/HP replaced from scraped_npcs_20261110_Cattywompus.csv inst 2067763995 pf 4531 (Textures 0:213851;1:213751;2:213807;3:213708;4:213925, Meshes 0:214654:0:2;0:40694:0:4;5:214715:0:0). Supersedes 2026-10-30 Clan-Protester-style guess."
+    }
+  },
+  "WIKA": {
+    "Templates": [
+      {
+        "Name": "Windcaller Karrec",
+        "Level": 200,
+        "Stats": {
+          "0": 277352961,
+          "1": 51008,
+          "4": 1,
+          "12": 17870,
+          "27": 51008,
+          "33": 0,
+          "54": 200,
+          "64": 40696,
+          "359": 40818,
+          "360": 121,
+          "455": 136,
+          "673": 31
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 161710
+          },
+          {
+            "Place": 2,
+            "Id": 161715
+          },
+          {
+            "Place": 3,
+            "Id": 161705
+          },
+          {
+            "Place": 4,
+            "Id": 161725
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 20108,
+            "OverrideTextureId": 161720,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40696,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "Source": "Capture 20260717-223626. Position matches hash WIKA. MonsterData 40818, head 40696, scale 121, level 200, family 136, health 51008, flags 277352961. Dialog is the captured greeting only. The temple follow-up is Guessed and gives no quest.",
+      "Appearance": "2026-11-10: mesh 17870, breed Solitus, outfit captured in scraped_npcs_20261110_Cattywompus.csv inst 2065876894 pf 655; level/HP/MonsterData/Scale/Family/HeadMesh already matched live."
+    }
+  },
+  "POTN": {
+    "Templates": [
+      {
+        "Name": "Portal Technician",
+        "Level": 200,
+        "Stats": {
+          "0": 268964353,
+          "1": 364337,
+          "4": 4,
+          "12": 23365,
+          "18": 0,
+          "21": 0,
+          "27": 364337,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 200,
+          "60": 0,
+          "64": 40103,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26103,
+          "360": 121,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 158,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 215295
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 215296
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 20007,
+            "OverrideTextureId": 215300,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40103,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-10-30: outfit(md:Clan Protester) (live SCFU textures/meshes, scraped Scale/MonsterData)"
+        },
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261110_Cattywompus.csv inst 2067740006 pf 4532; client spawn point POTN pf 4532 matched by position (d=0.2)",
+      "Note": "2026-11-10: POTN had a spawn but NO template on live. Stats base = PHTI Portal Technician template, all look fields from today's scrape."
+    },
+    "Hash": "POTN"
+  },
+  "PHTI": {
+    "Templates": [
+      {
+        "Name": "Portal Technician",
+        "Level": 200,
+        "Stats": {
+          "0": 268964353,
+          "1": 364337,
+          "4": 4,
+          "12": 23365,
+          "18": 0,
+          "21": 0,
+          "27": 364337,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 200,
+          "60": 0,
+          "64": 40103,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26103,
+          "360": 121,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 158,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 215295
+          },
+          {
+            "Place": 1,
+            "Id": 213751
+          },
+          {
+            "Place": 2,
+            "Id": 213807
+          },
+          {
+            "Place": 3,
+            "Id": 215296
+          },
+          {
+            "Place": 4,
+            "Id": 213925
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 20007,
+            "OverrideTextureId": 215300,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40103,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-10-30: outfit(md:Clan Protester) (live SCFU textures/meshes, scraped Scale/MonsterData)"
+        },
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scrape-city-20261030",
+      "Note": "live PRK scrape (hashpoint, pf 4531)",
+      "AppearanceFix": "2026-11-10: same Portal Technician outfit captured in pf 4532 (scraped_npcs_20261110_Cattywompus.csv inst 2067740006 pf 4532) replaces the 2026-10-30 Clan-Protester-style guess. Stats other than look kept."
+    }
+  },
+  "AGTE": {
+    "Hash": "AGTE",
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scraped_npcs_20261110_Cattywompus.csv Terminal 'Agency Teleport Sphere' pf 7011 (125.707,2.184,77.117, mesh 200989); client spawn point AGTE pf 7011 matched by position (d=0.00)",
+      "Note": "Static non-combat stand-in (same approach as the Pande terminal spheres): renders the sphere with the captured name and mesh. Teleport destinations/dialogue of the sphere were not captured; no Knubot script."
+    },
+    "Templates": [
+      {
+        "Name": "Agency Teleport Sphere",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "1": 1,
+          "4": 0,
+          "12": 200989,
+          "18": 0,
+          "21": 0,
+          "27": 1,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 1,
+          "60": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "360": 100,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": false,
+        "LootTable": []
+      }
+    ]
+  }
+}
