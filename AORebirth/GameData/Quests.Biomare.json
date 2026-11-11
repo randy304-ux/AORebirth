@@ -1,0 +1,571 @@
+[
+  {
+    "Hash": "BM01",
+    "Name": "Omni Investigation: Deliver Systems Monthly",
+    "QasInstance": 950101,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Summary": "Omni-Tek has placed an informant inside Biomare. Deliver the Systems Monthly periodical to Efficiency Expert Linda Osmos and return with her weekly progress report.",
+    "Objective": {
+      "Count": null,
+      "Npc": "BMLO",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 150.512,
+      "Y": 37.81,
+      "Z": 364.797
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "BM02",
+    "Reward": {
+      "Hash": "RB01",
+      "Credits": 0,
+      "Xp": 5000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM02",
+    "Name": "Linda: Disable Security Cameras",
+    "QasInstance": 950102,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Summary": "Disable six security cameras in Biomare for Efficiency Expert Linda Osmos. Return to Linda when done.",
+    "Objective": {
+      "Count": 6,
+      "Npc": "BMCA",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 150.512,
+      "Y": 37.81,
+      "Z": 364.797
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "BM03",
+    "Reward": {
+      "Hash": "RB02",
+      "Credits": 0,
+      "Xp": 8000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM03",
+    "Name": "Linda: Kill Toxic Floaters",
+    "QasInstance": 950103,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Summary": "Kill 8 Toxic Floaters in the Biomare sewers. Return to Linda Osmos.",
+    "Objective": {
+      "Count": 8,
+      "Npc": "BMTF",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 150.512,
+      "Y": 37.81,
+      "Z": 364.797
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "BM04",
+    "Reward": {
+      "Hash": "RB03",
+      "Credits": 0,
+      "Xp": 10000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM04",
+    "Name": "Linda: Kill Toxic Bloaters",
+    "QasInstance": 950104,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Summary": "Kill 8 Toxic Bloaters in the Biomare sewers. Return to Linda Osmos.",
+    "Objective": {
+      "Count": 8,
+      "Npc": "BMTB",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 150.512,
+      "Y": 37.81,
+      "Z": 364.797
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "BM05",
+    "Reward": {
+      "Hash": "RB04",
+      "Credits": 0,
+      "Xp": 12000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM05",
+    "Name": "Linda: Kill Tri Plumbo",
+    "QasInstance": 950105,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Kill Tri Plumbo for Efficiency Expert Linda Osmos, then return to her for the blank security card and weekly progress report.",
+    "Objective": {
+      "Count": null,
+      "Npc": "BMTP",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 150.512,
+      "Y": 37.81,
+      "Z": 364.797
+    },
+    "Flags": "None",
+    "MissionBit": 576,
+    "NextStep": "BM06",
+    "Reward": {
+      "Hash": "RB05",
+      "Credits": 0,
+      "Xp": 25000,
+      "Records": [
+        [
+          {
+            "Id": 258764,
+            "HighId": 258764,
+            "Name": "Security Clearance ID Card Blank",
+            "Quality": 1,
+            "Count": 1
+          },
+          {
+            "Id": 258759,
+            "HighId": 258759,
+            "Name": "Weekly Progress Report",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "BM06",
+    "Name": "Return Weekly Progress Report",
+    "QasInstance": 950106,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Take Linda Osmos's Weekly Progress Report back to Dr. Hercules Lincoln at Outpost 10-3.",
+    "Objective": {
+      "Count": null,
+      "Npc": "OIME",
+      "SpecItem": "WPRP",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 670,
+      "X": 1135,
+      "Y": 30,
+      "Z": 2375
+    },
+    "Flags": "None",
+    "MissionBit": 577,
+    "NextStep": "BM07",
+    "Reward": {
+      "Hash": "RB06",
+      "Credits": 0,
+      "Xp": 15000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM07",
+    "Name": "Rescue Analyst Theresa Cameron",
+    "QasInstance": 950107,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Summary": "In the Hangar area of Biomare, find Data Analyst Theresa Cameron and help her reach the emergency exit. Recover the Encrypted Datacube.",
+    "Objective": {
+      "Count": null,
+      "Npc": "BMTC",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 252.02,
+      "Y": 29.81,
+      "Z": 42.915
+    },
+    "Flags": "None",
+    "MissionBit": 578,
+    "NextStep": "BM08",
+    "Reward": {
+      "Hash": "RB07",
+      "Credits": 0,
+      "Xp": 20000,
+      "Records": [
+        [
+          {
+            "Id": 259247,
+            "HighId": 259247,
+            "Name": "Encryption Key",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "BM08",
+    "Name": "Deliver Decrypted Datacube",
+    "QasInstance": 950108,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Decrypt the Encrypted Datacube with your Encryption Key and deliver the Decrypted Datacube to Dr. Hercules Lincoln.",
+    "Objective": {
+      "Count": null,
+      "Npc": "OIME",
+      "SpecItem": "DCDC",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 670,
+      "X": 1135,
+      "Y": 30,
+      "Z": 2375
+    },
+    "Flags": "None",
+    "MissionBit": 579,
+    "NextStep": "BM09",
+    "Reward": {
+      "Hash": "RB08",
+      "Credits": 0,
+      "Xp": 25000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM09",
+    "Name": "Tissue Sample: Cardiac",
+    "QasInstance": 950109,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Collect a Cardiac Tissue Sample from a Shadow Mutant in Biomare and deliver it to Dr. Hercules Lincoln.",
+    "Objective": {
+      "Count": null,
+      "Npc": "OIME",
+      "SpecItem": "CTIS",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 670,
+      "X": 1135,
+      "Y": 30,
+      "Z": 2375
+    },
+    "Flags": "None",
+    "MissionBit": 580,
+    "NextStep": "BM0A",
+    "Reward": {
+      "Hash": "RB09",
+      "Credits": 0,
+      "Xp": 60000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM0A",
+    "Name": "Tissue Sample: Pulmonary",
+    "QasInstance": 950110,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Collect a Pulmonary Tissue Sample from an Alpha Bio Construct and deliver it to Dr. Hercules Lincoln.",
+    "Objective": {
+      "Count": null,
+      "Npc": "OIME",
+      "SpecItem": "PTIS",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 670,
+      "X": 1135,
+      "Y": 30,
+      "Z": 2375
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "BM0B",
+    "Reward": {
+      "Hash": "RB0A",
+      "Credits": 0,
+      "Xp": 75000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM0B",
+    "Name": "Tissue Sample: Liver",
+    "QasInstance": 950111,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Collect a Liver Tissue Sample from a Chemical Vindicator and deliver it to Dr. Hercules Lincoln.",
+    "Objective": {
+      "Count": null,
+      "Npc": "OIME",
+      "SpecItem": "LTIS",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 670,
+      "X": 1135,
+      "Y": 30,
+      "Z": 2375
+    },
+    "Flags": "None",
+    "MissionBit": 581,
+    "NextStep": "BM0C",
+    "Reward": {
+      "Hash": "RB0B",
+      "Credits": 0,
+      "Xp": 90000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM0C",
+    "Name": "Computer Hacking Mission",
+    "QasInstance": 950112,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Use Secure Terminal Hacking Protocols on laboratory computers in Biomare until you obtain Sensitive Data (green). Return it to Dr. Hercules Lincoln.",
+    "Objective": {
+      "Count": null,
+      "Npc": "OIME",
+      "SpecItem": "SENS",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 670,
+      "X": 1135,
+      "Y": 30,
+      "Z": 2375
+    },
+    "Flags": "None",
+    "MissionBit": 582,
+    "NextStep": "BM0D",
+    "Reward": {
+      "Hash": "RB0C",
+      "Credits": 0,
+      "Xp": 50000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM0D",
+    "Name": "Kill the Lab Director",
+    "QasInstance": 950113,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Find and kill the Lab Director in Biomare. Return his Identification Card to Dr. Hercules Lincoln for the Collar of Amplification.",
+    "Objective": {
+      "Count": null,
+      "Npc": "BMLD",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 376.789,
+      "Y": 46.01,
+      "Z": 360.637
+    },
+    "Flags": "None",
+    "MissionBit": 583,
+    "NextStep": "BM0E",
+    "Reward": {
+      "Hash": "RB0D",
+      "Credits": 0,
+      "Xp": 0,
+      "Records": [
+        [
+          {
+            "Id": 258802,
+            "HighId": 258802,
+            "Name": "Director's Identification Card",
+            "Quality": 1,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "BM0E",
+    "Name": "Deliver Director's Identification Card",
+    "QasInstance": 950114,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Deliver the Director's Identification Card to Dr. Hercules Lincoln at Outpost 10-3.",
+    "Objective": {
+      "Count": null,
+      "Npc": "OIME",
+      "SpecItem": "DIRC",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 670,
+      "X": 1135,
+      "Y": 30,
+      "Z": 2375
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "RB0E",
+      "Credits": 0,
+      "Xp": 125000,
+      "Records": [
+        [
+          {
+            "Id": 259265,
+            "HighId": 259265,
+            "Name": "Collar of Amplification",
+            "Quality": 100,
+            "Count": 1
+          }
+        ]
+      ]
+    }
+  },
+  {
+    "Hash": "BM0F",
+    "Name": "Kill T.I.M.",
+    "QasInstance": 950115,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Lab Assistant Evelynn Shead has requested your help shutting off the disposal device known as T.I.M.",
+    "Objective": {
+      "Count": null,
+      "Npc": "BMTI",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 379.334,
+      "Y": 14.21,
+      "Z": 244.777
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "RB0F",
+      "Credits": 0,
+      "Xp": 180000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM0G",
+    "Name": "Killer Cargo Bot Mission",
+    "QasInstance": 950116,
+    "Scope": "Solo",
+    "Action": "KillMultiple",
+    "Summary": "After the security clearance work, Linda Osmos wants 3 Heavy Cargo Haul Bots destroyed in the hangar.",
+    "Objective": {
+      "Count": 3,
+      "Npc": "BMHC",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 150.512,
+      "Y": 37.81,
+      "Z": 364.797
+    },
+    "Flags": "None",
+    "MissionBit": 584,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "RB0G",
+      "Credits": 3000,
+      "Xp": 60000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM0H",
+    "Name": "Recapture Beacon",
+    "QasInstance": 950117,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "Trade an SD Power Core to the Containment Unit System Droid in Biomare's west round room near T.I.M. Defeat the released scorpids and recover a Recapture Beacon.",
+    "Objective": {
+      "Count": null,
+      "Npc": "BMCS",
+      "SpecItem": "RCBE",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 413.218,
+      "Y": 22.205,
+      "Z": 349.474
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "RB0H",
+      "Credits": 0,
+      "Xp": 50000,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "BM0J",
+    "Name": "Johnsson Card Upgrade",
+    "QasInstance": 950118,
+    "Scope": "Solo",
+    "Action": "KillOne",
+    "Summary": "Find Maintenance Supervisor Johnsson in Biomare. Kill him and use your blank security card on the encoder left when his corpse rots to create Alpha clearance. Upgrade with damaged Beta/Gamma cards as you find them.",
+    "Objective": {
+      "Count": null,
+      "Npc": "BMJD",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 1941,
+      "X": 195.72,
+      "Y": 19.81,
+      "Z": 104.426
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "RB0J",
+      "Credits": 0,
+      "Xp": 20000,
+      "Records": null
+    }
+  }
+]

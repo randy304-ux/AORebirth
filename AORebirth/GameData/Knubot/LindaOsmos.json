@@ -1,0 +1,208 @@
+{
+  "Notes": "Efficiency Expert Linda Osmos (BMLO), Biomare PF 1941. First investigation step dialogue captured 2026-11-11 15:25-15:27 ET Killzaw. Later chain steps use source=filler from AO-Universe Omni Foremans guide. Clan-side Ace Starr lines skipped.",
+  "Npcs": [
+    "BMLO"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasQuest BM02"
+      ],
+      "Say": "cameras"
+    },
+    {
+      "If": [
+        "HasQuest BM03"
+      ],
+      "Say": "floaters"
+    },
+    {
+      "If": [
+        "HasQuest BM04"
+      ],
+      "Say": "bloaters"
+    },
+    {
+      "If": [
+        "HasQuest BM05"
+      ],
+      "Say": "plumbo"
+    },
+    {
+      "If": [
+        "HasCompletedQuest BM05",
+        "!HasQuest BM0G",
+        "!HasCompletedQuest BM0G"
+      ],
+      "Say": "cargo_offer"
+    },
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "investigate": {
+      "Text": "Well, I'm sent here to do some investigation, and I was told you could help me get started..",
+      "Goto": "busy",
+      "Source": "captured"
+    },
+    "sounds": {
+      "Text": "Sounds fine with me. What do you want me to do?",
+      "Goto": "cameras_task",
+      "Source": "captured"
+    },
+    "later": {
+      "Text": "Ok, see you later!",
+      "Goto": "dismiss",
+      "Source": "captured"
+    },
+    "cameras_done": {
+      "Text": "The security cameras are disabled.",
+      "Goto": "cameras_done",
+      "Source": "filler"
+    },
+    "floaters_done": {
+      "Text": "The Toxic Floaters are dealt with.",
+      "Goto": "floaters_done",
+      "Source": "filler"
+    },
+    "bloaters_done": {
+      "Text": "The Toxic Bloaters are dealt with.",
+      "Goto": "bloaters_done",
+      "Source": "filler"
+    },
+    "plumbo_done": {
+      "Text": "Tri Plumbo is dead.",
+      "Goto": "plumbo_done",
+      "Source": "filler"
+    },
+    "cargo_yes": {
+      "Text": "I can clear those cargo bots.",
+      "Goto": "cargo_yes",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "So, how can I help you?",
+      "Source": "captured",
+      "Replies": [
+        "investigate",
+        "bye"
+      ]
+    },
+    "busy": {
+      "Text": [
+        "Whoever suggested that obviously has no idea how much work I have to do down here.",
+        "But, if you could do my tasks while I write the report, I'll give you what information I have when you're done. How does that sound?"
+      ],
+      "Source": "captured",
+      "Replies": [
+        "sounds",
+        "bye"
+      ]
+    },
+    "cameras_task": {
+      "Text": "Well, first of all there's the matter of disabling the security cameras. Using this scrambler on the camera you will disable it. Once you have disabled the security cameras, come back here and I'll give you further instructions.{completequest BM01}{givequest BM02}",
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "cameras": {
+      "Text": "Any questions? No, thought not. Just find the security cameras and disable them!",
+      "Source": "captured",
+      "Replies": [
+        "cameras_done",
+        "later",
+        "bye"
+      ]
+    },
+    "dismiss": {
+      "Text": [
+        "Yes, yes.",
+        "Now... Where was I.."
+      ],
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "cameras_done": {
+      "Text": "Good. Next, clear eight Toxic Floaters from the sewer pipes.{completequest BM02}{givequest BM03}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "floaters": {
+      "Text": "Still waiting on those Toxic Floaters.",
+      "Source": "filler",
+      "Replies": [
+        "floaters_done",
+        "bye"
+      ]
+    },
+    "floaters_done": {
+      "Text": "Nice work. Now kill eight Toxic Bloaters.{completequest BM03}{givequest BM04}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bloaters": {
+      "Text": "The Toxic Bloaters are still a problem.",
+      "Source": "filler",
+      "Replies": [
+        "bloaters_done",
+        "bye"
+      ]
+    },
+    "bloaters_done": {
+      "Text": "One more sewer pest: Tri Plumbo. Kill it and come back.{completequest BM04}{givequest BM05}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "plumbo": {
+      "Text": "Tri Plumbo still needs dealing with.",
+      "Source": "filler",
+      "Replies": [
+        "plumbo_done",
+        "bye"
+      ]
+    },
+    "plumbo_done": {
+      "Text": "That blank card and my weekly progress report are yours. Take the report to Dr. Hercules Lincoln if you still have his investigation open.{completequest BM05}{givequest BM06}{spawn BLNK 1}{spawn WPRP 1}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "cargo_offer": {
+      "Text": "One more job when you have time: kill three Heavy Cargo Haul Bots in the hangar.",
+      "Source": "filler",
+      "Replies": [
+        "cargo_yes",
+        "bye"
+      ]
+    },
+    "cargo_yes": {
+      "Text": "Get it done and I'll see you paid.{givequest BM0G}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "captured"
+    }
+  }
+}

@@ -1,0 +1,2876 @@
+{
+  "ADK7": {
+    "Templates": [
+      {
+        "Name": "Reception Clerk",
+        "Level": 42,
+        "Health": 8154,
+        "Side": 3,
+        "Breed": 3,
+        "MonsterData": 40810,
+        "Scale": 104,
+        "Mesh": 17903,
+        "HeadMesh": 40187,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 277352961,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 22563
+          },
+          {
+            "slot": 3,
+            "id": 22538
+          },
+          {
+            "slot": 4,
+            "id": 22619
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40187
+          },
+          {
+            "position": 1,
+            "id": 35560
+          }
+        ],
+        "Features": [
+          "NoCombat"
+        ],
+        "LootTable": [
+          {
+            "Hash": "SILV",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L048",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "WAIS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "ADK7"
+  },
+  "1GNA": {
+    "Templates": [
+      {
+        "Name": "Base Protector",
+        "Level": 40,
+        "Health": 2347,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 26092,
+        "Scale": 103,
+        "Mesh": 5907,
+        "HeadMesh": 40694,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 8744
+          },
+          {
+            "slot": 1,
+            "id": 8738
+          },
+          {
+            "slot": 2,
+            "id": 8742
+          },
+          {
+            "slot": 3,
+            "id": 8735
+          },
+          {
+            "slot": 4,
+            "id": 8746
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20104
+          },
+          {
+            "position": 0,
+            "id": 40694
+          },
+          {
+            "position": 1,
+            "id": 21130
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "L049",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L050",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L051",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L052",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L049",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L050",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L051",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L052",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "1GNA"
+  },
+  "U5CB": {
+    "Templates": [
+      {
+        "Name": "Chief Base Protector",
+        "Level": 54,
+        "Health": 5836,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 26092,
+        "Scale": 106,
+        "Mesh": 5907,
+        "HeadMesh": 40694,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 8744
+          },
+          {
+            "slot": 1,
+            "id": 8738
+          },
+          {
+            "slot": 2,
+            "id": 8742
+          },
+          {
+            "slot": 3,
+            "id": 8735
+          },
+          {
+            "slot": 4,
+            "id": 8746
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20104
+          },
+          {
+            "position": 0,
+            "id": 40694
+          },
+          {
+            "position": 1,
+            "id": 35547
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "AGED",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "U5CB"
+  },
+  "R2L0": {
+    "Templates": [
+      {
+        "Name": "Outpost Sentry",
+        "Level": 60,
+        "Health": 6326,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 26092,
+        "Scale": 107,
+        "Mesh": 5907,
+        "HeadMesh": 40694,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 8744
+          },
+          {
+            "slot": 1,
+            "id": 8738
+          },
+          {
+            "slot": 2,
+            "id": 8742
+          },
+          {
+            "slot": 3,
+            "id": 8735
+          },
+          {
+            "slot": 4,
+            "id": 8746
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20104
+          },
+          {
+            "position": 0,
+            "id": 40694
+          },
+          {
+            "position": 1,
+            "id": 35547
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "R2L0"
+  },
+  "BMTF": {
+    "Templates": [
+      {
+        "Name": "Toxic Floater",
+        "Level": 60,
+        "Health": 6221,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 17704,
+        "Scale": 80,
+        "Mesh": 15961,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "EMBE",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SENP",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "AUTO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "NOMA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SOUL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "RIGH",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L053",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PINK",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BROW",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L054",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "OTRI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "WORN",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L055",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CHEM",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "RECR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "RIPO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "BMTF"
+  },
+  "6DSN": {
+    "Templates": [
+      {
+        "Name": "Base Defender",
+        "Level": 50,
+        "Health": 3277,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 249667,
+        "Scale": 105,
+        "Mesh": 5907,
+        "HeadMesh": 40686,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 8744
+          },
+          {
+            "slot": 1,
+            "id": 8738
+          },
+          {
+            "slot": 2,
+            "id": 8742
+          },
+          {
+            "slot": 3,
+            "id": 8735
+          },
+          {
+            "slot": 4,
+            "id": 8746
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20104
+          },
+          {
+            "position": 0,
+            "id": 40686
+          },
+          {
+            "position": 1,
+            "id": 31859
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "LOOS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ENGA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L056",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L057",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "GEMX",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "6DSN"
+  },
+  "BMLO": {
+    "Templates": [
+      {
+        "Name": "Efficiency Expert - Linda Osmos",
+        "Level": 50,
+        "Health": 2266,
+        "Side": 1,
+        "Breed": 3,
+        "MonsterData": 252178,
+        "Scale": 105,
+        "Mesh": 17901,
+        "HeadMesh": 40161,
+        "MonsterTexture": 0,
+        "NPCFamily": 137,
+        "Flags": 277352961,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 22572
+          },
+          {
+            "slot": 3,
+            "id": 22544
+          },
+          {
+            "slot": 4,
+            "id": 22631
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40161
+          }
+        ],
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "BMLO"
+  },
+  "BMTB": {
+    "Templates": [
+      {
+        "Name": "Toxic Bloater",
+        "Level": 70,
+        "Health": 9887,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 17704,
+        "Scale": 108,
+        "Mesh": 15961,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 13,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "BMTB"
+  },
+  "1ON6": {
+    "Templates": [
+      {
+        "Name": "Cargo Haul Bot",
+        "Level": 41,
+        "Health": 2396,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 45873,
+        "Scale": 104,
+        "Mesh": 45857,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "1ON6"
+  },
+  "YDOZ": {
+    "Templates": [
+      {
+        "Name": "Security Droid",
+        "Level": 52,
+        "Health": 7305,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 17697,
+        "Scale": 106,
+        "Mesh": 15294,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "SDPO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SOUL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "INFE",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L058",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CAST",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SOUL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "EYEI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L059",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L060",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "GLOW",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "LEGI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L061",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "YDOZ"
+  },
+  "EHWR": {
+    "Templates": [
+      {
+        "Name": "Stock Supervisor",
+        "Level": 45,
+        "Health": 5873,
+        "Side": 3,
+        "Breed": 2,
+        "MonsterData": 40812,
+        "Scale": 104,
+        "Mesh": 17915,
+        "HeadMesh": 40259,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 277352961,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 22562
+          },
+          {
+            "slot": 2,
+            "id": 9619
+          },
+          {
+            "slot": 3,
+            "id": 22537
+          },
+          {
+            "slot": 4,
+            "id": 22618
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40259
+          },
+          {
+            "position": 1,
+            "id": 30240
+          }
+        ],
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "EHWR"
+  },
+  "ZAHC": {
+    "Templates": [
+      {
+        "Name": "Chief Base Defender",
+        "Level": 60,
+        "Health": 6221,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 249667,
+        "Scale": 107,
+        "Mesh": 5907,
+        "HeadMesh": 40686,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 15806
+          },
+          {
+            "slot": 1,
+            "id": 15809
+          },
+          {
+            "slot": 2,
+            "id": 15807
+          },
+          {
+            "slot": 3,
+            "id": 15808
+          },
+          {
+            "slot": 4,
+            "id": 15805
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20106
+          },
+          {
+            "position": 0,
+            "id": 40686
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "FLAW",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "GOLD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L062",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "INST",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "ZAHC"
+  },
+  "BMTP": {
+    "Templates": [
+      {
+        "Name": "Tri Plumbo",
+        "Level": 80,
+        "Health": 28793,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 152519,
+        "Scale": 218,
+        "Mesh": 152493,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 13,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "STOR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CORR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "TRUE",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPRI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L063",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L064",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "BMTP"
+  },
+  "BMHC": {
+    "Templates": [
+      {
+        "Name": "Heavy Cargo Haul Bot",
+        "Level": 60,
+        "Health": 6221,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 45873,
+        "Scale": 107,
+        "Mesh": 45857,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "RADI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L065",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "RUBY",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L066",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L067",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L068",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "DOCA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BASI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ENER",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SDPO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PILL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "RING",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L069",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "HEAD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "BMHC"
+  },
+  "BMJD": {
+    "Templates": [
+      {
+        "Name": "Maintenance Supervisor Johnsson",
+        "Level": 50,
+        "Health": 9064,
+        "Side": 1,
+        "Breed": 4,
+        "MonsterData": 26097,
+        "Scale": 105,
+        "Mesh": 5900,
+        "HeadMesh": 40111,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 247939
+          },
+          {
+            "slot": 2,
+            "id": 247978
+          },
+          {
+            "slot": 3,
+            "id": 247893
+          },
+          {
+            "slot": 4,
+            "id": 248018
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 204895
+          },
+          {
+            "position": 0,
+            "id": 40111
+          },
+          {
+            "position": 1,
+            "id": 258983
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "BMJD"
+  },
+  "ZMD4": {
+    "Templates": [
+      {
+        "Name": "Refuse Bot",
+        "Level": 60,
+        "Health": 4977,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 17714,
+        "Scale": 107,
+        "Mesh": 17316,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "ZMD4"
+  },
+  "BMTC": {
+    "Templates": [
+      {
+        "Name": "Data Analyst - Theresa Cameron",
+        "Level": 50,
+        "Health": 9064,
+        "Side": 1,
+        "Breed": 1,
+        "MonsterData": 165181,
+        "Scale": 105,
+        "Mesh": 5927,
+        "HeadMesh": 40648,
+        "MonsterTexture": 0,
+        "NPCFamily": 219,
+        "Flags": 277352961,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "BMTC"
+  },
+  "MDGV": {
+    "Templates": [
+      {
+        "Name": "Security Officer",
+        "Level": 80,
+        "Health": 12973,
+        "Side": 3,
+        "Breed": 4,
+        "MonsterData": 26097,
+        "Scale": 109,
+        "Mesh": 5900,
+        "HeadMesh": 40111,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 8744
+          },
+          {
+            "slot": 1,
+            "id": 8738
+          },
+          {
+            "slot": 2,
+            "id": 8742
+          },
+          {
+            "slot": 3,
+            "id": 8735
+          },
+          {
+            "slot": 4,
+            "id": 8746
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20003
+          },
+          {
+            "position": 0,
+            "id": 40111
+          },
+          {
+            "position": 1,
+            "id": 96309
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "DAMA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PERS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PERS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "4THL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "TOER",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L070",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L071",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PERS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PERS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L072",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BLUN",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "GOLD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L073",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L074",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "MDGV"
+  },
+  "98JY": {
+    "Templates": [
+      {
+        "Name": "Security Guard",
+        "Level": 55,
+        "Health": 7089,
+        "Side": 3,
+        "Breed": 4,
+        "MonsterData": 26097,
+        "Scale": 106,
+        "Mesh": 5900,
+        "HeadMesh": 40111,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 8744
+          },
+          {
+            "slot": 1,
+            "id": 8738
+          },
+          {
+            "slot": 2,
+            "id": 8742
+          },
+          {
+            "slot": 3,
+            "id": 8735
+          },
+          {
+            "slot": 4,
+            "id": 8746
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20003
+          },
+          {
+            "position": 0,
+            "id": 40111
+          },
+          {
+            "position": 1,
+            "id": 96313
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "98JY"
+  },
+  "SB21": {
+    "Templates": [
+      {
+        "Name": "Technician",
+        "Level": 50,
+        "Health": 3626,
+        "Side": 3,
+        "Breed": 2,
+        "MonsterData": 26137,
+        "Scale": 105,
+        "Mesh": 5934,
+        "HeadMesh": 40209,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 9408
+          },
+          {
+            "slot": 1,
+            "id": 8741
+          },
+          {
+            "slot": 2,
+            "id": 9416
+          },
+          {
+            "slot": 3,
+            "id": 9400
+          },
+          {
+            "slot": 4,
+            "id": 9417
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40209
+          },
+          {
+            "position": 1,
+            "id": 7789
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "SB21"
+  },
+  "BMLC": {
+    "Templates": [
+      {
+        "Name": "Gunbeetle",
+        "Level": 65,
+        "Health": 14130,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 40069,
+        "Scale": 107,
+        "Mesh": 40043,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268980737
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "BMLC"
+  },
+  "DCNA": {
+    "Templates": [
+      {
+        "Name": "Behaviour Observer",
+        "Level": 55,
+        "Health": 4131,
+        "Side": 3,
+        "Breed": 3,
+        "MonsterData": 26151,
+        "Scale": 106,
+        "Mesh": 5921,
+        "HeadMesh": 40171,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 14048
+          },
+          {
+            "slot": 1,
+            "id": 14047
+          },
+          {
+            "slot": 2,
+            "id": 14050
+          },
+          {
+            "slot": 3,
+            "id": 14049
+          },
+          {
+            "slot": 4,
+            "id": 14051
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40171
+          },
+          {
+            "position": 1,
+            "id": 99147
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "HEAL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L075",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "DCNA"
+  },
+  "XKVM": {
+    "Templates": [
+      {
+        "Name": "Alpha Bio Construct",
+        "Level": 70,
+        "Health": 7909,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 44143,
+        "Scale": 108,
+        "Mesh": 44141,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "L076",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L077",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SOUL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L078",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L079",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L072",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L080",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L081",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L082",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L083",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BOWB",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BRAC",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L084",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "LEFT",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L076",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "MODE",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "RING",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L085",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L086",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L087",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "XKVM"
+  },
+  "SBMT": {
+    "Templates": [
+      {
+        "Name": "Suppressor",
+        "Level": 59,
+        "Health": 6680,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 26090,
+        "Scale": 107,
+        "Mesh": 5927,
+        "HeadMesh": 40629,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 8744
+          },
+          {
+            "slot": 1,
+            "id": 8738
+          },
+          {
+            "slot": 2,
+            "id": 8742
+          },
+          {
+            "slot": 3,
+            "id": 8735
+          },
+          {
+            "slot": 4,
+            "id": 8746
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20087
+          },
+          {
+            "position": 0,
+            "id": 40629
+          },
+          {
+            "position": 1,
+            "id": 7822
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "SBMT"
+  },
+  "TCRA": {
+    "Templates": [
+      {
+        "Name": "Neutralizer",
+        "Level": 60,
+        "Health": 6339,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 26092,
+        "Scale": 107,
+        "Mesh": 5907,
+        "HeadMesh": 40694,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 8744
+          },
+          {
+            "slot": 1,
+            "id": 8738
+          },
+          {
+            "slot": 2,
+            "id": 8742
+          },
+          {
+            "slot": 3,
+            "id": 8735
+          },
+          {
+            "slot": 4,
+            "id": 8746
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20104
+          },
+          {
+            "position": 0,
+            "id": 40694
+          },
+          {
+            "position": 1,
+            "id": 96336
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "MARR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPIN",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "TCRA"
+  },
+  "PKJE": {
+    "Templates": [
+      {
+        "Name": "Shadow Mutant",
+        "Level": 70,
+        "Health": 7909,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 30464,
+        "Scale": 108,
+        "Mesh": 30434,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "CARD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ICCA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BLUE",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L088",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L089",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "PKJE"
+  },
+  "BMBE": {
+    "Templates": [
+      {
+        "Name": "Blind Eyemutant",
+        "Level": 80,
+        "Health": 19675,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 17653,
+        "Scale": 164,
+        "Mesh": 15224,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 24,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "COMB",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L090",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "GEMX",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L091",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L062",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "BMBE"
+  },
+  "5SF2": {
+    "Templates": [
+      {
+        "Name": "Chemical Vindicator",
+        "Level": 70,
+        "Health": 9887,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 85351,
+        "Scale": 215,
+        "Mesh": 85335,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "L092",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "RADI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L093",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L057",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L092",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L094",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "OTRI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L095",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "IMPA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COMP",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "FLOW",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L096",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L097",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L087",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L098",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L099",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L077",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L100",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BRAC",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L101",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ABRI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L102",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "5SF2"
+  },
+  "JAP4": {
+    "Templates": [
+      {
+        "Name": "Beta Bio Construct",
+        "Level": 70,
+        "Health": 8021,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 44143,
+        "Scale": 108,
+        "Mesh": 44141,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "SPIN",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ILLT",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PEAR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L103",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L104",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L050",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "JAP4"
+  },
+  "BMES": {
+    "Templates": [
+      {
+        "Name": "Lab Assistant - Evelynn Shead",
+        "Level": 50,
+        "Health": 2266,
+        "Side": 1,
+        "Breed": 1,
+        "MonsterData": 165179,
+        "Scale": 105,
+        "Mesh": 17919,
+        "HeadMesh": 40624,
+        "MonsterTexture": 0,
+        "NPCFamily": 137,
+        "Flags": 277352961,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 9613
+          },
+          {
+            "slot": 2,
+            "id": 9619
+          },
+          {
+            "slot": 3,
+            "id": 9606
+          },
+          {
+            "slot": 4,
+            "id": 9626
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40624
+          }
+        ],
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "BMES"
+  },
+  "U5OF": {
+    "Templates": [
+      {
+        "Name": "Failed Experimental Mutant",
+        "Level": 70,
+        "Health": 3955,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 17695,
+        "Scale": 108,
+        "Mesh": 15285,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 219,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "U5OF"
+  },
+  "BMTI": {
+    "Templates": [
+      {
+        "Name": "T.I.M.",
+        "Level": 100,
+        "Health": 47803,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 22821,
+        "Scale": 279,
+        "Mesh": 21715,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 90,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "L105",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "HUDU",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L106",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "BMTI"
+  },
+  "0NQ9": {
+    "Templates": [
+      {
+        "Name": "Containment Unit",
+        "Level": 100,
+        "Health": 6829,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 259301,
+        "Scale": 100,
+        "Mesh": 259298,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 219,
+        "Flags": 269373953
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "0NQ9"
+  },
+  "BMCS": {
+    "Templates": [
+      {
+        "Name": "Containment Unit System Droid",
+        "Level": 80,
+        "Health": 4799,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 96056,
+        "Scale": 109,
+        "Mesh": 96024,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 4,
+        "Flags": 277352961,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "BMCS"
+  },
+  "9WRU": {
+    "Templates": [
+      {
+        "Name": "Data Collector",
+        "Level": 70,
+        "Health": 5594,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 96056,
+        "Scale": 108,
+        "Mesh": 96024,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "ILLI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "RUBI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L107",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L108",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SDPO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "9WRU"
+  },
+  "3M1W": {
+    "Templates": [
+      {
+        "Name": "Research Technician",
+        "Level": 70,
+        "Health": 7176,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 26090,
+        "Scale": 108,
+        "Mesh": 5927,
+        "HeadMesh": 40629,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 14048
+          },
+          {
+            "slot": 1,
+            "id": 14046
+          },
+          {
+            "slot": 2,
+            "id": 14050
+          },
+          {
+            "slot": 3,
+            "id": 14049
+          },
+          {
+            "slot": 4,
+            "id": 14051
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40629
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "HEAL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L075",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L109",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PINK",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L110",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "FEET",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CHEA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PEAR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CHES",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L111",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "3M1W"
+  },
+  "JYXK": {
+    "Templates": [
+      {
+        "Name": "Bodyguard",
+        "Level": 80,
+        "Health": 12582,
+        "Side": 3,
+        "Breed": 4,
+        "MonsterData": 26097,
+        "Scale": 109,
+        "Mesh": 5900,
+        "HeadMesh": 40111,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 8744
+          },
+          {
+            "slot": 1,
+            "id": 8738
+          },
+          {
+            "slot": 2,
+            "id": 8742
+          },
+          {
+            "slot": 3,
+            "id": 8735
+          },
+          {
+            "slot": 4,
+            "id": 8746
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20003
+          },
+          {
+            "position": 0,
+            "id": 40111
+          },
+          {
+            "position": 1,
+            "id": 8631
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "L112",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "GAMM",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "EMBE",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L113",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "MEGA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L050",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L114",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PIER",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L087",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L115",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "1HED",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "POIS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L116",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "GREN",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ASIA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L117",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L118",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L077",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L119",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L120",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L077",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L121",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BATT",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "JYXK"
+  },
+  "BMRR": {
+    "Templates": [
+      {
+        "Name": "Captain \"Rik-Rak\" Jones",
+        "Level": 80,
+        "Health": 33592,
+        "Side": 1,
+        "Breed": 4,
+        "MonsterData": 258938,
+        "Scale": 142,
+        "Mesh": 5900,
+        "HeadMesh": 40111,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40111
+          },
+          {
+            "position": 1,
+            "id": 246915
+          },
+          {
+            "position": 3,
+            "id": 11559
+          },
+          {
+            "position": 4,
+            "id": 11559
+          },
+          {
+            "position": 5,
+            "id": 41481
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "L105",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ASSA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "BMRR"
+  },
+  "BMLD": {
+    "Templates": [
+      {
+        "Name": "Lab Director",
+        "Level": 80,
+        "Health": 38390,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 26086,
+        "Scale": 109,
+        "Mesh": 17867,
+        "HeadMesh": 40688,
+        "MonsterTexture": 0,
+        "NPCFamily": 129,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 22573
+          },
+          {
+            "slot": 2,
+            "id": 9615
+          },
+          {
+            "slot": 3,
+            "id": 22545
+          },
+          {
+            "slot": 4,
+            "id": 22632
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40688
+          },
+          {
+            "position": 1,
+            "id": 99144
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "L105",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SEAL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CUST",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L122",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L123",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "DUCK",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1941,
+      "scrape": "20261111_Killzaw",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "BMLD"
+  },
+  "OIME": {
+    "Templates": [
+      {
+        "Name": "Dr. Hercules Lincoln",
+        "Level": 50,
+        "Health": 5000,
+        "Side": 1,
+        "Breed": 3,
+        "MonsterData": 26103,
+        "Scale": 105,
+        "Mesh": 17901,
+        "HeadMesh": 40161,
+        "MonsterTexture": 0,
+        "NPCFamily": 137,
+        "Flags": 277352961,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "aouniverse+donor",
+      "playfield": 670,
+      "note": "Outpost 10-3 Omni quest giver. Appearance stand-in (not in 20261111 scrape); NoCombat. Coords from AO-Universe Biomare Foremans guide (1135x2375)."
+    },
+    "Hash": "OIME"
+  }
+}

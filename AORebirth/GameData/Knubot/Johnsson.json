@@ -1,0 +1,44 @@
+{
+  "Notes": "Maintenance Supervisor Johnsson (BMJD). Card-upgrade explanation is filler; encoder corpse click is not fully authorable here so the kill quest stands in.",
+  "Npcs": [
+    "BMJD"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "card": {
+      "Text": "I need help with my security clearance card.",
+      "Goto": "card",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "What do you want? I'm busy.",
+      "Source": "filler",
+      "Replies": [
+        "card",
+        "bye"
+      ]
+    },
+    "card": {
+      "Text": "Blank cards get encoded when I... expire. If Linda sent you, you already know the rest.{givequest BM0J}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  }
+}
