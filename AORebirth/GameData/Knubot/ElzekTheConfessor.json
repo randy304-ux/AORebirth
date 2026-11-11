@@ -1,0 +1,58 @@
+{
+  "Notes": "Elzek the Confessor, Inner Sanctum (PF 1943) hash HHEA, at the Forbidden Gateway. Dialog captured 2026-11-10 13:45:12-13:45:41 ET. Option 1 'Um, secret knowledge...' was offered but not opened; that reply is tagged source=filler. No item take/give or teleport was captured; he tells the player to touch the Secret Knowledge for passage through the Forbidden Gateway (scrape spelling: Gatway).",
+  "Npcs": [
+    "HHEA"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "know": {
+      "Text": "I possess the secret knowledge.",
+      "Goto": "know",
+      "Source": "captured"
+    },
+    "um": {
+      "Text": "Um, secret knowledge...",
+      "Goto": "um",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Halt! Only those possessing the secret knowledge of the Inner Sanctum may gaze upon the Immortal One.",
+      "Source": "captured",
+      "Replies": [
+        "know",
+        "um",
+        "bye"
+      ]
+    },
+    "know": {
+      "Text": "The holy knowledge! To be taken into the presence of the Immortal One, touch the Secret Knowledge and gain passage through the Forbidden Gatway. Blessings of the Immortal One upon you, and may you find the peace that you seek.",
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "um": {
+      "Text": "Only those who possess the secret knowledge may pass.",
+      "Source": "filler",
+      "Replies": [
+        "know",
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "Blessings of the Immortal One upon you.{close}",
+      "Source": "captured"
+    }
+  }
+}
