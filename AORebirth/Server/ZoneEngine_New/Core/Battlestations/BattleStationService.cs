@@ -13,10 +13,12 @@ namespace ZoneEngine_New.Core.Battlestations
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.GameData;
     using ZoneEngine_New.Core.Helpers;
+    using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Mobs;
     using ZoneEngine_New.Core.Pets;
     using ZoneEngine_New.Core.Playfield;
+    using ZoneEngine_New.Core.Playfield.Locality;
     using ZoneEngine_New.Core.Raids;
     using ZoneEngine_New.Core.Teams;
 
@@ -35,6 +37,10 @@ namespace ZoneEngine_New.Core.Battlestations
 
         /// <summary>Enemy death inside a live match: +KillVp to the killer side, drop a VP Reward pickup.</summary>
         public static void NotifyKill(Character victim, Character? killer) => Service?.NotifyKill(victim, killer);
+
+        /// <summary>Click/use the red-beam VP Reward dynel (template 269820).</summary>
+        public static bool TryCollectVpReward(Player player, BattleStationVpRewardDynel dynel)
+            => Service != null && Service.TryCollectVpReward(player, dynel);
 
         /// <summary>True when the character is inside the shared Decontamination Room (no combat).</summary>
         public static bool IsInDecontamination(Character character)
@@ -222,13 +228,15 @@ namespace ZoneEngine_New.Core.Battlestations
                 }
 
                 int reward = BattleStationScoring.RollVpReward(_catalog.VpRewardMin, _catalog.VpRewardMax);
-                match.Rewards.Add(new VpReward(
+                var drop = new VpReward(
                     victim.Position.xf,
                     victim.Position.yf,
                     victim.Position.zf,
                     killerSide,
                     reward,
-                    _catalog.VpRewardLifetimeSeconds));
+                    _catalog.VpRewardLifetimeSeconds);
+                SpawnVpRewardBeacon(match, drop);
+                match.Rewards.Add(drop);
 
                 BroadcastScore(match, force: true);
 
@@ -1194,8 +1202,11 @@ namespace ZoneEngine_New.Core.Battlestations
             {
                 VpReward reward = match.Rewards[i];
                 reward.LifeLeft -= deltaTime;
-                if (reward.LifeLeft <= 0)
-                    match.Rewards.RemoveAt(i);
+                if (reward.LifeLeft > 0)
+                    continue;
+
+                DespawnVpRewardBeacon(match, reward);
+                match.Rewards.RemoveAt(i);
             }
         }
 
@@ -1215,20 +1226,97 @@ namespace ZoneEngine_New.Core.Battlestations
                 if (Distance(x, z, reward.X, reward.Z) > radius)
                     continue;
 
-                if (reward.Team == 1)
-                    match.RedScore += reward.Amount;
-                else
-                    match.BlueScore += reward.Amount;
-                human.PointsEarned += reward.Amount;
-                match.Rewards.RemoveAt(i);
-                Say(human.Player, "VP Reward +" + reward.Amount.ToString(CultureInfo.InvariantCulture) + ".");
-                BroadcastScore(match, force: true);
-                if (match.RedScore >= _catalog.ScoreCap || match.BlueScore >= _catalog.ScoreCap)
-                {
-                    Finish(match, match.RedScore >= _catalog.ScoreCap ? 1 : 2);
+                if (!ApplyVpReward(match, human, reward))
                     return;
+                match.Rewards.RemoveAt(i);
+            }
+        }
+
+        public bool TryCollectVpReward(Player player, BattleStationVpRewardDynel dynel)
+        {
+            if (player == null || dynel == null)
+                return false;
+
+            lock (_gate)
+            {
+                Human? human = FindHuman(player);
+                if (human?.Match == null || human.Match.Ending
+                    || !ReferenceEquals(player.Playfield, human.Match.Field))
+                    return false;
+
+                Match match = human.Match;
+                for (int i = 0; i < match.Rewards.Count; i++)
+                {
+                    VpReward reward = match.Rewards[i];
+                    if (!ReferenceEquals(reward.Dynel, dynel))
+                        continue;
+                    if (reward.Team != human.Team)
+                    {
+                        Say(player, "That VP Reward belongs to the other team.");
+                        return true;
+                    }
+
+                    if (!ApplyVpReward(match, human, reward))
+                        return true;
+                    match.Rewards.RemoveAt(i);
+                    return true;
                 }
             }
+
+            return false;
+        }
+
+        bool ApplyVpReward(Match match, Human human, VpReward reward)
+        {
+            if (reward.Team == 1)
+                match.RedScore += reward.Amount;
+            else
+                match.BlueScore += reward.Amount;
+            human.PointsEarned += reward.Amount;
+            DespawnVpRewardBeacon(match, reward);
+            Say(human.Player, "VP Reward +" + reward.Amount.ToString(CultureInfo.InvariantCulture) + ".");
+            BroadcastScore(match, force: true);
+            if (match.RedScore >= _catalog.ScoreCap || match.BlueScore >= _catalog.ScoreCap)
+            {
+                Finish(match, match.RedScore >= _catalog.ScoreCap ? 1 : 2);
+                return false;
+            }
+
+            return true;
+        }
+
+        void SpawnVpRewardBeacon(Match match, VpReward reward)
+        {
+            int templateId = _catalog.VpRewardTemplateId > 0
+                ? _catalog.VpRewardTemplateId
+                : BattleStationVpRewardDynel.DefaultTemplateId;
+            IItemTemplateCatalog? items = match.Field.GetService<IItemTemplateCatalog>();
+            if (items == null || !items.TryGet(templateId, out ItemTemplate? template) || template == null)
+            {
+                _logger.Warn("Battle station VP Reward template missing: " + templateId);
+                return;
+            }
+
+            DynelRegistry registry = match.Field.GetRequiredService<DynelRegistry>();
+            var dynel = new BattleStationVpRewardDynel(registry.AllocateStaticDynelIdentity(), template)
+            {
+                Playfield = match.Field,
+                Position = new Vector3(reward.X, reward.Y, reward.Z),
+                Rotation = new AORebirth.Core.Vector.Quaternion(0, 0, 0, 1)
+            };
+            registry.Register(dynel);
+            match.Field.GetRequiredService<PlayfieldLocality>().RegisterDynel(dynel);
+            reward.Dynel = dynel;
+        }
+
+        static void DespawnVpRewardBeacon(Match match, VpReward reward)
+        {
+            BattleStationVpRewardDynel? dynel = reward.Dynel;
+            reward.Dynel = null;
+            if (dynel == null || dynel.Playfield == null)
+                return;
+
+            match.Field.GetService<SpawnService>()?.DespawnStatic(dynel);
         }
 
         bool TryExitPad(Match match, Human human, float x, float z)
@@ -2367,6 +2455,9 @@ namespace ZoneEngine_New.Core.Battlestations
                     spawn?.DespawnNpc(match.Bots[i].Npc);
             }
 
+            for (int i = 0; i < match.Rewards.Count; i++)
+                DespawnVpRewardBeacon(match, match.Rewards[i]);
+
             lock (_gate)
             {
                 match.Humans.Clear();
@@ -2695,6 +2786,8 @@ namespace ZoneEngine_New.Core.Battlestations
             public int Team;
             public int Amount;
             public double LifeLeft;
+
+            public BattleStationVpRewardDynel? Dynel;
         }
 
         sealed class Bot
@@ -2828,6 +2921,11 @@ namespace ZoneEngine_New.Core.Battlestations
         public float VpRewardPickupRadius { get; set; } = 8f;
 
         public double VpRewardLifetimeSeconds { get; set; } = 90;
+
+        /// <summary>
+        /// Dust Brigade Exit Beacon (269820, mesh 258404) — same red-beam pillar as alien-ship exit beacons.
+        /// </summary>
+        public int VpRewardTemplateId { get; set; } = BattleStationScoring.VpRewardTemplateId;
 
         /// <summary>End-of-match PVP Solo/Team Score multipliers. Loss ~100 contribution → ~83.</summary>
         public double LossScoreMult { get; set; } = 0.83;

@@ -28,6 +28,7 @@
   "VpRewardMax": 60,
   "VpRewardPickupRadius": 8,
   "VpRewardLifetimeSeconds": 90,
+  "VpRewardTemplateId": 269820,
   "LossScoreMult": 0.83,
   "WinScoreMult": 1.35,
   "KillScoreBonus": 2,
@@ -38,7 +39,7 @@
   "WinVpPerLevel": 4,
   "LossVpPerLevel": 1,
   "BotHashes": ["MREN", "MRSO", "MRKE", "MRDR", "MRAD", "MRAG", "MRBU", "MREG", "MRFI", "MRMA", "MRMP", "MRNT", "MRSH", "MRTR"],
-  "Notes": "Shared Decontamination Room (district Entry on each BS playfield, centre ~1860,42,300). Both Red and Blue land and respawn here; no combat inside SafeRadius. ExitPads sit on the teal Exit Decontamination floor pad (templates 290266-290274). After StartGateSeconds the pad opens into the open Battle Station district; AFK players are auto-sent to a random Arms tip pad (TELEPORT LOCATIONS map: 3 pads at arm A NE tip, 3 at arm B South tip, 3 at arm C NW tip; Core is centre). Bots spawn/respawn on the same Arms pads. Consoles 287837/287828 are the four control points (Core worth 2, arms 1). Score HUD is N3 SendScore 0x44483B3A (live PF 4384: tick 10s / dominated 1s, end at 500). Kills +KillVp; VP Reward pickups roll VpRewardMin-Max. End PVP Solo/Team Score uses LossScoreMult/WinScoreMult. BotCapperWeight lowered + BotHackSeconds/BotCaptureLockSeconds + MaxDefendersPerPoint ease solo capture pressure while hunters/flankers still fight.",
+  "Notes": "Shared Decontamination Room (district Entry on each BS playfield, centre ~1860,42,300). Both Red and Blue land and respawn here; no combat inside SafeRadius. ExitPads sit on the teal Exit Decontamination floor pad (templates 290266-290274). After StartGateSeconds the pad opens into the open Battle Station district; AFK players are auto-sent to a random Arms tip pad (TELEPORT LOCATIONS map: 3 pads at arm A NE tip, 3 at arm B South tip, 3 at arm C NW tip; Core is centre). Bots spawn/respawn on the same Arms pads. Consoles 287837/287828 are the four control points (Core worth 2, arms 1). Score HUD is N3 SendScore 0x44483B3A (live PF 4384: tick 10s / dominated 1s, end at 500). Kills +KillVp; VP Reward pickups roll VpRewardMin-Max and spawn Dust Brigade Exit Beacon 269820 (mesh 258404, same red beam as alien-ship exit beacons). End PVP Solo/Team Score uses LossScoreMult/WinScoreMult. BotCapperWeight lowered + BotHackSeconds/BotCaptureLockSeconds + MaxDefendersPerPoint ease solo capture pressure while hunters/flankers still fight.",
   "SafeSpawn": { "X": 1862.0, "Y": 42.0, "Z": 300.0 },
   "ExitPads": [
     { "Arm": "", "X": 1862.5, "Y": 43.0, "Z": 303.5, "Radius": 12.0 }

@@ -8,6 +8,12 @@ namespace ZoneEngine_New.Core.Battlestations
     /// </summary>
     public static class BattleStationScoring
     {
+        /// <summary>
+        /// Dust Brigade Exit Beacon — same red-beam pillar as alien-ship / generated-dungeon exit beacons
+        /// (QuestDungeonPlayfield ExitTerminalTemplate; mesh 258404).
+        /// </summary>
+        public const int VpRewardTemplateId = 269820;
+
         /// <summary>Our match Owner[] uses 0=none, 1=Red, 2=Blue. Wire SendScore uses 0=Red, 1=Blue, 2=Neutral.</summary>
         public static int ToWireOwner(int matchOwner)
             => matchOwner switch
