@@ -1,17 +1,13 @@
 # Current Task
 
-## Active: NPC patrol import (GO deploy)
+## Active: Battle Station score HUD + solo bot pressure (local only)
 
-Branch `cursor/rk-desert-dyna-loot-15f4`. Tip base `1cd4db32` + prior local `c66703c1`.
+Branch `cursor/bs-score-1111` @ worktree `I:\AO\worktrees\bs-score-1111`.
+Base tip `959fa5a3`. Local commit only — no push/PR/deploy.
 
-### What
-- Wired existing `PatrolNode` for spawn-entry `patrolWaypoints` (walk speed, 2–6 s pauses, resume nearest after leash).
-- Matched `I:\AO\imports\gpt-moves-20261107-r2\patrols.json` to installed spawns (15 m XZ, same name/PF).
-- Validation PASS (200/200 scraped spot-check; synthetic Y within 10 m).
-- Build: `tools-temp\zbuild-patrol`. Deploy script: `tools-temp\deploy-patrol.ps1`.
+### Capture
+`I:\AO\imports\batch-20261111\scrape\bs_score_packets_20261111_Killzaw.csv`
+(PF 4384, SendScore `0x44483B3A`, end Red 91 / Blue 502).
 
-### Counts
-Matched **3508** / unmatched **850** / skipped synthetic **0**. Newland Desert: 518 matched, 35 unmatched.
-
-### Deploy
-Randy authorized GO after validation+build. MySQL 33070. Rollback `tools-temp\rb-patrol`.
+### Build
+`I:\AO\src\tools-temp\zbuild-bs-1111` (matched Core + ZoneEngine_New). Do not copy into Built\.
