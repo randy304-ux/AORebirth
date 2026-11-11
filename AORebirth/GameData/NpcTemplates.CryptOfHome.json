@@ -1,0 +1,1007 @@
+{
+  "CHDC": {
+    "Templates": [
+      {
+        "Name": "Dark Cenobite",
+        "Level": 73,
+        "Health": 12624,
+        "Side": 3,
+        "Breed": 3,
+        "MonsterData": 206249,
+        "Scale": 108,
+        "Mesh": 5907,
+        "HeadMesh": 116705,
+        "MonsterTexture": 0,
+        "NPCFamily": 213,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 117653
+          },
+          {
+            "slot": 1,
+            "id": 21824
+          },
+          {
+            "slot": 2,
+            "id": 9619
+          },
+          {
+            "slot": 3,
+            "id": 21819
+          },
+          {
+            "slot": 4,
+            "id": 21831
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 116705
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "NECR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "DARK",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CLOA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ANIL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "FLOA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L124",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHDC"
+  },
+  "CHDS": {
+    "Templates": [
+      {
+        "Name": "Dark Summoner",
+        "Level": 80,
+        "Health": 9598,
+        "Side": 3,
+        "Breed": 3,
+        "MonsterData": 206250,
+        "Scale": 109,
+        "Mesh": 5907,
+        "HeadMesh": 116711,
+        "MonsterTexture": 0,
+        "NPCFamily": 213,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 117653
+          },
+          {
+            "slot": 1,
+            "id": 21824
+          },
+          {
+            "slot": 2,
+            "id": 9619
+          },
+          {
+            "slot": 3,
+            "id": 21819
+          },
+          {
+            "slot": 4,
+            "id": 21831
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 116711
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "NECR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L125",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L126",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ANIL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "FLOA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CLOA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHDS"
+  },
+  "CHDN": {
+    "Templates": [
+      {
+        "Name": "Dark Sanitary",
+        "Level": 73,
+        "Health": 12624,
+        "Side": 3,
+        "Breed": 3,
+        "MonsterData": 206251,
+        "Scale": 108,
+        "Mesh": 17870,
+        "HeadMesh": 29694,
+        "MonsterTexture": 0,
+        "NPCFamily": 213,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 117653
+          },
+          {
+            "slot": 1,
+            "id": 21824
+          },
+          {
+            "slot": 2,
+            "id": 9619
+          },
+          {
+            "slot": 3,
+            "id": 21819
+          },
+          {
+            "slot": 4,
+            "id": 21831
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20040
+          },
+          {
+            "position": 0,
+            "id": 29694
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "L127",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ANIL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "FLOA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "NECR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L126",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "DARK",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHDN"
+  },
+  "CHEC": {
+    "Templates": [
+      {
+        "Name": "Eclipser",
+        "Level": 75,
+        "Health": 13130,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205925,
+        "Scale": 109,
+        "Mesh": 100399,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 213,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "ANIL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ANIL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHEC"
+  },
+  "CHBL": {
+    "Templates": [
+      {
+        "Name": "Blorrg",
+        "Level": 70,
+        "Health": 7909,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205933,
+        "Scale": 108,
+        "Mesh": 95310,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 214,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "GASB",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BUND",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Captured loot plus AO-Universe Crypt of Home guide fills (source=guide for guide-only rows)."
+    },
+    "Hash": "CHBL"
+  },
+  "CHBA": {
+    "Templates": [
+      {
+        "Name": "Bane",
+        "Level": 80,
+        "Health": 33592,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205931,
+        "Scale": 125,
+        "Mesh": 165156,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 213,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "L128",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "HUMA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Captured loot plus AO-Universe Crypt of Home guide fills (source=guide for guide-only rows)."
+    },
+    "Hash": "CHBA"
+  },
+  "CHNE": {
+    "Templates": [
+      {
+        "Name": "Necromancer",
+        "Level": 90,
+        "Health": 14108,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205939,
+        "Scale": 110,
+        "Mesh": 95294,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 216,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "SACR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "NECR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ANIL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHNE"
+  },
+  "CHCS": {
+    "Templates": [
+      {
+        "Name": "Cenobite Shadow",
+        "Level": 90,
+        "Health": 4514,
+        "Side": 0,
+        "Breed": 3,
+        "MonsterData": 206249,
+        "Scale": 99,
+        "Mesh": 5907,
+        "HeadMesh": 116705,
+        "MonsterTexture": 0,
+        "NPCFamily": 213,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 0,
+            "id": 117653
+          },
+          {
+            "slot": 1,
+            "id": 21824
+          },
+          {
+            "slot": 2,
+            "id": 9619
+          },
+          {
+            "slot": 3,
+            "id": 21819
+          },
+          {
+            "slot": 4,
+            "id": 21831
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 116705
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "L129",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CHIR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "HOWL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PANT",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Captured loot plus AO-Universe Crypt of Home guide fills (source=guide for guide-only rows)."
+    },
+    "Hash": "CHCS"
+  },
+  "CHSK": {
+    "Templates": [
+      {
+        "Name": "Skincrawler",
+        "Level": 75,
+        "Health": 8316,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205934,
+        "Scale": 109,
+        "Mesh": 156217,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 215,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "LARG",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L130",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PATC",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L131",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SMAL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L132",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHSK"
+  },
+  "CHKZ": {
+    "Templates": [
+      {
+        "Name": "Kizzermole",
+        "Level": 82,
+        "Health": 7949,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205941,
+        "Scale": 44,
+        "Mesh": 95388,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 216,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "KIZZ",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L133",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PITD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PITD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "KIZZ",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L133",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHKZ"
+  },
+  "CHAS": {
+    "Templates": [
+      {
+        "Name": "Alpha Skincrawler",
+        "Level": 90,
+        "Health": 39501,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205938,
+        "Scale": 143,
+        "Mesh": 156217,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 215,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "BROT",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L134",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Captured loot plus AO-Universe Crypt of Home guide fills (source=guide for guide-only rows)."
+    },
+    "Hash": "CHAS"
+  },
+  "CHAB": {
+    "Templates": [
+      {
+        "Name": "Abyss Serpent",
+        "Level": 80,
+        "Health": 9598,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205942,
+        "Scale": 44,
+        "Mesh": 32363,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 216,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "COLL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHAB"
+  },
+  "CHCG": {
+    "Templates": [
+      {
+        "Name": "Crypt Guardian",
+        "Level": 100,
+        "Health": 27316,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205940,
+        "Scale": 130,
+        "Mesh": 165156,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 218,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "L135",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ESSE",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ANIL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHCG"
+  },
+  "CHAP": {
+    "Templates": [
+      {
+        "Name": "Awakened Pit Demon",
+        "Level": 90,
+        "Health": 22572,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205943,
+        "Scale": 275,
+        "Mesh": 85335,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 216,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "L136",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PITD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "CHAP"
+  },
+  "CHCR": {
+    "Templates": [
+      {
+        "Name": "Cerubin The Rejected",
+        "Level": 150,
+        "Health": 160423,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 205946,
+        "Scale": 117,
+        "Mesh": 42886,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 218,
+        "Flags": 269357569,
+        "LootTable": [
+          {
+            "Hash": "PITD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "NECR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "FOCU",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPIR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "COLL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SHAP",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "JAGG",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Captured loot plus AO-Universe Crypt of Home guide fills (source=guide for guide-only rows)."
+    },
+    "Hash": "CHCR"
+  },
+  "9OZU": {
+    "Templates": [
+      {
+        "Name": "Cerubin's Tentacle of Chill",
+        "Level": 120,
+        "Health": 11962,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 206213,
+        "Scale": 228,
+        "Mesh": 45795,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 218,
+        "Flags": 403313153
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "9OZU"
+  },
+  "CZ6X": {
+    "Templates": [
+      {
+        "Name": "Cerubin's Lazy Tentacle",
+        "Level": 120,
+        "Health": 11962,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 206213,
+        "Scale": 228,
+        "Mesh": 45795,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 97,
+        "Flags": 403313153
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "CZ6X"
+  },
+  "YLK3": {
+    "Templates": [
+      {
+        "Name": "Cerubin's Tentacle of Power",
+        "Level": 120,
+        "Health": 11962,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 206213,
+        "Scale": 228,
+        "Mesh": 45795,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 218,
+        "Flags": 403313153
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "YLK3"
+  },
+  "XCNA": {
+    "Templates": [
+      {
+        "Name": "Cerubin's Tentacle of Burning Truth",
+        "Level": 120,
+        "Health": 11962,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 206213,
+        "Scale": 228,
+        "Mesh": 45795,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 218,
+        "Flags": 403313153
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 4805,
+      "scrape": "20261111_Killzaw+aouniverse",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "XCNA"
+  }
+}
