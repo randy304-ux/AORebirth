@@ -14,14 +14,18 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206248,
-            "HighId": 206248,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "BLOO",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Bloodshed Armband"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "DEFI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -29,8 +33,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "ACDR"
   },
@@ -48,14 +52,22 @@
         "HeadMesh": 40634,
         "MonsterTexture": 0,
         "NPCFamily": 136,
-        "Flags": 268964353
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "TATT",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
       }
     ],
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance from 2026-11-10 scrape. No loot row was captured for this NPC; loot not invented."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "ARJR"
   },
@@ -74,14 +86,24 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206047,
-            "HighId": 206047,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "PARA",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Parasitic Hecataleech"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L137",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "IRON",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -89,8 +111,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "AOSS"
   },
@@ -109,14 +131,24 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206181,
-            "HighId": 206181,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "TATT",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Tattered book: Karmic Fist (section 2)"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L138",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "TWIL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -124,8 +156,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "UKOW"
   },
@@ -144,14 +176,18 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206194,
-            "HighId": 206194,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "L137",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Archdeacon Robe"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "TWIL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -159,8 +195,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "AHTI"
   },
@@ -179,14 +215,12 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206248,
-            "HighId": 206248,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "BLOO",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Bloodshed Armband"
+            "LevelMod": 0
           }
         ]
       }
@@ -264,38 +298,42 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206254,
-            "HighId": 206254,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "RUST",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Rusted Iron-bound Funeral Urn"
+            "LevelMod": 0
           },
           {
-            "LowId": 206013,
-            "HighId": 206013,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "MIGH",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Might of the Revenant"
+            "LevelMod": 0
           },
           {
-            "LowId": 206192,
-            "HighId": 206192,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "DOMI",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Dominus Robe"
+            "LevelMod": 0
           },
           {
-            "LowId": 206239,
-            "HighId": 206239,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "THIR",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Third Circle of the Inner Sanctum"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "TEAC",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CHAR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -303,8 +341,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "HGER"
   },
@@ -323,30 +361,36 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206242,
-            "HighId": 206242,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "TEAC",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Teachings of the Immortal One"
+            "LevelMod": 0
           },
           {
-            "LowId": 205953,
-            "HighId": 205953,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "GLOO",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Gloomfall Armor (Gloves)"
+            "LevelMod": 0
           },
           {
-            "LowId": 287145,
-            "HighId": 287145,
-            "MinQl": 200,
-            "MaxQl": 200,
+            "Hash": "MERC",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Mercury Vapor Excitation Globe"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ABAD",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L139",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -354,8 +398,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "HHEX"
   },
@@ -373,14 +417,28 @@
         "HeadMesh": 40636,
         "MonsterTexture": 0,
         "NPCFamily": 136,
-        "Flags": 268964353
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "DOMI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CHAR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
       }
     ],
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance from 2026-11-10 scrape. No loot row was captured for this NPC; loot not invented."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "OGEL"
   },
@@ -429,8 +487,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance from 2026-11-10 scrape. No loot row was captured for this NPC; loot not invented."
+      "scrape": "20261110_Cattywompus+20261111_confirm_no_loot",
+      "note": "Appearance from scrape. Randy confirmed Fezael the Watcher has NO loot."
     },
     "Hash": "FZTE"
   },
@@ -449,54 +507,48 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206238,
-            "HighId": 206238,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "L140",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Third Circle of the Inner Sanctum"
+            "LevelMod": 0
           },
           {
-            "LowId": 205954,
-            "HighId": 205954,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "L141",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Gloomfall Armor (Sleeves)"
+            "LevelMod": 0
           },
           {
-            "LowId": 206067,
-            "HighId": 206067,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "ICHO",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Ichor of the Immortal One"
+            "LevelMod": 0
           },
           {
-            "LowId": 255550,
-            "HighId": 255550,
-            "MinQl": 200,
-            "MaxQl": 200,
+            "Hash": "PATT",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Pattern of Approaching Death"
+            "LevelMod": 0
           },
           {
-            "LowId": 206017,
-            "HighId": 206017,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "RODO",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Rod of Dismissal"
+            "LevelMod": 0
           },
           {
-            "LowId": 206052,
-            "HighId": 206052,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "IMPI",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Impious Dominator"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CONS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -504,8 +556,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "AASU"
   },
@@ -523,14 +575,40 @@
         "HeadMesh": 40651,
         "MonsterTexture": 0,
         "NPCFamily": 136,
-        "Flags": 268964353
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "L142",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L143",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L144",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "HIGH",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
       }
     ],
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance from 2026-11-10 scrape. No loot row was captured for this NPC; loot not invented."
+      "scrape": "20261110_Cattywompus+20261111+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "HEEH"
   },
@@ -574,14 +652,18 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206009,
-            "HighId": 206009,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "L144",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Soulmark"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L143",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -589,8 +671,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "HXER"
   },
@@ -609,22 +691,24 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206457,
-            "HighId": 206457,
-            "MinQl": 180,
-            "MaxQl": 180,
+            "Hash": "L142",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Obsidian Jar"
+            "LevelMod": 0
           },
           {
-            "LowId": 206006,
-            "HighId": 206006,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "L143",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Bloodmark"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L144",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -632,8 +716,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "HXEM"
   },
@@ -652,14 +736,24 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206009,
-            "HighId": 206009,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "L144",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Soulmark"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L143",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "HIGH",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -667,8 +761,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "HXEH"
   },
@@ -686,14 +780,22 @@
         "HeadMesh": 40187,
         "MonsterTexture": 0,
         "NPCFamily": 136,
-        "Flags": 268964353
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "L144",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
       }
     ],
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance from 2026-11-10 scrape. No loot row was captured for this NPC; loot not invented."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "HEEN"
   },
@@ -712,30 +814,24 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268980737,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206057,
-            "HighId": 206057,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "GELI",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Gelid Blade of Inobak"
+            "LevelMod": 0
           },
           {
-            "LowId": 206047,
-            "HighId": 206047,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "PARA",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Parasitic Hecataleech"
+            "LevelMod": 0
           },
           {
-            "LowId": 287145,
-            "HighId": 287145,
-            "MinQl": 200,
-            "MaxQl": 200,
+            "Hash": "MERC",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Mercury Vapor Excitation Globe"
+            "LevelMod": 0
           }
         ]
       }
@@ -743,8 +839,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "INTH"
   },
@@ -763,30 +859,48 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206258,
-            "HighId": 206258,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "INNE",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Inner Sanctum Knowledge (bottom half of key)"
+            "LevelMod": 0
           },
           {
-            "LowId": 206049,
-            "HighId": 206049,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "MAWO",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Maw of the Abyss"
+            "LevelMod": 0
           },
           {
-            "LowId": 206204,
-            "HighId": 206204,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "TWIL",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Twilight's Murder"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PREL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L145",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L146",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SECO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -794,8 +908,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "HGEA"
   },
@@ -814,30 +928,36 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206053,
-            "HighId": 206053,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "PREL",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Prelude to Chaos"
+            "LevelMod": 0
           },
           {
-            "LowId": 206064,
-            "HighId": 206064,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "JEUR",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Jeuru's Oscillating Ligature"
+            "LevelMod": 0
           },
           {
-            "LowId": 206257,
-            "HighId": 206257,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "L147",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Inner Sanctum Knowledge (top half of key)"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L145",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "DOMI",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -845,8 +965,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "CPSO"
   },
@@ -890,14 +1010,18 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206204,
-            "HighId": 206204,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "TWIL",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Twilight's Murder"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BLOO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -905,8 +1029,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "PEAN"
   },
@@ -925,22 +1049,18 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206055,
-            "HighId": 206055,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "FROS",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Frost Shard"
+            "LevelMod": 0
           },
           {
-            "LowId": 205956,
-            "HighId": 205956,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "CARA",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Carapace of the Infernal Tyrant (Sleeves)"
+            "LevelMod": 0
           }
         ]
       }
@@ -948,8 +1068,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "PEBR"
   },
@@ -968,22 +1088,24 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206055,
-            "HighId": 206055,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "FROS",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Frost Shard"
+            "LevelMod": 0
           },
           {
-            "LowId": 206185,
-            "HighId": 206185,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "L148",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Tattered book: Karmic Fist (section 6)"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PARA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -991,8 +1113,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "PECH"
   },
@@ -1011,14 +1133,24 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206007,
-            "HighId": 206007,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "DEFI",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Defiled Bloodmark"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PREC",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "BLOO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -1026,8 +1158,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "PCJO"
   },
@@ -1046,14 +1178,18 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206008,
-            "HighId": 206008,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "DESE",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Desecrated Bloodmark"
+            "LevelMod": 0
+          },
+          {
+            "Hash": "FROS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -1061,8 +1197,8 @@
     "ContentProvenance": {
       "source": "capture",
       "playfield": 1943,
-      "scrape": "20261110_Cattywompus",
-      "note": "Appearance and 2026-11-10 captured loot rows (single-run membership, Chance 100). Client spawn hash kept. No published rate applied."
+      "scrape": "20261110_Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
     },
     "Hash": "PEMH"
   },
@@ -1081,14 +1217,12 @@
         "MonsterTexture": 0,
         "NPCFamily": 136,
         "Flags": 268964353,
-        "Loot": [
+        "LootTable": [
           {
-            "LowId": 206055,
-            "HighId": 206055,
-            "MinQl": 1,
-            "MaxQl": 1,
+            "Hash": "FROS",
+            "Repeats": 1,
             "Chance": 100,
-            "Name": "Frost Shard"
+            "LevelMod": 0
           }
         ]
       }
@@ -1175,5 +1309,251 @@
       "note": "Appearance from 2026-11-10 scrape. No loot row was captured for this NPC; loot not invented."
     },
     "Hash": "PAID"
+  },
+  "RBSO": {
+    "Templates": [
+      {
+        "Name": "Reborn Soldier",
+        "Level": 192,
+        "Health": 29521,
+        "Side": 3,
+        "Breed": 1,
+        "MonsterData": 41690,
+        "Scale": 120,
+        "Mesh": 41664,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 136,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 32147
+          },
+          {
+            "slot": 3,
+            "id": 32141
+          },
+          {
+            "slot": 4,
+            "id": 32146
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 1,
+            "id": 204738
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "L149",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "GLOO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L150",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L149",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L150",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L140",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "THIR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CHAR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "THIR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PARA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L146",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "CHAR",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L140",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1943,
+      "scrape": "20261111_Adventuralot+Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
+    },
+    "Hash": "RBSO"
+  },
+  "TCRN": {
+    "Templates": [
+      {
+        "Name": "The Re-Incarnator",
+        "Level": 210,
+        "Health": 172867,
+        "Side": 3,
+        "Breed": 3,
+        "MonsterData": 26155,
+        "Scale": 123,
+        "Mesh": 23370,
+        "HeadMesh": 40138,
+        "MonsterTexture": 0,
+        "NPCFamily": 136,
+        "Flags": 268964353,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 161708
+          },
+          {
+            "slot": 2,
+            "id": 161713
+          },
+          {
+            "slot": 3,
+            "id": 161703
+          },
+          {
+            "slot": 4,
+            "id": 161723
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20023
+          },
+          {
+            "position": 0,
+            "id": 40138
+          },
+          {
+            "position": 1,
+            "id": 204738
+          }
+        ],
+        "BossTriggers": [
+          {
+            "On": "FirstAggro",
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Count": 2,
+                "Hash": "LFLS",
+                "Note": "Living Flesh adds observed near The Re-Incarnator in Adventuralot 2026-11-11 IS run"
+              }
+            ]
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "IRON",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L151",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "L140",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "PREL",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1943,
+      "scrape": "20261111_Adventuralot+Cattywompus+20261111",
+      "note": "Loot merged with 2026-11-11 Adventuralot/Cattywompus captures (Chance 100). Fezael excluded."
+    },
+    "Hash": "TCRN"
+  },
+  "LFLS": {
+    "Templates": [
+      {
+        "Name": "Living Flesh",
+        "Level": 150,
+        "Health": 2674,
+        "Side": 0,
+        "Breed": 1,
+        "MonsterData": 30258,
+        "Scale": 75,
+        "Mesh": 29973,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 136,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 1943,
+      "scrape": "20261111_Adventuralot+Cattywompus",
+      "note": "Living Flesh is a real L150 mob (MD 30258). Template for TCRN SpawnAdds; no permanent SpawnsAdd (fight add)."
+    },
+    "Hash": "LFLS"
   }
 }
