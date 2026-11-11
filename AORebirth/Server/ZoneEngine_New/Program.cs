@@ -112,6 +112,7 @@ namespace ZoneEngine_New
                 chatEngineLink.Start();
                 playfieldManager = rootServices.GetRequiredService<PlayfieldManager>();
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Battlestations.BattleStationService>();
+                _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Bots.PlayerBotService>();
                 var halloween = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.HalloweenService>();
                 halloween.EnableOnBootIfConfigured();
                 _ = rootServices.GetRequiredService<ZoneEngine_New.Core.Events.DailyLockoutService>();
@@ -346,6 +347,8 @@ namespace ZoneEngine_New
             services.AddSingleton<IGmCommand, MishrollCommand>();
             services.AddSingleton<ZoneEngine_New.Core.Raids.InvasionService>();
             services.AddSingleton<ZoneEngine_New.Core.Battlestations.BattleStationService>();
+            services.AddSingleton<ZoneEngine_New.Core.Bots.PlayerBotCatalog>();
+            services.AddSingleton<ZoneEngine_New.Core.Bots.PlayerBotService>();
             services.AddSingleton<ZoneEngine_New.Core.Events.HalloweenService>();
             services.AddSingleton<ZoneEngine_New.Core.Events.DailyLockoutService>();
             services.AddSingleton<ZoneEngine_New.Core.Events.DailyMissionService>();

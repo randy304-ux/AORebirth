@@ -1,17 +1,15 @@
 # Current Task
 
-## Active: NPC patrol import (GO deploy)
+## Active: Starter-area playerbots (local commit only)
 
-Branch `cursor/rk-desert-dyna-loot-15f4`. Tip base `1cd4db32` + prior local `c66703c1`.
+Branch `cursor/playerbots-1111` @ worktree `I:\AO\worktrees\playerbots-1111`.
+Base tip `959fa5a3`. Local commit only — no push/PR/deploy.
 
-### What
-- Wired existing `PatrolNode` for spawn-entry `patrolWaypoints` (walk speed, 2–6 s pauses, resume nearest after leash).
-- Matched `I:\AO\imports\gpt-moves-20261107-r2\patrols.json` to installed spawns (15 m XZ, same name/PF).
-- Validation PASS (200/200 scraped spot-check; synthetic Y within 10 m).
-- Build: `tools-temp\zbuild-patrol`. Deploy script: `tools-temp\deploy-patrol.ps1`.
+### Goal
+5-10 player-looking bots per starter hub (Arete 6553, ICC 4582, Nascence 4313):
+roam POIs via navmesh/straight PathTo, fight level-appropriate mobs, rest when hurt.
+Config: `GameData/PlayerBots.json` (Enabled default true, count 8).
 
-### Counts
-Matched **3508** / unmatched **850** / skipped synthetic **0**. Newland Desert: 518 matched, 35 unmatched.
-
-### Deploy
-Randy authorized GO after validation+build. MySQL 33070. Rollback `tools-temp\rb-patrol`.
+### Build
+`I:\AO\src\tools-temp\zbuild-playerbots-1111` (matched Core + ZoneEngine_New).
+Engines must be started only via `schtasks /run /tn "\DungeonDogs\AO Dungeon Dogs Engines"`.

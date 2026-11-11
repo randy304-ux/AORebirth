@@ -10,6 +10,9 @@ namespace ZoneEngine_New.Core.Ai
         public IChildTree CombatExtras { get; init; } = EmptyCombatExtras.Instance;
 
         public bool PatrolEnabled { get; init; }
+
+        /// <summary>When true, <see cref="NpcBrain"/> builds the starter playerbot action-loop tree.</summary>
+        public bool PlayerBot { get; init; }
     }
 
     public static class NpcAiProfiles
@@ -23,6 +26,12 @@ namespace ZoneEngine_New.Core.Ai
         public static NpcAiProfile HoldGround { get; } = new()
         {
             CombatExtras = HoldGroundCombatExtras.Instance
+        };
+
+        /// <summary>Starter-area playerbots: rest / fight / engage / roam loop.</summary>
+        public static NpcAiProfile PlayerBot { get; } = new()
+        {
+            PlayerBot = true
         };
 
         public static NpcAiProfile Resolve(string? hash)

@@ -104,6 +104,11 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="../../GameData/PlayerBots.json">
+      <Link>GameData/%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="../../GameData/Teams/LevelEligibility.json">
       <Link>GameData/Teams/LevelEligibility.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

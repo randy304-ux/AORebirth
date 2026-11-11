@@ -1,0 +1,79 @@
+{
+  "SchemaVersion": 1,
+  "Enabled": true,
+  "CountPerPlayfield": 8,
+  "MinLevel": 1,
+  "MaxLevel": 15,
+  "RestBelowPercent": 40,
+  "RestUntilPercent": 80,
+  "EngageRange": 28,
+  "RoamPauseMinSeconds": 3,
+  "RoamPauseMaxSeconds": 10,
+  "RespawnSeconds": 45,
+  "IdleWhenNoPlayers": true,
+  "EmptyZoneActivityChance": 0.04,
+  "TickSeconds": 1.0,
+  "BotHashes": [
+    "MREN", "MRSO", "MRKE", "MRDR", "MRAD", "MRAG",
+    "MRBU", "MREG", "MRFI", "MRMA", "MRMP", "MRNT", "MRSH", "MRTR"
+  ],
+  "FirstNames": [
+    "Aric", "Bren", "Cora", "Dax", "Elara", "Finn", "Gwen", "Hale",
+    "Ivy", "Jace", "Kira", "Lars", "Mira", "Nox", "Orin", "Pia",
+    "Quinn", "Rhea", "Seth", "Tessa", "Uma", "Vex", "Wren", "Yuri", "Zane",
+    "Ash", "Blake", "Casey", "Drew", "Eden", "Frost", "Gray", "Haven"
+  ],
+  "LastNames": [
+    "Voss", "Kane", "Reed", "Sloan", "Pike", "Cross", "Vale", "Storm",
+    "Ashford", "Mercer", "Quill", "Drake", "Holt", "Rook", "Frost",
+    "Steel", "Ward", "Blake", "Nash", "Quinn", "Hayes", "Cole"
+  ],
+  "Playfields": [
+    {
+      "Id": 6553,
+      "Name": "Arete Landing",
+      "Count": 8,
+      "Points": [
+        { "X": 3455.0, "Y": 9.5, "Z": 865.0 },
+        { "X": 3480.0, "Y": 9.5, "Z": 840.0 },
+        { "X": 3420.0, "Y": 9.5, "Z": 890.0 },
+        { "X": 3505.0, "Y": 10.0, "Z": 910.0 },
+        { "X": 3395.0, "Y": 9.5, "Z": 820.0 },
+        { "X": 3520.0, "Y": 9.5, "Z": 780.0 },
+        { "X": 3609.0, "Y": 52.3, "Z": 786.2 },
+        { "X": 3560.0, "Y": 20.0, "Z": 820.0 }
+      ]
+    },
+    {
+      "Id": 4582,
+      "Name": "ICC Shuttleport",
+      "Count": 8,
+      "Points": [
+        { "X": 934.9, "Y": 24.8, "Z": 762.0 },
+        { "X": 920.0, "Y": 24.8, "Z": 780.0 },
+        { "X": 950.0, "Y": 24.8, "Z": 740.0 },
+        { "X": 900.0, "Y": 24.8, "Z": 750.0 },
+        { "X": 960.0, "Y": 24.8, "Z": 770.0 },
+        { "X": 880.0, "Y": 24.4, "Z": 730.0 },
+        { "X": 970.0, "Y": 24.8, "Z": 800.0 },
+        { "X": 910.0, "Y": 24.8, "Z": 720.0 }
+      ]
+    },
+    {
+      "Id": 4313,
+      "Name": "Nascence Training Ground",
+      "Count": 8,
+      "Points": [
+        { "X": 412.8, "Y": 76.7, "Z": 353.5 },
+        { "X": 430.0, "Y": 76.7, "Z": 340.0 },
+        { "X": 395.0, "Y": 76.7, "Z": 370.0 },
+        { "X": 450.0, "Y": 76.7, "Z": 360.0 },
+        { "X": 380.0, "Y": 76.7, "Z": 330.0 },
+        { "X": 440.0, "Y": 76.7, "Z": 390.0 },
+        { "X": 400.0, "Y": 76.7, "Z": 320.0 },
+        { "X": 460.0, "Y": 76.7, "Z": 350.0 }
+      ]
+    }
+  ],
+  "Notes": "Starter-area playerbots: roam POIs, fight nearby level-appropriate mobs, rest when hurt. Default ON for the first live test. Arrival Hall 4604 is intentionally omitted."
+}

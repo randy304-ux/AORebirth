@@ -54,6 +54,11 @@ namespace ZoneEngine_New.Core.Entities
         public bool Attackable { get; set; } = true;
 
         /// <summary>
+        /// When true, death skips the corpse (same as pets). Used by starter playerbots so they are not lootable.
+        /// </summary>
+        public bool SuppressDeathCorpse { get; set; }
+
+        /// <summary>
         /// The NPC's body cannot move: its MonsterData Features (stat 224, copied on at spawn) lack
         /// <see cref="GameData.MonsterBodyFeatures.CanMove"/>. It never paths, wanders or chases, and fights from where it
         /// stands. Unknown Features count as mobile.
@@ -230,6 +235,11 @@ namespace ZoneEngine_New.Core.Entities
                 ClearKillRewards();
                 Playfield?.GetService<Pets.PetService>()?.OnPetDied(this);
             }
+            else if (SuppressDeathCorpse)
+            {
+                // Starter playerbots: no XP/loot credit and no corpse.
+                ClearKillRewards();
+            }
 
             // An NPC's pets fall with it.
             if (OwnedPets.Count > 0)
@@ -243,10 +253,10 @@ namespace ZoneEngine_New.Core.Entities
             }
         }
 
-        /// <summary>Pets leave no corpse.</summary>
+        /// <summary>Pets and playerbots leave no corpse.</summary>
         protected override void SpawnDeathCorpse()
         {
-            if (Pet == null)
+            if (Pet == null && !SuppressDeathCorpse)
                 base.SpawnDeathCorpse();
         }
 

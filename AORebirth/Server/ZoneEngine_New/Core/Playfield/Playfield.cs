@@ -738,6 +738,8 @@ namespace ZoneEngine_New.Core.Playfield
                 ZoneEngine_New.Core.Raids.WaveClock.Tick(this, deltaTime);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("battlestation");
                 ZoneEngine_New.Core.Battlestations.BattleStationClock.Tick(this, deltaTime);
+                ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("playerbots");
+                ZoneEngine_New.Core.Bots.PlayerBotClock.Tick(this, deltaTime);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("halloween");
                 ZoneEngine_New.Core.Events.HalloweenClock.Tick(this, deltaTime);
                 ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("spawngroup");
