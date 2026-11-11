@@ -1,0 +1,62 @@
+[
+  {
+    "Hash": "AISO",
+    "Name": "Spaced Out",
+    "QasInstance": 944220,
+    "Scope": "Solo",
+    "Action": "TargetNpc",
+    "Summary": "Spaced Out\n\nThe Kyr'Ozch are constantly surrounding the Goliath-class battlestations in orbit around Rubi-Ka.\n\nYou're commissioned by the agency to investigate the disappearances of several people on Rubi-Ka.\n\nOne of them was last seen outside of Newland.",
+    "Objective": {
+      "Count": null,
+      "Npc": "SOSZ",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 567,
+      "X": 1154.438,
+      "Y": 36.01,
+      "Z": 295.287
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AISP",
+    "Reward": {
+      "Hash": "RISO",
+      "Credits": 0,
+      "Xp": 0,
+      "AlienXpPercent": 0,
+      "Records": null
+    }
+  },
+  {
+    "Hash": "AISP",
+    "Name": "Spaced Out: Escape the Ship",
+    "QasInstance": 944221,
+    "Scope": "Solo",
+    "Action": "FindItem",
+    "Summary": "You have been abducted aboard an alien ship trap. Recover a Pulsing Clump from the Kyr'Ozch Hive Warden and give it to Shenna Marone or Roberto Belote, then stand on the center platform to escape.",
+    "Objective": {
+      "Count": null,
+      "Npc": "SOSM",
+      "SpecItem": "PUCL",
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 6125,
+      "X": 182.01,
+      "Y": 1.045,
+      "Z": 174.01
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": "AIPR",
+    "Reward": {
+      "Hash": "RISP",
+      "Credits": 0,
+      "Xp": 0,
+      "AlienXpPercent": 0,
+      "Records": null
+    }
+  }
+]

@@ -1,0 +1,383 @@
+{
+  "SOSZ": {
+    "Templates": [
+      {
+        "Name": "Sergio Zembower",
+        "Level": 70,
+        "Health": 3955,
+        "Side": 0,
+        "Breed": 1,
+        "MonsterData": 26092,
+        "Scale": 108,
+        "Mesh": 5907,
+        "HeadMesh": 40694,
+        "MonsterTexture": 0,
+        "NPCFamily": 137,
+        "Flags": 277352961,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 265586
+          },
+          {
+            "slot": 2,
+            "id": 256243
+          },
+          {
+            "slot": 3,
+            "id": 256241
+          },
+          {
+            "slot": 4,
+            "id": 256245
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40694
+          }
+        ],
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 567,
+      "scrape": "20261111_Cattywompus",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "SOSZ"
+  },
+  "SORB": {
+    "Templates": [
+      {
+        "Name": "Roberto Belote",
+        "Level": 230,
+        "Health": 161769,
+        "Side": 0,
+        "Breed": 3,
+        "MonsterData": 26151,
+        "Scale": 127,
+        "Mesh": 5921,
+        "HeadMesh": 223921,
+        "MonsterTexture": 0,
+        "NPCFamily": 103,
+        "Flags": 277352961,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 14042
+          },
+          {
+            "slot": 2,
+            "id": 9616
+          },
+          {
+            "slot": 3,
+            "id": 85940
+          },
+          {
+            "slot": 4,
+            "id": 265624
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 40171
+          }
+        ],
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6125,
+      "scrape": "20261111_Cattywompus",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "SORB"
+  },
+  "SOSM": {
+    "Templates": [
+      {
+        "Name": "Shenna Marone",
+        "Level": 230,
+        "Health": 161488,
+        "Side": 0,
+        "Breed": 1,
+        "MonsterData": 26080,
+        "Scale": 127,
+        "Mesh": 17921,
+        "HeadMesh": 40637,
+        "MonsterTexture": 0,
+        "NPCFamily": 103,
+        "Flags": 277352961,
+        "Textures": [
+          {
+            "slot": 1,
+            "id": 247938
+          },
+          {
+            "slot": 2,
+            "id": 247999
+          },
+          {
+            "slot": 3,
+            "id": 247892
+          },
+          {
+            "slot": 4,
+            "id": 248047
+          }
+        ],
+        "Meshes": [
+          {
+            "position": 0,
+            "id": 20091
+          },
+          {
+            "position": 0,
+            "id": 40637
+          }
+        ],
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6125,
+      "scrape": "20261111_Cattywompus",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "SOSM"
+  },
+  "SOAD": {
+    "Templates": [
+      {
+        "Name": "Alien Defense Drone",
+        "Level": 230,
+        "Health": 1346,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253588,
+        "Scale": 127,
+        "Mesh": 253423,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 999,
+        "Flags": 268964353,
+        "BossTriggers": [
+          {
+            "On": "FirstAggro",
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Count": 2,
+                "Hash": "SOHG",
+                "Note": "Spaced Out wave: Hive Guards after Defense Drone (AO-Universe Version 2)"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6125,
+      "scrape": "20261111_Cattywompus",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "SOAD"
+  },
+  "SOHG": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Hive Guard",
+        "Level": 230,
+        "Health": 81869,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 253920,
+        "Scale": 127,
+        "Mesh": 253415,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "BossTriggers": [
+          {
+            "On": "Death",
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Count": 2,
+                "Hash": "SOHM",
+                "Note": "Spaced Out wave: Hive Medics after Guard"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6125,
+      "scrape": "20261111_Cattywompus",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "SOHG"
+  },
+  "SOHM": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Hive Medic",
+        "Level": 230,
+        "Health": 72772,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251776,
+        "Scale": 50,
+        "Mesh": 247383,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "BossTriggers": [
+          {
+            "On": "Death",
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Count": 2,
+                "Hash": "SOHT",
+                "Note": "Spaced Out wave: Hive Technicians after Medic"
+              }
+            ]
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "KYRO",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6125,
+      "scrape": "20261111_Cattywompus",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "SOHM"
+  },
+  "SOHT": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Hive Technician",
+        "Level": 231,
+        "Health": 92417,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 251785,
+        "Scale": 90,
+        "Mesh": 246942,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "BossTriggers": [
+          {
+            "On": "Death",
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Count": 1,
+                "Hash": "SOHW",
+                "Note": "Spaced Out wave: Hive Warden after Technician"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6125,
+      "scrape": "20261111_Cattywompus",
+      "note": "Appearance from scrape. Loot not invented unless guide-filled."
+    },
+    "Hash": "SOHT"
+  },
+  "SOHW": {
+    "Templates": [
+      {
+        "Name": "Kyr'Ozch Hive Warden",
+        "Level": 233,
+        "Health": 95321,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 276976,
+        "Scale": 200,
+        "Mesh": 254291,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "PULS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6125,
+      "scrape": "20261111_Cattywompus",
+      "note": "Appearance and captured loot (single-run membership, Chance 100) unless guide-filled."
+    },
+    "Hash": "SOHW"
+  },
+  "SOXP": {
+    "Templates": [
+      {
+        "Name": "Activated Platform",
+        "Level": 1,
+        "Health": 1,
+        "Side": 0,
+        "Breed": 0,
+        "MonsterData": 0,
+        "Scale": 100,
+        "Mesh": 200990,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 0,
+        "Flags": -2146957823,
+        "Features": [
+          "NoCombat"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "capture",
+      "playfield": 6125,
+      "scrape": "20261111_Cattywompus",
+      "note": "Escape platform for Spaced Out after Pulsing Clump turn-in."
+    },
+    "Hash": "SOXP"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "Notes": "Activated Platform COL SPHERE on PF 6125. Talk-teleport back to Sergio's Newland spot after Pulsing Clump turn-in. Mesh-only dynel uses hash SOXP.",
+  "Npcs": [
+    "SOXP"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "leave": {
+      "Text": "Stand on the platform and leave.",
+      "Goto": "leave",
+      "Source": "filler"
+    },
+    "stay": {
+      "Text": "Stay aboard.",
+      "Goto": "stay",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "The platform hums with alien power.",
+      "Source": "filler",
+      "Replies": [
+        "leave",
+        "stay"
+      ]
+    },
+    "leave": {
+      "Text": "{teleport 567 1155.000 36.010 295.000}{close}",
+      "Source": "filler"
+    },
+    "stay": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  }
+}

@@ -135,7 +135,7 @@
       "Status": "Live",
       "Track": "",
       "MaxPerWindow": 1,
-      "WaypointText": "Alien Agency contract (existing AI missions plus Place the Bomb).",
+      "WaypointText": "Alien Agency contract (existing AI missions plus Place the Bomb and Spaced Out).",
       "Roll": [
         {
           "MinLevel": 25,
@@ -166,9 +166,14 @@
           "MinLevel": 1,
           "MaxLevel": 220,
           "QuestHash": "AIPB"
+        },
+        {
+          "MinLevel": 1,
+          "MaxLevel": 220,
+          "QuestHash": "AISO"
         }
       ],
-      "Note": "Reuses existing Alien Invasion quests with Randy level gates (AIWP 25-49, AIBG 75-100, AILP 75-99, AICC all, AIPD 200-220). Empty Track = no lock-out. Missions with no source data are listed in alien-pande-fixes-20261109/GAPS.md. Place the Bomb (AIPB) added from 2026-11-10 Cattywompus scrape; all levels."
+      "Note": "Reuses existing Alien Invasion quests with Randy level gates (AIWP 25-49, AIBG 75-100, AILP 75-99, AICC all, AIPD 200-220). Empty Track = no lock-out. Place the Bomb (AIPB) from 2026-11-10 scrape. Spaced Out (AISO) from 2026-11-11 Cattywompus capture (Newland Sergio -> PF 6125 Pulsing Clump -> AIPR). Do not change AIPR 25% alien-bar payout."
     },
     {
       "Hash": "PVBS",

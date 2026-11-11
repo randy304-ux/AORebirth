@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "recordType": 1000014,
+  "playfieldId": 567,
+  "source": "scrape-spacedout-20261111-Cattywompus",
+  "spawns": [
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "SOSZ",
+      "manifestHash": 0,
+      "minLevel": 70,
+      "maxLevel": 70,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 300,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 32,
+      "angleW": 1,
+      "position": [
+        1154.438,
+        36.01,
+        295.287
+      ],
+      "radius": 1,
+      "additionalPoints": []
+    }
+  ]
+}
