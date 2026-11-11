@@ -64,12 +64,16 @@ namespace ZoneEngine_New.Core.Ai
             PatrolWaypoints = Array.Empty<Vector3>();
 
             var blackboard = new Blackboard();
-            _tree = new NpcBehaviourTree(new BehaviourRoot(blackboard), this, profile);
+            _tree = profile.PlayerBot
+                ? new PlayerBotBehaviourTree(new BehaviourRoot(blackboard), this)
+                : new NpcBehaviourTree(new BehaviourRoot(blackboard), this, profile);
             _tree.SetupTree();
             _tree.Enable();
             _nanos = new NpcNanoCaster(this);
             _isEngageable = IsEngageable;
             _thinkElapsed = ThinkPhase(npc);
+            if (profile.PlayerBot)
+                PlayerBot = new PlayerBotState();
         }
 
         /// <summary>A summoned pet's brain: the pet tree instead of the roaming-NPC one, and no home to leash to.</summary>
@@ -110,6 +114,9 @@ namespace ZoneEngine_New.Core.Ai
 
         /// <summary>The pet state when this is a summoned pet's brain.</summary>
         public Pets.PetController? Pet { get; }
+
+        /// <summary>Starter playerbot loop state when this brain was created with <see cref="NpcAiProfiles.PlayerBot"/>.</summary>
+        public PlayerBotState? PlayerBot { get; private set; }
 
         public static NpcBrain CreatePet(NpcCharacter npc, Pets.PetController pet)
         {
