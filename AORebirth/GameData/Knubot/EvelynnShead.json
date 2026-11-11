@@ -1,0 +1,70 @@
+{
+  "Notes": "Lab Assistant Evelynn Shead (BMES). T.I.M. bonus mission. source=filler from AO-Universe.",
+  "Npcs": [
+    "BMES"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasQuest BM0F"
+      ],
+      "Say": "waiting"
+    },
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "help": {
+      "Text": "I can shut down T.I.M. for you.",
+      "Goto": "help",
+      "Source": "filler"
+    },
+    "done": {
+      "Text": "T.I.M. is destroyed.",
+      "Goto": "done",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "That disposal device they call T.I.M. is out of control. Can you shut it off?",
+      "Source": "filler",
+      "Replies": [
+        "help",
+        "bye"
+      ]
+    },
+    "help": {
+      "Text": "Thank you. Find T.I.M. past the lab wing and destroy it.{givequest BM0F}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "waiting": {
+      "Text": "Is T.I.M. down yet?",
+      "Source": "filler",
+      "Replies": [
+        "done",
+        "bye"
+      ]
+    },
+    "done": {
+      "Text": "Finally. Here is your pay for that mess.{completequest BM0F}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  }
+}

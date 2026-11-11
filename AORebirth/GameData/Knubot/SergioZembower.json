@@ -1,0 +1,94 @@
+{
+  "Notes": "Sergio Zembower (SOSZ), Newland. Spaced Out abduction start. Dialog captured 2026-11-11 17:14 ET Cattywompus; teleport into PF 6125 mirrors live Uh-oh abduction.",
+  "Npcs": [
+    "SOSZ"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasQuest AISO"
+      ],
+      "Say": "hello"
+    },
+    {
+      "Say": "idle"
+    }
+  ],
+  "Replies": {
+    "abducted": {
+      "Text": "I hear you've been abducted by aliens?",
+      "Goto": "story",
+      "Source": "captured"
+    },
+    "then": {
+      "Text": "So, after they, beamed... You up. What happened then?",
+      "Goto": "then",
+      "Source": "captured"
+    },
+    "ship": {
+      "Text": "What kind of ship was it?",
+      "Goto": "ship",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "idle": {
+      "Text": "I can't believe I paid credits for this crap...",
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "hello": {
+      "Text": [
+        "I can't believe I paid credits for this crap...",
+        "He holds up something metallic shaped like a hat."
+      ],
+      "Source": "captured",
+      "Replies": [
+        "abducted",
+        "bye"
+      ]
+    },
+    "story": {
+      "Text": [
+        "Hard to believe, ain't it? If it weren't for the fact that I'm not INSANE... I'd have a diffcult time believing it myself.",
+        "I don't have any proof or nothing... My doctor says this rash is just common rust allergy, but I don't know...",
+        "He scratches his body repeatedly"
+      ],
+      "Source": "captured",
+      "Replies": [
+        "then",
+        "ship",
+        "bye"
+      ]
+    },
+    "then": {
+      "Text": [
+        "He laughs laconically",
+        "You don't believe me. No... Why would you.",
+        "Why would anyone...",
+        "He looks up at the sky",
+        "I think you're going to find out soon enough.{completequest AISO}{givequest AISP}{teleport 6125 199.087 1.045 136.500}"
+      ],
+      "Source": "captured"
+    },
+    "ship": {
+      "Text": "It was dark metal, hovering quiet as death. Ask me again after you've seen it yourself.",
+      "Source": "filler",
+      "Replies": [
+        "then",
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "captured"
+    }
+  }
+}

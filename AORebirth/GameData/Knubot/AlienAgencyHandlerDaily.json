@@ -1,5 +1,5 @@
 {
-  "Notes": "Alien Agency Handler (Rome Blue, hash AGAX). 2026-11-10: dialog captured through 'If you say so.' and the Place the Bomb turn-in ('Back already?' / 'Mission complete' / 'Thank you very much for your service...'). Requires the Freelancers Inc. contract (quest AGCT). Solo -> {givedaily AGAX} (roll AIWP/AIBG/AILP/AICC/AIPD/AIPB, Track empty = no 18-hour lock-out). Return step AIPR is completed only by Mission complete (its TargetNpc points at unused hash AIPZ so targeting the Handler does not auto-reward). The 'with friends' branch has no team mission data.",
+  "Notes": "Alien Agency Handler (Rome Blue, hash AGAX). 2026-11-10: dialog captured through 'If you say so.' and the Place the Bomb turn-in. 2026-11-11: Cattywompus Spaced Out solo daily captured (Sergio Newland -> ship trap 6125 -> Pulsing Clump to Shenna -> Mission complete). Requires Freelancers Inc. contract (AGCT). Solo -> {givedaily AGAX} (roll AIWP/AIBG/AILP/AICC/AIPD/AIPB/AISO). Return step AIPR keeps AlienXpPercent 25. Team branch still has no data.",
   "Npcs": [
     "AGAX",
     "ddogs-agency-alien"
@@ -19,7 +19,7 @@
     },
     {
       "If": [
-        "HasAnyQuest AIWP,AIBG,AILP,AICC,AIPD,AIPB"
+        "HasAnyQuest AIWP,AIBG,AILP,AICC,AIPD,AIPB,AISO,AISP"
       ],
       "Say": "assigned"
     },
@@ -117,7 +117,7 @@
       ]
     },
     "complete": {
-      "Text": "Thank you very much for your service. Here is your reward and don't forget to come back again tomorrow.{completequest AIPR}{completequest AIPB}{completequest AIWP}{completequest AIBG}{completequest AILP}{completequest AICC}{completequest AIPD}",
+      "Text": "Thank you very much for your service. Here is your reward and don't forget to come back again tomorrow.{completequest AIPR}{completequest AIPB}{completequest AIWP}{completequest AIBG}{completequest AILP}{completequest AICC}{completequest AIPD}{completequest AISO}{completequest AISP}",
       "Source": "captured",
       "Replies": [
         "bye"

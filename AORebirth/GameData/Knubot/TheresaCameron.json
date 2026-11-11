@@ -1,0 +1,49 @@
+{
+  "Notes": "Data Analyst Theresa Cameron (BMTC). Escort not engine-authored as a pathing escort; talking completes the hangar step and grants Encrypted Datacube stand-in for decryption. source=filler.",
+  "Npcs": [
+    "BMTC"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasQuest BM07"
+      ],
+      "Say": "help"
+    },
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "rescue": {
+      "Text": "I'm here to get you to the emergency exit.",
+      "Goto": "rescue",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Please... keep your voice down.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "help": {
+      "Text": "You found me. Take this Encrypted Datacube — use your Encryption Key on it, then get the Decrypted Datacube to Dr. Lincoln.{completequest BM07}{givequest BM08}{spawn DCDC 1}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  }
+}

@@ -1,0 +1,424 @@
+{
+  "Notes": "Dr. Hercules Lincoln (OIME), Outpost 10-3 Omni Biomare chain. Dialogue source=filler from AO-Universe Biomare Foremans guide (Omni side only). Clan Ace Starr skipped.",
+  "Npcs": [
+    "OIME"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasQuest BM06"
+      ],
+      "Say": "report"
+    },
+    {
+      "If": [
+        "HasQuest BM08"
+      ],
+      "Say": "datacube"
+    },
+    {
+      "If": [
+        "HasQuest BM09"
+      ],
+      "Say": "cardiac"
+    },
+    {
+      "If": [
+        "HasQuest BM0A"
+      ],
+      "Say": "pulmonary"
+    },
+    {
+      "If": [
+        "HasQuest BM0B"
+      ],
+      "Say": "liver"
+    },
+    {
+      "If": [
+        "HasQuest BM0C"
+      ],
+      "Say": "hacking"
+    },
+    {
+      "If": [
+        "HasQuest BM0E"
+      ],
+      "Say": "director_card"
+    },
+    {
+      "If": [
+        "HasCompletedQuest BM06",
+        "!HasQuest BM07",
+        "!HasCompletedQuest BM07"
+      ],
+      "Say": "escort_offer"
+    },
+    {
+      "If": [
+        "HasCompletedQuest BM08",
+        "!HasQuest BM09",
+        "!HasCompletedQuest BM09"
+      ],
+      "Say": "tissue_offer"
+    },
+    {
+      "If": [
+        "HasCompletedQuest BM0B",
+        "!HasQuest BM0C",
+        "!HasCompletedQuest BM0C"
+      ],
+      "Say": "hack_offer"
+    },
+    {
+      "If": [
+        "HasCompletedQuest BM0C",
+        "!HasQuest BM0D",
+        "!HasCompletedQuest BM0D"
+      ],
+      "Say": "director_offer"
+    },
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "start": {
+      "Text": "I'm ready to help Omni-Tek investigate Biomare.",
+      "Goto": "start",
+      "Source": "filler"
+    },
+    "hand_report": {
+      "Text": "Here is Linda's weekly progress report.",
+      "Goto": "hand_report",
+      "Source": "filler"
+    },
+    "hand_cube": {
+      "Text": "Here is the Decrypted Datacube.",
+      "Goto": "hand_cube",
+      "Source": "filler"
+    },
+    "hand_cardiac": {
+      "Text": "Here is a Cardiac Tissue Sample.",
+      "Goto": "hand_cardiac",
+      "Source": "filler"
+    },
+    "hand_pulm": {
+      "Text": "Here is a Pulmonary Tissue Sample.",
+      "Goto": "hand_pulm",
+      "Source": "filler"
+    },
+    "hand_liver": {
+      "Text": "Here is a Liver Tissue Sample.",
+      "Goto": "hand_liver",
+      "Source": "filler"
+    },
+    "hand_data": {
+      "Text": "Here is the Sensitive Data.",
+      "Goto": "hand_data",
+      "Source": "filler"
+    },
+    "hand_dir": {
+      "Text": "Here is the Director's Identification Card.",
+      "Goto": "hand_dir",
+      "Source": "filler"
+    },
+    "accept_escort": {
+      "Text": "I'll rescue the analyst.",
+      "Goto": "accept_escort",
+      "Source": "filler"
+    },
+    "accept_tissue": {
+      "Text": "I'll gather the tissue samples.",
+      "Goto": "accept_tissue",
+      "Source": "filler"
+    },
+    "accept_hack": {
+      "Text": "I'll hack the laboratory terminals.",
+      "Goto": "accept_hack",
+      "Source": "filler"
+    },
+    "accept_dir": {
+      "Text": "I'll deal with the Lab Director.",
+      "Goto": "accept_dir",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Omni-Tek needs a courier inside Biomare. Deliver this Systems Monthly to Efficiency Expert Linda Osmos and bring back her weekly progress report.",
+      "Source": "filler",
+      "Replies": [
+        "start",
+        "bye"
+      ]
+    },
+    "start": {
+      "Text": "Good. Take this periodical and find Linda Osmos inside Biomare.{givequest BM01}{spawn SYSM 1}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "report": {
+      "Text": "Do you have Linda's report?",
+      "Source": "filler",
+      "Replies": [
+        "hand_report",
+        "bye"
+      ]
+    },
+    "hand_report": {
+      "Text": "Excellent. Next problem: an analyst is hiding in the hangar. Take this Encryption Key and get her out.{completequest BM06}{givequest BM07}{spawn ENCK 1}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "escort_offer": {
+      "Text": "We still need that analyst extracted from the hangar.",
+      "Source": "filler",
+      "Replies": [
+        "accept_escort",
+        "bye"
+      ]
+    },
+    "accept_escort": {
+      "Text": "Find Theresa Cameron and get her to the emergency exit.{givequest BM07}{spawn ENCK 1}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "datacube": {
+      "Text": "Do you have the Decrypted Datacube?",
+      "Source": "filler",
+      "Replies": [
+        "hand_cube",
+        "bye"
+      ]
+    },
+    "hand_cube": {
+      "Text": "Good work. Now I need tissue samples from the mutants.{completequest BM08}{givequest BM09}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "tissue_offer": {
+      "Text": "I still need those mutant tissue samples.",
+      "Source": "filler",
+      "Replies": [
+        "accept_tissue",
+        "bye"
+      ]
+    },
+    "accept_tissue": {
+      "Text": "Cardiac first — Shadow Mutants drop them.{givequest BM09}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "cardiac": {
+      "Text": "Cardiac sample?",
+      "Source": "filler",
+      "Replies": [
+        "hand_cardiac",
+        "bye"
+      ]
+    },
+    "hand_cardiac": {
+      "Text": "Accepted. Next: Pulmonary Tissue from Alpha Bio Constructs.{completequest BM09}{givequest BM0A}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "pulmonary": {
+      "Text": "Pulmonary sample?",
+      "Source": "filler",
+      "Replies": [
+        "hand_pulm",
+        "bye"
+      ]
+    },
+    "hand_pulm": {
+      "Text": "Accepted. Next: Liver Tissue from Chemical Vindicators.{completequest BM0A}{givequest BM0B}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "liver": {
+      "Text": "Liver sample?",
+      "Source": "filler",
+      "Replies": [
+        "hand_liver",
+        "bye"
+      ]
+    },
+    "hand_liver": {
+      "Text": "Accepted. Now hack the lab terminals for Sensitive Data.{completequest BM0B}{givequest BM0C}{spawn HPRO 1}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "hack_offer": {
+      "Text": "The laboratory computers still need hacking.",
+      "Source": "filler",
+      "Replies": [
+        "accept_hack",
+        "bye"
+      ]
+    },
+    "accept_hack": {
+      "Text": "Use these protocols until you get green Sensitive Data.{givequest BM0C}{spawn HPRO 1}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "hacking": {
+      "Text": "Sensitive Data?",
+      "Source": "filler",
+      "Replies": [
+        "hand_data",
+        "bye"
+      ]
+    },
+    "hand_data": {
+      "Text": "Perfect. Last job: kill the Lab Director and bring his ID card.{completequest BM0C}{givequest BM0D}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "director_offer": {
+      "Text": "The Lab Director still needs to be brought in.",
+      "Source": "filler",
+      "Replies": [
+        "accept_dir",
+        "bye"
+      ]
+    },
+    "accept_dir": {
+      "Text": "Find him in the laboratory wing and end his run.{givequest BM0D}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "director_card": {
+      "Text": "The Director's card?",
+      "Source": "filler",
+      "Replies": [
+        "hand_dir",
+        "bye"
+      ]
+    },
+    "hand_dir": {
+      "Text": "Outstanding. Wear this Collar of Amplification with Omni pride.{completequest BM0E}{spawn COLR 1}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "report": {
+      "If": [
+        "HasQuest BM06"
+      ],
+      "Items": [
+        {
+          "Hash": "WPRP",
+          "Count": 1
+        }
+      ],
+      "Goto": "hand_report"
+    },
+    "cube": {
+      "If": [
+        "HasQuest BM08"
+      ],
+      "Items": [
+        {
+          "Hash": "DCDC",
+          "Count": 1
+        }
+      ],
+      "Goto": "hand_cube"
+    },
+    "cardiac": {
+      "If": [
+        "HasQuest BM09"
+      ],
+      "Items": [
+        {
+          "Hash": "CTIS",
+          "Count": 1
+        }
+      ],
+      "Goto": "hand_cardiac"
+    },
+    "pulm": {
+      "If": [
+        "HasQuest BM0A"
+      ],
+      "Items": [
+        {
+          "Hash": "PTIS",
+          "Count": 1
+        }
+      ],
+      "Goto": "hand_pulm"
+    },
+    "liver": {
+      "If": [
+        "HasQuest BM0B"
+      ],
+      "Items": [
+        {
+          "Hash": "LTIS",
+          "Count": 1
+        }
+      ],
+      "Goto": "hand_liver"
+    },
+    "sens": {
+      "If": [
+        "HasQuest BM0C"
+      ],
+      "Items": [
+        {
+          "Hash": "SENS",
+          "Count": 1
+        }
+      ],
+      "Goto": "hand_data"
+    },
+    "dir": {
+      "If": [
+        "HasQuest BM0E"
+      ],
+      "Items": [
+        {
+          "Hash": "DIRC",
+          "Count": 1
+        }
+      ],
+      "Goto": "hand_dir"
+    }
+  }
+}

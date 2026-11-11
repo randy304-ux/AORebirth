@@ -1,0 +1,75 @@
+{
+  "Notes": "Roberto Belote (SORB). Alternate Pulsing Clump turn-in per AO-Universe Spaced Out. Filler dialogue; same AISP->AIPR handoff as Shenna.",
+  "Npcs": [
+    "SORB"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasQuest AISP"
+      ],
+      "Say": "hello"
+    },
+    {
+      "Say": "idle"
+    }
+  ],
+  "Replies": {
+    "found": {
+      "Text": "I found something that may help us.",
+      "Goto": "found",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "idle": {
+      "Text": "Stay quiet. They hear everything.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "hello": {
+      "Text": "If you've got whatever keeps this place running, hand it over.",
+      "Source": "filler",
+      "Replies": [
+        "found",
+        "bye"
+      ]
+    },
+    "found": {
+      "Text": "Show me.{opentrade}",
+      "Source": "filler"
+    },
+    "thanks": {
+      "Text": "That'll do. Hit the platform and run.{completequest AISP}{givequest AIPR}",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "clump": {
+      "If": [
+        "HasQuest AISP"
+      ],
+      "Items": [
+        {
+          "Hash": "PUCL",
+          "Count": 1
+        }
+      ],
+      "Goto": "thanks"
+    }
+  }
+}

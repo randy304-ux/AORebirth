@@ -1,0 +1,139 @@
+{
+  "Notes": "Shenna Marone (SOSM) on Alien ship trap PF 6125. Dialog captured 2026-11-11 17:17-17:18 ET. Pulsing Clump turn-in completes Spaced Out escape step and assigns AIPR return (25% alien bar unchanged).",
+  "Npcs": [
+    "SOSM"
+  ],
+  "Openers": [
+    {
+      "If": [
+        "HasQuest AISP"
+      ],
+      "Say": "hello"
+    },
+    {
+      "Say": "mad"
+    }
+  ],
+  "Replies": {
+    "place": {
+      "Text": "What is this place?",
+      "Goto": "place",
+      "Source": "captured"
+    },
+    "where": {
+      "Text": "Where are we?",
+      "Goto": "where",
+      "Source": "filler"
+    },
+    "out": {
+      "Text": "How do we get out of here?",
+      "Goto": "out",
+      "Source": "filler"
+    },
+    "found": {
+      "Text": "I found something that may help us.",
+      "Goto": "found",
+      "Source": "captured"
+    },
+    "who": {
+      "Text": "Who are you?",
+      "Goto": "who",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "captured"
+    }
+  },
+  "Lines": {
+    "mad": {
+      "Text": [
+        "The woman looks at you blankly.",
+        "I think I'm going mad..."
+      ],
+      "Source": "captured",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "hello": {
+      "Text": [
+        "The woman looks at you blankly.",
+        "I think I'm going mad..."
+      ],
+      "Source": "captured",
+      "Replies": [
+        "place",
+        "where",
+        "out",
+        "found",
+        "bye"
+      ]
+    },
+    "place": {
+      "Text": "Some kind of ship... they took us. Please, find a way out.",
+      "Source": "filler",
+      "Replies": [
+        "found",
+        "bye"
+      ]
+    },
+    "where": {
+      "Text": "I don't know. Above Rubi-Ka somewhere. It feels wrong.",
+      "Source": "filler",
+      "Replies": [
+        "found",
+        "bye"
+      ]
+    },
+    "out": {
+      "Text": "If you can find whatever powers their cages, maybe we can leave.",
+      "Source": "filler",
+      "Replies": [
+        "found",
+        "bye"
+      ]
+    },
+    "found": {
+      "Text": [
+        "She streches her hand out to you.",
+        "What is it? Let me see it!{opentrade}"
+      ],
+      "Source": "captured"
+    },
+    "thanks": {
+      "Text": "Thank you, thank you so much! Stand on the platform and get out of here!{completequest AISP}{givequest AIPR}",
+      "Source": "captured",
+      "Replies": [
+        "who",
+        "bye"
+      ]
+    },
+    "who": {
+      "Text": "Shenna. Just... get us home.",
+      "Source": "filler",
+      "Replies": [
+        "bye"
+      ]
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "captured"
+    }
+  },
+  "Trades": {
+    "clump": {
+      "If": [
+        "HasQuest AISP"
+      ],
+      "Items": [
+        {
+          "Hash": "PUCL",
+          "Count": 1
+        }
+      ],
+      "Goto": "thanks"
+    }
+  }
+}

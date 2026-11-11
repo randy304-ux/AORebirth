@@ -1,0 +1,56 @@
+{
+  "Notes": "Containment Unit System Droid (BMCS). Recapture Beacon trade for SD Power Core. source=filler from AO-Universe Recapture Beacon section.",
+  "Npcs": [
+    "BMCS"
+  ],
+  "Openers": [
+    {
+      "Say": "hello"
+    }
+  ],
+  "Replies": {
+    "core": {
+      "Text": "I have an SD Power Core for you.",
+      "Goto": "core",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "Goodbye",
+      "Goto": "bye",
+      "Source": "filler"
+    }
+  },
+  "Lines": {
+    "hello": {
+      "Text": "Containment systems offline. Insert SD Power Core to proceed.",
+      "Source": "filler",
+      "Replies": [
+        "core",
+        "bye"
+      ]
+    },
+    "core": {
+      "Text": "Power restored. Containment breaches opening — survive and claim a Recapture Beacon.{givequest BM0H}{opentrade}",
+      "Source": "filler"
+    },
+    "powered": {
+      "Text": "Beacon protocols unlocked.{completequest BM0H}{spawn RCBE 1}{close}",
+      "Source": "filler"
+    },
+    "bye": {
+      "Text": "{close}",
+      "Source": "filler"
+    }
+  },
+  "Trades": {
+    "power": {
+      "Items": [
+        {
+          "Hash": "SDPC",
+          "Count": 1
+        }
+      ],
+      "Goto": "powered"
+    }
+  }
+}
