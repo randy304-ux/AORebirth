@@ -143,6 +143,10 @@ namespace ZoneEngine_New.Core.Playfield
 
             ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("pf.services", id);
             _serviceProvider = BuildServices().BuildServiceProvider();
+            // Fail fast on the real playfield container: SpawnGroupService must resolve here.
+            // Playfield registers IGameData (not GameDataStore); a ctor dependency on the
+            // concrete type would only show up later as a per-tick heartbeat exception.
+            _serviceProvider.GetRequiredService<SpawnGroupService>();
             _dynelRegistry = _serviceProvider.GetRequiredService<DynelRegistry>();
             ZoneEngine_New.Core.Metrics.TickStallWatch.Stage("pf.hashspawns", id);
             _serviceProvider.GetRequiredService<HashSpawnSystem>().Initialize(

@@ -219,6 +219,14 @@ namespace ZoneEngine_New.Core.GameData
             destinationInstance = 0;
             return false;
         }
+
+        /// <summary>
+        /// Named, timed spawn sequences from SpawnGroups.json (Sector 35 / Sector 42 encounters).
+        /// Empty when the file is missing. Playfield containers register <see cref="IGameData"/>,
+        /// not the GameDataStore concrete type, so services must depend on IGameData and use this.
+        /// </summary>
+        ZoneEngine_New.Core.Playfield.SpawnGroupCatalog SpawnGroups
+            => ZoneEngine_New.Core.Playfield.SpawnGroupCatalog.Load(RootPath);
     }
 }
 

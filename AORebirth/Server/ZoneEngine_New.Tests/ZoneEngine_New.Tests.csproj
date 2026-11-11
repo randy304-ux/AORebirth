@@ -70,4 +70,10 @@
     <Compile Remove="@(Compile)" />
     <Compile Include="MishrollTargetingFeeCalculatorTests.cs" />
   </ItemGroup>
+
+  <ItemGroup Condition="'$(SpawnGroupServiceFocusedTests)' == 'true'">
+    <Compile Remove="@(Compile)" />
+    <Compile Include="TestDoubles.cs" />
+    <Compile Include="SpawnGroupServiceTests.cs" />
+  </ItemGroup>
 </Project>

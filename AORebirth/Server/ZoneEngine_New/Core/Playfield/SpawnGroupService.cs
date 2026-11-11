@@ -11,12 +11,12 @@ using ZoneEngine_New.Core.Logging;
 public sealed class SpawnGroupService
 {
     readonly Playfield _playfield;
-    readonly GameData.GameDataStore _gameData;
+    readonly GameData.IGameData _gameData;
     readonly IZoneLogger _logger;
     readonly object _sync = new();
     RunningGroup? _running;
 
-    public SpawnGroupService(Playfield playfield, GameData.GameDataStore gameData, IZoneLogger logger)
+    public SpawnGroupService(Playfield playfield, GameData.IGameData gameData, IZoneLogger logger)
     {
         _playfield = playfield;
         _gameData = gameData;
