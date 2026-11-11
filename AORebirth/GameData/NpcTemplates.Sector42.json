@@ -1731,5 +1731,264 @@
       "captured": "2026-11-10 15:29-16:19 ET"
     },
     "Hash": "S42X"
+  },
+  "S42AC": {
+    "Templates": [
+      {
+        "Name": "Artillery Commander",
+        "Level": 300,
+        "Health": 6533334,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 257313,
+        "Scale": 150,
+        "Mesh": 257312,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353,
+        "BossTriggers": [
+          {
+            "On": "HealthBelow",
+            "Pct": 90,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "S42SK",
+                "Count": 2,
+                "Radius": 20,
+                "Level": 300
+              }
+            ]
+          },
+          {
+            "On": "HealthBelow",
+            "Pct": 80,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "S42SK",
+                "Count": 4,
+                "Radius": 20,
+                "Level": 300
+              }
+            ]
+          },
+          {
+            "On": "HealthBelow",
+            "Pct": 70,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "S42SK",
+                "Count": 6,
+                "Radius": 20,
+                "Level": 300
+              }
+            ]
+          },
+          {
+            "On": "HealthBelow",
+            "Pct": 60,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "S42SK",
+                "Count": 8,
+                "Radius": 20,
+                "Level": 300
+              }
+            ]
+          },
+          {
+            "On": "HealthBelow",
+            "Pct": 50,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "S42SK",
+                "Count": 10,
+                "Radius": 20,
+                "Level": 300
+              }
+            ]
+          },
+          {
+            "On": "HealthBelow",
+            "Pct": 40,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "S42SK",
+                "Count": 12,
+                "Radius": 20,
+                "Level": 300
+              }
+            ]
+          },
+          {
+            "On": "HealthBelow",
+            "Pct": 30,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "S42SK",
+                "Count": 14,
+                "Radius": 20,
+                "Level": 300
+              }
+            ]
+          },
+          {
+            "On": "HealthBelow",
+            "Pct": 20,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "S42SK",
+                "Count": 16,
+                "Radius": 20,
+                "Level": 300
+              }
+            ]
+          },
+          {
+            "On": "HealthBelow",
+            "Pct": 10,
+            "Actions": [
+              {
+                "Type": "SpawnAdds",
+                "Hash": "S42SK",
+                "Count": 18,
+                "Radius": 20,
+                "Level": 300
+              }
+            ]
+          }
+        ],
+        "Loot": [
+          {
+            "LowId": 262656,
+            "HighId": 262656,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Kyr'Ozch Invasion Plan"
+          },
+          {
+            "LowId": 260422,
+            "HighId": 260422,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Unlearning Device"
+          },
+          {
+            "LowId": 260422,
+            "HighId": 260422,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Unlearning Device"
+          },
+          {
+            "LowId": 260422,
+            "HighId": 260422,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Unlearning Device"
+          },
+          {
+            "LowId": 260422,
+            "HighId": 260422,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Unlearning Device"
+          },
+          {
+            "LowId": 260422,
+            "HighId": 260422,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Unlearning Device"
+          },
+          {
+            "LowId": 275706,
+            "HighId": 275706,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Alien Matrix Alpha Box"
+          },
+          {
+            "LowId": 275706,
+            "HighId": 275706,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Alien Matrix Alpha Box"
+          },
+          {
+            "LowId": 275854,
+            "HighId": 275854,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Alien Matrix Beta Box"
+          },
+          {
+            "LowId": 275854,
+            "HighId": 275854,
+            "MinQl": 1,
+            "MaxQl": 1,
+            "Chance": 100,
+            "Name": "Alien Matrix Beta Box"
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "S42AL",
+            "Repeats": 4,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "source": "guide",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "note": "AO-Universe Sector 42 guide + wiki.aodb.us/wiki/Sector_42. Appearance is a labeled Cha'Khaz stand-in (S42G mesh/monster-data); not captured. HP 6,533,334 is a stand-in equal to the largest first-cycle mini-boss; exact AC HP was not published or captured. Seeker waves: 2 when 10% HP is lost, 4 at 20%, up to 18 at 90% (wiki). Batter Up / Hostile Detected / Target Acquired / Hostile Lock are not implemented (no nano IDs). Loot: guide uniques (Invasion Plan 262656, Unlearning Device 260422 x5, Matrix Alpha 275706 x2, Matrix Beta 275854 x2) plus 4 rolls of assorted family S42AL. Fences unchanged."
+    },
+    "Hash": "S42AC"
+  },
+  "S42SK": {
+    "Templates": [
+      {
+        "Name": "Alien Seeker",
+        "Level": 300,
+        "Health": 400000,
+        "Side": 3,
+        "Breed": 0,
+        "MonsterData": 248109,
+        "Scale": 67,
+        "Mesh": 247255,
+        "HeadMesh": 0,
+        "MonsterTexture": 0,
+        "NPCFamily": 220,
+        "Flags": 268964353
+      }
+    ],
+    "ContentProvenance": {
+      "source": "guide",
+      "playfield": 4370,
+      "scrape": "20261110_Cattywompus",
+      "note": "AO-Universe / wiki Alien Seeker add. Appearance is a labeled Alien Heavy Patroller stand-in (S42A); not captured. Level 300 and HP 400,000 are stand-ins; exact values were not published or captured. Guide: snares work, roots do not; seekers nuke hard. Root immunity is not scripted here."
+    },
+    "Hash": "S42SK"
   }
 }

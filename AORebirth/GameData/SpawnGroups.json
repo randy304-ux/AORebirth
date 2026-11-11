@@ -717,16 +717,13 @@
     ]
   },
   "S42B": {
-    "Name": "Sector 42 first-cycle mini-bosses",
+    "Name": "Sector 42 first cycle and Artillery Commanders",
     "Playfield": 4370,
     "AutoStart": true,
     "ResetTimeoutSeconds": 7200,
     "SuccessDespawnSeconds": 180,
     "SuccessIfDead": [
-      "S42M",
-      "S42S",
-      "S42G",
-      "S42P"
+      "S42AC"
     ],
     "Stages": [
       {
@@ -775,6 +772,87 @@
               560.892
             ],
             "Angle": 350,
+            "MinLevel": 300
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 0,
+        "WaitUntilAllDead": [
+          "S42M",
+          "S42S",
+          "S42G",
+          "S42P"
+        ],
+        "Spawns": [
+          {
+            "hashText": "S42E",
+            "Position": [
+              637.0,
+              10.01,
+              291.0
+            ],
+            "Angle": 272,
+            "MinLevel": 300
+          },
+          {
+            "hashText": "S42N",
+            "Position": [
+              578.0,
+              10.01,
+              621.0
+            ],
+            "Angle": 346,
+            "MinLevel": 300
+          },
+          {
+            "hashText": "S42W",
+            "Position": [
+              150.0,
+              10.01,
+              622.0
+            ],
+            "Angle": 322,
+            "MinLevel": 300
+          }
+        ]
+      },
+      {
+        "DelaySeconds": 0,
+        "WaitUntilAllDead": [
+          "S42E",
+          "S42N",
+          "S42W"
+        ],
+        "Spawns": [
+          {
+            "hashText": "S42AC",
+            "Position": [
+              637.0,
+              10.01,
+              291.0
+            ],
+            "Angle": 272,
+            "MinLevel": 300
+          },
+          {
+            "hashText": "S42AC",
+            "Position": [
+              578.0,
+              10.01,
+              621.0
+            ],
+            "Angle": 346,
+            "MinLevel": 300
+          },
+          {
+            "hashText": "S42AC",
+            "Position": [
+              150.0,
+              10.01,
+              622.0
+            ],
+            "Angle": 322,
             "MinLevel": 300
           }
         ]

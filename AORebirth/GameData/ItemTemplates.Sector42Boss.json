@@ -1,0 +1,66 @@
+{
+  "LVSP": {
+    "Templates": [
+      247147,
+      247147
+    ],
+    "Name": "Spiritual Lead Viralbots"
+  },
+  "LVAR": {
+    "Templates": [
+      247145,
+      247145
+    ],
+    "Name": "Arithmetic Lead Viralbots"
+  },
+  "LVOB": {
+    "Templates": [
+      247143,
+      247143
+    ],
+    "Name": "Observant Lead Viralbots"
+  },
+  "LVSU": {
+    "Templates": [
+      247141,
+      247141
+    ],
+    "Name": "Supple Lead Viralbots"
+  },
+  "LVST": {
+    "Templates": [
+      247139,
+      247139
+    ],
+    "Name": "Strong Lead Viralbots"
+  },
+  "LVEN": {
+    "Templates": [
+      247137,
+      247137
+    ],
+    "Name": "Enduring Lead Viralbots"
+  },
+  "FUBM": {
+    "Templates": [
+      251217,
+      251217
+    ],
+    "Name": "Fused Biotech Material"
+  },
+  "S42AL": {
+    "Children": [
+      "LVSP",
+      "LVAR",
+      "LVOB",
+      "LVSU",
+      "LVST",
+      "LVEN",
+      "FUBM"
+    ],
+    "ContentProvenance": {
+      "source": "guide",
+      "note": "Assorted Artillery Commander pool: six Lead Viralbots plus Fused Biotech Material (item 251217; guide says Fused Biomaterial). Exact typed Kyr'Ozch Bio-Material type list was not specified and is not invented."
+    }
+  }
+}
