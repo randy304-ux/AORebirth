@@ -1,0 +1,27 @@
+Stage-only pack for cursor/zones-s42boss-1110 (from 09e49e0b).
+Do not deploy or restart from this executor run. Parent deploys after "go".
+
+Live dest (when parent deploys):
+  I:\AO\src\AORebirth\GameData
+  (engines: I:\AO\src\AORebirth\Built\Debug\ZoneEngine_New)
+Restart needed: YES (GameData templates, spawn groups, SpawnSkips, new playfield 9070). No engine DLL change in this pack.
+
+Data files to copy (no DLLs):
+
+  AORebirth/GameData/NpcTemplates.InnerSanctum.json
+  AORebirth/GameData/Knubot/ElzekTheConfessor.json
+  AORebirth/GameData/NpcTemplates.CondemnedSubway.json
+  AORebirth/GameData/PlayfieldContent/9070/SpawnsAdd.zoneinflea.json
+  AORebirth/GameData/SpawnSkips.json
+  AORebirth/GameData/NpcTemplates.Sector42.json
+  AORebirth/GameData/SpawnGroups.json
+  AORebirth/GameData/ItemTemplates.Sector42Boss.json
+  AORebirth/GameData/Playfields/9070/   (ENTIRE FOLDER, gitignored, 20 files, ~1.3 MB; extracted from client-ddogs via RDBDataExtractor --tilemap-id 9070)
+
+  docs/gaps/zones-s42boss-1110/*.md     (optional; gaps only)
+
+Do not copy _extract9070 or _stage caches.
+Do not use official build.cmd (it stops live engines).
+Playfields/9070 must be hand-copied; it will not come along with git checkout.
+Fences in Sector 42 are unchanged (moderate contact damage, no instakill).
+No regular-subway entrance was added. Andromeda 655 already has the Condemned Subway door.

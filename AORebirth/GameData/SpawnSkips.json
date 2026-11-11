@@ -1,1592 +1,1602 @@
 {
-    "note":  "Overlap/duplicate removals only. Unmatched hashes are NOT hidden so pink placeholders stay visible. removedPoints drop one Spawns.json point on top of a real NPC; dedupeRadius drops a point whose hash already spawns within that many metres. Generated originally by ddogs/tools/Apply-PlaceholderCleanup.ps1; unmatched hiddenHashes cleared 2026-10-15 so Randy can see missing NPCs.",
-    "dedupeRadius":  0.5,
-    "hiddenHashes":  [
-                         {
-                             "hash":  "SHXT",
-                             "reason":  "Crashed Alien Ship exit talk-to stand-in (8009): the Exit door is a real walk-through door now (AlienShip.cs). 2026-10-30"
-                         },
-                         {
-                             "hash":  "BBOC",
-                             "reason":  "Arete credit card talk-to stand-in: replaced by the real Bank of Rubi-Ka Credit Card world pickup (PlayfieldContent/6553 Pickups). 2026-10-30"
-                         },
-                         {
-                             "hash":  "2CIE",
-                             "reason":  "ambient city citizen placeholder (Rome/Old Athen/West Athens/Andromeda/Borealis); Randy 2026-10-29"
-                         },
-                         {
-                             "hash":  "UNPU",
-                             "reason":  "Uncle Pumpkin-Head placeholders: live scrape shows Uncle Pumpkin-Head on these points; Halloween.json UPH spawns already place them (Borealis/ICC). 2026-10-30"
-                         },
-                         {
-                             "hash":  "CLRE",
-                             "reason":  "Arrival Hall 4604 Clan desk pink (205,161.6): live scrape 2026-10-30 has no NPC there. 2026-10-30"
-                         },
-                         {
-                             "hash":  "OMIM",
-                             "reason":  "Arrival Hall 4604 Omni desk pink (184.7,162.1): live scrape 2026-10-30 has no NPC there. 2026-10-30"
-                         }
-                     ],
-    "removedPoints":  [
-                          {
-                              "playfield":  127,
-                              "hash":  "BQWR",
-                              "position":  [
-                                               254.10004,
-                                               108.601685,
-                                               299.30002
-                                           ],
-                              "reason":  "on top of Basic Quality Weaponsdealer (content, 0.99 m)"
-                          },
-                          {
-                              "playfield":  127,
-                              "hash":  "BQAU",
-                              "position":  [
-                                               229.90002,
-                                               108.601685,
-                                               288.19995
-                                           ],
-                              "reason":  "on top of Basic Quality Armorer (content, 1 m)"
-                          },
-                          {
-                              "playfield":  127,
-                              "hash":  "BTMV",
-                              "position":  [
-                                               210.69666,
-                                               108.601685,
-                                               306.98618
-                                           ],
-                              "reason":  "on top of Basic Tools Merchant (content, 1 m)"
-                          },
-                          {
-                              "playfield":  4311,
-                              "hash":  "YUCH",
-                              "position":  [
-                                               308.2419,
-                                               61.57097,
-                                               1623.6819
-                                           ],
-                              "reason":  "on top of Yuttos Chemicals (content, 0 m)"
-                          },
-                          {
-                              "playfield":  4311,
-                              "hash":  "YUPH",
-                              "position":  [
-                                               311.09064,
-                                               61.600163,
-                                               1612.5253
-                                           ],
-                              "reason":  "on top of Yuttos Pharmaceuticals (content, 0 m)"
-                          },
-                          {
-                              "playfield":  4311,
-                              "hash":  "YTMA",
-                              "position":  [
-                                               319.60663,
-                                               61.600002,
-                                               1609.8859
-                                           ],
-                              "reason":  "on top of Yuttos Manuals (content, 0 m)"
-                          },
-                          {
-                              "playfield":  4311,
-                              "hash":  "YUEL",
-                              "position":  [
-                                               356.1908,
-                                               61.000004,
-                                               1592.1498
-                                           ],
-                              "reason":  "on top of Yuttos Electronics (content, 0 m)"
-                          },
-                          {
-                              "playfield":  4311,
-                              "hash":  "YUTO",
-                              "position":  [
-                                               363.24417,
-                                               61.000004,
-                                               1603.5494
-                                           ],
-                              "reason":  "on top of Yuttos Tools (content, 0 m)"
-                          },
-                          {
-                              "playfield":  4311,
-                              "hash":  "PRYU",
-                              "position":  [
-                                               287.78378,
-                                               107.10419,
-                                               1005.5608
-                                           ],
-                              "reason":  "on top of Prophet Yutt Thrak (content, 0.53 m)"
-                          },
-                          {
-                              "playfield":  4311,
-                              "hash":  "DEBE",
-                              "position":  [
-                                               429.72656,
-                                               104.74102,
-                                               450.0295
-                                           ],
-                              "reason":  "on top of Deep Breath Nine (content, 0 m)"
-                          },
-                          {
-                              "playfield":  4676,
-                              "hash":  "OROF",
-                              "position":  [
-                                               404.23752,
-                                               113.370094,
-                                               440.08286
-                                           ],
-                              "reason":  "on top of Or-Mada of Protection (content, 0.62 m)"
-                          },
-                          {
-                              "playfield":  4676,
-                              "hash":  "SUAA",
-                              "position":  [
-                                               468.73663,
-                                               117.25924,
-                                               495.35242
-                                           ],
-                              "reason":  "on top of Sipius Aban Lux-Wei (content, 0.37 m)"
-                          },
-                          {
-                              "playfield":  4677,
-                              "hash":  "HYUG",
-                              "position":  [
-                                               463.67334,
-                                               33.832256,
-                                               359.511
-                                           ],
-                              "reason":  "on top of Hypnagogic Urga-Lum Thrak (content, 0.65 m)"
-                          },
-                          {
-                              "playfield":  551,
-                              "hash":  "BSMV",
-                              "position":  [
-                                               1379.3834,
-                                               31.581947,
-                                               1379.513
-                                           ],
-                              "reason":  "on top of Hounds Dyna (hash, 0.79 m)"
-                          },
-                          {
-                              "playfield":  551,
-                              "hash":  "BSMB",
-                              "position":  [
-                                               2340.2825,
-                                               32.439632,
-                                               1419.5125
-                                           ],
-                              "reason":  "on top of Blubbags Dyna (hash, 0.56 m)"
-                          },
-                          {
-                              "playfield":  565,
-                              "hash":  "BMMN",
-                              "position":  [
-                                               460.0835,
-                                               27.7654,
-                                               2379.0142
-                                           ],
-                              "reason":  "on top of Leets Dyna (hash, 0.99 m)"
-                          },
-                          {
-                              "playfield":  565,
-                              "hash":  "BOMS",
-                              "position":  [
-                                               1339.9829,
-                                               19.207819,
-                                               2340.0137
-                                           ],
-                              "reason":  "on top of Rhinomen Dyna (hash, 0.02 m)"
-                          },
-                          {
-                              "playfield":  565,
-                              "hash":  "BOMS",
-                              "position":  [
-                                               1700.4841,
-                                               49.629242,
-                                               1579.3118
-                                           ],
-                              "reason":  "on top of Rhinomen Dyna (hash, 0.84 m)"
-                          },
-                          {
-                              "playfield":  570,
-                              "hash":  "BNMW",
-                              "position":  [
-                                               420.38373,
-                                               53.462563,
-                                               1499.3124
-                                           ],
-                              "reason":  "on top of Sandworms Dyna (hash, 0.79 m)"
-                          },
-                          {
-                              "playfield":  570,
-                              "hash":  "BNMS",
-                              "position":  [
-                                               1340.8832,
-                                               35.77124,
-                                               3059.713
-                                           ],
-                              "reason":  "on top of Anuns Dyna (hash, 0.93 m)"
-                          },
-                          {
-                              "playfield":  570,
-                              "hash":  "BMMM",
-                              "position":  [
-                                               1159.2836,
-                                               37.397537,
-                                               1145.613
-                                           ],
-                              "reason":  "on top of Mantis Dyna (hash, 0.94 m)"
-                          },
-                          {
-                              "playfield":  570,
-                              "hash":  "BNMS",
-                              "position":  [
-                                               3060.883,
-                                               65.03456,
-                                               920.31305
-                                           ],
-                              "reason":  "on top of Anuns Dyna (hash, 0.94 m)"
-                          },
-                          {
-                              "playfield":  585,
-                              "hash":  "BMMN",
-                              "position":  [
-                                               1340.2164,
-                                               18.305,
-                                               1899.6045
-                                           ],
-                              "reason":  "on top of Leets Dyna (hash, 0.45 m)"
-                          },
-                          {
-                              "playfield":  590,
-                              "hash":  "BTMN",
-                              "position":  [
-                                               940.61633,
-                                               35.105003,
-                                               1539.7043
-                                           ],
-                              "reason":  "on top of Enigmas Dyna (hash, 0.68 m)"
-                          },
-                          {
-                              "playfield":  605,
-                              "hash":  "BTMN",
-                              "position":  [
-                                               580.21625,
-                                               34.266384,
-                                               1819.2048
-                                           ],
-                              "reason":  "on top of Enigmas Dyna (hash, 0.82 m)"
-                          },
-                          {
-                              "playfield":  605,
-                              "hash":  "BEMJ",
-                              "position":  [
-                                               2500.7163,
-                                               11.1333685,
-                                               2139.3037
-                                           ],
-                              "reason":  "on top of Ninjadroids Dyna (hash, 1 m)"
-                          },
-                          {
-                              "playfield":  6115,
-                              "hash":  "LE75",
-                              "position":  [
-                                               194.94379,
-                                               1.4096003,
-                                               134.5967
-                                           ],
-                              "reason":  "on top of Leet (hash, 0 m)"
-                          },
-                          {
-                              "playfield":  6129,
-                              "hash":  "LE75",
-                              "position":  [
-                                               92.26358,
-                                               1.4096012,
-                                               35.97963
-                                           ],
-                              "reason":  "on top of Leet (hash, 0 m)"
-                          },
-                          {
-                              "playfield":  6129,
-                              "hash":  "LE75",
-                              "position":  [
-                                               92.26358,
-                                               1.4096012,
-                                               35.97963
-                                           ],
-                              "reason":  "on top of Leet (hash, 0 m)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "BMMN",
-                              "position":  [
-                                               1380,
-                                               38.11,
-                                               2700
-                                           ],
-                              "reason":  "on top of Leets Dyna (hash, 0 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "ALGI",
-                              "position":  [
-                                               3520.789,
-                                               5.4993086,
-                                               856.68506
-                                           ],
-                              "reason":  "on top of Alex Gibbs (content, 0.39 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "FLNV",
-                              "position":  [
-                                               3597.959,
-                                               5.498977,
-                                               862.6436
-                                           ],
-                              "reason":  "on top of Flint Novak (content, 0.63 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "SAGO",
-                              "position":  [
-                                               3463.067,
-                                               9.35276,
-                                               880.14777
-                                           ],
-                              "reason":  "on top of Stan Goodman (content, 0.34 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "ICIM",
-                              "position":  [
-                                               3510.7244,
-                                               5.499601,
-                                               826.85376
-                                           ],
-                              "reason":  "on top of ICC Immigration Officer Bill (content, 0.87 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "VRTR",
-                              "position":  [
-                                               3433.954,
-                                               12.31673,
-                                               825.8998
-                                           ],
-                              "reason":  "on top of Vernon Godfray (content, 0.03 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "SAGE",
-                              "position":  [
-                                               3471.2686,
-                                               9.112314,
-                                               840.8822
-                                           ],
-                              "reason":  "on top of Sarah Greene (content, 0.1 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "SPMF",
-                              "position":  [
-                                               3551.0078,
-                                               8.349168,
-                                               832.85345
-                                           ],
-                              "reason":  "on top of Shipping Manifest Terminal (content, 0.03 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "LRTH",
-                              "position":  [
-                                               3369.1414,
-                                               17.4982,
-                                               794.42285
-                                           ],
-                              "reason":  "on top of Lorelei the Bartender (content, 0.18 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "RAOH",
-                              "position":  [
-                                               3430.7615,
-                                               9.401502,
-                                               796.3233
-                                           ],
-                              "reason":  "on top of Dr. Mason (content, 0.93 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "VUHO",
-                              "position":  [
-                                               3369.2393,
-                                               18.156921,
-                                               828.8788
-                                           ],
-                              "reason":  "on top of Vaughn Hammond (content, 0.34 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "DNCI",
-                              "position":  [
-                                               3605.2036,
-                                               8.256823,
-                                               826.882
-                                           ],
-                              "reason":  "on top of Desmond Calitri (content, 0.18 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "ICTA",
-                              "position":  [
-                                               3540.867,
-                                               6.4508204,
-                                               748.3083
-                                           ],
-                              "reason":  "on top of Shady Guy (content, 0.37 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "OFTP",
-                              "position":  [
-                                               3462.5,
-                                               9.363626,
-                                               812.5
-                                           ],
-                              "reason":  "on top of Patrick Sun (content, 0.35 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "VOEQ",
-                              "position":  [
-                                               3443.0793,
-                                               9.235492,
-                                               832.65234
-                                           ],
-                              "reason":  "on top of Antonio Stacklund (content, 0.09 m)"
-                          },
-                          {
-                              "playfield":  7010,
-                              "hash":  "JOFE",
-                              "position":  [
-                                               104.184715,
-                                               2.3636801,
-                                               76.13313
-                                           ],
-                              "reason":  "on top of Scarlett Dalquist (content, 0.18 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "ICTE",
-                              "position":  [
-                                               3442.9375,
-                                               12.276416,
-                                               822.5002
-                                           ],
-                              "reason":  "on top of legacy:CapturedAreteAlexAreaVendorContentProvider:6553:12E77208 (content, 0.01 m)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "JUSO",
-                              "position":  [
-                                               3527.3494,
-                                               5.189701,
-                                               858.1209
-                                           ],
-                              "reason":  "on top of legacy:CapturedAreteAlexAreaVendorContentProvider:6553:12E77209 (content, 0 m)"
-                          },
-                          {
-                              "playfield":  6007,
-                              "hash":  "1TTO",
-                              "position":  [
-                                               248.5,
-                                               6.01,
-                                               189
-                                           ],
-                              "reason":  "on top of Battle Station 10-30 (content)"
-                          },
-                          {
-                              "playfield":  6007,
-                              "hash":  "31TO",
-                              "position":  [
-                                               241,
-                                               6.01,
-                                               196.5
-                                           ],
-                              "reason":  "on top of Battle Station 31-60 (content)"
-                          },
-                          {
-                              "playfield":  6007,
-                              "hash":  "60T1",
-                              "position":  [
-                                               241,
-                                               6.01,
-                                               181.49962
-                                           ],
-                              "reason":  "on top of Battle Station 61-100 (content)"
-                          },
-                          {
-                              "playfield":  6007,
-                              "hash":  "10T1",
-                              "position":  [
-                                               225,
-                                               6.01,
-                                               196.5
-                                           ],
-                              "reason":  "on top of Battle Station 101-150 (content)"
-                          },
-                          {
-                              "playfield":  6007,
-                              "hash":  "15T2",
-                              "position":  [
-                                               217.5,
-                                               6.01,
-                                               189
-                                           ],
-                              "reason":  "on top of Battle Station 151-200 (content)"
-                          },
-                          {
-                              "playfield":  6007,
-                              "hash":  "17TO",
-                              "position":  [
-                                               225,
-                                               6.01,
-                                               181.5
-                                           ],
-                              "reason":  "on top of Battle Station 201-214 (content)"
-                          },
-                          {
-                              "playfield":  6007,
-                              "hash":  "20TO",
-                              "position":  [
-                                               231,
-                                               6.01,
-                                               189.03943
-                                           ],
-                              "reason":  "on top of Battle Station 215-220 (content)"
-                          },
-                          {
-                              "playfield":  6007,
-                              "hash":  "MGOS",
-                              "position":  [
-                                               235,
-                                               6.01,
-                                               189
-                                           ],
-                              "reason":  "orphan pink AAAA in BS queue ring (no content NPC)"
-                          },
-                          {
-                              "playfield":  4683,
-                              "hash":  "CAOU",
-                              "position":  [
-                                               639.1049,
-                                               17.399986,
-                                               431.44244
-                                           ],
-                              "reason":  "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4683,
-                              "hash":  "CROA",
-                              "position":  [
-                                               642.6809,
-                                               17.400116,
-                                               426.38992
-                                           ],
-                              "reason":  "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4683,
-                              "hash":  "CFOR",
-                              "position":  [
-                                               645.89014,
-                                               17.400064,
-                                               415.6473
-                                           ],
-                              "reason":  "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4683,
-                              "hash":  "CGOP",
-                              "position":  [
-                                               645.60333,
-                                               17.400333,
-                                               406.3051
-                                           ],
-                              "reason":  "on top of Craig-Or of Protection (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4683,
-                              "hash":  "CGOM",
-                              "position":  [
-                                               645.7833,
-                                               17.399712,
-                                               398.13083
-                                           ],
-                              "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4686,
-                              "hash":  "CFOU",
-                              "position":  [
-                                               639.1049,
-                                               17.399986,
-                                               431.44244
-                                           ],
-                              "reason":  "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4686,
-                              "hash":  "CAOA",
-                              "position":  [
-                                               642.6809,
-                                               17.400116,
-                                               426.38992
-                                           ],
-                              "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4686,
-                              "hash":  "CPOE",
-                              "position":  [
-                                               645.89014,
-                                               17.400064,
-                                               415.6473
-                                           ],
-                              "reason":  "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4686,
-                              "hash":  "CFOT",
-                              "position":  [
-                                               645.60333,
-                                               17.400333,
-                                               406.3051
-                                           ],
-                              "reason":  "on top of Craig-Or of Protection (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4686,
-                              "hash":  "CGOA",
-                              "position":  [
-                                               645.7833,
-                                               17.399712,
-                                               398.13083
-                                           ],
-                              "reason":  "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4687,
-                              "hash":  "CFOU",
-                              "position":  [
-                                               639.1049,
-                                               17.399986,
-                                               431.44244
-                                           ],
-                              "reason":  "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4687,
-                              "hash":  "CAOA",
-                              "position":  [
-                                               642.6809,
-                                               17.400116,
-                                               426.38992
-                                           ],
-                              "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4687,
-                              "hash":  "CPOE",
-                              "position":  [
-                                               645.89014,
-                                               17.400064,
-                                               415.6473
-                                           ],
-                              "reason":  "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4687,
-                              "hash":  "CFOT",
-                              "position":  [
-                                               645.60333,
-                                               17.400333,
-                                               406.3051
-                                           ],
-                              "reason":  "on top of Craig-Or of Protection (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4687,
-                              "hash":  "CGOA",
-                              "position":  [
-                                               645.7833,
-                                               17.399712,
-                                               398.13083
-                                           ],
-                              "reason":  "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4690,
-                              "hash":  "CIOO",
-                              "position":  [
-                                               639.1049,
-                                               17.399986,
-                                               431.44244
-                                           ],
-                              "reason":  "on top of Craig-Or of Protection (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4690,
-                              "hash":  "CIOU",
-                              "position":  [
-                                               642.6809,
-                                               17.400116,
-                                               426.38992
-                                           ],
-                              "reason":  "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4690,
-                              "hash":  "CIOM",
-                              "position":  [
-                                               645.89014,
-                                               17.400064,
-                                               415.6473
-                                           ],
-                              "reason":  "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4690,
-                              "hash":  "CROM",
-                              "position":  [
-                                               645.60333,
-                                               17.400333,
-                                               406.3051
-                                           ],
-                              "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4690,
-                              "hash":  "CFOE",
-                              "position":  [
-                                               645.7833,
-                                               17.399712,
-                                               398.13083
-                                           ],
-                              "reason":  "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4691,
-                              "hash":  "CIOO",
-                              "position":  [
-                                               639.1049,
-                                               17.399986,
-                                               431.44244
-                                           ],
-                              "reason":  "on top of Craig-Or of Protection (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4691,
-                              "hash":  "CIOU",
-                              "position":  [
-                                               642.6809,
-                                               17.400116,
-                                               426.38992
-                                           ],
-                              "reason":  "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4691,
-                              "hash":  "CIOM",
-                              "position":  [
-                                               645.89014,
-                                               17.400064,
-                                               415.6473
-                                           ],
-                              "reason":  "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4691,
-                              "hash":  "CROM",
-                              "position":  [
-                                               645.60333,
-                                               17.400333,
-                                               406.3051
-                                           ],
-                              "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4691,
-                              "hash":  "CFOE",
-                              "position":  [
-                                               645.7833,
-                                               17.399712,
-                                               398.13083
-                                           ],
-                              "reason":  "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4694,
-                              "hash":  "CPOS",
-                              "position":  [
-                                               639.1049,
-                                               17.399986,
-                                               431.44244
-                                           ],
-                              "reason":  "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4694,
-                              "hash":  "CEOA",
-                              "position":  [
-                                               642.6809,
-                                               17.400116,
-                                               426.38992
-                                           ],
-                              "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4694,
-                              "hash":  "CROS",
-                              "position":  [
-                                               645.89014,
-                                               17.400064,
-                                               415.6473
-                                           ],
-                              "reason":  "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4694,
-                              "hash":  "COOI",
-                              "position":  [
-                                               645.60333,
-                                               17.400333,
-                                               406.3051
-                                           ],
-                              "reason":  "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4694,
-                              "hash":  "CROC",
-                              "position":  [
-                                               645.7833,
-                                               17.399712,
-                                               398.13083
-                                           ],
-                              "reason":  "on top of Craig-Or of Protection (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4695,
-                              "hash":  "CPOS",
-                              "position":  [
-                                               639.1049,
-                                               17.399986,
-                                               431.44244
-                                           ],
-                              "reason":  "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4695,
-                              "hash":  "CEOA",
-                              "position":  [
-                                               642.6809,
-                                               17.400116,
-                                               426.38992
-                                           ],
-                              "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4695,
-                              "hash":  "CROS",
-                              "position":  [
-                                               645.89014,
-                                               17.400064,
-                                               415.6473
-                                           ],
-                              "reason":  "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4695,
-                              "hash":  "COOI",
-                              "position":  [
-                                               645.60333,
-                                               17.400333,
-                                               406.3051
-                                           ],
-                              "reason":  "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4695,
-                              "hash":  "CROC",
-                              "position":  [
-                                               645.7833,
-                                               17.399712,
-                                               398.13083
-                                           ],
-                              "reason":  "on top of Craig-Or of Protection (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4697,
-                              "hash":  "CSOP",
-                              "position":  [
-                                               639.1049,
-                                               17.399986,
-                                               431.44244
-                                           ],
-                              "reason":  "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4697,
-                              "hash":  "CGOE",
-                              "position":  [
-                                               642.6809,
-                                               17.400116,
-                                               426.38992
-                                           ],
-                              "reason":  "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4697,
-                              "hash":  "CMON",
-                              "position":  [
-                                               645.89014,
-                                               17.400064,
-                                               415.6473
-                                           ],
-                              "reason":  "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4697,
-                              "hash":  "CGOG",
-                              "position":  [
-                                               645.60333,
-                                               17.400333,
-                                               406.3051
-                                           ],
-                              "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4697,
-                              "hash":  "CEOT",
-                              "position":  [
-                                               645.7833,
-                                               17.399712,
-                                               398.13083
-                                           ],
-                              "reason":  "on top of Craig-Or of Protection (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4699,
-                              "hash":  "CAOU",
-                              "position":  [
-                                               639.1049,
-                                               17.399986,
-                                               431.44244
-                                           ],
-                              "reason":  "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4699,
-                              "hash":  "CROA",
-                              "position":  [
-                                               642.6809,
-                                               17.400116,
-                                               426.38992
-                                           ],
-                              "reason":  "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4699,
-                              "hash":  "CFOR",
-                              "position":  [
-                                               645.89014,
-                                               17.400064,
-                                               415.6473
-                                           ],
-                              "reason":  "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4699,
-                              "hash":  "CGOP",
-                              "position":  [
-                                               645.60333,
-                                               17.400333,
-                                               406.3051
-                                           ],
-                              "reason":  "on top of Craig-Or of Protection (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  4699,
-                              "hash":  "CGOM",
-                              "position":  [
-                                               645.7833,
-                                               17.399712,
-                                               398.13083
-                                           ],
-                              "reason":  "on top of Craig-Or of Gear \u0026 Ammo (scrape import 2026-10-29)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3420.9395,
-                                               9.46229,
-                                               811.6199
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Douglass Guynes stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3459.9556,
-                                               9.764013,
-                                               801.8841
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Suzie Mirabelli stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3436.1877,
-                                               9.49749,
-                                               887.36176
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Ryan Daken stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3472.1748,
-                                               9.363698,
-                                               851.72
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Britni Annunziata stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3437.9019,
-                                               9.363636,
-                                               834.58075
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Pamela Borroel stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3438.5054,
-                                               9.363636,
-                                               846.9214
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Myrtle Phare stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3465.0232,
-                                               9.363636,
-                                               849.86786
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Jeanne Strimple stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3405.2678,
-                                               9.363636,
-                                               834.66266
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Chauncey Varela stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3439.942,
-                                               9.3636265,
-                                               860.5515
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Effie Depaolo stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3470.6606,
-                                               9.363636,
-                                               831.8837
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Milford Heiliger stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3470.9226,
-                                               9.363636,
-                                               858.4875
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Mohamed Reineman stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3463.8252,
-                                               9.363636,
-                                               858.8295
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Sadye Washko stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3441.1724,
-                                               9.363636,
-                                               860.754
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Herschel Musco stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "3846",
-                              "position":  [
-                                               3429.2158,
-                                               9.49988,
-                                               800.09937
-                                           ],
-                              "reason":  "scrape-arete-20261030: live civilian Lashaunda Cratty stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "CMDI",
-                              "position":  [
-                                               4032.5232,
-                                               0.24356711,
-                                               667.7076
-                                           ],
-                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "CMDI",
-                              "position":  [
-                                               4058.233,
-                                               0.3996004,
-                                               678.1939
-                                           ],
-                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "CMDI",
-                              "position":  [
-                                               4032.7603,
-                                               0.6561838,
-                                               676.9679
-                                           ],
-                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "CMDI",
-                              "position":  [
-                                               4054.3843,
-                                               2.7282076,
-                                               650.5932
-                                           ],
-                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "CMDI",
-                              "position":  [
-                                               4104.6396,
-                                               0.7377962,
-                                               713.5413
-                                           ],
-                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "CMDI",
-                              "position":  [
-                                               4103.5894,
-                                               6.1800666,
-                                               657.683
-                                           ],
-                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
-                          },
-                          {
-                              "playfield":  6553,
-                              "hash":  "CMDI",
-                              "position":  [
-                                               4040.219,
-                                               1.0684938,
-                                               696.5665
-                                           ],
-                              "reason":  "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3145.0098,
-                                               35.499603,
-                                               963.2869
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3260.8604,
-                                               35.499603,
-                                               904.3118
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3290.6494,
-                                               35.499603,
-                                               884.6131
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3293.1943,
-                                               35.499603,
-                                               846.01465
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3272.3496,
-                                               35.499603,
-                                               820.2318
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3227.1973,
-                                               35.499603,
-                                               831.45465
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3168.2444,
-                                               35.499603,
-                                               905.4153
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3225.3528,
-                                               35.499603,
-                                               908.1711
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3260.6572,
-                                               35.499603,
-                                               831.7664
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3175.9858,
-                                               35.500008,
-                                               915.2009
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3220.6128,
-                                               35.499603,
-                                               928.3059
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "FPBY",
-                              "position":  [
-                                               3185.2622,
-                                               35.179367,
-                                               966.3107
-                                           ],
-                              "reason":  "Food Provider replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "01V1",
-                              "position":  [
-                                               3145.4253,
-                                               35.499603,
-                                               795.839
-                                           ],
-                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "01V1",
-                              "position":  [
-                                               3164.297,
-                                               35.499603,
-                                               784.46124
-                                           ],
-                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "01V1",
-                              "position":  [
-                                               3174.2158,
-                                               35.499603,
-                                               772.6129
-                                           ],
-                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "01V1",
-                              "position":  [
-                                               3185.7148,
-                                               35.499603,
-                                               834.4891
-                                           ],
-                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "01V1",
-                              "position":  [
-                                               3150.4434,
-                                               35.499603,
-                                               829.684
-                                           ],
-                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "01V1",
-                              "position":  [
-                                               3174.4854,
-                                               35.499603,
-                                               795.7489
-                                           ],
-                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "01V1",
-                              "position":  [
-                                               3206.9421,
-                                               35.499603,
-                                               775.7012
-                                           ],
-                              "reason":  "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ABGU",
-                              "position":  [
-                                               3244.0098,
-                                               36,
-                                               939.70355
-                                           ],
-                              "reason":  "ICC Arbiter Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ABGU",
-                              "position":  [
-                                               3247.3667,
-                                               35.75936,
-                                               939.78
-                                           ],
-                              "reason":  "ICC Arbiter Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ICFM",
-                              "position":  [
-                                               3210.035,
-                                               35.49973,
-                                               928.8715
-                                           ],
-                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ICPA",
-                              "position":  [
-                                               3233.3835,
-                                               35.499603,
-                                               898.6942
-                                           ],
-                              "reason":  "Male Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ICFM",
-                              "position":  [
-                                               3350.1936,
-                                               35.499603,
-                                               870.04596
-                                           ],
-                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ICFM",
-                              "position":  [
-                                               3350.296,
-                                               35.499603,
-                                               862.20325
-                                           ],
-                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ICFM",
-                              "position":  [
-                                               3206.4988,
-                                               35.49985,
-                                               802.1018
-                                           ],
-                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ICFM",
-                              "position":  [
-                                               3290.1582,
-                                               35.499603,
-                                               826.3241
-                                           ],
-                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ICFM",
-                              "position":  [
-                                               3333.8977,
-                                               35.499603,
-                                               945.98804
-                                           ],
-                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ICFM",
-                              "position":  [
-                                               3333.8203,
-                                               37.195152,
-                                               900.9465
-                                           ],
-                              "reason":  "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "PPCD",
-                              "position":  [
-                                               3277.3618,
-                                               36.728603,
-                                               921.89606
-                                           ],
-                              "reason":  "Peacekeeper Constad 1 replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ZYBA",
-                              "position":  [
-                                               3158.1406,
-                                               35.499603,
-                                               899.1041
-                                           ],
-                              "reason":  "Zyvania Bagh replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3205.8596,
-                                               35.499603,
-                                               853.0229
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "3846",
-                              "position":  [
-                                               3226.5874,
-                                               35.499603,
-                                               847.137
-                                           ],
-                              "reason":  "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  655,
-                              "hash":  "ICPA",
-                              "position":  [
-                                               3214.8733,
-                                               35.500114,
-                                               876.63684
-                                           ],
-                              "reason":  "Male Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
-                          },
-                          {
-                              "playfield":  800,
-                              "hash":  "LEKA",
-                              "position":  [
-                                               613.24567,
-                                               68.3996,
-                                               475.4377
-                                           ],
-                              "reason":  "Levon Karubian moved to live scrape spot (scrape-cities-20261105b)"
-                          }
-                      ]
+    "note": "Overlap/duplicate removals only. Unmatched hashes are NOT hidden so pink placeholders stay visible. removedPoints drop one Spawns.json point on top of a real NPC; dedupeRadius drops a point whose hash already spawns within that many metres. Generated originally by ddogs/tools/Apply-PlaceholderCleanup.ps1; unmatched hiddenHashes cleared 2026-10-15 so Randy can see missing NPCs.",
+    "dedupeRadius": 0.5,
+    "hiddenHashes": [
+        {
+            "hash": "SHXT",
+            "reason": "Crashed Alien Ship exit talk-to stand-in (8009): the Exit door is a real walk-through door now (AlienShip.cs). 2026-10-30"
+        },
+        {
+            "hash": "BBOC",
+            "reason": "Arete credit card talk-to stand-in: replaced by the real Bank of Rubi-Ka Credit Card world pickup (PlayfieldContent/6553 Pickups). 2026-10-30"
+        },
+        {
+            "hash": "2CIE",
+            "reason": "ambient city citizen placeholder (Rome/Old Athen/West Athens/Andromeda/Borealis); Randy 2026-10-29"
+        },
+        {
+            "hash": "UNPU",
+            "reason": "Uncle Pumpkin-Head placeholders: live scrape shows Uncle Pumpkin-Head on these points; Halloween.json UPH spawns already place them (Borealis/ICC). 2026-10-30"
+        },
+        {
+            "hash": "CLRE",
+            "reason": "Arrival Hall 4604 Clan desk pink (205,161.6): live scrape 2026-10-30 has no NPC there. 2026-10-30"
+        },
+        {
+            "hash": "OMIM",
+            "reason": "Arrival Hall 4604 Omni desk pink (184.7,162.1): live scrape 2026-10-30 has no NPC there. 2026-10-30"
+        }
+    ],
+    "removedPoints": [
+        {
+            "playfield": 127,
+            "hash": "BQWR",
+            "position": [
+                254.10004,
+                108.601685,
+                299.30002
+            ],
+            "reason": "on top of Basic Quality Weaponsdealer (content, 0.99 m)"
+        },
+        {
+            "playfield": 127,
+            "hash": "BQAU",
+            "position": [
+                229.90002,
+                108.601685,
+                288.19995
+            ],
+            "reason": "on top of Basic Quality Armorer (content, 1 m)"
+        },
+        {
+            "playfield": 127,
+            "hash": "BTMV",
+            "position": [
+                210.69666,
+                108.601685,
+                306.98618
+            ],
+            "reason": "on top of Basic Tools Merchant (content, 1 m)"
+        },
+        {
+            "playfield": 4311,
+            "hash": "YUCH",
+            "position": [
+                308.2419,
+                61.57097,
+                1623.6819
+            ],
+            "reason": "on top of Yuttos Chemicals (content, 0 m)"
+        },
+        {
+            "playfield": 4311,
+            "hash": "YUPH",
+            "position": [
+                311.09064,
+                61.600163,
+                1612.5253
+            ],
+            "reason": "on top of Yuttos Pharmaceuticals (content, 0 m)"
+        },
+        {
+            "playfield": 4311,
+            "hash": "YTMA",
+            "position": [
+                319.60663,
+                61.600002,
+                1609.8859
+            ],
+            "reason": "on top of Yuttos Manuals (content, 0 m)"
+        },
+        {
+            "playfield": 4311,
+            "hash": "YUEL",
+            "position": [
+                356.1908,
+                61.000004,
+                1592.1498
+            ],
+            "reason": "on top of Yuttos Electronics (content, 0 m)"
+        },
+        {
+            "playfield": 4311,
+            "hash": "YUTO",
+            "position": [
+                363.24417,
+                61.000004,
+                1603.5494
+            ],
+            "reason": "on top of Yuttos Tools (content, 0 m)"
+        },
+        {
+            "playfield": 4311,
+            "hash": "PRYU",
+            "position": [
+                287.78378,
+                107.10419,
+                1005.5608
+            ],
+            "reason": "on top of Prophet Yutt Thrak (content, 0.53 m)"
+        },
+        {
+            "playfield": 4311,
+            "hash": "DEBE",
+            "position": [
+                429.72656,
+                104.74102,
+                450.0295
+            ],
+            "reason": "on top of Deep Breath Nine (content, 0 m)"
+        },
+        {
+            "playfield": 4676,
+            "hash": "OROF",
+            "position": [
+                404.23752,
+                113.370094,
+                440.08286
+            ],
+            "reason": "on top of Or-Mada of Protection (content, 0.62 m)"
+        },
+        {
+            "playfield": 4676,
+            "hash": "SUAA",
+            "position": [
+                468.73663,
+                117.25924,
+                495.35242
+            ],
+            "reason": "on top of Sipius Aban Lux-Wei (content, 0.37 m)"
+        },
+        {
+            "playfield": 4677,
+            "hash": "HYUG",
+            "position": [
+                463.67334,
+                33.832256,
+                359.511
+            ],
+            "reason": "on top of Hypnagogic Urga-Lum Thrak (content, 0.65 m)"
+        },
+        {
+            "playfield": 551,
+            "hash": "BSMV",
+            "position": [
+                1379.3834,
+                31.581947,
+                1379.513
+            ],
+            "reason": "on top of Hounds Dyna (hash, 0.79 m)"
+        },
+        {
+            "playfield": 551,
+            "hash": "BSMB",
+            "position": [
+                2340.2825,
+                32.439632,
+                1419.5125
+            ],
+            "reason": "on top of Blubbags Dyna (hash, 0.56 m)"
+        },
+        {
+            "playfield": 565,
+            "hash": "BMMN",
+            "position": [
+                460.0835,
+                27.7654,
+                2379.0142
+            ],
+            "reason": "on top of Leets Dyna (hash, 0.99 m)"
+        },
+        {
+            "playfield": 565,
+            "hash": "BOMS",
+            "position": [
+                1339.9829,
+                19.207819,
+                2340.0137
+            ],
+            "reason": "on top of Rhinomen Dyna (hash, 0.02 m)"
+        },
+        {
+            "playfield": 565,
+            "hash": "BOMS",
+            "position": [
+                1700.4841,
+                49.629242,
+                1579.3118
+            ],
+            "reason": "on top of Rhinomen Dyna (hash, 0.84 m)"
+        },
+        {
+            "playfield": 570,
+            "hash": "BNMW",
+            "position": [
+                420.38373,
+                53.462563,
+                1499.3124
+            ],
+            "reason": "on top of Sandworms Dyna (hash, 0.79 m)"
+        },
+        {
+            "playfield": 570,
+            "hash": "BNMS",
+            "position": [
+                1340.8832,
+                35.77124,
+                3059.713
+            ],
+            "reason": "on top of Anuns Dyna (hash, 0.93 m)"
+        },
+        {
+            "playfield": 570,
+            "hash": "BMMM",
+            "position": [
+                1159.2836,
+                37.397537,
+                1145.613
+            ],
+            "reason": "on top of Mantis Dyna (hash, 0.94 m)"
+        },
+        {
+            "playfield": 570,
+            "hash": "BNMS",
+            "position": [
+                3060.883,
+                65.03456,
+                920.31305
+            ],
+            "reason": "on top of Anuns Dyna (hash, 0.94 m)"
+        },
+        {
+            "playfield": 585,
+            "hash": "BMMN",
+            "position": [
+                1340.2164,
+                18.305,
+                1899.6045
+            ],
+            "reason": "on top of Leets Dyna (hash, 0.45 m)"
+        },
+        {
+            "playfield": 590,
+            "hash": "BTMN",
+            "position": [
+                940.61633,
+                35.105003,
+                1539.7043
+            ],
+            "reason": "on top of Enigmas Dyna (hash, 0.68 m)"
+        },
+        {
+            "playfield": 605,
+            "hash": "BTMN",
+            "position": [
+                580.21625,
+                34.266384,
+                1819.2048
+            ],
+            "reason": "on top of Enigmas Dyna (hash, 0.82 m)"
+        },
+        {
+            "playfield": 605,
+            "hash": "BEMJ",
+            "position": [
+                2500.7163,
+                11.1333685,
+                2139.3037
+            ],
+            "reason": "on top of Ninjadroids Dyna (hash, 1 m)"
+        },
+        {
+            "playfield": 6115,
+            "hash": "LE75",
+            "position": [
+                194.94379,
+                1.4096003,
+                134.5967
+            ],
+            "reason": "on top of Leet (hash, 0 m)"
+        },
+        {
+            "playfield": 6129,
+            "hash": "LE75",
+            "position": [
+                92.26358,
+                1.4096012,
+                35.97963
+            ],
+            "reason": "on top of Leet (hash, 0 m)"
+        },
+        {
+            "playfield": 6129,
+            "hash": "LE75",
+            "position": [
+                92.26358,
+                1.4096012,
+                35.97963
+            ],
+            "reason": "on top of Leet (hash, 0 m)"
+        },
+        {
+            "playfield": 655,
+            "hash": "BMMN",
+            "position": [
+                1380,
+                38.11,
+                2700
+            ],
+            "reason": "on top of Leets Dyna (hash, 0 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "ALGI",
+            "position": [
+                3520.789,
+                5.4993086,
+                856.68506
+            ],
+            "reason": "on top of Alex Gibbs (content, 0.39 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "FLNV",
+            "position": [
+                3597.959,
+                5.498977,
+                862.6436
+            ],
+            "reason": "on top of Flint Novak (content, 0.63 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "SAGO",
+            "position": [
+                3463.067,
+                9.35276,
+                880.14777
+            ],
+            "reason": "on top of Stan Goodman (content, 0.34 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "ICIM",
+            "position": [
+                3510.7244,
+                5.499601,
+                826.85376
+            ],
+            "reason": "on top of ICC Immigration Officer Bill (content, 0.87 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "VRTR",
+            "position": [
+                3433.954,
+                12.31673,
+                825.8998
+            ],
+            "reason": "on top of Vernon Godfray (content, 0.03 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "SAGE",
+            "position": [
+                3471.2686,
+                9.112314,
+                840.8822
+            ],
+            "reason": "on top of Sarah Greene (content, 0.1 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "SPMF",
+            "position": [
+                3551.0078,
+                8.349168,
+                832.85345
+            ],
+            "reason": "on top of Shipping Manifest Terminal (content, 0.03 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "LRTH",
+            "position": [
+                3369.1414,
+                17.4982,
+                794.42285
+            ],
+            "reason": "on top of Lorelei the Bartender (content, 0.18 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "RAOH",
+            "position": [
+                3430.7615,
+                9.401502,
+                796.3233
+            ],
+            "reason": "on top of Dr. Mason (content, 0.93 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "VUHO",
+            "position": [
+                3369.2393,
+                18.156921,
+                828.8788
+            ],
+            "reason": "on top of Vaughn Hammond (content, 0.34 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "DNCI",
+            "position": [
+                3605.2036,
+                8.256823,
+                826.882
+            ],
+            "reason": "on top of Desmond Calitri (content, 0.18 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "ICTA",
+            "position": [
+                3540.867,
+                6.4508204,
+                748.3083
+            ],
+            "reason": "on top of Shady Guy (content, 0.37 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "OFTP",
+            "position": [
+                3462.5,
+                9.363626,
+                812.5
+            ],
+            "reason": "on top of Patrick Sun (content, 0.35 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "VOEQ",
+            "position": [
+                3443.0793,
+                9.235492,
+                832.65234
+            ],
+            "reason": "on top of Antonio Stacklund (content, 0.09 m)"
+        },
+        {
+            "playfield": 7010,
+            "hash": "JOFE",
+            "position": [
+                104.184715,
+                2.3636801,
+                76.13313
+            ],
+            "reason": "on top of Scarlett Dalquist (content, 0.18 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "ICTE",
+            "position": [
+                3442.9375,
+                12.276416,
+                822.5002
+            ],
+            "reason": "on top of legacy:CapturedAreteAlexAreaVendorContentProvider:6553:12E77208 (content, 0.01 m)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "JUSO",
+            "position": [
+                3527.3494,
+                5.189701,
+                858.1209
+            ],
+            "reason": "on top of legacy:CapturedAreteAlexAreaVendorContentProvider:6553:12E77209 (content, 0 m)"
+        },
+        {
+            "playfield": 6007,
+            "hash": "1TTO",
+            "position": [
+                248.5,
+                6.01,
+                189
+            ],
+            "reason": "on top of Battle Station 10-30 (content)"
+        },
+        {
+            "playfield": 6007,
+            "hash": "31TO",
+            "position": [
+                241,
+                6.01,
+                196.5
+            ],
+            "reason": "on top of Battle Station 31-60 (content)"
+        },
+        {
+            "playfield": 6007,
+            "hash": "60T1",
+            "position": [
+                241,
+                6.01,
+                181.49962
+            ],
+            "reason": "on top of Battle Station 61-100 (content)"
+        },
+        {
+            "playfield": 6007,
+            "hash": "10T1",
+            "position": [
+                225,
+                6.01,
+                196.5
+            ],
+            "reason": "on top of Battle Station 101-150 (content)"
+        },
+        {
+            "playfield": 6007,
+            "hash": "15T2",
+            "position": [
+                217.5,
+                6.01,
+                189
+            ],
+            "reason": "on top of Battle Station 151-200 (content)"
+        },
+        {
+            "playfield": 6007,
+            "hash": "17TO",
+            "position": [
+                225,
+                6.01,
+                181.5
+            ],
+            "reason": "on top of Battle Station 201-214 (content)"
+        },
+        {
+            "playfield": 6007,
+            "hash": "20TO",
+            "position": [
+                231,
+                6.01,
+                189.03943
+            ],
+            "reason": "on top of Battle Station 215-220 (content)"
+        },
+        {
+            "playfield": 6007,
+            "hash": "MGOS",
+            "position": [
+                235,
+                6.01,
+                189
+            ],
+            "reason": "orphan pink AAAA in BS queue ring (no content NPC)"
+        },
+        {
+            "playfield": 4683,
+            "hash": "CAOU",
+            "position": [
+                639.1049,
+                17.399986,
+                431.44244
+            ],
+            "reason": "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4683,
+            "hash": "CROA",
+            "position": [
+                642.6809,
+                17.400116,
+                426.38992
+            ],
+            "reason": "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4683,
+            "hash": "CFOR",
+            "position": [
+                645.89014,
+                17.400064,
+                415.6473
+            ],
+            "reason": "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4683,
+            "hash": "CGOP",
+            "position": [
+                645.60333,
+                17.400333,
+                406.3051
+            ],
+            "reason": "on top of Craig-Or of Protection (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4683,
+            "hash": "CGOM",
+            "position": [
+                645.7833,
+                17.399712,
+                398.13083
+            ],
+            "reason": "on top of Craig-Or of Gear & Ammo (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4686,
+            "hash": "CFOU",
+            "position": [
+                639.1049,
+                17.399986,
+                431.44244
+            ],
+            "reason": "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4686,
+            "hash": "CAOA",
+            "position": [
+                642.6809,
+                17.400116,
+                426.38992
+            ],
+            "reason": "on top of Craig-Or of Gear & Ammo (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4686,
+            "hash": "CPOE",
+            "position": [
+                645.89014,
+                17.400064,
+                415.6473
+            ],
+            "reason": "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4686,
+            "hash": "CFOT",
+            "position": [
+                645.60333,
+                17.400333,
+                406.3051
+            ],
+            "reason": "on top of Craig-Or of Protection (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4686,
+            "hash": "CGOA",
+            "position": [
+                645.7833,
+                17.399712,
+                398.13083
+            ],
+            "reason": "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4687,
+            "hash": "CFOU",
+            "position": [
+                639.1049,
+                17.399986,
+                431.44244
+            ],
+            "reason": "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4687,
+            "hash": "CAOA",
+            "position": [
+                642.6809,
+                17.400116,
+                426.38992
+            ],
+            "reason": "on top of Craig-Or of Gear & Ammo (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4687,
+            "hash": "CPOE",
+            "position": [
+                645.89014,
+                17.400064,
+                415.6473
+            ],
+            "reason": "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4687,
+            "hash": "CFOT",
+            "position": [
+                645.60333,
+                17.400333,
+                406.3051
+            ],
+            "reason": "on top of Craig-Or of Protection (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4687,
+            "hash": "CGOA",
+            "position": [
+                645.7833,
+                17.399712,
+                398.13083
+            ],
+            "reason": "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4690,
+            "hash": "CIOO",
+            "position": [
+                639.1049,
+                17.399986,
+                431.44244
+            ],
+            "reason": "on top of Craig-Or of Protection (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4690,
+            "hash": "CIOU",
+            "position": [
+                642.6809,
+                17.400116,
+                426.38992
+            ],
+            "reason": "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4690,
+            "hash": "CIOM",
+            "position": [
+                645.89014,
+                17.400064,
+                415.6473
+            ],
+            "reason": "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4690,
+            "hash": "CROM",
+            "position": [
+                645.60333,
+                17.400333,
+                406.3051
+            ],
+            "reason": "on top of Craig-Or of Gear & Ammo (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4690,
+            "hash": "CFOE",
+            "position": [
+                645.7833,
+                17.399712,
+                398.13083
+            ],
+            "reason": "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4691,
+            "hash": "CIOO",
+            "position": [
+                639.1049,
+                17.399986,
+                431.44244
+            ],
+            "reason": "on top of Craig-Or of Protection (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4691,
+            "hash": "CIOU",
+            "position": [
+                642.6809,
+                17.400116,
+                426.38992
+            ],
+            "reason": "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4691,
+            "hash": "CIOM",
+            "position": [
+                645.89014,
+                17.400064,
+                415.6473
+            ],
+            "reason": "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4691,
+            "hash": "CROM",
+            "position": [
+                645.60333,
+                17.400333,
+                406.3051
+            ],
+            "reason": "on top of Craig-Or of Gear & Ammo (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4691,
+            "hash": "CFOE",
+            "position": [
+                645.7833,
+                17.399712,
+                398.13083
+            ],
+            "reason": "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4694,
+            "hash": "CPOS",
+            "position": [
+                639.1049,
+                17.399986,
+                431.44244
+            ],
+            "reason": "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4694,
+            "hash": "CEOA",
+            "position": [
+                642.6809,
+                17.400116,
+                426.38992
+            ],
+            "reason": "on top of Craig-Or of Gear & Ammo (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4694,
+            "hash": "CROS",
+            "position": [
+                645.89014,
+                17.400064,
+                415.6473
+            ],
+            "reason": "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4694,
+            "hash": "COOI",
+            "position": [
+                645.60333,
+                17.400333,
+                406.3051
+            ],
+            "reason": "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4694,
+            "hash": "CROC",
+            "position": [
+                645.7833,
+                17.399712,
+                398.13083
+            ],
+            "reason": "on top of Craig-Or of Protection (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4695,
+            "hash": "CPOS",
+            "position": [
+                639.1049,
+                17.399986,
+                431.44244
+            ],
+            "reason": "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4695,
+            "hash": "CEOA",
+            "position": [
+                642.6809,
+                17.400116,
+                426.38992
+            ],
+            "reason": "on top of Craig-Or of Gear & Ammo (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4695,
+            "hash": "CROS",
+            "position": [
+                645.89014,
+                17.400064,
+                415.6473
+            ],
+            "reason": "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4695,
+            "hash": "COOI",
+            "position": [
+                645.60333,
+                17.400333,
+                406.3051
+            ],
+            "reason": "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4695,
+            "hash": "CROC",
+            "position": [
+                645.7833,
+                17.399712,
+                398.13083
+            ],
+            "reason": "on top of Craig-Or of Protection (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4697,
+            "hash": "CSOP",
+            "position": [
+                639.1049,
+                17.399986,
+                431.44244
+            ],
+            "reason": "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4697,
+            "hash": "CGOE",
+            "position": [
+                642.6809,
+                17.400116,
+                426.38992
+            ],
+            "reason": "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4697,
+            "hash": "CMON",
+            "position": [
+                645.89014,
+                17.400064,
+                415.6473
+            ],
+            "reason": "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4697,
+            "hash": "CGOG",
+            "position": [
+                645.60333,
+                17.400333,
+                406.3051
+            ],
+            "reason": "on top of Craig-Or of Gear & Ammo (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4697,
+            "hash": "CEOT",
+            "position": [
+                645.7833,
+                17.399712,
+                398.13083
+            ],
+            "reason": "on top of Craig-Or of Protection (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4699,
+            "hash": "CAOU",
+            "position": [
+                639.1049,
+                17.399986,
+                431.44244
+            ],
+            "reason": "on top of Craig-Or of the Furious Fists (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4699,
+            "hash": "CROA",
+            "position": [
+                642.6809,
+                17.400116,
+                426.38992
+            ],
+            "reason": "on top of Craig-Or of Flaming Barrels (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4699,
+            "hash": "CFOR",
+            "position": [
+                645.89014,
+                17.400064,
+                415.6473
+            ],
+            "reason": "on top of Craig-Or of Preservation (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4699,
+            "hash": "CGOP",
+            "position": [
+                645.60333,
+                17.400333,
+                406.3051
+            ],
+            "reason": "on top of Craig-Or of Protection (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 4699,
+            "hash": "CGOM",
+            "position": [
+                645.7833,
+                17.399712,
+                398.13083
+            ],
+            "reason": "on top of Craig-Or of Gear & Ammo (scrape import 2026-10-29)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3420.9395,
+                9.46229,
+                811.6199
+            ],
+            "reason": "scrape-arete-20261030: live civilian Douglass Guynes stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3459.9556,
+                9.764013,
+                801.8841
+            ],
+            "reason": "scrape-arete-20261030: live civilian Suzie Mirabelli stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3436.1877,
+                9.49749,
+                887.36176
+            ],
+            "reason": "scrape-arete-20261030: live civilian Ryan Daken stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3472.1748,
+                9.363698,
+                851.72
+            ],
+            "reason": "scrape-arete-20261030: live civilian Britni Annunziata stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3437.9019,
+                9.363636,
+                834.58075
+            ],
+            "reason": "scrape-arete-20261030: live civilian Pamela Borroel stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3438.5054,
+                9.363636,
+                846.9214
+            ],
+            "reason": "scrape-arete-20261030: live civilian Myrtle Phare stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3465.0232,
+                9.363636,
+                849.86786
+            ],
+            "reason": "scrape-arete-20261030: live civilian Jeanne Strimple stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3405.2678,
+                9.363636,
+                834.66266
+            ],
+            "reason": "scrape-arete-20261030: live civilian Chauncey Varela stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3439.942,
+                9.3636265,
+                860.5515
+            ],
+            "reason": "scrape-arete-20261030: live civilian Effie Depaolo stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3470.6606,
+                9.363636,
+                831.8837
+            ],
+            "reason": "scrape-arete-20261030: live civilian Milford Heiliger stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3470.9226,
+                9.363636,
+                858.4875
+            ],
+            "reason": "scrape-arete-20261030: live civilian Mohamed Reineman stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3463.8252,
+                9.363636,
+                858.8295
+            ],
+            "reason": "scrape-arete-20261030: live civilian Sadye Washko stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3441.1724,
+                9.363636,
+                860.754
+            ],
+            "reason": "scrape-arete-20261030: live civilian Herschel Musco stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "3846",
+            "position": [
+                3429.2158,
+                9.49988,
+                800.09937
+            ],
+            "reason": "scrape-arete-20261030: live civilian Lashaunda Cratty stands here (named spawn in PlayfieldContent/6553/SpawnsAdd.json)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "CMDI",
+            "position": [
+                4032.5232,
+                0.24356711,
+                667.7076
+            ],
+            "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "CMDI",
+            "position": [
+                4058.233,
+                0.3996004,
+                678.1939
+            ],
+            "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "CMDI",
+            "position": [
+                4032.7603,
+                0.6561838,
+                676.9679
+            ],
+            "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "CMDI",
+            "position": [
+                4054.3843,
+                2.7282076,
+                650.5932
+            ],
+            "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "CMDI",
+            "position": [
+                4104.6396,
+                0.7377962,
+                713.5413
+            ],
+            "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "CMDI",
+            "position": [
+                4103.5894,
+                6.1800666,
+                657.683
+            ],
+            "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+        },
+        {
+            "playfield": 6553,
+            "hash": "CMDI",
+            "position": [
+                4040.219,
+                1.0684938,
+                696.5665
+            ],
+            "reason": "scrape-arete-20261030: SANDSTORM Marauder camp on live, not Waste Collectors (5 marauders in SpawnsAdd)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3145.0098,
+                35.499603,
+                963.2869
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3260.8604,
+                35.499603,
+                904.3118
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3290.6494,
+                35.499603,
+                884.6131
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3293.1943,
+                35.499603,
+                846.01465
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3272.3496,
+                35.499603,
+                820.2318
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3227.1973,
+                35.499603,
+                831.45465
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3168.2444,
+                35.499603,
+                905.4153
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3225.3528,
+                35.499603,
+                908.1711
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3260.6572,
+                35.499603,
+                831.7664
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3175.9858,
+                35.500008,
+                915.2009
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3220.6128,
+                35.499603,
+                928.3059
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "FPBY",
+            "position": [
+                3185.2622,
+                35.179367,
+                966.3107
+            ],
+            "reason": "Food Provider replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "01V1",
+            "position": [
+                3145.4253,
+                35.499603,
+                795.839
+            ],
+            "reason": "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "01V1",
+            "position": [
+                3164.297,
+                35.499603,
+                784.46124
+            ],
+            "reason": "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "01V1",
+            "position": [
+                3174.2158,
+                35.499603,
+                772.6129
+            ],
+            "reason": "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "01V1",
+            "position": [
+                3185.7148,
+                35.499603,
+                834.4891
+            ],
+            "reason": "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "01V1",
+            "position": [
+                3150.4434,
+                35.499603,
+                829.684
+            ],
+            "reason": "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "01V1",
+            "position": [
+                3174.4854,
+                35.499603,
+                795.7489
+            ],
+            "reason": "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "01V1",
+            "position": [
+                3206.9421,
+                35.499603,
+                775.7012
+            ],
+            "reason": "Waste Collector replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ABGU",
+            "position": [
+                3244.0098,
+                36,
+                939.70355
+            ],
+            "reason": "ICC Arbiter Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ABGU",
+            "position": [
+                3247.3667,
+                35.75936,
+                939.78
+            ],
+            "reason": "ICC Arbiter Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ICFM",
+            "position": [
+                3210.035,
+                35.49973,
+                928.8715
+            ],
+            "reason": "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ICPA",
+            "position": [
+                3233.3835,
+                35.499603,
+                898.6942
+            ],
+            "reason": "Male Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ICFM",
+            "position": [
+                3350.1936,
+                35.499603,
+                870.04596
+            ],
+            "reason": "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ICFM",
+            "position": [
+                3350.296,
+                35.499603,
+                862.20325
+            ],
+            "reason": "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ICFM",
+            "position": [
+                3206.4988,
+                35.49985,
+                802.1018
+            ],
+            "reason": "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ICFM",
+            "position": [
+                3290.1582,
+                35.499603,
+                826.3241
+            ],
+            "reason": "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ICFM",
+            "position": [
+                3333.8977,
+                35.499603,
+                945.98804
+            ],
+            "reason": "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ICFM",
+            "position": [
+                3333.8203,
+                37.195152,
+                900.9465
+            ],
+            "reason": "Male Lieutenant replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "PPCD",
+            "position": [
+                3277.3618,
+                36.728603,
+                921.89606
+            ],
+            "reason": "Peacekeeper Constad 1 replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ZYBA",
+            "position": [
+                3158.1406,
+                35.499603,
+                899.1041
+            ],
+            "reason": "Zyvania Bagh replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3205.8596,
+                35.499603,
+                853.0229
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "3846",
+            "position": [
+                3226.5874,
+                35.499603,
+                847.137
+            ],
+            "reason": "ICC Peacekeeper replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 655,
+            "hash": "ICPA",
+            "position": [
+                3214.8733,
+                35.500114,
+                876.63684
+            ],
+            "reason": "Male Guard replaced by live scrape NPCs (scrape-icc655-20261105)"
+        },
+        {
+            "playfield": 800,
+            "hash": "LEKA",
+            "position": [
+                613.24567,
+                68.3996,
+                475.4377
+            ],
+            "reason": "Levon Karubian moved to live scrape spot (scrape-cities-20261105b)"
+        },
+        {
+            "playfield": 9070,
+            "hash": "NMNV",
+            "position": [
+                68.2,
+                159,
+                25.6
+            ],
+            "reason": "Zone-in Filth Flea pack was 10.6 m from arrival (64.59, 158.01, 15.64) and the scrape flea had patrolled to 2 m. Moved down the +X/+Z corridor to (78, 159, 35), short of the next NMNV at (86.1, 159, 43.6). 2026-11-10"
+        }
+    ]
 }

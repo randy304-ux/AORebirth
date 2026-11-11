@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "recordType": 1000014,
+  "playfieldId": 9070,
+  "source": "zone-in-flea-move-20261110",
+  "spawns": [
+    {
+      "districtIndex": 0,
+      "hash": 0,
+      "hashText": "NMNV",
+      "manifestHash": 0,
+      "minLevel": 220,
+      "maxLevel": 250,
+      "respawnChance": 100,
+      "flags": 1,
+      "respawnTime": 30,
+      "version7Extra": 0,
+      "hasOptionalFlagBlock": true,
+      "nativeFlags": 0,
+      "moreFlags": 0,
+      "assistanceRadius": 0,
+      "unknownOptionalU8": 0,
+      "angle": 0,
+      "angleW": 1,
+      "position": [
+        78.0,
+        159.0,
+        35.0
+      ],
+      "radius": 1,
+      "additionalPoints": [],
+      "extensions": null
+    }
+  ]
+}
