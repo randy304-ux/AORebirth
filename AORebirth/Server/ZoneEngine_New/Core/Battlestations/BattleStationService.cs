@@ -13,11 +13,14 @@ namespace ZoneEngine_New.Core.Battlestations
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.GameData;
     using ZoneEngine_New.Core.Helpers;
+    using ZoneEngine_New.Core.Inventory;
     using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Mobs;
     using ZoneEngine_New.Core.Pets;
     using ZoneEngine_New.Core.Playfield;
+    using ZoneEngine_New.Core.Playfield.Locality;
     using ZoneEngine_New.Core.Raids;
+    using ZoneEngine_New.Core.Teams;
 
     using Vector3 = AORebirth.Core.Vector.Vector3;
 
@@ -31,6 +34,13 @@ namespace ZoneEngine_New.Core.Battlestations
         public static bool IsChanneling(Player player) => Service?.IsChanneling(player) == true;
 
         public static void NotifyHit(Character target) => Service?.NotifyHit(target);
+
+        /// <summary>Enemy death inside a live match: +KillVp to the killer side, drop a VP Reward pickup.</summary>
+        public static void NotifyKill(Character victim, Character? killer) => Service?.NotifyKill(victim, killer);
+
+        /// <summary>Click/use the red-beam VP Reward dynel (template 269820).</summary>
+        public static bool TryCollectVpReward(Player player, BattleStationVpRewardDynel dynel)
+            => Service != null && Service.TryCollectVpReward(player, dynel);
 
         /// <summary>True when the character is inside the shared Decontamination Room (no combat).</summary>
         public static bool IsInDecontamination(Character character)
@@ -177,6 +187,70 @@ namespace ZoneEngine_New.Core.Battlestations
                 human.Confirm = false;
                 Say(player, "The hack was interrupted.");
             }
+        }
+
+        public void NotifyKill(Character victim, Character? killer)
+        {
+            if (victim == null || victim.Playfield == null)
+                return;
+
+            lock (_gate)
+            {
+                if (!_matches.TryGetValue(victim.Playfield.Identity.Instance, out Match? match)
+                    || match.Ending
+                    || !match.FieldOpen
+                    || !ReferenceEquals(match.Field, victim.Playfield))
+                    return;
+
+                int victimSide = victim.Stats.GetOrZero(CharacterStat.BattlestationSide);
+                Character? credited = ResolveKillCreditor(killer);
+                int killerSide = credited?.Stats.GetOrZero(CharacterStat.BattlestationSide) ?? 0;
+                if (victimSide is not (1 or 2) || killerSide is not (1 or 2) || victimSide == killerSide)
+                    return;
+
+                int killVp = Math.Max(0, _catalog.KillVp);
+                if (killVp > 0)
+                {
+                    if (killerSide == 1)
+                        match.RedScore += killVp;
+                    else
+                        match.BlueScore += killVp;
+                }
+
+                if (credited is Player killerPlayer)
+                {
+                    Human? human = FindHuman(killerPlayer);
+                    if (human != null)
+                    {
+                        human.Kills++;
+                        human.PointsEarned += killVp;
+                    }
+                }
+
+                int reward = BattleStationScoring.RollVpReward(_catalog.VpRewardMin, _catalog.VpRewardMax);
+                var drop = new VpReward(
+                    victim.Position.xf,
+                    victim.Position.yf,
+                    victim.Position.zf,
+                    killerSide,
+                    reward,
+                    _catalog.VpRewardLifetimeSeconds);
+                SpawnVpRewardBeacon(match, drop);
+                match.Rewards.Add(drop);
+
+                BroadcastScore(match, force: true);
+
+                if (match.RedScore >= _catalog.ScoreCap || match.BlueScore >= _catalog.ScoreCap)
+                    Finish(match, match.RedScore >= _catalog.ScoreCap ? 1 : 2);
+            }
+        }
+
+        static Character? ResolveKillCreditor(Character? killer)
+        {
+            Character? credited = killer;
+            for (int hop = 0; hop < 3 && credited is NpcCharacter { PetOwner: { } owner } && !ReferenceEquals(owner, credited); hop++)
+                credited = owner;
+            return credited;
         }
 
         public bool TryRespawn(Player player, out Vector3 landing)
@@ -614,17 +688,20 @@ namespace ZoneEngine_New.Core.Battlestations
             bot.Npc.Name = baseName + " [" + bot.Role + "]";
         }
 
-        static BotRole PickRole()
+        BotRole PickRole()
         {
-            // Capper 35 / Defender 15 / Hunter 25 / Flanker 25.
-            int roll = Random.Shared.Next(100);
-            if (roll < 35)
-                return BotRole.Capper;
-            if (roll < 50)
-                return BotRole.Defender;
-            if (roll < 75)
-                return BotRole.Hunter;
-            return BotRole.Flanker;
+            int index = BattleStationScoring.PickRoleIndex(
+                _catalog.BotCapperWeight,
+                _catalog.BotDefenderWeight,
+                _catalog.BotHunterWeight,
+                _catalog.BotFlankerWeight);
+            return index switch
+            {
+                0 => BotRole.Capper,
+                1 => BotRole.Defender,
+                2 => BotRole.Hunter,
+                _ => BotRole.Flanker
+            };
         }
 
         void AssignHunterPack(Match match, Bot bot)
@@ -803,7 +880,7 @@ namespace ZoneEngine_New.Core.Battlestations
                     if (human.HackLeft > 0)
                         continue;
 
-                    LockConsole(match, console, human.Team, player.Name ?? "You", broadcast: true);
+                    LockConsole(match, console, human.Team, player.Name ?? "You", broadcast: true, botCapture: false);
                     human.HackConsole = -1;
                     human.Confirm = false;
                     _channeling.Remove(player.Identity.Instance);
@@ -829,7 +906,7 @@ namespace ZoneEngine_New.Core.Battlestations
                 if (bot.HackLeft > 0)
                     continue;
 
-                LockConsole(match, bot.HackConsole, bot.Team, bot.Npc.Name ?? "A guard", broadcast: false);
+                LockConsole(match, bot.HackConsole, bot.Team, bot.Npc.Name ?? "A guard", broadcast: false, botCapture: true);
                 bot.HackConsole = -1;
                 if (bot.Npc.Brain != null)
                     bot.Npc.Brain.PatrolEnabled = true;
@@ -873,19 +950,41 @@ namespace ZoneEngine_New.Core.Battlestations
                     ZoneEngine_New.Core.Events.DailyMissionService.Instance?.NotifyBattlestationThreshold(match.Humans[h].Player);
             }
 
-            // Score line only on a real change, at most once every 10 seconds (never per-tick spam).
-            if (match.RedScore == match.LastAnnouncedRed && match.BlueScore == match.LastAnnouncedBlue)
+            BroadcastScore(match, force: false);
+        }
+
+        void BroadcastScore(Match match, bool force)
+        {
+            if (!force
+                && match.RedScore == match.LastAnnouncedRed
+                && match.BlueScore == match.LastAnnouncedBlue)
                 return;
 
-            match.AnnounceDebt += interval;
-            if (match.AnnounceDebt < 10)
-                return;
-
-            match.AnnounceDebt = 0;
             match.LastAnnouncedRed = match.RedScore;
             match.LastAnnouncedBlue = match.BlueScore;
-            Announce(match, "Score  " + SideLabel(1) + " " + match.RedScore
-                + "  " + SideLabel(2) + " " + match.BlueScore);
+            for (int i = 0; i < match.Humans.Count; i++)
+                SendScoreHud(match, match.Humans[i]);
+        }
+
+        void SendScoreHud(Match match, Human human)
+        {
+            Player player = human.Player;
+            if (player.Session == null)
+                return;
+
+            player.Session.Send(new SendScoreMessage
+            {
+                Identity = Identity.None,
+                Unknown = 0x01,
+                ViewerInstance = player.Identity.Instance,
+                Owner0 = BattleStationScoring.ToWireOwner(match.Owner.Length > 0 ? match.Owner[0] : 0),
+                Owner1 = BattleStationScoring.ToWireOwner(match.Owner.Length > 1 ? match.Owner[1] : 0),
+                Owner2 = BattleStationScoring.ToWireOwner(match.Owner.Length > 2 ? match.Owner[2] : 0),
+                Owner3 = BattleStationScoring.ToWireOwner(match.Owner.Length > 3 ? match.Owner[3] : 0),
+                SecondaryInstance = 0,
+                RedScore = match.RedScore,
+                BlueScore = match.BlueScore
+            });
         }
 
         static readonly int[] CountdownMarks = [45, 30, 15, 10, 5, 3, 2, 1];
@@ -1089,7 +1188,135 @@ namespace ZoneEngine_New.Core.Battlestations
                         SendHome(player);
                     }
                 }
+
+                if (!inSafe)
+                    TryCollectVpRewards(match, human);
             }
+
+            TickVpRewards(match, deltaTime);
+        }
+
+        void TickVpRewards(Match match, double deltaTime)
+        {
+            for (int i = match.Rewards.Count - 1; i >= 0; i--)
+            {
+                VpReward reward = match.Rewards[i];
+                reward.LifeLeft -= deltaTime;
+                if (reward.LifeLeft > 0)
+                    continue;
+
+                DespawnVpRewardBeacon(match, reward);
+                match.Rewards.RemoveAt(i);
+            }
+        }
+
+        void TryCollectVpRewards(Match match, Human human)
+        {
+            if (human.Player.IsDead || match.Rewards.Count == 0)
+                return;
+
+            float radius = Math.Max(2f, _catalog.VpRewardPickupRadius);
+            float x = human.Player.Position.xf;
+            float z = human.Player.Position.zf;
+            for (int i = match.Rewards.Count - 1; i >= 0; i--)
+            {
+                VpReward reward = match.Rewards[i];
+                if (reward.Team != human.Team)
+                    continue;
+                if (Distance(x, z, reward.X, reward.Z) > radius)
+                    continue;
+
+                if (!ApplyVpReward(match, human, reward))
+                    return;
+                match.Rewards.RemoveAt(i);
+            }
+        }
+
+        public bool TryCollectVpReward(Player player, BattleStationVpRewardDynel dynel)
+        {
+            if (player == null || dynel == null)
+                return false;
+
+            lock (_gate)
+            {
+                Human? human = FindHuman(player);
+                if (human?.Match == null || human.Match.Ending
+                    || !ReferenceEquals(player.Playfield, human.Match.Field))
+                    return false;
+
+                Match match = human.Match;
+                for (int i = 0; i < match.Rewards.Count; i++)
+                {
+                    VpReward reward = match.Rewards[i];
+                    if (!ReferenceEquals(reward.Dynel, dynel))
+                        continue;
+                    if (reward.Team != human.Team)
+                    {
+                        Say(player, "That VP Reward belongs to the other team.");
+                        return true;
+                    }
+
+                    if (!ApplyVpReward(match, human, reward))
+                        return true;
+                    match.Rewards.RemoveAt(i);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        bool ApplyVpReward(Match match, Human human, VpReward reward)
+        {
+            if (reward.Team == 1)
+                match.RedScore += reward.Amount;
+            else
+                match.BlueScore += reward.Amount;
+            human.PointsEarned += reward.Amount;
+            DespawnVpRewardBeacon(match, reward);
+            Say(human.Player, "VP Reward +" + reward.Amount.ToString(CultureInfo.InvariantCulture) + ".");
+            BroadcastScore(match, force: true);
+            if (match.RedScore >= _catalog.ScoreCap || match.BlueScore >= _catalog.ScoreCap)
+            {
+                Finish(match, match.RedScore >= _catalog.ScoreCap ? 1 : 2);
+                return false;
+            }
+
+            return true;
+        }
+
+        void SpawnVpRewardBeacon(Match match, VpReward reward)
+        {
+            int templateId = _catalog.VpRewardTemplateId > 0
+                ? _catalog.VpRewardTemplateId
+                : BattleStationVpRewardDynel.DefaultTemplateId;
+            IItemTemplateCatalog? items = match.Field.GetService<IItemTemplateCatalog>();
+            if (items == null || !items.TryGet(templateId, out ItemTemplate? template) || template == null)
+            {
+                _logger.Warn("Battle station VP Reward template missing: " + templateId);
+                return;
+            }
+
+            DynelRegistry registry = match.Field.GetRequiredService<DynelRegistry>();
+            var dynel = new BattleStationVpRewardDynel(registry.AllocateStaticDynelIdentity(), template)
+            {
+                Playfield = match.Field,
+                Position = new Vector3(reward.X, reward.Y, reward.Z),
+                Rotation = new AORebirth.Core.Vector.Quaternion(0, 0, 0, 1)
+            };
+            registry.Register(dynel);
+            match.Field.GetRequiredService<PlayfieldLocality>().RegisterDynel(dynel);
+            reward.Dynel = dynel;
+        }
+
+        static void DespawnVpRewardBeacon(Match match, VpReward reward)
+        {
+            BattleStationVpRewardDynel? dynel = reward.Dynel;
+            reward.Dynel = null;
+            if (dynel == null || dynel.Playfield == null)
+                return;
+
+            match.Field.GetService<SpawnService>()?.DespawnStatic(dynel);
         }
 
         bool TryExitPad(Match match, Human human, float x, float z)
@@ -1785,7 +2012,7 @@ namespace ZoneEngine_New.Core.Battlestations
                 }
 
                 bot.HackConsole = bot.Goal;
-                bot.HackLeft = _catalog.HackSeconds;
+                bot.HackLeft = _catalog.BotHackSeconds > 0 ? _catalog.BotHackSeconds : _catalog.HackSeconds;
                 if (bot.Npc.Brain != null)
                     bot.Npc.Brain.PatrolEnabled = false;
                 bot.Npc.StopInPlace();
@@ -1921,20 +2148,51 @@ namespace ZoneEngine_New.Core.Battlestations
 
         int NextOwnedGoal(Match match, int team)
         {
-            // Prefer an owned arm tip; else Core if owned; else rally at Core.
-            int ownedArm = -1;
-            bool ownCore = match.Owner.Length > 0 && match.Owner[0] == team;
-            for (int i = 1; i < match.Owner.Length; i++)
+            // Spread defenders: prefer owned points under MaxDefendersPerPoint, fewest guards first.
+            int best = -1;
+            int bestCount = int.MaxValue;
+            int cap = Math.Max(1, _catalog.MaxDefendersPerPoint);
+            for (int i = 0; i < match.Owner.Length; i++)
             {
                 if (match.Owner[i] != team)
                     continue;
-                if (ownedArm < 0 || Random.Shared.Next(2) == 0)
-                    ownedArm = i;
+
+                int guards = CountDefendersAt(match, team, i);
+                if (guards >= cap)
+                    continue;
+                if (guards < bestCount || (guards == bestCount && Random.Shared.Next(2) == 0))
+                {
+                    bestCount = guards;
+                    best = i;
+                }
             }
 
-            if (ownedArm >= 0)
-                return ownedArm;
-            return ownCore ? 0 : 0;
+            if (best >= 0)
+                return best;
+
+            // All owned points are stacked: park on home arm / Core anyway so they still fight nearby.
+            for (int i = 1; i < match.Owner.Length; i++)
+            {
+                if (match.Owner[i] == team)
+                    return i;
+            }
+
+            return match.Owner.Length > 0 && match.Owner[0] == team ? 0 : 0;
+        }
+
+        static int CountDefendersAt(Match match, int team, int console)
+        {
+            int count = 0;
+            for (int i = 0; i < match.Bots.Count; i++)
+            {
+                Bot bot = match.Bots[i];
+                if (bot.Dead || bot.Team != team || bot.Role != BotRole.Defender)
+                    continue;
+                if (bot.Goal == console)
+                    count++;
+            }
+
+            return count;
         }
 
         int NextEnemyArm(Match match, int team, Bot self)
@@ -2076,17 +2334,22 @@ namespace ZoneEngine_New.Core.Battlestations
             }
         }
 
-        void LockConsole(Match match, int console, int team, string who, bool broadcast)
+        void LockConsole(Match match, int console, int team, string who, bool broadcast, bool botCapture)
         {
             if (console < 0 || console >= match.Owner.Length)
                 return;
 
             int previous = match.Owner[console];
             match.Owner[console] = team;
-            match.CaptureLockLeft[console] = _catalog.CaptureLockSeconds;
+            double lockSeconds = botCapture && _catalog.BotCaptureLockSeconds > 0
+                ? _catalog.BotCaptureLockSeconds
+                : _catalog.CaptureLockSeconds;
+            match.CaptureLockLeft[console] = lockSeconds;
             _logger.Info(string.Format(CultureInfo.InvariantCulture,
-                "Battle station capture console={0} team={1} by={2} prev={3}",
-                _catalog.Consoles[console].Id, team, who, previous));
+                "Battle station capture console={0} team={1} by={2} prev={3} lock={4:0.#}s",
+                _catalog.Consoles[console].Id, team, who, previous, lockSeconds));
+
+            BroadcastScore(match, force: true);
 
             // Broadcast only on a real ownership change for a human capture — never per-bot events.
             if (!broadcast || previous == team)
@@ -2125,6 +2388,7 @@ namespace ZoneEngine_New.Core.Battlestations
                 return;
 
             match.Ending = true;
+            BroadcastScore(match, force: true);
             string text = winner == 0
                 ? "The match ended with no one left."
                 : SideLabel(winner) + " wins.  "
@@ -2132,27 +2396,56 @@ namespace ZoneEngine_New.Core.Battlestations
                     + SideLabel(2) + " " + match.BlueScore + ".";
             Announce(match, text);
 
-            var stat = (CharacterStat)InvasionService.VictoryPointsStatId;
+            var vpStat = (CharacterStat)InvasionService.VictoryPointsStatId;
             for (int i = match.Humans.Count - 1; i >= 0; i--)
             {
                 Human human = match.Humans[i];
-                if (winner != 0 && human.Player.Session != null && ReferenceEquals(human.Player.Playfield, match.Field))
+                Player player = human.Player;
+                bool onField = player.Session != null && ReferenceEquals(player.Playfield, match.Field);
+                if (winner != 0 && onField)
                 {
-                    int per = human.Team == winner ? _catalog.WinVpPerLevel : _catalog.LossVpPerLevel;
-                    int amount = Math.Max(1, human.Player.Stats.GetOrOne(CharacterStat.Level) * per);
-                    int total = human.Player.Stats.GetOrZero(stat, StatDetail.Base) + amount;
-                    human.Player.Stats.Set(stat, total, StatDetail.Base);
-                    human.Player.SaveState.MarkDirty();
-                    int loyalty = Math.Min(_catalog.LoyaltyMax, Loyalty(human.Player) + _catalog.LoyaltyComplete);
-                    SetLoyalty(human.Player, loyalty);
-                    Say(human.Player, "Victory Points +" + amount + " (total " + total + "). Loyalty " + loyalty + ".");
+                    bool won = human.Team == winner;
+                    int teamScore = human.Team == 1 ? match.RedScore : match.BlueScore;
+                    // Solo players who mostly held one point still get team score as a floor contribution.
+                    int pointsEarned = Math.Max(human.PointsEarned, teamScore);
+                    int endScore = BattleStationScoring.ComputeEndPvpScore(
+                        pointsEarned,
+                        human.Kills,
+                        won,
+                        _catalog.LossScoreMult,
+                        _catalog.WinScoreMult,
+                        _catalog.KillScoreBonus);
+
+                    TeamService? teams = match.Field.GetService<TeamService>();
+                    bool grouped = teams?.GetTeam(player) is { MemberIds.Count: > 1 };
+                    CharacterStat trackStat = grouped ? CharacterStat.PVPTeamScore : CharacterStat.PVPSoloScore;
+                    long next = (long)player.Stats.GetOrZero(trackStat) + endScore;
+                    player.Stats.Set(trackStat, (int)Math.Min(next, int.MaxValue), StatDetail.Base, dirty: true);
+                    player.SaveState.MarkDirty();
+                    player.FlushDirtyStats();
+                    Say(player, "You gained " + endScore.ToString(CultureInfo.InvariantCulture)
+                        + (grouped ? " PVP Team Score" : " PVP Solo Score"));
+
+                    int per = won ? _catalog.WinVpPerLevel : _catalog.LossVpPerLevel;
+                    int amount = Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level) * per);
+                    int total = player.Stats.GetOrZero(vpStat, StatDetail.Base) + amount;
+                    player.Stats.Set(vpStat, total, StatDetail.Base);
+                    player.SaveState.MarkDirty();
+                    player.FlushDirtyStats();
+                    int loyalty = Math.Min(_catalog.LoyaltyMax, Loyalty(player) + _catalog.LoyaltyComplete);
+                    SetLoyalty(player, loyalty);
                 }
 
-                ClearSide(human.Player);
+                ClearSide(player);
                 lock (_gate)
-                    _channeling.Remove(human.Player.Identity.Instance);
-                if (human.Player.Session != null && ReferenceEquals(human.Player.Playfield, match.Field))
-                    SendHome(human.Player);
+                    _channeling.Remove(player.Identity.Instance);
+                if (onField)
+                {
+                    SendHome(player);
+                    // Client shows this after the hub zone-in when VP (stat 669) lands.
+                    if (winner != 0 && player.Session != null)
+                        Say(player, "New Victory Points gained.");
+                }
             }
 
             SpawnService? spawn = match.Field.GetService<SpawnService>();
@@ -2162,9 +2455,13 @@ namespace ZoneEngine_New.Core.Battlestations
                     spawn?.DespawnNpc(match.Bots[i].Npc);
             }
 
+            for (int i = 0; i < match.Rewards.Count; i++)
+                DespawnVpRewardBeacon(match, match.Rewards[i]);
+
             lock (_gate)
             {
                 match.Humans.Clear();
+                match.Rewards.Clear();
                 _matches.Remove(match.Bracket.Playfield);
             }
         }
@@ -2417,6 +2714,8 @@ namespace ZoneEngine_New.Core.Battlestations
             public List<Human> Humans { get; } = new();
 
             public List<Bot> Bots { get; } = new();
+
+            public List<VpReward> Rewards { get; } = new();
         }
 
         enum BotRole
@@ -2461,6 +2760,34 @@ namespace ZoneEngine_New.Core.Battlestations
 
             /// <summary>False while still in the shared Decontamination Room; true after an arm landing.</summary>
             public bool InField;
+
+            /// <summary>Enemy kills credited this match (humans only).</summary>
+            public int Kills;
+
+            /// <summary>Match VP contributed via kills and VP Reward pickups.</summary>
+            public int PointsEarned;
+        }
+
+        sealed class VpReward
+        {
+            public VpReward(float x, float y, float z, int team, int amount, double lifeLeft)
+            {
+                X = x;
+                Y = y;
+                Z = z;
+                Team = team;
+                Amount = amount;
+                LifeLeft = lifeLeft;
+            }
+
+            public float X;
+            public float Y;
+            public float Z;
+            public int Team;
+            public int Amount;
+            public double LifeLeft;
+
+            public BattleStationVpRewardDynel? Dynel;
         }
 
         sealed class Bot
@@ -2548,6 +2875,12 @@ namespace ZoneEngine_New.Core.Battlestations
         /// <summary>After a capture completes, nobody can start another on that point for this many seconds.</summary>
         public double CaptureLockSeconds { get; set; } = 15;
 
+        /// <summary>Bot channel time to capture a point (longer than humans eases solo pressure).</summary>
+        public double BotHackSeconds { get; set; } = 18;
+
+        /// <summary>Lockout after a bot finishes a capture (longer than human lock).</summary>
+        public double BotCaptureLockSeconds { get; set; } = 28;
+
         public double IdleSeconds { get; set; } = 180;
 
         public double QueueWaitSeconds { get; set; } = 45;
@@ -2565,6 +2898,42 @@ namespace ZoneEngine_New.Core.Battlestations
         public float BotEnemyClearRange { get; set; } = 20f;
 
         public double BotStuckSeconds { get; set; } = 2;
+
+        /// <summary>Role weights for bot spawn (Capper/Defender/Hunter/Flanker). Lower Capper eases solo hold.</summary>
+        public int BotCapperWeight { get; set; } = 15;
+
+        public int BotDefenderWeight { get; set; } = 20;
+
+        public int BotHunterWeight { get; set; } = 35;
+
+        public int BotFlankerWeight { get; set; } = 30;
+
+        /// <summary>Soft cap: defenders spread across owned points instead of stacking.</summary>
+        public int MaxDefendersPerPoint { get; set; } = 2;
+
+        /// <summary>Match score granted to the killer's side on an enemy death.</summary>
+        public int KillVp { get; set; } = 15;
+
+        public int VpRewardMin { get; set; } = 30;
+
+        public int VpRewardMax { get; set; } = 60;
+
+        public float VpRewardPickupRadius { get; set; } = 8f;
+
+        public double VpRewardLifetimeSeconds { get; set; } = 90;
+
+        /// <summary>
+        /// Dust Brigade Exit Beacon (269820, mesh 258404) — same red-beam pillar as alien-ship exit beacons.
+        /// </summary>
+        public int VpRewardTemplateId { get; set; } = BattleStationScoring.VpRewardTemplateId;
+
+        /// <summary>End-of-match PVP Solo/Team Score multipliers. Loss ~100 contribution → ~83.</summary>
+        public double LossScoreMult { get; set; } = 0.83;
+
+        public double WinScoreMult { get; set; } = 1.35;
+
+        /// <summary>Extra contribution per kill before applying win/loss mult.</summary>
+        public int KillScoreBonus { get; set; } = 2;
 
         public int LoyaltyStart { get; set; } = 10;
 

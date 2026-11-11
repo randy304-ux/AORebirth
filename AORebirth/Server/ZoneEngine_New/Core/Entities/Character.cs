@@ -341,6 +341,7 @@
             _corpseSwapRemainingSeconds = CorpseSpawnDelayMilliseconds / 1000.0;
 
             AwardKillRewards();
+            ZoneEngine_New.Core.Battlestations.BattleStationClock.NotifyKill(this, killer);
         }
 
         /// <summary>
