@@ -1,0 +1,43 @@
+Arrival Hall door signs -- 307000/307001/307002 staging
+=======================================================
+Staged: 2026-11-12 (America/New_York). Staging only. NOT deployed, NOT published.
+Do not copy these files into I:\AO\client-ddogs, I:\AO\src\AORebirth\GameData, or the launcher dist.
+
+What this is
+------------
+One client patch kit plus staged server GameData for three unique hanging-board items:
+
+  307000  Arete            (kept from the 2026-11-11 kit; Randy's photographic art)
+  307001  ICC Shuttleport  (generated plaque, neon green #7CFF6A)
+  307002  Jobe             (generated plaque, light blue #9EE6FF)
+
+Each item is cloned from 295853 "Clans" (mesh 285231, texture hook 285428 retargeted to the new id).
+Shared textures 6144 / 6656 / 30825 are not patched.
+
+PF 4604 Arrival Hall hanging boards in the STAGED Dynels.dat only:
+  0xC00B11FC  offset 1325  295853 Clans    -> 307000 Arete
+  0xC00C11FC  offset 1413  304368 Neutral  -> 307001 ICC Shuttleport
+  0xC00D11FC  offset 1501  295852 Omni-Tek -> 307002 Jobe
+
+Apply tool
+----------
+  I:\AO\staging\door-signs-1112\tools\ApplyDoorSigns\ApplyDoorSigns.exe
+
+  ApplyDoorSigns apply --client "<RC-PC or other test client root>" --records "I:\AO\staging\door-signs-1112\client-rdb"
+
+  The tool refuses I:\AO\client-ddogs. Default flip is hv. If a board is mirrored or upside down:
+    --flip h   or  --flip v  or  --flip none
+
+Server GameData (RC test copy only)
+-----------------------------------
+  I:\AO\staging\door-signs-1112\server\Playfields\4604\Dynels.dat
+  I:\AO\staging\door-signs-1112\server\items.dat
+
+RC-PC test
+----------
+1. Apply the client records to a TEST client, never I:\AO\client-ddogs.
+2. Point the RC test zone at copies of the staged Dynels.dat and items.dat. Do not overwrite live GameData.
+3. Zone into PF 4604 Arrival Hall and check the three hanging boards.
+4. Regression: Arete Landing and other 285231 Clans/Neutral/Omni boards must still be the originals.
+
+307000 art is the 11/11 photographic bake. Generated ARETE (warm #FFD2B0 core, red glow) is in art\ as an alternate, not in the 307000 records.
