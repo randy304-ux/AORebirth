@@ -621,7 +621,15 @@
         "HeadMesh": 0,
         "MonsterTexture": 0,
         "NPCFamily": 129,
-        "Flags": 268964353
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "SDPC",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
       }
     ],
     "ContentProvenance": {
@@ -1115,7 +1123,15 @@
         "HeadMesh": 0,
         "MonsterTexture": 0,
         "NPCFamily": 129,
-        "Flags": 268964353
+        "Flags": 268964353,
+        "LootTable": [
+          {
+            "Hash": "SDPC",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          }
+        ]
       }
     ],
     "ContentProvenance": {
@@ -1350,6 +1366,14 @@
           {
             "position": 1,
             "id": 96313
+          }
+        ],
+        "LootTable": [
+          {
+            "Hash": "DAMA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
           }
         ]
       }
@@ -1775,6 +1799,12 @@
           }
         ],
         "LootTable": [
+          {
+            "Hash": "COMB",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
           {
             "Hash": "MARR",
             "Repeats": 1,
@@ -2234,6 +2264,12 @@
         "Flags": 268964353,
         "LootTable": [
           {
+            "Hash": "SDPC",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
             "Hash": "L105",
             "Repeats": 1,
             "Chance": 100,
@@ -2540,6 +2576,18 @@
         ],
         "LootTable": [
           {
+            "Hash": "PERS",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "ASSA",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
             "Hash": "L112",
             "Repeats": 1,
             "Chance": 100,
@@ -2800,13 +2848,19 @@
         ],
         "LootTable": [
           {
-            "Hash": "L105",
+            "Hash": "SEAL",
             "Repeats": 1,
             "Chance": 100,
             "LevelMod": 0
           },
           {
-            "Hash": "SEAL",
+            "Hash": "BLCG",
+            "Repeats": 1,
+            "Chance": 100,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "FPGA",
             "Repeats": 1,
             "Chance": 100,
             "LevelMod": 0
@@ -2818,21 +2872,27 @@
             "LevelMod": 0
           },
           {
+            "Hash": "L105",
+            "Repeats": 1,
+            "Chance": 15,
+            "LevelMod": 0
+          },
+          {
             "Hash": "L122",
             "Repeats": 1,
-            "Chance": 100,
+            "Chance": 15,
             "LevelMod": 0
           },
           {
             "Hash": "L123",
             "Repeats": 1,
-            "Chance": 100,
+            "Chance": 15,
             "LevelMod": 0
           },
           {
             "Hash": "DUCK",
             "Repeats": 1,
-            "Chance": 100,
+            "Chance": 15,
             "LevelMod": 0
           }
         ]
