@@ -92,19 +92,32 @@ public static class ArrivalHall
         catch { return false; }
     }
 
+    /// <summary>Where a player stands in the red left doorway. Live /loc 2026-11-11 21:39 ET: 201.6, 1.0, 157.7. The door dynel is at Z 154.31, inside the wall, more than 3 m away.</summary>
+    public static readonly Vector3 AreteWalkIn = new Vector3(201.6, 1.0, 157.7);
+
+    /// <summary>Middle doorway. Live /loc 192.0, 1.0, 157.9. The door dynel is at Z 153.55.</summary>
+    public static readonly Vector3 IccWalkIn = new Vector3(192.0, 1.0, 157.9);
+
+    /// <summary>Blue right doorway. Live /loc 181.8, 1.0, 157.9. The door dynel is at Z 154.33.</summary>
+    public static readonly Vector3 JobeWalkIn = new Vector3(181.8, 1.0, 157.9);
+
+    /// <summary>Walk-in pad radius, same 3 m reach as a door with no DynelCollision.json sphere.</summary>
+    public const float WalkInRadius = 3f;
+
     /// <summary>
-    /// Widens the three south-wall door pads so walking through the doorway hits them. Those doors only carry the
-    /// unused 53142 event, so BakeVicinityTriggers leaves a 1 m disc inside the wall. Uses the same 3 m reach as a
-    /// walk-in door that has no DynelCollision.json sphere. Sign TemplateIds are not changed.
+    /// Places the three south-wall door pads on the live doorway /loc, not on the door dynels. Those doors only
+    /// carry the unused 53142 event; bake leaves a 1 m (then widened 3 m) disc on the dynel at Z ~154, which sits
+    /// inside the wall. Players stop in the opening at Z ~157.7, just outside that disc, so FireTargetVicinity never
+    /// ran. Sign TemplateIds are not changed.
     /// </summary>
     public static void RegisterDoorTriggers(PlayfieldWorldSimulation world, int playfieldId)
     {
         if (playfieldId != PlayfieldId)
             return;
 
-        world.WidenVicinityTrigger(AreteDoor);
-        world.WidenVicinityTrigger(IccDoor);
-        world.WidenVicinityTrigger(JobeDoor);
+        world.PlaceVicinityTrigger(AreteDoor, (float)AreteWalkIn.xf, (float)AreteWalkIn.yf, (float)AreteWalkIn.zf, WalkInRadius);
+        world.PlaceVicinityTrigger(IccDoor, (float)IccWalkIn.xf, (float)IccWalkIn.yf, (float)IccWalkIn.zf, WalkInRadius);
+        world.PlaceVicinityTrigger(JobeDoor, (float)JobeWalkIn.xf, (float)JobeWalkIn.yf, (float)JobeWalkIn.zf, WalkInRadius);
     }
 
     /// <summary>Runs the hall's door overrides. Returns true when the pad was handled here (its own spells must not run).</summary>

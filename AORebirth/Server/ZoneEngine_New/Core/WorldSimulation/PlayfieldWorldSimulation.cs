@@ -1286,6 +1286,65 @@ namespace ZoneEngine_New.Core.WorldSimulation
                 _triggers.Add(pad);
         }
 
+        /// <summary>
+        /// Moves (or adds) a TargetVicinity pad to an explicit walk-in point, keeping the door's DynelInstance so
+        /// handlers still match. Use this when the placed dynel sits inside the wall and players stand in the opening.
+        /// A plain disc of <paramref name="radius"/> metres; the client door sphere is not applied, because that would
+        /// pull the pad back onto the dynel.
+        /// </summary>
+        public void PlaceVicinityTrigger(int doorInstance, float x, float y, float z, float radius = 3f)
+        {
+            if (doorInstance == 0 || radius <= 0)
+                return;
+
+            List<PlayfieldDynel>? dynels = _geometry.Dynels?.Dynels;
+            if (dynels == null)
+                return;
+
+            PlayfieldDynel? placed = null;
+            for (int i = 0; i < dynels.Count; i++)
+            {
+                if (dynels[i].IdentityInstance != doorInstance)
+                    continue;
+                placed = dynels[i];
+                break;
+            }
+
+            if (placed == null)
+                return;
+
+            bool existing = _triggers.TryGetDynel(ZoneTriggerKind.TargetVicinity, doorInstance, out ZoneTriggerVolume pad);
+            if (!existing)
+            {
+                pad = new ZoneTriggerVolume
+                {
+                    Kind = ZoneTriggerKind.TargetVicinity,
+                    Id = _nextTriggerId++,
+                    DynelInstance = doorInstance,
+                    // Non-null so FireTargetVicinity reaches ArrivalHall.TryHandleVicinity.
+                    VicinityEvents = new ItemTemplate { Id = placed.TemplateId }
+                };
+            }
+
+            pad.Sphere = false;
+            pad.CenterX = x;
+            pad.CenterY = y;
+            pad.CenterZ = z;
+            pad.Radius = radius;
+            pad.MinX = x - radius;
+            pad.MaxX = x + radius;
+            pad.MinZ = z - radius;
+            pad.MaxZ = z + radius;
+            float h = TriggerVolumeCatalog.HalfHeight(pad);
+            pad.MinY = y - h;
+            pad.MaxY = y + h;
+
+            if (existing)
+                _triggers.Rebin(pad);
+            else
+                _triggers.Add(pad);
+        }
+
         public void RegisterDungeonExit(float x, float y, float z, int doorInstance, int exteriorPlayfieldId, AoVector3 landing, AoQuaternion landingHeading,
             int templateId = 0, AoQuaternion? doorRotation = null)
         {

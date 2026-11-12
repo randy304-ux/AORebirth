@@ -72,6 +72,31 @@ namespace ZoneEngine_New.Tests
         }
 
         [TestMethod]
+        public void SouthDoorWalkInPadsSitInTheDoorway()
+        {
+            Assert.AreEqual(201.6f, ArrivalHall.AreteWalkIn.xf, 0.01f);
+            Assert.AreEqual(1.0f, ArrivalHall.AreteWalkIn.yf, 0.01f);
+            Assert.AreEqual(157.7f, ArrivalHall.AreteWalkIn.zf, 0.01f);
+            Assert.AreEqual(192.0f, ArrivalHall.IccWalkIn.xf, 0.01f);
+            Assert.AreEqual(157.9f, ArrivalHall.IccWalkIn.zf, 0.01f);
+            Assert.AreEqual(181.8f, ArrivalHall.JobeWalkIn.xf, 0.01f);
+            Assert.AreEqual(157.9f, ArrivalHall.JobeWalkIn.zf, 0.01f);
+            Assert.AreEqual(3f, ArrivalHall.WalkInRadius);
+
+            // Live doorway /loc is more than 3 m from the door dynel (Z ~154, inside the wall).
+            var dynels = Data.Value.GetPlayfieldGeometry(ArrivalHall.PlayfieldId).Dynels!.Dynels;
+            void TooFarFromDoor(int door, Vector3 walk)
+            {
+                var d = dynels.Single(x => x.IdentityInstance == door);
+                double dx = walk.xf - d.Position.X, dz = walk.zf - d.Position.Z;
+                Assert.IsTrue(Math.Sqrt(dx * dx + dz * dz) > ArrivalHall.WalkInRadius);
+            }
+            TooFarFromDoor(ArrivalHall.AreteDoor, ArrivalHall.AreteWalkIn);
+            TooFarFromDoor(ArrivalHall.IccDoor, ArrivalHall.IccWalkIn);
+            TooFarFromDoor(ArrivalHall.JobeDoor, ArrivalHall.JobeWalkIn);
+        }
+
+        [TestMethod]
         public void JobeResearchLandingIsInFrontOfDrake()
         {
             // SCDK (Scientist Drake Rodriguez) spawn point in Jobe Research 4001.
