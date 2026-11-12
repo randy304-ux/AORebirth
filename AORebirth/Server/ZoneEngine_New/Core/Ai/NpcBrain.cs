@@ -302,7 +302,8 @@ namespace ZoneEngine_New.Core.Ai
 
             TickStallWatch.Stage("brain.scan", Npc.Identity.Instance);
             // A pet picks its fights from its owner, never from who happens to walk by.
-            if (Pet == null)
+            // Starter playerbots pick prey in PlayerBotEngageNode; proximity aggro would lock them onto players.
+            if (Pet == null && PlayerBot == null)
                 ScanProximity();
 
             // Channelling a cast roots the caster (pets too): no chasing or following until the cast ends.
@@ -1102,7 +1103,7 @@ namespace ZoneEngine_New.Core.Ai
             return position;
         }
 
-        Character? Resolve(Identity identity)
+        internal Character? Resolve(Identity identity)
         {
             if (identity.Instance == 0 || Npc.Playfield == null)
                 return null;
@@ -1142,9 +1143,18 @@ namespace ZoneEngine_New.Core.Ai
         bool ComputeEngageable(Identity identity)
         {
             Character? target = Resolve(identity);
-            return target != null
-                && Npc.GetEdgeDistanceTo(target) <= NpcAiRules.EngageRange(identity == _currentTarget)
-                && HasChanceWithGrace(target);
+            if (target == null
+                || Npc.GetEdgeDistanceTo(target) > NpcAiRules.EngageRange(identity == _currentTarget)
+                || !HasChanceWithGrace(target))
+                return false;
+
+            // Playerbot combat uses the same prey rules as acquisition, including CanAttack.
+            if (PlayerBot != null
+                && (PlayerBotTargeting.IsBlacklisted(PlayerBot, identity, DateTime.UtcNow)
+                    || !PlayerBotTargeting.IsValidPrey(Npc, target, applyLevelRange: true)))
+                return false;
+
+            return true;
         }
 
         internal static bool PathEndsUnderNpc(

@@ -1,6 +1,9 @@
 namespace ZoneEngine_New.Core.Ai
 {
+    using System;
     using System.Collections.Generic;
+
+    using SmokeLounge.AOtomation.Messaging.GameData;
 
     using Vector3 = AORebirth.Core.Vector.Vector3;
 
@@ -10,7 +13,9 @@ namespace ZoneEngine_New.Core.Ai
     /// </summary>
     public sealed class PlayerBotState
     {
-        public IReadOnlyList<Vector3> Waypoints { get; set; } = System.Array.Empty<Vector3>();
+        readonly Dictionary<ulong, DateTime> _blacklist = new();
+
+        public IReadOnlyList<Vector3> Waypoints { get; set; } = Array.Empty<Vector3>();
 
         public int WaypointIndex { get; set; }
 
@@ -35,6 +40,48 @@ namespace ZoneEngine_New.Core.Ai
 
         public bool RoamPausing { get; set; }
 
-        public System.DateTime RoamPauseUntilUtc { get; set; }
+        public DateTime RoamPauseUntilUtc { get; set; }
+
+        public Vector3 LastMovePosition { get; set; }
+
+        public DateTime LastMoveUtc { get; set; }
+
+        public Identity WatchTarget { get; set; }
+
+        public int WatchHealth { get; set; }
+
+        public DateTime WatchSinceUtc { get; set; }
+
+        public void Blacklist(Identity identity, DateTime untilUtc)
+        {
+            if (identity.Instance == 0)
+                return;
+            _blacklist[identity.Long()] = untilUtc;
+        }
+
+        public bool TryGetBlacklist(Identity identity, out DateTime untilUtc)
+        {
+            if (identity.Instance == 0)
+            {
+                untilUtc = default;
+                return false;
+            }
+
+            return _blacklist.TryGetValue(identity.Long(), out untilUtc);
+        }
+
+        public void ClearBlacklist(Identity identity)
+        {
+            if (identity.Instance == 0)
+                return;
+            _blacklist.Remove(identity.Long());
+        }
+
+        public void ClearWatch()
+        {
+            WatchTarget = Identity.None;
+            WatchHealth = 0;
+            WatchSinceUtc = default;
+        }
     }
 }

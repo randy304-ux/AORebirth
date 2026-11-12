@@ -12,6 +12,7 @@ namespace ZoneEngine_New.Core.Ai
 
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.Helpers;
+    using ZoneEngine_New.Core.Logging;
     using ZoneEngine_New.Core.Metrics;
     using ZoneEngine_New.Core.Mobs;
     using ZoneEngine_New.Core.Playfield.Locality;
@@ -19,8 +20,9 @@ namespace ZoneEngine_New.Core.Ai
     using Vector3 = AORebirth.Core.Vector.Vector3;
 
     /// <summary>
-    /// Starter playerbot brain: one prioritized action loop (rest → fight → engage → roam → idle).
+    /// Starter playerbot brain: one prioritized action loop (rest, fight, engage, roam, idle).
     /// Uses the same chase/fight leaves as ordinary NPCs; pathing falls back to straight line when no navmesh.
+    /// Invalid or ineffective prey is dropped and blacklisted so the bot returns to roam/hunt.
     /// </summary>
     sealed class PlayerBotBehaviourTree : BehaviourTree
     {
@@ -39,12 +41,13 @@ namespace ZoneEngine_New.Core.Ai
             root.Conditional(NeedsRest, "hurt")
                 .Attach(new PlayerBotRestNode(_brain));
 
-            IParent combat = root.Conditional(_brain.HasNearbyHate, "has-nearby-hate")
+            IParent combat = root.Conditional(HasUsableHate, "has-nearby-hate")
                 .Sequence("combat")
                 .Attach(new SelectHighestThreatNode(_brain));
             combat.Sequence("default-fight")
                 .Attach(new MoveTowardTargetNode(_brain))
-                .Attach(new StartFightingNode(_brain));
+                .Attach(new StartFightingNode(_brain))
+                .Attach(new PlayerBotWatchAttackNode(_brain));
 
             root.Attach(new PlayerBotEngageNode(_brain));
             root.Attach(new PlayerBotRoamNode(_brain));
@@ -77,6 +80,55 @@ namespace ZoneEngine_New.Core.Ai
 
             return false;
         }
+
+        bool HasUsableHate()
+        {
+            PlayerBotHate.Purge(_brain);
+            return _brain.HasNearbyHate();
+        }
+    }
+
+    static class PlayerBotHate
+    {
+        public static void Purge(NpcBrain brain)
+        {
+            PlayerBotState? state = brain.PlayerBot;
+            if (state == null || brain.Hate.IsEmpty)
+                return;
+
+            DateTime now = DateTime.UtcNow;
+            List<Identity>? drop = null;
+            foreach (HateEntry entry in brain.Hate.Entries)
+            {
+                Character? target = brain.Resolve(entry.Identity);
+                if (target == null
+                    || PlayerBotTargeting.IsBlacklisted(state, entry.Identity, now)
+                    || !PlayerBotTargeting.IsValidPrey(brain.Npc, target, applyLevelRange: true))
+                {
+                    (drop ??= new List<Identity>()).Add(entry.Identity);
+                }
+            }
+
+            if (drop == null)
+                return;
+
+            for (int i = 0; i < drop.Count; i++)
+                Drop(brain, state, drop[i], now, blacklist: true);
+        }
+
+        public static void Drop(NpcBrain brain, PlayerBotState state, Identity identity, DateTime nowUtc, bool blacklist)
+        {
+            if (identity.Instance == 0)
+                return;
+
+            if (blacklist)
+                PlayerBotTargeting.Blacklist(state, identity, nowUtc);
+
+            brain.Hate.Remove(identity);
+            if (brain.Npc.FightingTarget == identity)
+                brain.StopFighting();
+            state.ClearWatch();
+        }
     }
 
     sealed class PlayerBotRestNode : BehaviourNode
@@ -95,6 +147,7 @@ namespace ZoneEngine_New.Core.Ai
             _brain.ClearHate();
             _brain.StopFighting();
             _brain.StopPathing();
+            _brain.PlayerBot?.ClearWatch();
             return _nodeState = NodeState.Running;
         }
     }
@@ -118,6 +171,7 @@ namespace ZoneEngine_New.Core.Ai
             if (state == null || !state.Active || _brain.Npc.Playfield == null)
                 return _nodeState = NodeState.Failure;
 
+            DateTime now = DateTime.UtcNow;
             var locality = _brain.Npc.Playfield.GetRequiredService<PlayfieldLocality>();
             locality.CollectNearby(_brain.Npc, state.EngageRange, _scratch);
             NpcCharacter? prey = null;
@@ -125,24 +179,9 @@ namespace ZoneEngine_New.Core.Ai
             for (int i = 0; i < _scratch.Count; i++)
             {
                 NpcCharacter other = _scratch[i];
-                if (ReferenceEquals(other, _brain.Npc) || other.IsDead || !other.Attackable)
+                if (PlayerBotTargeting.IsBlacklisted(state, other.Identity, now))
                     continue;
-                if (other.Brain?.PlayerBot != null)
-                    continue;
-                if (NpcSupportRules.IsPlayerPetOrMerc(other) || other.PetOwner is Player)
-                    continue;
-                if (other.MobTemplate != null
-                    && (other.MobTemplate.Has(NpcFeature.NoCombat)
-                        || other.MobTemplate.Has(NpcFeature.PlayerUntargetable)
-                        || other.MobTemplate.Has(NpcFeature.Immortal)))
-                    continue;
-                if (CombatRules.IsBlueNameNpc(other.Stats.GetOrZero(CharacterStat.Flags)))
-                    continue;
-                if (!CombatRules.CanAttack(_brain.Npc, other))
-                    continue;
-
-                int level = other.Stats.GetOrZero(CharacterStat.Level);
-                if (level < state.MinPreyLevel || level > state.MaxPreyLevel + 3)
+                if (!PlayerBotTargeting.IsValidPrey(_brain.Npc, other, applyLevelRange: true))
                     continue;
 
                 double dx = other.Position.x - _brain.Npc.Position.x;
@@ -160,8 +199,86 @@ namespace ZoneEngine_New.Core.Ai
                 return _nodeState = NodeState.Failure;
 
             _brain.AddThreat(prey.Identity, NpcAiRules.ProximityHate);
+            if (!CombatRules.CanAttack(_brain.Npc, prey))
+            {
+                PlayerBotHate.Drop(_brain, state, prey.Identity, now, blacklist: true);
+                return _nodeState = NodeState.Failure;
+            }
+
             _brain.Npc.StartFighting(prey.Identity, 0);
+            if (_brain.Npc.FightingTarget != prey.Identity)
+            {
+                PlayerBotHate.Drop(_brain, state, prey.Identity, now, blacklist: true);
+                return _nodeState = NodeState.Failure;
+            }
+
             return _nodeState = NodeState.Success;
+        }
+    }
+
+    /// <summary>
+    /// Drops a target that refused StartFighting or took no damage after several seconds in range.
+    /// </summary>
+    sealed class PlayerBotWatchAttackNode : BehaviourNode
+    {
+        readonly NpcBrain _brain;
+
+        public PlayerBotWatchAttackNode(NpcBrain brain)
+            : base("playerbot-watch-attack")
+        {
+            _brain = brain;
+        }
+
+        public override NodeState Evaluate(float deltaTime)
+        {
+            TickStallWatch.Stage("node.playerbot-watch-attack", _brain.Npc.Identity.Instance);
+            PlayerBotState? state = _brain.PlayerBot;
+            Character? target = _brain.ResolveCurrentTarget();
+            if (state == null || target == null)
+                return _nodeState = NodeState.Failure;
+
+            DateTime now = DateTime.UtcNow;
+            if (!PlayerBotTargeting.IsValidPrey(_brain.Npc, target, applyLevelRange: true)
+                || _brain.Npc.FightingTarget != target.Identity)
+            {
+                LogDrop(target, "refused or invalid");
+                PlayerBotHate.Drop(_brain, state, target.Identity, now, blacklist: true);
+                return _nodeState = NodeState.Failure;
+            }
+
+            int health = target.Stats.GetOrZero(CharacterStat.Health);
+            if (state.WatchTarget != target.Identity)
+            {
+                state.WatchTarget = target.Identity;
+                state.WatchHealth = health;
+                state.WatchSinceUtc = now;
+                return _nodeState = NodeState.Success;
+            }
+
+            if (health < state.WatchHealth)
+            {
+                state.WatchHealth = health;
+                state.WatchSinceUtc = now;
+                return _nodeState = NodeState.Success;
+            }
+
+            if (_brain.CanAttackNow(target)
+                && now - state.WatchSinceUtc >= PlayerBotTargeting.IneffectiveAttackTimeout)
+            {
+                LogDrop(target, "no damage");
+                PlayerBotHate.Drop(_brain, state, target.Identity, now, blacklist: true);
+                return _nodeState = NodeState.Failure;
+            }
+
+            return _nodeState = NodeState.Success;
+        }
+
+        void LogDrop(Character target, string reason)
+        {
+            _brain.Npc.Playfield?.GetService<IZoneLogger>()?.Info(
+                "Playerbot dropped target bot=" + _brain.Npc.Name
+                + " target=" + target.Name
+                + " reason=" + reason);
         }
     }
 
@@ -196,6 +313,7 @@ namespace ZoneEngine_New.Core.Ai
                     return _nodeState = NodeState.Running;
                 state.RoamPausing = false;
                 state.WaypointIndex = (state.WaypointIndex + 1) % state.Waypoints.Count;
+                MarkMoved(state, now);
             }
 
             if (state.WaypointIndex < 0 || state.WaypointIndex >= state.Waypoints.Count)
@@ -209,13 +327,43 @@ namespace ZoneEngine_New.Core.Ai
                 double pause = state.RoamPauseMinSeconds
                     + Random.Shared.NextDouble() * Math.Max(0, state.RoamPauseMaxSeconds - state.RoamPauseMinSeconds);
                 state.RoamPauseUntilUtc = now.AddSeconds(pause);
+                MarkMoved(state, now);
                 return _nodeState = NodeState.Running;
+            }
+
+            if (IsStuck(state, now))
+            {
+                _brain.StopPathing();
+                state.WaypointIndex = (state.WaypointIndex + 1) % state.Waypoints.Count;
+                MarkMoved(state, now);
+                dest = state.Waypoints[state.WaypointIndex];
             }
 
             if (_brain.Npc.Motor.State != Movement.MovementState.Walk)
                 _brain.Npc.Motor.ApplyAction(Movement.MovementAction.SwitchToWalk);
             _brain.PathTo(dest);
             return _nodeState = NodeState.Running;
+        }
+
+        bool IsStuck(PlayerBotState state, DateTime now)
+        {
+            if (state.LastMoveUtc == default)
+            {
+                MarkMoved(state, now);
+                return false;
+            }
+
+            if (NpcAiRules.IsNearby(_brain.Npc.Position, state.LastMovePosition, PlayerBotTargeting.RoamStuckMeters))
+                return now - state.LastMoveUtc >= PlayerBotTargeting.RoamStuckTimeout;
+
+            MarkMoved(state, now);
+            return false;
+        }
+
+        void MarkMoved(PlayerBotState state, DateTime now)
+        {
+            state.LastMovePosition = _brain.Npc.Position;
+            state.LastMoveUtc = now;
         }
     }
 }

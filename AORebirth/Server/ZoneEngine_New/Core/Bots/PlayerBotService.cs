@@ -226,6 +226,8 @@ namespace ZoneEngine_New.Core.Bots
             }
 
             body.Rebase();
+            // Rebase can apply wear bonuses; keep proximity aggro off so ScanProximity never arms on players.
+            body.Stats.Set(CharacterStat.BreedHostility, 0);
             int max = body.Stats.GetOrZero(CharacterStat.MaxHealth);
             if (max > 0)
                 body.Stats.Set(CharacterStat.Health, max);

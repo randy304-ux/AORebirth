@@ -1,6 +1,7 @@
 namespace ZoneEngine_New.Tests
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,6 +13,7 @@ namespace ZoneEngine_New.Tests
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.GameData;
     using ZoneEngine_New.Core.Helpers;
+    using ZoneEngine_New.Core.Mobs;
 
     using Vector3 = AORebirth.Core.Vector.Vector3;
 
@@ -89,6 +91,72 @@ namespace ZoneEngine_New.Tests
             Assert.IsFalse(CombatRules.CanAttack(bot, player));
             Assert.IsFalse(CombatRules.CanAttack(bot, owned));
             Assert.IsTrue(NpcSupportRules.IsPlayerPetOrMerc(owned));
+        }
+
+        [TestMethod]
+        public void PlayerBotTargetingRejectsCiviliansAndOutOfLevelPrey()
+        {
+            var bot = new NpcCharacter(
+                new Identity { Type = IdentityType.CanbeAffected, Instance = 900020 },
+                new StubItemBuilder())
+            {
+                Attackable = true
+            };
+            NpcBrain.Create(bot, home: null, NpcAiProfiles.PlayerBot);
+            PlayerBotState state = bot.Brain!.PlayerBot!;
+            state.MinPreyLevel = 1;
+            state.MaxPreyLevel = 15;
+
+            var wild = PreyNpc(900021, attackable: true, level: 10);
+            Assert.IsTrue(PlayerBotTargeting.IsValidPrey(bot, wild, applyLevelRange: true));
+
+            var unattackable = PreyNpc(900022, attackable: false, level: 10);
+            Assert.IsFalse(PlayerBotTargeting.IsValidPrey(bot, unattackable, applyLevelRange: true));
+
+            var noCombat = PreyNpc(900023, attackable: true, level: 10);
+            noCombat.MobTemplate = new MobTemplate
+            {
+                Features = new HashSet<NpcFeature> { NpcFeature.NoCombat }
+            };
+            Assert.IsFalse(PlayerBotTargeting.IsValidPrey(bot, noCombat, applyLevelRange: true));
+
+            var blue = PreyNpc(900024, attackable: true, level: 10);
+            blue.Stats.Set(CharacterStat.Flags, (int)CharacterFlags.HasBlueName);
+            Assert.IsFalse(PlayerBotTargeting.IsValidPrey(bot, blue, applyLevelRange: true));
+
+            var highLevel = PreyNpc(900025, attackable: true, level: 24);
+            Assert.IsFalse(PlayerBotTargeting.IsValidPrey(bot, highLevel, applyLevelRange: true));
+
+            Player player = TestWorld.CreatePlayer(28);
+            Assert.IsFalse(PlayerBotTargeting.IsValidPrey(bot, player, applyLevelRange: true));
+        }
+
+        [TestMethod]
+        public void PlayerBotBlacklistExpires()
+        {
+            var state = new PlayerBotState();
+            var identity = new Identity { Type = IdentityType.CanbeAffected, Instance = 44 };
+            DateTime now = DateTime.UtcNow;
+
+            Assert.IsFalse(PlayerBotTargeting.IsBlacklisted(state, identity, now));
+            PlayerBotTargeting.Blacklist(state, identity, now);
+            Assert.IsTrue(PlayerBotTargeting.IsBlacklisted(state, identity, now.AddSeconds(1)));
+            Assert.IsFalse(PlayerBotTargeting.IsBlacklisted(
+                state,
+                identity,
+                now + PlayerBotTargeting.BlacklistDuration + TimeSpan.FromSeconds(1)));
+        }
+
+        static NpcCharacter PreyNpc(int instance, bool attackable, int level)
+        {
+            var npc = new NpcCharacter(
+                new Identity { Type = IdentityType.CanbeAffected, Instance = instance },
+                new StubItemBuilder())
+            {
+                Attackable = attackable
+            };
+            npc.Stats.Set(CharacterStat.Level, level);
+            return npc;
         }
     }
 }
