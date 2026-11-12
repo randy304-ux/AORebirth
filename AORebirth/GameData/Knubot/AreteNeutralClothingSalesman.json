@@ -1,0 +1,37 @@
+{
+    "Notes": "Neutral Clothing Salesman, Arete Landing market. Greeting and browse option captured 2026-11-12 by Gopherballs.",
+    "Npcs": [
+        "SimpleChar:7B0828A8",
+        "NCSM"
+    ],
+    "Openers": [
+        {
+            "Say": "hello"
+        }
+    ],
+    "Replies": {
+        "browse": {
+            "Text": "Sure, I'll browse.",
+            "Goto": "shop"
+        },
+        "bye": {
+            "Text": "Goodbye",
+            "Goto": "bye"
+        }
+    },
+    "Lines": {
+        "hello": {
+            "Text": "Need some new threads!",
+            "Replies": [
+                "browse",
+                "bye"
+            ]
+        },
+        "shop": {
+            "Text": "{shop}"
+        },
+        "bye": {
+            "Text": "{close}"
+        }
+    }
+}

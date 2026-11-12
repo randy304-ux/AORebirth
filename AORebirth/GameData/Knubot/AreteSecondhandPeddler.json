@@ -1,0 +1,42 @@
+{
+    "Notes": "Secondhand Peddler (Jean), Arete Landing market. Dialog captured 2026-11-12 by Gopherballs. \"Can you tell me what you are selling?\" had no follow-up captured; it uses the captured shopping-cart line so the sale window still opens.",
+    "Npcs": [
+        "SimpleChar:7B0828AA",
+        "SOPD"
+    ],
+    "Openers": [
+        {
+            "Say": "hello"
+        }
+    ],
+    "Replies": {
+        "look": {
+            "Text": "Can I have a look at what you are selling?",
+            "Goto": "cart"
+        },
+        "tell": {
+            "Text": "Can you tell me what you are selling?",
+            "Goto": "cart"
+        },
+        "bye": {
+            "Text": "Goodbye",
+            "Goto": "bye"
+        }
+    },
+    "Lines": {
+        "hello": {
+            "Text": "Hello, you can call me Jean.  I am trading in secondhand goods.",
+            "Replies": [
+                "look",
+                "tell",
+                "bye"
+            ]
+        },
+        "cart": {
+            "Text": "Yes, just press the button below - the one marked with the symbol of a Shopping Cart. It will give you an overview of my current stock.{shop}"
+        },
+        "bye": {
+            "Text": "{close}"
+        }
+    }
+}

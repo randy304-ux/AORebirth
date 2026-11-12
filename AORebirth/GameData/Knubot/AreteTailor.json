@@ -1,0 +1,37 @@
+{
+    "Notes": "Tailor, Arete Landing market. Greeting and wares option captured 2026-11-12 by Gopherballs (dialogs_20261112_Gopherballs.csv). The \"How is life?\" option was shown but its follow-up was not captured, so it is omitted.",
+    "Npcs": [
+        "SimpleChar:7B0828A9",
+        "TAIL"
+    ],
+    "Openers": [
+        {
+            "Say": "hello"
+        }
+    ],
+    "Replies": {
+        "wares": {
+            "Text": "Um, I'd just like to look at your wares.",
+            "Goto": "shop"
+        },
+        "bye": {
+            "Text": "Goodbye",
+            "Goto": "bye"
+        }
+    },
+    "Lines": {
+        "hello": {
+            "Text": "Hi.",
+            "Replies": [
+                "wares",
+                "bye"
+            ]
+        },
+        "shop": {
+            "Text": "{shop}"
+        },
+        "bye": {
+            "Text": "{close}"
+        }
+    }
+}

@@ -1,0 +1,2859 @@
+{
+  "AQ01": {
+    "Templates": [
+      {
+        "Name": "Alta Fuchs",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "1": 25,
+          "4": 3,
+          "12": 5941,
+          "18": 0,
+          "21": 0,
+          "27": 25,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 1,
+          "60": 15,
+          "64": 223905,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26149,
+          "360": 90,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)",
+          "WanderFix": "2026-11-12: Alta Fuchs trail n=255, centroid home, radius 18 (max horiz 17.58). Dropped NoMove."
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 223905,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ],
+        "Wander": {
+          "Home": [
+            3455.7,
+            9.07,
+            886.1
+          ],
+          "Radius": 18,
+          "MinPauseSeconds": 3,
+          "MaxPauseSeconds": 15
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ02": {
+    "Templates": [
+      {
+        "Name": "Britni Annunziata",
+        "Level": 12,
+        "Stats": {
+          "0": 277352961,
+          "1": 294,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 294,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 12,
+          "60": 15,
+          "64": 40655,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 96,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40655,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 29084,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ03": {
+    "Templates": [
+      {
+        "Name": "Chauncey Varela",
+        "Level": 11,
+        "Stats": {
+          "0": 277352961,
+          "1": 261,
+          "4": 4,
+          "12": 5900,
+          "18": 0,
+          "21": 0,
+          "27": 261,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 11,
+          "60": 15,
+          "64": 40121,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26097,
+          "360": 96,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40121,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 29084,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ04": {
+    "Templates": [
+      {
+        "Name": "Donte Clendennen",
+        "Level": 20,
+        "Stats": {
+          "0": 277352961,
+          "1": 559,
+          "4": 4,
+          "12": 5900,
+          "18": 0,
+          "21": 0,
+          "27": 559,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 20,
+          "60": 15,
+          "64": 40110,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26097,
+          "360": 99,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Wander": {
+          "Home": [
+            3419.4,
+            9.115,
+            811.9
+          ],
+          "Radius": 16,
+          "MinPauseSeconds": 3,
+          "MaxPauseSeconds": 15
+        },
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40110,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ05": {
+    "Templates": [
+      {
+        "Name": "Douglass Guynes",
+        "Level": 20,
+        "Stats": {
+          "0": 277352961,
+          "1": 559,
+          "4": 4,
+          "12": 5900,
+          "18": 0,
+          "21": 0,
+          "27": 559,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 20,
+          "60": 15,
+          "64": 236704,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26097,
+          "360": 99,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 236704,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ06": {
+    "Templates": [
+      {
+        "Name": "Effie Depaolo",
+        "Level": 7,
+        "Stats": {
+          "0": 277352961,
+          "1": 160,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 160,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 7,
+          "60": 15,
+          "64": 40641,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 94,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40641,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ07": {
+    "Templates": [
+      {
+        "Name": "Elsie Clancy",
+        "Level": 13,
+        "Stats": {
+          "0": 277352961,
+          "1": 327,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 327,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 13,
+          "60": 15,
+          "64": 223830,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 96,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Wander": {
+          "Home": [
+            3418.6,
+            9.145,
+            857.8
+          ],
+          "Radius": 21,
+          "MinPauseSeconds": 3,
+          "MaxPauseSeconds": 15
+        },
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 223830,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ08": {
+    "Templates": [
+      {
+        "Name": "Herschel Musco",
+        "Level": 15,
+        "Stats": {
+          "0": 277352961,
+          "1": 393,
+          "4": 2,
+          "12": 5914,
+          "18": 0,
+          "21": 0,
+          "27": 393,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 15,
+          "60": 15,
+          "64": 223891,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26139,
+          "360": 97,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 223891,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ09": {
+    "Templates": [
+      {
+        "Name": "Jeanne Strimple",
+        "Level": 20,
+        "Stats": {
+          "0": 277352961,
+          "1": 559,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 559,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 20,
+          "60": 15,
+          "64": 40631,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 99,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40631,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 29084,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ10": {
+    "Templates": [
+      {
+        "Name": "Kirby Schatz",
+        "Level": 24,
+        "Stats": {
+          "0": 277352961,
+          "1": 691,
+          "4": 2,
+          "12": 5914,
+          "18": 0,
+          "21": 0,
+          "27": 691,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 24,
+          "60": 15,
+          "64": 40250,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26139,
+          "360": 100,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Wander": {
+          "Home": [
+            3436.4,
+            9.145,
+            847.8
+          ],
+          "Radius": 43,
+          "MinPauseSeconds": 3,
+          "MaxPauseSeconds": 15
+        },
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40250,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ11": {
+    "Templates": [
+      {
+        "Name": "Lashaunda Cratty",
+        "Level": 11,
+        "Stats": {
+          "0": 277352961,
+          "1": 261,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 261,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 11,
+          "60": 15,
+          "64": 40636,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 96,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40636,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 29084,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ12": {
+    "Templates": [
+      {
+        "Name": "Milford Heiliger",
+        "Level": 27,
+        "Stats": {
+          "0": 277352961,
+          "1": 848,
+          "4": 4,
+          "12": 5900,
+          "18": 0,
+          "21": 0,
+          "27": 848,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 27,
+          "60": 15,
+          "64": 40111,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26097,
+          "360": 101,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40111,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ13": {
+    "Templates": [
+      {
+        "Name": "Mohamed Reineman",
+        "Level": 26,
+        "Stats": {
+          "0": 277352961,
+          "1": 786,
+          "4": 4,
+          "12": 5900,
+          "18": 0,
+          "21": 0,
+          "27": 786,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 26,
+          "60": 15,
+          "64": 40110,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26097,
+          "360": 101,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40110,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ14": {
+    "Templates": [
+      {
+        "Name": "Myrtle Phare",
+        "Level": 6,
+        "Stats": {
+          "0": 277352961,
+          "1": 138,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 138,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 6,
+          "60": 15,
+          "64": 40645,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 93,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40645,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ15": {
+    "Templates": [
+      {
+        "Name": "Pamela Borroel",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "1": 25,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 25,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 1,
+          "60": 15,
+          "64": 40636,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 90,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40636,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 29084,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ16": {
+    "Templates": [
+      {
+        "Name": "Ryan Daken",
+        "Level": 16,
+        "Stats": {
+          "0": 277352961,
+          "1": 426,
+          "4": 4,
+          "12": 5900,
+          "18": 0,
+          "21": 0,
+          "27": 426,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 16,
+          "60": 15,
+          "64": 40116,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26097,
+          "360": 97,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40116,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 29084,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ17": {
+    "Templates": [
+      {
+        "Name": "Sadye Washko",
+        "Level": 19,
+        "Stats": {
+          "0": 277352961,
+          "1": 526,
+          "4": 3,
+          "12": 5941,
+          "18": 0,
+          "21": 0,
+          "27": 526,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 19,
+          "60": 15,
+          "64": 40162,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26149,
+          "360": 98,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40162,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 258990,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "AQ18": {
+    "Templates": [
+      {
+        "Name": "Suzie Mirabelli",
+        "Level": 2,
+        "Stats": {
+          "0": 277352961,
+          "1": 48,
+          "4": 3,
+          "12": 5941,
+          "18": 0,
+          "21": 0,
+          "27": 48,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 2,
+          "60": 15,
+          "64": 223911,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26149,
+          "360": 91,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 103,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "LEMY",
+          "Source": "scrape-arete-20261030: live NPC scrape 2026-10-30 (look/level/hp/side/breed from RC-PC scraped_npcs_20261030.csv); donor LEMY supplies the remaining stats",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 155947
+          },
+          {
+            "Place": 1,
+            "Id": 155944
+          },
+          {
+            "Place": 2,
+            "Id": 155945
+          },
+          {
+            "Place": 3,
+            "Id": 155946
+          },
+          {
+            "Place": 4,
+            "Id": 155943
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 223911,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 29084,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "FACS": {
+    "Templates": [
+      {
+        "Name": "Logistics Manager Fausto",
+        "Level": 20,
+        "Stats": {
+          "0": 277352961,
+          "1": 559,
+          "4": 4,
+          "12": 23366,
+          "18": 0,
+          "21": 0,
+          "27": 559,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 20,
+          "59": 0,
+          "60": 15,
+          "64": 40105,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 30,
+          "286": 10,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26101,
+          "360": 99,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 137,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 247966
+          },
+          {
+            "Place": 2,
+            "Id": 9619
+          },
+          {
+            "Place": 3,
+            "Id": 247920
+          },
+          {
+            "Place": 4,
+            "Id": 9626
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40105,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scrape-rk-20261106",
+      "Note": "historical scrape pink fill (scraped_npcs_20261030_Nazgore.csv); outdoor/old-scraper OK; gloves omitted",
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "LEMY": {
+    "Templates": [
+      {
+        "Name": "Leonora Marty",
+        "Wander": {
+          "Home": [
+            3445.1,
+            9.09,
+            868.3
+          ],
+          "Radius": 30,
+          "MinPauseSeconds": 3,
+          "MaxPauseSeconds": 15
+        },
+        "Level": 10,
+        "Stats": {
+          "0": 277352961,
+          "1": 941,
+          "18": 0,
+          "21": 0,
+          "27": 941,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 10,
+          "60": 15,
+          "64": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 203736,
+          "360": 100,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": true,
+          "Confirmed": false,
+          "Donor": "ADAF",
+          "Source": "Street near the Weapons/Implants signs (Randy). Pink LEMY mapping guessed",
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)",
+          "WanderFix": "2026-11-12: Leonora Marty trail n=291, centroid home, radius 30 (max horiz 29.21). Restored LEMY to Leonora (RK had replaced this hash with Kermit Prabel; Kermit remains on K0SH)."
+        },
+        "HasHeadMesh": false,
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 85939
+          },
+          {
+            "Place": 1,
+            "Id": 296228
+          },
+          {
+            "Place": 2,
+            "Id": 296231
+          },
+          {
+            "Place": 3,
+            "Id": 296229
+          },
+          {
+            "Place": 4,
+            "Id": 296230
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40228,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 268635,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "FMXT": {
+    "Templates": [
+      {
+        "Name": "Furniture Merchant",
+        "Level": 192,
+        "Stats": {
+          "0": 277352961,
+          "1": 19630,
+          "4": 2,
+          "12": 5934,
+          "18": 0,
+          "21": 0,
+          "27": 19630,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "52": 7600,
+          "54": 192,
+          "59": 5,
+          "60": 15,
+          "61": 60,
+          "64": 40209,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 9,
+          "286": 3,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26137,
+          "360": 120,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 30862
+          },
+          {
+            "Place": 2,
+            "Id": 40903
+          },
+          {
+            "Place": 3,
+            "Id": 30839
+          },
+          {
+            "Place": 4,
+            "Id": 30886
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40209,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 7777,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ],
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scrape-rk-20261106",
+      "Note": "live RK scrape (today inst 2065882811); pink hash fill; gloves omitted unless city v6.0 capture supplies them (none in this pack)",
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "FPBY": {
+    "Templates": [
+      {
+        "Name": "Food Provider",
+        "Level": 187,
+        "Stats": {
+          "0": 277352961,
+          "1": 18885,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 18885,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "52": 7400,
+          "54": 187,
+          "59": 0,
+          "60": 15,
+          "64": 40629,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 3,
+          "286": 1,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 120,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 2,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 30862
+          },
+          {
+            "Place": 2,
+            "Id": 40903
+          },
+          {
+            "Place": 3,
+            "Id": 30839
+          },
+          {
+            "Place": 4,
+            "Id": 30886
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40629,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 7777,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ],
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        }
+      },
+      {
+        "Name": "Food Provider",
+        "Level": 194,
+        "Stats": {
+          "0": 277352961,
+          "1": 19928,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 19928,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "52": 7800,
+          "54": 194,
+          "59": 0,
+          "60": 15,
+          "61": 800,
+          "64": 40629,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 120,
+          "286": 40,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 120,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "Textures": [
+          {
+            "Id": 30862,
+            "Place": 1
+          },
+          {
+            "Id": 40903,
+            "Place": 2
+          },
+          {
+            "Id": 30839,
+            "Place": 3
+          },
+          {
+            "Id": 30886,
+            "Place": 4
+          }
+        ],
+        "Meshes": [
+          {
+            "Id": 40629,
+            "Position": 0,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Id": 7777,
+            "Position": 1,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ],
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scrape-rk-20261106",
+      "Note": "live RK scrape (today inst 2065882809); pink hash fill; gloves omitted unless city v6.0 capture supplies them (none in this pack)",
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "VJTN": {
+    "Templates": [
+      {
+        "Name": "Barry the Food Vendor",
+        "Level": 10,
+        "Stats": {
+          "0": 277352961,
+          "1": 227,
+          "4": 2,
+          "12": 5914,
+          "18": 0,
+          "21": 0,
+          "27": 227,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 10,
+          "59": 0,
+          "60": 15,
+          "64": 40249,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 15,
+          "286": 5,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26139,
+          "360": 95,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 30862
+          },
+          {
+            "Place": 2,
+            "Id": 40903
+          },
+          {
+            "Place": 3,
+            "Id": 30839
+          },
+          {
+            "Place": 4,
+            "Id": 30886
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40249,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 7777,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scrape-rk-20261106",
+      "Note": "historical scrape pink fill (scraped_npcs_20261030_Nazgore.csv); outdoor/old-scraper OK; gloves omitted",
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "TAIL": {
+    "Templates": [
+      {
+        "Name": "Tailor",
+        "Level": 180,
+        "Stats": {
+          "0": 271061505,
+          "1": 17841,
+          "4": 1,
+          "27": 17841,
+          "33": 0,
+          "47": 1,
+          "54": 180,
+          "59": 3,
+          "64": 40635,
+          "89": 1,
+          "156": 448,
+          "359": 26076,
+          "360": 119,
+          "455": 0,
+          "466": 0,
+          "673": 31
+        },
+        "HasHeadMesh": true,
+        "Equipment": [],
+        "Features": [
+          "NoCombat"
+        ],
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 30862
+          },
+          {
+            "Place": 2,
+            "Id": 40903
+          },
+          {
+            "Place": 3,
+            "Id": 30839
+          },
+          {
+            "Place": 4,
+            "Id": 30886
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40635,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          },
+          {
+            "Position": 1,
+            "Id": 7777,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          }
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "docs/accepted/npc/delmus/NpcTemplate.json recorded template.",
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "SOPD": {
+    "Templates": [
+      {
+        "Name": "Secondhand Peddler",
+        "Level": 200,
+        "Stats": {
+          "0": 268964353,
+          "1": 36434,
+          "4": 1,
+          "12": 5927,
+          "18": 0,
+          "21": 0,
+          "27": 36434,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 200,
+          "60": 0,
+          "64": 40629,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 180,
+          "286": 60,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26090,
+          "360": 121,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "HasHeadMesh": true,
+        "LootTable": [],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 40975
+          },
+          {
+            "Place": 1,
+            "Id": 82112
+          },
+          {
+            "Place": 2,
+            "Id": 40968
+          },
+          {
+            "Place": 3,
+            "Id": 40927
+          },
+          {
+            "Place": 4,
+            "Id": 40988
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 20093,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          },
+          {
+            "Position": 0,
+            "Id": 40629,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scrape-city-20261030",
+      "Note": "live PRK scrape (hashpoint, pf 950)",
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "VUHO": {
+    "Templates": [
+      {
+        "Name": "Vaughn Hammond",
+        "Level": 25,
+        "Stats": {
+          "0": 277352961,
+          "1": 724,
+          "4": 1,
+          "12": 5907,
+          "18": 0,
+          "21": 0,
+          "27": 724,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 25,
+          "59": 0,
+          "60": 15,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 281855,
+          "360": 100,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 137,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "HasHeadMesh": false,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 286229
+          },
+          {
+            "Place": 1,
+            "Id": 286227
+          },
+          {
+            "Place": 2,
+            "Id": 286228
+          },
+          {
+            "Place": 3,
+            "Id": 286226
+          },
+          {
+            "Place": 4,
+            "Id": 286225
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 265793,
+            "OverrideTextureId": 286562,
+            "Layer": 2
+          },
+          {
+            "Position": 1,
+            "Id": 264698,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 3,
+            "Id": 286446,
+            "OverrideTextureId": 0,
+            "Layer": 0
+          }
+        ],
+        "ContentProvenance": {
+          "AppearanceFix": "2026-11-12: Textures/Meshes from gopherballs-20261112-arete (Gopherballs, PF 6553)"
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "scrape-rk-20261106",
+      "Note": "historical scrape pink fill (scraped_npcs_20261030_Nazgore.csv); outdoor/old-scraper OK; gloves omitted",
+      "AppearanceFix": "2026-11-12 Gopherballs Arete Landing PF 6553 scrape"
+    }
+  },
+  "NCSM": {
+    "Templates": [
+      {
+        "Name": "Neutral Clothing Salesman",
+        "Level": 10,
+        "Stats": {
+          "0": 271061505,
+          "1": 272,
+          "4": 1,
+          "12": 5907,
+          "18": 0,
+          "21": 0,
+          "27": 272,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 10,
+          "59": 0,
+          "60": 15,
+          "64": 223811,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 15,
+          "286": 5,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26092,
+          "360": 105,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "LootTable": [],
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat"
+        ],
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 265346
+          },
+          {
+            "Place": 2,
+            "Id": 248878
+          },
+          {
+            "Place": 3,
+            "Id": 37036
+          },
+          {
+            "Place": 4,
+            "Id": 30886
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 223811,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Source": "gopherballs-20261112-arete: no prior template; stats/outfit from live scrape PF 6553 inst 2064132264"
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Confirmed": true,
+      "Source": "gopherballs-20261112-arete: no prior template; stats/outfit from live scrape PF 6553 inst 2064132264"
+    }
+  }
+}
