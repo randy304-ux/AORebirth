@@ -1609,6 +1609,36 @@
                 25.6
             ],
             "reason": "Zone-in Filth Flea pack was 10.6 m from arrival (64.59, 158.01, 15.64) and the scrape flea had patrolled to 2 m. Moved down the +X/+Z corridor to (78, 159, 35), short of the next NMNV at (86.1, 159, 43.6). 2026-11-10"
+        },
+        {
+            "playfield": 6553,
+            "hash": "TAIL",
+            "position": [
+                3471.4175,
+                9.363631,
+                861.1444
+            ],
+            "reason": "Arete market Tailor (content Npcs.json ddogs:arete:7B0828A9, shop stock=24) sits 0.35 m on this hash-spawn. Keep the unique vendor (working shop + knubot); drop the Spawns.json TAIL point. 2026-11-12"
+        },
+        {
+            "playfield": 6553,
+            "hash": "CGSA",
+            "position": [
+                3464.0718,
+                9.363676,
+                861.1578
+            ],
+            "reason": "Arete Neutral Clothing Salesman (content Npcs.json ddogs:arete:7B0828A8, shop stock=32) sits 0.35 m on this CGSA point. Hash-spawn is guessed Cyrus Cervenak (no stock). Keep the unique vendor; drop this Spawns.json CGSA point. 2026-11-12"
+        },
+        {
+            "playfield": 6553,
+            "hash": "SOPD",
+            "position": [
+                3440.2905,
+                9.363636,
+                863.59766
+            ],
+            "reason": "Arete Secondhand Peddler (content Npcs.json ddogs:arete:7B0828AA, shop stock=81) sits 0.35 m on this hash-spawn. Overlay SOPD template has no vendor. Keep the unique vendor (working shop + knubot); drop the Spawns.json SOPD point. 2026-11-12"
         }
     ]
 }
