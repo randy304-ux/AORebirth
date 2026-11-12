@@ -40,19 +40,29 @@ namespace ZoneEngine_New.Tests
             var dynels = Data.Value.GetPlayfieldGeometry(ArrivalHall.PlayfieldId).Dynels!.Dynels;
             var north = dynels.Single(d => d.IdentityInstance == ArrivalHall.NorthDoor);
             var arete = dynels.Single(d => d.IdentityInstance == ArrivalHall.AreteDoor);
+            var icc = dynels.Single(d => d.IdentityInstance == ArrivalHall.IccDoor);
+            var jobe = dynels.Single(d => d.IdentityInstance == ArrivalHall.JobeDoor);
             var sl = dynels.Single(d => d.IdentityInstance == ArrivalHall.ShadowlandsDoor);
             var term = dynels.Single(d => d.IdentityInstance == ArrivalHall.ShadowlandsTerminal);
 
             Assert.AreEqual(100406, north.TemplateId);
             Assert.AreEqual(100406, arete.TemplateId);
+            Assert.AreEqual(100406, icc.TemplateId);
+            Assert.AreEqual(100406, jobe.TemplateId);
             Assert.AreEqual(100406, sl.TemplateId);
             Assert.AreEqual(95351, term.TemplateId);
 
-            // North door is the farthest door in the hall.
+            // North door is the farthest door in the hall and is not a walk-in exit.
             Assert.AreEqual(dynels.Where(d => d.TemplateId == 100406).Max(d => d.Position.Z), north.Position.Z, 0.01f);
-            // Arete door: the middle south-wall door, between the ICC officer side and the Jobe/Shadowlands side.
-            Assert.AreEqual(191.95f, arete.Position.X, 0.1f);
-            Assert.AreEqual(153.55f, arete.Position.Z, 0.1f);
+            // Red left: Exit to Clans -> Arete.
+            Assert.AreEqual(201.49f, arete.Position.X, 0.1f);
+            Assert.AreEqual(154.31f, arete.Position.Z, 0.1f);
+            // Middle: Exit to Neutral -> ICC Shuttleport.
+            Assert.AreEqual(191.95f, icc.Position.X, 0.1f);
+            Assert.AreEqual(153.55f, icc.Position.Z, 0.1f);
+            // Blue right: Exit to Omni-Tek -> Jobe Research.
+            Assert.AreEqual(181.88f, jobe.Position.X, 0.1f);
+            Assert.AreEqual(154.33f, jobe.Position.Z, 0.1f);
 
             // The new-character landing is inside the hall, south of the north door and clear of its 3 m walk-in pad.
             Vector3 land = ArrivalHall.NorthDoorLanding;
@@ -66,6 +76,10 @@ namespace ZoneEngine_New.Tests
         {
             // SCDK (Scientist Drake Rodriguez) spawn point in Jobe Research 4001.
             Assert.AreEqual(4001, ArrivalHall.JobeResearch);
+            Assert.AreEqual(4582, ArrivalHall.IccShuttleport);
+            Assert.AreEqual(934.9f, ArrivalHall.IccShuttleportLanding.xf, 0.01f);
+            Assert.AreEqual(24.8f, ArrivalHall.IccShuttleportLanding.yf, 0.01f);
+            Assert.AreEqual(762.0f, ArrivalHall.IccShuttleportLanding.zf, 0.01f);
             double dx = ArrivalHall.JobeResearchLanding.xf - 854.5, dz = ArrivalHall.JobeResearchLanding.zf - 958.6;
             double d = Math.Sqrt(dx * dx + dz * dz);
             Assert.IsTrue(d > 2.0 && d < 8.0);

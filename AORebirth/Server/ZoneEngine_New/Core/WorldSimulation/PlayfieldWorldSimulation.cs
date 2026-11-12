@@ -126,6 +126,8 @@ namespace ZoneEngine_New.Core.WorldSimulation
             world.BakeTeleportalTriggers(geometry.Collision?.Teleportals);
             // Crashed Alien Ship doors: make sure each has a walk-in trigger (the client statels carry no destination).
             ZoneEngine_New.Core.Knubot.AlienShip.RegisterDoorTriggers(world, playfieldId);
+            // Arrival Hall south doors: widen the 1 m 53142 pads so walking through the doorway hits them.
+            ZoneEngine_New.Core.Knubot.ArrivalHall.RegisterDoorTriggers(world, playfieldId);
 
             int terrainChunks = surface?.Terrain != null ? geometry.Collision!.Terrain!.Chunks.Count : 0;
             logger.Info(
@@ -1218,6 +1220,72 @@ namespace ZoneEngine_New.Core.WorldSimulation
         /// <paramref name="landing"/> on <paramref name="exteriorPlayfieldId"/>, outside the ACG entrance. It records no
         /// way back (the entrance, with a key, is the way back in).
         /// </summary>
+        /// <summary>
+        /// Widens (or adds) a TargetVicinity pad at a placed dynel so walking through the doorway hits it.
+        /// BakeVicinityTriggers leaves unused-53142 doors at a 1 m disc, which sits inside the wall; doors with no
+        /// DynelCollision.json sphere use a 3 m reach, the same fallback as an absolute walk-in door.
+        /// </summary>
+        public void WidenVicinityTrigger(int doorInstance)
+        {
+            if (doorInstance == 0)
+                return;
+
+            List<PlayfieldDynel>? dynels = _geometry.Dynels?.Dynels;
+            if (dynels == null)
+                return;
+
+            PlayfieldDynel? placed = null;
+            for (int i = 0; i < dynels.Count; i++)
+            {
+                if (dynels[i].IdentityInstance != doorInstance)
+                    continue;
+                placed = dynels[i];
+                break;
+            }
+
+            if (placed == null)
+                return;
+
+            float x = placed.Position.X;
+            float y = placed.Position.Y;
+            float z = placed.Position.Z;
+            const float r = 3f;
+            bool existing = _triggers.TryGetDynel(ZoneTriggerKind.TargetVicinity, doorInstance, out ZoneTriggerVolume pad);
+            if (!existing)
+            {
+                pad = new ZoneTriggerVolume
+                {
+                    Kind = ZoneTriggerKind.TargetVicinity,
+                    Id = _nextTriggerId++,
+                    DynelInstance = doorInstance,
+                    // Non-null so FireTargetVicinity reaches ArrivalHall.TryHandleVicinity.
+                    VicinityEvents = new ItemTemplate { Id = placed.TemplateId }
+                };
+            }
+
+            pad.CenterX = x;
+            pad.CenterY = y;
+            pad.CenterZ = z;
+            pad.Radius = MathF.Max(pad.Radius, r);
+            ApplyClientSphere(pad, placed, x, y, z);
+            if (!pad.Sphere)
+            {
+                pad.Radius = MathF.Max(pad.Radius, r);
+                pad.MinX = x - pad.Radius;
+                pad.MaxX = x + pad.Radius;
+                pad.MinZ = z - pad.Radius;
+                pad.MaxZ = z + pad.Radius;
+                float h = TriggerVolumeCatalog.HalfHeight(pad);
+                pad.MinY = y - h;
+                pad.MaxY = y + h;
+            }
+
+            if (existing)
+                _triggers.Rebin(pad);
+            else
+                _triggers.Add(pad);
+        }
+
         public void RegisterDungeonExit(float x, float y, float z, int doorInstance, int exteriorPlayfieldId, AoVector3 landing, AoQuaternion landingHeading,
             int templateId = 0, AoQuaternion? doorRotation = null)
         {

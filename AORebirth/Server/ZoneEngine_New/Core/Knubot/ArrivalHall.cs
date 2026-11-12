@@ -16,22 +16,30 @@ using Vector3 = AORebirth.Core.Vector.Vector3;
 
 /// <summary>
 /// Dungeon Dogs: the Arrival Hall (playfield 4604) new-character start. A character whose start-area choice is still
-/// Pending and who would load in on the NewCharacter.json pad (Arete Landing 6553) is placed in the hall at the far
-/// (north) door instead; LoginEngine is untouched. Two walk-in doors are overridden here: the middle south-wall door
-/// (between the ICC Immigration Officer and the Jobe Research side) goes to Arete Landing and records the arete choice;
-/// the Shadowlands door and the exit terminal next to it go straight to Jobe Research (4001), in front of Scientist Drake Rodriguez. The Immigration Officer's KnuBot handles
-/// Rubi-Ka ({startarea icc} + ICC Shuttleport).
+/// Pending and who would load in on the NewCharacter.json pad (Arete Landing 6553) is placed in the hall at the mid-hall
+/// landing; LoginEngine is untouched. The three south-wall doors are the walk-in exits: the red left door ("Exit to
+/// Clans", sign 0xC00B11FC) goes to Arete Landing and records the arete choice; the middle door ("Exit to Neutral",
+/// sign 0xC00C11FC) goes to the ICC Shuttleport and records {startarea icc}; the blue right door ("Exit to Omni-Tek",
+/// sign 0xC00D11FC) goes to Jobe Research (4001), as do the Shadowlands door and the exit terminal next to it. Sign
+/// TemplateIds are left unchanged. The north door is not a walk-in exit.
 /// </summary>
 public static class ArrivalHall
 {
     public const int PlayfieldId = 4604;
     public const int JobeResearch = 4001;
+    public const int IccShuttleport = 4582;
 
-    /// <summary>Far north door (template 100406) at (213.27, 1.02, 350.10); new characters land just inside it.</summary>
+    /// <summary>Far north door (template 100406) at (213.27, 1.02, 350.10); new characters land in the mid-hall, not through this door.</summary>
     public const int NorthDoor = unchecked((int)0xC00811FC);
 
-    /// <summary>Middle south-wall door at (191.95, 1.02, 153.55), directly behind the Immigration Officer's desk.</summary>
-    public const int AreteDoor = unchecked((int)0xC00711FC);
+    /// <summary>Red left south-wall door ("Exit to Clans") at (201.49, 1.02, 154.31), sign 0xC00B11FC above it.</summary>
+    public const int AreteDoor = unchecked((int)0xC00111FC);
+
+    /// <summary>Middle south-wall door ("Exit to Neutral") at (191.95, 1.02, 153.55), sign 0xC00C11FC above it.</summary>
+    public const int IccDoor = unchecked((int)0xC00711FC);
+
+    /// <summary>Blue right south-wall door ("Exit to Omni-Tek") at (181.88, 1.02, 154.33), sign 0xC00D11FC above it.</summary>
+    public const int JobeDoor = unchecked((int)0xC00A11FC);
 
     /// <summary>Shadowlands door at (167.10, 1.02, 169.51) ("You need the Shadowlands Expansion Pack to go to Jobe.").</summary>
     public const int ShadowlandsDoor = unchecked((int)0xC00211FC);
@@ -51,6 +59,9 @@ public static class ArrivalHall
     /// paid nano; that scrape came from PRK, so the door goes straight here.)
     /// </summary>
     public static readonly Vector3 JobeResearchLanding = new Vector3(854.5, 34.8, 954.6);
+
+    /// <summary>ICC Shuttleport 4582 landing used by the Immigration Officer's {teleport 4582 934.9 24.8 762.0}.</summary>
+    public static readonly Vector3 IccShuttleportLanding = new Vector3(934.9, 24.8, 762.0);
 
     /// <summary>NewCharacter.json StartLocation (Arete Landing pad).</summary>
     public const int NewCharacterPlayfield = KnubotStartArea.AretePlayfield;
@@ -81,6 +92,21 @@ public static class ArrivalHall
         catch { return false; }
     }
 
+    /// <summary>
+    /// Widens the three south-wall door pads so walking through the doorway hits them. Those doors only carry the
+    /// unused 53142 event, so BakeVicinityTriggers leaves a 1 m disc inside the wall. Uses the same 3 m reach as a
+    /// walk-in door that has no DynelCollision.json sphere. Sign TemplateIds are not changed.
+    /// </summary>
+    public static void RegisterDoorTriggers(PlayfieldWorldSimulation world, int playfieldId)
+    {
+        if (playfieldId != PlayfieldId)
+            return;
+
+        world.WidenVicinityTrigger(AreteDoor);
+        world.WidenVicinityTrigger(IccDoor);
+        world.WidenVicinityTrigger(JobeDoor);
+    }
+
     /// <summary>Runs the hall's door overrides. Returns true when the pad was handled here (its own spells must not run).</summary>
     public static bool TryHandleVicinity(PlayfieldType playfield, Player player, int dynelInstance)
     {
@@ -92,6 +118,10 @@ public static class ArrivalHall
             case AreteDoor:
                 GoToArete(playfield, player);
                 return true;
+            case IccDoor:
+                GoToIcc(playfield, player);
+                return true;
+            case JobeDoor:
             case ShadowlandsDoor:
             case ShadowlandsTerminal:
                 GoToJobe(playfield, player);
@@ -103,24 +133,34 @@ public static class ArrivalHall
 
     static void GoToArete(PlayfieldType source, Player player)
     {
+        RecordStartArea(source, player, MissionStartAreaSelectionStates.Arete);
+        Transfer(source, player, KnubotStartArea.AretePlayfield, KnubotStartArea.AreteLanding, null);
+    }
+
+    static void GoToIcc(PlayfieldType source, Player player)
+    {
+        RecordStartArea(source, player, MissionStartAreaSelectionStates.IccShuttleport);
+        Transfer(source, player, IccShuttleport, IccShuttleportLanding, null);
+    }
+
+    static void GoToJobe(PlayfieldType source, Player player)
+    {
+        // Same as the existing Shadowlands path: transfer only. Jobe is not a start-area choice.
+        Transfer(source, player, JobeResearch, JobeResearchLanding, null);
+    }
+
+    static void RecordStartArea(PlayfieldType source, Player player, string state)
+    {
         IMissionDao? missions = KnubotStartArea.Missions ?? source.GetService<IMissionDao>();
         try
         {
             if (IsPending(missions, player.Identity.Instance))
-                missions!.TryCompleteStartAreaSelection(player.Identity.Instance, MissionStartAreaSelectionStates.Arete);
+                missions!.TryCompleteStartAreaSelection(player.Identity.Instance, state);
         }
         catch
         {
             // The choice is bookkeeping; the door still works.
         }
-
-        Transfer(source, player, KnubotStartArea.AretePlayfield, KnubotStartArea.AreteLanding, null);
-    }
-
-    static void GoToJobe(PlayfieldType source, Player player)
-    {
-        Transfer(source, player, JobeResearch, JobeResearchLanding, null);
-
     }
 
     static void Transfer(PlayfieldType source, Player player, int destination, Vector3 landing, Quaternion? heading)
@@ -142,4 +182,3 @@ public static class ArrivalHall
         });
     }
 }
-

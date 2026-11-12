@@ -184,14 +184,21 @@ namespace ZoneEngine_New.Core.WorldSimulation
         public int Count => _all.Count;
 
         public bool HasDynel(ZoneTriggerKind kind, int dynelInstance)
+            => TryGetDynel(kind, dynelInstance, out _);
+
+        public bool TryGetDynel(ZoneTriggerKind kind, int dynelInstance, out ZoneTriggerVolume volume)
         {
             for (int i = 0; i < _all.Count; i++)
             {
-                ZoneTriggerVolume volume = _all[i];
-                if (volume.Kind == kind && volume.DynelInstance == dynelInstance)
+                ZoneTriggerVolume candidate = _all[i];
+                if (candidate.Kind == kind && candidate.DynelInstance == dynelInstance)
+                {
+                    volume = candidate;
                     return true;
+                }
             }
 
+            volume = null!;
             return false;
         }
 
@@ -210,6 +217,23 @@ namespace ZoneEngine_New.Core.WorldSimulation
             else if (volume.Kind == ZoneTriggerKind.Teleportal)
                 TeleportalTriggerCount++;
 
+            IndexBins(volume);
+        }
+
+        /// <summary>
+        /// Recomputes the spatial-hash bins after a volume's AABB changed. The volume must already be in the catalog.
+        /// </summary>
+        public void Rebin(ZoneTriggerVolume volume)
+        {
+            ArgumentNullException.ThrowIfNull(volume);
+            foreach (List<ZoneTriggerVolume> list in _bins.Values)
+                list.Remove(volume);
+
+            IndexBins(volume);
+        }
+
+        void IndexBins(ZoneTriggerVolume volume)
+        {
             int minBinX = (int)MathF.Floor(volume.MinX / BinSize);
             int maxBinX = (int)MathF.Floor(volume.MaxX / BinSize);
             int minBinZ = (int)MathF.Floor(volume.MinZ / BinSize);
