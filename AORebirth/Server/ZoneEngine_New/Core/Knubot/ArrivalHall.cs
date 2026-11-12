@@ -39,8 +39,8 @@ public static class ArrivalHall
     /// <summary>Exit terminal (template 95351) at (163.40, 1.02, 169.50) beside the Shadowlands door.</summary>
     public const int ShadowlandsTerminal = unchecked((int)0xC00311FC);
 
-    /// <summary>About 6 m south of the north door, clear of its walk-in pad, facing south into the hall.</summary>
-    public static readonly Vector3 NorthDoorLanding = new Vector3(212.4, 1.02, 344.0);
+    /// <summary>Live PRK new-character spot, mid-hall south of the crashed shuttle (205.2, 1.0, 251.1), facing south into the hall.</summary>
+    public static readonly Vector3 NorthDoorLanding = new Vector3(205.2, 1.0, 251.1);
 
     /// <summary>Yaw 180 degrees (the north door's own placement heading): looking down the hall toward the desks.</summary>
     public static Quaternion NorthDoorHeading => new Quaternion(0, 1, 0, 0);
