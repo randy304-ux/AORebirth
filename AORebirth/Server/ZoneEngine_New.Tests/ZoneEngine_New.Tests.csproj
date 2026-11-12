@@ -76,4 +76,12 @@
     <Compile Include="TestDoubles.cs" />
     <Compile Include="SpawnGroupServiceTests.cs" />
   </ItemGroup>
+
+  <ItemGroup Condition="'$(StartersFocusedTests)' == 'true'">
+    <Compile Remove="@(Compile)" />
+    <Compile Include="TestDoubles.cs" />
+    <Compile Include="PlayerBotTests.cs" />
+    <Compile Include="NpcTemplateCatalogTests.cs" />
+    <Compile Include="StarterLoadersTests.cs" />
+  </ItemGroup>
 </Project>

@@ -129,6 +129,8 @@ namespace ZoneEngine_New.Core.Ai
                     continue;
                 if (other.Brain?.PlayerBot != null)
                     continue;
+                if (NpcSupportRules.IsPlayerPetOrMerc(other) || other.PetOwner is Player)
+                    continue;
                 if (other.MobTemplate != null
                     && (other.MobTemplate.Has(NpcFeature.NoCombat)
                         || other.MobTemplate.Has(NpcFeature.PlayerUntargetable)

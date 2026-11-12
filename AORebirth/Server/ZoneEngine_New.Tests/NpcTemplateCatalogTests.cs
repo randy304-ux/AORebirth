@@ -2,6 +2,7 @@ namespace ZoneEngine_New.Tests
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -394,6 +395,27 @@ namespace ZoneEngine_New.Tests
 
             public override int Next(int maxValue)
                 => Math.Min(_value, maxValue - 1);
+        }
+        [TestMethod]
+        public void OfficialAttackPetHashesResolveFromPetsOverlay()
+        {
+            string path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "GameData", "NpcTemplates.Pets.json"));
+            if (!File.Exists(path))
+                path = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "GameData", "NpcTemplates.Pets.json"));
+            if (!File.Exists(path))
+                Assert.Inconclusive("NpcTemplates.Pets.json not found beside the test host.");
+
+            NpcTemplateCatalog catalog = NpcTemplateCatalog.Parse(File.ReadAllText(path));
+            Assert.IsTrue(catalog.TryResolve("PT50", 1, out MobTemplate anger));
+            Assert.AreEqual("PT50", anger.Hash);
+            Assert.AreEqual("Anger Manifestation", anger.Name);
+            Assert.AreEqual(96195, anger.Stats[(int)CharacterStat.MonsterData]);
+            Assert.IsFalse(anger.UnresolvedPlaceholder);
+
+            Assert.IsTrue(catalog.TryResolve("MT01", 1, out MobTemplate heal));
+            Assert.AreEqual("Medinos", heal.Name);
+            Assert.AreEqual(96193, heal.Stats[(int)CharacterStat.MonsterData]);
+            Assert.IsFalse(heal.UnresolvedPlaceholder);
         }
     }
 }

@@ -59,6 +59,13 @@ namespace ZoneEngine_New.Core.Helpers
             if (ReferenceEquals(attackerSide, targetSide))
                 return false;
 
+            // Starter playerbots fight wild mobs only; never players, pets, mercs, or other player-owned NPCs.
+            if (attacker is NpcCharacter { Brain.PlayerBot: not null }
+                && (targetSide is Player
+                    || NpcSupportRules.IsPlayerPetOrMerc(target)
+                    || NpcSupportRules.IsPlayerPetOrMerc(targetSide)))
+                return false;
+
             // Allied structures (Sector 35 towers / accumulator): aliens may damage them,
             // players and their pets may not, including AoE (NanoCastFunctions uses CanAttack).
             if (target is NpcCharacter untargetable

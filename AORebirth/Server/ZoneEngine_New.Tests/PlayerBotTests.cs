@@ -1,5 +1,6 @@
 namespace ZoneEngine_New.Tests
 {
+    using System;
     using System.IO;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,6 +11,7 @@ namespace ZoneEngine_New.Tests
     using ZoneEngine_New.Core.Bots;
     using ZoneEngine_New.Core.Entities;
     using ZoneEngine_New.Core.GameData;
+    using ZoneEngine_New.Core.Helpers;
 
     using Vector3 = AORebirth.Core.Vector.Vector3;
 
@@ -54,6 +56,39 @@ namespace ZoneEngine_New.Tests
             Assert.IsTrue(catalog.TryGetZone(4582, out _));
             Assert.IsTrue(catalog.TryGetZone(4313, out _));
             Assert.IsFalse(catalog.TryGetZone(4604, out _));
+        }
+
+        [TestMethod]
+        public void PlayerBotDoesNotEngagePlayersPetsOrMercs()
+        {
+            var bot = new NpcCharacter(
+                new Identity { Type = IdentityType.CanbeAffected, Instance = 900010 },
+                new StubItemBuilder())
+            {
+                Attackable = true
+            };
+            NpcBrain.Create(bot, home: null, NpcAiProfiles.PlayerBot);
+            Assert.IsNotNull(bot.Brain?.PlayerBot);
+
+            Player player = TestWorld.CreatePlayer(26);
+            var wildMob = new NpcCharacter(
+                new Identity { Type = IdentityType.CanbeAffected, Instance = 900011 },
+                new StubItemBuilder())
+            {
+                Attackable = true
+            };
+            var owned = new NpcCharacter(
+                new Identity { Type = IdentityType.CanbeAffected, Instance = 900012 },
+                new StubItemBuilder())
+            {
+                Attackable = true
+            };
+            owned.Stats.Set(CharacterStat.PetMaster, player.Identity.Instance);
+
+            Assert.IsTrue(CombatRules.CanAttack(bot, wildMob));
+            Assert.IsFalse(CombatRules.CanAttack(bot, player));
+            Assert.IsFalse(CombatRules.CanAttack(bot, owned));
+            Assert.IsTrue(NpcSupportRules.IsPlayerPetOrMerc(owned));
         }
     }
 }
