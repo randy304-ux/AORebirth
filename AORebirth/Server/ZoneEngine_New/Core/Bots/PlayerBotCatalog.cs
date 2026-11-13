@@ -6,6 +6,7 @@ namespace ZoneEngine_New.Core.Bots
     using System.IO;
     using System.Text.Json;
 
+    using ZoneEngine_New.Core.Ai;
     using ZoneEngine_New.Core.GameData;
     using ZoneEngine_New.Core.Logging;
 
@@ -85,13 +86,39 @@ namespace ZoneEngine_New.Core.Bots
                             }
                         }
 
+                        var huntAreas = new List<PlayerBotHuntArea>();
+                        if (zone.HuntAreas != null)
+                        {
+                            foreach (HuntAreaModel? area in zone.HuntAreas)
+                            {
+                                if (area == null)
+                                    continue;
+                                float radius = area.Radius > 0f ? area.Radius : PlayerBotHunt.DefaultRadius;
+                                huntAreas.Add(new PlayerBotHuntArea(
+                                    area.Name ?? "",
+                                    new Vector3(area.X, area.Y, area.Z),
+                                    radius));
+                            }
+                        }
+
+                        if (points.Count == 0 && huntAreas.Count > 0)
+                        {
+                            for (int i = 0; i < huntAreas.Count; i++)
+                                points.Add(huntAreas[i].Center);
+                        }
+
                         if (points.Count == 0)
                             continue;
 
                         int count = zone.Count > 0
                             ? Clamp(zone.Count, 1, 20, CountPerPlayfield)
                             : CountPerPlayfield;
-                        zones.Add(new ZoneConfig(zone.Id, zone.Name ?? zone.Id.ToString(CultureInfo.InvariantCulture), count, points));
+                        zones.Add(new ZoneConfig(
+                            zone.Id,
+                            zone.Name ?? zone.Id.ToString(CultureInfo.InvariantCulture),
+                            count,
+                            points,
+                            huntAreas));
                     }
                 }
 
@@ -214,12 +241,18 @@ namespace ZoneEngine_New.Core.Bots
 
         public sealed class ZoneConfig
         {
-            public ZoneConfig(int id, string name, int count, IReadOnlyList<Vector3> points)
+            public ZoneConfig(
+                int id,
+                string name,
+                int count,
+                IReadOnlyList<Vector3> points,
+                IReadOnlyList<PlayerBotHuntArea>? huntAreas = null)
             {
                 Id = id;
                 Name = name;
                 Count = count;
                 Points = points;
+                HuntAreas = huntAreas ?? Array.Empty<PlayerBotHuntArea>();
             }
 
             public int Id { get; }
@@ -229,6 +262,8 @@ namespace ZoneEngine_New.Core.Bots
             public int Count { get; }
 
             public IReadOnlyList<Vector3> Points { get; }
+
+            public IReadOnlyList<PlayerBotHuntArea> HuntAreas { get; }
         }
 
         sealed class FileModel
@@ -279,6 +314,21 @@ namespace ZoneEngine_New.Core.Bots
             public int Count { get; set; }
 
             public PointModel[]? Points { get; set; }
+
+            public HuntAreaModel[]? HuntAreas { get; set; }
+        }
+
+        sealed class HuntAreaModel
+        {
+            public string? Name { get; set; }
+
+            public float X { get; set; }
+
+            public float Y { get; set; }
+
+            public float Z { get; set; }
+
+            public float Radius { get; set; }
         }
 
         sealed class PointModel

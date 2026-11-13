@@ -290,10 +290,15 @@ namespace ZoneEngine_New.Core.Ai
         }
     }
 
-    /// <summary>Walk the configured POI list (navmesh when present, otherwise straight-line PathTo).</summary>
+    /// <summary>
+    /// Hunt-area roam (mod-playerbots grind style). With no navmesh these starter PFs fall back to
+    /// short ground-snapped steps toward a living prey or a random point in the current hunt area.
+    /// An idle bot always picks a new roam target; two stuck skips switch the hunt area.
+    /// </summary>
     sealed class PlayerBotRoamNode : BehaviourNode
     {
         readonly NpcBrain _brain;
+        readonly List<NpcCharacter> _scratch = new(32);
 
         public PlayerBotRoamNode(NpcBrain brain)
             : base("playerbot-roam")
@@ -305,7 +310,11 @@ namespace ZoneEngine_New.Core.Ai
         {
             TickStallWatch.Stage("node.playerbot-roam", _brain.Npc.Identity.Instance);
             PlayerBotState? state = _brain.PlayerBot;
-            if (state == null || state.Waypoints.Count == 0)
+            if (state == null)
+                return _nodeState = NodeState.Failure;
+
+            PlayerBotHunt.EnsureArea(state);
+            if ((state.HuntAreas == null || state.HuntAreas.Count == 0) && state.HuntRadius <= 0f)
                 return _nodeState = NodeState.Failure;
 
             if (!state.Active)
@@ -320,18 +329,21 @@ namespace ZoneEngine_New.Core.Ai
                 if (now < state.RoamPauseUntilUtc)
                     return _nodeState = NodeState.Running;
                 state.RoamPausing = false;
-                state.WaypointIndex = (state.WaypointIndex + 1) % state.Waypoints.Count;
+                state.HasHuntDestination = false;
                 MarkMoved(state, now);
             }
 
-            if (state.WaypointIndex < 0 || state.WaypointIndex >= state.Waypoints.Count)
-                state.WaypointIndex = 0;
+            if (!state.HasHuntDestination)
+                ChooseDestination(state, sidestep: 0, reason: "new");
 
-            Vector3 dest = state.Waypoints[state.WaypointIndex];
-            if (NpcAiRules.IsNearby(_brain.Npc.Position, dest, NpcAiRules.ArriveHomeMeters))
+            Vector3 dest = state.HuntDestination;
+            if (PlayerBotHunt.HorizontalDistance(_brain.Npc.Position, dest) <= PlayerBotHunt.ArriveMeters)
             {
                 _brain.StopPathing();
                 state.RoamPausing = true;
+                state.HasHuntDestination = false;
+                state.StuckStrikes = 0;
+                state.LastSidestepRadians = 0;
                 double pause = state.RoamPauseMinSeconds
                     + Random.Shared.NextDouble() * Math.Max(0, state.RoamPauseMaxSeconds - state.RoamPauseMinSeconds);
                 state.RoamPauseUntilUtc = now.AddSeconds(pause);
@@ -342,15 +354,110 @@ namespace ZoneEngine_New.Core.Ai
             if (IsStuck(state, now))
             {
                 _brain.StopPathing();
-                state.WaypointIndex = (state.WaypointIndex + 1) % state.Waypoints.Count;
+                state.StuckStrikes++;
+                if (state.StuckStrikes >= PlayerBotHunt.StuckStrikesBeforeSwitch)
+                {
+                    PlayerBotHunt.SwitchArea(state);
+                    ChooseDestination(state, sidestep: 0, reason: "stuck-switch");
+                }
+                else
+                {
+                    double sidestep = (Random.Shared.Next(2) == 0 ? -1 : 1) * (Math.PI / 3.0);
+                    state.LastSidestepRadians = sidestep;
+                    ChooseDestination(state, sidestep, reason: "stuck-sidestep");
+                }
+
                 MarkMoved(state, now);
-                dest = state.Waypoints[state.WaypointIndex];
+                dest = state.HuntDestination;
             }
+
+            Vector3 step = PlayerBotHunt.StepToward(
+                _brain.Npc.Position,
+                dest,
+                PlayerBotHunt.StepMeters,
+                state.LastSidestepRadians);
+            step = Snap(step);
 
             if (_brain.Npc.Motor.State != Movement.MovementState.Walk)
                 _brain.Npc.Motor.ApplyAction(Movement.MovementAction.SwitchToWalk);
-            _brain.PathTo(dest);
+            _brain.PathTo(step);
             return _nodeState = NodeState.Running;
+        }
+
+        void ChooseDestination(PlayerBotState state, double sidestep, string reason)
+        {
+            PlayerBotHunt.EnsureArea(state);
+            NpcCharacter? prey = FindHuntPrey(state);
+            Vector3 goal;
+            string how;
+            if (prey != null)
+            {
+                goal = PlayerBotHunt.ApproachPoint(_brain.Npc.Position, prey.Position, PlayerBotHunt.PreyApproachMeters);
+                how = "prey:" + prey.Name;
+            }
+            else
+            {
+                goal = PlayerBotHunt.RandomPointInArea(state.HuntCenter, state.HuntRadius);
+                how = "area:" + (string.IsNullOrEmpty(state.HuntAreaName) ? "hunt" : state.HuntAreaName);
+            }
+
+            if (sidestep != 0)
+                goal = PlayerBotHunt.StepToward(_brain.Npc.Position, goal, PlayerBotHunt.StepMeters, sidestep);
+
+            state.HuntDestination = Snap(goal);
+            state.HasHuntDestination = true;
+            state.LastSidestepRadians = sidestep;
+
+            if (reason == "stuck-switch" || reason == "stuck-sidestep")
+            {
+                _brain.Npc.Playfield?.GetService<IZoneLogger>()?.Info(
+                    "Playerbot roam bot=" + _brain.Npc.Name
+                    + " action=" + reason
+                    + " area=" + state.HuntAreaName
+                    + " via=" + how
+                    + " dest=" + string.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "{0:0},{1:0}",
+                        state.HuntDestination.xf,
+                        state.HuntDestination.zf));
+            }
+        }
+
+        NpcCharacter? FindHuntPrey(PlayerBotState state)
+        {
+            if (_brain.Npc.Playfield == null)
+                return null;
+
+            DateTime now = DateTime.UtcNow;
+            var locality = _brain.Npc.Playfield.GetRequiredService<PlayfieldLocality>();
+            locality.CollectNearby(_brain.Npc, PlayerBotHunt.ScanRange, _scratch);
+            NpcCharacter? prey = null;
+            double best = double.MaxValue;
+            for (int i = 0; i < _scratch.Count; i++)
+            {
+                NpcCharacter other = _scratch[i];
+                if (PlayerBotTargeting.IsBlacklisted(state, other.Identity, now))
+                    continue;
+                if (!PlayerBotTargeting.IsValidPrey(_brain.Npc, other, applyLevelRange: true))
+                    continue;
+
+                double d = PlayerBotHunt.HorizontalDistance(_brain.Npc.Position, other.Position);
+                if (d < best)
+                {
+                    best = d;
+                    prey = other;
+                }
+            }
+
+            _scratch.Clear();
+            return prey;
+        }
+
+        Vector3 Snap(Vector3 point)
+        {
+            if (_brain.Npc.Playfield == null)
+                return point;
+            return _brain.Npc.Playfield.SnapFeetToFloor(point);
         }
 
         bool IsStuck(PlayerBotState state, DateTime now)

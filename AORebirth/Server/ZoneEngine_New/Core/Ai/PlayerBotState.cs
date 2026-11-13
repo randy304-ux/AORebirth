@@ -9,7 +9,7 @@ namespace ZoneEngine_New.Core.Ai
 
     /// <summary>
     /// Per-NPC state for starter-area playerbots. Owned by <see cref="NpcBrain"/> when the AI profile is the
-    /// playerbot loop; counts/levels/waypoints come from GameData/PlayerBots.json.
+    /// playerbot loop; counts/levels/waypoints/hunt areas come from GameData/PlayerBots.json.
     /// </summary>
     public sealed class PlayerBotState
     {
@@ -18,6 +18,24 @@ namespace ZoneEngine_New.Core.Ai
         public IReadOnlyList<Vector3> Waypoints { get; set; } = Array.Empty<Vector3>();
 
         public int WaypointIndex { get; set; }
+
+        public IReadOnlyList<PlayerBotHuntArea> HuntAreas { get; set; } = Array.Empty<PlayerBotHuntArea>();
+
+        public int HuntAreaIndex { get; set; }
+
+        public string HuntAreaName { get; set; } = "";
+
+        public Vector3 HuntCenter { get; set; }
+
+        public float HuntRadius { get; set; }
+
+        public Vector3 HuntDestination { get; set; }
+
+        public bool HasHuntDestination { get; set; }
+
+        public int StuckStrikes { get; set; }
+
+        public double LastSidestepRadians { get; set; }
 
         public int MinPreyLevel { get; set; } = 1;
 

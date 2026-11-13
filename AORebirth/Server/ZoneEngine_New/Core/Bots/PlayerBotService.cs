@@ -149,11 +149,23 @@ namespace ZoneEngine_New.Core.Bots
                 return false;
             }
 
-            // Fresh materialize — safe to mark untargetable and strip loot without touching the catalog.
+            // Fresh materialize Ã¢â‚¬â€ safe to mark untargetable and strip loot without touching the catalog.
             template.Features.Add(NpcFeature.PlayerUntargetable);
             template.ItemTable = new List<MobItemTableEntry>();
 
-            Vector3 at = runtime.Zone.Points[Random.Shared.Next(runtime.Zone.Points.Count)];
+            PlayerBotHuntArea? huntArea = null;
+            Vector3 at;
+            if (runtime.Zone.HuntAreas.Count > 0)
+            {
+                huntArea = runtime.Zone.HuntAreas[Random.Shared.Next(runtime.Zone.HuntAreas.Count)];
+                at = PlayerBotHunt.RandomPointInArea(huntArea.Center, huntArea.Radius * 0.7f);
+            }
+            else
+            {
+                at = runtime.Zone.Points[Random.Shared.Next(runtime.Zone.Points.Count)];
+            }
+
+            at = runtime.Field.SnapNpcSpawn(at);
             SpawnService spawn = runtime.Field.GetRequiredService<SpawnService>();
             NpcCharacter npc;
             try
@@ -165,7 +177,7 @@ namespace ZoneEngine_New.Core.Bots
                     spawnSource: SpawnSource.None,
                     spawnHash: "PBOT",
                     attachDefaultBrain: false,
-                    configure: body => Dress(body, hash, level, runtime.Zone, hasPlayers));
+                    configure: body => Dress(body, hash, level, runtime.Zone, hasPlayers, huntArea));
             }
             catch (Exception exception)
             {
@@ -188,7 +200,7 @@ namespace ZoneEngine_New.Core.Bots
             return true;
         }
 
-        void Dress(NpcCharacter body, string hash, int level, PlayerBotCatalog.ZoneConfig zone, bool hasPlayers)
+        void Dress(NpcCharacter body, string hash, int level, PlayerBotCatalog.ZoneConfig zone, bool hasPlayers, PlayerBotHuntArea? huntArea)
         {
             body.Name = PickName();
             body.SuppressDeathCorpse = true;
@@ -203,7 +215,7 @@ namespace ZoneEngine_New.Core.Bots
                 body.Stats.Set(CharacterStat.Profession, kind.Profession);
                 body.Stats.Set(CharacterStat.VisualProfession, kind.Profession);
                 bool female = Random.Shared.Next(2) == 0;
-                // Atrox has no female look — force male for that roll path via ApplyAppearance.
+                // Atrox has no female look Ã¢â‚¬â€ force male for that roll path via ApplyAppearance.
                 MercNameFormat.ApplyAppearance(body, kind, female, randomAppearance: true);
 
                 Mercs.Catalog catalog = Mercs.Load(_gameData.RootPath);
@@ -237,7 +249,34 @@ namespace ZoneEngine_New.Core.Bots
             PlayerBotState state = brain.PlayerBot
                 ?? throw new InvalidOperationException("Playerbot brain missing PlayerBotState.");
             state.Waypoints = ShuffleCopy(zone.Points);
-            state.WaypointIndex = Random.Shared.Next(state.Waypoints.Count);
+            state.WaypointIndex = state.Waypoints.Count == 0 ? 0 : Random.Shared.Next(state.Waypoints.Count);
+            if (zone.HuntAreas.Count > 0)
+            {
+                state.HuntAreas = zone.HuntAreas;
+                int index = 0;
+                if (huntArea == null)
+                {
+                    index = Random.Shared.Next(zone.HuntAreas.Count);
+                    huntArea = zone.HuntAreas[index];
+                }
+                else
+                {
+                    for (int i = 0; i < zone.HuntAreas.Count; i++)
+                    {
+                        if (ReferenceEquals(zone.HuntAreas[i], huntArea))
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                }
+
+                PlayerBotHunt.AssignArea(state, huntArea!, index);
+            }
+            else
+            {
+                PlayerBotHunt.AssignAreasFromPoints(state, state.Waypoints);
+            }
             state.MinPreyLevel = Math.Max(1, level - 2);
             state.MaxPreyLevel = level + 2;
             state.EngageRange = _catalog.EngageRange;
