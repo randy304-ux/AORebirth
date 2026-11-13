@@ -132,6 +132,46 @@ namespace ZoneEngine_New.Tests
         }
 
         [TestMethod]
+        public void PlayerBotGateRejectsServiceNpcsAndSameSide()
+        {
+            var bot = new NpcCharacter(
+                new Identity { Type = IdentityType.CanbeAffected, Instance = 900030 },
+                new StubItemBuilder())
+            {
+                Attackable = true
+            };
+            NpcBrain.Create(bot, home: null, NpcAiProfiles.PlayerBot);
+            PlayerBotState state = bot.Brain!.PlayerBot!;
+            state.MinPreyLevel = 1;
+            state.MaxPreyLevel = 15;
+
+            // Mission giver / dialog NPC that is not proximity-hostile (WoW: non-hostile with NPC flags).
+            var giver = PreyNpc(900031, attackable: true, level: 10);
+            giver.MobTemplate = new MobTemplate { KnuBotId = 1234 };
+            Assert.IsFalse(PlayerBotTargeting.IsPossibleTarget(bot, giver, true, out string why));
+            Assert.AreEqual("service npc", why);
+
+            // Same mob, but hostile (BreedHostility > 0): a quest-linked wild mob is still prey.
+            var hostileGiver = PreyNpc(900032, attackable: true, level: 10);
+            hostileGiver.MobTemplate = new MobTemplate { KnuBotId = 1234 };
+            hostileGiver.Stats.Set(NpcAiRules.BreedHostilityStat, 1);
+            Assert.IsTrue(PlayerBotTargeting.IsValidPrey(bot, hostileGiver, applyLevelRange: true));
+
+            // Terminals.
+            var terminal = PreyNpc(900033, attackable: true, level: 10);
+            terminal.Name = "Contract Terminal";
+            Assert.IsFalse(PlayerBotTargeting.IsValidPrey(bot, terminal, applyLevelRange: true));
+
+            // Same side as a Clan/Omni bot (WoW: IsFriendlyTo).
+            bot.Stats.Set(CharacterStat.Side, (int)Side.Omni);
+            var omniGuard = PreyNpc(900034, attackable: true, level: 10);
+            omniGuard.Stats.Set(CharacterStat.Side, (int)Side.Omni);
+            Assert.IsFalse(PlayerBotTargeting.IsPossibleTarget(bot, omniGuard, true, out why));
+            Assert.AreEqual("same side", why);
+            bot.Stats.Set(CharacterStat.Side, (int)Side.Neutral);
+
+        }
+        [TestMethod]
         public void PlayerBotBlacklistExpires()
         {
             var state = new PlayerBotState();

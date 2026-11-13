@@ -101,10 +101,13 @@ namespace ZoneEngine_New.Core.Ai
             foreach (HateEntry entry in brain.Hate.Entries)
             {
                 Character? target = brain.Resolve(entry.Identity);
-                if (target == null
-                    || PlayerBotTargeting.IsBlacklisted(state, entry.Identity, now)
-                    || !PlayerBotTargeting.IsValidPrey(brain.Npc, target, applyLevelRange: true))
+                if (target == null || PlayerBotTargeting.IsBlacklisted(state, entry.Identity, now))
                 {
+                    (drop ??= new List<Identity>()).Add(entry.Identity);
+                }
+                else if (!PlayerBotTargeting.IsPossibleTarget(brain.Npc, target, applyLevelRange: true, out string reason))
+                {
+                    LogDrop(brain, target, reason);
                     (drop ??= new List<Identity>()).Add(entry.Identity);
                 }
             }
@@ -114,6 +117,14 @@ namespace ZoneEngine_New.Core.Ai
 
             for (int i = 0; i < drop.Count; i++)
                 Drop(brain, state, drop[i], now, blacklist: true);
+        }
+
+        public static void LogDrop(NpcBrain brain, Character target, string reason)
+        {
+            brain.Npc.Playfield?.GetService<IZoneLogger>()?.Info(
+                "Playerbot dropped target bot=" + brain.Npc.Name
+                + " target=" + target.Name
+                + " reason=" + reason);
         }
 
         public static void Drop(NpcBrain brain, PlayerBotState state, Identity identity, DateTime nowUtc, bool blacklist)
@@ -238,10 +249,10 @@ namespace ZoneEngine_New.Core.Ai
                 return _nodeState = NodeState.Failure;
 
             DateTime now = DateTime.UtcNow;
-            if (!PlayerBotTargeting.IsValidPrey(_brain.Npc, target, applyLevelRange: true)
+            if (!PlayerBotTargeting.IsPossibleTarget(_brain.Npc, target, applyLevelRange: true, out string reason)
                 || _brain.Npc.FightingTarget != target.Identity)
             {
-                LogDrop(target, "refused or invalid");
+                LogDrop(target, reason.Length > 0 ? reason : "attack refused");
                 PlayerBotHate.Drop(_brain, state, target.Identity, now, blacklist: true);
                 return _nodeState = NodeState.Failure;
             }
@@ -275,10 +286,7 @@ namespace ZoneEngine_New.Core.Ai
 
         void LogDrop(Character target, string reason)
         {
-            _brain.Npc.Playfield?.GetService<IZoneLogger>()?.Info(
-                "Playerbot dropped target bot=" + _brain.Npc.Name
-                + " target=" + target.Name
-                + " reason=" + reason);
+            PlayerBotHate.LogDrop(_brain, target, reason);
         }
     }
 
