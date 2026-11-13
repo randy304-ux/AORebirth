@@ -1,0 +1,911 @@
+{
+  "RMGL": {
+    "Templates": [
+      {
+        "Name": "Remi Gallois",
+        "Level": 10,
+        "Stats": {
+          "0": 277352961,
+          "1": 227,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "27": 227,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 10,
+          "59": 2,
+          "60": 15,
+          "61": 100,
+          "64": 40689,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 20,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 10,
+          "286": 1,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26084,
+          "360": 95,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 25,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 21824
+          },
+          {
+            "Place": 2,
+            "Id": 42219
+          },
+          {
+            "Place": 3,
+            "Id": 21819
+          },
+          {
+            "Place": 4,
+            "Id": 21831
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 20108,
+            "OverrideTextureId": 17998,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40689,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "RMGL at 3433.6, 9.4, 832.8, the stall beside Antonio. Human mesh borrowed. No marauder quest.",
+      "Confirmed": true,
+      "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position.",
+      "AppearanceFix": "2026-11-12: Textures/Meshes/Scale/MonsterData from gopherballs-20261112-arete (Gopherballs, PF 6553)",
+      "ScrapeMatch": "Remi Gallois at 3433.653, 9.010, 832.800 (0.01m from RMGL spawn); md=26084 scale=95, not Mutated Garbage Flea"
+    }
+  },
+  "UNAF": {
+    "Templates": [
+      {
+        "Name": "Kneebreaker Alfonzo Rizzolo",
+        "Level": 4,
+        "Stats": {
+          "0": 268964353,
+          "1": 28,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "27": 28,
+          "33": 3,
+          "37": 1,
+          "47": 1,
+          "54": 4,
+          "59": 2,
+          "60": 15,
+          "61": 40,
+          "64": 40117,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 20,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 4,
+          "286": 1,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 165196,
+          "360": 120,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 25,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "HasHeadMesh": true,
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 284557
+          },
+          {
+            "Place": 2,
+            "Id": 247977
+          },
+          {
+            "Place": 3,
+            "Id": 247887
+          },
+          {
+            "Place": 4,
+            "Id": 248016
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40117,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "UNAF at 3580.2, 8.2, 833.0 matches the guide Kneebreaker at 3580.0 by 832.7. Spawn level 4. Human mesh borrowed.",
+      "Confirmed": true,
+      "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position.",
+      "AppearanceFix": "2026-11-12: Textures/Meshes/Scale/MonsterData from gopherballs-20261112-arete (Gopherballs, PF 6553)",
+      "ScrapeMatch": "Kneebreaker Alfonzo Rizzolo at 3580.105, 8.055, 832.963 (0.10m from UNAF spawn); md=165196 scale=120, not Burning Cleaning Robot"
+    }
+  },
+  "WODO": {
+    "Templates": [
+      {
+        "Name": "Wounded Dockworker",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "1": 32,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "27": 32,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 1,
+          "59": 2,
+          "60": 15,
+          "64": 40130,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 11,
+          "174": 11,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 296008,
+          "360": 90,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "ADAF",
+          "Source": "Wounded Dockworker lying on the deck (AO-Universe #2, Randy screenshot). Mesh 296008 \"wounded dock worker\" from the client; hash WODO: guessed",
+          "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position."
+        },
+        "Equipment": [
+          [
+            295698,
+            295698
+          ]
+        ],
+        "Textures": [
+          {
+            "Place": 0,
+            "Id": 295555
+          },
+          {
+            "Place": 1,
+            "Id": 295553
+          },
+          {
+            "Place": 2,
+            "Id": 295554
+          },
+          {
+            "Place": 3,
+            "Id": 295552
+          },
+          {
+            "Place": 4,
+            "Id": 295556
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 205110,
+            "OverrideTextureId": 0,
+            "Layer": 2
+          },
+          {
+            "Position": 0,
+            "Id": 40130,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Confirmed": true,
+      "Donor": "ADAF",
+      "Source": "Wounded Dockworker lying on the deck (AO-Universe #2, Randy screenshot). Mesh 296008 \"wounded dock worker\" from the client; hash WODO: guessed",
+      "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position.",
+      "AppearanceFix": "2026-11-12: Textures/Meshes/Scale/MonsterData from gopherballs-20261112-arete (Gopherballs, PF 6553)",
+      "ScrapeMatch": "Wounded Dockworker at multiple WODO spawns (0.00-0.84m); md=296008 scale=90, not Burning Cleaning Robot"
+    }
+  },
+  "ONRP": {
+    "Templates": [
+      {
+        "Name": "Marco Spida",
+        "Level": 10,
+        "Stats": {
+          "0": 277352961,
+          "1": 227,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "27": 227,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 10,
+          "59": 2,
+          "60": 15,
+          "61": 100,
+          "64": 40694,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 20,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 10,
+          "286": 1,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 26092,
+          "360": 95,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 25,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "Features": [
+          "NoCombat"
+        ],
+        "HasHeadMesh": true,
+        "Equipment": [
+          [
+            46521,
+            46521
+          ]
+        ],
+        "ShopStock": [
+          {
+            "LowId": 248255,
+            "HighId": 248255,
+            "Quality": 1
+          },
+          {
+            "LowId": 248256,
+            "HighId": 248256,
+            "Quality": 1
+          },
+          {
+            "LowId": 248257,
+            "HighId": 248257,
+            "Quality": 1
+          },
+          {
+            "LowId": 248258,
+            "HighId": 248258,
+            "Quality": 1
+          },
+          {
+            "LowId": 248259,
+            "HighId": 248259,
+            "Quality": 1
+          },
+          {
+            "LowId": 248260,
+            "HighId": 248260,
+            "Quality": 1
+          },
+          {
+            "LowId": 248261,
+            "HighId": 248261,
+            "Quality": 1
+          },
+          {
+            "LowId": 248262,
+            "HighId": 248262,
+            "Quality": 1
+          },
+          {
+            "LowId": 248263,
+            "HighId": 248263,
+            "Quality": 1
+          },
+          {
+            "LowId": 248264,
+            "HighId": 248264,
+            "Quality": 1
+          },
+          {
+            "LowId": 248265,
+            "HighId": 248265,
+            "Quality": 1
+          },
+          {
+            "LowId": 248266,
+            "HighId": 248266,
+            "Quality": 1
+          },
+          {
+            "LowId": 300892,
+            "HighId": 300892,
+            "Quality": 1
+          },
+          {
+            "LowId": 300893,
+            "HighId": 300893,
+            "Quality": 1
+          }
+        ],
+        "Textures": [
+          {
+            "Place": 1,
+            "Id": 247966
+          },
+          {
+            "Place": 2,
+            "Id": 9619
+          },
+          {
+            "Place": 3,
+            "Id": 247920
+          },
+          {
+            "Place": 4,
+            "Id": 9626
+          }
+        ],
+        "Meshes": [
+          {
+            "Position": 0,
+            "Id": 40694,
+            "OverrideTextureId": 0,
+            "Layer": 4
+          }
+        ]
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Source": "ONRP at 3407.7, 9.4, 831.3 matches Marco Spida at 3407.7 by 831.0. Human mesh borrowed.",
+      "Confirmed": true,
+      "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position.",
+      "AppearanceFix": "2026-11-12: Textures/Meshes/Scale/MonsterData from gopherballs-20261112-arete (Gopherballs, PF 6553)",
+      "ScrapeMatch": "Marco Spida at 3407.679, 9.010, 831.277 (0.01m from ONRP spawn); md=26092 scale=95, not Franklyn Age"
+    }
+  },
+  "CMDI": {
+    "Templates": [
+      {
+        "Name": "Waste Collector",
+        "Level": 7,
+        "Stats": {
+          "0": 268964353,
+          "1": 29,
+          "4": 6,
+          "18": 0,
+          "21": 0,
+          "27": 29,
+          "33": 3,
+          "37": 1,
+          "47": 1,
+          "54": 7,
+          "59": 5,
+          "60": 15,
+          "61": 50,
+          "64": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 5,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 5,
+          "286": 2,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 17714,
+          "360": 75,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "01V1",
+          "Source": "Waste Collector around the Supreme Collector (SOCW camp, 4067,667). Client pink CMDI L7 mapped to Waste Collector: guessed",
+          "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position."
+        },
+        "LootTable": [
+          {
+            "Hash": "CMTR",
+            "Repeats": 1,
+            "Chance": 40,
+            "LevelMod": 20
+          },
+          {
+            "Hash": "CMHK",
+            "Repeats": 1,
+            "Chance": 8,
+            "LevelMod": 20
+          },
+          {
+            "Hash": "OFAB",
+            "Repeats": 1,
+            "Chance": 1,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPP1",
+            "Repeats": 1,
+            "Chance": 12,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPP2",
+            "Repeats": 1,
+            "Chance": 12,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPP3",
+            "Repeats": 1,
+            "Chance": 12,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPP4",
+            "Repeats": 1,
+            "Chance": 12,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPP5",
+            "Repeats": 1,
+            "Chance": 12,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPP6",
+            "Repeats": 1,
+            "Chance": 12,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPP7",
+            "Repeats": 1,
+            "Chance": 12,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "SPP8",
+            "Repeats": 1,
+            "Chance": 12,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "QFLS",
+            "Repeats": 1,
+            "Chance": 25,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "QFUC",
+            "Repeats": 1,
+            "Chance": 25,
+            "LevelMod": 0
+          },
+          {
+            "Hash": "QCCH",
+            "Repeats": 1,
+            "Chance": 25,
+            "LevelMod": 0
+          }
+        ],
+        "HasHeadMesh": false
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Confirmed": true,
+      "Donor": "01V1",
+      "Source": "Waste Collector around the Supreme Collector (SOCW camp, 4067,667). Client pink CMDI L7 mapped to Waste Collector: guessed",
+      "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position.",
+      "AppearanceFix": "2026-11-12: Textures/Meshes/Scale/MonsterData from gopherballs-20261112-arete (Gopherballs, PF 6553)",
+      "ScrapeMatch": "Waste Collector at CMDI spawns (0.03-0.77m, md=17714 scale=75). One nearby Garbage Flea at 2.31m is a different mob, not this hash."
+    }
+  },
+  "BBOC": {
+    "Templates": [
+      {
+        "Name": "Bank of Rubi-Ka Credit Card",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "1": 941,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "27": 941,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 1,
+          "59": 2,
+          "60": 15,
+          "64": 223803,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 253599,
+          "360": 30,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "ADAF",
+          "Source": "Lost credit card behind the barrels, Underground 3448,889 (AO-Universe #19). Talk-to pickup and look guessed",
+          "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position."
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Confirmed": true,
+      "Donor": "ADAF",
+      "Source": "Lost credit card behind the barrels, Underground 3448,889 (AO-Universe #19). Talk-to pickup and look guessed",
+      "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position.",
+      "ScrapeMatch": "Bank of Rubi-Ka Credit Card terminal at 3449.287, 0.010, 889.069 (0.01m from BBOC spawn); not Garbage Flea"
+    }
+  },
+  "PRHO": {
+    "Templates": [
+      {
+        "Name": "Prized House Plant",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "1": 6829,
+          "4": 6,
+          "18": 0,
+          "21": 0,
+          "27": 6829,
+          "33": 3,
+          "37": 1,
+          "47": 1,
+          "54": 1,
+          "59": 2,
+          "60": 15,
+          "64": 0,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 346,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 150,
+          "286": 50,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 30377,
+          "360": 40,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 219,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "HasHeadMesh": false,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "OMUI",
+          "Source": "6553 spawn PRHO: Arete guide #4 (AO-Universe), Randy 2026-10-19; Build-AreteSurveillance.ps1",
+          "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position."
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Confirmed": true,
+      "Donor": "OMUI",
+      "Source": "6553 spawn PRHO: Arete guide #4 (AO-Universe), Randy 2026-10-19; Build-AreteSurveillance.ps1",
+      "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position.",
+      "ScrapeMatch": "Prized Houseplant terminal at 3611.694, 8.152, 814.917 (0.00m from PRHO spawn); not Bodyguard Logan Fixx"
+    }
+  },
+  "SLPW": {
+    "Templates": [
+      {
+        "Name": "Romantic Flowers!",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "1": 941,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "27": 941,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 1,
+          "59": 2,
+          "60": 15,
+          "64": 223803,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 294206,
+          "360": 60,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "ADAF",
+          "Source": "Stall sign (Randy). Pink SLPW mapping and look guessed",
+          "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position."
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Confirmed": true,
+      "Donor": "ADAF",
+      "Source": "Stall sign (Randy). Pink SLPW mapping and look guessed",
+      "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position.",
+      "ScrapeMatch": "Romantic Flowers terminal at 3434.912, 10.215, 848.423 (0.01m from SLPW spawn); not Pete Vallone"
+    }
+  },
+  "SPAU": {
+    "Templates": [
+      {
+        "Name": "Tasty Chocolates!",
+        "Level": 1,
+        "Stats": {
+          "0": 277352961,
+          "1": 941,
+          "4": 1,
+          "18": 0,
+          "21": 0,
+          "27": 941,
+          "33": 0,
+          "37": 1,
+          "47": 1,
+          "54": 1,
+          "59": 2,
+          "60": 15,
+          "64": 223803,
+          "89": 1,
+          "99": 503,
+          "132": 5,
+          "156": 129,
+          "173": 3,
+          "174": 3,
+          "214": 1,
+          "274": 0,
+          "284": 0,
+          "285": 38,
+          "286": 12,
+          "292": 0,
+          "339": 91,
+          "342": 600,
+          "343": 0,
+          "359": 289979,
+          "360": 60,
+          "368": 15,
+          "387": 503,
+          "389": 0,
+          "417": 503,
+          "421": 3,
+          "436": 91,
+          "455": 0,
+          "466": 15,
+          "660": 0,
+          "673": 31,
+          "1003": 0
+        },
+        "HasHeadMesh": true,
+        "Features": [
+          "NoCombat",
+          "NoMove"
+        ],
+        "LootTable": [],
+        "ContentProvenance": {
+          "Guessed": false,
+          "Confirmed": true,
+          "Donor": "ADAF",
+          "Source": "Stall sign (Randy). Pink SPAU mapping and look guessed",
+          "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position."
+        }
+      }
+    ],
+    "ContentProvenance": {
+      "Guessed": false,
+      "Confirmed": true,
+      "Donor": "ADAF",
+      "Source": "Stall sign (Randy). Pink SPAU mapping and look guessed",
+      "RestoreFix": "Restored after NpcTemplates.RK.json pink-fill (9ded57ac, pf 6553) replaced this Arete hash with a nearby mob. Confirmed against gopherballs-20261112-arete (Gopherballs, PF 6553) by position.",
+      "ScrapeMatch": "Tasty Chocolates terminal at 3433.756, 10.215, 848.433 (0.01m from SPAU spawn); not Dominick Dellamora"
+    }
+  }
+}
