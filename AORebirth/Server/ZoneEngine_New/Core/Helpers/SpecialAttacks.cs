@@ -195,6 +195,10 @@ namespace ZoneEngine_New.Core.Helpers
             // A special is a weapon hit too: offensive and defensive procs roll on it.
             Nanos.ProcRules.OnWeaponHit(attacker, target, specialItem ?? weapon.Item);
 
+            // Optional data-driven Fling area blast (WeaponFlingEffects.json). Unlisted weapons are unchanged.
+            if (special == CharacterStat.FlingShot)
+                WeaponFlingEffects.TryApply(attacker, target, item);
+
             // A landed Brawl or Dimach also runs its item's OnUse on the struck target (Brawl Item: 20% stun 211405 on
             // the fighting target).
             if (specialItem != null && special is CharacterStat.Brawl or CharacterStat.Dimach)

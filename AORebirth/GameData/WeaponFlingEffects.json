@@ -1,0 +1,57 @@
+{
+  "Effects": [
+    {
+      "Name": "BFG",
+      "LowId": 307100,
+      "HighId": 307106,
+      "RadiusMeters": 15,
+      "MaxTargets": 8,
+      "RequireLineOfSight": true,
+      "ExcludePrimaryTarget": true,
+      "Stat": 27,
+      "AcStat": 97,
+      "DamageByQl": [
+        {
+          "Ql": 1,
+          "Min": -13,
+          "Max": -26
+        },
+        {
+          "Ql": 50,
+          "Min": -106,
+          "Max": -232
+        },
+        {
+          "Ql": 100,
+          "Min": -201,
+          "Max": -442
+        },
+        {
+          "Ql": 150,
+          "Min": -457,
+          "Max": -991
+        },
+        {
+          "Ql": 182,
+          "Min": -649,
+          "Max": -1402
+        },
+        {
+          "Ql": 200,
+          "Min": -713,
+          "Max": -1540
+        },
+        {
+          "Ql": 250,
+          "Min": -892,
+          "Max": -1925
+        },
+        {
+          "Ql": 300,
+          "Min": -1070,
+          "Max": -2310
+        }
+      ]
+    }
+  ]
+}
