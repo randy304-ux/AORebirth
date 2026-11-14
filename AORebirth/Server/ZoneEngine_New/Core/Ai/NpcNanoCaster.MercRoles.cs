@@ -23,8 +23,9 @@ namespace ZoneEngine_New.Core.Ai
     /// Merc combat roles, checked faster than the generic nano loop (Randy 2026-11-14):
     /// an Enforcer taunts (Mongo area taunt on 2+ mobs on the team, single taunts on mobs hitting anyone else);
     /// the Doctor is the main healer; other mercs with heals (Adventurer, Martial Artist, Trader, NT, ...) heal
-    /// only when there is no Doctor merc or the Doctor is struggling; an NT restores the lowest player's nano.
-    /// Taunt and nano-restore ladders are picked by merc level, since mercs skip caster requirements.
+    /// only when there is no Doctor merc or the Doctor is struggling; an NT keeps its nano-delta buff (Humidity Extractor)
+    /// on the party; a Trader keeps Outfit (Team) nano-over-time and Umbral Wrangler team skill buff running.
+    /// Every ladder is picked by merc level (level >= the nano's QL), since mercs have no real skills.
     /// </summary>
     sealed partial class NpcNanoCaster
     {
@@ -49,9 +50,6 @@ namespace ZoneEngine_New.Core.Ai
         /// <summary>Secondary healers heal under this while the Doctor is struggling.</summary>
         public const int StrugglingHealBelowPercent = 60;
 
-        /// <summary>An NT restores a player's nano under this.</summary>
-        public const int NanoRestoreBelowPercent = 60;
-
         /// <summary>Doctor merc counts for the team when this close to the healer.</summary>
         public const double DoctorPresenceMeters = 40;
 
@@ -68,11 +66,36 @@ namespace ZoneEngine_New.Core.Ai
             (100198, 1), (100200, 50), (100197, 80), (100199, 119), (301291, 170), (270786, 215)
         ];
 
-        /// <summary>NT nano restore ladder (Humidity Extractor line, merc level).</summary>
-        internal static readonly (int Id, int Level)[] NanoRestoreLadder =
+        /// <summary>
+        /// NT nano-delta buff ladder (Humidity Extractor line; merc level >= QL). Can=0 and its Hit is on Target, so it
+        /// goes on any party member, not only self. 4 h, a nano tick every 15 s.
+        /// </summary>
+        internal static readonly (int Id, int Level)[] NanoDeltaLadder =
         [
-            (90400, 1), (90405, 18), (90404, 38), (90403, 74), (90402, 93), (90401, 137), (90406, 157)
+            (90400, 1), (90405, 17), (90404, 40), (90403, 80), (90402, 99), (90401, 149), (90406, 169)
         ];
+
+        /// <summary>
+        /// Trader Outfit (Team) nano-over-time ladder (merc level >= QL). Self-cast (Can=ApplyOnSelf); its TeamCastNano
+        /// pulses the nano heal to the merc, its player and the player's team within 40 m every 8 s for 60 s.
+        /// </summary>
+        internal static readonly (int Id, int Level)[] OutfitLadder =
+        [
+            (223241, 25), (223247, 100), (223249, 150), (223251, 200), (223253, 207), (223255, 213), (223257, 217)
+        ];
+
+        /// <summary>
+        /// Trader Umbral Wrangler team skill buff ladder (merc level >= QL). Self-cast wrapper (1 to 4 h) whose
+        /// TeamCastNano re-pulses the skill buff to the team every 2 min.
+        /// </summary>
+        internal static readonly (int Id, int Level)[] UmbralWranglerLadder =
+        [
+            (235271, 25), (235273, 55), (235275, 80), (235277, 105), (235279, 127), (235281, 149),
+            (235283, 170), (235285, 189), (235287, 199), (235289, 204), (235291, 217)
+        ];
+
+        /// <summary>Outfit pulse children, never cast directly.</summary>
+        static readonly int[] OutfitChildren = [216580, 216581, 216582, 216583, 216584, 216585, 216586];
 
         static readonly HashSet<int> RoleOnlyNanoIds = BuildRoleOnly();
 
@@ -83,7 +106,13 @@ namespace ZoneEngine_New.Core.Ai
                 ids.Add(id);
             foreach ((int id, _) in MongoLadder)
                 ids.Add(id);
-            foreach ((int id, _) in NanoRestoreLadder)
+            foreach ((int id, _) in NanoDeltaLadder)
+                ids.Add(id);
+            foreach ((int id, _) in OutfitLadder)
+                ids.Add(id);
+            foreach ((int id, _) in UmbralWranglerLadder)
+                ids.Add(id);
+            foreach (int id in OutfitChildren)
                 ids.Add(id);
             // Mongo area children and perk/skill-item taunts are never cast directly.
             foreach (int id in new[] { 100193, 100194, 100195, 100196, 270788, 301290, 227152 })
@@ -91,12 +120,13 @@ namespace ZoneEngine_New.Core.Ai
             return ids;
         }
 
-        /// <summary>Taunts, Mongo and nano-restore ids only the role code casts (never the generic loop).</summary>
+        /// <summary>Taunts, Mongo, nano-delta, Outfit and Umbral Wrangler ids only the role code casts (never the generic loop).</summary>
         internal static bool IsRoleOnlyNano(int nanoId) => RoleOnlyNanoIds.Contains(nanoId);
 
+        /// <summary>The highest rung with level >= its gate; 0 when the merc is below the first gate.</summary>
         internal static int PickRung((int Id, int Level)[] ladder, int level)
         {
-            int pick = ladder[0].Id;
+            int pick = 0;
             foreach ((int id, int need) in ladder)
             {
                 if (level >= need)
@@ -159,7 +189,11 @@ namespace ZoneEngine_New.Core.Ai
             if (hasHeals && TryHealRole(key, nowUtc))
                 return true;
 
-            if (key == "nanotechnician" && TryNanoRestoreRole(nowUtc))
+            if (key == "nanotechnician" && TryNanoDeltaRole(nowUtc))
+                return true;
+
+            if (key == "trader" && (TryTeamWrapperRole(OutfitLadder, "outfit", nowUtc)
+                                     || TryTeamWrapperRole(UmbralWranglerLadder, "umbral-wrangler", nowUtc)))
                 return true;
 
             return false;
@@ -407,7 +441,7 @@ namespace ZoneEngine_New.Core.Ai
             if (inMongoReach >= 2 && (looseInReach || nowUtc >= _mongoRefreshUtc))
             {
                 int mongoId = PickRung(MongoLadder, level);
-                if (IsReady(mongoId, nowUtc) && Resolve(mongoId) is NanoSpell mongo
+                if (mongoId != 0 && IsReady(mongoId, nowUtc) && Resolve(mongoId) is NanoSpell mongo
                     && NanoRuntime.CanStartCast(Npc, mongo, Npc, nowUtc)
                     && RoleCast(mongo, Npc, nowUtc, "mongo", 8))
                 {
@@ -417,7 +451,7 @@ namespace ZoneEngine_New.Core.Ai
             }
 
             int tauntId = PickRung(SingleTauntLadder, level);
-            if (!IsReady(tauntId, nowUtc) || Resolve(tauntId) is not NanoSpell taunt)
+            if (tauntId == 0 || !IsReady(tauntId, nowUtc) || Resolve(tauntId) is not NanoSpell taunt)
                 return false;
 
             // A mob hitting someone else: the one whose victim is lowest on health first.
@@ -475,40 +509,76 @@ namespace ZoneEngine_New.Core.Ai
             }
         }
 
-        // ---------------------------------------------------------------- nano restore
+        // ---------------------------------------------------------------- team upkeep
 
-        bool TryNanoRestoreRole(DateTime nowUtc)
+        /// <summary>
+        /// NT: keep the highest nano-delta buff the merc's level allows on every party member that lacks it:
+        /// players (owner first, then teammates) at any time; mercs and self only out of combat. Merc pets are skipped.
+        /// Maintenance only: it checks whether the buff is running, never how low anyone's nano is.
+        /// </summary>
+        bool TryNanoDeltaRole(DateTime nowUtc)
         {
-            int restoreId = PickRung(NanoRestoreLadder, MercLevel);
-            if (!IsReady(restoreId, nowUtc) || Resolve(restoreId) is not NanoSpell restore)
+            int deltaId = PickRung(NanoDeltaLadder, MercLevel);
+            if (deltaId == 0 || !IsReady(deltaId, nowUtc) || Resolve(deltaId) is not NanoSpell delta)
                 return false;
 
-            Player? target = null;
-            int lowest = NanoRestoreBelowPercent;
-            foreach (Character member in _party)
+            bool fighting = PartyInCombat();
+            for (int pass = 0; pass < 2; pass++)
             {
-                if (member is not Player player)
-                    continue;
-                int percent = NanoPercent(player);
-                if (percent >= lowest || !InRange(restore, player, DefaultSupportRange)
-                    || !NpcSupportRules.MayNpcLand(Npc, player, restore)
-                    || !NanoRuntime.CanStartCast(Npc, restore, player, nowUtc))
-                    continue;
-                lowest = percent;
-                target = player;
+                foreach (Character member in _party)
+                {
+                    bool player = member is Player;
+                    if (pass == 0 ? !player : player)
+                        continue;
+                    if (!player && (fighting || !IsMercOrSelf(member)))
+                        continue;
+                    if (HasNano(member, delta))
+                        continue;
+                    bool self = ReferenceEquals(member, Npc);
+                    if (!self && (!NpcSupportRules.CanSupport(Npc, member) || !InRange(delta, member, DefaultSupportRange)))
+                        continue;
+                    if (!NpcSupportRules.MayNpcLand(Npc, member, delta) || !NanoRuntime.CanStartCast(Npc, delta, member, nowUtc))
+                        continue;
+                    if (RoleCast(delta, member, nowUtc, "nano-delta", 2))
+                        return true;
+                }
             }
 
-            return target != null && RoleCast(restore, target, nowUtc, "nano-restore", 8);
+            return false;
         }
 
-        static int NanoPercent(Character character)
+        /// <summary>
+        /// Trader team wrappers (Outfit, Umbral Wrangler): keep the highest the merc's level allows running on the merc;
+        /// its TeamCastNano pulses reach the player and teammates within 40 m, so a member who was missing it gets it on
+        /// the next pulse. Recast as soon as it expires. Below the first gate nothing is cast.
+        /// </summary>
+        bool TryTeamWrapperRole((int Id, int Level)[] ladder, string role, DateTime nowUtc)
         {
-            int max = character.Stats.GetOrZero(CharacterStat.MaxNanoEnergy);
-            if (max <= 0)
-                return 100;
-            return (int)(100L * Math.Max(0, character.Stats.GetOrZero(CharacterStat.CurrentNano)) / max);
+            int id = PickRung(ladder, MercLevel);
+            if (id == 0 || !IsReady(id, nowUtc) || Resolve(id) is not NanoSpell wrapper)
+                return false;
+            if (HasNano(Npc, wrapper) || !NanoRuntime.CanStartCast(Npc, wrapper, Npc, nowUtc))
+                return false;
+            return RoleCast(wrapper, Npc, nowUtc, role, 5);
         }
 
+        bool IsMercOrSelf(Character member)
+            => ReferenceEquals(member, Npc)
+               || (member is NpcCharacter npc && npc.Pet?.Hash is string hash && Mercs.ByHash(hash) != null);
+
+        /// <summary>This merc or any party player is fighting.</summary>
+        bool PartyInCombat()
+        {
+            if (Npc.FightingTarget.Instance != 0)
+                return true;
+            foreach (Character member in _party)
+            {
+                if (member is Player && member.FightingTarget.Instance != 0)
+                    return true;
+            }
+
+            return false;
+        }
         // ---------------------------------------------------------------- cast
 
         bool RoleCast(NanoSpell spell, Character target, DateTime nowUtc, string role, double cooldownSeconds)
