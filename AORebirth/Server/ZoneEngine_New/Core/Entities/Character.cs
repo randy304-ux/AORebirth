@@ -1,4 +1,4 @@
-﻿namespace ZoneEngine_New.Core.Entities
+namespace ZoneEngine_New.Core.Entities
 {
     using System;
     using System.Linq;
@@ -1823,7 +1823,10 @@
             // Weapon/unarmed auto-attacks stay AttackInfo-only. HealthDamage is for Hit/nano/status.
 
             target.ApplyDamage(this, result.Damage, result.HitType);
-            if (weapon != null && !target.IsDead)
+            // A weapon listed in WeaponFlingEffects.json with a percent-of-hit splash (BFG) splashes a share of this
+            // hit onto hostiles near the target, killing hit included, in place of its items.dat OnHit functions.
+            bool splashed = weapon != null && WeaponFlingEffects.TryApplySplash(this, target, weapon, result.Damage);
+            if (!splashed && weapon != null && !target.IsDead)
                 ApplyOnHitProcs(target, weapon);
             Nanos.ProcRules.OnWeaponHit(this, target, weapon);
         }

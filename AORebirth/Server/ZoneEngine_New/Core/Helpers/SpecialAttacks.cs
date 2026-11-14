@@ -197,7 +197,7 @@ namespace ZoneEngine_New.Core.Helpers
 
             // Optional data-driven Fling area blast (WeaponFlingEffects.json). Unlisted weapons are unchanged.
             if (special == CharacterStat.FlingShot)
-                WeaponFlingEffects.TryApply(attacker, target, item);
+                WeaponFlingEffects.TryApply(attacker, target, item, result.Damage);
 
             // A landed Brawl or Dimach also runs its item's OnUse on the struck target (Brawl Item: 20% stun 211405 on
             // the fighting target).

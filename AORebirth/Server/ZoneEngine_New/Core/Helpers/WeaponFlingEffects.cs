@@ -45,6 +45,21 @@ namespace ZoneEngine_New.Core.Helpers
             public int Stat { get; set; } = (int)CharacterStat.Health;
             public int AcStat { get; set; } = (int)CharacterStat.FireAC;
             public List<DamageAnchor> DamageByQl { get; set; } = [];
+
+            /// <summary>
+            /// When above 0, the Fling blast deals this percent of the landed Fling Shot's damage to each
+            /// secondary target (no extra Add Damage) instead of rolling <see cref="DamageByQl"/>.
+            /// </summary>
+            public int PercentOfHit { get; set; }
+
+            /// <summary>
+            /// When above 0 together with <see cref="SplashRadiusMeters"/>, every landed regular weapon hit
+            /// splashes this percent of its damage onto hostiles within SplashRadiusMeters of the struck target
+            /// (primary excluded). This replaces the weapon's items.dat OnHit functions for listed weapons.
+            /// </summary>
+            public int SplashPercentOfHit { get; set; }
+
+            public int SplashRadiusMeters { get; set; }
         }
 
         sealed class DamageAnchor
@@ -69,8 +84,15 @@ namespace ZoneEngine_New.Core.Helpers
         /// No-op when the weapon is not listed or when no secondary targets qualify.
         /// </summary>
         public static void TryApply(Character attacker, Character primary, Item? weapon)
+            => TryApply(attacker, primary, weapon, hitDamage: 0);
+
+        /// <summary>
+        /// After a Fling Shot hit lands for <paramref name="hitDamage"/>, apply the configured area blast.
+        /// Still blasts when the Fling killed the primary.
+        /// </summary>
+        public static void TryApply(Character attacker, Character primary, Item? weapon, int hitDamage)
         {
-            if (attacker == null || primary == null || weapon == null || primary.IsDead)
+            if (attacker == null || primary == null || weapon == null)
                 return;
 
             string? root = attacker.Playfield?.GetService<IGameData>()?.RootPath;
@@ -85,7 +107,19 @@ namespace ZoneEngine_New.Core.Helpers
             if (row.Stat != (int)CharacterStat.Health || row.RadiusMeters < 0)
                 return;
 
-            (int minHit, int maxHit) = DamageAt(effect.Anchors, weapon.Quality);
+            bool percentMode = row.PercentOfHit > 0;
+            int minHit, maxHit;
+            if (percentMode)
+            {
+                if (hitDamage <= 0)
+                    return;
+                minHit = maxHit = -PercentOf(hitDamage, row.PercentOfHit);
+            }
+            else
+            {
+                (minHit, maxHit) = DamageAt(effect.Anchors, weapon.Quality);
+            }
+
             if (maxHit >= 0)
                 return;
             if (minHit > maxHit)
@@ -112,7 +146,7 @@ namespace ZoneEngine_New.Core.Helpers
                     continue;
                 if (primary.Distance3D(candidate) > row.RadiusMeters)
                     continue;
-                if (!CombatRules.CanAttack(attacker, candidate))
+                if (!IsAreaVictim(attacker, candidate))
                     continue;
                 if (row.RequireLineOfSight && !HasLos(primary, candidate) && !HasLos(attacker, candidate))
                     continue;
@@ -120,11 +154,130 @@ namespace ZoneEngine_New.Core.Helpers
                 int delta = minHit == maxHit
                     ? minHit
                     : Random.Shared.Next(minHit, maxHit + 1);
-                // Reuse AreaHit's hostile Health path (Add Damage for the AC type).
-                ItemUseFunctions.ApplyFlingAreaDelta(candidate, attacker, delta, row.AcStat);
+                // Reuse AreaHit's hostile Health path. Percent mode is already a share of the real hit
+                // (which carried Add Damage), so it adds none on top.
+                ItemUseFunctions.ApplyFlingAreaDelta(candidate, attacker, delta, row.AcStat, addDamage: !percentMode);
                 hit++;
             }
         }
+
+        /// <summary>True when the weapon is listed with a percent-of-hit splash that replaces its OnHit.</summary>
+        public static bool HasSplash(Character attacker, Item? weapon)
+        {
+            if (attacker == null || weapon == null)
+                return false;
+            string? root = attacker.Playfield?.GetService<IGameData>()?.RootPath;
+            if (string.IsNullOrEmpty(root))
+                return false;
+            EffectRow? row = Find(root, weapon.LowId, weapon.HighId)?.Row;
+            return row != null && row.SplashPercentOfHit > 0 && row.SplashRadiusMeters > 0;
+        }
+
+        /// <summary>
+        /// After a regular weapon hit on <paramref name="primary"/> lands for <paramref name="hitDamage"/>, splash
+        /// SplashPercentOfHit of it onto valid hostiles within SplashRadiusMeters (primary excluded, cap MaxTargets).
+        /// Returns true when the weapon is listed with a splash (so its items.dat OnHit must not run as well).
+        /// </summary>
+        public static bool TryApplySplash(Character attacker, Character primary, Item? weapon, int hitDamage)
+        {
+            if (attacker == null || primary == null || weapon == null)
+                return false;
+
+            string? root = attacker.Playfield?.GetService<IGameData>()?.RootPath;
+            if (string.IsNullOrEmpty(root))
+                return false;
+
+            LoadedEffect? effect = Find(root, weapon.LowId, weapon.HighId);
+            EffectRow? row = effect?.Row;
+            if (row == null || row.SplashPercentOfHit <= 0 || row.SplashRadiusMeters <= 0)
+                return false;
+            if (hitDamage <= 0)
+                return true;
+
+            int amount = PercentOf(hitDamage, row.SplashPercentOfHit);
+            Playfield? playfield = primary.Playfield;
+            DynelRegistry? registry = playfield?.GetService<DynelRegistry>();
+            if (registry == null)
+                return true;
+
+            int cap = row.MaxTargets > 0 ? row.MaxTargets : DefaultMaxTargets;
+            int hit = 0;
+            foreach (Dynel dynel in registry.Dynels())
+            {
+                if (hit >= cap)
+                    break;
+                if (dynel is not Character candidate || candidate.IsDead)
+                    continue;
+                if (ReferenceEquals(candidate, primary) || ReferenceEquals(candidate, attacker))
+                    continue;
+                if (!ReferenceEquals(candidate.Playfield, playfield))
+                    continue;
+                if (primary.Distance3D(candidate) > row.SplashRadiusMeters)
+                    continue;
+                if (!IsAreaVictim(attacker, candidate))
+                    continue;
+                if (row.RequireLineOfSight && !HasLos(primary, candidate) && !HasLos(attacker, candidate))
+                    continue;
+
+                ItemUseFunctions.ApplyFlingAreaDelta(candidate, attacker, -amount, row.AcStat, addDamage: false);
+                hit++;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Who a weapon area effect may damage: the server's attack rule (<see cref="CombatRules.CanAttack"/>,
+        /// which treats a player, their pets, their mercs and the mercs' own pets as one side), plus explicit
+        /// friendly guards: never the attacker's side or a teammate's side (players, pets, mercs, merc pets),
+        /// never another player's side the attacker could not attack, never a starter playerbot (or anything it
+        /// owns), and never a blue-name friendly NPC.
+        /// </summary>
+        public static bool IsAreaVictim(Character attacker, Character candidate)
+        {
+            if (attacker == null || candidate == null || candidate.IsDead || ReferenceEquals(attacker, candidate))
+                return false;
+            if (!CombatRules.CanAttack(attacker, candidate))
+                return false;
+
+            Character attackerSide = CombatRules.SideOf(attacker);
+            Character candidateSide = CombatRules.SideOf(candidate);
+            if (ReferenceEquals(attackerSide, candidateSide))
+                return false;
+
+            if (candidateSide is Player sidePlayer)
+            {
+                if (attackerSide is Player attackerPlayer)
+                {
+                    if (AreTeammates(attackerPlayer, sidePlayer))
+                        return false;
+                    if (!CombatRules.CanAttack(attackerPlayer, sidePlayer))
+                        return false;
+                }
+            }
+
+            if (candidateSide is NpcCharacter { Brain.PlayerBot: not null }
+                || candidate is NpcCharacter { Brain.PlayerBot: not null })
+                return false;
+
+            if (candidate is NpcCharacter npc && CombatRules.IsBlueNameNpc(npc.Stats.GetOrZero(CharacterStat.Flags)))
+                return false;
+
+            return true;
+        }
+
+        static bool AreTeammates(Player a, Player b)
+        {
+            if (ReferenceEquals(a, b))
+                return true;
+            ZoneEngine_New.Core.Teams.TeamService? teams =
+                a.Playfield?.GetService<ZoneEngine_New.Core.Teams.TeamService>()
+                ?? b.Playfield?.GetService<ZoneEngine_New.Core.Teams.TeamService>();
+            return teams != null && teams.AreTeammates(a, b);
+        }
+
+        static int PercentOf(int damage, int percent)
+            => Math.Max(1, (int)Math.Round(damage * (double)percent / 100.0, MidpointRounding.AwayFromZero));
 
         static bool HasLos(Character from, Character to)
             => from.HasLineOfSightTo(to);

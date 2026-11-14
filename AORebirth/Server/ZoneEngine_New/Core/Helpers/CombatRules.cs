@@ -53,9 +53,10 @@ namespace ZoneEngine_New.Core.Helpers
             if (attacker is NpcCharacter { Attackable: false } || attacker.CombatRestricted)
                 return false;
 
-            // A pet and its owner (and the owner's other pets) are one side.
-            Character attackerSide = attacker is NpcCharacter { PetOwner: Character attackerOwner } ? attackerOwner : attacker;
-            Character targetSide = target is NpcCharacter { PetOwner: Character targetOwner } ? targetOwner : target;
+            // A pet and its owner (and the owner's other pets) are one side. Followed up the chain, so a merc's
+            // own pets (MP attack/heal/mezz pets, Crat worker-droid, Engineer robot) side with the merc's player.
+            Character attackerSide = SideOf(attacker);
+            Character targetSide = SideOf(target);
             if (ReferenceEquals(attackerSide, targetSide))
                 return false;
 
@@ -112,6 +113,27 @@ namespace ZoneEngine_New.Core.Helpers
         }
 
         static bool CanAttackNonPlayer(Character target) => target is not NpcCharacter npc || npc.Attackable;
+
+        /// <summary>Most owner levels followed by <see cref="SideOf"/> (player, merc, merc pet, ...).</summary>
+        const int MaxOwnerDepth = 4;
+
+        /// <summary>
+        /// The character whose side <paramref name="character"/> fights on: its pet owner, followed up the chain
+        /// (a merc's pet sides with the merc, which sides with its player). A character with no owner is its own side.
+        /// </summary>
+        public static Character SideOf(Character character)
+        {
+            ArgumentNullException.ThrowIfNull(character);
+            Character side = character;
+            for (int depth = 0; depth < MaxOwnerDepth; depth++)
+            {
+                if (side is not NpcCharacter { PetOwner: Character owner } || ReferenceEquals(owner, side))
+                    break;
+                side = owner;
+            }
+
+            return side;
+        }
 
         /// <summary>
         /// A blue-named NPC (Flags stat bit <see cref="SmokeLounge.AOtomation.Messaging.GameData.CharacterFlags.HasBlueName"/>):

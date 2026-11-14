@@ -51,6 +51,32 @@ namespace ZoneEngine_New.Core.Ai
         /// <summary>Non-buff friendly nanos (heals) only go on characters under this health.</summary>
         public const int HealBelowPercent = 75;
 
+        /// <summary>A heal that costs the caster health is only cast while the caster is at or above this health.</summary>
+        public const int CasterCostHealFloorPercent = 50;
+
+        /// <summary>
+        /// True when the nano damages its own caster's Health (a Hit with a negative Health amount on User),
+        /// e.g. Trader Health Haggler 121505: Health -40 on User, +24 on Target.
+        /// </summary>
+        internal static bool CostsCasterHealth(NanoSpell spell)
+        {
+            if (spell == null)
+                return false;
+            foreach (List<ItemSpell> spells in spell.SpellList.Values)
+            {
+                for (int i = 0; i < spells.Count; i++)
+                {
+                    ItemSpell fn = spells[i];
+                    if (fn.Is(FunctionType.Hit) && fn.Target == (int)ItemTarget.User
+                        && fn.TryReadInt(0, out int stat) && stat == (int)CharacterStat.Health
+                        && fn.TryReadInt(1, out int amount) && amount < 0)
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
         readonly NpcBrain _brain;
         readonly Dictionary<int, NanoSpell?> _spells = new();
         readonly List<Character> _allies = new();
@@ -154,6 +180,9 @@ namespace ZoneEngine_New.Core.Ai
                 NanoSpell? spell = Resolve(nanoId);
                 if (spell == null || spell.IsHostile || !IsHeal(spell))
                     continue;
+                if (CostsCasterHealth(spell)
+                    && (ReferenceEquals(target, Npc) || HealthPercent(Npc) < CasterCostHealFloorPercent))
+                    continue;
 
                 hasHeal = true;
                 if (!InRange(spell, target, DefaultSupportRange) || !NanoRuntime.CanStartCast(Npc, spell, target, nowUtc))
@@ -236,7 +265,12 @@ namespace ZoneEngine_New.Core.Ai
 
             // A pet heals greedily, all the way to full; other NPCs only once someone is well hurt.
             int healBelow = Npc.Pet != null ? 100 : HealBelowPercent;
-            if (HealthPercent(Npc) < healBelow && !HasNano(Npc, spell)
+            // A heal paid for with the caster's own health (Trader Health Haggler: -40 to the user, +24 to the
+            // target) never goes on the caster itself, and is not cast on others while the caster is low.
+            bool costsCaster = CostsCasterHealth(spell);
+            if (costsCaster && HealthPercent(Npc) < CasterCostHealFloorPercent)
+                return null;
+            if (!costsCaster && HealthPercent(Npc) < healBelow && !HasNano(Npc, spell)
                 && NanoRuntime.CanStartCast(Npc, spell, Npc, nowUtc))
                 return Npc;
 

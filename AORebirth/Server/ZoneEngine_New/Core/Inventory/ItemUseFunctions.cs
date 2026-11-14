@@ -429,8 +429,8 @@ namespace ZoneEngine_New.Core.Inventory
         /// Hostile Health delta for weapon Fling area blasts (see <c>WeaponFlingEffects</c>).
         /// Same path as AreaHit: Add Damage for the AC type, HealthDamage announce.
         /// </summary>
-        internal static bool ApplyFlingAreaDelta(Character target, Character source, int delta, int acStat)
-            => ApplyHealthDelta(target, source, delta, acStat, addDamage: true);
+        internal static bool ApplyFlingAreaDelta(Character target, Character source, int delta, int acStat, bool addDamage = true)
+            => ApplyHealthDelta(target, source, delta, acStat, addDamage);
 
         static bool ApplyHealthDelta(Character target, Character? source, int delta, int acStat, bool addDamage = false)
         {
