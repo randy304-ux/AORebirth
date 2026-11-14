@@ -251,6 +251,16 @@ public static class KnubotParser
                     Effect(new KnubotDismissMerc(words[1]));
                     break;
 
+                case "dungeonmerc":
+                    if (words.Length != 2)
+                    {
+                        errors.Add("expected {dungeonmerc ROSTER_ID} (MercRoster.json id or unlock group): {" + body + "}");
+                        break;
+                    }
+
+                    Effect(new KnubotDungeonMerc(words[1]));
+                    break;
+
                 case "dismissmercs":
                     Expect(words, 1, 1, body, errors);
                     Effect(new KnubotDismissMercs());

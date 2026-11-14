@@ -1,0 +1,32 @@
+[
+  {
+    "Hash": "MSUB",
+    "Name": "Anvil's Last Shift",
+    "QasInstance": 990127,
+    "Scope": "Team",
+    "Action": "KillOne",
+    "Summary": "Brock \"Anvil\" Malone wants Abmouth Supremus dead. Fight through the Condemned Subway with him and kill it at the bottom of the tunnels.\n\nAnvil fights at your side inside the Subway until the boss is dead; after that you can call him anywhere with /merc.",
+    "Objective": {
+      "Count": null,
+      "Npc": "ASSU",
+      "SpecItem": null,
+      "WorldItem": null
+    },
+    "Waypoint": {
+      "Playfield": 127,
+      "X": 357.05,
+      "Y": 76.11,
+      "Z": 99.07
+    },
+    "Flags": "None",
+    "MissionBit": null,
+    "NextStep": null,
+    "Reward": {
+      "Hash": "RSUB",
+      "Credits": 15000,
+      "Xp": 30900,
+      "AlienXpPercent": 0,
+      "Records": null
+    }
+  }
+]

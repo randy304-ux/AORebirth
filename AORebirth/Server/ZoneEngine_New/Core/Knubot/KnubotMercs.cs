@@ -1,5 +1,7 @@
 namespace ZoneEngine_New.Core.Knubot;
 
+using System.Collections.Generic;
+
 using AORebirth.Enums;
 
 using SmokeLounge.AOtomation.Messaging.GameData;
@@ -38,5 +40,34 @@ public sealed record KnubotDismissMerc(string Kind) : KnubotEffect
     {
         if (Mercs.Find(Kind) is { } kind)
             context.Player.Playfield?.GetService<PetService>()?.DismissMerc(context.Player, kind);
+    }
+}
+
+/// <summary>
+/// <c>{dungeonmerc ID}</c>: a dungeon's twink merc joins on its kill-the-boss mission (MercRoster.json id or unlock
+/// group): a locked merc becomes dungeon-only (summon inside that dungeon until the boss dies), and it is summoned
+/// into the player's party unless it already is.
+/// </summary>
+public sealed record KnubotDungeonMerc(string Id) : KnubotEffect
+{
+    public override bool Check(KnubotContext context, KnubotPlan plan, KnubotEffectServices services)
+        => context.Player.Playfield?.GetService<MercUnlockService>() is { } unlocks
+           && (unlocks.Roster.Find(Id) ?? FirstInGroup(unlocks, Id)) != null;
+
+    public override void Apply(KnubotContext context, KnubotEffectServices services)
+    {
+        if (context.Player.Playfield?.GetService<MercUnlockService>() is not { } unlocks
+            || (unlocks.Roster.Find(Id) ?? FirstInGroup(unlocks, Id)) is not { } def)
+            return;
+
+        unlocks.OnMissionAccepted(context.Player, def.Id);
+        if (!unlocks.IsSummoned(context.Player, def))
+            unlocks.Summon(context.Player, def);
+    }
+
+    static MercDefinition? FirstInGroup(MercUnlockService unlocks, string group)
+    {
+        IReadOnlyList<MercDefinition> list = unlocks.Roster.ByUnlockGroup(group);
+        return list.Count > 0 ? list[0] : null;
     }
 }

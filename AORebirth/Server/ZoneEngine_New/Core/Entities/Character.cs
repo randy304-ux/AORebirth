@@ -1825,7 +1825,17 @@ namespace ZoneEngine_New.Core.Entities
             target.ApplyDamage(this, result.Damage, result.HitType);
             // A weapon listed in WeaponFlingEffects.json with a percent-of-hit splash (BFG) splashes a share of this
             // hit onto hostiles near the target, killing hit included, in place of its items.dat OnHit functions.
-            bool splashed = weapon != null && WeaponFlingEffects.TryApplySplash(this, target, weapon, result.Damage);
+            bool splashed;
+            string? previousTag = DamageTag;
+            DamageTag = "splash";
+            try
+            {
+                splashed = weapon != null && WeaponFlingEffects.TryApplySplash(this, target, weapon, result.Damage);
+            }
+            finally
+            {
+                DamageTag = previousTag;
+            }
             if (!splashed && weapon != null && !target.IsDead)
                 ApplyOnHitProcs(target, weapon);
             Nanos.ProcRules.OnWeaponHit(this, target, weapon);
@@ -1856,6 +1866,13 @@ namespace ZoneEngine_New.Core.Entities
                 items,
                 source: this);
         }
+
+        /// <summary>
+        /// What kind of damage is landing right now on this thread (splash, FlingShot, flingblast, nano), for the
+        /// NPC kill ledger. Null is a plain weapon hit.
+        /// </summary>
+        [ThreadStatic]
+        internal static string? DamageTag;
 
         /// <summary>
         /// Applies hit-point damage. Returns true when this hit killed the character.

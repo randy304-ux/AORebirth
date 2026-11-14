@@ -188,7 +188,17 @@ namespace ZoneEngine_New.Core.Helpers
 
             int healthBefore = target.Stats.GetOrZero(CharacterStat.Health);
             target.RollBuffBreaks(BuffBreakCause.Attack, attacker);
-            target.ApplyDamage(attacker, result.Damage, result.HitType);
+            string? previousTag = Character.DamageTag;
+            Character.DamageTag = special.ToString();
+            try
+            {
+                target.ApplyDamage(attacker, result.Damage, result.HitType);
+            }
+            finally
+            {
+                Character.DamageTag = previousTag;
+            }
+
             if (target.Stats.GetOrZero(CharacterStat.Health) < healthBefore)
                 AnnounceSpecialHit(attacker, target, special, slot, bullets, result.Damage);
 
@@ -197,7 +207,17 @@ namespace ZoneEngine_New.Core.Helpers
 
             // Optional data-driven Fling area blast (WeaponFlingEffects.json). Unlisted weapons are unchanged.
             if (special == CharacterStat.FlingShot)
-                WeaponFlingEffects.TryApply(attacker, target, item, result.Damage);
+            {
+                Character.DamageTag = "flingblast";
+                try
+                {
+                    WeaponFlingEffects.TryApply(attacker, target, item, result.Damage);
+                }
+                finally
+                {
+                    Character.DamageTag = previousTag;
+                }
+            }
 
             // A landed Brawl or Dimach also runs its item's OnUse on the struck target (Brawl Item: 20% stun 211405 on
             // the fighting target).

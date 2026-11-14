@@ -43,7 +43,16 @@ namespace ZoneEngine_New.Core.Helpers
             if (IsPlayerPetOrMerc(caster))
             {
                 Character? petMaster = ResolveMaster(caster);
-                return petMaster != null && IsOwnerParty(petMaster, target);
+                if (petMaster == null)
+                    return false;
+                if (IsOwnerParty(petMaster, target))
+                    return true;
+                // A merc's own pet (the MP merc's Salvinous) works for the merc's player: that player, the
+                // player's team, the other mercs and every pet on that side (Randy 2026-11-14).
+                return petMaster is NpcCharacter
+                    && CombatRules.SideOf(caster) is Player sidePlayer
+                    && !ReferenceEquals(sidePlayer, petMaster)
+                    && IsOwnerParty(sidePlayer, target);
             }
 
             // Battle-station bot: same side, players or other BS bots only — never outdoor mobs.

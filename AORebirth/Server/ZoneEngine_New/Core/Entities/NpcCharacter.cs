@@ -20,6 +20,8 @@ namespace ZoneEngine_New.Core.Entities
     using ZoneEngine_New.Core.Playfield;
     using ZoneEngine_New.Core.Trade;
 
+    using Utility;
+
     /// <summary>
     /// Monster / NPC character. Holds template-backed spawn data not shared with players.
     /// </summary>
@@ -406,7 +408,61 @@ namespace ZoneEngine_New.Core.Entities
             if (attacker.IsPlayer || (attacker is NpcCharacter { PetOwner: Player }))
                 Brain?.AddThreat(attacker.Identity, hpRemoved);
 
+            RecordKillLedger(attacker, hpRemoved);
             RunBossTriggers(attacker);
+        }
+
+        // Kill ledger (Randy 2026-11-14 DPS review): damage by player-side source and kind, logged when this NPC dies.
+        Dictionary<string, long>? _killLedger;
+        DateTime _killLedgerStartUtc;
+
+        void RecordKillLedger(Character attacker, int hpRemoved)
+        {
+            if (hpRemoved <= 0 || CombatRules.SideOf(attacker) is not Player)
+                return;
+
+            if (_killLedger == null)
+            {
+                _killLedger = new Dictionary<string, long>(StringComparer.Ordinal);
+                _killLedgerStartUtc = DateTime.UtcNow;
+            }
+
+            string source = attacker switch
+            {
+                Player player => player.Name,
+                NpcCharacter npc => npc.Pet?.Hash ?? npc.SpawnHash ?? npc.Name,
+                _ => attacker.Name
+            };
+            string key = source + "/" + (DamageTag ?? "hit");
+            _killLedger.TryGetValue(key, out long sum);
+            _killLedger[key] = sum + hpRemoved;
+
+            if (Stats.GetOrZero(CharacterStat.Health) > 0)
+                return;
+
+            long total = 0;
+            var parts = new List<string>(_killLedger.Count);
+            foreach (KeyValuePair<string, long> pair in _killLedger)
+            {
+                total += pair.Value;
+                parts.Add(pair.Key + ":" + pair.Value.ToString(CultureInfo.InvariantCulture));
+            }
+
+            parts.Sort(StringComparer.Ordinal);
+            LogUtil.Debug(
+                DebugInfoDetail.Engine,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Kill ledger npc={0} hash={1} name={2} lv={3} maxhp={4} secs={5:F1} total={6} by={7}",
+                    Identity.Instance,
+                    SpawnHash ?? "-",
+                    Name,
+                    Stats.GetOrZero(CharacterStat.Level),
+                    Stats.GetOrZero(CharacterStat.MaxHealth),
+                    (DateTime.UtcNow - _killLedgerStartUtc).TotalSeconds,
+                    total,
+                    string.Join(",", parts)));
+            _killLedger = null;
         }
 
         public override bool IsEvading => Brain?.IsEvading == true;

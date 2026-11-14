@@ -106,7 +106,7 @@ namespace ZoneEngine_New.Core.Ai
             if (merc)
             {
                 _nextRoleUtc = nowUtc.AddSeconds(RoleCheckSeconds);
-                if (MercKey != null && TryMercRoles(nowUtc))
+                if ((MercKey != null && TryMercRoles(nowUtc)) || (MercKey == null && TryMezzPetRole(nowUtc)))
                 {
                     DateTime after = nowUtc.AddSeconds(Between(3, 6));
                     if (_nextAttemptUtc < after)
@@ -127,10 +127,14 @@ namespace ZoneEngine_New.Core.Ai
             List<int> nanos = Npc.UploadedNanoIds;
             // Fixer mercs lead with NCU (compressor / retool / quarkstor) before other buffs.
             bool fixerLead = IsFixerMerc();
-            int start = fixerLead ? 0 : _random.Next(nanos.Count);
-            for (int pass = 0; pass < (fixerLead ? 2 : 1); pass++)
+            // Heal pets (the MP merc's Salvinous) look for someone to heal before they buff (Randy 2026-11-14).
+            bool healLead = !fixerLead && MercKey == null && Npc.Pet is { Heals: true };
+            bool twoPass = fixerLead || healLead;
+            int start = twoPass ? 0 : _random.Next(nanos.Count);
+            for (int pass = 0; pass < (twoPass ? 2 : 1); pass++)
             {
                 bool ncuPass = fixerLead && pass == 0;
+                bool healPass = healLead && pass == 0;
             for (int i = 0; i < nanos.Count; i++)
             {
                 // NCU pass walks the upload list backwards so the highest tier the target accepts goes first.
@@ -143,6 +147,9 @@ namespace ZoneEngine_New.Core.Ai
 
                 NanoSpell? spell = Resolve(nanoId);
                 if (spell == null)
+                    continue;
+
+                if (healLead && healPass != (!spell.IsHostile && (IsHeal(spell) || IsTeamHeal(spell))))
                     continue;
 
                 // Every merc nano pick stays at or under its QL cap (level + tier bonus).

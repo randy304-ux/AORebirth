@@ -2060,6 +2060,66 @@
                                                   }
                                               ]
                                 }
+                 },
+                 {
+                     "Key":  "ddogs:merc:127:giver:enforcer_subway",
+                     "Provenance":  "ddogs dungeon merc giver (Randy 2026-11-03 design, 2026-11-14): MercRoster enforcer_subway; body = scraped Workman Striker (Atrox, md 203854) with Architect Striker leg/hand textures",
+                     "ContentNpcIdentity":  "ddogs-merc-giver-enforcer_subway",
+                     "PlayfieldId":  127,
+                     "InstanceId":  2110900127,
+                     "Name":  "Brock \"Anvil\" Malone",
+                     "Position":  [
+                                      318.5,
+                                      102.8,
+                                      201.0
+                                  ],
+                     "Rotation":  [
+                                      0,
+                                      0,
+                                      0,
+                                      1
+                                  ],
+                     "Stats":  {
+                                   "0":  271061505,
+                                   "1":  2400,
+                                   "4":  4,
+                                   "27":  2400,
+                                   "33":  0,
+                                   "47":  1,
+                                   "54":  24,
+                                   "59":  1,
+                                   "60":  9,
+                                   "64":  40127,
+                                   "89":  1,
+                                   "156":  137,
+                                   "173":  3,
+                                   "174":  3,
+                                   "359":  203854,
+                                   "360":  105,
+                                   "389":  0,
+                                   "455":  0,
+                                   "466":  0,
+                                   "660":  0,
+                                   "673":  31
+                               },
+                     "Textures":  [
+                                      { "Place":  0, "Id":  40976 },
+                                      { "Place":  1, "Id":  22562 },
+                                      { "Place":  2, "Id":  40968 },
+                                      { "Place":  3, "Id":  22537 },
+                                      { "Place":  4, "Id":  22618 }
+                                  ],
+                     "Meshes":  [
+                                    { "Position":  0, "OverrideTextureId":  22650, "Id":  20007, "Layer":  2 },
+                                    { "Position":  0, "OverrideTextureId":  0, "Id":  40127, "Layer":  4 },
+                                    { "Position":  1, "OverrideTextureId":  0, "Id":  30235, "Layer":  2 }
+                                ],
+                     "Passive":  true,
+                     "Attackable":  false,
+                     "TickLiving":  true,
+                     "Presentation":  {
+
+                                      }
                  }
              ]
 }

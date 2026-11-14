@@ -449,7 +449,16 @@ namespace ZoneEngine_New.Core.Inventory
                 }
 
                 int before = Math.Max(0, target.Stats.GetOrZero(CharacterStat.Health));
-                target.ApplyDamage(caster, -delta, HitType.Normal);
+                string? previousTag = Character.DamageTag;
+                Character.DamageTag ??= "nano";
+                try
+                {
+                    target.ApplyDamage(caster, -delta, HitType.Normal);
+                }
+                finally
+                {
+                    Character.DamageTag = previousTag;
+                }
 
                 int after = Math.Max(0, target.Stats.GetOrZero(CharacterStat.Health));
                 int actual = before - after;
