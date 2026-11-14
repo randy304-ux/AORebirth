@@ -169,6 +169,65 @@ namespace ZoneEngine_New.Core.Ai
 
         int MercLevel => Math.Max(1, Npc.Stats.GetOrOne(CharacterStat.Level));
 
+        /// <summary>This merc's nano QL cap (level + tier bonus, set at spawn as NanoCastQuality); its level if unset.</summary>
+        int NanoCap => Npc.NanoCastQuality > 1 ? Npc.NanoCastQuality : MercLevel;
+
+        /// <summary>
+        /// Single-id nanos must be at or under the QL cap. QL pairs (two Relations) always pass: NanoCastQuality already
+        /// interpolates them at the cap.
+        /// </summary>
+        bool WithinQlCap(NanoSpell spell)
+            => spell.Relations is { Count: 2 } || EstimatedNanoQl(spell) <= NanoCap;
+
+        /// <summary>Skill requirement -> QL points (Umbral Wrangler / Outfit lines from auno).</summary>
+        static readonly (int Skill, int Ql)[] SkillToQl =
+        [
+            (0, 1), (19, 1), (152, 25), (326, 55), (496, 80), (666, 105), (809, 127), (885, 149), (962, 170),
+            (1026, 189), (1052, 199), (1194, 204), (1650, 217), (2500, 300)
+        ];
+
+        /// <summary>
+        /// A nano's QL estimated from its ToUse requirements: the largest nano-skill requirement mapped through
+        /// <see cref="SkillToQl"/>, or its level requirement, whichever is higher. items.dat Quality on nanos is not the QL.
+        /// </summary>
+        internal static int EstimatedNanoQl(ItemTemplate template)
+        {
+            int skill = 0;
+            int level = 0;
+            foreach (ItemAction action in template.Actions)
+            {
+                if (action.ActionType != 3)
+                    continue;
+                foreach (ItemRequirement req in action.Requirements)
+                {
+                    if ((int)req.Operator != 2)
+                        continue;
+                    int stat = (int)req.StatNumber;
+                    int value = (int)req.Value;
+                    if (stat is 122 or 127 or 128 or 129 or 130 or 131)
+                        skill = Math.Max(skill, value + 1);
+                    else if (stat == (int)CharacterStat.Level)
+                        level = Math.Max(level, value + 1);
+                }
+            }
+
+            int ql = 1;
+            for (int i = 1; i < SkillToQl.Length; i++)
+            {
+                (int s0, int q0) = SkillToQl[i - 1];
+                (int s1, int q1) = SkillToQl[i];
+                if (skill <= s1)
+                {
+                    ql = q0 + (int)Math.Round((double)(skill - s0) * (q1 - q0) / Math.Max(1, s1 - s0));
+                    break;
+                }
+
+                ql = q1;
+            }
+
+            return Math.Max(Math.Max(1, ql), level);
+        }
+
         /// <summary>Runs this merc's role. True when it started a cast.</summary>
         bool TryMercRoles(DateTime nowUtc)
         {
@@ -281,7 +340,8 @@ namespace ZoneEngine_New.Core.Ai
             foreach (int nanoId in Npc.UploadedNanoIds)
             {
                 // Mongo's self-heal does not make an Enforcer a healer: role-only nanos never count.
-                if (!IsRoleOnlyNano(nanoId) && Resolve(nanoId) is NanoSpell spell && !spell.IsHostile && (IsHeal(spell) || IsTeamHeal(spell)))
+                if (!IsRoleOnlyNano(nanoId) && Resolve(nanoId) is NanoSpell spell && !spell.IsHostile && WithinQlCap(spell)
+                    && (IsHeal(spell) || IsTeamHeal(spell)))
                     return true;
             }
 
@@ -359,7 +419,7 @@ namespace ZoneEngine_New.Core.Ai
             for (int i = nanos.Count - 1; i >= 0; i--)
             {
                 int nanoId = nanos[i];
-                if (IsRoleOnlyNano(nanoId) || !IsReady(nanoId, nowUtc) || Resolve(nanoId) is not NanoSpell spell || spell.IsHostile || !IsTeamHeal(spell))
+                if (IsRoleOnlyNano(nanoId) || !IsReady(nanoId, nowUtc) || Resolve(nanoId) is not NanoSpell spell || spell.IsHostile || !IsTeamHeal(spell) || !WithinQlCap(spell))
                     continue;
                 if (CostsCasterHealth(spell) && HealthPercent(Npc) < CasterCostHealFloorPercent)
                     continue;
@@ -381,7 +441,7 @@ namespace ZoneEngine_New.Core.Ai
             {
                 int nanoId = nanos[i];
                 if (IsRoleOnlyNano(nanoId) || !IsReady(nanoId, nowUtc) || Resolve(nanoId) is not NanoSpell spell || spell.IsHostile
-                    || !IsHeal(spell) || IsTeamHeal(spell))
+                    || !IsHeal(spell) || IsTeamHeal(spell) || !WithinQlCap(spell))
                     continue;
                 if (CostsCasterHealth(spell) && (self || HealthPercent(Npc) < CasterCostHealFloorPercent))
                     continue;
@@ -426,7 +486,7 @@ namespace ZoneEngine_New.Core.Ai
             if (_engaged.Count == 0)
                 return false;
 
-            int level = MercLevel;
+            int level = NanoCap;
             int inMongoReach = 0;
             bool looseInReach = false;
             foreach ((NpcCharacter mob, Character victim) in _engaged)
@@ -518,7 +578,7 @@ namespace ZoneEngine_New.Core.Ai
         /// </summary>
         bool TryNanoDeltaRole(DateTime nowUtc)
         {
-            int deltaId = PickRung(NanoDeltaLadder, MercLevel);
+            int deltaId = PickRung(NanoDeltaLadder, NanoCap);
             if (deltaId == 0 || !IsReady(deltaId, nowUtc) || Resolve(deltaId) is not NanoSpell delta)
                 return false;
 
@@ -554,7 +614,7 @@ namespace ZoneEngine_New.Core.Ai
         /// </summary>
         bool TryTeamWrapperRole((int Id, int Level)[] ladder, string role, DateTime nowUtc)
         {
-            int id = PickRung(ladder, MercLevel);
+            int id = PickRung(ladder, NanoCap);
             if (id == 0 || !IsReady(id, nowUtc) || Resolve(id) is not NanoSpell wrapper)
                 return false;
             if (HasNano(Npc, wrapper) || !NanoRuntime.CanStartCast(Npc, wrapper, Npc, nowUtc))

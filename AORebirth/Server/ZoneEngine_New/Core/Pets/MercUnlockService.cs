@@ -407,7 +407,7 @@ namespace ZoneEngine_New.Core.Pets
             return null;
         }
 
-        /// <summary>Nano band level for a profession merc: hire uses tier power level; dungeon uses roster level.</summary>
+        /// <summary>Nano band level for a profession merc: hire uses the tier nano QL cap (level + tier bonus); dungeon uses roster level.</summary>
         public int ProfessionNanoLevel(Player player, Mercs.Kind kind)
         {
             ArgumentNullException.ThrowIfNull(player);
@@ -417,7 +417,7 @@ namespace ZoneEngine_New.Core.Pets
             {
                 int body = Math.Max(1, npc.Stats.GetOrOne(CharacterStat.Level));
                 if (PetService.HasContract(player, kind))
-                    return Mercs.PowerLevel(Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level)), Mercs.GetTier(player, kind));
+                    return Mercs.NanoQlCap(Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level)), Mercs.GetTier(player, kind));
                 return body;
             }
 
@@ -426,7 +426,7 @@ namespace ZoneEngine_New.Core.Pets
             if (dungeon != null)
                 return dungeon.Level;
             if (PetService.HasContract(player, kind))
-                return Mercs.PowerLevel(Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level)), Mercs.GetTier(player, kind));
+                return Mercs.NanoQlCap(Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level)), Mercs.GetTier(player, kind));
             return Math.Max(1, player.Stats.GetOrOne(CharacterStat.Level));
         }
 

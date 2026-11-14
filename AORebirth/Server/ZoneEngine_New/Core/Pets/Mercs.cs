@@ -198,6 +198,46 @@ namespace ZoneEngine_New.Core.Pets
             return bonus <= 0 ? body : Math.Clamp(body + bonus, 1, 220);
         }
 
+        /// <summary>Highest nano QL a merc may cast above its level, by tier (Randy 2026-11-14): Basic 0, Elite +15, Champion +35, Twink +60.</summary>
+        public static int NanoQlBonus(Tier tier) => tier switch
+        {
+            Tier.Elite => 15,
+            Tier.Champion => 35,
+            Tier.Twink => 60,
+            _ => 0
+        };
+
+        /// <summary>Highest nano QL in the game; a ladder or QL pair also stops at its own top QL.</summary>
+        public const int MaxNanoQl = 300;
+
+        /// <summary>QL cap for every merc nano pick (buffs, heals, taunts, team wrappers): body level + tier bonus.</summary>
+        public static int NanoQlCap(int ownerLevel, Tier tier)
+            => Math.Clamp(BodyLevel(ownerLevel) + NanoQlBonus(tier), 1, MaxNanoQl);
+
+        /// <summary>
+        /// Pet level bonus for pet-class mercs (MP, Bureaucrat, Engineer) at merc level 60 and above: Basic +20,
+        /// Elite +55, Champion +95, Twink +140 (L60 anchors 80 / 115 / 155 / 200). Below 60 it ramps in with level.
+        /// </summary>
+        public static int PetLevelBonus(Tier tier) => tier switch
+        {
+            Tier.Elite => 55,
+            Tier.Champion => 95,
+            Tier.Twink => 140,
+            _ => 20
+        };
+
+        /// <summary>Highest pet level (same cap as merc power level).</summary>
+        public const int MaxPetLevel = 220;
+
+        /// <summary>Level of a merc's own pets: body + PetLevelBonus * min(1, body / 60), capped at <see cref="MaxPetLevel"/>.</summary>
+        public static int MercPetLevel(int ownerLevel, Tier tier)
+        {
+            int body = BodyLevel(ownerLevel);
+            double ramp = Math.Min(1.0, body / 60.0);
+            int bonus = (int)Math.Round(PetLevelBonus(tier) * ramp, MidpointRounding.AwayFromZero);
+            return Math.Clamp(body + bonus, 1, MaxPetLevel);
+        }
+
         public static bool TryParseTier(string text, out Tier tier)
         {
             tier = Tier.Basic;

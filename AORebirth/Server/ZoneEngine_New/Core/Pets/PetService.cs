@@ -168,11 +168,10 @@ namespace ZoneEngine_New.Core.Pets
                         // stats (and fill combat skills) from merc level before any tier flat adds.
                         ApplyMercCombatScaling(npc, mercKind);
                         ApplyMercTier(npc, tier);
+                        // Every merc nano pick is capped at body level + tier bonus (Basic casts at its level).
+                        npc.NanoCastQuality = Mercs.NanoQlCap(petLevel, tier);
                         if (tier != Mercs.Tier.Basic)
-                        {
-                            npc.NanoCastQuality = gearQl;
                             npc.Name = npc.Name + " (" + Mercs.TierName(tier) + ")";
-                        }
                     }
                     if (healthPercent is > 0 and < 100)
                     {
@@ -198,7 +197,7 @@ namespace ZoneEngine_New.Core.Pets
             RefreshOverEquip(pet);
             if (owner is Player mercOwner && Mercs.ByHash(hash) is Mercs.Kind mercPetKind)
             {
-                EnsureMercPets(pet, Mercs.PowerLevel(pet.Stats.GetOrOne(CharacterStat.Level), Mercs.GetTier(mercOwner, mercPetKind)));
+                EnsureMercPets(pet, Mercs.MercPetLevel(pet.Stats.GetOrOne(CharacterStat.Level), Mercs.GetTier(mercOwner, mercPetKind)));
                 // Dungeon merc rename / NT nuke filter after hire or TickMercs revive.
                 _mercUnlocks?.ConfigureSummonedMerc(mercOwner, pet);
             }
@@ -600,7 +599,7 @@ namespace ZoneEngine_New.Core.Pets
                         continue;
                     }
 
-                    EnsureMercPets(merc, Mercs.PowerLevel(merc.Stats.GetOrOne(CharacterStat.Level), Mercs.GetTier(owner, kind)));
+                    EnsureMercPets(merc, Mercs.MercPetLevel(merc.Stats.GetOrOne(CharacterStat.Level), Mercs.GetTier(owner, kind)));
                     continue;
                 }
                 roster.MercReviveUtc.Remove(kind.Key);

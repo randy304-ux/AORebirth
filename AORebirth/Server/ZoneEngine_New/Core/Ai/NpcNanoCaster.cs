@@ -145,6 +145,10 @@ namespace ZoneEngine_New.Core.Ai
                 if (spell == null)
                     continue;
 
+                // Every merc nano pick stays at or under its QL cap (level + tier bonus).
+                if (MercKey != null && !WithinQlCap(spell))
+                    continue;
+
                 // A merc's heals are cast by its heal role (Doctor first; others only when needed).
                 if (MercKey != null && !spell.IsHostile && (IsHeal(spell) || IsTeamHeal(spell)))
                     continue;
