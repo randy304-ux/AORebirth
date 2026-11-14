@@ -494,7 +494,7 @@ namespace ZoneEngine_New.Core.Pets
                     ?? _roster.All.FirstOrDefault(d => d.Kind.Key == ntKind.Key);
                 // Keep non-nukes from the tier list; FilterNtNukes rebuilds AOE/ST from items.dat.
                 npc.UploadedNanoIds.Clear();
-                npc.UploadedNanoIds.AddRange(Mercs.TierNanosFor(ntKind, Mercs.GetTier(player, ntKind)));
+                npc.UploadedNanoIds.AddRange(Mercs.MercNanosFor(ntKind, Mercs.GetTier(player, ntKind), ProfessionNanoLevel(player, ntKind)));
                 if (nt != null)
                     ConfigureSummonedMerc(player, npc, nt);
                 else

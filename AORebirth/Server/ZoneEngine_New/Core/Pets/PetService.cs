@@ -144,7 +144,7 @@ namespace ZoneEngine_New.Core.Pets
                     if (mercKind != null)
                     {
                         // Own-profession spells/buffs/specials; stronger lists at higher tiers (basic < elite < champion < twink).
-                        npc.UploadedNanoIds.AddRange(Mercs.TierNanosFor(mercKind, tier));
+                        npc.UploadedNanoIds.AddRange(Mercs.MercNanosFor(mercKind, tier, Mercs.NanoQlCap(petLevel, tier)));
                     }
                     else
                     {
