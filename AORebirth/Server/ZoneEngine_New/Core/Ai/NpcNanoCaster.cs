@@ -35,7 +35,7 @@ namespace ZoneEngine_New.Core.Ai
         NoHeal
     }
 
-    sealed class NpcNanoCaster
+    sealed partial class NpcNanoCaster
     {
         /// <summary>Wait after a cast before the next one.</summary>
         public const double MinCastIntervalSeconds = 8;
@@ -95,10 +95,30 @@ namespace ZoneEngine_New.Core.Ai
 
         public void Tick(DateTime nowUtc)
         {
-            if (nowUtc < _nextAttemptUtc)
+            // Mercs run their role (taunt / heal / nano restore) on a faster check than the generic loop.
+            bool merc = Npc.Pet != null && nowUtc >= _nextRoleUtc;
+            if (!merc && nowUtc < _nextAttemptUtc)
                 return;
             if (Npc.IsDead || _brain.IsEvading || Npc.IsCastingNano || Npc.IsInNanoRecharge(nowUtc)
-                || Npc.UploadedNanoIds.Count == 0 || Npc.Playfield == null)
+                || Npc.Playfield == null)
+                return;
+
+            if (merc)
+            {
+                _nextRoleUtc = nowUtc.AddSeconds(RoleCheckSeconds);
+                if (MercKey != null && TryMercRoles(nowUtc))
+                {
+                    DateTime after = nowUtc.AddSeconds(Between(3, 6));
+                    if (_nextAttemptUtc < after)
+                        _nextAttemptUtc = after;
+                    return;
+                }
+
+                if (nowUtc < _nextAttemptUtc)
+                    return;
+            }
+
+            if (Npc.UploadedNanoIds.Count == 0)
                 return;
 
             _nextAttemptUtc = nowUtc.AddSeconds(IdleCheckSeconds);
@@ -118,8 +138,15 @@ namespace ZoneEngine_New.Core.Ai
                 if (fixerLead && ncuPass != IsFixerNcuNano(nanoId))
                     continue;
 
+                if (!IsReady(nanoId, nowUtc) || (MercKey != null && IsRoleOnlyNano(nanoId)))
+                    continue;
+
                 NanoSpell? spell = Resolve(nanoId);
                 if (spell == null)
+                    continue;
+
+                // A merc's heals are cast by its heal role (Doctor first; others only when needed).
+                if (MercKey != null && !spell.IsHostile && (IsHeal(spell) || IsTeamHeal(spell)))
                     continue;
 
                 Character? target = ChooseTarget(nanoId, spell, nowUtc);
@@ -143,10 +170,27 @@ namespace ZoneEngine_New.Core.Ai
                         HealthPercent(target),
                         HealthPercent(Npc)));
 
+                Cooldown(nanoId, nowUtc, GenericCooldownSeconds(spell));
+                Cooldown(nanoId, nowUtc, GenericCooldownSeconds(spell));
                 _nextAttemptUtc = nowUtc.AddSeconds(Between(MinCastIntervalSeconds, MaxCastIntervalSeconds));
                 return;
             }
             }
+        }
+
+        /// <summary>
+        /// Per-nano wait after a generic cast so one nano is not spammed: offensive 12 s, buffs 10 s,
+        /// heals 4 s, anything else (item creation, utility) 45 s.
+        /// </summary>
+        double GenericCooldownSeconds(NanoSpell spell)
+        {
+            if (NpcSupportRules.IsOffensiveNano(Npc, spell))
+                return 12;
+            if (IsHeal(spell) || IsTeamHeal(spell))
+                return 4;
+            if (IsBuffLike(spell))
+                return 10;
+            return 45;
         }
 
         bool IsFixerMerc()

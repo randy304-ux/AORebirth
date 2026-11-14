@@ -329,12 +329,41 @@ namespace ZoneEngine_New.Core.Nanos
                 return false;
             if (IsPlayerPet(npc))
                 return false;
+            if (source.FightingTarget == npc.Identity)
+                return false;
 
-            return source.FightingTarget != npc.Identity;
+            // A merc (or a merc's pet) fights for its player: its area nanos (Mongo area taunt, area nukes) also
+            // reach mobs fighting that player, the player's team, or their mercs/pets, never uninvolved mobs.
+            if (CombatRules.SideOf(source) is Player owner)
+                return !IsEngagedWithSide(npc, owner);
+
+            return true;
+        }
+
+        /// <summary>The NPC is the owner's fight target, or is fighting the owner, a teammate, or one of their pets/mercs.</summary>
+        static bool IsEngagedWithSide(NpcCharacter npc, Player owner)
+        {
+            if (owner.FightingTarget == npc.Identity)
+                return true;
+            if (npc.FightingTarget.Instance == 0 || npc.Playfield?.GetService<DynelRegistry>() is not DynelRegistry registry)
+                return false;
+            if (!registry.TryGet(npc.FightingTarget, out Dynel? hit) || hit is not Character victim)
+                return false;
+
+            Character victimSide = CombatRules.SideOf(victim);
+            if (ReferenceEquals(victimSide, owner))
+                return true;
+
+            TeamService? teams = owner.Playfield?.GetService<TeamService>();
+            return victimSide is Player mate && teams != null && teams.AreTeammates(owner, mate);
         }
 
         static bool IsPlayerPet(NpcCharacter npc)
         {
+            // A merc's pet sides with the merc's player through the owner chain.
+            if (CombatRules.SideOf(npc) is Player)
+                return true;
+
             int master = npc.Stats.GetOrZero(CharacterStat.PetMaster);
             if (master == 0)
                 return false;

@@ -139,7 +139,12 @@ namespace ZoneEngine_New.Core.Helpers
                 Character? npcMaster = ResolveMaster(npc);
                 if (npcMaster != null && ReferenceEquals(npcMaster, master))
                     return true;
-                if (npcMaster is Player npcOwner && master is Player masterPlayer
+                // A merc's own pet sides with the merc's player (owner chain), so it is party too.
+                Character npcSide = CombatRules.SideOf(npc);
+                if (!ReferenceEquals(npcSide, npc) && ReferenceEquals(npcSide, master))
+                    return true;
+                Player? npcOwner = npcMaster as Player ?? npcSide as Player;
+                if (npcOwner != null && master is Player masterPlayer
                     && AreTeammates(masterPlayer, npcOwner))
                     return true;
                 return false;
@@ -275,8 +280,9 @@ namespace ZoneEngine_New.Core.Helpers
                     if (!AppliesToCastRecipient(fn))
                         continue;
 
+                    // A taunt (TauntNpc) is aimed at an enemy just like damage.
                     if (IsNegativeHealthHit(fn) || fn.Is(FunctionType.DrainHit) || fn.Is(FunctionType.AreaHit)
-                        || fn.Is(FunctionType.SpecialHit))
+                        || fn.Is(FunctionType.SpecialHit) || fn.Is(FunctionType.TauntNpc))
                         return true;
 
                     if ((fn.Is(FunctionType.CastNano) || fn.Is(FunctionType.CastNano2)
