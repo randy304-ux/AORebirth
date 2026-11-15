@@ -941,8 +941,8 @@ namespace ZoneEngine_New.Core.Pets
                     pet.HealthPercent, pet.NanoPercent, pet.SummonRequirements);
                 if (spawned == null)
                     continue;
-                RestoreBuffs(spawned, pet.SelfBuffs, spawned.Identity);
-                RestoreBuffs(owner, pet.OwnerBuffs, spawned.Identity);
+                RestoreBuffs(spawned, pet.SelfBuffs, spawned);
+                RestoreBuffs(owner, pet.OwnerBuffs, spawned);
             }
         }
 
@@ -978,7 +978,7 @@ namespace ZoneEngine_New.Core.Pets
             return list;
         }
 
-        void RestoreBuffs(Character target, IReadOnlyList<StashedBuff> stash, Identity source)
+        void RestoreBuffs(Character target, IReadOnlyList<StashedBuff> stash, Character source)
         {
             if (stash == null || stash.Count == 0 || target.Playfield == null)
                 return;
@@ -995,7 +995,11 @@ namespace ZoneEngine_New.Core.Pets
                 try
                 {
                     NanoSpell spell = NanoSpell.From(items.CreateTemplate(entry.NanoId, entry.NanoId, quality: 1));
-                    target.TryRestoreBuff(spell, source, entry.NanoInstance, expires);
+                    Buff? restored = target.TryRestoreBuff(spell, source.Identity, entry.NanoInstance, expires);
+                    // Spawn already sent SCFU without these buffs; memory-only restore left the client
+                    // empty and either blocked AI recast (HasNano) or looked like a full rebuff.
+                    if (restored != null)
+                        NanoRuntime.AnnounceRestoredBuff(source, target, restored, nowUtc);
                 }
                 catch (Exception exception)
                 {

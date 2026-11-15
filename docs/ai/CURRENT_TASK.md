@@ -1,14 +1,13 @@
 ﻿# Current Task
 
-## Active: BFG Fling range and BFG9000 (staged, not deployed)
+## Active: Player/merc buff persistence after login and zoning
 
-Branch `cursor/bfg9000-1115` @ worktree `I:\AO\worktrees\bfg9000-1115`, from `d7f4d65d`.
-Local commit only. No push, no deploy, engines left running.
+Branch `cursor/buff-persist-rootcause-724e` @ worktree `I:\AO\worktrees\buffpersist-1115`, from `255d83fd`.
 
-### What
-1. BFG Fling blast uses `WeaponFlingEffects.json` DamageByQl (QL300 1070-2310), not 75% of a normal hit.
-2. BFG 307100-307106 uses Hellfury mesh 154139 / icon 154362. BFG9000 stays on Hellspinner mesh 154141 / icon 154361. Both fire projectile 2670 and impact 2100. The two cannons' bolt colors are the same client value.
-3. Soldier BFG9000 items 307107-307113. 307114+ left for the later illegal version.
+### Root causes
+1. **Player login**: DB save/load works; `TryRestoreBuff` could silently no-op on `!spell.IsBuff`. Client NCU needs `SetNanoDuration` after FullCharacter (SCFU ActiveNanos alone insufficient for self).
+2. **Merc zoning**: `RestoreBuffs` only mutated memory after empty spawn SCFU — no client packets; AI either blocked by `HasNano` or recast from scratch.
+3. **Merc logout**: `DismissAll` clears stash; `TickMercs` respawns from contracts with no buff carry (no schema change).
 
-### Build
-`I:\AO\src\tools-temp\zbuild-bfg9000` (Debug). Offline load vs a copy of live GameData plus the new slice.
+### Fixes
+- Drop `IsBuff` gate on restore; announce restored buffs with **remaining** duration after login/reconnect FullCharacter; merc `RestoreBuffs` calls `AnnounceRestoredBuff`.

@@ -2514,7 +2514,9 @@ namespace ZoneEngine_New.Core.Entities
         {
             ArgumentNullException.ThrowIfNull(spell);
 
-            if (!spell.IsBuff || TryGetBuff(spell.Id, out _))
+            // Persisted / stashed rows were already legal when stored. Do not re-gate on catalog
+            // IsBuff: a stub or flag-less template would silently drop every NCU row on login.
+            if (TryGetBuff(spell.Id, out _))
                 return null;
 
             Buff buff = Buff.Restore(spell, source, nanoInstance, expiresAtUtc);

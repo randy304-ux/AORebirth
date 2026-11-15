@@ -1101,8 +1101,43 @@ namespace ZoneEngine_New.Core.Nanos
         /// The owner's cell gets the same packet so other players see the buff.
         /// </summary>
         static void SendNanoDuration(Character caster, Character owner, Buff buff)
+            => SendNanoDuration(caster, owner, buff, buff.DurationCentiseconds);
+
+        /// <summary>
+        /// Re-sends <see cref="CharacterActionType.SetNanoDuration"/> for every buff still on
+        /// <paramref name="owner"/> using remaining lifetime. Login SCFU / merc respawn SCFU can
+        /// leave the client's NCU empty until this packet arrives (player casts never Buff-add).
+        /// </summary>
+        public static void AnnounceRestoredBuffs(Character owner)
         {
-            CharacterActionMessage message = DurationMessage(caster, owner, buff);
+            ArgumentNullException.ThrowIfNull(owner);
+            DateTime nowUtc = DateTime.UtcNow;
+            IReadOnlyList<Buff> buffs = owner.Buffs;
+            for (int i = 0; i < buffs.Count; i++)
+            {
+                Buff buff = buffs[i];
+                if (buff.IsExpired(nowUtc))
+                    continue;
+                AnnounceRestoredBuff(owner, owner, buff, nowUtc);
+            }
+        }
+
+        /// <summary>
+        /// One restored buff: SetNanoDuration with remaining centiseconds so the client timer
+        /// matches the server deadline instead of refreshing to the full template duration.
+        /// </summary>
+        public static void AnnounceRestoredBuff(Character caster, Character owner, Buff buff, DateTime nowUtc)
+        {
+            ArgumentNullException.ThrowIfNull(caster);
+            ArgumentNullException.ThrowIfNull(owner);
+            ArgumentNullException.ThrowIfNull(buff);
+            int remaining = Math.Clamp(buff.RemainingCentiseconds(nowUtc), 1, Buff.MaxDurationCentiseconds);
+            SendNanoDuration(caster, owner, buff, remaining);
+        }
+
+        static void SendNanoDuration(Character caster, Character owner, Buff buff, int durationCentiseconds)
+        {
+            CharacterActionMessage message = DurationMessage(caster, owner, buff, durationCentiseconds);
 
             SessionOf(caster)?.Send(message);
             if (!ReferenceEquals(caster, owner))
@@ -1132,7 +1167,7 @@ namespace ZoneEngine_New.Core.Nanos
 
             session.Send(ImmediateLandMessage(source, target, buff.Id));
             session.Send(CastFinishedMessage(source, buff.Id));
-            session.Send(DurationMessage(source, target, buff));
+            session.Send(DurationMessage(source, target, buff, buff.DurationCentiseconds));
         }
 
         /// <summary>
@@ -1148,7 +1183,11 @@ namespace ZoneEngine_New.Core.Nanos
             SendNanoDuration(owner, owner, buff);
         }
 
-        static CharacterActionMessage DurationMessage(Character caster, Character owner, Buff buff)
+        static CharacterActionMessage DurationMessage(
+            Character caster,
+            Character owner,
+            Buff buff,
+            int durationCentiseconds)
             => new()
             {
                 Identity = owner.Identity,
@@ -1161,7 +1200,7 @@ namespace ZoneEngine_New.Core.Nanos
                     Instance = buff.Id
                 },
                 Parameter1 = caster.Identity.Instance,
-                Parameter2 = buff.DurationCentiseconds,
+                Parameter2 = durationCentiseconds,
                 Unknown2 = 0
             };
 

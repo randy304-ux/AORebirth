@@ -831,6 +831,9 @@ namespace ZoneEngine_New.Core.Playfield
             _playfield.GetRequiredService<PlayfieldLocality>().PrimeVendingMachineVisibility(player);
             SendRetailWorldEntryReadyBlock(session, player);
             session.Send(full);
+            // Player casts use SetNanoDuration for NCU display. SCFU ActiveNanos alone is not
+            // enough after FullCharacter rebuilds the local character on login.
+            ZoneEngine_New.Core.Nanos.NanoRuntime.AnnounceRestoredBuffs(player);
             SendRetailWorldEntryCompletion(session, player);
             session.State = SessionState.InPlay;
             player.SendPerkActions();
@@ -921,6 +924,8 @@ namespace ZoneEngine_New.Core.Playfield
             _playfield.GetRequiredService<PlayfieldLocality>().PrimeVendingMachineVisibility(player);
             SendRetailWorldEntryReadyBlock(session, player);
             session.Send(reconnectFull);
+            // Same post-FullCharacter NCU announce as initial login (zone reconnect rebuilds the client).
+            ZoneEngine_New.Core.Nanos.NanoRuntime.AnnounceRestoredBuffs(player);
             SendRetailWorldEntryCompletion(session, player);
             session.State = SessionState.InPlay;
             player.SendPerkActions();
@@ -1190,6 +1195,7 @@ namespace ZoneEngine_New.Core.Playfield
             foreach (MessageBody stance in player.BuildCombatStanceMessages())
                 session.Send(stance);
             session.Send(player.BuildFullCharacterMessage());
+            ZoneEngine_New.Core.Nanos.NanoRuntime.AnnounceRestoredBuffs(player);
             player.SendPerkActions();
 
             session.Send(

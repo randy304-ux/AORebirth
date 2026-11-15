@@ -92,9 +92,17 @@ namespace ZoneEngine_New.Core.Characters
                 if (expiresAtUtc <= nowUtc)
                     continue;
 
-                NanoSpell spell = NanoSpell.From(
-                    _items.CreateTemplate(record.NanoId, record.NanoId, quality: 1));
-                player.TryRestoreBuff(spell, player.Identity, record.NanoInstance, expiresAtUtc);
+                try
+                {
+                    NanoSpell spell = NanoSpell.From(
+                        _items.CreateTemplate(record.NanoId, record.NanoId, quality: 1));
+                    // SetNanoDuration for the client is sent after FullCharacter (see SpawnService).
+                    player.TryRestoreBuff(spell, player.Identity, record.NanoInstance, expiresAtUtc);
+                }
+                catch
+                {
+                    // A bad catalog row must not abort login; the NCU entry is skipped until next flush.
+                }
             }
         }
 
