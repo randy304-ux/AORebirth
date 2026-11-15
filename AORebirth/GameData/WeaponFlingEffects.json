@@ -10,50 +10,41 @@
       "ExcludePrimaryTarget": true,
       "Stat": 27,
       "AcStat": 97,
-      "PercentOfHit": 75,
       "SplashPercentOfHit": 75,
       "SplashRadiusMeters": 6,
       "DamageByQl": [
-        {
-          "Ql": 1,
-          "Min": -13,
-          "Max": -26
-        },
-        {
-          "Ql": 50,
-          "Min": -106,
-          "Max": -232
-        },
-        {
-          "Ql": 100,
-          "Min": -201,
-          "Max": -442
-        },
-        {
-          "Ql": 150,
-          "Min": -457,
-          "Max": -991
-        },
-        {
-          "Ql": 182,
-          "Min": -649,
-          "Max": -1402
-        },
-        {
-          "Ql": 200,
-          "Min": -713,
-          "Max": -1540
-        },
-        {
-          "Ql": 250,
-          "Min": -892,
-          "Max": -1925
-        },
-        {
-          "Ql": 300,
-          "Min": -1070,
-          "Max": -2310
-        }
+        { "Ql": 1, "Min": -13, "Max": -26 },
+        { "Ql": 50, "Min": -106, "Max": -232 },
+        { "Ql": 100, "Min": -201, "Max": -442 },
+        { "Ql": 150, "Min": -457, "Max": -991 },
+        { "Ql": 182, "Min": -649, "Max": -1402 },
+        { "Ql": 200, "Min": -713, "Max": -1540 },
+        { "Ql": 250, "Min": -892, "Max": -1925 },
+        { "Ql": 300, "Min": -1070, "Max": -2310 }
+      ]
+    },
+    {
+      "Name": "BFG9000",
+      "LowId": 307107,
+      "HighId": 307113,
+      "RadiusMeters": 25,
+      "MaxTargets": 8,
+      "RequireLineOfSight": true,
+      "ExcludePrimaryTarget": true,
+      "Stat": 27,
+      "AcStat": 97,
+      "FlingAcStat": 92,
+      "SplashPercentOfHit": 75,
+      "SplashRadiusMeters": 8,
+      "DamageByQl": [
+        { "Ql": 1, "Min": -29, "Max": -36 },
+        { "Ql": 50, "Min": -238, "Max": -317 },
+        { "Ql": 100, "Min": -451, "Max": -604 },
+        { "Ql": 150, "Min": -1025, "Max": -1354 },
+        { "Ql": 182, "Min": -1456, "Max": -1915 },
+        { "Ql": 200, "Min": -1599, "Max": -2103 },
+        { "Ql": 250, "Min": -2001, "Max": -2629 },
+        { "Ql": 300, "Min": -2400, "Max": -3155 }
       ]
     }
   ]

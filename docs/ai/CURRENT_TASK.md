@@ -1,17 +1,14 @@
 ﻿# Current Task
 
-## Active: Pet Warp / merc come (staged, not deployed)
+## Active: BFG Fling range and BFG9000 (staged, not deployed)
 
-Branch `cursor/anvil-fix-1114` @ worktree `I:\AO\worktrees\anvil-fix-1114`.
-Prior live tip `e23eb3fe`. Local commits only — no push/PR/deploy.
+Branch `cursor/bfg9000-1115` @ worktree `I:\AO\worktrees\bfg9000-1115`, from `d7f4d65d`.
+Local commit only. No push, no deploy, engines left running.
 
 ### What
-1. Retail Pet Warp nano 209488 (`FunctionType.SummonPets` 53181): warp owned pets+mercs to caster.
-2. `.merc come` / `.merc warp` (10s cooldown) + merc menu link.
-3. Merc TickMercs auto-warp: >40 m or no progress ~8 s, not in combat.
-
-### Pet Warp args
-Nano 209488 OnUse SummonPets Arguments=`[0]` — 0 means all living owned pets/mercs on the playfield; `>0` treated as max range in meters.
+1. BFG Fling blast uses `WeaponFlingEffects.json` DamageByQl (QL300 1070-2310), not 75% of a normal hit.
+2. BFG client projectile is Hellfury 153977 effect 2670; hit impact stays explosion 2100.
+3. Soldier BFG9000 items 307107-307113. 307114+ left for the later illegal version.
 
 ### Build
-`I:\AO\src\tools-temp\zbuild-petwarp` (Debug). zeload vs live Built GameData.
+`I:\AO\src\tools-temp\zbuild-bfg9000` (Debug). Offline load vs a copy of live GameData plus the new slice.

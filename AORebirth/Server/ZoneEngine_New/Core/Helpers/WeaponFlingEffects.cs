@@ -44,11 +44,17 @@ namespace ZoneEngine_New.Core.Helpers
             public bool ExcludePrimaryTarget { get; set; } = true;
             public int Stat { get; set; } = (int)CharacterStat.Health;
             public int AcStat { get; set; } = (int)CharacterStat.FireAC;
+
+            /// <summary>
+            /// Armour stat for the Fling blast. When 0, the blast uses <see cref="AcStat"/> (the splash armour).
+            /// </summary>
+            public int FlingAcStat { get; set; }
+
             public List<DamageAnchor> DamageByQl { get; set; } = [];
 
             /// <summary>
-            /// When above 0, the Fling blast deals this percent of the landed Fling Shot's damage to each
-            /// secondary target (no extra Add Damage) instead of rolling <see cref="DamageByQl"/>.
+            /// Ignored for the blast. An earlier BFG row set this to 75, which replaced
+            /// <see cref="DamageByQl"/> with a share of the normal weapon hit.
             /// </summary>
             public int PercentOfHit { get; set; }
 
@@ -107,18 +113,10 @@ namespace ZoneEngine_New.Core.Helpers
             if (row.Stat != (int)CharacterStat.Health || row.RadiusMeters < 0)
                 return;
 
-            bool percentMode = row.PercentOfHit > 0;
-            int minHit, maxHit;
-            if (percentMode)
-            {
-                if (hitDamage <= 0)
-                    return;
-                minHit = maxHit = -PercentOf(hitDamage, row.PercentOfHit);
-            }
-            else
-            {
-                (minHit, maxHit) = DamageAt(effect.Anchors, weapon.Quality);
-            }
+            // The blast rolls DamageByQl. It must not reuse the landed weapon hit: PercentOfHit
+            // did that, so a BFG Fling dealt the same kind of damage as a regular shot.
+            _ = hitDamage;
+            (int minHit, int maxHit) = DamageAt(effect.Anchors, weapon.Quality);
 
             if (maxHit >= 0)
                 return;
@@ -154,9 +152,8 @@ namespace ZoneEngine_New.Core.Helpers
                 int delta = minHit == maxHit
                     ? minHit
                     : Random.Shared.Next(minHit, maxHit + 1);
-                // Reuse AreaHit's hostile Health path. Percent mode is already a share of the real hit
-                // (which carried Add Damage), so it adds none on top.
-                ItemUseFunctions.ApplyFlingAreaDelta(candidate, attacker, delta, row.AcStat, addDamage: !percentMode);
+                int ac = row.FlingAcStat > 0 ? row.FlingAcStat : row.AcStat;
+                ItemUseFunctions.ApplyFlingAreaDelta(candidate, attacker, delta, ac, addDamage: true);
                 hit++;
             }
         }
