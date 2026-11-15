@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using AORebirth.Enums;
 
 using SmokeLounge.AOtomation.Messaging.GameData;
+using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
 
 using ZoneEngine_New.Core.Pets;
 
@@ -61,8 +62,16 @@ public sealed record KnubotDungeonMerc(string Id) : KnubotEffect
             return;
 
         unlocks.OnMissionAccepted(context.Player, def.Id);
-        if (!unlocks.IsSummoned(context.Player, def))
-            unlocks.Summon(context.Player, def);
+        if (unlocks.IsSummoned(context.Player, def))
+            return;
+
+        string? refused = unlocks.Summon(context.Player, def);
+        if (refused != null)
+            context.Player.Session?.Send(new ChatTextMessage
+            {
+                Identity = context.Player.Identity,
+                Text = refused
+            });
     }
 
     static MercDefinition? FirstInGroup(MercUnlockService unlocks, string group)

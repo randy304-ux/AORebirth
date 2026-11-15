@@ -1,82 +1,74 @@
 {
-  "Npcs": [
-    "ddogs-merc-giver-enforcer_subway"
-  ],
-  "Openers": [
-    {
-      "If": [
-        "quest MSUB done"
-      ],
-      "Say": "done"
-    },
-    {
-      "If": [
-        "quest MSUB active"
-      ],
-      "Say": "active"
-    },
-    {
-      "Say": "intro"
-    }
-  ],
-  "Replies": {
-    "job": {
-      "Text": "What's down there?",
-      "Goto": "job"
-    },
-    "deal": {
-      "Text": "Deal. Let's go break its teeth.",
-      "Goto": "deal"
-    },
-    "rejoin": {
-      "Text": "Fall in, Anvil. We're not done.",
-      "Goto": "rejoin"
-    },
-    "bye": {
-      "Text": "Later.",
-      "Goto": "bye",
-      "Source": "filler"
-    }
-  },
-  "Lines": {
-    "intro": {
-      "Text": "Name's Brock Malone. Folks call me Anvil, on account of what happens when things hit me. I used to run security on the old transit line, before the tunnels went bad. Something big has been nesting at the bottom of this hole, and I'm not walking out of here until it's dead.",
-      "Options": [
-        "job",
-        "bye"
-      ]
-    },
-    "job": {
-      "Text": "Abmouth Supremus. Big, ugly, all mouth, and it eats the scavengers who wander too deep. I can't take it alone, and from the look of you, neither can you. Bring it down with me and you'll be paid well, and I'll answer your call anywhere on Rubi-Ka after. Until then, I only fight down here.",
-      "Options": [
-        "deal",
-        "bye"
-      ]
-    },
-    "deal": {
-      "Text": "Good. I'll take the hits, you do the damage. Kill Abmouth Supremus. {givequest MSUB}{dungeonmerc enforcer_subway}",
-      "Options": [
-        "bye"
-      ]
-    },
-    "active": {
-      "Text": "Abmouth is still breathing. That's a problem. I'm with you as long as we're in these tunnels.",
-      "Options": [
-        "rejoin",
-        "bye"
-      ]
-    },
-    "rejoin": {
-      "Text": "Right behind you. {dungeonmerc enforcer_subway}",
-      "Options": [
-        "bye"
-      ]
-    },
-    "done": {
-      "Text": "Never thought I'd see that thing dead. You've got my number now. Call me anywhere with /merc and I'll come running.",
-      "Options": [
-        "bye"
-      ]
-    }
-  }
+    "Npcs":  [
+                 "ddogs-merc-giver-enforcer_subway"
+             ],
+    "Openers":  [
+                    {
+                        "If":  [
+                                   "quest MSUB done"
+                               ],
+                        "Say":  "done"
+                    },
+                    {
+                        "If":  [
+                                   "quest MSUB active"
+                               ],
+                        "Say":  "active"
+                    },
+                    {
+                        "Say":  "intro"
+                    }
+                ],
+    "Replies":  {
+                    "job":  {
+                                "Text":  "What\u0027s down there?",
+                                "Goto":  "job"
+                            },
+                    "deal":  {
+                                 "Text":  "Deal. Let\u0027s go break its teeth.",
+                                 "Goto":  "deal"
+                             },
+                    "rejoin":  {
+                                   "Text":  "Fall in, Anvil. We\u0027re not done.",
+                                   "Goto":  "rejoin"
+                               }
+                },
+    "Lines":  {
+                  "intro":  {
+                                "Text":  "Name\u0027s Brock Malone. Folks call me Anvil, on account of what happens when things hit me. I used to run security on the old transit line, before the tunnels went bad. Something big has been nesting at the bottom of this hole, and I\u0027m not walking out of here until it\u0027s dead.",
+                                "Replies":  [
+                                                "job"
+                                            ]
+                            },
+                  "job":  {
+                              "Text":  "Abmouth Supremus. Big, ugly, all mouth, and it eats the scavengers who wander too deep. I can\u0027t take it alone, and from the look of you, neither can you. Bring it down with me and you\u0027ll be paid well, and I\u0027ll answer your call anywhere on Rubi-Ka after. Until then, I only fight down here.",
+                              "Replies":  [
+                                              "deal"
+                                          ]
+                          },
+                  "deal":  {
+                               "Text":  "Good. I\u0027ll take the hits, you do the damage. Kill Abmouth Supremus. {givequest MSUB}{dungeonmerc enforcer_subway}",
+                               "Replies":  [
+
+                                           ]
+                           },
+                  "active":  {
+                                 "Text":  "Abmouth is still breathing. That\u0027s a problem. I\u0027m with you as long as we\u0027re in these tunnels.",
+                                 "Replies":  [
+                                                 "rejoin"
+                                             ]
+                             },
+                  "rejoin":  {
+                                 "Text":  "Right behind you. {dungeonmerc enforcer_subway}",
+                                 "Replies":  [
+
+                                             ]
+                             },
+                  "done":  {
+                               "Text":  "Never thought I\u0027d see that thing dead. You\u0027ve got my number now. Call me anywhere with /merc and I\u0027ll come running.",
+                               "Replies":  [
+
+                                           ]
+                           }
+              }
 }

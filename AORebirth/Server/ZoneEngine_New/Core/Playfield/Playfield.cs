@@ -824,6 +824,9 @@ namespace ZoneEngine_New.Core.Playfield
                 services.AddSingleton(_playfieldManager.Knubot.Catalog);
             if (_playfieldManager.Gameplay != null)
                 services.AddSingleton(_playfieldManager.Gameplay);
+            // Required by {dungeonmerc} / boss-kill unlock hooks via playfield.GetService<MercUnlockService>().
+            if (_playfieldManager.MercUnlocks != null)
+                services.AddSingleton(_playfieldManager.MercUnlocks);
             services.AddSingleton(_playfieldManager.ItemTemplates);
             services.AddSingleton(_playerHydrator);
             services.AddSingleton(_gameData);

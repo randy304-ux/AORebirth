@@ -1,23 +1,18 @@
 ﻿# Current Task
 
-## Active: batch-1111 (content + Battle Station + starter playerbots)
+## Active: Anvil subway merc giver Deal fix (staged, not deployed)
 
-Branch `cursor/batch-1111` @ worktree `I:\AO\worktrees\batch-1111`.
-Base tip `959fa5a3`. Local commit only -- no push/PR.
+Branch `cursor/anvil-fix-1114` @ worktree `I:\AO\worktrees\anvil-fix-1114`.
+Base `3834f8e8`. Local commit only — no push/PR/deploy.
 
-Merges: `cursor/content-1111`, `cursor/bs-score-1111`, `cursor/playerbots-1111`.
+### Cause
+`{dungeonmerc}` looks up `playfield.GetService<MercUnlockService>()`, but playfield DI never registered the root singleton. `CanApplyAll` failed on Deal → Fail/close with no quest, no summon, and no Warn.
 
-### Battle Station
-Score HUD + solo bot pressure. Capture in
-`I:\AO\imports\batch-20261111\scrape\bs_score_packets_20261111_Killzaw.csv`
-(PF 4384, SendScore `0x44483B3A`, end Red 91 / Blue 502).
+### Fix
+- Register `MercUnlocks` on playfield services.
+- Warn when a Knubot line's effects cannot apply (names the failing effect).
+- Keep dungeon_only unlock in memory if DB upsert fails; surface summon refusal text.
+- Carry live Anvil GameData (MercGiverSubway Replies, Anvil position, PCBN SpawnSkip).
 
-### Starter-area playerbots
-5-10 player-looking bots per starter hub (Arete 6553, ICC 4582, Nascence 4313):
-roam POIs via navmesh/straight PathTo, fight level-appropriate mobs, rest when hurt.
-Config: `GameData/PlayerBots.json` (Enabled default true, count 8).
-
-### Build / deploy
-Matched Core + ZoneEngine_New + Messaging from this merged tree:
-`I:\AO\src\tools-temp\zbuild-batch-1111`.
-Engines must be started only via `schtasks /run /tn "\DungeonDogs\AO Dungeon Dogs Engines"`.
+### Build
+`I:\AO\src\tools-temp\zbuild-anvil-fix` (Release). Offline zeload PASS (quests=605, Knubot rejected=0).

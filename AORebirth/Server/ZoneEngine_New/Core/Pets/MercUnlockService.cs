@@ -90,10 +90,15 @@ namespace ZoneEngine_New.Core.Pets
             }
 
             string dbState = state == MercUnlockState.DungeonOnly ? StateDungeonOnly : StateUnlocked;
-            // One row per unlock group member so NT AOE/ST both see the state.
+            // Keep in-memory state even when the DB write fails (missing table / deploy lag),
+            // so {dungeonmerc} can summon in the same session.
+            Dictionary<string, MercUnlockState> map = Load(player.Identity.Instance);
             foreach (MercDefinition sibling in _roster.ByUnlockGroup(def.UnlockGroup))
+            {
+                map[sibling.Id] = state;
                 Upsert(player.Identity.Instance, sibling.Id, dbState);
-            Invalidate(player.Identity.Instance);
+            }
+
             detail = def.DisplayName + " set to " + dbState + ".";
             return true;
         }

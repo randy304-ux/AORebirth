@@ -64,22 +64,33 @@ public abstract record KnubotEffect
     public abstract void Apply(KnubotContext context, KnubotEffectServices services);
 
     public static bool CanApplyAll(KnubotEffect[] effects, KnubotContext context, KnubotEffectServices services)
+        => TryFindBlock(effects, context, services, out _) == null;
+
+    /// <summary>Null when every effect can apply; otherwise a short reason naming the blocker.</summary>
+    public static string? TryFindBlock(KnubotEffect[] effects, KnubotContext context, KnubotEffectServices services, out KnubotEffect? blocked)
     {
+        blocked = null;
         if (effects.Length == 0)
-            return true;
+            return null;
 
         Player player = context.Player;
         if (!player.Inventory.IsHydrated)
-            return false;
+            return "inventory not hydrated";
 
         var plan = new KnubotPlan();
         foreach (KnubotEffect effect in effects)
         {
             if (!effect.Check(context, plan, services))
-                return false;
+            {
+                blocked = effect;
+                return effect.ToString();
+            }
         }
 
-        return KnubotItems.FreeSlots(player) >= plan.SlotsNeeded;
+        if (KnubotItems.FreeSlots(player) < plan.SlotsNeeded)
+            return "inventory full (need " + plan.SlotsNeeded + " free slot(s))";
+
+        return null;
     }
 
     /// <summary>Applies one effect if it can still be applied now.</summary>

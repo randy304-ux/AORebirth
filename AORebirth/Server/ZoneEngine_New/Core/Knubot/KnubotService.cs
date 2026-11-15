@@ -427,8 +427,13 @@ public sealed class KnubotService(KnubotCatalog catalog, KnubotEffectServices ef
             return;
         }
 
-        if (!KnubotEffect.CanApplyAll(line.Effects, Context(conversation), effects))
+        string? blocked = KnubotEffect.TryFindBlock(line.Effects, Context(conversation), effects, out KnubotEffect? failedEffect);
+        if (blocked != null)
         {
+            logger.Warn(string.Format(CultureInfo.InvariantCulture,
+                "Knubot {0}: line '{1}' effects cannot apply for char={2}: {3}",
+                conversation.Script.Id, line.Id, conversation.Player.Identity.Instance,
+                failedEffect != null ? failedEffect.ToString() : blocked));
             Fail(conversation, line, chain);
             return;
         }
@@ -582,7 +587,7 @@ public sealed class KnubotService(KnubotCatalog catalog, KnubotEffectServices ef
             {
                 // The player's state changed since the line started (full inventory, quest taken elsewhere):
                 // the rest of the line is dropped and its Fail line is said instead.
-                logger.Info(string.Format(CultureInfo.InvariantCulture, "Knubot {0}: {1} no longer applies on line '{2}' for char={3}",
+                logger.Warn(string.Format(CultureInfo.InvariantCulture, "Knubot {0}: {1} no longer applies on line '{2}' for char={3}",
                     conversation.Script.Id, next.Effect, next.Line!.Id, conversation.Player.Identity.Instance));
                 conversation.Packets.Clear();
                 Fail(conversation, next.Line, next.Chain);
