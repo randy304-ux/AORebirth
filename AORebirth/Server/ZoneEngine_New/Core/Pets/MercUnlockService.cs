@@ -258,10 +258,13 @@ namespace ZoneEngine_New.Core.Pets
             if (pets == null)
                 return "Mercenaries are not available here.";
 
+            // Replace any parked/hired profession merc in this slot with the dungeon Twink body.
+            // Must be Twink (not Basic): Basic reuses the MREN hire path and brings back a plain
+            // "Mercenary Enforcer" instead of the MercRoster Anvil / Grit look and name.
             pets.ParkMerc(player, def.Kind);
             ClearSummonedKind(player.Identity.Instance, def.Kind.Key);
 
-            NpcCharacter? npc = pets.HireMerc(player, def.Kind, def.Level, Mercs.Tier.Basic);
+            NpcCharacter? npc = pets.HireMerc(player, def.Kind, def.Level, Mercs.Tier.Twink);
             if (npc == null)
                 return "Could not summon right now (mercenaries off, or you are dead or zoning).";
 

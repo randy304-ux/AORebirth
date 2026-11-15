@@ -1,18 +1,15 @@
 ﻿# Current Task
 
-## Active: Anvil subway merc giver Deal fix (staged, not deployed)
+## Active: Anvil dungeonmerc Twink body (staged, not deployed)
 
 Branch `cursor/anvil-fix-1114` @ worktree `I:\AO\worktrees\anvil-fix-1114`.
-Base `3834f8e8`. Local commit only — no push/PR/deploy.
+Prior live: `2f6fa402` (DI register). Local commits only — no push/PR/deploy.
 
-### Cause
-`{dungeonmerc}` looks up `playfield.GetService<MercUnlockService>()`, but playfield DI never registered the root singleton. `CanApplyAll` failed on Deal → Fail/close with no quest, no summon, and no Warn.
+### Cause (follow-up)
+`MercUnlockService.Summon` called `HireMerc(..., Mercs.Tier.Basic)`, so Deal reused the MREN basic-hire path and brought back a plain Mercenary Enforcer instead of Twink Anvil.
 
 ### Fix
-- Register `MercUnlocks` on playfield services.
-- Warn when a Knubot line's effects cannot apply (names the failing effect).
-- Keep dungeon_only unlock in memory if DB upsert fails; surface summon refusal text.
-- Carry live Anvil GameData (MercGiverSubway Replies, Anvil position, PCBN SpawnSkip).
+Hire dungeon unlocks at `Mercs.Tier.Twink` so gear/name/ConfigureSummonedMerc use the MercRoster body.
 
 ### Build
-`I:\AO\src\tools-temp\zbuild-anvil-fix` (Release). Offline zeload PASS (quests=605, Knubot rejected=0).
+`I:\AO\src\tools-temp\zbuild-anvil-fix2` (Release). zeload vs live Built GameData.
