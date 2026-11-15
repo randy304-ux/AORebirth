@@ -1,15 +1,17 @@
 ﻿# Current Task
 
-## Active: Anvil dungeonmerc Twink body (staged, not deployed)
+## Active: Pet Warp / merc come (staged, not deployed)
 
 Branch `cursor/anvil-fix-1114` @ worktree `I:\AO\worktrees\anvil-fix-1114`.
-Prior live: `2f6fa402` (DI register). Local commits only — no push/PR/deploy.
+Prior live tip `e23eb3fe`. Local commits only — no push/PR/deploy.
 
-### Cause (follow-up)
-`MercUnlockService.Summon` called `HireMerc(..., Mercs.Tier.Basic)`, so Deal reused the MREN basic-hire path and brought back a plain Mercenary Enforcer instead of Twink Anvil.
+### What
+1. Retail Pet Warp nano 209488 (`FunctionType.SummonPets` 53181): warp owned pets+mercs to caster.
+2. `.merc come` / `.merc warp` (10s cooldown) + merc menu link.
+3. Merc TickMercs auto-warp: >40 m or no progress ~8 s, not in combat.
 
-### Fix
-Hire dungeon unlocks at `Mercs.Tier.Twink` so gear/name/ConfigureSummonedMerc use the MercRoster body.
+### Pet Warp args
+Nano 209488 OnUse SummonPets Arguments=`[0]` — 0 means all living owned pets/mercs on the playfield; `>0` treated as max range in meters.
 
 ### Build
-`I:\AO\src\tools-temp\zbuild-anvil-fix2` (Release). zeload vs live Built GameData.
+`I:\AO\src\tools-temp\zbuild-petwarp` (Debug). zeload vs live Built GameData.

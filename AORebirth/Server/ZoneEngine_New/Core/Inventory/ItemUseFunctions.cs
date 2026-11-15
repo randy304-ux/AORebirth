@@ -118,6 +118,8 @@ namespace ZoneEngine_New.Core.Inventory
                     return SpawnMonster2(target, spell);
                 case FunctionType.SummonPet:
                     return SummonPet(target, spell, sourceTemplate);
+                case FunctionType.SummonPets:
+                    return SummonPets(target, spell);
                 case FunctionType.DestroyItem:
                     return DestroySubject(target, criteria);
                 case FunctionType.ToggleFlag:
@@ -1243,6 +1245,25 @@ namespace ZoneEngine_New.Core.Inventory
         /// Catalog shape from nano 205606: SpawnMonster2("KHAL", 73, 3600) — hash, level, lifetime.
         /// Lifetime is stored on the function; one-shot summons do not hash-respawn.
         /// </summary>
+        /// <summary>
+        /// SummonPets (retail Pet Warp 209488): arg0 is 0 = pull every living owned pet/merc on this playfield
+        /// to the caster; arg0 &gt; 0 = only those within that many meters. Same playfield only.
+        /// </summary>
+        static bool SummonPets(Character target, ItemSpell spell)
+        {
+            if (target is not Player player || player.IsDead || player.Playfield == null)
+                return false;
+            if (player.Playfield.GetService<Pets.PetService>() is not Pets.PetService pets)
+                return false;
+
+            double? range = null;
+            if (spell.TryReadInt(0, out int limit) && limit > 0)
+                range = limit;
+
+            pets.WarpOwnedPetsToOwner(player, range);
+            return true;
+        }
+
         /// <summary>
         /// SummonPet (mob hash, level, duration seconds; -1 or 0: until dismissed): the character the function runs
         /// on gets the pet (the summoner: shell items and pet nanos target Self).

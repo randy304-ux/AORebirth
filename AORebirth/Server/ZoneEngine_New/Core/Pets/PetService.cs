@@ -31,6 +31,15 @@ namespace ZoneEngine_New.Core.Pets
         /// <summary>A player's pet farther than this from its owner rejoins the owner at once.</summary>
         public const double MaxPlayerPetDistance = 50.0;
 
+        /// <summary>Merc auto-warp: pull a living merc back when farther than this (same playfield, not in combat).</summary>
+        public const double MercAutoWarpMeters = 40.0;
+
+        /// <summary>Merc auto-warp: pull back when the merc has made no progress toward the owner for this long.</summary>
+        public const double MercStuckSeconds = 8.0;
+
+        /// <summary><c>.merc come</c> / <c>.merc warp</c> cooldown.</summary>
+        public const double MercComeCooldownSeconds = 10.0;
+
         /// <summary>Orders <see cref="Command"/> honors. The client sends these codes from /pet. Other codes are ignored.</summary>
         public static readonly (PetCommandCode Code, string Syntax, string Summary)[] Orders =
         [
@@ -546,8 +555,90 @@ namespace ZoneEngine_New.Core.Pets
         }
 
         /// <summary>
+        /// Pet Warp / <c>.merc come</c>: teleport every living owned pet and merc on this playfield next to
+        /// <paramref name="owner"/> (ring offset), clear path/AI, and resume follow. Optional
+        /// <paramref name="maxRangeMeters"/> limits which pets are pulled (SummonPets arg0 &gt; 0).
+        /// </summary>
+        public int WarpOwnedPetsToOwner(Player owner, double? maxRangeMeters = null)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            if (owner.IsDead || !ReferenceEquals(owner.Playfield, _playfield))
+                return 0;
+
+            int count = 0;
+            int index = 0;
+            foreach (NpcCharacter pet in owner.OwnedPets.All.ToList())
+            {
+                if (!ReferenceEquals(pet.Playfield, _playfield) || pet.IsDead)
+                    continue;
+                if (maxRangeMeters is double max && Vector3.Abs(pet.Position - owner.Position) > max)
+                    continue;
+
+                WarpPetBesideOwner(owner, pet, index++);
+                count++;
+            }
+
+            return count;
+        }
+
+        /// <summary><c>.merc come</c> / <c>.merc warp</c> with a short cooldown.</summary>
+        public string Come(Player owner)
+        {
+            ArgumentNullException.ThrowIfNull(owner);
+            DateTime now = DateTime.UtcNow;
+            OwnedPets roster = owner.OwnedPets;
+            if (now < roster.MercComeReadyUtc)
+            {
+                int wait = (int)Math.Ceiling((roster.MercComeReadyUtc - now).TotalSeconds);
+                return "Pet warp ready in " + wait.ToString(CultureInfo.InvariantCulture) + "s.";
+            }
+
+            int warped = WarpOwnedPetsToOwner(owner);
+            roster.MercComeReadyUtc = now.AddSeconds(MercComeCooldownSeconds);
+            return warped == 0
+                ? "No pets or mercs nearby to warp."
+                : "Warped " + warped.ToString(CultureInfo.InvariantCulture) + " pet(s)/merc(s) to you.";
+        }
+
+        void WarpPetBesideOwner(Player owner, NpcCharacter pet, int index)
+        {
+            double angle = index * Math.PI / 3.0;
+            var spot = new Vector3(
+                owner.Position.x + Math.Cos(angle) * 1.5,
+                owner.Position.y,
+                owner.Position.z + Math.Sin(angle) * 1.5);
+            if (!_playfield.TrySnapFeetToFloor(spot, out Vector3 floor) || Math.Abs(floor.y - owner.Position.y) > 1.0)
+                floor = new Vector3(owner.Position.x, owner.Position.y, owner.Position.z);
+
+            if (pet.Pet != null)
+            {
+                pet.Pet.WarpRequested = false;
+                pet.Pet.MercAutoWarpLastPos = null;
+                pet.Pet.MercAutoWarpProgressUtc = default;
+                if (pet.Pet.Mode == PetMode.Attack)
+                    pet.Pet.EndAttack();
+                if (pet.Pet.Mode == PetMode.Wait)
+                    pet.Pet.Order(PetMode.Follow);
+            }
+
+            if (pet.Brain != null)
+            {
+                pet.Brain.StopFighting();
+                pet.Brain.SetCurrentTarget(Identity.None);
+                pet.Brain.WarpTo(floor);
+            }
+            else
+            {
+                pet.Motor.ClearPath();
+                pet.Motor.Warp(floor);
+                NpcFollowTarget.AnnounceStop(pet, floor);
+            }
+        }
+
+        /// <summary>
         /// Brings back every contracted merc the owner is missing: on login, after the owner's or the merc's death
         /// (once its revive time is up), and after a zone change that lost it. Runs about once a second per player.
+        /// Also auto-warps living mercs that are stuck or far away on this playfield.
         /// </summary>
         public void TickMercs(Player owner)
         {
@@ -566,6 +657,7 @@ namespace ZoneEngine_New.Core.Pets
                 return;
 
             int level = owner.Stats.GetOrOne(CharacterStat.Level);
+            int warpIndex = 0;
             foreach (Mercs.Kind kind in Mercs.Kinds)
             {
                 if ((bits & (1 << kind.Bit)) == 0)
@@ -600,6 +692,8 @@ namespace ZoneEngine_New.Core.Pets
                     }
 
                     EnsureMercPets(merc, Mercs.MercPetLevel(merc.Stats.GetOrOne(CharacterStat.Level), Mercs.GetTier(owner, kind)));
+                    if (ShouldAutoWarpMerc(owner, merc, now))
+                        WarpPetBesideOwner(owner, merc, warpIndex++);
                     continue;
                 }
                 roster.MercReviveUtc.Remove(kind.Key);
@@ -607,6 +701,53 @@ namespace ZoneEngine_New.Core.Pets
                     _logger.Info(string.Format(CultureInfo.InvariantCulture, "Merc returned hash={0} owner={1}", kind.Hash, owner.Identity.Instance));
             }
         }
+
+        static bool ShouldAutoWarpMerc(Player owner, NpcCharacter merc, DateTime now)
+        {
+            if (!ReferenceEquals(merc.Playfield, owner.Playfield) || merc.IsDead || merc.Pet == null)
+                return false;
+            if (MercInCombat(merc))
+            {
+                merc.Pet.MercAutoWarpLastPos = null;
+                merc.Pet.MercAutoWarpProgressUtc = default;
+                return false;
+            }
+
+            double distance = Vector3.Abs(merc.Position - owner.Position);
+            if (distance <= PetAi.FollowStartMeters)
+            {
+                merc.Pet.MercAutoWarpLastPos = null;
+                merc.Pet.MercAutoWarpProgressUtc = default;
+                return false;
+            }
+
+            if (distance > MercAutoWarpMeters || merc.Pet.WarpRequested)
+                return true;
+
+            // Stuck / no progress: common on playfields with no navmesh (e.g. Subway).
+            if (merc.Pet.MercAutoWarpLastPos == null || merc.Pet.MercAutoWarpProgressUtc == default)
+            {
+                merc.Pet.MercAutoWarpLastPos = new Vector3(merc.Position.x, merc.Position.y, merc.Position.z);
+                merc.Pet.MercAutoWarpProgressUtc = now;
+                return false;
+            }
+
+            Vector3 last = merc.Pet.MercAutoWarpLastPos;
+            double movedToward = Vector3.Abs(last - owner.Position) - distance;
+            if (movedToward >= 0.5 || Vector3.Abs(merc.Position - last) >= 0.5)
+            {
+                merc.Pet.MercAutoWarpLastPos = new Vector3(merc.Position.x, merc.Position.y, merc.Position.z);
+                merc.Pet.MercAutoWarpProgressUtc = now;
+                return false;
+            }
+
+            return (now - merc.Pet.MercAutoWarpProgressUtc).TotalSeconds >= MercStuckSeconds;
+        }
+
+        static bool MercInCombat(NpcCharacter merc)
+            => merc.FightingTarget.Instance != 0
+               || merc.Attackers.Count > 0
+               || merc.Pet?.Mode == PetMode.Attack;
 
         void ScheduleMercRevive(Character owner, PetController controller)
         {

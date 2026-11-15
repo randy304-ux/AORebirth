@@ -308,6 +308,20 @@ namespace ZoneEngine_New.Core.Pets
                 return;
             }
 
+            if (verb.Equals("come", StringComparison.OrdinalIgnoreCase)
+                || verb.Equals("warp", StringComparison.OrdinalIgnoreCase))
+            {
+                PetService? pets = player.Playfield?.GetService<PetService>();
+                if (pets == null)
+                {
+                    Say(player, "Mercenaries are not available here.");
+                    return;
+                }
+
+                Say(player, pets.Come(player));
+                return;
+            }
+
             if (verb.Equals("preset", StringComparison.OrdinalIgnoreCase) && args.Length > 1)
             {
                 RunPreset(player, string.Join(" ", args, 1, args.Length - 1));
@@ -583,6 +597,7 @@ namespace ZoneEngine_New.Core.Pets
             body.Append("<font color=").Append(ColorHeader).Append(">Mercs</font>\n");
             body.Append("Hired contracts and unlocked dungeon mercs. All links are in this window.\n");
             body.Append(SayLink("call", "Call hired")).Append(' ')
+                .Append(SayLink("come", "Come / warp")).Append(' ')
                 .Append(SayLink("dismiss all", "Dismiss all")).Append('\n');
             return body.ToString();
         }

@@ -29,7 +29,7 @@ namespace ZoneEngine_New.Core.Commands
         public int RequiredGmLevel => 0;
 
         public string Usage =>
-            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc filter <...> | .merc view <name> | .merc contract <profession> | .merc macros | .merc cast <id> | .merc castclear | .merc preset <...> | .merc hire <profession> [tier] | .merc call | .merc setstate <name> <locked|dungeon_only|unlocked>";
+            ".merc list | .merc summon <name> | .merc dismiss [name|all] | .merc menu | .merc filter <...> | .merc view <name> | .merc contract <profession> | .merc macros | .merc cast <id> | .merc castclear | .merc preset <...> | .merc hire <profession> [tier] | .merc call | .merc come | .merc warp | .merc setstate <name> <locked|dungeon_only|unlocked>";
 
         public string Topic => "mercs";
 
@@ -68,6 +68,8 @@ namespace ZoneEngine_New.Core.Commands
                 case "contract":
                 case "dismiss":
                 case "call":
+                case "come":
+                case "warp":
                     // Same menu service path as /tell Merc — opens windows via GmCommandFeedback ChatText.
                     _menu.Execute(player, context.Args);
                     return;

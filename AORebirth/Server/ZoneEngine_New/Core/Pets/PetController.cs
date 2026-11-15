@@ -78,6 +78,12 @@ namespace ZoneEngine_New.Core.Pets
         /// <summary>Set when the pet cannot follow its owner on foot; it rejoins the owner on the next tick.</summary>
         internal bool WarpRequested { get; set; }
 
+        /// <summary>Merc auto-warp: last position sampled while trying to catch up (TickMercs).</summary>
+        internal Vector3? MercAutoWarpLastPos { get; set; }
+
+        /// <summary>Merc auto-warp: when the merc last made progress toward the owner.</summary>
+        internal DateTime MercAutoWarpProgressUtc { get; set; }
+
         /// <summary>
         /// Last walking distance from the pet to its owner (navmesh route length; +infinity when no route), and
         /// where both stood when it was measured. See PetAi.OwnerDistance.
@@ -148,6 +154,9 @@ namespace ZoneEngine_New.Core.Pets
         public Dictionary<string, DateTime> MercReviveUtc { get; } = new(StringComparer.OrdinalIgnoreCase);
 
         internal DateTime MercCheckUtc;
+
+        /// <summary>When <c>.merc come</c> / Pet Warp command may run again (UTC).</summary>
+        internal DateTime MercComeReadyUtc;
 
         readonly List<NpcCharacter> _pets = new();
         readonly List<PetStash> _stash = new();
